@@ -2,7 +2,29 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
-## 최신 능력 모델 개정 H11
+## 최신 실제 디자인 교정 H12
+
+H11의 일반 SF 참고작이 아니라, Bungie 표기 헌터 칼 도면/게임 스크린샷과 Flashbang 게임 캡처를 대조해
+**나이프160큐브·섬광탄56큐브를 재제작**했습니다. 원본 게임 메시를 획득/재배포한 것이 아닙니다.
+소이·소용돌이·연막은 원작 껍질 근거 미확보로 H11 잠정 모델 유지. [출처·한계](../../design/14_헌터_능력_모델.md).
+
+- 새 자동 실행 **GameTest40/40, JUnit8/8**, build 성공(06:31:35KST).
+- [실제 게임 비교](props_h12_ingame_gallery.png): 확대 scale2.5, 일반20TPS. 칼의 구멍3개/갈고리 홈/비대칭 실루엣 확인.
+- Blockbench: [나이프](props_h12_blockbench_solar_knife.png) · [상면](props_h12_blockbench_solar_knife_top.png) · [섬광탄](props_h12_blockbench_arc_flashbang.png)
+- 실제 투척: [섬광탄](props_h12_flight_arc_flashbang.png) · [나이프](props_h12_flight_solar_knife.png)
+- [참고 이미지 출처·해시](props-h12-reference-evidence.json) (원본 이미지는 배포물 미포함)
+- [새 빌드](props-h12-build-gametest.txt) · [소품JUnit](props-h12-junit-TEST-kim.biryeong.destiny.HunterPropAssetTest.xml) · [기존JUnit](props-h12-junit-TEST-kim.biryeong.destiny.HunterAssetTest.xml)
+- [서버](props-h12-runtime-server.txt) · [비전 클라이언트](props-h12-vision-client.txt) · [조건·해시](props-h12-validation.json)
+
+1708×956 실제 프레임버퍼 PNG를 육안 확인. 비행 캡처만1TPS, 원래 모델 스케일 수류탄0.5/칼0.6.
+나이프 관찰 카메라는 y-59.4/pitch18로 옮겨 얇은 칼날 면을 확인했습니다. 비행 방향/물리 변경 없음.
+일반속도 플레이감·다인/최대 투사체 부하·다른GUI배율 검증은 아님. 20TPS 복구, 자신의 비교 엔티티2개 제거,
+원래 스폰/서브클래스 복구 뒤 자신의 서버와 클라이언트 종료. 클라이언트exit143은 의도된SIGTERM 정리.
+vsync/포커스 일시정지 옵션 원본 바이트 복구. 새 소품 누락 경고는 없음; 기존 경고는 로그 참조.
+
+---
+
+## 이전 능력 모델 개정 H11
 
 Blockbench MCP로 수류탄3종·태양 단검·공허 연막탄을 새로 제작해 투사체에 연결했습니다.
 참고작의 작가·라이선스와 조형 재해석은 [모델 명세](../../design/14_헌터_능력_모델.md)에 기록했습니다.

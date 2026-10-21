@@ -39,7 +39,7 @@ class HunterPropAssetTest {
             assertEquals("destiny:item/hunter/" + name, model.getAsJsonObject("textures").get("0").getAsString());
             assertEquals(model.getAsJsonObject("textures").get("0"), model.getAsJsonObject("textures").get("particle"));
             var elements = model.getAsJsonArray("elements");
-            assertTrue(elements.size() >= 16 && elements.size() <= 32, name + " cube budget");
+            assertTrue(elements.size() >= 16 && elements.size() <= 256, name + " cube budget");
             for (var element : elements) {
                 var cube = element.getAsJsonObject();
                 for (int axis = 0; axis < 3; axis++) {
@@ -81,4 +81,36 @@ class HunterPropAssetTest {
                     Base64.getDecoder().decode(data.substring(data.indexOf(',') + 1)));
         }
     }
+    @Test
+    void reconstructedKnifeHasRealBladeFingerAndPommelHoles() throws Exception {
+        var elements = json("assets/destiny/models/hunter/solar_knife.json").getAsJsonArray("elements");
+        // Source chart holes: blade (1236,193), finger (503,253), pommel (120,279).
+        for (double[] point : new double[][]{{1236,193}, {503,253}, {120,279}, {1530,100}}) {
+            double z = 16 - point[0] / 128;
+            double x = 6.2 + point[1] / 115;
+            boolean filled = false;
+            for (var e : elements) {
+                var c = e.getAsJsonObject();
+                if (c.has("rotation")) continue; // Engraved surface chevrons, not shell.
+                filled |= x > c.getAsJsonArray("from").get(0).getAsDouble()
+                        && x < c.getAsJsonArray("to").get(0).getAsDouble()
+                        && z > c.getAsJsonArray("from").get(2).getAsDouble()
+                        && z < c.getAsJsonArray("to").get(2).getAsDouble();
+            }
+            assertFalse(filled, "Three through holes and hooked spine notch must stay empty");
+        }
+    }
+
+    @Test
+    void manifestDoesNotClaimUnverifiedPropsAreDestinyDesigns() throws Exception {
+        var manifest = JsonParser.parseString(Files.readString(Path.of("art/blockbench/hunter/manifest.json"))).getAsJsonObject();
+        for (var model : manifest.getAsJsonArray("models")) {
+            var m = model.getAsJsonObject();
+            boolean verified = Set.of("solar_knife", "arc_flashbang").contains(m.get("name").getAsString());
+            assertEquals(verified ? "reference_verified_reconstruction" : "provisional_not_destiny_verified",
+                    m.get("design_status").getAsString());
+            assertEquals(verified ? 2 : 0, m.getAsJsonArray("visual_reference_urls").size());
+        }
+    }
+
 }

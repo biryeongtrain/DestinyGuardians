@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Author and export original props using the running Blockbench MCP, no native fs eval.
+"""Author and export reference reconstructions / provisional props using the running Blockbench MCP, no native fs eval.
 
 Usage: rtk proxy python3 scripts/export_hunter_props.py [--url http://localhost:3000/bb-mcp]
-Creates five NEW tabs; never clears or edits an existing user project.
+Creates NEW tabs for selected models (default five); never clears or edits an existing user project.
 """
 import argparse
 import base64
@@ -54,14 +54,17 @@ def write_json(path, obj):
 def main():
     args = argparse.ArgumentParser()
     args.add_argument("--url", default="http://localhost:3000/bb-mcp")
-    bb = Blockbench(args.parse_args().url)
+    args.add_argument("--models", nargs="+", choices=NAMES, default=NAMES)
+    options = args.parse_args()
+    bb = Blockbench(options.url)
     source = (ROOT / "scripts/build_hunter_props.js").read_text()
     preview = "destiny_props_" + uuid.uuid4().hex[:8]
     bb.tool("create_offscreen_view", {"id": preview, "width": 900, "height": 900, "copy_view": "none"})
-    manifest = []
+    manifest_path = ROOT / "art/blockbench/hunter/manifest.json"
+    manifest = {m["name"]: m for m in json.loads(manifest_path.read_text())["models"]} if manifest_path.exists() else {}
     try:
-        for name in NAMES:
-            bb.tool("create_project", {"name": "hunter_" + name, "format": "java_block"})
+        for name in options.models:
+            bb.tool("create_project", {"name": "H12_hunter_" + name, "format": "java_block"})
             info = bb.evaluate("const propName=" + json.dumps(name) + ";\n" + source)
             payload = bb.evaluate("({model:Codecs.java_block.compile({raw:true}),"
                                   "project:Codecs.project.compile({raw:true,absolute_paths:false}),"
@@ -75,14 +78,15 @@ def main():
             tex_path.parent.mkdir(parents=True, exist_ok=True)
             tex_path.write_bytes(base64.b64decode(payload["texture"].split(",", 1)[1]))
             # Java Block preview offsets X/Z by -8; aim at local [0,8,0].
-            shot = bb.tool("set_camera_angle", {"view": preview, "position": [25, 21, -30],
+            shot = bb.tool("set_camera_angle", {"view": preview, "position": [0, 32, 6] if name == "solar_knife" else [25, 21, -30],
                             "target": [0, 8, 0], "projection": "orthographic", "zoom": .85})
             image = next(c for c in shot["content"] if c["type"] == "image")
-            shot_path = ROOT / f"docs/qa/2026-10-22/props_blockbench_{name}.png"
+            shot_path = ROOT / f"docs/qa/2026-10-22/props_h12_blockbench_{name}.png"
             shot_path.write_bytes(base64.b64decode(image["data"]))
-            manifest.append({"name": name, "cubes": info["cubes"], "texture": info["texture"],
+            manifest[name] = {"name": name, "cubes": info["cubes"], "texture": info["texture"],
                              "source": f"art/blockbench/hunter/{name}.bbmodel",
-                             "format": model.get("format_version"), "screenshot": shot_path.name})
+                             "format": model.get("format_version"), "screenshot": shot_path.name}
+            bb.evaluate("Project.save_path=" + json.dumps(str(ROOT / f"art/blockbench/hunter/{name}.bbmodel")) + ";Project.saved=true;true")
             print(name, info["cubes"], "cubes exported", flush=True)
     finally:
         try:
@@ -90,8 +94,17 @@ def main():
         except RuntimeError as exc:
             # MCP 1.10.1 + BB 5.1.4 can throw onContextMenu during native preview disposal.
             print("Preview cleanup warning (exports preserved):", exc)
-    write_json(ROOT / "art/blockbench/hunter/manifest.json", {"authoring": "Blockbench 5.1.4 + MCP 1.10.1",
-               "geometry": "Original cuboids and atlas; no downloaded meshes or textures", "models": manifest})
+    sources = {
+        "solar_knife": ["https://www.destinypedia.com/Hunter_Knife", "https://destiny.wiki.gallery/images/2/20/Destiny_Hunters_Knife.jpg"],
+        "arc_flashbang": ["https://www.destinypedia.com/Flashbang_Grenade", "https://destiny.wiki.gallery/images/0/0a/Flashbang_Grenade.jpg"]
+    }
+    for name, entry in manifest.items():
+        entry["design_status"] = "reference_verified_reconstruction" if name in sources else "provisional_not_destiny_verified"
+        entry["visual_reference_urls"] = sources.get(name, [])
+        entry["revision"] = "H12" if name in sources else "H11"
+    write_json(manifest_path, {"authoring": "Blockbench 5.1.4 + MCP 1.10.1",
+               "geometry": "New cuboids and atlas, not original game meshes. Only two designs source-verified; three provisional.",
+               "models": [manifest[n] for n in NAMES if n in manifest]})
 
 
 if __name__ == "__main__":

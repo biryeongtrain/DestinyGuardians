@@ -57,7 +57,8 @@ OP는 마지막에 플레이어 이름을 붙일 수 있습니다.
 
 헌터는 F 손 교환을 능력 입력으로 사용합니다. `/guardian class none`으로 해제하면 바닐라 동작이 유지됩니다.
 일반 총기·탄약 및 명사수 회피의 재장전 연동은 아직 없습니다.
-수류탄3종·태양 단검·공허 연막탄은 Blockbench 신규 소품으로 표시합니다.
+수류탄3종·태양 단검·공허 연막탄은 Blockbench 소품으로 표시합니다.
+H12에서 칼·섬광탄을 실제 Destiny 시각 자료에 맞춰 재제작했습니다. 소이·소용돌이·연막은 원작 외형 미확인 잠정 모델입니다.
 [능력 모델·레퍼런스](docs/design/14_헌터_능력_모델.md) · [편집 원본](art/blockbench/hunter/)
 BetterModel 기본 리그에서 `config/bettermodel/players/guardian_hunter.bbmodel`을 최초 생성하며,
 기존 파일은 덮어쓰지 않습니다. 최종 아트로 교체할 때 `roll`, `super_arc`, `super_solar`, `super_void`
