@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.bat text eol=crlf
+*.png binary
+*.jar binary
+*.ogg binary
+*.bbmodel text eol=lf -diff
+# 에셋이 커지면 git-lfs 설치 후 아래를 활성화:
+# *.png filter=lfs diff=lfs merge=lfs -text
+# *.ogg filter=lfs diff=lfs merge=lfs -text

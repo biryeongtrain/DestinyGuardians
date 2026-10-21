@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "destiny",
+  "version": "${version}",
+  "name": "Destiny Guardians",
+  "description": "Server-side Destiny-inspired classes, weapons and raids for vanilla clients.",
+  "authors": ["biryeongtrain"],
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["kim.biryeong.destiny.DestinyGuardians"]
+  },
+  "mixins": ["destiny.mixins.json"],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=25",
+    "fabric-api": "*",
+    "polymer-core": "*",
+    "polymer-resource-pack": "*",
+    "polymer-virtual-entity": "*",
+    "bettermodel": "*",
+    "minigamelib": ">=2.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        maven { name = 'Fabric'; url = 'https://maven.fabricmc.net/' }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'destiny-guardians'
+
+// minigame-lib (DisplayHud, ShaderFX, FOV, 시네마틱, 음악) 를 git submodule 소스로 직접 빌드한다.
+// kim.biryeong:minigame-lib 의존성이 이 빌드로 자동 대체된다.
+includeBuild('libs/minigame-lib')
