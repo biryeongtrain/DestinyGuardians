@@ -1,7 +1,12 @@
 package kim.biryeong.destiny;
 
-import kim.biryeong.destiny.debug.DebugCommands;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
+import kim.biryeong.destiny.ability.AbilityRegistry;
+import kim.biryeong.destiny.ability.AbilityService;
+import kim.biryeong.destiny.ability.hunter.HunterAbilities;
+import kim.biryeong.destiny.command.GuardianCommands;
+import kim.biryeong.destiny.debug.DebugCommands;
+import kim.biryeong.destiny.guardian.Guardians;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
@@ -22,12 +27,30 @@ public final class DestinyGuardians implements ModInitializer {
         PolymerResourcePackUtils.addModAssets(MOD_ID);
         PolymerResourcePackUtils.markAsRequired();
 
+        Guardians.init();
+        HunterAbilities.register();
+        AbilityRegistry.registerReloadListener();
+        AbilityService.init();
+        GuardianCommands.register();
         DebugCommands.register();
+        if (FabricLoader.getInstance().isModLoaded("gcb-server")) {
+            initGcb();
+        }
 
         logDependency("polymer-core");
         logDependency("bettermodel");
         logDependency("minigamelib");
+        logDependency("gcb-server");
         LOGGER.info("Destiny Guardians initialized");
+    }
+
+    private static void initGcb() {
+        try {
+            Class.forName("kim.biryeong.destiny.compat.gcb.GcbInputBridge").getMethod("init").invoke(null);
+            LOGGER.info("GCB input bridge enabled");
+        } catch (ReflectiveOperationException e) {
+            LOGGER.warn("gcb-server is loaded but the bridge is not compiled in: {}", e.toString());
+        }
     }
 
     private static void logDependency(String modId) {

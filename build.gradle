@@ -9,6 +9,8 @@ base {
     archivesName = project.archives_base_name
 }
 
+def gcbAvailable = new File(file(project.gcb_server_dir), 'build.gradle').exists()
+
 repositories {
     mavenCentral()
     maven { url 'https://maven.nucleoid.xyz' }      // Polymer, sgui
@@ -37,6 +39,10 @@ dependencies {
     // minigame-lib: libs/minigame-lib submodule 에서 includeBuild 로 대체됨
     implementation "kim.biryeong:minigame-lib:${project.minigamelib_version}"
 
+    if (gcbAvailable) {
+        implementation "kim.biryeong:GCB-server:${project.gcb_server_version}"
+    }
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
 }
@@ -53,6 +59,26 @@ loom {
 }
 
 test { useJUnitPlatform() }
+
+sourceSets {
+    main {
+        java {
+            if (!gcbAvailable) {
+                exclude 'kim/biryeong/destiny/compat/gcb/**'
+            }
+        }
+    }
+}
+
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = 'destiny-test'
+        enableGameTests = true
+        enableClientGameTests = false
+        eula = true
+    }
+}
 
 processResources {
     inputs.property 'version', project.version

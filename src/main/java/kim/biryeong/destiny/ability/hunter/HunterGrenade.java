@@ -1,0 +1,89 @@
+package kim.biryeong.destiny.ability.hunter;
+
+import kim.biryeong.destiny.ability.Ability;
+import kim.biryeong.destiny.ability.Tasks;
+import kim.biryeong.destiny.combat.Combat;
+import kim.biryeong.destiny.combat.Keyword;
+import kim.biryeong.destiny.combat.Statuses;
+import kim.biryeong.destiny.fx.Fx;
+import kim.biryeong.destiny.fx.SimProjectile;
+import kim.biryeong.destiny.guardian.AbilitySlot;
+import kim.biryeong.destiny.guardian.Element;
+import kim.biryeong.destiny.guardian.GuardianClass;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+
+/** 헌터 수류탄 3종: Arc 섬광(실명), Solar 소이(연소), Void 소용돌이(끌어당김 지속 피해). */
+public final class HunterGrenade extends Ability {
+    public HunterGrenade(Identifier id, String name, Element element, double cooldownSeconds) {
+        super(id, GuardianClass.HUNTER, AbilitySlot.GRENADE, element, cooldownSeconds, name);
+    }
+
+    @Override
+    public boolean activate(ServerPlayer player) {
+        Vec3 eye = player.getEyePosition();
+        Vec3 velocity = player.getLookAngle().scale(param("throw_speed", 1.1)).add(0, 0.12, 0);
+        ItemStack visual = new ItemStack(switch (element()) {
+            case ARC -> Items.PRISMARINE_CRYSTALS;
+            case SOLAR -> Items.FIRE_CHARGE;
+            default -> Items.ENDER_PEARL;
+        });
+        SimProjectile.launch(player, eye, velocity, 0.045, 80, visual, 0.5f, element().color(), hit -> detonate(player, hit));
+        Fx.sound(player.level(), eye, SoundEvents.SNOWBALL_THROW, 0.8f, 0.7f);
+        return true;
+    }
+
+    private void detonate(ServerPlayer player, HitResult hit) {
+        ServerLevel level = player.level();
+        Vec3 pos = hit.getLocation().add(0, 0.2, 0);
+        double radius = param("radius", 4.5);
+        switch (element()) {
+            case ARC -> {
+                Fx.burst(level, pos, element(), 60, radius / 3);
+                Fx.ring(level, pos, radius, element().glow(), 40);
+                Fx.sound(level, pos, SoundEvents.LIGHTNING_BOLT_IMPACT, 0.8f, 1.6f);
+                for (LivingEntity e : Combat.enemiesNear(player, pos, radius)) {
+                    Combat.damage(player, e, (float) param("damage", 5), element());
+                    Statuses.apply(e, Keyword.BLINDED, (int) param("blind_ticks", 80));
+                }
+            }
+            case SOLAR -> {
+                Fx.burst(level, pos, element(), 70, radius / 3);
+                level.sendParticles(ParticleTypes.LAVA, pos.x, pos.y, pos.z, 12, radius / 3, 0.2, radius / 3, 0.0);
+                Fx.sound(level, pos, SoundEvents.GENERIC_EXPLODE.value(), 0.8f, 1.3f);
+                for (LivingEntity e : Combat.enemiesNear(player, pos, radius)) {
+                    Combat.damage(player, e, (float) param("damage", 7), element());
+                    Statuses.apply(e, Keyword.SCORCHED, (int) param("scorch_ticks", 100));
+                }
+            }
+            default -> {
+                int duration = (int) param("duration_ticks", 60);
+                float pulse = (float) param("damage", 3);
+                Fx.sound(level, pos, SoundEvents.PORTAL_TRIGGER, 0.6f, 1.8f);
+                Tasks.run(age -> {
+                    if (age % 2 == 0) {
+                        Fx.ring(level, pos, radius * (1 - (age % 20) / 20.0), element().color(), 24);
+                        level.sendParticles(ParticleTypes.PORTAL, pos.x, pos.y, pos.z, 12, radius / 3, 0.4, radius / 3, 0.5);
+                    }
+                    for (LivingEntity e : Combat.enemiesNear(player, pos, radius)) {
+                        Vec3 pull = pos.subtract(e.position()).scale(0.08);
+                        e.setDeltaMovement(e.getDeltaMovement().add(pull.x, 0, pull.z));
+                        e.needsSync = true;
+                        if (age % 10 == 0) {
+                            Combat.damage(player, e, pulse, element());
+                        }
+                    }
+                    return age < duration;
+                });
+            }
+        }
+    }
+}

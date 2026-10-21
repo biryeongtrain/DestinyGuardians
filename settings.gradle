@@ -10,3 +10,9 @@ rootProject.name = 'destiny-guardians'
 // minigame-lib (DisplayHud, ShaderFX, FOV, 시네마틱, 음악) 를 git submodule 소스로 직접 빌드한다.
 // kim.biryeong:minigame-lib 의존성이 이 빌드로 자동 대체된다.
 includeBuild('libs/minigame-lib')
+
+// GCB-server (선택): 로컬 체크아웃이 있으면 소스에서 빌드한다. 경로는 gradle.properties 의 gcb_server_dir.
+def gcbDir = file(providers.gradleProperty('gcb_server_dir').getOrElse('../GCB-server'))
+if (new File(gcbDir, 'build.gradle').exists()) {
+    includeBuild(gcbDir)
+}

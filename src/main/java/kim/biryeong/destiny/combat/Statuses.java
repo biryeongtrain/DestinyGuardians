@@ -1,0 +1,108 @@
+package kim.biryeong.destiny.combat;
+
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * 키워드 상태 관리. 바닐라 효과로 보이게 하고, 바닐라에 없는 효과(약화·지속 피해·몹 실명)는 여기서 처리한다.
+ */
+public final class Statuses {
+    public static final float WEAKEN_MULTIPLIER = 1.3f;
+
+    private static final Map<UUID, Map<Keyword, Long>> ACTIVE = new HashMap<>();
+    private static final Map<UUID, ServerLevel> LEVELS = new HashMap<>();
+
+    private Statuses() {
+    }
+
+    public static void apply(LivingEntity target, Keyword keyword, int ticks) {
+        if (!(target.level() instanceof ServerLevel level)) {
+            return;
+        }
+        long until = level.getGameTime() + ticks;
+        ACTIVE.computeIfAbsent(target.getUUID(), id -> new EnumMap<>(Keyword.class)).merge(keyword, until, Math::max);
+        LEVELS.put(target.getUUID(), level);
+        switch (keyword) {
+            case BLINDED -> {
+                if (target instanceof Player) {
+                    target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, ticks, 0));
+                }
+                target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, ticks, 2));
+                clearTarget(target);
+            }
+            case AMPLIFIED -> target.addEffect(new MobEffectInstance(MobEffects.SPEED, ticks, 1));
+            case SCORCHED -> target.setRemainingFireTicks(Math.max(target.getRemainingFireTicks(), ticks));
+            case WEAKENED -> target.addEffect(new MobEffectInstance(MobEffects.GLOWING, ticks, 0));
+            case SUPPRESSED -> {
+                target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, ticks, 3));
+                target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, ticks, 1));
+                clearTarget(target);
+            }
+        }
+    }
+
+    public static boolean has(Entity target, Keyword keyword) {
+        Map<Keyword, Long> map = ACTIVE.get(target.getUUID());
+        if (map == null || !(target.level() instanceof ServerLevel level)) {
+            return false;
+        }
+        Long until = map.get(keyword);
+        return until != null && until > level.getGameTime();
+    }
+
+    /** 받는 피해 보정 (LivingEntityMixin). */
+    public static float modifyIncoming(LivingEntity target, float amount) {
+        return has(target, Keyword.WEAKENED) ? amount * WEAKEN_MULTIPLIER : amount;
+    }
+
+    public static void tick(MinecraftServer server) {
+        Iterator<Map.Entry<UUID, Map<Keyword, Long>>> it = ACTIVE.entrySet().iterator();
+        while (it.hasNext()) {
+            var entry = it.next();
+            ServerLevel level = LEVELS.get(entry.getKey());
+            Entity entity = level == null ? null : level.getEntity(entry.getKey());
+            if (!(entity instanceof LivingEntity living) || !living.isAlive()) {
+                it.remove();
+                LEVELS.remove(entry.getKey());
+                continue;
+            }
+            long now = level.getGameTime();
+            entry.getValue().values().removeIf(until -> until <= now);
+            if (entry.getValue().isEmpty()) {
+                it.remove();
+                LEVELS.remove(entry.getKey());
+                continue;
+            }
+            if (entry.getValue().containsKey(Keyword.BLINDED) || entry.getValue().containsKey(Keyword.SUPPRESSED)) {
+                clearTarget(living);
+            }
+            if (entry.getValue().containsKey(Keyword.SCORCHED) && now % 20 == 0) {
+                living.setInvulnerableTime(0);
+                living.hurtServer(level, living.damageSources().onFire(), 2f);
+            }
+        }
+    }
+
+    public static void clearAll() {
+        ACTIVE.clear();
+        LEVELS.clear();
+    }
+
+    private static void clearTarget(LivingEntity target) {
+        if (target instanceof Mob mob) {
+            mob.setTarget(null);
+        }
+    }
+}
