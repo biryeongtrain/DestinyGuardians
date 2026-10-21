@@ -1,5 +1,6 @@
 package kim.biryeong.destiny;
 
+import kim.biryeong.destiny.debug.DebugCommands;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -20,6 +21,8 @@ public final class DestinyGuardians implements ModInitializer {
         // destiny 네임스페이스 에셋을 서버 리소스팩에 포함시킨다.
         PolymerResourcePackUtils.addModAssets(MOD_ID);
         PolymerResourcePackUtils.markAsRequired();
+
+        DebugCommands.register();
 
         logDependency("polymer-core");
         logDependency("bettermodel");
