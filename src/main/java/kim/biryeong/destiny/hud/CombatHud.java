@@ -5,116 +5,161 @@ import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianData;
-import kim.biryeong.destiny.guardian.GuardianRuntime;
 import kim.biryeong.destiny.guardian.Guardians;
 import kim.biryeong.minigamelib.displayhud.DisplayHud;
-import kim.biryeong.minigamelib.displayhud.TextDisplayHud;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
+import kim.biryeong.minigamelib.displayhud.ItemDisplayHud;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Display;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomModelData;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * 전투 HUD (docs/design/08 3장): 왼쪽 아래 능력 쿨타임, 아래 가운데 궁극기 게이지.
- * 표시 문자열이 바뀔 때만 갱신한다.
+/** Destiny-style combat HUD: upper-centre vitals and lower-left ability cluster.
+ * All imagery is original, pack-backed flat quads, not visible debug text or vanilla item icons.
+ * Vanilla player-heart sprites are transparent in the required pack; vitals therefore cover non-guardians too.
  */
 public final class CombatHud {
-    public static final String ABILITIES_ID = "destiny:hud_abilities";
-    public static final String SUPER_ID = "destiny:hud_super";
+    private static final String PREFIX = "destiny:hud_";
+    public static final String ABILITIES_ID = PREFIX + "abilities";
+    public static final String SUPER_ID = PREFIX + "super";
+    public static final String HEALTH_ID = PREFIX + "health";
+    public static final String ABSORPTION_ID = PREFIX + "absorption";
     private static final Map<UUID, String> LAST = new HashMap<>();
+    private static final int WHITE = 0xF1F3F5;
+    private static final int GOLD = 0xF4D36A;
+    private static final int MUTED = 0x606872;
+    private static final AbilitySlot[] SLOTS = {AbilitySlot.GRENADE, AbilitySlot.MELEE, AbilitySlot.CLASS_ABILITY};
 
-    public static float abilitiesX = 80f;
-    public static float abilitiesY = 955f;
-    public static float superX = 960f;
-    public static float superY = 860f;
+    private CombatHud() { }
 
-    private CombatHud() {
+    public static float healthFraction(ServerPlayer player) {
+        return fraction(player.getHealth(), player.getMaxHealth());
+    }
+
+    /** Cooldown fill is an actual charge fraction, not a fabricated timer. */
+    public static float charge(ServerPlayer player, AbilitySlot slot) {
+        Ability ability = AbilityService.equipped(player, slot).orElse(null);
+        return ability == null ? 0f : Math.clamp(1f - fraction(Guardians.data(player).cooldown(slot),
+                Math.max(1, ability.cooldownTicks())), 0f, 1f);
+    }
+
+    private static float fraction(float value, float max) {
+        return Float.isFinite(value) && Float.isFinite(max) && max > 0 ? Math.clamp(value / max, 0f, 1f) : 0f;
     }
 
     public static void update(ServerPlayer player) {
-        if (!Guardians.isGuardian(player)) {
+        if (player.isDeadOrDying() || player.isSpectator()) {
             remove(player);
             return;
         }
-        Component abilities = abilitiesLine(player);
-        Component superLine = superLine(player);
-        String key = abilities.getString() + "|" + superLine.getString();
-        if (key.equals(LAST.get(player.getUUID())) && DisplayHud.getHud(player, ABILITIES_ID) != null) {
+        // The pack is shared by the whole server, so every living player needs a health replacement.
+        bar(player, HEALTH_ID + "_track", 744, 76, 432, 11, 1, 0x3C414A, DisplayHud.HudAlignment.CENTER);
+        bar(player, HEALTH_ID, 748, 76, 424 * healthFraction(player), 5, 2,
+                healthFraction(player) <= 0.3f ? 0xE75A4E : WHITE, DisplayHud.HudAlignment.CENTER);
+        float absorption = fraction(player.getAbsorptionAmount(), player.getMaxHealth());
+        bar(player, ABSORPTION_ID, 748, 65, 424 * absorption, 3, 2, 0x9DDBEE, DisplayHud.HudAlignment.CENTER);
+        if (!Guardians.isGuardian(player)) {
+            removeAbilities(player);
+            LAST.put(player.getUUID(), "체력 " + player.getHealth() + "/" + player.getMaxHealth());
             return;
         }
-        LAST.put(player.getUUID(), key);
-        text(player, ABILITIES_ID, abilities, abilitiesX, abilitiesY, Display.TextDisplay.Align.LEFT, DisplayHud.HudAlignment.LEFT);
-        text(player, SUPER_ID, superLine, superX, superY, Display.TextDisplay.Align.CENTER, DisplayHud.HudAlignment.CENTER);
+        GuardianData data = Guardians.data(player);
+        var runtime = Guardians.runtime(player);
+        Ability superAbility = AbilityService.equipped(player, AbilitySlot.SUPER).orElse(null);
+        Element element = superAbility == null ? Element.KINETIC : superAbility.element();
+        boolean active = runtime.superSession != null;
+        float superCharge = Math.clamp(active ? runtime.superSession.remaining() : data.superEnergy(), 0f, 1f);
+        boolean ready = active || data.superEnergy() >= 1f;
+
+        sprite(player, PREFIX + "super_diamond", "diamond", 112, 876, 66, 66, 1,
+                ready ? GOLD : MUTED, DisplayHud.HudAlignment.LEFT);
+        sprite(player, PREFIX + "super_icon", switch (element) {
+            case ARC -> "staff"; case SOLAR -> "gun"; default -> "bow";
+        }, 112, 876, 37, 37, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
+        bar(player, SUPER_ID + "_track", 158, 876, 192, 6, 1, 0x3C414A, DisplayHud.HudAlignment.LEFT);
+        bar(player, SUPER_ID, 158, 876, 192 * superCharge, 4, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
+
+        StringBuilder debug = new StringBuilder("체력=" + player.getHealth());
+        for (int i = 0; i < SLOTS.length; i++) {
+            AbilitySlot slot = SLOTS[i];
+            Ability ability = AbilityService.equipped(player, slot).orElse(null);
+            int tint = ability == null ? MUTED : ability.element().color();
+            float progress = charge(player, slot);
+            float x = 100 + i * 58;
+            String id = i == 0 ? ABILITIES_ID : ABILITIES_ID + "_" + i;
+            sprite(player, id, "tile", x, 952, 44, 44, 1, progress >= 1 ? WHITE : MUTED, DisplayHud.HudAlignment.LEFT);
+            sprite(player, id + "_icon", icon(slot, ability), x, 952, 31, 31, 2,
+                    progress >= 1 ? WHITE : 0x747C86, DisplayHud.HudAlignment.LEFT);
+            bar(player, id + "_charge", x - 20, 978, 40 * progress, 3, 2,
+                    progress >= 1 ? tint : WHITE, DisplayHud.HudAlignment.LEFT);
+            debug.append('|').append(switch(slot) {
+                case GRENADE -> "수류탄 "; case MELEE -> "근접 "; default -> "직업 ";
+            }).append(data.cooldown(slot) > 0 ? (data.cooldown(slot) + 19) / 20 + "s" : "ready");
+        }
+        LAST.put(player.getUUID(), debug.append("|궁극기 ").append(Math.round(superCharge * 100)).append('%').toString());
     }
+
+    private static String icon(AbilitySlot slot, Ability ability) {
+        if (slot == AbilitySlot.CLASS_ABILITY) return "dodge";
+        Element element = ability == null ? Element.KINETIC : ability.element();
+        if (slot == AbilitySlot.GRENADE) return switch (element) {
+            case ARC -> "flash"; case SOLAR -> "flame"; default -> "vortex";
+        };
+        return switch (element) { case ARC -> "fist"; case SOLAR -> "knife"; default -> "smoke"; };
+    }
+
+    /** Diagnostic state only; never rendered as a line of HUD text. */
+    public static String lastText(ServerPlayer player) { return LAST.get(player.getUUID()); }
 
     public static void remove(ServerPlayer player) {
         LAST.remove(player.getUUID());
-        DisplayHud.removeHud(player, ABILITIES_ID);
-        DisplayHud.removeHud(player, SUPER_ID);
-    }
-
-    /** 현재 HUD 문자열 (테스트·디버그용). */
-    public static String lastText(ServerPlayer player) {
-        return LAST.get(player.getUUID());
-    }
-
-    static Component abilitiesLine(ServerPlayer player) {
-        GuardianData data = Guardians.data(player);
-        MutableComponent line = Component.empty();
-        slot(line, player, data, AbilitySlot.GRENADE, "수류탄");
-        line.append("   ");
-        slot(line, player, data, AbilitySlot.MELEE, "근접");
-        line.append("   ");
-        slot(line, player, data, AbilitySlot.CLASS_ABILITY, "직업");
-        return line;
-    }
-
-    private static void slot(MutableComponent line, ServerPlayer player, GuardianData data, AbilitySlot slot, String label) {
-        Ability ability = AbilityService.equipped(player, slot).orElse(null);
-        int color = ability == null ? 0x8A94A3 : ability.element().color();
-        int cd = data.cooldown(slot);
-        String state = cd > 0 ? (cd + 19) / 20 + "s" : "●";
-        line.append(Component.literal(label + " ").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE6EAF0))));
-        line.append(Component.literal(state).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(cd > 0 ? 0x8A94A3 : color))));
-    }
-
-    static Component superLine(ServerPlayer player) {
-        GuardianData data = Guardians.data(player);
-        GuardianRuntime runtime = Guardians.runtime(player);
-        Element element = AbilityService.equipped(player, AbilitySlot.SUPER).map(Ability::element).orElse(Element.KINETIC);
-        float value = runtime.superSession != null ? runtime.superSession.remaining() : data.superEnergy();
-        int filled = Math.round(value * 20);
-        MutableComponent line = Component.literal(runtime.superSession != null ? "궁극기 발동 중 " : data.superEnergy() >= 1f ? "궁극기 준비 " : "궁극기 ")
-                .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(data.superEnergy() >= 1f || runtime.superSession != null ? 0xF2C14E : 0xE6EAF0)));
-        line.append(Component.literal("|".repeat(filled)).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(element.color()))));
-        line.append(Component.literal("|".repeat(20 - filled)).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x3A4250))));
-        line.append(Component.literal(" " + Math.round(value * 100) + "%").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xE6EAF0))));
-        return line;
-    }
-
-    private static void text(ServerPlayer player, String id, Component content, float x, float y,
-                             Display.TextDisplay.Align align, DisplayHud.HudAlignment hudAlign) {
-        DisplayHud existing = DisplayHud.getHud(player, id);
-        if (existing instanceof TextDisplayHud hud) {
-            hud.setText(content);
-            return;
+        for (String id : List.copyOf(DisplayHud.getHuds(player).keySet())) {
+            if (id.startsWith(PREFIX)) DisplayHud.removeHud(player, id);
         }
-        TextDisplayHud hud = new TextDisplayHud();
-        hud.setLineWidth(300);
-        hud.setTextAlignment(align);
-        hud.setShadowToggle(true);
-        hud.setBackgroundColor(0);
-        hud.setText(content);
-        hud.setScale(220, 220, 1);
+    }
+
+    private static void removeAbilities(ServerPlayer player) {
+        for (String id : List.copyOf(DisplayHud.getHuds(player).keySet())) {
+            if (id.startsWith(PREFIX) && !id.startsWith(HEALTH_ID) && !id.equals(ABSORPTION_ID)) {
+                DisplayHud.removeHud(player, id);
+            }
+        }
+    }
+
+    private static void bar(ServerPlayer player, String id, float left, float y, float width, float height,
+                            float z, int color, DisplayHud.HudAlignment align) {
+        width = Math.round(width * 2) / 2f;
+        if (width <= 0.01f) { DisplayHud.removeHud(player, id); return; }
+        sprite(player, id, "solid", left + width / 2, y, width, height, z, color, align);
+    }
+
+    private static void sprite(ServerPlayer player, String id, String image, float x, float y,
+                               float width, float height, float z, int color, DisplayHud.HudAlignment align) {
+        String key = image + ":" + color + ":" + Math.round(width * 10) + ":" + x + ":" + y;
+        DisplayHud existing = DisplayHud.getHud(player, id);
+        if (existing != null && key.equals(existing.getExtraData("state"))) return;
+        ItemDisplayHud hud = existing instanceof ItemDisplayHud item ? item : new ItemDisplayHud();
+        hud.updateWhenDataChanged(false);
+        ItemStack stack = new ItemStack(Items.PAPER);
+        stack.set(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath("destiny", "gui/hud/" + image));
+        stack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(List.of(), List.of(), List.of(), List.of(color)));
+        hud.setItem(stack);
+        hud.setItemTransform(ItemDisplayContext.NONE);
+        hud.setScale(width, height, 1);
+        hud.setAlignment(align);
+        hud.setLocation(x, y, z);
         hud.setViewRange(1000);
-        hud.setAlignment(hudAlign);
-        hud.setLocation(x, y, 0);
-        hud.spawn(player, id);
+        hud.setExtraData("state", key);
+        // Top-centre health and lower-left controls do not overlap the right-hand model; no extra outline pass needed.
+        if (existing == null) hud.spawn(player, id);
+        hud.updateWhenDataChanged(true);
+        hud.update();
     }
 }

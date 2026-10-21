@@ -95,6 +95,7 @@ public final class AbilityService {
             runtime.airJumpsUsed = 0;
         }
         if (!Guardians.isGuardian(player)) {
+            CombatHud.update(player);
             return;
         }
         data.tickCooldowns();

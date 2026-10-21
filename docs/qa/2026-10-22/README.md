@@ -2,6 +2,27 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
+## 최신 HUD 개정 H9
+
+사용자 피드백으로 체력 하트를 숨기고 데스티니형 상단 체력 바·좌하단 아이콘 HUD로 변경했습니다.
+아래 구판 H1~H8 스크린샷의 텍스트 HUD는 현재 화면이 아닙니다.
+
+- **현재 검증:** GameTest 36/36, JUnit 4/4, build 성공.
+- [현재 정상 화면](hud_destiny_full.png) · [50% 체력](hud_destiny_damaged.png)
+- [위험 체력·실제 흡수·수류탄 소모](hud_destiny_critical_absorption.png) · [Solar 궁극기 중](hud_destiny_solar_active.png)
+- [자동 빌드 로그](hud-build-gametest.txt) · [JUnit XML](hud-junit-results.xml)
+- [실제 서버](hud-runtime-server.txt) · [실제 클라이언트](hud-vision-client.txt) · [메타데이터/해시](hud-validation.json)
+
+생존 모드에서 체력20→10→4, 흡수 효과4HP, 회복 및 흡수 제거를 실제 화면으로 확인했습니다.
+필수 팩의 하트 44종은 투명하며, 직업 none도 대체 체력 바를 표시합니다.
+원작의 전투 UI 구성을 따른 직접 제작 아트입니다. 핫바/배고픔/방어구/경험치는 아직 유지합니다.
+로그의 `particle` 미지정 경고는 화면용 평면 아이템에서 사용하지 않는 입자 슬롯입니다.
+마젠타를 만들었던 실제 HUD 텍스처 아틀라스 문제는 표준 item/ 경로로 수정 후 재캡처했습니다.
+
+---
+
+아래 결과는 이전 H1~H8 체크포인트이며 당시 JAR 해시/화면을 보존한 기록입니다.
+
 ## 결과
 
 - Fabric GameTest **33/33 필수 통과**. 최종 재실행 04:57:44 KST.
