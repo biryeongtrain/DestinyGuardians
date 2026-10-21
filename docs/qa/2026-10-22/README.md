@@ -2,12 +2,50 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
-## 최신 HUD 크기 조정 H10
+## 최신 능력 모델 개정 H11
+
+Blockbench MCP로 수류탄3종·태양 단검·공허 연막탄을 새로 제작해 투사체에 연결했습니다.
+참고작의 작가·라이선스와 조형 재해석은 [모델 명세](../../design/14_헌터_능력_모델.md)에 기록했습니다.
+Arc 연속 타격은 맨손을 유지합니다.
+
+- **최신 검증:** GameTest **40/40**, JUnit **6/6**, build 성공 (05:49:26 KST).
+- [Blockbench 모델 5종](props_blockbench_overview.png) · [게임 내 5종 비교](props_ingame_gallery.png)
+- 실제 투척: [Arc 섬광](props_flight_arc_flashbang.png) · [Solar 소이](props_flight_solar_incendiary.png) ·
+  [Void 소용돌이](props_flight_void_vortex.png) · [Solar 단검](props_flight_solar_knife.png) · [Void 연막](props_flight_void_smoke_bomb.png)
+- [자동 빌드](props-build-gametest.txt) · [GameTest 서버](props-gametest-server.txt)
+- [기존 에셋 JUnit](props-junit-TEST-kim.biryeong.destiny.HunterAssetTest.xml) · [신규 소품 JUnit](props-junit-TEST-kim.biryeong.destiny.HunterPropAssetTest.xml)
+- [실제 서버](props-runtime-server.txt) · [비전 클라이언트](props-vision-client.txt) · [해시/조건](props-validation.json)
+
+정적 비교용 item_display는 **scale=2**입니다. 실제 투척은 기존 크기(수류탄/연막 0.5, 단검 0.6) 그대로이며,
+빠른 소품을 잡기 위해 해당 캡처만 서버를 임시 **1TPS**로 낮췄습니다. 성능 측정이나 일반 속도 플레이 영상이 아닙니다.
+관찰자는 발사 후 콘솔 tp로 옆으로 이동했고, 기존 속도/중력/피해는 변경하지 않았습니다.
+직전 시전의 잔여 파티클이 일부 비행 PNG에 같이 보입니다. 시험 후 20TPS 복구, 비교용 엔티티 제거, 클라이언트 옵션 복구.
+실제 PNG는 1708×956. 타 해상도·Vulkan·2인 관찰/애니메이션 연결은 이번에 재검증하지 않았습니다.
+
+### 비행 모델 재현 예시
+
+서버 콘솔, 로컬 테스트 월드에서만 실행:
+
+```text
+tick rate 1
+guardian subclass solar MinigameQA
+guardian reset MinigameQA
+tp MinigameQA 100.5 -60 0.5 0 0
+guardian action melee MinigameQA
+tp MinigameQA 102.5 -60 2.7 90 0
+```
+
+두 번째 tp의 로그가 나온 뒤 약 0.8~1.2초에 비전 `/screenshot`을 캡처합니다.
+검사 후 반드시 `tick rate 20`으로 복구합니다. 수류탄은 action=grenade, 관찰 z=1.6으로 변경.
+
+---
+
+## 이전 HUD 크기 조정 H10
 
 좌하단 능력·궁극기 HUD를 약 20% 확대했습니다. 타일 53px / 궁극기 80px,
 체력 바 두께 7px. 간격도 같이 늘려 기존 여백과 비중첩 배치를 유지합니다.
 
-- **최신 검증:** GameTest 36/36, JUnit 4/4, build 성공.
+- **H10 검증:** GameTest 36/36, JUnit 4/4, build 성공.
 - [확대 정상 화면](hud_destiny_enlarged.png) · [위험 체력·흡수·수류탄 소모](hud_destiny_enlarged_critical.png)
 - [자동 빌드 로그](hud-enlarged-build-gametest.txt) · [JUnit XML](hud-enlarged-junit-results.xml)
 - [실제 서버](hud-enlarged-runtime-server.txt) · [클라이언트](hud-enlarged-vision-client.txt)

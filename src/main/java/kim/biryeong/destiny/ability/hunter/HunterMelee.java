@@ -20,8 +20,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -72,7 +70,7 @@ public final class HunterMelee extends Ability {
     private boolean knife(ServerPlayer player) {
         float damage = (float) param("damage", 10);
         SimProjectile.launch(player, player.getEyePosition(), player.getLookAngle().scale(param("speed", 2.2)), 0.008, 30,
-                new ItemStack(Items.IRON_SWORD), 0.6f, element().color(), hit -> {
+                HunterAbilityVisuals.melee(element()), 0.6f, element().color(), hit -> {
                     ServerLevel level = player.level();
                     Fx.burst(level, hit.getLocation(), element(), 20, 0.3);
                     if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity target) {
@@ -88,7 +86,7 @@ public final class HunterMelee extends Ability {
         double radius = param("radius", 3.5);
         int duration = (int) param("duration_ticks", 100);
         SimProjectile.launch(player, player.getEyePosition(), player.getLookAngle().scale(1.0).add(0, 0.1, 0), 0.05, 60,
-                new ItemStack(Items.GUNPOWDER), 0.5f, element().color(), hit -> {
+                HunterAbilityVisuals.melee(element()), 0.5f, element().color(), hit -> {
                     ServerLevel level = player.level();
                     Vec3 pos = hit.getLocation();
                     Fx.sound(level, pos, SoundEvents.FIRE_EXTINGUISH, 0.8f, 0.6f);

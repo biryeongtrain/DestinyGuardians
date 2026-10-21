@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-22",
+  "scope": "H11 original Blockbench hunter throwable props",
+  "gametests": {
+    "required": 40,
+    "passed": 40,
+    "log": "props-build-gametest.txt"
+  },
+  "junit": {
+    "tests": 6,
+    "passed": 6,
+    "xml": [
+      "props-junit-TEST-kim.biryeong.destiny.HunterAssetTest.xml",
+      "props-junit-TEST-kim.biryeong.destiny.HunterPropAssetTest.xml"
+    ]
+  },
+  "jar_sha256": "b18abb76fd214c9736165640ac2fafd743e12bad3668bb983bea4919e82a82b9",
+  "authoring": {
+    "blockbench": "5.1.4",
+    "mcp": "1.10.1",
+    "sources": [
+      {
+        "file": "art/blockbench/hunter/arc_flashbang.bbmodel",
+        "sha256": "4d697b0ffec7c8d28c8848ada3b0041d622d0064114d61b6ee36fda981803541"
+      },
+      {
+        "file": "art/blockbench/hunter/solar_incendiary.bbmodel",
+        "sha256": "a7903acc4070ec9f76d5752be69631fd4b8439b44540dcbf908c9624cb4e1a59"
+      },
+      {
+        "file": "art/blockbench/hunter/solar_knife.bbmodel",
+        "sha256": "b5376810e0c31af5c479b66ba0d77c3433925e925d28fd2bddde6c0a43db452d"
+      },
+      {
+        "file": "art/blockbench/hunter/void_smoke_bomb.bbmodel",
+        "sha256": "a548ef6369158bfab9d18203c0a3c4b13cb4c9d5c7d5bee65a828cceef9f1ef6"
+      },
+      {
+        "file": "art/blockbench/hunter/void_vortex.bbmodel",
+        "sha256": "f21c023030d450ed604e288f8988459b7222fb9c97a1dd23c3d66ce21cb83565"
+      }
+    ]
+  },
+  "framebuffers": [
+    {
+      "file": "props_blockbench_arc_flashbang.png",
+      "sha256": "f514acd37c3a83968b1096a1360e33ed86259b763536b35a811639fd3f9d7e0f",
+      "kind": "Blockbench render"
+    },
+    {
+      "file": "props_blockbench_overview.png",
+      "sha256": "56ff74f053c9a9c0d301e2541622dab6d83f1e9998faf34531fde27adbb17318",
+      "kind": "Blockbench render"
+    },
+    {
+      "file": "props_blockbench_solar_incendiary.png",
+      "sha256": "560fab5a75cdebbf42ac98af13ceec63d0d5186945053702bd8a6df28f33c531",
+      "kind": "Blockbench render"
+    },
+    {
+      "file": "props_blockbench_solar_knife.png",
+      "sha256": "892934d1cf6ea69c0f5c728ce1bf6a31594a5ff5f486f8a80eb3fbe9a4689e93",
+      "kind": "Blockbench render"
+    },
+    {
+      "file": "props_blockbench_void_smoke_bomb.png",
+      "sha256": "3dc43501daf876320ce40ba20bcb52cfd117bb8610edda65b87b494119b0b70d",
+      "kind": "Blockbench render"
+    },
+    {
+      "file": "props_blockbench_void_vortex.png",
+      "sha256": "bad04942e2fa27ac0228d618b1424001c0deb2d7f93f8526fb3c6b569c68e286",
+      "kind": "Blockbench render"
+    },
+    {
+      "file": "props_flight_arc_flashbang.png",
+      "sha256": "46408c5a7f8e18842a602656c6bc257797e86ae3871943cfe2dd79943997efe0",
+      "kind": "Minecraft actual framebuffer"
+    },
+    {
+      "file": "props_flight_solar_incendiary.png",
+      "sha256": "b19545edb7969ed89ccb855d25f7c20a6c0547290951fd44ec229b4be276aa27",
+      "kind": "Minecraft actual framebuffer"
+    },
+    {
+      "file": "props_flight_solar_knife.png",
+      "sha256": "e3c6ee5f882f7aec215359ee530c1ff02b550a48501812065ba247dff44b1449",
+      "kind": "Minecraft actual framebuffer"
+    },
+    {
+      "file": "props_flight_void_smoke_bomb.png",
+      "sha256": "470ec2e9a3eb793c56fcdfe783697fef4e978241fb010a8ce16f69ad005bdea9",
+      "kind": "Minecraft actual framebuffer"
+    },
+    {
+      "file": "props_flight_void_vortex.png",
+      "sha256": "333cbfdb89164a2808b1558694aa86b37401c02729b0939288848b58ab4e3bc1",
+      "kind": "Minecraft actual framebuffer"
+    },
+    {
+      "file": "props_ingame_gallery.png",
+      "sha256": "c3513c7cff7d3d07783790b8a34b217238bf0ce1a68693569d70e686a7d3b64a",
+      "kind": "Minecraft actual framebuffer"
+    }
+  ],
+  "qa_conditions": {
+    "resolution": [
+      1708,
+      956
+    ],
+    "gallery": "Vanilla item_display scale 2 for side-by-side texture inspection; not gameplay size",
+    "actual_flight": "Ability casts with original scale 0.5 for grenades/smoke, 0.6 for knife; server tick rate temporarily 1 for capture; observer repositioned by console",
+    "final_tick_rate": 20,
+    "profile_options_restored": true,
+    "own_test_entities_removed": true,
+    "server_stopped": true,
+    "client_shutdown": "Own client SIGTERM after server stop; expected Gradle exit 143"
+  },
+  "limitations": [
+    "No bespoke throw/ready player animation or Arc fist rig in this change",
+    "No shader or impact effect redesign",
+    "Other resolutions, GUI scales, Vulkan and multi-client observation not retested"
+  ],
+  "warnings": [
+    "Blockbench offscreen cleanup: onContextMenu is not defined; export succeeded",
+    "Offline account Realms authentication",
+    "Existing unrelated unused particle reference on older HUD item models",
+    "Existing OpenGL unused vertex outputs and minecraft:end_of_frame warning"
+  ]
+}

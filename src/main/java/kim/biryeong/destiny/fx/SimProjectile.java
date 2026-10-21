@@ -4,6 +4,7 @@ import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.attachment.ChunkAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import kim.biryeong.destiny.combat.Combat;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,12 +13,14 @@ import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
+import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,7 @@ public final class SimProjectile {
     private final Consumer<HitResult> onImpact;
     private final ElementHolder holder;
     private final ItemDisplayElement display;
+    private final boolean directional;
     private boolean done;
 
     private SimProjectile(ServerPlayer owner, Vec3 pos, Vec3 velocity, double gravity, int life, ItemStack visual,
@@ -56,7 +60,12 @@ public final class SimProjectile {
         this.onImpact = onImpact;
         this.holder = new ElementHolder();
         this.display = new ItemDisplayElement(visual);
-        display.setBillboardMode(Display.BillboardConstraints.CENTER);
+        // Authored 3D props follow flight, rather than turning into camera-facing sprites.
+        // Legacy vanilla sprites (e.g. Shadowshot's arrow) retain their previous presentation.
+        this.directional = visual.has(DataComponents.ITEM_MODEL);
+        display.setItemDisplayContext(ItemDisplayContext.NONE);
+        display.setBillboardMode(directional ? Display.BillboardConstraints.FIXED : Display.BillboardConstraints.CENTER);
+        if (directional) display.setLeftRotation(flightRotation(velocity));
         display.setScale(new Vector3f(scale));
         display.setBrightness(new Brightness(15, 15));
         display.setTeleportDuration(1);
@@ -125,6 +134,7 @@ public final class SimProjectile {
         Fx.line(level, pos, end, trailColor, 0.4, 0.8f);
         pos = end;
         display.setOffset(pos.subtract(origin));
+        if (directional) display.setLeftRotation(flightRotation(velocity));
         holder.tick();
         if (hit.getType() != HitResult.Type.MISS) {
             finish(hit);
@@ -149,5 +159,13 @@ public final class SimProjectile {
 
     public Vec3 position() {
         return pos;
+    }
+
+    /** Align authored -Z with flight, compensating ItemDisplayRenderer's built-in Y=PI. */
+    public static Quaternionf flightRotation(Vec3 velocity) {
+        if (velocity.lengthSqr() < 1.0e-10) return new Quaternionf().rotationY((float) Math.PI);
+        Vec3 direction = velocity.normalize();
+        return new Quaternionf().rotationTo(0, 0, -1,
+                (float) direction.x, (float) direction.y, (float) direction.z).rotateY((float) Math.PI);
     }
 }

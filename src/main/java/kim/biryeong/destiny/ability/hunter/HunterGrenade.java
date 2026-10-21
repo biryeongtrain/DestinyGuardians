@@ -17,7 +17,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -32,11 +31,7 @@ public final class HunterGrenade extends Ability {
         ServerLevel level = player.level();
         Vec3 eye = player.getEyePosition();
         Vec3 velocity = player.getLookAngle().scale(param("throw_speed", 1.1)).add(0, 0.12, 0);
-        ItemStack visual = new ItemStack(switch (element()) {
-            case ARC -> Items.PRISMARINE_CRYSTALS;
-            case SOLAR -> Items.FIRE_CHARGE;
-            default -> Items.ENDER_PEARL;
-        });
+        ItemStack visual = HunterAbilityVisuals.grenade(element());
         SimProjectile.launch(player, eye, velocity, 0.045, 80, visual, 0.5f, element().color(), hit -> detonate(player, level, hit));
         Fx.sound(player.level(), eye, SoundEvents.SNOWBALL_THROW, 0.8f, 0.7f);
         return true;
