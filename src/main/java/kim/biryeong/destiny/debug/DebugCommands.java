@@ -47,6 +47,10 @@ public final class DebugCommands {
         dispatcher.register(Commands.literal("destiny")
                 .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands.literal("debug")
+                        .then(Commands.literal("owner-view")
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .then(Commands.literal("first").executes(c -> ownerView(c, false)))
+                                        .then(Commands.literal("third").executes(c -> ownerView(c, true)))))
                         .then(Commands.literal("model")
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .then(Commands.argument("model", StringArgumentType.word())
@@ -77,6 +81,17 @@ public final class DebugCommands {
         boolean animated = tracker.animate(animation, new AnimationModifier(0, 0, AnimationIterator.Type.LOOP));
         DUMMIES.add(tracker);
         ctx.getSource().sendSuccess(() -> Component.literal("Spawned " + name + " (" + animation + ", animated=" + animated + ")"), false);
+        return 1;
+    }
+
+    /** QA override for testing owner visibility without installing GCB in the vision-only client. */
+    private static int ownerView(CommandContext<CommandSourceStack> ctx, boolean third) throws CommandSyntaxException {
+        ServerPlayer player = EntityArgument.getPlayer(ctx, "player");
+        var runtime = kim.biryeong.destiny.guardian.Guardians.runtime(player);
+        runtime.gcbClient = third;
+        runtime.gcbThirdPerson = third;
+        kim.biryeong.destiny.fx.PlayerAnimations.refreshOwnerVisibility(player);
+        ctx.getSource().sendSuccess(() -> Component.literal("QA owner-view=" + (third ? "third" : "first") + " (simulated; not GCB transport verification)"), false);
         return 1;
     }
 

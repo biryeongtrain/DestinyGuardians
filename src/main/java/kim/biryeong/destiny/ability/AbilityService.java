@@ -35,18 +35,41 @@ public final class AbilityService {
 
     public static void init() {
         ServerTickEvents.END_SERVER_TICK.register(AbilityService::tick);
+        net.fabricmc.fabric.api.entity.event.v1.ServerEntityLevelChangeEvents.AFTER_PLAYER_CHANGE_LEVEL.register((player, from, to) -> {
+            cleanup(player);
+            Guardians.forget(player);
+        });
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
-            endSuper(handler.getPlayer());
-            CombatHud.remove(handler.getPlayer());
+            cleanup(handler.getPlayer());
             Guardians.forget(handler.getPlayer());
         });
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
+            Statuses.creditFireDeath(entity, source);
             if (entity instanceof ServerPlayer player) {
-                endSuper(player);
+                cleanup(player);
+                Guardians.forget(player);
             }
         });
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
                 !(entity instanceof ServerPlayer player) || Guardians.runtime(player).invulnerableTicks <= 0);
+        net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                cleanup(player);
+                Guardians.forget(player);
+            }
+            SimProjectile.clearAll();
+            Tasks.clearAll();
+            Statuses.clearAll();
+        });
+    }
+
+    public static void cleanup(ServerPlayer player) {
+        endSuper(player);
+        kim.biryeong.destiny.fx.PlayerAnimations.stop(player);
+        CombatHud.remove(player);
+        SimProjectile.discardOwned(player);
+        Tasks.cancelOwned(player);
+        Statuses.forget(player);
     }
 
     public static void tick(MinecraftServer server) {
@@ -59,6 +82,10 @@ public final class AbilityService {
     }
 
     public static void tickPlayer(ServerPlayer player) {
+        if (player.isDeadOrDying() || player.isSpectator()) {
+            CombatHud.remove(player);
+            return;
+        }
         GuardianData data = Guardians.data(player);
         GuardianRuntime runtime = Guardians.runtime(player);
         if (runtime.invulnerableTicks > 0) {
@@ -108,6 +135,7 @@ public final class AbilityService {
     }
 
     public static Result use(ServerPlayer player, AbilitySlot slot) {
+        if (player.isDeadOrDying() || player.isSpectator()) return Result.FAILED;
         if (!Guardians.isGuardian(player)) {
             return Result.NOT_GUARDIAN;
         }

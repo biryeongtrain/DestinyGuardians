@@ -86,12 +86,30 @@ public final class SimProjectile {
         ACTIVE.clear();
     }
 
+    public static void discardOwned(ServerPlayer owner) {
+        ACTIVE.removeIf(p -> {
+            if (p.owner != owner) return false;
+            p.discard();
+            return true;
+        });
+    }
+
+    public static int activeCount(ServerPlayer owner) {
+        return (int) ACTIVE.stream().filter(p -> p.owner == owner && !p.done).count();
+    }
+
+    public boolean isDone() { return done; }
+
     public static int activeCount() {
         return ACTIVE.size();
     }
 
     private void tick() {
         if (done) {
+            return;
+        }
+        if (!owner.isAlive() || owner.isRemoved() || owner.level() != level) {
+            discard();
             return;
         }
         Vec3 next = pos.add(velocity);
@@ -125,6 +143,7 @@ public final class SimProjectile {
     }
 
     private void discard() {
+        done = true;
         holder.destroy();
     }
 

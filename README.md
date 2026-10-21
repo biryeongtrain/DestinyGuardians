@@ -35,11 +35,55 @@ git add libs/minigame-lib && git commit -m "chore: bump minigame-lib to <tag>"
 
 `build/libs/destiny-guardians-<버전>.jar`와 함께 다음 모드를 서버에 넣습니다: Fabric API, Polymer(core·resource-pack·virtual-entity·autohost), BetterModel(+ Fabric Language Kotlin), minigame-lib.
 
+## 헌터 시작하기
+
+서버에서 리소스팩 수락 후 실행합니다. 아래 명령은 본인 대상으로 쓸 수 있고,
+OP는 마지막에 플레이어 이름을 붙일 수 있습니다.
+
+```text
+/guardian class hunter
+/guardian subclass arc          # solar / void 도 선택 가능
+/guardian info
+```
+
+| 동작 | 바닐라 입력 | GCB-mod 선택 설치 시 |
+|---|---|---|
+| 공중 점프 | 공중에서 Space 다시 누르기 | 동일 |
+| 회피 | Shift 두 번 (7틱 이내) | C |
+| 수류탄 | F | Z |
+| 근접 능력 | Shift + 좌클릭 | V |
+| 궁극기 | Shift + F (게이지 100%) | X |
+| 궁극기 공격 | 좌클릭 | 좌클릭 |
+
+헌터는 F 손 교환을 능력 입력으로 사용합니다. `/guardian class none`으로 해제하면 바닐라 동작이 유지됩니다.
+일반 총기·탄약 및 명사수 회피의 재장전 연동은 아직 없습니다.
+BetterModel 기본 리그에서 `config/bettermodel/players/guardian_hunter.bbmodel`을 최초 생성하며,
+기존 파일은 덮어쓰지 않습니다. 최종 아트로 교체할 때 `roll`, `super_arc`, `super_solar`, `super_void`
+애니메이션과 `pri_right_item` bone 계약을 유지해야 합니다.
+바닐라는 본인 limb를 숨기며, GCB 시점 이벤트가 있어야 본인 3인칭 표시를 구분합니다.
+
+GCB 어댑터는 빌드 시 `gcb_server_dir`(기본 `../GCB-server`) 소스가 있어야 포함됩니다.
+없어도 바닐라 입력 빌드는 가능하지만, 그 JAR에 GCB-server만 나중에 추가해도 어댑터가 생기지는 않습니다.
+빌드 의존성 모드들은 JAR에 내장되지 않으므로 서버에 별도 설치해야 합니다.
+
+## 자동 검증
+
+Java 25에서:
+
+```sh
+rtk proxy ./gradlew runGameTest build --console=plain
+```
+
+헌터 GameTest 33개, JUnit 리소스 테스트 2개. 실제 렌더링은 별도 Copper Golem Vision 26.3으로 검증했습니다.
+개발 서버 실행 중 소스 재컴파일은 하지 말고, 서버를 중지한 뒤 빌드하고 새 JVM에서 검증하세요.
+
 ## 문서
 
 - [기획서](docs/Destiny_Guardians.md)
 - [세부 문서 안내](docs/design/00_문서_안내.md)
 - [작업 계획 – 기본 시스템](docs/design/11_작업_계획.md)
+- [헌터 구현 로그·검증 범위](docs/design/13_헌터_구현_로그.md)
+- [헌터 QA 증거](docs/qa/2026-10-22/README.md)
 
 ## 작업 규칙
 

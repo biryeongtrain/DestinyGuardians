@@ -3,6 +3,7 @@ package kim.biryeong.destiny.fx;
 import kim.biryeong.destiny.guardian.Guardians;
 import kr.toxicity.model.api.BetterModel;
 import kr.toxicity.model.api.animation.AnimationModifier;
+import kr.toxicity.model.api.animation.AnimationIterator;
 import kr.toxicity.model.api.mod.platform.ModPlayer;
 import kr.toxicity.model.api.tracker.EntityHideOption;
 import kr.toxicity.model.api.tracker.EntityTracker;
@@ -10,7 +11,7 @@ import kr.toxicity.model.api.tracker.TrackerModifier;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ import java.util.UUID;
 public final class PlayerAnimations {
     public static String limb = "guardian_hunter";
     public static String fallbackLimb = "steve";
-    private static final Map<UUID, EntityTracker> ACTIVE = new HashMap<>();
+    private static final Map<UUID, EntityTracker> ACTIVE = new ConcurrentHashMap<>();
 
     private PlayerAnimations() {
     }
@@ -36,14 +37,23 @@ public final class PlayerAnimations {
             return false;
         }
         try {
-            return playInternal(player, animation);
+            return playInternal(player, animation, false);
         } catch (RuntimeException | LinkageError e) {
             kim.biryeong.destiny.DestinyGuardians.LOGGER.warn("Limb animation {} failed: {}", animation, e.toString());
             return false;
         }
     }
 
-    private static boolean playInternal(ServerPlayer player, String animation) {
+    public static boolean loop(ServerPlayer player, String animation) {
+        if (!available()) return false;
+        try { return playInternal(player, animation, true); }
+        catch (RuntimeException | LinkageError e) {
+            kim.biryeong.destiny.DestinyGuardians.LOGGER.warn("Limb loop {} failed: {}", animation, e.toString());
+            return false;
+        }
+    }
+
+    private static boolean playInternal(ServerPlayer player, String animation, boolean loop) {
         var renderer = BetterModel.limb(limb)
                 .filter(r -> r.animation(animation).isPresent())
                 .or(() -> BetterModel.limb(fallbackLimb).filter(r -> r.animation(animation).isPresent()))
@@ -56,7 +66,7 @@ public final class PlayerAnimations {
         EntityTracker tracker = renderer.getOrCreate(self, TrackerModifier.DEFAULT, t -> t.hideOption(EntityHideOption.DEFAULT));
         ACTIVE.put(player.getUUID(), tracker);
         applyOwnerVisibility(player, tracker);
-        boolean ok = tracker.animate(animation, AnimationModifier.DEFAULT_WITH_PLAY_ONCE, () -> {
+        boolean ok = tracker.animate(animation, loop ? new AnimationModifier(0, 0, AnimationIterator.Type.LOOP) : AnimationModifier.DEFAULT_WITH_PLAY_ONCE, () -> {
             tracker.close();
             ACTIVE.remove(player.getUUID(), tracker);
         });
@@ -98,5 +108,14 @@ public final class PlayerAnimations {
 
     public static boolean isPlaying(ServerPlayer player) {
         return ACTIVE.containsKey(player.getUUID());
+    }
+
+    public static void superItem(ServerPlayer player, net.minecraft.world.item.ItemStack item) {
+        EntityTracker tracker = ACTIVE.get(player.getUUID());
+        if (tracker == null) return;
+        tracker.update(kr.toxicity.model.api.tracker.TrackerUpdateAction.itemStack(
+                kr.toxicity.model.api.util.TransformedItemStack.of(
+                        kr.toxicity.model.api.mod.platform.ModItemStack.of(item))),
+                bone -> bone.name().rawName().equals("pri_right_item"));
     }
 }

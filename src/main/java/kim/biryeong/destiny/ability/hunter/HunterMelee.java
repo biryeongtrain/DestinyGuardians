@@ -50,13 +50,13 @@ public final class HunterMelee extends Ability {
         Fx.sound(level, player.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.8f);
         float damage = (float) param("damage", 12);
         double reach = param("reach", 2.8);
-        Tasks.run(age -> {
+        Tasks.run(player, level, age -> {
             Vec3 center = player.position().add(0, 1, 0).add(Motion.horizontalLook(player).scale(1.2));
             level.sendParticles(ParticleTypes.ELECTRIC_SPARK, center.x, center.y, center.z, 6, 0.4, 0.4, 0.4, 0.1);
             if (age == 3) {
-                for (LivingEntity e : Combat.enemiesNear(player, center, reach)) {
+                for (LivingEntity e : Combat.enemiesNear(level, player, center, reach)) {
                     Fx.line(level, player.getEyePosition(), e.position().add(0, e.getBbHeight() / 2, 0), element().color(), 0.25, 1.0f);
-                    if (Combat.damage(player, e, damage, element())) {
+                    if (Combat.damage(level, player, e, damage, element())) {
                         Statuses.apply(player, Keyword.AMPLIFIED, (int) param("amplified_ticks", 120));
                         player.heal((float) param("heal_on_kill", 4));
                     }
@@ -76,8 +76,8 @@ public final class HunterMelee extends Ability {
                     ServerLevel level = player.level();
                     Fx.burst(level, hit.getLocation(), element(), 20, 0.3);
                     if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity target) {
-                        Combat.damage(player, target, damage, element());
-                        Statuses.apply(target, Keyword.SCORCHED, (int) param("scorch_ticks", 80));
+                        Combat.damage(level, player, target, damage, element());
+                        Statuses.scorch(player, target, (int) param("scorch_ticks", 80));
                     }
                 });
         Fx.sound(player.level(), player.getEyePosition(), SoundEvents.TRIDENT_THROW.value(), 0.8f, 1.5f);
@@ -92,11 +92,11 @@ public final class HunterMelee extends Ability {
                     ServerLevel level = player.level();
                     Vec3 pos = hit.getLocation();
                     Fx.sound(level, pos, SoundEvents.FIRE_EXTINGUISH, 0.8f, 0.6f);
-                    Tasks.run(age -> {
+                    Tasks.run(player, level, age -> {
                         level.sendParticles(ParticleTypes.LARGE_SMOKE, pos.x, pos.y + 0.5, pos.z, 6, radius / 2, 0.5, radius / 2, 0.01);
                         level.sendParticles(Fx.dust(element().color(), 2.0f), pos.x, pos.y + 0.5, pos.z, 4, radius / 2, 0.5, radius / 2, 0.0);
                         if (age % 10 == 0) {
-                            for (LivingEntity e : Combat.enemiesNear(player, pos, radius)) {
+                            for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                                 Statuses.apply(e, Keyword.SUPPRESSED, 20);
                             }
                             for (Player p : level.getEntitiesOfClass(Player.class, new net.minecraft.world.phys.AABB(pos, pos).inflate(radius))) {

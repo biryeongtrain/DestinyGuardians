@@ -29,8 +29,8 @@ public final class CombatHud {
     public static final String SUPER_ID = "destiny:hud_super";
     private static final Map<UUID, String> LAST = new HashMap<>();
 
-    public static float abilitiesX = 300f;
-    public static float abilitiesY = 980f;
+    public static float abilitiesX = 80f;
+    public static float abilitiesY = 955f;
     public static float superX = 960f;
     public static float superY = 860f;
 
@@ -106,12 +106,12 @@ public final class CombatHud {
             return;
         }
         TextDisplayHud hud = new TextDisplayHud();
-        hud.setLineWidth(400);
+        hud.setLineWidth(300);
         hud.setTextAlignment(align);
         hud.setShadowToggle(true);
-        hud.setBackgroundColor(0x700E1218);
+        hud.setBackgroundColor(0);
         hud.setText(content);
-        hud.setScale(32, 32, 1);
+        hud.setScale(220, 220, 1);
         hud.setViewRange(1000);
         hud.setAlignment(hudAlign);
         hud.setLocation(x, y, 0);

@@ -29,6 +29,7 @@ public final class HunterGrenade extends Ability {
 
     @Override
     public boolean activate(ServerPlayer player) {
+        ServerLevel level = player.level();
         Vec3 eye = player.getEyePosition();
         Vec3 velocity = player.getLookAngle().scale(param("throw_speed", 1.1)).add(0, 0.12, 0);
         ItemStack visual = new ItemStack(switch (element()) {
@@ -36,13 +37,12 @@ public final class HunterGrenade extends Ability {
             case SOLAR -> Items.FIRE_CHARGE;
             default -> Items.ENDER_PEARL;
         });
-        SimProjectile.launch(player, eye, velocity, 0.045, 80, visual, 0.5f, element().color(), hit -> detonate(player, hit));
+        SimProjectile.launch(player, eye, velocity, 0.045, 80, visual, 0.5f, element().color(), hit -> detonate(player, level, hit));
         Fx.sound(player.level(), eye, SoundEvents.SNOWBALL_THROW, 0.8f, 0.7f);
         return true;
     }
 
-    private void detonate(ServerPlayer player, HitResult hit) {
-        ServerLevel level = player.level();
+    private void detonate(ServerPlayer player, ServerLevel level, HitResult hit) {
         Vec3 pos = hit.getLocation().add(0, 0.2, 0);
         double radius = param("radius", 4.5);
         switch (element()) {
@@ -50,8 +50,8 @@ public final class HunterGrenade extends Ability {
                 Fx.burst(level, pos, element(), 60, radius / 3);
                 Fx.ring(level, pos, radius, element().glow(), 40);
                 Fx.sound(level, pos, SoundEvents.LIGHTNING_BOLT_IMPACT, 0.8f, 1.6f);
-                for (LivingEntity e : Combat.enemiesNear(player, pos, radius)) {
-                    Combat.damage(player, e, (float) param("damage", 5), element());
+                for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
+                    Combat.damage(level, player, e, (float) param("damage", 5), element());
                     Statuses.apply(e, Keyword.BLINDED, (int) param("blind_ticks", 80));
                 }
             }
@@ -59,26 +59,26 @@ public final class HunterGrenade extends Ability {
                 Fx.burst(level, pos, element(), 70, radius / 3);
                 level.sendParticles(ParticleTypes.LAVA, pos.x, pos.y, pos.z, 12, radius / 3, 0.2, radius / 3, 0.0);
                 Fx.sound(level, pos, SoundEvents.GENERIC_EXPLODE.value(), 0.8f, 1.3f);
-                for (LivingEntity e : Combat.enemiesNear(player, pos, radius)) {
-                    Combat.damage(player, e, (float) param("damage", 7), element());
-                    Statuses.apply(e, Keyword.SCORCHED, (int) param("scorch_ticks", 100));
+                for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
+                    Combat.damage(level, player, e, (float) param("damage", 7), element());
+                    Statuses.scorch(player, e, (int) param("scorch_ticks", 100));
                 }
             }
             default -> {
                 int duration = (int) param("duration_ticks", 60);
                 float pulse = (float) param("damage", 3);
                 Fx.sound(level, pos, SoundEvents.PORTAL_TRIGGER, 0.6f, 1.8f);
-                Tasks.run(age -> {
+                Tasks.run(player, level, age -> {
                     if (age % 2 == 0) {
                         Fx.ring(level, pos, radius * (1 - (age % 20) / 20.0), element().color(), 24);
                         level.sendParticles(ParticleTypes.PORTAL, pos.x, pos.y, pos.z, 12, radius / 3, 0.4, radius / 3, 0.5);
                     }
-                    for (LivingEntity e : Combat.enemiesNear(player, pos, radius)) {
+                    for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                         Vec3 pull = pos.subtract(e.position()).scale(0.08);
                         e.setDeltaMovement(e.getDeltaMovement().add(pull.x, 0, pull.z));
                         e.needsSync = true;
                         if (age % 10 == 0) {
-                            Combat.damage(player, e, pulse, element());
+                            Combat.damage(level, player, e, pulse, element());
                         }
                     }
                     return age < duration;

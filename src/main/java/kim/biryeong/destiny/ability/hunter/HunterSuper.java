@@ -10,6 +10,7 @@ import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
 import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.fx.PostEffects;
+import kim.biryeong.destiny.fx.PlayerAnimations;
 import kim.biryeong.destiny.fx.SimProjectile;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
@@ -56,6 +57,8 @@ public final class HunterSuper extends Ability {
         };
         AbilityService.startSuper(player, session);
         PostEffects.enter(player, element());
+        PlayerAnimations.loop(player, "super_" + element().getSerializedName());
+        PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()));
         Fx.burst(player.level(), player.position().add(0, 1, 0), element(), 80, 0.8);
         Fx.sound(player.level(), player.position(), SoundEvents.BEACON_ACTIVATE, 1f, 1.4f);
         return true;
@@ -65,6 +68,7 @@ public final class HunterSuper extends Ability {
         protected final ServerPlayer player;
         protected final int duration;
         protected int age;
+        private ItemStack handStack;
 
         Session(ServerPlayer player, int duration) {
             this.player = player;
@@ -73,6 +77,7 @@ public final class HunterSuper extends Ability {
 
         @Override
         public boolean tick() {
+            syncHand();
             return ++age < duration && player.isAlive();
         }
 
@@ -84,13 +89,24 @@ public final class HunterSuper extends Ability {
         @Override
         public void end() {
             PostEffects.exit(player, element());
+            PlayerAnimations.stop(player);
             DisplayHud.removeHud(player, HAND_HUD_ID);
         }
 
         protected void handItem(ItemStack stack) {
+            handStack = stack;
+            syncHand();
+        }
+
+        private void syncHand() {
+            if (PlayerAnimations.ownerSeesLimb(player)) {
+                DisplayHud.removeHud(player, HAND_HUD_ID);
+                return;
+            }
+            if (handStack == null || DisplayHud.getHud(player, HAND_HUD_ID) != null) return;
             DisplayHud.removeHud(player, HAND_HUD_ID);
             ItemDisplayHud hud = new ItemDisplayHud();
-            hud.setItem(stack);
+            hud.setItem(handStack);
             hud.setItemTransform(ItemDisplayContext.GUI);
             hud.setScale(220, 220, 1);
             hud.setViewRange(1000);
@@ -107,7 +123,7 @@ public final class HunterSuper extends Ability {
         ArcStaff(ServerPlayer player) {
             super(player, (int) param("duration_ticks", 400));
             Statuses.apply(player, Keyword.AMPLIFIED, duration);
-            handItem(new ItemStack(Items.BREEZE_ROD));
+            handItem(kim.biryeong.destiny.fx.SuperVisuals.item(element()));
         }
 
         @Override
@@ -136,10 +152,10 @@ public final class HunterSuper extends Ability {
                 Fx.line(level, eye.add(dir.scale(1.0)), eye.add(dir.scale(reach)), element().glow(), 0.6, 0.7f);
             }
             Fx.sound(level, eye, SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.2f);
-            for (LivingEntity e : Combat.enemiesNear(player, eye, reach)) {
+            for (LivingEntity e : Combat.enemiesNear(level, player, eye, reach)) {
                 Vec3 to = e.position().add(0, e.getBbHeight() / 2, 0).subtract(eye).normalize();
                 if (to.dot(look) >= cosHalf) {
-                    Combat.damage(player, e, (float) param("damage", 16), element());
+                    Combat.damage(level, player, e, (float) param("damage", 16), element());
                     level.sendParticles(ParticleTypes.ELECTRIC_SPARK, e.getX(), e.getY() + 1, e.getZ(), 12, 0.3, 0.5, 0.3, 0.2);
                 }
             }
@@ -160,7 +176,7 @@ public final class HunterSuper extends Ability {
         GoldenGun(ServerPlayer player) {
             super(player, (int) param("duration_ticks", 200));
             this.shots = (int) param("shots", 3);
-            handItem(new ItemStack(Items.GOLDEN_HORSE_ARMOR));
+            handItem(kim.biryeong.destiny.fx.SuperVisuals.item(element()));
         }
 
         @Override
@@ -191,7 +207,7 @@ public final class HunterSuper extends Ability {
 
         Shadowshot(ServerPlayer player) {
             super(player, (int) param("aim_ticks", 200));
-            handItem(new ItemStack(Items.BOW));
+            handItem(kim.biryeong.destiny.fx.SuperVisuals.item(element()));
         }
 
         @Override
@@ -218,14 +234,14 @@ public final class HunterSuper extends Ability {
                         Vec3 anchor = hit.getLocation();
                         Fx.burst(level, anchor, element(), 80, 1.0);
                         Fx.sound(level, anchor, SoundEvents.ENDER_EYE_DEATH, 1f, 0.5f);
-                        for (LivingEntity e : Combat.enemiesNear(player, anchor, radius)) {
-                            Combat.damage(player, e, impactDamage, element());
+                        for (LivingEntity e : Combat.enemiesNear(level, player, anchor, radius)) {
+                            Combat.damage(level, player, e, impactDamage, element());
                         }
-                        Tasks.run(age -> {
+                        Tasks.run(player, level, age -> {
                             if (age % 3 == 0) {
                                 Fx.ring(level, anchor, radius, element().color(), 36);
                             }
-                            for (LivingEntity e : Combat.enemiesNear(player, anchor, radius)) {
+                            for (LivingEntity e : Combat.enemiesNear(level, player, anchor, radius)) {
                                 if (age % 10 == 0) {
                                     Statuses.apply(e, Keyword.WEAKENED, 30);
                                     Statuses.apply(e, Keyword.SUPPRESSED, 30);
@@ -261,9 +277,10 @@ public final class HunterSuper extends Ability {
         Fx.line(level, eye.add(player.getLookAngle().scale(0.8)).add(0, -0.15, 0), impact, element.color(), 0.3, 1.1f);
         Fx.burst(level, impact, element, 30, 0.3);
         if (entity != null && entity.getEntity() instanceof LivingEntity target) {
-            Combat.damage(player, target, damage, element);
+            Combat.damage(level, player, target, damage, element);
             if (keyword != null && target.isAlive()) {
-                Statuses.apply(target, keyword, 100);
+                if (keyword == Keyword.SCORCHED) Statuses.scorch(player, target, 100);
+                else Statuses.apply(target, keyword, 100);
             }
             return target;
         }

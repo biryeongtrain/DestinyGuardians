@@ -68,7 +68,7 @@ final class TestPlayers {
     }
 
     static void remove(ServerPlayer player) {
-        kim.biryeong.destiny.ability.AbilityService.endSuper(player);
+        kim.biryeong.destiny.ability.AbilityService.cleanup(player);
         Guardians.forget(player);
         EmbeddedChannel channel = CHANNELS.remove(player.getUUID());
         if (channel != null) {

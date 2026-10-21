@@ -11,7 +11,7 @@ public final class Tasks {
         boolean tick(int age);
     }
 
-    private record Running(Task task, int[] age) {
+    private record Running(Task task, int[] age, net.minecraft.server.level.ServerPlayer owner, net.minecraft.server.level.ServerLevel level) {
     }
 
     private static final List<Running> RUNNING = new ArrayList<>();
@@ -20,7 +20,19 @@ public final class Tasks {
     }
 
     public static void run(Task task) {
-        RUNNING.add(new Running(task, new int[]{0}));
+        RUNNING.add(new Running(task, new int[]{0}, null, null));
+    }
+
+    public static void run(net.minecraft.server.level.ServerPlayer owner, net.minecraft.server.level.ServerLevel level, Task task) {
+        RUNNING.add(new Running(task, new int[]{0}, owner, level));
+    }
+
+    public static void cancelOwned(net.minecraft.server.level.ServerPlayer owner) {
+        RUNNING.removeIf(r -> r.owner == owner);
+    }
+
+    public static int count(net.minecraft.server.level.ServerPlayer owner) {
+        return (int) RUNNING.stream().filter(r -> r.owner == owner).count();
     }
 
     public static void tickAll() {
@@ -28,6 +40,10 @@ public final class Tasks {
             return;
         }
         for (Running r : List.copyOf(RUNNING)) {
+            if (r.owner != null && (!r.owner.isAlive() || r.owner.isRemoved() || r.owner.level() != r.level)) {
+                RUNNING.remove(r);
+                continue;
+            }
             boolean keep;
             try {
                 keep = r.task.tick(r.age[0]++);

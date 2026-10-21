@@ -126,7 +126,7 @@ public final class HunterGameTests {
             for (int i = 0; i < 6; i++) {
                 AbilityService.tickPlayer(p);
             }
-            p.setInvulnerableTime(0);
+            p.damageCooldownTime = 0;
             p.hurtServer(p.level(), p.damageSources().generic(), 5);
             check(h, p.getHealth() < health, "Damage applies after i-frames");
 
@@ -145,11 +145,16 @@ public final class HunterGameTests {
         ServerPlayer p = hunter(h, element, 15);
         Husk husk = husk(h, 6.5, 6.5);
         float start = husk.getHealth();
+        double originalX = husk.getX();
         boolean cancelled = InputRouter.onPlayerAction(p, ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND);
         check(h, cancelled, "F (swap hands) must be cancelled for guardians");
         check(h, Guardians.data(p).cooldown(AbilitySlot.GRENADE) > 0, "Grenade should go on cooldown");
         h.succeedWhen(() -> {
             check(h, husk.getHealth() < start, "Grenade did not damage the husk yet");
+            if (element == Element.VOID) {
+                check(h, start - husk.getHealth() > 3.01f, "Vortex must deal more than one damage pulse");
+                check(h, husk.getX() < originalX - 0.05 || husk.getDeltaMovement().x < -0.01, "Vortex must pull toward the anchor (NoAI fixture may retain velocity without traveling), x=" + husk.getX() + " vx=" + husk.getDeltaMovement().x);
+            }
             if (keyword != null) {
                 check(h, Statuses.has(husk, keyword), "Husk should have " + keyword);
             }
@@ -178,12 +183,16 @@ public final class HunterGameTests {
     public void arcCombinationBlowWithShiftPunch(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
         Husk husk = husk(h, 4.5, 6.5);
+        husk.setHealth(5f);
+        p.setHealth(12f);
         float start = husk.getHealth();
         p.setShiftKeyDown(true);
         InputRouter.onPunch(p);
         check(h, Guardians.data(p).cooldown(AbilitySlot.MELEE) > 0, "Shift + punch should use melee");
         h.succeedWhen(() -> {
             check(h, husk.getHealth() < start, "Combination blow did not hit");
+            check(h, !husk.isAlive() && Statuses.has(p, Keyword.AMPLIFIED), "Melee kill must amplify the hunter");
+            check(h, p.getHealth() >= 16f, "Melee kill must heal the hunter");
             TestPlayers.remove(p);
         });
     }
@@ -321,6 +330,55 @@ public final class HunterGameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20)
     public void projectilesCleanUp(GameTestHelper h) {
-        h.succeedWhen(() -> check(h, SimProjectile.activeCount() >= 0, "noop"));
+        ServerPlayer p = hunter(h, Element.ARC, 0);
+        var projectile = SimProjectile.launch(p, p.getEyePosition(), Vec3.ZERO, 0, 2,
+                new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.STICK), 0.5f, 0xFFFFFF, hit -> { });
+        check(h, SimProjectile.activeCount(p) == 1, "Test projectile must exist");
+        h.succeedWhen(() -> {
+            check(h, projectile.isDone() && SimProjectile.activeCount(p) == 0, "Expired projectile and holder must be disposed");
+            TestPlayers.remove(p);
+        });
     }
+    @GameTest(structure = FLOOR, maxTicks = 20)
+    public void guardianDataCodecRoundTripsAndClassSwitchKeepsLoadouts(GameTestHelper h) {
+        GuardianData data = new GuardianData();
+        data.setGuardianClass(GuardianClass.HUNTER);
+        data.setLoadout(GuardianClass.HUNTER, HunterAbilities.preset(Element.VOID));
+        data.setCooldown(AbilitySlot.GRENADE, 347);
+        data.setSuperEnergy(0.63f);
+        var encoded = GuardianData.CODEC.encodeStart(com.mojang.serialization.JsonOps.INSTANCE, data).getOrThrow();
+        GuardianData restored = GuardianData.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, encoded).getOrThrow();
+        check(h, restored.guardianClass() == GuardianClass.HUNTER, "Class persists");
+        check(h, restored.cooldown(AbilitySlot.GRENADE) == 347, "Cooldown persists");
+        check(h, Math.abs(restored.superEnergy() - 0.63f) < 0.0001, "Super energy persists");
+        check(h, restored.loadout().orElseThrow().get(AbilitySlot.SUPER).equals(HunterAbilities.SHADOWSHOT), "Loadout persists");
+        restored.setGuardianClass(GuardianClass.NONE);
+        restored.setGuardianClass(GuardianClass.HUNTER);
+        check(h, restored.loadout().orElseThrow().get(AbilitySlot.SUPER).equals(HunterAbilities.SHADOWSHOT), "Switching away preserves hunter loadout");
+        h.succeed();
+    }
+
+    @GameTest(structure = FLOOR, maxTicks = 20)
+    public void guardianAttachmentSurvivesDeathRespawnEvent(GameTestHelper h) {
+        ServerPlayer old = hunter(h, Element.SOLAR, 0);
+        ServerPlayer respawned = TestPlayers.create(h, PLAYER_POS, -90, 0);
+        try {
+            Guardians.data(old).setCooldown(AbilitySlot.MELEE, 123);
+            Guardians.data(old).setSuperEnergy(0.42f);
+            respawned.restoreFrom(old, false);
+            // Fabric transfers attachments after respawn, not in vanilla restoreFrom.
+            net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents.AFTER_RESPAWN.invoker()
+                    .afterRespawn(old, respawned, false);
+            GuardianData data = Guardians.data(respawned);
+            check(h, data.guardianClass() == GuardianClass.HUNTER, "Hunter attachment copies on death");
+            check(h, data.cooldown(AbilitySlot.MELEE) == 123, "Death keeps cooldown");
+            check(h, Math.abs(data.superEnergy() - 0.42f) < 0.0001, "Death keeps super energy");
+            check(h, data.loadout().orElseThrow().get(AbilitySlot.SUPER).equals(HunterAbilities.GOLDEN_GUN), "Death keeps subclass");
+            h.succeed();
+        } finally {
+            TestPlayers.remove(old);
+            TestPlayers.remove(respawned);
+        }
+    }
+
 }

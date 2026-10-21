@@ -23,6 +23,7 @@ public final class Statuses {
 
     private static final Map<UUID, Map<Keyword, Long>> ACTIVE = new HashMap<>();
     private static final Map<UUID, ServerLevel> LEVELS = new HashMap<>();
+    private static final Map<UUID, net.minecraft.server.level.ServerPlayer> SCORCH_OWNERS = new HashMap<>();
 
     private Statuses() {
     }
@@ -62,6 +63,31 @@ public final class Statuses {
         return until != null && until > level.getGameTime();
     }
 
+    public static void scorch(net.minecraft.server.level.ServerPlayer owner, LivingEntity target, int ticks) {
+        apply(target, Keyword.SCORCHED, ticks);
+        SCORCH_OWNERS.put(target.getUUID(), owner);
+        target.setLastHurtByPlayer(owner, ticks);
+    }
+
+    /** Includes vanilla fire ticks, which can kill before the explicit scorch pulse. */
+    public static void creditFireDeath(LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
+        var owner = SCORCH_OWNERS.remove(target.getUUID());
+        if (owner != null && has(target, Keyword.SCORCHED)
+                && source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE)
+                && owner.isAlive() && !owner.isRemoved()) {
+            kim.biryeong.destiny.ability.AbilityService.onKill(owner, target, kim.biryeong.destiny.guardian.Element.SOLAR);
+        }
+    }
+
+    public static void forget(Entity entity) {
+        ACTIVE.remove(entity.getUUID());
+        LEVELS.remove(entity.getUUID());
+        SCORCH_OWNERS.remove(entity.getUUID());
+        if (entity instanceof net.minecraft.server.level.ServerPlayer player) {
+            SCORCH_OWNERS.values().removeIf(owner -> owner == player);
+        }
+    }
+
     /** 받는 피해 보정 (LivingEntityMixin). */
     public static float modifyIncoming(LivingEntity target, float amount) {
         return has(target, Keyword.WEAKENED) ? amount * WEAKEN_MULTIPLIER : amount;
@@ -76,10 +102,12 @@ public final class Statuses {
             if (!(entity instanceof LivingEntity living) || !living.isAlive()) {
                 it.remove();
                 LEVELS.remove(entry.getKey());
+                SCORCH_OWNERS.remove(entry.getKey());
                 continue;
             }
             long now = level.getGameTime();
             entry.getValue().values().removeIf(until -> until <= now);
+            if (!entry.getValue().containsKey(Keyword.SCORCHED)) SCORCH_OWNERS.remove(entry.getKey());
             if (entry.getValue().isEmpty()) {
                 it.remove();
                 LEVELS.remove(entry.getKey());
@@ -89,7 +117,7 @@ public final class Statuses {
                 clearTarget(living);
             }
             if (entry.getValue().containsKey(Keyword.SCORCHED) && now % 20 == 0) {
-                living.setInvulnerableTime(0);
+                living.damageCooldownTime = 0;
                 living.hurtServer(level, living.damageSources().onFire(), 2f);
             }
         }
@@ -98,6 +126,7 @@ public final class Statuses {
     public static void clearAll() {
         ACTIVE.clear();
         LEVELS.clear();
+        SCORCH_OWNERS.clear();
     }
 
     private static void clearTarget(LivingEntity target) {

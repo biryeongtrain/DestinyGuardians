@@ -31,7 +31,11 @@ public final class Combat {
     }
 
     public static List<LivingEntity> enemiesNear(ServerPlayer source, Vec3 center, double radius) {
-        ServerLevel level = source.level();
+        return enemiesNear(source.level(), source, center, radius);
+    }
+
+    public static List<LivingEntity> enemiesNear(ServerLevel level, ServerPlayer source, Vec3 center, double radius) {
+        if (source.level() != level || !source.isAlive() || source.isRemoved()) return List.of();
         AABB box = AABB.ofSize(center, radius * 2, radius * 2, radius * 2);
         return level.getEntitiesOfClass(LivingEntity.class, box,
                         e -> isEnemy(source, e) && e.position().add(0, e.getBbHeight() / 2, 0).distanceTo(center) <= radius)
@@ -45,11 +49,15 @@ public final class Combat {
      * @return 처치했으면 true
      */
     public static boolean damage(ServerPlayer source, LivingEntity target, float amount, Element element) {
-        if (!target.isAlive()) {
+        return damage(source.level(), source, target, amount, element);
+    }
+
+    public static boolean damage(ServerLevel level, ServerPlayer source, LivingEntity target, float amount, Element element) {
+        if (source.level() != level || target.level() != level || !source.isAlive() || !target.isAlive()) {
             return false;
         }
-        target.setInvulnerableTime(0);
-        target.hurtServer(source.level(), source.damageSources().playerAttack(source), amount);
+        target.damageCooldownTime = 0;
+        target.hurtServer(level, source.damageSources().playerAttack(source), amount);
         target.setLastHurtByPlayer(source, 100);
         boolean killed = !target.isAlive() || target.isDeadOrDying();
         if (killed) {

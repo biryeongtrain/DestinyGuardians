@@ -109,7 +109,8 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal(cls.getSerializedName() + " 은(는) 아직 구현되지 않았습니다"));
             return 0;
         }
-        AbilityService.endSuper(player);
+        AbilityService.cleanup(player);
+        Guardians.forget(player);
         GuardianData data = Guardians.data(player);
         data.setGuardianClass(cls);
         if (cls == GuardianClass.HUNTER && data.loadout(cls) == null) {
@@ -133,7 +134,8 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal("먼저 /guardian class hunter"));
             return 0;
         }
-        AbilityService.endSuper(player);
+        AbilityService.cleanup(player);
+        Guardians.forget(player);
         data.setLoadout(GuardianClass.HUNTER, HunterAbilities.preset(element));
         CombatHud.update(player);
         c.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " → hunter / " + element.getSerializedName()), false);
@@ -148,6 +150,7 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal("장착할 수 없는 능력: " + abilityId));
             return 0;
         }
+        if (ability.slot() == AbilitySlot.SUPER) AbilityService.endSuper(player);
         data.loadout().ifPresent(l -> data.setLoadout(data.guardianClass(), l.with(ability.slot(), ability.id())));
         CombatHud.update(player);
         c.getSource().sendSuccess(() -> Component.literal(ability.slot().getSerializedName() + " = " + ability.displayName()), false);
