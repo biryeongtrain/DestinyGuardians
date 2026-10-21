@@ -60,11 +60,11 @@ public final class CombatHud {
             return;
         }
         // The pack is shared by the whole server, so every living player needs a health replacement.
-        bar(player, HEALTH_ID + "_track", 744, 76, 432, 11, 1, 0x3C414A, DisplayHud.HudAlignment.CENTER);
-        bar(player, HEALTH_ID, 748, 76, 424 * healthFraction(player), 5, 2,
+        bar(player, HEALTH_ID + "_track", 744, 76, 432, 13, 1, 0x3C414A, DisplayHud.HudAlignment.CENTER);
+        bar(player, HEALTH_ID, 748, 76, 424 * healthFraction(player), 7, 2,
                 healthFraction(player) <= 0.3f ? 0xE75A4E : WHITE, DisplayHud.HudAlignment.CENTER);
         float absorption = fraction(player.getAbsorptionAmount(), player.getMaxHealth());
-        bar(player, ABSORPTION_ID, 748, 65, 424 * absorption, 3, 2, 0x9DDBEE, DisplayHud.HudAlignment.CENTER);
+        bar(player, ABSORPTION_ID, 748, 65, 424 * absorption, 4, 2, 0x9DDBEE, DisplayHud.HudAlignment.CENTER);
         if (!Guardians.isGuardian(player)) {
             removeAbilities(player);
             LAST.put(player.getUUID(), "체력 " + player.getHealth() + "/" + player.getMaxHealth());
@@ -78,13 +78,13 @@ public final class CombatHud {
         float superCharge = Math.clamp(active ? runtime.superSession.remaining() : data.superEnergy(), 0f, 1f);
         boolean ready = active || data.superEnergy() >= 1f;
 
-        sprite(player, PREFIX + "super_diamond", "diamond", 112, 876, 66, 66, 1,
+        sprite(player, PREFIX + "super_diamond", "diamond", 120, 856, 80, 80, 1,
                 ready ? GOLD : MUTED, DisplayHud.HudAlignment.LEFT);
         sprite(player, PREFIX + "super_icon", switch (element) {
             case ARC -> "staff"; case SOLAR -> "gun"; default -> "bow";
-        }, 112, 876, 37, 37, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
-        bar(player, SUPER_ID + "_track", 158, 876, 192, 6, 1, 0x3C414A, DisplayHud.HudAlignment.LEFT);
-        bar(player, SUPER_ID, 158, 876, 192 * superCharge, 4, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
+        }, 120, 856, 44, 44, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
+        bar(player, SUPER_ID + "_track", 176, 856, 230, 8, 1, 0x3C414A, DisplayHud.HudAlignment.LEFT);
+        bar(player, SUPER_ID, 176, 856, 230 * superCharge, 5, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
 
         StringBuilder debug = new StringBuilder("체력=" + player.getHealth());
         for (int i = 0; i < SLOTS.length; i++) {
@@ -92,12 +92,12 @@ public final class CombatHud {
             Ability ability = AbilityService.equipped(player, slot).orElse(null);
             int tint = ability == null ? MUTED : ability.element().color();
             float progress = charge(player, slot);
-            float x = 100 + i * 58;
+            float x = 104 + i * 70;
             String id = i == 0 ? ABILITIES_ID : ABILITIES_ID + "_" + i;
-            sprite(player, id, "tile", x, 952, 44, 44, 1, progress >= 1 ? WHITE : MUTED, DisplayHud.HudAlignment.LEFT);
-            sprite(player, id + "_icon", icon(slot, ability), x, 952, 31, 31, 2,
+            sprite(player, id, "tile", x, 948, 53, 53, 1, progress >= 1 ? WHITE : MUTED, DisplayHud.HudAlignment.LEFT);
+            sprite(player, id + "_icon", icon(slot, ability), x, 948, 37, 37, 2,
                     progress >= 1 ? WHITE : 0x747C86, DisplayHud.HudAlignment.LEFT);
-            bar(player, id + "_charge", x - 20, 978, 40 * progress, 3, 2,
+            bar(player, id + "_charge", x - 24, 980, 48 * progress, 4, 2,
                     progress >= 1 ? tint : WHITE, DisplayHud.HudAlignment.LEFT);
             debug.append('|').append(switch(slot) {
                 case GRENADE -> "수류탄 "; case MELEE -> "근접 "; default -> "직업 ";

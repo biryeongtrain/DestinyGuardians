@@ -2,13 +2,27 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
-## 최신 HUD 개정 H9
+## 최신 HUD 크기 조정 H10
+
+좌하단 능력·궁극기 HUD를 약 20% 확대했습니다. 타일 53px / 궁극기 80px,
+체력 바 두께 7px. 간격도 같이 늘려 기존 여백과 비중첩 배치를 유지합니다.
+
+- **최신 검증:** GameTest 36/36, JUnit 4/4, build 성공.
+- [확대 정상 화면](hud_destiny_enlarged.png) · [위험 체력·흡수·수류탄 소모](hud_destiny_enlarged_critical.png)
+- [자동 빌드 로그](hud-enlarged-build-gametest.txt) · [JUnit XML](hud-enlarged-junit-results.xml)
+- [실제 서버](hud-enlarged-runtime-server.txt) · [클라이언트](hud-enlarged-vision-client.txt)
+- [메타데이터/해시](hud-enlarged-validation.json)
+
+실제 1708×956 프레임버퍼를 육안 확인. 다른 해상도·GUI 배율은 재검증하지 않았습니다.
+이전 H9의 작은 크기 화면과 증거는 아래에 보존합니다.
+
+## 이전 HUD 개정 H9
 
 사용자 피드백으로 체력 하트를 숨기고 데스티니형 상단 체력 바·좌하단 아이콘 HUD로 변경했습니다.
 아래 구판 H1~H8 스크린샷의 텍스트 HUD는 현재 화면이 아닙니다.
 
-- **현재 검증:** GameTest 36/36, JUnit 4/4, build 성공.
-- [현재 정상 화면](hud_destiny_full.png) · [50% 체력](hud_destiny_damaged.png)
+- **H9 검증:** GameTest 36/36, JUnit 4/4, build 성공.
+- [H9 정상 화면](hud_destiny_full.png) · [50% 체력](hud_destiny_damaged.png)
 - [위험 체력·실제 흡수·수류탄 소모](hud_destiny_critical_absorption.png) · [Solar 궁극기 중](hud_destiny_solar_active.png)
 - [자동 빌드 로그](hud-build-gametest.txt) · [JUnit XML](hud-junit-results.xml)
 - [실제 서버](hud-runtime-server.txt) · [실제 클라이언트](hud-vision-client.txt) · [메타데이터/해시](hud-validation.json)

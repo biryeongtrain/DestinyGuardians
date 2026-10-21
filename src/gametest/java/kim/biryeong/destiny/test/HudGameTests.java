@@ -33,6 +33,7 @@ public final class HudGameTests {
             var health = (ItemDisplayHud) DisplayHud.getHud(p, CombatHud.HEALTH_ID);
             check(h, Math.abs(health.getScale().x - 212) < 0.1, "Half health fills exactly half the 424px track");
             check(h, DisplayHud.getHud(p, CombatHud.ABSORPTION_ID) != null, "Actual absorption gets a separate thin bar");
+            check(h, Math.abs(health.getScale().y - 7) < 0.1, "Health fill uses the thicker 7px size");
             int entityId = health.getEntityId();
             p.setHealth(p.getMaxHealth() / 5);
             p.setAbsorptionAmount(0);
@@ -71,8 +72,13 @@ public final class HudGameTests {
             Guardians.data(p).setCooldown(AbilitySlot.GRENADE, duration / 2);
             CombatHud.update(p);
             check(h, Math.abs(CombatHud.charge(p, AbilitySlot.GRENADE) - 0.5f) < 0.001, "Half cooldown is half charge");
+            var tile = (ItemDisplayHud) DisplayHud.getHud(p, CombatHud.ABILITIES_ID);
+            check(h, Math.abs(tile.getScale().x - 53) < 0.1 && Math.abs(tile.getScale().y - 53) < 0.1,
+                    "Ability tiles are enlarged to 53px");
+            var diamond = (ItemDisplayHud) DisplayHud.getHud(p, "destiny:hud_super_diamond");
+            check(h, Math.abs(diamond.getScale().x - 80) < 0.1, "Super diamond is enlarged to 80px");
             var gauge = (ItemDisplayHud) DisplayHud.getHud(p, CombatHud.ABILITIES_ID + "_charge");
-            check(h, Math.abs(gauge.getScale().x - 20) < 0.1, "Actual charge drives the icon underline");
+            check(h, Math.abs(gauge.getScale().x - 24) < 0.1, "Actual charge drives the icon underline");
             var icon = (ItemDisplayHud) DisplayHud.getHud(p, CombatHud.ABILITIES_ID + "_icon");
             check(h, icon.getItem().get(DataComponents.ITEM_MODEL).toString().endsWith("/flame"), "Solar uses flame glyph");
             Guardians.data(p).setLoadout(GuardianClass.HUNTER, HunterAbilities.preset(Element.VOID));
