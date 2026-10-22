@@ -31,6 +31,11 @@ public final class CombatHud {
     public static final String SUPER_ID = PREFIX + "super";
     public static final String HEALTH_ID = PREFIX + "health";
     public static final String ABSORPTION_ID = PREFIX + "absorption";
+    public static final String READY_ID = PREFIX + "ready_banner";
+    public static final String READY_ECHO_ID = PREFIX + "ready_echo";
+    public static final String CAST_ID = PREFIX + "cast_flash";
+    private static final String SWEEP_ID = PREFIX + "ready_sweep";
+    private static final Map<UUID, SuperHudCue> CUES = new HashMap<>();
     private static final Map<UUID, String> LAST = new HashMap<>();
     private static final int WHITE = 0xF1F3F5;
     private static final int GOLD = 0xF4D36A;
@@ -78,13 +83,15 @@ public final class CombatHud {
         float superCharge = Math.clamp(active ? runtime.superSession.remaining() : data.superEnergy(), 0f, 1f);
         boolean ready = active || data.superEnergy() >= 1f;
 
-        sprite(player, PREFIX + "super_diamond", "diamond", 120, 856, 80, 80, 1,
+        sprite(player, PREFIX + "super_diamond", ready && !active ? "diamond_ready" : "diamond", 120, 856, 80, 80, 1,
                 ready ? GOLD : MUTED, DisplayHud.HudAlignment.LEFT);
         sprite(player, PREFIX + "super_icon", switch (element) {
             case ARC -> "staff"; case SOLAR -> "gun"; default -> "bow";
-        }, 120, 856, 44, 44, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
+        }, 120, 856, 44, 44, 2, ready && !active ? 0x292820 : ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
         bar(player, SUPER_ID + "_track", 176, 856, 230, 8, 1, 0x3C414A, DisplayHud.HudAlignment.LEFT);
         bar(player, SUPER_ID, 176, 856, 230 * superCharge, 5, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
+
+        updateSuperCue(player, superAbility, ready && !active, active, element);
 
         StringBuilder debug = new StringBuilder("체력=" + player.getHealth());
         for (int i = 0; i < SLOTS.length; i++) {
@@ -106,6 +113,40 @@ public final class CombatHud {
         LAST.put(player.getUUID(), debug.append("|궁극기 ").append(Math.round(superCharge * 100)).append('%').toString());
     }
 
+    private static void updateSuperCue(ServerPlayer player, Ability ability, boolean ready, boolean active, Element element) {
+        int now = player.level().getServer().getTickCount();
+        SuperHudCue cue = CUES.computeIfAbsent(player.getUUID(), ignored -> new SuperHudCue());
+        cue.sample(now, ability == null ? null : ability.id(), ready, active);
+        int age = cue.readyAge(now);
+        if (age >= 0 && age < SuperHudCue.READY_TICKS) {
+            // Two-tick steps bound metadata traffic. The texture itself carries the alpha envelope.
+            int frame = age < 6 ? age / 2 : age < 44 ? 3 : 4 + (age - 44) / 4;
+            float opening = Math.min(1f, (age / 2 * 2) / 6f);
+            sprite(player, READY_ID, "ready_banner_" + frame, 960, 402,
+                    560 * (0.94f + 0.06f * opening), 112, 4, GOLD, DisplayHud.HudAlignment.CENTER);
+            if (age < 20) {
+                int step = age / 2;
+                sprite(player, READY_ECHO_ID, "ready_echo_" + Math.min(3, step / 3), 120, 856,
+                        88 + step * 5, 88 + step * 5, 3, GOLD, DisplayHud.HudAlignment.LEFT);
+                bar(player, SWEEP_ID, 176 + step * 22, 856, 12, 9, 3, 0xFFF4C8, DisplayHud.HudAlignment.LEFT);
+            } else {
+                DisplayHud.removeHud(player, READY_ECHO_ID);
+                DisplayHud.removeHud(player, SWEEP_ID);
+            }
+        } else {
+            DisplayHud.removeHud(player, READY_ID);
+            DisplayHud.removeHud(player, READY_ECHO_ID);
+            DisplayHud.removeHud(player, SWEEP_ID);
+        }
+        int castAge = cue.castAge(now);
+        if (castAge >= 0 && castAge < SuperHudCue.CAST_TICKS) {
+            // Short peripheral release, not a full-screen flash. Existing post-effect ownership is untouched.
+            int stage = castAge / 2;
+            sprite(player, CAST_ID, "cast_flash_" + stage, 960, 540, 1920, 1080, 3,
+                    element.glow(), DisplayHud.HudAlignment.CENTER);
+        } else DisplayHud.removeHud(player, CAST_ID);
+    }
+
     private static String icon(AbilitySlot slot, Ability ability) {
         if (slot == AbilitySlot.CLASS_ABILITY) return "dodge";
         Element element = ability == null ? Element.KINETIC : ability.element();
@@ -120,12 +161,14 @@ public final class CombatHud {
 
     public static void remove(ServerPlayer player) {
         LAST.remove(player.getUUID());
+        CUES.remove(player.getUUID());
         for (String id : List.copyOf(DisplayHud.getHuds(player).keySet())) {
             if (id.startsWith(PREFIX)) DisplayHud.removeHud(player, id);
         }
     }
 
     private static void removeAbilities(ServerPlayer player) {
+        CUES.remove(player.getUUID());
         for (String id : List.copyOf(DisplayHud.getHuds(player).keySet())) {
             if (id.startsWith(PREFIX) && !id.startsWith(HEALTH_ID) && !id.equals(ABSORPTION_ID)) {
                 DisplayHud.removeHud(player, id);
@@ -142,7 +185,7 @@ public final class CombatHud {
 
     private static void sprite(ServerPlayer player, String id, String image, float x, float y,
                                float width, float height, float z, int color, DisplayHud.HudAlignment align) {
-        String key = image + ":" + color + ":" + Math.round(width * 10) + ":" + x + ":" + y;
+        String key = image + ":" + color + ":" + Math.round(width * 10) + ":" + height + ":" + x + ":" + y + ":" + z + ":" + align;
         DisplayHud existing = DisplayHud.getHud(player, id);
         if (existing != null && key.equals(existing.getExtraData("state"))) return;
         ItemDisplayHud hud = existing instanceof ItemDisplayHud item ? item : new ItemDisplayHud();
