@@ -3,6 +3,8 @@
 2026-10-22. **실험적 구현 / 자동·화면 검증 통과 / 실제 키·마우스 검증 미완료.**
 전체 기능 인수 완료나 실전 조작감 통과로 표시하지 않는다.
 
+> **후속 발견:** Vision v1 native 입력으로 Arc 원격 카메라 중 전진을 검사한 결과, 서버에 입력이 도착하지만 몸이 이동하지 않았다. 아래 과거 자동/화면 결과와 별개로 **실제 연결 이동 인수는 실패**다. 마지막 후속 절을 참고한다.
+
 ## 단계별 결과
 
 1. 외부 camera entity의 일반 이동/회전 gate를 실제26.3 코드에서 확인했다.
@@ -68,3 +70,18 @@ F5 perspective 잠금 없음, 벽 근접 limb 가림 정책 미완료, 다인/�
 - 기존 `outputs/DestinyGuardians-Hunter-26.3.zip`은 **H17 그대로**다. 미완료 H18을 검증 완료 배포본으로 덮어쓰지 않았다.
 
 최종 클라이언트 wrapper의 exit143/BUILD FAILED는 자체 SIGTERM 종료 결과이며 gameplay crash로 집계하지 않는다. 초기 클라이언트의 post-main shutdown watchdog도 별도 예비 종료 문제로 보존한다.
+
+## Vision v1 후속 발견 — 2026-10-22
+
+위 기록 이후 사용자 승인으로 원본 Vision `feat/test-input-control`에 native 입력 제어를 추가했다.
+최종 epoch/aim-lock 수정본 + 기존 서버 `0b2600d`로 테스트했다. 서버 gameplay 소스는 변경하지 않았다.
+
+- 일반 시점 이동: `(100.5,-60,100.5)` → `(102.654844128,-60,110.424635488)`.
+- Arc 발동 후 remote camera: forward+sprint100틱 동안 native input은 true이나 body는 `(100.5,-60,100.5)`로 고정.
+- 서버도 `20:18:59`에 `SuperCamera active=true rotations=36`, `Input[forward=true,...sprint=true]`, 동일 body를 기록했다. [서버 발췌](vision-v1-server.txt), [입력·상태 report](vision-v1-camera-input-report.json).
+- swap·attack edge 소비와 회전은 확인했으나 적중/전체 조작감 인수는 아니다. **실제 연결 상태에서 카메라 중 이동은 실패**로 취급한다.
+- 기존 GameTest의 직접 player tick 호출 결과는 실제 연결 상태 이동을 보장하지 못했다. 원인은 미확정이다. `ServerGamePacketListenerImpl.tickPlayer()`도 `doTick()`을 호출하므로 단순 tick 미호출로 단정하지 않는다.
+- 이번 단계는 Vision 구현·검증이다. 다음 gameplay 작업에서 서버 이동을 복구하고 동일 native 시나리오로 재검증한다. H18 자동100/49·화면 검증 기록은 당시 사실로 유지하되 기능 전체 완료로 확대하지 않는다.
+
+Vision 최종 JUnit47/47·Node31/31, 실패0. 실행별 PNG·TTL/emergency·HTTP·복원·해시는 원본 Vision `docs/qa/2026-10-22/README.md`에 보존했다.
+새 MCP 도구는 source/mock 검사 완료이며 현재 전역 프로세스는 token과 함께 재연결하지 않았다. 실제 OS/CU와 물리 focus/toggle/키 재지정 인수는 여전히 남았다.

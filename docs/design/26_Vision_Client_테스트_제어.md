@@ -1,5 +1,7 @@
 # 26. Vision Client 테스트 입력·안전 제어
 
+> **2026-10-22 구현 업데이트:** 아래 설계 초안 이후 원본 Vision의 `feat/test-input-control`에서 v1을 구현했다. 현행 계약·실제 검증은 이 문서 마지막9절과 원본 Vision `docs/input-control.md`, `docs/qa/2026-10-22/README.md`를 따른다. 아래의 ‘미구현’·제안 route/tool 이름은 작성 당시 기록이다. 특히 phase capture는 여전히 후속이다.
+
 2026-10-22. **설계 초안 / 미구현.** 다음 gameplay 기능보다 먼저 실제 클라이언트 이동·공격을 재현할 테스트 제어를 마련한다.
 이번 변경은 이 문서뿐이다. 원본 Vision 프로젝트를 읽었으며 수정·빌드·실행·HTTP 호출·CU 재시도는 하지 않았다.
 
@@ -204,3 +206,22 @@ bridge 테스트는 mock 서버·임시 디렉터리를 사용하고 Minecraft�
 5. **별도 CU 게이트:** Java 앱 inventory/bundle 연결 문제 해결 후 실제 OS 입력 검증. 해결 전에는 Vision 내부 입력 통과만 보고하고 CU 완료라고 표기하지 않는다.
 
 현재 완료는 **원본 API·26.3 연결 지점 정적 조사와 이 설계 초안 작성**뿐이다. 신규 endpoint·bridge 도구·입력 lease·테스트·실제 키/마우스 검증은 모두 미구현/미실행이다.
+
+## 9. V1 구현·검증 업데이트 — 2026-10-22
+
+원본 `/Users/qf/IdeaProjects/copper-golem-vision-client-26.3`, branch `feat/test-input-control`.
+현행 [사용법·안전 계약](../../../copper-golem-vision-client-26.3/docs/input-control.md), [QA](../../../copper-golem-vision-client-26.3/docs/qa/2026-10-22/README.md), [단계 로그](../../../copper-golem-vision-client-26.3/docs/control-work-log.md)는 별도 저장소다. 로컬에서는 위 절대 경로를 사용한다.
+
+- 구현: opt-in/허용 서버/인증, single lease/operation, monotonic TTL2초·절대30초, seq 멱등성,1..100틱 입력/32step·200틱 sequence, epoch·긴급 해제·화면/접속/사용자 우선 취소.
+- native `KeyMapping.isDown/consumeClick` 논리 overlay다. 직접 `GuardianAction` 호출·능력 패킷 합성·물리 키 상태 덮어쓰기·`releaseAll`이 아니다.
+- API: `GET /control/state`, POST lease/renew/input/pulse/sequence/release. 실제 필드는 `keys`이며 step은 직렬 `{keys,ticks,yaw?,pitch?}`다. phase capture/상대offset 예약은 v1에 없다.
+- MCP8종은 `vision_control_state/acquire/input/pulse/renew/release/emergency_release/run_sequence`. renew/release에 seq는 없다. run_sequence는 acquire→500ms renew→완료 확인→finally release→해제 snapshot 검사까지 수행한다.
+- loopback/Bearer/Host/Origin·strict JSON/8KiB·finite 검사, bounded HTTP queue·client thread deadline, state/mutation/release permit 분리. 현재 전역 MCP 프로세스는 token과 함께 재연결하지 않았고 전역 설정은 보존했다.
+- 최종 자동 검사: **Vision JUnit47/47 + Node31/31**, 실패0. 이 숫자는 Destiny GameTest100/JUnit49와 다른 새 검사다. 서버 GameTest를 이번에 재실행하지 않았다.
+- 실제 클라이언트 이동/달리기·좌이동·점프·sneak+swap 궁극기 발동·attack·bow use 및 TTL/긴급 해제·접속 종료를 검사했다. 마지막 epoch/aim-lock 수정 뒤 핵심 시나리오를 새 JVM에서 재확인했다. 전체 증거의 소스 시점은 원본 QA에 구분했다.
+- PNG는 실제 framebuffer를 state로 bracket한다. exact animation contact frame/tick 동기화는 미구현이다. physical CU/focus/toggle/rebinding 전체 인수·다인 성능 검증은 남았다.
+
+**새 결함:** Arc 원격 카메라에서100틱 전진/달리기를 유지하면 native input과 서버 Input 수신은 true지만 body가 이동하지 않는다. 일반 self-camera 이동은 정상이다.
+최종 서버 로그 `20:18:59`, `SuperCamera active=true rotations=36`, `body=(100.5,-60,100.5)`, `Input[forward=true,...sprint=true]`.
+기존 GameTest의 직접 player tick 호출은 실제 연결 상태를 대신하지 못했다. 원인은 미확정이며 이번 Vision 작업에서 서버 gameplay를 수정하지 않았다.
+다음 gameplay 작업의 최우선 항목은 **실제 native 입력 기반 H18 이동 복구 및 회귀**다. [H18 후속 기록](../qa/2026-10-22/h18/README.md#vision-v1-후속-발견--2026-10-22)을 따른다.
