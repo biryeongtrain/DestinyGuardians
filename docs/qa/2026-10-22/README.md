@@ -2,7 +2,30 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
-## 최신 VFX 개정 H13
+## 최신 H14 — VFX 디테일 개정
+
+굵은 분절 고리/막대를 분기 전격·테이퍼 곡선 화염·나선/필라멘트로 재제작했고, 연막은 카메라를 향하는 billow 카드로 바꿨습니다.
+아틀라스32→128, 렌더본4~8개 유지. [디테일·비용·제약](../../design/17_헌터_VFX_디테일_개정.md).
+
+- 최종 **GameTest52/52·JUnit10/10, build 성공(13:51:12 KST)**. [실행 로그](vfx-h14-build-gametest.txt) · [에셋 JUnit](vfx-h14-junit-TEST-kim.biryeong.destiny.HunterVfxAssetTest.xml)
+- [H13/H14 전후](vfx_h14_before_after.jpg): 같은 Blockbench 카메라/배율/클립 시각. **게임 전후 실측 캡처가 아님**. Smoke 빌보드는 편집기에서 적용되지 않음.
+- [실제 시전6종 모음](vfx_h14_overview.jpg), 정상20TPS/1708×956 PNG. Arc 근접은 뒤3인칭, 나머지는1인칭, HUD 유지.
+- 수류탄 PNG: [Arc](vfx_h14_ability_arc.png) · [Solar](vfx_h14_ability_solar.png) · [Vortex](vfx_h14_ability_vortex.png)
+- 근접 PNG: [연속 타격](vfx_h14_ability_strike.png) · [작은 단검 충돌](vfx_h14_ability_knife.png) · [연막](vfx_h14_ability_smoke.png)
+- 움직임 WebP: [Arc](vfx_h14_ability_arc.webp) · [Solar](vfx_h14_ability_solar.webp) · [Vortex](vfx_h14_ability_vortex.webp) · [타격](vfx_h14_ability_strike.webp) · [단검](vfx_h14_ability_knife.webp) · [연막](vfx_h14_ability_smoke.webp)
+- [연막 정면](vfx_h14_smoke_front.png) · [90도 측면](vfx_h14_smoke_side.png): 같은 실제 시전 중 카메라 이동, 다인 검증 아님.
+- [실제 캡처 간격](vfx-h14-frame-captures.json), WebP/모음은 검토용 축소본. 고정60FPS 영상이나 원작 타이밍 실측이 아님.
+- [실제 출력 비용](vfx-h14-generated-pack-budget.json), [연막 미출력 메시 제거 전후 렌더 byte 동등성](vfx-h14-smoke-render-equivalence.json).
+- [최종 조건/해시](vfx-h14-validation.json) · [정리 후 화면](vfx_h14_cleanup.png) · [서버](vfx-h14-runtime-server.txt) · [클라이언트](vfx-h14-vision-client.txt)
+
+H143종은 첫 JVM 화면, 연막 최종 빌보드는 세 번째 JVM 화면입니다. 미출력 구체 제거 후 네 번째 서버 팩이 촬영 팩과 같은 출력임을 확인했습니다.
+자연 만료 active0/정리·본인 서버 정상종료·본인 클라이언트 SIGTERM143·원래 옵션5157바이트 복구·25565/8102 비점유 확인.
+원작 미확인 연막/근접 파생 효과, 카드의 평면감, 메시 상수 tint/음영은 남습니다. bloom/볼류메트릭·다인/24개 부하·밤/동굴·신규 궁극기 VFX는 미검증/범위 밖입니다.
+기존 HUD/무기 particle·end_of_frame·OpenGL·오프라인 계정·팩캐시 경고는 남으며 신규 VFX 누락/백엔드 오류와 구분했습니다.
+
+---
+
+## 이전 VFX 개정 H13
 
 수류탄·근접6종에 BetterModel 애니메이션 모델4종을 연결했습니다. 실제 Destiny 참고 기반 로우폴리 재해석이며 원본 게임 에셋이나 블룸 셰이더를 이식한 것은 아닙니다.
 [레퍼런스](../../design/15_헌터_VFX_레퍼런스.md) · [구현·한계](../../design/16_헌터_VFX_구현.md).

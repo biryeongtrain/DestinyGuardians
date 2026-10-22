@@ -22,10 +22,10 @@ public final class VfxGameTests {
     private static final String FLOOR = "destiny-test:floor";
     private static final Vec3 OWNER_POS = new Vec3(2.5, 1, 6.5);
     private static final Map<String, String> ANIMATIONS = Map.of(
-            "destiny_vfx_arc_h13", "spawn",
-            "destiny_vfx_solar_h13", "spawn",
-            "destiny_vfx_vortex_h13", "loop",
-            "destiny_vfx_smoke_h13", "loop");
+            "destiny_vfx_arc_h14", "spawn",
+            "destiny_vfx_solar_h14", "spawn",
+            "destiny_vfx_vortex_h14", "loop",
+            "destiny_vfx_smoke_h14", "loop");
 
     private static void check(GameTestHelper h, boolean condition, String message) {
         h.assertTrue(condition, Component.literal(message));
@@ -99,17 +99,17 @@ public final class VfxGameTests {
                 long bones = renderer.flatten().filter(group -> !group.getItemStack().isAir()).count();
                 check(h, bones > 0 && bones <= 8, entry.getKey() + " must use at most eight render bones");
                 if (!loop) {
-                    float seconds = entry.getKey().equals("destiny_vfx_arc_h13") ? 0.8f : 1.1f;
+                    float seconds = entry.getKey().equals("destiny_vfx_arc_h14") ? 0.8f : 1.1f;
                     check(h, Math.abs(animation.length() - seconds) < 0.001f,
                             entry.getKey() + " must match the one-shot TTL");
                 }
             }
-            check(h, HunterVfx.modelName(Kind.ARC_FLASH).equals("destiny_vfx_arc_h13")
-                    && HunterVfx.modelName(Kind.ARC_STRIKE).equals("destiny_vfx_arc_h13"), "Arc kinds share their model");
-            check(h, HunterVfx.modelName(Kind.SOLAR_BURST).equals("destiny_vfx_solar_h13")
-                    && HunterVfx.modelName(Kind.SOLAR_KNIFE).equals("destiny_vfx_solar_h13"), "Solar kinds share their model");
-            check(h, HunterVfx.modelName(Kind.VOID_VORTEX).equals("destiny_vfx_vortex_h13")
-                    && HunterVfx.modelName(Kind.VOID_SMOKE).equals("destiny_vfx_smoke_h13"), "Void kinds use separate models");
+            check(h, HunterVfx.modelName(Kind.ARC_FLASH).equals("destiny_vfx_arc_h14")
+                    && HunterVfx.modelName(Kind.ARC_STRIKE).equals("destiny_vfx_arc_h14"), "Arc kinds share their model");
+            check(h, HunterVfx.modelName(Kind.SOLAR_BURST).equals("destiny_vfx_solar_h14")
+                    && HunterVfx.modelName(Kind.SOLAR_KNIFE).equals("destiny_vfx_solar_h14"), "Solar kinds share their model");
+            check(h, HunterVfx.modelName(Kind.VOID_VORTEX).equals("destiny_vfx_vortex_h14")
+                    && HunterVfx.modelName(Kind.VOID_SMOKE).equals("destiny_vfx_smoke_h14"), "Void kinds use separate models");
             h.succeed();
         });
     }

@@ -1,0 +1,134 @@
+{
+  "revision": "H14",
+  "base_revision": "b08b4345d51b81597b272d24744d95bcb359e82b",
+  "final_build_gametest_time_kst": "2026-10-22 13:51:12",
+  "gametests": 52,
+  "junit": 10,
+  "jar": "destiny-guardians-0.1.0+26.3.jar",
+  "jar_sha256": "16858afea5f85175fff7aa77dd5f32761e8ed221cfc687c2b3e0501913902d16",
+  "source_jar_sha256": "e88b7e92db23cfbe83f4f0af06d45ce2f8ab51e4df1acaf70eb8c25d0ebc5c03",
+  "assets_sha256": {
+    "destiny_vfx_arc_h14.bbmodel": "830b17e9c00f1bb05f985ea804a3a33ede7a1413bfce770410c2f3e59fd62f45",
+    "destiny_vfx_solar_h14.bbmodel": "edd9d899a79087fa789d9507232d22b9e108058171e7a4a87362ea1796334d00",
+    "destiny_vfx_vortex_h14.bbmodel": "3f984a4f5c996b8645e2d72cd828d14f83f2d1e6838a865c3ec49beaaa3c1f33",
+    "destiny_vfx_smoke_h14.bbmodel": "d54356e44bd88fa311e53bc13922b05d2e65cf17077eef75032ad1668ba450dc"
+  },
+  "models": [
+    {
+      "design_status": "reference_based_detailed_adaptation",
+      "visual_reference_urls": [
+        "https://www.artstation.com/artwork/31lkyE",
+        "https://destiny.wiki.gallery/images/0/0c/Grimoire_Flashbang.jpg"
+      ],
+      "name": "destiny_vfx_arc_h14",
+      "cubes": 19,
+      "meshes": 24,
+      "mesh_triangles": 720,
+      "render_bones": 6,
+      "animation": "spawn",
+      "clip_seconds": 0.8,
+      "source": "art/blockbench/vfx/destiny_vfx_arc_h14.bbmodel",
+      "preview": "vfx_h14_blockbench_arc.png"
+    },
+    {
+      "design_status": "reference_based_detailed_adaptation",
+      "visual_reference_urls": [
+        "https://destiny.wiki.gallery/images/1/1f/Incendiary_Grenade.jpg"
+      ],
+      "name": "destiny_vfx_solar_h14",
+      "cubes": 45,
+      "meshes": 16,
+      "mesh_triangles": 864,
+      "render_bones": 8,
+      "animation": "spawn",
+      "clip_seconds": 1.1,
+      "source": "art/blockbench/vfx/destiny_vfx_solar_h14.bbmodel",
+      "preview": "vfx_h14_blockbench_solar.png"
+    },
+    {
+      "design_status": "reference_based_detailed_adaptation",
+      "visual_reference_urls": [
+        "https://destiny.wiki.gallery/images/f/ff/Vortex_Grenade.jpg"
+      ],
+      "name": "destiny_vfx_vortex_h14",
+      "cubes": 23,
+      "meshes": 11,
+      "mesh_triangles": 1024,
+      "render_bones": 4,
+      "animation": "loop",
+      "clip_seconds": 1,
+      "source": "art/blockbench/vfx/destiny_vfx_vortex_h14.bbmodel",
+      "preview": "vfx_h14_blockbench_vortex.png"
+    },
+    {
+      "design_status": "provisional_not_destiny_verified",
+      "visual_reference_urls": [],
+      "name": "destiny_vfx_smoke_h14",
+      "cubes": 30,
+      "meshes": 0,
+      "mesh_triangles": 0,
+      "render_bones": 6,
+      "animation": "loop",
+      "clip_seconds": 2,
+      "source": "art/blockbench/vfx/destiny_vfx_smoke_h14.bbmodel",
+      "preview": "vfx_h14_blockbench_smoke.png"
+    }
+  ],
+  "framebuffer": [
+    1708,
+    956
+  ],
+  "tick_rate": 20,
+  "hud_visible": true,
+  "ability_count": 6,
+  "smoke_billboard": "CENTER per plume bone, 6 displays/30 cards; common local direction; in-plane Z animation; unused mesh removed after compiled-equivalence check",
+  "smoke_camera_check": {
+    "front": [
+      100.5,
+      -60,
+      0.5,
+      0,
+      25
+    ],
+    "side": [
+      106.5,
+      -60,
+      4.5,
+      90,
+      15
+    ],
+    "method": "two screenshots during one actual smoke cast, not multi-viewer test"
+  },
+  "cleanup": {
+    "active_count_after_natural_expiry": 0,
+    "server_stopped_normally": true,
+    "own_client_pids_sigterm": [
+      9235,
+      12581,
+      15638
+    ],
+    "client_exit_143_intentional": true,
+    "options_restored_bytes": 5157,
+    "ports_25565_8102_closed": true,
+    "original_blockbench_11_tabs_preserved": true,
+    "final_h14_tabs": 4
+  },
+  "known_warnings": [
+    "offline account and Realms JWT",
+    "cached pack hash mismatch redownload",
+    "legacy HUD/weapon particle texture refs",
+    "minecraft:end_of_frame missing",
+    "Apple OpenGL unused varyings",
+    "test-layout tool does not recognize 26.3 GameTest fixtures"
+  ],
+  "not_claimed": [
+    "original game meshes or textures",
+    "shader bloom, additive or volumetric rendering",
+    "smoke exact Destiny fidelity",
+    "smooth mesh normals or per-pixel mesh alpha",
+    "FPS/TPS multi-viewer or 24-tracker load test",
+    "night/cave rendering",
+    "new super-specific VFX"
+  ],
+  "visual_limit": "Cards/constant-tint mesh can still look flat up close; smoke uses billboard not volume."
+}

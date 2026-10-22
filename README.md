@@ -61,8 +61,9 @@ OP는 마지막에 플레이어 이름을 붙일 수 있습니다.
 H12에서 칼·섬광탄을 실제 Destiny 시각 자료에 맞춰 재제작했습니다. 소이·소용돌이·연막은 원작 외형 미확인 잠정 모델입니다.
 [능력 모델·레퍼런스](docs/design/14_헌터_능력_모델.md) · [편집 원본](art/blockbench/hunter/)
 
-H13: 수류탄·근접6종에 **BetterModel 애니메이션 VFX4종**을 연결했습니다. Arc 전격·Solar cutout 화염·Void 회전 호·연막을 별도 조형으로 표시합니다.
-[시각 레퍼런스](docs/design/15_헌터_VFX_레퍼런스.md) · [구현·한계](docs/design/16_헌터_VFX_구현.md) · [VFX 원본](art/blockbench/vfx/)
+H13 기반/H14 디테일 개정: 수류탄·근접6종에 **BetterModel 애니메이션 VFX4종**을 연결했습니다. Arc 분기 전격·겹친 곡선 화염·Void 나선/필라멘트·텍스처 연무로 표시합니다.
+32→128 아틀라스, Arc/Solar/Vortex 메시720~1024삼각형+19~45카드, 연막30빌보드 카드, 렌더본4~8개를 사용합니다.
+[시각 레퍼런스](docs/design/15_헌터_VFX_레퍼런스.md) · [구현·한계](docs/design/16_헌터_VFX_구현.md) · [H14 디테일·비용](docs/design/17_헌터_VFX_디테일_개정.md) · [VFX 원본](art/blockbench/vfx/)
 연막과 근접 파생 효과는 잠정 해석이며, 신규 궁극기 VFX나 원작 블룸 셰이더 재현은 이번 범위가 아닙니다.
 
 BetterModel 기본 리그에서 `config/bettermodel/players/guardian_hunter.bbmodel`을 최초 생성하며,

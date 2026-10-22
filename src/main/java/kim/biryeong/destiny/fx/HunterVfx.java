@@ -6,6 +6,7 @@ import kr.toxicity.model.api.animation.AnimationIterator;
 import kr.toxicity.model.api.animation.AnimationModifier;
 import kr.toxicity.model.api.mod.platform.ModLocation;
 import kr.toxicity.model.api.mod.platform.ModPlayer;
+import kr.toxicity.model.api.platform.PlatformBillboard;
 import kr.toxicity.model.api.tracker.DummyTracker;
 import kr.toxicity.model.api.tracker.ModelScaler;
 import kr.toxicity.model.api.tracker.TrackerModifier;
@@ -35,12 +36,12 @@ public final class HunterVfx {
     private static final Set<String> MISSING_MODELS = new HashSet<>();
 
     public enum Kind {
-        ARC_FLASH("destiny_vfx_arc_h13", 16),
-        ARC_STRIKE("destiny_vfx_arc_h13", 16),
-        SOLAR_BURST("destiny_vfx_solar_h13", 22),
-        SOLAR_KNIFE("destiny_vfx_solar_h13", 22),
-        VOID_VORTEX("destiny_vfx_vortex_h13", MAX_DURATION),
-        VOID_SMOKE("destiny_vfx_smoke_h13", MAX_DURATION);
+        ARC_FLASH("destiny_vfx_arc_h14", 16),
+        ARC_STRIKE("destiny_vfx_arc_h14", 16),
+        SOLAR_BURST("destiny_vfx_solar_h14", 22),
+        SOLAR_KNIFE("destiny_vfx_solar_h14", 22),
+        VOID_VORTEX("destiny_vfx_vortex_h14", MAX_DURATION),
+        VOID_SMOKE("destiny_vfx_smoke_h14", MAX_DURATION);
 
         private final String modelName;
         private final int maxDuration;
@@ -130,6 +131,10 @@ public final class HunterVfx {
                     tracker -> effect.tracker = tracker);
             updateScale(effect, 0);
             effect.tracker.update(TrackerUpdateAction.brightness(15, 15));
+            if (kind == Kind.VOID_SMOKE) {
+                // One camera-facing display per plume, not per card; keep the six-bone budget.
+                effect.tracker.update(TrackerUpdateAction.billboard(PlatformBillboard.CENTER));
+            }
             var type = kind.looping() ? AnimationIterator.Type.LOOP : AnimationIterator.Type.PLAY_ONCE;
             if (!effect.tracker.animate(kind.animation(), new AnimationModifier(0, 0, type))) {
                 return false;

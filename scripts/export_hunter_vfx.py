@@ -11,21 +11,26 @@ import uuid
 from export_hunter_props import Blockbench, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
-NAMES = ["destiny_vfx_arc_h13", "destiny_vfx_solar_h13", "destiny_vfx_vortex_h13", "destiny_vfx_smoke_h13"]
+NAMES = ["destiny_vfx_arc_h14", "destiny_vfx_solar_h14", "destiny_vfx_vortex_h14", "destiny_vfx_smoke_h14"]
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--url", default="http://localhost:3000/bb-mcp")
-    bb = Blockbench(parser.parse_args().url)
+    parser.add_argument("--models", nargs="+", choices=["arc", "solar", "vortex", "smoke"], default=["arc", "solar", "vortex", "smoke"])
+    options = parser.parse_args()
+    bb = Blockbench(options.url)
     for prompt in ["blockbench_native_apis", "blockbench_code_eval_safety"]:
         bb.call("prompts/get", {"name": prompt, "arguments": {}})
     source = (ROOT / "scripts/build_hunter_vfx.js").read_text()
     view = "destiny_vfx_" + uuid.uuid4().hex[:8]
     bb.tool("create_offscreen_view", {"id": view, "width": 1000, "height": 800, "copy_view": "none"})
-    models = []
+    manifest_path = ROOT / "art/blockbench/vfx/manifest.json"
+    existing = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    models = {m["name"]: m for m in existing.get("models", []) if m["name"] in NAMES}
     try:
-        for name in NAMES:
+        for variant in options.models:
+            name = "destiny_vfx_" + variant + "_h14"
             bb.tool("create_project", {"name": name, "format": "free"})
             info = bb.evaluate("const vfxName=" + json.dumps(name) + ";\n" + source)
             bb.tool("create_animation", {"name": info["animation"], "loop": info["animation"] == "loop",
@@ -42,7 +47,7 @@ def main():
             result = bb.tool("set_camera_angle", {"view": view, "position": [32, 25, -36], "target": [0, 3, 0],
                              "projection": "orthographic", "zoom": .52})
             img = next(c for c in result["content"] if c["type"] == "image")
-            shot = ROOT / f"docs/qa/2026-10-22/vfx_h13_blockbench_{info['variant']}.png"
+            shot = ROOT / f"docs/qa/2026-10-22/vfx_h14_blockbench_{info['variant']}.png"
             shot.write_bytes(base64.b64decode(img["data"]))
             references = {
                 "arc": ["https://www.artstation.com/artwork/31lkyE", "https://destiny.wiki.gallery/images/0/0c/Grimoire_Flashbang.jpg"],
@@ -50,20 +55,20 @@ def main():
                 "vortex": ["https://destiny.wiki.gallery/images/f/ff/Vortex_Grenade.jpg"],
                 "smoke": []
             }
-            models.append({"design_status": "provisional_not_destiny_verified" if info["variant"] == "smoke" else "reference_based_lowpoly_adaptation",
-                          "visual_reference_urls": references[info["variant"]], "name": name, "cubes": info["cubes"], "render_bones": info["renderBones"],
+            models[name] = {"design_status": "provisional_not_destiny_verified" if info["variant"] == "smoke" else "reference_based_detailed_adaptation",
+                          "visual_reference_urls": references[info["variant"]], "name": name, "cubes": info["cubes"], "meshes": info["meshes"], "mesh_triangles": info["triangles"], "render_bones": info["renderBones"],
                           "animation": info["animation"], "clip_seconds": info["duration"], "source": str(path.relative_to(ROOT)),
-                          "preview": shot.name})
-            print(name, info["cubes"], "cubes", info["renderBones"], "render bones", flush=True)
+                          "preview": shot.name}
+            print(name, info["cubes"], "cards", info["meshes"], "meshes", info["triangles"], "triangles", info["renderBones"], "render bones", flush=True)
     finally:
         try:
             bb.tool("delete_offscreen_view", {"view": view})
         except RuntimeError as e:
             print("Preview cleanup warning:", e)
-    write_json(ROOT / "art/blockbench/vfx/manifest.json", {"revision": "H13", "authoring": "Blockbench5.1.4/MCP1.10.1",
+    write_json(ROOT / "art/blockbench/vfx/manifest.json", {"revision": "H14", "authoring": "Blockbench5.1.4/MCP1.10.1",
                "reference_document": "docs/design/15_헌터_VFX_레퍼런스.md", "original_game_assets_used": False,
-               "rendering": "BetterModel animated item displays; full-bright geometry, not additive volumetric shader",
-               "models": models})
+               "rendering": "BetterModel animated item displays; hybrid curved meshes and full-bright cutout cards; not additive volumetric shader",
+               "models": [models[n] for n in NAMES if n in models]})
 
 
 if __name__ == "__main__":

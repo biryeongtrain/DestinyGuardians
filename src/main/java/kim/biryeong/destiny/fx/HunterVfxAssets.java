@@ -10,8 +10,8 @@ import java.util.List;
 
 /** Bundled versioned BetterModel defaults. An installed artist's file is never overwritten. */
 public final class HunterVfxAssets {
-    public static final List<String> MODELS = List.of("destiny_vfx_arc_h13", "destiny_vfx_solar_h13",
-            "destiny_vfx_vortex_h13", "destiny_vfx_smoke_h13");
+    public static final List<String> MODELS = List.of("destiny_vfx_arc_h14", "destiny_vfx_solar_h14",
+            "destiny_vfx_vortex_h14", "destiny_vfx_smoke_h14");
 
     private HunterVfxAssets() { }
 
