@@ -14,6 +14,8 @@
 - Void: [활 준비](super_h15_void_ready.png) · [발사/회복](super_h15_void_release_final.webp) · [대상 이동 전](super_h15_void_tether_before.png) / [이동 후 연결선](super_h15_void_tether_after.png) · [닻/연결선 움직임](super_h15_void_anchor_final.webp).
 - 회피: [앞](super_h15_dodge_forward_final.webp) · [뒤](super_h15_dodge_back_final.webp) · [좌](super_h15_dodge_left_final.webp) · [우](super_h15_dodge_right_final.webp) · [본인1인칭 숨김](super_h15_dodge_first_final.webp) · [원래 몸 복원](super_h15_dodge_restored.png).
 - [측정 캡처 간격/원본 해시](super-h15-frame-captures.json) · [최종 검증 조건·한계·JAR 해시](super-h15-validation.json) · [실제 생성 팩 비용](super-h15-generated-pack-budget.json).
+- 추가 화살 측면: [이전 위치](super_h15_arrow_side_earlier.png) · [다음 위치](super_h15_arrow_side_later.png) · [1TPS 검토 WebP](super_h15_arrow_side_1tps.webp) · [조건·해시·스킨 원인 조사](super-h15-followup-validation.json).
+  이 촬영만1TPS/발사 후 콘솔 관찰자 이동이며 성능시험·정상 속도 영상이 아니다. 밝은 촉이 실제 수평 이동 방향을 향함을 확인했다.
 - [서버 JVM2](super-h15-runtime-server-jvm2.txt) · [클라이언트 JVM2](super-h15-vision-client-jvm2.txt). JVM1에서 발견한 뒤쪽 전격과 큰 발동 구름을 수정한 뒤 새 JVM으로 검증했다. JVM1 이미지는 최종 증거에 넣지 않았다.
 - [장비4종 Blockbench 비교](supers_h15_overview.png)는 별도 편집기 미리보기다. [장비/출처](../../design/20_헌터_궁극기_장비.md) · [애니메이션](../../design/19_헌터_애니메이션_개정.md) · [펄스](../../design/21_궁극기_화면_펄스.md) · [VFX 계약](../../design/22_궁극기_VFX_구현.md).
 
@@ -25,7 +27,7 @@
 WebP는 측정 간격의 축소 검토본이며 고정60FPS 영상·원작 타이밍 실측이 아니다.
 
 오프라인 계정은 limb 재생 중 템플릿 색으로 바뀌었다가 바닐라 UUID 스킨으로 복원된다.
-인증 스킨·빠른 화살의 근접 비행 방향·2인 관찰자·거리 경계·밤/동굴·FPS/TPS 부하·
+인증 스킨·화살의 정상 속도 근접/다른 pitch·2인 관찰자·거리 경계·밤/동굴·FPS/TPS 부하·
 Vulkan/타 해상도·청음은 미검증이다. 블룸·가산 합성·볼류메트릭은 구현하지 않았다.
 모델 상한은 BetterModel24트래커+별도 빔24홀더=48이며 디스플레이 엔티티 수나 드로콜 수가 아니다.
 

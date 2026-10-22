@@ -1,0 +1,139 @@
+{
+  "phase": "H15 follow-up; same runtime code/artifacts as8bb0f56",
+  "runtime_changes": false,
+  "baseline_tests": {
+    "gametests_passed": 71,
+    "junit_passed": 28
+  },
+  "arrow": {
+    "framebuffer": [
+      1708,
+      956
+    ],
+    "hud_visible": true,
+    "server_tick_rate_for_capture": 1,
+    "reason": "Slow the existing real Shadowshot projectile for side-on inspection; not performance or normal-speed evidence",
+    "cast_origin": [
+      200.5,
+      -60,
+      0.5
+    ],
+    "cast_yaw": -90,
+    "cast_pitch": 0,
+    "observer_reposition_after_cast": [
+      203.1,
+      -60,
+      4.5
+    ],
+    "observer_yaw": 180,
+    "observer_pitch": 0,
+    "observation": "Authored small pale stepped arrowhead points screen-right, broader dark fletching is left; projectile moves left-to-right between frames17 and23, agreeing with +X horizontal flight.",
+    "limits": "One horizontal orientation tested; no claim of all pitches/observer views. Early frames0-11 captured incomplete chunk loading and are not selected evidence.",
+    "sequence_metadata": {
+      "capture_start_utc": "2026-10-22T05:43:28.218907+00:00",
+      "client_state": {
+        "ok": true,
+        "inWorld": true,
+        "hasPlayer": true,
+        "world": "minecraft:overworld",
+        "dimension": "minecraft:overworld",
+        "windowActive": true,
+        "hudHidden": false,
+        "pauseOnLostFocus": false,
+        "perspective": "first",
+        "screen": null,
+        "overlay": null,
+        "yaw": -90.0,
+        "pitch": 0.0
+      },
+      "frame_times_seconds": [
+        0.00031395896803587675,
+        0.15392216690815985,
+        0.3137760419631377,
+        0.4723891669418663,
+        0.6304130839416757,
+        0.7871925838990137,
+        0.9470844999887049,
+        1.10449683398474,
+        1.2636816669255495,
+        1.4220874169841409,
+        1.5804310420062393,
+        1.7387941669439897,
+        1.8970887089380994,
+        2.0471763749374077,
+        2.207203416968696,
+        2.363740124972537,
+        2.5237634999211878,
+        2.6828506249003112,
+        2.8428859999403358,
+        3.002907541929744,
+        3.1620893749641255,
+        3.3213709169067442,
+        3.481158584007062,
+        3.63983554195147,
+        3.7970018750056624,
+        3.955408666981384,
+        4.108178041991778,
+        4.263687041937374,
+        4.42115491698496,
+        4.5719219169113785,
+        4.730411708937027,
+        4.888245333917439,
+        5.046975958975963,
+        5.205408209003508,
+        5.361189458984882,
+        5.512882999959402,
+        5.6720202919095755,
+        5.830337499966845,
+        5.990356583963148
+      ],
+      "source_size": [
+        1708,
+        960
+      ],
+      "hud_normalized": false,
+      "frames": 39
+    },
+    "selected_frames": {
+      "super_h15_arrow_side_earlier.png": {
+        "source_frame": 17,
+        "capture_time_seconds": 2.6828506249003112,
+        "sha256": "8f0d5419e4dff17ca5cf8f798b22520800a5ce440fd9eed5fa0ccd45c1f2e6c4"
+      },
+      "super_h15_arrow_side_later.png": {
+        "source_frame": 23,
+        "capture_time_seconds": 3.63983554195147,
+        "sha256": "dc7073ea858834cfb0a14c2d5cf35fd96f6b9e1ced0d5bb5a833114c413c740d"
+      }
+    }
+  },
+  "skin": {
+    "cause": "No auth textures property -> ModelProfileSkin.EMPTY -> null skin URI -> bundled BetterModel fallback_skin.png, instead of client UUID default skin",
+    "source_checkout_commit": "7dc7eed785854f81a3826e7a2e188a53ce5215d7",
+    "verified_artifact_version": "BetterModel Fabric/core3.5.1; javap bytecode cross-check stored alongside",
+    "safe_extension_points": [
+      "CreatePlayerSkinEvent#setModelProfile",
+      "ModelRenderer#getOrCreate(entity, ModelProfile, modifier, callback)"
+    ],
+    "boundary": "These accept a separate visual skin URI without modifying auth GameProfile, but loader is HTTP(S). No public buffered-image fallback factory/setter was found.",
+    "decision": "Document dependency limit; no auth profile mutation, UUID guess mapping, texture scraping, localhost skin server, or upstream modification.",
+    "status": "Not fixed. Authenticated-player skin parity still unverified."
+  },
+  "cleanup": {
+    "server_tick_rate_restored": 20,
+    "subclass": "arc",
+    "owner_view": "first",
+    "player_position": [
+      0.5,
+      -60,
+      0.5
+    ],
+    "active_vfx": 0,
+    "active_beams": 0,
+    "server_normal_stop": true,
+    "own_client_pid": 50432,
+    "client_sigterm_wrapper_exit": 1,
+    "client_options_byte_identical_to_backup": true,
+    "ports25565_and8102_closed": true
+  }
+}
