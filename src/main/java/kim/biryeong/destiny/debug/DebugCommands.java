@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import kr.toxicity.model.api.BetterModel;
+import kim.biryeong.destiny.fx.HunterVfx;
 import kr.toxicity.model.api.animation.AnimationIterator;
 import kr.toxicity.model.api.animation.AnimationModifier;
 import kr.toxicity.model.api.mod.platform.ModLocation;
@@ -51,6 +52,16 @@ public final class DebugCommands {
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .then(Commands.literal("first").executes(c -> ownerView(c, false)))
                                         .then(Commands.literal("third").executes(c -> ownerView(c, true)))))
+                        .then(Commands.literal("vfx")
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .then(Commands.argument("kind", StringArgumentType.word())
+                                                .suggests((ctx, builder) -> net.minecraft.commands.SharedSuggestionProvider.suggest(
+                                                        java.util.Arrays.stream(HunterVfx.Kind.values()).map(k -> k.name().toLowerCase(java.util.Locale.ROOT)), builder))
+                                                .executes(DebugCommands::vfx))))
+                        .then(Commands.literal("vfx-status").executes(ctx -> {
+                            ctx.getSource().sendSuccess(() -> Component.literal("Active Hunter VFX=" + HunterVfx.activeCount()), false);
+                            return HunterVfx.activeCount();
+                        }))
                         .then(Commands.literal("model")
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .then(Commands.argument("model", StringArgumentType.word())
@@ -63,6 +74,30 @@ public final class DebugCommands {
                                                         .executes(ctx -> limb(ctx, false))
                                                         .then(Commands.literal("loop").executes(ctx -> limb(ctx, true)))))))
                         .then(Commands.literal("clear").executes(DebugCommands::clear))));
+    }
+
+    /** Production VFX factory preview, intentionally cosmetic and without damage. */
+    private static int vfx(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = EntityArgument.getPlayer(ctx, "player");
+        HunterVfx.Kind kind;
+        try {
+            kind = HunterVfx.Kind.valueOf(StringArgumentType.getString(ctx, "kind").toUpperCase(java.util.Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            ctx.getSource().sendFailure(Component.literal("Unknown VFX kind"));
+            return 0;
+        }
+        boolean loop = kind == HunterVfx.Kind.VOID_VORTEX || kind == HunterVfx.Kind.VOID_SMOKE;
+        double radius = switch (kind) {
+            case ARC_STRIKE -> 1.1;
+            case SOLAR_KNIFE -> 0.65;
+            case VOID_SMOKE -> 3.5;
+            default -> 4.5;
+        };
+        Vec3 pos = player.position().add(Vec3.directionFromRotation(0, player.getYRot()).scale(6)).add(0, 0.2, 0);
+        boolean played = HunterVfx.play(player, player.level(), pos, kind, radius,
+                loop ? (kind == HunterVfx.Kind.VOID_SMOKE ? 100 : 60) : (kind == HunterVfx.Kind.ARC_FLASH || kind == HunterVfx.Kind.ARC_STRIKE ? 16 : 22));
+        ctx.getSource().sendSuccess(() -> Component.literal("VFX preview " + kind + " played=" + played + " active=" + HunterVfx.activeCount()), false);
+        return played ? 1 : 0;
     }
 
     private static int model(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -118,7 +153,8 @@ public final class DebugCommands {
     }
 
     private static int clear(CommandContext<CommandSourceStack> ctx) {
-        int count = DUMMIES.size() + LIMBS.size();
+        int count = DUMMIES.size() + LIMBS.size() + HunterVfx.activeCount();
+        HunterVfx.clearAll();
         DUMMIES.forEach(DummyTracker::close);
         DUMMIES.clear();
         LIMBS.forEach(EntityTracker::close);

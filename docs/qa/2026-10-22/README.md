@@ -2,7 +2,27 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
-## 최신 실제 디자인 교정 H12
+## 최신 VFX 개정 H13
+
+수류탄·근접6종에 BetterModel 애니메이션 모델4종을 연결했습니다. 실제 Destiny 참고 기반 로우폴리 재해석이며 원본 게임 에셋이나 블룸 셰이더를 이식한 것은 아닙니다.
+[레퍼런스](../../design/15_헌터_VFX_레퍼런스.md) · [구현·한계](../../design/16_헌터_VFX_구현.md).
+
+- 최종 **GameTest52/52·JUnit10/10**, build 성공(13:15:58KST). [실행 로그](vfx-h13-build-gametest.txt)
+- [6종 실제 시전 모음](vfx_h13_overview.jpg), 정상20TPS/1708×956 원본 PNG 육안 확인.
+- 수류탄: [Arc](vfx_h13_ability_arc.png) · [Solar](vfx_h13_ability_solar.png) · [Vortex](vfx_h13_ability_vortex.png)
+- 근접: [연속 타격3인칭](vfx_h13_ability_strike.png) · [단검 작은 충돌](vfx_h13_ability_knife.png) · [연막(잠정)](vfx_h13_ability_smoke.png)
+- 움직임 WebP: [Arc](vfx_h13_ability_arc.webp) · [Solar](vfx_h13_ability_solar.webp) · [Vortex](vfx_h13_ability_vortex.webp) · [타격](vfx_h13_ability_strike.webp) · [단검](vfx_h13_ability_knife.webp) · [연막](vfx_h13_ability_smoke.webp)
+- WebP/모음은 실제 PNG의 검토용 축소본. [실제 캡처 간격](vfx-h13-frame-captures.json); 고정FPS 동영상이나 원작 시간 실측이 아님.
+- [정리 후 실제 화면](vfx_h13_cleanup.png) · [조건/해시/미검증](vfx-h13-validation.json) · [출처/해시](vfx-h13-reference-evidence.json)
+- [VFX JUnit](vfx-h13-junit-TEST-kim.biryeong.destiny.HunterVfxAssetTest.xml) · [서버](vfx-h13-runtime-server.txt) · [비전 클라이언트](vfx-h13-vision-client.txt)
+
+자연 만료 active0·속성 변경1→0 확인. 본인 서버 정상 종료/클라이언트SIGTERM(exit143)/원본 옵션 바이트 복구.
+새 VFX 누락은 없으나 기존 HUD/장비 particle 참조·end_of_frame·OpenGL·오프라인 계정/팩캐시 경고는 남습니다.
+연막/근접 원작 충실도, 다인/48블록 경계/전체24개 부하·밤/동굴·신규 궁극기 VFX는 미검증 또는 후속 범위입니다.
+
+---
+
+## 이전 실제 디자인 교정 H12
 
 H11의 일반 SF 참고작이 아니라, Bungie 표기 헌터 칼 도면/게임 스크린샷과 Flashbang 게임 캡처를 대조해
 **나이프160큐브·섬광탄56큐브를 재제작**했습니다. 원본 게임 메시를 획득/재배포한 것이 아닙니다.

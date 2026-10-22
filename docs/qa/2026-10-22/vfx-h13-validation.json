@@ -1,0 +1,59 @@
+{
+  "revision": "H13",
+  "build_time_kst": "2026-10-22 13:15:58",
+  "gametests_passed": 52,
+  "new_vfx_gametests": 12,
+  "junit_passed": 10,
+  "new_vfx_junit_tests": 2,
+  "jar_sha256": "6b9b45179f07fe49a2a7fddc1b89597a64af0827dc75312152cb0f0259b8062a",
+  "models_sha256": {
+    "destiny_vfx_arc_h13.bbmodel": "26e31909795a05f803242163a6679822be89ebc5d90cb42e08b3f9aad9fb92fe",
+    "destiny_vfx_solar_h13.bbmodel": "e6ccbef8387f74542b7e462491557c7104d596577ef359d1e06d51ad6ea49956",
+    "destiny_vfx_vortex_h13.bbmodel": "14ceaed3785c3a3a1bb6f9004780850cca9801ab5a0f163579696e3183a06fb7",
+    "destiny_vfx_smoke_h13.bbmodel": "7ecec24ab89112411b21ae5832067c1f5c19468e7d9781ba66bfa6ccc8321038"
+  },
+  "framebuffer": [
+    1708,
+    956
+  ],
+  "ability_capture_tick_rate": 20,
+  "gameplay_hooks_captured": 6,
+  "new_assets": 4,
+  "render_bones": {
+    "arc": 6,
+    "solar": 8,
+    "vortex": 4,
+    "smoke": 6
+  },
+  "provisional_designs": [
+    "void_smoke",
+    "arc_strike adaptation",
+    "solar_knife adaptation"
+  ],
+  "original_game_assets_used": false,
+  "frame_captures": "vfx-h13-frame-captures.json",
+  "lifecycle_evidence": {
+    "automatic": "TTL,200tick ceiling,owner4cap,death/removal/disconnect/dimension,AbilityService.cleanup",
+    "live": "natural expiry active=0; subclass switch active1->0; server normal stop"
+  },
+  "client_cleanup": "owned PID97685 SIGTERM (earlier draft PID95031), intentional Gradle exit143",
+  "options_original_bytes_restored": true,
+  "new_vfx_missing_texture_or_model_warnings": false,
+  "existing_warnings": [
+    "offline QA account / Realms auth",
+    "resource-pack cache hash redownload",
+    "legacy HUD/weapon models missing particle references",
+    "minecraft:end_of_frame missing post-effect",
+    "macOS OpenGL unused varying warnings"
+  ],
+  "not_validated": [
+    "Exact original ability animation timings",
+    "Hunter smoke/Combination Blow/specific knife VFX fidelity",
+    "super-specific new VFX",
+    "2-player observers / 48-block border / late entry",
+    "full24 cap stress and FPS/TPS load",
+    "night/cave readability",
+    "runtime missing-model fallback injection",
+    "Vulkan and authenticated skin"
+  ]
+}

@@ -6,6 +6,7 @@ import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
 import kim.biryeong.destiny.fx.Fx;
+import kim.biryeong.destiny.fx.HunterVfx;
 import kim.biryeong.destiny.fx.SimProjectile;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
@@ -42,8 +43,9 @@ public final class HunterGrenade extends Ability {
         double radius = param("radius", 4.5);
         switch (element()) {
             case ARC -> {
-                Fx.burst(level, pos, element(), 60, radius / 3);
-                Fx.ring(level, pos, radius, element().glow(), 40);
+                boolean modeled = HunterVfx.play(player, level, pos, HunterVfx.Kind.ARC_FLASH, radius, 16);
+                Fx.burst(level, pos, element(), modeled ? 18 : 60, radius / 3);
+                if (!modeled) Fx.ring(level, pos, radius, element().glow(), 40);
                 Fx.sound(level, pos, SoundEvents.LIGHTNING_BOLT_IMPACT, 0.8f, 1.6f);
                 for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                     Combat.damage(level, player, e, (float) param("damage", 5), element());
@@ -51,8 +53,9 @@ public final class HunterGrenade extends Ability {
                 }
             }
             case SOLAR -> {
-                Fx.burst(level, pos, element(), 70, radius / 3);
-                level.sendParticles(ParticleTypes.LAVA, pos.x, pos.y, pos.z, 12, radius / 3, 0.2, radius / 3, 0.0);
+                boolean modeled = HunterVfx.play(player, level, pos, HunterVfx.Kind.SOLAR_BURST, radius, 22);
+                Fx.burst(level, pos, element(), modeled ? 18 : 70, radius / 3);
+                level.sendParticles(ParticleTypes.LAVA, pos.x, pos.y, pos.z, modeled ? 4 : 12, radius / 3, 0.2, radius / 3, 0.0);
                 Fx.sound(level, pos, SoundEvents.GENERIC_EXPLODE.value(), 0.8f, 1.3f);
                 for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                     Combat.damage(level, player, e, (float) param("damage", 7), element());
@@ -62,9 +65,10 @@ public final class HunterGrenade extends Ability {
             default -> {
                 int duration = (int) param("duration_ticks", 60);
                 float pulse = (float) param("damage", 3);
+                boolean modeled = HunterVfx.play(player, level, pos, HunterVfx.Kind.VOID_VORTEX, radius, duration);
                 Fx.sound(level, pos, SoundEvents.PORTAL_TRIGGER, 0.6f, 1.8f);
                 Tasks.run(player, level, age -> {
-                    if (age % 2 == 0) {
+                    if (!modeled && age % 2 == 0) {
                         Fx.ring(level, pos, radius * (1 - (age % 20) / 20.0), element().color(), 24);
                         level.sendParticles(ParticleTypes.PORTAL, pos.x, pos.y, pos.z, 12, radius / 3, 0.4, radius / 3, 0.5);
                     }

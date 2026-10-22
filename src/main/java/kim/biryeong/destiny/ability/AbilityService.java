@@ -2,6 +2,7 @@ package kim.biryeong.destiny.ability;
 
 import kim.biryeong.destiny.combat.Statuses;
 import kim.biryeong.destiny.fx.SimProjectile;
+import kim.biryeong.destiny.fx.HunterVfx;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianData;
@@ -57,6 +58,7 @@ public final class AbilityService {
                 cleanup(player);
                 Guardians.forget(player);
             }
+            HunterVfx.clearAll();
             SimProjectile.clearAll();
             Tasks.clearAll();
             Statuses.clearAll();
@@ -69,6 +71,7 @@ public final class AbilityService {
         CombatHud.remove(player);
         SimProjectile.discardOwned(player);
         Tasks.cancelOwned(player);
+        HunterVfx.cancelOwned(player);
         Statuses.forget(player);
     }
 
@@ -79,6 +82,7 @@ public final class AbilityService {
         Statuses.tick(server);
         SimProjectile.tickAll(server);
         Tasks.tickAll();
+        HunterVfx.tick(server);
     }
 
     public static void tickPlayer(ServerPlayer player) {
