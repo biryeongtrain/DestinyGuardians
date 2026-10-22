@@ -1,0 +1,403 @@
+{
+  "revision_name": "H16",
+  "baseline_commit": "3e2219331258ea586f7075f1e8bbf784f676f859",
+  "scope_completed_with_limits": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "future_not_implemented": [
+    5
+  ],
+  "automated": {
+    "gametests_passed": 80,
+    "junit": {
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "release_log": "h16-release-build-tests.txt"
+  },
+  "runtime": {
+    "minecraft": "26.3",
+    "server_loader": "0.20.1",
+    "vision_loader": "0.19.5",
+    "bettermodel": "3.5.1",
+    "hardware": "Apple M4 Pro",
+    "os": "macOS 26.1",
+    "renderer": "OpenGL",
+    "real_clients": 2,
+    "accounts": [
+      "H16Caster",
+      "H16Observer"
+    ],
+    "ports": [
+      8102,
+      8103
+    ],
+    "framebuffer": [
+      1708,
+      960
+    ],
+    "hud_visible": true,
+    "fps_cap": 120,
+    "vsync": false,
+    "render_distance_chunks": 10,
+    "inactivity_limit": "minimized",
+    "server_tick_target": 20,
+    "offline_loopback": true,
+    "whole_tick_evidence_server_jvm": 3,
+    "no_capture_or_gameplay_commands_during_measurement": true,
+    "whole_tick_source": "MinecraftServer.tickServer including Fabric END; excludes outer packet processing/wait and asynchronous workers"
+  },
+  "performance_windows": {
+    "baseline": {
+      "server_file": "h16-baseline.json",
+      "clients_file": "h16-perf-baseline-clients.json",
+      "packets_file": "h16-packets-baseline.json",
+      "primary_whole_tick_evidence": false,
+      "server": {
+        "tick_nanos": {
+          "n": 600,
+          "mean_ms": 2.5978433516666666,
+          "p50_ms": 2.1848755,
+          "p95_ms": 2.875666,
+          "p99_ms": 3.573292,
+          "max_ms": 237.393583,
+          "over_50ms": 1
+        }
+      },
+      "clients": {
+        "8102": {
+          "samples": 30,
+          "fps_min": 86,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 15,
+          "loaded_item_displays_max": 15,
+          "all_in_world": true,
+          "hud_visible": true
+        },
+        "8103": {
+          "samples": 30,
+          "fps_min": 77,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 15,
+          "loaded_item_displays_max": 15,
+          "all_in_world": true,
+          "hud_visible": true
+        }
+      },
+      "observed_tick_start_rate": null,
+      "legacy_command_boundary_rate": 20.15946898771697,
+      "max_bm_trackers": 0,
+      "max_beam_holders": 0,
+      "sent_packets_per_second": 50.22695967111762,
+      "sent_payload_bytes_per_second": 981.4087952725478
+    },
+    "load": {
+      "server_file": "h16-load.json",
+      "clients_file": "h16-perf-load-clients.json",
+      "packets_file": "h16-packets-load.json",
+      "primary_whole_tick_evidence": false,
+      "server": {
+        "tick_nanos": {
+          "n": 600,
+          "mean_ms": 2.2536806916666667,
+          "p50_ms": 2.110729,
+          "p95_ms": 2.858417,
+          "p99_ms": 3.398,
+          "max_ms": 88.018584,
+          "over_50ms": 1
+        }
+      },
+      "clients": {
+        "8102": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 47,
+          "loaded_item_displays_max": 47,
+          "all_in_world": true,
+          "hud_visible": true
+        },
+        "8103": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 47,
+          "loaded_item_displays_max": 47,
+          "all_in_world": true,
+          "hud_visible": true
+        }
+      },
+      "observed_tick_start_rate": null,
+      "legacy_command_boundary_rate": 20.058609082723734,
+      "max_bm_trackers": 8,
+      "max_beam_holders": 8,
+      "sent_packets_per_second": 606.2216900689184,
+      "sent_payload_bytes_per_second": 13720.515385425006
+    },
+    "recovery": {
+      "server_file": "h16-recovery.json",
+      "clients_file": "h16-perf-recovery-clients.json",
+      "packets_file": "h16-packets-recovery.json",
+      "primary_whole_tick_evidence": false,
+      "server": {
+        "tick_nanos": {
+          "n": 600,
+          "mean_ms": 2.0442290983333335,
+          "p50_ms": 2.0340625,
+          "p95_ms": 2.587083,
+          "p99_ms": 3.214125,
+          "max_ms": 4.549875,
+          "over_50ms": 0
+        }
+      },
+      "clients": {
+        "8102": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 15,
+          "loaded_item_displays_max": 15,
+          "all_in_world": true,
+          "hud_visible": true
+        },
+        "8103": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 15,
+          "loaded_item_displays_max": 15,
+          "all_in_world": true,
+          "hud_visible": true
+        }
+      },
+      "observed_tick_start_rate": null,
+      "legacy_command_boundary_rate": 20.001379095088605,
+      "max_bm_trackers": 0,
+      "max_beam_holders": 0,
+      "sent_packets_per_second": 44.2590778324984,
+      "sent_payload_bytes_per_second": 601.4302097630016
+    },
+    "load_warm": {
+      "server_file": "h16-load_warm.json",
+      "clients_file": "h16-perf-load_warm-clients.json",
+      "packets_file": "h16-packets-load_warm.json",
+      "primary_whole_tick_evidence": false,
+      "server": {
+        "tick_nanos": {
+          "n": 600,
+          "mean_ms": 2.1028702666666668,
+          "p50_ms": 2.1633335000000002,
+          "p95_ms": 2.8195,
+          "p99_ms": 3.138084,
+          "max_ms": 7.056,
+          "over_50ms": 0
+        }
+      },
+      "clients": {
+        "8102": {
+          "samples": 30,
+          "fps_min": 117,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 47,
+          "loaded_item_displays_max": 47,
+          "all_in_world": true,
+          "hud_visible": true
+        },
+        "8103": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 47,
+          "loaded_item_displays_max": 47,
+          "all_in_world": true,
+          "hud_visible": true
+        }
+      },
+      "observed_tick_start_rate": null,
+      "legacy_command_boundary_rate": 20.002390591712285,
+      "max_bm_trackers": 8,
+      "max_beam_holders": 8,
+      "sent_packets_per_second": 606.1925163053794,
+      "sent_payload_bytes_per_second": 13593.88050691938
+    },
+    "whole_baseline": {
+      "server_file": "h16-whole_baseline.json",
+      "clients_file": "h16-perf-whole_baseline-clients.json",
+      "packets_file": "h16-packets-whole_baseline.json",
+      "primary_whole_tick_evidence": true,
+      "server": {
+        "tick_nanos": {
+          "n": 600,
+          "mean_ms": 2.3410943233333334,
+          "p50_ms": 2.378729,
+          "p95_ms": 3.182208,
+          "p99_ms": 3.545917,
+          "max_ms": 4.76975,
+          "over_50ms": 0
+        },
+        "whole_tick_nanos": {
+          "n": 600,
+          "mean_ms": 2.479606936666667,
+          "p50_ms": 2.5215835,
+          "p95_ms": 3.346959,
+          "p99_ms": 3.77725,
+          "max_ms": 4.857834,
+          "over_50ms": 0
+        }
+      },
+      "clients": {
+        "8102": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 15,
+          "loaded_item_displays_max": 15,
+          "all_in_world": true,
+          "hud_visible": true
+        },
+        "8103": {
+          "samples": 30,
+          "fps_min": 118,
+          "fps_median": 119.5,
+          "fps_max": 120,
+          "loaded_item_displays_min": 15,
+          "loaded_item_displays_max": 15,
+          "all_in_world": true,
+          "hud_visible": true
+        }
+      },
+      "observed_tick_start_rate": 19.999655292084853,
+      "legacy_command_boundary_rate": 20.002586751187486,
+      "max_bm_trackers": 0,
+      "max_beam_holders": 0,
+      "sent_packets_per_second": 44.25936528475629,
+      "sent_payload_bytes_per_second": 601.4341159101748
+    },
+    "whole_load": {
+      "server_file": "h16-whole_load.json",
+      "clients_file": "h16-perf-whole_load-clients.json",
+      "packets_file": "h16-packets-whole_load.json",
+      "primary_whole_tick_evidence": true,
+      "server": {
+        "tick_nanos": {
+          "n": 600,
+          "mean_ms": 1.9204389316666666,
+          "p50_ms": 1.9354580000000001,
+          "p95_ms": 2.561,
+          "p99_ms": 2.944167,
+          "max_ms": 5.997792,
+          "over_50ms": 0
+        },
+        "whole_tick_nanos": {
+          "n": 600,
+          "mean_ms": 2.16003994,
+          "p50_ms": 2.119604,
+          "p95_ms": 2.88275,
+          "p99_ms": 3.603542,
+          "max_ms": 12.031833,
+          "over_50ms": 0
+        }
+      },
+      "clients": {
+        "8102": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 47,
+          "loaded_item_displays_max": 47,
+          "all_in_world": true,
+          "hud_visible": true
+        },
+        "8103": {
+          "samples": 30,
+          "fps_min": 119,
+          "fps_median": 120.0,
+          "fps_max": 120,
+          "loaded_item_displays_min": 47,
+          "loaded_item_displays_max": 47,
+          "all_in_world": true,
+          "hud_visible": true
+        }
+      },
+      "observed_tick_start_rate": 19.998852013810584,
+      "legacy_command_boundary_rate": 20.001436325144088,
+      "max_bm_trackers": 8,
+      "max_beam_holders": 8,
+      "sent_packets_per_second": 603.0074521917761,
+      "sent_payload_bytes_per_second": 13549.971368516695
+    }
+  },
+  "distance": {
+    "bm_center": [
+      206.5,
+      -60,
+      0.5
+    ],
+    "bm_received_at": [
+      47.99,
+      48.0
+    ],
+    "bm_removed_at": [
+      48.01,
+      64.0
+    ],
+    "same_ids_on_return": true,
+    "viewer_refresh_ticks": 5,
+    "beam_render_visible_at32": true,
+    "beam_render_absent_at64": true,
+    "beam_entities_still_delivered_at64": 4
+  },
+  "lighting": {
+    "day_night_covered_room_anchor": true,
+    "actual_shadowshot_links_in_covered_room": true,
+    "dynamic_world_lighting": false,
+    "bloom": false
+  },
+  "lifecycle": {
+    "actual_late_join": true,
+    "actual_disconnect_cleanup": true,
+    "observed_pools_after_disconnect": [
+      0,
+      0
+    ]
+  },
+  "cleanup": {
+    "qa_mobs_removed": true,
+    "temporary_stone_room_removed": true,
+    "qa_floor_retained": true,
+    "qa_players_at_spawn": true,
+    "active_pools_at_shutdown": [
+      0,
+      0
+    ],
+    "own_clients_stopped": true,
+    "own_servers_stopped": true,
+    "original_options_unchanged_sha256": "cc4d5315623f79194a5ca799191cf1a48a71bcd03cb952199fd1309cf9c89b13"
+  },
+  "known_limits": [
+    "Only 2 real clients; 24+24 global capacity is embedded GameTest, not real-client global-max performance",
+    "120 FPS cap and 1 Hz native FPS polling; no end-to-end frame-time percentile proof",
+    "Whole tickServer timing includes Fabric END callbacks, not outer waiting/packet processing or BetterModel async worker CPU",
+    "Initial vanilla timing excludes Fabric END; initial spikes and data retained, not treated as whole-tick VFX cost",
+    "Beam viewRange is client culling; distant tracked chunks still receive beam packets",
+    "One controlled covered room, not every natural cave/lighting/element",
+    "Offline BetterModel fallback skin mismatch remains; authenticated skin/GCB transport/Vulkan/audio unverified",
+    "Normal guns/ammo/reload/Marksman Dodge reload not implemented"
+  ],
+  "jar_sha256": "69a1a6db451243313d30422ac5bae01404b8bdabf79637f9b62c736b1a2aca46"
+}

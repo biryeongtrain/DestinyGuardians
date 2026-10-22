@@ -1,0 +1,108 @@
+{
+  "jfr": "server-2026-10-22-154612.jfr",
+  "sample": "h16-perf-load_warm-clients.json",
+  "window_start_utc": "2026-10-22T06:47:04.147860+00:00",
+  "window_seconds": 30.0102682079887,
+  "bytes_semantics": "Minecraft JFR encoded packet payload; not compressed TCP wire bytes",
+  "directions": {
+    "sent": {
+      "packets": 18192,
+      "payload_bytes": 407956,
+      "packets_per_second": 606.1925163053794,
+      "payload_bytes_per_second": 13593.88050691938,
+      "remote_packet_counts": {
+        "/127.0.0.1:53472": 8936,
+        "/127.0.0.1:53524": 9256
+      },
+      "by_packet": [
+        {
+          "packet": "play/minecraft:set_entity_data",
+          "count": 7776,
+          "bytes": 309216
+        },
+        {
+          "packet": "play/minecraft:bundle_delimiter",
+          "count": 6176,
+          "bytes": 6176
+        },
+        {
+          "packet": "play/minecraft:remove_entities",
+          "count": 1392,
+          "bytes": 5568
+        },
+        {
+          "packet": "play/minecraft:add_entity",
+          "count": 1392,
+          "bytes": 68208
+        },
+        {
+          "packet": "play/minecraft:update_attributes",
+          "count": 1200,
+          "bytes": 16800
+        },
+        {
+          "packet": "play/minecraft:move_entity_rot",
+          "count": 96,
+          "bytes": 576
+        },
+        {
+          "packet": "play/minecraft:set_time",
+          "count": 60,
+          "bytes": 600
+        },
+        {
+          "packet": "play/minecraft:rotate_head",
+          "count": 50,
+          "bytes": 150
+        },
+        {
+          "packet": "play/minecraft:move_entity_pos",
+          "count": 40,
+          "bytes": 400
+        },
+        {
+          "packet": "play/minecraft:keep_alive",
+          "count": 4,
+          "bytes": 36
+        },
+        {
+          "packet": "play/minecraft:entity_position_sync",
+          "count": 4,
+          "bytes": 152
+        },
+        {
+          "packet": "play/minecraft:player_info_update",
+          "count": 2,
+          "bytes": 74
+        }
+      ]
+    },
+    "received": {
+      "packets": 1264,
+      "payload_bytes": 2796,
+      "packets_per_second": 42.118917139951606,
+      "payload_bytes_per_second": 93.16811101527269,
+      "remote_packet_counts": {
+        "/127.0.0.1:53524": 632,
+        "/127.0.0.1:53472": 632
+      },
+      "by_packet": [
+        {
+          "packet": "play/minecraft:client_tick_end",
+          "count": 1200,
+          "bytes": 1200
+        },
+        {
+          "packet": "play/minecraft:move_player_pos",
+          "count": 60,
+          "bytes": 1560
+        },
+        {
+          "packet": "play/minecraft:keep_alive",
+          "count": 4,
+          "bytes": 36
+        }
+      ]
+    }
+  }
+}

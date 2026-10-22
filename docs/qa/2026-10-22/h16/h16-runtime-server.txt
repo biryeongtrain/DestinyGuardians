@@ -1,0 +1,2065 @@
+Picked up JAVA_TOOL_OPTIONS: -Ddestiny.qa=true
+
+> Configure project :minigame-lib
+Fabric Loom: 1.18.2
+
+> Configure project :GCB-server
+Fabric Loom: 1.18.2
+
+> Configure project :
+Fabric Loom: 1.18.2
+
+> Task :processResources UP-TO-DATE
+> Task :generateLog4jConfig UP-TO-DATE
+> Task :generateDLIConfig UP-TO-DATE
+> Task :configureLaunch UP-TO-DATE
+> Task :GCB-server:compileJava UP-TO-DATE
+> Task :minigame-lib:compileJava UP-TO-DATE
+> Task :GCB-server:processResources UP-TO-DATE
+> Task :GCB-server:classes UP-TO-DATE
+> Task :minigame-lib:processResources UP-TO-DATE
+> Task :GCB-server:processIncludeJars UP-TO-DATE
+> Task :minigame-lib:classes UP-TO-DATE
+> Task :minigame-lib:processIncludeJars UP-TO-DATE
+> Task :GCB-server:jar UP-TO-DATE
+> Task :minigame-lib:jar UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :runServer
+Picked up JAVA_TOOL_OPTIONS: -Ddestiny.qa=true
+[15:33:39] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 26.3 with Fabric Loader 0.20.1
+[15:33:39] [main/INFO] (FabricLoader/Mappings) Mappings not present!
+[15:33:39] [main/INFO] (FabricLoader) Loading 100 mods:
+	- adventure-platform-fabric 7.2.0
+	   |-- net_kyori_adventure-api 5.2.0
+	   |-- net_kyori_adventure-key 5.2.0
+	   |-- net_kyori_adventure-platform-mod-shared 7.2.0
+	   |-- net_kyori_adventure-text-logger-slf4j 5.2.0
+	   |-- net_kyori_adventure-text-minimessage 5.2.0
+	   |-- net_kyori_adventure-text-serializer-ansi 5.2.0
+	   |-- net_kyori_adventure-text-serializer-gson 5.2.0
+	   |-- net_kyori_adventure-text-serializer-json 5.2.0
+	   |-- net_kyori_adventure-text-serializer-plain 5.2.0
+	   |-- net_kyori_ansi 1.1.1
+	   \-- net_kyori_option 1.1.0
+	- bettermodel 3.5.1
+	   |-- com_github_ben-manes_caffeine_caffeine 3.3.1
+	   |-- gg_moonflower_molang-compiler 3.1.1.19
+	   |-- io_github_toxicity188_armormodel 1.2.0
+	   |-- io_github_toxicity188_dynamicuv 1.3.0
+	   |-- io_github_toxicity188_java-mesh 0.0.1
+	   |-- kr_toxicity_model_bettermodel-api 3.5.1
+	   |-- kr_toxicity_model_bettermodel-core 3.5.1
+	   |-- kr_toxicity_model_bettermodel-mod-api 3.5.1
+	   |-- org_semver4j_semver4j 6.0.0
+	   |-- org_spongepowered_configurate-core 4.2.0
+	   \-- org_spongepowered_configurate-yaml 4.2.0
+	- cloud 2.1.0
+	   |-- io_leangen_geantyref_geantyref 1.3.16
+	   |-- org_incendo_cloud-brigadier 2.0.1
+	   |-- org_incendo_cloud-core 2.1.0
+	   |-- org_incendo_cloud-minecraft-modded-common 2.1.0
+	   \-- org_incendo_cloud-services 2.1.0
+	- destiny 0.1.0+26.3
+	- fabric-advancement-api-v1 1.0.1+38c7a2d55d
+	- fabric-api 0.164.0+26.3
+	- fabric-api-base 2.0.6+fcdff87f5d
+	- fabric-api-lookup-api-v1 2.0.24+3434d6d95d
+	- fabric-biome-api-v1 20.1.0+c6aa69a85d
+	- fabric-block-api-v1 3.1.0+0ae6f9115d
+	- fabric-block-getter-api-v2 2.0.9+3434d6d95d
+	- fabric-command-api-v2 3.1.2+fcdff87f5d
+	- fabric-content-registries-v0 15.0.6+74ed1ea55d
+	- fabric-convention-tags-v2 4.10.4+899e30535d
+	- fabric-crash-report-info-v1 1.0.7+fcdff87f5d
+	- fabric-creative-tab-api-v1 5.0.22+fcdff87f5d
+	- fabric-data-attachment-api-v1 2.2.32+b9b88df45d
+	- fabric-data-generation-api-v1 27.4.1+501c7ef55d
+	- fabric-debug-api-v1 1.0.5+5af7744b5d
+	- fabric-dimensions-v1 5.1.20+5af7744b5d
+	- fabric-entity-events-v1 6.0.4+3434d6d95d
+	- fabric-events-interaction-v0 5.3.8+b9b88df45d
+	- fabric-game-rule-api-v1 4.0.10+3434d6d95d
+	- fabric-gametest-api-v1 4.0.34+3434d6d95d
+	- fabric-item-api-v1 14.8.0+d1c0d72b5d
+	- fabric-language-kotlin 1.14.2+kotlin.2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-reflect 2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-stdlib 2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-stdlib-jdk7 2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-stdlib-jdk8 2.4.21
+	   |-- org_jetbrains_kotlinx_atomicfu-jvm 0.33.0
+	   |-- org_jetbrains_kotlinx_kotlinx-coroutines-core-jvm 1.11.0
+	   |-- org_jetbrains_kotlinx_kotlinx-coroutines-jdk8 1.11.0
+	   |-- org_jetbrains_kotlinx_kotlinx-datetime-jvm 0.8.0
+	   |-- org_jetbrains_kotlinx_kotlinx-io-bytestring-jvm 0.9.1
+	   |-- org_jetbrains_kotlinx_kotlinx-io-core-jvm 0.9.1
+	   |-- org_jetbrains_kotlinx_kotlinx-serialization-cbor-jvm 1.11.0
+	   |-- org_jetbrains_kotlinx_kotlinx-serialization-core-jvm 1.11.0
+	   \-- org_jetbrains_kotlinx_kotlinx-serialization-json-jvm 1.11.0
+	- fabric-lifecycle-events-v1 4.1.9+ffef5f675d
+	- fabric-loot-api-v3 4.0.9+4068fd645d
+	- fabric-menu-api-v1 2.0.29+ed66f0a35d
+	- fabric-message-api-v1 7.0.10+3434d6d95d
+	- fabric-networking-api-v1 6.3.10+5c1fee4d5d
+	- fabric-object-builder-api-v1 24.1.11+e2f63d3e5d
+	- fabric-particles-v1 5.0.26+3434d6d95d
+	- fabric-permission-api-v1 1.0.8+fcdff87f5d
+	- fabric-recipe-api-v1 10.0.10+b9b88df45d
+	- fabric-registry-sync-v0 8.0.3+1ca9f6365d
+	- fabric-rendering-fluids-v1 6.0.6+3434d6d95d
+	- fabric-resource-conditions-api-v1 6.2.0+0d124ae85d
+	- fabric-resource-loader-v0 3.3.27+4fc5413f5d
+	- fabric-resource-loader-v1 3.1.0+5af7744b5d
+	- fabric-serialization-api-v1 2.0.7+74ed1ea55d
+	- fabric-tag-api-v1 2.1.11+fcdff87f5d
+	- fabric-transfer-api-v1 8.0.25+fcdff87f5d
+	- fabric-transitive-access-wideners-v1 8.1.17+e2f63d3e5d
+	- fabricloader 0.20.1
+	- gcb-server 1.2.0+26.3
+	- java 25
+	- map-canvas-api 0.9.1+26.2
+	- minecraft 26.3
+	- minigamelib 2.0.0+26.3
+	- mixinextras 0.5.5
+	- polymer-autohost 0.18.4+26.3
+	- polymer-blocks 0.18.4+26.3
+	- polymer-common 0.18.4+26.3
+	- polymer-core 0.18.4+26.3
+	- polymer-networking 0.18.4+26.3
+	- polymer-registry-sync-manipulator 0.18.4+26.3
+	- polymer-resource-pack 0.18.4+26.3
+	- polymer-resource-pack-extras 0.18.4+26.3
+	- polymer-virtual-entity 0.18.4+26.3
+[15:33:39] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/Users/qf/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.5+mixin.0.8.7/cef8519a91129d0c21fa03bb9378f0e8ca810e5/sponge-mixin-0.17.5+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[15:33:40] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[15:33:42] [main/WARN] (DestinyGuardians) H16 QA fixtures enabled explicitly (-Ddestiny.qa=true); not a production workload
+[15:33:42] [main/INFO] (DestinyGuardians) GCB input bridge enabled
+[15:33:42] [main/INFO] (DestinyGuardians)   polymer-core = 0.18.4+26.3
+[15:33:42] [main/INFO] (DestinyGuardians)   bettermodel = 3.5.1
+[15:33:42] [main/INFO] (DestinyGuardians)   minigamelib = 2.0.0+26.3
+[15:33:42] [main/INFO] (DestinyGuardians)   gcb-server = 1.2.0+26.3
+[15:33:42] [main/INFO] (DestinyGuardians) Destiny Guardians initialized
+[15:33:42] [main/INFO] (minigamelib) Registered /displayhudtest command (development environment only)
+[15:33:42] [main/INFO] (minigamelib) Registered /rgbmapdebug command (development environment only)
+[15:33:43] [main/INFO] (Minecraft) Environment: Environment[discoveryUrl=https://discovery.minecraftservices.com/minecraft/client, name=PROD]
+[15:33:44] [Worker-Main-9/INFO] (Minecraft) Loaded 1866 advancements
+[15:33:44] [main/INFO] (DestinyGuardians) Loaded 13 ability tunings
+[15:33:44] [main/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 67 new biomes in 522.1 μs
+[15:33:44] [IO-Worker-1/INFO] (Minecraft) System chat: [Polymer] Starting resource pack generation...
+[15:33:44] [Server thread/INFO] (Minecraft) Starting minecraft server version 26.3
+[15:33:44] [Server thread/INFO] (Minecraft) Loading properties
+[15:33:44] [Server thread/INFO] (Minecraft) Default game type: SURVIVAL
+[15:33:44] [Server thread/INFO] (Minecraft) Generating keypair
+[15:33:44] [Server thread/INFO] (Minecraft) Starting Minecraft server on *:25565
+[15:33:44] [Server thread/WARN] (Minecraft) **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[15:33:44] [Server thread/WARN] (Minecraft) The server will make no attempt to authenticate usernames. Beware.
+[15:33:44] [Server thread/WARN] (Minecraft) While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[15:33:44] [Server thread/WARN] (Minecraft) To change this, set "online-mode" to "true" in the server.properties file.
+[15:33:44] [Server thread/INFO] (Minecraft) Preparing level "world"
+[15:33:44] [Server thread/INFO] (Minecraft) Loading 0 persistent chunks...
+[15:33:44] [Server thread/INFO] (Minecraft) Time elapsed: 12 ms
+[15:33:44] [Server thread/INFO] (Minecraft) Done (0.193s)! For help, type "help"
+[15:33:44] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[15:33:44] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[15:33:44] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[15:33:44] [IO-Worker-1/INFO] (bettermodel) [92mMod is loaded. (474 ms)[0m
+[15:33:44] [IO-Worker-1/INFO] (bettermodel) [96mPlatform: Fabric[0m
+[15:33:44] [Server thread/INFO] (Minecraft) System chat: [Polymer] Resource pack created successfully! You can find it in game folder as polymer/resource_pack.zip
+[15:34:01] [Server thread/INFO] (Minecraft) H16Caster[/127.0.0.1:52702] logged in with entity id 5 at (3.5, -60.0, -1.5)
+[15:34:01] [Server thread/INFO] (Minecraft) System chat: H16Caster joined the game
+[15:34:13] [Server thread/INFO] (Minecraft) System chat: That position is not loaded
+[15:34:13] [Server thread/INFO] (Minecraft) System chat: Clock minecraft:overworld is already at time marker minecraft:noon
+[15:34:13] [Server thread/INFO] (Minecraft) System chat: Set the weather to clear
+[15:34:13] [Server thread/INFO] (Minecraft) System chat: Teleported H16Caster to 200.500000, -60.000000, 0.500000
+[15:34:13] [Server thread/INFO] (Minecraft) System chat: H16Caster → hunter
+[15:34:13] [Server thread/INFO] (Minecraft) System chat: H16Caster → hunter / void
+[15:34:13] [Server thread/INFO] (Minecraft) System chat: []
+[15:34:25] [Server thread/INFO] (Minecraft) System chat: Successfully filled 1897 block(s)
+[15:34:25] [Server thread/INFO] (Minecraft) System chat: [
+  {
+    "owner": "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78",
+    "model": "destiny_super_void_anchor_h15",
+    "position": {
+      "x": 206.5,
+      "y": -60.0,
+      "z": 0.5
+    },
+    "viewers": [
+      "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78"
+    ]
+  }
+]
+[15:34:30] [Server thread/INFO] (Minecraft) H16Observer[/127.0.0.1:52746] logged in with entity id 64 at (7.5, -60.0, 6.5)
+[15:34:30] [Server thread/INFO] (Minecraft) System chat: H16Observer joined the game
+[15:34:40] [Server thread/INFO] (Minecraft) System chat: There are 2 of a max of 20 players online: H16Caster, H16Observer
+[15:34:40] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 212.500000, -60.000000, 7.500000
+[15:34:40] [Server thread/INFO] (Minecraft) System chat: H16Observer → hunter
+[15:34:40] [Server thread/INFO] (Minecraft) System chat: H16Observer → hunter / arc
+[15:34:40] [Server thread/INFO] (Minecraft) System chat: [
+  {
+    "owner": "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78",
+    "model": "destiny_super_void_anchor_h15",
+    "position": {
+      "x": 206.5,
+      "y": -60.0,
+      "z": 0.5
+    },
+    "viewers": [
+      "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78"
+    ]
+  }
+]
+[15:35:10] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 254.490000, -60.000000, 0.500000
+[15:35:11] [Server thread/INFO] (Minecraft) System chat: [
+  {
+    "owner": "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78",
+    "model": "destiny_super_void_anchor_h15",
+    "position": {
+      "x": 206.5,
+      "y": -60.0,
+      "z": 0.5
+    },
+    "viewers": [
+      "e513648e-8e8a-346f-844d-336725872bb4",
+      "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78"
+    ]
+  }
+]
+[15:35:11] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 254.500000, -60.000000, 0.500000
+[15:35:13] [Server thread/INFO] (Minecraft) System chat: [
+  {
+    "owner": "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78",
+    "model": "destiny_super_void_anchor_h15",
+    "position": {
+      "x": 206.5,
+      "y": -60.0,
+      "z": 0.5
+    },
+    "viewers": [
+      "e513648e-8e8a-346f-844d-336725872bb4",
+      "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78"
+    ]
+  }
+]
+[15:35:13] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 254.510000, -60.000000, 0.500000
+[15:35:14] [Server thread/INFO] (Minecraft) System chat: [
+  {
+    "owner": "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78",
+    "model": "destiny_super_void_anchor_h15",
+    "position": {
+      "x": 206.5,
+      "y": -60.0,
+      "z": 0.5
+    },
+    "viewers": [
+      "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78"
+    ]
+  }
+]
+[15:35:14] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 270.500000, -60.000000, 0.500000
+[15:35:16] [Server thread/INFO] (Minecraft) System chat: [
+  {
+    "owner": "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78",
+    "model": "destiny_super_void_anchor_h15",
+    "position": {
+      "x": 206.5,
+      "y": -60.0,
+      "z": 0.5
+    },
+    "viewers": [
+      "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78"
+    ]
+  }
+]
+[15:35:16] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 212.500000, -60.000000, 7.500000
+[15:35:30] [Server thread/INFO] (Minecraft) System chat: [
+  {
+    "owner": "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78",
+    "model": "destiny_super_void_anchor_h15",
+    "position": {
+      "x": 206.5,
+      "y": -60.0,
+      "z": 0.5
+    },
+    "viewers": [
+      "e513648e-8e8a-346f-844d-336725872bb4",
+      "f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78"
+    ]
+  }
+]
+[15:35:30] [Server thread/INFO] (Minecraft) System chat: H16Caster → hunter / solar
+[15:35:30] [Server thread/INFO] (Minecraft) System chat: H16Observer → hunter / arc
+[15:35:30] [Server thread/INFO] (Minecraft) System chat: Teleported H16Caster to 200.500000, -60.000000, 0.500000
+[15:35:30] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 204.500000, -60.000000, 6.500000
+[15:36:00] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[15:36:00] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[15:36:00] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[15:36:00] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[15:36:00] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[15:36:00] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[15:36:04] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[15:36:04] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[15:36:26] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[15:36:26] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[15:36:26] [Server thread/INFO] (Minecraft) System chat: QA owner-view=third (simulated; not GCB transport verification)
+[15:36:43] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[15:36:43] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[15:36:46] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[15:36:46] [Server thread/INFO] (Minecraft) System chat: QA dodge left → true (simulated direction; real ability)
+[15:36:46] [Server thread/INFO] (Minecraft) Player H16Observer standing on air - force-sending blocks below
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: Cleared 0 debug models
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: H16Caster → hunter / arc
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: H16Observer → hunter / arc
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: Teleported H16Caster to 200.500000, -60.000000, -4.500000
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 200.500000, -60.000000, 4.500000
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: Clock minecraft:overworld is already at time marker minecraft:noon
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: The game is running normally
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: Target tick rate: 20.0 per second.
+Average time per tick: 2.3ms (Target: 50.0ms)
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: Percentiles: P50: 2.3ms P95: 3.0ms P99: 3.9ms. Sample: 100
+[15:37:35] [Server thread/INFO] (Minecraft) Started flight recorder profiling id(1):name(server-26.3-2026-10-22-153735) - will dump to debug/server-2026-10-22-153735.jfr on exit or stop command
+[15:37:35] [Server thread/INFO] (Minecraft) System chat: JFR profiling started
+[15:38:05] [Server thread/INFO] (DestinyGuardians) H16 sample baseline: 600 ticks / 29.762688708 wall seconds, BM=0 beams=0
+[15:38:06] [Server thread/INFO] (Minecraft) Dumped flight recorder profiling to debug/server-2026-10-22-153735.jfr
+[15:38:06] [Server thread/INFO] (Minecraft) {
+  "startedEpoch": 1792651055069,
+  "endedEpoch": 1792651086492,
+  "durationMs": 31423,
+  "heap": {
+    "allocationRateBytesPerSecond": 1758901.677419355,
+    "gcCount": 2,
+    "gcOverHeadPercent": 0.0049645165,
+    "gcTotalDurationMs": 156
+  },
+  "cpuPercent": {
+    "jvm": {
+      "min": 8.090615156106651E-4,
+      "average": 0.0012451029887112477,
+      "max": 0.0024999999441206455
+    },
+    "userJvm": {
+      "min": 0.004125412553548813,
+      "average": 0.007247327609608571,
+      "max": 0.018333332613110542
+    },
+    "system": {
+      "min": 0.14717906713485718,
+      "average": 0.1808910235762596,
+      "max": 0.40893760323524475
+    }
+  },
+  "network": {
+    "sent": {
+      "totalBytes": 198222,
+      "count": 1633,
+      "bytesPerSecond": 6394.258064516129,
+      "countPerSecond": 52.67741935483871,
+      "topContributors": [
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:level_chunk_with_light",
+          "totalBytes": 166980,
+          "count": 23,
+          "averageSize": 7260.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:update_attributes",
+          "totalBytes": 17584,
+          "count": 1256,
+          "averageSize": 14.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:set_entity_data",
+          "totalBytes": 11914,
+          "count": 161,
+          "averageSize": 74.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:set_time",
+          "totalBytes": 620,
+          "count": 62,
+          "averageSize": 10.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_entity_pos",
+          "totalBytes": 410,
+          "count": 41,
+          "averageSize": 10.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:entity_position_sync",
+          "totalBytes": 228,
+          "count": 6,
+          "averageSize": 38.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:forget_level_chunk",
+          "totalBytes": 207,
+          "count": 23,
+          "averageSize": 9.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:rotate_head",
+          "totalBytes": 141,
+          "count": 47,
+          "averageSize": 3.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:player_info_update",
+          "totalBytes": 74,
+          "count": 2,
+          "averageSize": 37.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:keep_alive",
+          "totalBytes": 36,
+          "count": 4,
+          "averageSize": 9.0
+        }
+      ]
+    },
+    "received": {
+      "totalBytes": 3051,
+      "count": 1331,
+      "bytesPerSecond": 98.41935483870968,
+      "countPerSecond": 42.935483870967744,
+      "topContributors": [
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_player_pos",
+          "totalBytes": 1638,
+          "count": 63,
+          "averageSize": 26.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:client_tick_end",
+          "totalBytes": 1256,
+          "count": 1256,
+          "averageSize": 1.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:accept_teleportation",
+          "totalBytes": 68,
+          "count": 2,
+          "averageSize": 34.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:keep_alive",
+          "totalBytes": 36,
+          "count": 4,
+          "averageSize": 9.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_player_pos_rot",
+          "totalBytes": 34,
+          "count": 1,
+          "averageSize": 34.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:chunk_batch_received",
+          "totalBytes": 15,
+          "count": 3,
+          "averageSize": 5.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_player_status_only",
+          "totalBytes": 4,
+          "count": 2,
+          "averageSize": 2.0
+        }
+      ]
+    }
+  },
+  "fileIO": {
+    "write": {
+      "totalBytes": 114387,
+      "count": 34,
+      "bytesPerSecond": 3689.9032258064517,
+      "countPerSecond": 1.096774193548387,
+      "topContributors": [
+        {
+          "path": "./world/dimensions/minecraft/overworld/region/r.0.-1.mca",
+          "totalBytes": 105022
+        },
+        {
+          "path": "qa/h16-baseline.json",
+          "totalBytes": 8112
+        },
+        {
+          "path": "logs/debug.log",
+          "totalBytes": 459
+        },
+        {
+          "path": "logs/latest.log",
+          "totalBytes": 397
+        }
+      ]
+    },
+    "read": {
+      "totalBytes": 4827,
+      "count": 8,
+      "bytesPerSecond": 155.70967741935485,
+      "countPerSecond": 0.25806451612903225,
+      "topContributors": [
+        {
+          "path": "/Users/qf/IdeaProjects/DestinyGuardians/.gradle/loom-cache/minecraftMaven/net/minecraft/minecraft-merged-09aa076130/26.3/minecraft-merged-09aa076130-26.3.jar",
+          "totalBytes": 3983
+        },
+        {
+          "path": "/Users/qf/IdeaProjects/DestinyGuardians/build/classes/java/main/kim/biryeong/destiny/debug/HunterQa$Sample.class",
+          "totalBytes": 844
+        }
+      ]
+    },
+    "chunksRead": {
+      "totalBytes": 0,
+      "count": 0,
+      "bytesPerSecond": 0.0,
+      "countPerSecond": 0.0,
+      "topContributors": []
+    },
+    "chunksWritten": {
+      "totalBytes": 6670,
+      "count": 12,
+      "bytesPerSecond": 215.16129032258064,
+      "countPerSecond": 0.3870967741935484,
+      "topContributors": [
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 14,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 13,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 18,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 17,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 16,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 22,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 21,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 20,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 24,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 23,
+          "z": -13,
+          "totalBytes": 556,
+          "count": 1,
+          "averageSize": 556.0
+        }
+      ]
+    }
+  },
+  "fps": {
+    "minFps": 0,
+    "averageFps": 0.0,
+    "maxFps": 0,
+    "p99": 0.0,
+    "p90": 0.0,
+    "p75": 0.0,
+    "p50": 0.0
+  },
+  "serverTick": {
+    "minMs": 1.551267,
+    "averageMs": 2.2694810322580645,
+    "maxMs": 3.645854,
+    "p99": 3.3798365,
+    "p90": 2.499698,
+    "p75": 2.3124245,
+    "p50": 2.239772
+  },
+  "threadAllocation": [
+    {
+      "thread": "BetterModel-Async-Scheduler-0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-1",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-10",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-11",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-3",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-5",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-6",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-7",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-8",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-9",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-1",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-10",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-11",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-12",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-13",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-14",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-15",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-16",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-17",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-18",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-19",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-20",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-21",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-22",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-23",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-3",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-5",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-6",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-7",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-8",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-9",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "C1 CompilerThread0",
+      "bytesPerSecond": 7.04
+    },
+    {
+      "thread": "Common-Cleaner",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "DestroyJavaVM",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Finalizer",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "ForkJoinPool.commonPool-worker-12",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-7",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-8",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JFR Periodic Tasks",
+      "bytesPerSecond": 153.92
+    },
+    {
+      "thread": "JFR Recorder Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JNA Cleaner",
+      "bytesPerSecond": 71.36
+    },
+    {
+      "thread": "JVMCI-native CompilerThread0",
+      "bytesPerSecond": 2.88
+    },
+    {
+      "thread": "Java2D Disposer",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Minecraft Services Discovery",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Monitor Deflation Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #1",
+      "bytesPerSecond": 61580.48
+    },
+    {
+      "thread": "Netty Kqueue IO #2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #3",
+      "bytesPerSecond": 61630.72
+    },
+    {
+      "thread": "Netty Kqueue IO #4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Notification Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Reference Handler",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Server Watchdog",
+      "bytesPerSecond": 1.6
+    },
+    {
+      "thread": "Server console handler",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Server thread",
+      "bytesPerSecond": 1277904.96
+    },
+    {
+      "thread": "Service Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Signal Dispatcher",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Timer hack thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-12",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-13",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-14",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-15",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-16",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-17",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-18",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-19",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-20",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-21",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Worker-Main-22",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "adventure-platform-mod-scheduler0",
+      "bytesPerSecond": 8.64
+    },
+    {
+      "thread": "minigamelib-music",
+      "bytesPerSecond": 3206.4
+    }
+  ],
+  "chunkGen": {},
+  "structureGen": {}
+}
+[15:38:06] [Server thread/INFO] (Minecraft) Dumped recording summary to debug/jfr-report-server-2026-10-22-153735.json
+[15:38:06] [Server thread/INFO] (Minecraft) System chat: JFR profiling stopped and dumped to debug/server-2026-10-22-153735.jfr
+[15:38:06] [Server thread/INFO] (Minecraft) System chat: The game is running normally
+[15:38:06] [Server thread/INFO] (Minecraft) System chat: Target tick rate: 20.0 per second.
+Average time per tick: 2.3ms (Target: 50.0ms)
+[15:38:06] [Server thread/INFO] (Minecraft) System chat: Percentiles: P50: 2.3ms P95: 2.8ms P99: 13.4ms. Sample: 100
+[15:38:31] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=8 super-beams=8
+[15:38:31] [Server thread/INFO] (Minecraft) Started flight recorder profiling id(2):name(server-26.3-2026-10-22-153831) - will dump to debug/server-2026-10-22-153831.jfr on exit or stop command
+[15:38:31] [Server thread/INFO] (Minecraft) System chat: JFR profiling started
+[15:39:01] [Server thread/INFO] (DestinyGuardians) H16 sample load: 600 ticks / 29.91234325 wall seconds, BM=8 beams=8
+[15:39:39] [Server thread/INFO] (Minecraft) Dumped flight recorder profiling to debug/server-2026-10-22-153831.jfr
+[15:39:39] [Server thread/INFO] (Minecraft) {
+  "startedEpoch": 1792651055308,
+  "endedEpoch": 1792651179227,
+  "durationMs": 123919,
+  "heap": {
+    "allocationRateBytesPerSecond": 2504062.0895522386,
+    "gcCount": 2,
+    "gcOverHeadPercent": 0.0012185379,
+    "gcTotalDurationMs": 151
+  },
+  "cpuPercent": {
+    "jvm": {
+      "min": 0.0016025641234591603,
+      "average": 0.002098230186247212,
+      "max": 0.0033333334140479565
+    },
+    "userJvm": {
+      "min": 0.004950494971126318,
+      "average": 0.008553445072132437,
+      "max": 0.019166667014360428
+    },
+    "system": {
+      "min": 0.2311435490846634,
+      "average": 0.26446638037176695,
+      "max": 0.4186991751194
+    }
+  },
+  "network": {
+    "sent": {
+      "totalBytes": 930606,
+      "count": 40933,
+      "bytesPerSecond": 7565.90243902439,
+      "countPerSecond": 332.7886178861789,
+      "topContributors": [
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:set_entity_data",
+          "totalBytes": 710138,
+          "count": 17694,
+          "averageSize": 40.134396
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:add_entity",
+          "totalBytes": 152096,
+          "count": 3104,
+          "averageSize": 49.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:update_attributes",
+          "totalBytes": 38024,
+          "count": 2716,
+          "averageSize": 14.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:bundle_delimiter",
+          "totalBytes": 13792,
+          "count": 13792,
+          "averageSize": 1.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:remove_entities",
+          "totalBytes": 12416,
+          "count": 3104,
+          "averageSize": 4.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:set_time",
+          "totalBytes": 1360,
+          "count": 136,
+          "averageSize": 10.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_entity_rot",
+          "totalBytes": 1152,
+          "count": 192,
+          "averageSize": 6.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_entity_pos",
+          "totalBytes": 910,
+          "count": 91,
+          "averageSize": 10.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:rotate_head",
+          "totalBytes": 252,
+          "count": 84,
+          "averageSize": 3.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:entity_position_sync",
+          "totalBytes": 228,
+          "count": 6,
+          "averageSize": 38.0
+        }
+      ]
+    },
+    "received": {
+      "totalBytes": 6346,
+      "count": 2866,
+      "bytesPerSecond": 51.59349593495935,
+      "countPerSecond": 23.30081300813008,
+      "topContributors": [
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_player_pos",
+          "totalBytes": 3536,
+          "count": 136,
+          "averageSize": 26.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:client_tick_end",
+          "totalBytes": 2720,
+          "count": 2720,
+          "averageSize": 1.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:keep_alive",
+          "totalBytes": 90,
+          "count": 10,
+          "averageSize": 9.0
+        }
+      ]
+    }
+  },
+  "fileIO": {
+    "write": {
+      "totalBytes": 100219,
+      "count": 54,
+      "bytesPerSecond": 814.7886178861788,
+      "countPerSecond": 0.43902439024390244,
+      "topContributors": [
+        {
+          "path": "./world/dimensions/minecraft/overworld/entities/r.0.0.mca",
+          "totalBytes": 69174
+        },
+        {
+          "path": "./world/dimensions/minecraft/overworld/entities/r.0.-1.mca",
+          "totalBytes": 17558
+        },
+        {
+          "path": "qa/h16-load.json",
+          "totalBytes": 8086
+        },
+        {
+          "path": "./world/players/data/f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78-16453546150327896589.dat",
+          "totalBytes": 965
+        },
+        {
+          "path": "./world/players/data/e513648e-8e8a-346f-844d-336725872bb4-15670511325567558216.dat",
+          "totalBytes": 965
+        },
+        {
+          "path": "logs/debug.log",
+          "totalBytes": 454
+        },
+        {
+          "path": "./world/level10075035409250668200.dat",
+          "totalBytes": 439
+        },
+        {
+          "path": "logs/latest.log",
+          "totalBytes": 392
+        },
+        {
+          "path": "./world/players/stats/e513648e-8e8a-346f-844d-336725872bb4.json",
+          "totalBytes": 332
+        },
+        {
+          "path": "./world/players/advancements/f7e9aed4-ebbf-3d1e-bcc3-48e3f2630c78.json",
+          "totalBytes": 325
+        }
+      ]
+    },
+    "read": {
+      "totalBytes": 40015,
+      "count": 187,
+      "bytesPerSecond": 325.3252032520325,
+      "countPerSecond": 1.5203252032520325,
+      "topContributors": [
+        {
+          "path": "/dev/urandom",
+          "totalBytes": 26240
+        },
+        {
+          "path": "/Users/qf/IdeaProjects/DestinyGuardians/.gradle/loom-cache/minecraftMaven/net/minecraft/minecraft-merged-09aa076130/26.3/minecraft-merged-09aa076130-26.3.jar",
+          "totalBytes": 7423
+        },
+        {
+          "path": "/Users/qf/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/8.5.18/a6cff377eecc19c2037bf31568a6d7106b50ba1f/fastutil-8.5.18.jar",
+          "totalBytes": 6352
+        }
+      ]
+    },
+    "chunksRead": {
+      "totalBytes": 0,
+      "count": 0,
+      "bytesPerSecond": 0.0,
+      "countPerSecond": 0.0,
+      "topContributors": []
+    },
+    "chunksWritten": {
+      "totalBytes": 4780,
+      "count": 8,
+      "bytesPerSecond": 38.86178861788618,
+      "countPerSecond": 0.06504065040650407,
+      "topContributors": [
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 1,
+          "z": 3,
+          "totalBytes": 788,
+          "count": 1,
+          "averageSize": 788.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 0,
+          "z": -4,
+          "totalBytes": 585,
+          "count": 1,
+          "averageSize": 585.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 3,
+          "z": 5,
+          "totalBytes": 584,
+          "count": 1,
+          "averageSize": 584.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 2,
+          "z": 2,
+          "totalBytes": 584,
+          "count": 1,
+          "averageSize": 584.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 3,
+          "z": 6,
+          "totalBytes": 581,
+          "count": 1,
+          "averageSize": 581.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 3,
+          "z": -1,
+          "totalBytes": 581,
+          "count": 1,
+          "averageSize": 581.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 2,
+          "z": 6,
+          "totalBytes": 576,
+          "count": 1,
+          "averageSize": 576.0
+        },
+        {
+          "level": "world",
+          "dimension": "minecraft:overworld",
+          "x": 0,
+          "z": 0,
+          "totalBytes": 501,
+          "count": 1,
+          "averageSize": 501.0
+        }
+      ]
+    }
+  },
+  "fps": {
+    "minFps": 0,
+    "averageFps": 0.0,
+    "maxFps": 0,
+    "p99": 0.0,
+    "p90": 0.0,
+    "p75": 0.0,
+    "p50": 0.0
+  },
+  "serverTick": {
+    "minMs": 1.610406,
+    "averageMs": 2.1742558970588237,
+    "maxMs": 5.217086,
+    "p99": 3.73276934,
+    "p90": 2.4813458,
+    "p75": 2.2703697500000004,
+    "p50": 2.117596
+  },
+  "threadAllocation": [
+    {
+      "thread": "BetterModel-Async-Scheduler-0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-1",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-10",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-11",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-3",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-5",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-6",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-7",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-8",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-9",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-0",
+      "bytesPerSecond": 7501.733333333334
+    },
+    {
+      "thread": "BetterModel-Worker-1",
+      "bytesPerSecond": 10433.466666666667
+    },
+    {
+      "thread": "BetterModel-Worker-10",
+      "bytesPerSecond": 9518.933333333332
+    },
+    {
+      "thread": "BetterModel-Worker-11",
+      "bytesPerSecond": 7884.4
+    },
+    {
+      "thread": "BetterModel-Worker-12",
+      "bytesPerSecond": 8613.733333333334
+    },
+    {
+      "thread": "BetterModel-Worker-13",
+      "bytesPerSecond": 7873.066666666667
+    },
+    {
+      "thread": "BetterModel-Worker-14",
+      "bytesPerSecond": 7579.066666666667
+    },
+    {
+      "thread": "BetterModel-Worker-15",
+      "bytesPerSecond": 9456.266666666666
+    },
+    {
+      "thread": "BetterModel-Worker-16",
+      "bytesPerSecond": 7578.0
+    },
+    {
+      "thread": "BetterModel-Worker-17",
+      "bytesPerSecond": 9050.666666666666
+    },
+    {
+      "thread": "BetterModel-Worker-18",
+      "bytesPerSecond": 8262.0
+    },
+    {
+      "thread": "BetterModel-Worker-19",
+      "bytesPerSecond": 8108.933333333333
+    },
+    {
+      "thread": "BetterModel-Worker-2",
+      "bytesPerSecond": 7476.133333333333
+    },
+    {
+      "thread": "BetterModel-Worker-20",
+      "bytesPerSecond": 10100.8
+    },
+    {
+      "thread": "BetterModel-Worker-21",
+      "bytesPerSecond": 8322.0
+    },
+    {
+      "thread": "BetterModel-Worker-22",
+      "bytesPerSecond": 8718.0
+    },
+    {
+      "thread": "BetterModel-Worker-23",
+      "bytesPerSecond": 7854.933333333333
+    },
+    {
+      "thread": "BetterModel-Worker-3",
+      "bytesPerSecond": 8251.6
+    },
+    {
+      "thread": "BetterModel-Worker-4",
+      "bytesPerSecond": 7842.933333333333
+    },
+    {
+      "thread": "BetterModel-Worker-5",
+      "bytesPerSecond": 7875.466666666666
+    },
+    {
+      "thread": "BetterModel-Worker-6",
+      "bytesPerSecond": 8754.133333333333
+    },
+    {
+      "thread": "BetterModel-Worker-7",
+      "bytesPerSecond": 7846.133333333333
+    },
+    {
+      "thread": "BetterModel-Worker-8",
+      "bytesPerSecond": 6967.466666666666
+    },
+    {
+      "thread": "BetterModel-Worker-9",
+      "bytesPerSecond": 9033.6
+    },
+    {
+      "thread": "C1 CompilerThread0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Common-Cleaner",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "DestroyJavaVM",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Finalizer",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-10",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-11",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-12",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-13",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-14",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "IO-Worker-9",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JFR Periodic Tasks",
+      "bytesPerSecond": 154.4
+    },
+    {
+      "thread": "JFR Recorder Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JNA Cleaner",
+      "bytesPerSecond": 29.733333333333334
+    },
+    {
+      "thread": "JVMCI-native CompilerThread0",
+      "bytesPerSecond": 0.9333333333333333
+    },
+    {
+      "thread": "Java2D Disposer",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Minecraft Services Discovery",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Monitor Deflation Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #1",
+      "bytesPerSecond": 358741.2
+    },
+    {
+      "thread": "Netty Kqueue IO #2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #3",
+      "bytesPerSecond": 365654.26666666666
+    },
+    {
+      "thread": "Netty Kqueue IO #4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Notification Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Reference Handler",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Server Watchdog",
+      "bytesPerSecond": 1.6
+    },
+    {
+      "thread": "Server console handler",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Server thread",
+      "bytesPerSecond": 1562660.5333333334
+    },
+    {
+      "thread": "Service Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Signal Dispatcher",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Timer hack thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "adventure-platform-mod-scheduler0",
+      "bytesPerSecond": 7.2
+    },
+    {
+      "thread": "minigamelib-music",
+      "bytesPerSecond": 3216.0
+    }
+  ],
+  "chunkGen": {},
+  "structureGen": {}
+}
+[15:39:39] [Server thread/INFO] (Minecraft) Dumped recording summary to debug/jfr-report-server-2026-10-22-153831.json
+[15:39:39] [Server thread/INFO] (Minecraft) System chat: JFR profiling stopped and dumped to debug/server-2026-10-22-153831.jfr
+[15:39:39] [Server thread/INFO] (Minecraft) System chat: The game is running normally
+[15:39:39] [Server thread/INFO] (Minecraft) System chat: Target tick rate: 20.0 per second.
+Average time per tick: 2.0ms (Target: 50.0ms)
+[15:39:39] [Server thread/INFO] (Minecraft) System chat: Percentiles: P50: 2.0ms P95: 2.6ms P99: 2.9ms. Sample: 100
+[15:39:40] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=0 super-beams=0
+[15:39:40] [Server thread/INFO] (Minecraft) Started flight recorder profiling id(3):name(server-26.3-2026-10-22-153940) - will dump to debug/server-2026-10-22-153940.jfr on exit or stop command
+[15:39:40] [Server thread/INFO] (Minecraft) System chat: JFR profiling started
+[15:40:32] [Server thread/INFO] (DestinyGuardians) H16 sample recovery: 600 ticks / 29.9979315 wall seconds, BM=0 beams=0
+[15:41:05] [Server thread/INFO] (Minecraft) Dumped flight recorder profiling to debug/server-2026-10-22-153940.jfr
+[15:41:05] [Server thread/INFO] (Minecraft) {
+  "startedEpoch": 1792651124540,
+  "endedEpoch": 1792651265825,
+  "durationMs": 141285,
+  "heap": {
+    "allocationRateBytesPerSecond": 1332308.3294117646,
+    "gcCount": 2,
+    "gcOverHeadPercent": 8.068797E-4,
+    "gcTotalDurationMs": 114
+  },
+  "cpuPercent": {
+    "jvm": {
+      "min": 0.0,
+      "average": 0.0012579452212187734,
+      "max": 0.01739482209086418
+    },
+    "userJvm": {
+      "min": 0.0033333334140479565,
+      "average": 0.005728336445548955,
+      "max": 0.040048543363809586
+    },
+    "system": {
+      "min": 0.1409395933151245,
+      "average": 0.17777220729519339,
+      "max": 0.3376835286617279
+    }
+  },
+  "network": {
+    "sent": {
+      "totalBytes": 54114,
+      "count": 3853,
+      "bytesPerSecond": 383.78723404255317,
+      "countPerSecond": 27.326241134751772,
+      "topContributors": [
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:update_attributes",
+          "totalBytes": 47684,
+          "count": 3406,
+          "averageSize": 14.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:set_entity_data",
+          "totalBytes": 2656,
+          "count": 37,
+          "averageSize": 71.78378
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:set_time",
+          "totalBytes": 1700,
+          "count": 170,
+          "averageSize": 10.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_entity_pos",
+          "totalBytes": 1140,
+          "count": 114,
+          "averageSize": 10.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:entity_position_sync",
+          "totalBytes": 304,
+          "count": 8,
+          "averageSize": 38.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:rotate_head",
+          "totalBytes": 300,
+          "count": 100,
+          "averageSize": 3.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:player_info_update",
+          "totalBytes": 222,
+          "count": 6,
+          "averageSize": 37.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:keep_alive",
+          "totalBytes": 108,
+          "count": 12,
+          "averageSize": 9.0
+        }
+      ]
+    },
+    "received": {
+      "totalBytes": 7936,
+      "count": 3590,
+      "bytesPerSecond": 56.283687943262414,
+      "countPerSecond": 25.46099290780142,
+      "topContributors": [
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:move_player_pos",
+          "totalBytes": 4420,
+          "count": 170,
+          "averageSize": 26.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:client_tick_end",
+          "totalBytes": 3408,
+          "count": 3408,
+          "averageSize": 1.0
+        },
+        {
+          "protocolId": "play",
+          "packetId": "minecraft:keep_alive",
+          "totalBytes": 108,
+          "count": 12,
+          "averageSize": 9.0
+        }
+      ]
+    }
+  },
+  "fileIO": {
+    "write": {
+      "totalBytes": 9371,
+      "count": 10,
+      "bytesPerSecond": 66.46099290780141,
+      "countPerSecond": 0.07092198581560284,
+      "topContributors": [
+        {
+          "path": "qa/h16-recovery.json",
+          "totalBytes": 8124
+        },
+        {
+          "path": "logs/debug.log",
+          "totalBytes": 457
+        },
+        {
+          "path": "logs/latest.log",
+          "totalBytes": 395
+        }
+      ]
+    },
+    "read": {
+      "totalBytes": 154,
+      "count": 1,
+      "bytesPerSecond": 1.0921985815602837,
+      "countPerSecond": 0.0070921985815602835,
+      "topContributors": []
+    },
+    "chunksRead": {
+      "totalBytes": 0,
+      "count": 0,
+      "bytesPerSecond": 0.0,
+      "countPerSecond": 0.0,
+      "topContributors": []
+    },
+    "chunksWritten": {
+      "totalBytes": 0,
+      "count": 0,
+      "bytesPerSecond": 0.0,
+      "countPerSecond": 0.0,
+      "topContributors": []
+    }
+  },
+  "fps": {
+    "minFps": 0,
+    "averageFps": 0.0,
+    "maxFps": 0,
+    "p99": 0.0,
+    "p90": 0.0,
+    "p75": 0.0,
+    "p50": 0.0
+  },
+  "serverTick": {
+    "minMs": 1.438416,
+    "averageMs": 2.071103470588235,
+    "maxMs": 2.830371,
+    "p99": 2.7877788000000003,
+    "p90": 2.2479006,
+    "p75": 2.147261,
+    "p50": 2.049411
+  },
+  "threadAllocation": [
+    {
+      "thread": "BetterModel-Async-Scheduler-0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-1",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-10",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-11",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-3",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-5",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-6",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-7",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-8",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Async-Scheduler-9",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-1",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-10",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-11",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-12",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-13",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-14",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-15",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-16",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-17",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-18",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-19",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-20",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-21",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-22",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-23",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-3",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-5",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-6",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-7",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-8",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "BetterModel-Worker-9",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "C1 CompilerThread0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Common-Cleaner",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "DestroyJavaVM",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Finalizer",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JFR Periodic Tasks",
+      "bytesPerSecond": 154.4
+    },
+    {
+      "thread": "JFR Recorder Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JNA Cleaner",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "JVMCI-native CompilerThread0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Java2D Disposer",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Minecraft Services Discovery",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Monitor Deflation Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #0",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #1",
+      "bytesPerSecond": 38026.8
+    },
+    {
+      "thread": "Netty Kqueue IO #2",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Netty Kqueue IO #3",
+      "bytesPerSecond": 37084.5
+    },
+    {
+      "thread": "Netty Kqueue IO #4",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Notification Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Reference Handler",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Server Watchdog",
+      "bytesPerSecond": 0.5
+    },
+    {
+      "thread": "Server console handler",
+      "bytesPerSecond": 5.1
+    },
+    {
+      "thread": "Server thread",
+      "bytesPerSecond": 1245520.1
+    },
+    {
+      "thread": "Service Thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Signal Dispatcher",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "Timer hack thread",
+      "bytesPerSecond": 0.0
+    },
+    {
+      "thread": "adventure-platform-mod-scheduler0",
+      "bytesPerSecond": 5.4
+    },
+    {
+      "thread": "minigamelib-music",
+      "bytesPerSecond": 3215.6
+    }
+  ],
+  "chunkGen": {},
+  "structureGen": {}
+}
+[15:41:05] [Server thread/INFO] (Minecraft) Dumped recording summary to debug/jfr-report-server-2026-10-22-153940.json
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: JFR profiling stopped and dumped to debug/server-2026-10-22-153940.jfr
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: The game is running normally
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: Target tick rate: 20.0 per second.
+Average time per tick: 2.1ms (Target: 50.0ms)
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: Percentiles: P50: 2.2ms P95: 2.6ms P99: 2.9ms. Sample: 100
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=0 super-beams=0
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: Teleported H16Caster to 200.500000, -60.000000, 0.500000
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 212.500000, -60.000000, 7.500000
+[15:41:05] [Server thread/INFO] (Minecraft) System chat: Clock minecraft:overworld is already at time marker minecraft:noon
+[15:41:07] [Server thread/INFO] (Minecraft) System chat: Set minecraft:overworld to time marker minecraft:midnight
+[15:41:08] [Server thread/INFO] (Minecraft) System chat: Successfully filled 2970 block(s)
+[15:41:58] [Server thread/INFO] (Minecraft) System chat: H16Caster → hunter / void
+[15:41:58] [Server thread/INFO] (Minecraft) System chat: Teleported H16Caster to 200.500000, -60.000000, 0.500000
+[15:41:58] [Server thread/INFO] (Minecraft) System chat: Summoned new Husk
+[15:41:58] [Server thread/INFO] (Minecraft) System chat: Summoned new Husk
+[15:41:58] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[15:41:58] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[15:42:00] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Cleared 0 debug models
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Killed 2 entities
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Killed Rotten Flesh
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Successfully filled 1926 block(s)
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Successfully filled 1044 block(s)
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Set minecraft:overworld to time marker minecraft:noon
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: H16Caster → hunter / arc
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Teleported H16Caster to 200.500000, -60.000000, 0.500000
+[15:42:51] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 238.500000, -60.000000, 0.500000
+[15:42:52] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 270.500000, -60.000000, 0.500000
+[15:42:54] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 220.500000, -60.000000, 7.500000
+[15:44:04] [Server thread/INFO] (Minecraft) System chat: Cleared 0 debug models
+[15:44:04] [Server thread/INFO] (Minecraft) System chat: Teleported H16Caster to 200.500000, -60.000000, 0.500000
+[15:44:04] [Server thread/INFO] (Minecraft) System chat: Teleported H16Observer to 212.500000, -60.000000, 7.500000
+[15:44:04] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=0 super-beams=0
+[15:44:04] [Server thread/INFO] (Minecraft) System chat: Stopping the server
+[15:44:04] [Server thread/INFO] (Minecraft) Stopping server
+[15:44:04] [Server thread/INFO] (Minecraft) Saving players
+[15:44:04] [Server thread/INFO] (Minecraft) H16Caster lost connection: Server closed
+[15:44:04] [Server thread/INFO] (Minecraft) System chat: H16Caster left the game
+[15:44:04] [Server thread/INFO] (Minecraft) Saving worlds
+[15:44:04] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[15:44:06] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[15:44:06] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+
+[Incubating] Problems report is available at: file:///Users/qf/IdeaProjects/DestinyGuardians/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 10m 27s
+13 actionable tasks: 1 executed, 12 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.7.1/userguide/configuration_cache_enabling.html

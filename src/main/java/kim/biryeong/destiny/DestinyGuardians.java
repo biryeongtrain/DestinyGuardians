@@ -35,6 +35,7 @@ public final class DestinyGuardians implements ModInitializer {
         AbilityService.init();
         GuardianCommands.register();
         DebugCommands.register();
+        kim.biryeong.destiny.debug.HunterQa.init();
         if (FabricLoader.getInstance().isModLoaded("gcb-server")) {
             initGcb();
         }

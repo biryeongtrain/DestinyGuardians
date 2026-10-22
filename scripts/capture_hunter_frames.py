@@ -13,8 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from PIL import Image, ImageDraw
 
-def get(path):
-    with urllib.request.urlopen("http://127.0.0.1:8102/"+path,timeout=20) as response:
+def get(path,port=8102):
+    with urllib.request.urlopen(f"http://127.0.0.1:{port}/"+path,timeout=20) as response:
         return response.read()
 
 def main():
@@ -23,14 +23,15 @@ def main():
     p.add_argument("--seconds",type=float,default=3)
     p.add_argument("--interval",type=float,default=.12)
     p.add_argument("--out",type=Path,default=Path("/tmp/destiny-h15-frames"))
+    p.add_argument("--port",type=int,default=8102)
     a=p.parse_args(); directory=a.out/a.name;directory.mkdir(parents=True,exist_ok=True)
-    state=json.loads(get("state"))
+    state=json.loads(get("state",a.port))
     if not state.get("inWorld"):raise RuntimeError("Client not in a world")
     start=time.monotonic(); frames=[];times=[]
     utc=datetime.now(timezone.utc).isoformat()
     while time.monotonic()-start<a.seconds:
         before=time.monotonic()-start
-        raw=get("screenshot");frame=Image.open(io.BytesIO(raw)).convert("RGB")
+        raw=get("screenshot",a.port);frame=Image.open(io.BytesIO(raw)).convert("RGB")
         (directory/f"{len(frames):03}.png").write_bytes(raw)
         times.append(before);frames.append(frame)
         time.sleep(max(0,a.interval-(time.monotonic()-start-before)))
@@ -48,7 +49,7 @@ def main():
     durations=[max(1,round((times[i+1]-times[i])*1000)) for i in range(len(times)-1)]+[round(a.interval*1000)]
     scaled[0].save(directory/"sequence.webp",save_all=True,append_images=scaled[1:],duration=durations,loop=0,quality=80)
     metadata={"capture_start_utc":utc,"client_state":state,"frame_times_seconds":times,
-              "source_size":list(frames[0].size),"hud_normalized":False,"frames":len(frames)}
+              "source_size":list(frames[0].size),"hud_normalized":False,"frames":len(frames),"vision_port":a.port}
     (directory/"frames.json").write_text(json.dumps(metadata,indent=2)+"\n")
     print(json.dumps({"name":a.name,"frames":len(frames),"directory":str(directory)}),flush=True)
 

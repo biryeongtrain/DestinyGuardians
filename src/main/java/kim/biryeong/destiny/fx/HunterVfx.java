@@ -222,6 +222,14 @@ public final class HunterVfx {
         return ACTIVE.size();
     }
 
+    /** Read-only QA diagnostics; does not change viewer selection or spawn packets. */
+    public record Snapshot(UUID owner, String model, Vec3 position, List<UUID> viewers) { }
+
+    public static List<Snapshot> snapshots() {
+        return ACTIVE.stream().map(e -> new Snapshot(e.owner.getUUID(), e.kind.modelName(), e.position,
+                List.copyOf(e.viewers.keySet()))).toList();
+    }
+
     public static int activeCount(ServerPlayer owner) {
         if (owner == null) return 0;
         return (int) ACTIVE.stream().filter(effect -> effect.owner.getUUID().equals(owner.getUUID())).count();
