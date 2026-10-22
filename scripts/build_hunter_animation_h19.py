@@ -11,7 +11,8 @@ Static FK uses the existing authoring pipeline's Rz*Ry*Rx group rotations,
 +X right, +Y up, front -Z; Rx(+90) turns a downward arm toward -Z.
 All ancestors, bind rotations, equipment pivots and root translation are included.
 Bow contract: model grip (8,8,8), nock X=11.27 / 16.24, left display
-Ry(-90), translation (0,2,0). Thus world item identity aims arrow -X along
+JSON Ry(+90), translated (0,2,0); MC's left-hand Y flip yields effective
+Ry(-90). Thus world item identity aims arrow -X along
 world -Z, and the drawn nock is wrist+(0,2,8.24). Item rotations cancel
 the complete arm chain AND the bind Rx(-90); they are not hand-wave offsets.
 This is static/non-game verification, not a Blockbench or native-client check.

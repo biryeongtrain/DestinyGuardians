@@ -1,0 +1,268 @@
+Compiled from "ItemStackRenderState.java"
+public class net.minecraft.client.renderer.item.ItemStackRenderState$LayerRenderState implements net.fabricmc.fabric.api.client.renderer.v1.render.FabricLayerRenderState,net.fabricmc.fabric.api.client.rendering.v1.FabricRenderState {
+  private static final org.joml.Vector3fc[] NO_EXTENTS;
+
+  public static final java.util.function.Supplier<org.joml.Vector3fc[]> NO_EXTENTS_SUPPLIER;
+
+  public static final int[] EMPTY_TINTS;
+
+  private net.minecraft.client.resources.model.geometry.ItemQuads quads;
+
+  private boolean usesBlockLight;
+
+  private net.minecraft.client.resources.model.sprite.Material$Baked particleMaterial;
+
+  private net.minecraft.client.resources.model.cuboid.ItemTransform itemTransform;
+
+  private final org.joml.Matrix4f localTransform;
+
+  private net.minecraft.client.renderer.item.ItemStackRenderState$FoilType foilType;
+
+  private it.unimi.dsi.fastutil.ints.IntList tintLayers;
+
+  private net.minecraft.client.renderer.special.SpecialModelRenderer<java.lang.Object> specialRenderer;
+
+  private java.lang.Object argumentForSpecialRendering;
+
+  private java.util.function.Supplier<org.joml.Vector3fc[]> extents;
+
+  final net.minecraft.client.renderer.item.ItemStackRenderState this$0;
+
+  public net.minecraft.client.renderer.item.ItemStackRenderState$LayerRenderState(net.minecraft.client.renderer.item.ItemStackRenderState);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: dup
+         3: invokestatic  #72                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         6: pop
+         7: putfield      #74                 // Field this$0:Lnet/minecraft/client/renderer/item/ItemStackRenderState;
+        10: aload_0
+        11: invokespecial #77                 // Method java/lang/Object."<init>":()V
+        14: aload_0
+        15: getstatic     #82                 // Field net/minecraft/client/resources/model/geometry/ItemQuads.EMPTY:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+        18: putfield      #84                 // Field quads:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+        21: aload_0
+        22: getstatic     #89                 // Field net/minecraft/client/resources/model/cuboid/ItemTransform.NO_TRANSFORM:Lnet/minecraft/client/resources/model/cuboid/ItemTransform;
+        25: putfield      #91                 // Field itemTransform:Lnet/minecraft/client/resources/model/cuboid/ItemTransform;
+        28: aload_0
+        29: new           #93                 // class org/joml/Matrix4f
+        32: dup
+        33: invokespecial #94                 // Method org/joml/Matrix4f."<init>":()V
+        36: putfield      #96                 // Field localTransform:Lorg/joml/Matrix4f;
+        39: aload_0
+        40: getstatic     #99                 // Field net/minecraft/client/renderer/item/ItemStackRenderState$FoilType.NONE:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+        43: putfield      #101                // Field foilType:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+        46: aload_0
+        47: getstatic     #103                // Field NO_EXTENTS_SUPPLIER:Ljava/util/function/Supplier;
+        50: putfield      #105                // Field extents:Ljava/util/function/Supplier;
+        53: return
+
+  public void clear();
+    Code:
+         0: aload_0
+         1: getstatic     #82                 // Field net/minecraft/client/resources/model/geometry/ItemQuads.EMPTY:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+         4: putfield      #84                 // Field quads:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+         7: aload_0
+         8: getstatic     #99                 // Field net/minecraft/client/renderer/item/ItemStackRenderState$FoilType.NONE:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+        11: putfield      #101                // Field foilType:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+        14: aload_0
+        15: aconst_null
+        16: putfield      #110                // Field specialRenderer:Lnet/minecraft/client/renderer/special/SpecialModelRenderer;
+        19: aload_0
+        20: aconst_null
+        21: putfield      #112                // Field argumentForSpecialRendering:Ljava/lang/Object;
+        24: aload_0
+        25: getfield      #114                // Field tintLayers:Lit/unimi/dsi/fastutil/ints/IntList;
+        28: ifnull        40
+        31: aload_0
+        32: getfield      #114                // Field tintLayers:Lit/unimi/dsi/fastutil/ints/IntList;
+        35: invokeinterface #118,  1          // InterfaceMethod it/unimi/dsi/fastutil/ints/IntList.clear:()V
+        40: aload_0
+        41: iconst_0
+        42: putfield      #120                // Field usesBlockLight:Z
+        45: aload_0
+        46: aconst_null
+        47: putfield      #122                // Field particleMaterial:Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        50: aload_0
+        51: getstatic     #89                 // Field net/minecraft/client/resources/model/cuboid/ItemTransform.NO_TRANSFORM:Lnet/minecraft/client/resources/model/cuboid/ItemTransform;
+        54: putfield      #91                 // Field itemTransform:Lnet/minecraft/client/resources/model/cuboid/ItemTransform;
+        57: aload_0
+        58: getfield      #96                 // Field localTransform:Lorg/joml/Matrix4f;
+        61: invokevirtual #126                // Method org/joml/Matrix4f.identity:()Lorg/joml/Matrix4f;
+        64: pop
+        65: aload_0
+        66: getstatic     #103                // Field NO_EXTENTS_SUPPLIER:Ljava/util/function/Supplier;
+        69: putfield      #105                // Field extents:Ljava/util/function/Supplier;
+        72: return
+
+  public void setQuads(net.minecraft.client.resources.model.geometry.ItemQuads);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #84                 // Field quads:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+         5: return
+
+  public void setUsesBlockLight(boolean);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #120                // Field usesBlockLight:Z
+         5: return
+
+  public void setExtents(java.util.function.Supplier<org.joml.Vector3fc[]>);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #105                // Field extents:Ljava/util/function/Supplier;
+         5: return
+
+  public void setParticleMaterial(net.minecraft.client.resources.model.sprite.Material$Baked);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #122                // Field particleMaterial:Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+         5: return
+
+  public void setItemTransform(net.minecraft.client.resources.model.cuboid.ItemTransform);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #91                 // Field itemTransform:Lnet/minecraft/client/resources/model/cuboid/ItemTransform;
+         5: return
+
+  public void setLocalTransform(org.joml.Matrix4fc);
+    Code:
+         0: aload_0
+         1: getfield      #96                 // Field localTransform:Lorg/joml/Matrix4f;
+         4: aload_1
+         5: invokevirtual #144                // Method org/joml/Matrix4f.set:(Lorg/joml/Matrix4fc;)Lorg/joml/Matrix4f;
+         8: pop
+         9: return
+
+  public <T> void setupSpecialModel(net.minecraft.client.renderer.special.SpecialModelRenderer<T>, T);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokestatic  #154                // Method eraseSpecialRenderer:(Lnet/minecraft/client/renderer/special/SpecialModelRenderer;)Lnet/minecraft/client/renderer/special/SpecialModelRenderer;
+         5: putfield      #110                // Field specialRenderer:Lnet/minecraft/client/renderer/special/SpecialModelRenderer;
+         8: aload_0
+         9: aload_2
+        10: putfield      #112                // Field argumentForSpecialRendering:Ljava/lang/Object;
+        13: return
+
+  private static net.minecraft.client.renderer.special.SpecialModelRenderer<java.lang.Object> eraseSpecialRenderer(net.minecraft.client.renderer.special.SpecialModelRenderer<?>);
+    Code:
+         0: aload_0
+         1: areturn
+
+  public void setFoilType(net.minecraft.client.renderer.item.ItemStackRenderState$FoilType);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #101                // Field foilType:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+         5: return
+
+  public it.unimi.dsi.fastutil.ints.IntList tintLayers();
+    Code:
+         0: aload_0
+         1: getfield      #114                // Field tintLayers:Lit/unimi/dsi/fastutil/ints/IntList;
+         4: ifnonnull     18
+         7: aload_0
+         8: new           #163                // class it/unimi/dsi/fastutil/ints/IntArrayList
+        11: dup
+        12: invokespecial #164                // Method it/unimi/dsi/fastutil/ints/IntArrayList."<init>":()V
+        15: putfield      #114                // Field tintLayers:Lit/unimi/dsi/fastutil/ints/IntList;
+        18: aload_0
+        19: getfield      #114                // Field tintLayers:Lit/unimi/dsi/fastutil/ints/IntList;
+        22: areturn
+
+  private void submit(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, int, int);
+    Code:
+         0: aload_1
+         1: invokevirtual #174                // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+         4: aload_0
+         5: aload_1
+         6: invokevirtual #178                // Method com/mojang/blaze3d/vertex/PoseStack.last:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+         9: invokevirtual #182                // Method applyTransform:(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;)V
+        12: aload_0
+        13: getfield      #110                // Field specialRenderer:Lnet/minecraft/client/renderer/special/SpecialModelRenderer;
+        16: ifnull        57
+        19: aload_0
+        20: getfield      #110                // Field specialRenderer:Lnet/minecraft/client/renderer/special/SpecialModelRenderer;
+        23: aload_0
+        24: getfield      #112                // Field argumentForSpecialRendering:Ljava/lang/Object;
+        27: aload_1
+        28: aload_2
+        29: iload_3
+        30: iload         4
+        32: aload_0
+        33: getfield      #101                // Field foilType:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+        36: getstatic     #99                 // Field net/minecraft/client/renderer/item/ItemStackRenderState$FoilType.NONE:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+        39: if_acmpeq     46
+        42: iconst_1
+        43: goto          47
+        46: iconst_0
+        47: iload         5
+        49: invokeinterface #189,  8          // InterfaceMethod net/minecraft/client/renderer/special/SpecialModelRenderer.submit:(Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;IIZI)V
+        54: goto          113
+        57: aload_0
+        58: getfield      #114                // Field tintLayers:Lit/unimi/dsi/fastutil/ints/IntList;
+        61: ifnull        79
+        64: aload_0
+        65: getfield      #114                // Field tintLayers:Lit/unimi/dsi/fastutil/ints/IntList;
+        68: getstatic     #191                // Field EMPTY_TINTS:[I
+        71: invokeinterface #195,  2          // InterfaceMethod it/unimi/dsi/fastutil/ints/IntList.toArray:([I)[I
+        76: goto          82
+        79: getstatic     #191                // Field EMPTY_TINTS:[I
+        82: astore        6
+        84: aload_2
+        85: aload_1
+        86: aload_0
+        87: getfield      #74                 // Field this$0:Lnet/minecraft/client/renderer/item/ItemStackRenderState;
+        90: getfield      #200                // Field net/minecraft/client/renderer/item/ItemStackRenderState.displayContext:Lnet/minecraft/world/item/ItemDisplayContext;
+        93: iload_3
+        94: iload         4
+        96: iload         5
+        98: aload         6
+       100: aload_0
+       101: getfield      #84                 // Field quads:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+       104: aload_0
+       105: getfield      #101                // Field foilType:Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
+       108: invokeinterface #204,  9          // InterfaceMethod net/minecraft/client/renderer/SubmitNodeCollector.submitItem:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/item/ItemDisplayContext;III[ILnet/minecraft/client/resources/model/geometry/ItemQuads;Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;)V
+       113: aload_1
+       114: invokevirtual #207                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+       117: return
+
+  private void applyTransform(com.mojang.blaze3d.vertex.PoseStack$Pose);
+    Code:
+         0: aload_0
+         1: getfield      #91                 // Field itemTransform:Lnet/minecraft/client/resources/model/cuboid/ItemTransform;
+         4: aload_0
+         5: getfield      #74                 // Field this$0:Lnet/minecraft/client/renderer/item/ItemStackRenderState;
+         8: getfield      #200                // Field net/minecraft/client/renderer/item/ItemStackRenderState.displayContext:Lnet/minecraft/world/item/ItemDisplayContext;
+        11: invokevirtual #218                // Method net/minecraft/world/item/ItemDisplayContext.leftHand:()Z
+        14: aload_1
+        15: invokevirtual #222                // Method net/minecraft/client/resources/model/cuboid/ItemTransform.apply:(ZLcom/mojang/blaze3d/vertex/PoseStack$Pose;)V
+        18: aload_1
+        19: aload_0
+        20: getfield      #96                 // Field localTransform:Lorg/joml/Matrix4f;
+        23: invokevirtual #225                // Method com/mojang/blaze3d/vertex/PoseStack$Pose.mulPose:(Lorg/joml/Matrix4fc;)V
+        26: return
+
+  private static org.joml.Vector3fc[] lambda$static$0();
+    Code:
+         0: getstatic     #230                // Field NO_EXTENTS:[Lorg/joml/Vector3fc;
+         3: areturn
+
+  static {};
+    Code:
+         0: iconst_0
+         1: anewarray     #233                // class org/joml/Vector3fc
+         4: putstatic     #230                // Field NO_EXTENTS:[Lorg/joml/Vector3fc;
+         7: invokedynamic #250,  0            // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+        12: putstatic     #103                // Field NO_EXTENTS_SUPPLIER:Ljava/util/function/Supplier;
+        15: iconst_0
+        16: newarray       int
+        18: putstatic     #191                // Field EMPTY_TINTS:[I
+        21: return
+}
