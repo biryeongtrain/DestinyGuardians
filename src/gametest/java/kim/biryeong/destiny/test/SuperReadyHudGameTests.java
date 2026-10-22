@@ -388,8 +388,9 @@ public final class SuperReadyHudGameTests {
             check(h, AbilityService.use(owner, AbilitySlot.SUPER) == AbilityService.Result.OK, "Real Void activation");
             int castEntity = item(h, owner, CombatHud.CAST_ID).getEntityId();
             AbilityService.perform(owner, kim.biryeong.destiny.input.GuardianAction.PRIMARY);
-            AbilityService.tickPlayer(owner);
-            check(h, !AbilityService.inSuper(owner), "One-shot session ends immediately after firing");
+            for (int i = 0; i < kim.biryeong.destiny.fx.ShadowshotTiming.RELEASE_TICKS; i++)
+                AbilityService.tickPlayer(owner);
+            check(h, !AbilityService.inSuper(owner), "One-shot session ends at bow release, not on button press");
             check(h, item(h, owner, CombatHud.CAST_ID).getEntityId() == castEntity,
                     "Normal session end must not truncate short release");
             noReady(h, owner);

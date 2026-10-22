@@ -21,8 +21,8 @@ import java.util.Map;
 
 /** Installs a versioned limb without ever opening an artist-owned installed model for writing. */
 public final class HunterModelAssets {
-    public static final String MODEL_NAME = "guardian_hunter_h15";
-    static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_h15.animation.json";
+    public static final String MODEL_NAME = "guardian_hunter_h19";
+    static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_h19.animation.json";
 
     private HunterModelAssets() { }
 
@@ -32,17 +32,17 @@ public final class HunterModelAssets {
         if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) return;
         try (var template = HunterModelAssets.class.getResourceAsStream("/steve.bbmodel");
              var clips = HunterModelAssets.class.getResourceAsStream(ANIMATION_RESOURCE)) {
-            if (template == null || clips == null) throw new IOException("Hunter template or H15 clips missing");
+            if (template == null || clips == null) throw new IOException("Hunter template or H19 clips missing");
             JsonObject model = buildModel(
                     JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),
                     JsonParser.parseReader(new InputStreamReader(clips, StandardCharsets.UTF_8))
                             .getAsJsonObject().getAsJsonArray("animations"));
             if (installIfAbsent(target, model)) {
-                DestinyGuardians.LOGGER.info("Installed H15 hunter limb: {}", target);
+                DestinyGuardians.LOGGER.info("Installed H19 hunter limb: {}", target);
             }
         } catch (Exception e) {
             // Cosmetic failure must not prevent startup: PlayerAnimations tries legacy limb then Steve.
-            DestinyGuardians.LOGGER.warn("Cannot prepare H15 hunter limb; legacy fallback remains available: {}", e.toString());
+            DestinyGuardians.LOGGER.warn("Cannot prepare H19 hunter limb; legacy fallback remains available: {}", e.toString());
         }
     }
 

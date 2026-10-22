@@ -57,6 +57,7 @@ public final class PlayerAnimations {
         Run run;
         boolean closingAfterRun;
         TransformedItemStack equipment;
+        boolean bowInLeftHand;
 
         Playback(ServerPlayer owner, EntityTracker tracker, String loopRequest, String loopAnimation) {
             this.owner = owner;
@@ -159,6 +160,7 @@ public final class PlayerAnimations {
     private static Clip resolve(String request) {
         var names = new LinkedHashSet<String>();
         names.add(limb);
+        names.add("guardian_hunter_h15");
         names.add("guardian_hunter");
         names.add(fallbackLimb);
         for (String name : names) {
@@ -310,10 +312,16 @@ public final class PlayerAnimations {
 
     /** Visual hand only. EMPTY clears the override and restores live equipment mapping. */
     public static void superItem(ServerPlayer player, ItemStack item) {
+        superItem(player, item, false);
+    }
+
+    /** Visual equipment only: a right-handed archer supports the bow with the left hand. */
+    public static void superItem(ServerPlayer player, ItemStack item, boolean bowInLeftHand) {
         Playback state = ACTIVE.get(player.getUUID());
         if (state == null) return;
         try {
             state.equipment = item.isEmpty() ? null : TransformedItemStack.of(ModItemStack.of(item.copy()));
+            state.bowInLeftHand = bowInLeftHand;
             syncEquipment(state);
         } catch (RuntimeException | LinkageError e) { fail(player, "equipment", e); }
     }
@@ -322,6 +330,11 @@ public final class PlayerAnimations {
         if (state.equipment == null) {
             state.tracker.update(TrackerUpdateAction.itemMapping(), bone ->
                     bone.name().rawName().equals("pri_right_item") || bone.name().rawName().equals("pli_left_item"));
+        } else if (state.bowInLeftHand) {
+            state.tracker.update(TrackerUpdateAction.itemStack(state.equipment),
+                    bone -> bone.name().rawName().equals("pli_left_item"));
+            state.tracker.update(TrackerUpdateAction.itemStack(TransformedItemStack.of(ModItemStack.of(ItemStack.EMPTY))),
+                    bone -> bone.name().rawName().equals("pri_right_item"));
         } else {
             state.tracker.update(TrackerUpdateAction.itemStack(state.equipment),
                     bone -> bone.name().rawName().equals("pri_right_item"));

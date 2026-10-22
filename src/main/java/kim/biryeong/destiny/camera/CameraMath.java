@@ -21,6 +21,15 @@ public final class CameraMath {
      * @throws IllegalArgumentException if any coordinate or angle is nonfinite
      */
     public static Point desired(double eyeX, double eyeY, double eyeZ, float yaw, float pitch) {
+        return desired(eyeX, eyeY, eyeZ, yaw, pitch, SHOULDER_RIGHT);
+    }
+
+    /** Wider Void framing exposes the supporting arm and draw hand, rather than a head-occluded pole. */
+    public static Point desiredBow(double eyeX, double eyeY, double eyeZ, float yaw, float pitch) {
+        return desired(eyeX, eyeY, eyeZ, yaw, pitch, 1.15);
+    }
+
+    private static Point desired(double eyeX, double eyeY, double eyeZ, float yaw, float pitch, double shoulderRight) {
         if (!Double.isFinite(eyeX) || !Double.isFinite(eyeY) || !Double.isFinite(eyeZ)
                 || !Float.isFinite(yaw) || !Float.isFinite(pitch)) {
             throw new IllegalArgumentException("Eye coordinates and camera angles must be finite");
@@ -32,9 +41,9 @@ public final class CameraMath {
         // look = (-sinYaw*cosPitch, -sinPitch, cosYaw*cosPitch)
         // right = (-cosYaw, 0, -sinYaw), defined even at vertical pitch.
         return new Point(
-                eyeX + REAR_DISTANCE * sinYaw * cosPitch - SHOULDER_RIGHT * cosYaw,
+                eyeX + REAR_DISTANCE * sinYaw * cosPitch - shoulderRight * cosYaw,
                 eyeY + REAR_DISTANCE * sinPitch + UP,
-                eyeZ - REAR_DISTANCE * cosYaw * cosPitch - SHOULDER_RIGHT * sinYaw);
+                eyeZ - REAR_DISTANCE * cosYaw * cosPitch - shoulderRight * sinYaw);
     }
 
     /** Opposite keys cancel before diagonal normalization; crouch scales the final vector. */

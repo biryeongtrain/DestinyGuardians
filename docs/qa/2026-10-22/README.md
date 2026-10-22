@@ -2,7 +2,13 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
-## 최신 H17 — 궁극기 준비/발동 HUD
+## 최신 H19 — 공허 활 사격 / 연결 카메라 이동
+
+- **GameTest104/104·JUnit59/59**, build 성공. [H19 증거와 한계](h19/README.md) · [모션](h19/void-normal.webp) · [설계28](../../design/28_H19_궁극기_활_연출.md).
+- 왼손 지지·오른손 draw→7서버틱 release, Void 어깨 framing. 실제 native Arc/Void100틱 이동과 Solar self camera·회피 회귀를 확인했다.
+- **5TPS의 BetterModel/서버 발사 시간축 차이와 partial draw 접점은 미완료**다. 영상 재생/원본 에셋 추출/OS-CU 검증 또는 전체 일반 스킬 개편을 완료했다고 주장하지 않는다.
+
+## H17 — 궁극기 준비/발동 HUD (당시 기록)
 
 - **GameTest90/90·JUnit37/37**, 실패/오류/스킵0. [H17 증거](h17/README.md) · [문서24](../../design/24_궁극기_준비_HUD_연출.md) · [실제 화면](h17/overview.jpg).
 - 새충전→황금배너/확산/스윕→정적준비→속성별발동 액센트. 재접속100%/직업none도 확인했다.

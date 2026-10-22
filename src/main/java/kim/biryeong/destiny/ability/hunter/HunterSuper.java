@@ -67,7 +67,7 @@ public final class HunterSuper extends Ability {
             kim.biryeong.destiny.camera.SuperCamera.stop(player);
             return false;
         }
-        PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()));
+        PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()), element() == Element.VOID);
         // Keep the core silhouette readable; the old eye-height flame cloud obscured first person.
         player.level().sendParticles(Fx.dust(element().color(), 0.65f), player.getX(), player.getY() + 0.25,
                 player.getZ(), 16, 0.55, 0.12, 0.55, 0.01);
@@ -221,6 +221,8 @@ public final class HunterSuper extends Ability {
     /** Void: 그림자 사격 (데드폴 닻). */
     private final class Shadowshot extends Session {
         private boolean fired;
+        private final kim.biryeong.destiny.fx.ShadowshotTiming draw = new kim.biryeong.destiny.fx.ShadowshotTiming();
+        private boolean drawnVisual;
 
         Shadowshot(ServerPlayer player) {
             super(player, (int) param("aim_ticks", 200));
@@ -229,19 +231,29 @@ public final class HunterSuper extends Ability {
 
         @Override
         public boolean tick() {
-            if (!fired && age + 1 >= duration) {
+            if (!draw.requested() && age + 1 >= duration) {
                 primary();
             }
-            return !fired && super.tick();
+            if (draw.advance()) releaseArrow();
+            if (!drawnVisual && draw.drawn()) {
+                drawnVisual = true;
+                PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.drawnBow(), true);
+            }
+            boolean aiming = super.tick();
+            // A timeout starts the same bounded draw; it must not discard the pending arrow.
+            return !fired && (draw.requested() || aiming);
         }
 
         @Override
         public void primary() {
-            if (fired) {
-                return;
-            }
-            fired = true;
+            if (!draw.request()) return;
             PlayerAnimations.superAttack(player, element());
+            Fx.sound(player.level(), player.getEyePosition(), SoundEvents.CROSSBOW_LOADING_START.value(), .5f, .7f);
+        }
+
+        private void releaseArrow() {
+            fired = true;
+            PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()), true);
             ServerLevel level = player.level();
             double radius = param("tether_radius", 7);
             int tetherTicks = (int) param("tether_ticks", 160);

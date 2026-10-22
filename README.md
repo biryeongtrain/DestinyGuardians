@@ -93,6 +93,10 @@ GCB 어댑터는 빌드 시 `gcb_server_dir`(기본 `../GCB-server`) 소스가 �
 
 ## 자동 검증
 
+최신 H19: **GameTest104/104 · JUnit59/59**, build 성공. 공허 활 당김→단발 릴리스와
+연결 wrapper를 거친 카메라 이동 회귀를 포함합니다. 실제 native 입력·PNG와 저속 틱 한계는
+[H19 QA](docs/qa/2026-10-22/h19/README.md)에 분리했습니다. 아래 H17/H16 수치는 당시 기록입니다.
+
 Java 25에서:
 
 ```sh
@@ -116,6 +120,7 @@ H17 필수 GameTest **90/90**, JUnit **37/37**(실패·오류·스킵 0), build 
 - [헌터 구현 로그·검증 범위](docs/design/13_헌터_구현_로그.md)
 - [헌터 QA 증거](docs/qa/2026-10-22/README.md)
 - [H16 다인·거리·전체 틱/FPS/패킷 결과](docs/design/23_다인_거리_성능_검증.md)
+- [H19 공허 활 사격 연출·출처·제약](docs/design/28_H19_궁극기_활_연출.md)
 
 ## 작업 규칙
 

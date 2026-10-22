@@ -13,12 +13,26 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** 바닐라 입력 패킷을 InputRouter 로 넘긴다. 모두 서버 스레드에서 실행되는 지점에 건다. */
 @Mixin(ServerGamePacketListenerImpl.class)
 public abstract class ServerGamePacketListenerImplMixin {
     @Shadow
     public ServerPlayer player;
+
+    @Shadow
+    public abstract void resetPosition();
+
+    /** Vanilla rewinds doTick movement to firstGoodXYZ immediately after this call.
+     * During camera ownership, keep the one collision-resolved native step as that baseline.
+     * resetPosition only updates connection bookkeeping; it neither moves nor sends a teleport.
+     */
+    @Inject(method = "tickPlayer", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/server/level/ServerPlayer;doTick()V", shift = At.Shift.AFTER))
+    private void destiny$retainCameraPhysics(CallbackInfoReturnable<Boolean> cir) {
+        if (SuperCamera.active(player)) resetPosition();
+    }
 
     @Inject(method = "handleMovePlayer", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",

@@ -4,6 +4,7 @@ import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.camera.SuperCamera;
 import kim.biryeong.destiny.fx.HunterModelAssets;
 import kim.biryeong.destiny.fx.PlayerAnimations;
+import kim.biryeong.destiny.fx.ShadowshotTiming;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.Guardians;
@@ -14,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
+import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Input;
@@ -228,12 +230,12 @@ public final class SuperCameraGameTests {
             strafe.setLastClientInput(new Input(false, false, true, false, false, false, false));
             blocked.setLastClientInput(FORWARD);
             Vec3 a = forward.position(), b = strafe.position(), c = blocked.position();
-            // Exactly one doTick call per player below; tickCount belongs to the outer world tick,
-            // not doTick itself. Its HEAD/TAIL mixins must apply keys and fall bookkeeping.
-            // Do not seed velocity, call travel/move, or manually invoke afterPhysics to hide regressions.
-            forward.doTick();
-            strafe.doTick();
-            blocked.doTick();
+            // Exercise the real connection wrapper: vanilla tickPlayer rewinds doTick's result
+            // to firstGoodXYZ. Calling doTick directly missed the H18 connected-player freeze.
+            // One connection tick must retain exactly one collision-resolved native step.
+            forward.connection.tick();
+            strafe.connection.tick();
+            blocked.connection.tick();
             double distance = forward.getX() - a.x;
             check(h, distance > .02 && distance < .3, "Forward key must move actual body from zero velocity: dx=" + distance);
             check(h, Math.abs(forward.getZ() - a.z) < EPS, "Forward at yaw -90 stays on X axis");
@@ -247,6 +249,80 @@ public final class SuperCameraGameTests {
             for (ServerPlayer p : new ServerPlayer[]{forward, strafe, blocked}) actualBody(h, p);
             h.succeed();
         });
+    }
+
+    @GameTest(structure = FLOOR, maxTicks = 1200)
+    public void connectedSprintAccumulatesExactlyOneNativeStepForArcAndVoid(GameTestHelper h) {
+        loaded(h, () -> {
+            for (int x = 1; x <= 8; x++) {
+                for (int z = 1; z <= 8; z++) h.setBlock(x, 0, z, Blocks.STONE);
+            }
+            ServerPlayer[] connected = new ServerPlayer[2], direct = new ServerPlayer[2];
+            Vec3[] starts = new Vec3[2];
+            Input sprint = new Input(true, false, false, false, false, false, true);
+            Element[] elements = {Element.ARC, Element.VOID};
+            for (int i = 0; i < elements.length; i++) {
+                Vec3 pos = new Vec3(2.5, 1, 2.5 + i * 3);
+                connected[i] = owner(h, elements[i], pos);
+                direct[i] = owner(h, elements[i], pos);
+                for (ServerPlayer p : new ServerPlayer[]{connected[i], direct[i]}) {
+                    // Let vanilla initialize speed before ownership; no fixture setSpeed/velocity impulse.
+                    p.connection.tick();
+                    p.setDeltaMovement(Vec3.ZERO);
+                    p.setOnGround(true);
+                    ready(h, p, elements[i]);
+                    p.connection.handlePlayerInput(new ServerboundPlayerInputPacket(sprint));
+                    check(h, p.getLastClientInput().equals(sprint), "Real input handler retains forward/sprint keys");
+                }
+                starts[i] = connected[i].position();
+            }
+            for (int delay = 1; delay <= 8; delay++) {
+                final int nativeTick = delay;
+                h.runAfterDelay(delay, () -> {
+                    for (int i = 0; i < elements.length; i++) {
+                        ServerPlayer p = connected[i], reference = direct[i];
+                        for (ServerPlayer player : new ServerPlayer[]{p, reference}) {
+                            player.connection.handleMovePlayer(new ServerboundMovePlayerPacket.Rot(-90, 0, false, false));
+                            heartbeat(h, player);
+                        }
+                        Vec3 before = p.position();
+                        p.connection.tick();
+                        reference.doTick(); // Oracle: one native step, never a replacement movement implementation.
+                        check(h, p.position().distanceToSqr(reference.position()) < EPS * EPS,
+                                elements[i] + " connected tick equals exactly one native step at tick " + nativeTick);
+                        check(h, p.getX() > before.x + .02 && p.isSprinting(),
+                                elements[i] + " retains forward/sprint displacement after the connection wrapper");
+                        check(h, Math.abs(p.getZ() - starts[i].z) < EPS, "Yaw -90 retains forward axis");
+                        actualBody(h, p);
+                        TestPlayers.drain(p);
+                        TestPlayers.drain(reference);
+                    }
+                    if (nativeTick == 8) {
+                        for (int i = 0; i < elements.length; i++) {
+                            check(h, connected[i].getX() - starts[i].x > 1,
+                                    elements[i] + " movement accumulates across connection ticks instead of rewinding");
+                        }
+                        h.succeed();
+                    }
+                });
+            }
+        });
+    }
+
+    @GameTest(structure = FLOOR, maxTicks = 40)
+    public void unownedConnectionRetainsVanillaPositionRewind(GameTestHelper h) {
+        ServerPlayer p = owner(h, Element.SOLAR, new Vec3(2.5, 1, 6.5));
+        atRest(p);
+        Vec3 before = p.position();
+        // A real native step would move this body, but vanilla's unowned connection restores
+        // its packet-authoritative baseline. This also guards the camera-only injection scope.
+        p.xxa = 0;
+        p.zza = 1;
+        p.connection.tick();
+        unchanged(h, p, before);
+        check(h, p.getDeltaMovement().horizontalDistanceSqr() > 0,
+                "Native travel ran even though unowned vanilla connection rewound the position");
+        h.succeed();
     }
 
     @GameTest(structure = FLOOR, maxTicks = 1200)
@@ -277,7 +353,7 @@ public final class SuperCameraGameTests {
                     heartbeat(h, p);
                     check(h, SuperCamera.move(p, new ServerboundMovePlayerPacket.Pos(p.getX(), p.getY(), p.getZ(), true, true)),
                             "Spoofed ground packet consumed before physics");
-                    p.doTick(); // Exactly once per real server tick; exercise both mixin injections.
+                    p.connection.tick(); // Include tickPlayer's post-physics baseline rewind (H18 regression).
                     actualBody(h, p);
                     check(h, nativeTick < 3 || p.getY() < startY - EPS,
                             "Native gravity must lower actual body from rest: tick=" + nativeTick + ", y=" + p.getY());
@@ -308,18 +384,33 @@ public final class SuperCameraGameTests {
             Guardians.data(p).setSuperEnergy(1f);
             check(h, AbilityService.use(p, AbilitySlot.SUPER) == AbilityService.Result.OK, "Actual Void super starts");
             check(h, SuperCamera.active(p) && AbilityService.inSuper(p), "Void owns camera and gameplay");
-            check(h, AbilityService.perform(p, GuardianAction.PRIMARY), "Actual Void release accepted");
-            AbilityService.tickPlayer(p); // Fake player is not in the natural player-list tick.
-            check(h, !AbilityService.inSuper(p), "One-arrow gameplay session ends after release");
-            check(h, PlayerAnimations.isPlaying(p), "Accepted final release animation survives gameplay end");
+            check(h, AbilityService.perform(p, GuardianAction.PRIMARY), "Actual Void bow draw accepted");
+            check(h, AbilityService.inSuper(p), "Accepted bow draw retains gameplay until arrow contact");
+            for (int delay = 1; delay <= ShadowshotTiming.RELEASE_TICKS; delay++) {
+                final int drawTick = delay;
+                h.runAfterDelay(delay, () -> {
+                    AbilityService.tickPlayer(p); // Fake player is not in the natural player-list tick.
+                    check(h, AbilityService.inSuper(p) == (drawTick < ShadowshotTiming.RELEASE_TICKS),
+                            "Gameplay remains through bow draw and ends at arrow contact: tick=" + drawTick);
+                    heartbeat(h, p);
+                    check(h, PlayerAnimations.isPlaying(p) && PlayerAnimations.ownerSeesLimb(p),
+                            "Camera and owner limb survive draw/contact and gameplay end");
+                    unchanged(h, p, before);
+                });
+            }
             heartbeat(h, p);
-            h.runAfterDelay(2, () -> {
+            h.runAfterDelay(ShadowshotTiming.RELEASE_TICKS + 2, () -> {
                 heartbeat(h, p);
                 check(h, PlayerAnimations.isPlaying(p) && PlayerAnimations.ownerSeesLimb(p),
                         "Final release and owner limb are not truncated on the next ticks");
                 unchanged(h, p, before);
             });
-            h.runAfterDelay(25, () -> {
+            // Use the installed attack clip's length, including its start transition and callback
+            // grace, instead of the old fixed 25-tick deadline. Clip time starts at PRIMARY.
+            int clipTicks = (int) Math.ceil(BetterModel.limb(HunterModelAssets.MODEL_NAME).orElseThrow()
+                    .animation("h15_super_void_attack").orElseThrow().length() * 20);
+            int recoveryDeadline = Math.max(ShadowshotTiming.RELEASE_TICKS + 3, clipTicks + 1 + 6 + 1);
+            h.runAfterDelay(recoveryDeadline, () -> {
                 PlayerAnimations.tick(h.getLevel().getServer());
                 SuperCamera.tick(h.getLevel().getServer());
                 check(h, !PlayerAnimations.isPlaying(p) && !SuperCamera.active(p),

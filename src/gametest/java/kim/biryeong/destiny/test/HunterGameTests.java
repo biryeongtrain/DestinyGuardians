@@ -280,6 +280,8 @@ public final class HunterGameTests {
         check(h, AbilityService.use(p, AbilitySlot.SUPER) == AbilityService.Result.OK, "Shadowshot starts");
         AbilityService.perform(p, GuardianAction.PRIMARY);
         h.succeedWhen(() -> {
+            // Embedded fixture is not in PlayerList: advance its pending H19 bow draw once per test tick.
+            AbilityService.tickPlayer(p);
             check(h, Statuses.has(husk, Keyword.WEAKENED) && Statuses.has(husk, Keyword.SUPPRESSED), "Tether should weaken + suppress");
             check(h, Math.abs(Statuses.modifyIncoming(husk, 10f) - 13f) < 1e-4, "Weakened takes x1.3 damage");
             TestPlayers.remove(p);

@@ -64,8 +64,10 @@ public final class HunterAnimationH15GameTests {
             check(h, !PlayerAnimations.superAttack(p, element), "Closing playback rejects new attacks");
             int start = h.getLevel().getServer().getTickCount();
             h.runAfterDelay(2, () -> check(h, PlayerAnimations.isPlaying(p), "Do not truncate final shot on next tick"));
-            h.runAfterDelay(25, () -> {
-                check(h, h.getLevel().getServer().getTickCount() - start == 25, "Only normal server ticks");
+            // H19 Void is .90s + one start tick + six callback-grace ticks.
+            // Inspect on the next tick, after the END_SERVER_TICK completion check.
+            h.runAfterDelay(26, () -> {
+                check(h, h.getLevel().getServer().getTickCount() - start == 26, "Only normal server ticks");
                 check(h, !PlayerAnimations.isPlaying(p), "Final shot and equipment expire after recovery");
                 inventory(h, p);
                 h.succeed();

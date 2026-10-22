@@ -15,9 +15,15 @@ public final class SuperVisuals {
         String name = switch (element) {
             case ARC -> "arc_staff";
             case SOLAR -> "golden_gun";
-            default -> "shadow_bow";
+            default -> "shadow_bow_h19";
         };
         stack.set(DataComponents.ITEM_MODEL, DestinyGuardians.id(name));
+        return stack;
+    }
+
+    public static ItemStack drawnBow() {
+        ItemStack stack = new ItemStack(Items.STICK);
+        stack.set(DataComponents.ITEM_MODEL, DestinyGuardians.id("shadow_bow_h19_drawn"));
         return stack;
     }
 }

@@ -38,13 +38,15 @@ public final class SuperCamera {
     private static final class Session {
         final ServerPlayer owner;
         final ServerLevel level;
+        final boolean bow;
         final Display.ItemDisplay mount, camera;
         Vec3 previous;
         Vec3 physicsStart;
         int lastRotation, rotations;
 
-        Session(ServerPlayer owner) {
+        Session(ServerPlayer owner, Element element) {
             this.owner = owner;
+            bow = element == Element.VOID;
             level = owner.level();
             mount = marker(owner);
             camera = marker(owner);
@@ -83,7 +85,7 @@ public final class SuperCamera {
                 || p.getAbilities().flying || p.isFallFlying() || p.hasDisconnected()
                 || p.getCamera() != p || CameraViews.get(p) != null) return false;
         stop(p);
-        Session s = new Session(p);
+        Session s = new Session(p, element);
         ACTIVE.put(p.getUUID(), s);
         try {
             updatePositions(s);
@@ -200,7 +202,9 @@ public final class SuperCamera {
     private static void updatePositions(Session s) {
         ServerPlayer p = s.owner;
         Vec3 eye = p.getEyePosition();
-        var target = CameraMath.desired(eye.x, eye.y, eye.z, p.getYRot(), p.getXRot());
+        var target = s.bow
+                ? CameraMath.desiredBow(eye.x, eye.y, eye.z, p.getYRot(), p.getXRot())
+                : CameraMath.desired(eye.x, eye.y, eye.z, p.getYRot(), p.getXRot());
         Vec3 desired = new Vec3(target.x(), target.y(), target.z());
         Vec3 delta = desired.subtract(eye);
         double fraction = 1;
