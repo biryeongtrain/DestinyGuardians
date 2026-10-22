@@ -68,6 +68,7 @@ public final class AbilityService {
     }
 
     public static void cleanup(ServerPlayer player) {
+        kim.biryeong.destiny.camera.SuperCamera.stop(player);
         endSuper(player);
         kim.biryeong.destiny.fx.PlayerAnimations.stop(player);
         CombatHud.remove(player);
@@ -90,6 +91,7 @@ public final class AbilityService {
         kim.biryeong.destiny.fx.SuperVfx.tick(server);
         kim.biryeong.destiny.fx.PostEffects.tick(server);
         kim.biryeong.destiny.fx.PlayerAnimations.tick(server);
+        kim.biryeong.destiny.camera.SuperCamera.tick(server);
     }
 
     public static void tickPlayer(ServerPlayer player) {

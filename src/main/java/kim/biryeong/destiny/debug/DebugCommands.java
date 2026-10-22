@@ -48,6 +48,17 @@ public final class DebugCommands {
         dispatcher.register(Commands.literal("destiny")
                 .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands.literal("debug")
+                        .then(Commands.literal("camera-status").then(Commands.argument("player", EntityArgument.player())
+                                .executes(c -> {
+                                    ServerPlayer p = EntityArgument.getPlayer(c, "player");
+                                    c.getSource().sendSuccess(() -> Component.literal("SuperCamera active="
+                                            + kim.biryeong.destiny.camera.SuperCamera.active(p)
+                                            + " rotations=" + kim.biryeong.destiny.camera.SuperCamera.rotations(p)
+                                            + " body=" + p.position() + " yaw=" + p.getYRot() + " pitch=" + p.getXRot()
+                                            + " ground=" + p.onGround() + " input=" + p.getLastClientInput()
+                                            + " camera=" + kim.biryeong.destiny.camera.SuperCamera.cameraPosition(p)), false);
+                                    return 1;
+                                })))
                         .then(Commands.literal("owner-view")
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .then(Commands.literal("first").executes(c -> ownerView(c, false)))

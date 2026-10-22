@@ -51,6 +51,7 @@ public final class HunterSuper extends Ability {
 
     @Override
     public boolean activate(ServerPlayer player) {
+        if (!kim.biryeong.destiny.camera.SuperCamera.start(player, element())) return false;
         SuperSession session = switch (element()) {
             case ARC -> new ArcStaff(player);
             case SOLAR -> new GoldenGun(player);
@@ -59,7 +60,13 @@ public final class HunterSuper extends Ability {
         AbilityService.startSuper(player, session);
         PostEffects.enter(player, element());
         PostEffects.pulse(player, element(), false);
-        PlayerAnimations.loop(player, "super_" + element().getSerializedName());
+        boolean animated = PlayerAnimations.loop(player, "super_" + element().getSerializedName());
+        if (!animated && kim.biryeong.destiny.camera.SuperCamera.active(player)) {
+            // A combat camera without the requested limb is not a successful activation.
+            AbilityService.endSuper(player);
+            kim.biryeong.destiny.camera.SuperCamera.stop(player);
+            return false;
+        }
         PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()));
         // Keep the core silhouette readable; the old eye-height flame cloud obscured first person.
         player.level().sendParticles(Fx.dust(element().color(), 0.65f), player.getX(), player.getY() + 0.25,

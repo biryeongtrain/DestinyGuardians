@@ -294,7 +294,7 @@ public final class PlayerAnimations {
 
     public static boolean ownerSeesLimb(ServerPlayer player) {
         var runtime = Guardians.runtime(player);
-        return runtime.gcbClient && runtime.gcbThirdPerson;
+        return kim.biryeong.destiny.camera.SuperCamera.active(player) || (runtime.gcbClient && runtime.gcbThirdPerson);
     }
 
     private static void applyOwnerVisibility(ServerPlayer player, EntityTracker tracker) {
