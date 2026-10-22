@@ -64,11 +64,16 @@ H12에서 칼·섬광탄을 실제 Destiny 시각 자료에 맞춰 재제작했�
 H13 기반/H14 디테일 개정: 수류탄·근접6종에 **BetterModel 애니메이션 VFX4종**을 연결했습니다. Arc 분기 전격·겹친 곡선 화염·Void 나선/필라멘트·텍스처 연무로 표시합니다.
 32→128 아틀라스, Arc/Solar/Vortex 메시720~1024삼각형+19~45카드, 연막30빌보드 카드, 렌더본4~8개를 사용합니다.
 [시각 레퍼런스](docs/design/15_헌터_VFX_레퍼런스.md) · [구현·한계](docs/design/16_헌터_VFX_구현.md) · [H14 디테일·비용](docs/design/17_헌터_VFX_디테일_개정.md) · [VFX 원본](art/blockbench/vfx/)
-연막과 근접 파생 효과는 잠정 해석이며, 신규 궁극기 VFX나 원작 블룸 셰이더 재현은 이번 범위가 아닙니다.
+연막과 근접 파생 효과는 잠정 해석입니다. H15에서는 궁극기 전용 장비4종, BetterModel 버스트·닻,
+Polymer 화염 궤적·움직이는 공허 연결선과 화면 펄스를 추가했습니다.
+방향별 회피와 궁극기 준비/공격/회복 클립도 연결했습니다.
+[고도화 로드맵](docs/design/18_헌터_고도화_로드맵.md) · [장비](docs/design/20_헌터_궁극기_장비.md) · [궁극기 VFX](docs/design/22_궁극기_VFX_구현.md)
 
-BetterModel 기본 리그에서 `config/bettermodel/players/guardian_hunter.bbmodel`을 최초 생성하며,
-기존 파일은 덮어쓰지 않습니다. 최종 아트로 교체할 때 `roll`, `super_arc`, `super_solar`, `super_void`
-애니메이션과 `pri_right_item` bone 계약을 유지해야 합니다.
+BetterModel 기본 리그에서 `config/bettermodel/players/guardian_hunter_h15.bbmodel`을 최초 생성하며,
+기존 파일은 덮어쓰지 않습니다. 방향별 `h15_roll_*`, 속성별 `h15_super_*`·`h15_super_*_attack` 및
+아이템 bone 계약은 [애니메이션 명세](docs/design/19_헌터_애니메이션_개정.md)를 따릅니다.
+구형 `guardian_hunter`와 기본 리그는 폴백입니다. 오프라인 QA 계정은 limb 재생 중 기본 템플릿 색으로
+바뀌는 현상이 남으며, 인증 계정 개인 스킨은 미검증입니다.
 바닐라는 본인 limb를 숨기며, GCB 시점 이벤트가 있어야 본인 3인칭 표시를 구분합니다.
 
 GCB 어댑터는 빌드 시 `gcb_server_dir`(기본 `../GCB-server`) 소스가 있어야 포함됩니다.
@@ -91,7 +96,10 @@ Java 25에서:
 rtk proxy ./gradlew runGameTest build --console=plain
 ```
 
-헌터·HUD·소품·VFX GameTest **52개**, JUnit 리소스/설치 테스트 **10개**. 실제 렌더링은 별도 Copper Golem Vision 26.3으로 검증했습니다.
+H15 필수 GameTest **71/71**, JUnit **28/28**(실패·오류·스킵 0), build 성공.
+실제 렌더링은 별도 Copper Golem Vision 26.3에서 검증했습니다.
+전체 로드맵1~3은 구현·단일 클라이언트 검증 완료, 4~5(다인/성능·일반 총기)는 후속입니다.
+원작 블룸·볼류메트릭·GCB 실제 통신을 검증했다고 간주하지 않습니다.
 개발 서버 실행 중 소스 재컴파일은 하지 말고, 서버를 중지한 뒤 빌드하고 새 JVM에서 검증하세요.
 
 ## 문서

@@ -1,0 +1,256 @@
+{
+  "revision": "H15",
+  "scope_completed": [
+    1,
+    2,
+    3
+  ],
+  "follow_up_not_implemented": [
+    4,
+    5
+  ],
+  "baseline_commit": "f8940f4cf1c17de2f5652de88c3661beb73f4d1e",
+  "automated": {
+    "gametests_passed": 71,
+    "junit_passed": 28,
+    "junit_suites": [
+      {
+        "suite": "kim.biryeong.destiny.HunterAssetTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-22T05:32:09.176Z"
+      },
+      {
+        "suite": "kim.biryeong.destiny.HunterPropAssetTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-22T05:32:09.256Z"
+      },
+      {
+        "suite": "kim.biryeong.destiny.HunterSuperPropAssetTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-22T05:32:09.280Z"
+      },
+      {
+        "suite": "kim.biryeong.destiny.HunterSuperVfxAssetTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-22T05:32:09.372Z"
+      },
+      {
+        "suite": "kim.biryeong.destiny.HunterVfxAssetTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-22T05:32:09.437Z"
+      },
+      {
+        "suite": "kim.biryeong.destiny.PostPulseAssetTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-22T05:32:09.475Z"
+      },
+      {
+        "suite": "kim.biryeong.destiny.fx.HunterAnimationH15Test",
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-22T05:32:09.479Z"
+      }
+    ],
+    "build_log": "super-h15-build-gametest.txt",
+    "unit_rerun_log": "super-h15-junit.txt",
+    "layout_passed": true,
+    "layout_warning": "Legacy helper does not detect 26.3 src/gametest SNBT fixtures"
+  },
+  "runtime": {
+    "server_jvm": 2,
+    "framebuffer": [
+      1708,
+      956
+    ],
+    "tick_rate": 20,
+    "hud_visible": true,
+    "account": "MinigameQA offline QA",
+    "vision_http_port": 8102,
+    "renderer": "OpenGL on Apple M4 Pro",
+    "own_third_person": "QA owner-view simulation; not GCB transport verification",
+    "dodge_direction": "debug injects direction into real class ability then restores previous input",
+    "solar_tracer_inspection": "Console observer reposition immediately after first shot; not actual strafing input",
+    "void_motion": "Two no-AI husks repositioned via console while the real tether task remained active",
+    "first_jvm_not_final": "Arc yaw and activation dust were corrected before JVM2; only JVM2 frames selected"
+  },
+  "observed": [
+    "Arc Staff grip/attack/ready restoration and front-facing electric sweep",
+    "Golden Gun equipment, muzzle/impact ribbons, thin flame tracer and third-shot restoration",
+    "Shadowshot bow ready/release, anchor and two links following moved targets",
+    "Four distinct directional dodge clips and vanilla restoration; own first-person limb hidden",
+    "Ultimate tint/pulse chains render without new shader errors; fixed TTL verified by GameTests",
+    "Active Hunter VFX=0 super-beams=0 before and after explicit cleanup"
+  ],
+  "limits": [
+    "Offline account changes from vanilla UUID skin to BetterModel template colors during limb playback; authenticated skins unverified",
+    "No native WASD/GCB client input transport test, no multiplayer/distance/night/cave/FPS/TPS load test",
+    "No bloom/additive/volumetric shader, no original game asset extraction or topology equivalence",
+    "Fast arrow is integrated and shape/axis tested; captured normal-speed frames do not establish close-up flight orientation",
+    "HUD hunger/hotbar retained; other resolutions, Vulkan and audio not tested",
+    "Contact sheets/WebPs are scaled review artifacts, not fixed-rate gameplay video"
+  ],
+  "cleanup": {
+    "server_normal_stop": true,
+    "own_vision_pid": 40319,
+    "vision_termination": "SIGTERM; Gradle wrapper returned1",
+    "client_options_restored_bytes": 5157,
+    "client_options_byte_identical_to_backup": true,
+    "ports_25565_8102_closed": true,
+    "qa_mobs_removed": true,
+    "qa_dropped_items_removed": true,
+    "player_restored_to": [
+      0.5,
+      -60,
+      0.5
+    ],
+    "subclass_restored": "arc",
+    "owner_view_restored": "first"
+  },
+  "known_warnings": [
+    "offline Realms/JWT authentication",
+    "existing HUD/legacy weapon particle references",
+    "minecraft:end_of_frame absent",
+    "Apple OpenGL unused varying warnings",
+    "client disconnect on intentional server stop"
+  ],
+  "selected_frames": {
+    "super_h15_arc_attack.png": {
+      "sequence": "arc_attack_final",
+      "frame": 7,
+      "capture_time_seconds": 1.1965319169685245,
+      "sha256": "606b53bbe38a52b4e8c171d28946363fddd1d702d434b85210cc2bfd7aa7e15e"
+    },
+    "super_h15_arc_ready.png": {
+      "sequence": "arc_attack_final",
+      "frame": 10,
+      "capture_time_seconds": 1.7079796670004725,
+      "sha256": "5cb81e99d8da72289b7f2f8ebc43feb60709c44fbbdde96ec4e71c127b209d31"
+    },
+    "super_h15_arc_restored.png": {
+      "sequence": "arc_attack_final",
+      "frame": 19,
+      "capture_time_seconds": 3.1536476670298725,
+      "sha256": "0b0697f8ef6a8acb25fd0ef32887068102ef0e2faacd15dca21230c2bd73e74b"
+    },
+    "super_h15_solar_first.png": {
+      "sequence": "solar_first_final",
+      "frame": 7,
+      "capture_time_seconds": 1.1569750839844346,
+      "sha256": "dc16c0d5fc4f166e37ca5d6214b1c5da65e557e8d0accc6c7a2860eb869ada69"
+    },
+    "super_h15_solar_ready.png": {
+      "sequence": "solar_first_final",
+      "frame": 0,
+      "capture_time_seconds": 0.00015341700054705143,
+      "sha256": "2057470426d18ddd9fc83e2410960e3fe4b723588234dfd6c789f2f999b9ac6c"
+    },
+    "super_h15_solar_third.png": {
+      "sequence": "solar_third_final",
+      "frame": 7,
+      "capture_time_seconds": 1.1686091660521924,
+      "sha256": "2fd29e506cf137f7723060dc43af7e5a98a3c3af4be0cd0bad3cf4b7998e6d05"
+    },
+    "super_h15_solar_tracer.png": {
+      "sequence": "solar_tracer_final",
+      "frame": 8,
+      "capture_time_seconds": 1.328762875054963,
+      "sha256": "8cf9160012e4886f47b2ddbe95afe286ee50b768b7ee0ebe29f3edd505f75a00"
+    },
+    "super_h15_solar_last.png": {
+      "sequence": "solar_tracer_final",
+      "frame": 14,
+      "capture_time_seconds": 2.3394132499815896,
+      "sha256": "aea0a00ef7cb5d34d6b81a4f09dba1023778eb3a6e2d3ca5e41dd07f5595a5f8"
+    },
+    "super_h15_void_ready.png": {
+      "sequence": "void_release_final",
+      "frame": 0,
+      "capture_time_seconds": 0.00012208393309265375,
+      "sha256": "392033963b45564d8c5973ba82d4bec3e881ff8fc7870045bbe5c45709975e8c"
+    },
+    "super_h15_void_release.png": {
+      "sequence": "void_release_final",
+      "frame": 8,
+      "capture_time_seconds": 1.347957417019643,
+      "sha256": "f9ba4bb935cf55c64ba10442088a5255bf01b65d077a5caa88143f1a8fa7c648"
+    },
+    "super_h15_void_tether_before.png": {
+      "sequence": "void_anchor_final",
+      "frame": 9,
+      "capture_time_seconds": 1.43210483295843,
+      "sha256": "9fc88d5d5b91ba123548516989a35f589927118eb09534aaf8ab2b5218ef3cf0"
+    },
+    "super_h15_void_tether_after.png": {
+      "sequence": "void_anchor_final",
+      "frame": 20,
+      "capture_time_seconds": 2.98356091696769,
+      "sha256": "a1b671156703e7a2d2441e7ca30f506dc020b9218ff5e3beda12f94470c582da"
+    },
+    "super_h15_dodge_forward.png": {
+      "sequence": "dodge_forward_final",
+      "frame": 10,
+      "capture_time_seconds": 1.480708459042944,
+      "sha256": "4eb5e9ea0138a5f94812bb20ab099ec53daab2023a8588f9475d54513eb43f7e"
+    },
+    "super_h15_dodge_back.png": {
+      "sequence": "dodge_back_final",
+      "frame": 10,
+      "capture_time_seconds": 1.4608263750560582,
+      "sha256": "29a8866c33fb0ab8f6a164630052f0b4b22545cdf95f8c8d7eef590d89f1f4dc"
+    },
+    "super_h15_dodge_left.png": {
+      "sequence": "dodge_left_final",
+      "frame": 10,
+      "capture_time_seconds": 1.4508155001094565,
+      "sha256": "ee58985e890d5a9ae8d524ed1ca4d329d037cc859bc66b02fba49bd3fa66d2b0"
+    },
+    "super_h15_dodge_right.png": {
+      "sequence": "dodge_right_final",
+      "frame": 10,
+      "capture_time_seconds": 1.4862138329772279,
+      "sha256": "d2b53b3813acf3141b045c5096daeaec8595c8dd6d7719eededcff3fb4d01c33"
+    },
+    "super_h15_dodge_first.png": {
+      "sequence": "dodge_first_final",
+      "frame": 10,
+      "capture_time_seconds": 1.3943534999853,
+      "sha256": "8b944d4ae180b031ffd889de546a47f8b187cf3f5ee56c91089fee7028c50653"
+    },
+    "super_h15_dodge_restored.png": {
+      "sequence": "dodge_right_final",
+      "frame": 16,
+      "capture_time_seconds": 2.365852375049144,
+      "sha256": "c1b2b95ee91e2d990ca89ed55bc83bc6b48b26bb856898de2205e91e1c0d8367"
+    }
+  },
+  "artifacts": {
+    "destiny-guardians-0.1.0+26.3-sources.jar": {
+      "bytes": 627737,
+      "sha256": "ce14f520f082f843350653e20590a5d6b291d3bccf0cf5361bf277818fb41669"
+    },
+    "destiny-guardians-0.1.0+26.3.jar": {
+      "bytes": 716570,
+      "sha256": "b56d5152165b3b91ac9bc38ef9ef8082a762979af8bd0f885a2e5639181cb84c"
+    }
+  }
+}

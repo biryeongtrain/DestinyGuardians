@@ -12,6 +12,7 @@ import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.fx.PostEffects;
 import kim.biryeong.destiny.fx.PlayerAnimations;
 import kim.biryeong.destiny.fx.SimProjectile;
+import kim.biryeong.destiny.fx.SuperVfx;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianClass;
@@ -57,9 +58,12 @@ public final class HunterSuper extends Ability {
         };
         AbilityService.startSuper(player, session);
         PostEffects.enter(player, element());
+        PostEffects.pulse(player, element(), false);
         PlayerAnimations.loop(player, "super_" + element().getSerializedName());
         PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()));
-        Fx.burst(player.level(), player.position().add(0, 1, 0), element(), 80, 0.8);
+        // Keep the core silhouette readable; the old eye-height flame cloud obscured first person.
+        player.level().sendParticles(Fx.dust(element().color(), 0.65f), player.getX(), player.getY() + 0.25,
+                player.getZ(), 16, 0.55, 0.12, 0.55, 0.01);
         Fx.sound(player.level(), player.position(), SoundEvents.BEACON_ACTIVATE, 1f, 1.4f);
         return true;
     }
@@ -89,7 +93,7 @@ public final class HunterSuper extends Ability {
         @Override
         public void end() {
             PostEffects.exit(player, element());
-            PlayerAnimations.stop(player);
+            PlayerAnimations.finishSuper(player);
             DisplayHud.removeHud(player, HAND_HUD_ID);
         }
 
@@ -141,10 +145,12 @@ public final class HunterSuper extends Ability {
                 return;
             }
             nextStrike = age + (int) param("strike_interval_ticks", 6);
+            PlayerAnimations.superAttack(player, element());
             ServerLevel level = player.level();
             Vec3 eye = player.getEyePosition();
             Vec3 look = player.getLookAngle();
             double reach = param("reach", 4.5);
+            SuperVfx.arcSweep(player, reach);
             double cosHalf = Math.cos(Math.toRadians(param("arc_degrees", 70) / 2));
             for (int i = 0; i < 12; i++) {
                 double a = Math.toRadians(-35 + i * 6.4);
@@ -152,10 +158,13 @@ public final class HunterSuper extends Ability {
                 Fx.line(level, eye.add(dir.scale(1.0)), eye.add(dir.scale(reach)), element().glow(), 0.6, 0.7f);
             }
             Fx.sound(level, eye, SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.2f);
+            int impactVisuals = 0;
             for (LivingEntity e : Combat.enemiesNear(level, player, eye, reach)) {
                 Vec3 to = e.position().add(0, e.getBbHeight() / 2, 0).subtract(eye).normalize();
                 if (to.dot(look) >= cosHalf) {
                     Combat.damage(level, player, e, (float) param("damage", 16), element());
+                    if (impactVisuals++ < 2) SuperVfx.arcHit(player, e);
+                    PostEffects.pulse(player, element(), true);
                     level.sendParticles(ParticleTypes.ELECTRIC_SPARK, e.getX(), e.getY() + 1, e.getZ(), 12, 0.3, 0.5, 0.3, 0.2);
                 }
             }
@@ -191,6 +200,7 @@ public final class HunterSuper extends Ability {
             }
             shots--;
             nextShot = age + (int) param("shot_interval_ticks", 8);
+            PlayerAnimations.superAttack(player, element());
             hitscan(player, param("range", 80), (float) param("damage", 80), element(), Keyword.SCORCHED);
             Fx.sound(player.level(), player.getEyePosition(), SoundEvents.TRIDENT_THUNDER.value(), 0.7f, 1.8f);
         }
@@ -224,24 +234,29 @@ public final class HunterSuper extends Ability {
                 return;
             }
             fired = true;
+            PlayerAnimations.superAttack(player, element());
             ServerLevel level = player.level();
             double radius = param("tether_radius", 7);
             int tetherTicks = (int) param("tether_ticks", 160);
             float impactDamage = (float) param("damage", 20);
             Fx.sound(level, player.getEyePosition(), SoundEvents.ARROW_SHOOT, 1f, 0.6f);
             SimProjectile.launch(player, player.getEyePosition(), player.getLookAngle().scale(2.6), 0.01, 40,
-                    new ItemStack(Items.ARROW), 0.8f, element().color(), hit -> {
+                    shadowArrow(), 0.8f, element().color(), hit -> {
                         Vec3 anchor = hit.getLocation();
+                        SuperVfx.anchor(player, anchor, tetherTicks);
+                        PostEffects.pulse(player, element(), true);
                         Fx.burst(level, anchor, element(), 80, 1.0);
                         Fx.sound(level, anchor, SoundEvents.ENDER_EYE_DEATH, 1f, 0.5f);
                         for (LivingEntity e : Combat.enemiesNear(level, player, anchor, radius)) {
                             Combat.damage(level, player, e, impactDamage, element());
                         }
                         Tasks.run(player, level, age -> {
+                            var enemies = Combat.enemiesNear(level, player, anchor, radius);
+                            if (age % 10 == 0) SuperVfx.tether(player, anchor, radius, enemies);
                             if (age % 3 == 0) {
                                 Fx.ring(level, anchor, radius, element().color(), 36);
                             }
-                            for (LivingEntity e : Combat.enemiesNear(level, player, anchor, radius)) {
+                            for (LivingEntity e : enemies) {
                                 if (age % 10 == 0) {
                                     Statuses.apply(e, Keyword.WEAKENED, 30);
                                     Statuses.apply(e, Keyword.SUPPRESSED, 30);
@@ -251,7 +266,9 @@ public final class HunterSuper extends Ability {
                                 e.setDeltaMovement(e.getDeltaMovement().add(pull.x, 0, pull.z));
                                 e.needsSync = true;
                             }
-                            return age < tetherTicks;
+                            boolean keep = age < tetherTicks;
+                            if (!keep) SuperVfx.cancelLinks(player, anchor);
+                            return keep;
                         });
                     });
         }
@@ -260,6 +277,13 @@ public final class HunterSuper extends Ability {
         public float remaining() {
             return fired ? 0f : super.remaining();
         }
+    }
+
+    private static ItemStack shadowArrow() {
+        ItemStack stack = new ItemStack(Items.ARROW);
+        stack.set(net.minecraft.core.component.DataComponents.ITEM_MODEL,
+                kim.biryeong.destiny.DestinyGuardians.id("shadow_arrow"));
+        return stack;
     }
 
     /** 즉발 사격: 시선 방향 레이캐스트로 첫 적에게 피해. */
@@ -274,10 +298,14 @@ public final class HunterSuper extends Ability {
         EntityHitResult entity = ProjectileUtil.getEntityHitResult(player, eye, end, new AABB(eye, end).inflate(1.0),
                 e -> Combat.isEnemy(player, e), eye.distanceToSqr(end));
         Vec3 impact = entity != null ? entity.getLocation() : end;
+        if (element == Element.SOLAR) {
+            SuperVfx.solarShot(player, eye.add(player.getLookAngle().scale(0.8)).add(0, -0.15, 0), impact);
+        }
         Fx.line(level, eye.add(player.getLookAngle().scale(0.8)).add(0, -0.15, 0), impact, element.color(), 0.3, 1.1f);
         Fx.burst(level, impact, element, 30, 0.3);
         if (entity != null && entity.getEntity() instanceof LivingEntity target) {
             Combat.damage(level, player, target, damage, element);
+            PostEffects.pulse(player, element, true);
             if (keyword != null && target.isAlive()) {
                 if (keyword == Keyword.SCORCHED) Statuses.scorch(player, target, 100);
                 else Statuses.apply(target, keyword, 100);

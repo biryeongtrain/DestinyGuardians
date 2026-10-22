@@ -161,7 +161,7 @@ class HunterVfxAssetTest {
 
     @Test
     void installDefaultsIsIdempotentAndNeverOverwritesArtistsFile(@TempDir Path directory) throws Exception {
-        assertEquals(4, HunterVfxAssets.install(directory));
+        assertEquals(HunterVfxAssets.allModels().size(), HunterVfxAssets.install(directory));
         for (String name : HunterVfxAssets.MODELS) assertArrayEquals(resource(name), Files.readAllBytes(directory.resolve(name + ".bbmodel")));
         Path custom = directory.resolve(HunterVfxAssets.MODELS.getFirst() + ".bbmodel");
         Files.writeString(custom, "artist customized model");

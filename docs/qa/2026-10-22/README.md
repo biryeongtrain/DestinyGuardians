@@ -2,7 +2,41 @@
 
 기본 헌터 구현의 자동 검증과 실제 프레임버퍼 증거입니다.
 
-## 최신 H14 — VFX 디테일 개정
+## 최신 H15 — 궁극기·방향 회피 고도화
+
+[목표/단계별 기록](../../design/18_헌터_고도화_로드맵.md)의 **1~3 구현·단일 클라이언트 검증 완료**.
+4~5(다인/거리/밤/성능·일반 총기/재장전)는 후속이다.
+
+- **GameTest71/71·JUnit28/28**, 실패·오류·스킵0, build 성공. [전체 빌드](super-h15-build-gametest.txt) · [JUnit 강제 재실행](super-h15-junit.txt) · [레이아웃 검사](super-h15-test-layout.txt).
+- [실제 화면 모음](super_h15_overview.jpg): JVM2/정상20TPS/1708×956/HUD 표시 원본을 축소 배치했다. **Blockbench 미리보기가 아니다**.
+- Arc: [타격/전방 전격](super_h15_arc_attack.png) · [준비 복귀](super_h15_arc_ready.png) · [종료 복원](super_h15_arc_restored.png) · [움직임](super_h15_arc_attack_final.webp).
+- Solar: [1인칭 장비/총구](super_h15_solar_first.png) · [화염 궤적](super_h15_solar_tracer.png) · [마지막 발사 후 복원](super_h15_solar_last.png) · [3발 움직임](super_h15_solar_tracer_final.webp) · [3인칭 사격](super_h15_solar_third_final.webp).
+- Void: [활 준비](super_h15_void_ready.png) · [발사/회복](super_h15_void_release_final.webp) · [대상 이동 전](super_h15_void_tether_before.png) / [이동 후 연결선](super_h15_void_tether_after.png) · [닻/연결선 움직임](super_h15_void_anchor_final.webp).
+- 회피: [앞](super_h15_dodge_forward_final.webp) · [뒤](super_h15_dodge_back_final.webp) · [좌](super_h15_dodge_left_final.webp) · [우](super_h15_dodge_right_final.webp) · [본인1인칭 숨김](super_h15_dodge_first_final.webp) · [원래 몸 복원](super_h15_dodge_restored.png).
+- [측정 캡처 간격/원본 해시](super-h15-frame-captures.json) · [최종 검증 조건·한계·JAR 해시](super-h15-validation.json) · [실제 생성 팩 비용](super-h15-generated-pack-budget.json).
+- [서버 JVM2](super-h15-runtime-server-jvm2.txt) · [클라이언트 JVM2](super-h15-vision-client-jvm2.txt). JVM1에서 발견한 뒤쪽 전격과 큰 발동 구름을 수정한 뒤 새 JVM으로 검증했다. JVM1 이미지는 최종 증거에 넣지 않았다.
+- [장비4종 Blockbench 비교](supers_h15_overview.png)는 별도 편집기 미리보기다. [장비/출처](../../design/20_헌터_궁극기_장비.md) · [애니메이션](../../design/19_헌터_애니메이션_개정.md) · [펄스](../../design/21_궁극기_화면_펄스.md) · [VFX 계약](../../design/22_궁극기_VFX_구현.md).
+
+### H15 관찰 조건과 한계
+
+본인3인칭은 `owner-view` QA 신호, 회피 방향은 `debug dodge`의 일시적 입력 주입이다.
+실제 직업 능력을 실행했지만 WASD/GCB 전송 검증은 아니다. 공허 대상은 NoAI Husk2마리를
+콘솔로 이동시켰다. Solar 궤적 관찰은 첫 발 직후 관찰자 위치/시선을 콘솔로 옮겼다.
+WebP는 측정 간격의 축소 검토본이며 고정60FPS 영상·원작 타이밍 실측이 아니다.
+
+오프라인 계정은 limb 재생 중 템플릿 색으로 바뀌었다가 바닐라 UUID 스킨으로 복원된다.
+인증 스킨·빠른 화살의 근접 비행 방향·2인 관찰자·거리 경계·밤/동굴·FPS/TPS 부하·
+Vulkan/타 해상도·청음은 미검증이다. 블룸·가산 합성·볼류메트릭은 구현하지 않았다.
+모델 상한은 BetterModel24트래커+별도 빔24홀더=48이며 디스플레이 엔티티 수나 드로콜 수가 아니다.
+
+자연 만료와 명시적 정리 뒤 active0/beam0, QA 몹/드롭 제거, 스폰·Arc·owner-view first 복구.
+자체 서버 정상 종료·자체 클라이언트 PID40319 SIGTERM(Gradle 래퍼 exit1)·원래 옵션5157바이트 복구·
+25565/8102 비점유를 확인했다. 복구 직후 청크 로딩 중 받은 정지 이미지는 최종 증거에서 제외했다.
+기존 HUD/장비 particle·end_of_frame·Apple GL·오프라인 인증 경고는 남으며 신규 자산/셰이더 오류와 구분했다.
+
+---
+
+## 이전 H14 — VFX 디테일 개정
 
 굵은 분절 고리/막대를 분기 전격·테이퍼 곡선 화염·나선/필라멘트로 재제작했고, 연막은 카메라를 향하는 billow 카드로 바꿨습니다.
 아틀라스32→128, 렌더본4~8개 유지. [디테일·비용·제약](../../design/17_헌터_VFX_디테일_개정.md).
@@ -73,7 +107,7 @@ Blockbench MCP로 수류탄3종·태양 단검·공허 연막탄을 새로 제�
 참고작의 작가·라이선스와 조형 재해석은 [모델 명세](../../design/14_헌터_능력_모델.md)에 기록했습니다.
 Arc 연속 타격은 맨손을 유지합니다.
 
-- **최신 검증:** GameTest **40/40**, JUnit **6/6**, build 성공 (05:49:26 KST).
+- **H11 당시 검증:** GameTest **40/40**, JUnit **6/6**, build 성공 (05:49:26 KST).
 - [Blockbench 모델 5종](props_blockbench_overview.png) · [게임 내 5종 비교](props_ingame_gallery.png)
 - 실제 투척: [Arc 섬광](props_flight_arc_flashbang.png) · [Solar 소이](props_flight_solar_incendiary.png) ·
   [Void 소용돌이](props_flight_void_vortex.png) · [Solar 단검](props_flight_solar_knife.png) · [Void 연막](props_flight_void_smoke_bomb.png)

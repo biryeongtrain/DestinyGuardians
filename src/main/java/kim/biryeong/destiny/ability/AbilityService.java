@@ -59,6 +59,8 @@ public final class AbilityService {
                 Guardians.forget(player);
             }
             HunterVfx.clearAll();
+            kim.biryeong.destiny.fx.SuperVfx.clearAll();
+            kim.biryeong.destiny.fx.PostEffects.clearAll();
             SimProjectile.clearAll();
             Tasks.clearAll();
             Statuses.clearAll();
@@ -72,6 +74,8 @@ public final class AbilityService {
         SimProjectile.discardOwned(player);
         Tasks.cancelOwned(player);
         HunterVfx.cancelOwned(player);
+        kim.biryeong.destiny.fx.SuperVfx.cancelOwned(player);
+        kim.biryeong.destiny.fx.PostEffects.cancel(player);
         Statuses.forget(player);
     }
 
@@ -83,6 +87,9 @@ public final class AbilityService {
         SimProjectile.tickAll(server);
         Tasks.tickAll();
         HunterVfx.tick(server);
+        kim.biryeong.destiny.fx.SuperVfx.tick(server);
+        kim.biryeong.destiny.fx.PostEffects.tick(server);
+        kim.biryeong.destiny.fx.PlayerAnimations.tick(server);
     }
 
     public static void tickPlayer(ServerPlayer player) {

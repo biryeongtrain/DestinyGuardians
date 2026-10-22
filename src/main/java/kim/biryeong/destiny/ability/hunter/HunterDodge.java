@@ -38,7 +38,7 @@ public final class HunterDodge extends Ability {
         Motion.setVelocity(player, new Vec3(dir.x * speed, param("lift", 0.18), dir.z * speed));
         runtime.invulnerableTicks = (int) param("invulnerable_ticks", 6);
         player.resetFallDistance();
-        PlayerAnimations.play(player, "roll");
+        PlayerAnimations.play(player, PlayerAnimations.rollAnimation(runtime.lastInput));
         Vec3 feet = player.position();
         player.level().sendParticles(Fx.dust(0xC9B79C, 1.4f), feet.x, feet.y + 0.1, feet.z, 16, 0.4, 0.05, 0.4, 0.0);
         Fx.sound(player.level(), feet, SoundEvents.PLAYER_ATTACK_SWEEP, 0.6f, 1.4f);

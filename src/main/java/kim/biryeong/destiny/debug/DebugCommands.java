@@ -52,6 +52,12 @@ public final class DebugCommands {
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .then(Commands.literal("first").executes(c -> ownerView(c, false)))
                                         .then(Commands.literal("third").executes(c -> ownerView(c, true)))))
+                        .then(Commands.literal("dodge")
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .then(Commands.argument("direction", StringArgumentType.word())
+                                                .suggests((ctx, builder) -> net.minecraft.commands.SharedSuggestionProvider.suggest(
+                                                        new String[]{"forward", "back", "left", "right"}, builder))
+                                                .executes(DebugCommands::dodge))))
                         .then(Commands.literal("vfx")
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .then(Commands.argument("kind", StringArgumentType.word())
@@ -59,7 +65,8 @@ public final class DebugCommands {
                                                         java.util.Arrays.stream(HunterVfx.Kind.values()).map(k -> k.name().toLowerCase(java.util.Locale.ROOT)), builder))
                                                 .executes(DebugCommands::vfx))))
                         .then(Commands.literal("vfx-status").executes(ctx -> {
-                            ctx.getSource().sendSuccess(() -> Component.literal("Active Hunter VFX=" + HunterVfx.activeCount()), false);
+                            ctx.getSource().sendSuccess(() -> Component.literal("Active Hunter VFX=" + HunterVfx.activeCount()
+                                    + " super-beams=" + kim.biryeong.destiny.fx.SuperVfx.activeCount()), false);
                             return HunterVfx.activeCount();
                         }))
                         .then(Commands.literal("model")
@@ -86,7 +93,8 @@ public final class DebugCommands {
             ctx.getSource().sendFailure(Component.literal("Unknown VFX kind"));
             return 0;
         }
-        boolean loop = kind == HunterVfx.Kind.VOID_VORTEX || kind == HunterVfx.Kind.VOID_SMOKE;
+        boolean loop = kind == HunterVfx.Kind.VOID_VORTEX || kind == HunterVfx.Kind.VOID_SMOKE
+                || kind == HunterVfx.Kind.VOID_ANCHOR;
         double radius = switch (kind) {
             case ARC_STRIKE -> 1.1;
             case SOLAR_KNIFE -> 0.65;
@@ -98,6 +106,30 @@ public final class DebugCommands {
                 loop ? (kind == HunterVfx.Kind.VOID_SMOKE ? 100 : 60) : (kind == HunterVfx.Kind.ARC_FLASH || kind == HunterVfx.Kind.ARC_STRIKE ? 16 : 22));
         ctx.getSource().sendSuccess(() -> Component.literal("VFX preview " + kind + " played=" + played + " active=" + HunterVfx.activeCount()), false);
         return played ? 1 : 0;
+    }
+
+    /** QA direction injection exercises the real ability; it is NOT a client WASD transport test. */
+    private static int dodge(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = EntityArgument.getPlayer(ctx, "player");
+        String direction = StringArgumentType.getString(ctx, "direction");
+        if (!List.of("forward", "back", "left", "right").contains(direction)) {
+            ctx.getSource().sendFailure(Component.literal("Unknown dodge direction"));
+            return 0;
+        }
+        var runtime = kim.biryeong.destiny.guardian.Guardians.runtime(player);
+        var old = runtime.lastInput;
+        boolean ok;
+        try {
+            runtime.lastInput = new net.minecraft.world.entity.player.Input(direction.equals("forward"),
+                    direction.equals("back"), direction.equals("left"), direction.equals("right"), false, false, false);
+            ok = kim.biryeong.destiny.input.InputRouter.dispatch(player,
+                    kim.biryeong.destiny.input.GuardianAction.CLASS_ABILITY);
+        } finally {
+            runtime.lastInput = old;
+        }
+        ctx.getSource().sendSuccess(() -> Component.literal("QA dodge " + direction + " → " + ok
+                + " (simulated direction; real ability)"), false);
+        return ok ? 1 : 0;
     }
 
     private static int model(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -153,8 +185,9 @@ public final class DebugCommands {
     }
 
     private static int clear(CommandContext<CommandSourceStack> ctx) {
-        int count = DUMMIES.size() + LIMBS.size() + HunterVfx.activeCount();
+        int count = DUMMIES.size() + LIMBS.size() + HunterVfx.activeCount() + kim.biryeong.destiny.fx.SuperVfx.activeCount();
         HunterVfx.clearAll();
+        kim.biryeong.destiny.fx.SuperVfx.clearAll();
         DUMMIES.forEach(DummyTracker::close);
         DUMMIES.clear();
         LIMBS.forEach(EntityTracker::close);

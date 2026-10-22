@@ -41,7 +41,11 @@ public final class HunterVfx {
         SOLAR_BURST("destiny_vfx_solar_h14", 22),
         SOLAR_KNIFE("destiny_vfx_solar_h14", 22),
         VOID_VORTEX("destiny_vfx_vortex_h14", MAX_DURATION),
-        VOID_SMOKE("destiny_vfx_smoke_h14", MAX_DURATION);
+        VOID_SMOKE("destiny_vfx_smoke_h14", MAX_DURATION),
+        ARC_SWEEP("destiny_super_arc_sweep_h15", 12),
+        SOLAR_MUZZLE("destiny_super_solar_muzzle_h15", 9),
+        SOLAR_IMPACT("destiny_super_solar_impact_h15", 14),
+        VOID_ANCHOR("destiny_super_void_anchor_h15", MAX_DURATION);
 
         private final String modelName;
         private final int maxDuration;
@@ -56,7 +60,7 @@ public final class HunterVfx {
         }
 
         private boolean looping() {
-            return this == VOID_VORTEX || this == VOID_SMOKE;
+            return this == VOID_VORTEX || this == VOID_SMOKE || this == VOID_ANCHOR;
         }
 
         private String animation() {
@@ -101,8 +105,15 @@ public final class HunterVfx {
     /** Starts a visual only; an unavailable renderer or any backend failure leaves no active entry. */
     public static boolean play(ServerPlayer owner, ServerLevel level, Vec3 pos, Kind kind,
                                double radius, int durationTicks) {
+        return play(owner, level, pos, kind, radius, durationTicks, 0, 0);
+    }
+
+    /** Explicit BetterModel display orientation; cosmetic rotation never rotates the player. */
+    public static boolean play(ServerPlayer owner, ServerLevel level, Vec3 pos, Kind kind,
+                               double radius, int durationTicks, float pitch, float yaw) {
         float scale = (float) radius;
         if (owner == null || level == null || pos == null || kind == null || durationTicks <= 0
+                || !Float.isFinite(pitch) || !Float.isFinite(yaw)
                 || !Double.isFinite(pos.x) || !Double.isFinite(pos.y) || !Double.isFinite(pos.z)
                 || !Double.isFinite(radius) || !Float.isFinite(scale) || scale <= 0
                 || (kind.looping() && (float) (radius * 0.01) <= 0)
@@ -127,7 +138,7 @@ public final class HunterVfx {
             // Make room before allocating another backend tracker, including during construction.
             evictFor(owner);
             // Capture the tracker before the factory's create event, so a failing event can be cleaned up.
-            effect.tracker = renderer.create(ModLocation.of(level, pos), TrackerModifier.DEFAULT,
+            effect.tracker = renderer.create(ModLocation.of(level, pos, pitch, yaw), TrackerModifier.DEFAULT,
                     tracker -> effect.tracker = tracker);
             updateScale(effect, 0);
             effect.tracker.update(TrackerUpdateAction.brightness(15, 15));

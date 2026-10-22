@@ -1,0 +1,287 @@
+
+> Configure project :minigame-lib
+Fabric Loom: 1.18.2
+
+> Configure project :GCB-server
+Fabric Loom: 1.18.2
+
+> Configure project :
+Fabric Loom: 1.18.2
+
+> Task :processResources UP-TO-DATE
+> Task :generateLog4jConfig UP-TO-DATE
+> Task :generateDLIConfig UP-TO-DATE
+> Task :configureLaunch UP-TO-DATE
+> Task :minigame-lib:compileJava UP-TO-DATE
+> Task :GCB-server:compileJava UP-TO-DATE
+> Task :GCB-server:processResources UP-TO-DATE
+> Task :GCB-server:classes UP-TO-DATE
+> Task :GCB-server:processIncludeJars UP-TO-DATE
+> Task :minigame-lib:processResources UP-TO-DATE
+> Task :minigame-lib:classes UP-TO-DATE
+> Task :minigame-lib:processIncludeJars UP-TO-DATE
+> Task :GCB-server:jar UP-TO-DATE
+> Task :minigame-lib:jar UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :runServer
+[14:24:43] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 26.3 with Fabric Loader 0.20.1
+[14:24:43] [main/INFO] (FabricLoader/Mappings) Mappings not present!
+[14:24:44] [main/INFO] (FabricLoader) Loading 100 mods:
+	- adventure-platform-fabric 7.2.0
+	   |-- net_kyori_adventure-api 5.2.0
+	   |-- net_kyori_adventure-key 5.2.0
+	   |-- net_kyori_adventure-platform-mod-shared 7.2.0
+	   |-- net_kyori_adventure-text-logger-slf4j 5.2.0
+	   |-- net_kyori_adventure-text-minimessage 5.2.0
+	   |-- net_kyori_adventure-text-serializer-ansi 5.2.0
+	   |-- net_kyori_adventure-text-serializer-gson 5.2.0
+	   |-- net_kyori_adventure-text-serializer-json 5.2.0
+	   |-- net_kyori_adventure-text-serializer-plain 5.2.0
+	   |-- net_kyori_ansi 1.1.1
+	   \-- net_kyori_option 1.1.0
+	- bettermodel 3.5.1
+	   |-- com_github_ben-manes_caffeine_caffeine 3.3.1
+	   |-- gg_moonflower_molang-compiler 3.1.1.19
+	   |-- io_github_toxicity188_armormodel 1.2.0
+	   |-- io_github_toxicity188_dynamicuv 1.3.0
+	   |-- io_github_toxicity188_java-mesh 0.0.1
+	   |-- kr_toxicity_model_bettermodel-api 3.5.1
+	   |-- kr_toxicity_model_bettermodel-core 3.5.1
+	   |-- kr_toxicity_model_bettermodel-mod-api 3.5.1
+	   |-- org_semver4j_semver4j 6.0.0
+	   |-- org_spongepowered_configurate-core 4.2.0
+	   \-- org_spongepowered_configurate-yaml 4.2.0
+	- cloud 2.1.0
+	   |-- io_leangen_geantyref_geantyref 1.3.16
+	   |-- org_incendo_cloud-brigadier 2.0.1
+	   |-- org_incendo_cloud-core 2.1.0
+	   |-- org_incendo_cloud-minecraft-modded-common 2.1.0
+	   \-- org_incendo_cloud-services 2.1.0
+	- destiny 0.1.0+26.3
+	- fabric-advancement-api-v1 1.0.1+38c7a2d55d
+	- fabric-api 0.164.0+26.3
+	- fabric-api-base 2.0.6+fcdff87f5d
+	- fabric-api-lookup-api-v1 2.0.24+3434d6d95d
+	- fabric-biome-api-v1 20.1.0+c6aa69a85d
+	- fabric-block-api-v1 3.1.0+0ae6f9115d
+	- fabric-block-getter-api-v2 2.0.9+3434d6d95d
+	- fabric-command-api-v2 3.1.2+fcdff87f5d
+	- fabric-content-registries-v0 15.0.6+74ed1ea55d
+	- fabric-convention-tags-v2 4.10.4+899e30535d
+	- fabric-crash-report-info-v1 1.0.7+fcdff87f5d
+	- fabric-creative-tab-api-v1 5.0.22+fcdff87f5d
+	- fabric-data-attachment-api-v1 2.2.32+b9b88df45d
+	- fabric-data-generation-api-v1 27.4.1+501c7ef55d
+	- fabric-debug-api-v1 1.0.5+5af7744b5d
+	- fabric-dimensions-v1 5.1.20+5af7744b5d
+	- fabric-entity-events-v1 6.0.4+3434d6d95d
+	- fabric-events-interaction-v0 5.3.8+b9b88df45d
+	- fabric-game-rule-api-v1 4.0.10+3434d6d95d
+	- fabric-gametest-api-v1 4.0.34+3434d6d95d
+	- fabric-item-api-v1 14.8.0+d1c0d72b5d
+	- fabric-language-kotlin 1.14.2+kotlin.2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-reflect 2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-stdlib 2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-stdlib-jdk7 2.4.21
+	   |-- org_jetbrains_kotlin_kotlin-stdlib-jdk8 2.4.21
+	   |-- org_jetbrains_kotlinx_atomicfu-jvm 0.33.0
+	   |-- org_jetbrains_kotlinx_kotlinx-coroutines-core-jvm 1.11.0
+	   |-- org_jetbrains_kotlinx_kotlinx-coroutines-jdk8 1.11.0
+	   |-- org_jetbrains_kotlinx_kotlinx-datetime-jvm 0.8.0
+	   |-- org_jetbrains_kotlinx_kotlinx-io-bytestring-jvm 0.9.1
+	   |-- org_jetbrains_kotlinx_kotlinx-io-core-jvm 0.9.1
+	   |-- org_jetbrains_kotlinx_kotlinx-serialization-cbor-jvm 1.11.0
+	   |-- org_jetbrains_kotlinx_kotlinx-serialization-core-jvm 1.11.0
+	   \-- org_jetbrains_kotlinx_kotlinx-serialization-json-jvm 1.11.0
+	- fabric-lifecycle-events-v1 4.1.9+ffef5f675d
+	- fabric-loot-api-v3 4.0.9+4068fd645d
+	- fabric-menu-api-v1 2.0.29+ed66f0a35d
+	- fabric-message-api-v1 7.0.10+3434d6d95d
+	- fabric-networking-api-v1 6.3.10+5c1fee4d5d
+	- fabric-object-builder-api-v1 24.1.11+e2f63d3e5d
+	- fabric-particles-v1 5.0.26+3434d6d95d
+	- fabric-permission-api-v1 1.0.8+fcdff87f5d
+	- fabric-recipe-api-v1 10.0.10+b9b88df45d
+	- fabric-registry-sync-v0 8.0.3+1ca9f6365d
+	- fabric-rendering-fluids-v1 6.0.6+3434d6d95d
+	- fabric-resource-conditions-api-v1 6.2.0+0d124ae85d
+	- fabric-resource-loader-v0 3.3.27+4fc5413f5d
+	- fabric-resource-loader-v1 3.1.0+5af7744b5d
+	- fabric-serialization-api-v1 2.0.7+74ed1ea55d
+	- fabric-tag-api-v1 2.1.11+fcdff87f5d
+	- fabric-transfer-api-v1 8.0.25+fcdff87f5d
+	- fabric-transitive-access-wideners-v1 8.1.17+e2f63d3e5d
+	- fabricloader 0.20.1
+	- gcb-server 1.2.0+26.3
+	- java 25
+	- map-canvas-api 0.9.1+26.2
+	- minecraft 26.3
+	- minigamelib 2.0.0+26.3
+	- mixinextras 0.5.5
+	- polymer-autohost 0.18.4+26.3
+	- polymer-blocks 0.18.4+26.3
+	- polymer-common 0.18.4+26.3
+	- polymer-core 0.18.4+26.3
+	- polymer-networking 0.18.4+26.3
+	- polymer-registry-sync-manipulator 0.18.4+26.3
+	- polymer-resource-pack 0.18.4+26.3
+	- polymer-resource-pack-extras 0.18.4+26.3
+	- polymer-virtual-entity 0.18.4+26.3
+[14:24:44] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/Users/qf/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.5+mixin.0.8.7/cef8519a91129d0c21fa03bb9378f0e8ca810e5/sponge-mixin-0.17.5+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[14:24:44] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[14:24:47] [main/INFO] (minigamelib) Registered /displayhudtest command (development environment only)
+[14:24:47] [main/INFO] (minigamelib) Registered /rgbmapdebug command (development environment only)
+[14:24:47] [main/INFO] (DestinyGuardians) GCB input bridge enabled
+[14:24:47] [main/INFO] (DestinyGuardians)   polymer-core = 0.18.4+26.3
+[14:24:47] [main/INFO] (DestinyGuardians)   bettermodel = 3.5.1
+[14:24:47] [main/INFO] (DestinyGuardians)   minigamelib = 2.0.0+26.3
+[14:24:47] [main/INFO] (DestinyGuardians)   gcb-server = 1.2.0+26.3
+[14:24:47] [main/INFO] (DestinyGuardians) Destiny Guardians initialized
+[14:24:47] [main/INFO] (Minecraft) Environment: Environment[discoveryUrl=https://discovery.minecraftservices.com/minecraft/client, name=PROD]
+[14:24:48] [Worker-Main-7/INFO] (Minecraft) Loaded 1866 advancements
+[14:24:48] [main/INFO] (DestinyGuardians) Loaded 13 ability tunings
+[14:24:48] [main/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 67 new biomes in 693.0 μs
+[14:24:48] [IO-Worker-1/INFO] (Minecraft) System chat: [Polymer] Starting resource pack generation...
+[14:24:48] [Server thread/INFO] (Minecraft) Starting minecraft server version 26.3
+[14:24:48] [Server thread/INFO] (Minecraft) Loading properties
+[14:24:48] [Server thread/INFO] (Minecraft) Default game type: SURVIVAL
+[14:24:48] [Server thread/INFO] (Minecraft) Generating keypair
+[14:24:48] [Server thread/INFO] (Minecraft) Starting Minecraft server on *:25565
+[14:24:48] [Server thread/WARN] (Minecraft) **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[14:24:48] [Server thread/WARN] (Minecraft) The server will make no attempt to authenticate usernames. Beware.
+[14:24:48] [Server thread/WARN] (Minecraft) While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[14:24:48] [Server thread/WARN] (Minecraft) To change this, set "online-mode" to "true" in the server.properties file.
+[14:24:48] [Server thread/INFO] (Minecraft) Preparing level "world"
+[14:24:48] [Server thread/INFO] (Minecraft) Loading 0 persistent chunks...
+[14:24:48] [Server thread/INFO] (Minecraft) Time elapsed: 11 ms
+[14:24:48] [Server thread/INFO] (Minecraft) Done (0.127s)! For help, type "help"
+[14:24:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[14:24:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[14:24:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[14:24:49] [IO-Worker-1/INFO] (bettermodel) [92mMod is loaded. (526 ms)[0m
+[14:24:49] [IO-Worker-1/INFO] (bettermodel) [96mPlatform: Fabric[0m
+[14:24:49] [Server thread/INFO] (Minecraft) System chat: [Polymer] Resource pack created successfully! You can find it in game folder as polymer/resource_pack.zip
+[14:25:00] [Server thread/INFO] (Minecraft) MinigameQA[/127.0.0.1:50620] logged in with entity id 7 at (205.1322317465326, -60.0, 0.5)
+[14:25:00] [Server thread/INFO] (Minecraft) System chat: MinigameQA joined the game
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: Clock minecraft:overworld is already at time marker minecraft:noon
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: Set the weather to clear
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: No entity was found
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / arc
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: QA owner-view=third (simulated; not GCB transport verification)
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: Summoned new Husk
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[14:27:31] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:27:48] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[14:27:48] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[14:27:48] [Server thread/INFO] (Minecraft) System chat: SUPER → false
+[14:27:49] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:27:49] [Server thread/INFO] (Minecraft) System chat: Husk has the following entity data: 368.51202f
+[14:27:49] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=2 super-beams=0
+[14:28:04] [Server thread/INFO] (Minecraft) System chat: Killed Husk
+[14:28:04] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / solar
+[14:28:04] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:28:04] [Server thread/INFO] (Minecraft) System chat: QA owner-view=third (simulated; not GCB transport verification)
+[14:28:04] [Server thread/INFO] (Minecraft) System chat: Summoned new Husk
+[14:28:04] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[14:28:04] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[14:28:06] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:28:06] [Server thread/INFO] (Minecraft) System chat: Husk has the following entity data: 321.28f
+[14:28:06] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=2 super-beams=1
+[14:28:21] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / solar
+[14:28:21] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[14:28:21] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[14:28:21] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[14:28:23] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:28:23] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=2 super-beams=1
+[14:28:30] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:28:31] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: Killed Husk
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / void
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: Summoned new Husk
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: Summoned new Husk
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[14:28:46] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[14:28:48] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:28:49] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=1 super-beams=2
+[14:28:49] [Server thread/INFO] (Minecraft) System chat: Teleported Husk to 211.500000, -60.000000, -3.500000
+[14:28:49] [Server thread/INFO] (Minecraft) System chat: Teleported Husk to 213.500000, -60.000000, 5.500000
+[14:29:21] [Server thread/INFO] (Minecraft) System chat: Killed 2 entities
+[14:29:21] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / solar
+[14:29:21] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:29:21] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[14:29:21] [Server thread/INFO] (Minecraft) System chat: Summoned new Husk
+[14:29:21] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[14:29:21] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[14:29:23] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:29:23] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, -1.500000
+[14:29:23] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:29:24] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:29:24] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=2 super-beams=1
+[14:29:36] [Server thread/INFO] (Minecraft) System chat: Killed Husk
+[14:29:36] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / arc
+[14:29:36] [Server thread/INFO] (Minecraft) System chat: QA owner-view=third (simulated; not GCB transport verification)
+[14:29:36] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:29:36] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[14:29:38] [Server thread/INFO] (Minecraft) System chat: QA dodge forward → true (simulated direction; real ability)
+[14:29:54] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:29:54] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[14:29:55] [Server thread/INFO] (Minecraft) System chat: QA dodge back → true (simulated direction; real ability)
+[14:30:04] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:30:04] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[14:30:06] [Server thread/INFO] (Minecraft) System chat: QA dodge left → true (simulated direction; real ability)
+[14:30:06] [Server thread/INFO] (Minecraft) Player MinigameQA standing on air - force-sending blocks below
+[14:30:15] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:30:15] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[14:30:16] [Server thread/INFO] (Minecraft) System chat: QA dodge right → true (simulated direction; real ability)
+[14:30:17] [Server thread/INFO] (Minecraft) Player MinigameQA standing on air - force-sending blocks below
+[14:30:31] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[14:30:31] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:30:31] [Server thread/INFO] (Minecraft) System chat: cooldowns reset
+[14:30:33] [Server thread/INFO] (Minecraft) System chat: QA dodge forward → true (simulated direction; real ability)
+[14:30:33] [Server thread/INFO] (Minecraft) Player MinigameQA standing on air - force-sending blocks below
+[14:30:44] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=0 super-beams=0
+[14:30:44] [Server thread/INFO] (Minecraft) System chat: Incorrect argument for command
+[14:30:44] [Server thread/INFO] (Minecraft) System chat: ...bug clear MinigameQA<--[HERE]
+[14:30:44] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=0 super-beams=0
+[14:31:07] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / void
+[14:31:07] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 200.500000, -60.000000, 0.500000
+[14:31:07] [Server thread/INFO] (Minecraft) System chat: QA owner-view=third (simulated; not GCB transport verification)
+[14:31:07] [Server thread/INFO] (Minecraft) System chat: super = 100.0%
+[14:31:07] [Server thread/INFO] (Minecraft) System chat: SUPER → true
+[14:31:09] [Server thread/INFO] (Minecraft) System chat: PRIMARY → true
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=0 super-beams=0
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: MinigameQA → hunter / arc
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: QA owner-view=first (simulated; not GCB transport verification)
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: Cleared 0 debug models
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: No entity was found
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: Killed 3 entities
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: Teleported MinigameQA to 0.500000, -60.000000, 0.500000
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: Active Hunter VFX=0 super-beams=0
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: Stopping the server
+[14:31:40] [Server thread/INFO] (Minecraft) Stopping server
+[14:31:40] [Server thread/INFO] (Minecraft) Saving players
+[14:31:40] [Server thread/INFO] (Minecraft) MinigameQA lost connection: Server closed
+[14:31:40] [Server thread/INFO] (Minecraft) System chat: MinigameQA left the game
+[14:31:40] [Server thread/INFO] (Minecraft) Saving worlds
+[14:31:41] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[14:31:41] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[14:31:41] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+
+[Incubating] Problems report is available at: file:///Users/qf/IdeaProjects/DestinyGuardians/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 6m 58s
+13 actionable tasks: 1 executed, 12 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.7.1/userguide/configuration_cache_enabling.html

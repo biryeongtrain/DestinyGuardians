@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "revision": "H15",
+  "inspected_at": "2026-10-22T14:29:59+09:00",
+  "inspection": {
+    "mode": "Read-only ZIP snapshot and source cross-check; only this QA JSON was written",
+    "archive_path": "run/server/polymer/resource_pack.zip",
+    "archive_bytes": 3109256,
+    "archive_sha256": "dd488e029c9db4bd607d30fc4af80fcbbc9ee77c49f1536aa41b9888ab987da3",
+    "archive_unchanged_during_read": true,
+    "source_manifest_path": "art/blockbench/vfx/manifest-super-h15.json",
+    "gradle_or_server_commands_run": false,
+    "method": "Recursively count model/model references in each generated BetterModel item JSON; match each item bone to source bbmodel triangle faces; read exact ZipInfo file_size/compress_size. ZIP entry reads verify CRC."
+  },
+  "measurement_definitions": {
+    "mesh_triangle_model_parts": "Leaf model references to bettermodel:mesh_triangle_single across nested composite item models; wrappers are excluded.",
+    "byte_sizes": "Uncompressed bytes are stored entry content lengths. Compressed payload bytes exclude ZIP headers, directory entries and central-directory overhead. Sums count each stored path once, even when contents match.",
+    "render_bones": "Three model-bearing bone item definitions per H15 BetterModel asset. This is distinct from leaf model parts and tracker instances.",
+    "scope": "Four H15 BetterModel mesh VFX, two H15 beam models/items/textures, and their directly referenced shared mesh primitive/texture. Other pack assets and unrelated BetterModel dependencies are excluded."
+  },
+  "bettermodel_mesh_vfx": {
+    "arc_sweep": {
+      "model_name": "destiny_super_arc_sweep_h15",
+      "source_path": "src/main/resources/destiny/vfx/destiny_super_arc_sweep_h15.bbmodel",
+      "source_meshes": 15,
+      "source_triangles": 1080,
+      "render_bones": 3,
+      "item_model_files": 3,
+      "item_json_bytes": 888299,
+      "item_json_compressed_payload_bytes": 79042,
+      "mesh_triangle_model_parts": 3240,
+      "other_model_parts": 0,
+      "observed_parts_per_source_triangle": 3,
+      "bones": [
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_arc_sweep_h15_edge.json",
+          "uncompressed_bytes": 316981,
+          "compressed_payload_bytes": 32912,
+          "bone": "edge",
+          "source_meshes": 3,
+          "source_triangles": 384,
+          "mesh_triangle_model_parts": 1152,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 1152
+          },
+          "constant_tint_colors": [
+            4570871,
+            11333631,
+            15793663
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_arc_sweep_h15_forks.json",
+          "uncompressed_bytes": 101521,
+          "compressed_payload_bytes": 12390,
+          "bone": "forks",
+          "source_meshes": 6,
+          "source_triangles": 120,
+          "mesh_triangle_model_parts": 360,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 360
+          },
+          "constant_tint_colors": [
+            11333631,
+            15793663
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_arc_sweep_h15_sparks.json",
+          "uncompressed_bytes": 469797,
+          "compressed_payload_bytes": 33740,
+          "bone": "sparks",
+          "source_meshes": 6,
+          "source_triangles": 576,
+          "mesh_triangle_model_parts": 1728,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 1728
+          },
+          "constant_tint_colors": [
+            11333631,
+            15793663
+          ]
+        }
+      ]
+    },
+    "solar_muzzle": {
+      "model_name": "destiny_super_solar_muzzle_h15",
+      "source_path": "src/main/resources/destiny/vfx/destiny_super_solar_muzzle_h15.bbmodel",
+      "source_meshes": 17,
+      "source_triangles": 1152,
+      "render_bones": 3,
+      "item_model_files": 3,
+      "item_json_bytes": 948826,
+      "item_json_compressed_payload_bytes": 79733,
+      "mesh_triangle_model_parts": 3456,
+      "other_model_parts": 0,
+      "observed_parts_per_source_triangle": 3,
+      "bones": [
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_solar_muzzle_h15_core.json",
+          "uncompressed_bytes": 76817,
+          "compressed_payload_bytes": 4645,
+          "bone": "core",
+          "source_meshes": 1,
+          "source_triangles": 96,
+          "mesh_triangle_model_parts": 288,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 288
+          },
+          "constant_tint_colors": [
+            16775645
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_solar_muzzle_h15_embers.json",
+          "uncompressed_bytes": 629346,
+          "compressed_payload_bytes": 45471,
+          "bone": "embers",
+          "source_meshes": 8,
+          "source_triangles": 768,
+          "mesh_triangle_model_parts": 2304,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 2304
+          },
+          "constant_tint_colors": [
+            16770453,
+            16775645
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_solar_muzzle_h15_flames.json",
+          "uncompressed_bytes": 242663,
+          "compressed_payload_bytes": 29617,
+          "bone": "flames",
+          "source_meshes": 8,
+          "source_triangles": 288,
+          "mesh_triangle_model_parts": 864,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 864
+          },
+          "constant_tint_colors": [
+            16751925,
+            16770453
+          ]
+        }
+      ]
+    },
+    "solar_impact": {
+      "model_name": "destiny_super_solar_impact_h15",
+      "source_path": "src/main/resources/destiny/vfx/destiny_super_solar_impact_h15.bbmodel",
+      "source_meshes": 17,
+      "source_triangles": 1152,
+      "render_bones": 3,
+      "item_model_files": 3,
+      "item_json_bytes": 948032,
+      "item_json_compressed_payload_bytes": 79723,
+      "mesh_triangle_model_parts": 3456,
+      "other_model_parts": 0,
+      "observed_parts_per_source_triangle": 3,
+      "bones": [
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_solar_impact_h15_core.json",
+          "uncompressed_bytes": 76023,
+          "compressed_payload_bytes": 4635,
+          "bone": "core",
+          "source_meshes": 1,
+          "source_triangles": 96,
+          "mesh_triangle_model_parts": 288,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 288
+          },
+          "constant_tint_colors": [
+            16775645
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_solar_impact_h15_embers.json",
+          "uncompressed_bytes": 629346,
+          "compressed_payload_bytes": 45471,
+          "bone": "embers",
+          "source_meshes": 8,
+          "source_triangles": 768,
+          "mesh_triangle_model_parts": 2304,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 2304
+          },
+          "constant_tint_colors": [
+            16770453,
+            16775645
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_solar_impact_h15_flames.json",
+          "uncompressed_bytes": 242663,
+          "compressed_payload_bytes": 29617,
+          "bone": "flames",
+          "source_meshes": 8,
+          "source_triangles": 288,
+          "mesh_triangle_model_parts": 864,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 864
+          },
+          "constant_tint_colors": [
+            16751925,
+            16770453
+          ]
+        }
+      ]
+    },
+    "void_anchor": {
+      "model_name": "destiny_super_void_anchor_h15",
+      "source_path": "src/main/resources/destiny/vfx/destiny_super_void_anchor_h15.bbmodel",
+      "source_meshes": 12,
+      "source_triangles": 832,
+      "render_bones": 3,
+      "item_model_files": 3,
+      "item_json_bytes": 691524,
+      "item_json_compressed_payload_bytes": 72483,
+      "mesh_triangle_model_parts": 2496,
+      "other_model_parts": 0,
+      "observed_parts_per_source_triangle": 3,
+      "bones": [
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_void_anchor_h15_orbits.json",
+          "uncompressed_bytes": 378869,
+          "compressed_payload_bytes": 45472,
+          "bone": "orbits",
+          "source_meshes": 4,
+          "source_triangles": 448,
+          "mesh_triangle_model_parts": 1344,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 1344
+          },
+          "constant_tint_colors": [
+            10050786,
+            13935871
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_void_anchor_h15_singularity.json",
+          "uncompressed_bytes": 153447,
+          "compressed_payload_bytes": 9449,
+          "bone": "singularity",
+          "source_meshes": 2,
+          "source_triangles": 192,
+          "mesh_triangle_model_parts": 576,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 576
+          },
+          "constant_tint_colors": [
+            13935871,
+            16376575
+          ]
+        },
+        {
+          "path": "assets/bettermodel/items/c/destiny_super_void_anchor_h15_tendrils.json",
+          "uncompressed_bytes": 159208,
+          "compressed_payload_bytes": 17562,
+          "bone": "tendrils",
+          "source_meshes": 6,
+          "source_triangles": 192,
+          "mesh_triangle_model_parts": 576,
+          "other_model_parts": 0,
+          "composite_nodes": 2,
+          "leaf_model_references": {
+            "bettermodel:mesh_triangle_single": 576
+          },
+          "constant_tint_colors": [
+            10050786,
+            13935871
+          ]
+        }
+      ]
+    }
+  },
+  "bettermodel_mesh_vfx_totals": {
+    "files": 12,
+    "uncompressed_bytes": 3476681,
+    "compressed_payload_bytes": 310981,
+    "source_triangles": 4216,
+    "mesh_triangle_model_parts": 12648,
+    "render_bones": 12
+  },
+  "triangle_expansion": {
+    "observed_factor": 3,
+    "formula": "generated mesh_triangle_single leaf model parts = authored triangle faces * 3",
+    "checked_at": "Every one of the 12 generated H15 bone item definitions, not only aggregate model totals",
+    "shared_primitive": {
+      "path": "assets/bettermodel/models/mesh_triangle_single.json",
+      "cube_elements": 1,
+      "authored_quad_faces": 1,
+      "face_direction": "north",
+      "texture": "bettermodel:item/mesh_pixel"
+    },
+    "explanation": "BetterModel represents these mesh faces through transformed references to a shared textured primitive. The generated item composites contain three such parts for every authored triangle. Source triangle count alone therefore understates client item-model part count by 3x for these four assets. The shared primitive file is stored once, while each transformed/tinted reference is serialized in its bone item JSON.",
+    "not_equivalent_to": [
+      "Three entities per source triangle",
+      "GPU draw calls",
+      "Measured rasterized triangle count",
+      "A universal expansion factor for every possible BetterModel input"
+    ],
+    "shared_files": [
+      {
+        "path": "assets/bettermodel/models/mesh_triangle_single.json",
+        "uncompressed_bytes": 219,
+        "compressed_payload_bytes": 136
+      },
+      {
+        "path": "assets/bettermodel/textures/item/mesh_pixel.png",
+        "uncompressed_bytes": 84,
+        "compressed_payload_bytes": 77
+      }
+    ]
+  },
+  "beam_models": {
+    "solar_trail": {
+      "item_model_id": "destiny:fx/solar_trail_h15",
+      "runtime_holder": "One Polymer ElementHolder containing one ItemDisplayElement per beam",
+      "item_model_leaf_parts": 1,
+      "cube_elements": 48,
+      "authored_quad_faces": 288,
+      "cube_name_groups": {
+        "bright_spine": 16,
+        "spiral_0": 16,
+        "spiral_1": 16
+      },
+      "rotation_schemas": {
+        "angle,axis,origin": 16,
+        "origin,x,y,z": 32
+      },
+      "texture_dimensions_pixels": [
+        128,
+        128
+      ],
+      "totals": {
+        "files": 3,
+        "uncompressed_bytes": 68925,
+        "compressed_payload_bytes": 4151
+      },
+      "files": [
+        {
+          "path": "assets/destiny/items/fx/solar_trail_h15.json",
+          "uncompressed_bytes": 94,
+          "compressed_payload_bytes": 77
+        },
+        {
+          "path": "assets/destiny/models/fx/solar_trail_h15.json",
+          "uncompressed_bytes": 67935,
+          "compressed_payload_bytes": 3352
+        },
+        {
+          "path": "assets/destiny/textures/item/fx/solar_trail_h15.png",
+          "uncompressed_bytes": 896,
+          "compressed_payload_bytes": 722
+        }
+      ]
+    },
+    "void_link": {
+      "item_model_id": "destiny:fx/void_link_h15",
+      "runtime_holder": "One Polymer ElementHolder containing one ItemDisplayElement per beam",
+      "item_model_leaf_parts": 1,
+      "cube_elements": 48,
+      "authored_quad_faces": 288,
+      "cube_name_groups": {
+        "bright_spine": 16,
+        "spiral_0": 16,
+        "spiral_1": 16
+      },
+      "rotation_schemas": {
+        "angle,axis,origin": 16,
+        "origin,x,y,z": 32
+      },
+      "texture_dimensions_pixels": [
+        128,
+        128
+      ],
+      "totals": {
+        "files": 3,
+        "uncompressed_bytes": 68935,
+        "compressed_payload_bytes": 4136
+      },
+      "files": [
+        {
+          "path": "assets/destiny/items/fx/void_link_h15.json",
+          "uncompressed_bytes": 92,
+          "compressed_payload_bytes": 75
+        },
+        {
+          "path": "assets/destiny/models/fx/void_link_h15.json",
+          "uncompressed_bytes": 67943,
+          "compressed_payload_bytes": 3336
+        },
+        {
+          "path": "assets/destiny/textures/item/fx/void_link_h15.png",
+          "uncompressed_bytes": 900,
+          "compressed_payload_bytes": 725
+        }
+      ]
+    }
+  },
+  "beam_asset_totals": {
+    "files": 6,
+    "uncompressed_bytes": 137860,
+    "compressed_payload_bytes": 8287
+  },
+  "selected_asset_totals_including_shared_once": {
+    "files": 20,
+    "uncompressed_bytes": 3614844,
+    "compressed_payload_bytes": 319481
+  },
+  "runtime_budget": {
+    "source_paths": [
+      "src/main/java/kim/biryeong/destiny/fx/HunterVfx.java",
+      "src/main/java/kim/biryeong/destiny/fx/SuperVfx.java"
+    ],
+    "bettermodel_pool": {
+      "per_owner_trackers": 4,
+      "global_trackers": 24,
+      "scope": "HunterVfx pool shared by existing H14 effects and H15 effects; H15 does not receive a separate extra 24"
+    },
+    "beam_pool": {
+      "per_owner_holders": 4,
+      "global_holders": 24,
+      "item_displays_per_holder": 1
+    },
+    "combined_per_owner_tracker_holder_cap": 8,
+    "combined_global_tracker_holder_cap": 48,
+    "explanation": "Independent capped pools allow 24 BetterModel trackers plus 24 Polymer beam holders concurrently: combined cap 48, not 24. Per owner the corresponding cap is 4 + 4 = 8. This is a tracker/holder count, not a model-part, entity, draw-call or triangle cap.",
+    "h15_only_capacity_projection": {
+      "assumptions": "All BetterModel slots use the audited H15 assets with three model-bearing bones each; all beam slots are populated. These are static bounds, not observed live usage or performance measurements.",
+      "max_bettermodel_model_bearing_bone_instances": 72,
+      "max_beam_item_display_instances": 24,
+      "combined_model_bearing_bone_plus_beam_instances": 96,
+      "max_h15_mesh_triangle_parts_per_tracker": 3456,
+      "max_h15_mesh_triangle_part_instances_across_bm_pool": 82944,
+      "max_beam_cube_element_instances_across_beam_pool": 1152,
+      "excludes": "BetterModel auxiliary entities, existing H14 shapes, other gameplay display entities and viewer multiplicity; 96 model-bearing bone/beam instances is not a total network entity cap."
+    }
+  },
+  "validation": {
+    "all_four_models_present": true,
+    "all_twelve_bone_items_present": true,
+    "manifest_triangle_counts_match_source": true,
+    "every_bone_has_exactly_three_generated_parts_per_source_triangle": true,
+    "both_beam_item_model_texture_chains_present": true,
+    "beam_cubes_each": 48,
+    "runtime_combined_global_cap": 48,
+    "performance_or_visual_fps_claim": "None; GPU load/FPS, actual viewer spawn counts and live cap saturation were not measured."
+  }
+}
