@@ -1,0 +1,28 @@
+{
+  "stage": "target-1",
+  "command": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    "--offline",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "--init-script",
+    "/private/tmp/destiny-w228-native/test-heap.init.gradle",
+    "test",
+    "--tests",
+    "kim.biryeong.destiny.inventory.*",
+    "assemble",
+    "compileGametestJava"
+  ],
+  "returncode": 0,
+  "seconds": 209.9573415420018,
+  "totals": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": []
+}

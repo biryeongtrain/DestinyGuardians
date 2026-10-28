@@ -27,7 +27,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
-/** Server-side interactive equipment screen. HUDs never own inventory and never grant weapons. */
+/** Server-side interactive equipment screen. Detached drafts are discarded; only final confirmation may equip a real weapon. */
 public final class WeaponScreen {
     private static final Map<UUID, Session> OPEN = new HashMap<>();
     private static final net.minecraft.resources.Identifier FREEZE = DestinyGuardians.id("equipment_screen");
@@ -40,11 +40,17 @@ public final class WeaponScreen {
         final WeaponScreenControls controls = new WeaponScreenControls();
         WeaponSlot slot = WeaponSlot.KINETIC;
         Input input = Input.EMPTY;
-        List<WeaponEquipmentService.Owned> choices = List.of();
+        String stage = "LOADOUT", family = "";
+        List<WeaponScreenView.FamilyOption> families = List.of();
+        List<WeaponCatalog.Entry> choices = List.of();
+        WeaponPerkSelection.Group perkGroup = WeaponPerkSelection.Group.DAMAGE;
+        List<WeaponPerkSelection.Option> perks = List.of();
+        WeaponCatalog.Entry draftEntry;
+        ItemStack draft;
+        String damage = "", utility = "";
         WeaponScreenView view;
         int page, focus, repeatAt, lastClick = Integer.MIN_VALUE / 2, lastActive;
-        boolean armed = true;
-        String message = "무기 칸을 고른 뒤 소지 무기를 선택하세요.";
+        String message = "슬롯을 고른 뒤 새 무기로 로드아웃을 구성하세요.";
         Session(ServerPlayer p) {
             owner = p; level = p.level(); connection = p.connection; anchor = p.position();
             controls.baseline(p.getYRot(), p.getXRot());
@@ -57,6 +63,7 @@ public final class WeaponScreen {
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, environment) ->
             dispatcher.register(Commands.literal("destiny").then(Commands.literal("inventory")
                 .executes(c -> open(c.getSource().getPlayerOrException()) ? 1 : 0)
+                .then(Commands.literal("test").executes(c -> open(c.getSource().getPlayerOrException()) ? 1 : 0))
                 .then(Commands.literal("close").executes(c -> { close(c.getSource().getPlayerOrException()); return 1; }))
                 .then(Commands.literal("open").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .then(Commands.argument("player", EntityArgument.player()).executes(c -> open(EntityArgument.getPlayer(c, "player")) ? 1 : 0)))
@@ -127,7 +134,7 @@ public final class WeaponScreen {
             if (Float.isFinite(yaw) && Float.isFinite(pitch)) {
                 p.setYRot(yaw); p.setYHeadRot(yaw); p.setXRot(Math.clamp(pitch, -90, 90));
                 if (s.controls.rotate(yaw, pitch)) {
-                    s.focus = WeaponScreenLayout.hit(s.controls.x(), s.controls.y()); s.armed = true; touch(s); render(s);
+                    s.focus = WeaponScreenLayout.hit(s.controls.x(), s.controls.y(), s.stage); touch(s); render(s);
                 }
             }
         }
@@ -150,33 +157,62 @@ public final class WeaponScreen {
         int dx = (s.input.right() ? 1 : 0) - (s.input.left() ? 1 : 0);
         int dy = (s.input.backward() ? 1 : 0) - (s.input.forward() ? 1 : 0);
         if (dx == 0 && dy == 0) return;
-        s.focus = WeaponScreenLayout.navigate(s.focus, dx, dy);
+        s.focus = WeaponScreenLayout.navigate(s.focus, dx, dy, s.stage);
         var b = WeaponScreenLayout.bounds(s.focus); s.controls.point(b.x(), b.y());
-        s.armed = true; touch(s); render(s);
+        touch(s); render(s);
     }
     public static boolean click(ServerPlayer p, boolean back) {
         var s = current(p); if (s == null) return false;
-        // Several vanilla attack/use packets may represent one click. A hold cannot swap the new grid again.
+        // Coalesce same-tick packet variants, while allowing a fresh click at the same screen position.
         int now = now(s); if (now - s.lastClick < 3) return true;
         s.lastClick = now; touch(s);
         if (back) { close(p); return true; }
-        if (!s.armed) return true;
-        s.armed = false;
         int node = s.focus;
         if (node >= 0 && node < 3) {
-            s.slot = WeaponSlot.values()[node]; s.page = 0; s.message = "장착할 소지 무기를 선택하세요."; refresh(s);
-        } else if (node >= 3 && node < 12) {
+            s.slot = WeaponSlot.values()[node]; resetDraft(s); s.stage = "LOADOUT"; s.family = ""; s.page = 0;
+            s.message = "이 슬롯에 추가하려면 새 무기를 누르세요."; refresh(s);
+        } else if (node == WeaponScreenLayout.TEST_ARMORY && s.stage.equals("LOADOUT")) {
+            if (!WeaponTestArmory.enabled()) { s.message = "테스트 무기 기능이 비활성화되어 있습니다."; render(s); }
+            else { s.stage = "FAMILY"; s.page = 0; s.message = "무기군을 선택하세요. 확정 전에는 장비가 변경되지 않습니다."; refresh(s); }
+        } else if (node >= 3 && node < 12 && !s.stage.equals("LOADOUT")) {
             int index = s.page * PAGE_SIZE + node - 3;
-            if (index < s.choices.size()) {
-                var choice = s.choices.get(index);
-                String error = WeaponEquipmentService.equip(p, choice.inventoryIndex(), choice.stack());
-                s.message = error == null ? "장착 완료 · 탄약과 특성 유지" : error;
-                refresh(s);
+            if (s.stage.equals("FAMILY") && index < s.families.size()) {
+                s.family = s.families.get(index).id(); s.stage = "WEAPON"; s.page = 0;
+                s.message = "무기를 선택하면 퍽 선택으로 넘어갑니다.";
+            } else if (s.stage.equals("WEAPON") && index < s.choices.size()) {
+                s.draftEntry = s.choices.get(index); s.draft = WeaponItems.create(s.draftEntry);
+                s.damage = ""; s.utility = ""; s.perkGroup = WeaponPerkSelection.Group.DAMAGE;
+                s.stage = "PERKS"; s.page = 0;
+                s.message = "데미지·유틸리티 퍽을 고른 뒤 로드아웃에 추가하세요. 아직 장비에는 적용되지 않았습니다.";
+            } else if (s.stage.equals("PERKS") && index < s.perks.size()) {
+                var option = s.perks.get(index);
+                String damage = s.perkGroup == WeaponPerkSelection.Group.DAMAGE ? option.id() : s.damage;
+                String utility = s.perkGroup == WeaponPerkSelection.Group.UTILITY ? option.id() : s.utility;
+                String error = option.enabled() ? WeaponPerkSelection.configure(s.draft, damage, utility) : option.reason();
+                if (error == null) { s.damage = damage; s.utility = utility; s.message = "퍽 선택 저장 · 로드아웃에 추가하면 실제 적용됩니다."; }
+                else s.message = error;
             }
-        } else if (node == 12 || node == 13) {
-            int pages = Math.max(1, (s.choices.size() + PAGE_SIZE - 1) / PAGE_SIZE);
-            s.page = Math.clamp(s.page + (node == 12 ? -1 : 1), 0, pages - 1); render(s);
-        } else if (node == 14) close(p);
+            refresh(s);
+        } else if ((node == WeaponScreenLayout.PREVIOUS || node == WeaponScreenLayout.NEXT) && !s.stage.equals("LOADOUT")) {
+            s.page = Math.clamp(s.page + (node == WeaponScreenLayout.PREVIOUS ? -1 : 1), 0, pages(s) - 1); render(s);
+        } else if (node == WeaponScreenLayout.DAMAGE_PERKS || node == WeaponScreenLayout.UTILITY_PERKS) {
+            if (s.stage.equals("PERKS")) {
+                s.perkGroup = node == WeaponScreenLayout.DAMAGE_PERKS ? WeaponPerkSelection.Group.DAMAGE : WeaponPerkSelection.Group.UTILITY;
+                s.page = 0; refresh(s);
+            }
+        } else if (node == WeaponScreenLayout.BACK_WEAPONS && !s.stage.equals("LOADOUT")) {
+            if (s.stage.equals("PERKS")) { resetDraft(s); s.stage = "WEAPON"; }
+            else if (s.stage.equals("WEAPON")) { s.family = ""; s.stage = "FAMILY"; }
+            else s.stage = "LOADOUT";
+            s.page = 0; s.message = "이전 단계로 돌아왔습니다. 실제 장비는 변경하지 않았습니다."; refresh(s);
+        } else if (node == WeaponScreenLayout.CONFIRM_LOADOUT && s.stage.equals("PERKS") && s.draftEntry != null) {
+            String error = WeaponTestArmory.add(p, s.draftEntry.id(), s.damage, s.utility);
+            if (error == null) {
+                resetDraft(s); s.stage = "LOADOUT"; s.page = 0;
+                s.message = "로드아웃에 추가 완료 · 선택한 슬롯에 무기와 퍽을 적용했습니다.";
+            } else s.message = error;
+            refresh(s);
+        } else if (node == WeaponScreenLayout.CLOSE) close(p);
         return true;
     }
     private static int now(Session s) { return s.level.getServer().getTickCount(); }
@@ -193,10 +229,25 @@ public final class WeaponScreen {
             if (now(s) % 10 == 0) refresh(s);
         }
     }
+    private static void resetDraft(Session s) {
+        s.draft = null; s.draftEntry = null; s.damage = ""; s.utility = ""; s.perks = List.of();
+    }
+    private static int count(Session s) {
+        return switch (s.stage) { case "FAMILY" -> s.families.size(); case "WEAPON" -> s.choices.size(); case "PERKS" -> s.perks.size(); default -> 0; };
+    }
+    private static int pages(Session s) { return Math.max(1, (count(s) + PAGE_SIZE - 1) / PAGE_SIZE); }
     private static void refresh(Session s) {
-        s.choices = WeaponEquipmentService.owned(s.owner, s.slot).stream().filter(o -> !o.equipped()).toList();
-        int pages = Math.max(1, (s.choices.size() + PAGE_SIZE - 1) / PAGE_SIZE);
-        s.page = Math.clamp(s.page, 0, pages - 1); render(s);
+        var catalog = WeaponTestArmory.catalog(s.slot);
+        s.families = catalog.stream().map(WeaponCatalog.Entry::family).distinct().sorted()
+                .map(id -> new WeaponScreenView.FamilyOption(id, WeaponScreenText.family(id),
+                        (int)catalog.stream().filter(e -> e.family().equals(id)).count())).toList();
+        s.choices = s.stage.equals("WEAPON") ? catalog.stream().filter(e -> e.family().equals(s.family)).toList() : List.of();
+        s.perks = s.stage.equals("PERKS") ? WeaponPerkSelection.options(s.draft, s.perkGroup) : List.of();
+        s.page = Math.clamp(s.page, 0, pages(s) - 1);
+        if (!WeaponScreenLayout.visible(s.focus, s.stage)) {
+            s.focus = 0; var b = WeaponScreenLayout.bounds(s.focus); s.controls.point(b.x(), b.y());
+        }
+        render(s);
     }
     private static WeaponScreenView.Card card(int index, ItemStack stack, WeaponCatalog.Entry entry, boolean equipped) {
         var c = WeaponCharacteristics.of(entry); var profile = WeaponProfile.forEntry(entry);
@@ -204,15 +255,28 @@ public final class WeaponScreen {
         return new WeaponScreenView.Card(index, entry.id(), entry.name(), entry.family(), entry.source_frame_label(),
                 c.slot(), c.damage().name(), c.ammo().name(), c.exotic(), c.stats(), ammo.rounds(), ammo.loadedLimit(), equipped);
     }
+    private static WeaponScreenView.Card preview(WeaponCatalog.Entry entry) {
+        var c = WeaponCharacteristics.of(entry); var profile = WeaponProfile.forEntry(entry);
+        return new WeaponScreenView.Card(-1, entry.id(), entry.name(), entry.family(), entry.source_frame_label(),
+                c.slot(), c.damage().name(), c.ammo().name(), c.exotic(), c.stats(), profile.magazine(), profile.magazine(), false);
+    }
+    private static String perkName(String id) { return id.isEmpty() ? "" : WeaponPerkLabels.name(id); }
     private static void render(Session s) {
         var equipped = WeaponLoadout.equipped(s.owner).stream()
                 .map(e -> card(e.slot().hotbar(), e.stack(), e.weapon(), true)).toList();
-        var choices = s.choices.stream().skip((long)s.page * PAGE_SIZE).limit(PAGE_SIZE)
-                .map(o -> card(o.inventoryIndex(), o.stack(), o.weapon(), o.equipped())).toList();
-        WeaponScreenView.Card inspected = s.focus >= 3 && s.focus < 3 + choices.size() ? choices.get(s.focus - 3)
-                : equipped.stream().filter(c -> c.slot() == s.slot).findFirst().orElse(choices.isEmpty() ? null : choices.getFirst());
+        var choices = s.choices.stream().skip((long)s.page * PAGE_SIZE).limit(PAGE_SIZE).map(WeaponScreen::preview).toList();
+        var families = s.families.stream().skip((long)s.page * PAGE_SIZE).limit(PAGE_SIZE).toList();
+        var perks = s.perks.stream().skip((long)s.page * PAGE_SIZE).limit(PAGE_SIZE)
+                .map(o -> new WeaponScreenView.PerkOption(o.id(), o.name(), o.description(), o.selected(), o.enabled(), o.reason())).toList();
+        var current = equipped.stream().filter(c -> c.slot() == s.slot).findFirst().orElse(null);
+        var inspected = s.stage.equals("PERKS") && s.draftEntry != null ? preview(s.draftEntry)
+                : s.stage.equals("WEAPON") ? s.focus >= 3 && s.focus < 3 + choices.size() ? choices.get(s.focus - 3)
+                    : choices.isEmpty() ? null : choices.getFirst()
+                : current;
         s.view = new WeaponScreenView(s.owner.getGameProfile().name(), s.slot, equipped, choices, inspected,
-                s.page, Math.max(1, (s.choices.size() + PAGE_SIZE - 1) / PAGE_SIZE), s.focus, s.controls.x(), s.controls.y(), s.message);
+                s.page, pages(s), s.focus, s.controls.x(), s.controls.y(), s.message, true,
+                s.stage.equals("PERKS") ? s.perkGroup.name() : "", perks, perkName(s.damage), perkName(s.utility),
+                s.stage, s.stage.equals("FAMILY") ? families : List.of(), s.family);
         WeaponScreenHud.render(s.owner, s.view);
     }
 }
