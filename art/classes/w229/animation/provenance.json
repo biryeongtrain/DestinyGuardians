@@ -1,0 +1,1104 @@
+{
+  "schemaVersion": 1,
+  "blender": "5.4.0 Alpha",
+  "isolatedHeadless": true,
+  "autoexec": false,
+  "savedSource": false,
+  "sourceRoots": [
+    "provided-super-animation-return/animations",
+    "provided-w229-ssd-staging"
+  ],
+  "basis": [
+    [
+      0.0,
+      -1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "basisConvention": "W197 confirmed anatomical mapping: source +Y left,+Z up,+X forward -> target +X right,+Y up,-Z forward. W197 native camera note remains pending.",
+  "boneMap": {
+    "phip_hip": "C7C0BA6E",
+    "pw_waist": "A252A6A2",
+    "pc_chest": "A352A6A2",
+    "h_ph_head": "7E92D640",
+    "pra_right_arm": "17025F50",
+    "prfa_right_forearm": "A3781DCD",
+    "pla_left_arm": "D1232BA2",
+    "plfa_left_forearm": "897A1504",
+    "prl_right_leg": "9F0FD28C",
+    "prfl_right_foreleg": "8BD44A3F",
+    "pll_left_leg": "695DAF09",
+    "plfl_left_foreleg": "35B14D1B",
+    "pri_right_item": "DE9D6BEA",
+    "pli_left_item": "8C83CB67"
+  },
+  "retarget": "W197 C and hashed-ID mapping. Trunk/head world rotation C*Rpose*Rrest^-1*C^-1; collapse missing source spine/clavicle/neck into target hierarchy. Limbs use W197 anatomical plane frames measured from hip-knee-ankle or shoulder-elbow-wrist; arms positive X flex, H21/W199 knees negative X flex. Absolute source anatomical frames preserve pose directions rather than calibrating every action to a made-up ready. Item wrist rotation calibrated once against source rest anatomical forearm frame and target -90X item bind.",
+  "targetRig": "existing PLAYERskin-compatible Steve limb, same groups/UV/geometry/equipment tags; no fingers added",
+  "base": {
+    "name": "guardian_hunter_w199_r1.bbmodel",
+    "sha256": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+    "inheritedAnimationsUnchanged": 21
+  },
+  "references": [
+    {
+      "file": "scripts/build_hunter_source_w197.py",
+      "sha256": "1b15db1776e59e026b627b1d15b6b6ef27c92392a46664bb34e9c08c43767ca0"
+    },
+    {
+      "file": "scripts/build_shadowshot_source_w199.py",
+      "sha256": "367810be04afe4b494eb691136c09f80838b474311625ed0397280092a3a36c5"
+    },
+    {
+      "file": "scripts/build_hunter_animation_h15.py",
+      "sha256": "3908d921f42d52ae84f880021a6e06d10316084aec8a309453a338abb24805c6"
+    },
+    {
+      "file": "scripts/build_hunter_animation_h19.py",
+      "sha256": "483a796efdcab5dbf3fcc997ca5fc3118c4b693da6a3f47f520b5e06561af9ef"
+    },
+    {
+      "file": "scripts/build_hunter_animation_h20.py",
+      "sha256": "8d8dde7a49b54af3a31c3c78c1182c2851784277b75a8510a301fcdf95c79428"
+    }
+  ],
+  "sources": [
+    {
+      "group": "titan_hammer_of_sol",
+      "files": {
+        "source.blend": "bb3ab6077f832983ae305ede8eb30ae488e26e8df7fa6ec61cba6d6994daaa5a",
+        "clips.json": "a11158a4850f16a8df5b364b399c4709a236e503b7846d02844e57d0f963f848",
+        "inspection.json": "1646783815a57eab3b27221c0dbccab6a0734dc84c95f1e80091fa22afaf0e79",
+        "playback-samples.json": "26d8bac1bd6a2c700db67653875dda6896b7e783267e6cb588d4324394dc687e",
+        "titan_hammer_of_sol.fbx": "86af430e525e27a00ab15d1b17c06753e401963d8f5c95504f0061ddb6c471ad"
+      },
+      "ssdBlendIdentical": true,
+      "boneCount": 72,
+      "fps": 30.0,
+      "sourceBlendUnchangedAfterEvaluation": true,
+      "objectScaleOmitted": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ]
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "files": {
+        "source.blend": "5e99140ef782974b87a5076e9a04be5e9a7318a95fea31e6ae317fc7706638bf",
+        "clips.json": "33139d6df73b5e017b7ad064f01e1ce8e2e2e734ad76b68de3171a20ba721f13",
+        "inspection.json": "afb4bed77244c4f7f631fbbe62eceacd5462fd7b80af20adf3527a838f8e784b",
+        "playback-samples.json": "3257739dcfe22e8f3e6781b14e55bf31126aad2c2e71199fdd49388b63a4cbfc",
+        "titan_sentinel_shield.fbx": "a904879ec566289af9230f81c83253d7b4940666978b7d60ef0fd7f02000c1f8"
+      },
+      "ssdBlendIdentical": true,
+      "boneCount": 72,
+      "fps": 30.0,
+      "sourceBlendUnchangedAfterEvaluation": true,
+      "objectScaleOmitted": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ]
+    },
+    {
+      "group": "warlock_daybreak",
+      "files": {
+        "source.blend": "cd1c473d369ce3f281928de1395ea9b3a73899bd471aa7bda5d078d1288b01fe",
+        "clips.json": "c259e5ebaddc70a29a63bc480e0b1a472b9fdb7925563ff0d2caff3a5b8315d3",
+        "inspection.json": "9d974f0cd5aa1a9c1ec42d023625d8aff496a3dbd7a6e5d8ecc8eb46ef4050a0",
+        "playback-samples.json": "6b240bc88d765f5b6c70c0988ebe25d4e65a855fabb0b59f061285dca6c0da19",
+        "warlock_daybreak.fbx": "17c6b52e060b7dd3c029073df91a23b4d078ca22a22a569b78e284dd70130ddc"
+      },
+      "ssdBlendIdentical": true,
+      "boneCount": 72,
+      "fps": 30.0,
+      "sourceBlendUnchangedAfterEvaluation": true,
+      "objectScaleOmitted": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ]
+    },
+    {
+      "group": "warlock_daybreak_event_linked",
+      "files": {
+        "source.blend": "4a90099e74c02287ddd5dc7aaf0a413f36bae9c09b5fae6177c42f38a7027646",
+        "clips.json": "4fff7a706fe5c627f032f6cee3c17fe36abaa110ca83d0fceb0d5fe6b85f8f08",
+        "inspection.json": "cc5f2820acc31a1e5481d20b8751653d765b622ed2a122a1982a2e65b2955b6f",
+        "playback-samples.json": "411d17d559b8e2c0d4547ff0ab8dc2d5a741361f499563e886e445c1070a47e6",
+        "warlock_daybreak_event_linked.fbx": "249c6e5b374e2d458a9e79644f4b83a75743f5f5fa48fc9c00a102f97d2d312c"
+      },
+      "ssdBlendIdentical": true,
+      "boneCount": 72,
+      "fps": 30.0,
+      "sourceBlendUnchangedAfterEvaluation": true,
+      "objectScaleOmitted": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ]
+    },
+    {
+      "group": "warlock_nova_bomb",
+      "files": {
+        "source.blend": "f47050b41d24c2a07278c752952219c238207c6453433f1df9b00821034b8e4a",
+        "clips.json": "59461a408e15e36d95c61291321c611d5081b1873ea90e7f6afc28e85170a380",
+        "inspection.json": "9577f7230595ae5277b926dfc84f22c5aa2f6428489d40ceccf96e183d4b16b9",
+        "playback-samples.json": "a9f3f65740b6352095ddade2e3b2d51645cac50d67c5ce8846faf4f67c73c2b2",
+        "warlock_nova_bomb.fbx": "3375e4414030470213f17f49d9b66a82b92bd0f982a1cd2f0df6c9322e200e83"
+      },
+      "ssdBlendIdentical": true,
+      "boneCount": 72,
+      "fps": 30.0,
+      "sourceBlendUnchangedAfterEvaluation": true,
+      "objectScaleOmitted": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ]
+    },
+    {
+      "group": "warlock_stormtrance",
+      "files": {
+        "source.blend": "e3bb789eec3f400c0fe43e1301390a75853bca276a1cae9e47cd35ce5f271209",
+        "clips.json": "51e9c5199d0a557f9b8cd6646306fd3f607f26d89bd4c998453fd6b7ece86085",
+        "inspection.json": "363bccf85edd55ab09a9c39f7ba418cd4b1ddbde634d906515403032f751b27d",
+        "playback-samples.json": "d1c22148407c1a986537d16a23490b373eba504aa3d44aac553ed283100d4a3c",
+        "warlock_stormtrance.fbx": "6bf08a3cc1fdb39d1cf2edd7df7f6c10ad7cc177cd844693925f0d4171381af5"
+      },
+      "ssdBlendIdentical": true,
+      "boneCount": 72,
+      "fps": 30.0,
+      "sourceBlendUnchangedAfterEvaluation": true,
+      "objectScaleOmitted": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "group": "titan_hammer_of_sol",
+      "tag": "80A8A8AE",
+      "name": "Armature|80A8A8AE_titan_sunbreaker_hammer_throw|Replacement",
+      "range": [
+        1.0,
+        48.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "0127e2212942c8fea6b0a925861dfc4f687bda063be752aee98b4f7411236e84",
+      "evaluatedSamplesSha256": "7cbed32ca618c6c00c3b8d5516cd6def2b1d12d7a0aea073f6910f8b384ab945",
+      "rawSha256": "dffb1d556a1d600376dd223e89174334db2304c06b7c8bf197c95ee75c4e9b15"
+    },
+    {
+      "group": "titan_hammer_of_sol",
+      "tag": "80A8A8B2",
+      "name": "Armature|80A8A8B2_titan_sunbreaker_hammer_melee_lunge|Base",
+      "range": [
+        1.0,
+        48.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "3e6190ffd5e7dd8fce5ab9b051de72aa4eff52408ab6e917748a6fb8501d0316",
+      "evaluatedSamplesSha256": "f0600bcdd3ef53af30f7ef4da822e1732dcb46aa10ddf4ae4ec059b61544bdfd",
+      "rawSha256": "1ba75152bdd2bdd9d5ed587929bfcbce2744e238ec955f4afbde77a598491713"
+    },
+    {
+      "group": "titan_hammer_of_sol",
+      "tag": "80A8A8F0",
+      "name": "Armature|80A8A8F0_hammer_charge|Base",
+      "range": [
+        1.0,
+        39.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "59448c981c98e3b5fad26fc025320a18c636d6f8458b640b4ee99f8561dfb2e6",
+      "evaluatedSamplesSha256": "75943305b8031768cbb426309d49f2ddd185db97fd6487e3b6729c21e96433c6",
+      "rawSha256": "2be752bb1bdc625c5da39060b3d36de08cc96c64d665bcfe56643e2f11c5bd7b"
+    },
+    {
+      "group": "titan_hammer_of_sol",
+      "tag": "80A8A8F1",
+      "name": "Armature|80A8A8F1_hammer_cast_air|Base",
+      "range": [
+        1.0,
+        39.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "c64c0116e89c915642ce860a155a4150799cfde6eaa8632d981ec64795b19648",
+      "evaluatedSamplesSha256": "981f884e2f804b5d9515088edec97f1192fe36042236026ba75deecb4ecc784d",
+      "rawSha256": "97482b502fbf9f66759bbdf68ddedfd42d9384c6f2a49f4f524a9a3f56e55cd0"
+    },
+    {
+      "group": "titan_hammer_of_sol",
+      "tag": "80A8A8F2",
+      "name": "Armature|80A8A8F2_hammer_charge_air|Base",
+      "range": [
+        1.0,
+        26.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "cebe26648acf83b10d4d7debf499ac2680fd9c8c66a0791f8a950b9067f3a05b",
+      "evaluatedSamplesSha256": "c6f5345e52a3ab714a44c9d000cc04edf94c3461feb04555736eb3916c87d741",
+      "rawSha256": "35bd90096de0908857e1723e119dbae9ffc9321c869752687593db8548f8177b"
+    },
+    {
+      "group": "titan_hammer_of_sol",
+      "tag": "80A8A8F3",
+      "name": "Armature|80A8A8F3_titan_sunbreaker_hammer_melee_lunge_air|Base",
+      "range": [
+        1.0,
+        26.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "cebe26648acf83b10d4d7debf499ac2680fd9c8c66a0791f8a950b9067f3a05b",
+      "evaluatedSamplesSha256": "c6f5345e52a3ab714a44c9d000cc04edf94c3461feb04555736eb3916c87d741",
+      "rawSha256": "37cee99a7a02dff9430fb5a1146a62161101fa31e9a4e00cccbfa703c7a24653"
+    },
+    {
+      "group": "titan_hammer_of_sol",
+      "tag": "80A8A8FE",
+      "name": "Armature|80A8A8FE_hammer_cast|Base",
+      "range": [
+        1.0,
+        39.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "098486a0f10a008b923dfdf6f452d622d9cf03b71ddea8a58b518e86f7a084bb",
+      "evaluatedSamplesSha256": "1daf28cc456e4eaa8590bf89179930a1766cdd2f3223f90a76a76987d07b69d1",
+      "rawSha256": "844835a54ee40c3a4431bbae7dc9e398352403833f99989cbaee0e1b2e2b29e4"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A7D0",
+      "name": "Armature|80A8A7D0_shield_melee_weak_3|Base",
+      "range": [
+        1.0,
+        34.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "ec16b864e6d9266326011a8fc756e1ab5534d702a88a7433731bce464664df31",
+      "evaluatedSamplesSha256": "f3d7c9d911b30c2e7449dfdd5f0ccb4e055410de034cc454bb4de24cd53f7439",
+      "rawSha256": "912d7a9559a537da010b7df7922d712ee94d80f1f99a1a46f1c99f75deb8cadd"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A7D1",
+      "name": "Armature|80A8A7D1_shield_melee_weak_1|Base",
+      "range": [
+        1.0,
+        31.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "24b84a4e55a207841cc4a42c7e3458c035973c67409d1d5d00ff6512e4085881",
+      "evaluatedSamplesSha256": "88858ff07894aba6e4f48ea43185f0a9dc6d38ab65cc24e1230af1467828dcf8",
+      "rawSha256": "5eecda19a4fb10202f8f109b109dd4359f07d30e787210cc7fc39c99fa9bbe27"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A7D2",
+      "name": "Armature|80A8A7D2_shield_melee_airborne_heavy_1|Base",
+      "range": [
+        1.0,
+        33.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "eab0af7db64b09bd0510bbf6b7ff338c56df94117d422936180c827610947082",
+      "evaluatedSamplesSha256": "9487016f23354b03f753889ee3b627915aca10d250f5c0cd87ccfb442f28038f",
+      "rawSha256": "3b23a535b0d909aab5e8efeb2f9960ca73158fb0fffa33fcd849e37dda2db4e9"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A7E6",
+      "name": "Armature|80A8A7E6_shield_melee_weak_2|Base",
+      "range": [
+        1.0,
+        32.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "925275a595e5bee732ce00f401d1bcfa3ea7ce96ec1b86c701f36144aa03c2ae",
+      "evaluatedSamplesSha256": "d175a3b1fcb26173a4919a9ce00b64f421bf22c9d706b1b5ab5be1f0d264db91",
+      "rawSha256": "12362a1e0d8bf1a9c32095edaca7f2c7e5334fce2729b800008a163a29325af0"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A7E7",
+      "name": "Armature|80A8A7E7_shield_melee_weak_1_air|Base",
+      "range": [
+        1.0,
+        25.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "d80cd6cbe9017493e824606e8b393670c84dda6aba35d2e3568a4401822144dc",
+      "evaluatedSamplesSha256": "8309353c36f4d4d0b516d1d3e8f01a628551b5e4980a2435c4ac280af299f3e7",
+      "rawSha256": "6a0369f984d3a1ad19e4763cf655b46f5bce1c28d0ec28d71e585f6569b8dc4d"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A81D",
+      "name": "Armature|80A8A81D_shield_melee_heavy_slam_air_enter|Base",
+      "range": [
+        1.0,
+        25.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "66cf0a016d3a21856f2efe7a04f7a4d0157e38e835890689464cff2dcc688e1f",
+      "evaluatedSamplesSha256": "5346cdd5389c37d77806ebf21ad5d3df15091f7f3f5906b91c4533c357edeabe",
+      "rawSha256": "f34a3924a8a97136ef163ace33e1b766cf400943d896147cc35d8f38abca1333"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A924",
+      "name": "Armature|80A8A924_shield_throw_crusader|Base",
+      "range": [
+        1.0,
+        41.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "6c22e70cf7f3fb4e5ecadbffe9e15b929a8cb77a930b98f6536ba31464f4c69f",
+      "evaluatedSamplesSha256": "a2f911f73ae9e37653d564ea2842f808e69b63c4a7097869cdb7d2b064cd8239",
+      "rawSha256": "b84b81b6c67f2e3ce7b684d56d27f39ad67f5bb2112659f57ff6a0eb6d719f0a"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A928",
+      "name": "Armature|80A8A928_titan_sentinel_shield_cast_enter|Base",
+      "range": [
+        1.0,
+        43.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "32aa751f3486d1bb68259bfd60acb25f38601ace5fe22031244a0d1b0b5977f7",
+      "evaluatedSamplesSha256": "6b2492631c0180cd75f1d5ea0cb859bd3997a8d42d8938fdb034adf37931a094",
+      "rawSha256": "487f169ae11e8a8cd98ba9be7f7312aeb3ccaada1829c5ac70b640a8d632882e"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A94F",
+      "name": "Armature|80A8A94F_cast_air_crusader|Base",
+      "range": [
+        1.0,
+        41.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "6ef5c899d6cdefed0555208dec7078dfed11342a9e3cbb64614216e5c64c1827",
+      "evaluatedSamplesSha256": "dd1fcff58b194535b7eea6093c1e1a300891a2dd1b8e1d46e5ded96881c4fb90",
+      "rawSha256": "54b75b40e8fff698687d74748674e8fa5ff42a7923db40794339d8ac024d26f5"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A964",
+      "name": "Armature|80A8A964_titan_sentinel_shield_charge|Base",
+      "range": [
+        1.0,
+        36.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "7a4f85a4cb10931a66fa2c1c2c8daf746830a1ec214d5176989663b28fc78762",
+      "evaluatedSamplesSha256": "db25958c2e85cd2f2aac3916fb9531fdaef70eceeadd398f43d6c7c243ef9eec",
+      "rawSha256": "aad54de18a64d19876adebab78094d390db9d62ea5af5ac9cddfb9b59ecd21d3"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A967",
+      "name": "Armature|80A8A967_titan_sentinel_shield_throw_air|Base",
+      "range": [
+        1.0,
+        25.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "0a04167b3675103a0d9a9fe25e7c5cfb8604ca0951adb480c98c88bdf80accf3",
+      "evaluatedSamplesSha256": "a7b5af3ab2a047adc921776cc59a2c51da2ee7dde1e09daa0eea52181cba9692",
+      "rawSha256": "6f636c9bae5580f95a6d045788d9b402f2e662a654be444af08c0ec09ea3764c"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A97D",
+      "name": "Armature|80A8A97D_titan_sentinel_shield_charge_combo|Base",
+      "range": [
+        1.0,
+        36.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "0d0f2eb3a7c8f18bf306570d6e7628235b566e2beff4673a4a57eb753290d505",
+      "evaluatedSamplesSha256": "54667bb791ab7667533140c444b6a98955f7073349b0550c2503626106702bdb",
+      "rawSha256": "656f5401275137180961fa8e7951cffa8d5556d907d9ae763660da86db8306eb"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A983",
+      "name": "Armature|80A8A983_titan_sentinel_shield_charge_air|Base",
+      "range": [
+        1.0,
+        32.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "ef8cbe94ee56aebe86204ec09534243f6d4d5867f3d52cce8bbe25f1bf2d7c12",
+      "evaluatedSamplesSha256": "767df01f95ee91003a60415a597500524faac1ba1e87e99d1bfbe61ae029a7dd",
+      "rawSha256": "206bfc79f7ab3371e22f62b7c4ad3e2d70a48ffbea7b65f44f4b0c0c5d5dd874"
+    },
+    {
+      "group": "titan_sentinel_shield",
+      "tag": "80A8A9AD",
+      "name": "Armature|80A8A9AD_titan_sentinel_shield_sprint|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "d6db5de50c2082e64c6b9fff896c5e93cd2d3f5c292ab779c8f7a93346758ca9",
+      "evaluatedSamplesSha256": "7b74e16adbf5ddb268d4e85eb0d32ba24e7af380b6bc1f1724ae6346016bbe33",
+      "rawSha256": "f6f2fcac2a86e7e1b8beec0b17da7020118fdd9b7f9ba0c9ca139d1501bc07d7"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A921",
+      "name": "Armature|80A8A921_warlock_archangel_cast|Base",
+      "range": [
+        1.0,
+        48.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "e0ae714c6ab4b881b30d5b6a84068bd13ed0df79f3675a612c664f238d21be26",
+      "evaluatedSamplesSha256": "44a40abdf0c6ca6d01a580de999834da905a1add1c7250bd0000b2b7fb553503",
+      "rawSha256": "2e5cb1fd66213e9e1e784f81ef6bfa48292051a2224533f6e034baa417231420"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A968",
+      "name": "Armature|80A8A968_warlock_dawnblade_dodge_front_air|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "bcaa75d4ca3c9bdee895b61a9e88eaf95b5924813e851142bec9e4c3f4674861",
+      "evaluatedSamplesSha256": "59dbd045d7e672f789913a24340b63a8df687993a70c2ada592e29891de04639",
+      "rawSha256": "20e0b20869ced9c9331a4e0d96ea6bac9d3ffc3bdb940307f8817606e9bb1c80"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A969",
+      "name": "Armature|80A8A969_dodge_right_air_warlock|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "05734f6853fe2e5c64541b1062d1c39cc49323406d833ff6099a82750d81a378",
+      "evaluatedSamplesSha256": "2df61a2b5222ed3b14905c51ad189ac26fdd7b783776af9fb695826fc21e2f4d",
+      "rawSha256": "75809ab3a6f123b13f80fbb4632fc69acb87dbeb36e4297d4d89877c3e85ff26"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A96A",
+      "name": "Armature|80A8A96A_dodge_left_air_warlock|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "7a1343cf32740961af1d500a15f9efa3f2a095f9b0f0b444560c5c43475c915f",
+      "evaluatedSamplesSha256": "b65c2be962060d68573ea26f9944ffa0544ea74a96aff354d417cd584c698fff",
+      "rawSha256": "ab203a934522e949789bb3c2da7d3409ab6d16ec38f7ebcb94cafe05eaaa449b"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A96C",
+      "name": "Armature|80A8A96C_warlock_dawnblade_dodge_back_air|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "2dce49fde772e39a6193fa40de23d89d4f4ac2341076fc4316cbdda78b100be5",
+      "evaluatedSamplesSha256": "9e5d5abb6a6b2e34158fdd641749b4b35a897574a038de59fee017b363718b31",
+      "rawSha256": "bbb9b87cd632503bc53638a1d313b5fb242371d4b7d091ccaa4a9a67f8147201"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A973",
+      "name": "Armature|80A8A973_warlock_archangel_cast_air|Base",
+      "range": [
+        1.0,
+        48.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "4caffa8463dc03cb2185224a521a5da8868cd82b1f6f5db04870a3be4765796a",
+      "evaluatedSamplesSha256": "caff0aecd9e6ebbd2a19cc38784e68a19cb3406ff69845734eed2ba994b03654",
+      "rawSha256": "2aef23cd9789f7748ac6ec819e0ec0ff62ddccdb8d07f38436d8eeea172541cc"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A98D",
+      "name": "Armature|80A8A98D_dodge_back_air_archangel|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "d8627cbf27d882e71f9e44a8ec1796a883cb9dc73e345fb0e77cc3de2779144d",
+      "evaluatedSamplesSha256": "cce053f489750dfa4a44652dbd1ba4ac6356c02c33ef87b4995dbf9449571018",
+      "rawSha256": "40ed7798eda63e836249cfafe2f891757f82ff81b6594d6306a0abcd3b87a755"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A98F",
+      "name": "Armature|80A8A98F_dodge_left_air_archangel|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "00e0666e7be0c033e85529c74ecd70cf0fcfb74a06cc81c4a13ae77735393f79",
+      "evaluatedSamplesSha256": "2e45cb46d252f1bbffafb4932316d338839cc654a58c246829dc9b0457fe652f",
+      "rawSha256": "11a22561a5bb95a6b7c98fceeeea26abe0e1916f8beae921c1190850d915b1da"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A990",
+      "name": "Armature|80A8A990_dodge_front_air_archangel|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "db0e66446315e513ea4c576fdaf934adefca922420f035d53ac6a3528294c9b3",
+      "evaluatedSamplesSha256": "5e6bee7627b05f7d0f5c5d019e0b5787652e1ff6bb951a72985566bf153d9fbc",
+      "rawSha256": "a9c48fc3fa119f39b4623a19963a89b8d4cfc5f3bf04f207a2e7a223a14542c8"
+    },
+    {
+      "group": "warlock_daybreak",
+      "tag": "80A8A991",
+      "name": "Armature|80A8A991_dodge_right_air_archangel|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "c4d763607c6d1f9fea1488ea9bc0645f18823e918c05410ff153bfedfb672f7e",
+      "evaluatedSamplesSha256": "7ad49f5864a51ec10d64ab312a7e173fb004e691844c1fc3873b0caf77666b3a",
+      "rawSha256": "4475262b7c559e2fc978433c9875d9d5b24eb26eab10064acf4d4c0eca4a4c68"
+    },
+    {
+      "group": "warlock_daybreak_event_linked",
+      "tag": "80A8A960",
+      "name": "Armature|80A8A960|Base",
+      "range": [
+        1.0,
+        32.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "5257748429fdce2c78d062655804b14f06ee788329ee7b2167eccba606c0cd81",
+      "evaluatedSamplesSha256": "44d1806ec98665415159bd95920fbfd5626b676193ced4248ae83e0ca3fb923e",
+      "rawSha256": "67b96939427cfad99c098b1570de54af3132b9fe8d36d5dffeffada66b1d169d"
+    },
+    {
+      "group": "warlock_daybreak_event_linked",
+      "tag": "80A8A962",
+      "name": "Armature|80A8A962|Base",
+      "range": [
+        1.0,
+        35.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "5baf26c365736d67ff0cb300ed89abb31e31a0b5ccaaa8a04a5974603a87b639",
+      "evaluatedSamplesSha256": "6862eed7b39af32896c1531d3156df6173f0fb7efe76a8806947d6a3d4790b24",
+      "rawSha256": "058514674b7023cb49ca0757c4de07f1a2a37a4c8e731952dfa9df479ea8818c"
+    },
+    {
+      "group": "warlock_nova_bomb",
+      "tag": "80A8AD80",
+      "name": "Armature|80A8AD80_warlock_voidwalker_novabomb_cast|Base",
+      "range": [
+        1.0,
+        40.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "094e61d9b32f2a2a8d49dff69d7690876ce78d3873f507063bc1a1c792c604af",
+      "evaluatedSamplesSha256": "e6ef502b410a038a4959172018e4d2c48422fc37cc0b976f01a700e75a272e2b",
+      "rawSha256": "8d10b330d5ae73459cc58f6ea40d32a9d8857eb73ee68f8d3ff752ed46c694ad"
+    },
+    {
+      "group": "warlock_nova_bomb",
+      "tag": "80A8AD81",
+      "name": "Armature|80A8AD81_warlock_voidwalker_novabomb_cast_air|Base",
+      "range": [
+        1.0,
+        40.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "f0e8ce91baee6d888c92b2d0648e089442e187a9f08e8df2e3bb267430e6c847",
+      "evaluatedSamplesSha256": "e414d19ed9910429de54834a3155daf903ea21581aa84fe4b288a28060d69133",
+      "rawSha256": "f50988444a7721492479efc07422528b2439bf37a0c8624585975f4077e0fb72"
+    },
+    {
+      "group": "warlock_nova_bomb",
+      "tag": "80A8AD82",
+      "name": "Armature|80A8AD82_novabomb_spread|Base",
+      "range": [
+        1.0,
+        40.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "371c40f51fdf417223180ec6a64425322f409639d266642ad039c727d3b98e78",
+      "evaluatedSamplesSha256": "df8c6c79e28c9ac5996de96b5484ab20861986e46fe14ddd8d3c684c90349215",
+      "rawSha256": "c21da99cd49f3654e0248f70e7b722b36ea047fd8a9ee8522bc80dd597606fde"
+    },
+    {
+      "group": "warlock_nova_bomb",
+      "tag": "80A8AD87",
+      "name": "Armature|80A8AD87_novabomb_spread_air|Base",
+      "range": [
+        1.0,
+        40.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "cbebe63c782097d89162288ba2793cc79faf8d47a3a364a9fb697ebbd1685b87",
+      "evaluatedSamplesSha256": "488d5fde659155618707d883794379a4c4535c6ebf3751074981d3769c062264",
+      "rawSha256": "fc24df7985c2eefa66ff000e5af0c630d3dc480a796cef7b1111bf767e7236ca"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8A8",
+      "name": "Armature|80A8A8A8_lightning_cast_enter|Base",
+      "range": [
+        1.0,
+        15.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "8ab38eca744702390cb8e64c198830ff2c349d6fde4286649029e7b04e8a2d78",
+      "evaluatedSamplesSha256": "4d87ff5ff3493d79c4408c0ed68328db230ae5a89e4332c18fd15196c7f7c0ba",
+      "rawSha256": "ae7c61ca6fe38630e52fe7b987d2b95f9c825e29af17c0fa01122310f7601d8a"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8AA",
+      "name": "Armature|80A8A8AA_warlock_lightning_cast_exit|Base",
+      "range": [
+        1.0,
+        11.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "60b0595319aac7513658ae37e70c115bca40ddf7006aef54ddf3230b8267979a",
+      "evaluatedSamplesSha256": "f242afe306989047cdad2777ba8380d22508138bf2b350fc5ccaacc303ae438a",
+      "rawSha256": "c2e96614ce3f6cba32f03552eeb01cc3be4514dd52f8fefd5f3a87d550e1d473"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8AC",
+      "name": "Armature|80A8A8AC_warlock_lightning_cast_idle|Base",
+      "range": [
+        1.0,
+        16.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "dc60bf7acabfacaa273a36d1cfe536ffe358d328a830493666f3b07f4461436b",
+      "evaluatedSamplesSha256": "c6a573da37425d7816fd85d388d7d6aa27f5c544fcce30a72d86509d14cc0b90",
+      "rawSha256": "430bf72f967a6f960334abeeb11cb902172cebc7957e19d4972b67af40054c68"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8B0",
+      "name": "Armature|80A8A8B0_warlock_stormcaller_lightning_cast_enter|Base",
+      "range": [
+        1.0,
+        38.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "ec021e1b16e56f6bafcef63a9699f9f56468f7deb2e0178b83b60b1c968b7454",
+      "evaluatedSamplesSha256": "1729bebfcfa966f1ba87319eba6d7624e17d2da3b97fc9c0f3a7b79116de8c7a",
+      "rawSha256": "ff38128101730e8402b594b985e0567dba8397c3b256bc289025310e1be5c769"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8B4",
+      "name": "Armature|80A8A8B4_cast_blink|Replacement",
+      "range": [
+        1.0,
+        19.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "0b94ad48d52d887d84bc3f704f192040bec23611cac296499378a3d75790b624",
+      "evaluatedSamplesSha256": "3ab3e0fd4f0ac0b41d1f794080975c160b4a8f97e02b81e0df2ade0bd7af4157",
+      "rawSha256": "29039281f58707b473fad0699b86fe5e51a59a48e50276d6d6376ce708da4958"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8C6",
+      "name": "Armature|80A8A8C6_lightning_enter_air|Base",
+      "range": [
+        1.0,
+        39.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "592216f6375e2bb6dc71bf628d25a766c40ffbfc3f6b8dc9816876e23f895421",
+      "evaluatedSamplesSha256": "f0f75bf396b7368de2a7b73bbd367094a25f058daaff4f4865b56123c5ccc708",
+      "rawSha256": "f3331dbbd3a9cc432bca0b1ad1b996c624597fa95269440cb677e6570b92e8cd"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8D9",
+      "name": "Armature|80A8A8D9_warlock_lightning_cast_exit|Replacement",
+      "range": [
+        1.0,
+        11.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "3e12213c806cdbdeeeb5114e3670e3e43f5a0da67cbbbf7e1657f085c4574549",
+      "evaluatedSamplesSha256": "915bae8671843aa64d70b5a5dd65088a3eaacae9bb57b484e49a62cd09fc8e10",
+      "rawSha256": "943f0d7c746378712712b04610ed26779eebced6c8568334375eb92664238bfd"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8DC",
+      "name": "Armature|80A8A8DC_lightning_cast_enter|Replacement",
+      "range": [
+        1.0,
+        15.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "2253a44d5825b8f775728fb21284dff877b2eb78ffdf14488c5f1f8b2166dae1",
+      "evaluatedSamplesSha256": "b6cf241f0c2b97de4f1ba6d995e1f0da5dbb41c5875265657b21c1143c8f1773",
+      "rawSha256": "71583e8578099a5789ff69cf507c2f253233ade4d8024b77feb993a25065aff9"
+    },
+    {
+      "group": "warlock_stormtrance",
+      "tag": "80A8A8DD",
+      "name": "Armature|80A8A8DD_warlock_lightning_cast_idle|Replacement",
+      "range": [
+        1.0,
+        6.0
+      ],
+      "curves": 720,
+      "actionCurvesSha256": "5f2cf5fa9436ae67441be28ccdc91f7d5c13eac0c98a40cc56974d54e67e38d1",
+      "evaluatedSamplesSha256": "aea93e5ebb7871d50febc426c36401d7eb46ceca4bc8df2e946b63aadd616f62",
+      "rawSha256": "5fba7aa293abbf1a34a551abc6e384cab7fad023f29fcf0123de77d09bf7497c"
+    }
+  ],
+  "model": "guardian_classes_w229_r2",
+  "revision": 2,
+  "r1FrozenManifest": "frozen-r1-manifest.json",
+  "r2Changes": [
+    {
+      "name": "w229_titan_solar_move",
+      "kind": "source hold upperbody + explicitly MC-authored lowerbody gait",
+      "upperBodySource": {
+        "r1Clip": "w229_titan_solar_idle",
+        "tag": "80A8A8AE",
+        "frame": 48
+      },
+      "lowerBodySource": "authored",
+      "superAssociation": "known super upperbody; no verified super walking source",
+      "sourceFrameSnapshot": 48,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "2acd53f9b6fb8f82870b67457186461d506aad2816f8ce684d47aff951356956",
+      "semanticEvidence": "Source rip \uc544\ub2cc lowerbody gait. R1 terminal hammer recovery upperbody held; 0.8s authored walk/run cadence, not source duration.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_void_move",
+      "kind": "source-derived lowerbody composition",
+      "upperBodySource": {
+        "r1Clip": "w229_titan_void_idle",
+        "tag": "80A8A928",
+        "frame": 43
+      },
+      "lowerBodySource": {
+        "tag": "80A8A9AD",
+        "range": [
+          1,
+          16
+        ]
+      },
+      "superAssociation": "exact named Sentinel sprint; upperbody composed from known super ready",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.5,
+      "clipTicksExact": 10.0,
+      "clipDurationTicksCeil": 10,
+      "motion61SamplesSha256": "892aa5a33a425fc927cf8cb85a9f9fa284fee0f52989dca858da431038b8eea2",
+      "semanticEvidence": "Every native sprint frame retained in 61 samples; 0.5s original elapsed time. No whole-body original-sprint claim. Endpoint seam is measured, not silently rewritten.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pli_left_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_idle",
+      "kind": "evaluated source sword-catch loop adapted to Daybreak",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "lowerBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "superAssociation": "partial association only; generic sword-catch, not confirmed Daybreak idle",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.7333333333333333,
+      "clipTicksExact": 14.666666666666666,
+      "clipDurationTicksCeil": 15,
+      "motion61SamplesSha256": "787ff519cf3ae5495a10b50ae501494b7447174388b10ab0f07a9cdd973737ed",
+      "semanticEvidence": "Temporary source-derived sword carry. Evaluated compatible rig/one-handed item node; source is Replacement layer and its original runtime base/mixing is unresolved. Replaces rejected cast f28; no Daybreak-exclusive claim.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_move",
+      "kind": "source sword-catch upperbody + explicitly MC-authored lowerbody gait",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "lowerBodySource": "authored",
+      "superAssociation": "partial sword-catch association only",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.7333333333333333,
+      "clipTicksExact": 14.666666666666666,
+      "clipDurationTicksCeil": 15,
+      "motion61SamplesSha256": "3dae956d38c7fd05bb2345dab752fb044e676e1db671e017f2bea2d465cd4c5a",
+      "semanticEvidence": "Upperbody, wrists and item local transforms retain source idle timing (22/30s). Legs are Source rip \uc544\ub2cc lowerbody gait. Ground cadence is authored, not original Daybreak movement.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_air",
+      "kind": "source-derived sword-carry/glide composition",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "snapshotFrame": 1
+      },
+      "lowerBodySource": {
+        "tag": "80A8AB5E",
+        "range": [
+          1,
+          61
+        ]
+      },
+      "superAssociation": "generic Warlock glide + generic sword-catch, no dedicated Daybreak association",
+      "sourceFrameSnapshot": 1,
+      "sampleCount": 61,
+      "lengthSeconds": 2.0,
+      "clipTicksExact": 40.0,
+      "clipDurationTicksCeil": 40,
+      "motion61SamplesSha256": "677708ed17135a90ca8a13ce61cb766b2b9934acf68b8a66f01e67de24a2178d",
+      "semanticEvidence": "Temporary compatible air carry. Real source glide legs under held sword-catch upperbody; no procedural flight or gameplay root motion.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_arc_idle",
+      "kind": "explicitly MC-authored temporary ready hold",
+      "upperBodySource": null,
+      "lowerBodySource": "authored",
+      "superAssociation": "no Fists of Havoc source identified",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "670019c059b9d2b0dfa0906a01b1e8a0199aac12628cae5e4c60e718b0d2ac1c",
+      "semanticEvidence": "Authored fist-ready loop; no source rip, source action, recovered cast/contact or original timing claim. Arms are player limb blocks; no fingers added.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": null,
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_arc_move",
+      "kind": "explicitly MC-authored temporary lowerbody gait",
+      "upperBodySource": null,
+      "lowerBodySource": "authored",
+      "superAssociation": "no Fists of Havoc source identified",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "f7e6fc734de5ba542ceb6fde869fd1675dc37c2df59c6685f1d4a1b9ac5cfe89",
+      "semanticEvidence": "Authored ready upperbody preserved; Source rip \uc544\ub2cc lowerbody gait. No fabricated start/attack/end; master retains native lifecycle.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": null,
+      "productProvisional": null
+    }
+  ],
+  "r2SourceActions": {
+    "80A8B370": {
+      "group": "other_player_actions_08",
+      "actionName": "Armature|80A8B370_sword_catch_idle|Replacement",
+      "sourceRange": [
+        1.0,
+        23.0
+      ],
+      "sourceFps": 30,
+      "actionCurvesSha256": "7a03fdd038828b8e81966302f371cd41fb85ef824ca39fcccaa722f4449abd99",
+      "evaluatedSamplesSha256": "e353dce7f9834d7e890b12d6f876f3d9293489f6b7e0bc6a1ad1272a20fdb15f",
+      "sourceBlendSha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6",
+      "rawSha256": "a9c789c3a0a69bcadeae4d95ae9ca8a1d2ea501c441fa579113e11b982150ce3",
+      "association": "partial_association_only",
+      "sourceNames": [
+        "sword_catch_idle"
+      ],
+      "sourceEvents": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        }
+      ]
+    },
+    "80A8AD1E": {
+      "group": "other_player_actions_08",
+      "actionName": "Armature|80A8AD1E_titan_catch_hammer_idle|Replacement",
+      "sourceRange": [
+        1.0,
+        23.0
+      ],
+      "sourceFps": 30,
+      "actionCurvesSha256": "70a8df6c6b85e6c53d1f64188b68095b070ae59126043aeb9add61fcffcdc51e",
+      "evaluatedSamplesSha256": "572f7fade355e54b72313308161100a08fee29e2792975b2585e48ee728bb1cf",
+      "sourceBlendSha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6",
+      "rawSha256": "4365d4d32b999ab385dde59e2b243ceb7dd988905307963700b462402d69a047",
+      "association": "partial_association_only",
+      "sourceNames": [
+        "titan_catch_hammer_idle"
+      ],
+      "sourceEvents": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 22,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        }
+      ]
+    },
+    "80A8A9AD": {
+      "group": "titan_sentinel_shield",
+      "actionName": "Armature|80A8A9AD_titan_sentinel_shield_sprint|Base",
+      "sourceRange": [
+        1.0,
+        16.0
+      ],
+      "sourceFps": 30,
+      "actionCurvesSha256": "d6db5de50c2082e64c6b9fff896c5e93cd2d3f5c292ab779c8f7a93346758ca9",
+      "evaluatedSamplesSha256": "7b74e16adbf5ddb268d4e85eb0d32ba24e7af380b6bc1f1724ae6346016bbe33",
+      "sourceBlendSha256": "5e99140ef782974b87a5076e9a04be5e9a7318a95fea31e6ae317fc7706638bf",
+      "rawSha256": "f6f2fcac2a86e7e1b8beec0b17da7020118fdd9b7f9ba0c9ca139d1501bc07d7",
+      "association": "exact_source_named_family_role",
+      "sourceNames": [
+        "titan_sentinel_shield_sprint"
+      ],
+      "sourceEvents": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 5,
+            "Unk02": 2,
+            "Unk04": 29,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 13,
+            "Unk02": 2,
+            "Unk04": 28,
+            "Unk06": 0
+          }
+        }
+      ]
+    },
+    "80A8AB5E": {
+      "group": "other_player_actions_06",
+      "actionName": "Armature|80A8AB5E_glide|Base",
+      "sourceRange": [
+        1.0,
+        61.0
+      ],
+      "sourceFps": 30,
+      "actionCurvesSha256": "e74152e1b91384594abbd7847e8152e2f15c4e4ea94eba65cdbad9665975cb74",
+      "evaluatedSamplesSha256": "32f542b1fbb9093284681a6912a3f05f9da81296ebd5cbd3747fdb7e983e4cc9",
+      "sourceBlendSha256": "73e27be634c081cdf6daeb2c756d3176d3c17b5c5e75409f8d2a25f4d76efd34",
+      "rawSha256": "9371eb3c50c422f1be10c54ab9547b9e0f97fa358fb6c71f7a04ea4429a48bf0",
+      "association": "generic_class_motion_only",
+      "sourceNames": [
+        "glide",
+        "warlock_glide_idle"
+      ],
+      "sourceEvents": []
+    }
+  },
+  "discovery": {
+    "manifestClips": 2171,
+    "candidateBlendActions": 236,
+    "details": "source-discovery.json",
+    "sourceWorkerReportSha256": "8095f6574452e57f31d8cbd0d94fa80595685844abb564ce22cf54ea2330307a"
+  },
+  "sourceLimitations": [
+    "Sword-catch/hammer-catch idle names do not establish dedicated super state selection. Replacement runtime base unresolved; meshless source has no actual sword object. Compatibility is retarget/static node geometry only until native Vision2.",
+    "TitanArc has authored idle/move only; original Fists source still unidentified.",
+    "Generic Warlock glide legs do not prove Daybreak flight state."
+  ],
+  "equipment": "unchanged pri_right_item / pli_left_item; master superItem owns actual source props; no extra holder"
+}

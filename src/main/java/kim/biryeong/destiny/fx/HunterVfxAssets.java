@@ -16,7 +16,8 @@ public final class HunterVfxAssets {
             "destiny_super_solar_muzzle_h15", "destiny_super_solar_impact_h15", "destiny_super_void_anchor_h15");
 
     public static List<String> allModels() {
-        return java.util.stream.Stream.concat(MODELS.stream(), SUPER_MODELS.stream()).toList();
+        var originals = java.util.stream.Stream.concat(MODELS.stream(), SUPER_MODELS.stream()).toList();
+        return java.util.stream.Stream.concat(originals.stream(), originals.stream().map(name -> name + "_enemy")).toList();
     }
 
     private HunterVfxAssets() { }

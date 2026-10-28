@@ -1,0 +1,47 @@
+{
+  "model": "guardian_classes_w229_r2",
+  "reason": "Leg groups parent player_root, not phip_hip. Re-express source gait world rotation under actual parent. Four move/air clips corrected; existing16clips unchanged. Original frozen six files remain byte identical.",
+  "baselineInstalledR2": {
+    "classes_w229.animation.json": "953a7f9229019f1628333e750e348540f910d89d659a5c71a212ac427bc1857b",
+    "guardian_classes_w229_r2.bbmodel": "6e12392bef6027547456e17f27188e8e52a9cdf8a10c12c31a8dfb1ca1134ef5",
+    "provenance.json": "05d5cae6641b338e39d038ad00dbefcd82f841933920bbcb74eaa80e791877b6",
+    "motion61samples.json": "fd26c26bfae3cb122265e29866fc52cb0564587e4d58aeff4853927913c6f01c",
+    "timing-manifest.json": "cab3d98c4bd17c0a7d5632e0d9b39fbb02593dd0e0165aaebdcfa90fb1d8675b",
+    "validation.json": "a58a9f49fb82f21160402e6da52bd53daf804835778a17e45d3efebc59b1b7bc"
+  },
+  "correctedFiles": {
+    "classes_w229.animation.json": "c37d9e0ad7d6aac7fef19c3e2723e7c3d8fb9b360362aa0a00d9121279dfc1f8",
+    "guardian_classes_w229_r2.bbmodel": "c590f81cc495a0f8ff7af069b396db86af4716d18f515db8a2e755bdf597c928",
+    "provenance.json": "1e1a061d18ab703db364b55c3db2c98b21982f6618b6e38bc9d988fc4c6c7f65",
+    "motion61samples.json": "a65c19119e6391235740e27095d1613e3d87a54b73c2f536bf866e24139d8145",
+    "timing-manifest.json": "d90a2290ae173e92e8031e4b7c034fe5a10ce9810644966a59d650454eda56ed",
+    "validation.json": "0671bd4c21446fe3913ce76ce553b061096cb3c6160068c7799f6a7e0c8481e8"
+  },
+  "changedClips": [
+    "w229_titan_solar_move",
+    "w229_titan_void_move",
+    "w229_warlock_solar_move",
+    "w229_warlock_solar_air"
+  ],
+  "unchangedClips": [
+    "w229_titan_solar_start",
+    "w229_titan_solar_attack",
+    "w229_titan_solar_idle",
+    "w229_titan_void_start",
+    "w229_titan_void_attack",
+    "w229_titan_void_idle",
+    "w229_warlock_solar_start",
+    "w229_warlock_solar_attack",
+    "w229_warlock_solar_idle",
+    "w229_warlock_arc_start",
+    "w229_warlock_arc_attack",
+    "w229_warlock_arc_idle",
+    "w229_warlock_arc_end",
+    "w229_warlock_void_attack",
+    "w229_titan_arc_idle",
+    "w229_titan_arc_move"
+  ],
+  "integration": "CAS installed full JSON against baselineInstalledR2; replace with parent-fix full resource and companion provenance/timing/validation. Model remains guardian_classes_w229_r2 before native QA. Do not rebuild source or change original frozen artifacts.",
+  "validation": "supplemental-validation.json",
+  "status": "offline validated; requires master integration and native R2 QA"
+}

@@ -40,12 +40,15 @@ public final class SuperCamera {
         final ServerLevel level;
         final boolean bow;
         final Display.ItemDisplay mount, camera;
+        final net.minecraft.world.item.ItemStack swordStack;
         Vec3 previous;
         Vec3 physicsStart;
         int lastRotation, rotations;
+        int movementUnlockTick;
 
-        Session(ServerPlayer owner, Element element) {
+        Session(ServerPlayer owner, Element element,net.minecraft.world.item.ItemStack swordStack) {
             this.owner = owner;
+            this.swordStack=swordStack;
             bow = element == Element.VOID;
             level = owner.level();
             mount = marker(owner);
@@ -67,7 +70,23 @@ public final class SuperCamera {
     }
 
     public static boolean active(ServerPlayer p) { return ACTIVE.containsKey(p.getUUID()); }
+    public static boolean swordActive(ServerPlayer p) {
+        Session s=ACTIVE.get(p.getUUID());return s!=null&&s.swordStack!=null;
+    }
+    public static void stopSword(ServerPlayer p) {
+        if(swordActive(p))stop(p);
+    }
     public static int activeCount() { return ACTIVE.size(); }
+    /** Session-owned input gate, not a teleport/freeze: gravity and existing impulses remain native. */
+    public static void blockMovement(ServerPlayer p, int ticks) {
+        Session s = ACTIVE.get(p.getUUID());
+        if (s != null && !s.bow) s.movementUnlockTick = s.level.getServer().getTickCount() + Math.max(0, ticks);
+    }
+
+    public static boolean movementBlocked(ServerPlayer p) {
+        Session s = ACTIVE.get(p.getUUID());
+        return s != null && s.level.getServer().getTickCount() < s.movementUnlockTick;
+    }
     public static int rotations(ServerPlayer p) {
         Session s = ACTIVE.get(p.getUUID());
         return s == null ? 0 : s.rotations;
@@ -81,11 +100,29 @@ public final class SuperCamera {
     public static boolean start(ServerPlayer p, Element element) {
         if (element == Element.SOLAR || !ENABLED) return true;
         if (element != Element.ARC && element != Element.VOID) return true;
+        return startSession(p,element,null);
+    }
+
+    /** All Titan/Warlock supers use the normal rear camera, including Solar. Golden Gun keeps start(). */
+    public static boolean startThirdPerson(ServerPlayer p) {
+        return !ENABLED || startSession(p, Element.KINETIC, null);
+    }
+
+    /** Sword stays third-person while this exact held stack is selected, not only during a swing. */
+    public static boolean startSword(ServerPlayer p) {
+        if(!ENABLED||!kim.biryeong.destiny.weapon.SwordItems.isSword(p.getMainHandItem())
+                ||AbilityService.inSuper(p)||!kim.biryeong.destiny.weapon.WeaponLoadout.canUse(p))return false;
+        Session s=ACTIVE.get(p.getUUID());
+        if(s!=null)return s.swordStack==p.getMainHandItem();
+        return startSession(p,Element.KINETIC,p.getMainHandItem());
+    }
+
+    private static boolean startSession(ServerPlayer p,Element element,net.minecraft.world.item.ItemStack swordStack) {
         if (p.isPassenger() || p.isSpectator() || p.isDeadOrDying() || p.isSleeping()
                 || p.getAbilities().flying || p.isFallFlying() || p.hasDisconnected()
                 || p.getCamera() != p || CameraViews.get(p) != null) return false;
         stop(p);
-        Session s = new Session(p, element);
+        Session s = new Session(p, element,swordStack);
         ACTIVE.put(p.getUUID(), s);
         try {
             updatePositions(s);
@@ -126,6 +163,14 @@ public final class SuperCamera {
         if (s == null) return;
         s.physicsStart = p.position();
         Input in = p.getLastClientInput();
+        if (movementBlocked(p)) {
+            p.xxa = 0;
+            p.zza = 0;
+            p.setJumping(false);
+            p.setShiftKeyDown(false);
+            p.setSprinting(false);
+            return;
+        }
         var v = CameraMath.input(in.forward(), in.backward(), in.left(), in.right(), in.shift());
         p.xxa = v.strafe();
         p.zza = v.forward();
@@ -177,15 +222,23 @@ public final class SuperCamera {
                     || p.isSpectator() || p.isSleeping() || p.isPassenger() || p.getAbilities().flying || p.isFallFlying();
             boolean timedOut = server.getTickCount() - s.lastRotation > ROTATION_TIMEOUT;
             boolean teleported = p.position().distanceToSqr(s.previous) > 64;
+            if(s.swordStack!=null&&(p.getMainHandItem()!=s.swordStack
+                    ||!kim.biryeong.destiny.weapon.WeaponLoadout.canUse(p)||AbilityService.inSuper(p))) {
+                release(s,!foreign&&p.level()==s.level);
+                PlayerAnimations.stopSword(p);
+                continue;
+            }
             if (foreign || invalid || timedOut || teleported) {
                 // Remove our control BEFORE ending the super; no recursive ownership or delayed camera resurrection.
                 release(s, !foreign && p.level() == s.level);
-                if (AbilityService.inSuper(p)) AbilityService.endSuper(p);
-                PlayerAnimations.stop(p);
+                if(s.swordStack==null) {
+                    if (AbilityService.inSuper(p)) AbilityService.endSuper(p);
+                    PlayerAnimations.stop(p);
+                } else PlayerAnimations.stopSword(p);
                 if (timedOut) DestinyGuardians.LOGGER.warn("Super camera rotation timed out for {}; safe release", p.getName().getString());
                 continue;
             }
-            if (!AbilityService.inSuper(p) && !PlayerAnimations.isPlaying(p)) {
+            if (s.swordStack==null && !AbilityService.inSuper(p) && !PlayerAnimations.isPlaying(p)) {
                 stop(p);
                 continue;
             }
@@ -244,7 +297,11 @@ public final class SuperCamera {
             p.connection.send(passengers(s.mount.getId()));
             p.connection.send(new ClientboundRemoveEntitiesPacket(s.mount.getId(), s.camera.getId()));
             // A single authoritative resync on return, never per tick. Do not teleport a dead/new-world player.
-            if (restore && p.isAlive() && !p.isRemoved()) p.connection.teleport(p.getX(), p.getY(), p.getZ(), p.getYRot(), p.getXRot());
+            if (restore && p.isAlive() && !p.isRemoved()) {
+                Vec3 velocity=p.getDeltaMovement();
+                p.teleportTo(p.getX(),p.getY(),p.getZ());
+                p.setDeltaMovement(velocity);
+            }
         }
         PlayerAnimations.refreshOwnerVisibility(p);
     }

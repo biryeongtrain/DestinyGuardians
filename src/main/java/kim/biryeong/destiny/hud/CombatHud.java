@@ -96,9 +96,8 @@ public final class CombatHud {
 
         sprite(player, PREFIX + "super_diamond", ready && !active ? "diamond_ready" : "diamond", 120, 856, 80, 80, 1,
                 ready ? GOLD : MUTED, DisplayHud.HudAlignment.LEFT);
-        sprite(player, PREFIX + "super_icon", switch (element) {
-            case ARC -> "staff"; case SOLAR -> "gun"; default -> "bow";
-        }, 120, 856, 44, 44, 2, ready && !active ? 0x292820 : ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
+        sprite(player, PREFIX + "super_icon", superIcon(superAbility), 120, 856, 44, 44, 2,
+                ready && !active ? 0x292820 : ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
         bar(player, SUPER_ID + "_track", 176, 856, 230, 8, 1, 0x3C414A, DisplayHud.HudAlignment.LEFT);
         bar(player, SUPER_ID, 176, 856, 230 * superCharge, 5, 2, ready ? GOLD : WHITE, DisplayHud.HudAlignment.LEFT);
 
@@ -164,12 +163,35 @@ public final class CombatHud {
     }
 
     private static String icon(AbilitySlot slot, Ability ability) {
+        if (ability != null && ability.guardianClass() == kim.biryeong.destiny.guardian.GuardianClass.TITAN) {
+            if (slot == AbilitySlot.CLASS_ABILITY) return "titan_barricade";
+            if (slot == AbilitySlot.MELEE) return switch (ability.element()) {
+                case SOLAR -> "titan_hammer"; case VOID -> "titan_shield"; default -> "fist";
+            };
+        }
+        if (ability != null && ability.guardianClass() == kim.biryeong.destiny.guardian.GuardianClass.WARLOCK) {
+            if (slot == AbilitySlot.CLASS_ABILITY) return "warlock_rift";
+            if (slot == AbilitySlot.MELEE) return switch (ability.element()) {
+                case SOLAR -> "warlock_snap"; case VOID -> "warlock_singularity"; default -> "warlock_storm";
+            };
+        }
         if (slot == AbilitySlot.CLASS_ABILITY) return "dodge";
         Element element = ability == null ? Element.KINETIC : ability.element();
         if (slot == AbilitySlot.GRENADE) return switch (element) {
             case ARC -> "flash"; case SOLAR -> "flame"; default -> "vortex";
         };
         return switch (element) { case ARC -> "fist"; case SOLAR -> "knife"; default -> "smoke"; };
+    }
+
+    static String superIcon(Ability ability) {
+        Element element = ability == null ? Element.KINETIC : ability.element();
+        if (ability != null) {
+            if (ability.guardianClass() == kim.biryeong.destiny.guardian.GuardianClass.TITAN)
+                return switch (element) { case SOLAR -> "titan_hammer"; case VOID -> "titan_shield"; default -> "titan_havoc"; };
+            if (ability.guardianClass() == kim.biryeong.destiny.guardian.GuardianClass.WARLOCK)
+                return switch (element) { case SOLAR -> "warlock_daybreak"; case VOID -> "warlock_nova"; default -> "warlock_storm"; };
+        }
+        return switch (element) { case ARC -> "staff"; case SOLAR -> "gun"; default -> "bow"; };
     }
 
     /** Diagnostic state only; never rendered as a line of HUD text. */

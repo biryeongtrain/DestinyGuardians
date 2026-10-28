@@ -107,6 +107,12 @@ public final class SimProjectile {
         return (int) ACTIVE.stream().filter(p -> p.owner == owner && !p.done).count();
     }
 
+    /** Main-thread cancellation of this exact emission, without an impact or damage callback. */
+    public void cancel() {
+        if (!done) discard();
+        ACTIVE.remove(this);
+    }
+
     public boolean isDone() { return done; }
 
     public static int activeCount() {

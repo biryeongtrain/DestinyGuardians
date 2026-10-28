@@ -11,9 +11,12 @@ import kr.toxicity.model.api.mod.platform.ModItemStack;
 import kr.toxicity.model.api.mod.platform.ModPlayer;
 import kr.toxicity.model.api.tracker.EntityHideOption;
 import kr.toxicity.model.api.tracker.EntityTracker;
+import kr.toxicity.model.api.tracker.ModelRotation;
 import kr.toxicity.model.api.tracker.TrackerModifier;
 import kr.toxicity.model.api.tracker.TrackerUpdateAction;
 import kr.toxicity.model.api.util.TransformedItemStack;
+import kr.toxicity.model.api.bone.BoneTags;
+import kr.toxicity.model.api.util.function.BonePredicate;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -42,7 +45,7 @@ public final class PlayerAnimations {
         static final AnimationModifier READY = AnimationModifier.builder()
                 .start(2).end(0).priority(0).type(AnimationIterator.Type.LOOP).build();
         static final AnimationModifier ONCE = AnimationModifier.builder()
-                .start(1).end(0).priority(20).type(AnimationIterator.Type.PLAY_ONCE).build();
+                .start(kim.biryeong.destiny.weapon.SwordTiming.START_TICKS).end(0).priority(20).type(AnimationIterator.Type.PLAY_ONCE).build();
     }
 
     private PlayerAnimations() { }
@@ -53,19 +56,24 @@ public final class PlayerAnimations {
         final ServerLevel level;
         final EntityTracker tracker;
         final String loopRequest;
-        final String loopAnimation;
+        String loopAnimation;
+        net.minecraft.world.phys.Vec3 previousPosition;
+        int classMovingUntil;
         Run run;
         boolean closingAfterRun;
-        TransformedItemStack equipment;
-        boolean bowInLeftHand;
+        final LimbEquipment equipment;
+        ItemStack swordStack;
+        SwordHandPackets.Protection handProtection;
 
-        Playback(ServerPlayer owner, EntityTracker tracker, String loopRequest, String loopAnimation) {
+        Playback(ServerPlayer owner, EntityTracker tracker, String loopRequest, String loopAnimation, LimbEquipment equipment) {
+            this.equipment = equipment;
             this.owner = owner;
             this.server = owner.level().getServer();
             this.level = owner.level();
             this.tracker = tracker;
             this.loopRequest = loopRequest;
             this.loopAnimation = loopAnimation;
+            this.previousPosition = owner.position();
         }
     }
 
@@ -104,6 +112,69 @@ public final class PlayerAnimations {
         return start(player, animation, true);
     }
 
+    /** Weapon cosmetics never replace a dodge/grenade/super or use an unsupported fallback clip. */
+    public static boolean swordAttack(ServerPlayer player,String animation) {
+        if(!kim.biryeong.destiny.weapon.SwordItems.isSword(player.getMainHandItem())
+                ||player.isSpectator()||!kim.biryeong.destiny.weapon.WeaponLoadout.canUse(player)
+                ||kim.biryeong.destiny.ability.AbilityService.inSuper(player)||foreignToSword(player)
+                ||player.getCamera()!=player||kim.biryeong.minigamelib.cinematic.CameraViews.get(player)!=null)return false;
+        return start(player,animation,false,true);
+    }
+
+    /** Persistent stance underlay. Accepted attacks stay on this exact tracker
+     * and keep its monotonic server clock; a stance request cannot cut a swing. */
+    public static boolean swordPose(ServerPlayer player,SwordStance stance) {
+        if(!kim.biryeong.destiny.weapon.SwordItems.isSword(player.getMainHandItem())
+                ||player.isSpectator()||!kim.biryeong.destiny.weapon.WeaponLoadout.canUse(player)
+                ||kim.biryeong.destiny.ability.AbilityService.inSuper(player)||foreignToSword(player)
+                ||player.getCamera()!=player||kim.biryeong.minigamelib.cinematic.CameraViews.get(player)!=null)return false;
+        return start(player,stance.clip(),true,true);
+    }
+
+    public static boolean foreignToSword(ServerPlayer player) {
+        Playback s=ACTIVE.get(player.getUUID());
+        return s!=null&&!s.tracker.isClosed()&&s.swordStack==null;
+    }
+
+    public static boolean swordPlaying(ServerPlayer player) {
+        Playback s=ACTIVE.get(player.getUUID());
+        return s!=null&&!s.tracker.isClosed()&&s.swordStack!=null;
+    }
+
+    /** Main-thread packet projection: only the exact live pose binding owns the
+     * invisible logical carrier. Model bones continue reading the real item. */
+    public static boolean ownsSwordHand(ServerPlayer player, ItemStack stack) {
+        Playback state = ACTIVE.get(player.getUUID());
+        return state != null && state.owner == player && state.swordStack == stack && valid(state);
+    }
+
+    public static boolean swordAttacking(ServerPlayer player) {
+        Playback s=ACTIVE.get(player.getUUID());
+        return s!=null&&!s.tracker.isClosed()&&s.swordStack!=null&&s.run!=null;
+    }
+
+    /** Active underlay, not necessarily the displayed priority-20 attack. */
+    public static String swordPose(ServerPlayer player) {
+        Playback s=ACTIVE.get(player.getUUID());
+        return s!=null&&!s.tracker.isClosed()&&s.swordStack!=null?s.loopAnimation:null;
+    }
+
+    public static void stopSword(ServerPlayer player) {
+        Playback s=ACTIVE.get(player.getUUID());
+        if(s!=null&&s.swordStack!=null)discard(s);
+    }
+
+    /** Cancel only the owned attack; a valid stance underlay may remain.
+     * Foreign/lifecycle-invalid bindings still receive full cleanup. */
+    public static void cancelSwordAttack(ServerPlayer player) {
+        Playback s=ACTIVE.get(player.getUUID());
+        if(s==null||s.swordStack==null)return;
+        if(s.loopRequest==null||!valid(s)) {discard(s);return;}
+        Run run=s.run;
+        s.run=null;
+        if(run!=null)s.tracker.stopAnimation(run.animation);
+    }
+
     /** Diagonals prefer forward/back visually; Motion keeps the exact diagonal physics. */
     public static String rollAnimation(Input input) {
         int forward = (input.forward() ? 1 : 0) - (input.backward() ? 1 : 0);
@@ -133,31 +204,87 @@ public final class PlayerAnimations {
     }
 
     private static boolean start(ServerPlayer player, String request, boolean loop) {
+        return start(player,request,loop,false);
+    }
+
+    private static boolean start(ServerPlayer player,String request,boolean loop,boolean sword) {
         if (!available() || player.isRemoved() || !player.isAlive() || player.hasDisconnected()) return false;
+        SwordHandPackets.Protection handProtection = null;
+        boolean adopted = false;
         try {
             Playback previous = ACTIVE.get(player.getUUID());
-            if (!loop && previous != null && !previous.closingAfterRun && previous.loopRequest != null && valid(previous)) {
+            if(sword&&previous!=null&&previous.swordStack==player.getMainHandItem()&&valid(previous)) {
+                String name=clipName(previous.tracker.renderer(),request);
+                if(name==null)return false;
+                return loop ? (previous.run!=null || updateLoop(previous,name)) : oneShot(previous,name);
+            }
+            if (!sword && !loop && previous != null && previous.swordStack==null
+                    && !previous.closingAfterRun && previous.loopRequest != null && valid(previous)) {
                 String name = clipName(previous.tracker.renderer(), request);
                 return name != null && oneShot(previous, name);
             }
-            Clip clip = resolve(request);
+            Clip clip;
+            if(sword) {
+                var renderer=BetterModel.limb(SwordPoseW146Assets.MODEL_NAME).orElse(null);
+                var name=renderer==null?null:clipName(renderer,request);
+                clip=name==null?null:new Clip(renderer,name);
+            } else clip = resolve(request);
             if (clip == null) return false; // A missing clip must not destroy a working loop.
             stop(player);
+            if (sword) handProtection = SwordHandPackets.begin(player);
+            LimbEquipment equipment = new LimbEquipment();
+            AtomicBoolean created = new AtomicBoolean();
             EntityTracker tracker = clip.renderer.getOrCreate(ModPlayer.of(player.connection),
-                    TrackerModifier.DEFAULT, t -> t.hideOption(EntityHideOption.DEFAULT));
-            Playback state = new Playback(player, tracker, loop ? logical(request) : null, loop ? clip.animation : null);
+                    TrackerModifier.DEFAULT, t -> {
+                        t.hideOption(EntityHideOption.DEFAULT);
+                        equipment.bind(t);
+                        created.set(true);
+                    });
+            // getOrCreate skips its initializer for an existing same-model tracker.
+            // Do not claim a foreign clock or install an unbound visual state.
+            if (!created.get()) return false;
+            ((ServerAnimationClock) (Object) tracker).destiny$claimServerClock();
+            Playback state = new Playback(player, tracker, loop ? logical(request) : null, loop ? clip.animation : null, equipment);
+            if(sword) {
+                state.swordStack=player.getMainHandItem();
+                tracker.rotation(() -> new ModelRotation(0,player.getYRot()));
+            }
+            if ("super_void".equals(state.loopRequest) || "super_solar".equals(state.loopRequest)
+                    || request.startsWith("w229_")) {
+                // Aim supers face the authoritative view, not BM's independently smoothed
+                // body yaw. This only rotates the visual tracker; camera/body input is untouched.
+                tracker.rotation(() -> new ModelRotation(0, player.getYRot()));
+                // BM cancels parent's GLOBAL modifier on each child. Use the same quaternion
+                // throughout the upper-body subtree, replacing built-in head pitch while aiming.
+                tracker.getPipeline().addGlobalRotModifier(BonePredicate.tag(BoneTags.PLAYER_CHEST).withChildren(),
+                        q -> q.rotationX((float) Math.toRadians(player.getXRot())));
+            }
+            state.handProtection = handProtection;
             ACTIVE.put(player.getUUID(), state);
+            adopted = true;
             applyOwnerVisibility(player, tracker);
+            if (sword) SwordHandPackets.syncCurrent(player);
             boolean ok = loop ? tracker.animate(clip.animation, Modifiers.READY) : oneShot(state, clip.animation);
+            if (ok && loop) ((ServerAnimationClock) (Object) tracker).destiny$primeAnimation();
             if (!ok) discard(state);
             return ok;
         } catch (RuntimeException | LinkageError e) {
             fail(player, request, e);
             return false;
+        } finally {
+            if (!adopted && handProtection != null) {
+                SwordHandPackets.syncCurrent(player);
+                SwordHandPackets.end(handProtection);
+            }
         }
     }
 
     private static Clip resolve(String request) {
+        if (request.startsWith("w229_")) {
+            ModelRenderer renderer = BetterModel.limb(ClassSuperModelAssets.MODEL_NAME).orElse(null);
+            String animation = renderer == null ? null : clipName(renderer, request);
+            return animation == null ? null : new Clip(renderer, animation);
+        }
         var names = new LinkedHashSet<String>();
         names.add(limb);
         names.add("guardian_hunter_h15");
@@ -195,6 +322,7 @@ public final class PlayerAnimations {
         Run run = new Run(animation, state.server.getTickCount(), ticks);
         state.run = run;
         boolean ok = state.tracker.animate(animation, Modifiers.ONCE, () -> run.completed.set(true));
+        if (ok) ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation();
         if (!ok) {
             state.run = null;
             if (state.loopRequest == null) discard(state);
@@ -216,9 +344,15 @@ public final class PlayerAnimations {
                     discard(state);
                     continue;
                 }
+                ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick();
+                var position = state.owner.position();
+                double moved = position.subtract(state.previousPosition).horizontalDistanceSqr();
+                state.previousPosition = position;
                 Run run = state.run;
                 if (run != null) {
-                    if (run.finished(server.getTickCount())) {
+                    boolean arcDeployDone = run.animation.equals(PREFIX + "super_arc_start")
+                            && server.getTickCount() - run.startedAt >= run.durationTicks;
+                    if (arcDeployDone || run.finished(server.getTickCount())) {
                         state.run = null;
                         state.tracker.stopAnimation(run.animation);
                         if (state.loopRequest == null || state.closingAfterRun) {
@@ -227,6 +361,21 @@ public final class PlayerAnimations {
                         }
                     }
                 }
+                if (state.run == null && !state.closingAfterRun && "super_arc".equals(state.loopRequest)) {
+                    updateArcLocomotion(state, moved > .000225 && state.owner.onGround());
+                }
+                if (state.run == null && !state.closingAfterRun && state.loopRequest != null
+                        && state.loopRequest.startsWith("w229_")) {
+                    if (moved > .000225) state.classMovingUntil = server.getTickCount() + 3;
+                    updateClassLocomotion(state, server.getTickCount() < state.classMovingUntil);
+                }
+                if (state.run == null && state.swordStack!=null && state.loopRequest!=null) {
+                    var pose=SwordStance.select(kim.biryeong.destiny.weapon.WeaponRuntime.swordStatus(state.owner)
+                            .map(kim.biryeong.destiny.weapon.WeaponRuntime.SwordStatus::guarding).orElse(false),
+                            state.owner.onGround(),moved);
+                    String name=clipName(state.tracker.renderer(),pose.clip());
+                    if(name!=null)updateLoop(state,name);
+                }
                 syncEquipment(state);
             } catch (RuntimeException | LinkageError e) {
                 fail(state.owner, "tick", e);
@@ -234,9 +383,41 @@ public final class PlayerAnimations {
         }
     }
 
+    /** Actual collision-resolved displacement drives gait, not held keys against a wall. */
+    private static void updateArcLocomotion(Playback state, boolean moving) {
+        String name = clipName(state.tracker.renderer(), moving ? "super_arc_move" : "super_arc");
+        if(name!=null)updateLoop(state,name);
+    }
+
+    /** Class upper-body ready/hold plus source-backed or explicitly authored lower-body gait.
+     * Collision-resolved movement drives selection. Cast/attack one-shots always finish first. */
+    private static void updateClassLocomotion(Playback state, boolean moving) {
+        String base = state.loopRequest.endsWith("_idle")
+                ? state.loopRequest.substring(0, state.loopRequest.length() - 5) : state.loopRequest;
+        String request = !state.owner.onGround() ? base + "_air" : moving ? base + "_move" : state.loopRequest;
+        String name = clipName(state.tracker.renderer(), request);
+        if (name == null) name = clipName(state.tracker.renderer(), moving ? base + "_move" : state.loopRequest);
+        if (name == null) name = clipName(state.tracker.renderer(), state.loopRequest);
+        if (name != null) updateLoop(state, name);
+    }
+
+    private static boolean updateLoop(Playback state,String name) {
+        if(name.equals(state.loopAnimation))return true;
+        if(!state.tracker.animate(name,Modifiers.READY))return false;
+        if (state.loopAnimation != null) state.tracker.stopAnimation(state.loopAnimation);
+        state.loopAnimation = name;
+        ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation();
+        return true;
+    }
+
     private static boolean valid(Playback state) {
-        return !state.tracker.isClosed() && state.owner.isAlive() && !state.owner.isRemoved()
-                && !state.owner.hasDisconnected() && state.owner.level() == state.level;
+        return !state.tracker.isClosed() && state.owner.isAlive() && !state.owner.isSpectator() && !state.owner.isRemoved()
+                && !state.owner.hasDisconnected() && state.owner.level() == state.level
+                && (state.swordStack==null || (state.owner.getMainHandItem()==state.swordStack
+                    && !kim.biryeong.destiny.ability.AbilityService.inSuper(state.owner)
+                    && kim.biryeong.destiny.weapon.WeaponLoadout.canUse(state.owner)
+                    && state.owner.getCamera()==state.owner
+                    && kim.biryeong.minigamelib.cinematic.CameraViews.get(state.owner)==null));
     }
 
     public static void stop(ServerPlayer player) {
@@ -268,15 +449,21 @@ public final class PlayerAnimations {
 
     private static void close(Playback state) {
         state.run = null;
-        state.equipment = null;
+        state.equipment.clear();
         try {
             if (!state.tracker.isClosed()) state.tracker.update(TrackerUpdateAction.itemMapping());
         } catch (RuntimeException | LinkageError e) {
             DestinyGuardians.LOGGER.warn("Limb equipment restore failed: {}", e.toString());
         } finally {
+            state.tracker.bones().forEach(EquipmentDisplaySamples::forget);
             try { state.tracker.close(); }
             catch (RuntimeException | LinkageError e) {
                 DestinyGuardians.LOGGER.warn("Limb close failed: {}", e.toString());
+            } finally {
+                if (state.handProtection != null) {
+                    try { SwordHandPackets.syncCurrent(state.owner); }
+                    finally { SwordHandPackets.end(state.handProtection); }
+                }
             }
         }
     }
@@ -310,9 +497,58 @@ public final class PlayerAnimations {
         return state != null && !state.tracker.isClosed();
     }
 
+    /** Read-only effective clip for server QA; does not create or advance a tracker. */
+    public static String activeClip(ServerPlayer player) {
+        Playback s = ACTIVE.get(player.getUUID());
+        return s == null || s.owner != player || s.tracker.isClosed() ? "none"
+                : s.run != null ? s.run.animation : s.loopAnimation == null ? "none" : s.loopAnimation;
+    }
+
+    /** QA telemetry from the actual BetterModel clock, not a separate gameplay counter. */
+    public static long serverFrames(ServerPlayer player) {
+        Playback state = ACTIVE.get(player.getUUID());
+        return state == null ? 0 : ((ServerAnimationClock) (Object) state.tracker).destiny$serverFrames();
+    }
+
+    /** World socket on the equipped prop, using the SAME transform sent to the vanilla display.
+     * Raw coordinates are Java model units. H24 staff and H22 bow hand contexts are pinned here.
+     * Null means no live equipped pose: callers must skip cosmetics rather than guess near the face.
+     */
+    public static net.minecraft.world.phys.Vec3 equipmentPoint(ServerPlayer player, boolean bow,
+                                                               double rawX, double rawY, double rawZ) {
+        if (!Double.isFinite(rawX) || !Double.isFinite(rawY) || !Double.isFinite(rawZ)) return null;
+        Playback state = ACTIVE.get(player.getUUID());
+        if (state == null || state.tracker.isClosed() || !valid(state)) return null;
+        var equipment = state.equipment.selection();
+        if (equipment.item() == null || bow != equipment.bowInLeftHand()) return null;
+        var bone = state.tracker.bone(b -> b.name().rawName().equals(bow ? "pli_left_item" : "pri_right_item"));
+        var sample = bone == null ? null : EquipmentDisplaySamples.sample(bone);
+        if (sample == null) return null;
+        var local = new org.joml.Vector3f((float)(rawX-8)/16, (float)(rawY-8)/16, (float)(rawZ-8)/16);
+        if (bow) local.rotateY(-(float)Math.PI/2); // left-handed ItemTransform mirrors authored +90.
+        local.add(0, .125f, 0).rotateY((float)Math.PI); // native hand translation then submitInner Ry180.
+        local.mul(sample.scale()).rotate(sample.rotation()).add(sample.position());
+        local.rotateY(-(float)Math.toRadians(state.tracker.getPipeline().getRotation().y()));
+        // BM sends SetPassengers: limb displays ride the player, not tracker.location().
+        // Vanilla clamps all these non-registered model riders to the first passenger anchor.
+        // ItemDisplay has zero VEHICLE attachment; do not add BM off-world spawn sentinel.
+        var seat = player.getPassengerRidingPosition(player);
+        return seat.add(local.x, local.y, local.z);
+    }
+
     /** Visual hand only. EMPTY clears the override and restores live equipment mapping. */
     public static void superItem(ServerPlayer player, ItemStack item) {
         superItem(player, item, false);
+    }
+
+    /** Explicit bare hands on the visual rig; EMPTY via superItem instead restores live equipment. */
+    public static void superEmptyHands(ServerPlayer player) {
+        Playback state = ACTIVE.get(player.getUUID());
+        if (state == null) return;
+        try {
+            state.equipment.set(TransformedItemStack.empty(), true);
+            syncEquipment(state);
+        } catch (RuntimeException | LinkageError e) { fail(player, "empty super hands", e); }
     }
 
     /** Visual equipment only: a right-handed archer supports the bow with the left hand. */
@@ -320,24 +556,15 @@ public final class PlayerAnimations {
         Playback state = ACTIVE.get(player.getUUID());
         if (state == null) return;
         try {
-            state.equipment = item.isEmpty() ? null : TransformedItemStack.of(ModItemStack.of(item.copy()));
-            state.bowInLeftHand = bowInLeftHand;
+            state.equipment.set(item.isEmpty() ? null : TransformedItemStack.of(ModItemStack.of(item.copy())), bowInLeftHand);
             syncEquipment(state);
         } catch (RuntimeException | LinkageError e) { fail(player, "equipment", e); }
     }
 
     private static void syncEquipment(Playback state) {
-        if (state.equipment == null) {
-            state.tracker.update(TrackerUpdateAction.itemMapping(), bone ->
-                    bone.name().rawName().equals("pri_right_item") || bone.name().rawName().equals("pli_left_item"));
-        } else if (state.bowInLeftHand) {
-            state.tracker.update(TrackerUpdateAction.itemStack(state.equipment),
-                    bone -> bone.name().rawName().equals("pli_left_item"));
-            state.tracker.update(TrackerUpdateAction.itemStack(TransformedItemStack.of(ModItemStack.of(ItemStack.EMPTY))),
-                    bone -> bone.name().rawName().equals("pri_right_item"));
-        } else {
-            state.tracker.update(TrackerUpdateAction.itemStack(state.equipment),
-                    bone -> bone.name().rawName().equals("pri_right_item"));
-        }
+        // Mapping refreshes respect the lifetime policy at the actual native commit.
+        // Both hands refresh: switching away from a left-hand bow restores live offhand.
+        state.tracker.update(TrackerUpdateAction.itemMapping(), bone ->
+                bone.name().rawName().equals("pri_right_item") || bone.name().rawName().equals("pli_left_item"));
     }
 }

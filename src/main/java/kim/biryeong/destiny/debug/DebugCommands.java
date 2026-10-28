@@ -181,9 +181,19 @@ public final class DebugCommands {
                                     ServerPlayer p = EntityArgument.getPlayer(c, "player");
                                     c.getSource().sendSuccess(() -> Component.literal("SuperCamera active="
                                             + kim.biryeong.destiny.camera.SuperCamera.active(p)
+                                            + " class=" + kim.biryeong.destiny.guardian.Guardians.data(p).guardianClass().getSerializedName()
+                                            + " inSuper=" + kim.biryeong.destiny.ability.AbilityService.inSuper(p)
+                                            + " classPresentation=" + kim.biryeong.destiny.fx.ClassAbilityEffects.activeCount()
+                                            + " barricade=" + kim.biryeong.destiny.ability.titan.TitanClassAbility.active(p)
+                                            + " rift=" + kim.biryeong.destiny.ability.warlock.WarlockClassAbility.active(p)
+                                            + " lift=" + kim.biryeong.destiny.ability.titan.TitanJump.active(p)
+                                            + " glide=" + kim.biryeong.destiny.ability.warlock.WarlockJump.active(p)
+                                            + " emitted=" + kim.biryeong.destiny.ability.warlock.WarlockSuper.emitted(p)
+                                            + " impacts=" + kim.biryeong.destiny.ability.warlock.WarlockSuper.impacts(p)
                                             + " rotations=" + kim.biryeong.destiny.camera.SuperCamera.rotations(p)
                                             + " body=" + p.position() + " yaw=" + p.getYRot() + " pitch=" + p.getXRot()
                                             + " ground=" + p.onGround() + " input=" + p.getLastClientInput()
+                                            + " limbClip=" + kim.biryeong.destiny.fx.PlayerAnimations.activeClip(p)
                                             + " limbFrames=" + kim.biryeong.destiny.fx.PlayerAnimations.serverFrames(p)
                                             + " vfxCues=" + kim.biryeong.destiny.fx.SuperVfx.lifecycleCount(p)
                                             + " camera=" + kim.biryeong.destiny.camera.SuperCamera.cameraPosition(p)), false);

@@ -6,6 +6,7 @@ import kim.biryeong.destiny.fx.HunterVfx;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianData;
+import kim.biryeong.destiny.guardian.GuardianClass;
 import kim.biryeong.destiny.guardian.GuardianRuntime;
 import kim.biryeong.destiny.guardian.Guardians;
 import kim.biryeong.destiny.hud.CombatHud;
@@ -65,10 +66,16 @@ public final class AbilityService {
             SimProjectile.clearAll();
             Tasks.clearAll();
             Statuses.clearAll();
+            kim.biryeong.destiny.ability.titan.TitanAbilities.clearAll();
+            kim.biryeong.destiny.ability.warlock.WarlockAbilities.clearAll();
+            kim.biryeong.destiny.fx.ClassAbilityEffects.clearAll();
         });
     }
 
     public static void cleanup(ServerPlayer player) {
+        kim.biryeong.destiny.ability.titan.TitanAbilities.cleanup(player);
+        kim.biryeong.destiny.ability.warlock.WarlockAbilities.cleanup(player);
+        kim.biryeong.destiny.fx.ClassAbilityEffects.cleanup(player);
         kim.biryeong.destiny.weapon.WeaponRuntime.cancelUseForSkill(player);
         kim.biryeong.destiny.ability.hunter.HunterSkillCast.cancelPending(player);
         kim.biryeong.destiny.camera.SuperCamera.stop(player);
@@ -90,6 +97,8 @@ public final class AbilityService {
         Statuses.tick(server);
         SimProjectile.tickAll(server);
         Tasks.tickAll();
+        kim.biryeong.destiny.ability.titan.TitanAbilities.tick(server);
+        kim.biryeong.destiny.ability.warlock.WarlockAbilities.tick(server);
         HunterVfx.tick(server);
         kim.biryeong.destiny.fx.SuperVfx.tick(server);
         kim.biryeong.destiny.fx.PostEffects.tick(server);
@@ -124,13 +133,22 @@ public final class AbilityService {
                 completeSuper(player);
             }
         } else if (data.superEnergy() < 1f) {
-            data.setSuperEnergy(data.superEnergy() + (float) (1.0 / (passiveSuperSeconds * 20.0)));
+            // Classic new-class base recharge comes from its DDC-backed super tuning.
+            // Hunter retains the existing configurable recharge path. Kill/ability gains are additive.
+            double rechargeTicks = passiveSuperSeconds * 20.0;
+            if (data.guardianClass() == GuardianClass.TITAN || data.guardianClass() == GuardianClass.WARLOCK) {
+                int tuned = equipped(player, AbilitySlot.SUPER).map(Ability::cooldownTicks).orElse(0);
+                if (tuned > 0) rechargeTicks = tuned;
+            }
+            data.setSuperEnergy(data.superEnergy() + (float) (1.0 / rechargeTicks));
         }
         CombatHud.update(player);
     }
 
     public static Optional<Ability> equipped(ServerPlayer player, AbilitySlot slot) {
-        return Guardians.data(player).loadout().map(l -> l.get(slot)).flatMap(AbilityRegistry::get);
+        GuardianData data = Guardians.data(player);
+        return data.loadout().map(l -> l.get(slot)).flatMap(AbilityRegistry::get)
+                .filter(a -> a.guardianClass() == data.guardianClass() && a.slot() == slot);
     }
 
     /** 입력 동작 처리. 처리했으면 true. */

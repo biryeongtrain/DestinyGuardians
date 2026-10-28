@@ -1,0 +1,104 @@
+{
+  "coordinate_units": "16 model units = 1 block before ItemDisplay transformation",
+  "display_context": "NONE",
+  "model_anchor": [
+    8,
+    8,
+    8
+  ],
+  "source_mesh": null,
+  "source_uv": null,
+  "authorship": "Self-authored temporary primitive VFX; no ripped barrier/rift source claimed",
+  "barrier": {
+    "item_id": "destiny:class_ability/titan/class_ability",
+    "canonical_bounds": {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        16,
+        16,
+        16
+      ]
+    },
+    "canonical_size": [
+      16,
+      16,
+      16
+    ],
+    "plane": "XY",
+    "normal": [
+      0,
+      0,
+      1
+    ],
+    "anchor": "center",
+    "scale_formula": [
+      "width_blocks",
+      "height_blocks",
+      "thickness_blocks"
+    ],
+    "default_gameplay_size_blocks": [
+      3,
+      2.4,
+      0.18
+    ],
+    "default_item_display_scale": [
+      3,
+      2.4,
+      0.18
+    ],
+    "position": "existing Barrier.center = p + normal*1.35 + (0,1.2,0)",
+    "rotation": "rotate local +Z normal onto gameplay normal; keep +Y up",
+    "translation": "No old BlockDisplay corner translation; ItemDisplay uses center anchor",
+    "elements": 89,
+    "triangle_adapter_elements": 0
+  },
+  "rift": {
+    "item_id": "destiny:class_ability/warlock/class_ability",
+    "canonical_support_bounds": {
+      "min": [
+        0,
+        8.018,
+        0
+      ],
+      "max": [
+        16,
+        8.57,
+        16
+      ]
+    },
+    "radius_model_units": 8,
+    "radius_blocks_before_scale": 0.5,
+    "plane": "XZ",
+    "normal": [
+      0,
+      1,
+      0
+    ],
+    "anchor": "ground center [8,8,8]",
+    "scale_formula": [
+      "2*radius_blocks",
+      1,
+      "2*radius_blocks"
+    ],
+    "default_radius_blocks": 4,
+    "default_item_display_scale": [
+      8,
+      1,
+      8
+    ],
+    "position": "existing Rift.origin = ground + (0,0.04,0)",
+    "height_above_anchor_blocks": [
+      0.001125,
+      0.035625
+    ],
+    "field_plane_y": 8.018,
+    "rotation": "identity on horizontal ground",
+    "support_note": "Support plane is square 0..16 in XZ, texture alpha clips footprint to radius8; rings fit inside that radius. No solid volume disc.",
+    "elements": 101,
+    "triangle_adapter_elements": 0
+  }
+}

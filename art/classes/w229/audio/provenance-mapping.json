@@ -1,0 +1,890 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T11:41:02.738102+00:00",
+  "status": "ready_to_copy_fragment_not_installed_in_main",
+  "event_count": 18,
+  "unique_ogg_count": 17,
+  "contract": {
+    "file": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/fx/ClassAbilityEffects.java",
+    "sha256_at_inspection": "6e1565174f253145556d8095d3c3743abfaecde14a2a5aee9aea44f21e5b1b13",
+    "key_expression": "guardianClass.getSerializedName() + \".\" + element.getSerializedName() + \".\" + action",
+    "namespace": "destiny",
+    "resource_path_prefix": "classes_w229/",
+    "runtime_sound_source": "PLAYERS (DestinySounds.packet)",
+    "runtime_volume": 0.65,
+    "sample_gain_changes": false
+  },
+  "main_sounds_json_baseline": {
+    "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/resources/assets/destiny/sounds.json",
+    "sha256_at_inspection": "1c13e0ed4d143a818decdff335e7173b44f2a8a342cfbd3f6723ac33e0b29969",
+    "key_collisions": [],
+    "modified": false
+  },
+  "code_inspection": [
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/fx/ClassAbilityEffects.java",
+      "sha256_at_inspection": "6e1565174f253145556d8095d3c3743abfaecde14a2a5aee9aea44f21e5b1b13",
+      "matches": [
+        {
+          "line": 83,
+          "source": "sound(p, e, \"super.start\");"
+        },
+        {
+          "line": 167,
+          "source": "String key = Guardians.data(p).guardianClass().getSerializedName() + \".\" + e.getSerializedName() + \".\" + action;"
+        },
+        {
+          "line": 168,
+          "source": "DestinySounds.orVanilla(p.level(), p.position(), key, action.equals(\"super.fire\")"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow/src/main/java/kim/biryeong/destiny/ability/titan/TitanMelee.java",
+      "sha256_at_inspection": "f5512f55bfbcc2578cea2b39cad9adbb4616ea05558ede3cf357de2380b8b667",
+      "matches": [
+        {
+          "line": 39,
+          "source": "ClassAbilityEffects.sound(p,element(),\"melee.impact\");"
+        },
+        {
+          "line": 42,
+          "source": "ClassAbilityEffects.sound(p,element(),\"melee.cast\");return true;"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow/src/main/java/kim/biryeong/destiny/ability/titan/TitanGrenade.java",
+      "sha256_at_inspection": "604516ad88b33d1d9be48782edb1f8b63055d78a30399df7bacc36de1afb2964",
+      "matches": [
+        {
+          "line": 14,
+          "source": "/** Pulse, delayed fusion and suppressor. All damage uses accepted grenade provenance. */"
+        },
+        {
+          "line": 58,
+          "source": "if(!fired)ClassAbilityEffects.sound(c.owner,ability.element(),\"grenade.impact\");fired=true;"
+        },
+        {
+          "line": 77,
+          "source": "switch(e){case ARC->\"파동 수류탄\";case SOLAR->\"융합 수류탄\";default->\"억제 수류탄\";});}"
+        },
+        {
+          "line": 92,
+          "source": "WeaponDemolitionist.grenadeReleased(p,demo);ClassAbilityEffects.sound(p,element(),\"grenade.throw\");return true;"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow/src/main/java/kim/biryeong/destiny/ability/titan/TitanSuper.java",
+      "sha256_at_inspection": "808d95c6c98aa3a491cfdd3b47849ca5babfc060f63280f15fae4b5cfa14fc8a",
+      "matches": [
+        {
+          "line": 100,
+          "source": "ClassAbilityEffects.sound(p,ability.element(),\"super.impact\");"
+        },
+        {
+          "line": 102,
+          "source": "if(launched)ClassAbilityEffects.sound(p,ability.element(),\"super.fire\");"
+        },
+        {
+          "line": 107,
+          "source": "ClassAbilityEffects.sound(p,ability.element(),\"super.fire\");"
+        },
+        {
+          "line": 113,
+          "source": "ClassAbilityEffects.sound(p,ability.element(),\"super.impact\");"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-seventh_seraph_officer_revolver/src/main/java/kim/biryeong/destiny/ability/warlock/WarlockMelee.java",
+      "sha256_at_inspection": "4d8540946fd68dca9a2cc989f72440d9e5515269fb406647b6aad1803c3cb3e3",
+      "matches": [
+        {
+          "line": 42,
+          "source": "case ARC -> {"
+        },
+        {
+          "line": 45,
+          "source": "chain(lease, first, damage, traits);"
+        },
+        {
+          "line": 63,
+          "source": "ClassAbilityEffects.sound(p, element(), \"melee.impact\");"
+        },
+        {
+          "line": 72,
+          "source": "ClassAbilityEffects.sound(p, element(), \"melee.impact\");"
+        },
+        {
+          "line": 85,
+          "source": "ClassAbilityEffects.sound(p, element(), \"melee.cast\");"
+        },
+        {
+          "line": 102,
+          "source": "ClassAbilityEffects.sound(lease.owner, element(), \"melee.impact\");"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-seventh_seraph_officer_revolver/src/main/java/kim/biryeong/destiny/ability/warlock/WarlockGrenade.java",
+      "sha256_at_inspection": "5c937077c480947d41ed64654c718cc38d1999d5568b4ee40c899f1bccf44a7a",
+      "matches": [
+        {
+          "line": 14,
+          "source": "/** Storm, solar and vortex: a colliding throw followed by an owner-scoped finite field. */"
+        },
+        {
+          "line": 53,
+          "source": "ClassAbilityEffects.sound(p, element(), \"grenade.impact\");"
+        },
+        {
+          "line": 57,
+          "source": "ClassAbilityEffects.sound(p, element(), \"grenade.throw\");"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-seventh_seraph_officer_revolver/src/main/java/kim/biryeong/destiny/ability/warlock/WarlockSuper.java",
+      "sha256_at_inspection": "fb21d0f76b94fc14d5228d0ef72db8f55c468f35375013e688adfa79c4f3009d",
+      "matches": [
+        {
+          "line": 96,
+          "source": "ClassAbilityEffects.sound(lease.owner, ability.element(), \"super.fire\");"
+        },
+        {
+          "line": 151,
+          "source": "ClassAbilityEffects.sound(lease.owner, ability.element(), \"super.impact\");"
+        }
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "event_key": "titan.solar.super.start",
+      "resource_location": "destiny:classes_w229/titan_solar_super_start",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_solar_super_start.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_solar_super_start.ogg",
+      "asset_bytes": 60423,
+      "asset_sha256": "e31ee5d725b1a690c7358bd10ef6bf061cd5761fd0c88440b9746fc1bbd6125e",
+      "source_original": {
+        "id": "1u6cxrYTgaP_BDQn_8T-Q2ijiVtNu8U3O",
+        "name": "0215-000016E1.mp3",
+        "source_url": "https://drive.google.com/file/d/1u6cxrYTgaP_BDQn_8T-Q2ijiVtNu8U3O/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1u6cxrYTgaP_BDQn_8T-Q2ijiVtNu8U3O&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-sunbreaker/0215-000016E1.mp3",
+        "source_folder_id": "1ICoX3qlqWuf3X_Tz41YnEGZFkIWfBUVk",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 131727,
+        "sha256": "c5d8b64264a12d8e74caa00f46d1c9f637e9c68dbeb5968ed666aad74b5ea759",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-sunbreaker/0215-000016E1.ogg",
+      "processed_source_sha256": "e31ee5d725b1a690c7358bd10ef6bf061cd5761fd0c88440b9746fc1bbd6125e",
+      "source_window_seconds": [
+        0,
+        5.472
+      ],
+      "duration_seconds": 5.472,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.solar.super.fire",
+      "resource_location": "destiny:classes_w229/titan_solar_hammer_throw",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_solar_hammer_throw.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_solar_hammer_throw.ogg",
+      "asset_bytes": 14023,
+      "asset_sha256": "eda64b0b3fa8d9ea99d3db23fb624ca569cdc66240fe62815682825a043211b7",
+      "source_original": {
+        "id": "1qrGnUvUoYh1JZ9OPzLhez6gPB6-dZzOa",
+        "name": "Hammer_Throw_1.mp3",
+        "source_url": "https://drive.google.com/file/d/1qrGnUvUoYh1JZ9OPzLhez6gPB6-dZzOa/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1qrGnUvUoYh1JZ9OPzLhez6gPB6-dZzOa&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-throwing-hammer/Hammer_Throw_1.mp3",
+        "source_folder_id": "1Dsem3miS32kZUQ2eviRjvAfU3_wxES3Q",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 33452,
+        "sha256": "6dec9c4afe0dafabb17244dc8f9cb2f93f83c4ba4eb28f38deba8918e55305cd",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-throwing-hammer/Hammer_Throw_1.ogg",
+      "processed_source_sha256": "eda64b0b3fa8d9ea99d3db23fb624ca569cdc66240fe62815682825a043211b7",
+      "source_window_seconds": [
+        0,
+        1.0710204081632653
+      ],
+      "duration_seconds": 1.0710204081632653,
+      "sample_rate": 44100,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "intentional_shared_named_melee_cue_super_wwise_unverified",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User explicitly selects the named Titan - Throwing Hammer melee cue for Hammer of Sol fire, shared with titan.solar.melee.cast. Source super Wwise/media correspondence remains unverified; no long tentative super candidate used.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.arc.super.start",
+      "resource_location": "destiny:classes_w229/titan_arc_super_start",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_arc_super_start.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_arc_super_start.ogg",
+      "asset_bytes": 18701,
+      "asset_sha256": "a7378db47f6a50951ba827dc166845dc866d803cce9c22796ccd3dcabdbb9d1d",
+      "source_original": {
+        "id": "1TBRCnBWs7kYHl6UvfMekFd6X13BQDh9p",
+        "name": "0215-0000164C.mp3",
+        "source_url": "https://drive.google.com/file/d/1TBRCnBWs7kYHl6UvfMekFd6X13BQDh9p/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1TBRCnBWs7kYHl6UvfMekFd6X13BQDh9p&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-striker/0215-0000164C.mp3",
+        "source_folder_id": "1emY81ZeXlLPajLJvtgp0NgGg-D2ZdEyk",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 36111,
+        "sha256": "e424a8e5a399985d44c858fe0084c2d98b65e3bc8804039adccbe1139c3893ad",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-striker/0215-0000164C.ogg",
+      "processed_source_sha256": "a7378db47f6a50951ba827dc166845dc866d803cce9c22796ccd3dcabdbb9d1d",
+      "source_window_seconds": [
+        0,
+        1.488
+      ],
+      "duration_seconds": 1.488,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.arc.super.fire",
+      "resource_location": "destiny:classes_w229/titan_arc_super_fire",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_arc_super_fire.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_arc_super_fire.ogg",
+      "asset_bytes": 21801,
+      "asset_sha256": "aa74fbc17cd4f407768e61b955b6e87791194f84a0769c4fe080c47516d838ac",
+      "source_original": {
+        "id": "1lucBGl3DZrriWoOOHsycuiBoh1kOpb4J",
+        "name": "0215-0000164D.mp3",
+        "source_url": "https://drive.google.com/file/d/1lucBGl3DZrriWoOOHsycuiBoh1kOpb4J/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1lucBGl3DZrriWoOOHsycuiBoh1kOpb4J&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-striker/0215-0000164D.mp3",
+        "source_folder_id": "1emY81ZeXlLPajLJvtgp0NgGg-D2ZdEyk",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 43599,
+        "sha256": "266e5e4650ff34d7f3b8f205ce4414e9c6c7c80f2f6e3cf778f3a49e4157cef9",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-striker/0215-0000164D.ogg",
+      "processed_source_sha256": "aa74fbc17cd4f407768e61b955b6e87791194f84a0769c4fe080c47516d838ac",
+      "source_window_seconds": [
+        0,
+        1.8
+      ],
+      "duration_seconds": 1.8,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.void.super.start",
+      "resource_location": "destiny:classes_w229/titan_void_super_start",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_void_super_start.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_void_super_start.ogg",
+      "asset_bytes": 19665,
+      "asset_sha256": "9bcefc016c08e2ef6575918850c855a8c31b4991cfa5f1b3a3e898f6054c093a",
+      "source_original": {
+        "id": "1cpGj1P-iC7QR5pqUuux0ki7FhkXcZfox",
+        "name": "0215-000016EA.mp3",
+        "source_url": "https://drive.google.com/file/d/1cpGj1P-iC7QR5pqUuux0ki7FhkXcZfox/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1cpGj1P-iC7QR5pqUuux0ki7FhkXcZfox&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-sentinel/0215-000016EA.mp3",
+        "source_folder_id": "1Czx_A54unnuNbaOpLM7jRMTNxMVt11Cm",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 39567,
+        "sha256": "45241d9d7d560e01ca3892a977c61e36ebddb2526a06dbd4671433bb4645aaab",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-sentinel/0215-000016EA.ogg",
+      "processed_source_sha256": "9bcefc016c08e2ef6575918850c855a8c31b4991cfa5f1b3a3e898f6054c093a",
+      "source_window_seconds": [
+        0,
+        1.632
+      ],
+      "duration_seconds": 1.632,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.void.super.fire",
+      "resource_location": "destiny:classes_w229/titan_void_super_fire",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_void_super_fire.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_void_super_fire.ogg",
+      "asset_bytes": 13721,
+      "asset_sha256": "462c3c4a5e720f0c22a30b9895fdf4bda0c60bf7a1b22f8b3a83b883888c6984",
+      "source_original": {
+        "id": "1E9XrL3hP5J7dQ7oZA3gIC6HzL1I5yJAl",
+        "name": "0215-000016FF.mp3",
+        "source_url": "https://drive.google.com/file/d/1E9XrL3hP5J7dQ7oZA3gIC6HzL1I5yJAl/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1E9XrL3hP5J7dQ7oZA3gIC6HzL1I5yJAl&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-sentinel/0215-000016FF.mp3",
+        "source_folder_id": "1Czx_A54unnuNbaOpLM7jRMTNxMVt11Cm",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 28047,
+        "sha256": "09864db4943b34cc54864046f8c95206a48bb60fb34a0a562dc5b073bd743866",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-sentinel/0215-000016FF.ogg",
+      "processed_source_sha256": "462c3c4a5e720f0c22a30b9895fdf4bda0c60bf7a1b22f8b3a83b883888c6984",
+      "source_window_seconds": [
+        0,
+        1.152
+      ],
+      "duration_seconds": 1.152,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.solar.super.start",
+      "resource_location": "destiny:classes_w229/warlock_solar_super_start",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_solar_super_start.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_solar_super_start.ogg",
+      "asset_bytes": 41721,
+      "asset_sha256": "1b9a59d6aff886ea9af2ea4cd7efbc62b364771b11caae9cace4833eaadcf89c",
+      "source_original": {
+        "id": "1tMQ8guZ4kng8JJbFJXMhQ0-MHhoDsPYW",
+        "name": "0215-0000173A.mp3",
+        "source_url": "https://drive.google.com/file/d/1tMQ8guZ4kng8JJbFJXMhQ0-MHhoDsPYW/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1tMQ8guZ4kng8JJbFJXMhQ0-MHhoDsPYW&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-dawnblade/0215-0000173A.mp3",
+        "source_folder_id": "1CgDcrNAdkq4CV6jD2vz9uAJNxFRasdze",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 98319,
+        "sha256": "af1b65db904cb136a18e27dcd064f48b1dac1e01ba775e05d165de28ff4f25bf",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-dawnblade/0215-0000173A.ogg",
+      "processed_source_sha256": "1b9a59d6aff886ea9af2ea4cd7efbc62b364771b11caae9cace4833eaadcf89c",
+      "source_window_seconds": [
+        0,
+        4.08
+      ],
+      "duration_seconds": 4.08,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.solar.super.fire",
+      "resource_location": "destiny:classes_w229/warlock_solar_super_fire",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_solar_super_fire.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_solar_super_fire.ogg",
+      "asset_bytes": 39292,
+      "asset_sha256": "383c0296f3e3750efe57ec65034d210b3dbc34bd2ab09769e8024235e67b05ff",
+      "source_original": {
+        "id": "1REU9RJBW0TprG0yO09LFD7cGi90O4lIH",
+        "name": "0215-0000173B.mp3",
+        "source_url": "https://drive.google.com/file/d/1REU9RJBW0TprG0yO09LFD7cGi90O4lIH/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1REU9RJBW0TprG0yO09LFD7cGi90O4lIH&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-dawnblade/0215-0000173B.mp3",
+        "source_folder_id": "1CgDcrNAdkq4CV6jD2vz9uAJNxFRasdze",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 78159,
+        "sha256": "840e96067fde2c1399771fcc57c43e8104a2f3458fc70f5ded0c67bbc41678de",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-dawnblade/0215-0000173B.ogg",
+      "processed_source_sha256": "383c0296f3e3750efe57ec65034d210b3dbc34bd2ab09769e8024235e67b05ff",
+      "source_window_seconds": [
+        0,
+        3.24
+      ],
+      "duration_seconds": 3.24,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.arc.super.start",
+      "resource_location": "destiny:classes_w229/warlock_arc_super_start",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_arc_super_start.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_arc_super_start.ogg",
+      "asset_bytes": 20268,
+      "asset_sha256": "d2f727716821e1ae5196494001758a0a353fbfce109884269e7186e0df137bd6",
+      "source_original": {
+        "id": "1HFABKo3tl3GbZATCq0gzUDDFlc8FDJRv",
+        "name": "0215-000015CD.mp3",
+        "source_url": "https://drive.google.com/file/d/1HFABKo3tl3GbZATCq0gzUDDFlc8FDJRv/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1HFABKo3tl3GbZATCq0gzUDDFlc8FDJRv&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-stormtrance/0215-000015CD.mp3",
+        "source_folder_id": "1FDrqd6eWi4NZBUjLuKiAYO6g8sIZwN94",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 35535,
+        "sha256": "47dfdb7ae08b3c8b0247a2c8d798fe933ad04ef46587e452dac9243ea2217082",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-stormtrance/0215-000015CD.ogg",
+      "processed_source_sha256": "d2f727716821e1ae5196494001758a0a353fbfce109884269e7186e0df137bd6",
+      "source_window_seconds": [
+        0,
+        1.464
+      ],
+      "duration_seconds": 1.464,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.arc.super.fire",
+      "resource_location": "destiny:classes_w229/warlock_arc_super_fire",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_arc_super_fire.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_arc_super_fire.ogg",
+      "asset_bytes": 24109,
+      "asset_sha256": "2fc198f83966eeef6f36433e0a6b02b35a8b689afb2e5f1203387a815bebb06d",
+      "source_original": {
+        "id": "1LPc3pRjHZjUJ6WarAGXpNLelXwN-qzcy",
+        "name": "0215-000015CE.mp3",
+        "source_url": "https://drive.google.com/file/d/1LPc3pRjHZjUJ6WarAGXpNLelXwN-qzcy/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1LPc3pRjHZjUJ6WarAGXpNLelXwN-qzcy&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-stormtrance/0215-000015CE.mp3",
+        "source_folder_id": "1FDrqd6eWi4NZBUjLuKiAYO6g8sIZwN94",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 47631,
+        "sha256": "ecd592f848624a73b633762baeb1d7dc614c9c7bfad95b131fbd222dc3e0eca8",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-stormtrance/0215-000015CE.ogg",
+      "processed_source_sha256": "2fc198f83966eeef6f36433e0a6b02b35a8b689afb2e5f1203387a815bebb06d",
+      "source_window_seconds": [
+        0,
+        1.968
+      ],
+      "duration_seconds": 1.968,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.void.super.start",
+      "resource_location": "destiny:classes_w229/warlock_void_super_start",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_void_super_start.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_void_super_start.ogg",
+      "asset_bytes": 39738,
+      "asset_sha256": "058a1e4b7d8adc0cf5db06a921c7cc8d0e94cad38aa4113c1f1ea233ec888379",
+      "source_original": {
+        "id": "12CmGQ3pr-6x6ctSKlZhiX6Clykve4OAI",
+        "name": "0215-000016D4.mp3",
+        "source_url": "https://drive.google.com/file/d/12CmGQ3pr-6x6ctSKlZhiX6Clykve4OAI/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=12CmGQ3pr-6x6ctSKlZhiX6Clykve4OAI&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-novabomb/0215-000016D4.mp3",
+        "source_folder_id": "1UI_cxrAFnGV7RAjOvqisEjz0qZH6gFA3",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 97743,
+        "sha256": "d77f3e85fe8d4f742734ac6ad2e11b66971dc78394ae6ad7c6c940b9277fdf52",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-novabomb/0215-000016D4.ogg",
+      "processed_source_sha256": "058a1e4b7d8adc0cf5db06a921c7cc8d0e94cad38aa4113c1f1ea233ec888379",
+      "source_window_seconds": [
+        0,
+        4.056
+      ],
+      "duration_seconds": 4.056,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.void.super.fire",
+      "resource_location": "destiny:classes_w229/warlock_void_super_fire",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_void_super_fire.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_void_super_fire.ogg",
+      "asset_bytes": 27345,
+      "asset_sha256": "167b3677f7badc4ccc16a8e4c914782400f39ff294aa6aa7fa84b5c2f428dca1",
+      "source_original": {
+        "id": "1d94XyY5eFicqbdHqM-IDKFW1caqhLTmF",
+        "name": "023D-0000123B.mp3",
+        "source_url": "https://drive.google.com/file/d/1d94XyY5eFicqbdHqM-IDKFW1caqhLTmF/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1d94XyY5eFicqbdHqM-IDKFW1caqhLTmF&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-novabomb/023D-0000123B.mp3",
+        "source_folder_id": "1UI_cxrAFnGV7RAjOvqisEjz0qZH6gFA3",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 60303,
+        "sha256": "4da9d0fe00289264a5a9cfab0e791bd46abb5fd0da2f166ff51003753b10844d",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-novabomb/023D-0000123B.ogg",
+      "processed_source_sha256": "167b3677f7badc4ccc16a8e4c914782400f39ff294aa6aa7fa84b5c2f428dca1",
+      "source_window_seconds": [
+        0,
+        2.496
+      ],
+      "duration_seconds": 2.496,
+      "sample_rate": 48000,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "tentative_folder_family_only",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "User-authorized numeric start/fire candidate. Folder establishes family; cast/fire identity and original media-event linkage are unverified.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.solar.melee.cast",
+      "resource_location": "destiny:classes_w229/titan_solar_hammer_throw",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_solar_hammer_throw.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_solar_hammer_throw.ogg",
+      "asset_bytes": 14023,
+      "asset_sha256": "eda64b0b3fa8d9ea99d3db23fb624ca569cdc66240fe62815682825a043211b7",
+      "source_original": {
+        "id": "1qrGnUvUoYh1JZ9OPzLhez6gPB6-dZzOa",
+        "name": "Hammer_Throw_1.mp3",
+        "source_url": "https://drive.google.com/file/d/1qrGnUvUoYh1JZ9OPzLhez6gPB6-dZzOa/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1qrGnUvUoYh1JZ9OPzLhez6gPB6-dZzOa&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-throwing-hammer/Hammer_Throw_1.mp3",
+        "source_folder_id": "1Dsem3miS32kZUQ2eviRjvAfU3_wxES3Q",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 33452,
+        "sha256": "6dec9c4afe0dafabb17244dc8f9cb2f93f83c4ba4eb28f38deba8918e55305cd",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-throwing-hammer/Hammer_Throw_1.ogg",
+      "processed_source_sha256": "eda64b0b3fa8d9ea99d3db23fb624ca569cdc66240fe62815682825a043211b7",
+      "source_window_seconds": [
+        0,
+        1.0710204081632653
+      ],
+      "duration_seconds": 1.0710204081632653,
+      "sample_rate": 44100,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "named_file_role",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "Solar implementation launches a hammer; source filename names throw. Shared bytes with titan.solar.super.fire by explicit user choice.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.solar.melee.impact",
+      "resource_location": "destiny:classes_w229/titan_solar_hammer_impact",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_solar_hammer_impact.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_solar_hammer_impact.ogg",
+      "asset_bytes": 20659,
+      "asset_sha256": "020249684cccfa2efda16c93be40b26d81047b1d79ad2578b778a21bd6c3ed6c",
+      "source_original": {
+        "id": "1tvqLYL6ej8tj2zWFGQP-3DGQ8WZl1IRh",
+        "name": "Hammer_Impact_1.mp3",
+        "source_url": "https://drive.google.com/file/d/1tvqLYL6ej8tj2zWFGQP-3DGQ8WZl1IRh/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1tvqLYL6ej8tj2zWFGQP-3DGQ8WZl1IRh&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-throwing-hammer/Hammer_Impact_1.mp3",
+        "source_folder_id": "1Dsem3miS32kZUQ2eviRjvAfU3_wxES3Q",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 59118,
+        "sha256": "5d5db0a26adb293f2fd410544a84975aa5f483c75c65c2175753ba6744ce796b",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-throwing-hammer/Hammer_Impact_1.ogg",
+      "processed_source_sha256": "020249684cccfa2efda16c93be40b26d81047b1d79ad2578b778a21bd6c3ed6c",
+      "source_window_seconds": [
+        0,
+        2.1420408163265305
+      ],
+      "duration_seconds": 2.1420408163265305,
+      "sample_rate": 44100,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "named_file_role",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "Common melee.impact collision hook; use generic named Hammer Impact. Ground Impact is not randomized into this hook because the contract does not distinguish ground/entity collision.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.void.grenade.throw",
+      "resource_location": "destiny:classes_w229/titan_void_suppressor_throw",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_void_suppressor_throw.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_void_suppressor_throw.ogg",
+      "asset_bytes": 15640,
+      "asset_sha256": "d00f0f185f197521061c9548af685561e2546ebdf0561e7f4b969823ecab1036",
+      "source_original": {
+        "id": "1dqqtAjdr0vgbd5CIYerIuGbRpEJCzxjF",
+        "name": "Throw_VOID_Suppressor_Grenade.mp3",
+        "source_url": "https://drive.google.com/file/d/1dqqtAjdr0vgbd5CIYerIuGbRpEJCzxjF/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1dqqtAjdr0vgbd5CIYerIuGbRpEJCzxjF&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-void-grenades/Throw_VOID_Suppressor_Grenade.mp3",
+        "source_folder_id": "1U73BdXwpGifPkgjoD8waV17bPyXARp_J",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 38458,
+        "sha256": "166e9830e11a4bd1de33a6ea466fe72db1acb5d43750f9be12e8edd92868f352",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-void-grenades/Throw_VOID_Suppressor_Grenade.ogg",
+      "processed_source_sha256": "d00f0f185f197521061c9548af685561e2546ebdf0561e7f4b969823ecab1036",
+      "source_window_seconds": [
+        0,
+        1.28
+      ],
+      "duration_seconds": 1.28,
+      "sample_rate": 44100,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "named_file_role",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "TitanGrenade VOID implementation is suppressor; successful release hook grenade.throw.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "titan.void.grenade.impact",
+      "resource_location": "destiny:classes_w229/titan_void_suppressor_impact",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/titan_void_suppressor_impact.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/titan_void_suppressor_impact.ogg",
+      "asset_bytes": 63316,
+      "asset_sha256": "abfe96e85d1f051b1473661c6b572a801c6fd4a48d0a7e579cc52fd8733799c0",
+      "source_original": {
+        "id": "1kGvDJsFjsOmcH6eNi6IhG6fELPQ5S8dK",
+        "name": "Exp_VOID_Suppressor_Grenade_3.mp3",
+        "source_url": "https://drive.google.com/file/d/1kGvDJsFjsOmcH6eNi6IhG6fELPQ5S8dK/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1kGvDJsFjsOmcH6eNi6IhG6fELPQ5S8dK&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-void-grenades/Exp_VOID_Suppressor_Grenade_3.mp3",
+        "source_folder_id": "1U73BdXwpGifPkgjoD8waV17bPyXARp_J",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 166791,
+        "sha256": "44c6c9c5441da958fd593f8f8896af86119d492caa3a1211b3cf2820f798d066",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-void-grenades/Exp_VOID_Suppressor_Grenade_3.ogg",
+      "processed_source_sha256": "abfe96e85d1f051b1473661c6b572a801c6fd4a48d0a7e579cc52fd8733799c0",
+      "source_window_seconds": [
+        0,
+        6.635102040816326
+      ],
+      "duration_seconds": 6.635102040816326,
+      "sample_rate": 44100,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "named_file_role",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "TitanGrenade VOID suppressor first detonation hook grenade.impact. Selected source lacks PlayerSuppressed suffix.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.void.grenade.throw",
+      "resource_location": "destiny:classes_w229/warlock_void_vortex_throw",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_void_vortex_throw.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_void_vortex_throw.ogg",
+      "asset_bytes": 17173,
+      "asset_sha256": "4ab0b10515c23a1975a25457617806708ee3968b2fbf4dda80f3e88a4c25afd5",
+      "source_original": {
+        "id": "107UtLozwTWt3WiSS6ujTgyuuGe7JN1-3",
+        "name": "Throw_VOID_Vortex_Grenade.mp3",
+        "source_url": "https://drive.google.com/file/d/107UtLozwTWt3WiSS6ujTgyuuGe7JN1-3/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=107UtLozwTWt3WiSS6ujTgyuuGe7JN1-3&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-void-grenades/Throw_VOID_Vortex_Grenade.mp3",
+        "source_folder_id": "1U73BdXwpGifPkgjoD8waV17bPyXARp_J",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 44718,
+        "sha256": "b74ebba91fc0def1fefc4bef5f1c068879a1d6189cb3dfd6ac06b21650e805b7",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-void-grenades/Throw_VOID_Vortex_Grenade.ogg",
+      "processed_source_sha256": "4ab0b10515c23a1975a25457617806708ee3968b2fbf4dda80f3e88a4c25afd5",
+      "source_window_seconds": [
+        0,
+        1.5412244897959184
+      ],
+      "duration_seconds": 1.5412244897959184,
+      "sample_rate": 44100,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "named_file_role",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "WarlockGrenade VOID implementation is vortex; successful release hook grenade.throw.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    },
+    {
+      "event_key": "warlock.void.grenade.impact",
+      "resource_location": "destiny:classes_w229/warlock_void_vortex_impact",
+      "asset_relative_path": "assets/destiny/sounds/classes_w229/warlock_void_vortex_impact.ogg",
+      "asset_path": "/private/tmp/destiny-w229-sources/processed/installed-assets/assets/destiny/sounds/classes_w229/warlock_void_vortex_impact.ogg",
+      "asset_bytes": 79238,
+      "asset_sha256": "4f5e860e5391a2a0c78995485cb80b855a5adb6474c5139835aee2e4031b5324",
+      "source_original": {
+        "id": "1-Tu72ia6VjwEoOdYZx3US8SHIlRcWLeM",
+        "name": "Exp_VOID_Vortex_Grenade_1.mp3",
+        "source_url": "https://drive.google.com/file/d/1-Tu72ia6VjwEoOdYZx3US8SHIlRcWLeM/view",
+        "download_url": "https://drive.usercontent.google.com/download?id=1-Tu72ia6VjwEoOdYZx3US8SHIlRcWLeM&export=download&confirm=t",
+        "path": "/private/tmp/destiny-w229-sources/downloads/sound-void-grenades/Exp_VOID_Vortex_Grenade_1.mp3",
+        "source_folder_id": "1U73BdXwpGifPkgjoD8waV17bPyXARp_J",
+        "authorized_root_url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+        "bytes": 209357,
+        "sha256": "45f2333d0766ad4ef99debe76566197b18ab5fdb72e4a3050806549ca3c0b55b",
+        "provenance_type": "authorized_public_drive_original"
+      },
+      "processed_source_path": "/private/tmp/destiny-w229-sources/processed/ogg/sound-void-grenades/Exp_VOID_Vortex_Grenade_1.ogg",
+      "processed_source_sha256": "4f5e860e5391a2a0c78995485cb80b855a5adb6474c5139835aee2e4031b5324",
+      "source_window_seconds": [
+        0,
+        8.411428571428571
+      ],
+      "duration_seconds": 8.411428571428571,
+      "sample_rate": 44100,
+      "channels": 1,
+      "codec": "OGG/VORBIS",
+      "confidence": "named_file_role",
+      "auditioned": false,
+      "in_game_verified": false,
+      "original_wwise_media_mapping_verified": false,
+      "original_animation_sound_onset_frame": null,
+      "proposed_hook_relative_seconds": 0,
+      "selection_reason": "WarlockGrenade VOID vortex collision/field creation hook grenade.impact.",
+      "processing": "Full source decoded with libsndfile; arithmetic mean across channels; no trim/resample/normalization/gain; Vorbis compression_level 0.5; derivative decoded back and exact frame count checked.",
+      "sample_decode_verified": true
+    }
+  ],
+  "intentional_shared_assets": [
+    {
+      "keys": [
+        "titan.solar.super.fire",
+        "titan.solar.melee.cast"
+      ],
+      "source_file_id": "1qrGnUvUoYh1JZ9OPzLhez6gPB6-dZzOa",
+      "reason": "Explicit user selection: named Hammer_Throw_1; super Wwise association unverified."
+    }
+  ],
+  "excluded": {
+    "Ball_Proj_1.mp3": "Current Warlock ARC melee is Chain Lightning; Ball Lightning source is not a match.",
+    "Hammer_Ground_Impact_1.mp3": "Already prepared separately; current melee.impact hook does not expose collision-type routing, so generic Hammer_Impact_1 is used.",
+    "other_grenade_variants": "No Axion/Magnetic/Scatter cue attached to Suppressor or Vortex.",
+    "unresolved_class_move_end_cues": "Only requested source-backed/tentative events included."
+  },
+  "integration_notes": [
+    "Copy assets/ into src/main/resources/assets/.",
+    "Merge top-level sounds-additions.json keys into existing assets/destiny/sounds.json, preserving unrelated entries. sounds-additions.json is not automatically loaded by Minecraft.",
+    "This is an asset fragment, not a standalone resource pack; existing project pack metadata is retained by master.",
+    "TitanSuper snapshot calls super.impact but no super.fire string; shared ClassAbilityEffects.attack snapshot has no sound dispatch. Titan super.fire asset keys are prepared, and runtime fire-hook connection remains master integration work.",
+    "No main/worktree changes, Java changes, build, game input or live Blender use performed."
+  ]
+}

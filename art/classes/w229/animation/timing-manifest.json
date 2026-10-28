@@ -1,0 +1,1393 @@
+{
+  "schemaVersion": 1,
+  "resource": "/destiny/animation/classes_w229.animation.json",
+  "model": "guardian_classes_w229_r2",
+  "samplePolicy": "61 poses per clip. Motion: keep every original integer 30fps frame, add directly Blender-evaluated fractional samples at the largest measured FK/rotation/floor interpolation errors until61; nonuniform spacing, no retiming. Holds: repeat one actual source snapshot61 times.",
+  "runtimeClock": "seconds*20; contact ticks below exclude any AnimationModifier.start blend ticks; master must add its actual start delay",
+  "clips": [
+    {
+      "name": "w229_titan_solar_start",
+      "group": "titan_hammer_of_sol",
+      "actionTag": "80A8A8FE",
+      "actionName": "Armature|80A8A8FE_hammer_cast|Base",
+      "actionCurvesSha256": "098486a0f10a008b923dfdf6f452d622d9cf03b71ddea8a58b518e86f7a084bb",
+      "evaluatedActionSamplesSha256": "1daf28cc456e4eaa8590bf89179930a1766cdd2f3223f90a76a76987d07b69d1",
+      "sourceRange": [
+        1.0,
+        39.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.2666666666666666,
+      "clipTicksExact": 25.333333333333332,
+      "clipDurationTicksCeil": 26,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named hammer_cast; complete ground cast",
+      "motion61SamplesSha256": "b024b917a9e4b1813a5126dd09f76e884cbbde8c1149706da1572114218c120d",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C12",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 4,
+            "Unk04": {
+              "Hash32": 2428407438,
+              "Position": 9220
+            }
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 3,
+            "Unk02": 2,
+            "Unk04": 28,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 14,
+            "Unk02": 2,
+            "Unk04": 29,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 16,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 16,
+            "Unk02": 2,
+            "Unk04": 22,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 29,
+            "Unk02": 2,
+            "Unk04": 29,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 32,
+            "Unk02": 2,
+            "Unk04": 19,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 8.08254562088053e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pri_right_item",
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "cast accent candidate; not a decoded summon event",
+        "sourceFrame": 17.0,
+        "sourceSeconds": 0.5333333333333333,
+        "clipSeconds": 0.5333333333333333,
+        "clipTicksExact": 10.666666666666666,
+        "clipTickFloor": 10,
+        "clipTickCeil": 11,
+        "clipTickNearest": 11,
+        "sourceWindowFrames": [
+          16.0,
+          18.0
+        ],
+        "metric": "peak wrist speed relative to chest",
+        "metricValueMetersPerSecond": 17.114351820521943,
+        "sourceWristBones": [
+          "DE9D6BEA"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          -15.583877563476562,
+          -6.538271047174931,
+          2.700890600681305
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_titan_solar_attack",
+      "group": "titan_hammer_of_sol",
+      "actionTag": "80A8A8AE",
+      "actionName": "Armature|80A8A8AE_titan_sunbreaker_hammer_throw|Replacement",
+      "actionCurvesSha256": "0127e2212942c8fea6b0a925861dfc4f687bda063be752aee98b4f7411236e84",
+      "evaluatedActionSamplesSha256": "7cbed32ca618c6c00c3b8d5516cd6def2b1d12d7a0aea073f6910f8b384ab945",
+      "sourceRange": [
+        1.0,
+        48.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.5666666666666667,
+      "clipTicksExact": 31.333333333333332,
+      "clipDurationTicksCeil": 32,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named hammer_throw + hammer_throw/spawn audio events; Replacement layer",
+      "motion61SamplesSha256": "701176c82624a29831d77164f729432ebb7f06fd9ba81a1db93aee66c603db04",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C12",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 4,
+            "Unk04": {
+              "Hash32": 1353242594,
+              "Position": 8740
+            }
+          }
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 0,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C84C",
+          "path": "content\\audio\\wwise_events\\com01\\abilities_com01\\player_com01\\supers\\thermal_titan\\thermal_hammer_throw.wwise_event"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 15,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C846",
+          "path": "content\\audio\\wwise_events\\com01\\abilities_com01\\player_com01\\supers\\thermal_titan\\thermal_hammer_spawn.wwise_event"
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 36,
+            "Unk02": 2,
+            "Unk04": 1,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 45,
+            "Unk02": 2,
+            "Unk04": 47,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 1.9166405693829075e-14,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pri_right_item",
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "attack accent/release candidate; not a decoded damage event",
+        "sourceFrame": 10.0,
+        "sourceSeconds": 0.3,
+        "clipSeconds": 0.3,
+        "clipTicksExact": 6.0,
+        "clipTickFloor": 6,
+        "clipTickCeil": 6,
+        "clipTickNearest": 6,
+        "sourceWindowFrames": [
+          9.0,
+          11.0
+        ],
+        "metric": "peak anterior wrist velocity relative to chest",
+        "metricValueMetersPerSecond": 16.725443420000374,
+        "sourceWristBones": [
+          "DE9D6BEA"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          16.725443420000374,
+          0.8472693152725697,
+          -1.2545889616012573
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events",
+      "hammerSpawnRecommendation": {
+        "sourceEvidence": "S80808C13 audio marker, not a decoded mesh-visibility or damage event",
+        "eventTag": "80D4C846",
+        "marker": "811C9DC5",
+        "path": "content\\audio\\wwise_events\\com01\\abilities_com01\\player_com01\\supers\\thermal_titan\\thermal_hammer_spawn.wwise_event",
+        "sourceEventStartFrame": 15,
+        "eventFrameOrigin": "source zero-based StartFrame retained by exporter without normalization; evaluated Blender starts at1",
+        "correspondingBlenderFrame": 16,
+        "seconds": 0.5,
+        "ticksExact": 10,
+        "productProvisional": {
+          "reEquipHammerAtClipTick": 10,
+          "suggestedReleaseAtClipTick": 6,
+          "hiddenWindowClipTicks": [
+            6,
+            10
+          ],
+          "status": "optional cosmetic timing inferred from kinematic release candidate plus source audio marker; actual source prop visibility unverified"
+        },
+        "runtimeOffset": "add actual AnimationModifier.start blend ticks to both6 and10; no original motion retiming"
+      }
+    },
+    {
+      "name": "w229_titan_solar_idle",
+      "group": "titan_hammer_of_sol",
+      "actionTag": "80A8A8AE",
+      "actionName": "Armature|80A8A8AE_titan_sunbreaker_hammer_throw|Replacement",
+      "actionCurvesSha256": "0127e2212942c8fea6b0a925861dfc4f687bda063be752aee98b4f7411236e84",
+      "evaluatedActionSamplesSha256": "7cbed32ca618c6c00c3b8d5516cd6def2b1d12d7a0aea073f6910f8b384ab945",
+      "sourceRange": [
+        1.0,
+        48.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 0.5,
+      "clipTicksExact": 10.0,
+      "clipDurationTicksCeil": 10,
+      "kind": "explicitly sampled hold",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": 48,
+      "semanticEvidence": "explicitly sampled hold: terminal hammer-throw recovery snapshot; no source idle action",
+      "motion61SamplesSha256": "7d4be7577b7e837a79567436a199d8b51c025f7e329e05beb077444fd6f5b5a1",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C12",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 4,
+            "Unk04": {
+              "Hash32": 1353242594,
+              "Position": 8740
+            }
+          }
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 0,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C84C",
+          "path": "content\\audio\\wwise_events\\com01\\abilities_com01\\player_com01\\supers\\thermal_titan\\thermal_hammer_throw.wwise_event"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 15,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C846",
+          "path": "content\\audio\\wwise_events\\com01\\abilities_com01\\player_com01\\supers\\thermal_titan\\thermal_hammer_spawn.wwise_event"
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 36,
+            "Unk02": 2,
+            "Unk04": 1,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 45,
+            "Unk02": 2,
+            "Unk04": 47,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 5.214799211354908e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pri_right_item",
+      "holdPeriodNote": "0.5s exporter loop period; sampled pose is original, period is not a recovered source idle duration"
+    },
+    {
+      "name": "w229_titan_void_start",
+      "group": "titan_sentinel_shield",
+      "actionTag": "80A8A928",
+      "actionName": "Armature|80A8A928_titan_sentinel_shield_cast_enter|Base",
+      "actionCurvesSha256": "32aa751f3486d1bb68259bfd60acb25f38601ace5fe22031244a0d1b0b5977f7",
+      "evaluatedActionSamplesSha256": "6b2492631c0180cd75f1d5ea0cb859bd3997a8d42d8938fdb034adf37931a094",
+      "sourceRange": [
+        1.0,
+        43.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.4,
+      "clipTicksExact": 28.0,
+      "clipDurationTicksCeil": 28,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named titan_sentinel_shield_cast_enter",
+      "motion61SamplesSha256": "b5c82e6cc8a4373e7805fc6604b70e66293eca2572d649d70a6da7e993c93a0e",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 3,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 7,
+            "Unk02": 2,
+            "Unk04": 28,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 16,
+            "Unk02": 2,
+            "Unk04": 1,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 18,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 32,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 36,
+            "Unk02": 2,
+            "Unk04": 19,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 2.1043046661867034e-15,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pli_left_item",
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "cast accent candidate; not a decoded summon event",
+        "sourceFrame": 16.0,
+        "sourceSeconds": 0.5,
+        "clipSeconds": 0.5,
+        "clipTicksExact": 10.0,
+        "clipTickFloor": 10,
+        "clipTickCeil": 10,
+        "clipTickNearest": 10,
+        "sourceWindowFrames": [
+          15.0,
+          17.0
+        ],
+        "metric": "peak wrist speed relative to chest",
+        "metricValueMetersPerSecond": 16.4192097865326,
+        "sourceWristBones": [
+          "8C83CB67"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          -3.5358865186572075,
+          7.728966982103884,
+          14.048168063163757
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_titan_void_attack",
+      "group": "titan_sentinel_shield",
+      "actionTag": "80A8A924",
+      "actionName": "Armature|80A8A924_shield_throw_crusader|Base",
+      "actionCurvesSha256": "6c22e70cf7f3fb4e5ecadbffe9e15b929a8cb77a930b98f6536ba31464f4c69f",
+      "evaluatedActionSamplesSha256": "a2f911f73ae9e37653d564ea2842f808e69b63c4a7097869cdb7d2b064cd8239",
+      "sourceRange": [
+        1.0,
+        41.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.3333333333333333,
+      "clipTicksExact": 26.666666666666664,
+      "clipDurationTicksCeil": 27,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named shield_throw_crusader; not a melee replacement",
+      "motion61SamplesSha256": "aeb33ba3ad939428949152ac22495866849f5226de5d801cc2f13bc2d6a9faf8",
+      "events": [
+        {
+          "type": "S80808C13",
+          "startFrame": 0,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C878",
+          "path": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\void_shield\\void_shield_throw.wwise_event"
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 10,
+            "Unk02": 2,
+            "Unk04": 1,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 21,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 22,
+            "Unk02": 2,
+            "Unk04": 28,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 22,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 22,
+            "Unk02": 2,
+            "Unk04": 24,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 23,
+            "Unk02": 2,
+            "Unk04": 29,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 24,
+            "Unk02": 2,
+            "Unk04": 47,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 32,
+            "Unk02": 2,
+            "Unk04": 29,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 38,
+            "Unk02": 2,
+            "Unk04": 28,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 4.697175049207787e-15,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pli_left_item",
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "attack accent/release candidate; not a decoded damage event",
+        "sourceFrame": 10.0,
+        "sourceSeconds": 0.3,
+        "clipSeconds": 0.3,
+        "clipTicksExact": 6.0,
+        "clipTickFloor": 6,
+        "clipTickCeil": 6,
+        "clipTickNearest": 6,
+        "sourceWindowFrames": [
+          9.0,
+          11.0
+        ],
+        "metric": "peak anterior wrist velocity relative to chest",
+        "metricValueMetersPerSecond": 15.958064049482346,
+        "sourceWristBones": [
+          "8C83CB67"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          15.958064049482346,
+          -1.9580611120909452,
+          0.6684565544128418
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_titan_void_idle",
+      "group": "titan_sentinel_shield",
+      "actionTag": "80A8A928",
+      "actionName": "Armature|80A8A928_titan_sentinel_shield_cast_enter|Base",
+      "actionCurvesSha256": "32aa751f3486d1bb68259bfd60acb25f38601ace5fe22031244a0d1b0b5977f7",
+      "evaluatedActionSamplesSha256": "6b2492631c0180cd75f1d5ea0cb859bd3997a8d42d8938fdb034adf37931a094",
+      "sourceRange": [
+        1.0,
+        43.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 0.5,
+      "clipTicksExact": 10.0,
+      "clipDurationTicksCeil": 10,
+      "kind": "explicitly sampled hold",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": 43,
+      "semanticEvidence": "explicitly sampled hold: terminal shield-cast carry snapshot; no source idle action",
+      "motion61SamplesSha256": "63abd7a35a227ba4c9b36aa353159c1b1ca3d30c90dc4129584b8c0ecf0b56fc",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 3,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 7,
+            "Unk02": 2,
+            "Unk04": 28,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 16,
+            "Unk02": 2,
+            "Unk04": 1,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 18,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 32,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 36,
+            "Unk02": 2,
+            "Unk04": 19,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 2.7194799110210365e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pli_left_item",
+      "holdPeriodNote": "0.5s exporter loop period; sampled pose is original, period is not a recovered source idle duration"
+    },
+    {
+      "name": "w229_warlock_solar_start",
+      "group": "warlock_daybreak",
+      "actionTag": "80A8A921",
+      "actionName": "Armature|80A8A921_warlock_archangel_cast|Base",
+      "actionCurvesSha256": "e0ae714c6ab4b881b30d5b6a84068bd13ed0df79f3675a612c664f238d21be26",
+      "evaluatedActionSamplesSha256": "44a40abdf0c6ca6d01a580de999834da905a1add1c7250bd0000b2b7fb553503",
+      "sourceRange": [
+        1.0,
+        48.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.5666666666666667,
+      "clipTicksExact": 31.333333333333332,
+      "clipDurationTicksCeil": 32,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named warlock_archangel_cast; complete ground cast",
+      "motion61SamplesSha256": "c9d55dfcaeb8528b4861af7973421ebedc7e97cbf377161cba33fe8236d0fd53",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 20,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 18,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 18,
+            "Unk02": 2,
+            "Unk04": 1,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 35,
+            "Unk02": 2,
+            "Unk04": 19,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 36,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 8.970522628861657e-15,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pri_right_item",
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "cast accent candidate; not a decoded summon event",
+        "sourceFrame": 17.0,
+        "sourceSeconds": 0.5333333333333333,
+        "clipSeconds": 0.5333333333333333,
+        "clipTicksExact": 10.666666666666666,
+        "clipTickFloor": 10,
+        "clipTickCeil": 11,
+        "clipTickNearest": 11,
+        "sourceWindowFrames": [
+          16.0,
+          18.0
+        ],
+        "metric": "peak wrist speed relative to chest",
+        "metricValueMetersPerSecond": 12.346188738607406,
+        "sourceWristBones": [
+          "DE9D6BEA"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          7.845961404964328,
+          0.7366635370999575,
+          9.504030346870422
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_warlock_solar_attack",
+      "group": "warlock_daybreak_event_linked",
+      "actionTag": "80A8A960",
+      "actionName": "Armature|80A8A960|Base",
+      "actionCurvesSha256": "5257748429fdce2c78d062655804b14f06ee788329ee7b2167eccba606c0cd81",
+      "evaluatedActionSamplesSha256": "44d1806ec98665415159bd95920fbfd5626b676193ced4248ae83e0ca3fb923e",
+      "sourceRange": [
+        1.0,
+        32.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.0333333333333334,
+      "clipTicksExact": 20.666666666666668,
+      "clipDurationTicksCeil": 21,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "explicit thermal_sword_slash_1 FX sequence event; 80A8A962 slash_2 inspected, not silently concatenated",
+      "motion61SamplesSha256": "b5fdcc648ffbb42b5a2ba6872b345e00f0dcf5f1c92abcb4afd145b47a4172fd",
+      "events": [
+        {
+          "type": "S80808C13",
+          "startFrame": 0,
+          "marker": "7BD05F71",
+          "eventTag": "80D94393",
+          "path": "content\\sandbox\\abilities\\player\\supers\\thermal_sword\\fx\\thermal_sword_slash_1.fx_sequence.tft"
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 18,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 8.596815707320577e-07,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": "pri_right_item",
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "attack accent/release candidate; not a decoded damage event",
+        "sourceFrame": 13.0,
+        "sourceSeconds": 0.4,
+        "clipSeconds": 0.4,
+        "clipTicksExact": 8.0,
+        "clipTickFloor": 8,
+        "clipTickCeil": 8,
+        "clipTickNearest": 8,
+        "sourceWindowFrames": [
+          12.0,
+          14.0
+        ],
+        "metric": "peak wrist speed relative to chest",
+        "metricValueMetersPerSecond": 14.691820000225574,
+        "sourceWristBones": [
+          "DE9D6BEA"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          1.5638589626178145,
+          -12.840860411524773,
+          -6.965358853340149
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_warlock_solar_idle",
+      "kind": "evaluated source sword-catch loop adapted to Daybreak",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "lowerBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "superAssociation": "partial association only; generic sword-catch, not confirmed Daybreak idle",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.7333333333333333,
+      "clipTicksExact": 14.666666666666666,
+      "clipDurationTicksCeil": 15,
+      "motion61SamplesSha256": "787ff519cf3ae5495a10b50ae501494b7447174388b10ab0f07a9cdd973737ed",
+      "semanticEvidence": "Temporary source-derived sword carry. Evaluated compatible rig/one-handed item node; source is Replacement layer and its original runtime base/mixing is unresolved. Replaces rejected cast f28; no Daybreak-exclusive claim.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_arc_start",
+      "group": "warlock_stormtrance",
+      "actionTag": "80A8A8B0",
+      "actionName": "Armature|80A8A8B0_warlock_stormcaller_lightning_cast_enter|Base",
+      "actionCurvesSha256": "ec021e1b16e56f6bafcef63a9699f9f56468f7deb2e0178b83b60b1c968b7454",
+      "evaluatedActionSamplesSha256": "1729bebfcfa966f1ba87319eba6d7624e17d2da3b97fc9c0f3a7b79116de8c7a",
+      "sourceRange": [
+        1.0,
+        38.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.2333333333333334,
+      "clipTicksExact": 24.666666666666668,
+      "clipDurationTicksCeil": 25,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named warlock_stormcaller_lightning_cast_enter; full super activation",
+      "motion61SamplesSha256": "2fb2bedfbc1cc2ec372bf0368827ff6db0b4f03cb289765d243ede1be00664d1",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 9.35722128073846e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": null,
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "cast accent candidate; not a decoded summon event",
+        "sourceFrame": 16.0,
+        "sourceSeconds": 0.5,
+        "clipSeconds": 0.5,
+        "clipTicksExact": 10.0,
+        "clipTickFloor": 10,
+        "clipTickCeil": 10,
+        "clipTickNearest": 10,
+        "sourceWindowFrames": [
+          15.0,
+          17.0
+        ],
+        "metric": "peak wrist speed relative to chest",
+        "metricValueMetersPerSecond": 8.162167291891869,
+        "sourceWristBones": [
+          "DE9D6BEA",
+          "8C83CB67"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          -6.647619344294071,
+          4.394890246912837,
+          -1.7649565637111664
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_warlock_arc_attack",
+      "group": "warlock_stormtrance",
+      "actionTag": "80A8A8A8",
+      "actionName": "Armature|80A8A8A8_lightning_cast_enter|Base",
+      "actionCurvesSha256": "8ab38eca744702390cb8e64c198830ff2c349d6fde4286649029e7b04e8a2d78",
+      "evaluatedActionSamplesSha256": "4d87ff5ff3493d79c4408c0ed68328db230ae5a89e4332c18fd15196c7f7c0ba",
+      "sourceRange": [
+        1.0,
+        15.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 0.4666666666666667,
+      "clipTicksExact": 9.333333333333334,
+      "clipDurationTicksCeil": 10,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named lightning_cast_enter; beam-casting transition, not a damage event",
+      "motion61SamplesSha256": "84e3a2f96726010874bb2bcc32c299d09aefccf961babaadba2d147dd1811623",
+      "events": [],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 9.142502916948183e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": null,
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "attack accent/release candidate; not a decoded damage event",
+        "sourceFrame": 9.0,
+        "sourceSeconds": 0.26666666666666666,
+        "clipSeconds": 0.26666666666666666,
+        "clipTicksExact": 5.333333333333333,
+        "clipTickFloor": 5,
+        "clipTickCeil": 6,
+        "clipTickNearest": 5,
+        "sourceWindowFrames": [
+          8.0,
+          10.0
+        ],
+        "metric": "peak anterior wrist velocity relative to chest",
+        "metricValueMetersPerSecond": 8.49383432418108,
+        "sourceWristBones": [
+          "DE9D6BEA",
+          "8C83CB67"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          8.49383432418108,
+          2.8569943830370903,
+          -1.0801246762275696
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_warlock_arc_idle",
+      "group": "warlock_stormtrance",
+      "actionTag": "80A8A8AC",
+      "actionName": "Armature|80A8A8AC_warlock_lightning_cast_idle|Base",
+      "actionCurvesSha256": "dc60bf7acabfacaa273a36d1cfe536ffe358d328a830493666f3b07f4461436b",
+      "evaluatedActionSamplesSha256": "c6a573da37425d7816fd85d388d7d6aa27f5c544fcce30a72d86509d14cc0b90",
+      "sourceRange": [
+        1.0,
+        16.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 0.5,
+      "clipTicksExact": 10.0,
+      "clipDurationTicksCeil": 10,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named warlock_lightning_cast_idle; actual animated channel loop",
+      "motion61SamplesSha256": "f76531c043eb11260d28fa6eea3b06f5e836d336caa17e5e012ca40de91056af",
+      "events": [],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 8.09326123442274e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": null,
+      "holdPeriodNote": null
+    },
+    {
+      "name": "w229_warlock_arc_end",
+      "group": "warlock_stormtrance",
+      "actionTag": "80A8A8AA",
+      "actionName": "Armature|80A8A8AA_warlock_lightning_cast_exit|Base",
+      "actionCurvesSha256": "60b0595319aac7513658ae37e70c115bca40ddf7006aef54ddf3230b8267979a",
+      "evaluatedActionSamplesSha256": "f242afe306989047cdad2777ba8380d22508138bf2b350fc5ccaacc303ae438a",
+      "sourceRange": [
+        1.0,
+        11.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 0.3333333333333333,
+      "clipTicksExact": 6.666666666666666,
+      "clipDurationTicksCeil": 7,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named warlock_lightning_cast_exit",
+      "motion61SamplesSha256": "c919ce0158185c85c51e9c06d2cb074ca8aa69af84bef75237a3942221b48f03",
+      "events": [],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 6.843874359417885e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": null,
+      "holdPeriodNote": null
+    },
+    {
+      "name": "w229_warlock_void_attack",
+      "group": "warlock_nova_bomb",
+      "actionTag": "80A8AD80",
+      "actionName": "Armature|80A8AD80_warlock_voidwalker_novabomb_cast|Base",
+      "actionCurvesSha256": "094e61d9b32f2a2a8d49dff69d7690876ce78d3873f507063bc1a1c792c604af",
+      "evaluatedActionSamplesSha256": "e6ef502b410a038a4959172018e4d2c48422fc37cc0b976f01a700e75a272e2b",
+      "sourceRange": [
+        1.0,
+        40.0
+      ],
+      "sourceFps": 30,
+      "lengthSeconds": 1.3,
+      "clipTicksExact": 26.0,
+      "clipDurationTicksCeil": 26,
+      "kind": "evaluated source motion",
+      "sampleCount": 61,
+      "sourceFrameSnapshot": null,
+      "semanticEvidence": "source-named novabomb_cast; entire one-shot windup/cast/recovery, no fabricated roaming idle/start/end",
+      "motion61SamplesSha256": "c1b77d55c0f9f913309853a7d31a32b2e311b2ff65cb77c85eeb6a4a56a7899d",
+      "events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C12",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 4,
+            "Unk04": {
+              "Hash32": 3686523648,
+              "Position": 9468
+            }
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 36,
+            "Unk02": 2,
+            "Unk04": 24,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 37,
+            "Unk02": 2,
+            "Unk04": 19,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 37,
+            "Unk02": 2,
+            "Unk04": 4,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 37,
+            "Unk02": 2,
+            "Unk04": 47,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 39,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        }
+      ],
+      "eventSemantics": "S80808C1A/S80808C12 remain unknown; no decoded damage/contact claim",
+      "contact": null,
+      "maxLongBoneDirectionError": 7.997507952675014e-16,
+      "rootMotion": "source translation omitted; visual skin-floor correction Y only; never gameplay movement",
+      "equipmentNode": null,
+      "holdPeriodNote": null,
+      "productProvisional": {
+        "status": "kinematic_visual_candidate_unconfirmed",
+        "purpose": "attack accent/release candidate; not a decoded damage event",
+        "sourceFrame": 22.0,
+        "sourceSeconds": 0.7,
+        "clipSeconds": 0.7,
+        "clipTicksExact": 14.0,
+        "clipTickFloor": 14,
+        "clipTickCeil": 14,
+        "clipTickNearest": 14,
+        "sourceWindowFrames": [
+          21.0,
+          23.0
+        ],
+        "metric": "peak anterior wrist velocity relative to chest",
+        "metricValueMetersPerSecond": 14.542861701920629,
+        "sourceWristBones": [
+          "DE9D6BEA"
+        ],
+        "sourceVelocityMetersPerSecond": [
+          14.542861701920629,
+          4.813903891481459,
+          -0.8782893419265747
+        ],
+        "confirmation": "master Vision1 images -> art review -> integration delta -> master Vision2; authoring contact excludes runtime start blend delay"
+      },
+      "decodedContactStatus": "not decoded; raw unknown control fields are not contact events"
+    },
+    {
+      "name": "w229_titan_solar_move",
+      "kind": "source hold upperbody + explicitly MC-authored lowerbody gait",
+      "upperBodySource": {
+        "r1Clip": "w229_titan_solar_idle",
+        "tag": "80A8A8AE",
+        "frame": 48
+      },
+      "lowerBodySource": "authored",
+      "superAssociation": "known super upperbody; no verified super walking source",
+      "sourceFrameSnapshot": 48,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "2acd53f9b6fb8f82870b67457186461d506aad2816f8ce684d47aff951356956",
+      "semanticEvidence": "Source rip \uc544\ub2cc lowerbody gait. R1 terminal hammer recovery upperbody held; 0.8s authored walk/run cadence, not source duration.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_void_move",
+      "kind": "source-derived lowerbody composition",
+      "upperBodySource": {
+        "r1Clip": "w229_titan_void_idle",
+        "tag": "80A8A928",
+        "frame": 43
+      },
+      "lowerBodySource": {
+        "tag": "80A8A9AD",
+        "range": [
+          1,
+          16
+        ]
+      },
+      "superAssociation": "exact named Sentinel sprint; upperbody composed from known super ready",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.5,
+      "clipTicksExact": 10.0,
+      "clipDurationTicksCeil": 10,
+      "motion61SamplesSha256": "892aa5a33a425fc927cf8cb85a9f9fa284fee0f52989dca858da431038b8eea2",
+      "semanticEvidence": "Every native sprint frame retained in 61 samples; 0.5s original elapsed time. No whole-body original-sprint claim. Endpoint seam is measured, not silently rewritten.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pli_left_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_move",
+      "kind": "source sword-catch upperbody + explicitly MC-authored lowerbody gait",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "lowerBodySource": "authored",
+      "superAssociation": "partial sword-catch association only",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.7333333333333333,
+      "clipTicksExact": 14.666666666666666,
+      "clipDurationTicksCeil": 15,
+      "motion61SamplesSha256": "3dae956d38c7fd05bb2345dab752fb044e676e1db671e017f2bea2d465cd4c5a",
+      "semanticEvidence": "Upperbody, wrists and item local transforms retain source idle timing (22/30s). Legs are Source rip \uc544\ub2cc lowerbody gait. Ground cadence is authored, not original Daybreak movement.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_air",
+      "kind": "source-derived sword-carry/glide composition",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "snapshotFrame": 1
+      },
+      "lowerBodySource": {
+        "tag": "80A8AB5E",
+        "range": [
+          1,
+          61
+        ]
+      },
+      "superAssociation": "generic Warlock glide + generic sword-catch, no dedicated Daybreak association",
+      "sourceFrameSnapshot": 1,
+      "sampleCount": 61,
+      "lengthSeconds": 2.0,
+      "clipTicksExact": 40.0,
+      "clipDurationTicksCeil": 40,
+      "motion61SamplesSha256": "677708ed17135a90ca8a13ce61cb766b2b9934acf68b8a66f01e67de24a2178d",
+      "semanticEvidence": "Temporary compatible air carry. Real source glide legs under held sword-catch upperbody; no procedural flight or gameplay root motion.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_arc_idle",
+      "kind": "explicitly MC-authored temporary ready hold",
+      "upperBodySource": null,
+      "lowerBodySource": "authored",
+      "superAssociation": "no Fists of Havoc source identified",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "670019c059b9d2b0dfa0906a01b1e8a0199aac12628cae5e4c60e718b0d2ac1c",
+      "semanticEvidence": "Authored fist-ready loop; no source rip, source action, recovered cast/contact or original timing claim. Arms are player limb blocks; no fingers added.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": null,
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_arc_move",
+      "kind": "explicitly MC-authored temporary lowerbody gait",
+      "upperBodySource": null,
+      "lowerBodySource": "authored",
+      "superAssociation": "no Fists of Havoc source identified",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "f7e6fc734de5ba542ceb6fde869fd1675dc37c2df59c6685f1d4a1b9ac5cfe89",
+      "semanticEvidence": "Authored ready upperbody preserved; Source rip \uc544\ub2cc lowerbody gait. No fabricated start/attack/end; master retains native lifecycle.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": null,
+      "productProvisional": null
+    }
+  ],
+  "absent": [
+    {
+      "name": "w229_titan_solar_end",
+      "reason": "no separately evidenced source action or suitable held pose for this semantic; Nova is a complete one-shot cast",
+      "requestedMaterial": "identified 3P 72-bone titan_solar end action with tag, evaluated blend/FBX, fps/frame range and decoded event semantics if available"
+    },
+    {
+      "name": "w229_titan_void_end",
+      "reason": "no separately evidenced source action or suitable held pose for this semantic; Nova is a complete one-shot cast",
+      "requestedMaterial": "identified 3P 72-bone titan_void end action with tag, evaluated blend/FBX, fps/frame range and decoded event semantics if available"
+    },
+    {
+      "name": "w229_warlock_solar_end",
+      "reason": "no separately evidenced source action or suitable held pose for this semantic; Nova is a complete one-shot cast",
+      "requestedMaterial": "identified 3P 72-bone warlock_solar end action with tag, evaluated blend/FBX, fps/frame range and decoded event semantics if available"
+    },
+    {
+      "name": "w229_warlock_void_idle",
+      "reason": "no separately evidenced source action or suitable held pose for this semantic; Nova is a complete one-shot cast",
+      "requestedMaterial": "identified 3P 72-bone warlock_void idle action with tag, evaluated blend/FBX, fps/frame range and decoded event semantics if available"
+    },
+    {
+      "name": "w229_warlock_void_start",
+      "reason": "no separately evidenced source action or suitable held pose for this semantic; Nova is a complete one-shot cast",
+      "requestedMaterial": "identified 3P 72-bone warlock_void start action with tag, evaluated blend/FBX, fps/frame range and decoded event semantics if available"
+    },
+    {
+      "name": "w229_warlock_void_end",
+      "reason": "no separately evidenced source action or suitable held pose for this semantic; Nova is a complete one-shot cast",
+      "requestedMaterial": "identified 3P 72-bone warlock_void end action with tag, evaluated blend/FBX, fps/frame range and decoded event semantics if available"
+    }
+  ],
+  "fistsOfHavoc": "unidentified; no substitute produced",
+  "integrationContract": {
+    "nova": "w229_warlock_void_attack contains complete cast: start it at the first activation tick; no start/idle/end requests",
+    "missingClips": "absence is intentional; route must not substitute Hunter or unrelated super motion",
+    "equipment": "PlayerAnimations.superItem on pri_right_item / pli_left_item; native fallback holder only; no new holder geometry supplied",
+    "contactAuthority": "contact null means no decoded contact. productProvisional is an optional product decision derived from measured source kinematics; never original damage timing."
+  },
+  "revision": 2,
+  "status": "offline artifact; pending master second Vision",
+  "r1FrozenManifest": "frozen-r1-manifest.json",
+  "samplePolicyR2": "Original cast/attack/end assets remain exactly unchanged. New source loops retain every native 30fps frame and elapsed time; compositions identify each source region. Authored legs explicitly distinguish procedural gait from rip."
+}

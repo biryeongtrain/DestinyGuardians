@@ -1,0 +1,196 @@
+{
+  "model": "guardian_classes_w229_r2",
+  "r1": {
+    "classes_w229.animation.json": "9d0f4146784fb051fe17a5647f505c553bc49c96053bf5d5c7a26db0cbb9f10c",
+    "provenance.json": "d9d2645d93a97d8a767feea032b862875ea2cefd2da7d1f3692419a7a9a559ec",
+    "motion61samples.json": "51df73eb7fa2b720e1916730c27991fb59be18683fbfcc441f04e697d961b632",
+    "timing-manifest.json": "12a6a8d83cf8daf71264eeee5eff6f987faf16f0b8551bc3157ece559bbbf83b",
+    "validation.json": "04082a3d20752eb35f8d31c37547307b23d4b0abb8ea5981faac1001133ed4b3",
+    "guardian_classes_w229_r1.bbmodel": "4d7db8bbcd485c0578bbcbb7ee2fa126ac9e7697ecadb55742dfa3d0776ba16b"
+  },
+  "r2": {
+    "classes_w229.animation.json": "953a7f9229019f1628333e750e348540f910d89d659a5c71a212ac427bc1857b",
+    "guardian_classes_w229_r2.bbmodel": "6e12392bef6027547456e17f27188e8e52a9cdf8a10c12c31a8dfb1ca1134ef5",
+    "provenance.json": "05d5cae6641b338e39d038ad00dbefcd82f841933920bbcb74eaa80e791877b6",
+    "motion61samples.json": "fd26c26bfae3cb122265e29866fc52cb0564587e4d58aeff4853927913c6f01c",
+    "timing-manifest.json": "cab3d98c4bd17c0a7d5632e0d9b39fbb02593dd0e0165aaebdcfa90fb1d8675b",
+    "validation.json": "a58a9f49fb82f21160402e6da52bd53daf804835778a17e45d3efebc59b1b7bc"
+  },
+  "newClips": [
+    {
+      "name": "w229_titan_solar_move",
+      "kind": "source hold upperbody + explicitly MC-authored lowerbody gait",
+      "upperBodySource": {
+        "r1Clip": "w229_titan_solar_idle",
+        "tag": "80A8A8AE",
+        "frame": 48
+      },
+      "lowerBodySource": "authored",
+      "superAssociation": "known super upperbody; no verified super walking source",
+      "sourceFrameSnapshot": 48,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "3d53e7e707aaf37e575a3657d3125057e77d1eb0f1c4a1c7e72871ef0eb5c56d",
+      "semanticEvidence": "Source rip \uc544\ub2cc lowerbody gait. R1 terminal hammer recovery upperbody held; 0.8s authored walk/run cadence, not source duration.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_void_move",
+      "kind": "source-derived lowerbody composition",
+      "upperBodySource": {
+        "r1Clip": "w229_titan_void_idle",
+        "tag": "80A8A928",
+        "frame": 43
+      },
+      "lowerBodySource": {
+        "tag": "80A8A9AD",
+        "range": [
+          1,
+          16
+        ]
+      },
+      "superAssociation": "exact named Sentinel sprint; upperbody composed from known super ready",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.5,
+      "clipTicksExact": 10.0,
+      "clipDurationTicksCeil": 10,
+      "motion61SamplesSha256": "31f3a48e2707c1eaec29506517a1df4b76a1b30c091ea1141e13b95d17b07348",
+      "semanticEvidence": "Every native sprint frame retained in 61 samples; 0.5s original elapsed time. No whole-body original-sprint claim. Endpoint seam is measured, not silently rewritten.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pli_left_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_idle",
+      "kind": "evaluated source sword-catch loop adapted to Daybreak",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "lowerBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "superAssociation": "partial association only; generic sword-catch, not confirmed Daybreak idle",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.7333333333333333,
+      "clipTicksExact": 14.666666666666666,
+      "clipDurationTicksCeil": 15,
+      "motion61SamplesSha256": "787ff519cf3ae5495a10b50ae501494b7447174388b10ab0f07a9cdd973737ed",
+      "semanticEvidence": "Temporary source-derived sword carry. Evaluated compatible rig/one-handed item node; source is Replacement layer and its original runtime base/mixing is unresolved. Replaces rejected cast f28; no Daybreak-exclusive claim.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_move",
+      "kind": "source sword-catch upperbody + explicitly MC-authored lowerbody gait",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "range": [
+          1,
+          23
+        ]
+      },
+      "lowerBodySource": "authored",
+      "superAssociation": "partial sword-catch association only",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.7333333333333333,
+      "clipTicksExact": 14.666666666666666,
+      "clipDurationTicksCeil": 15,
+      "motion61SamplesSha256": "e4ca7a4a42f50a828ed8383281acdf928df12be57304b8ac1093da3fb74214a1",
+      "semanticEvidence": "Upperbody, wrists and item local transforms retain source idle timing (22/30s). Legs are Source rip \uc544\ub2cc lowerbody gait. Ground cadence is authored, not original Daybreak movement.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_warlock_solar_air",
+      "kind": "source-derived sword-carry/glide composition",
+      "upperBodySource": {
+        "tag": "80A8B370",
+        "snapshotFrame": 1
+      },
+      "lowerBodySource": {
+        "tag": "80A8AB5E",
+        "range": [
+          1,
+          61
+        ]
+      },
+      "superAssociation": "generic Warlock glide + generic sword-catch, no dedicated Daybreak association",
+      "sourceFrameSnapshot": 1,
+      "sampleCount": 61,
+      "lengthSeconds": 2.0,
+      "clipTicksExact": 40.0,
+      "clipDurationTicksCeil": 40,
+      "motion61SamplesSha256": "74e0a334c19e7ed9bb5d54fb8258716661a950256b0a06528b4cee0eacc5e5bc",
+      "semanticEvidence": "Temporary compatible air carry. Real source glide legs under held sword-catch upperbody; no procedural flight or gameplay root motion.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": "pri_right_item",
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_arc_idle",
+      "kind": "explicitly MC-authored temporary ready hold",
+      "upperBodySource": null,
+      "lowerBodySource": "authored",
+      "superAssociation": "no Fists of Havoc source identified",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "670019c059b9d2b0dfa0906a01b1e8a0199aac12628cae5e4c60e718b0d2ac1c",
+      "semanticEvidence": "Authored fist-ready loop; no source rip, source action, recovered cast/contact or original timing claim. Arms are player limb blocks; no fingers added.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": null,
+      "productProvisional": null
+    },
+    {
+      "name": "w229_titan_arc_move",
+      "kind": "explicitly MC-authored temporary lowerbody gait",
+      "upperBodySource": null,
+      "lowerBodySource": "authored",
+      "superAssociation": "no Fists of Havoc source identified",
+      "sourceFrameSnapshot": null,
+      "sampleCount": 61,
+      "lengthSeconds": 0.8,
+      "clipTicksExact": 16.0,
+      "clipDurationTicksCeil": 16,
+      "motion61SamplesSha256": "f7e6fc734de5ba542ceb6fde869fd1675dc37c2df59c6685f1d4a1b9ac5cfe89",
+      "semanticEvidence": "Authored ready upperbody preserved; Source rip \uc544\ub2cc lowerbody gait. No fabricated start/attack/end; master retains native lifecycle.",
+      "contact": null,
+      "contactStatus": "not applicable: locomotion/carry loop, not a cast or damage event",
+      "rootMotion": "in-place; source translation omitted; visual skin-floor Y correction only; never gameplay displacement",
+      "equipmentNode": null,
+      "productProvisional": null
+    }
+  ],
+  "integration": "Replace resource with full20-clip R2 pack, install only guardian_classes_w229_r2; never mutate installed r1. Existing start/attack/end unchanged; loop selection only while run==null."
+}

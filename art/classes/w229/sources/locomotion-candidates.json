@@ -1,0 +1,1263 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T12:02:58.106382+00:00",
+  "task": "Original SSD sword-held Daybreak idle/move/airloop and Titan Hammer/Sentinel locomotion research only",
+  "ddc_prior_task": {
+    "status": "complete brief evidence table already delivered",
+    "path": "/private/tmp/destiny-w229-sources/ddc-class-values.md",
+    "scope": "15 ability rows; primary sheet fetched; no numeric tests or implementation changes"
+  },
+  "summary": {
+    "exact_named_dedicated_sentinel_sprint": [
+      "80A8A9AD"
+    ],
+    "exact_named_dedicated_sentinel_walk": [],
+    "exact_named_dedicated_hammer_super_walk": [],
+    "exact_named_dedicated_daybreak_idle_move_airloop": [],
+    "partial_sword_idle_candidate": [
+      "80A8B370"
+    ],
+    "partial_titan_hammer_catch_idle_candidate": [
+      "80A8AD1E"
+    ],
+    "generic_warlock_glide_idle_candidates": [
+      "80A8A6A6",
+      "80A8AAB8",
+      "80A8AB5E",
+      "80A8B34A"
+    ],
+    "interpretation": "Not identified in this returned corpus does not prove absent from the game or SSD outside the inspected delivery folders. User report of a dedicated sword idle remains unverified; do not replace it with cast-frame-28 snapshot."
+  },
+  "scope_searched": {
+    "super_delivery_root": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return",
+    "second_delivery_root": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return",
+    "manifest_clip_count": 2171,
+    "manifest_summary": {
+      "sourceClips": 2171,
+      "decodedUniqueClips": 2160,
+      "rawOnlyClips": 11,
+      "superRelatedSourceClips": 105,
+      "animationFbxFiles": 54,
+      "blenderFiles": 54,
+      "previewVideos": 23,
+      "particleDefinitions": 458,
+      "directSuperLinkedParticles": 34,
+      "effectMeshFbxFiles": 64,
+      "effectTexturePngFiles": 106,
+      "materialJsonFiles": 307,
+      "rawFiles": 4157
+    },
+    "query_links_count": 953,
+    "unnamed_manifest_clips": 1495,
+    "raw_ascii_scan": {
+      "glob": "raw/*.bin",
+      "file_count": 4157,
+      "indexed_bytes": 21456071,
+      "patterns": "daybreak|archangel|thermal_sword|titan_sentinel|crusader|hammer ... idle/walk | idle ... hammer; printable ASCII sequences >=5 bytes",
+      "hits": 2,
+      "result_path": "/private/tmp/destiny-w229-sources/ssd/locomotion-raw-string-hits.json",
+      "limitation": "binary hashes/unknown graph node selectors do not become readable names through an ASCII scan; no inferred name preimages were promoted to source names"
+    },
+    "second_manifest_clips": 332,
+    "second_manifest_scope": "Original weapon reload/ready/fire and related animation rigs, without game meshes/materials.",
+    "second_matching_super_source_names": [],
+    "second_manifest_note": "Generic idle/ready names in the weapon-only 1P return are not 3P super locomotion.",
+    "container": {
+      "component": "80C2FFB0",
+      "container": "80C2FF98",
+      "query": "80C2FF9C",
+      "clipNames": 66,
+      "clips": 2171,
+      "clips2": 2354,
+      "note": "Container slot hashes and unnamed clips remain unresolved. Namespace/address adjacency is not a role assignment."
+    }
+  },
+  "source_game": {
+    "buildId": "25932352",
+    "appId": "1085660",
+    "depotId": "1085661",
+    "manifestId": "8767582239275350621",
+    "version": "245114.26.10.13.2000.v500_live.main",
+    "versionEvidence": "Steam installed manifest selected fields and Charm initialization log; no update performed."
+  },
+  "candidates": [
+    {
+      "clip_id": "80A8A9AD",
+      "target": "titan/sentinel",
+      "candidate_role": "sprint",
+      "name_evidence": "source_query_named",
+      "super_association": "exact_source_named_family_role",
+      "association_reason": "Name is explicitly titan_sentinel_shield_sprint. Confirms dedicated sprint, not ordinary walking; runtime loop/speed/graph selection still unverified.",
+      "source_names": [
+        "titan_sentinel_shield_sprint"
+      ],
+      "source_query_links": [
+        {
+          "hash": "5D07F16B",
+          "name": "titan_sentinel_shield_sprint",
+          "queryIndex": 189,
+          "clips": [
+            "80A8A9AD"
+          ]
+        },
+        {
+          "hash": "F3255E02",
+          "name": "F3255E02",
+          "queryIndex": 189,
+          "clips": [
+            "80A8A9AD"
+          ]
+        }
+      ],
+      "source_groups": [
+        "titan_sentinel_shield"
+      ],
+      "actual_action": "Armature|80A8A9AD_titan_sentinel_shield_sprint|Base",
+      "source_frame_range": [
+        1.0,
+        16.0
+      ],
+      "fps": 30,
+      "elapsed_seconds_first_to_last": 0.5,
+      "frame_count_inclusive": 16,
+      "rig": {
+        "skeleton_id": "80C3ABDE",
+        "runtime_rig_id": "80C3AC72",
+        "bones": 72,
+        "perspective": "3P_player_rig",
+        "meshless": true
+      },
+      "files": {
+        "raw_clip": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80A8A9AD.bin",
+          "bytes": 6592,
+          "sha256": "f6f2fcac2a86e7e1b8beec0b17da7020118fdd9b7f9ba0c9ca139d1501bc07d7"
+        },
+        "blend": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/titan_sentinel_shield/source.blend",
+          "bytes": 3255937,
+          "sha256": "5e99140ef782974b87a5076e9a04be5e9a7318a95fea31e6ae317fc7706638bf"
+        },
+        "fbx": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/titan_sentinel_shield/titan_sentinel_shield.fbx",
+          "exists": true
+        },
+        "skeleton": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3ABDE.bin",
+          "bytes": 8000,
+          "sha256": "42d7fb1cccf93d1141fb5ecbd1e64bb4320656d25a1b280d9824cff8373a8afc"
+        },
+        "runtime_rig": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3AC72.bin",
+          "bytes": 8032,
+          "sha256": "16bd0c418d04074380d6dfe59e6f1bfcabe6a60067eea5cbe7683e5666721048"
+        }
+      },
+      "raw_package_provenance": {
+        "tag": "80A8A9AD",
+        "package": "0145",
+        "entry": "09AD",
+        "reference": "80808BE0",
+        "bytes": 6592,
+        "sha256": "F6F2FCAC2A86E7E1B8BEEC0B17DA7020118FDD9B7F9BA0C9CA139D1501BC07D7"
+      },
+      "source_events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 5,
+            "Unk02": 2,
+            "Unk04": 29,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 13,
+            "Unk02": 2,
+            "Unk04": 28,
+            "Unk06": 0
+          }
+        }
+      ],
+      "headless_evaluation": {
+        "id": "80A8A9AD",
+        "source_names": [
+          "titan_sentinel_shield_sprint"
+        ],
+        "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/titan_sentinel_shield/source.blend",
+        "source_blend_sha256": "5e99140ef782974b87a5076e9a04be5e9a7318a95fea31e6ae317fc7706638bf",
+        "action": "Armature|80A8A9AD_titan_sentinel_shield_sprint|Base",
+        "frames": [
+          1.0,
+          16.0
+        ],
+        "fps": 30.0,
+        "armatures": [
+          {
+            "name": "Armature",
+            "bones": 72,
+            "sampled_frames": 16,
+            "finite": true,
+            "changing_bones": 70,
+            "max_pose_matrix_delta_from_first": 1.6633837223052979,
+            "first_last_max_pose_matrix_delta": 0.02468960452824831,
+            "loopability": "not gameplay verified; seam delta is descriptive only",
+            "mesh_count": 0
+          }
+        ]
+      },
+      "gameplay_verified": false,
+      "dedicated_locomotion_approved": false,
+      "source_named_dedicated_family_role_verified": true,
+      "runtime_playback_approved": false
+    },
+    {
+      "clip_id": "80A8B370",
+      "target": "warlock/daybreak",
+      "candidate_role": "idle",
+      "name_evidence": "source_query_named_generic_sword",
+      "super_association": "partial_association_only",
+      "association_reason": "sword_catch_idle is a real separate looping idle clip. No archangel/daybreak/thermal_sword query name, group, or event links it to Daybreak. Catch/relic/weapon context unresolved; do not present as confirmed sword-held Daybreak idle.",
+      "source_names": [
+        "sword_catch_idle"
+      ],
+      "source_query_links": [
+        {
+          "hash": "E9C42099",
+          "name": "sword_catch_idle",
+          "queryIndex": 588,
+          "clips": [
+            "80A8B370"
+          ]
+        }
+      ],
+      "source_groups": [
+        "other_player_actions_08"
+      ],
+      "actual_action": "Armature|80A8B370_sword_catch_idle|Replacement",
+      "source_frame_range": [
+        1.0,
+        23.0
+      ],
+      "fps": 30,
+      "elapsed_seconds_first_to_last": 0.7333333333333333,
+      "frame_count_inclusive": 23,
+      "rig": {
+        "skeleton_id": "80C3ABDE",
+        "runtime_rig_id": "80C3AC72",
+        "bones": 72,
+        "perspective": "3P_player_rig",
+        "meshless": true
+      },
+      "files": {
+        "raw_clip": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80A8B370.bin",
+          "bytes": 4992,
+          "sha256": "a9c789c3a0a69bcadeae4d95ae9ca8a1d2ea501c441fa579113e11b982150ce3"
+        },
+        "blend": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/source.blend",
+          "bytes": 13067163,
+          "sha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6"
+        },
+        "fbx": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/other_player_actions_08.fbx",
+          "exists": true
+        },
+        "skeleton": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3ABDE.bin",
+          "bytes": 8000,
+          "sha256": "42d7fb1cccf93d1141fb5ecbd1e64bb4320656d25a1b280d9824cff8373a8afc"
+        },
+        "runtime_rig": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3AC72.bin",
+          "bytes": 8032,
+          "sha256": "16bd0c418d04074380d6dfe59e6f1bfcabe6a60067eea5cbe7683e5666721048"
+        }
+      },
+      "raw_package_provenance": {
+        "tag": "80A8B370",
+        "package": "0145",
+        "entry": "1370",
+        "reference": "80808BE0",
+        "bytes": 4992,
+        "sha256": "A9C789C3A0A69BCADEAE4D95AE9CA8A1D2EA501C441FA579113E11B982150CE3"
+      },
+      "source_events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        }
+      ],
+      "headless_evaluation": {
+        "id": "80A8B370",
+        "source_names": [
+          "sword_catch_idle"
+        ],
+        "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/source.blend",
+        "source_blend_sha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6",
+        "action": "Armature|80A8B370_sword_catch_idle|Replacement",
+        "frames": [
+          1.0,
+          23.0
+        ],
+        "fps": 30.0,
+        "armatures": [
+          {
+            "name": "Armature",
+            "bones": 72,
+            "sampled_frames": 23,
+            "finite": true,
+            "changing_bones": 61,
+            "max_pose_matrix_delta_from_first": 0.039343684911727905,
+            "first_last_max_pose_matrix_delta": 0.0,
+            "loopability": "not gameplay verified; seam delta is descriptive only",
+            "mesh_count": 0
+          }
+        ]
+      },
+      "gameplay_verified": false,
+      "dedicated_locomotion_approved": false,
+      "source_named_dedicated_family_role_verified": false,
+      "runtime_playback_approved": false
+    },
+    {
+      "clip_id": "80A8AD1E",
+      "target": "titan/hammer_of_sol",
+      "candidate_role": "idle",
+      "name_evidence": "source_query_named_titan_hammer_catch",
+      "super_association": "partial_association_only",
+      "association_reason": "Exact titan_catch_hammer_idle name identifies Titan/hammer catch, but not Sunbreaker/Hammer of Sol super. No thermal_titan event or super group link. Do not silently use as super locomotion.",
+      "source_names": [
+        "titan_catch_hammer_idle"
+      ],
+      "source_query_links": [
+        {
+          "hash": "22465827",
+          "name": "titan_catch_hammer_idle",
+          "queryIndex": 577,
+          "clips": [
+            "80A8AD1E"
+          ]
+        }
+      ],
+      "source_groups": [
+        "other_player_actions_08"
+      ],
+      "actual_action": "Armature|80A8AD1E_titan_catch_hammer_idle|Replacement",
+      "source_frame_range": [
+        1.0,
+        23.0
+      ],
+      "fps": 30,
+      "elapsed_seconds_first_to_last": 0.7333333333333333,
+      "frame_count_inclusive": 23,
+      "rig": {
+        "skeleton_id": "80C3ABDE",
+        "runtime_rig_id": "80C3AC72",
+        "bones": 72,
+        "perspective": "3P_player_rig",
+        "meshless": true
+      },
+      "files": {
+        "raw_clip": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80A8AD1E.bin",
+          "bytes": 5008,
+          "sha256": "4365d4d32b999ab385dde59e2b243ceb7dd988905307963700b462402d69a047"
+        },
+        "blend": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/source.blend",
+          "bytes": 13067163,
+          "sha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6"
+        },
+        "fbx": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/other_player_actions_08.fbx",
+          "exists": true
+        },
+        "skeleton": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3ABDE.bin",
+          "bytes": 8000,
+          "sha256": "42d7fb1cccf93d1141fb5ecbd1e64bb4320656d25a1b280d9824cff8373a8afc"
+        },
+        "runtime_rig": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3AC72.bin",
+          "bytes": 8032,
+          "sha256": "16bd0c418d04074380d6dfe59e6f1bfcabe6a60067eea5cbe7683e5666721048"
+        }
+      },
+      "raw_package_provenance": {
+        "tag": "80A8AD1E",
+        "package": "0145",
+        "entry": "0D1E",
+        "reference": "80808BE0",
+        "bytes": 5008,
+        "sha256": "4365D4D32B999AB385DDE59E2B243CEB7DD988905307963700B462402D69A047"
+      },
+      "source_events": [
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 0,
+            "Unk02": 2,
+            "Unk04": 13,
+            "Unk06": 0
+          }
+        },
+        {
+          "type": "S80808C1A",
+          "fields": {
+            "Unk00": 22,
+            "Unk02": 2,
+            "Unk04": 14,
+            "Unk06": 0
+          }
+        }
+      ],
+      "headless_evaluation": {
+        "id": "80A8AD1E",
+        "source_names": [
+          "titan_catch_hammer_idle"
+        ],
+        "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/source.blend",
+        "source_blend_sha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6",
+        "action": "Armature|80A8AD1E_titan_catch_hammer_idle|Replacement",
+        "frames": [
+          1.0,
+          23.0
+        ],
+        "fps": 30.0,
+        "armatures": [
+          {
+            "name": "Armature",
+            "bones": 72,
+            "sampled_frames": 23,
+            "finite": true,
+            "changing_bones": 61,
+            "max_pose_matrix_delta_from_first": 0.03934401273727417,
+            "first_last_max_pose_matrix_delta": 0.0,
+            "loopability": "not gameplay verified; seam delta is descriptive only",
+            "mesh_count": 0
+          }
+        ]
+      },
+      "gameplay_verified": false,
+      "dedicated_locomotion_approved": false,
+      "source_named_dedicated_family_role_verified": false,
+      "runtime_playback_approved": false
+    },
+    {
+      "clip_id": "80A8A6A6",
+      "target": "warlock/daybreak",
+      "candidate_role": "air_loop_candidate",
+      "name_evidence": "source_query_named_warlock_generic",
+      "super_association": "generic_class_motion_only",
+      "association_reason": "Exact glide / warlock_glide_idle aliases; 61-frame changing source action with identical endpoint matrices in headless evaluation. No sword/archangel/thermal_sword linkage. May be relevant to airborne locomotion research, not approved as sword-held Daybreak airloop.",
+      "source_names": [
+        "glide",
+        "warlock_glide_idle"
+      ],
+      "source_query_links": [
+        {
+          "hash": "B0F439A4",
+          "name": "glide",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        },
+        {
+          "hash": "B547C15B",
+          "name": "warlock_glide_idle",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        }
+      ],
+      "source_groups": [
+        "other_player_actions_01"
+      ],
+      "actual_action": "Armature|80A8A6A6_glide|Base",
+      "source_frame_range": [
+        1.0,
+        61.0
+      ],
+      "fps": 30,
+      "elapsed_seconds_first_to_last": 2.0,
+      "frame_count_inclusive": 61,
+      "rig": {
+        "skeleton_id": "80C3ABDE",
+        "runtime_rig_id": "80C3AC72",
+        "bones": 72,
+        "perspective": "3P_player_rig",
+        "meshless": true
+      },
+      "files": {
+        "raw_clip": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80A8A6A6.bin",
+          "bytes": 4224,
+          "sha256": "60057731ea2cf0acf2a21ffce80c5e0cce8fa3bcff114f6e510e4ed0c810d7bb"
+        },
+        "blend": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_01/source.blend",
+          "bytes": 20157542,
+          "sha256": "a197b16b9986451a7f4b30f0915af1be8aadd1a9d5806dac96b0042f43c176eb"
+        },
+        "fbx": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_01/other_player_actions_01.fbx",
+          "exists": true
+        },
+        "skeleton": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3ABDE.bin",
+          "bytes": 8000,
+          "sha256": "42d7fb1cccf93d1141fb5ecbd1e64bb4320656d25a1b280d9824cff8373a8afc"
+        },
+        "runtime_rig": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3AC72.bin",
+          "bytes": 8032,
+          "sha256": "16bd0c418d04074380d6dfe59e6f1bfcabe6a60067eea5cbe7683e5666721048"
+        }
+      },
+      "raw_package_provenance": {
+        "tag": "80A8A6A6",
+        "package": "0145",
+        "entry": "06A6",
+        "reference": "80808BE0",
+        "bytes": 4224,
+        "sha256": "60057731EA2CF0ACF2A21FFCE80C5E0CCE8FA3BCFF114F6E510E4ED0C810D7BB"
+      },
+      "source_events": [],
+      "headless_evaluation": {
+        "id": "80A8A6A6",
+        "source_names": [
+          "glide",
+          "warlock_glide_idle"
+        ],
+        "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_01/source.blend",
+        "source_blend_sha256": "a197b16b9986451a7f4b30f0915af1be8aadd1a9d5806dac96b0042f43c176eb",
+        "action": "Armature|80A8A6A6_glide|Base",
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "fps": 30.0,
+        "armatures": [
+          {
+            "name": "Armature",
+            "bones": 72,
+            "sampled_frames": 61,
+            "finite": true,
+            "changing_bones": 70,
+            "max_pose_matrix_delta_from_first": 0.21888529509305954,
+            "first_last_max_pose_matrix_delta": 0.0,
+            "loopability": "not gameplay verified; seam delta is descriptive only",
+            "mesh_count": 0
+          }
+        ]
+      },
+      "gameplay_verified": false,
+      "dedicated_locomotion_approved": false,
+      "source_named_dedicated_family_role_verified": false,
+      "runtime_playback_approved": false
+    },
+    {
+      "clip_id": "80A8AAB8",
+      "target": "warlock/daybreak",
+      "candidate_role": "air_loop_candidate",
+      "name_evidence": "source_query_named_warlock_generic",
+      "super_association": "generic_class_motion_only",
+      "association_reason": "Exact glide / warlock_glide_idle aliases; 61-frame changing source action with identical endpoint matrices in headless evaluation. No sword/archangel/thermal_sword linkage. May be relevant to airborne locomotion research, not approved as sword-held Daybreak airloop.",
+      "source_names": [
+        "glide",
+        "warlock_glide_idle"
+      ],
+      "source_query_links": [
+        {
+          "hash": "B0F439A4",
+          "name": "glide",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        },
+        {
+          "hash": "B547C15B",
+          "name": "warlock_glide_idle",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        }
+      ],
+      "source_groups": [
+        "other_player_actions_05"
+      ],
+      "actual_action": "Armature|80A8AAB8_glide|Base",
+      "source_frame_range": [
+        1.0,
+        61.0
+      ],
+      "fps": 30,
+      "elapsed_seconds_first_to_last": 2.0,
+      "frame_count_inclusive": 61,
+      "rig": {
+        "skeleton_id": "80C3ABDE",
+        "runtime_rig_id": "80C3AC72",
+        "bones": 72,
+        "perspective": "3P_player_rig",
+        "meshless": true
+      },
+      "files": {
+        "raw_clip": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80A8AAB8.bin",
+          "bytes": 4240,
+          "sha256": "da1f696affdb81c2a07987271df2c62076e6fe5f91cc8326901e1c14bd3415e9"
+        },
+        "blend": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_05/source.blend",
+          "bytes": 18237308,
+          "sha256": "5ba90c4847d042a1c60c5b8504e17c4fe1df981388ca96a6d06db102f4f7bafc"
+        },
+        "fbx": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_05/other_player_actions_05.fbx",
+          "exists": true
+        },
+        "skeleton": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3ABDE.bin",
+          "bytes": 8000,
+          "sha256": "42d7fb1cccf93d1141fb5ecbd1e64bb4320656d25a1b280d9824cff8373a8afc"
+        },
+        "runtime_rig": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3AC72.bin",
+          "bytes": 8032,
+          "sha256": "16bd0c418d04074380d6dfe59e6f1bfcabe6a60067eea5cbe7683e5666721048"
+        }
+      },
+      "raw_package_provenance": {
+        "tag": "80A8AAB8",
+        "package": "0145",
+        "entry": "0AB8",
+        "reference": "80808BE0",
+        "bytes": 4240,
+        "sha256": "DA1F696AFFDB81C2A07987271DF2C62076E6FE5F91CC8326901E1C14BD3415E9"
+      },
+      "source_events": [],
+      "headless_evaluation": {
+        "id": "80A8AAB8",
+        "source_names": [
+          "glide",
+          "warlock_glide_idle"
+        ],
+        "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_05/source.blend",
+        "source_blend_sha256": "5ba90c4847d042a1c60c5b8504e17c4fe1df981388ca96a6d06db102f4f7bafc",
+        "action": "Armature|80A8AAB8_glide|Base",
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "fps": 30.0,
+        "armatures": [
+          {
+            "name": "Armature",
+            "bones": 72,
+            "sampled_frames": 61,
+            "finite": true,
+            "changing_bones": 70,
+            "max_pose_matrix_delta_from_first": 0.2188849374651909,
+            "first_last_max_pose_matrix_delta": 0.0,
+            "loopability": "not gameplay verified; seam delta is descriptive only",
+            "mesh_count": 0
+          }
+        ]
+      },
+      "gameplay_verified": false,
+      "dedicated_locomotion_approved": false,
+      "source_named_dedicated_family_role_verified": false,
+      "runtime_playback_approved": false
+    },
+    {
+      "clip_id": "80A8AB5E",
+      "target": "warlock/daybreak",
+      "candidate_role": "air_loop_candidate",
+      "name_evidence": "source_query_named_warlock_generic",
+      "super_association": "generic_class_motion_only",
+      "association_reason": "Exact glide / warlock_glide_idle aliases; 61-frame changing source action with identical endpoint matrices in headless evaluation. No sword/archangel/thermal_sword linkage. May be relevant to airborne locomotion research, not approved as sword-held Daybreak airloop.",
+      "source_names": [
+        "glide",
+        "warlock_glide_idle"
+      ],
+      "source_query_links": [
+        {
+          "hash": "B0F439A4",
+          "name": "glide",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        },
+        {
+          "hash": "B547C15B",
+          "name": "warlock_glide_idle",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        }
+      ],
+      "source_groups": [
+        "other_player_actions_06"
+      ],
+      "actual_action": "Armature|80A8AB5E_glide|Base",
+      "source_frame_range": [
+        1.0,
+        61.0
+      ],
+      "fps": 30,
+      "elapsed_seconds_first_to_last": 2.0,
+      "frame_count_inclusive": 61,
+      "rig": {
+        "skeleton_id": "80C3ABDE",
+        "runtime_rig_id": "80C3AC72",
+        "bones": 72,
+        "perspective": "3P_player_rig",
+        "meshless": true
+      },
+      "files": {
+        "raw_clip": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80A8AB5E.bin",
+          "bytes": 5056,
+          "sha256": "9371eb3c50c422f1be10c54ab9547b9e0f97fa358fb6c71f7a04ea4429a48bf0"
+        },
+        "blend": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_06/source.blend",
+          "bytes": 15734015,
+          "sha256": "73e27be634c081cdf6daeb2c756d3176d3c17b5c5e75409f8d2a25f4d76efd34"
+        },
+        "fbx": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_06/other_player_actions_06.fbx",
+          "exists": true
+        },
+        "skeleton": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3ABDE.bin",
+          "bytes": 8000,
+          "sha256": "42d7fb1cccf93d1141fb5ecbd1e64bb4320656d25a1b280d9824cff8373a8afc"
+        },
+        "runtime_rig": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3AC72.bin",
+          "bytes": 8032,
+          "sha256": "16bd0c418d04074380d6dfe59e6f1bfcabe6a60067eea5cbe7683e5666721048"
+        }
+      },
+      "raw_package_provenance": {
+        "tag": "80A8AB5E",
+        "package": "0145",
+        "entry": "0B5E",
+        "reference": "80808BE0",
+        "bytes": 5056,
+        "sha256": "9371EB3C50C422F1BE10C54AB9547B9E0F97FA358FB6C71F7A04EA4429A48BF0"
+      },
+      "source_events": [],
+      "headless_evaluation": {
+        "id": "80A8AB5E",
+        "source_names": [
+          "glide",
+          "warlock_glide_idle"
+        ],
+        "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_06/source.blend",
+        "source_blend_sha256": "73e27be634c081cdf6daeb2c756d3176d3c17b5c5e75409f8d2a25f4d76efd34",
+        "action": "Armature|80A8AB5E_glide|Base",
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "fps": 30.0,
+        "armatures": [
+          {
+            "name": "Armature",
+            "bones": 72,
+            "sampled_frames": 61,
+            "finite": true,
+            "changing_bones": 70,
+            "max_pose_matrix_delta_from_first": 0.326072633266449,
+            "first_last_max_pose_matrix_delta": 0.0,
+            "loopability": "not gameplay verified; seam delta is descriptive only",
+            "mesh_count": 0
+          }
+        ]
+      },
+      "gameplay_verified": false,
+      "dedicated_locomotion_approved": false,
+      "source_named_dedicated_family_role_verified": false,
+      "runtime_playback_approved": false
+    },
+    {
+      "clip_id": "80A8B34A",
+      "target": "warlock/daybreak",
+      "candidate_role": "air_loop_candidate",
+      "name_evidence": "source_query_named_warlock_generic",
+      "super_association": "generic_class_motion_only",
+      "association_reason": "Exact glide / warlock_glide_idle aliases; 61-frame changing source action with identical endpoint matrices in headless evaluation. No sword/archangel/thermal_sword linkage. May be relevant to airborne locomotion research, not approved as sword-held Daybreak airloop.",
+      "source_names": [
+        "glide",
+        "warlock_glide_idle"
+      ],
+      "source_query_links": [
+        {
+          "hash": "B0F439A4",
+          "name": "glide",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        },
+        {
+          "hash": "B547C15B",
+          "name": "warlock_glide_idle",
+          "queryIndex": 40,
+          "clips": [
+            "80A8A6A6",
+            "80A8AAB8",
+            "80A8AB5E",
+            "80A8B34A"
+          ]
+        }
+      ],
+      "source_groups": [
+        "other_player_actions_08"
+      ],
+      "actual_action": "Armature|80A8B34A_glide|Base",
+      "source_frame_range": [
+        1.0,
+        61.0
+      ],
+      "fps": 30,
+      "elapsed_seconds_first_to_last": 2.0,
+      "frame_count_inclusive": 61,
+      "rig": {
+        "skeleton_id": "80C3ABDE",
+        "runtime_rig_id": "80C3AC72",
+        "bones": 72,
+        "perspective": "3P_player_rig",
+        "meshless": true
+      },
+      "files": {
+        "raw_clip": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80A8B34A.bin",
+          "bytes": 4016,
+          "sha256": "701401567cc6084c752cd22f07b514828b23413ed9fdd5d2ff614f4ebabe3aa9"
+        },
+        "blend": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/source.blend",
+          "bytes": 13067163,
+          "sha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6"
+        },
+        "fbx": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/other_player_actions_08.fbx",
+          "exists": true
+        },
+        "skeleton": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3ABDE.bin",
+          "bytes": 8000,
+          "sha256": "42d7fb1cccf93d1141fb5ecbd1e64bb4320656d25a1b280d9824cff8373a8afc"
+        },
+        "runtime_rig": {
+          "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/raw/80C3AC72.bin",
+          "bytes": 8032,
+          "sha256": "16bd0c418d04074380d6dfe59e6f1bfcabe6a60067eea5cbe7683e5666721048"
+        }
+      },
+      "raw_package_provenance": {
+        "tag": "80A8B34A",
+        "package": "0145",
+        "entry": "134A",
+        "reference": "80808BE0",
+        "bytes": 4016,
+        "sha256": "701401567CC6084C752CD22F07B514828B23413ED9FDD5D2FF614F4EBABE3AA9"
+      },
+      "source_events": [],
+      "headless_evaluation": {
+        "id": "80A8B34A",
+        "source_names": [
+          "glide",
+          "warlock_glide_idle"
+        ],
+        "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/other_player_actions_08/source.blend",
+        "source_blend_sha256": "a1cfbeb9c58d766236ebfc08c28fe77252dfca53c8be4654420c6530d01047a6",
+        "action": "Armature|80A8B34A_glide|Base",
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "fps": 30.0,
+        "armatures": [
+          {
+            "name": "Armature",
+            "bones": 72,
+            "sampled_frames": 61,
+            "finite": true,
+            "changing_bones": 70,
+            "max_pose_matrix_delta_from_first": 0.2096247896552086,
+            "first_last_max_pose_matrix_delta": 0.0,
+            "loopability": "not gameplay verified; seam delta is descriptive only",
+            "mesh_count": 0
+          }
+        ]
+      },
+      "gameplay_verified": false,
+      "dedicated_locomotion_approved": false,
+      "source_named_dedicated_family_role_verified": false,
+      "runtime_playback_approved": false
+    }
+  ],
+  "not_locomotion_or_not_exclusive": [
+    {
+      "clip_id": "80A8A921",
+      "source_names": [
+        "warlock_archangel_cast",
+        "cast_archangel"
+      ],
+      "actual_action": "Armature|80A8A921_warlock_archangel_cast|Base",
+      "frames": [
+        1.0,
+        48.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "cast_enter transition; not an idle loop and not a replacement for missing locomotion",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A96C",
+      "source_names": [
+        "warlock_dawnblade_dodge_back_air",
+        "dodge_back_air_warlock"
+      ],
+      "actual_action": "Armature|80A8A96C_warlock_dawnblade_dodge_back_air|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A968",
+      "source_names": [
+        "warlock_dawnblade_dodge_front_air",
+        "dodge_front_air_warlock"
+      ],
+      "actual_action": "Armature|80A8A968_warlock_dawnblade_dodge_front_air|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A96A",
+      "source_names": [
+        "dodge_left_air_warlock",
+        "warlock_dawnblade_dodge_left_air"
+      ],
+      "actual_action": "Armature|80A8A96A_dodge_left_air_warlock|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A969",
+      "source_names": [
+        "dodge_right_air_warlock",
+        "warlock_dawnblade_dodge_right_air"
+      ],
+      "actual_action": "Armature|80A8A969_dodge_right_air_warlock|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A973",
+      "source_names": [
+        "warlock_archangel_cast_air",
+        "cast_archangel_air"
+      ],
+      "actual_action": "Armature|80A8A973_warlock_archangel_cast_air|Base",
+      "frames": [
+        1.0,
+        48.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "cast_enter transition; not an idle loop and not a replacement for missing locomotion",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A98D",
+      "source_names": [
+        "dodge_back_air_archangel"
+      ],
+      "actual_action": "Armature|80A8A98D_dodge_back_air_archangel|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A990",
+      "source_names": [
+        "dodge_front_air_archangel"
+      ],
+      "actual_action": "Armature|80A8A990_dodge_front_air_archangel|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A98F",
+      "source_names": [
+        "dodge_left_air_archangel"
+      ],
+      "actual_action": "Armature|80A8A98F_dodge_left_air_archangel|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A991",
+      "source_names": [
+        "dodge_right_air_archangel"
+      ],
+      "actual_action": "Armature|80A8A991_dodge_right_air_archangel|Base",
+      "frames": [
+        1.0,
+        16.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak/source.blend",
+      "reason": "directional air dodge; not hover/idle/move loop; dawnblade subclass names do not prove super-exclusive selection",
+      "name_evidence": "source_query_named",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A960",
+      "source_names": [],
+      "actual_action": "Armature|80A8A960|Base",
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak_event_linked/source.blend",
+      "events": [
+        {
+          "type": "S80808C13",
+          "startFrame": 0,
+          "marker": "7BD05F71",
+          "eventTag": "80D94393",
+          "path": "content\\sandbox\\abilities\\player\\supers\\thermal_sword\\fx\\thermal_sword_slash_1.fx_sequence.tft"
+        }
+      ],
+      "name_evidence": "unnamed_clip_event_link_only",
+      "reason": "Direct thermal_sword slash FX event associates this source with Daybreak attacks; it is not evidence for idle/walking/airloop.",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A962",
+      "source_names": [],
+      "actual_action": "Armature|80A8A962|Base",
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/warlock_daybreak_event_linked/source.blend",
+      "events": [
+        {
+          "type": "S80808C13",
+          "startFrame": 0,
+          "marker": "7BD05F71",
+          "eventTag": "80D94399",
+          "path": "content\\sandbox\\abilities\\player\\supers\\thermal_sword\\fx\\thermal_sword_slash_2.fx_sequence.tft"
+        }
+      ],
+      "name_evidence": "unnamed_clip_event_link_only",
+      "reason": "Direct thermal_sword slash FX event associates this source with Daybreak attacks; it is not evidence for idle/walking/airloop.",
+      "gameplay_verified": false
+    },
+    {
+      "clip_id": "80A8A8F0",
+      "source_names": [
+        "hammer_charge"
+      ],
+      "frames": [
+        1.0,
+        39.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/titan_hammer_of_sol/source.blend",
+      "name_evidence": "source_query_named",
+      "reason": "hammer_charge / hammer_charge_air are charge actions, not named walking loops; no locomotion substitution approved."
+    },
+    {
+      "clip_id": "80A8A8F2",
+      "source_names": [
+        "hammer_charge_air"
+      ],
+      "frames": [
+        1.0,
+        26.0
+      ],
+      "source_blend": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/animations/titan_hammer_of_sol/source.blend",
+      "name_evidence": "source_query_named",
+      "reason": "hammer_charge / hammer_charge_air are charge actions, not named walking loops; no locomotion substitution approved."
+    }
+  ],
+  "evaluation": {
+    "path": "/private/tmp/destiny-w229-sources/ssd/locomotion-headless-evaluation.json",
+    "blender_version": "5.4.0 Alpha",
+    "method": "separate headless process; factory startup; autoexec disabled; no import scripts; open_mainfile load_ui=False/use_scripts=False; no source save",
+    "source_blend_hashes_checked_before_after_equal": true,
+    "all_7_candidates_finite_and_changing": true,
+    "endpoint_note": "Generic sword/hammer catches and four glides have identical first/last sampled bone matrices. Sentinel sprint has maximum endpoint matrix delta about 0.02469. This is descriptive, not proof of seamless gameplay loops.",
+    "source_rigs_meshless": true,
+    "no_live_blender_access": true,
+    "retarget_not_performed": true,
+    "art_generated": false
+  },
+  "windows_targeted_followup": {
+    "purpose": "Identify exact missing state selector links before exporting additional clips; avoid reripping whole folder",
+    "requests": [
+      {
+        "family": "warlock archangel / daybreak / thermal_sword",
+        "actions": [
+          "ground sword-held idle/alert/breathe loop",
+          "ground forward/back/left/right walk/run loops and start/stop transitions",
+          "air hover/idle loop and forward air movement/ascent/descent if separate"
+        ],
+        "required_evidence": "Exact query/state-machine selector or source debug name to clip handle; distinguish dedicated super from generic sword-catch/weapon glide, show state graph transition evidence; gameplay reference identifies sword held throughout."
+      },
+      {
+        "family": "titan sunbreaker / thermal_titan / Hammer of Sol",
+        "actions": [
+          "hammer-held ground idle",
+          "hammer-held walk/run directional loops and start/stop"
+        ],
+        "required_evidence": "Direct super graph/query linkage; establish whether titan_catch_hammer_idle 80A8AD1E is used by this super or only catch/relic context."
+      },
+      {
+        "family": "titan sentinel / crusader",
+        "actions": [
+          "shield-held ordinary walk directional loops",
+          "shield-held idle/guard locomotion if distinct"
+        ],
+        "required_evidence": "Ordinary walking selector links distinct from existing sprint 80A8A9AD and shield-charge actions."
+      }
+    ],
+    "deliverables": [
+      "Only corresponding raw clip .bin plus skeleton 80C3ABDE/runtimeRig 80C3AC72 or exact original compatible rig if different",
+      "Original .blend action(s) on 72-bone rig with original frame range/fps; sampled transforms, loop flag, root motion vs in-place and required Base/Replacement/Additive mixing",
+      "Source names/query hashes/state edges, raw package entry, bytes and SHA-256, exact current build provenance",
+      "Weapon/socket/hand attachment and required overlay/base action; these return rigs are meshless, so sword/hammer/shield-held visual identity needs separate prop binding; original prop textures are already catalogued",
+      "One short source gameplay reference or state capture for idle/walk/airloop selection; do not invent clips or rename casts to idle"
+    ]
+  },
+  "delivery": {
+    "requested_recipient_prefix": "01a18240",
+    "scope": "explicitly authorized animation subagent only; no messages to other tasks",
+    "direct_share_status": "not_sent: no multi-agent messaging tool is exposed, and the provided subagent id is incomplete; do not substitute a user-owned task",
+    "shared_file_path": "/private/tmp/destiny-w229-sources/locomotion-candidates.json"
+  },
+  "source_provenance": [
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/manifest.json",
+      "bytes": 4105080,
+      "sha256": "19ed4b5677ef2bf44aebf9ed9d2dc1f36ab4b27022553a67510fa570590d1243"
+    },
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/provenance/query-clip-links.json",
+      "bytes": 139407,
+      "sha256": "1e973dfee84d32ac403a64e392905534210d6c2dd617da302934613af3f37ecb"
+    },
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/provenance/player-containers.json",
+      "bytes": 441335,
+      "sha256": "7ad2cfe425e07d41efef3f69a1a987ff626749c1b77a5a1fb9014fa96817c192"
+    },
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/provenance/player.json",
+      "bytes": 168359,
+      "sha256": "df0d7e28c005531e468744c45c4bb4fa554a919aab612e8eabf30a43a7fa6ca6"
+    },
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/provenance/export-plan.json",
+      "bytes": 204512,
+      "sha256": "55ddc7d2f5fd1985095935c0ad5689f09787ef28b8b47325d546116a9b1ed79b"
+    },
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/provenance/raw-index.json",
+      "bytes": 883529,
+      "sha256": "a59eadbcb4a7dc3b2bc03136764e55ba2925b45df458b6d6050266b64fa7e4c2"
+    },
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return/provenance/recovered-query-name-candidates.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/manifest.json",
+      "bytes": 1230002,
+      "sha256": "a66c17bbe1fa158f14259b854f19841f6884241dbc233d3238dfaef01772fa73"
+    }
+  ],
+  "constraints_observed": [
+    "SSD originals read only; no importer/export scripts executed",
+    "separate headless source evaluation only; live unsaved Blender scene untouched",
+    "no main/worktree changes, game input, builds, commits, guessed animation, or retarget duplicate work",
+    "all shell commands prefixed rtk"
+  ]
+}

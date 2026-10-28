@@ -24,6 +24,7 @@ public final class DestinyGuardians implements ModInitializer {
     @Override
     public void onInitialize() {
         kim.biryeong.destiny.fx.HunterModelAssets.prepare();
+        kim.biryeong.destiny.fx.ClassSuperModelAssets.prepare();
         kim.biryeong.destiny.fx.HunterVfxAssets.prepare();
         // destiny 네임스페이스 에셋을 서버 리소스팩에 포함시킨다.
         PolymerResourcePackUtils.addModAssets(MOD_ID);
@@ -32,6 +33,8 @@ public final class DestinyGuardians implements ModInitializer {
         Guardians.init();
         kim.biryeong.destiny.inventory.WeaponScreen.init();
         HunterAbilities.register();
+        kim.biryeong.destiny.ability.titan.TitanAbilities.register();
+        kim.biryeong.destiny.ability.warlock.WarlockAbilities.register();
         AbilityRegistry.registerReloadListener();
         AbilityService.init();
         GuardianCommands.register();

@@ -89,7 +89,7 @@ class HunterSuperVfxAssetTest {
 
     @Test
     void ultimateDefaultsNeverReplaceAnExistingArtistsRevision(@TempDir Path dir) throws Exception {
-        assertEquals(8, HunterVfxAssets.install(dir));
+        assertEquals(HunterVfxAssets.allModels().size(), HunterVfxAssets.install(dir));
         for (String name : HunterVfxAssets.SUPER_MODELS)
             assertArrayEquals(resource("destiny/vfx/" + name + ".bbmodel"), Files.readAllBytes(dir.resolve(name + ".bbmodel")));
         Path custom = dir.resolve(HunterVfxAssets.SUPER_MODELS.getFirst() + ".bbmodel");

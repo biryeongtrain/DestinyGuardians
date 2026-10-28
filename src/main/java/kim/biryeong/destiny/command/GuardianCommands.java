@@ -15,6 +15,7 @@ import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianClass;
 import kim.biryeong.destiny.guardian.GuardianData;
 import kim.biryeong.destiny.guardian.Guardians;
+import kim.biryeong.destiny.guardian.GuardianPresets;
 import kim.biryeong.destiny.hud.CombatHud;
 import kim.biryeong.destiny.input.GuardianAction;
 import kim.biryeong.destiny.input.InputRouter;
@@ -105,16 +106,12 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal("알 수 없는 직업"));
             return 0;
         }
-        if (cls != GuardianClass.HUNTER && cls != GuardianClass.NONE) {
-            c.getSource().sendFailure(Component.literal(cls.getSerializedName() + " 은(는) 아직 구현되지 않았습니다"));
-            return 0;
-        }
         AbilityService.cleanup(player);
         Guardians.forget(player);
         GuardianData data = Guardians.data(player);
         data.setGuardianClass(cls);
-        if (cls == GuardianClass.HUNTER && data.loadout(cls) == null) {
-            data.setLoadout(cls, HunterAbilities.preset(Element.ARC));
+        if (cls != GuardianClass.NONE && data.loadout(cls) == null) {
+            data.setLoadout(cls, GuardianPresets.preset(cls, Element.ARC));
         }
         CombatHud.update(player);
         c.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " → " + cls.getSerializedName()), false);
@@ -130,15 +127,20 @@ public final class GuardianCommands {
             return 0;
         }
         GuardianData data = Guardians.data(player);
-        if (data.guardianClass() != GuardianClass.HUNTER) {
-            c.getSource().sendFailure(Component.literal("먼저 /guardian class hunter"));
+        if (data.guardianClass() == GuardianClass.NONE) {
+            c.getSource().sendFailure(Component.literal("먼저 /guardian class <hunter|titan|warlock>"));
+            return 0;
+        }
+        if (!GuardianPresets.supported(element)) {
+            c.getSource().sendFailure(Component.literal("지원하는 속성: arc, solar, void"));
             return 0;
         }
         AbilityService.cleanup(player);
         Guardians.forget(player);
-        data.setLoadout(GuardianClass.HUNTER, HunterAbilities.preset(element));
+        data.setLoadout(data.guardianClass(), GuardianPresets.preset(data.guardianClass(), element));
         CombatHud.update(player);
-        c.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " → hunter / " + element.getSerializedName()), false);
+        c.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " → "
+                + data.guardianClass().getSerializedName() + " / " + element.getSerializedName()), false);
         return 1;
     }
 
