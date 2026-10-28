@@ -1,0 +1,1300 @@
+{
+  "sourceDelivery": "Destiny-Light-Abilities-2026-10-28",
+  "cueSheetSha256": "2e0272bdaf54ef9253e6163e5d5f092c0692a96f9242fdb5f731b1786dc14aad",
+  "processing": "single selected WEM; mono 48000Hz Vorbis q5; gain0.5; no trim, mix, loop or tempo change",
+  "identityLimit": "FNV name candidates remain candidates. Wwise container/layer reconstruction and original-game A/B listening are not certified.",
+  "bindings": [
+    {
+      "event": "hunter.arc.super.start",
+      "group": "hunter_arc_staff",
+      "sound": "80D4B33C",
+      "wem": "80D6659A",
+      "reason": "arc_staff_energy_start는 FNV-1 후보이다. arc_staff_ability.pattern.tft의 80C2EA93 -> 80C3A39D/80C3A3B9 참조와 energy_start 명명에 한해 능력 시작 시 1회 선정. sourceFrames가 없고 CUE phase는 유지·이동 후보이므로 정확한 시작 프레임·루프 의미는 미복원. 공격/착탄/종료로 재사용하지 않는다. HunterSuper.activate의 super.start 경로를 사용한다. 기존 연결: destiny:w33/hunter/arc/super/start. CUE-SHEETS.json의 arc_staff_energy_start / bank 80D4B33B 안에서 기재 순서의 첫 WEM 80D6659A 하나만 결정적으로 선택(전체 17개). 파일 audio/ogg/80d6659a.ogg, duration=4.0초, channels=2, SHA-256=f7f84ab96723de5ca14edab04736c9e2af0fe311e7b9933cb9a5dcfc7374876a. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate",
+      "sourceName": "arc_staff_energy_start",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [
+        {
+          "component": "80C3A39D",
+          "sound": "80D4B33C",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "DE9B7715",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        },
+        {
+          "component": "80C3A3B9",
+          "sound": "80D4B33C",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "DE9B7715",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        }
+      ],
+      "sourceFile": "audio/ogg/80d6659a.ogg",
+      "sourceSha256": "f7f84ab96723de5ca14edab04736c9e2af0fe311e7b9933cb9a5dcfc7374876a",
+      "bank": "80D4B33B",
+      "output": "assets/destiny/sounds/light_w233/80d6659a.ogg",
+      "processed": {
+        "sha256": "c752247ad2216453cff20e51526c574c2dd8b473e331f49f23dd97a4b56511ea",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 192000,
+        "peak": 0.7029746770858765,
+        "rms": 0.062155379402878116
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.arc.super.start",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/arc/super/start",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.arc.super.fire",
+      "group": "hunter_arc_staff",
+      "sound": "80D4C865",
+      "wem": "80D643E7",
+      "reason": "원본 arc_staff_swing_misc_fast.wwise_event와 클립 80A8A937의 프레임10/13/19/22/26, 80A8A92B의 프레임8/10/13/17 등 17개 sourceFrames가 지팡이 휘두르기 공격을 뒷받침한다. 같은 WEM 집합을 공유하는 slow/fast 후보를 중첩하지 않고 기존 ArcStaff.strike super.fire 1회에 대표음을 연결한다. 명중 여부와 독립적인 공격음이며 착탄음이 아니다. 원본30fps 프레임을 현재 contact tick에 정확히 대응했다는 의미는 아니다. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A937\", \"sourceFrame\": 10, \"exportFps\": 30, \"exportSeconds\": 0.3333333333333333, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\arc_staff\\\\arc_staff_swing_misc_fast.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/arc/super/fire. CUE-SHEETS.json의 arc_staff_swing_misc_fast / bank 80D4C864 안에서 기재 순서의 첫 WEM 80D643E7 하나만 결정적으로 선택(전체 13개). 파일 audio/ogg/80d643e7.ogg, duration=0.6333333333333333초, channels=2, SHA-256=51427cc87611aebf3d3d484837712f90c9a974af308903dbb6995c9305a89666. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip",
+      "sourceName": "arc_staff_swing_misc_fast",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A937",
+          "sourceFrame": 10,
+          "exportFps": 30,
+          "exportSeconds": 0.3333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A937",
+          "sourceFrame": 13,
+          "exportFps": 30,
+          "exportSeconds": 0.43333333333333335,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A937",
+          "sourceFrame": 19,
+          "exportFps": 30,
+          "exportSeconds": 0.6333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A937",
+          "sourceFrame": 22,
+          "exportFps": 30,
+          "exportSeconds": 0.7333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A937",
+          "sourceFrame": 26,
+          "exportFps": 30,
+          "exportSeconds": 0.8666666666666667,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A92A",
+          "sourceFrame": 22,
+          "exportFps": 30,
+          "exportSeconds": 0.7333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A92A",
+          "sourceFrame": 24,
+          "exportFps": 30,
+          "exportSeconds": 0.8,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A92A",
+          "sourceFrame": 33,
+          "exportFps": 30,
+          "exportSeconds": 1.1,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A92B",
+          "sourceFrame": 8,
+          "exportFps": 30,
+          "exportSeconds": 0.26666666666666666,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A92B",
+          "sourceFrame": 10,
+          "exportFps": 30,
+          "exportSeconds": 0.3333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A92B",
+          "sourceFrame": 13,
+          "exportFps": 30,
+          "exportSeconds": 0.43333333333333335,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A92B",
+          "sourceFrame": 17,
+          "exportFps": 30,
+          "exportSeconds": 0.5666666666666667,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A95F",
+          "sourceFrame": 33,
+          "exportFps": 30,
+          "exportSeconds": 1.1,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A966",
+          "sourceFrame": 11,
+          "exportFps": 30,
+          "exportSeconds": 0.36666666666666664,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A966",
+          "sourceFrame": 16,
+          "exportFps": 30,
+          "exportSeconds": 0.5333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A972",
+          "sourceFrame": 9,
+          "exportFps": 30,
+          "exportSeconds": 0.3,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A972",
+          "sourceFrame": 13,
+          "exportFps": 30,
+          "exportSeconds": 0.43333333333333335,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\arc_staff_swing_misc_fast.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d643e7.ogg",
+      "sourceSha256": "51427cc87611aebf3d3d484837712f90c9a974af308903dbb6995c9305a89666",
+      "bank": "80D4C864",
+      "output": "assets/destiny/sounds/light_w233/80d643e7.ogg",
+      "processed": {
+        "sha256": "dd3f21657369229a2d13cfe99a4e866670faa8d2e9c0b7af7a8ba485f63bcc38",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 30272,
+        "peak": 0.7035594582557678,
+        "rms": 0.16409799901181465
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.arc.super.fire",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/arc/super/fire",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.solar.super.start",
+      "group": "hunter_golden_gun",
+      "sound": "80D4B2D1",
+      "wem": "80D64EDE",
+      "reason": "golden_gun_super_cast FNV-1 명명 후보와 golden_gun_ability.pattern.tft의 80A5BFC7 -> 80C38C62 참조로 황금총 시전 1회에 선정. sourceFrames는 없다. golden_gun_aoe_pre_exp/aoe_exp는 폭발 후보이며 시전으로 사용하지 않는다. ready/fail 후보도 제외한다. HunterSuper.activate의 super.start 경로를 사용한다. 기존 연결: destiny:w33/hunter/solar/super/start. CUE-SHEETS.json의 golden_gun_super_cast / bank 80D4B2D0 안에서 기재 순서의 첫 WEM 80D64EDE 하나만 결정적으로 선택(전체 17개). 파일 audio/ogg/80d64ede.ogg, duration=3.6266666666666665초, channels=2, SHA-256=51091a44c763d81dbe7896ee553d5ed5d1e13fb2788842ec83e01cb2f4490ff4. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate",
+      "sourceName": "golden_gun_super_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [
+        {
+          "component": "80C38C62",
+          "sound": "80D4B2D1",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "3DEF1476",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        },
+        {
+          "component": "80C38C69",
+          "sound": "80D4B2D1",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "3DEF1476",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        }
+      ],
+      "sourceFile": "audio/ogg/80d64ede.ogg",
+      "sourceSha256": "51091a44c763d81dbe7896ee553d5ed5d1e13fb2788842ec83e01cb2f4490ff4",
+      "bank": "80D4B2D0",
+      "output": "assets/destiny/sounds/light_w233/80d64ede.ogg",
+      "processed": {
+        "sha256": "27bba9ade455da56684dc4f58149e3c84b46e59020f6714e8c4da64e78a5c643",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 174080,
+        "peak": 0.8236951231956482,
+        "rms": 0.08525968354770427
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.solar.super.start",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/solar/super/start",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.solar.super.fire",
+      "group": "hunter_golden_gun",
+      "sound": "80A6121A",
+      "wem": "80D66A2C",
+      "reason": "golden_gun_fire FNV-1 명명 후보와 golden_gun_ability.pattern.tft 참조에 근거하여 GoldenGun.tick의 실제 hitscan 발사 후 super.fire 1회에 선정. sourceFrames가 없어 정확한 원작 타이밍과 황금총 변형 구분은 미확정. aoe_exp/금속 착탄 후보를 발사로 대체하지 않는다. 기존 연결: destiny:w33/hunter/solar/super/fire. CUE-SHEETS.json의 golden_gun_fire / bank 80A61219 안에서 기재 순서의 첫 WEM 80D66A2C 하나만 결정적으로 선택(전체 7개). 파일 audio/ogg/80d66a2c.ogg, duration=2.6666666666666665초, channels=2, SHA-256=1d30f5c3d29ffcee043c63fb7876714e4d0e58d7ae18fde043bebf1c903b86dd. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate",
+      "sourceName": "golden_gun_fire",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [
+        {
+          "component": "80C45538",
+          "sound": "80A6121A",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "811C9DC5",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        },
+        {
+          "component": "80C38D0A",
+          "sound": "80A6121A",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "811C9DC5",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        },
+        {
+          "component": "80C38DD2",
+          "sound": "80A6121A",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "811C9DC5",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        }
+      ],
+      "sourceFile": "audio/ogg/80d66a2c.ogg",
+      "sourceSha256": "1d30f5c3d29ffcee043c63fb7876714e4d0e58d7ae18fde043bebf1c903b86dd",
+      "bank": "80A61219",
+      "output": "assets/destiny/sounds/light_w233/80d66a2c.ogg",
+      "processed": {
+        "sha256": "403b9ab5adc13d2d53ab2b209ad763cb6b8cae07edea169051ff2df4ff1b2c03",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 128000,
+        "peak": 0.6452417373657227,
+        "rms": 0.04913874589063399
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.solar.super.fire",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/solar/super/fire",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.arc.melee.cast",
+      "group": "hunter_melee",
+      "sound": "80D4C863",
+      "wem": "80D6494E",
+      "reason": "arc_staff/palm_strike_melee/palm_strike_melee.wwise_event 원본 경로와 클립80A8A980/80A8A984 프레임4(30fps,0.133333초)의 공격 동작 이벤트에 근거. 현재 combinationBlow의 melee.cast 경로에 손바닥 타격 동작음 1회로 선정하며, 적 명중 전용 melee.impact와 구분한다. 일반 hunter_melee/fp_melee의 범용 뱅크를 함께 재생하지 않는다. 원본 클립과 현재 스킬 타이밍의 정밀 대응은 미검증. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A980\", \"sourceFrame\": 4, \"exportFps\": 30, \"exportSeconds\": 0.13333333333333333, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\arc_staff\\\\palm_strike_melee\\\\palm_strike_melee.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/arc/melee/cast. CUE-SHEETS.json의 palm_strike_melee / bank 80D4C862 안에서 기재 순서의 첫 WEM 80D6494E 하나만 결정적으로 선택(전체 4개). 파일 audio/ogg/80d6494e.ogg, duration=0.7495416666666667초, channels=2, SHA-256=621ffcb9ae01cf7f64e6f84e77f6515992868828b64d2b6b4c3d381a5f74a24a. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip",
+      "sourceName": "palm_strike_melee",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A980",
+          "sourceFrame": 4,
+          "exportFps": 30,
+          "exportSeconds": 0.13333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\palm_strike_melee\\palm_strike_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A984",
+          "sourceFrame": 4,
+          "exportFps": 30,
+          "exportSeconds": 0.13333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\arc_staff\\palm_strike_melee\\palm_strike_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d6494e.ogg",
+      "sourceSha256": "621ffcb9ae01cf7f64e6f84e77f6515992868828b64d2b6b4c3d381a5f74a24a",
+      "bank": "80D4C862",
+      "output": "assets/destiny/sounds/light_w233/80d6494e.ogg",
+      "processed": {
+        "sha256": "16246571a0867efdc7b33aaa0a66d5c2f957b07d9eac4659b75019eb8af2760b",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 35850,
+        "peak": 0.6903965473175049,
+        "rms": 0.08281327224970562
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.arc.melee.cast",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/arc/melee/cast",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.solar.melee.cast",
+      "group": "hunter_melee",
+      "sound": "80A60E8B",
+      "wem": "80D63567",
+      "reason": "abilities/player/melees/hunter/throwing_knife/hunter_knife_throw.wwise_event 원본 경로, 클립80A8A80A 프레임0(30fps)의 투척 이벤트에 근거. HunterMelee.knife의 투사체 생성 시 melee.cast 1회에 선정. heavy/fan/flaming FNV 후보를 현재 단일 칼 투척과 섞지 않는다. 착탄 thwack과 분리하며 Blade Barrage의 기존 throw는 변경하지 않는다. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A80A\", \"sourceFrame\": 0, \"exportFps\": 30, \"exportSeconds\": 0.0, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\abilities\\\\player\\\\melees\\\\hunter\\\\throwing_knife\\\\hunter_knife_throw.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/solar/melee/cast. CUE-SHEETS.json의 hunter_knife_throw / bank 80A60E8A 안에서 기재 순서의 첫 WEM 80D63567 하나만 결정적으로 선택(전체 16개). 파일 audio/ogg/80d63567.ogg, duration=0.7849375초, channels=2, SHA-256=62a0b7fd8920d31a8cfb1ef35a86980ee34eb4e33c644d70a1ede852542e0db5. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip",
+      "sourceName": "hunter_knife_throw",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A80A",
+          "sourceFrame": 0,
+          "exportFps": 30,
+          "exportSeconds": 0.0,
+          "originalPath": "content\\audio\\wwise_events\\abilities\\player\\melees\\hunter\\throwing_knife\\hunter_knife_throw.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d63567.ogg",
+      "sourceSha256": "62a0b7fd8920d31a8cfb1ef35a86980ee34eb4e33c644d70a1ede852542e0db5",
+      "bank": "80A60E8A",
+      "output": "assets/destiny/sounds/light_w233/80d63567.ogg",
+      "processed": {
+        "sha256": "d5d79de38437252cc0f01cf7834c74fd7381f0e2bef90c6651042c9be8bd26b9",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 37549,
+        "peak": 0.6666881442070007,
+        "rms": 0.11199998501244988
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.solar.melee.cast",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/solar/melee/cast",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.solar.melee.impact",
+      "group": "hunter_melee",
+      "sound": "80D4AE70",
+      "wem": "80D66B3B",
+      "reason": "hunter_knife_throw_thwack FNV-1 명명 후보에 근거한 칼 착탄 후보. sourceFrames와 직접 원본 경로 문자열은 없다. 현재 HunterMelee.knife의 투사체 hit.getLocation() callback melee.impact 1회에만 선정한다. cast/공격 시작으로 사용하지 않는다. SimProjectile.tick은 수명 만료 때도 합성 BlockHitResult로 finish/onImpact를 호출한다. 현재는 공중 만료에도 이 실제 제품 이벤트가 재생된다. master는 실제 충돌과 수명 만료를 분리해야 하며 이 selection은 트리거를 신설하지 않는다. 기존 연결: destiny:w33/hunter/solar/melee/impact. CUE-SHEETS.json의 hunter_knife_throw_thwack / bank 80D4AE6F 안에서 기재 순서의 첫 WEM 80D66B3B 하나만 결정적으로 선택(전체 8개). 파일 audio/ogg/80d66b3b.ogg, duration=0.9508333333333333초, channels=2, SHA-256=48696f0da180c37fd9c4564a31e106729a7979c96fcc5ac60d68f522873c49f3. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate",
+      "sourceName": "hunter_knife_throw_thwack",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d66b3b.ogg",
+      "sourceSha256": "48696f0da180c37fd9c4564a31e106729a7979c96fcc5ac60d68f522873c49f3",
+      "bank": "80D4AE6F",
+      "output": "assets/destiny/sounds/light_w233/80d66b3b.ogg",
+      "processed": {
+        "sha256": "69ff99b0901567cc49218ac217c913851f763ec1fb65f6b293ddce3ad1bbf8e9",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 45512,
+        "peak": 0.8662728071212769,
+        "rms": 0.11824518993805062
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.solar.melee.impact",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/solar/melee/impact",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.void.melee.cast",
+      "group": "hunter_melee",
+      "sound": "80A60E8E",
+      "wem": "80D69F57",
+      "reason": "com01/abilities_com01/player_com01/melees/hunter/smoke_bomb_throw.wwise_event 원본 경로와 클립80A8A8D8 프레임0(30fps)에 근거. HunterMelee.smoke의 투사체 생성 전 melee.cast에 투척음 1회로 선정. smoke_bomb_expl 폭발은 impact에만 둔다. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A8D8\", \"sourceFrame\": 0, \"exportFps\": 30, \"exportSeconds\": 0.0, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\com01\\\\abilities_com01\\\\player_com01\\\\melees\\\\hunter\\\\smoke_bomb_throw.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/void/melee/cast. CUE-SHEETS.json의 smoke_bomb_throw / bank 80A60E8D 안에서 기재 순서의 첫 WEM 80D69F57 하나만 결정적으로 선택(전체 3개). 파일 audio/ogg/80d69f57.ogg, duration=0.998초, channels=2, SHA-256=67b0ea2dc712e68e4f15ebf6057b39a206a222d33ac66a194c35b50e45feac1f. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip",
+      "sourceName": "smoke_bomb_throw",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A8D8",
+          "sourceFrame": 0,
+          "exportFps": 30,
+          "exportSeconds": 0.0,
+          "originalPath": "content\\audio\\wwise_events\\com01\\abilities_com01\\player_com01\\melees\\hunter\\smoke_bomb_throw.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d69f57.ogg",
+      "sourceSha256": "67b0ea2dc712e68e4f15ebf6057b39a206a222d33ac66a194c35b50e45feac1f",
+      "bank": "80A60E8D",
+      "output": "assets/destiny/sounds/light_w233/80d69f57.ogg",
+      "processed": {
+        "sha256": "78f21f14deb69e51341bc21d21f5d99f1bfd0ca9b4136273a72baeffb7877db0",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 47776,
+        "peak": 0.605736255645752,
+        "rms": 0.049039398205786906
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.void.melee.cast",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/void/melee/cast",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "hunter.void.melee.impact",
+      "group": "hunter_melee",
+      "sound": "80D4BAAA",
+      "wem": "80D653ED",
+      "reason": "hunter_smoke_bomb_expl FNV-1 명명 후보에 근거한 연막탄 착탄/전개음. sourceFrames와 직접 원본 경로 문자열은 없다. HunterMelee.smoke의 hit 위치 melee.impact 1회에만 선정한다. underwater 후보80D4BAA4는 제외하고 연막 지속 Tasks 반복에서 재생하지 않는다. SimProjectile.tick은 수명 만료 때도 합성 BlockHitResult로 finish/onImpact를 호출한다. 현재는 공중 만료에도 이 실제 제품 이벤트가 재생된다. master는 실제 충돌과 수명 만료를 분리해야 하며 이 selection은 트리거를 신설하지 않는다. 기존 연결: destiny:w33/hunter/void/melee/impact. CUE-SHEETS.json의 hunter_smoke_bomb_expl / bank 80D4BAA9 안에서 기재 순서의 첫 WEM 80D653ED 하나만 결정적으로 선택(전체 4개). 파일 audio/ogg/80d653ed.ogg, duration=2.403979166666667초, channels=2, SHA-256=fefbb7b732f180cccb18f53c52e92224c8ee1e1d6cab6365ff4535ab3f80138a. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate",
+      "sourceName": "hunter_smoke_bomb_expl",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d653ed.ogg",
+      "sourceSha256": "fefbb7b732f180cccb18f53c52e92224c8ee1e1d6cab6365ff4535ab3f80138a",
+      "bank": "80D4BAA9",
+      "output": "assets/destiny/sounds/light_w233/80d653ed.ogg",
+      "processed": {
+        "sha256": "f81aab531cc92d5148d426c6b5b444f311d08e7513eff6d10532ff4e2c5f67e9",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 115391,
+        "peak": 0.9075796604156494,
+        "rms": 0.11700564787746541
+      },
+      "previousDefinition": {
+        "subtitle": "subtitles.destiny.hunter.void.melee.impact",
+        "sounds": [
+          {
+            "name": "destiny:w33/hunter/void/melee/impact",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "titan.arc.fists_of_havoc.impact",
+      "group": "titan_fists_of_havoc",
+      "sound": "80D4848A",
+      "wem": "80D61BF7",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_arc_fists_of_havoc_impact\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanAbilities.arc_super -> TitanSuper.Session.strike(boolean) super.impact -> ClassAbilityEffects.sound의 titan/arc_super 특례 -> titan.arc.fists_of_havoc.impact. fist_of_havoc_expl 이름의 폭발 후보를 착지/타격 impact에만 배정. 기존 W230의 0215-0000164E.mp3는 tentative_numeric_folder_family_only이므로 이번 후보의 이름 근거와 구분. 은행 순서상 최초 stereo WEM을 대표로 고름; 짧은 mono 80D67F81은 여러 비전기 이벤트에도 공유되어 피함. 선택 WEM도 다른 Arc 은행에 공유되므로 주먹 전용/완성 믹스라고 단정하지 않음. 6.997초 꼬리는 연속 공격에서 겹칠 수 있으며 master의 음량/voice 수락 검증 필요. strike(slam)의 경공격/강공격/최초 착지가 같은 impact 키이므로 구분 미복원; 동일 WEM을 fire에도 중복 배정하지 않음. CUE-SHEETS.json(group=titan_fists_of_havoc, sound=80D4848A, name=fist_of_havoc_expl, nameStatus=FNV-1 후보 문자열, bank=80D48489). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_fists_of_havoc\",\"sound\":\"80D4848A\",\"name\":\"fist_of_havoc_expl\",\"evidence\":\"wordlist_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D61BF7 하나만 선택; bank 17개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d61bf7.ogg; sha256=f184b5b2332f8d5c247528f3cecae89b7df39f8d78c9f1039d943f5663a3cf27; rawSha256=a30abec11370815c8db6fd0a521cda436bc054a723f4d2f362b55ab4219d8364; duration=6.997333333333334s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate",
+      "sourceName": "fist_of_havoc_expl",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d61bf7.ogg",
+      "sourceSha256": "f184b5b2332f8d5c247528f3cecae89b7df39f8d78c9f1039d943f5663a3cf27",
+      "bank": "80D48489",
+      "output": "assets/destiny/sounds/light_w233/80d61bf7.ogg",
+      "processed": {
+        "sha256": "863cb7d126f083fe8ee7d6876a25a1d2450c244e0f18e6e4265fde35b452e22b",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 335872,
+        "peak": 0.5852090120315552,
+        "rms": 0.05047039733468547
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w230/titan_arc_fists_of_havoc_impact",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "titan.solar.super.start",
+      "group": "titan_hammer_of_sol",
+      "sound": "80D4B476",
+      "wem": "80D65094",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_solar_super_start\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanSuper.activate -> ClassAbilityEffects.beginSuper(titan/solar_super) -> super.start -> titan.solar.super.start. thermal_titan_cast 이름으로 궁극기 시전 시작만 선택. thermal_titan_start(80D4B478)는 유지/이동 후보여서 cast 대체로 선택하지 않음. thermal_hammer_spawn(80D4C846)은 공격 클립 80A8A8AE frame15의 망치 생성이며 cast 전체와 같다고 보지 않음. ability_ready_super/ability_fail_grenade 공용 후보는 배제. CUE-SHEETS.json(group=titan_hammer_of_sol, sound=80D4B476, name=thermal_titan_cast, nameStatus=FNV-1 후보 문자열, bank=80D4B475). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_hammer_of_sol\",\"sound\":\"80D4B476\",\"name\":\"thermal_titan_cast\",\"evidence\":\"wordlist_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D65094 하나만 선택; bank 19개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d65094.ogg; sha256=88d33b69acf0bfe07fb7a98643d5cfcf72641588a33d93d0b2d3205643b4f71d; rawSha256=1baf2ddb79d2a001d41e0a72966dbf2eea015f9ff66d535543e3412412c05db9; duration=1.1686458333333334s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate",
+      "sourceName": "thermal_titan_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d65094.ogg",
+      "sourceSha256": "88d33b69acf0bfe07fb7a98643d5cfcf72641588a33d93d0b2d3205643b4f71d",
+      "bank": "80D4B475",
+      "output": "assets/destiny/sounds/light_w233/80d65094.ogg",
+      "processed": {
+        "sha256": "fc6177f55310bad4e7c44a505c997717ea9c1cf38ae7648d51c194cf4a573c39",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 56095,
+        "peak": 0.6471825838088989,
+        "rms": 0.22195596440408935
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w229/titan_solar_super_start",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "titan.solar.super.fire",
+      "group": "titan_hammer_of_sol",
+      "sound": "80D4C84C",
+      "wem": "80D6493E",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_solar_hammer_throw\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanSuper.Session.release solar launchFlight 성공 -> super.fire -> titan.solar.super.fire. thermal_hammer_throw 원본 투척 이벤트를 발사에 배정. 기존 solar super.fire와 solar melee.cast가 classes_w229/titan_solar_hammer_throw 한 파일을 공유했으므로 궁극기/일반 근접을 별도 원본 이벤트로 분리. 원본 공격 clip frame0은 출처 근거이며 현재 게임에서 pending contact 뒤 투사체 생성 성공 때 재생하는 호출 시점을 source-frame 동기화 완료로 주장하지 않음. 착탄으로 재사용 금지. CUE-SHEETS.json(group=titan_hammer_of_sol, sound=80D4C84C, name=thermal_hammer_throw, nameStatus=원본 경로 문자열, bank=80D4C84B). 원본 sourceFrames=[{\"clip\":\"80A8A8AE\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\com01\\\\abilities_com01\\\\player_com01\\\\supers\\\\thermal_titan\\\\thermal_hammer_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D6493E 하나만 선택; bank 4개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d6493e.ogg; sha256=bb2f540eaf0cceaca329a87725e74b926235a9c3d71109dfbb0e325f6e538d7e; rawSha256=6b1768313094be316f82daaf8cacf877ed744dcb1b8a479c8db939c1d89106c0; duration=0.974125s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip",
+      "sourceName": "thermal_hammer_throw",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A8AE",
+          "sourceFrame": 0,
+          "exportFps": 30,
+          "exportSeconds": 0.0,
+          "originalPath": "content\\audio\\wwise_events\\com01\\abilities_com01\\player_com01\\supers\\thermal_titan\\thermal_hammer_throw.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d6493e.ogg",
+      "sourceSha256": "bb2f540eaf0cceaca329a87725e74b926235a9c3d71109dfbb0e325f6e538d7e",
+      "bank": "80D4C84B",
+      "output": "assets/destiny/sounds/light_w233/80d6493e.ogg",
+      "processed": {
+        "sha256": "4175e36274fe15bb2e40fcd883cac1f2fb2d9ec4062fb91aa3806f08b1b050ed",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 46630,
+        "peak": 0.7249698042869568,
+        "rms": 0.16569817527008962
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w229/titan_solar_hammer_throw",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "titan.solar.super.impact",
+      "group": "titan_hammer_of_sol",
+      "sound": "80D4B47A",
+      "wem": "80D62579",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 route: TitanSuper.Session.release solar projectile hit callback -> super.impact -> titan.solar.super.impact. thermal_hammer_expl 명명 후보를 궁극기 투사체 충돌 폭발에 배정. throw/spawn/cast 또는 golden_gun_aoe_exp·submerged·pulse_gren_bounce 후보로 착탄을 대체하지 않음. master: 현재 impact 콜백은 center를 구하지만 ClassAbilityEffects.sound가 p.position()에서 재생하므로 실제 hit 위치를 받는 재생 API로 바꿔야 함. sounds.json 키 추가 필요; 현재는 GENERIC_EXPLODE fallback. CUE-SHEETS.json(group=titan_hammer_of_sol, sound=80D4B47A, name=thermal_hammer_expl, nameStatus=FNV-1 후보 문자열, bank=80D4B479). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_hammer_of_sol\",\"sound\":\"80D4B47A\",\"name\":\"thermal_hammer_expl\",\"evidence\":\"wordlist_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D62579 하나만 선택; bank 20개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d62579.ogg; sha256=d58abf0851cbf290c6f7cf09064a0bf0c6b605e5c340c93614106e02cae31aa5; rawSha256=930da8cad38d441f93cb14e775d8f6600f85c43309b7d11be8e8fca26206b780; duration=2.0227291666666667s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate",
+      "sourceName": "thermal_hammer_expl",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d62579.ogg",
+      "sourceSha256": "d58abf0851cbf290c6f7cf09064a0bf0c6b605e5c340c93614106e02cae31aa5",
+      "bank": "80D4B479",
+      "output": "assets/destiny/sounds/light_w233/80d62579.ogg",
+      "processed": {
+        "sha256": "5d58bae1485a77803aa0de535bcc0aca4ff7878755680e6b861509ca7bc4e48b",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 97091,
+        "peak": 0.7598071098327637,
+        "rms": 0.15640189032870183
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "titan.void.super.fire",
+      "group": "titan_sentinel_shield",
+      "sound": "80D4C878",
+      "wem": "80D665EF",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_void_super_fire\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanSuper.Session.release void launchFlight 성공 -> super.fire -> titan.void.super.fire. void_shield_throw 원본 경로/frame0 근거로 파수병 방패 궁극기의 투사체 발사에 배정. 일반 근접의 melee_void_shield_throw(80A60E99)와 구별. 방패 투척음은 cast/착탄에 재사용하지 않음. CUE-SHEETS.json(group=titan_sentinel_shield, sound=80D4C878, name=void_shield_throw, nameStatus=원본 경로 문자열, bank=80D4C877). 원본 sourceFrames=[{\"clip\":\"80A8A924\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\void_shield\\\\void_shield_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null},{\"clip\":\"80A8A967\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\void_shield\\\\void_shield_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D665EF 하나만 선택; bank 5개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d665ef.ogg; sha256=fa86864a78b44acd172eb404419a3ababb12daf35ea4d5f03a125124eca735e6; rawSha256=a7b318b1fe1b6f5d76f00370fbade78feafd4c07f53f6b69d8b1079ffd84fecf; duration=1.6666666666666667s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip",
+      "sourceName": "void_shield_throw",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A924",
+          "sourceFrame": 0,
+          "exportFps": 30,
+          "exportSeconds": 0.0,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\void_shield\\void_shield_throw.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A967",
+          "sourceFrame": 0,
+          "exportFps": 30,
+          "exportSeconds": 0.0,
+          "originalPath": "content\\audio\\wwise_events\\30\\abilities_30\\player_30\\builds\\void_shield\\void_shield_throw.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d665ef.ogg",
+      "sourceSha256": "fa86864a78b44acd172eb404419a3ababb12daf35ea4d5f03a125124eca735e6",
+      "bank": "80D4C877",
+      "output": "assets/destiny/sounds/light_w233/80d665ef.ogg",
+      "processed": {
+        "sha256": "64b0c7ed660a0f45cc585105cda8f36257c2c0324d24c4f5c66306e558101d2e",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 80000,
+        "peak": 0.7220507264137268,
+        "rms": 0.0859288783232059
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w229/titan_void_super_fire",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "titan.solar.melee.cast",
+      "group": "titan_melee",
+      "sound": "80A60E94",
+      "wem": "80D69F5E",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_solar_hammer_throw\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanMelee.activate solar launch 성공 -> melee.cast -> titan.solar.melee.cast. titan_melee_hammer_throw 원본 frame0으로 일반 근접 투척에 배정. 이 은행의 첫 WEM 80D63567 등 8개는 fp_melee 은행과 공유되므로 그 공유 8개를 제외한 첫 WEM 80D69F5E를 대표로 선택. 유일한 완성 레이어라는 뜻은 아님. titan_hammer_catch 그룹도 같은 throw 이벤트/은행을 참조하므로 catch 소리로 재명명하지 않음; 현재 TitanMelee에는 회수/catch runtime 자체가 없음. 기존 궁극기/근접 공용 throw 연결을 이 원본 근접 이벤트로 구분. CUE-SHEETS.json(group=titan_melee, sound=80A60E94, name=titan_melee_hammer_throw, nameStatus=원본 경로 문자열, bank=80A60E93). 원본 sourceFrames=[{\"clip\":\"80A8AB1D\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\400\\\\abilities_400\\\\abilities_player_400\\\\abilities_player_builds_400\\\\titan_thermal_maul\\\\titan_melee_hammer_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D69F5E 하나만 선택; bank 11개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d69f5e.ogg; sha256=fb5deacc54995eff073552fa75bbfb74c23d6199c3a4ffa8ea610eb389ea5ef9; rawSha256=de07c769495bd7d32c16d0cbd6857e4a5f9ef18e13caf32b8d4d06efbfd91b5f; duration=1.4118958333333333s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip",
+      "sourceName": "titan_melee_hammer_throw",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8AB1D",
+          "sourceFrame": 0,
+          "exportFps": 30,
+          "exportSeconds": 0.0,
+          "originalPath": "content\\audio\\wwise_events\\400\\abilities_400\\abilities_player_400\\abilities_player_builds_400\\titan_thermal_maul\\titan_melee_hammer_throw.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d69f5e.ogg",
+      "sourceSha256": "fb5deacc54995eff073552fa75bbfb74c23d6199c3a4ffa8ea610eb389ea5ef9",
+      "bank": "80A60E93",
+      "output": "assets/destiny/sounds/light_w233/80d69f5e.ogg",
+      "processed": {
+        "sha256": "21182fad78f1d1d84bca57a4f8f1aee46ed31a53c13fe1c762b3e4c71874aa44",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 67771,
+        "peak": 0.4444897472858429,
+        "rms": 0.055260240115409184
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w229/titan_solar_hammer_throw",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "titan.void.melee.cast",
+      "group": "titan_melee",
+      "sound": "80A60E99",
+      "wem": "80D69F61",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 route: TitanMelee.activate void launch 성공 -> melee.cast -> titan.void.melee.cast. void_three_point_zero/titan/melee_void_shield_throw 원본 frame0으로 일반 방패 근접 투척에 배정. 파수병 궁극기 void_shield_throw와 다른 행/은행 사용. 충돌음이 아니며 현재 미등록 key의 BEACON_ACTIVATE fallback을 교체하는 제안. CUE-SHEETS.json(group=titan_melee, sound=80A60E99, name=melee_void_shield_throw, nameStatus=원본 경로 문자열, bank=80A60E98). 원본 sourceFrames=[{\"clip\":\"80A8ABCA\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\600\\\\abilities_600\\\\player_abilities_600\\\\void_three_point_zero\\\\titan\\\\melee_void_shield_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D69F61 하나만 선택; bank 5개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d69f61.ogg; sha256=2bfa529077c47b15ca5a916ed944160fe9b2acfbb83e4c9ed38b01e9e89f00f3; rawSha256=686f6aad9e266f9bcc64bcbd3910aacb7a02bc0732aa1c179806212429c597f9; duration=1.7325416666666666s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip",
+      "sourceName": "melee_void_shield_throw",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8ABCA",
+          "sourceFrame": 0,
+          "exportFps": 30,
+          "exportSeconds": 0.0,
+          "originalPath": "content\\audio\\wwise_events\\600\\abilities_600\\player_abilities_600\\void_three_point_zero\\titan\\melee_void_shield_throw.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d69f61.ogg",
+      "sourceSha256": "2bfa529077c47b15ca5a916ed944160fe9b2acfbb83e4c9ed38b01e9e89f00f3",
+      "bank": "80A60E98",
+      "output": "assets/destiny/sounds/light_w233/80d69f61.ogg",
+      "processed": {
+        "sha256": "d1f7dc27ffae0b664e90c55a87ea8785e5eede63dea5a7f010ff08c163eefca2",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 83162,
+        "peak": 0.6413354873657227,
+        "rms": 0.10151121431489356
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "titan.void.ward_of_dawn.fire",
+      "group": "titan_ward_of_dawn",
+      "sound": "80D4B12D",
+      "wem": "80D64CD3",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 route: TitanExpandedSupers.WardCast.advance supported 설치 성공 -> ClassAbilityEffects.sound(titan/ward_of_dawn, super.fire) -> titan.void.ward_of_dawn.fire. reviewed_FNV1_name_candidate ward_of_dawn_start를 돔이 실제 설치되는 시점의 생성 시작 후보로만 배정. 시전자 준비 동작 시작(super.start)과 구별. 현재 sounds.json에는 Ward 키가 없으며 W230 optional 파일은 Sentinel 숫자 폴더 후보여서 기본 연결되지 않았음. CUE phase는 유지·이동 후보이고 29 WEM의 지속/생성 레이어는 미복원: 1회 대표만 사용, 매 tick/loop 재생 금지; 완전한 돔 생성음 또는 유지 루프 확정이 아님. indicator와 in 후보는 돔 시전/종료로 전용하지 않음. master: sounds.json 실제 fire 키 추가, 조기 파괴/전직/취소 시 5.525초 꼬리의 중단 필요성 검증; 현재 Ward.close에 sound stop/종료 이벤트 없음. CUE-SHEETS.json(group=titan_ward_of_dawn, sound=80D4B12D, name=ward_of_dawn_start, nameStatus=FNV-1 후보 문자열, bank=80D4B12C). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_ward_of_dawn\",\"sound\":\"80D4B12D\",\"name\":\"ward_of_dawn_start\",\"evidence\":\"reviewed_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D64CD3 하나만 선택; bank 29개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d64cd3.ogg; sha256=2df8b25ac549705f7c42eebd9b5791b00bbeb85f340a85773e869f15fad6a3a2; rawSha256=dfec5aa2ae38d7c28df5a5c14e50a01866a9fcb352a97e29a679bd6a89734a81; duration=5.525333333333333s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate",
+      "sourceName": "ward_of_dawn_start",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d64cd3.ogg",
+      "sourceSha256": "2df8b25ac549705f7c42eebd9b5791b00bbeb85f340a85773e869f15fad6a3a2",
+      "bank": "80D4B12C",
+      "output": "assets/destiny/sounds/light_w233/80d64cd3.ogg",
+      "processed": {
+        "sha256": "621ddba7afeeed57125324be88fa940669f8647ec1dd3c959245f7b190270160",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 265216,
+        "peak": 0.21412557363510132,
+        "rms": 0.04788119614505406
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.void.super.start",
+      "group": "warlock_nova_bomb",
+      "sound": "80D4B278",
+      "wem": "80D64E66",
+      "reason": "신성 폭탄 시전 이름 후보. 기존 숫자 임시 시전음 교체. 원작 변형 구분은 미확인.",
+      "status": "named_candidate",
+      "sourceName": "nova_bomb_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [
+        {
+          "component": "80C3692A",
+          "sound": "80D4B278",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "506726AF",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        },
+        {
+          "component": "80C3698F",
+          "sound": "80D4B278",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "506726AF",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        }
+      ],
+      "sourceFile": "audio/ogg/80d64e66.ogg",
+      "sourceSha256": "686eb3d8e8786bb63dab9608a96062577cd4ea544f597e305d74f12bd4597039",
+      "bank": "80D4B277",
+      "output": "assets/destiny/sounds/light_w233/80d64e66.ogg",
+      "processed": {
+        "sha256": "5eb9d555dfe04c07d732cc8249242cf3c497aa55e605d2c7dcbc844683a0b03f",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 122129,
+        "peak": 0.8112831115722656,
+        "rms": 0.14354771518001647
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w229/warlock_void_super_start",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "warlock.void.super.impact",
+      "group": "warlock_nova_bomb",
+      "sound": "80D4B195",
+      "wem": "80D64D6B",
+      "reason": "신성 폭탄 폭발 이름 후보. 착탄 지점 판정 시 재생.",
+      "status": "named_candidate",
+      "sourceName": "nova_bomb_expl",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d64d6b.ogg",
+      "sourceSha256": "7754466ea523afb9cde688fb2777f6f6b2c1c268a339191ec4e107d4a89227f2",
+      "bank": "80D4B194",
+      "output": "assets/destiny/sounds/light_w233/80d64d6b.ogg",
+      "processed": {
+        "sha256": "d917410698eb4f31a70a20729efb49417ac3ef99714c012a9c9fa6fa3def409a",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 349184,
+        "peak": 0.37632307410240173,
+        "rms": 0.040939037126387384
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.arc.super.start",
+      "group": "warlock_stormtrance",
+      "sound": "80D4B25A",
+      "wem": "80D64E2C",
+      "reason": "폭풍몰입 시전 이름 후보. 유지/초기화 이벤트와 구분.",
+      "status": "named_candidate",
+      "sourceName": "arc_lightning_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [
+        {
+          "component": "80C36154",
+          "sound": "80D4B25A",
+          "start": 0,
+          "duration": 0,
+          "nodeName": "3DEF1476",
+          "evidence": "typed_SSequenceAudioEvent_relative_timing_fields"
+        }
+      ],
+      "sourceFile": "audio/ogg/80d64e2c.ogg",
+      "sourceSha256": "d3d0ca320ce480ff2899f5d335c31309efda595ef1423452d969b3465e76301a",
+      "bank": "80D4B259",
+      "output": "assets/destiny/sounds/light_w233/80d64e2c.ogg",
+      "processed": {
+        "sha256": "da9b30fce36a1ca69b5f1e5f4352ffac046b226059c5bed13977c5416a09bc04",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 220072,
+        "peak": 0.3709891736507416,
+        "rms": 0.05850261406909542
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w229/warlock_arc_super_start",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "warlock.arc.super.fire",
+      "group": "warlock_stormtrance",
+      "sound": "80A61118",
+      "wem": "80D66FFA",
+      "reason": "폭풍몰입 번개 발사 이름 후보. 선택한 1개 WEM만 사용.",
+      "status": "named_candidate",
+      "sourceName": "arc_lightning_super_bolt",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d66ffa.ogg",
+      "sourceSha256": "0bfb23104bb53648d0c07c732df839c4759e377f54309805ff475e6db312dafa",
+      "bank": "80A61117",
+      "output": "assets/destiny/sounds/light_w233/80d66ffa.ogg",
+      "processed": {
+        "sha256": "615501755a1fb492c190de1e2e34128dafcd7c72e531c5f9dee1e242040f16b4",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 50172,
+        "peak": 0.7522395849227905,
+        "rms": 0.06860559419122454
+      },
+      "previousDefinition": {
+        "sounds": [
+          {
+            "name": "destiny:classes_w229/warlock_arc_super_fire",
+            "stream": false,
+            "attenuation_distance": 32
+          }
+        ]
+      }
+    },
+    {
+      "event": "warlock.arc.class.cast",
+      "group": "warlock_rifts",
+      "sound": "80D4AD6F",
+      "wem": "80D665A3",
+      "reason": "치유 균열 시전 이름 후보. 속성에 관계없이 균열 종류로 구분. 현재 제품은 치유 균열만 구현되어 class.cast에 연결.",
+      "status": "named_candidate",
+      "sourceName": "warlock_sigil_heal_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d665a3.ogg",
+      "sourceSha256": "c01294a8b18c25edaa237065028b36b90435daf81dc8e44e5e8bd279291cbd2c",
+      "bank": "80D4AD6E",
+      "output": "assets/destiny/sounds/light_w233/80d665a3.ogg",
+      "processed": {
+        "sha256": "d9d658028161cf4d79183d5004f45ed2298de29571a61bb88c4d85d8bf6528a5",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 136172,
+        "peak": 0.849336564540863,
+        "rms": 0.18857083339237177
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.solar.class.cast",
+      "group": "warlock_rifts",
+      "sound": "80D4AD6F",
+      "wem": "80D665A3",
+      "reason": "치유 균열 시전 이름 후보. 속성에 관계없이 균열 종류로 구분. 현재 제품은 치유 균열만 구현되어 class.cast에 연결.",
+      "status": "named_candidate",
+      "sourceName": "warlock_sigil_heal_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d665a3.ogg",
+      "sourceSha256": "c01294a8b18c25edaa237065028b36b90435daf81dc8e44e5e8bd279291cbd2c",
+      "bank": "80D4AD6E",
+      "output": "assets/destiny/sounds/light_w233/80d665a3.ogg",
+      "processed": {
+        "sha256": "d9d658028161cf4d79183d5004f45ed2298de29571a61bb88c4d85d8bf6528a5",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 136172,
+        "peak": 0.849336564540863,
+        "rms": 0.18857083339237177
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.void.class.cast",
+      "group": "warlock_rifts",
+      "sound": "80D4AD6F",
+      "wem": "80D665A3",
+      "reason": "치유 균열 시전 이름 후보. 속성에 관계없이 균열 종류로 구분. 현재 제품은 치유 균열만 구현되어 class.cast에 연결.",
+      "status": "named_candidate",
+      "sourceName": "warlock_sigil_heal_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d665a3.ogg",
+      "sourceSha256": "c01294a8b18c25edaa237065028b36b90435daf81dc8e44e5e8bd279291cbd2c",
+      "bank": "80D4AD6E",
+      "output": "assets/destiny/sounds/light_w233/80d665a3.ogg",
+      "processed": {
+        "sha256": "d9d658028161cf4d79183d5004f45ed2298de29571a61bb88c4d85d8bf6528a5",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 136172,
+        "peak": 0.849336564540863,
+        "rms": 0.18857083339237177
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.arc.melee.cast",
+      "group": "warlock_melee",
+      "sound": "80D4ADE6",
+      "wem": "80D66C4B",
+      "reason": "전기 근접 볼트 시전 이름 후보.",
+      "status": "named_candidate",
+      "sourceName": "arc_warlock_melee_bolt_cast",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d66c4b.ogg",
+      "sourceSha256": "0777cc22bd73954a49be3281d609ed6e6f1561b1afb077ab6f28bff3bb6041a5",
+      "bank": "80D4ADE5",
+      "output": "assets/destiny/sounds/light_w233/80d66c4b.ogg",
+      "processed": {
+        "sha256": "b314154a82e076024fb9e0b9e7ff2f5307b6fb12504f5a4facbf43797badce95",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 81326,
+        "peak": 0.6086487174034119,
+        "rms": 0.09231224855043141
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.arc.melee.impact",
+      "group": "warlock_melee",
+      "sound": "80D4ADFE",
+      "wem": "80D67D62",
+      "reason": "전기 근접 볼트 공격자 타격음 이름 후보.",
+      "status": "named_candidate",
+      "sourceName": "arc_warlock_melee_bolt_attacker_thwak",
+      "nameStatus": "FNV-1 후보 문자열",
+      "confidence": "이름 해시 후보",
+      "sourceFrames": [],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d67d62.ogg",
+      "sourceSha256": "5d3d93fcd8fef57c267b81efa7356ab098c007156a689f8012d3d154ae4bb999",
+      "bank": "80D4ADFD",
+      "output": "assets/destiny/sounds/light_w233/80d67d62.ogg",
+      "processed": {
+        "sha256": "97b1deecb7b5667c31e14206df01807623d83190241946c41a552ce4e522a341",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 83283,
+        "peak": 0.9266332387924194,
+        "rms": 0.10418084742736912
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.solar.melee.cast",
+      "group": "warlock_melee",
+      "sound": "80A60E85",
+      "wem": "80D69F8C",
+      "reason": "원본 워록 근접 프레임 이벤트의 공용 스윙 1개. 능력 고유 투사체음 복원으로 간주하지 않음.",
+      "status": "source_clip",
+      "sourceName": "warlock_melee",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A6F1",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A7B2",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A81A",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8AB4D",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8ABEF",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d69f8c.ogg",
+      "sourceSha256": "78222c3114d8db9328da4ee36c83731bada82001b65368da3d726ae6771d38e1",
+      "bank": "80A60E84",
+      "output": "assets/destiny/sounds/light_w233/80d69f8c.ogg",
+      "processed": {
+        "sha256": "a4bf87962eaaadc88a5bba0b162b47a6c28f057bf8643662e8f7ebbd3e429730",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 84992,
+        "peak": 0.731101930141449,
+        "rms": 0.09910979131999591
+      },
+      "previousDefinition": null
+    },
+    {
+      "event": "warlock.void.melee.cast",
+      "group": "warlock_melee",
+      "sound": "80A60E85",
+      "wem": "80D69F8C",
+      "reason": "원본 워록 근접 프레임 이벤트의 공용 스윙 1개. 능력 고유 투사체음 복원으로 간주하지 않음.",
+      "status": "source_clip",
+      "sourceName": "warlock_melee",
+      "nameStatus": "원본 경로 문자열",
+      "confidence": "원본 클립 이벤트 연결",
+      "sourceFrames": [
+        {
+          "clip": "80A8A6F1",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A7B2",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8A81A",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8AB4D",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        },
+        {
+          "clip": "80A8ABEF",
+          "sourceFrame": 1,
+          "exportFps": 30,
+          "exportSeconds": 0.03333333333333333,
+          "originalPath": "content\\audio\\wwise_events\\characters\\weapon_animations\\fp_melee\\warlock_melee.wwise_event",
+          "sequenceStart": null,
+          "sequenceDuration": null
+        }
+      ],
+      "sequenceTimings": [],
+      "sourceFile": "audio/ogg/80d69f8c.ogg",
+      "sourceSha256": "78222c3114d8db9328da4ee36c83731bada82001b65368da3d726ae6771d38e1",
+      "bank": "80A60E84",
+      "output": "assets/destiny/sounds/light_w233/80d69f8c.ogg",
+      "processed": {
+        "sha256": "a4bf87962eaaadc88a5bba0b162b47a6c28f057bf8643662e8f7ebbd3e429730",
+        "channels": 1,
+        "sampleRate": 48000,
+        "samples": 84992,
+        "peak": 0.731101930141449,
+        "rms": 0.09910979131999591
+      },
+      "previousDefinition": null
+    }
+  ]
+}

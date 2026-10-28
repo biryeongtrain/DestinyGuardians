@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "guardianClass": "titan",
+  "bindings": [
+    {
+      "event": "titan.arc.fists_of_havoc.impact",
+      "group": "titan_fists_of_havoc",
+      "sound": "80D4848A",
+      "wem": "80D61BF7",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_arc_fists_of_havoc_impact\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanAbilities.arc_super -> TitanSuper.Session.strike(boolean) super.impact -> ClassAbilityEffects.sound의 titan/arc_super 특례 -> titan.arc.fists_of_havoc.impact. fist_of_havoc_expl 이름의 폭발 후보를 착지/타격 impact에만 배정. 기존 W230의 0215-0000164E.mp3는 tentative_numeric_folder_family_only이므로 이번 후보의 이름 근거와 구분. 은행 순서상 최초 stereo WEM을 대표로 고름; 짧은 mono 80D67F81은 여러 비전기 이벤트에도 공유되어 피함. 선택 WEM도 다른 Arc 은행에 공유되므로 주먹 전용/완성 믹스라고 단정하지 않음. 6.997초 꼬리는 연속 공격에서 겹칠 수 있으며 master의 음량/voice 수락 검증 필요. strike(slam)의 경공격/강공격/최초 착지가 같은 impact 키이므로 구분 미복원; 동일 WEM을 fire에도 중복 배정하지 않음. CUE-SHEETS.json(group=titan_fists_of_havoc, sound=80D4848A, name=fist_of_havoc_expl, nameStatus=FNV-1 후보 문자열, bank=80D48489). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_fists_of_havoc\",\"sound\":\"80D4848A\",\"name\":\"fist_of_havoc_expl\",\"evidence\":\"wordlist_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D61BF7 하나만 선택; bank 17개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d61bf7.ogg; sha256=f184b5b2332f8d5c247528f3cecae89b7df39f8d78c9f1039d943f5663a3cf27; rawSha256=a30abec11370815c8db6fd0a521cda436bc054a723f4d2f362b55ab4219d8364; duration=6.997333333333334s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "titan.solar.super.start",
+      "group": "titan_hammer_of_sol",
+      "sound": "80D4B476",
+      "wem": "80D65094",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_solar_super_start\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanSuper.activate -> ClassAbilityEffects.beginSuper(titan/solar_super) -> super.start -> titan.solar.super.start. thermal_titan_cast 이름으로 궁극기 시전 시작만 선택. thermal_titan_start(80D4B478)는 유지/이동 후보여서 cast 대체로 선택하지 않음. thermal_hammer_spawn(80D4C846)은 공격 클립 80A8A8AE frame15의 망치 생성이며 cast 전체와 같다고 보지 않음. ability_ready_super/ability_fail_grenade 공용 후보는 배제. CUE-SHEETS.json(group=titan_hammer_of_sol, sound=80D4B476, name=thermal_titan_cast, nameStatus=FNV-1 후보 문자열, bank=80D4B475). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_hammer_of_sol\",\"sound\":\"80D4B476\",\"name\":\"thermal_titan_cast\",\"evidence\":\"wordlist_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D65094 하나만 선택; bank 19개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d65094.ogg; sha256=88d33b69acf0bfe07fb7a98643d5cfcf72641588a33d93d0b2d3205643b4f71d; rawSha256=1baf2ddb79d2a001d41e0a72966dbf2eea015f9ff66d535543e3412412c05db9; duration=1.1686458333333334s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "titan.solar.super.fire",
+      "group": "titan_hammer_of_sol",
+      "sound": "80D4C84C",
+      "wem": "80D6493E",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_solar_hammer_throw\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanSuper.Session.release solar launchFlight 성공 -> super.fire -> titan.solar.super.fire. thermal_hammer_throw 원본 투척 이벤트를 발사에 배정. 기존 solar super.fire와 solar melee.cast가 classes_w229/titan_solar_hammer_throw 한 파일을 공유했으므로 궁극기/일반 근접을 별도 원본 이벤트로 분리. 원본 공격 clip frame0은 출처 근거이며 현재 게임에서 pending contact 뒤 투사체 생성 성공 때 재생하는 호출 시점을 source-frame 동기화 완료로 주장하지 않음. 착탄으로 재사용 금지. CUE-SHEETS.json(group=titan_hammer_of_sol, sound=80D4C84C, name=thermal_hammer_throw, nameStatus=원본 경로 문자열, bank=80D4C84B). 원본 sourceFrames=[{\"clip\":\"80A8A8AE\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\com01\\\\abilities_com01\\\\player_com01\\\\supers\\\\thermal_titan\\\\thermal_hammer_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D6493E 하나만 선택; bank 4개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d6493e.ogg; sha256=bb2f540eaf0cceaca329a87725e74b926235a9c3d71109dfbb0e325f6e538d7e; rawSha256=6b1768313094be316f82daaf8cacf877ed744dcb1b8a479c8db939c1d89106c0; duration=0.974125s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip"
+    },
+    {
+      "event": "titan.solar.super.impact",
+      "group": "titan_hammer_of_sol",
+      "sound": "80D4B47A",
+      "wem": "80D62579",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 route: TitanSuper.Session.release solar projectile hit callback -> super.impact -> titan.solar.super.impact. thermal_hammer_expl 명명 후보를 궁극기 투사체 충돌 폭발에 배정. throw/spawn/cast 또는 golden_gun_aoe_exp·submerged·pulse_gren_bounce 후보로 착탄을 대체하지 않음. master: 현재 impact 콜백은 center를 구하지만 ClassAbilityEffects.sound가 p.position()에서 재생하므로 실제 hit 위치를 받는 재생 API로 바꿔야 함. sounds.json 키 추가 필요; 현재는 GENERIC_EXPLODE fallback. CUE-SHEETS.json(group=titan_hammer_of_sol, sound=80D4B47A, name=thermal_hammer_expl, nameStatus=FNV-1 후보 문자열, bank=80D4B479). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_hammer_of_sol\",\"sound\":\"80D4B47A\",\"name\":\"thermal_hammer_expl\",\"evidence\":\"wordlist_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D62579 하나만 선택; bank 20개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d62579.ogg; sha256=d58abf0851cbf290c6f7cf09064a0bf0c6b605e5c340c93614106e02cae31aa5; rawSha256=930da8cad38d441f93cb14e775d8f6600f85c43309b7d11be8e8fca26206b780; duration=2.0227291666666667s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "titan.void.super.fire",
+      "group": "titan_sentinel_shield",
+      "sound": "80D4C878",
+      "wem": "80D665EF",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_void_super_fire\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanSuper.Session.release void launchFlight 성공 -> super.fire -> titan.void.super.fire. void_shield_throw 원본 경로/frame0 근거로 파수병 방패 궁극기의 투사체 발사에 배정. 일반 근접의 melee_void_shield_throw(80A60E99)와 구별. 방패 투척음은 cast/착탄에 재사용하지 않음. CUE-SHEETS.json(group=titan_sentinel_shield, sound=80D4C878, name=void_shield_throw, nameStatus=원본 경로 문자열, bank=80D4C877). 원본 sourceFrames=[{\"clip\":\"80A8A924\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\void_shield\\\\void_shield_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null},{\"clip\":\"80A8A967\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\void_shield\\\\void_shield_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D665EF 하나만 선택; bank 5개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d665ef.ogg; sha256=fa86864a78b44acd172eb404419a3ababb12daf35ea4d5f03a125124eca735e6; rawSha256=a7b318b1fe1b6f5d76f00370fbade78feafd4c07f53f6b69d8b1079ffd84fecf; duration=1.6666666666666667s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip"
+    },
+    {
+      "event": "titan.solar.melee.cast",
+      "group": "titan_melee",
+      "sound": "80A60E94",
+      "wem": "80D69F5E",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_solar_hammer_throw\",\"stream\":false,\"attenuation_distance\":32}]}. 실제 route: TitanMelee.activate solar launch 성공 -> melee.cast -> titan.solar.melee.cast. titan_melee_hammer_throw 원본 frame0으로 일반 근접 투척에 배정. 이 은행의 첫 WEM 80D63567 등 8개는 fp_melee 은행과 공유되므로 그 공유 8개를 제외한 첫 WEM 80D69F5E를 대표로 선택. 유일한 완성 레이어라는 뜻은 아님. titan_hammer_catch 그룹도 같은 throw 이벤트/은행을 참조하므로 catch 소리로 재명명하지 않음; 현재 TitanMelee에는 회수/catch runtime 자체가 없음. 기존 궁극기/근접 공용 throw 연결을 이 원본 근접 이벤트로 구분. CUE-SHEETS.json(group=titan_melee, sound=80A60E94, name=titan_melee_hammer_throw, nameStatus=원본 경로 문자열, bank=80A60E93). 원본 sourceFrames=[{\"clip\":\"80A8AB1D\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\400\\\\abilities_400\\\\abilities_player_400\\\\abilities_player_builds_400\\\\titan_thermal_maul\\\\titan_melee_hammer_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D69F5E 하나만 선택; bank 11개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d69f5e.ogg; sha256=fb5deacc54995eff073552fa75bbfb74c23d6199c3a4ffa8ea610eb389ea5ef9; rawSha256=de07c769495bd7d32c16d0cbd6857e4a5f9ef18e13caf32b8d4d06efbfd91b5f; duration=1.4118958333333333s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip"
+    },
+    {
+      "event": "titan.void.melee.cast",
+      "group": "titan_melee",
+      "sound": "80A60E99",
+      "wem": "80D69F61",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 route: TitanMelee.activate void launch 성공 -> melee.cast -> titan.void.melee.cast. void_three_point_zero/titan/melee_void_shield_throw 원본 frame0으로 일반 방패 근접 투척에 배정. 파수병 궁극기 void_shield_throw와 다른 행/은행 사용. 충돌음이 아니며 현재 미등록 key의 BEACON_ACTIVATE fallback을 교체하는 제안. CUE-SHEETS.json(group=titan_melee, sound=80A60E99, name=melee_void_shield_throw, nameStatus=원본 경로 문자열, bank=80A60E98). 원본 sourceFrames=[{\"clip\":\"80A8ABCA\",\"sourceFrame\":0,\"exportFps\":30,\"exportSeconds\":0.0,\"originalPath\":\"content\\\\audio\\\\wwise_events\\\\600\\\\abilities_600\\\\player_abilities_600\\\\void_three_point_zero\\\\titan\\\\melee_void_shield_throw.wwise_event\",\"sequenceStart\":null,\"sequenceDuration\":null}].  대표 WEM 80D69F61 하나만 선택; bank 5개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d69f61.ogg; sha256=2bfa529077c47b15ca5a916ed944160fe9b2acfbb83e4c9ed38b01e9e89f00f3; rawSha256=686f6aad9e266f9bcc64bcbd3910aacb7a02bc0732aa1c179806212429c597f9; duration=1.7325416666666666s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "source_clip"
+    },
+    {
+      "event": "titan.void.ward_of_dawn.fire",
+      "group": "titan_ward_of_dawn",
+      "sound": "80D4B12D",
+      "wem": "80D64CD3",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 route: TitanExpandedSupers.WardCast.advance supported 설치 성공 -> ClassAbilityEffects.sound(titan/ward_of_dawn, super.fire) -> titan.void.ward_of_dawn.fire. reviewed_FNV1_name_candidate ward_of_dawn_start를 돔이 실제 설치되는 시점의 생성 시작 후보로만 배정. 시전자 준비 동작 시작(super.start)과 구별. 현재 sounds.json에는 Ward 키가 없으며 W230 optional 파일은 Sentinel 숫자 폴더 후보여서 기본 연결되지 않았음. CUE phase는 유지·이동 후보이고 29 WEM의 지속/생성 레이어는 미복원: 1회 대표만 사용, 매 tick/loop 재생 금지; 완전한 돔 생성음 또는 유지 루프 확정이 아님. indicator와 in 후보는 돔 시전/종료로 전용하지 않음. master: sounds.json 실제 fire 키 추가, 조기 파괴/전직/취소 시 5.525초 꼬리의 중단 필요성 검증; 현재 Ward.close에 sound stop/종료 이벤트 없음. CUE-SHEETS.json(group=titan_ward_of_dawn, sound=80D4B12D, name=ward_of_dawn_start, nameStatus=FNV-1 후보 문자열, bank=80D4B12C). FNV-1 명명 후보이며 원본 경로/시점 확정이 아님; sourceFrames=[]; evidence=[{\"group\":\"titan_ward_of_dawn\",\"sound\":\"80D4B12D\",\"name\":\"ward_of_dawn_start\",\"evidence\":\"reviewed_FNV1_name_candidate\",\"phase\":\"name_inferred\"}].  대표 WEM 80D64CD3 하나만 선택; bank 29개 WEM의 random/parallel 혼합 금지. 레이어·변형·거리·상태의 의미 미복원. SSD 원본=/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28/audio/ogg/80d64cd3.ogg; sha256=2df8b25ac549705f7c42eebd9b5791b00bbeb85f340a85773e869f15fad6a3a2; rawSha256=dfec5aa2ae38d7c28df5a5c14e50a01866a9fcb352a97e29a679bd6a89734a81; duration=5.525333333333333s; channels=2; sampleRate=48000. master importer가 원본 SHA pinned 및 모노 변환 수행. 청취/인게임 검증하지 않음.",
+      "status": "named_candidate"
+    }
+  ],
+  "retained": [
+    {
+      "event": "titan.arc.fists_of_havoc.start",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_arc_fists_of_havoc_start\",\"stream\":false,\"attenuation_distance\":32}]}. 임시 기존 W230 연결 유지: 0215-0000164C.mp3, tentative_numeric_folder_family_only. titan_fists_of_havoc의 numeric-only 행과 공용 ready/fail은 cast로 승격하지 않음. arc_flare_zap(80D4B243)도 단계 불명이라 start에 배정하지 않음."
+    },
+    {
+      "event": "titan.arc.fists_of_havoc.fire",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_arc_fists_of_havoc_fire\",\"stream\":false,\"attenuation_distance\":32}]}. 임시 기존 W230 연결 유지: 0215-0000164D.mp3, tentative_numeric_folder_family_only. 실제 strike()의 공격 cue이며 impact 후보 fist_of_havoc_expl을 fire에도 중복 재생하지 않음. 경공격/강공격/최초 착지 모두 같은 fire/impact 쌍을 같은 tick에 호출하므로 추후 세분화와 중첩 검증 필요."
+    },
+    {
+      "event": "titan.arc.fists_of_havoc.end",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_arc_fists_of_havoc_end\",\"stream\":false,\"attenuation_distance\":32}]}. 임시 기존 W230 연결 유지: 0215-0000165A.mp3, tentative_numeric_folder_family_only. 종료로 확인된 비공용 명명/원본 이벤트 없음."
+    },
+    {
+      "event": "titan.arc.super.start",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_arc_super_start\",\"stream\":false,\"attenuation_distance\":32}]}. 레거시 기존 연결 보존만 기록. 현재 TitanSuper의 titan/arc_super는 ClassAbilityEffects.sound 특례로 fists_of_havoc.start에 라우팅되므로 이 키는 기본 전기 궁극기의 실제 호출 대상이 아님; bindings에 넣지 않음. master가 실제 fists 키를 갱신해야 함."
+    },
+    {
+      "event": "titan.arc.super.fire",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_arc_super_fire\",\"stream\":false,\"attenuation_distance\":32}]}. 레거시 기존 연결 보존만 기록. 현재 TitanSuper의 titan/arc_super는 ClassAbilityEffects.sound 특례로 fists_of_havoc.fire에 라우팅되므로 이 키는 기본 전기 궁극기의 실제 호출 대상이 아님; bindings에 넣지 않음. master가 실제 fists 키를 갱신해야 함."
+    },
+    {
+      "event": "titan.solar.super.end",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. TitanSuper.end -> endSuper의 실제 호출 키이나 원본 종료음 근거가 없어 현재 BEACON_ACTIVATE fallback 유지. thermal_hammer_spawn/throw/thermal_titan_start를 종료음으로 전용하지 않음."
+    },
+    {
+      "event": "titan.void.super.start",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_void_super_start\",\"stream\":false,\"attenuation_distance\":32}]}. 기존 classes_w229/titan_void_super_start 유지, SSD 의미 확정 교체는 보류. titan_sentinel_shield의 relic_shield_air_slam_cast(80D4C83D)는 source clip80A8A81D frame0의 공중 slam cast 전용 경로이고 현재 모든 지상/공중 beginSuper에 일괄 적용할 수 없어 미선정. SSD titan_twilight_arsenal은 80D4C8C2/80D4C8E0/80D4C8E2 모두 name==sound 숫자 미확인이라 배정 금지; TitanAbilities/TitanExpandedSupers/ClassSuperModelAssets.EXPANDED에도 twilight_arsenal 등록/호출이 없으므로 새 제품 event를 만들지 않음. Stasis/Strand 궁극기도 이 현재 Titan API에 없음."
+    },
+    {
+      "event": "titan.void.super.impact",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 TitanSuper void 투사체 충돌 callback 키, sounds.json 미등록이라 GENERIC_EXPLODE fallback 유지. throw 이름 두 행은 착탄 근거가 아님. master: callback의 center 대신 p.position()에 재생하는 현재 위치 문제 수정 필요."
+    },
+    {
+      "event": "titan.void.super.end",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 endSuper 호출 키, 종료 근거 없는 상태라 BEACON_ACTIVATE fallback 유지. relic_shield_air_slam_cast 또는 void_shield_throw를 종료음으로 재명명하지 않음."
+    },
+    {
+      "event": "titan.solar.burning_maul.start",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_solar_burning_maul_start\",\"stream\":false,\"attenuation_distance\":32}]}. 임시 기존 W230 File3916.wav 연결 유지: audio-provenance.json의 tentative_numeric_folder_family_only; 원본 phase 확정이 아님. titan_burning_maul 17행 중 유일한 비숫자 thermal_pulse_submerged(80D48A49)도 submerged/미확인 단계이며 나머지는 name==sound라 일반 시전/회전/지면파/종료로 자동 배정하지 않음."
+    },
+    {
+      "event": "titan.solar.burning_maul.fire",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_solar_burning_maul_fire\",\"stream\":false,\"attenuation_distance\":32}]}. 임시 기존 W230 File3917.wav 연결 유지: audio-provenance.json의 tentative_numeric_folder_family_only; 원본 phase 확정이 아님. titan_burning_maul 17행 중 유일한 비숫자 thermal_pulse_submerged(80D48A49)도 submerged/미확인 단계이며 나머지는 name==sound라 일반 시전/회전/지면파/종료로 자동 배정하지 않음. 현재 Maul.advance는 경회전과 강공격 지면파 생성 모두 super.fire 한 키를 사용; 추후 원본 근거 확보 시 둘의 분기별 재생 필요. 강공격은 waves.size/support 실패 후에도 pending 처리 끝에서 fire를 호출하므로 실제 파동 생성 성공과 재생 동기 확인 필요."
+    },
+    {
+      "event": "titan.solar.burning_maul.impact",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_solar_burning_maul_impact\",\"stream\":false,\"attenuation_distance\":32}]}. 임시 기존 W230 File3918.wav 연결 유지: audio-provenance.json의 tentative_numeric_folder_family_only; 원본 phase 확정이 아님. titan_burning_maul 17행 중 유일한 비숫자 thermal_pulse_submerged(80D48A49)도 submerged/미확인 단계이며 나머지는 name==sound라 일반 시전/회전/지면파/종료로 자동 배정하지 않음. 현재 Maul/Firewave에는 super.impact sound 호출 자체가 없어 이 key는 비활성 자산 연결; bindings 제외. Firewave의 실제 타격 위치 cue를 추가하려면 owner+path+position을 명시하고 매 tick 무제한 반복을 피해야 함."
+    },
+    {
+      "event": "titan.solar.burning_maul.end",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_solar_burning_maul_end\",\"stream\":false,\"attenuation_distance\":32}]}. 임시 기존 W230 File3919.wav 연결 유지: audio-provenance.json의 tentative_numeric_folder_family_only; 원본 phase 확정이 아님. titan_burning_maul 17행 중 유일한 비숫자 thermal_pulse_submerged(80D48A49)도 submerged/미확인 단계이며 나머지는 name==sound라 일반 시전/회전/지면파/종료로 자동 배정하지 않음."
+    },
+    {
+      "event": "titan.arc.thundercrash.start",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_arc_thundercrash_start\",\"stream\":false,\"attenuation_distance\":32}]}. 기존 W230 Missile_Act_Nearby.mp3 명명 후보 유지: named_phase_NOT_auditioned, 시전/비행 꼬리 포함 가능. SSD의 commonCandidate ready/fail 또는 숫자 미확인 행으로 더 분명한 기존 명명 근거를 대체하지 않음. audio-provenance.json도 청취 미검증이며 완료 믹스 보증이 아님."
+    },
+    {
+      "event": "titan.arc.thundercrash.fire",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. Crash.advance 비행 시작 때 실제 호출되나 현재 미등록이라 PLAYER_ATTACK_SWEEP fallback. arc_flare_zap(80D4B243)은 meteor_strike 참조 경로뿐이며 비행 시작/유지 의미가 미확인이라 배정하지 않음; 80D4B4AE/B1/B4/B7 등 숫자 행과 commonCandidate는 배제."
+    },
+    {
+      "event": "titan.arc.thundercrash.impact",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w230/titan_arc_thundercrash_impact\",\"stream\":false,\"attenuation_distance\":32}]}. 기존 W230 Missile_Impact_Far.mp3 명명 후보 유지: named_phase_NOT_auditioned, far mix라 near와 동등하지 않음. SSD arc_flare_zap은 impact 확정 근거가 없고 80D4B4B4/B7 등은 숫자 미확인. 현재 Crash.impact(false)는 비행 시간/거리 만료에도 실제 충돌 없이 피해+impact cue를 호출함; master가 timeout/cancel과 실제 접촉 의미를 구분할 필요 있음. Aftershock.tick은 피해/시각만 있고 별도 sound 호출 없음."
+    },
+    {
+      "event": "titan.arc.thundercrash.end",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. Crash.finishPresentation에서 실제 호출되나 미등록 BEACON_ACTIVATE fallback 유지. 종료 명명/원본 큐 없음. cleanup에서 잔류 긴 start/fire voice를 중단하는 API도 현재 이 경로에 없음."
+    },
+    {
+      "event": "titan.void.ward_of_dawn.start",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. Ward의 beginSuper 시전자 준비 시작 키, 현재 BEACON_ACTIVATE fallback 유지. 선정한 ward_of_dawn_start는 실제 돔 설치 super.fire에만 1회 연결하므로 start에도 겹쳐 넣지 않음. W230 optional Sentinel 숫자 소스는 Ward 시전으로 확정되지 않았으며 현재 sounds.json에도 없음."
+    },
+    {
+      "event": "titan.void.ward_of_dawn.end",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. WardCast 종료/카메라 해제 때 endSuper가 실제 호출, 현재 BEACON_ACTIVATE fallback 유지. 이는 Ward 존속 종료가 아님. Ward.close/파괴/만료에는 별도 sound 호출이 없으며 ward_of_dawn_in/indicator는 종료 근거가 없어 미배정. 현재 Ward에는 super.impact 호출도 없어 별도 impact 키를 만들지 않음."
+    },
+    {
+      "event": "titan.arc.melee.cast",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 현재 TitanMelee ARC는 즉시 전방 powered strike 뒤 melee.cast 호출, sounds.json 미등록 BEACON_ACTIVATE fallback 유지. titan_melee에는 thunderclap 명명/원본 이벤트가 없으며 fp_melee/mvmt1의 일반 무기 동작 근거를 powered thunderclap으로 승격하지 않음. ARC branch에는 melee.impact sound 호출이 없으므로 별도 binding을 만들지 않음."
+    },
+    {
+      "event": "titan.solar.melee.impact",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_solar_hammer_impact\",\"stream\":false,\"attenuation_distance\":32}]}. 기존 classes_w229/titan_solar_hammer_impact 임시 연결 유지. titan_melee_hammer_throw 및 titan_hammer_catch 그룹의 같은 throw 행은 착탄/회수 근거가 아니므로 미배정. 궁극기용 thermal_hammer_expl을 일반 근접 작은 망치에 복제하지 않음. master: callback의 impactPosition(hit)을 sound가 받지 않아 시전자 위치에서 재생되는 문제 수정 필요."
+    },
+    {
+      "event": "titan.void.melee.impact",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 실제 TitanMelee void 투사체 충돌 키, 현재 미등록 GENERIC_EXPLODE fallback 유지. melee_void_shield_throw는 투척만 입증하므로 impact로 재사용하지 않음. master: impactPosition(hit)에서 재생하도록 위치 인자 전달 필요."
+    },
+    {
+      "event": "titan.arc.class.cast",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 현재 TitanClassAbility.activate가 elementFor(p)=장착 SUPER 원소로 호출하는 실제 높은 방벽 생성 키. CUE-SHEETS.json에는 titan barricade/class_ability 전용 행과 진짜 방벽 명명/원본 경로 근거가 없음. ward_of_dawn 또는 공용 ready/fail을 방벽으로 배정하지 않음. 현재 미등록 BEACON_ACTIVATE fallback 유지; 막기/파괴/만료에는 별도 sound 호출 없음."
+    },
+    {
+      "event": "titan.solar.class.cast",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 현재 TitanClassAbility.activate가 elementFor(p)=장착 SUPER 원소로 호출하는 실제 높은 방벽 생성 키. CUE-SHEETS.json에는 titan barricade/class_ability 전용 행과 진짜 방벽 명명/원본 경로 근거가 없음. ward_of_dawn 또는 공용 ready/fail을 방벽으로 배정하지 않음. 현재 미등록 BEACON_ACTIVATE fallback 유지; 막기/파괴/만료에는 별도 sound 호출 없음."
+    },
+    {
+      "event": "titan.void.class.cast",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. 현재 TitanClassAbility.activate가 elementFor(p)=장착 SUPER 원소로 호출하는 실제 높은 방벽 생성 키. CUE-SHEETS.json에는 titan barricade/class_ability 전용 행과 진짜 방벽 명명/원본 경로 근거가 없음. ward_of_dawn 또는 공용 ready/fail을 방벽으로 배정하지 않음. 현재 미등록 BEACON_ACTIVATE fallback 유지; 막기/파괴/만료에는 별도 sound 호출 없음."
+    },
+    {
+      "event": "titan.arc.jump",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. TitanJump.activate는 AbilitySlot.JUMP 자체 KINETIC이어도 ClassAbilityEffects.sound(p,Element.ARC,\"jump\")를 실제 호출함. CUE-SHEETS.json에는 class_aerial_movement/titan lift 전용 row가 없으므로 공용/궁극기 이동음으로 대체하지 않고 미등록 BEACON_ACTIVATE fallback 유지. solar.jump/void.jump/kinetic.jump는 현재 호출하지 않으므로 binding 생성 금지. Lift.tick/cleanup에는 유지/종료 sound 호출 없음."
+    },
+    {
+      "event": "titan.arc.grenade.throw",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. TitanGrenade의 실제 grenade.throw 호출 키 보존. 본 작업의 Titan 궁극기/근접/방벽/점프 선정 밖이며 CUE-SHEETS에는 Titan grenade 전용 그룹 없음. ability_fail_grenade 같은 commonCandidate나 다른 능력의 pulse_gren_bounce 명명 후보를 실제 수류탄 throw/impact로 자동 배정하지 않음. 현재 미등록 vanilla fallback 유지."
+    },
+    {
+      "event": "titan.arc.grenade.impact",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. TitanGrenade의 실제 grenade.impact 호출 키 보존. 본 작업의 Titan 궁극기/근접/방벽/점프 선정 밖이며 CUE-SHEETS에는 Titan grenade 전용 그룹 없음. ability_fail_grenade 같은 commonCandidate나 다른 능력의 pulse_gren_bounce 명명 후보를 실제 수류탄 throw/impact로 자동 배정하지 않음. 현재 미등록 vanilla fallback 유지."
+    },
+    {
+      "event": "titan.solar.grenade.throw",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. TitanGrenade의 실제 grenade.throw 호출 키 보존. 본 작업의 Titan 궁극기/근접/방벽/점프 선정 밖이며 CUE-SHEETS에는 Titan grenade 전용 그룹 없음. ability_fail_grenade 같은 commonCandidate나 다른 능력의 pulse_gren_bounce 명명 후보를 실제 수류탄 throw/impact로 자동 배정하지 않음. 현재 미등록 vanilla fallback 유지."
+    },
+    {
+      "event": "titan.solar.grenade.impact",
+      "reason": "현재 sounds.json 미등록: ClassAbilityEffects.sound의 실제 호출 키이며 현재 orVanilla fallback 사용. TitanGrenade의 실제 grenade.impact 호출 키 보존. 본 작업의 Titan 궁극기/근접/방벽/점프 선정 밖이며 CUE-SHEETS에는 Titan grenade 전용 그룹 없음. ability_fail_grenade 같은 commonCandidate나 다른 능력의 pulse_gren_bounce 명명 후보를 실제 수류탄 throw/impact로 자동 배정하지 않음. 현재 미등록 vanilla fallback 유지."
+    },
+    {
+      "event": "titan.void.grenade.throw",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_void_suppressor_throw\",\"stream\":false,\"attenuation_distance\":32}]}. TitanGrenade의 실제 grenade.throw 호출 키 보존. 본 작업의 Titan 궁극기/근접/방벽/점프 선정 밖이며 CUE-SHEETS에는 Titan grenade 전용 그룹 없음. ability_fail_grenade 같은 commonCandidate나 다른 능력의 pulse_gren_bounce 명명 후보를 실제 수류탄 throw/impact로 자동 배정하지 않음. 기존 W229 suppressor 연결 유지."
+    },
+    {
+      "event": "titan.void.grenade.impact",
+      "reason": "현재 sounds.json: {\"sounds\":[{\"name\":\"destiny:classes_w229/titan_void_suppressor_impact\",\"stream\":false,\"attenuation_distance\":32}]}. TitanGrenade의 실제 grenade.impact 호출 키 보존. 본 작업의 Titan 궁극기/근접/방벽/점프 선정 밖이며 CUE-SHEETS에는 Titan grenade 전용 그룹 없음. ability_fail_grenade 같은 commonCandidate나 다른 능력의 pulse_gren_bounce 명명 후보를 실제 수류탄 throw/impact로 자동 배정하지 않음. 기존 W229 suppressor 연결 유지."
+    }
+  ],
+  "silenced": []
+}

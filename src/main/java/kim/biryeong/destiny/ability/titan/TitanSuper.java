@@ -150,7 +150,7 @@ public final class TitanSuper extends Ability {
                             Vec3 center=TitanAbilities.impactPosition(hit);
                             for(LivingEntity e:TitanAbilities.targets(c,center,TitanAbilities.value(ability,"radius",3,1,5)))damage(e);
                             ClassAbilityEffects.burst(p,center,ability.element(),2);
-                            ClassAbilityEffects.sound(p,ability.element(),"super.impact");
+                            ClassAbilityEffects.soundAt(p,ability.element(),ability.id().getPath(),"super.impact",center);
                         });
                 if(flight!=null) {
                     flights.add(flight);
@@ -173,7 +173,7 @@ public final class TitanSuper extends Ability {
                 if(slam||delta.lengthSqr()<1e-8||forward.dot(delta.normalize())>.25)damage(e);
             }
             ClassAbilityEffects.burst(p,center,ability.element(),slam?3:1.5);
-            ClassAbilityEffects.sound(p,ability.element(),"super.impact");
+            ClassAbilityEffects.soundAt(p,ability.element(),ability.id().getPath(),"super.impact",center);
         }
         void damage(LivingEntity e) {
             Combat.damage(c.level,c.owner,e,(float)TitanAbilities.value(ability,"damage",24,0,150),ability.element(),AmmoGeneration.SUPER);

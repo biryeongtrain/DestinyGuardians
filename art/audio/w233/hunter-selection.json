@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "guardianClass": "hunter",
+  "bindings": [
+    {
+      "event": "hunter.arc.super.start",
+      "group": "hunter_arc_staff",
+      "sound": "80D4B33C",
+      "wem": "80D6659A",
+      "reason": "arc_staff_energy_start는 FNV-1 후보이다. arc_staff_ability.pattern.tft의 80C2EA93 -> 80C3A39D/80C3A3B9 참조와 energy_start 명명에 한해 능력 시작 시 1회 선정. sourceFrames가 없고 CUE phase는 유지·이동 후보이므로 정확한 시작 프레임·루프 의미는 미복원. 공격/착탄/종료로 재사용하지 않는다. HunterSuper.activate의 super.start 경로를 사용한다. 기존 연결: destiny:w33/hunter/arc/super/start. CUE-SHEETS.json의 arc_staff_energy_start / bank 80D4B33B 안에서 기재 순서의 첫 WEM 80D6659A 하나만 결정적으로 선택(전체 17개). 파일 audio/ogg/80d6659a.ogg, duration=4.0초, channels=2, SHA-256=f7f84ab96723de5ca14edab04736c9e2af0fe311e7b9933cb9a5dcfc7374876a. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "hunter.arc.super.fire",
+      "group": "hunter_arc_staff",
+      "sound": "80D4C865",
+      "wem": "80D643E7",
+      "reason": "원본 arc_staff_swing_misc_fast.wwise_event와 클립 80A8A937의 프레임10/13/19/22/26, 80A8A92B의 프레임8/10/13/17 등 17개 sourceFrames가 지팡이 휘두르기 공격을 뒷받침한다. 같은 WEM 집합을 공유하는 slow/fast 후보를 중첩하지 않고 기존 ArcStaff.strike super.fire 1회에 대표음을 연결한다. 명중 여부와 독립적인 공격음이며 착탄음이 아니다. 원본30fps 프레임을 현재 contact tick에 정확히 대응했다는 의미는 아니다. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A937\", \"sourceFrame\": 10, \"exportFps\": 30, \"exportSeconds\": 0.3333333333333333, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\arc_staff\\\\arc_staff_swing_misc_fast.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/arc/super/fire. CUE-SHEETS.json의 arc_staff_swing_misc_fast / bank 80D4C864 안에서 기재 순서의 첫 WEM 80D643E7 하나만 결정적으로 선택(전체 13개). 파일 audio/ogg/80d643e7.ogg, duration=0.6333333333333333초, channels=2, SHA-256=51427cc87611aebf3d3d484837712f90c9a974af308903dbb6995c9305a89666. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip"
+    },
+    {
+      "event": "hunter.solar.super.start",
+      "group": "hunter_golden_gun",
+      "sound": "80D4B2D1",
+      "wem": "80D64EDE",
+      "reason": "golden_gun_super_cast FNV-1 명명 후보와 golden_gun_ability.pattern.tft의 80A5BFC7 -> 80C38C62 참조로 황금총 시전 1회에 선정. sourceFrames는 없다. golden_gun_aoe_pre_exp/aoe_exp는 폭발 후보이며 시전으로 사용하지 않는다. ready/fail 후보도 제외한다. HunterSuper.activate의 super.start 경로를 사용한다. 기존 연결: destiny:w33/hunter/solar/super/start. CUE-SHEETS.json의 golden_gun_super_cast / bank 80D4B2D0 안에서 기재 순서의 첫 WEM 80D64EDE 하나만 결정적으로 선택(전체 17개). 파일 audio/ogg/80d64ede.ogg, duration=3.6266666666666665초, channels=2, SHA-256=51091a44c763d81dbe7896ee553d5ed5d1e13fb2788842ec83e01cb2f4490ff4. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "hunter.solar.super.fire",
+      "group": "hunter_golden_gun",
+      "sound": "80A6121A",
+      "wem": "80D66A2C",
+      "reason": "golden_gun_fire FNV-1 명명 후보와 golden_gun_ability.pattern.tft 참조에 근거하여 GoldenGun.tick의 실제 hitscan 발사 후 super.fire 1회에 선정. sourceFrames가 없어 정확한 원작 타이밍과 황금총 변형 구분은 미확정. aoe_exp/금속 착탄 후보를 발사로 대체하지 않는다. 기존 연결: destiny:w33/hunter/solar/super/fire. CUE-SHEETS.json의 golden_gun_fire / bank 80A61219 안에서 기재 순서의 첫 WEM 80D66A2C 하나만 결정적으로 선택(전체 7개). 파일 audio/ogg/80d66a2c.ogg, duration=2.6666666666666665초, channels=2, SHA-256=1d30f5c3d29ffcee043c63fb7876714e4d0e58d7ae18fde043bebf1c903b86dd. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "hunter.arc.melee.cast",
+      "group": "hunter_melee",
+      "sound": "80D4C863",
+      "wem": "80D6494E",
+      "reason": "arc_staff/palm_strike_melee/palm_strike_melee.wwise_event 원본 경로와 클립80A8A980/80A8A984 프레임4(30fps,0.133333초)의 공격 동작 이벤트에 근거. 현재 combinationBlow의 melee.cast 경로에 손바닥 타격 동작음 1회로 선정하며, 적 명중 전용 melee.impact와 구분한다. 일반 hunter_melee/fp_melee의 범용 뱅크를 함께 재생하지 않는다. 원본 클립과 현재 스킬 타이밍의 정밀 대응은 미검증. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A980\", \"sourceFrame\": 4, \"exportFps\": 30, \"exportSeconds\": 0.13333333333333333, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\30\\\\abilities_30\\\\player_30\\\\builds\\\\arc_staff\\\\palm_strike_melee\\\\palm_strike_melee.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/arc/melee/cast. CUE-SHEETS.json의 palm_strike_melee / bank 80D4C862 안에서 기재 순서의 첫 WEM 80D6494E 하나만 결정적으로 선택(전체 4개). 파일 audio/ogg/80d6494e.ogg, duration=0.7495416666666667초, channels=2, SHA-256=621ffcb9ae01cf7f64e6f84e77f6515992868828b64d2b6b4c3d381a5f74a24a. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip"
+    },
+    {
+      "event": "hunter.solar.melee.cast",
+      "group": "hunter_melee",
+      "sound": "80A60E8B",
+      "wem": "80D63567",
+      "reason": "abilities/player/melees/hunter/throwing_knife/hunter_knife_throw.wwise_event 원본 경로, 클립80A8A80A 프레임0(30fps)의 투척 이벤트에 근거. HunterMelee.knife의 투사체 생성 시 melee.cast 1회에 선정. heavy/fan/flaming FNV 후보를 현재 단일 칼 투척과 섞지 않는다. 착탄 thwack과 분리하며 Blade Barrage의 기존 throw는 변경하지 않는다. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A80A\", \"sourceFrame\": 0, \"exportFps\": 30, \"exportSeconds\": 0.0, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\abilities\\\\player\\\\melees\\\\hunter\\\\throwing_knife\\\\hunter_knife_throw.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/solar/melee/cast. CUE-SHEETS.json의 hunter_knife_throw / bank 80A60E8A 안에서 기재 순서의 첫 WEM 80D63567 하나만 결정적으로 선택(전체 16개). 파일 audio/ogg/80d63567.ogg, duration=0.7849375초, channels=2, SHA-256=62a0b7fd8920d31a8cfb1ef35a86980ee34eb4e33c644d70a1ede852542e0db5. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip"
+    },
+    {
+      "event": "hunter.solar.melee.impact",
+      "group": "hunter_melee",
+      "sound": "80D4AE70",
+      "wem": "80D66B3B",
+      "reason": "hunter_knife_throw_thwack FNV-1 명명 후보에 근거한 칼 착탄 후보. sourceFrames와 직접 원본 경로 문자열은 없다. 현재 HunterMelee.knife의 투사체 hit.getLocation() callback melee.impact 1회에만 선정한다. cast/공격 시작으로 사용하지 않는다. SimProjectile.tick은 수명 만료 때도 합성 BlockHitResult로 finish/onImpact를 호출한다. 현재는 공중 만료에도 이 실제 제품 이벤트가 재생된다. master는 실제 충돌과 수명 만료를 분리해야 하며 이 selection은 트리거를 신설하지 않는다. 기존 연결: destiny:w33/hunter/solar/melee/impact. CUE-SHEETS.json의 hunter_knife_throw_thwack / bank 80D4AE6F 안에서 기재 순서의 첫 WEM 80D66B3B 하나만 결정적으로 선택(전체 8개). 파일 audio/ogg/80d66b3b.ogg, duration=0.9508333333333333초, channels=2, SHA-256=48696f0da180c37fd9c4564a31e106729a7979c96fcc5ac60d68f522873c49f3. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "hunter.void.melee.cast",
+      "group": "hunter_melee",
+      "sound": "80A60E8E",
+      "wem": "80D69F57",
+      "reason": "com01/abilities_com01/player_com01/melees/hunter/smoke_bomb_throw.wwise_event 원본 경로와 클립80A8A8D8 프레임0(30fps)에 근거. HunterMelee.smoke의 투사체 생성 전 melee.cast에 투척음 1회로 선정. smoke_bomb_expl 폭발은 impact에만 둔다. 실제 sourceFrames 첫 근거: {\"clip\": \"80A8A8D8\", \"sourceFrame\": 0, \"exportFps\": 30, \"exportSeconds\": 0.0, \"originalPath\": \"content\\\\audio\\\\wwise_events\\\\com01\\\\abilities_com01\\\\player_com01\\\\melees\\\\hunter\\\\smoke_bomb_throw.wwise_event\", \"sequenceStart\": null, \"sequenceDuration\": null}. 기존 연결: destiny:w33/hunter/void/melee/cast. CUE-SHEETS.json의 smoke_bomb_throw / bank 80A60E8D 안에서 기재 순서의 첫 WEM 80D69F57 하나만 결정적으로 선택(전체 3개). 파일 audio/ogg/80d69f57.ogg, duration=0.998초, channels=2, SHA-256=67b0ea2dc712e68e4f15ebf6057b39a206a222d33ac66a194c35b50e45feac1f. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "source_clip"
+    },
+    {
+      "event": "hunter.void.melee.impact",
+      "group": "hunter_melee",
+      "sound": "80D4BAAA",
+      "wem": "80D653ED",
+      "reason": "hunter_smoke_bomb_expl FNV-1 명명 후보에 근거한 연막탄 착탄/전개음. sourceFrames와 직접 원본 경로 문자열은 없다. HunterMelee.smoke의 hit 위치 melee.impact 1회에만 선정한다. underwater 후보80D4BAA4는 제외하고 연막 지속 Tasks 반복에서 재생하지 않는다. SimProjectile.tick은 수명 만료 때도 합성 BlockHitResult로 finish/onImpact를 호출한다. 현재는 공중 만료에도 이 실제 제품 이벤트가 재생된다. master는 실제 충돌과 수명 만료를 분리해야 하며 이 selection은 트리거를 신설하지 않는다. 기존 연결: destiny:w33/hunter/void/melee/impact. CUE-SHEETS.json의 hunter_smoke_bomb_expl / bank 80D4BAA9 안에서 기재 순서의 첫 WEM 80D653ED 하나만 결정적으로 선택(전체 4개). 파일 audio/ogg/80d653ed.ogg, duration=2.403979166666667초, channels=2, SHA-256=fefbb7b732f180cccb18f53c52e92224c8ee1e1d6cab6365ff4535ab3f80138a. Wwise 레이어/랜덤 대체/상태별 분기 의미 미복원; 전체 bank 동시·순차·무작위 재생 금지. 실제 청취·원작 A/B·인게임 검증은 수행하지 않았다. master는 SSD를 읽기 전용으로 두고 선택 파일만 제품용 mono로 변환/import한다.",
+      "status": "named_candidate"
+    }
+  ],
+  "retained": [
+    {
+      "event": "hunter.arc.super.impact",
+      "reason": "임시 기존 연결 유지. sand_impact_small/medium/large FNV 후보는 모래 재질 한정 착탄이며 모든 적의 지팡이 명중음으로 확대할 근거가 없다. arc_staff_attack_heavy_air는 공격 후보이지 명중 전용음이 아니다. 숫자80D4B38A/80D4B38C/80D4B38F/80D4B392도 미배정. 현재 유효 명중 때 첫 대상 위치 1회 호출은 보존한다. 기존 sounds.json 연결: destiny:w33/hunter/arc/super/impact. 현재 ArcStaff에는 일반 strike만 있고 slow/heavy/air attack별 독립 액션 트리거가 없다. source의 arc_staff_swing_misc_slow(원본 프레임), arc_staff_swing_air_heavy/arc_staff_attack_heavy_air(명명 후보)는 별도 bindings를 만들지 않고 미배정으로 남긴다."
+    },
+    {
+      "event": "hunter.arc.super.end",
+      "reason": "임시 기존 연결 유지. 지팡이 종료에 맞는 명명/원본 프레임 cue가 없다. 숫자 후보를 종료로 추정하지 않으며 energy_start를 종료로 재사용하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/arc/super/end."
+    },
+    {
+      "event": "hunter.solar.super.end",
+      "reason": "임시 기존 연결 유지. golden_gun_aoe_exp/aoe_pre_exp는 폭발 후보이며 황금총 해제/종료음으로 사용할 근거가 없다. sourceFrames 종료 근거 없음. 현재 GoldenGun hitscan에는 독립 solar.super.impact 음향 호출도 없어 폭발을 시작/종료에 억지 연결하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/solar/super/end."
+    },
+    {
+      "event": "hunter.void.super.start",
+      "reason": "사용자 지정 보존: Shadowshot W36 hunter.void.super.start의 연속 cast에 draw/release/impact tail이 포함된다. start를 void_bow_cast FNV 후보로 교체하지 않고 draw/fire/impact/end 별도 재생도 재도입하지 않는다. HunterSuper.releaseArrow의 W36 주석과 독립 음향 호출 부재를 확인. 원본 후보80D4B312/80D4B31A/80D4B329는 명명 후보로만 남기며 이 selection에서 미배정. 이 이벤트의 기존 자산 연결 및 현재 호출 억제 의미를 유지한다. 기존 sounds.json 연결: destiny:w36/hunter/void/super/cast."
+    },
+    {
+      "event": "hunter.void.super.draw",
+      "reason": "사용자 지정 보존: Shadowshot W36 hunter.void.super.start의 연속 cast에 draw/release/impact tail이 포함된다. start를 void_bow_cast FNV 후보로 교체하지 않고 draw/fire/impact/end 별도 재생도 재도입하지 않는다. HunterSuper.releaseArrow의 W36 주석과 독립 음향 호출 부재를 확인. 원본 후보80D4B312/80D4B31A/80D4B329는 명명 후보로만 남기며 이 selection에서 미배정. 이 이벤트의 기존 자산 연결 및 현재 호출 억제 의미를 유지한다. 기존 sounds.json 연결: destiny:w34/hunter/void/super/draw."
+    },
+    {
+      "event": "hunter.void.super.fire",
+      "reason": "사용자 지정 보존: Shadowshot W36 hunter.void.super.start의 연속 cast에 draw/release/impact tail이 포함된다. start를 void_bow_cast FNV 후보로 교체하지 않고 draw/fire/impact/end 별도 재생도 재도입하지 않는다. HunterSuper.releaseArrow의 W36 주석과 독립 음향 호출 부재를 확인. 원본 후보80D4B312/80D4B31A/80D4B329는 명명 후보로만 남기며 이 selection에서 미배정. 이 이벤트의 기존 자산 연결 및 현재 호출 억제 의미를 유지한다. 기존 sounds.json 연결: destiny:w34/hunter/void/super/fire."
+    },
+    {
+      "event": "hunter.void.super.impact",
+      "reason": "사용자 지정 보존: Shadowshot W36 hunter.void.super.start의 연속 cast에 draw/release/impact tail이 포함된다. start를 void_bow_cast FNV 후보로 교체하지 않고 draw/fire/impact/end 별도 재생도 재도입하지 않는다. HunterSuper.releaseArrow의 W36 주석과 독립 음향 호출 부재를 확인. 원본 후보80D4B312/80D4B31A/80D4B329는 명명 후보로만 남기며 이 selection에서 미배정. 이 이벤트의 기존 자산 연결 및 현재 호출 억제 의미를 유지한다. 기존 sounds.json 연결: destiny:w34/hunter/void/super/impact."
+    },
+    {
+      "event": "hunter.void.super.end",
+      "reason": "사용자 지정 보존: Shadowshot W36 hunter.void.super.start의 연속 cast에 draw/release/impact tail이 포함된다. start를 void_bow_cast FNV 후보로 교체하지 않고 draw/fire/impact/end 별도 재생도 재도입하지 않는다. HunterSuper.releaseArrow의 W36 주석과 독립 음향 호출 부재를 확인. 원본 후보80D4B312/80D4B31A/80D4B329는 명명 후보로만 남기며 이 selection에서 미배정. 이 이벤트의 기존 자산 연결 및 현재 호출 억제 의미를 유지한다. 기존 sounds.json 연결: destiny:w34/hunter/void/super/end."
+    },
+    {
+      "event": "hunter.solar.blade_barrage.start",
+      "reason": "사용자 지정 보존: Blade Barrage 기존 throw 음원을 전체 시전당 1회 유지한다. HunterExpandedSupers.fan의 ++lease.volleys == 1에서만 super.fire, ClassAbilityEffects.sound의 blade_barrage 비-fire 반환을 확인. 두 fan 또는 각 칼마다 throw를 재생하지 않는다. start/impact/end 자산은 기존 연결과 호출 억제를 그대로 유지. 숫자80D4B2C0/80D4B2C5/80D4B2CA/80D4B2CC/80D4B2CF는 미배정, pulse_gren_splash/thermal_flux_bounce/submerged는 의미가 다른 후보여서 시전으로 쓰지 않는다. knife_throw_thwack은 throw 자체가 아닌 착탄 후보이며 기존 throw 교체 근거로 삼지 않는다. 향후 칼 박힘/폭발음을 추가하려면 현재 비-fire 차단 및 EmbeddedKnife의 무음 blast 경로를 별도로 검토해야 한다. 기존 sounds.json 연결: destiny:classes_w230/hunter_solar_blade_barrage_start."
+    },
+    {
+      "event": "hunter.solar.blade_barrage.fire",
+      "reason": "사용자 지정 보존: Blade Barrage 기존 throw 음원을 전체 시전당 1회 유지한다. HunterExpandedSupers.fan의 ++lease.volleys == 1에서만 super.fire, ClassAbilityEffects.sound의 blade_barrage 비-fire 반환을 확인. 두 fan 또는 각 칼마다 throw를 재생하지 않는다. start/impact/end 자산은 기존 연결과 호출 억제를 그대로 유지. 숫자80D4B2C0/80D4B2C5/80D4B2CA/80D4B2CC/80D4B2CF는 미배정, pulse_gren_splash/thermal_flux_bounce/submerged는 의미가 다른 후보여서 시전으로 쓰지 않는다. knife_throw_thwack은 throw 자체가 아닌 착탄 후보이며 기존 throw 교체 근거로 삼지 않는다. 향후 칼 박힘/폭발음을 추가하려면 현재 비-fire 차단 및 EmbeddedKnife의 무음 blast 경로를 별도로 검토해야 한다. 기존 sounds.json 연결: destiny:classes_w230/hunter_solar_blade_barrage_fire."
+    },
+    {
+      "event": "hunter.solar.blade_barrage.impact",
+      "reason": "사용자 지정 보존: Blade Barrage 기존 throw 음원을 전체 시전당 1회 유지한다. HunterExpandedSupers.fan의 ++lease.volleys == 1에서만 super.fire, ClassAbilityEffects.sound의 blade_barrage 비-fire 반환을 확인. 두 fan 또는 각 칼마다 throw를 재생하지 않는다. start/impact/end 자산은 기존 연결과 호출 억제를 그대로 유지. 숫자80D4B2C0/80D4B2C5/80D4B2CA/80D4B2CC/80D4B2CF는 미배정, pulse_gren_splash/thermal_flux_bounce/submerged는 의미가 다른 후보여서 시전으로 쓰지 않는다. knife_throw_thwack은 throw 자체가 아닌 착탄 후보이며 기존 throw 교체 근거로 삼지 않는다. 향후 칼 박힘/폭발음을 추가하려면 현재 비-fire 차단 및 EmbeddedKnife의 무음 blast 경로를 별도로 검토해야 한다. 기존 sounds.json 연결: destiny:classes_w230/hunter_solar_blade_barrage_impact."
+    },
+    {
+      "event": "hunter.solar.blade_barrage.end",
+      "reason": "사용자 지정 보존: Blade Barrage 기존 throw 음원을 전체 시전당 1회 유지한다. HunterExpandedSupers.fan의 ++lease.volleys == 1에서만 super.fire, ClassAbilityEffects.sound의 blade_barrage 비-fire 반환을 확인. 두 fan 또는 각 칼마다 throw를 재생하지 않는다. start/impact/end 자산은 기존 연결과 호출 억제를 그대로 유지. 숫자80D4B2C0/80D4B2C5/80D4B2CA/80D4B2CC/80D4B2CF는 미배정, pulse_gren_splash/thermal_flux_bounce/submerged는 의미가 다른 후보여서 시전으로 쓰지 않는다. knife_throw_thwack은 throw 자체가 아닌 착탄 후보이며 기존 throw 교체 근거로 삼지 않는다. 향후 칼 박힘/폭발음을 추가하려면 현재 비-fire 차단 및 EmbeddedKnife의 무음 blast 경로를 별도로 검토해야 한다. 기존 sounds.json 연결: destiny:classes_w230/hunter_solar_blade_barrage_end."
+    },
+    {
+      "event": "hunter.void.spectral_blades.start",
+      "reason": "임시 기존 연결/fallback 유지. hunter_spectral_blades CUE 3행 모두 name==sound:80D4AF7C,80D4B2ED,80D4B2F0이며 sourceFrames 없음. 어느 것도 시전/베기/착탄/종료에 배정하지 않는다. hunter_void_rush_melee의 hunter_void_rush_dagger_flourish는 별개 근접 경로이고 WEM도 없어 전용하지 않는다. 현재 slash는 super.fire만 호출하고 명중 전용 impact 호출이 없으므로 향후 명중음은 적 접촉 시 별도 경로가 필요하다. 기존 sounds.json 연결: destiny:classes_w230/hunter_void_spectral_blades_start."
+    },
+    {
+      "event": "hunter.void.spectral_blades.fire",
+      "reason": "임시 기존 연결/fallback 유지. hunter_spectral_blades CUE 3행 모두 name==sound:80D4AF7C,80D4B2ED,80D4B2F0이며 sourceFrames 없음. 어느 것도 시전/베기/착탄/종료에 배정하지 않는다. hunter_void_rush_melee의 hunter_void_rush_dagger_flourish는 별개 근접 경로이고 WEM도 없어 전용하지 않는다. 현재 slash는 super.fire만 호출하고 명중 전용 impact 호출이 없으므로 향후 명중음은 적 접촉 시 별도 경로가 필요하다. 기존 sounds.json 연결: destiny:classes_w230/hunter_void_spectral_blades_fire."
+    },
+    {
+      "event": "hunter.void.spectral_blades.impact",
+      "reason": "임시 기존 연결/fallback 유지. hunter_spectral_blades CUE 3행 모두 name==sound:80D4AF7C,80D4B2ED,80D4B2F0이며 sourceFrames 없음. 어느 것도 시전/베기/착탄/종료에 배정하지 않는다. hunter_void_rush_melee의 hunter_void_rush_dagger_flourish는 별개 근접 경로이고 WEM도 없어 전용하지 않는다. 현재 slash는 super.fire만 호출하고 명중 전용 impact 호출이 없으므로 향후 명중음은 적 접촉 시 별도 경로가 필요하다. 기존 sounds.json 연결: destiny:classes_w230/hunter_void_spectral_blades_impact."
+    },
+    {
+      "event": "hunter.void.spectral_blades.end",
+      "reason": "임시 기존 연결/fallback 유지. hunter_spectral_blades CUE 3행 모두 name==sound:80D4AF7C,80D4B2ED,80D4B2F0이며 sourceFrames 없음. 어느 것도 시전/베기/착탄/종료에 배정하지 않는다. hunter_void_rush_melee의 hunter_void_rush_dagger_flourish는 별개 근접 경로이고 WEM도 없어 전용하지 않는다. 현재 slash는 super.fire만 호출하고 명중 전용 impact 호출이 없으므로 향후 명중음은 적 접촉 시 별도 경로가 필요하다. 기존 sounds.json 연결: destiny:classes_w230/hunter_void_spectral_blades_end."
+    },
+    {
+      "event": "hunter.arc.gathering_storm.start",
+      "reason": "임시 기존 연결/fallback 유지. lightning_rod_ability.pattern.tft의 80D4B558/80D4BD41/80D4C0A8/80D4C0AB/80D4C0AD/80D4C0BF/80D4D1F9는 숫자 후보이며 sourceFrames 없음. 유일한 비공용 명명 arc_dissolve는 시전/투척/착탄이라는 근거가 없어서 대체하지 않는다. ready/fail/commonCandidate도 제외. 현재 착지 throwStaff callback과 지연 StaffField 낙뢰가 같은 super.impact 이벤트를 공유하고 ClassAbilityEffects.sound는 owner.position()에서 재생한다. master는 필요 시 착지·낙뢰 이벤트와 실제 impact/field 위치를 분리해야 한다. endSuper는 시전 회복 시 호출되므로 필드 소멸과도 구분이 필요하다. 기존 sounds.json 연결: destiny:classes_w230/hunter_arc_gathering_storm_start."
+    },
+    {
+      "event": "hunter.arc.gathering_storm.fire",
+      "reason": "임시 기존 연결/fallback 유지. lightning_rod_ability.pattern.tft의 80D4B558/80D4BD41/80D4C0A8/80D4C0AB/80D4C0AD/80D4C0BF/80D4D1F9는 숫자 후보이며 sourceFrames 없음. 유일한 비공용 명명 arc_dissolve는 시전/투척/착탄이라는 근거가 없어서 대체하지 않는다. ready/fail/commonCandidate도 제외. 현재 착지 throwStaff callback과 지연 StaffField 낙뢰가 같은 super.impact 이벤트를 공유하고 ClassAbilityEffects.sound는 owner.position()에서 재생한다. master는 필요 시 착지·낙뢰 이벤트와 실제 impact/field 위치를 분리해야 한다. endSuper는 시전 회복 시 호출되므로 필드 소멸과도 구분이 필요하다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.arc.gathering_storm.impact",
+      "reason": "임시 기존 연결/fallback 유지. lightning_rod_ability.pattern.tft의 80D4B558/80D4BD41/80D4C0A8/80D4C0AB/80D4C0AD/80D4C0BF/80D4D1F9는 숫자 후보이며 sourceFrames 없음. 유일한 비공용 명명 arc_dissolve는 시전/투척/착탄이라는 근거가 없어서 대체하지 않는다. ready/fail/commonCandidate도 제외. 현재 착지 throwStaff callback과 지연 StaffField 낙뢰가 같은 super.impact 이벤트를 공유하고 ClassAbilityEffects.sound는 owner.position()에서 재생한다. master는 필요 시 착지·낙뢰 이벤트와 실제 impact/field 위치를 분리해야 한다. endSuper는 시전 회복 시 호출되므로 필드 소멸과도 구분이 필요하다. 기존 sounds.json 연결: destiny:classes_w230/hunter_arc_gathering_storm_impact."
+    },
+    {
+      "event": "hunter.arc.gathering_storm.end",
+      "reason": "임시 기존 연결/fallback 유지. lightning_rod_ability.pattern.tft의 80D4B558/80D4BD41/80D4C0A8/80D4C0AB/80D4C0AD/80D4C0BF/80D4D1F9는 숫자 후보이며 sourceFrames 없음. 유일한 비공용 명명 arc_dissolve는 시전/투척/착탄이라는 근거가 없어서 대체하지 않는다. ready/fail/commonCandidate도 제외. 현재 착지 throwStaff callback과 지연 StaffField 낙뢰가 같은 super.impact 이벤트를 공유하고 ClassAbilityEffects.sound는 owner.position()에서 재생한다. master는 필요 시 착지·낙뢰 이벤트와 실제 impact/field 위치를 분리해야 한다. endSuper는 시전 회복 시 호출되므로 필드 소멸과도 구분이 필요하다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.arc.storms_edge.start",
+      "reason": "명시적 미배정, 기존 임시 vanilla fallback 유지. arc_blink_dagger.pattern.tft의 전용 시전/텔레포트/종료 태그는 숫자 후보(예:80D4B50C,80D4B517,80D4B8E9,80D4B8EC,80D4BE48)여서 배정하지 않는다. 명명된 default_hit_hunter/재질별 melee_*_hunter와 hunter_knife_throw_thwack은 접촉 후보이지 시전·단검 투척·blink 전역 이벤트의 증거가 아니다. 현재 super.impact는 blink 성공 후 범위 blast 의미이며 투사체 착탄과 분리되어 있지 않다. 향후 적중/텔레포트 범위공격 구분과 위치 인자를 추가한 뒤 선정해야 한다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.arc.storms_edge.fire",
+      "reason": "명시적 미배정, 기존 임시 vanilla fallback 유지. arc_blink_dagger.pattern.tft의 전용 시전/텔레포트/종료 태그는 숫자 후보(예:80D4B50C,80D4B517,80D4B8E9,80D4B8EC,80D4BE48)여서 배정하지 않는다. 명명된 default_hit_hunter/재질별 melee_*_hunter와 hunter_knife_throw_thwack은 접촉 후보이지 시전·단검 투척·blink 전역 이벤트의 증거가 아니다. 현재 super.impact는 blink 성공 후 범위 blast 의미이며 투사체 착탄과 분리되어 있지 않다. 향후 적중/텔레포트 범위공격 구분과 위치 인자를 추가한 뒤 선정해야 한다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.arc.storms_edge.impact",
+      "reason": "명시적 미배정, 기존 임시 vanilla fallback 유지. arc_blink_dagger.pattern.tft의 전용 시전/텔레포트/종료 태그는 숫자 후보(예:80D4B50C,80D4B517,80D4B8E9,80D4B8EC,80D4BE48)여서 배정하지 않는다. 명명된 default_hit_hunter/재질별 melee_*_hunter와 hunter_knife_throw_thwack은 접촉 후보이지 시전·단검 투척·blink 전역 이벤트의 증거가 아니다. 현재 super.impact는 blink 성공 후 범위 blast 의미이며 투사체 착탄과 분리되어 있지 않다. 향후 적중/텔레포트 범위공격 구분과 위치 인자를 추가한 뒤 선정해야 한다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.arc.storms_edge.end",
+      "reason": "명시적 미배정, 기존 임시 vanilla fallback 유지. arc_blink_dagger.pattern.tft의 전용 시전/텔레포트/종료 태그는 숫자 후보(예:80D4B50C,80D4B517,80D4B8E9,80D4B8EC,80D4BE48)여서 배정하지 않는다. 명명된 default_hit_hunter/재질별 melee_*_hunter와 hunter_knife_throw_thwack은 접촉 후보이지 시전·단검 투척·blink 전역 이벤트의 증거가 아니다. 현재 super.impact는 blink 성공 후 범위 blast 의미이며 투사체 착탄과 분리되어 있지 않다. 향후 적중/텔레포트 범위공격 구분과 위치 인자를 추가한 뒤 선정해야 한다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.arc.melee.impact",
+      "reason": "임시 기존 연결 유지. palm_strike_melee/hunter_melee/fp_melee는 클립 공격 프레임음이고 적 접촉 전용 cue라는 근거가 없다. melee.cast 선정음을 같은 접촉에 중복 배정하지 않는다. 현재 contacted일 때만 center 위치 1회 호출은 보존한다. 기존 sounds.json 연결: destiny:w33/hunter/arc/melee/impact. source hunter_melee/fp_melee는 별도 일반 근접 사운드 액션 트리거를 이 작업에서 확인하지 못했으며 bindings를 신설하지 않는다."
+    },
+    {
+      "event": "hunter.dodge",
+      "reason": "도박꾼/명사수 회피 모두 HunterDodge.cast의 hunter.dodge 경로 사용. 실제 CUE-SHEETS.json 469행에 회피 그룹/명명/원본 프레임 cue가 없다. hunter_melee의 mvmt1은 근접 클립 프레임0의 범용 움직임이라 회피에 전용하지 않는다. 현재 PLAYER_ATTACK_SWEEP fallback은 임시로 유지한다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.jump",
+      "reason": "2단/3단 점프 모두 HunterJump.cast의 hunter.jump 경로 사용. 실제 CUE-SHEETS.json 469행에 헌터 점프/공중 이동 그룹이나 명명 cue가 없다. 근접 mvmt1 또는 전기 해체/공용 준비음으로 점프를 추정하지 않는다. 현재 WIND_CHARGE_BURST fallback은 임시로 유지한다. 현재 sounds.json에는 키가 없고 코드 경로의 기존 vanilla fallback을 유지한다. 새 SSD 배정은 없다."
+    },
+    {
+      "event": "hunter.void.grenade.throw",
+      "reason": "현 작업의 헌터 궁극기·근접·회피/점프 선정 범위 밖이며 해당 수류탄의 정확한 투척/착탄 CUE row를 확인하지 못해 기존 임시 연결 유지. 다른 궁극기의 pulse_gren_splash 또는 공용 폭발 후보를 이 능력으로 전용하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/void/grenade/throw."
+    },
+    {
+      "event": "hunter.void.grenade.impact",
+      "reason": "현 작업의 헌터 궁극기·근접·회피/점프 선정 범위 밖이며 해당 수류탄의 정확한 투척/착탄 CUE row를 확인하지 못해 기존 임시 연결 유지. 다른 궁극기의 pulse_gren_splash 또는 공용 폭발 후보를 이 능력으로 전용하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/void/grenade/impact."
+    },
+    {
+      "event": "hunter.arc.grenade.throw",
+      "reason": "현 작업의 헌터 궁극기·근접·회피/점프 선정 범위 밖이며 해당 수류탄의 정확한 투척/착탄 CUE row를 확인하지 못해 기존 임시 연결 유지. 다른 궁극기의 pulse_gren_splash 또는 공용 폭발 후보를 이 능력으로 전용하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/arc/grenade/throw."
+    },
+    {
+      "event": "hunter.arc.grenade.impact",
+      "reason": "현 작업의 헌터 궁극기·근접·회피/점프 선정 범위 밖이며 해당 수류탄의 정확한 투척/착탄 CUE row를 확인하지 못해 기존 임시 연결 유지. 다른 궁극기의 pulse_gren_splash 또는 공용 폭발 후보를 이 능력으로 전용하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/arc/grenade/impact."
+    },
+    {
+      "event": "hunter.solar.grenade.throw",
+      "reason": "현 작업의 헌터 궁극기·근접·회피/점프 선정 범위 밖이며 해당 수류탄의 정확한 투척/착탄 CUE row를 확인하지 못해 기존 임시 연결 유지. 다른 궁극기의 pulse_gren_splash 또는 공용 폭발 후보를 이 능력으로 전용하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/solar/grenade/throw."
+    },
+    {
+      "event": "hunter.solar.grenade.impact",
+      "reason": "현 작업의 헌터 궁극기·근접·회피/점프 선정 범위 밖이며 해당 수류탄의 정확한 투척/착탄 CUE row를 확인하지 못해 기존 임시 연결 유지. 다른 궁극기의 pulse_gren_splash 또는 공용 폭발 후보를 이 능력으로 전용하지 않는다. 기존 sounds.json 연결: destiny:w33/hunter/solar/grenade/impact."
+    }
+  ],
+  "silenced": []
+}

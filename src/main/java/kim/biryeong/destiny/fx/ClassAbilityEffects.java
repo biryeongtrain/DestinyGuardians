@@ -212,13 +212,20 @@ public final class ClassAbilityEffects {
 
     /** Persistent fields keep their own identity after the cast presentation has ended. */
     public static void sound(ServerPlayer p, Element e, String path, String action) {
+        soundAt(p, e, path, action, p.position());
+    }
+
+    /** Impact cues belong to the authoritative hit point, including after presentation cleanup. */
+    public static void soundAt(ServerPlayer p, Element e, String path, String action, Vec3 position) {
+        // The selected Nova cast plays once at activation; do not replay a cast at release.
+        if (path.equals("warlock/void_super") && action.equals("super.fire")) return;
         // Blade Barrage uses one throw cue, not overlapping numeric start/end candidates.
         if (path.equals("hunter/blade_barrage") && !action.equals("super.fire")) return;
         String routed = ClassSuperModelAssets.isExpanded(path)
                 ? action.replace("super.", path.substring(path.indexOf('/') + 1) + ".") : action;
         if (path.equals("titan/arc_super")) routed = action.replace("super.", "fists_of_havoc.");
         String key = Guardians.data(p).guardianClass().getSerializedName() + "." + e.getSerializedName() + "." + routed;
-        DestinySounds.orVanilla(p.level(), p.position(), key, action.equals("super.fire")
+        DestinySounds.orVanilla(p.level(), position, key, action.equals("super.fire")
                 ? SoundEvents.PLAYER_ATTACK_SWEEP : action.endsWith("impact")
                 ? SoundEvents.GENERIC_EXPLODE.value() : SoundEvents.BEACON_ACTIVATE, .65f, 1f);
     }

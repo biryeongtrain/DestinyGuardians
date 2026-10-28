@@ -185,7 +185,7 @@ public final class WarlockSuper extends Ability {
         }
         private void impact(Vec3 origin, double radius) {
             ClassAbilityEffects.burst(lease.owner, origin, ability.element(), radius);
-            ClassAbilityEffects.sound(lease.owner, ability.element(), "super.impact");
+            ClassAbilityEffects.soundAt(lease.owner, ability.element(), ability.id().getPath(), "super.impact", origin);
         }
         @Override public void end() {
             if (ended) return;

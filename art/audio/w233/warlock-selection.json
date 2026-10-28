@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "guardianClass": "warlock",
+  "bindings": [
+    {
+      "event": "warlock.void.super.start",
+      "group": "warlock_nova_bomb",
+      "sound": "80D4B278",
+      "wem": "80D64E66",
+      "reason": "신성 폭탄 시전 이름 후보. 기존 숫자 임시 시전음 교체. 원작 변형 구분은 미확인.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.void.super.impact",
+      "group": "warlock_nova_bomb",
+      "sound": "80D4B195",
+      "wem": "80D64D6B",
+      "reason": "신성 폭탄 폭발 이름 후보. 착탄 지점 판정 시 재생.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.arc.super.start",
+      "group": "warlock_stormtrance",
+      "sound": "80D4B25A",
+      "wem": "80D64E2C",
+      "reason": "폭풍몰입 시전 이름 후보. 유지/초기화 이벤트와 구분.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.arc.super.fire",
+      "group": "warlock_stormtrance",
+      "sound": "80A61118",
+      "wem": "80D66FFA",
+      "reason": "폭풍몰입 번개 발사 이름 후보. 선택한 1개 WEM만 사용.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.arc.class.cast",
+      "group": "warlock_rifts",
+      "sound": "80D4AD6F",
+      "wem": "80D665A3",
+      "reason": "치유 균열 시전 이름 후보. 속성에 관계없이 균열 종류로 구분. 현재 제품은 치유 균열만 구현되어 class.cast에 연결.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.solar.class.cast",
+      "group": "warlock_rifts",
+      "sound": "80D4AD6F",
+      "wem": "80D665A3",
+      "reason": "치유 균열 시전 이름 후보. 속성에 관계없이 균열 종류로 구분. 현재 제품은 치유 균열만 구현되어 class.cast에 연결.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.void.class.cast",
+      "group": "warlock_rifts",
+      "sound": "80D4AD6F",
+      "wem": "80D665A3",
+      "reason": "치유 균열 시전 이름 후보. 속성에 관계없이 균열 종류로 구분. 현재 제품은 치유 균열만 구현되어 class.cast에 연결.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.arc.melee.cast",
+      "group": "warlock_melee",
+      "sound": "80D4ADE6",
+      "wem": "80D66C4B",
+      "reason": "전기 근접 볼트 시전 이름 후보.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.arc.melee.impact",
+      "group": "warlock_melee",
+      "sound": "80D4ADFE",
+      "wem": "80D67D62",
+      "reason": "전기 근접 볼트 공격자 타격음 이름 후보.",
+      "status": "named_candidate"
+    },
+    {
+      "event": "warlock.solar.melee.cast",
+      "group": "warlock_melee",
+      "sound": "80A60E85",
+      "wem": "80D69F8C",
+      "reason": "원본 워록 근접 프레임 이벤트의 공용 스윙 1개. 능력 고유 투사체음 복원으로 간주하지 않음.",
+      "status": "source_clip"
+    },
+    {
+      "event": "warlock.void.melee.cast",
+      "group": "warlock_melee",
+      "sound": "80A60E85",
+      "wem": "80D69F8C",
+      "reason": "원본 워록 근접 프레임 이벤트의 공용 스윙 1개. 능력 고유 투사체음 복원으로 간주하지 않음.",
+      "status": "source_clip"
+    }
+  ],
+  "retained": [
+    {
+      "event": "nova_warp",
+      "reason": "큐시트가 숫자 후보/뱅크 분기만 제공하거나 시점 미확정. 기존 임시 연결 보존; 정확 복원으로 표시하지 않음."
+    },
+    {
+      "event": "chaos_reach",
+      "reason": "큐시트가 숫자 후보/뱅크 분기만 제공하거나 시점 미확정. 기존 임시 연결 보존; 정확 복원으로 표시하지 않음."
+    },
+    {
+      "event": "well_of_radiance",
+      "reason": "큐시트가 숫자 후보/뱅크 분기만 제공하거나 시점 미확정. 기존 임시 연결 보존; 정확 복원으로 표시하지 않음."
+    },
+    {
+      "event": "song_of_flame",
+      "reason": "큐시트가 숫자 후보/뱅크 분기만 제공하거나 시점 미확정. 기존 임시 연결 보존; 정확 복원으로 표시하지 않음."
+    },
+    {
+      "event": "daybreak",
+      "reason": "큐시트가 숫자 후보/뱅크 분기만 제공하거나 시점 미확정. 기존 임시 연결 보존; 정확 복원으로 표시하지 않음."
+    },
+    {
+      "event": "grenades",
+      "reason": "큐시트가 숫자 후보/뱅크 분기만 제공하거나 시점 미확정. 기존 임시 연결 보존; 정확 복원으로 표시하지 않음."
+    },
+    {
+      "event": "empowering_rift",
+      "reason": "원본 강화 균열 후보는 식별했으나 현재 제품에 강화 균열 능력 자체가 없음. 사운드만 추가해 구현했다고 주장하지 않음."
+    },
+    {
+      "event": "warlock.arc.super.impact",
+      "reason": "arc_lightning_thwak 이름 후보는 있지만 현재 폭풍몰입 채널은 별도 impact 이벤트를 호출하지 않는다. 미사용 파일만 등록하지 않고 실제 적중 연계 작업으로 남김."
+    }
+  ],
+  "silenced": [
+    "warlock.void.super.fire"
+  ]
+}
