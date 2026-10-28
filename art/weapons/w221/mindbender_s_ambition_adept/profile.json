@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "stage": "W221",
+  "weapon": "mindbender_s_ambition_adept",
+  "sourceAction": "80A8A3F1",
+  "sourceRig": {
+    "group": "shotgun_2eb0529e",
+    "sourceBlendSha256": "87ff521e800cc7f4aa339e79dfe22086f8c461eab229ec98c1ce1fcad8ee6052",
+    "sourceMapSha256": "2856b584691cd859c63c3b09e753dd8aaff54e4710da975f09cb087cf33325f0",
+    "boneMapSha256": "6209b582528f73dcfb6bfed9d87d02821f6ac33958795d4198509c0a0e6227ef",
+    "action": "80A8A3F1"
+  },
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ]
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.15,
+        8.28
+      ],
+      "rotation": [
+        -27.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        7.8,
+        9.58,
+        -2.2
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        -85.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        8.0,
+        10.04,
+        4.45
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -80.0
+      ],
+      "partHint": "shell",
+      "policy": "shell",
+      "rigAction": "80A8A3F1",
+      "hand": "left",
+      "sourcePalmContactFit": true,
+      "sourceShellPoseHold": true
+    }
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w221/source-review.json",
+      "sourceSha256": "1816b1225731e5eac1ad16a1e52fb4c70aa6694c0e6af0035236d1f031391266",
+      "observation": "Read master-owned original Blender5.4 Alpha evaluation: Armature only, OBSlot action Armature|fp_80A8A3F1_reload_full|Base, frames1..101 at30fps,61 evaluated upper chains, prior-cache joint error0 and allInputsUnchanged=true. Worker did not open/evaluate Blender."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w221/source-handling-evidence.json",
+      "sourceSha256": "911ef2ee6443347fce73c5ffa424df599f47e62659a5c72b3c14a50415a5aa0e",
+      "observation": "LEFT loading hand; maximum source weapon-local wrist travel32 LEFT10.130476179348449,RIGHT5.426285168779391. Shared generic source binding, no recovered weapon selector."
+    },
+    {
+      "source": "art/weapons/w221/rigs/shotgun_2eb0529e.json",
+      "sourceSha256": "fd7f7efe9e769303b79cd4ee84352c44767882973cfb94308596325be6152e25",
+      "observation": "Fresh original61 cache reviewed with source weapon4A0810C4, both original shoulders and elbows/wrists; armature-object matrices, no matrixWorld reapplication. Authored x32 basis and mesh calibration retained."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w221/source-sheets/shotgun_2eb0529e-80A8A3F1-upper-chain.png",
+      "sourceSha256": "76a2e7f4e73a6bfb804e8eb0e3918289280976c7b3e6bff78dbdb7c706f01c41",
+      "observation": "Actually viewed six XZ/YZ source-chain poses0,.2,.4,.6,.8,1: left excursion, source shoulder/elbow bends and return near opening chain. Bone-only sheet establishes no mesh contact or camera."
+    },
+    {
+      "source": "scripts/generate_insert_w179_mindbender_s_ambition_adept.py",
+      "sourceSha256": "7d3f0132d3d47fb95133542b72ca33ed823d31e9606a3bc2914ab274fa5b383f",
+      "observation": "Retain Mindbender own GRIP[8,8.70,8.18],SHELL_ANCHOR[8,10.04,4.45],KEYS/HOLD,loading windows and12-solid longitudinal shell; no FILO geometry/contact copied."
+    },
+    {
+      "source": "art/weapons/w208/first_in_last_out/profile.json",
+      "sourceSha256": "e8cbaf7aadf3864a6e2c8c2af8551a74eefd7fc141160fc9fdbc9b35854beca3",
+      "observation": "Read rejected full-source-loop and body-only-freeze history; corrected candidate keeps body plus source upper/forearm chain at common held sample, then blends to rest."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "observation": "Idle mesh contacts preserved; loading_tray X7.59..8.41,Y10.49..10.69,Z3.795..7.045 supports authored shell feed. Rigid action_solid unchanged, cartridge seats inside it."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "observation": "Evaluated current first_person_framing_w205.load/profile: shotgun translation[-.65,.6,0],rotation[-1,2,0],scale.98,rightWristRoll28,leftRotation[15,35,-35]. Spatial settings retained."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST product candidate; master owns shared loaders, fresh61 rig installation, runtime60grid, arms materialization and actual Vision.",
+    "Keep inherited idle RIGHT[8,8.15,8.28], LEFT[7.8,9.58,-2.2] and their rotations unchanged. Loading LEFT contact follows W179 SHELL_ANCHOR[8,10.04,4.45] instead of the old static loading_port estimate.",
+    "Keep original shoulder->elbow->wrist orientations and ordinary segment lengths, visible support and unchanged sights. No new camera offset or axis damping.",
+    "Explicit sourceShellPoseHold calibration: initial source_p=.35*smooth(p/.36), weight=smooth(p/.1); loop source_p=.35/weight1; return source_p=.35/weight1-smooth(p). Body and limbs must consume the same joint sample. This is source frame36 of generic full-reload1..101, not recovered per-shell events.",
+    "Do not repeat rejected FILO body-only freeze: source_weapon_display and full limbs remain together; sourcePalmContactFit fits LEFT source palm to composed shell during handling before upper-arm attachment.",
+    "Preserve all W179 visible event keys, holds, longitudinal-Z twelve-solid shell and meaningful graphite loading_tray/silver barrel_silver_collar_0 UV donors. Shell visibility initial[.38,.90),loop[.10,.84); hidden geometry recycles to common HOME at held seams.",
+    "No gameplay duration/ammunition/audio change. Master preserves current per-shell timing and W219 cancellable last-shell sound.",
+    "Required originalBlend ->61 ->FIRST Vision ->same-worker concrete correction or justified no-change ->SECOND Vision. Neither native acceptance nor second-pass completion claimed.",
+    "Evidence source paths are durable master-preservation targets for unchanged bytes inspected in temporary scratch storage; preservation is pending master installation. Scratch paths are not durable deliverables. Master owns accepted-batch commits; worker does not commit and retains the reusable worktree slot."
+  ]
+}

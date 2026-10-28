@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "stage": "W221",
+  "weapon": "ikelos_sg_v1_0_1",
+  "sourceRig": {
+    "path": "art/weapons/w221/rigs/shotgun_2eb0529e.json",
+    "group": "shotgun_2eb0529e",
+    "sourceAction": "80A8A3F1",
+    "action": "Armature|fp_80A8A3F1_reload_full|Base",
+    "sourceFrameRange": [
+      1,
+      101
+    ],
+    "evaluatedSamples": 61,
+    "cacheSha256": "fd7f7efe9e769303b79cd4ee84352c44767882973cfb94308596325be6152e25",
+    "sourceBlendSha256": "87ff521e800cc7f4aa339e79dfe22086f8c461eab229ec98c1ce1fcad8ee6052",
+    "sourceMapSha256": "2856b584691cd859c63c3b09e753dd8aaff54e4710da975f09cb087cf33325f0",
+    "boneMapSha256": "6209b582528f73dcfb6bfed9d87d02821f6ac33958795d4198509c0a0e6227ef",
+    "evaluationOwner": "master separate background Blender 5.4.0 Alpha; worker inspected report/cache/sheet"
+  },
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "sourceFullChain": true,
+    "sourceWeaponMotion": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "contact": [
+        8,
+        10.16,
+        5.8
+      ],
+      "rotation": [
+        0,
+        0,
+        -80
+      ],
+      "partHint": "shell",
+      "policy": "shell",
+      "hand": "left",
+      "rigAction": "80A8A3F1",
+      "sourcePalmContactFit": true,
+      "sourceShellPoseHold": true
+    }
+  },
+  "evidence": [
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "observation": "Retain right [8,8.65,8.88] and left [7.8,8.98,-2.8]; no idle grip override."
+    },
+    {
+      "source": "art/weapons/w123/ikelos_sg_v1_0_1/design.json",
+      "observation": "Port center derives from lower_receiver_rear bounds [7.31,10.48,4.85]..[8.69,11.6,8.22]: midpoint X8, underside Y10.48-.32, forward Z4.85+.95. Solid-body port approximation, no recovered cavity."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w221/source-review.json",
+      "observation": "Master evaluated original Armature-only source.blend read-only, OBSlot 80A8A3F1 frames1..101 at61 samples; prior-cache joint error0; inputs unchanged. Worker did not evaluate Blender. Worker inspected the staging copy; master preserves this evidence at the repository path named here."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w221/source-sheets/shotgun_2eb0529e-80A8A3F1-upper-chain.png",
+      "observation": "Viewed six paired XZ/YZ poses; elbows and shoulders bend, ending near starting chain. No mesh/camera/contact proof. Worker inspected the staging copy; master preserves this evidence at the repository path named here."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w221/source-handling-evidence.json",
+      "observation": "Left wrist weapon-local travel10.130476 model units versus right5.426285 supports left loading hand; not selector recovery. Worker inspected the staging copy; master preserves this evidence at the repository path named here."
+    },
+    {
+      "source": "art/weapons/w123/ikelos_sg_v1_0_1/comparison.png",
+      "observation": "Viewed default photo and side/oblique solid model: long mauve shroud, copper capacitors, skeletal grip/stock, deep rectangular bore. Preserve all111 body elements and UV."
+    },
+    {
+      "source": "art/weapons/w208/first_in_last_out/profile.json",
+      "observation": "Read rejected body-only freeze history. Require sourceWeaponMotion true with shared sourceShellPoseHold, keeping body and full chain at the same source .35/frame36 across repeated inserts, blend-to-rest return."
+    }
+  ],
+  "notes": [
+    "Source .35/frame36 is explicit generic shotgun calibration, not a recovered shell-loop event track or source camera. Master owns exact ID opt-in and shared integration.",
+    "Ordinary shoulder/elbow/wrist lengths, both visible arms and clear sights remain required. No hiding, axis damping, camera-depth fitting or geometry scale-zero.",
+    "Left support follows continuous shell contact HOME across initial end/loop start/end/return start; invisible recycling only after seating. Gameplay insert duration and W219 cancellable last-shell audio remain master-owned and unchanged.",
+    "Initial native candidate: awaiting FIRST feedback, same-worker correction or justified no-change, then master SECOND Vision."
+  ]
+}

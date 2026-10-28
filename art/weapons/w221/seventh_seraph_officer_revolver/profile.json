@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "stage": "W221",
+  "weapon": "seventh_seraph_officer_revolver",
+  "sourceAction": "80A8A53D",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "hideSupportAtRest": false,
+    "keepMeshSupport": true,
+    "meshArmDirections": true,
+    "reloadCameraLower": 1.5,
+    "sourceWeaponRelative": true,
+    "sourceFullChain": true,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ]
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.18,
+        8.72
+      ],
+      "rotation": [
+        -26.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        7.3,
+        7.8,
+        9.02
+      ],
+      "rotation": [
+        -26.0,
+        0.0,
+        -20.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        7.0,
+        11.9,
+        5.7
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -80.0
+      ],
+      "partHint": "cylinder",
+      "policy": "cylinder",
+      "rigAction": "80A8A53D",
+      "hand": "left",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.5454545454545454,
+        0.6363636363636364
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "hand_cannon_5b24a8d7",
+    "sourceBlendSha256": "caa2af7aaf5a6219f1044a585da1dfe47f18c7559757cf8d2f4cd6dd77b8b81a",
+    "sourceMapSha256": "dd3507e832f6f493c3387f024df01115fe54078c1db2305d26aad7c18a1eccb1",
+    "boneMapSha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d",
+    "action": "80A8A53D"
+  },
+  "sourceProvenance": {
+    "evaluationOwner": "Master headless Blender5.4Alpha; worker read report/cache and viewed bone-only source sheet.",
+    "reviewPath": "docs/qa/2026-10-28/w221/source-review.json",
+    "reviewSha256": "1816b1225731e5eac1ad16a1e52fb4c70aa6694c0e6af0035236d1f031391266",
+    "evaluatedRigPath": "art/weapons/w221/rigs/hand_cannon_5b24a8d7.json",
+    "evaluatedRigSha256": "0b7f72c17e96174fbc937093d2a1ac3bf6c18c718b94ff1723546a95e155c047",
+    "chainSheetPath": "docs/qa/2026-10-28/w221/source-sheets/hand_cannon_5b24a8d7-80A8A53D-upper-chain.png",
+    "chainSheetSha256": "fb63f78d3db1256186173a221e92547b6766bc2e92a37035ea94b209872bec34",
+    "handlingEvidenceSha256": "911ef2ee6443347fce73c5ffa424df599f47e62659a5c72b3c14a50415a5aa0e",
+    "blenderVersion": "5.4.0 Alpha",
+    "exporterSha256": "05c6e85d6d18d38d97d2620a6a478a788d5cc4357f09eade22ada558c6359cd8",
+    "action": "Armature|fp_80A8A53D_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1.0,
+      127.0
+    ],
+    "sceneFps": 30,
+    "evaluatedSamples": 61,
+    "existingCacheJointAbsError": 0.0,
+    "masterReportedInputsUnchanged": true,
+    "objects": [
+      "ARMATURE"
+    ],
+    "sourceCameraRecovered": false,
+    "sourceActionWeaponExclusive": false,
+    "handlingEvidencePath": "docs/qa/2026-10-28/w221/source-handling-evidence.json"
+  },
+  "notes": [
+    "Pre-FIRST product candidate. Actual original Blender evaluated by master before worker authored61 poses; no worker DCC evaluation, mesh/camera/fingerIK recovery or perweapon selector claim.",
+    "Preserve canonical idle contacts and effective hand_cannon framing, including inherited reloadCameraLower1.5. No added camera offset, hiding, axis damping or authored wholebody sweep.",
+    "LEFT cylinder handling; release completes during open hold before close begins8/11, earlier than seated9/11. Full-chain palm travel remains source-driven; cylinder policy never translates an attached cylinder to a hand.",
+    "Source group5b24a8d7 is distinct from Duke cedb29ae although both actions use80A8A53D. Source1..127 at30fps normalizes to existing runtime progress without gameplay/audio changes.",
+    "Current read-only W181 script and canonical121 solids contain no separate cartridges/ejector. Preserve its full10-solid cylinder; do not invent disconnected rounds or claim an axial partition exists. Recheck seeded baseline at transfer.",
+    "FIRST Vision and worker correction/review, then SECOND acceptance remain pending.61 poses are not continuous60fps certification.",
+    "Provenance paths name durable repository destinations preserved by master. Temporary scratch copies and optional validation overrides are not durable evidence locations. Master owns commits after batch acceptance; worker does not commit and retains the fixed worktree slot."
+  ]
+}

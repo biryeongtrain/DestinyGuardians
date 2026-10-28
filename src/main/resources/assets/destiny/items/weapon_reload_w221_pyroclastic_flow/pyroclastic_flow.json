@@ -1,0 +1,3225 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": "ads",
+              "model": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads"
+                }
+              }
+            },
+            {
+              "when": "inspect",
+              "model": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect"
+                }
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 1,
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow"
+                    }
+                  }
+                }
+              },
+              {
+                "threshold": 0.01666666753590107,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_01_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.03333333507180214,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_02_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.05000000074505806,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_03_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.06666667014360428,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_04_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.0833333358168602,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_05_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.10000000149011612,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_06_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.11666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_07_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.13333334028720856,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_08_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.15000000596046448,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_09_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.1666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_10_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.18333333730697632,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_11_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.20000000298023224,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_12_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.21666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_13_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.23333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_14_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_15_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.2666666805744171,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_16_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.28333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_17_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.30000001192092896,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_18_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_19_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_20_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3499999940395355,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_21_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.36666667461395264,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_22_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.38333332538604736,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_23_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4000000059604645,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_24_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4166666567325592,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_25_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_26_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.44999998807907104,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_27_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.46666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_28_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4833333194255829,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_29_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_30_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5166666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_31_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5333333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_32_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.550000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_33_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5666666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_34_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5833333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_35_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6000000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_36_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6166666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_37_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6333333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_38_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6499999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_39_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_40_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6833333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_41_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.699999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_42_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7166666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_43_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7333333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_44_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_45_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7666666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_46_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7833333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_47_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.800000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_48_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_49_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_50_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8500000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_51_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8666666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_52_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8833333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_53_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8999999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_54_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9166666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_55_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_56_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.949999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_57_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9666666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_58_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9833333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_lever_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w221_pyroclastic_flow/pyroclastic_flow_59_lever_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 1.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow"
+                    }
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/rocket_launcher/pyroclastic_flow"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_ads"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_inspect"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow_twohand"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/rocket_launcher/pyroclastic_flow"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

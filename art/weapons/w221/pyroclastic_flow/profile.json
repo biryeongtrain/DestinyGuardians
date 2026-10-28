@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "stage": "W221",
+  "weapon": "pyroclastic_flow",
+  "sourceAction": "80A8A1A2",
+  "framing": {
+    "translation": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 1,
+    "rightWristRoll": 15,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ]
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A1A2",
+      "hand": "left",
+      "policy": "magazine",
+      "partHint": "magazine",
+      "contact": [
+        8,
+        11.7,
+        14.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "gripWindow": [
+        0.18,
+        0.28,
+        0.56,
+        0.66
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "rocket_launcher_1a221f25",
+    "action": "80A8A1A2",
+    "path": "art/weapons/w221/rigs/rocket_launcher_1a221f25.json",
+    "sha256": "bed0fec9d2c9ae288d800e1883b65a0d1e97cbf232d8404d799a8b96f2a47e1f",
+    "sourceBlendSha256": "acae68d41c0dfa9cb453c7faec067bd49c9ce22b1f8af115cc60df8e8fb4230c",
+    "sourceMapSha256": "0a696b08c520dfbd50116053ae7950eba0872efd9e4f2c1aba130739649cff74",
+    "boneMapSha256": "e17a7237d3f33e9ee87774e42885a5aa8db641b00ec106e5a1009752f5759a5b"
+  },
+  "canonicalSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/pyroclastic_flow.json": "4202530497e94cf149186821f75c5c3385ed302e77293aca2e333c796ad46559",
+    "src/main/resources/assets/destiny/items/weapon/pyroclastic_flow.json": "f8fe01994b4d9f919ad26ff28e4de95e0c568c11317bca0008eef6faa3f29b04",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/pyroclastic_flow.png": "f3f568f4042d28765cb3feffde574ba40b19c26caaa7fc048e460fb55b686228",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "src/main/resources/assets/destiny/models/weapon/rocket_launcher/pyroclastic_flow.json": "77e259d2246a7008be0d898977e506614b6fdf81824966d355c5598d3e59c59f",
+    "src/main/resources/assets/destiny/models/weapon/rocket_launcher/pyroclastic_flow_twohand.json": "7bf335e4042bf33106f6536ae0a48a7f5a31c8e67513a2de5ce947c42c22f501",
+    "src/main/resources/assets/destiny/models/weapon/rocket_launcher/pyroclastic_flow_ads.json": "a8dde23a4582f9c5df9a3325c68d0b312c21d45e1a6927ad82fbb64500e56e3c",
+    "src/main/resources/assets/destiny/models/weapon/rocket_launcher/pyroclastic_flow_ads_twohand.json": "a868b261e8d03aaa034d5b88304c9be1e199a8ac74716d3918e890dec419282a",
+    "src/main/resources/assets/destiny/models/weapon/rocket_launcher/pyroclastic_flow_inspect.json": "3518a2f839c725f75a3e9f786e3de15c28dfc0f8f05c8c2d80a11f2c1d180913",
+    "src/main/resources/assets/destiny/models/weapon/rocket_launcher/pyroclastic_flow_inspect_twohand.json": "b7091519778717ae3fa352a2b5ac3d70f9784b2e63a182ec04039a2486e49d2a"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w221/source-review.json",
+      "sourceSha256": "1816b1225731e5eac1ad16a1e52fb4c70aa6694c0e6af0035236d1f031391266",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original source.blend read-only in Blender5.4 Alpha; ARMATURE only, OBSlot action80A8A1A2, frames1..113,61 samples, prior joint error0, inputs unchanged. Worker read report and viewed bone sheet; no independent Blender evaluation claimed."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w221/source-sheets/rocket_launcher_1a221f25-80A8A1A2-upper-chain.png",
+      "sourceSha256": "5c050f9b1fc0d2fe80fe71b5aa7c384cd8212d6bcbcae9020b4f59e337adfae0",
+      "role": "viewed_source_upper_chain_sheet",
+      "observation": "Actual XZ/YZ source chains at0,.2,.4,.6,.8,1; left arm handles reload; no mesh/camera/finger IK available."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w221/source-handling-evidence.json",
+      "sourceSha256": "911ef2ee6443347fce73c5ffa424df599f47e62659a5c72b3c14a50415a5aa0e",
+      "role": "source_hand_ownership",
+      "observation": "Left wrist maximum weapon-local travel20.73145 at32units; right0.00016935. Keep source left palm unchanged and translate only incoming projectile."
+    }
+  ],
+  "notes": [
+    "Preserve W150106 canonical elements and all original face UV; no named detachable rocket exists. Author8 reload-only solids from existing material UV templates.",
+    "Receiver core, launch tube, cowling, sights and receiver cradle remain fixed relative to source weapon bone. Rear socket floor/lip articulate about existing rear hinge; rear latch unlocks separately.",
+    "Retain existing right/left idle contacts and effective framing. Reload contact is projectile center; source palm unchanged. Release fully by.66, before neutral seat.72 and closure.76..84.",
+    "Original source has no recovered weapon mesh/camera/fingers or weapon-specific selector proof. Mechanical part timing and pivots are authored geometry-based approximations.",
+    "Master owns actual assembled-arm counts, materialization and FIRST feedback then SECOND Vision; no acceptance claimed."
+  ]
+}
