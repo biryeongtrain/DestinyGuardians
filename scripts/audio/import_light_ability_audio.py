@@ -13,10 +13,18 @@ def decode(ffmpeg,p):
  a=array.array("f",command(ffmpeg,["-i",str(p),"-f","f32le","-acodec","pcm_f32le","-"]))
  if not a or any(not math.isfinite(x) for x in a):raise ValueError("Invalid PCM: "+str(p))
  return {"samples":len(a),"peak":max(abs(x) for x in a),"rms":math.sqrt(sum(x*x for x in a)/len(a))}
+def sound_definition(asset, previous):
+ # Replacing a clip must preserve existing subtitle and other event metadata.
+ definition={k:v for k,v in (previous or {}).items() if k!="sounds"}
+ definition["sounds"]=[{"name":"destiny:"+asset,"stream":False,"attenuation_distance":32}]
+ return definition
+
 def main():
  ap=argparse.ArgumentParser();ap.add_argument("--source",type=Path,required=True);ap.add_argument("--root",type=Path,default=ROOT);ap.add_argument("--ffmpeg",type=Path,required=True);ap.add_argument("--check",action="store_true");a=ap.parse_args()
  root=a.root.resolve();res=root/"src/main/resources";cues=a.source/"CUE-SHEETS.json"
  if sha(cues)!=CUE_SHA:raise ValueError("Cue sheet changed; review the new delivery")
+ provenance_path=root/"art/audio/w233/applied.json"
+ previous_bindings={x["event"]:x for x in read(provenance_path)["bindings"]} if provenance_path.exists() else {}
  lookup={(x["group"],x["sound"]):x for x in read(cues)};sounds_path=res/"assets/destiny/sounds.json";sounds=read(sounds_path);before=json.loads(json.dumps(sounds));records=[];unique={}
  for klass in ["hunter","titan","warlock"]:
   selection=read(root/("art/audio/w233/"+klass+"-selection.json"))
@@ -38,13 +46,13 @@ def main():
     if pcm["peak"]<=0 or pcm["peak"]>=1:raise ValueError("Silent/clipped output: "+asset)
     if abs(pcm["samples"]/rate-f["duration"])>.08:raise ValueError("Duration drift")
     unique[asset]={"sha256":sha(dest),"channels":channels,"sampleRate":rate,**pcm}
-   definition={"sounds":[{"name":"destiny:"+asset,"stream":False,"attenuation_distance":32}]}
    old=sounds.get(event)
+   original=previous_bindings[event]["previousDefinition"] if event in previous_bindings else old
+   definition=sound_definition(asset,original)
    if a.check and old!=definition:raise ValueError("Mapping mismatch: "+event)
    sounds[event]=definition
-   records.append({**binding,"sourceName":cue["name"],"nameStatus":cue["nameStatus"],"confidence":cue["confidence"],"sourceFrames":cue["sourceFrames"],"sequenceTimings":cue["sequenceTimings"],"sourceFile":f["file"],"sourceSha256":f["sha256"],"bank":cue["bank"],"output":"assets/destiny/sounds/"+asset+".ogg","processed":unique[asset],"previousDefinition":old if not a.check else None})
+   records.append({**binding,"sourceName":cue["name"],"nameStatus":cue["nameStatus"],"confidence":cue["confidence"],"sourceFrames":cue["sourceFrames"],"sequenceTimings":cue["sequenceTimings"],"sourceFile":f["file"],"sourceSha256":f["sha256"],"bank":cue["bank"],"output":"assets/destiny/sounds/"+asset+".ogg","processed":unique[asset],"previousDefinition":original})
  if len({x["event"] for x in records})!=len(records):raise ValueError("Duplicate event binding")
- provenance_path=root/"art/audio/w233/applied.json"
  if not a.check:
   write(sounds_path,sounds);write(provenance_path,{"sourceDelivery":SOURCE_NAME,"cueSheetSha256":CUE_SHA,"processing":"single selected WEM; mono 48000Hz Vorbis q5; gain0.5; no trim, mix, loop or tempo change","identityLimit":"FNV name candidates remain candidates. Wwise container/layer reconstruction and original-game A/B listening are not certified.","bindings":records})
  else:

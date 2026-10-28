@@ -1,0 +1,18 @@
+{
+  "totals": {
+    "tests": 2091,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": [
+    {
+      "suite": "kim.biryeong.destiny.weapon.FirstPersonHandsW201Test",
+      "test": "nativeCodecAcceptsRepresentativeIdleAdsAndReloadAndRetainsNonFirstpersonGraph()",
+      "message": "com.google.gson.JsonParseException: Failed parsing JSON source: JsonReader at line 1 column 42249983 path $.model.cases[0].model.fallback.entries[2].model.entries[46].model.on_false.models[3].on_true.on_false.tints[47]. to Json",
+      "trace": "com.google.gson.JsonParseException: Failed parsing JSON source: JsonReader at line 1 column 42249983 path $.model.cases[0].model.fallback.entries[2].model.entries[46].model.on_false.models[3].on_true.on_false.tints[47]. to Json\n\tat com.google.gson.JsonParser.parseReader(JsonParser.java:146)\n\tat com.google.gson.JsonParser.parseReader(JsonParser.java:110)\n\tat com.google.gson.JsonParser.parseString(JsonParser.java:92)\n\tat kim.biryeong.destiny.weapon.FirstPersonHandsW201Test.json(FirstPersonHandsW201Test.java:20)\n\tat kim.biryeong.destiny.weapon.FirstPersonHandsW201Test.nativeCodecAcceptsRepresentativeIdleAdsAndReloadAndRetainsNonFirstpersonGraph(FirstPersonHandsW201Test.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\nCaused by: java.lang.OutOfMemoryError: Java heap space\n\tat com.google.gson.internal.bind.JsonElementTypeAdapter.tryBeginNesting(JsonElementTypeAdapter.java:51)\n\tat com.google.gson.internal.bind.JsonElementTypeAdapter.read(JsonElementTypeAdapter.java:103)\n\tat com.google.gson.internal.Streams.parse(Streams.java:48)\n\tat com.google.gson.JsonParser.parseReader(JsonParser.java:144)\n\tat com.google.gson.JsonParser.parseReader(JsonParser.java:110)\n\tat com.google.gson.JsonParser.parseString(JsonParser.java:92)\n\tat kim.biryeong.destiny.weapon.FirstPersonHandsW201Test.json(FirstPersonHandsW201Test.java:20)\n\tat kim.biryeong.destiny.weapon.FirstPersonHandsW201Test.nativeCodecAcceptsRepresentativeIdleAdsAndReloadAndRetainsNonFirstpersonGraph(FirstPersonHandsW201Test.java:43)\n\tat java.base/java.lang.invoke.LambdaForm$DMH/0x00007f000114c400.invokeVirtual(LambdaForm$DMH)\n\tat java.base/java.lang.invoke.LambdaForm$MH/0x00007f0001088800.invoke(LambdaForm$MH)\n\tat java.base/java.lang.invoke.Invokers$Holder.invokeExact_MT(Invokers$Holder)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n"
+    }
+  ],
+  "originalW233FailuresResolved": true,
+  "buildSuccessful": false
+}

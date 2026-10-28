@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "stage": "W234",
+  "policy": "Full original SHA-256 and byte counts remain mandatory. Historical manifests and product data are unchanged.",
+  "sources": [
+    {
+      "id": "inventory",
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691,
+      "repositoryPaths": [],
+      "url": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+      "archiveEntry": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c.json",
+      "provenance": "Recovered from surviving /private/tmp/destiny-weapons-w30/bungie-items.json; exact SHA-256 and size matched all four original manifests before archiving."
+    },
+    {
+      "id": "plugSets",
+      "path": "/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797,
+      "repositoryPaths": [],
+      "url": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+      "provenance": "Recovered 2026-10-29 from the unchanged historical Bungie component URL; exact SHA-256 and size matched all four original manifests before archiving.",
+      "archiveEntry": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959.json"
+    },
+    {
+      "id": "manifest",
+      "path": "/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873,
+      "repositoryPaths": [
+        "art/weapons/w83/references/pinned-manifest-raw.json"
+      ],
+      "url": null,
+      "provenance": "Full original response already preserved in W83; current Destiny2/Manifest response is not a substitute.",
+      "archiveEntry": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce.json"
+    },
+    {
+      "id": "clarity",
+      "path": "/private/tmp/w167-clarity.json",
+      "sha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+      "bytes": 2091445,
+      "repositoryPaths": [
+        "art/weapons/w83/references/clarity-raw.json"
+      ],
+      "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+      "archiveEntry": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384.json"
+    }
+  ],
+  "archive": {
+    "path": "art/weapons/w234/pinned-original-sources.zip",
+    "sha256": "c39000dc1396093af0779d46081d79bcd6858400cc87091030a0e9e29e2fb134",
+    "bytes": 9035688,
+    "format": "ZIP_DEFLATED",
+    "reproduce": "rtk proxy python3 scripts/qa/verify_profile_sources_w234.py --rebuild-archive /private/tmp/pinned-original-sources.zip --inventory /path/to/bungie-items.json --plug-sets /path/to/bungie-plugsets.json --manifest /path/to/manifest.json --clarity /path/to/clarity.json"
+  }
+}

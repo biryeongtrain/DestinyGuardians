@@ -62,7 +62,11 @@ loom {
     }
 }
 
-test { useJUnitPlatform() }
+test {
+    useJUnitPlatform()
+    // 큰 1인칭 손/무기 JSON을 바닐라 codec으로 검사할 때 기본 512MiB로는 부족하다.
+    maxHeapSize = '2g'
+}
 
 sourceSets {
     main {
