@@ -1,0 +1,13 @@
+{
+  "tests": 4,
+  "failures": 0,
+  "command": "rtk proxy python3 -B -m unittest scripts/qa/test_source_registration_w222.py scripts/qa/test_source_bindings_w212.py scripts/qa/test_bow_contacts_w222.py",
+  "earlierFailure": "Initial rigid-pivot regression caught source-unit/item-unit mismatch in shared correction; fixed origin delta division by32 before displacement conversion.",
+  "checks": [
+    "61source-world right-wrist poses match independent rigid map",
+    "orthogonal basis preserves source limb length",
+    "basis aligns actual source/mesh grip directions",
+    "scale/reflection/nonfinite basis rejected",
+    "existing bindings and bow anchors retained"
+  ]
+}

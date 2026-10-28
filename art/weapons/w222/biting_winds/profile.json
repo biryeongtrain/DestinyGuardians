@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "stage": "W222",
+  "weapon": "biting_winds",
+  "sourceAction": "80A8A207",
+  "sourceRig": {
+    "path": "art/weapons/w222/rigs/bow_6239be39.json",
+    "group": "bow_6239be39",
+    "action": "80A8A207",
+    "sourceAction": "80A8A207",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/bow_6239be39/blender/source.blend",
+    "cacheSha256": "cd8782f018f3a4c422c95be447f8ade8f34f45250b6ce93dab1295cdb9f3c623",
+    "sha256": "cd8782f018f3a4c422c95be447f8ade8f34f45250b6ce93dab1295cdb9f3c623",
+    "sourceBlendSha256": "e9f43ddf06fda271fc8d6606a09e0b49098caeb2cc066d852f376e822af5e9e8",
+    "sourceMapSha256": "db04930d3bb50aa9f2257fcf65e2cd5ba8c2dd7fcca22a48478c0d5764055d87",
+    "boneMapSha256": "0118c8bb56a6875120efe45ae591274d37592467aed25030b53d73f2656513bd",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/bow_6239be39/source-map.json",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/bow_6239be39/bone-map.json"
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        10.25,
+        12.23
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        8.1,
+        12.1,
+        7.48
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        7.85,
+        10.25,
+        11.85
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "partHint": "moving",
+      "policy": "bow",
+      "hand": "right",
+      "rigAction": "80A8A207"
+    }
+  },
+  "framing": {
+    "supportHipLower": 0.6,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "cameraDepth": 11,
+    "leftPalmLower": 1.5,
+    "rightPalmLower": 1.0,
+    "translation": [
+      -5.5,
+      -0.2,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 0.94,
+    "rightWristRoll": 35,
+    "leftRotation": [
+      0,
+      0,
+      -25
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceWeaponMotion": true
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w222/source-review.json",
+      "sourceSha256": "c89efd773b59eae8272983f11885e993985e090179a0f4411ac07681efa19ec2",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated source.blend read-only in separate Blender5.4.0 Alpha; ARMATURE only, OBSlot Armature|fp_80A8A207_reload_full|Base, frames1..29,61 samples with shoulders, prior cache joint error0, allInputsUnchanged=true. Worker read report and viewed source sheet; no independent Blender evaluation claimed."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/source-handling-evidence.json",
+      "sourceSha256": "9431fd31c457e7e024a3653144fa48f5b2ccb0193f7d368d2cc85f660a218f69",
+      "role": "source_hand_ownership",
+      "observation": "Maximum weapon-relative wrist excursion RIGHT0.9233936977935914, LEFT0.004347778639555654 in source armature units. RIGHT is nocking/handling hand; LEFT supports riser. Entire source action is nock, not W50 draw."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/selection.json",
+      "sourceSha256": "3e4e4d64d6881cba06228c08438c500cb75fcc2326b2f17e8359ca725a702c29",
+      "role": "master_action_selection",
+      "observation": "Master selected shared bow action80A8A207 for biting_winds and whispering_slab; source names reload_full/reload_special/reload_empty do not establish a weapon-exclusive event track."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/source-sheets/bow_6239be39-80A8A207-upper-chain.png",
+      "sourceSha256": "0cb2ce9b2ef4b07d3453727fdc155b0571cbbdbb142772ba380d037916591fcd",
+      "role": "viewed_source_upper_chain_sheet",
+      "observation": "Viewed original source shoulder/elbow/wrist XZ/YZ chain sheet at0,.2,.4,.6,.8,1; the right handling excursion is evident. Bone-only projections provide no weapon mesh, arrow/string mesh/bone events, camera framing or finger IK."
+    }
+  ],
+  "notes": [
+    "Master owns source evaluation and shared sourceFullChain replay. Worker supplies61 neutral body-carrier poses/60intervals for RIGHT-hand nocking, preserving both existing FP displays/native-twohand calibration; no source motion is double-baked.",
+    "Preserve126 semantic elements including23 resting arrow/string pieces and exact face UVs. No detached arrow added, hidden, scaled or moved; original source has no arrow mesh/bone event evidence. Body-only nock carrier is deliberate.",
+    "Keep W50 draw separate. Master must preserve RIGHT-hand W50 string displacement and lowered LEFT riser anchor when source_palm_translations replaces palm locations. Existing contacts and supportHipLower/leftPalmLower/rightPalmLower stay calibrated.",
+    "Preserve accepted bow translation[-5.5,-.2,0], rotation[0,0,0], scale.94 and existing cameraDepth11. sourceViewRotation is explicitly[0,0,0] for full-chain replay. No new camera lift/lower/depth or damping, no stretched/hidden arms.",
+    "Source group is shared with whispering_slab; not proof of a Biting Winds-exclusive selector. ARMATURE only: no recovered weapon mesh, camera or finger IK. Resting geometry is accepted product geometry, not recovered animated source mesh.",
+    "61 bank poses do not establish native continuous60fps interpolation. Preserve existing gameplay duration, ammo, inputs, ADS/inspect, W50 draw and audio; master owns loaders/routing/materialization/build/CU/Vision.",
+    "Reserve448 elements for four ordinary skin-arm surfaces. Candidate reload126+448=574; conservative raw W50 alternative252+448=700. Master measures final integrated assembled arms/routes.",
+    "FIRST Vision, actual-image feedback to this worker, justified correction or no-change response, and SECOND Vision remain pending; no native acceptance claimed."
+  ],
+  "nativeReview": {
+    "firstVision": "pending",
+    "sameWorkerImageReview": "pending",
+    "secondVision": "pending",
+    "nativeAccepted": false
+  }
+}

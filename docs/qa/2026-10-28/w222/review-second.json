@@ -1,0 +1,71 @@
+{
+  "accepted": true,
+  "acceptanceScope": "Source-chain routing, corrected rigid mesh registration and sampled reload/ADS/recovery behavior; not final all-angle weapon-art polish",
+  "nativeSequences": 13,
+  "viewed": [
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/biting_winds-review.png",
+      "sha256": "b05539186d576a17ef56d60fc323ff061c260517c38b08e81f8447474880961f"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/biting_winds-reload.png",
+      "sha256": "722b1f98229ff9af7da58040c006c234d66ccef25073d220cd0b06edc007a510"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/whispering_slab-review.png",
+      "sha256": "a67869edc705062801a014b218263abe5ea00da0980252b654079b14bc890c1b"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/whispering_slab-reload.png",
+      "sha256": "dd15112a624bfca45e15ad79aa84b1fb175c2cbac50c2e125fb1d788f680b1dd"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/long_arm-review.png",
+      "sha256": "72628ebd9e4f141bacba6569c527181e749d322cbaaf6ea223d2310b9570311f"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/long_arm-reload.png",
+      "sha256": "23b92e97148f6ddd43b4ebbb84cc80b545eb45f394a5b0d9123638bdd6b38bb4"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/nezarec_s_whisper-review.png",
+      "sha256": "8ad6c87b7dff13459c8773f498abb57667f89dc8ee96b30e00456f605bd76d9b"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/screenshots/nezarec_s_whisper-reload.png",
+      "sha256": "1d30acc49d37de4c6008e51063e9f6a08aa28fadfcedd7c7ba3b74288c3fb7d4"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/second-post-reload-review.png",
+      "sha256": "90c3ed1738e7b59d7107a595598558800595befa57a4424584e675dedf37e6ef"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/frames/w222-nezarec_s_whisper-reload-sample-04.png",
+      "sha256": "bed65f12946d3900ae0d98412a98cb63858892029d38204ee48859c4da193b68"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/frames/w222-nezarec_s_whisper-reload-sample-09.png",
+      "sha256": "1e304458e26866f301b35d3c9b653a4a38ba01a80a777cb54755c4802fc11f7b"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/frames/w222-nezarec_s_whisper-reload-sample-14.png",
+      "sha256": "29ecd649e7fcf934cfe59b58164a83971544612e30988a83c9a0be3dd671554f"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w222/vision2/frames/w222-long_arm-reload-sample-16.png",
+      "sha256": "2a511aa72d3583dd23b5b13ca6c4fe7a723b578c865b684f6222fe78e8c0b328"
+    }
+  ],
+  "findings": [
+    "All4weapons pay native fire, finish reload and return to ready pose; LongArm finishes14 and interrupt paidshot leaves3 in both passes.",
+    "Nezarec corrected samples04/09/14 now retain visible shaft/blade where FIRST lost body. Fixed source/mesh axis and pivot registration is supported by source-world trajectory oracle and actualPNG.",
+    "Bows retain open sight/pin area, lower riser contact, nock tilt and return; forearm still crowds lower-right ADS.",
+    "LongArm initial/loop/return60interval route is live; pair carry/seat partlyoccluded by receiver/palm.",
+    "W222-specific pack missing-reference warnings reduced from224particle-only to0 after hiddenparent correction."
+  ],
+  "limits": [
+    "Nezarec upper/forearm still occupies a large right/center screen area in raised reload and ready pose. Accepted rigid registration is not a claim that final first-person silhouette is naturally polished; remaining arm framing/occlusion needs a later source-grounded pass.",
+    "Sampled frames cannot establish every contact/seat instant. Some source joints are outside the framebuffer.",
+    "No acoustic listening, continuous60fps certification, third-person changes, or both-grip/all-angle visual parity in this batch."
+  ]
+}

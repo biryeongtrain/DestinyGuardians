@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "stage": "W222",
+  "weapon": "whispering_slab",
+  "sourceAction": "80A8A207",
+  "sourceRig": {
+    "group": "bow_6239be39",
+    "action": "80A8A207",
+    "sourceAction": "80A8A207",
+    "path": "art/weapons/w222/rigs/bow_6239be39.json",
+    "sha256": "cd8782f018f3a4c422c95be447f8ade8f34f45250b6ce93dab1295cdb9f3c623",
+    "cacheSha256": "cd8782f018f3a4c422c95be447f8ade8f34f45250b6ce93dab1295cdb9f3c623",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/bow_6239be39/blender/source.blend",
+    "sourceBlendSha256": "e9f43ddf06fda271fc8d6606a09e0b49098caeb2cc066d852f376e822af5e9e8",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/bow_6239be39/source-map.json",
+    "sourceMapSha256": "db04930d3bb50aa9f2257fcf65e2cd5ba8c2dd7fcca22a48478c0d5764055d87",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/bow_6239be39/bone-map.json",
+    "boneMapSha256": "0118c8bb56a6875120efe45ae591274d37592467aed25030b53d73f2656513bd"
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        6.38,
+        17.4,
+        6.95
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        6.38,
+        15.85,
+        3.92
+      ],
+      "rotation": [
+        -15.0,
+        0.0,
+        0.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        6.2,
+        17.4,
+        6.65
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "partHint": "body",
+      "policy": "bow",
+      "hand": "right",
+      "rigAction": "80A8A207"
+    }
+  },
+  "framing": {
+    "supportHipLower": 0.6,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "cameraDepth": 11,
+    "leftPalmLower": 1.5,
+    "rightPalmLower": 1.0,
+    "translation": [
+      -5.5,
+      -0.2,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 0.94,
+    "rightWristRoll": 35,
+    "leftRotation": [
+      0,
+      0,
+      -25
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceWeaponMotion": true
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w222/source-review.json",
+      "sourceSha256": "c89efd773b59eae8272983f11885e993985e090179a0f4411ac07681efa19ec2",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original source.blend read-only using separate Blender5.4 Alpha: ARMATURE only, OBSlot action80A8A207, frames1..29,61 samples including shoulders; prior-cache joint error0 and original inputs unchanged. Worker read report; no independent Blender evaluation claimed."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/source-handling-evidence.json",
+      "sourceSha256": "9431fd31c457e7e024a3653144fa48f5b2ccb0193f7d368d2cc85f660a218f69",
+      "role": "actual_hand_ownership",
+      "observation": "Maximum weapon-relative wrist excursion: right0.9233936977935914, left0.004347778639555654. RIGHT nocks; LEFT supports offset riser."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/selection.json",
+      "sourceSha256": "3e4e4d64d6881cba06228c08438c500cb75fcc2326b2f17e8359ca725a702c29",
+      "role": "master_action_selection",
+      "observation": "Whispering Slab and Biting Winds share bow6239be39 action80A8A207. No weapon-exclusive action selector proof."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/source-sheets/bow_6239be39-80A8A207-upper-chain.png",
+      "sourceSha256": "0cb2ce9b2ef4b07d3453727fdc155b0571cbbdbb142772ba380d037916591fcd",
+      "role": "viewed_original_source_chain",
+      "observation": "Viewed six XZ/YZ shoulder-elbow-wrist chain samples at0,.2,.4,.6,.8,1. Source bones only; no mesh/camera/gameplay evidence."
+    }
+  ],
+  "notes": [
+    "Body-only neutral carrier: preserve entire current96-element rest surface, arrow/string geometry, original UVs, accepted native/twohand displays, ADS/inspect graph and canonical endpoints/fallback/nonFP.",
+    "Original61 samples cover whole nock action1..29. Master alone replays weapon and both shoulder/elbow/wrist chains once. No generic authored motion is described as recovered source animation.",
+    "RIGHT is the nocking hand; LEFT keeps calibrated offset riser contact[6.38,15.85,3.92]. Existing right/string and reload nocking contact calibrations are preserved. No arm stretching, hiding, axis damping or additional camera fit.",
+    "Effective bow family/current framing is merged intact except sourceViewRotation explicitly[0,0,0] for source-chain replay; sourceWeaponMotion true. Retain existing translation[-5.5,-.2,0], scale.94, rotation[0,0,0], inherited cameraDepth11 and palm/support lowering; no new cameraLift/Lower/Depth adjustment.",
+    "Source contains ARMATURE only: no arrow mesh/bone-event track, source weapon mesh, camera or recovered finger IK. Rest arrow/string remain static relative to the body; no invented recovered arrow exchange/reveal event.",
+    "Nocking is separate from W50 draw. Master retains existing W50 draw hand displacement, string/arrow routing and lowered LEFT riser anchor. This generator does not change timing/audio/ammo/inputs or recover draw motion.",
+    "61 poses/60 intervals are discrete banks, not proof of continuous native60fps interpolation. Bow action is shared, not a Whispering Slab-exclusive action recovery.",
+    "Reload96+448 ordinary four-arm-surface reserve=544; raw canonical alternative200+448=648, below1000. Alternatives are not simultaneous. Master must measure actual integrated arm/all-route counts and inspect contacts/clearance.",
+    "FIRST native images, same-worker correction or justified no-change feedback, integration and SECOND Vision remain pending. Native acceptance is not claimed."
+  ]
+}

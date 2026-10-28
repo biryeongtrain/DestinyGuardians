@@ -21,7 +21,7 @@ def load():
     assert data['schemaVersion'] == 1
     data['profileInputs'] = {}
     data['contactOverrides'] = {}
-    for path in sorted([*PROFILES.glob('*/profile.json'), *(ROOT/'art/weapons/w208').glob('*/profile.json'), *(ROOT/'art/weapons/w210').glob('*/profile.json'), *(ROOT/'art/weapons/w212').glob('*/profile.json'), *(ROOT/'art/weapons/w213').glob('*/profile.json'), *(ROOT/'art/weapons/w214').glob('*/profile.json'), *(ROOT/'art/weapons/w215').glob('*/profile.json'), *(ROOT/'art/weapons/w216').glob('*/profile.json'), *(ROOT/'art/weapons/w217').glob('*/profile.json'), *(ROOT/'art/weapons/w218').glob('*/profile.json'), *(ROOT/'art/weapons/w219').glob('*/profile.json'), *(ROOT/'art/weapons/w220').glob('*/profile.json'), *(ROOT/'art/weapons/w221').glob('*/profile.json')]):
+    for path in sorted([*PROFILES.glob('*/profile.json'), *(ROOT/'art/weapons/w208').glob('*/profile.json'), *(ROOT/'art/weapons/w210').glob('*/profile.json'), *(ROOT/'art/weapons/w212').glob('*/profile.json'), *(ROOT/'art/weapons/w213').glob('*/profile.json'), *(ROOT/'art/weapons/w214').glob('*/profile.json'), *(ROOT/'art/weapons/w215').glob('*/profile.json'), *(ROOT/'art/weapons/w216').glob('*/profile.json'), *(ROOT/'art/weapons/w217').glob('*/profile.json'), *(ROOT/'art/weapons/w218').glob('*/profile.json'), *(ROOT/'art/weapons/w219').glob('*/profile.json'), *(ROOT/'art/weapons/w220').glob('*/profile.json'), *(ROOT/'art/weapons/w221').glob('*/profile.json'), *(ROOT/'art/weapons/w222').glob('*/profile.json')]):
         raw = path.read_bytes()
         entry = json.loads(raw)
         weapon = path.parent.name

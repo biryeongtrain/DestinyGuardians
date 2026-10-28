@@ -62,6 +62,14 @@ def resolve(key):
 def smooth(x):
     x=max(0,min(1,x));return x*x*(3-2*x)
 
+def source_mesh_contacts(config,amount,bow_draw_displacement=0.0):
+    """Keep mesh-specific bow anchors when replaying the original arm chain."""
+    contacts={side:framing.contact(config,side) for side in ('right','left')}
+    if config['family']=='bow':
+        contacts['left']['position'][1]-=config['framing'].get('supportHipLower',0)*amount
+        contacts['right']['position'][2]+=bow_draw_displacement
+    return contacts
+
 def display_at(source,contact):
     out={}
     for context in FP:
@@ -135,7 +143,7 @@ def generated():
         amount=framing.weight(state,primary['model'])
         progress=state.get(1)
         insert_phase=None
-        if id in ('dust_rock_blues', 'first_in_last_out', 'ikelos_sg_v1_0_1', 'mindbender_s_ambition_adept', 'parcel_of_stardust_fell_to_earth') and 4 in state:
+        if id in ('dust_rock_blues', 'first_in_last_out', 'ikelos_sg_v1_0_1', 'mindbender_s_ambition_adept', 'parcel_of_stardust_fell_to_earth', 'long_arm') and 4 in state:
             value=state[4]
             if 0 <= value <= 5:
                 insert_phase=('initial','loop','return')[min(2,int(value//2))]
@@ -173,6 +181,7 @@ def generated():
         base_right=copy.deepcopy(right)
         reload_target=None;reload_grip_weight=0.;moving_key=None
         handling_side=reload_hand.side(config['reload'])
+        bow_draw_displacement=0.0
         if config['family']=='bow':
             # Keep the palm on the lower riser pad, below the sight aperture.
             # This is mesh-contact retargeting, not a recovered camera offset.
@@ -184,7 +193,8 @@ def generated():
             if moving:
                 frame=int(re.search(r'_draw_(\d+)',role(moving))[1])
                 contact=framing.contact(config,'right')
-                contact['position'][2]+={'biting_winds':4.8,'whispering_slab':3.4}[id]*frame/20
+                bow_draw_displacement={'biting_winds':4.8,'whispering_slab':3.4}[id]*frame/20
+                contact['position'][2]+=bow_draw_displacement
                 right=display_at(framed(source(moving['model'])[0]['display']),contact)
         elif progress is not None and (insert_phase is not None or 0<progress<1):
             reload=config['reload'];hint=reload.get('partHint','magazine')
@@ -232,8 +242,8 @@ def generated():
             stats['rigFrames']+=1
         part_shift={}
         if source_chain:
-            palms=rig_arms.source_palm_translations(rigs[id],state,progress,config,body_display,
-                {side:framing.contact(config,side) for side in ('right','left')},xyz,vec)
+            mesh_contacts=source_mesh_contacts(config,amount,bow_draw_displacement)
+            palms=rig_arms.source_palm_translations(rigs[id],state,progress,config,body_display,mesh_contacts,xyz,vec)
             for side,display in [('right',right),('left',left)]:
                 for ctx in FP:display[ctx]['translation']=palms[side][ctx]
             # A generic full-shotgun action has no extracted shell event track.

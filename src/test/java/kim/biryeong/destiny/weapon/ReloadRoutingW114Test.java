@@ -8,6 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 /** Catalog-only admission regression, independently runnable without asset/server bootstrap. */
 class ReloadRoutingW114Test {
     private static final Map<String, String> EXPECTED = Map.ofEntries(
+            Map.entry("biting_winds", "weapon_reload_w222_biting_winds/biting_winds"),
+            Map.entry("whispering_slab", "weapon_reload_w222_whispering_slab/whispering_slab"),
+            Map.entry("nezarec_s_whisper", "weapon_reload_w222_nezarec_s_whisper/nezarec_s_whisper"),
+
             Map.entry("pyroclastic_flow", "weapon_reload_w221_pyroclastic_flow/pyroclastic_flow"),
             Map.entry("canis_major", "weapon_reload_w220_canis_major/canis_major"),
             Map.entry("dimensional_hypotrochoid", "weapon_reload_w220_dimensional_hypotrochoid/dimensional_hypotrochoid"),
@@ -60,7 +64,7 @@ class ReloadRoutingW114Test {
             Map.entry("brass_attacks", "weapon_reload_w216_brass_attacks/brass_attacks"),
             Map.entry("claws_of_the_wolf", "weapon_reload_w214_claws_of_the_wolf/claws_of_the_wolf"),
             Map.entry("salvager_s_salvo", "weapon_reload_w220_salvager_s_salvo/salvager_s_salvo"));
-    @Test void fiftyCanonicalReloadRoutesIncludePyroclasticFlow() {
+    @Test void fiftyThreeRoutesIncludeBowNockingAndGlaive() {
         assertEquals(65, WeaponCatalog.all().size());
         int count = 0;
         for (var entry : WeaponCatalog.all()) {
@@ -70,7 +74,7 @@ class ReloadRoutingW114Test {
                 count++;
             } else assertThrows(IllegalArgumentException.class, () -> WeaponReloadPresentation.model(entry), entry.id());
         }
-        assertEquals(50, count);
+        assertEquals(53, count);
         assertEquals(1, WeaponReloadPresentation.PROGRESS_INDEX);
     }
     @Test void nullHasNoReloadGraphOrPresentation() {

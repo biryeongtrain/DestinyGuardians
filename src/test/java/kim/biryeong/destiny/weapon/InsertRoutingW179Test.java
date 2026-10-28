@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InsertRoutingW179Test {
-    @Test void sixExactRoutesKeepLegacyLongArmAndDenseShotguns() {
+    @Test void sixExactRoutesIncludeDenseLongArmAndShotguns() {
         var routes=Map.of("ikelos_sg_v1_0_1","weapon_insert_w221_ikelos_sg_v1_0_1/ikelos_sg_v1_0_1",
                 "parcel_of_stardust_fell_to_earth","weapon_insert_w221_parcel_of_stardust_fell_to_earth/parcel_of_stardust_fell_to_earth",
-                "long_arm","weapon_insert_w71/long_arm",
+                "long_arm","weapon_insert_w222_long_arm/long_arm",
                 "first_in_last_out","weapon_insert_w208_first_in_last_out/first_in_last_out",
                 "mindbender_s_ambition_adept","weapon_insert_w221_mindbender_s_ambition_adept/mindbender_s_ambition_adept",
                 "dust_rock_blues","weapon_insert_w207_dust_rock_blues/dust_rock_blues");

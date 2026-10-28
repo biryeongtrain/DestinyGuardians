@@ -11,7 +11,7 @@ import first_person_framing_w205 as framing
 class SourceBindingsW212(unittest.TestCase):
     def test_new_profiles_use_real_dense_motion_and_restore_rest(self):
         rigs,_=rig.load();profiles=framing.load()
-        for weapon in ('antiope_d','bug_out_bag','cold_denial','bygones','lonesome','steelfeather_repeater','aishas_embrace','chattering_bone','halfdan_d','claws_of_the_wolf','bite_of_the_fox','retrofit_escapade','duke_mk_44','farewell','apostate','fixed_odds','distant_relation','patron_of_lost_causes','brass_attacks','ikelos_smg_v1_0_1','erentil_fr4','hollow_words','dream_breaker','null_composure','coriolis_force','line_in_the_sand','stormchaser','code_duello','bellowing_giant','bad_omens','allied_demand','dead_man_walking_xx7463','high_albedo','frontier_justice','retraced_path','edge_transit','canis_major','dimensional_hypotrochoid','deafening_whisper','salvager_s_salvo','ikelos_sg_v1_0_1','mindbender_s_ambition_adept','parcel_of_stardust_fell_to_earth','pyroclastic_flow','seventh_seraph_officer_revolver'):
+        for weapon in ('antiope_d','bug_out_bag','cold_denial','bygones','lonesome','steelfeather_repeater','aishas_embrace','chattering_bone','halfdan_d','claws_of_the_wolf','bite_of_the_fox','retrofit_escapade','duke_mk_44','farewell','apostate','fixed_odds','distant_relation','patron_of_lost_causes','brass_attacks','ikelos_smg_v1_0_1','erentil_fr4','hollow_words','dream_breaker','null_composure','coriolis_force','line_in_the_sand','stormchaser','code_duello','bellowing_giant','bad_omens','allied_demand','dead_man_walking_xx7463','high_albedo','frontier_justice','retraced_path','edge_transit','canis_major','dimensional_hypotrochoid','deafening_whisper','salvager_s_salvo','ikelos_sg_v1_0_1','mindbender_s_ambition_adept','parcel_of_stardust_fell_to_earth','pyroclastic_flow','seventh_seraph_officer_revolver','biting_winds','whispering_slab','long_arm','nezarec_s_whisper'):
             with self.subTest(weapon=weapon):
                 data=rigs[weapon]
                 reload=profiles['contactOverrides'][weapon]['reload']
@@ -19,7 +19,7 @@ class SourceBindingsW212(unittest.TestCase):
                 self.assertEqual(61,len(data['actions'][reload['rigAction']]['frames']))
                 self.assertTrue(profiles['weapons'][weapon]['sourceFullChain'])
                 self.assertIn('leftShoulder',data['names'])
-                shell=weapon in ('ikelos_sg_v1_0_1','mindbender_s_ambition_adept','parcel_of_stardust_fell_to_earth')
+                shell=weapon in ('ikelos_sg_v1_0_1','mindbender_s_ambition_adept','parcel_of_stardust_fell_to_earth','long_arm')
                 if shell:config['insertPhase']='initial'
                 # These shell actions deliberately hold the port pose after
                 # .36; test the moving initial slice, not that calibrated hold.

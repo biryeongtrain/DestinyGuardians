@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "stage": "W222",
+  "weapon": "long_arm",
+  "sourceAction": "80A8A345",
+  "sourceRig": {
+    "path": "art/weapons/w222/rigs/scout_rifle_e4c9ea6c.json",
+    "group": "scout_rifle_e4c9ea6c",
+    "sourceAction": "80A8A345",
+    "action": "Armature|fp_80A8A345_reload_full|Base",
+    "sourceFrameRange": [1, 105],
+    "evaluatedSamples": 61,
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/scout_rifle_e4c9ea6c/blender/source.blend",
+    "sourceBlendSha256": "086f4a7f7b1ea7806753fc177ae2dd3e17dfdfdfe2d235b73cd27ecc8e244f87",
+    "sourceMapSha256": "9cb89065935051a1f2ce78335aac457bc0562e9dfd1048f9faba9355895bee27",
+    "boneMapSha256": "2deeb3c44022d7eb3434ff5aaa4503cea02c00af1c87419e9e17c050529a4823",
+    "cacheSha256": "29713d0d7f4164a8e6c183b8d5cf51a457313c4367109fc1faa14463c4fb9f35",
+    "evaluationOwner": "Master read-only separate Blender5.4Alpha evaluation; worker read evidence/cache and viewed original-chain sheet"
+  },
+  "framing": {
+    "translation": [-0.65, 0.6, 0],
+    "rotation": [-1, 2, 0],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [15, 35, -35],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceViewRotation": [0, 0, 0],
+    "sourceWeaponMotion": true
+  },
+  "contacts": {
+    "right": {
+      "position": [8.0, 8.65, 8.8],
+      "rotation": [38.0, 0.0, 0.0]
+    },
+    "left": {
+      "position": [7.8, 7.83, 1.5],
+      "rotation": [0.0, 90.0, -85.0]
+    },
+    "reload": {
+      "contact": [8.55, 9.4, 6.35],
+      "rotation": [0.0, 15.0, -80.0],
+      "partHint": "shell",
+      "policy": "shell",
+      "hand": "left",
+      "rigAction": "80A8A345",
+      "sourceShellPoseHold": true,
+      "sourcePalmContactFit": true
+    }
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w222/source-review.json",
+      "observation": "Master evaluated original source.blend read-only in separate Blender5.4Alpha; Armature only, OBSlot action80A8A345 frames1..105 at61 samples. Prior-cache joint error0. Worker did not independently open/evaluate Blender. Original-cache SHA ca18c5871e0f37ab45ff9db283a4ccc2938b71e32c9c80134b01357e1fd3485e differs intentionally from the freshly evaluated W222 full-shoulder cache SHA above."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/source-handling-evidence.json",
+      "observation": "Weapon-relative wrist excursion LEFT .8631696442320517 versus RIGHT .057006084096135244 supports LEFT loading hand. Fresh cache SHA matches profile. Generic scout full-magazine reload is not recovered Long Arm pair loops."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/source-sheets/scout_rifle_e4c9ea6c-80A8A345-upper-chain.png",
+      "observation": "Worker viewed six XZ/YZ source-chain poses, p0,.2,.4,.6,.8,1: articulated elbows and shoulders, large handling excursion and near-rest ending. Bones only; no mesh, camera or gameplay/contact proof. PNG read from main because retained worktree contains only evidence JSON/cache."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w222/selection.json",
+      "observation": "Exact selected weapon long_arm."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "observation": "Preserve calibrated idle right/left positions and rotations exactly. Retain reload rotation; refine approximate side-port target behind bolt_handle using receiver_main geometry, with both rounds on one shell carrier and LEFT palm contact fit."
+    },
+    {
+      "source": "art/weapons/w123/long_arm/design.json",
+      "observation": "Preserve113 canonical surface elements/UV, lever bow, wood/wraps, long double-level barrel and raised gold sight. Authored side-port target derives from receiver_main [7.535,8.9,3.87]..[8.465,9.9,8.09]: east X+.085, midpoint Y, front Z+2.48. Added small cartridges reuse gold lever_upper/lever_toe and steel receiver_upper_action UV interiors. Solid receiver unchanged; no recovered port cavity or cartridge mesh."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "observation": "Merge existing scout family/current weapon values; preserve accepted translation/rotation/scale. Enable full source chain, support visibility and weapon motion; no new camera offset, fitting, damping or limb stretch."
+    },
+    {
+      "source": "scripts/generate_insert_w221_ikelos_sg_v1_0_1.py",
+      "observation": "Use explicit .35 held source calibration concept across seams, applied by master equally to weapon and shoulders/elbows/wrists. For this105-frame scout range .35 is frame37.4, not shotgun frame36. Generator body carrier is neutral; pair contact/geometry/path are explicitly authored."
+    }
+  ],
+  "notes": [
+    "183 authored presentation poses,61 each INITIAL CMD4[0,1], LOOP[2,3], RETURN[4,5]. Master binds61 samples per bank; shared replay owns source weapon and full normal-length arm chains exactly once.",
+    "Initial shared source reaches .35 via .35*smooth(p/.36); LOOP holds .35; RETURN blends that same calibration to rest. This is explicit authored generic-scout calibration, not a recovered pair loop or source camera.",
+    "Authored two small cartridges are a rigid paired payload, not a detachable tube. LEFT palm follows the same shell leaf/contact; original fore-end idle contact remains unchanged. Seat inside receiver before empty-geometry visibility; hidden HOME recycling is C1 at exact phase seams.",
+    "Preserve authoritative two-round-per-insert timing/ammo/input/audio and cosmetic6-tick recovery. No mechanisms or gameplay code edited; old W46 generic reload snapshot is not the authority for Long Arm insert behavior.",
+    "448 reserved elements cover four ordinary skin-arm surfaces. No hidden/stretch arms, no cameraLift/Lower/Depth adjustments, no new textures. Master measures final assembled elements and visually checks both grips and sights.",
+    "Prepared candidate only: FIRST actual-image feedback, same-worker correction or justified no-change, then master SECOND Vision remain pending.61 poses do not prove continuous60fps interpolation."
+  ]
+}

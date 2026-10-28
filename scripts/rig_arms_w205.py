@@ -42,11 +42,20 @@ def load():
   raw=path.read_bytes();d=json.loads(raw);inputs[str(path.relative_to(ROOT))]=hashlib.sha256(raw).hexdigest()
   for weapon in ('ikelos_sg_v1_0_1', 'mindbender_s_ambition_adept', 'parcel_of_stardust_fell_to_earth', 'pyroclastic_flow', 'seventh_seraph_officer_revolver'):
    if weapon in d['weapons']:result[weapon]=d
+ for path in sorted((ROOT/'art/weapons/w222/rigs').glob('*.json')):
+  raw=path.read_bytes();d=json.loads(raw);inputs[str(path.relative_to(ROOT))]=hashlib.sha256(raw).hexdigest()
+  for weapon in ('biting_winds', 'whispering_slab', 'long_arm', 'nezarec_s_whisper'):
+   if weapon in d['weapons']:result[weapon]=d
  return result,inputs
 
 # Source maps label all three Ammit/Blast variants reload_full/reload_empty,
 # without a weapon-specific selector. The caller must select an audited variant.
 RELOAD_ACTIONS = {
+ 'biting_winds': ('80A8A207',),
+ 'whispering_slab': ('80A8A207',),
+ 'long_arm': ('80A8A345',),
+ 'nezarec_s_whisper': ('80A8A440',),
+
  'ikelos_sg_v1_0_1': ('80A8A3F1',),
  'mindbender_s_ambition_adept': ('80A8A3F1',),
  'parcel_of_stardust_fell_to_earth': ('80A8A3F1',),
@@ -177,7 +186,7 @@ def joints(data,state,progress,config=None):
  if tag is None:return rest,False
  if tag not in data['actions']:raise ValueError(f'Missing evaluated reload action {tag}')
  p=progress;weight=smooth(p/.1)*smooth((1-p)/.1);source_p=p
- if weapon in ('dust_rock_blues', 'first_in_last_out', 'ikelos_sg_v1_0_1', 'mindbender_s_ambition_adept', 'parcel_of_stardust_fell_to_earth'):
+ if weapon in ('dust_rock_blues', 'first_in_last_out', 'ikelos_sg_v1_0_1', 'mindbender_s_ambition_adept', 'parcel_of_stardust_fell_to_earth', 'long_arm'):
   # One generic full reload is not an extracted shell-loop event track.
   # Calibrated continuous slice: hold the port pose at .35 across phase
   # boundaries; excursion/retrace during each insert avoids a loop-end pop.
@@ -229,6 +238,21 @@ def weapon_relative_delta(reference,current,side,mul):
  active=mul(transpose(weapon_basis(current)),forearm_basis(current,side))
  return mul(active,transpose(rest))
 
+def source_mesh_basis(config,mul):
+ """Optional rigid registration for a mesh whose semantic shaft is not -Z.
+
+ The glaive's two existing mesh grips define +Y, whereas its evaluated
+ source grip line points mostly -Z after C. A fixed orthogonal basis maps
+ those axes together; it never attenuates animation or fits the camera.
+ """
+ q=config.get('framing',{}).get('sourceMeshBasis')
+ if q is None:return C
+ if (len(q)!=3 or any(len(row)!=3 or any(not math.isfinite(v) for v in row) for row in q)
+     or any(abs(dot(q[i],q[j])-(1 if i==j else 0))>1e-7 for i in range(3) for j in range(3))
+     or dot(q[0],cross(q[1],q[2]))<1-1e-7):
+  raise ValueError('Source mesh basis must be a proper orthogonal rotation')
+ return mul(q,C)
+
 def source_weapon_display(data,state,progress,config,body,ready,part,xyz,mul,euler,vec):
  """Replay the source weapon bone, retaining authored part/body transforms.
 
@@ -236,9 +260,20 @@ def source_weapon_display(data,state,progress,config,body,ready,part,xyz,mul,eul
  matrices share one parent frame; the source file has no exported camera.
  """
  current,_=joints(data,state,progress,config);rest=rest_joints(data,state)
+ basis=source_mesh_basis(config,mul)
  wr=weapon_basis(rest);wt=weapon_basis(current)
- delta=mul(mul(C,mul(transpose(wr),wt)),transpose(C))
- shift=vec(C,vec(transpose(wr),sub(pos(current['weapon']),pos(rest['weapon']))))
+ delta=mul(mul(basis,mul(transpose(wr),wt)),transpose(basis))
+ shift=vec(basis,vec(transpose(wr),sub(pos(current['weapon']),pos(rest['weapon']))))
+ if config.get('framing',{}).get('sourceMeshPivot',False):
+  # Register the source weapon-bone origin using the accepted right grip.
+  # Rotation about the item's center would otherwise change that registration.
+  wrist=vec(basis,vec(transpose(wr),sub(pos(rest['rightWrist']),pos(rest['weapon']))))
+  grip=list(config['right']['position']);grip[1]-=config['framing'].get('rightPalmLower',0)
+  origin=[grip[i]-8-32*wrist[i] for i in range(3)]
+  rotated=vec(delta,origin)
+  # shift remains in source units here; displacement below converts it to
+  # item units once. origin already uses item units from the calibrated grip.
+  shift=[shift[i]+(origin[i]-rotated[i])/32 for i in range(3)]
  out={k:dict(v) for k,v in part.items()}
  for ctx in ('firstperson_righthand','firstperson_lefthand'):
   b,r,p=body[ctx],ready[ctx],part[ctx]
@@ -260,11 +295,13 @@ def source_palm_translations(data,state,progress,config,body,contacts,xyz,vec):
  shoulder chain into the sky even when the rotations are internally correct.
  """
  current,_=joints(data,state,progress,config);rest=rest_joints(data,state)
+ mul=lambda a,b:[[dot(row,col) for col in zip(*b)] for row in a]
+ basis=source_mesh_basis(config,mul)
  wt=transpose(weapon_basis(current));wr=transpose(weapon_basis(rest))
  result={}
  for side,contact in contacts.items():
-  active=vec(C,vec(wt,sub(pos(current[side+'Wrist']),pos(current['weapon']))))
-  ready=vec(C,vec(wr,sub(pos(rest[side+'Wrist']),pos(rest['weapon']))))
+  active=vec(basis,vec(wt,sub(pos(current[side+'Wrist']),pos(current['weapon']))))
+  ready=vec(basis,vec(wr,sub(pos(rest[side+'Wrist']),pos(rest['weapon']))))
   result[side]={}
   for ctx,b in body.items():
    local=[(contact['position'][i]-8+32*(active[i]-ready[i]))*b['scale'][i] for i in range(3)]
@@ -326,7 +363,7 @@ def apply(data,state,progress,config,right,left,base_right,body_display,carrier_
     # upward into the ADS view. Palm location is still the remodeled contact.
     body=xyz(body_display[ctx].get('rotation',[0,0,0]))
     source=mul(transpose(weapon_basis(j)),forearm_basis(j,name))
-    display[ctx]['rotation']=euler(mul(mul(body,C),source))
+    display[ctx]['rotation']=euler(mul(mul(body,source_mesh_basis(config,mul)),source))
    elif settings.get('sourceWeaponRelative',False) and dynamic:
     # Calibrate once in weapon space. Absolute armature-space source FK was
     # incompatible with the animated remodeled weapon's frame. Preserve the
