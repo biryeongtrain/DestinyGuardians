@@ -34,6 +34,9 @@ public final class HunterW230GameTests {
     private static final float HP=200; // 26.3 MAX_HEALTH is capped at1024; never expect unclamped2000.
     private static void check(GameTestHelper h,boolean value,String why) { h.assertTrue(value,Component.literal(why)); }
     private static ServerPlayer player(GameTestHelper h,Identifier id,Vec3 pos) {
+        return player(h,id,pos,null);
+    }
+    private static ServerPlayer player(GameTestHelper h,Identifier id,Vec3 pos,List<String> soundEvents) {
         for(int x=0;x<16;x++) for(int z=0;z<14;z++) h.setBlock(x,0,z,Blocks.STONE);
         Element element=AbilityRegistry.get(id).orElseThrow().element();
         ServerPlayer p=TestPlayers.hunter(h,element,pos,-90,0,"W230H"+UUID.randomUUID().toString().substring(0,7));
@@ -41,8 +44,18 @@ public final class HunterW230GameTests {
         Guardians.data(p).setSuperEnergy(1); Guardians.runtime(p); p.setOnGround(true);
         p.getInventory().setItem(0,new ItemStack(Items.DIAMOND,3));
         TestCleanup.register(h,() -> { HunterExpandedSupers.cleanup(p); TestPlayers.remove(p); });
+        ServerPlayer listener=soundEvents==null?null:TestPlayers.create(h,pos.add(0,0,-2),0,0);
+        if (listener != null) {
+            h.getLevel().addNewPlayer(listener);
+            listener.setNoGravity(true);
+            TestCleanup.register(h,() -> {
+                h.getLevel().removePlayerImmediately(listener,net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
+                TestPlayers.remove(listener);
+            });
+        }
         h.onEachTick(() -> {
             TestPlayers.drain(p);
+            if (listener != null) collectSounds(listener,soundEvents);
             if(AbilityService.inSuper(p)) {
                 int rotations=SuperCamera.rotations(p);
                 p.connection.handleMovePlayer(new ServerboundMovePlayerPacket.Rot(p.getYRot(),p.getXRot(),false,false));
@@ -50,10 +63,19 @@ public final class HunterW230GameTests {
                 AbilityService.tickPlayer(p);
             }
             HunterExpandedSupers.tick(h.getLevel().getServer()); // Same gameTime is intentionally safe if central lifecycle also runs.
+            if (listener != null) collectSounds(listener,soundEvents);
         });
         return p;
     }
     private static ServerPlayer player(GameTestHelper h,Identifier id) { return player(h,id,new Vec3(2.5,1,6.5)); }
+    private static void collectSounds(ServerPlayer p,List<String> sounds) {
+        for (var packet : TestPlayers.outbound(p)) {
+            if (packet instanceof net.minecraft.network.protocol.game.ClientboundSoundPacket sound) {
+                String key=sound.getSound().value().location().toString();
+                if (key.startsWith("destiny:hunter.solar.blade_barrage.")) sounds.add(key);
+            }
+        }
+    }
     private static Husk enemy(GameTestHelper h,Vec3 pos) {
         Husk e=h.spawn(EntityTypes.HUSK,pos); e.setNoAi(true); e.setNoGravity(true); e.setPersistenceRequired();
         e.getAttribute(Attributes.MAX_HEALTH).setBaseValue(HP); e.getAttribute(Attributes.ARMOR).setBaseValue(0);
@@ -108,9 +130,10 @@ public final class HunterW230GameTests {
         check(h,p.getInventory().getItem(0).is(Items.DIAMOND) && p.getInventory().getItem(0).getCount()==3,
                 "Virtual props preserve actual inventory");
     }
-    @GameTest(structure=FLOOR,environment=ENV,maxTicks=150,skyAccess=true)
+    @GameTest(structure=FLOOR,environment=ENV,maxTicks=250,skyAccess=true)
     public void barrageAutomaticallyReleasesExactlyTwoFansAndExplodesOnlyOnVisibleSide(GameTestHelper h) {
-        ServerPlayer p=player(h,HunterExpandedSupers.BLADE_BARRAGE); wall(h,7);
+        List<String> sounds=new ArrayList<>();
+        ServerPlayer p=player(h,HunterExpandedSupers.BLADE_BARRAGE,new Vec3(2.5,1,6.5),sounds); wall(h,7);
         Husk front=enemy(h,new Vec3(5.75,1,6.5)), blocked=enemy(h,new Vec3(8.5,1,6.5));
         check(h,h.getLevel().noCollision(blocked,blocked.getBoundingBox()),"Occluded control never overlaps wall");
         aim(p,blocked.position().add(0,.9,0)); cast(h,p);
@@ -120,7 +143,18 @@ public final class HunterW230GameTests {
             check(h,HunterExpandedSupers.emitted(p)==14 && status(p).contains("volleys=2"),"Two automatic seven-knife fans only: "+status(p));
             check(h,front.getHealth()<HP && blocked.getHealth()==HP,"Embedded delayed blast respects near-side collider LOS"+diagnostic(h,p,front,blocked));
             check(h,!AbilityService.inSuper(p) && SimProjectile.activeCount(p)==0,"Camera/session and finite knife flights recover");
-            inventory(h,p); h.succeed();
+            check(h,sounds.equals(List.of("destiny:hunter.solar.blade_barrage.fire")),
+                    "One throw cue across windup, both fans and recovery; no layered start/end: "+sounds);
+            inventory(h,p);
+            // A new accepted cast gets its own cue; the guard must not be a global cooldown.
+            Guardians.data(p).setSuperEnergy(1); cast(h,p);
+            h.runAfterDelay(windup(HunterExpandedSupers.BLADE_BARRAGE,40)+35,() -> {
+                check(h,sounds.equals(List.of("destiny:hunter.solar.blade_barrage.fire",
+                        "destiny:hunter.solar.blade_barrage.fire")),"Exactly one cue per successive cast: "+sounds);
+                check(h,HunterExpandedSupers.emitted(p)==14 && status(p).contains("volleys=2"),
+                        "Audio deduplication preserves both fans on the next cast");
+                inventory(h,p); h.succeed();
+            });
         });
     }
     @GameTest(structure=FLOOR,environment=ENV,maxTicks=400,skyAccess=true)

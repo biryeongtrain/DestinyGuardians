@@ -212,6 +212,8 @@ public final class ClassAbilityEffects {
 
     /** Persistent fields keep their own identity after the cast presentation has ended. */
     public static void sound(ServerPlayer p, Element e, String path, String action) {
+        // Blade Barrage uses one throw cue, not overlapping numeric start/end candidates.
+        if (path.equals("hunter/blade_barrage") && !action.equals("super.fire")) return;
         String routed = ClassSuperModelAssets.isExpanded(path)
                 ? action.replace("super.", path.substring(path.indexOf('/') + 1) + ".") : action;
         if (path.equals("titan/arc_super")) routed = action.replace("super.", "fists_of_havoc.");

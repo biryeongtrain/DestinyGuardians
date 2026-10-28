@@ -301,7 +301,8 @@ public final class HunterExpandedSupers {
         }
         boolean cloaked() { return ability.kind==Kind.SPECTRAL && now()-started>=windup && now()>=decloakedUntil; }
         private void fan(int side) {
-            lease.volleys++; ClassAbilityEffects.sound(lease.owner,ability.element(),path,"super.fire");
+            // Both knife fans belong to one cast cue; do not layer the full clip on the second fan.
+            if (++lease.volleys == 1) ClassAbilityEffects.sound(lease.owner,ability.element(),path,"super.fire");
             int count=ticks(ability,"knives_per_volley",7,3,9);
             Vec3 look=lease.owner.getLookAngle().normalize();
             Vec3 right=look.cross(new Vec3(0,1,0));

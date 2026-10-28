@@ -56,6 +56,8 @@ Java는 `ClassSuperModelAssets.durationTicks(path,phase,fallback)+SwordTiming.ST
 
 모든 사운드는 `sound(player,element,path,action)`으로 호출하여 cast 종료 후 필드도 궁극기별 key를 유지한다. 공유 sound routing/음원 선정은 master/source leader가 담당한다.
 
+W231 중복 수정: 칼날 장전은 첫 칼 투척 순간 `blade_barrage.fire`를 시전당1회만 재생한다. 두 번째 fan에서는 반복하지 않으며 준비·종료 단계의 숫자 후보음원을 덧씌우지 않는다. 실제 투사체14개·두 차례 투척은 유지한다.
+
 ## 충돌·소유권·수명
 
 - `Combat.isEnemy`에 더해 allied/tamed를 제외하고, 모든 범위 피해는 필드/접촉 원점의 collider LOS를 확인한다.
