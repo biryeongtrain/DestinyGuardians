@@ -30,6 +30,7 @@ public final class DestinyGuardians implements ModInitializer {
         PolymerResourcePackUtils.markAsRequired();
 
         Guardians.init();
+        kim.biryeong.destiny.inventory.WeaponScreen.init();
         HunterAbilities.register();
         AbilityRegistry.registerReloadListener();
         AbilityService.init();

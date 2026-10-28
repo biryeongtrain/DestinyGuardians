@@ -25,6 +25,7 @@ public final class InputRouter {
 
     /** 같은 동작이 같은 틱에 두 경로로 들어오면 한 번만 처리한다. */
     public static boolean dispatch(ServerPlayer player, GuardianAction action) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return false;
         if (action == GuardianAction.AIR_JUMP) {
             // 점프는 바닐라 입력에서만 온다. 같은 틱 중복이 생기지 않는다.
             return AbilityService.perform(player, action);
@@ -45,6 +46,7 @@ public final class InputRouter {
     }
 
     public static void onPlayerInput(ServerPlayer player, Input previous, Input next) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
         if (!Guardians.isGuardian(player)) {
             return;
         }
@@ -66,6 +68,11 @@ public final class InputRouter {
 
     /** @return true 면 바닐라 처리를 취소한다. */
     public static boolean onPlayerAction(ServerPlayer player, ServerboundPlayerActionPacket.Action action) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return true;
+        if (action == ServerboundPlayerActionPacket.Action.DROP_ITEM && player.isShiftKeyDown()) {
+            kim.biryeong.destiny.inventory.WeaponScreen.open(player);
+            return true;
+        }
         if (!Guardians.isGuardian(player)) {
             return false;
         }
@@ -80,6 +87,7 @@ public final class InputRouter {
     }
 
     public static void onPunch(ServerPlayer player) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
         if (!Guardians.isGuardian(player)) {
             return;
         }

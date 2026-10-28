@@ -1,0 +1,22 @@
+{
+  "goal": "Interactive display-HUD weapon equipment, no armor",
+  "opening": [
+    "/destiny inventory",
+    "vanilla sneak+Q",
+    "optional GCB key0"
+  ],
+  "controls": [
+    "vanilla look-delta HUD cursor",
+    "WASD focus plus repeat",
+    "left click or jump confirm",
+    "right click or Q/F close"
+  ],
+  "ownership": "real owned stacks only; category hotbar0/1/2; identity checked swaps; ammo and perk preservation; one exotic",
+  "verification": [
+    "pure pointer/layout tests",
+    "actual inventory server GameTests",
+    "menu suppression and cleanup server test",
+    "single isolated Vision WASD/mouse/click/equip/close session"
+  ],
+  "excluded": "armor, Titan, Warlock and Crucible remain future work"
+}

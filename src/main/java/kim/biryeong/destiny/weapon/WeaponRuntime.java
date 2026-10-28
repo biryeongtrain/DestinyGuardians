@@ -268,6 +268,7 @@ public final class WeaponRuntime {
         return s;
     }
     public static boolean beginUse(ServerPlayer player) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return false;
         traceUse(player, "runtime.begin", -1);
         var entry = WeaponItems.entry(player.getMainHandItem());
         if (entry.isEmpty() || !available(player)) return false;
@@ -313,6 +314,7 @@ public final class WeaponRuntime {
     }
     /** Charged-crossbow clients repeat RMB every four ticks; the server grants only a six-tick lease. */
     public static boolean heartbeatUse(ServerPlayer player) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return false;
         if (WeaponItems.entry(player.getMainHandItem()).isEmpty() || !WeaponModels.twoHanded(player.getMainHandItem()) || !available(player)) return false;
         WeaponQuickdraw.update(player);
         WeaponHandling.update(player);

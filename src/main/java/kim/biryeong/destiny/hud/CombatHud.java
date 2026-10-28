@@ -60,6 +60,7 @@ public final class CombatHud {
     }
 
     public static void update(ServerPlayer player) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) { remove(player); return; }
         if (player.isDeadOrDying() || player.isSpectator()) {
             remove(player);
             return;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kim.biryeong.destiny.compat.pack.ParticleTextureFallbacksTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2026-10-28T09:44:02.126Z" hostname="qf-macbook.local" time="0.047">
+  <properties/>
+  <testcase name="preservesExistingParticlesInheritedModelsAndUnrelatedResources()" classname="kim.biryeong.destiny.compat.pack.ParticleTextureFallbacksTest" time="0.001"/>
+  <testcase name="followsFaceAliasesButDoesNotInventFallbacksForCyclesOrMissingSlots()" classname="kim.biryeong.destiny.compat.pack.ParticleTextureFallbacksTest" time="0.0"/>
+  <testcase name="repairsCurrentStandaloneModelsWithoutChangingAnyOtherField()" classname="kim.biryeong.destiny.compat.pack.ParticleTextureFallbacksTest" time="0.046">
+    <failure message="org.opentest4j.AssertionFailedError: Current W126 warnings must all receive a real face sprite ==&gt; expected: &lt;98&gt; but was: &lt;100&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Current W126 warnings must all receive a real face sprite ==&gt; expected: &lt;98&gt; but was: &lt;100&gt;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at kim.biryeong.destiny.compat.pack.ParticleTextureFallbacksTest.repairsCurrentStandaloneModelsWithoutChangingAnyOtherField(ParticleTextureFallbacksTest.java:39)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

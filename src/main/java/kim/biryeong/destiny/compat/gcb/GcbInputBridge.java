@@ -38,6 +38,10 @@ public final class GcbInputBridge {
 
     static void onKey(ServerPlayer player, boolean pushed, Key key) {
         Guardians.runtime(player).gcbClient = true;
+        if (pushed && key == Key.KEY_0) {
+            kim.biryeong.destiny.inventory.WeaponScreen.toggle(player); return;
+        }
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
         if (!pushed || !Guardians.isGuardian(player)) {
             return;
         }

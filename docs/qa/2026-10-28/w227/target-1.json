@@ -1,0 +1,32 @@
+{
+  "stage": "target-1",
+  "command": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    "--offline",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "--init-script",
+    "/private/tmp/destiny-w227-native/test-heap.init.gradle",
+    "test",
+    "--tests",
+    "kim.biryeong.destiny.inventory.*",
+    "assemble",
+    "compileGametestJava"
+  ],
+  "returncode": 1,
+  "seconds": 100.90675377845764,
+  "totals": {
+    "tests": 0,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "jar": {
+    "bytes": 173999034,
+    "sha256": "c7150d7886e6e7eb269d2f2bedb89dfe902425e3fcaebeec4b4392c8b7fafd18"
+  }
+}
