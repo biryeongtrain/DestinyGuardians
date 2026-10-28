@@ -29,6 +29,7 @@ public final class DestinyGuardians implements ModInitializer {
         // destiny 네임스페이스 에셋을 서버 리소스팩에 포함시킨다.
         PolymerResourcePackUtils.addModAssets(MOD_ID);
         PolymerResourcePackUtils.markAsRequired();
+        kim.biryeong.destiny.compat.pack.WeaponPackOptimizer.init();
 
         Guardians.init();
         kim.biryeong.destiny.inventory.WeaponScreen.init();
