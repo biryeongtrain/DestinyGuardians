@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.client.renderer.item.ItemModels;
+import net.minecraft.client.renderer.item.ClientItem;
 import net.minecraft.client.resources.model.cuboid.CuboidModel;
 import net.minecraft.resources.Identifier;
 import org.junit.jupiter.api.BeforeAll;
@@ -39,11 +40,17 @@ class FirstPersonHandsW201Test {
                 "weapon_reload_w208_gnawing_hunger/gnawing_hunger","weapon_reload_w208_austringer/austringer",
                 "weapon_insert_w208_first_in_last_out/first_in_last_out")){
             var original=json(A.resolve("items/"+route+".json"));
-            var graph=json(A.resolve("items/weapon_hands_w201/"+route+".json")).getAsJsonObject("model");
+            var wrapper=json(A.resolve("items/weapon_hands_w201/"+route+".json"));
+            var graph=wrapper.getAsJsonObject("model");
             assertEquals(original.get("model"),graph.get("fallback"),route);
             assertEquals(JsonParser.parseString("[\"firstperson_righthand\",\"firstperson_lefthand\"]"),graph.getAsJsonArray("cases").get(0).getAsJsonObject().get("when"));
             var result=ItemModels.CODEC.parse(JsonOps.INSTANCE,graph);
             assertTrue(result.isSuccess(),route+": "+result.error());
+            // Decode the whole root: model-only parsing cannot catch a valid
+            // graph whose vanilla equip displacement was accidentally restored.
+            var item=ClientItem.CODEC.parse(JsonOps.INSTANCE,wrapper).getOrThrow();
+            assertFalse(item.properties().handAnimationOnSwap(),route);
+            assertEquals(0f,item.properties().swapAnimationScale(),route);
         }
     }
     @Test void nativeCuboidParserAcceptsFingerlessSkinArmsAndRepresentativeComposedTransforms()throws Exception{

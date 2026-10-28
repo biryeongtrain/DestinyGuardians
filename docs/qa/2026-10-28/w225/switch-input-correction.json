@@ -1,0 +1,13 @@
+{
+  "invalidatedScenarios": [
+    "w225-w91-switch",
+    "w225-w113-switch",
+    "w225-generic-switch"
+  ],
+  "reason": "swap_offhand native action was intercepted by InputRouter as a grenade ability; oracle never observed STOW/READY and weapon did not change",
+  "inputTransportCompleted": true,
+  "weaponSwitchValidation": false,
+  "next": "actual hotbar number input through CU if app accessible; no blind replay of ability actions",
+  "additionalFixtureIssue": "outgoing load command was also rejected by combat-item protection; it did not replace the incoming weapon",
+  "replacementValidation": "Separate actual inventory replacement fixture exercises real Handling/route ownership and rendered STOW/READY; explicitly not native hotbar input."
+}

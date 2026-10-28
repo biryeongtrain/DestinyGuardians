@@ -337,7 +337,10 @@ def generated():
         if id not in contacts:continue
         graph=json.loads(p.read_bytes());inputs[str(p.relative_to(ROOT))]=sha(p.read_bytes())
         original=graph['model'];augmented=specialize(rewrite(specialize(original),id,{}))
-        wrapped={**graph,'hand_animation_on_swap':False,'model':{
+        # 26.3 resets hand height on successful item use independently of the
+        # component-swap flag. Keep that vanilla lowering out of our authored
+        # recoil/reload/swap transforms on every emitted weapon state root.
+        wrapped={**graph,'hand_animation_on_swap':False,'swap_animation_scale':0.0,'model':{
             'type':'minecraft:select','property':'minecraft:display_context',
             'cases':[{'when':list(FP),'model':augmented}],'fallback':original}}
         key=rel.with_suffix('').as_posix();routes['destiny:'+key]='destiny:'+PREFIX+key
