@@ -26,6 +26,10 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+    // Fantasy: 타워 영구 월드. 정확한 26.3 버전을 서버 배포 JAR에 포함한다.
+    implementation "xyz.nucleoid:fantasy:${project.fantasy_version}"
+    include "xyz.nucleoid:fantasy:${project.fantasy_version}"
+
     // Polymer: 서버사이드 아이템·엔티티, 리소스팩 생성·자동 호스팅
     implementation "eu.pb4:polymer-core:${project.polymer_version}"
     implementation "eu.pb4:polymer-virtual-entity:${project.polymer_version}"
@@ -84,11 +88,13 @@ processResources {
     inputs.property 'version', project.version
     inputs.property 'minecraft_version', project.minecraft_version
     inputs.property 'loader_version', project.loader_version
+    inputs.property 'fantasy_version', project.fantasy_version
     filteringCharset 'UTF-8'
     filesMatching('fabric.mod.json') {
         expand 'version': project.version,
                 'minecraft_version': project.minecraft_version,
-                'loader_version': project.loader_version
+                'loader_version': project.loader_version,
+                'fantasy_version': project.fantasy_version
     }
 }
 

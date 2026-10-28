@@ -1,0 +1,65 @@
+{
+  "stage": "full-r1",
+  "command": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "--init-script",
+    "/private/tmp/destiny-w232/test-heap.init.gradle",
+    "test",
+    "assemble"
+  ],
+  "returncode": 1,
+  "seconds": 194.1655531669967,
+  "totals": {
+    "tests": 2079,
+    "failures": 10,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": [
+    {
+      "classname": "kim.biryeong.destiny.weapon.PerpetualMotionProfileW170Test",
+      "name": "allConsumedPinsAndGeneratedHashesMatch()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.FireVariantsW98Test",
+      "name": "onlyThreeExactEventsGainTwoAlternativesAndKeepOriginalFirstEntryAndSubtitles()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.FireVariantsW98Test",
+      "name": "inheritedAudioBytesAndExactlySixW98PlusSixteenW102ClipsFormClosedRuntimeInventory()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.SoundAssetsW33Test",
+      "name": "allPackReferencesAreNamespacedMonoVorbisWithBoundedSize()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.NamedAudioW102Test",
+      "name": "originalDefinitionsW63TableAndAll196PreservedSourceFilesRemainByteExact()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.SwordAudioW56Test",
+      "name": "existingSoundDefinitionsRemainIdenticalWithExactlyFifteenAdditions()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.weapon.TapTheTriggerProfileW171Test",
+      "name": "pinnedInputsGeneratorAndGeneratedBytesMatch()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.compat.pack.ParticleTextureFallbacksTest",
+      "name": "repairsCurrentStandaloneModelsWithoutChangingAnyOtherField()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.weapon.StatsForAllProfileW176Test",
+      "name": "pinnedSourcesAndGeneratedHashesStillMatch()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.weapon.FrenzyProfileW172Test",
+      "name": "allConsumedPinsAndGeneratedHashesMatch()"
+    }
+  ]
+}

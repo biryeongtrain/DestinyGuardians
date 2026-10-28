@@ -1,0 +1,84 @@
+{
+  "status": "SOURCE_READY_UNCOMPILED",
+  "slot": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow",
+  "baseline_head": "fe08cd551702fba8529d1d5c0975cd0bf875df60",
+  "files": [
+    {
+      "path": "build.gradle",
+      "baseline_sha256": "bb8e38e55402bcab27a25d9743ad8cfe7167640a2781627ece63243de433527e",
+      "current_sha256": "b51b6e779313791ab180e20991479c15128627af95bf6c34d6b9f2304c489865",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/build.gradle"
+    },
+    {
+      "path": "gradle.properties",
+      "baseline_sha256": "3ddf84746b5663682c6a2685ceb6f7b8111f5b29670451fc20e3afde9297fe24",
+      "current_sha256": "7440bfb7eeb796478ae52fdb18f930704f28b83e41ce048d7ba9672177bb031a",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/gradle.properties"
+    },
+    {
+      "path": "src/main/resources/fabric.mod.json",
+      "baseline_sha256": "5b11e7aa251b5d14370a5f92af7ab0a39622e7fcbaac7066973f2f4d165a4255",
+      "current_sha256": "703795ac37e6d6d17d0714e4598099ab735f2e210e0195c2871e61993192f1c2",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/src/main/resources/fabric.mod.json"
+    },
+    {
+      "path": "src/main/java/kim/biryeong/destiny/world/TowerSpawnWorld.java",
+      "baseline_sha256": null,
+      "current_sha256": "1a070a1254e1e34f7dcc244721645a2ce0cfde75c09d804e3ca50d2c6b4ecd6d",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/src/main/java/kim/biryeong/destiny/world/TowerSpawnWorld.java"
+    },
+    {
+      "path": "src/main/java/kim/biryeong/destiny/world/TowerVoxelMap.java",
+      "baseline_sha256": null,
+      "current_sha256": "e382a2edf0c6886d48599eaece3d0b934b6132667c98189ff7739ff6ef9bccbf",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/src/main/java/kim/biryeong/destiny/world/TowerVoxelMap.java"
+    },
+    {
+      "path": "src/main/java/kim/biryeong/destiny/world/TowerChunkGenerator.java",
+      "baseline_sha256": null,
+      "current_sha256": "1520b9d05f911fdf4c110eace9e79eac4450dad75fbf3542a98b5d00ca968d92",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/src/main/java/kim/biryeong/destiny/world/TowerChunkGenerator.java"
+    },
+    {
+      "path": "src/gametest/java/kim/biryeong/destiny/test/TowerW232GameTests.java",
+      "baseline_sha256": null,
+      "current_sha256": "45293e0bcecb6aa08ae9c2e4baf5eeb09270264f86ec1f5a6570615305e8a03c",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/src/gametest/java/kim/biryeong/destiny/test/TowerW232GameTests.java"
+    },
+    {
+      "path": "src/test/java/kim/biryeong/destiny/world/TowerVoxelMapTest.java",
+      "baseline_sha256": null,
+      "current_sha256": "72b08938eac32aa0b89473a31151020f42a3af4349596dca7b77e3374b24c479",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/src/test/java/kim/biryeong/destiny/world/TowerVoxelMapTest.java"
+    },
+    {
+      "path": "docs/design/W232_Tower_스폰월드.md",
+      "baseline_sha256": null,
+      "current_sha256": "779277d502c9212b5f427235d9a2f96171a5f2a63d6aeb3a75e66b9689fdd393",
+      "delta_path": "/private/tmp/destiny-w232-world/delta/docs/design/W232_Tower_스폰월드.md"
+    }
+  ],
+  "checks": [
+    "git diff --check passed for tracked owned files",
+    "Exact Fantasy 0.8.4+26.3 binary/sources inspected",
+    "Minecraft 26.3 and Fabric API javap signatures inspected",
+    "Product direct terrain mutation search found none outside tower generator"
+  ],
+  "not_run": [
+    "build/compile (explicitly prohibited)",
+    "JUnit",
+    "GameTests",
+    "Minecraft/Vision/live/restart"
+  ],
+  "integration": [
+    "Master owns main initializer and GameTest entrypoint",
+    "Tower GameTests manualOnly=true; run explicitly enabled and sequentially in disposable server",
+    "Map/manifest bundled assets produced by master; not in worker delta"
+  ],
+  "notes": [
+    "World is server-only",
+    "Tower-specific RuntimeLevel overrides vanilla explosion and fire spread",
+    "Disabled JVM property bypasses world startup and transfers",
+    "No commit/reset/stash/clean/push executed"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "stage": "target-r1",
+  "command": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "--init-script",
+    "/private/tmp/destiny-w232/test-heap.init.gradle",
+    "test",
+    "--tests",
+    "kim.biryeong.destiny.world.TowerVoxelMapTest",
+    "compileGametestJava",
+    "assemble"
+  ],
+  "returncode": 0,
+  "seconds": 234.37409520801157,
+  "totals": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": []
+}
