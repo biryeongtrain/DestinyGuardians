@@ -70,6 +70,16 @@ public final class CombatHud {
                 healthFraction(player) <= 0.3f ? 0xE75A4E : WHITE, DisplayHud.HudAlignment.CENTER);
         float absorption = fraction(player.getAbsorptionAmount(), player.getMaxHealth());
         bar(player, ABSORPTION_ID, 748, 65, 424 * absorption, 4, 2, 0x9DDBEE, DisplayHud.HudAlignment.CENTER);
+        AmmoHud.update(player);
+        AmmoMeterHud.update(player);
+        WeaponPerkHud.update(player);
+        WeaponScopeHud.update(player, kim.biryeong.destiny.weapon.WeaponRuntime.reloading(player));
+        WeaponReticleHud.update(player, kim.biryeong.destiny.weapon.WeaponAiming.progress(player),
+                kim.biryeong.destiny.weapon.WeaponAiming.bloom(player),kim.biryeong.destiny.weapon.WeaponRuntime.reloading(player));
+        AceReticleCounter.update(player);
+        WeaponHitHud.update(player);
+        FallbackAimHud.update(player);
+        IncomingDamageHud.update(player);
         if (!Guardians.isGuardian(player)) {
             removeAbilities(player);
             LAST.put(player.getUUID(), "체력 " + player.getHealth() + "/" + player.getMaxHealth());
@@ -97,15 +107,19 @@ public final class CombatHud {
         for (int i = 0; i < SLOTS.length; i++) {
             AbilitySlot slot = SLOTS[i];
             Ability ability = AbilityService.equipped(player, slot).orElse(null);
-            int tint = ability == null ? MUTED : ability.element().color();
-            float progress = charge(player, slot);
+            var sword = slot == AbilitySlot.MELEE ? kim.biryeong.destiny.weapon.WeaponRuntime.swordStatus(player)
+                    : java.util.Optional.<kim.biryeong.destiny.weapon.WeaponRuntime.SwordStatus>empty();
+            int tint = sword.isPresent() ? (sword.get().guarding()?0x95ECF8:WHITE)
+                    : ability == null ? MUTED : ability.element().color();
+            float progress = sword.isPresent() ? sword.get().energy() : charge(player, slot);
             float x = 104 + i * 70;
             String id = i == 0 ? ABILITIES_ID : ABILITIES_ID + "_" + i;
             sprite(player, id, "tile", x, 948, 53, 53, 1, progress >= 1 ? WHITE : MUTED, DisplayHud.HudAlignment.LEFT);
-            sprite(player, id + "_icon", icon(slot, ability), x, 948, 37, 37, 2,
+            sprite(player, id + "_icon", sword.isPresent()?"ammo_sword":icon(slot, ability), x, 948, 37, 37, 2,
                     progress >= 1 ? WHITE : 0x747C86, DisplayHud.HudAlignment.LEFT);
             bar(player, id + "_charge", x - 24, 980, 48 * progress, 4, 2,
                     progress >= 1 ? tint : WHITE, DisplayHud.HudAlignment.LEFT);
+            if(sword.isPresent()) { debug.append("|검 에너지 ").append(Math.round(progress*100)).append('%'); continue; }
             debug.append('|').append(switch(slot) {
                 case GRENADE -> "수류탄 "; case MELEE -> "근접 "; default -> "직업 ";
             }).append(data.cooldown(slot) > 0 ? (data.cooldown(slot) + 19) / 20 + "s" : "ready");
@@ -116,7 +130,8 @@ public final class CombatHud {
     private static void updateSuperCue(ServerPlayer player, Ability ability, boolean ready, boolean active, Element element) {
         int now = player.level().getServer().getTickCount();
         SuperHudCue cue = CUES.computeIfAbsent(player.getUUID(), ignored -> new SuperHudCue());
-        cue.sample(now, ability == null ? null : ability.id(), ready, active);
+        if (cue.sample(now, ability == null ? null : ability.id(), ready, active))
+            kim.biryeong.destiny.sound.DestinySounds.ready(player);
         int age = cue.readyAge(now);
         if (age >= 0 && age < SuperHudCue.READY_TICKS) {
             // Two-tick steps bound metadata traffic. The texture itself carries the alpha envelope.
@@ -160,6 +175,12 @@ public final class CombatHud {
     public static String lastText(ServerPlayer player) { return LAST.get(player.getUUID()); }
 
     public static void remove(ServerPlayer player) {
+        IncomingDamageHud.cleanup(player);
+        AceReticleCounter.remove(player);
+        WeaponHitHud.remove(player);
+        WeaponReticleHud.remove(player);
+        WeaponScopeHud.remove(player);
+        FallbackAimHud.remove(player);
         LAST.remove(player.getUUID());
         CUES.remove(player.getUUID());
         for (String id : List.copyOf(DisplayHud.getHuds(player).keySet())) {
@@ -170,22 +191,27 @@ public final class CombatHud {
     private static void removeAbilities(ServerPlayer player) {
         CUES.remove(player.getUUID());
         for (String id : List.copyOf(DisplayHud.getHuds(player).keySet())) {
-            if (id.startsWith(PREFIX) && !id.startsWith(HEALTH_ID) && !id.equals(ABSORPTION_ID)) {
+            if (id.startsWith(PREFIX) && !id.startsWith(HEALTH_ID) && !id.equals(ABSORPTION_ID)
+                    && !id.startsWith(AmmoHud.PREFIX) && !id.startsWith(AmmoMeterHud.PREFIX)
+                    && !id.startsWith(WeaponPerkHud.PREFIX) && !id.startsWith(IncomingDamageHud.PREFIX)) {
                 DisplayHud.removeHud(player, id);
             }
         }
     }
 
-    private static void bar(ServerPlayer player, String id, float left, float y, float width, float height,
+    static void bar(ServerPlayer player, String id, float left, float y, float width, float height,
                             float z, int color, DisplayHud.HudAlignment align) {
         width = Math.round(width * 2) / 2f;
         if (width <= 0.01f) { DisplayHud.removeHud(player, id); return; }
         sprite(player, id, "solid", left + width / 2, y, width, height, z, color, align);
     }
 
-    private static void sprite(ServerPlayer player, String id, String image, float x, float y,
+    static void sprite(ServerPlayer player, String id, String image, float x, float y,
                                float width, float height, float z, int color, DisplayHud.HudAlignment align) {
-        String key = image + ":" + color + ":" + Math.round(width * 10) + ":" + height + ":" + x + ":" + y + ":" + z + ":" + align;
+        // The native offhand model occupies the lower-left corner. Only affected left-aligned
+        // HUDs request the existing DisplayHud above-hand pass; ordinary/centre HUDs keep their path.
+        boolean aboveHand = align == DisplayHud.HudAlignment.LEFT && !player.getOffhandItem().isEmpty();
+        String key = image + ":" + color + ":" + Math.round(width * 10) + ":" + height + ":" + x + ":" + y + ":" + z + ":" + align + ":" + aboveHand;
         DisplayHud existing = DisplayHud.getHud(player, id);
         if (existing != null && key.equals(existing.getExtraData("state"))) return;
         ItemDisplayHud hud = existing instanceof ItemDisplayHud item ? item : new ItemDisplayHud();
@@ -200,7 +226,7 @@ public final class CombatHud {
         hud.setLocation(x, y, z);
         hud.setViewRange(1000);
         hud.setExtraData("state", key);
-        // Top-centre health and lower-left controls do not overlap the right-hand model; no extra outline pass needed.
+        hud.setAboveHand(aboveHand);
         if (existing == null) hud.spawn(player, id);
         hud.updateWhenDataChanged(true);
         hud.update();

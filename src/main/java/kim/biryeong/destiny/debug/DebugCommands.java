@@ -48,6 +48,134 @@ public final class DebugCommands {
         dispatcher.register(Commands.literal("destiny")
                 .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands.literal("debug")
+                        .then(Commands.literal("weapon-honed-reload").then(Commands.argument("player", EntityArgument.player())
+                                .executes(c -> {
+                                    // Authorized fixture input to the real transaction, not a completed charge grant.
+                                    ServerPlayer p = EntityArgument.getPlayer(c, "player");
+                                    boolean accepted = kim.biryeong.destiny.weapon.WeaponRuntime.reloadHoned(p);
+                                    c.getSource().sendSuccess(() -> Component.literal("WeaponHoned accepted=" + accepted), false);
+                                    return accepted ? 1 : 0;
+                                })))
+                        .then(Commands.literal("weapon-presentation-status").then(Commands.argument("player", EntityArgument.player())
+                                .executes(c -> {
+                                    // Read existing state only. In particular do not tick/bind a visual or Handling session.
+                                    ServerPlayer p = EntityArgument.getPlayer(c, "player");
+                                    var stack = p.getMainHandItem();
+                                    var entry = kim.biryeong.destiny.weapon.WeaponItems.entry(stack);
+                                    var swap = kim.biryeong.destiny.weapon.WeaponHandling.presentation(p);
+                                    var readiness = kim.biryeong.destiny.weapon.WeaponHandling.readiness(p);
+                                    var fusionCharge = kim.biryeong.destiny.weapon.WeaponRuntime.chargeState(p);
+                                    var tracking = kim.biryeong.destiny.weapon.WeaponTracking.status(p);
+                                    var perkRows = kim.biryeong.minigamelib.displayhud.DisplayHud.getHuds(p).entrySet().stream()
+                                            .filter(e -> e.getKey().startsWith(kim.biryeong.destiny.hud.WeaponPerkHud.PREFIX)
+                                                    && e.getKey().endsWith("label"))
+                                            .map(e -> e.getKey().substring(kim.biryeong.destiny.hud.WeaponPerkHud.PREFIX.length())
+                                                    + "@" + e.getValue().getLocation().y()).sorted().toList();
+                                    var data = stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_MODEL_DATA,
+                                            net.minecraft.world.item.component.CustomModelData.EMPTY);
+                                    var context = ((net.fabricmc.fabric.api.networking.v1.context.PacketContextProvider)
+                                            (Object)p.connection).getPacketContext();
+                                    var model = kim.biryeong.destiny.weapon.WeaponCombatItem.INSTANCE
+                                            .getPolymerItemModel(stack, context, p.registryAccess());
+                                    String ammo = entry.map(e -> {
+                                        var magazine = kim.biryeong.destiny.weapon.WeaponItems.magazine(stack,
+                                                kim.biryeong.destiny.weapon.WeaponProfile.forEntry(e));
+                                        return magazine.rounds() + "/" + magazine.reserve();
+                                    }).orElse("none");
+                                    c.getSource().sendSuccess(() -> Component.literal("WeaponPresentation tick="
+                                            + p.level().getServer().getTickCount() + " weapon="
+                                            + entry.map(kim.biryeong.destiny.weapon.WeaponCatalog.Entry::id).orElse("none")
+                                            + " model=" + model + " floats=" + data.floats()
+                                            + " swap=" + swap.map(v -> v.outgoing().id() + ":" + v.phase() + ":" + v.progress()).orElse("none")
+                                            + " handling=" + readiness.map(v -> v.phase() + ":" + v.remainingTicks()).orElse("unobserved")
+                                            + " grip=" + (kim.biryeong.destiny.weapon.WeaponModels.twoHanded(stack) ? "two_hand" : "native")
+                                            + " entityPose=" + p.getPose()
+                                            + " crouchPose=" + kim.biryeong.destiny.weapon.WeaponCrouchPresentation.crouched(stack)
+                                            + " hitHud=" + kim.biryeong.minigamelib.displayhud.DisplayHud.getHuds(p).keySet().stream()
+                                                    .filter(id -> id.startsWith(kim.biryeong.destiny.hud.WeaponHitHud.PREFIX)).sorted()
+                                                    .map(id -> {
+                                                        var h = kim.biryeong.minigamelib.displayhud.DisplayHud.getHud(p, id);
+                                                        return id + "@" + (h instanceof kim.biryeong.minigamelib.displayhud.ItemDisplayHud item
+                                                                ? item.getItem().get(net.minecraft.core.component.DataComponents.ITEM_MODEL) : "none");
+                                                    }).toList()
+                                            + " mori=" + kim.biryeong.destiny.weapon.WeaponAce.rounds(p)
+                                            + " moriPips=" + kim.biryeong.minigamelib.displayhud.DisplayHud.getHuds(p).keySet().stream()
+                                                    .filter(id -> id.startsWith(kim.biryeong.destiny.hud.AceReticleCounter.PREFIX)).count()
+                                            + " reloading=" + kim.biryeong.destiny.weapon.WeaponRuntime.reloading(p)
+                                            + " honing=" + kim.biryeong.destiny.weapon.WeaponIzanagi.honing(p)
+                                            + " charge=" + kim.biryeong.destiny.weapon.WeaponIzanagi.charge(stack)
+                                            + " fusionCharge=" + fusionCharge.phase() + ":" + fusionCharge.progress()
+                                            + ":" + fusionCharge.emittedBolts() + "/" + fusionCharge.totalBolts()
+                                            + " tracking=" + tracking.phase() + ":" + tracking.ticks() + "/" + tracking.requiredTicks()
+                                            + " perkRows=" + perkRows
+                                            + " ofa=" + kim.biryeong.destiny.weapon.WeaponOneForAll.progress(p)
+                                            + ":" + kim.biryeong.destiny.weapon.WeaponOneForAll.remaining(p)
+                                            + " surrounded=" + kim.biryeong.destiny.weapon.WeaponSurrounded.active(p)
+                                            + " multikillClip=" + kim.biryeong.destiny.weapon.WeaponMultikillClip.stacks(p)
+                                            + " perpetualMotion=" + kim.biryeong.destiny.weapon.WeaponPerpetualMotion.stacks(p)
+                                            + " perpetualMovingTicks=" + kim.biryeong.destiny.weapon.WeaponPerpetualMotion.movingTicks(p)
+                                            + " focusedFuryTicks=" + kim.biryeong.destiny.weapon.WeaponFocusedFury.remaining(p)
+                                            + " focusedFuryHits=" + kim.biryeong.destiny.weapon.WeaponFocusedFury.progress(p)
+                                            + " statsForAllTicks=" + kim.biryeong.destiny.weapon.WeaponStatsForAll.remaining(p)
+                                            + " threatDetectorStacks=" + kim.biryeong.destiny.weapon.WeaponThreatDetector.stacks(p)
+                                            + " quickdrawRemaining=" + kim.biryeong.destiny.weapon.WeaponQuickdraw.remaining(p)
+                                            + " elementalCapacitor=" + kim.biryeong.destiny.weapon.WeaponElementalCapacitor.element(p).getSerializedName()
+                                            + " elementalStabilityBonus=" + kim.biryeong.destiny.weapon.WeaponElementalCapacitor.stabilityBonus(p)
+                                            + " firmlyPlanted=" + kim.biryeong.destiny.weapon.WeaponFirmlyPlanted.active(p)
+                                            + " plantedStability=" + kim.biryeong.destiny.weapon.WeaponFirmlyPlanted.stabilityBonus(p)
+                                            + " plantedHandling=" + kim.biryeong.destiny.weapon.WeaponFirmlyPlanted.handlingBonus(p)
+                                            + " plantedCone=" + kim.biryeong.destiny.weapon.WeaponFirmlyPlanted.accuracyScalar(p)
+                                            + " plantedGrowth=" + kim.biryeong.destiny.weapon.WeaponFirmlyPlanted.growthScalar(p)
+                                            + " plantedYaw=" + kim.biryeong.destiny.weapon.WeaponFirmlyPlanted.yawScalar(p)
+                                            + " zenMomentStacks=" + kim.biryeong.destiny.weapon.WeaponZenMoment.stacks(p)
+                                            + " zenMomentTicks=" + kim.biryeong.destiny.weapon.WeaponZenMoment.remaining(p)
+                                            + " zenFlinchScalar=" + kim.biryeong.destiny.weapon.WeaponZenMoment.flinchScalar(p)
+                                            + " surplusCharges=" + kim.biryeong.destiny.weapon.WeaponSurplus.stacks(p)
+                                            + " killingTally=" + kim.biryeong.destiny.weapon.WeaponKillingTally.stacks(p)
+                                            + " whirlwindBlade=" + kim.biryeong.destiny.weapon.WeaponWhirlwindBlade.stacks(p)
+                                            + ":" + kim.biryeong.destiny.weapon.WeaponWhirlwindBlade.remaining(p)
+                                            + " enGardeTicks=" + kim.biryeong.destiny.weapon.WeaponEnGarde.remaining(p)
+                                            + " assassinsBladeTicks=" + kim.biryeong.destiny.weapon.WeaponAssassinsBlade.remaining(p)
+                                            + " pulseMonitor=" + kim.biryeong.destiny.weapon.WeaponPulseMonitor.active(p)
+                                            + " unrelenting=" + kim.biryeong.destiny.weapon.WeaponUnrelenting.active(p)
+                                            + " boxBreathingReady=" + kim.biryeong.destiny.weapon.WeaponBoxBreathing.ready(p)
+                                            + " dynamicSway=" + kim.biryeong.destiny.weapon.WeaponDynamicSway.stacks(p)
+                                            + " surplusStabilityBonus=" + kim.biryeong.destiny.weapon.WeaponSurplus.stabilityBonus(p)
+                                            + " reloadDuration=" + kim.biryeong.destiny.weapon.WeaponRuntime.ammunition(p).map(a -> Integer.toString(a.reloadDuration())).orElse("none")
+                                            + " heatingUpStacks=" + kim.biryeong.destiny.weapon.WeaponHeatingUp.stacks(p)
+                                            + " heatingUpTicks=" + kim.biryeong.destiny.weapon.WeaponHeatingUp.remaining(p)
+                                            + " statsForAllTargets=" + kim.biryeong.destiny.weapon.WeaponStatsForAll.progress(p)
+                                            + " adrenalineJunkie=" + kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.stacks(p)
+                                            + " adrenalineJunkieTicks=" + kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.remaining(p)
+                                            + " frenzyTicks=" + kim.biryeong.destiny.weapon.WeaponFrenzy.remaining(p)
+                                            + " frenzyCombatTicks=" + kim.biryeong.destiny.weapon.WeaponFrenzy.combatTicks(p)
+                                            + " tapTheTriggerTicks=" + kim.biryeong.destiny.weapon.WeaponTapTheTrigger.remaining(p)
+                                            + " tapTheTriggerStabilityBonus=" + kim.biryeong.destiny.weapon.WeaponTapTheTrigger.stabilityBonus(p)
+                                            + " rapidHit=" + kim.biryeong.destiny.weapon.WeaponRapidHit.stacks(p)
+                                            + " rapidHitTicks=" + kim.biryeong.destiny.weapon.WeaponRapidHit.remaining(p)
+                                            + " rapidHitStabilityBonus=" + kim.biryeong.destiny.weapon.WeaponRapidHit.stabilityBonus(p)
+                                            + " multikillClipTicks=" + kim.biryeong.destiny.weapon.WeaponMultikillClip.remaining(p)
+                                            + " swashbuckler=" + kim.biryeong.destiny.weapon.WeaponSwashbuckler.stacks(p)
+                                            + " swashbucklerTicks=" + kim.biryeong.destiny.weapon.WeaponSwashbuckler.remaining(p)
+                                            + " frenzy=" + kim.biryeong.destiny.weapon.WeaponFeedingFrenzy.stacks(p)
+                                            + ":" + kim.biryeong.destiny.weapon.WeaponFeedingFrenzy.remaining(p)
+                                            + " ammo=" + ammo), false);
+                                    return 1;
+                                })))
+                        .then(Commands.literal("critical-hud-status").then(Commands.argument("player", EntityArgument.player())
+                                .executes(c -> {
+                                    // Read the exact already-owned HUD; never spawn/update it for a QA query.
+                                    ServerPlayer p = EntityArgument.getPlayer(c, "player");
+                                    var hud = kim.biryeong.minigamelib.displayhud.DisplayHud.getHud(p,
+                                            kim.biryeong.destiny.hud.IncomingDamageHud.PREFIX + "critical");
+                                    String model = hud instanceof kim.biryeong.minigamelib.displayhud.ItemDisplayHud item
+                                            ? String.valueOf(item.getItem().get(net.minecraft.core.component.DataComponents.ITEM_MODEL)) : "none";
+                                    c.getSource().sendSuccess(() -> Component.literal("CriticalHud tick="
+                                            + p.level().getServer().getTickCount() + " hp=" + p.getHealth()
+                                            + " max=" + p.getMaxHealth() + " model=" + model
+                                            + " entity=" + (hud == null ? -1 : hud.getEntityId())), false);
+                                    return 1;
+                                })))
                         .then(Commands.literal("camera-status").then(Commands.argument("player", EntityArgument.player())
                                 .executes(c -> {
                                     ServerPlayer p = EntityArgument.getPlayer(c, "player");
@@ -56,6 +184,8 @@ public final class DebugCommands {
                                             + " rotations=" + kim.biryeong.destiny.camera.SuperCamera.rotations(p)
                                             + " body=" + p.position() + " yaw=" + p.getYRot() + " pitch=" + p.getXRot()
                                             + " ground=" + p.onGround() + " input=" + p.getLastClientInput()
+                                            + " limbFrames=" + kim.biryeong.destiny.fx.PlayerAnimations.serverFrames(p)
+                                            + " vfxCues=" + kim.biryeong.destiny.fx.SuperVfx.lifecycleCount(p)
                                             + " camera=" + kim.biryeong.destiny.camera.SuperCamera.cameraPosition(p)), false);
                                     return 1;
                                 })))

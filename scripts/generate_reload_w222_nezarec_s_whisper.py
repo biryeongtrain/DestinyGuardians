@@ -55,19 +55,26 @@ def float32(value):
     return struct.unpack('!f', struct.pack('!f', value))[0]
 
 
-def source_mesh_basis(rig, contacts):
-    """Shortest arc from source idle grip direction to accepted mesh direction.
+def source_mesh_registration(rig, contacts, display):
+    """Rigid rest registration closest to the existing global axis convention.
 
-    This fixes weapon-local axes, not screen framing. It adds no arbitrary
-    twist about the shaft, scale ratio, source-pose attenuation or camera fit.
-    Master must use Q coherently for weapon, wrist and whole forearm chains.
+    C is an established X-forward/Z-up convention, not a recovered source
+    camera extrinsic (the original contains no camera or mesh). In column-vector
+    notation let a=unit(C*(Lw-Rw)), b=unit(R*(meshLeft-meshRight)). The shortest
+    arc T taking a to b minimizes the rotation away from C under that direction
+    constraint. Then B=R^T*T*C*Wr, and the shared replay basis Q*C=B.
+    Applying shortestArc in weapon-local space instead discards Wr and R when
+    choosing the unconstrained shaft twist, turning the complete arms upward.
+
+    No grip-distance ratio is applied. Each accepted palm has its own mesh
+    contact offset; source limb lengths and all source motion remain intact.
     """
     def dot(a, b):
         return sum(x * y for x, y in zip(a, b))
 
     def unit(v):
         length = math.sqrt(dot(v, v))
-        if length < 1e-8:
+        if not math.isfinite(length) or length < 1e-8:
             raise ValueError('Cannot derive mesh basis from a degenerate grip/bone')
         return [x / length for x in v]
 
@@ -77,6 +84,27 @@ def source_mesh_basis(rig, contacts):
     def vec(m, v):
         return [dot(row, v) for row in m]
 
+    def transpose(m):
+        return [list(row) for row in zip(*m)]
+
+    def mul(a, b):
+        return [[dot(row, col) for col in zip(*b)] for row in a]
+
+    accepted = display['firstperson_righthand']
+    # Shared xyz uses Rx*Ry*Rz, not the commonly assumed Rz*Ry*Rx.
+    if (len(accepted['rotation']) != 3
+            or not all(math.isfinite(v) for v in accepted['rotation'])):
+        raise ValueError('Expected a finite accepted native Euler rotation')
+    rx, ry, rz = map(math.radians, accepted['rotation'])
+    cx, sx, cy, sy, cz, sz = (math.cos(rx), math.sin(rx), math.cos(ry),
+                              math.sin(ry), math.cos(rz), math.sin(rz))
+    rotation = [[cy*cz, -cy*sz, sy],
+                [sx*sy*cz+cx*sz, -sx*sy*sz+cx*cz, -sx*cy],
+                [-cx*sy*cz+sx*sz, cx*sy*sz+sx*cz, cx*cy]]
+    scale = accepted['scale']
+    if (len(scale) != 3 or not all(math.isfinite(v) and v > 0 for v in scale)
+            or max(scale) - min(scale) > 1e-12):
+        raise ValueError('Rigid registration expects the accepted uniform positive body scale')
     rest = rig['actions'][rig['idle']]['frames'][0]['joints']
     weapon = rest['weapon']
     # Match shared weapon_basis: remove tiny exported scale/shear before inverse.
@@ -86,19 +114,49 @@ def source_mesh_basis(rig, contacts):
     y = unit([y[i] - projection * x[i] for i in range(3)])
     z = unit(cross(x, y))
     y = cross(z, x)
+    wr = transpose([x, y, z])
     separation = [rest['leftWrist'][i][3] - rest['rightWrist'][i][3] for i in range(3)]
-    source = unit(vec(SOURCE_TO_CANONICAL, vec([x, y, z], separation)))
-    target = unit([contacts['left']['position'][i] - contacts['right']['position'][i]
-                   for i in range(3)])
+    mesh_separation = [contacts['left']['position'][i] - contacts['right']['position'][i]
+                       for i in range(3)]
+    source = unit(vec(SOURCE_TO_CANONICAL, separation))
+    target = unit(vec(rotation, mesh_separation))
     v = cross(source, target)
-    cosine = dot(source, target)
+    cosine = max(-1., min(1., dot(source, target)))
     if 1 + cosine < 1e-8:
         raise ValueError('Antiparallel grip directions leave the shortest-arc axis ambiguous')
     skew = [[0, -v[2], v[1]], [v[2], 0, -v[0]], [-v[1], v[0], 0]]
-    squared = [[sum(skew[i][k] * skew[k][j] for k in range(3))
-                for j in range(3)] for i in range(3)]
-    return [[(1 if i == j else 0) + skew[i][j] + squared[i][j] / (1 + cosine)
-             for j in range(3)] for i in range(3)]
+    squared = mul(skew, skew)
+    correction = [[(1 if i == j else 0) + skew[i][j] + squared[i][j] / (1 + cosine)
+                   for j in range(3)] for i in range(3)]
+    basis = mul(mul(mul(transpose(rotation), correction), SOURCE_TO_CANONICAL), wr)
+    q = mul(basis, transpose(SOURCE_TO_CANONICAL))
+    wrist = [rest['rightWrist'][i][3] - weapon[i][3] for i in range(3)]
+    offset = vec(basis, vec(transpose(wr), wrist))
+    origin = [contacts['right']['position'][i] - 8 - 32*offset[i] for i in range(3)]
+    return q, {
+        'method': 'source_view_axes_preserving_rigid_registration',
+        'idleAction': rig['idle'],
+        'nativeDisplayContext': 'firstperson_righthand',
+        'acceptedNativeRotation': list(accepted['rotation']),
+        'rotationConvention': 'column vectors; accepted R=Rx*Ry*Rz, identical to shared xyz',
+        'sourceOrientationConvention': 'Existing global X-forward/Z-up C; calibration, not recovered source camera extrinsic',
+        'sourceGripSeparationArmature': separation,
+        'sourceGripDirectionAfterC': source,
+        'meshGripSeparation': mesh_separation,
+        'targetCameraGripDirection': target,
+        'shortestArcDegrees': math.degrees(math.acos(cosine)),
+        'basisDerivation': 'a=unit(C*(Lw-Rw)); b=unit(R*(meshLeft-meshRight)); T=shortestArc(a,b); B=R^T*T*C*Wr; Q=B*C^T',
+        'minimumRotationConstraint': 'T minimizes geodesic rotation from identity subject to T*a=b; no free shaft twist',
+        'registeredWeaponOriginOffsetModelUnits': origin,
+        'pivotDerivation': 'O=(rightGrip-8)-32*Q*C*Wr^T*(idleRightWrist-idleWeapon)',
+        'localTranslationModelUnits': '32*Q*shift+(I-Q*A*Q^T)*O; accepted ready rotation/scale applied afterwards',
+        'scope': 'Fixed proper rotation shared by weapon, palm deltas and both full arm chains; separate accepted contact offsets; no grip-distance rescale or source attenuation',
+        'limitation': 'Direction constraint only: source wrist separation differs from remodeled mesh grips. No original mesh, camera, finger IK or contact surfaces are recoverable.'}
+
+
+def source_mesh_basis(rig, contacts, display):
+    """Derive Q from the actual idle rig, semantic contacts and native display."""
+    return source_mesh_registration(rig, contacts, display)[0]
 
 
 def pose_display(original, twohand, progress, part, grip):
@@ -151,12 +209,14 @@ def generate(root=ROOT, *, rig_path=None, profile_path=None) -> dict[Path, bytes
                             hideSupportAtRest=False, sourceViewRotation=[0, 0, 0],
                             sourceWeaponMotion=True, sourceMeshPivot=True)
     basis = profile['framing'].get('sourceMeshBasis')
-    derived_basis = source_mesh_basis(rig, contacts)
+    derived_basis, derived_registration = source_mesh_registration(rig, contacts, native['display'])
     if (not isinstance(basis, list) or len(basis) != 3
             or any(not isinstance(row, list) or len(row) != 3 for row in basis)
             or any(not math.isfinite(basis[i][j]) or abs(basis[i][j] - derived_basis[i][j]) > 1e-12
                    for i in range(3) for j in range(3))):
-        raise ValueError('sourceMeshBasis must be derived from actual idle source/mesh grip directions')
+        raise ValueError('sourceMeshBasis must derive from actual idle rig, contacts and accepted native display')
+    if profile.get('sourceRetarget') != derived_registration:
+        raise ValueError('sourceRetarget must describe the current source/native registration derivation')
     if {k: v for k, v in profile['framing'].items() if k != 'sourceMeshBasis'} != {**effective, **required_framing}:
         raise ValueError('Keep current framing; opt in to coherent source basis and pivot registration only')
 
@@ -253,7 +313,8 @@ def generate(root=ROOT, *, rig_path=None, profile_path=None) -> dict[Path, bytes
         'sourceActionSourceRange': [1, 123], 'sourceRigSamples': SAMPLES, 'sourceFullChain': True,
         'sourceWeaponMotion': True, 'sourceCameraRecovered': False, 'sourceMeshRecovered': False,
         'sourceMeshBasis': basis, 'sourceMeshPivot': True,
-        'sourceMeshBasisDerivation': 'Shortest arc: normalized C*idleWeaponBasis^T*(leftWrist-rightWrist) to normalized calibrated mesh(leftGrip-rightGrip); no extra shaft twist or length rescale.',
+        'sourceMeshBasisDerivation': derived_registration['basisDerivation'],
+        'sourceMeshRegistration': derived_registration,
         'sourceMeshPivotDerivation': 'O=(rightGrip-8)-32*Q*C*idleWeaponBasis^T*(idleRightWrist-idleWeapon); local body translation32*Q*shift+(I-Q*A*Q^T)*O before accepted scale/rotation.',
         'sourceReviewEvidence': profile['evidence'], 'sourceGeometryPath': str(SOURCE),
         'sourceGeometryFileSha256': sha(raw[SOURCE]), 'sourceElements': count,

@@ -58,6 +58,7 @@ public final class AbilityService {
                 cleanup(player);
                 Guardians.forget(player);
             }
+            kim.biryeong.destiny.hud.WeaponHitHud.clearAll(server);
             HunterVfx.clearAll();
             kim.biryeong.destiny.fx.SuperVfx.clearAll();
             kim.biryeong.destiny.fx.PostEffects.clearAll();
@@ -68,6 +69,8 @@ public final class AbilityService {
     }
 
     public static void cleanup(ServerPlayer player) {
+        kim.biryeong.destiny.weapon.WeaponRuntime.cancelUseForSkill(player);
+        kim.biryeong.destiny.ability.hunter.HunterSkillCast.cancelPending(player);
         kim.biryeong.destiny.camera.SuperCamera.stop(player);
         endSuper(player);
         kim.biryeong.destiny.fx.PlayerAnimations.stop(player);
@@ -91,11 +94,15 @@ public final class AbilityService {
         kim.biryeong.destiny.fx.SuperVfx.tick(server);
         kim.biryeong.destiny.fx.PostEffects.tick(server);
         kim.biryeong.destiny.fx.PlayerAnimations.tick(server);
+        kim.biryeong.destiny.fx.SuperVfx.tickEquipmentEnergy(server);
         kim.biryeong.destiny.camera.SuperCamera.tick(server);
     }
 
     public static void tickPlayer(ServerPlayer player) {
         if (player.isDeadOrDying() || player.isSpectator()) {
+            if (Guardians.runtime(player).superSession != null || kim.biryeong.destiny.fx.PlayerAnimations.isPlaying(player)) {
+                cleanup(player);
+            }
             CombatHud.remove(player);
             return;
         }
@@ -114,7 +121,7 @@ public final class AbilityService {
         data.tickCooldowns();
         if (runtime.superSession != null) {
             if (!runtime.superSession.tick()) {
-                endSuper(player);
+                completeSuper(player);
             }
         } else if (data.superEnergy() < 1f) {
             data.setSuperEnergy(data.superEnergy() + (float) (1.0 / (passiveSuperSeconds * 20.0)));
@@ -160,6 +167,12 @@ public final class AbilityService {
         Ability ability = equipped.get();
         GuardianData data = Guardians.data(player);
         GuardianRuntime runtime = Guardians.runtime(player);
+        if (slot == AbilitySlot.JUMP && kim.biryeong.destiny.camera.SuperCamera.movementBlocked(player)) {
+            return Result.BUSY;
+        }
+        if (runtime.superSession != null && slot != AbilitySlot.SUPER && slot != AbilitySlot.JUMP) {
+            return Result.BUSY; // A grenade/dodge cannot replace an accepted super contact animation.
+        }
         if (slot == AbilitySlot.SUPER) {
             if (runtime.superSession != null) {
                 return Result.BUSY;
@@ -170,6 +183,12 @@ public final class AbilityService {
         } else if (data.cooldown(slot) > 0) {
             return Result.COOLDOWN;
         }
+        if (slot != AbilitySlot.JUMP) kim.biryeong.destiny.weapon.WeaponRuntime.cancelUseForSkill(player);
+        var wellRounded=(slot==AbilitySlot.GRENADE||slot==AbilitySlot.SUPER)
+            ?kim.biryeong.destiny.weapon.WeaponWellRounded.accepted(player,slot)
+            :kim.biryeong.destiny.weapon.WeaponWellRounded.Token.NONE;
+        var osmosis = slot == AbilitySlot.GRENADE ? kim.biryeong.destiny.weapon.WeaponOsmosis.accepted(player)
+                : kim.biryeong.destiny.weapon.WeaponOsmosis.Token.NONE;
         if (!ability.activate(player)) {
             return Result.FAILED;
         }
@@ -178,15 +197,26 @@ public final class AbilityService {
         } else {
             data.setCooldown(slot, ability.cooldownTicks());
         }
+        kim.biryeong.destiny.weapon.WeaponWellRounded.abilityUsed(player,wellRounded,slot);
+        if (slot == AbilitySlot.GRENADE) kim.biryeong.destiny.weapon.WeaponOsmosis.abilityUsed(player,osmosis);
         CombatHud.update(player);
         return Result.OK;
     }
 
     public static void startSuper(ServerPlayer player, SuperSession session) {
+        kim.biryeong.destiny.ability.hunter.HunterSkillCast.cancelPending(player);
         Guardians.runtime(player).superSession = session;
     }
 
     public static void endSuper(ServerPlayer player) {
+        completeSuper(player);
+        // Explicit cancellation is not an accepted final-shot recovery.
+        kim.biryeong.destiny.fx.PlayerAnimations.stop(player);
+        kim.biryeong.destiny.camera.SuperCamera.stop(player);
+        kim.biryeong.destiny.fx.SuperVfx.cancelOwned(player);
+    }
+
+    private static void completeSuper(ServerPlayer player) {
         GuardianRuntime runtime = Guardians.runtime(player);
         SuperSession session = runtime.superSession;
         runtime.superSession = null;
@@ -196,7 +226,7 @@ public final class AbilityService {
     }
 
     public static boolean inSuper(ServerPlayer player) {
-        return Guardians.runtime(player).superSession != null;
+        return Guardians.runtimeIfPresent(player).map(runtime -> runtime.superSession != null).orElse(false);
     }
 
     public static void onKill(ServerPlayer player, LivingEntity target, Element element) {

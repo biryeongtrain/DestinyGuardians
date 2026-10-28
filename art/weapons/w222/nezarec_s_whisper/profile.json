@@ -46,19 +46,19 @@
     "sourceWeaponMotion": true,
     "sourceMeshBasis": [
       [
-        0.95973933541829,
-        0.19609995243772527,
-        -0.20110996172437814
+        -0.007607548100051909,
+        -0.9988540797145159,
+        0.04725095395410554
       ],
       [
-        -0.19609995243772527,
-        -0.04484459594469925,
-        -0.9795579466619004
+        -0.1960999524377253,
+        -0.044844595944699146,
+        -0.9795579466619005
       ],
       [
-        -0.20110996172437814,
-        0.9795579466619004,
-        -0.00458393136298918
+        0.9805544012780868,
+        -0.016717944019055724,
+        -0.19553408010356774
       ]
     ],
     "sourceMeshPivot": true
@@ -151,6 +151,42 @@
       "sourceSha256": "bd383bf0e1e4b59b2912dbfee4d890b2fb5aa9a8f94e48e16e735d36c355d2f3",
       "role": "viewed_FIRST_postreload_framebuffer",
       "observation": "Actual postreload Nezarec panel returns to initial blade-forward/rest appearance with7 rounds. Reload-middle defect is not evidence of a persistent final rest-transform change."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w223/source-review.json",
+      "sourceSha256": "2dd4b353660e68ed7e011e93b2910f75d0fd354c2ebef6192de2056e6d3438dd",
+      "role": "W223_master_original_blender_evaluation",
+      "observation": "Master freshly evaluated actual original source.blend in isolated background Blender with scripts disabled: ARMATURE only, no mesh/camera, OBSlot action80A8A440 frames1..123,61 samples, old cache joint error0, all inputs unchanged. Worker read evidence; no independent Blender evaluation."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w223/fresh-evaluation-cache.json",
+      "sourceSha256": "96b5ca34b1fa41b06dfa5113776f346384892fc1060906a8b6fe6cde3a0406cd",
+      "role": "W223_fresh_evaluated_action_comparison",
+      "observation": "Worker compared every action/frame/joint with the local W222 rig: exact equality. Only w222Source61.exporterSha256 differs; retain local rig hash as actual generator input."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w223/source-sheets/glaive_f9784d8f-80A8A440-upper-chain.png",
+      "sourceSha256": "94ecf39f32747f06b59e1f55fb4c8d19f50f14a5bf11955530ff397e17b1eb2f",
+      "role": "W223_viewed_original_upper_chain_sheet",
+      "observation": "Worker viewed original XZ/YZ complete arm-chain samples at0,.2,.4,.6,.8,1. Source bones only; no mesh/camera/native gameplay evidence."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w223/registration-proposal.json",
+      "sourceSha256": "f9e58e5749dfad7b4bdfd104bc57f9c52ef975b0343b51aca6297e3e773c1cbb",
+      "role": "W223_master_registration_proposal",
+      "observation": "Independently rederived from actual rig/contacts/native Rx*Ry*Rz display; proposal used as comparison, not a hardcoded registration literal. FIRST reviewed by the same worker with no evidenced derivation defect; product retained unchanged, SECOND pending."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w222/vision2/screenshots/nezarec_s_whisper-review.png",
+      "sourceSha256": "8ad6c87b7dff13459c8773f498abb57667f89dc8ee96b30e00456f605bd76d9b",
+      "role": "W223_viewed_rejected_W222_SECOND",
+      "observation": "Worker viewed actual historical W222 SECOND hip/ADS/reload: huge cyan sleeve dominates screen, including rest hip and ADS. Reject visual quality despite weapon visible."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w222/vision2/screenshots/nezarec_s_whisper-reload.png",
+      "sourceSha256": "1d30acc49d37de4c6008e51063e9f6a08aa28fadfcedd7c7ba3b74288c3fb7d4",
+      "role": "W223_viewed_rejected_W222_SECOND_reload",
+      "observation": "Worker viewed historical samples00/04/09/14/18: weapon visible but large cyan sleeve crosses view at04/09/14. This is the baseline defect, not W223 FIRST evidence."
     }
   ],
   "notes": [
@@ -161,41 +197,54 @@
     "Preserve blade-forward first/third-person, ADS/inspect graphs, twohand carrier, rest scale/translation/rotation and authoritative62-tick gameplay reload/audio/ammo/inputs/guard behavior.",
     "61 poses/60 intervals are bank samples over source frames1..123, not proof of continuous native60fps interpolation or native contact/visibility acceptance.",
     "148 surface elements plus448 conservative ordinary-arm reserve=596; raw canonical246 plus448=694. Master must measure actual integrated routes including four ordinary skin-arm surfaces.",
-    "FIRST actual images reviewed: reload05/09/13 visually rejected despite native13/13, source tests2 and JUnit16 passing. Apply shortest-arc sourceMeshBasis and sourceMeshPivot coherently in master shared helpers. SECOND must demonstrate improved visible reload and return; no final acceptance yet.",
-    "FIRST correction is rigid coordinate/pivot registration only: generic C mapped source shaft mostly -Z but canonical glaive shaft is+Y. Derived Q rotates source basis without changing source rotations/travel magnitudes. Generator remains neutral; shared helpers implement all replay."
+    "Historical W222 FIRST/SECOND are visually rejected: W222 SECOND improves weapon visibility but the ordinary cyan sleeve crosses hip/ADS/reload. Historical native/test passes do not establish W223 visual acceptance.",
+    "W223 rigid rest-axis registration derives Q dynamically from actual idle joints, accepted semantic contacts and native firstperson_righthand display. Preserve existing global X-forward/Z-up C in view convention, then use only the minimum18.778326470728114-degree correction needed to align grip directions. No recovered source camera extrinsic is claimed.",
+    "W223 original evidence was freshly evaluated by master in isolated background Blender with scripts disabled. This worker read that evidence and viewed its upper-chain sheet; worker did not independently open Blender. Fresh actions equal local W222 rig actions exactly; only exporterSha256 metadata differs, so the existing rig input/provenance hash remains unchanged.",
+    "W223 FIRST: same worker viewed actual master-captured hip/ADS/reload sheets and raw hip/after-reload/reload07/13. Previous central cyan sleeve obstruction is resolved; large lower-right ready forearm and lower-left cyan upper-arm transient at07 remain visible with center clear. No evidenced derivation defect: retain Q, full source motion/lengths and all accepted contacts/displays unchanged. SECOND Vision remains pending; no final acceptance.",
+    "W223 FIRST source-fast transient caveat: raw source right forearm relative rotation already changes103.865degrees over p0..1/60 and86.600degrees over p.55...5667. Fixed Q preserves those angular changes. Sparse framebuffer samples cannot establish exact source progress, continuous temporal quality or detailed port/finger contact; do not tune twist, hide/stretch arms, add camera offsets or damp source motion from this evidence."
   ],
   "sourceRetarget": {
-    "method": "shortest_arc_idle_two_grip_directions",
+    "method": "source_view_axes_preserving_rigid_registration",
     "idleAction": "80A8A3C2",
-    "sourceGripSeparationAfterC32": [
-      -2.515967792234776,
-      -0.5753574014173995,
-      -12.567755442019424
+    "nativeDisplayContext": "firstperson_righthand",
+    "acceptedNativeRotation": [
+      -77,
+      90,
+      0
+    ],
+    "rotationConvention": "column vectors; accepted R=Rx*Ry*Rz, identical to shared xyz",
+    "sourceOrientationConvention": "Existing global X-forward/Z-up C; calibration, not recovered source camera extrinsic",
+    "sourceGripSeparationArmature": [
+      0.39354946464300156,
+      0.07466616481542587,
+      -0.01718580722808838
     ],
     "sourceGripDirectionAfterC": [
-      -0.19609995243772527,
-      -0.04484459594469913,
-      -0.9795579466619004
+      -0.1862285380816488,
+      -0.042863963399640395,
+      -0.9815709919540441
     ],
     "meshGripSeparation": [
-      0,
-      3.3,
-      0
+      0.0,
+      3.3000000000000007,
+      0.0
     ],
-    "meshShaftAxis": [
-      0,
-      1,
-      0
+    "targetCameraGripDirection": [
+      0.0,
+      0.22495105434386492,
+      -0.9743700647852354
     ],
-    "shortestArcDegrees": 92.57026805734112,
+    "shortestArcDegrees": 18.778326470728093,
+    "basisDerivation": "a=unit(C*(Lw-Rw)); b=unit(R*(meshLeft-meshRight)); T=shortestArc(a,b); B=R^T*T*C*Wr; Q=B*C^T",
+    "minimumRotationConstraint": "T minimizes geodesic rotation from identity subject to T*a=b; no free shaft twist",
     "registeredWeaponOriginOffsetModelUnits": [
-      -0.1852862032795882,
+      0.6297219058327456,
       3.7929449776060404,
-      -0.604136781029738
+      -0.05255995275029655
     ],
-    "pivotDerivation": "O=(rightGrip-8)-32*Q*C*idleWeaponBasis^T*(idleRightWrist-idleWeapon)",
+    "pivotDerivation": "O=(rightGrip-8)-32*Q*C*Wr^T*(idleRightWrist-idleWeapon)",
     "localTranslationModelUnits": "32*Q*shift+(I-Q*A*Q^T)*O; accepted ready rotation/scale applied afterwards",
-    "scope": "Master-owned coherent weapon rotation/translation, palm deltas, forearm axes; upper-arm relative bend unchanged. No rescaling by source/mesh grip separation, no new attenuation.",
-    "rollLimit": "Shortest arc adds no arbitrary twist. Source weapon mesh/camera unavailable; shaft-alignment calibration is grounded in source wrists and accepted semantic grips, not recovered mesh orientation."
+    "scope": "Fixed proper rotation shared by weapon, palm deltas and both full arm chains; separate accepted contact offsets; no grip-distance rescale or source attenuation",
+    "limitation": "Direction constraint only: source wrist separation differs from remodeled mesh grips. No original mesh, camera, finger IK or contact surfaces are recoverable."
   }
 }
