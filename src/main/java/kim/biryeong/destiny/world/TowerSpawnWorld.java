@@ -61,6 +61,7 @@ public final class TowerSpawnWorld {
     private static boolean initialized;
     private static State state;
     private static final Map<UUID, Integer> RETRY_AFTER = new HashMap<>();
+    private static final Map<UUID, ServerPlayer> PENDING_JOINS = new HashMap<>();
     private record State(MinecraftServer server, RuntimeLevelHandle handle, TowerVoxelMap map) {}
     private TowerSpawnWorld() {}
 
@@ -94,7 +95,7 @@ public final class TowerSpawnWorld {
         });
         // Fantasy PERSISTENT levels use the normal server save/close path. Never delete or enqueue an unload here.
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
-            if (state != null && state.server() == server) { state = null; RETRY_AFTER.clear(); }
+            if (state != null && state.server() == server) { state = null; RETRY_AFTER.clear(); PENDING_JOINS.clear(); }
         });
         CommandRegistrationCallback.EVENT.register((dispatcher, access, environment) ->
                 dispatcher.register(Commands.literal("tower").executes(context -> {
@@ -115,7 +116,10 @@ public final class TowerSpawnWorld {
                     return 1;
                 })));
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> onJoin(handler.getPlayer()));
-        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> RETRY_AFTER.remove(handler.getPlayer().getUUID()));
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            RETRY_AFTER.remove(handler.getPlayer().getUUID());
+            PENDING_JOINS.remove(handler.getPlayer().getUUID(), handler.getPlayer());
+        });
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             if (!alive && enabled()) teleport(newPlayer);
         });
@@ -189,11 +193,22 @@ public final class TowerSpawnWorld {
     /** Existing players keep their login location; new player stats identify a first join. */
     public static void onJoin(ServerPlayer player) {
         if (!enabled() || state == null || state.server() != player.level().getServer()) return;
-        if (player.getStats().getValue(Stats.CUSTOM.get(Stats.PLAY_TIME)) == 0 || isTower(player.level())) teleport(player);
+        // Fabric 26.3 JOIN fires inside placeNewPlayer, BEFORE level.addNewPlayer.
+        // Changing levels there registers the player in two levels with one lastSectionPos.
+        PENDING_JOINS.put(player.getUUID(), player);
     }
 
     public static void tick(MinecraftServer server) {
         if (!enabled() || state == null || state.server() != server) return;
+        for (var player : java.util.List.copyOf(PENDING_JOINS.values())) {
+            PENDING_JOINS.remove(player.getUUID(), player);
+            if (player.level().getServer() == server && !player.hasDisconnected() && !player.isRemoved()
+                    && server.getPlayerList().getPlayer(player.getUUID()) == player
+                    && player.level().getEntity(player.getId()) == player
+                    && (player.getStats().getValue(Stats.CUSTOM.get(Stats.PLAY_TIME)) == 0 || isTower(player.level()))) {
+                teleport(player);
+            }
+        }
         int tick = server.getTickCount();
         for (var player : java.util.List.copyOf(state.handle().asLevel().players())) {
             if (player.isAlive() && (player.getY() < state.map().manifest().returnBelowY()

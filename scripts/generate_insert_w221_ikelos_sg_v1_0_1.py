@@ -296,7 +296,8 @@ def generate(root=ROOT, *, rig_path=None, profile_path=None) -> dict[Path, bytes
     if budget > 1000:
         raise ValueError('Assembled element budget exceeded')
     emit(A/f'models/{KEY}_shell.json', shell)
-    emit(A/f'models/{KEY}_shell_hidden.json', {'elements': []})
+    emit(A/f'models/{KEY}_shell_hidden.json', {
+        'textures': {'particle': source['textures']['particle']}, 'elements': []})
     entries = []
     for phase_index, phase in enumerate(PHASES):
         for frame in range(SAMPLES):

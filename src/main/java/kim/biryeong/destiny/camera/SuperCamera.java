@@ -292,7 +292,7 @@ public final class SuperCamera {
         p.xxa = 0;
         p.zza = 0;
         p.setJumping(false);
-        if (!p.hasDisconnected()) {
+        if (!p.hasDisconnected() && p.connection.isAcceptingMessages()) {
             if (restore) p.connection.send(new ClientboundSetCameraPacket(p));
             p.connection.send(passengers(s.mount.getId()));
             p.connection.send(new ClientboundRemoveEntitiesPacket(s.mount.getId(), s.camera.getId()));

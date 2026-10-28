@@ -22,6 +22,9 @@ public abstract class ServerGamePacketListenerImplMixin {
     public ServerPlayer player;
 
     @Shadow
+    private boolean clientIsFloating;
+
+    @Shadow
     public abstract void resetPosition();
 
     /** Vanilla rewinds doTick movement to firstGoodXYZ immediately after this call.
@@ -31,7 +34,16 @@ public abstract class ServerGamePacketListenerImplMixin {
     @Inject(method = "tickPlayer", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/server/level/ServerPlayer;doTick()V", shift = At.Shift.AFTER))
     private void destiny$retainCameraPhysics(CallbackInfoReturnable<Boolean> cir) {
-        if (SuperCamera.active(player)) resetPosition();
+        if (SuperCamera.active(player)) {
+            resetPosition();
+            // Camera ownership cancels handleMovePlayer, so an earlier floating flag
+            // is otherwise never recomputed, even after native physics lands the player.
+            clientIsFloating = false;
+            player.connection.resetFlyingTicks();
+            if (player.level().getEntity(player.getId()) == player) {
+                player.level().getChunkSource().move(player);
+            }
+        }
     }
 
     @Inject(method = "handleMovePlayer", at = @At(value = "INVOKE",
