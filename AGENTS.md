@@ -1,0 +1,80 @@
+# Destiny Guardians 작업 규칙
+
+@/Users/qf/.codex/RTK.md
+
+## 현재 작업 범위 — 사용자 지시 (2026-10-27)
+
+- 사용자에게서 Windows 추출 결과를 받았다. `/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return`과 `/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return`을 읽기 전용 원본으로 사용하여 W196부터 애니메이션 검증을 재개한다. 사용자가 부른 Animation-Export의 실제 전달 폴더명은 두 번째 Animation-Return이다. 기존 Windows handoff와 봉인 QA는 보존한다.
+- 이번 전달의 플레이어 3P 리그를 무기 1P 장전으로 간주하지 않는다. 파일 무결성·실제 동작·좌표/본 대응·이펙트 연결을 확인한 뒤 적용 범위를 정한다. 일반 퍽 작업에는 기존 DDC·정확 소켓 풀·수치 테스트 예외를 계속 적용한다.
+
+## Mac 인게임 QA
+
+- **이번 부재중 세션 — 사용자 지시 (2026-10-28):** 사용자가 작업 전48시간 잠자기/자동 화면 꺼짐 방지를 명시적으로 요청했다. 별도 소유 `caffeinate -dimsu -t172800` PID79904, 만료2026-10-30 03:41:56+09:00을 유지한다. 기록: `/Users/qf/.codex/tmp/destiny-awake-48h-20261028/session.json`. 개별 QA 정리로 이48시간 assertion을 해제하지 않는다. 일반12시간 QA wrapper 제한과 별도이며 암호/인증/수동 잠금·덮개/재부팅은 우회하지 않는다.
+
+- 사용자가 승인한 격리 QA만 조작한다. 일반 Minecraft 프로필·월드와 Blender/Blockbench의 미저장 작업은 보존한다.
+- **다음 인게임 QA 실행부터 `scripts/qa/keep_awake.py`로 client 또는 통합 QA command를 감싼다.** [실행법·제약](docs/qa/KEEP_AWAKE.md)을 따른다. 따로 관리하는 assertion은 소유 PID·시간 상한을 기록하고 테스트 종료 시 자기 것만 해제한다.
+- 한 배치에서 결함 수정 때문에 client/server를 종료·재빌드·재시작할 때는, bounded awake를 개별 client 수명보다 긴 master QA coordinator에 묶어 그 사이 idle gap도 덮는다. 종료된 client를 계속 살리거나 실행 중인 소스를 빌드하라는 뜻이 아니다. 이미 잠긴 화면은 여전히 수동 해제가 필요하다.
+- 시작 전 Computer Use로 잠금 상태, Vision port/process 소유권을 확인한다. 이미 잠긴 Mac은 우회하지 않는다. 암호·인증·화면보호기 보안 설정을 끄지 않는다. 자동 idle/display sleep 방지와 영구 잠금 해제는 다르다.
+- master만 Computer Use/Vision 입력을 통합 운영한다. 병렬 agent는 같은 게임 창·lease·server fixture를 동시에 변경하지 않는다.
+- `minecraft-testing`, `copper-golem-vision-client-fabric-26-3`의 skill/reference를 읽고 진행한다. 실제 PNG·server 결과·native 입력·청취를 구분하고 실패와 미검증 범위를 단계별 QA/구현 로그에 남긴다.
+
+## 무기 장전 작업의 필수 순서 — 사용자 지시 (2026-10-28)
+
+다음 무기 장전/손 리깅 배치부터 아래 순서를 기본으로 강제한다. 원본 확인이나 1차 Vision을 건너뛰고 수동 수치 조절로 완료 처리하지 않는다.
+
+1. **원본 Blender 파일 확인:** 리핑된 해당 무기의 `.blend`를 먼저 열거나 별도 소유 scene/headless Blender에서 평가한다. action/slot, 무기 본, 손목·팔꿈치, 파지와 장전 동작을 확인하고 provenance와 검토 이미지를 남긴다. 캐시 JSON만 읽고 `.blend`를 봤다고 하지 않는다. 사용자 미저장 scene와 SSD 원본은 보존한다.
+2. **장전61프레임 생성/변경:** 원본 타이밍/hold/분리 부품을 살리며 61 pose(60구간)를 보간·생성한다. 틱마다 멈추는 곡선·축 특이점·회전 flip을 확인한다. 61 pose만으로 바닐라60fps 연속 보간이라고 주장하지 않는다.
+3. **1차 Vision:** master가 실제 입력과 PNG로 파지·장전 부품 접촉·ADS 가림·복귀를 검수한다. worker는 같은 client/lease/fixture를 조작하지 않는다.
+4. **서브에이전트 수정 요청:** master가 검수 이미지/정확한 구간/문제/원본 근거를 담당 agent에게 전달하여 수정본을 받는다. 담당 agent는 독립 worktree와 배타적 파일 범위에서 수정한다. 1차 결과가 양호해도 담당 agent에게 검수 결과와 잔여 점검을 전달한다. 문제없는 부분을 형식적으로 바꾸지는 않는다.
+5. **통합 후2차 Vision:** master가 반환 delta를 검토·통합하고 같은 시나리오로 재검수한다. 관련 gate/실패/잔여 한계를 문서화한다. 2차 검증 이전에 최종 완료로 보고하지 않는다.
+
+단순 스탯 수치 퍽의 기존 테스트 예외와 문서 전용 변경에는 이 무기 장전 시퀀스를 적용하지 않는다. 완료 worktree는 아래 최신 재사용 규칙을 따른다.
+
+## Worktree 병렬 배치
+
+- **워크트리 재사용 — 최신 사용자 지시 (2026-10-28):** 완료 워크트리를 배치마다 삭제하지 않는다. master가 지정한 고정 5개 슬롯을 다음 배치에도 재사용한다. [슬롯·갱신 절차](docs/qa/WORKTREE_POOL.md)를 따른다. worker 종료·소유 delta 통합·증거 보관 후, 현재 통합본의 변경 파일만 갱신하고 다음 소유 범위를 배정한다. 사용자 표현의 pull은 최신 통합본 반영으로 적용하며, dirty main에 무조건 원격 pull/reset/clean하지 않는다.
+- 정리 범위는 **이 프로젝트의 확인된 완료 워크트리만**이다. `/Users/qf/IdeaProjects/DestinyGuardians` 메인 checkout과 IdeaProjects의 다른 프로젝트는 삭제하지 않는다. 별도 export/delta 폴더는 워크트리로 간주해 함께 삭제하지 않는다. 진행 중·공유·소유권 불명 작업본도 자동 삭제하지 않는다. 앱 관리 워크트리는 앱의 archive 도구를 사용한다.
+- 고정 슬롯의 삭제는 별도 사용자 지시가 있을 때만 진행한다. 삭제 지시가 있다면 필요한 변경 보관·사용 여부를 확인하고 정확한 경로로 제거한다. main이나 IdeaProjects의 다른 프로젝트를 삭제하지 않는다. APFS CoW의 `du` 합계를 실제 확보량으로 보고하지 않는다.
+- 기능/자산·데이터/회귀 테스트를 별도 Git worktree에 배정한다. 각 배치에서 master는 통합·공유 레지스트리·중앙 gate·Vision/CU를 소유한다.
+- 현재 제품의 미커밋·untracked 파일도 해시 기준선에 포함한다. HEAD만 checkout한 작업본은 현재 제품이 아니다. worker는 main에서 commit/stash/reset/clean/push하지 않는다. master의 검수 후 커밋은 아래 최신 지시를 따른다.
+- agent에게 절대 worktree 경로와 배타적 파일 소유권을 준다. 자식 agent도 동일 규칙을 적용한다. 기본 3개 리더, 리더당 필요할 때 자식 1개 이내, 전체 활성 작업자 6개 이내로 시작하고 자원 여유에 따라 조정한다. 무제한 생성하지 않는다.
+- 의존성 소스·build/run 디렉터리를 분리한다. 격리 사본의 GCB 경로는 Gradle CLI `-Pgcb_server_dir=<worktree>/libs/gcb-server`로 명시한다. `settings.gradle`의 명시적 dependency substitution을 유지하여 `libs/gcb-server`라는 폴더명에서도 `kim.biryeong:GCB-server` 모듈이 격리 소스에 연결되도록 한다. 공유 원본 dependency를 병렬 빌드하지 않는다.
+- 반환 시 소유 경로 delta만 검토하고 기준 해시와 main의 현재 해시가 맞을 때 통합한다. 변경된 main을 자동 덮어쓰지 않는다. 수행한 검사·미검증 Vision 목록을 함께 반환한다. 아래 단순 수치 변경 예외에서는 테스트 수를 채우지 않는다.
+- standalone agent 테스트는 각자 격리 환경에서 가능하지만 중앙 gate와 실제 Minecraft/lease/fixture는 master가 순차 1회 배치한다. 봉인된 과거 QA는 변경하지 않는다.
+
+- 이후 배치는 독립 **게임 기능 / 모델·애니메이션 / HUD 제품 변경**을 우선 병렬화한다. 각 리더가 변경 범위에 필요한 검사를 반환하고, 문서/감사만 병렬화한 것을 여러 제품 기능 완료로 세지 않는다.
+
+## 완료 작업 커밋 — 최신 사용자 지시 (2026-10-28)
+
+- 검수를 마친 작업은 master가 통합 checkout에서 관련 파일을 묶어 커밋한다. 별도 확인을 다시 요구하지 않는다. 작업 중간 실패나 미검증 결과를 완료 커밋으로 표시하지 않는다.
+- worker는 배타 소유 delta만 반환한다. master가 통합·필요 검사·Vision 수락 후 커밋하며 결과에 커밋 해시와 잔여 변경을 남긴다.
+- 기존 미커밋 작업이 많으므로 index와 범위를 먼저 확인한다. 무분별한 `git add .`로 QA 캡처·런타임·캐시·외부 원본까지 넣지 않는다. 기존 변경을 버리거나 덮어쓰지 않는다. 원격 push는 별도 지시가 있을 때 진행한다.
+
+## 병렬 처리량 · 수락 기준
+
+- 배치 시작 전에 각 기능의 소유 파일, 완료 조건, 필요한 targeted regression, 취합할 Vision 시나리오를 정한다. 단순 수치 변경은 아래 예외를 적용한다. master는 남은 공유 critical path를 직접 진행하며 결과를 기다리기만 하지 않는다.
+- macOS/APFS에서 가능한 copy-on-write 복제는 허용한다. 독립 inode, 원본/복제본 hash·drift 검증, 수정 격리를 유지해야 한다. hardlink나 공유 writable dependency/build/run으로 대체하지 않는다.
+- 동작을 변경하는 배치는 먼저 targeted gate, 통합 후 최종 전체 gate 1회를 기본으로 한다. 단순 수치 변경에는 아래 예외가 우선한다. 실패·추가 코드 변경에는 재검증하되 이유 없는 동일 full gate 반복으로 병렬 이익을 소모하지 않는다.
+- Vision 검증은 기능별 시나리오를 모아 master의 한 격리 서버/client 세션에서 순차 수행한다. 실패·미검증·cleanup은 구분해 남긴다.
+- 운영 도구/문서 변경만인 배치는 기능 추가나 새로운 인게임 검증으로 보고하지 않는다. 자식 agent도 명시적 배타 소유 범위를 주며 전체 6worker 상한과 메모리/디스크 예산을 유지한다.
+
+## 모델 작업 검사 강도 — 최신 사용자 지시 (2026-10-25)
+
+- 무기 신규 제작·재설계·표면 정돈 작업은 `/Users/qf/.codex/skills/minecraft-weapon-art-design/SKILL.md`와 연결된 에이스/이자나기 실측 연구를 먼저 참조한다. 병렬 모델 agent에게도 이 경로를 전달한다. 리핑 메시 직접 변환보다 의미 있는 큰 입체와 면별 UV로 재설계하고, 비슷한 복잡도는 80~120개 내외의 저요소 초안부터 시도한다. 이는 강제 개수 제한이 아니며 필요한 실루엣·입체 디테일은 보존한다. 아래 1,000개는 상한이지 목표량이 아니다.
+
+- **무기 1개당 본체+탄창의 큐브와 삼각/윤곽용 출력 요소를 모두 합쳐 최대 1,000개로 제한한다.** full 모델과 body+magazine은 같은 조립체이므로 중복 합산하지 않는다. 삼각 어댑터가 여러 요소를 출력하면 각각 센다.
+- 실사용은 10~20개 표시 규모를 기준으로 한다. 원본 실루엣·디테일을 우선하고, 큐브·26.3 회전·필요한 윤곽 삼각면을 성능 우려만으로 과도하게 줄이지 않는다.
+- 일반 모델/텍스처 수정은 기본 파싱·팩 로드와 대표 1/3인칭·ADS/장전, 10~20개에서 눈에 띄는 깨짐·끊김을 짧게 확인한다. 전수 수학적 동등성·모든 각도/거리/조합·반복 FPS 인증을 다음 모델 착수의 필수 조건으로 삼지 않는다.
+- 작은 미술 변경마다 전체 강제 gate를 반복하지 않는다. 관련 targeted 검사와 master의 한 번의 실화면 취합을 우선한다. 실제 결함 또는 전투/탄약/lifecycle 코드 변경이 있을 때만 범위에 맞게 회귀를 넓힌다. 기존 보안·소유권·중립 cleanup 규칙은 유지한다.
+- 과거 정밀 QA 대기열은 필요할 때 참고할 목록이지 모두 닫아야 하는 blocking gate가 아니다. 수행하지 않은 검증은 통과했다고 쓰지 않는다.
+
+## 수치 기준 — 사용자 지정 DDC (2026-10-27)
+
+- 무기/특성/능력 수치는 [Destiny Data Compendium](https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4)를 우선 대조한다. [수치 적용 규칙](docs/design/162_수치_기준_Destiny_Data_Compendium.md)을 따른다.
+- PvE/PvP·기본/강화·프레임/조건·단위와 조회한 탭/행을 기록한다. `?`/빈값은 확정값으로 바꾸지 않고, Minecraft 환산·임시 튜닝과 원작 확정 수치를 구분한다. 기존 전체 수치를 이미 소급 검증했다고 주장하지 않는다.
+
+## 단순 수치 퍽 처리량 — 최신 사용자 지시 (2026-10-27)
+
+- 핸들링·사거리·안정성·재장전속도 등의 값을 기존 스탯 경로에 추가하는 작업은 출처 수치와 실제 적용 경로 연결만 확인한다. 퍽별 테스트 신설·반복 실행·Vision 시나리오·전체 gate를 요구하지 않는다. 그 시간에 한 배치에서 구현하는 퍽 수를 늘린다.
+- 기존 계산·적용 경로 자체를 바꾸거나 새로운 발동/만료·이벤트·탄약·피해·소유권 동작을 구현하면 그 동작 범위에 필요한 검증을 수행한다. 숫자가 포함된다는 이유만으로 새 동작까지 면제하지 않는다.
+- 이 예외는 위 일반 테스트 반환/gate 지침보다 우선하며 병렬 자식 agent에게도 전달한다. 확인한 출처·적용 지점과 수행하지 않은 검사를 짧게 기록한다.
