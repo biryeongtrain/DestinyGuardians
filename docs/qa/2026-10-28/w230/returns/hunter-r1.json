@@ -1,0 +1,118 @@
+{
+  "status": "FROZEN_R1_WITH_SCOPED_CLOAK_AWAIT_MASTER_COMPILE_AND_VISION",
+  "created": "2026-10-28T13:20:39.055398+00:00",
+  "slot": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-ikelos_sg_v1_0_1",
+  "files": [
+    {
+      "path": "src/main/java/kim/biryeong/destiny/ability/hunter/HunterAbilities.java",
+      "before_sha256": "598f39c84dfb12fd02ba05743bc2d7fd96c4d333e8c8f3ca385725bc1035c2f9",
+      "sha256": "d6fa26c13a672d33a5c136e35dc1a1c0b32a7195f7036e561fa648515bacaf97",
+      "bytes": 4160
+    },
+    {
+      "path": "src/main/java/kim/biryeong/destiny/ability/hunter/HunterExpandedSupers.java",
+      "before_sha256": null,
+      "sha256": "a0b480ce62eeee30940bbfef24a646dfbe5b66df12961ade0181f6785ddf367b",
+      "bytes": 30432
+    },
+    {
+      "path": "src/main/resources/data/destiny/destiny_ability/hunter/blade_barrage.json",
+      "before_sha256": null,
+      "sha256": "aaf8b81a8b7e496362db2ae1652d2dc14d44ff4ab0e2bcb05d7b6010bbe64e10",
+      "bytes": 309
+    },
+    {
+      "path": "src/main/resources/data/destiny/destiny_ability/hunter/spectral_blades.json",
+      "before_sha256": null,
+      "sha256": "4483a9a7d947a979d3e5fe6cdba95cff03e4accc9c8f5e3c76f0f645c84ab882",
+      "bytes": 361
+    },
+    {
+      "path": "src/main/resources/data/destiny/destiny_ability/hunter/gathering_storm.json",
+      "before_sha256": null,
+      "sha256": "5d32881ec6139752a404c24a3d317ddca06c00f4f63dd1d6e9a8ea4e51d66d96",
+      "bytes": 341
+    },
+    {
+      "path": "src/main/resources/data/destiny/destiny_ability/hunter/storms_edge.json",
+      "before_sha256": null,
+      "sha256": "80a8846a8d8cb5e18b9d0d191ec05fc0a000c741d1a379f31d7a82d6e4fae2a1",
+      "bytes": 245
+    },
+    {
+      "path": "src/gametest/java/kim/biryeong/destiny/test/HunterW230GameTests.java",
+      "before_sha256": null,
+      "sha256": "d98366b50569cb356be49dc43526291ecbe2a159c2445598a490ce2f5c47d827",
+      "bytes": 18282
+    },
+    {
+      "path": "docs/design/W230_Hunter_궁극기.md",
+      "before_sha256": null,
+      "sha256": "649809ac1169f514f0d75366ce42f8e045157561223d95845c5baff725ac84b8",
+      "bytes": 13452
+    }
+  ],
+  "checks": [
+    "Java25 compiler parse-only: HunterAbilities, HunterExpandedSupers, HunterW230GameTests PASS",
+    "four ability JSON parse PASS",
+    "owned 8 paths only; no main/shared/build/runtime/commit changes",
+    "Java25 parse-only of updated source and test PASS",
+    "26.3 LivingEntity.addEffect bytecode inspected: direct install + virtual MobEffectInstance.update supports foreign-update ownership detection"
+  ],
+  "not_run": [
+    "Java typecheck/build: central master only",
+    "6 GameTests: central master only",
+    "R1 Vision worker feedback and R2: master scheduling"
+  ],
+  "helper_dependencies": [
+    "ClassSuperModelAssets.durationTicks(path,phase,fallback)",
+    "ClassSuperModelAssets.prefix(path) -> w230_hunter_<id>",
+    "ClassAbilityEffects.sound(player,element,path,action)",
+    "ClassAbilityEffects.beginSuper must play _start even when _idle absent; preserve hand choices separately",
+    "PlayerAnimations W230 source clips / author-declared loops"
+  ],
+  "lifecycle": [
+    "HunterAbilities.register() calls HunterExpandedSupers.register() only",
+    "Master connects tick(server),cleanup(player),clearAll() explicitly from shared lifecycle; no tick in HunterAbilities",
+    "Session and fields guard same gameTime; fake-session time cannot be advanced by loop pumping"
+  ],
+  "oracle": {
+    "status_fields": [
+      "active",
+      "id",
+      "emitted",
+      "impacts",
+      "volleys",
+      "blinks",
+      "contacts",
+      "fields",
+      "embedded",
+      "flights",
+      "charges",
+      "cloaked",
+      "invisibility",
+      "cloakOwned",
+      "aiDrops"
+    ],
+    "public_methods": [
+      "fieldCount(player)",
+      "fieldOrigin(player)",
+      "emitted(player)",
+      "blinkCount(player)"
+    ],
+    "blade_barrage": "automatic2fans14knives; 10tick delayed embedded blasts; emits persist after camera ends",
+    "gathering_storm": "automatic1staff; fields=1 after cast completes; strike+40,field+24,duration160,pulse14; eventuallyfields0",
+    "spectral_blades": "after source windup real INVISIBILITY; scoped nearby hostile aggro drop; light removes exact owned cloak; heavy contact re-acquires; same-object foreign update relinquishes removal ownership; preexisting/foreign effects persist; death and loadout replacement revoke own cloak",
+    "storms_edge": "automaticfirst+2manual; emitted3/blinks3 on safe target; slit-through-wall emitted1/impacts1/blinks0; totalfinite"
+  },
+  "limitations": [
+    "Spectral heavy uses original weak3 as explicit provisional mapping; carry/gait authored",
+    "Storm Edge 400tick deadline provisional because DDC duration unknown",
+    "Contact candidates are wrist-speed kinematics, not decoded original release events",
+    "All MC damage/ranges provisional; source debuffs, resistance/orbs not claimed",
+    "Base staff flight long axis+Y versus generic SimProjectile forward-Z needs master/art visual review; embedded root uses exactgroundanchor",
+    "Expanded Hunter cooldown path requires master passive recharge to honor equipped new ID tuning; old Hunter global recharge remains in current shared baseline",
+    "Real vanilla invisibility and bounded aggro drop implemented; BetterModel item-display opacity/PvP viewer invisibility/truesight not claimed"
+  ],
+  "revision": "cloak-r2"
+}

@@ -1,0 +1,50 @@
+{
+  "stage": "full-r1",
+  "command": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    "--offline",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "--init-script",
+    "/private/tmp/destiny-w230-native/test-heap.init.gradle",
+    "test",
+    "assemble"
+  ],
+  "returncode": 1,
+  "seconds": 174.78164408286102,
+  "totals": {
+    "tests": 2076,
+    "failures": 6,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": [
+    {
+      "classname": "kim.biryeong.destiny.sound.FireVariantsW98Test",
+      "name": "onlyThreeExactEventsGainTwoAlternativesAndKeepOriginalFirstEntryAndSubtitles()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.FireVariantsW98Test",
+      "name": "inheritedAudioBytesAndExactlySixW98PlusSixteenW102ClipsFormClosedRuntimeInventory()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.SoundAssetsW33Test",
+      "name": "allPackReferencesAreNamespacedMonoVorbisWithBoundedSize()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.NamedAudioW102Test",
+      "name": "originalDefinitionsW63TableAndAll196PreservedSourceFilesRemainByteExact()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.sound.SwordAudioW56Test",
+      "name": "existingSoundDefinitionsRemainIdenticalWithExactlyFifteenAdditions()"
+    },
+    {
+      "classname": "kim.biryeong.destiny.compat.pack.ParticleTextureFallbacksTest",
+      "name": "repairsCurrentStandaloneModelsWithoutChangingAnyOtherField()"
+    }
+  ]
+}

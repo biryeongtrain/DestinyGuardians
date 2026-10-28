@@ -92,7 +92,7 @@ public final class TitanW229GameTests {
     @GameTest(structure=FLOOR,environment=ENV,maxTicks=20)
     public void elevenAbilitiesAndThreeCompleteTitanPresets(GameTestHelper h) {
         TitanAbilities.register();
-        check(h,AbilityRegistry.all().stream().filter(a->a.guardianClass()==GuardianClass.TITAN).count()==11,"Exactly eleven Titan abilities");
+        check(h,AbilityRegistry.all().stream().filter(a->a.guardianClass()==GuardianClass.TITAN).count()==14,"Fourteen Titan abilities including W230 supers");
         for(Element e:List.of(Element.ARC,Element.SOLAR,Element.VOID)) {
             var preset=TitanAbilities.preset(e);
             for(AbilitySlot slot:AbilitySlot.values()) {
@@ -220,7 +220,7 @@ public final class TitanW229GameTests {
     // flight controls require open sky; normal collision would finish them before deployment.
     @GameTest(structure=FLOOR,environment=ENV,maxTicks=600,skyAccess=true)
     public void allThreeRoamingSupersSpendEnergyAttackAndRejectRepeatedClicks(GameTestHelper h) {
-        var f=new Fixture(h,Element.ARC);var target=f.target(4.5,6.5);
+        var f=new Fixture(h,Element.ARC);f.prepareGround();var target=f.target(4.5,6.5);
         check(h,AbilityService.use(f.p,AbilitySlot.SUPER)==AbilityService.Result.NOT_READY,"No free super");
         h.onEachTick(f::tick);
         ordinaryFlightCoexists(h,f,()->superStage(h,f,target,Element.ARC,()->superStage(h,f,target,Element.SOLAR,
@@ -275,8 +275,8 @@ public final class TitanW229GameTests {
         Guardians.data(f.p).setSuperEnergy(1);f.p.setOnGround(true);f.p.setDeltaMovement(Vec3.ZERO);
         target.setHealth(200);f.cast(AbilitySlot.SUPER);
         check(h,AbilityService.inSuper(f.p)&&Guardians.data(f.p).superEnergy()==0,"Accepted super spends full energy");
-        int deploy=e==Element.SOLAR?27:e==Element.VOID?29:6;
-        int contact=e==Element.ARC?4:7;
+        int deploy=e==Element.SOLAR?27:e==Element.VOID?29:31;
+        int contact=e==Element.ARC?5:7;
         AbilityService.perform(f.p,GuardianAction.PRIMARY);
         check(h,SimProjectile.activeCount(f.p)==0&&target.getHealth()==200,"Deploy locks attack");
         f.afterGameTicks(deploy+1,()->{
@@ -287,7 +287,7 @@ public final class TitanW229GameTests {
             f.afterGameTicks(contact-1,()->check(h,SimProjectile.activeCount(f.p)==projectiles&&target.getHealth()==after,
                     "Animation wind-up cannot release payload early"));
             f.afterGameTicks(contact+5,()->{
-                check(h,target.getHealth()<200&&target.getLastHurtByPlayer()==f.p,"Actual super contact credits owner");
+                check(h,target.getHealth()<after&&target.getLastHurtByPlayer()==f.p,"Primary contact adds damage after any activation slam and credits owner");
                 TitanAbilities.cleanup(f.p);check(h,!AbilityService.inSuper(f.p),"Cleanup ends owned session");next.run();
             });
         });

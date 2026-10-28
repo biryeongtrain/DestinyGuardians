@@ -1,0 +1,34 @@
+{
+  "status": "ready-r2-air-land-minimal",
+  "files": [
+    {
+      "path": "src/main/java/kim/biryeong/destiny/ability/titan/TitanSuper.java",
+      "before_sha256": "12c0d25ae4f68e038a1ee207049e7eae687162a98804f7db4e2bc90bc4bce569",
+      "after_sha256": "59a80621003756d45ea7bf6e44200e8482a3cc1171de4cf3dd61c3634f4693d2",
+      "payload": "/private/tmp/destiny-w230-titan/delta-r2-air-land/payload/src/main/java/kim/biryeong/destiny/ability/titan/TitanSuper.java"
+    }
+  ],
+  "independent_typecheck": "javac25 exit0; actual26.3 jars plus cached main classes and shared signature stubs; not runtime verification",
+  "main_build_game_executed": false,
+  "source_contract": {
+    "air": "w229_titan_arc_air (shared original air idle)",
+    "land": "w229_titan_arc_land (80A8AD9C)",
+    "duration": "existing durationTicks(path,land,18)+SwordTiming.START_TICKS"
+  },
+  "preserved": [
+    "ground punch helper uses new master integrated authored attack",
+    "damage amounts and slam/ground damage mode at existing supported contact",
+    "downward velocity,20tick bounded air wait,session cleanup"
+  ],
+  "changes": [
+    "airborne primary skips ground punch animation",
+    "real supported landing replays source land",
+    "landing pose recovery gates next primary and camera movement for source duration"
+  ],
+  "r2": [
+    "airborne primary before landing: no early ground impact",
+    "supported landing: land clip once,actual damage once",
+    "ground attack still new authored clip",
+    "cleanup while pending slam"
+  ]
+}

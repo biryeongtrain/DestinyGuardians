@@ -15,31 +15,47 @@ import java.util.HashSet;
 
 /** Source-derived Titan/Warlock clips on BetterModel's complete player-skin rig. */
 public final class ClassSuperModelAssets {
-    public static final String MODEL_NAME = "guardian_classes_w229_r3";
-    static final String RESOURCE = "/destiny/animation/classes_w229.animation.json";
+    public static final String MODEL_NAME = "guardian_classes_w230_r3";
+    static final String RESOURCE = "/destiny/animation/classes_w230.animation.json";
+    private static final java.util.Set<String> EXPANDED = java.util.Set.of(
+            "hunter/blade_barrage", "hunter/spectral_blades", "hunter/gathering_storm", "hunter/storms_edge",
+            "titan/thundercrash", "titan/burning_maul", "titan/ward_of_dawn",
+            "warlock/well_of_radiance", "warlock/chaos_reach", "warlock/nova_warp");
     private ClassSuperModelAssets() { }
 
     public static String prefix(String abilityPath) {
-        return "w229_" + abilityPath.replace('/', '_').replace("_super", "");
+        return (isExpanded(abilityPath) ? "w230_" : "w229_")
+                + abilityPath.replace('/', '_').replace("_super", "");
+    }
+
+    public static boolean isExpanded(String path) { return EXPANDED.contains(path); }
+
+    /** Full clip span in server ticks; call sites add their explicit entry blend separately. */
+    public static int durationTicks(String path, String phase, int fallback) {
+        Double seconds = ClipIndex.LENGTHS.get(prefix(path) + "_" + phase);
+        return seconds == null ? fallback : Math.max(1, (int) Math.ceil(seconds * 20));
     }
 
     public static boolean hasClip(String clip) {
-        return ClipIndex.NAMES.contains(clip);
+        return ClipIndex.LENGTHS.containsKey(clip);
     }
 
     private static final class ClipIndex {
-        static final java.util.Set<String> NAMES = load();
+        static final java.util.Map<String, Double> LENGTHS = load();
     }
 
-    private static java.util.Set<String> load() {
+    private static java.util.Map<String, Double> load() {
         try (var in = ClassSuperModelAssets.class.getResourceAsStream(RESOURCE)) {
-            if (in == null) return java.util.Set.of();
+            if (in == null) return java.util.Map.of();
             var animations = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8))
                     .getAsJsonObject().getAsJsonArray("animations");
-            var names = new HashSet<String>();
-            for (var a : animations) names.add(a.getAsJsonObject().get("name").getAsString());
-            return java.util.Set.copyOf(names);
-        } catch (Exception e) { return java.util.Set.of(); }
+            var lengths = new HashMap<String, Double>();
+            for (var a : animations) {
+                var clip = a.getAsJsonObject();
+                lengths.put(clip.get("name").getAsString(), clip.get("length").getAsDouble());
+            }
+            return java.util.Map.copyOf(lengths);
+        } catch (Exception e) { return java.util.Map.of(); }
     }
 
     public static void prepare() {
@@ -73,7 +89,8 @@ public final class ClassSuperModelAssets {
         for (var a : clips) {
             var animation = a.getAsJsonObject().deepCopy();
             String name = animation.get("name").getAsString();
-            if (!name.startsWith("w229_") || !names.add(name)) throw new IllegalArgumentException("Foreign/duplicate class clip " + name);
+            if (!(name.startsWith("w229_") || name.startsWith("w230_")) || !names.add(name))
+                throw new IllegalArgumentException("Foreign/duplicate class clip " + name);
             var remapped = new JsonObject();
             for (var entry : animation.getAsJsonObject("animators").entrySet()) {
                 var animator = entry.getValue().getAsJsonObject();

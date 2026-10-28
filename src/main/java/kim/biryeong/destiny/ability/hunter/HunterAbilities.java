@@ -47,6 +47,7 @@ public final class HunterAbilities {
         AbilityRegistry.register(new HunterSuper(ARC_STAFF, "아크 지팡이", Element.ARC));
         AbilityRegistry.register(new HunterSuper(GOLDEN_GUN, "황금 총", Element.SOLAR));
         AbilityRegistry.register(new HunterSuper(SHADOWSHOT, "그림자 사격", Element.VOID));
+        HunterExpandedSupers.register();
     }
 
     /** 속성별 기본 장착. */

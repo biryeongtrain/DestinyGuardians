@@ -1,0 +1,34 @@
+{
+  "stage": "target-ui-r2",
+  "command": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    "--offline",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "--init-script",
+    "/private/tmp/destiny-w230-native/test-heap.init.gradle",
+    "test",
+    "--tests",
+    "kim.biryeong.destiny.fx.ClassAssetsW229Test",
+    "--tests",
+    "kim.biryeong.destiny.fx.ExpandedAssetsW230Test",
+    "compileGametestJava"
+  ],
+  "returncode": 1,
+  "seconds": 116.90176204196177,
+  "totals": {
+    "tests": 4,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": [
+    {
+      "classname": "kim.biryeong.destiny.fx.ClassAssetsW229Test",
+      "name": "missingClassMotionsStayAbsentInsteadOfSubstitutingHunterActions()"
+    }
+  ]
+}

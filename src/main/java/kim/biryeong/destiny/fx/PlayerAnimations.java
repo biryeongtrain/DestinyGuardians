@@ -250,7 +250,7 @@ public final class PlayerAnimations {
                 tracker.rotation(() -> new ModelRotation(0,player.getYRot()));
             }
             if ("super_void".equals(state.loopRequest) || "super_solar".equals(state.loopRequest)
-                    || request.startsWith("w229_")) {
+                    || request.startsWith("w229_") || request.startsWith("w230_")) {
                 // Aim supers face the authoritative view, not BM's independently smoothed
                 // body yaw. This only rotates the visual tracker; camera/body input is untouched.
                 tracker.rotation(() -> new ModelRotation(0, player.getYRot()));
@@ -280,7 +280,7 @@ public final class PlayerAnimations {
     }
 
     private static Clip resolve(String request) {
-        if (request.startsWith("w229_")) {
+        if (request.startsWith("w229_") || request.startsWith("w230_")) {
             ModelRenderer renderer = BetterModel.limb(ClassSuperModelAssets.MODEL_NAME).orElse(null);
             String animation = renderer == null ? null : clipName(renderer, request);
             return animation == null ? null : new Clip(renderer, animation);
@@ -365,7 +365,7 @@ public final class PlayerAnimations {
                     updateArcLocomotion(state, moved > .000225 && state.owner.onGround());
                 }
                 if (state.run == null && !state.closingAfterRun && state.loopRequest != null
-                        && state.loopRequest.startsWith("w229_")) {
+                        && (state.loopRequest.startsWith("w229_") || state.loopRequest.startsWith("w230_"))) {
                     if (moved > .000225) state.classMovingUntil = server.getTickCount() + 3;
                     updateClassLocomotion(state, server.getTickCount() < state.classMovingUntil);
                 }
@@ -549,6 +549,17 @@ public final class PlayerAnimations {
             state.equipment.set(TransformedItemStack.empty(), true);
             syncEquipment(state);
         } catch (RuntimeException | LinkageError e) { fail(player, "empty super hands", e); }
+    }
+
+    /** Two virtual props on the skin rig; does not write the player's real inventory. */
+    public static void superItems(ServerPlayer player, ItemStack main, ItemStack off) {
+        Playback state = ACTIVE.get(player.getUUID());
+        if (state == null) return;
+        try {
+            state.equipment.dual(TransformedItemStack.of(ModItemStack.of(main.copy())),
+                    TransformedItemStack.of(ModItemStack.of(off.copy())));
+            syncEquipment(state);
+        } catch (RuntimeException | LinkageError e) { fail(player, "dual super hands", e); }
     }
 
     /** Visual equipment only: a right-handed archer supports the bow with the left hand. */

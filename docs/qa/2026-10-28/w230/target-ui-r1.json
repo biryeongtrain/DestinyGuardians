@@ -1,0 +1,29 @@
+{
+  "stage": "target-ui-r1",
+  "command": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    "--offline",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "--init-script",
+    "/private/tmp/destiny-w230-native/test-heap.init.gradle",
+    "test",
+    "--tests",
+    "kim.biryeong.destiny.fx.ClassAssetsW229Test",
+    "--tests",
+    "kim.biryeong.destiny.fx.ExpandedAssetsW230Test",
+    "compileGametestJava"
+  ],
+  "returncode": 0,
+  "seconds": 32.736785209039226,
+  "totals": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failures": []
+}

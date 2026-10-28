@@ -184,6 +184,8 @@ public final class CombatHud {
     }
 
     static String superIcon(Ability ability) {
+        if (ability != null && kim.biryeong.destiny.fx.ClassSuperModelAssets.isExpanded(ability.id().getPath()))
+            return "w230_" + ability.id().getPath().substring(ability.id().getPath().indexOf('/') + 1);
         Element element = ability == null ? Element.KINETIC : ability.element();
         if (ability != null) {
             if (ability.guardianClass() == kim.biryeong.destiny.guardian.GuardianClass.TITAN)

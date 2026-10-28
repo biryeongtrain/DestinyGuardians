@@ -53,7 +53,8 @@ public final class AbilityService {
             }
         });
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
-                !(entity instanceof ServerPlayer player) || Guardians.runtime(player).invulnerableTicks <= 0);
+                (!(entity instanceof ServerPlayer player) || Guardians.runtime(player).invulnerableTicks <= 0)
+                && kim.biryeong.destiny.ability.titan.TitanExpandedSupers.allowDamage(entity, source, amount));
         net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 cleanup(player);
@@ -69,10 +70,16 @@ public final class AbilityService {
             kim.biryeong.destiny.ability.titan.TitanAbilities.clearAll();
             kim.biryeong.destiny.ability.warlock.WarlockAbilities.clearAll();
             kim.biryeong.destiny.fx.ClassAbilityEffects.clearAll();
+            kim.biryeong.destiny.ability.hunter.HunterExpandedSupers.clearAll();
+            kim.biryeong.destiny.ability.titan.TitanExpandedSupers.clearAll();
+            kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.clearAll();
         });
     }
 
     public static void cleanup(ServerPlayer player) {
+        kim.biryeong.destiny.ability.hunter.HunterExpandedSupers.cleanup(player);
+        kim.biryeong.destiny.ability.titan.TitanExpandedSupers.cleanup(player);
+        kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.cleanup(player);
         kim.biryeong.destiny.ability.titan.TitanAbilities.cleanup(player);
         kim.biryeong.destiny.ability.warlock.WarlockAbilities.cleanup(player);
         kim.biryeong.destiny.fx.ClassAbilityEffects.cleanup(player);
@@ -97,6 +104,9 @@ public final class AbilityService {
         Statuses.tick(server);
         SimProjectile.tickAll(server);
         Tasks.tickAll();
+        kim.biryeong.destiny.ability.hunter.HunterExpandedSupers.tick(server);
+        kim.biryeong.destiny.ability.titan.TitanExpandedSupers.tick(server);
+        kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.tick(server);
         kim.biryeong.destiny.ability.titan.TitanAbilities.tick(server);
         kim.biryeong.destiny.ability.warlock.WarlockAbilities.tick(server);
         HunterVfx.tick(server);
@@ -136,7 +146,8 @@ public final class AbilityService {
             // Classic new-class base recharge comes from its DDC-backed super tuning.
             // Hunter retains the existing configurable recharge path. Kill/ability gains are additive.
             double rechargeTicks = passiveSuperSeconds * 20.0;
-            if (data.guardianClass() == GuardianClass.TITAN || data.guardianClass() == GuardianClass.WARLOCK) {
+            if (data.guardianClass() == GuardianClass.TITAN || data.guardianClass() == GuardianClass.WARLOCK
+                    || equipped(player, AbilitySlot.SUPER).map(a -> kim.biryeong.destiny.fx.ClassSuperModelAssets.isExpanded(a.id().getPath())).orElse(false)) {
                 int tuned = equipped(player, AbilitySlot.SUPER).map(Ability::cooldownTicks).orElse(0);
                 if (tuned > 0) rechargeTicks = tuned;
             }

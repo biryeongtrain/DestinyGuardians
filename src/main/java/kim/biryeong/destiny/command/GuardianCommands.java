@@ -73,6 +73,7 @@ public final class GuardianCommands {
                 .executes(c -> info(c, self(c)))
                 .then(Commands.argument("player", EntityArgument.player()).requires(op())
                         .executes(c -> info(c, EntityArgument.getPlayer(c, "player")))));
+        root.then(Commands.literal("supers").executes(c -> supers(c, self(c))));
         root.then(Commands.literal("super").requires(op())
                 .then(Commands.argument("percent", FloatArgumentType.floatArg(0, 100))
                         .executes(c -> superEnergy(c, self(c)))
@@ -152,7 +153,7 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal("장착할 수 없는 능력: " + abilityId));
             return 0;
         }
-        if (ability.slot() == AbilitySlot.SUPER) AbilityService.endSuper(player);
+        AbilityService.cleanup(player);
         data.loadout().ifPresent(l -> data.setLoadout(data.guardianClass(), l.with(ability.slot(), ability.id())));
         CombatHud.update(player);
         c.getSource().sendSuccess(() -> Component.literal(ability.slot().getSerializedName() + " = " + ability.displayName()), false);
@@ -171,6 +172,15 @@ public final class GuardianCommands {
         }
         c.getSource().sendSuccess(() -> Component.literal(sb.toString()), false);
         return 1;
+    }
+
+    private static int supers(CommandContext<CommandSourceStack> c, ServerPlayer player) {
+        var cls = Guardians.data(player).guardianClass();
+        var supers = AbilityRegistry.all().stream().filter(a -> a.guardianClass() == cls && a.slot() == AbilitySlot.SUPER)
+                .sorted(java.util.Comparator.comparing(a -> a.id().toString())).toList();
+        c.getSource().sendSuccess(() -> Component.literal("[궁극기 선택] /guardian equip <ID>\n"
+                + supers.stream().map(a -> a.displayName() + " — " + a.id()).collect(java.util.stream.Collectors.joining("\n"))), false);
+        return supers.size();
     }
 
     private static int superEnergy(CommandContext<CommandSourceStack> c, ServerPlayer player) {

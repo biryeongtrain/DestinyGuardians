@@ -36,7 +36,8 @@ class ClassAssetsW229Test {
         assertEquals(inherited + clips.size(), built.getAsJsonArray("animations").size());
         for (int i = inherited; i < inherited + clips.size(); i++) {
             var animation = built.getAsJsonArray("animations").get(i).getAsJsonObject();
-            assertTrue(animation.get("name").getAsString().startsWith("w229_"));
+            assertTrue(animation.get("name").getAsString().startsWith("w229_")
+                    || animation.get("name").getAsString().startsWith("w230_"));
             for (var entry : animation.getAsJsonObject("animators").entrySet()) {
                 assertTrue(ids.contains(entry.getKey()), "Animator maps to a real skin bone");
                 var channels = new HashMap<String, Integer>();
@@ -50,10 +51,11 @@ class ClassAssetsW229Test {
         }
     }
 
-    @Test void missingClassMotionsStayAbsentInsteadOfSubstitutingHunterActions() {
+    @Test void sourceGapsStayAbsentWhileTheReviewedAuthoredFistsAttackIsAvailable() {
         assertTrue(ClassSuperModelAssets.hasClip("w229_warlock_void_attack"));
         assertFalse(ClassSuperModelAssets.hasClip("w229_warlock_void_start"));
-        assertFalse(ClassSuperModelAssets.hasClip("w229_titan_arc_attack"));
+        assertTrue(ClassSuperModelAssets.hasClip("w229_titan_arc_attack"),
+                "R1-reviewed authored punch is explicit; no Hunter action or forward-cast substitution");
         assertEquals("w229_titan_solar", ClassSuperModelAssets.prefix("titan/solar_super"));
     }
 

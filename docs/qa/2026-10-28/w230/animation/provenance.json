@@ -1,0 +1,942 @@
+{
+  "sourceRoot": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28",
+  "sourceInspection": "evidence/inspection.json",
+  "sourceActions": 46,
+  "newSuperActions": 40,
+  "fistsActions": 6,
+  "targetRigSource": "/Users/qf/IdeaProjects/DestinyGuardians/art/blockbench/animations/guardian_hunter_w199_r1.bbmodel",
+  "targetRigSha256": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+  "baselineResource": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/resources/destiny/animation/classes_w229.animation.json",
+  "baselineSha256": "c37d9e0ad7d6aac7fef19c3e2723e7c3d8fb9b360362aa0a00d9121279dfc1f8",
+  "baseline20DeepEqual": true,
+  "targetGeometryUvSkinGroupsUnchanged": true,
+  "boneMap": {
+    "phip_hip": "C7C0BA6E",
+    "pw_waist": "A252A6A2",
+    "pc_chest": "A352A6A2",
+    "h_ph_head": "7E92D640",
+    "pra_right_arm": "17025F50",
+    "prfa_right_forearm": "A3781DCD",
+    "pla_left_arm": "D1232BA2",
+    "plfa_left_forearm": "897A1504",
+    "prl_right_leg": "9F0FD28C",
+    "prfl_right_foreleg": "8BD44A3F",
+    "pll_left_leg": "695DAF09",
+    "plfl_left_foreleg": "35B14D1B",
+    "pri_right_item": "DE9D6BEA",
+    "pli_left_item": "8C83CB67"
+  },
+  "basis": [
+    [
+      0.0,
+      -1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "basisNote": "Use evaluated ARMATURE-LOCAL matrices; object scale .01 and Blender object world rotation are deliberately excluded. Source armature +Z up; source world up differs.",
+  "retarget": "W229 anatomical long-bone directions and target actual hierarchy retained. Axial twist calibrated from evaluated source upper/forearm matrices instead of ill-conditioned straight-joint cross planes. Each target limb -Y follows its actual source segment; wrist offset corrected using existing skin rig. Item rotation source wrist/rest calibration unchanged. PLAYER skin geometry/UV/groups unchanged.",
+  "rawSourceTranslation": "omitted from target; server owns movement",
+  "libraryActions": [
+    {
+      "group": "titan_fists_of_havoc",
+      "tag": "80A8A6AA",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/source.blend",
+      "sourceNames": [
+        "titan_striker_fistsofhavoc_idle_air"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        46.0
+      ],
+      "durationSeconds": 1.5,
+      "liveNames": [
+        "w229_titan_arc_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_fists_of_havoc",
+      "tag": "80A8AD93",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/source.blend",
+      "sourceNames": [
+        "titan_striker_fistsofhavoc_cast_enter_forward_long"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        49.0
+      ],
+      "durationSeconds": 1.6,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "titan_fists_of_havoc",
+      "tag": "80A8AD9A",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/source.blend",
+      "sourceNames": [
+        "titan_striker_fistsofhavoc_cast_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        45.0
+      ],
+      "durationSeconds": 1.4666666666666666,
+      "liveNames": [
+        "w229_titan_arc_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_fists_of_havoc",
+      "tag": "80A8AD9B",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/source.blend",
+      "sourceNames": [
+        "titan_striker_fistsofhavoc_cast_air_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        21.0
+      ],
+      "durationSeconds": 0.6666666666666666,
+      "liveNames": [
+        "w229_titan_arc_start_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_fists_of_havoc",
+      "tag": "80A8AD9C",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/source.blend",
+      "sourceNames": [
+        "titan_striker_fistsofhavoc_cast_air_activate_land"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        28.0
+      ],
+      "durationSeconds": 0.9,
+      "liveNames": [
+        "w229_titan_arc_land"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_fists_of_havoc",
+      "tag": "80A8AD9D",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/source.blend",
+      "sourceNames": [
+        "titan_striker_fistsofhavoc_cast_enter_forward"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        45.0
+      ],
+      "durationSeconds": 1.4666666666666666,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "hunter_blade_barrage",
+      "tag": "80A8AD86",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_blade_barrage/source.blend",
+      "sourceNames": [
+        "hunter_gunslinger_knives_cast",
+        "hunter_gunslinger_knives_cast"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        60.0
+      ],
+      "durationSeconds": 1.9666666666666666,
+      "liveNames": [
+        "w230_hunter_blade_barrage_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_gathering_storm",
+      "tag": "80A8ABF2",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_gathering_storm/source.blend",
+      "sourceNames": [
+        "hunter_arcstrider_spear_cast"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        50.0
+      ],
+      "durationSeconds": 1.6333333333333333,
+      "liveNames": [
+        "w230_hunter_gathering_storm_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8A7CC",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_bladedancer_arc_blade_melee_weak_1"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        45.0
+      ],
+      "durationSeconds": 1.4666666666666666,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8A7CF",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_bladedancer_arc_blade_melee_weak_3"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        48.0
+      ],
+      "durationSeconds": 1.5666666666666667,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8A7D5",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_bladedancer_arc_blade_melee_weak_2"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        45.0
+      ],
+      "durationSeconds": 1.4666666666666666,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAC4",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_cast_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        48.0
+      ],
+      "durationSeconds": 1.5666666666666667,
+      "liveNames": [
+        "w230_hunter_spectral_blades_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAC5",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_melee_weak_3"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        53.0
+      ],
+      "durationSeconds": 1.7333333333333334,
+      "liveNames": [
+        "w230_hunter_spectral_blades_attack3"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAC7",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_melee_weak_2"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        45.0
+      ],
+      "durationSeconds": 1.4666666666666666,
+      "liveNames": [
+        "w230_hunter_spectral_blades_attack2"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAC8",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_melee_weak_1"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        45.0
+      ],
+      "durationSeconds": 1.4666666666666666,
+      "liveNames": [
+        "w230_hunter_spectral_blades_attack"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAD0",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_cast_air_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        49.0
+      ],
+      "durationSeconds": 1.6,
+      "liveNames": [
+        "w230_hunter_spectral_blades_start_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAE5",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_melee_weak_3_air"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        30.0
+      ],
+      "durationSeconds": 0.9666666666666667,
+      "liveNames": [
+        "w230_hunter_spectral_blades_attack3_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAE8",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        53.0
+      ],
+      "durationSeconds": 1.7333333333333334,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8AAF8",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_melee_weak_1_air"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        26.0
+      ],
+      "durationSeconds": 0.8333333333333334,
+      "liveNames": [
+        "w230_hunter_spectral_blades_attack_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8B4F5",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_dash_strike"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        31.0
+      ],
+      "durationSeconds": 1.0,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "hunter_spectral_blades",
+      "tag": "80A8B55A",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_spectral_blades/source.blend",
+      "sourceNames": [
+        "hunter_nightstalker_void_blades_dash_strike_air"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        28.0
+      ],
+      "durationSeconds": 0.9,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "hunter_storms_edge",
+      "tag": "80A8ACCE",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_storms_edge/source.blend",
+      "sourceNames": [
+        "hunter_blink_dagger_cast"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        51.0
+      ],
+      "durationSeconds": 1.6666666666666667,
+      "liveNames": [
+        "w230_hunter_storms_edge_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "hunter_storms_edge",
+      "tag": "80A8ACF0",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/hunter_storms_edge/source.blend",
+      "sourceNames": [
+        "hunter_blink_dagger_blink_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        3.0
+      ],
+      "durationSeconds": 0.06666666666666667,
+      "liveNames": [
+        "w230_hunter_storms_edge_blink"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_burning_maul",
+      "tag": "80A8AAF7",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_burning_maul/source.blend",
+      "sourceNames": [
+        "titan_thermal_maul_enter",
+        "titan_sunbreaker_thermal_maul_cast_enter",
+        "titan_sunbreaker_thermal_maul_cast_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        40.0
+      ],
+      "durationSeconds": 1.3,
+      "liveNames": [
+        "w230_titan_burning_maul_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_burning_maul",
+      "tag": "80A8AB1A",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_burning_maul/source.blend",
+      "sourceNames": [
+        "titan_sunbreaker_thermal_maul_cast_air",
+        "titan_sunbreaker_thermal_maul_cast_air_enter",
+        "titan_sunbreaker_thermal_maul_cast_air",
+        "titan_sunbreaker_thermal_maul_cast_air_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        40.0
+      ],
+      "durationSeconds": 1.3,
+      "liveNames": [
+        "w230_titan_burning_maul_start_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_thundercrash",
+      "tag": "80A8AAD4",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_thundercrash/source.blend",
+      "sourceNames": [
+        "titan_meteor_strike_enter",
+        "titan_striker_meteor_strike_cast_enter",
+        "titan_striker_meteor_strike_cast_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        25.0
+      ],
+      "durationSeconds": 0.8,
+      "liveNames": [
+        "w230_titan_thundercrash_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_thundercrash",
+      "tag": "80A8AAE6",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_thundercrash/source.blend",
+      "sourceNames": [
+        "titan_meteor_strike_loop"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        1.0
+      ],
+      "durationSeconds": 0.2,
+      "liveNames": [
+        "w230_titan_thundercrash_idle",
+        "w230_titan_thundercrash_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_thundercrash",
+      "tag": "80A8AAE7",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_thundercrash/source.blend",
+      "sourceNames": [
+        "titan_meteor_strike_enter_air",
+        "titan_striker_meteor_strike_cast_air_enter",
+        "titan_striker_meteor_strike_cast_air_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        25.0
+      ],
+      "durationSeconds": 0.8,
+      "liveNames": [
+        "w230_titan_thundercrash_start_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_thundercrash",
+      "tag": "80A8AAED",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_thundercrash/source.blend",
+      "sourceNames": [
+        "titan_meteor_strike_exit_wall"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        21.0
+      ],
+      "durationSeconds": 0.6666666666666666,
+      "liveNames": [
+        "w230_titan_thundercrash_end_wall"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_thundercrash",
+      "tag": "80A8AAFC",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_thundercrash/source.blend",
+      "sourceNames": [
+        "titan_meteor_strike_exit",
+        "titan_striker_meteor_strike_activate_exit"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        26.0
+      ],
+      "durationSeconds": 0.8333333333333334,
+      "liveNames": [
+        "w230_titan_thundercrash_end"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_ward_of_dawn",
+      "tag": "80A8AD95",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_ward_of_dawn/source.blend",
+      "sourceNames": [
+        "wardofdawn_air_loop",
+        "wardofdawn_air_loop"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        28.0
+      ],
+      "durationSeconds": 0.9,
+      "liveNames": [
+        "w230_titan_ward_of_dawn_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_ward_of_dawn",
+      "tag": "80A8AD98",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_ward_of_dawn/source.blend",
+      "sourceNames": [
+        "titan_defender_wardofdawn_cast_air_enter",
+        "wardofdawn_air_enter",
+        "wardofdawn_air_enter",
+        "titan_defender_wardofdawn_cast_air_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        14.0
+      ],
+      "durationSeconds": 0.43333333333333335,
+      "liveNames": [
+        "w230_titan_ward_of_dawn_start_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_ward_of_dawn",
+      "tag": "80A8ADA0",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_ward_of_dawn/source.blend",
+      "sourceNames": [
+        "titan_defender_wardofdawn_cast",
+        "wardofdawn",
+        "titan_defender_wardofdawn_cast"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        43.0
+      ],
+      "durationSeconds": 1.4,
+      "liveNames": [
+        "w230_titan_ward_of_dawn_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "titan_ward_of_dawn",
+      "tag": "80A8ADA2",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/titan_ward_of_dawn/source.blend",
+      "sourceNames": [
+        "wardofdawn_air_activate",
+        "titan_defender_wardofdawn_cast_air_activate_land",
+        "titan_defender_wardofdawn_cast_air_activate_land"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        34.0
+      ],
+      "durationSeconds": 1.1,
+      "liveNames": [
+        "w230_titan_ward_of_dawn_land"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_chaos_reach",
+      "tag": "80A8AABC",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_chaos_reach/source.blend",
+      "sourceNames": [
+        "warlock_stormcaller_arc_beam_cast_enter",
+        "warlock_arc_beam_enter",
+        "Warlock Melee Ability"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        23.0
+      ],
+      "durationSeconds": 0.7333333333333333,
+      "liveNames": [
+        "w230_warlock_chaos_reach_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_chaos_reach",
+      "tag": "80A8AAD8",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_chaos_reach/source.blend",
+      "sourceNames": [
+        "warlock_arc_beam_loop",
+        "warlock_stormcaller_arc_beam_cast_loop"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        1.0
+      ],
+      "durationSeconds": 0.06666666666666667,
+      "liveNames": [
+        "w230_warlock_chaos_reach_idle"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_chaos_reach",
+      "tag": "80A8AADF",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_chaos_reach/source.blend",
+      "sourceNames": [
+        "warlock_stormcaller_arc_beam_cast_exit",
+        "warlock_arc_beam_exit"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        13.0
+      ],
+      "durationSeconds": 0.4,
+      "liveNames": [
+        "w230_warlock_chaos_reach_end"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_chaos_reach",
+      "tag": "80A8AB48",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_chaos_reach/source.blend",
+      "sourceNames": [
+        "warlock_stormcaller_arc_beam_cast_exit",
+        "warlock_arc_beam_exit"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        25.0
+      ],
+      "durationSeconds": 0.8,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "warlock_nova_warp",
+      "tag": "80A8A99C",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_nova_warp/source.blend",
+      "sourceNames": [
+        "warlock_voidwalker_novapulse_charge_idle"
+      ],
+      "layer": "Additive",
+      "sourceRange": [
+        1.0,
+        1.0
+      ],
+      "durationSeconds": 0.26666666666666666,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Additive runtime base/mixing unavailable; do not play standalone"
+    },
+    {
+      "group": "warlock_nova_warp",
+      "tag": "80A8A99D",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_nova_warp/source.blend",
+      "sourceNames": [
+        "nova_pulse_charge_exit",
+        "warlock_nova_pulse_charge_exit",
+        "warlock_voidwalker_novapulse_charge_exit"
+      ],
+      "layer": "Additive",
+      "sourceRange": [
+        1.0,
+        39.0
+      ],
+      "durationSeconds": 1.2666666666666666,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Additive runtime base/mixing unavailable; do not play standalone"
+    },
+    {
+      "group": "warlock_nova_warp",
+      "tag": "80A8A9A2",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_nova_warp/source.blend",
+      "sourceNames": [
+        "nova_pulse_air_enter",
+        "warlock_nova_pulse_cast_air_enter",
+        "warlock_voidwalker_novapulse_cast_air_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        62.0
+      ],
+      "durationSeconds": 2.033333333333333,
+      "liveNames": [
+        "w230_warlock_nova_warp_start_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_nova_warp",
+      "tag": "80A8A9AE",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_nova_warp/source.blend",
+      "sourceNames": [
+        "warlock_nova_pulse_cast_enter",
+        "nova_pulse_enter",
+        "warlock_voidwalker_novapulse_cast_enter_forward"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        62.0
+      ],
+      "durationSeconds": 2.033333333333333,
+      "liveNames": [],
+      "libraryOnly": true,
+      "reason": "Unconfirmed source-only variant/shared action; not connected to a live semantic state"
+    },
+    {
+      "group": "warlock_nova_warp",
+      "tag": "80A8AAF5",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_nova_warp/source.blend",
+      "sourceNames": [
+        "warlock_voidwalker_novapulse_cast_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        62.0
+      ],
+      "durationSeconds": 2.033333333333333,
+      "liveNames": [
+        "w230_warlock_nova_warp_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_well_of_radiance",
+      "tag": "80A8AAC6",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_well_of_radiance/source.blend",
+      "sourceNames": [
+        "warlock_dawnblade_sword_healing_cast"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        54.0
+      ],
+      "durationSeconds": 1.7666666666666666,
+      "liveNames": [
+        "w230_warlock_well_of_radiance_start"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_well_of_radiance",
+      "tag": "80A8AACA",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_well_of_radiance/source.blend",
+      "sourceNames": [
+        "warlock_dawnblade_sword_healing_cast_air_enter"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        18.0
+      ],
+      "durationSeconds": 0.5666666666666667,
+      "liveNames": [
+        "w230_warlock_well_of_radiance_start_air"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    },
+    {
+      "group": "warlock_well_of_radiance",
+      "tag": "80A8AACB",
+      "sourceBlend": "/Volumes/qf-ssd/Titan-Fists-of-Havoc-2026-10-28/supers/warlock_well_of_radiance/source.blend",
+      "sourceNames": [
+        "warlock_dawnblade_sword_healing_cast_air_activate_land"
+      ],
+      "layer": "Base",
+      "sourceRange": [
+        1.0,
+        33.0
+      ],
+      "durationSeconds": 1.0666666666666667,
+      "liveNames": [
+        "w230_warlock_well_of_radiance_land"
+      ],
+      "libraryOnly": false,
+      "reason": null
+    }
+  ],
+  "gameBuildVisionRun": false,
+  "productAdaptations": [
+    {
+      "type": "seam crossfade to actual source first pose during final20percent",
+      "startSeconds": 1.2,
+      "endSeconds": 1.5,
+      "unchangedTotalDurationSeconds": 1.5,
+      "originalMotionPreservedIn": "source-library.animation.json / library_titan_fists_of_havoc_80A8A6AA",
+      "reason": "Actual source endpoints differ84deg at wrist; raw motion is not a seamless cycle."
+    }
+  ],
+  "sourceVersusGame": "Evaluated extraction .blend evidence only; does not prove original game runtime layer mixing, transitions, smoothing or decoded hit event timing."
+}

@@ -35,6 +35,7 @@ public final class WarlockAbilities {
             AbilityRegistry.register(new WarlockMelee(melee(e), e));
             AbilityRegistry.register(new WarlockSuper(superId(e), e));
         }
+        WarlockExpandedSupers.register();
     }
     private static Identifier grenade(Element e) { return e == Element.SOLAR ? SOLAR_GRENADE : e == Element.VOID ? VOID_GRENADE : ARC_GRENADE; }
     private static Identifier melee(Element e) { return e == Element.SOLAR ? SOLAR_MELEE : e == Element.VOID ? VOID_MELEE : ARC_MELEE; }

@@ -36,6 +36,7 @@ public final class TitanAbilities {
             AbilityRegistry.register(new TitanMelee(e));
             AbilityRegistry.register(new TitanSuper(e));
         }
+        TitanExpandedSupers.register();
         TitanClassAbility.init();
         registered=true;
     }

@@ -27,6 +27,8 @@ public final class Combat {
                 && living.isAlive()
                 && !(entity instanceof Player)
                 && !(entity instanceof ArmorStand)
+                && !source.isAlliedTo(entity)
+                && !(entity instanceof net.minecraft.world.entity.TamableAnimal tame && tame.isTame())
                 && (entity instanceof Enemy || entity instanceof Mob);
     }
 
@@ -53,8 +55,18 @@ public final class Combat {
     }
 
     public static boolean damage(ServerLevel level, ServerPlayer source, LivingEntity target, float amount, Element element) {
+        return damage(level,source,target,amount,element,kim.biryeong.destiny.weapon.AmmoGeneration.ABILITY);
+    }
+
+    public static boolean damage(ServerLevel level, ServerPlayer source, LivingEntity target, float amount, Element element,
+                                 kim.biryeong.destiny.weapon.AmmoGeneration attribution) {
         if (source.level() != level || target.level() != level || !source.isAlive() || !target.isAlive()) {
             return false;
+        }
+        if (attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.PRIMARY
+                || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.SPECIAL
+                || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.HEAVY) {
+            amount *= (float) kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.outgoingDamageMultiplier(source);
         }
         target.damageCooldownTime = 0;
         target.hurtServer(level, source.damageSources().playerAttack(source), amount);
