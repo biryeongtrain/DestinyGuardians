@@ -24,7 +24,7 @@ class HunterSourceW199Test {
         return clips;
     }
     @Test void installedVersionUsesSourceVoidWithoutChangingOtherClipsOrGeometry() throws Exception {
-        assertEquals("guardian_hunter_w255_r2", HunterModelAssets.MODEL_NAME);
+        assertEquals("guardian_hunter_w259_r1", HunterModelAssets.MODEL_NAME);
         assertEquals("/destiny/animation/hunter_w199.animation.json", HunterModelAssets.ANIMATION_RESOURCE);
         var root = "src/main/resources/destiny/animation/";
         var before = read(root + "hunter_w197.animation.json");

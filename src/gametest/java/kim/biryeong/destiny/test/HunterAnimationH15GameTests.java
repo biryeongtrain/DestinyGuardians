@@ -109,17 +109,21 @@ public final class HunterAnimationH15GameTests {
                     new Input(false, false, false, true, false, false, false)};
             Vec3[] expected = {new Vec3(1.15, .18, 0), new Vec3(-1.15, .18, 0),
                     new Vec3(0, .18, -1.15), new Vec3(0, .18, 1.15)};
-            HunterDodge dodge = new HunterDodge(Identifier.parse("destiny:h15_test_dodge"),
-                    "H15 test dodge", HunterDodge.Variant.MARKSMAN, 12);
-            for (int i = 0; i < inputs.length; i++) {
-                ServerPlayer p = owner(h);
-                owners.add(p);
-                Guardians.runtime(p).lastInput = inputs[i];
-                check(h, dodge.activate(p), "Dodge activates");
-                check(h, p.getDeltaMovement().distanceTo(expected[i]) < 1.0e-5, "Original input-relative velocity");
-                check(h, Guardians.runtime(p).invulnerableTicks == 6, "Original six invulnerable ticks");
-                check(h, p.getYRot() == -90 && p.getXRot() == 12, "Dodge never rotates player aim");
-                check(h, PlayerAnimations.isPlaying(p), "Directional roll starts");
+            for (HunterDodge.Variant variant : HunterDodge.Variant.values()) {
+                HunterDodge dodge = new HunterDodge(Identifier.parse("destiny:h15_test_dodge"),
+                        "H15 test dodge", variant, 12);
+                for (int i = 0; i < inputs.length; i++) {
+                    ServerPlayer p = owner(h);
+                    owners.add(p);
+                    Guardians.runtime(p).lastInput = inputs[i];
+                    check(h, dodge.activate(p), "Dodge activates");
+                    check(h, p.getDeltaMovement().distanceTo(expected[i]) < 1.0e-5, "Original input-relative velocity");
+                    check(h, Guardians.runtime(p).invulnerableTicks == 6, "Original six invulnerable ticks");
+                    check(h, p.getYRot() == -90 && p.getXRot() == 12, "Dodge never rotates player aim");
+                    check(h, PlayerAnimations.isPlaying(p), "Directional source dodge starts");
+                    check(h, PlayerAnimations.dodgeAnimation(inputs[i], variant == HunterDodge.Variant.MARKSMAN)
+                            .equals(PlayerAnimations.activeClip(p)), "Ability kind and direction select the actual source clip");
+                }
             }
             h.runAfterDelay(25, () -> {
                 for (ServerPlayer p : owners) {

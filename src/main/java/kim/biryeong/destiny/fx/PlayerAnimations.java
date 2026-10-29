@@ -205,6 +205,12 @@ public final class PlayerAnimations {
                 : left > 0 ? "left" : left < 0 ? "right" : "forward");
     }
 
+    /** W259 keeps the two dodge silhouettes distinct and the legacy roll API stable. */
+    public static String dodgeAnimation(Input input, boolean marksman) {
+        String roll = rollAnimation(input);
+        return marksman ? roll.replace(PREFIX + "roll_", PREFIX + "dodge_marksman_") : roll;
+    }
+
     /**
      * Call AFTER a primary cast passes cooldown/ammo checks. Requires the matching
      * loop(player, "super_" + element id). Retriggers safely interrupt the previous attack.
@@ -273,6 +279,12 @@ public final class PlayerAnimations {
                 state.swordStack=player.getMainHandItem();
                 tracker.rotation(() -> new ModelRotation(0,player.getYRot()));
             }
+            if (logical(request).startsWith("roll_") || logical(request).startsWith("dodge_marksman_")) {
+                // Directional source poses are relative to the accepted aim, not the
+                // body's movement-facing yaw. Do not rotate the player's real view.
+                float dodgeYaw = player.getYRot();
+                tracker.rotation(() -> new ModelRotation(0, dodgeYaw));
+            }
             if ("super_void".equals(state.loopRequest) || "super_solar".equals(state.loopRequest)
                     || request.startsWith("w229_") || request.startsWith("w230_")) {
                 // Aim supers face the authoritative view, not BM's independently smoothed
@@ -333,6 +345,9 @@ public final class PlayerAnimations {
         String preferred = PREFIX + (logical.equals("roll") ? "roll_forward" : logical);
         if (renderer.animation(preferred).isPresent()) return preferred;
         if (renderer.animation(logical).isPresent()) return logical;
+        // Only a missing imported marksman clip may use the legacy roll fallback.
+        if (logical.startsWith("dodge_marksman_"))
+            return clipName(renderer, "roll_" + logical.substring("dodge_marksman_".length()));
         // Legacy/Steve has only one roll; never substitute it for a super attack.
         return logical.startsWith("roll_") && renderer.animation("roll").isPresent() ? "roll" : null;
     }
