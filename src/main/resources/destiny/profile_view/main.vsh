@@ -3,7 +3,7 @@
     if (Position.y < -9000000.0 && Position.y > -11000000.0 && (UV2.y == 208 || UV2.y == 192)) {
         if (UV2.y == 208 && UV2.x >= 0 && UV2.x <= 240) destinyArmInfo = UV2.x / 16 + 1;
         vec3 p = (Position + vec3(0.0,10000000.0,0.0)) / 32000.0;
-        float aspect = abs(ProjMat[1][1] / ProjMat[0][0]);
+        float aspect = displayhud_screen_aspect();
         float focal = 1.428148;
         // Preserve signed w: the GPU clips complete triangles at the near plane.
         float w = -p.z;
