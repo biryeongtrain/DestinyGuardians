@@ -53,6 +53,6 @@ public final class WeaponFirstPersonHands {
         var original = carrier.get(DataComponents.ITEM_MODEL);
         var model = model(original);
         if (model != null && !model.equals(original)) carrier.set(DataComponents.ITEM_MODEL, model);
-        return model != null && !model.equals(original) ? WeaponSkinArms.project(carrier, context) : carrier;
+        return model != null && !model.equals(original) && !ProfileWeaponView.enabled() ? WeaponSkinArms.project(carrier, context) : carrier;
     }
 }

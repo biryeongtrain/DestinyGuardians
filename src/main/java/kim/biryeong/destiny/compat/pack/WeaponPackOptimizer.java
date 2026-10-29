@@ -28,6 +28,7 @@ public final class WeaponPackOptimizer {
         var files = new HashMap<String, PackResource>();
         builder.forEachResource(files::put);
         var active = WeaponPackRoots.active();
+        if (kim.biryeong.destiny.weapon.ProfileWeaponView.enabled()) { ProfileArmAssets.compact(builder, files, active); return; }
         var excluded = new HashSet<String>();
         for (var source : WeaponFirstPersonHands.sources()) {
             if (!active.contains(source)) {

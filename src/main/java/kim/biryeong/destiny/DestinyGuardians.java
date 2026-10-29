@@ -32,6 +32,7 @@ public final class DestinyGuardians implements ModInitializer {
         kim.biryeong.destiny.compat.pack.WeaponPackOptimizer.init();
 
         kim.biryeong.destiny.experimental.ProfileArmProbe.init();
+        kim.biryeong.destiny.weapon.ProfileWeaponView.init();
         Guardians.init();
         kim.biryeong.destiny.inventory.WeaponScreen.init();
         HunterAbilities.register();
