@@ -70,9 +70,17 @@ public final class InputRouter {
     /** @return true 면 바닐라 처리를 취소한다. */
     public static boolean onPlayerAction(ServerPlayer player, ServerboundPlayerActionPacket.Action action) {
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return true;
-        if (action == ServerboundPlayerActionPacket.Action.DROP_ITEM && player.isShiftKeyDown()) {
-            kim.biryeong.destiny.inventory.WeaponScreen.open(player);
-            return true;
+        if ((action == ServerboundPlayerActionPacket.Action.DROP_ITEM
+                || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
+                && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem()).isPresent()) {
+            if ((player.isShiftKeyDown() || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
+                    && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem())
+                        .filter(kim.biryeong.destiny.weapon.WeaponExotics::izanagi).isPresent()) {
+                kim.biryeong.destiny.weapon.WeaponRuntime.reloadHoned(player);
+            } else {
+                kim.biryeong.destiny.weapon.WeaponRuntime.reload(player);
+            }
+            return true; // 모든 실전 무기의 Q 계열 입력은 장전 성공·거절과 무관하게 버리기를 취소한다.
         }
         if (!Guardians.isGuardian(player)) {
             return false;

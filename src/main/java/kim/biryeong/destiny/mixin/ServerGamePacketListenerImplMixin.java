@@ -64,6 +64,7 @@ public abstract class ServerGamePacketListenerImplMixin {
             shift = At.Shift.AFTER), cancellable = true)
     private void destiny$action(ServerboundPlayerActionPacket packet, CallbackInfo ci) {
         if (InputRouter.onPlayerAction(player, packet.getAction())) {
+            kim.biryeong.destiny.input.CancelledDropSync.restore(player, packet.getAction());
             ci.cancel();
         }
     }

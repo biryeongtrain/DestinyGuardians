@@ -69,6 +69,9 @@ public final class WeaponScreen {
     private WeaponScreen() {}
 
     public static void init() {
+        InventoryMenuRedirect.init();
+        CommandRegistrationCallback.EVENT.register((dispatcher, registry, environment) ->
+                dispatcher.register(Commands.literal("메뉴").executes(c -> toggle(c.getSource().getPlayerOrException()) ? 1 : 0)));
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, environment) ->
             dispatcher.register(Commands.literal("destiny").then(Commands.literal("inventory")
                 .executes(c -> open(c.getSource().getPlayerOrException()) ? 1 : 0)

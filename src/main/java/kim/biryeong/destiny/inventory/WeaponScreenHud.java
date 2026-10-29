@@ -119,7 +119,7 @@ public final class WeaponScreenHud {
             button(p, WeaponScreenLayout.NEXT, "다음  >", page + 1 < pages);
             p.text("pages", (page + 1) + " / " + pages, 720, 860, 20, WHITE);
         }
-        button(p, WeaponScreenLayout.CLOSE, "닫기  [Q]", true);
+        button(p, WeaponScreenLayout.CLOSE, "닫기  [E]", true);
         if (loadoutMode) button(p, WeaponScreenLayout.TEST_ARMORY, "새 무기", true);
 
         if (perkMode) {
@@ -140,7 +140,7 @@ public final class WeaponScreenHud {
     private static void finish(Painter p, WeaponScreenView view, String action, String hint) {
         p.rect("footer_rule", 960, 958, 1760, 1, 104, LINE);
         p.text("footer_pointer", "마우스 포인터 · WASD 선택", 465, 992, 18, MUTED);
-        p.textFit("footer_equip", "좌클릭·Space " + action + " · 우클릭·Q 닫기", 1370, 992, 18, WHITE, 800);
+        p.textFit("footer_equip", "좌클릭·Space " + action + " · 우클릭·E 닫기", 1370, 992, 18, WHITE, 800);
         if (view.message() != null && !view.message().isBlank())
             p.textFit("message", statusMessage(view.message()), 960, 1041, 20, GOLD, 1640);
         else
@@ -205,7 +205,7 @@ public final class WeaponScreenHud {
             button(p, WeaponScreenLayout.BACK_CHARACTER, "캐릭터로", true);
             characterOptionDetails(p, view);
         }
-        button(p, WeaponScreenLayout.CLOSE, "닫기  [Q]", true);
+        button(p, WeaponScreenLayout.CLOSE, "닫기  [E]", true);
         if (WeaponScreenLayout.visible(view.focus(), view.stage()))
             p.frame("focus", WeaponScreenLayout.bounds(view.focus()), 3, 125, WHITE);
         finish(p, view, root ? "항목 선택" : "즉시 장착", "캐릭터 항목 → 옵션 선택 → 즉시 장착");
