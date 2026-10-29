@@ -2,6 +2,8 @@ package kim.biryeong.destiny.inventory;
 
 import kim.biryeong.destiny.inventory.WeaponScreenLayout.Box;
 import kim.biryeong.destiny.inventory.WeaponScreenView.Card;
+import kim.biryeong.destiny.inventory.WeaponScreenView.CharacterField;
+import kim.biryeong.destiny.inventory.WeaponScreenView.CharacterOption;
 import kim.biryeong.destiny.inventory.WeaponScreenView.FamilyOption;
 import kim.biryeong.destiny.inventory.WeaponScreenView.PerkOption;
 import kim.biryeong.destiny.weapon.WeaponCatalog;
@@ -65,9 +67,13 @@ public final class WeaponScreenHud {
         p.rect("identity_mark", 116, 112, 4, 65, 105, GOLD);
         p.text("identity", clipped(view.playerName(), 21), 365, 89, 30, WHITE);
         p.text("identity_sub", "수호자  /  캐릭터", 365, 138, 20, MUTED);
-        p.text("tab_character", "캐릭터", 890, 110, 20, MUTED);
-        p.text("tab_equipment", "장비", 1130, 110, 21, WHITE);
-        p.rect("active_tab", 1130, 178, 186, 3, 105, GOLD);
+        button(p, WeaponScreenLayout.CHARACTER_TAB, "캐릭터", true);
+        button(p, WeaponScreenLayout.LOADOUT_TAB, "로드아웃", true);
+        p.rect("active_tab", view.characterMode() ? 890 : 1130, 178, 186, 3, 105, GOLD);
+        if (view.characterMode()) {
+            character(p, view);
+            return;
+        }
         p.text("weapons_title", "무기", 240, 227, 20, WHITE);
         p.textFit("collection_title", collectionTitle(view),
                 720, 227, 20, WHITE, 550);
@@ -127,21 +133,124 @@ public final class WeaponScreenHud {
         if (WeaponScreenLayout.visible(view.focus(), stage))
             p.frame("focus", WeaponScreenLayout.bounds(view.focus()), 3, 125, WHITE);
 
+        String action = perkMode ? "퍽 선택" : familyMode ? "무기군 선택" : weaponMode ? "다음: 퍽 선택" : "슬롯·새 무기 선택";
+        finish(p, view, action, "슬롯 → 새 무기 → 무기군 → 무기 → 퍽 선택 → 로드아웃에 추가");
+    }
+
+    private static void finish(Painter p, WeaponScreenView view, String action, String hint) {
         p.rect("footer_rule", 960, 958, 1760, 1, 104, LINE);
         p.text("footer_pointer", "마우스 포인터 · WASD 선택", 465, 992, 18, MUTED);
-        String action = perkMode ? "퍽 선택" : familyMode ? "무기군 선택" : weaponMode ? "다음: 퍽 선택" : "슬롯·새 무기 선택";
         p.textFit("footer_equip", "좌클릭·Space " + action + " · 우클릭·Q 닫기", 1370, 992, 18, WHITE, 800);
         if (view.message() != null && !view.message().isBlank())
             p.textFit("message", statusMessage(view.message()), 960, 1041, 20, GOLD, 1640);
         else
-            p.text("footer_open", "슬롯 → 새 무기 → 무기군 → 무기 → 퍽 선택 → 로드아웃에 추가", 960, 1041, 18, MUTED);
+            p.textFit("footer_open", hint, 960, 1041, 18, MUTED, 1640);
 
-        Box fallback = WeaponScreenLayout.bounds(WeaponScreenLayout.visible(view.focus(), stage)
-                ? view.focus() : 0);
+        Box fallback = WeaponScreenLayout.bounds(WeaponScreenLayout.visible(view.focus(), view.stage())
+                ? view.focus() : WeaponScreenLayout.fallback(view.stage()));
         float cursorX = Float.isFinite(view.cursorX()) ? Math.max(0, Math.min(1920, view.cursorX())) : fallback.x();
         float cursorY = Float.isFinite(view.cursorY()) ? Math.max(0, Math.min(1080, view.cursorY())) : fallback.y();
         cursor(p, cursorX, cursorY);
         p.finish();
+    }
+
+    private static void character(Painter p, WeaponScreenView view) {
+        boolean root = "CHARACTER".equals(view.stage());
+        var character = view.character();
+        p.text("character_title", root ? "캐릭터 구성" : characterFieldName(view) + " 선택", 550, 227, 24, WHITE);
+        p.textFit("character_identity", character.className() + "  /  " + character.subclassName(),
+                1440, 247, 20, GOLD, 596);
+        p.rect("detail_panel", 1440, 558, 672, 676, 103, 0x273139);
+        p.rect("detail_rarity_rule", 1440, 221, 672, 3, 106, GOLD);
+        if (root) {
+            for (int index = 0; index < Math.min(6, character.fields().size()); index++)
+                characterField(p, WeaponScreenLayout.CLASS + index, character.fields().get(index),
+                        character.fields().get(index).id().equals(character.field()));
+            int index = view.focus() - WeaponScreenLayout.CLASS;
+            CharacterField field = index >= 0 && index < character.fields().size() ? character.fields().get(index) : null;
+            p.text("character_detail_title", field == null ? "수호자 능력 구성" : field.name(), 1440, 300, 28, WHITE);
+            p.wrapped("character_current", field == null ? "직업과 하위직업에 맞는 능력을 선택하세요."
+                    : "현재: " + field.value(), 1440, 382, 24, WHITE, 596, 3, 34);
+            p.text("character_rule_label", "선택 안내", 1440, 538, 20, GOLD);
+            p.wrapped("character_rule", field == null ? "항목을 누르면 현재 선택 가능한 옵션이 표시됩니다."
+                    : field.reason(), 1440, 580, 20, field != null && !field.enabled() ? DISABLED : MUTED, 596, 3, 30);
+            p.wrapped("character_scope", "능력은 현재 직업·하위직업에 등록된 항목만 표시됩니다.",
+                    1440, 706, 20, MUTED, 596, 3, 30);
+            p.text("character_apply", "옵션 선택 → 즉시 장착 → 캐릭터 복귀", 1440, 837, 20, GOLD);
+        } else {
+            p.rect("collection", 720, 540, 576, 584, 103, 0x27313A);
+            p.textFit("collection_hint", "현재 선택 강조 · 선택하면 즉시 적용", 720, 264, 18, MUTED, 550);
+            p.text("character_sidebar_title", "현재 구성", 240, 320, 20, GOLD);
+            p.wrapped("character_sidebar_class", character.className(), 240, 372, 24, WHITE, 260, 2, 32);
+            p.wrapped("character_sidebar_subclass", character.subclassName(), 240, 458, 22, MUTED, 260, 2, 30);
+            p.wrapped("character_sidebar_scope", "현재 직업·하위직업의 등록된 옵션만 선택할 수 있습니다.",
+                    240, 586, 20, MUTED, 260, 5, 30);
+            for (int node = 3; node < 12; node++) {
+                int index = node - 3;
+                characterOption(p, node, index < character.options().size() ? character.options().get(index) : null);
+            }
+            int pages = Math.max(1, view.pages());
+            int page = Math.clamp(view.page(), 0, pages - 1);
+            button(p, WeaponScreenLayout.PREVIOUS, "<  이전", page > 0);
+            button(p, WeaponScreenLayout.NEXT, "다음  >", page + 1 < pages);
+            p.text("pages", (page + 1) + " / " + pages, 720, 860, 20, WHITE);
+            button(p, WeaponScreenLayout.BACK_CHARACTER, "캐릭터로", true);
+            characterOptionDetails(p, view);
+        }
+        button(p, WeaponScreenLayout.CLOSE, "닫기  [Q]", true);
+        if (WeaponScreenLayout.visible(view.focus(), view.stage()))
+            p.frame("focus", WeaponScreenLayout.bounds(view.focus()), 3, 125, WHITE);
+        finish(p, view, root ? "항목 선택" : "즉시 장착", "캐릭터 항목 → 옵션 선택 → 즉시 장착");
+    }
+
+    private static void characterField(Painter p, int node, CharacterField field, boolean selected) {
+        Box box = WeaponScreenLayout.bounds(node);
+        String key = "character_field_" + field.id();
+        p.tile(key, box, 108, field.enabled() ? 0x303B44 : 0x252E36, null, false);
+        p.frame(key + "_edge", box, selected ? 2 : 1, 110, selected ? GOLD : LINE);
+        p.text(key + "_label", field.name(), box.x(), box.y() - 52, 20, GOLD);
+        p.wrapped(key + "_value", field.value(), box.x(), box.y() - 8, 22, WHITE, box.width() - 28, 2, 30);
+        p.text(key + "_state", field.enabled() ? "변경하기" : "선택 불가", box.x(), box.y() + 57, 18,
+                field.enabled() ? MUTED : DISABLED);
+    }
+
+    private static void characterOption(Painter p, int node, CharacterOption option) {
+        Box box = WeaponScreenLayout.bounds(node);
+        String key = "character_option_" + node;
+        boolean selected = option != null && option.selected();
+        p.tile(key, box, 108, selected ? 0x5C5139 : 0x2B353E, null, false);
+        p.frame(key + "_edge", box, selected ? 2 : 1, 110, selected ? GOLD : LINE);
+        if (option == null) {
+            p.text(key + "_empty", "빈 칸", box.x(), box.y(), 20, MUTED);
+            return;
+        }
+        p.wrapped(key + "_name", option.name(), box.x(), box.y() - 38, 20, WHITE, 132, 3, 27);
+        p.text(key + "_status", selected ? "선택 중" : option.enabled() ? "즉시 장착" : "선택 불가",
+                box.x(), box.y() + 57, 18, selected ? GOLD : option.enabled() ? MUTED : DISABLED);
+    }
+
+    private static String characterFieldName(WeaponScreenView view) {
+        return view.character().fields().stream().filter(f -> f.id().equals(view.character().field()))
+                .map(CharacterField::name).findFirst().orElse("능력");
+    }
+
+    private static void characterOptionDetails(Painter p, WeaponScreenView view) {
+        int index = view.focus() - 3;
+        var options = view.character().options();
+        CharacterOption option = index >= 0 && index < options.size() ? options.get(index) : null;
+        p.text("character_detail_title", characterFieldName(view) + " 선택", 1440, 300, 26, WHITE);
+        if (option == null) {
+            p.wrapped("character_empty", options.isEmpty() ? "현재 선택 가능한 등록 옵션이 없습니다. 캐릭터로 돌아가 직업·하위직업을 확인하세요."
+                    : "옵션을 가리키면 설명과 선택 조건을 확인할 수 있습니다.", 1440, 416, 22, MUTED, 596, 5, 32);
+            return;
+        }
+        p.wrapped("character_option_name", option.name(), 1440, 370, 26, WHITE, 596, 2, 36);
+        p.text("character_option_status", option.selected() ? "현재 선택 중" : option.enabled() ? "선택 가능 · 즉시 적용" : "선택 불가",
+                1440, 465, 20, option.selected() ? GOLD : option.enabled() ? WHITE : DISABLED);
+        p.text("character_description_label", "능력 설명", 1440, 523, 20, GOLD);
+        p.wrapped("character_description", option.description(), 1440, 564, 20, WHITE, 596, 5, 30);
+        p.text("character_reason_label", "선택 조건", 1440, 741, 20, GOLD);
+        p.wrapped("character_reason", option.reason(), 1440, 782, 20, option.enabled() ? MUTED : DISABLED, 596, 3, 30);
     }
 
     public static void remove(ServerPlayer player) {

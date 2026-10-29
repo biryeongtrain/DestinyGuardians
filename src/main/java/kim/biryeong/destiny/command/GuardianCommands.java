@@ -9,7 +9,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import kim.biryeong.destiny.ability.Ability;
 import kim.biryeong.destiny.ability.AbilityRegistry;
 import kim.biryeong.destiny.ability.AbilityService;
-import kim.biryeong.destiny.ability.hunter.HunterAbilities;
+import kim.biryeong.destiny.guardian.CharacterLoadouts;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianClass;
@@ -67,7 +67,7 @@ public final class GuardianCommands {
                                 .executes(c -> subclass(c, EntityArgument.getPlayer(c, "player"))))));
         root.then(Commands.literal("equip")
                 .then(Commands.argument("ability", StringArgumentType.greedyString())
-                        .suggests((c, b) -> SharedSuggestionProvider.suggest(AbilityRegistry.all().stream().map(a -> a.id().toString()), b))
+                        .suggests((c, b) -> SharedSuggestionProvider.suggest(available(c.getSource()).stream().map(a -> a.id().toString()), b))
                         .executes(c -> equip(c, self(c), StringArgumentType.getString(c, "ability")))));
         root.then(Commands.literal("info")
                 .executes(c -> info(c, self(c)))
@@ -107,14 +107,8 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal("알 수 없는 직업"));
             return 0;
         }
-        AbilityService.cleanup(player);
-        Guardians.forget(player);
-        GuardianData data = Guardians.data(player);
-        data.setGuardianClass(cls);
-        if (cls != GuardianClass.NONE && data.loadout(cls) == null) {
-            data.setLoadout(cls, GuardianPresets.preset(cls, Element.ARC));
-        }
-        CombatHud.update(player);
+        String error = CharacterLoadouts.selectClass(player, cls);
+        if (error != null) { c.getSource().sendFailure(Component.literal(error)); return 0; }
         c.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " → " + cls.getSerializedName()), false);
         return 1;
     }
@@ -136,10 +130,8 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal("지원하는 속성: arc, solar, void"));
             return 0;
         }
-        AbilityService.cleanup(player);
-        Guardians.forget(player);
-        data.setLoadout(data.guardianClass(), GuardianPresets.preset(data.guardianClass(), element));
-        CombatHud.update(player);
+        String error = CharacterLoadouts.selectSubclass(player, element);
+        if (error != null) { c.getSource().sendFailure(Component.literal(error)); return 0; }
         c.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " → "
                 + data.guardianClass().getSerializedName() + " / " + element.getSerializedName()), false);
         return 1;
@@ -153,9 +145,8 @@ public final class GuardianCommands {
             c.getSource().sendFailure(Component.literal("장착할 수 없는 능력: " + abilityId));
             return 0;
         }
-        AbilityService.cleanup(player);
-        data.loadout().ifPresent(l -> data.setLoadout(data.guardianClass(), l.with(ability.slot(), ability.id())));
-        CombatHud.update(player);
+        String error = CharacterLoadouts.selectAbility(player, ability.slot(), id);
+        if (error != null) { c.getSource().sendFailure(Component.literal(error)); return 0; }
         c.getSource().sendSuccess(() -> Component.literal(ability.slot().getSerializedName() + " = " + ability.displayName()), false);
         return 1;
     }
@@ -174,10 +165,17 @@ public final class GuardianCommands {
         return 1;
     }
 
+    private static java.util.List<Ability> available(CommandSourceStack source) {
+        var player = source.getPlayer();
+        if (player == null) return java.util.List.of();
+        var data = Guardians.data(player);
+        return Arrays.stream(AbilitySlot.values()).flatMap(slot ->
+                CharacterLoadouts.options(data.guardianClass(), CharacterLoadouts.subclass(data), slot).stream()).toList();
+    }
+
     private static int supers(CommandContext<CommandSourceStack> c, ServerPlayer player) {
-        var cls = Guardians.data(player).guardianClass();
-        var supers = AbilityRegistry.all().stream().filter(a -> a.guardianClass() == cls && a.slot() == AbilitySlot.SUPER)
-                .sorted(java.util.Comparator.comparing(a -> a.id().toString())).toList();
+        var data = Guardians.data(player);
+        var supers = CharacterLoadouts.options(data.guardianClass(), CharacterLoadouts.subclass(data), AbilitySlot.SUPER);
         c.getSource().sendSuccess(() -> Component.literal("[궁극기 선택] /guardian equip <ID>\n"
                 + supers.stream().map(a -> a.displayName() + " — " + a.id()).collect(java.util.stream.Collectors.joining("\n"))), false);
         return supers.size();

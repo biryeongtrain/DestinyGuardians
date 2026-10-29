@@ -9,7 +9,7 @@ public record WeaponScreenView(String playerName, WeaponSlot selectedSlot, List<
         List<Card> choices, Card inspected, int page, int pages, int focus,
         float cursorX, float cursorY, String message, boolean testArmory, String perkGroup,
         List<PerkOption> perks, String selectedDamage, String selectedUtility,
-        String stage, List<FamilyOption> families, String selectedFamily) {
+        String stage, List<FamilyOption> families, String selectedFamily, CharacterView character) {
     public WeaponScreenView {
         equipped = List.copyOf(equipped);
         choices = List.copyOf(choices);
@@ -20,6 +20,18 @@ public record WeaponScreenView(String playerName, WeaponSlot selectedSlot, List<
         selectedUtility = selectedUtility == null ? "" : selectedUtility;
         stage = stage == null || stage.isBlank() ? "LOADOUT" : stage;
         selectedFamily = selectedFamily == null ? "" : selectedFamily;
+        character = character == null ? CharacterView.EMPTY : character;
+    }
+
+    /** Retain the complete weapon-wizard constructor used before the character tab. */
+    public WeaponScreenView(String playerName, WeaponSlot selectedSlot, List<Card> equipped,
+            List<Card> choices, Card inspected, int page, int pages, int focus,
+            float cursorX, float cursorY, String message, boolean testArmory, String perkGroup,
+            List<PerkOption> perks, String selectedDamage, String selectedUtility,
+            String stage, List<FamilyOption> families, String selectedFamily) {
+        this(playerName, selectedSlot, equipped, choices, inspected, page, pages, focus,
+                cursorX, cursorY, message, testArmory, perkGroup, perks, selectedDamage, selectedUtility,
+                stage, families, selectedFamily, CharacterView.EMPTY);
     }
 
     /** Existing callers enter the loadout without creating or equipping a draft. */
@@ -40,6 +52,25 @@ public record WeaponScreenView(String playerName, WeaponSlot selectedSlot, List<
     }
 
     public boolean perkMode() { return "PERKS".equals(stage); }
+    public boolean characterMode() { return "CHARACTER".equals(stage) || "CHARACTER_OPTIONS".equals(stage); }
+
+    /** Strings and immutable lists only: no live guardian state, abilities or owned items escape. */
+    public record CharacterView(String guardianClass, String className, String subclass,
+            String subclassName, String field, List<CharacterField> fields, List<CharacterOption> options) {
+        public static final CharacterView EMPTY = new CharacterView("NONE", "미선택", "", "미선택",
+                "", List.of(), List.of());
+        public CharacterView {
+            fields = List.copyOf(fields);
+            options = List.copyOf(options);
+        }
+    }
+
+    /** Stable IDs: CLASS, SUBCLASS, GRENADE, MELEE, CLASS_ABILITY, SUPER (in that order). */
+    public record CharacterField(String id, String name, String value, boolean enabled, String reason) { }
+
+    /** Current page only (at most nine). IDs are enum names or a registered ability identifier. */
+    public record CharacterOption(String id, String name, String description,
+            boolean selected, boolean enabled, String reason) { }
 
     /** The wizard edits only its detached draft; other stages retain the prior equipped lookup. */
     public Card perkTarget() {

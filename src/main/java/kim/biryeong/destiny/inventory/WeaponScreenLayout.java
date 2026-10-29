@@ -6,7 +6,7 @@ package kim.biryeong.destiny.inventory;
  * Boxes store their CENTRES, never their upper-left corners. Page numbers do not affect geometry.
  */
 public final class WeaponScreenLayout {
-    public static final int NODE_COUNT = 20;
+    public static final int NODE_COUNT = 29;
     public static final int PREVIOUS = 12;
     public static final int NEXT = 13;
     public static final int CLOSE = 14;
@@ -15,6 +15,15 @@ public final class WeaponScreenLayout {
     public static final int UTILITY_PERKS = 17;
     public static final int BACK_WEAPONS = 18;
     public static final int CONFIRM_LOADOUT = 19;
+    public static final int CHARACTER_TAB = 20;
+    public static final int LOADOUT_TAB = 21;
+    public static final int CLASS = 22;
+    public static final int SUBCLASS = 23;
+    public static final int GRENADE = 24;
+    public static final int MELEE = 25;
+    public static final int CLASS_ABILITY = 26;
+    public static final int SUPER = 27;
+    public static final int BACK_CHARACTER = 28;
 
     public record Box(float x, float y, float width, float height) {
         public Box {
@@ -43,7 +52,12 @@ public final class WeaponScreenLayout {
             new Box(1450, 112, 280, 52),
             new Box(1280, 920, 280, 44), new Box(1600, 920, 280, 44),
             new Box(720, 925, 220, 44),
-            new Box(1440, 858, 560, 44)
+            new Box(1440, 858, 560, 44),
+            new Box(890, 112, 186, 52), new Box(1130, 112, 186, 52),
+            new Box(330, 360, 340, 156), new Box(800, 360, 340, 156),
+            new Box(330, 540, 340, 156), new Box(800, 540, 340, 156),
+            new Box(330, 720, 340, 156), new Box(800, 720, 340, 156),
+            new Box(720, 925, 220, 44)
     };
 
     private WeaponScreenLayout() { }
@@ -53,7 +67,7 @@ public final class WeaponScreenLayout {
         return BOXES[node];
     }
 
-    /** Geometry-only compatibility overload includes every node; live wizard callers supply stage. */
+    /** Legacy weapon geometry (0..19); live callers supply a stage to include character controls. */
     public static int hit(float x, float y) {
         return hit(x, y, true);
     }
@@ -66,13 +80,17 @@ public final class WeaponScreenLayout {
     }
 
     public static boolean visible(int node, boolean perkMode) {
-        return node >= 0 && node < NODE_COUNT
+        return node >= 0 && node <= CONFIRM_LOADOUT
                 && (perkMode || (node != BACK_WEAPONS && node != CONFIRM_LOADOUT));
     }
 
     /** Live wizard geometry. A missing/unknown stage safely exposes only the loadout controls. */
     public static boolean visible(int node, String stage) {
         if (node < 0 || node >= NODE_COUNT) return false;
+        if (node == CHARACTER_TAB || node == LOADOUT_TAB || node == CLOSE) return true;
+        if ("CHARACTER".equals(stage)) return node >= CLASS && node <= SUPER;
+        if ("CHARACTER_OPTIONS".equals(stage))
+            return (node >= 3 && node <= NEXT) || node == BACK_CHARACTER;
         if (node < 3 || node == CLOSE) return true;
         return switch (stage == null ? "LOADOUT" : stage) {
             case "FAMILY", "WEAPON" -> (node >= 3 && node <= NEXT) || node == BACK_WEAPONS;
@@ -107,8 +125,17 @@ public final class WeaponScreenLayout {
         return navigateVisible(current, dx, dy, node -> visible(node, stage));
     }
 
+    /** Stage-specific recovery is also shared by controller refresh and the rendered cursor. */
+    public static int fallback(String stage) {
+        return "CHARACTER".equals(stage) ? CLASS : "CHARACTER_OPTIONS".equals(stage) ? 3 : 0;
+    }
+
     private static int navigateVisible(int current, int dx, int dy, java.util.function.IntPredicate visible) {
-        int start = visible.test(current) ? current : 0;
+        int start = current;
+        if (!visible.test(start)) {
+            // Content comes before tabs/close even when those controls have a lower node number.
+            start = visible.test(CLASS) ? CLASS : visible.test(0) ? 0 : visible.test(3) ? 3 : CLOSE;
+        }
         if (dx == 0 && dy == 0) return start;
         boolean horizontal = Math.abs((long) dx) >= Math.abs((long) dy);
         int direction = Integer.signum(horizontal ? dx : dy);

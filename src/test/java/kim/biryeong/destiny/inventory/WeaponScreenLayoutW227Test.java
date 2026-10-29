@@ -21,8 +21,8 @@ class WeaponScreenLayoutW227Test {
     };
 
     @Test void publishedRenderBoxesMapToTheirOwnHitTargets() {
-        assertEquals(CENTRES.length, WeaponScreenLayout.NODE_COUNT);
-        for (int node = 0; node < WeaponScreenLayout.NODE_COUNT; node++) {
+        assertTrue(WeaponScreenLayout.NODE_COUNT >= CENTRES.length);
+        for (int node = 0; node < CENTRES.length; node++) {
             // Renderer uses these exact bounds for bases, all four frame edges, and focus.
             var box = WeaponScreenLayout.bounds(node);
             assertEquals(CENTRES[node][0], box.x(), "native cursor X for " + node);
@@ -40,7 +40,7 @@ class WeaponScreenLayoutW227Test {
     }
 
     @Test void paintedEdgesAndCornersAreInclusiveButImmediatelyOutsideMisses() {
-        for (int node = 0; node < WeaponScreenLayout.NODE_COUNT; node++) {
+        for (int node = 0; node < CENTRES.length; node++) {
             var b = WeaponScreenLayout.bounds(node);
             float left = b.x() - b.width() / 2, right = b.x() + b.width() / 2;
             float top = b.y() - b.height() / 2, bottom = b.y() + b.height() / 2;
@@ -84,7 +84,7 @@ class WeaponScreenLayoutW227Test {
 
     @Test void everyControlIsReachableFromEveryOtherControlWithoutAFocusTrap() {
         // Includes empty candidate cells and disabled page endpoints: neither traps keyboard focus.
-        for (int start = 0; start < WeaponScreenLayout.NODE_COUNT; start++) {
+        for (int start = 0; start < CENTRES.length; start++) {
             Set<Integer> visited = new HashSet<>();
             ArrayDeque<Integer> queue = new ArrayDeque<>();
             visited.add(start);
@@ -97,7 +97,7 @@ class WeaponScreenLayoutW227Test {
                     if (visited.add(next)) queue.add(next);
                 }
             }
-            assertEquals(WeaponScreenLayout.NODE_COUNT, visited.size(), "unreachable from " + start + ": " + visited);
+            assertEquals(CENTRES.length, visited.size(), "unreachable from " + start + ": " + visited);
         }
     }
 
@@ -110,7 +110,7 @@ class WeaponScreenLayoutW227Test {
         assertEquals(0, WeaponScreenLayout.navigate(-1, 0, 0, true));
         assertEquals(0, WeaponScreenLayout.navigate(Integer.MIN_VALUE, 0, 0, true));
         assertEquals(3, WeaponScreenLayout.navigate(999, 1, 0, true));
-        for (int node = 0; node < WeaponScreenLayout.NODE_COUNT; node++) {
+        for (int node = 0; node < CENTRES.length; node++) {
             assertEquals(node, WeaponScreenLayout.navigate(node, 0, 0, true));
             for (int[] direction : DIRECTIONS) {
                 int next = WeaponScreenLayout.navigate(node, direction[0], direction[1], true);

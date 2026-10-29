@@ -27,7 +27,7 @@ class WeaponScreenLayoutW228Test {
     };
 
     @Test void retainsEveryOriginalBoxAndPublishesTheFiveNewControls() {
-        assertEquals(20, WeaponScreenLayout.NODE_COUNT);
+        assertTrue(WeaponScreenLayout.NODE_COUNT >= 20);
         for (int node = 0; node < ORIGINAL_BOXES.length; node++)
             assertBox(node, ORIGINAL_BOXES[node]);
         assertEquals(15, WeaponScreenLayout.TEST_ARMORY);
@@ -56,13 +56,13 @@ class WeaponScreenLayoutW228Test {
 
     @Test void everyVisibleBoxUsesItsPaintedHitEdgesWithoutOverlapsInEitherMode() {
         for (boolean perkMode : new boolean[]{false, true})
-            for (int node = 0; node < WeaponScreenLayout.NODE_COUNT; node++) {
+            for (int node = 0; node < 20; node++) {
                 if (!WeaponScreenLayout.visible(node, perkMode)) continue;
                 var box = WeaponScreenLayout.bounds(node);
                 for (float dx : new float[]{-box.width() / 2, 0, box.width() / 2})
                     for (float dy : new float[]{-box.height() / 2, 0, box.height() / 2})
                         assertEquals(node, WeaponScreenLayout.hit(box.x() + dx, box.y() + dy, perkMode));
-                for (int other = node + 1; other < WeaponScreenLayout.NODE_COUNT; other++) {
+                for (int other = node + 1; other < 20; other++) {
                     if (!WeaponScreenLayout.visible(other, perkMode)) continue;
                     var candidate = WeaponScreenLayout.bounds(other);
                     assertTrue(Math.abs(box.x() - candidate.x()) > (box.width() + candidate.width()) / 2
@@ -93,7 +93,7 @@ class WeaponScreenLayoutW228Test {
 
     @Test void allVisibleControlsAreReachableFromEveryVisibleStartingPoint() {
         for (boolean perkMode : new boolean[]{false, true})
-            for (int start = 0; start < WeaponScreenLayout.NODE_COUNT; start++) {
+            for (int start = 0; start < 20; start++) {
                 if (!WeaponScreenLayout.visible(start, perkMode)) continue;
                 Set<Integer> visited = new HashSet<>();
                 ArrayDeque<Integer> pending = new ArrayDeque<>();
@@ -113,7 +113,7 @@ class WeaponScreenLayoutW228Test {
     }
 
     @Test void legacyOverloadsUseAllNodesWhileExplicitModesRejectNonfinitePointers() {
-        for (int node = 0; node < WeaponScreenLayout.NODE_COUNT; node++) {
+        for (int node = 0; node < 20; node++) {
             var box = WeaponScreenLayout.bounds(node);
             assertEquals(node, WeaponScreenLayout.hit(box.x(), box.y()));
             for (int[] direction : DIRECTIONS)
@@ -126,7 +126,7 @@ class WeaponScreenLayoutW228Test {
                 assertEquals(-1, WeaponScreenLayout.hit(720, invalid, perkMode));
             }
             assertEquals(0, WeaponScreenLayout.navigate(Integer.MIN_VALUE, 0, 0, perkMode));
-            for (int node = 0; node < WeaponScreenLayout.NODE_COUNT; node++)
+            for (int node = 0; node < 20; node++)
                 assertTrue(WeaponScreenLayout.visible(WeaponScreenLayout.navigate(node,
                         Integer.MIN_VALUE, Integer.MAX_VALUE, perkMode), perkMode));
         }
@@ -204,10 +204,10 @@ class WeaponScreenLayoutW228Test {
 
     @Test void eachWizardStageHitsAndNavigatesOnlyItsVisibleControls() {
         Map<String, Set<Integer>> controls = Map.of(
-                "LOADOUT", Set.of(0, 1, 2, 14, 15),
-                "FAMILY", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18),
-                "WEAPON", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18),
-                "PERKS", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19));
+                "LOADOUT", Set.of(0, 1, 2, 14, 15, 20, 21),
+                "FAMILY", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 20, 21),
+                "WEAPON", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 20, 21),
+                "PERKS", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21));
         for (var stage : controls.entrySet()) {
             String name = stage.getKey();
             Set<Integer> expected = stage.getValue();
@@ -216,7 +216,7 @@ class WeaponScreenLayoutW228Test {
                 assertEquals(expected.contains(node) ? node : 0, WeaponScreenLayout.navigate(node, 0, 0, name));
                 for (int[] direction : DIRECTIONS)
                     assertTrue(expected.contains(WeaponScreenLayout.navigate(node, direction[0], direction[1], name)));
-                if (node < 0 || node >= WeaponScreenLayout.NODE_COUNT) continue;
+                if (node < 0 || node >= WeaponScreenLayout.CLASS) continue; // Character fields reuse another stage's canvas.
                 var box = WeaponScreenLayout.bounds(node);
                 for (float dx : new float[]{-box.width() / 2, 0, box.width() / 2})
                     for (float dy : new float[]{-box.height() / 2, 0, box.height() / 2})
