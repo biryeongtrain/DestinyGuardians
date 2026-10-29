@@ -62,7 +62,8 @@ public final class TowerSpawnWorld {
     private static State state;
     private static final Map<UUID, Integer> RETRY_AFTER = new HashMap<>();
     private static final Map<UUID, ServerPlayer> PENDING_JOINS = new HashMap<>();
-    private record State(MinecraftServer server, RuntimeLevelHandle handle, TowerVoxelMap map, TowerDetailPass details, TowerMaterialPass materials) {}
+    private record State(MinecraftServer server, RuntimeLevelHandle handle, TowerVoxelMap map, TowerDetailPass details, TowerMaterialPass materials,
+                         TowerBakedMaterialPass baked) {}
     private TowerSpawnWorld() {}
 
     /** Exact 26.3 server hooks: all vanilla explosion entry points dispatch here. */
@@ -98,6 +99,7 @@ public final class TowerSpawnWorld {
             if (state != null && state.server() == server) {
                 state.details().close();
                 state.materials().close();
+                state.baked().close();
             }
         });
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
@@ -180,7 +182,8 @@ public final class TowerSpawnWorld {
         var bounds = map.manifest().bounds();
         level.getWorldBorder().setCenter((bounds.minX() + bounds.maxX() + 1) / 2.0, (bounds.minZ() + bounds.maxZ() + 1) / 2.0);
         level.getWorldBorder().setSize(map.manifest().worldBorder());
-        state = new State(server, handle, map, TowerDetailPass.start(level, map), TowerMaterialPass.start(level, map));
+        state = new State(server, handle, map, TowerDetailPass.start(level, map), TowerMaterialPass.start(level, map),
+                TowerBakedMaterialPass.start(level, map));
         // Arrival remains source/persisted geometry. Details run later in bounded ticks and never repair edits.
         if (safeSpawn(level, map).isEmpty()) throw new IllegalStateException("타워 스폰 주변에 안전한 바닥과 머리 공간이 없습니다.");
         handle.setTickWhenEmpty(false);
@@ -209,6 +212,8 @@ public final class TowerSpawnWorld {
         state.details().tick();
         // Preserve source-floor support checks: every prop/branch finishes before recoloring.
         if (state.details().isFinished()) state.materials().tick();
+        // W245 expects the pinned W243 result; failed/unfinished W243 never unlocks it.
+        if (state.materials().isFinished()) state.baked().tick();
         for (var player : java.util.List.copyOf(PENDING_JOINS.values())) {
             PENDING_JOINS.remove(player.getUUID(), player);
             if (player.level().getServer() == server && !player.hasDisconnected() && !player.isRemoved()

@@ -71,3 +71,11 @@ Vision R2에서는 최종스폰·onGround·selfcamera, native40틱 보행8.6306�
 전체 JUnit은2079개 중2069통과/10실패였다. W231에서도 있던6실패와 별도로 과거/tmp plugsets원본 누락으로4개가 실패했다. W232는 해당 pin·consumer를 변경하지 않았고 관련3개는통과했다. 전체gate성공으로 표시하지 않는다. 상세한 실패·비교·근거는 `docs/qa/2026-10-29/w232/`에 있다.
 
 R3 새 JVM에서 동일 저장 폴더를 다시 열고, 저장한 시험용 gold_block이 유지되는 것을 확인했다. 시험 블록을 원본 smooth_stone으로 복원·저장한 뒤 임시 forceload ticket을 해제했다. 서버와 Vision 클라이언트 모두 종료했으며8102/25611/25565포트가 닫혀 있고 Java프로세스가 남지 않았음을 확인했다. 사용자 요청의48시간 잠자기 방지는 유지했다. `persistence-final.json`, `cleanup.json`에 근거를 보관한다.
+
+## W245 머테리얼 전달본 적용 (2026-10-29)
+
+`Destiny-Tower-Materials-2026-10-29`의 DDS/HLSL/cbuffer를 이용해 24개 shader·98개 머테리얼의 정적 basecolor를 합성했다. 원본 GLB를 별도 Blender에서 전후 비교한 뒤, 기존 노출면의 색을 바닐라 블록 팔레트에 대응했다. 새 클라이언트용 대형 텍스처·모델은 추가하지 않는다. 원본 지형·크기·동선·중앙 나무와 기존 소품은 유지한다.
+
+Charm STATIC export의 UV에는 scale/translation이 이미 적용되어 있어 PS UV는 `(U,1-V)`로 변환한다. 중복 scale/offset 적용을 피했다. TEXCOORD8 vertex buffer와 원본 조명·일부 engine 입력은 없어 대표값 근사이며 원작 색 완전 복원은 아니다.
+
+서버는 W243 재질 pass 완료 후 별도 W245 ledger로 96,577개 후보를 128 operations/tick 상한으로 적용한다. 실제 블록이 expected와 일치할 때만 바꾸므로 저장된 사용자 편집은 보존한다. 최종 QA에서는 96,550변경/27보호 skip을 확인했다. 자세한 근거와 Blender·Danmo 비교는 [W245 검수 기록](../qa/2026-10-29/w245/README.md)에 있다.

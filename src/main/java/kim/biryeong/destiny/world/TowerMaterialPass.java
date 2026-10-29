@@ -74,6 +74,8 @@ public final class TowerMaterialPass implements AutoCloseable {
         if (driver.isFinished()) close();
     }
 
+    boolean isFinished() { return driver != null && driver.isFinished(); }
+
     @Override public void close() {
         if (driver != null) driver.close();
         prepared.cancel(false);
