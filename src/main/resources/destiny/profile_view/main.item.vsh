@@ -7,7 +7,8 @@
         // Preserve signed w: the GPU clips complete triangles at the near plane.
         float w = -p.z;
         gl_Position = vec4(p.x*focal/aspect,p.y*focal,w*(0.85-clamp(w/64.0,0.0,0.20)) + 0.025*(0.15+0.025/64.0),w);
-        vertexColor=Color;
+        // DisplayHud already flattened vertexColor; restore native face lighting.
+        vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, Color);
 #ifndef OIT_ALPHA_ONLY
         lightMapColor=vec4(1.0);
         overlayColor=vec4(0.0,0.0,0.0,1.0);

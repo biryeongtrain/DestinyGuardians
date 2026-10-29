@@ -1,0 +1,745 @@
+{
+  "native_version": "26.3",
+  "core_sha256": {
+    "assets/minecraft/shaders/core/entity.vsh": "3633e94e2b38f6c50e390cfbdb329cc80fcf129e26f7d6de3c9021278f792b2e",
+    "assets/minecraft/shaders/core/entity.fsh": "8ab505ab29caf2bc83a013bc1576e5f989809dd18bcb8c842135801468531001",
+    "assets/minecraft/shaders/core/item.vsh": "d175c134b00ab079fe3f179cff3bde3e2ab2ff807eec261561f6e008a4fc3157",
+    "assets/minecraft/shaders/core/item.fsh": "fcdc2561724112ad48b91ed69da646ee9433a0346d25c12ac1e2814cbe3a213c"
+  },
+  "includes": {
+    "assets/minecraft/shaders/include/displayhud.glsl": {
+      "source": "pack",
+      "sha256": "6c79026e8f0f5adaa19a5be6c6baba436bab2528e4c13c778ff3a6cae075cf0b"
+    },
+    "assets/minecraft/shaders/include/dynamictransforms.glsl": {
+      "source": "native",
+      "sha256": "13db01aebd7ceeabf7769b1d60d0d5691f88072f302350ca2499f5d962237c7a"
+    },
+    "assets/minecraft/shaders/include/fog.glsl": {
+      "source": "native",
+      "sha256": "c96edf62b3dca66b2dc314516b0cd74f2e12fbe7514342e28a5440ad8dfc49be"
+    },
+    "assets/minecraft/shaders/include/globals.glsl": {
+      "source": "native",
+      "sha256": "85784f154ace14501ff33310a69b48e6d01f3af30b52444ce6192b9049be1060"
+    },
+    "assets/minecraft/shaders/include/light.glsl": {
+      "source": "native",
+      "sha256": "57364b31f9a361aba051e38a9a36e87890ab39798d88aadad0620d6768bc0401"
+    },
+    "assets/minecraft/shaders/include/oit.glsl": {
+      "source": "native",
+      "sha256": "d90c5f454fffff35e81673b9806531d468d9597557a2bf7d9e37ed5cd7c18989"
+    },
+    "assets/minecraft/shaders/include/oit_add_transmittance.glsl": {
+      "source": "native",
+      "sha256": "79f5b662a4550428757bac08b9e725dae775d9efc73416b96940009c8ae2a8f4"
+    },
+    "assets/minecraft/shaders/include/oit_common.glsl": {
+      "source": "native",
+      "sha256": "bd5f404aea0c8b75f32471e763332fdfa81a30106dfd1318a3fec0a82e1c7720"
+    },
+    "assets/minecraft/shaders/include/oit_depth_bounds.glsl": {
+      "source": "native",
+      "sha256": "892f076e405e784f44da5f1a59c4aedeffe45b6a1b56ef733ff515c3218c4a04"
+    },
+    "assets/minecraft/shaders/include/oit_depth_sample.glsl": {
+      "source": "native",
+      "sha256": "fcf65ad828e0a079652096ceea20da9367ef38c53d77e88da74a7f00718e8b90"
+    },
+    "assets/minecraft/shaders/include/oit_sample.glsl": {
+      "source": "native",
+      "sha256": "92c2735235ac4c7122230baeac027b24784d0d2d4cc0b3740c2ca97855832b90"
+    },
+    "assets/minecraft/shaders/include/projection.glsl": {
+      "source": "native",
+      "sha256": "54ad58fcd6b3811992a9432628dba49900b2d9d33e075424224b0e7f0603818e"
+    },
+    "assets/minecraft/shaders/include/sample_lightmap.glsl": {
+      "source": "native",
+      "sha256": "a9304edbf7f4cae659177dc47b813a5b8a715c9cb3e4a16214273a871eb508e9"
+    }
+  },
+  "native_include_sha256": {
+    "assets/minecraft/shaders/include/dynamictransforms.glsl": "13db01aebd7ceeabf7769b1d60d0d5691f88072f302350ca2499f5d962237c7a",
+    "assets/minecraft/shaders/include/fog.glsl": "c96edf62b3dca66b2dc314516b0cd74f2e12fbe7514342e28a5440ad8dfc49be",
+    "assets/minecraft/shaders/include/globals.glsl": "85784f154ace14501ff33310a69b48e6d01f3af30b52444ce6192b9049be1060",
+    "assets/minecraft/shaders/include/light.glsl": "57364b31f9a361aba051e38a9a36e87890ab39798d88aadad0620d6768bc0401",
+    "assets/minecraft/shaders/include/oit.glsl": "d90c5f454fffff35e81673b9806531d468d9597557a2bf7d9e37ed5cd7c18989",
+    "assets/minecraft/shaders/include/oit_add_transmittance.glsl": "79f5b662a4550428757bac08b9e725dae775d9efc73416b96940009c8ae2a8f4",
+    "assets/minecraft/shaders/include/oit_common.glsl": "bd5f404aea0c8b75f32471e763332fdfa81a30106dfd1318a3fec0a82e1c7720",
+    "assets/minecraft/shaders/include/oit_depth_bounds.glsl": "892f076e405e784f44da5f1a59c4aedeffe45b6a1b56ef733ff515c3218c4a04",
+    "assets/minecraft/shaders/include/oit_depth_sample.glsl": "fcf65ad828e0a079652096ceea20da9367ef38c53d77e88da74a7f00718e8b90",
+    "assets/minecraft/shaders/include/oit_sample.glsl": "92c2735235ac4c7122230baeac027b24784d0d2d4cc0b3740c2ca97855832b90",
+    "assets/minecraft/shaders/include/projection.glsl": "54ad58fcd6b3811992a9432628dba49900b2d9d33e075424224b0e7f0603818e",
+    "assets/minecraft/shaders/include/sample_lightmap.glsl": "a9304edbf7f4cae659177dc47b813a5b8a715c9cb3e4a16214273a871eb508e9"
+  },
+  "pack_include_sha256": {
+    "assets/minecraft/shaders/include/displayhud.glsl": "6c79026e8f0f5adaa19a5be6c6baba436bab2528e4c13c778ff3a6cae075cf0b"
+  },
+  "include_policy": "pack first, native 26.3 fallback; selected source and raw-byte SHA-256 recorded",
+  "summary": {
+    "programs": 14,
+    "passed": 14,
+    "failed": 0,
+    "by_shader": {
+      "entity": {
+        "programs": 8,
+        "failed": 0
+      },
+      "item": {
+        "programs": 6,
+        "failed": 0
+      }
+    }
+  },
+  "pack": "/private/tmp/destiny-w251/shader-final-candidate.zip",
+  "client": "/Users/qf/.gradle/caches/fabric-loom/26.3/minecraft-client.jar",
+  "pack_sha256": "d3eb1937b7e25612792c43f9d26f59daecfc42c94ca887fa836adcd7070f7823",
+  "client_sha256": "4508d006323f24fa02876310c192d739af56516eb259000ac50f0909a68c9a2d",
+  "validator": "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+  "results": [
+    {
+      "id": "entity-base-ordinary-overlay-opengl",
+      "shader": "entity",
+      "family": "base",
+      "phase": "ordinary",
+      "backend": "opengl",
+      "defines": {},
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-base-ordinary-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-base-ordinary-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-base-ordinary-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-base-ordinary-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "entity-base-depth-bounds-overlay-opengl",
+      "shader": "entity",
+      "family": "base",
+      "phase": "depth-bounds",
+      "backend": "opengl",
+      "defines": {
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ALPHA_ONLY": "1",
+        "OIT_DEPTH_BOUNDS": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-base-depth-bounds-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-base-depth-bounds-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-base-depth-bounds-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-base-depth-bounds-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "entity-no-cardinal-ordinary-overlay-opengl",
+      "shader": "entity",
+      "family": "no-cardinal",
+      "phase": "ordinary",
+      "backend": "opengl",
+      "defines": {
+        "NO_CARDINAL_LIGHTING": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-ordinary-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-ordinary-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-ordinary-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-ordinary-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "entity-no-cardinal-depth-bounds-overlay-opengl",
+      "shader": "entity",
+      "family": "no-cardinal",
+      "phase": "depth-bounds",
+      "backend": "opengl",
+      "defines": {
+        "NO_CARDINAL_LIGHTING": "1",
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ALPHA_ONLY": "1",
+        "OIT_DEPTH_BOUNDS": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-depth-bounds-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-depth-bounds-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-depth-bounds-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-no-cardinal-depth-bounds-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "entity-emissive-ordinary-overlay-opengl",
+      "shader": "entity",
+      "family": "emissive",
+      "phase": "ordinary",
+      "backend": "opengl",
+      "defines": {
+        "EMISSIVE": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-emissive-ordinary-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-emissive-ordinary-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-emissive-ordinary-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-emissive-ordinary-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "entity-emissive-depth-bounds-overlay-opengl",
+      "shader": "entity",
+      "family": "emissive",
+      "phase": "depth-bounds",
+      "backend": "opengl",
+      "defines": {
+        "EMISSIVE": "1",
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ALPHA_ONLY": "1",
+        "OIT_DEPTH_BOUNDS": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-emissive-depth-bounds-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-emissive-depth-bounds-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-emissive-depth-bounds-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-emissive-depth-bounds-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "entity-per-face-ordinary-overlay-opengl",
+      "shader": "entity",
+      "family": "per-face",
+      "phase": "ordinary",
+      "backend": "opengl",
+      "defines": {
+        "PER_FACE_LIGHTING": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-per-face-ordinary-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-per-face-ordinary-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-per-face-ordinary-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-per-face-ordinary-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "entity-per-face-depth-bounds-overlay-opengl",
+      "shader": "entity",
+      "family": "per-face",
+      "phase": "depth-bounds",
+      "backend": "opengl",
+      "defines": {
+        "PER_FACE_LIGHTING": "1",
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ALPHA_ONLY": "1",
+        "OIT_DEPTH_BOUNDS": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-per-face-depth-bounds-overlay-opengl/entity.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/entity-per-face-depth-bounds-overlay-opengl/entity.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/entity-per-face-depth-bounds-overlay-opengl/entity.vert\n/private/tmp/destiny-w251/shader-final-compile/entity-per-face-depth-bounds-overlay-opengl/entity.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/entity.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/entity.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "item-base-plain-ordinary-opengl",
+      "shader": "item",
+      "family": "base-plain",
+      "phase": "ordinary",
+      "backend": "opengl",
+      "defines": {},
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-ordinary-opengl/item.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-ordinary-opengl/item.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-ordinary-opengl/item.vert\n/private/tmp/destiny-w251/shader-final-compile/item-base-plain-ordinary-opengl/item.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/item.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/item.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "item-base-plain-accumulate-opengl",
+      "shader": "item",
+      "family": "base-plain",
+      "phase": "accumulate",
+      "backend": "opengl",
+      "defines": {
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ACCUMULATE": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-accumulate-opengl/item.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-accumulate-opengl/item.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-accumulate-opengl/item.vert\n/private/tmp/destiny-w251/shader-final-compile/item-base-plain-accumulate-opengl/item.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/item.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/item.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "item-base-plain-depth-bounds-opengl",
+      "shader": "item",
+      "family": "base-plain",
+      "phase": "depth-bounds",
+      "backend": "opengl",
+      "defines": {
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ALPHA_ONLY": "1",
+        "OIT_DEPTH_BOUNDS": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-depth-bounds-opengl/item.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-depth-bounds-opengl/item.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/item-base-plain-depth-bounds-opengl/item.vert\n/private/tmp/destiny-w251/shader-final-compile/item-base-plain-depth-bounds-opengl/item.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/item.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/item.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "item-cutout-01-plain-ordinary-opengl",
+      "shader": "item",
+      "family": "cutout-01-plain",
+      "phase": "ordinary",
+      "backend": "opengl",
+      "defines": {
+        "ALPHA_CUTOUT": "0.1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-ordinary-opengl/item.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-ordinary-opengl/item.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-ordinary-opengl/item.vert\n/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-ordinary-opengl/item.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/item.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/item.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "item-cutout-01-plain-accumulate-opengl",
+      "shader": "item",
+      "family": "cutout-01-plain",
+      "phase": "accumulate",
+      "backend": "opengl",
+      "defines": {
+        "ALPHA_CUTOUT": "0.1",
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ACCUMULATE": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-accumulate-opengl/item.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-accumulate-opengl/item.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-accumulate-opengl/item.vert\n/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-accumulate-opengl/item.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/item.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/item.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    },
+    {
+      "id": "item-cutout-01-plain-depth-bounds-opengl",
+      "shader": "item",
+      "family": "cutout-01-plain",
+      "phase": "depth-bounds",
+      "backend": "opengl",
+      "defines": {
+        "ALPHA_CUTOUT": "0.1",
+        "OIT": "1",
+        "OIT_WAVELET_RANK": "2",
+        "OIT_COEFF_COUNT": "8",
+        "OIT_COEFF_ATTACHMENT_COUNT": "2",
+        "OIT_ALPHA_ONLY": "1",
+        "OIT_DEPTH_BOUNDS": "1"
+      },
+      "ok": true,
+      "returncode": 0,
+      "command": [
+        "/opt/homebrew/Cellar/glslang/16.6.0/bin/glslang",
+        "-l",
+        "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-depth-bounds-opengl/item.vert",
+        "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-depth-bounds-opengl/item.frag"
+      ],
+      "output": "/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-depth-bounds-opengl/item.vert\n/private/tmp/destiny-w251/shader-final-compile/item-cutout-01-plain-depth-bounds-opengl/item.frag\n",
+      "source_map": {
+        "vert": {
+          "0": "assets/minecraft/shaders/core/item.vsh",
+          "1": "assets/minecraft/shaders/include/light.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/projection.glsl",
+          "5": "assets/minecraft/shaders/include/sample_lightmap.glsl",
+          "6": "assets/minecraft/shaders/include/displayhud.glsl"
+        },
+        "frag": {
+          "0": "assets/minecraft/shaders/core/item.fsh",
+          "1": "assets/minecraft/shaders/include/globals.glsl",
+          "2": "assets/minecraft/shaders/include/fog.glsl",
+          "3": "assets/minecraft/shaders/include/dynamictransforms.glsl",
+          "4": "assets/minecraft/shaders/include/oit.glsl",
+          "5": "assets/minecraft/shaders/include/oit_common.glsl",
+          "6": "assets/minecraft/shaders/include/projection.glsl",
+          "7": "assets/minecraft/shaders/include/oit_depth_sample.glsl",
+          "8": "assets/minecraft/shaders/include/oit_depth_bounds.glsl",
+          "9": "assets/minecraft/shaders/include/oit_add_transmittance.glsl",
+          "10": "assets/minecraft/shaders/include/oit_sample.glsl"
+        }
+      }
+    }
+  ],
+  "limitation": "Offline compile/link matrix; native GPU render and reachable pipeline census unverified."
+}

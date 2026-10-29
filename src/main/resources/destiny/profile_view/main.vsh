@@ -10,12 +10,26 @@
         gl_Position = vec4(p.x*focal/aspect, p.y*focal, w*(0.85-clamp(w/64.0,0.0,0.20)) + 0.025*(0.15+0.025/64.0), w);
         sphericalVertexDistance = 0.0;
         cylindricalVertexDistance = 0.0;
+        // Skin arms use a player-head UV carrier with a remapped silhouette.
+        // DisplayHud flattened the colors above; recompute native weapon lighting.
+        if (UV2.y == 208) {
 #ifdef PER_FACE_LIGHTING
-        vertexPerFaceColorBack = Color;
-        vertexPerFaceColorFront = Color;
+            vertexPerFaceColorBack = Color;
+            vertexPerFaceColorFront = Color;
 #else
-        vertexColor = Color;
+            vertexColor = Color;
 #endif
+        } else {
+#ifdef PER_FACE_LIGHTING
+            vec2 weaponLight = minecraft_compute_light(Light0_Direction, Light1_Direction, Normal);
+            vertexPerFaceColorBack = minecraft_mix_light_separate(-weaponLight, Color);
+            vertexPerFaceColorFront = minecraft_mix_light_separate(weaponLight, Color);
+#elif defined(NO_CARDINAL_LIGHTING)
+            vertexColor = Color;
+#else
+            vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, Color);
+#endif
+        }
 #ifndef EMISSIVE
         lightMapColor = vec4(1.0);
 #endif
