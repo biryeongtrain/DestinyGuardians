@@ -186,6 +186,8 @@ public final class ClassAbilityEffects {
 
     /** Source-backed item definitions are installed separately; provisional base item is explicit in docs. */
     public static ItemStack item(String path) {
+        var grenade=GrenadeModels.item(DestinyGuardians.id(path));
+        if(!grenade.isEmpty())return grenade;
         if (path.equals("titan/arc_super") || path.equals("warlock/arc_super")) return ItemStack.EMPTY;
         ItemStack stack = new ItemStack(switch (path) {
             case "titan/solar_super", "titan/solar_melee", "titan/burning_maul" -> Items.MACE;

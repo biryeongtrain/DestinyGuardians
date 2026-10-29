@@ -12,11 +12,7 @@ public final class HunterAbilityVisuals {
     }
 
     public static ItemStack grenade(Element element) {
-        return item(switch (element) {
-            case ARC -> HunterAbilities.ARC_FLASHBANG;
-            case SOLAR -> HunterAbilities.SOLAR_INCENDIARY;
-            default -> HunterAbilities.VOID_VORTEX;
-        });
+        return kim.biryeong.destiny.fx.GrenadeModels.item(kim.biryeong.destiny.guardian.GuardianClass.HUNTER, element);
     }
 
     /** Combination blow is unarmed and has no projectile visual. */

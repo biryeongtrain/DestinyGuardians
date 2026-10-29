@@ -1,0 +1,396 @@
+{
+  "revision": "W252",
+  "generator": "scripts/art/build_grenades_w252.py",
+  "format": "Minecraft 26.3 cuboids, scalar x/y/z EulerXYZ",
+  "provenance": {
+    "method": "New cuboid geometry and hand-designed material atlas after source review; no FBX triangles or ripped PNG pixels copied into product.",
+    "drive_archive": {
+      "url": "https://drive.google.com/file/d/1yEfOLn_FJGT2tY5Q5oRNtA0OCnjkt2fQ/view",
+      "name": "Misc/Four Grenade Types.7z",
+      "bytes": 2370535,
+      "sha256": "b3183e471b5ce992a463e4b779a2ce9f0530aab538f770fd21c908ea772bb75f",
+      "reviewed_meshes": [
+        {
+          "path": "Explosion Grenade/Explosion Grenade.fbx",
+          "sha256": "d4833b00b30efea11d0a8e9fccdea75d7d2874a66c1d394a32b79136c6c7a9cc",
+          "vertices": 570,
+          "polygon_indices": 2538,
+          "tag_in_mesh_name": "f3eab080",
+          "ability_mapping": "Flashbang screenshot shape correspondence; archive calls it Explosion, not Flashbang/Incendiary/Suppressor"
+        },
+        {
+          "path": "Pulse Grenade/Pulse Grenade.fbx",
+          "sha256": "1ed683efe866ec5e4611390fd3872e1b1663e4e7cdef71558dfd1179c4f08df0",
+          "vertices": [
+            614,
+            198
+          ],
+          "polygon_indices": [
+            2610,
+            486
+          ],
+          "tag_in_mesh_name": "20f2b080",
+          "ability_mapping": "Pulse Grenade named in archive"
+        }
+      ],
+      "also_present_not_used": [
+        "Grenades.blend",
+        "Magnetic Grenade",
+        "Spike Grenade"
+      ],
+      "review": "Binary FBX vertices/polygon indices parsed in memory, untextured front/oblique/side software projections and original Diffuse PNG visually inspected. Projections normalize each Geometry independently and do not evaluate FBX scene transforms/materials. Blender scene not evaluated for grenade props.",
+      "source_credit": "Destiny design Bungie; community archive ripper, game build and asset-extraction date unspecified. Downloaded 2026-10-29."
+    },
+    "ssd": {
+      "path": "/Volumes/qf-ssd/Destiny-Light-Abilities-2026-10-28",
+      "read_only": true,
+      "review": "Inventory has animation FBX/Blends, no separately named grenade prop mesh identified; not a prop-mesh source."
+    },
+    "reference_images": [
+      {
+        "name": "flashbang",
+        "page": "https://www.destinypedia.com/Flashbang_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/flashbang.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/0/0a/Flashbang_Grenade.jpg/350px-Flashbang_Grenade.jpg",
+        "sha256": "5936c0c11c9e4280c98e0305411df4d2fdff6af93d5e67e5b22b3235a731cd68",
+        "role": "Visible mechanical shell in flight"
+      },
+      {
+        "name": "incendiary",
+        "page": "https://www.destinypedia.com/Incendiary_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/incendiary.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/1/1f/Incendiary_Grenade.jpg/350px-Incendiary_Grenade.jpg",
+        "sha256": "bd3756a95a951815568ca95511dc9609d9230d711109641ff539a4e8eb0bf874",
+        "role": "Detonation/energy reference only, not projectile-shell topology proof"
+      },
+      {
+        "name": "vortex",
+        "page": "https://www.destinypedia.com/Vortex_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/vortex.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/f/ff/Vortex_Grenade.jpg/350px-Vortex_Grenade.jpg",
+        "sha256": "430aa560f64cae85a927ae4d50f905743f62dacbba879549d89959b50841bec9",
+        "role": "Detonation/energy reference only, not projectile-shell topology proof"
+      },
+      {
+        "name": "pulse",
+        "page": "https://www.destinypedia.com/Pulse_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/pulse.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/f/f6/Pulse_Grenade.jpg/350px-Pulse_Grenade.jpg",
+        "sha256": "ce568b425f9de1d148903a835840d5d00aa9f64577a782ae7fea902f2a590024",
+        "role": "Detonation/energy reference only, not projectile-shell topology proof"
+      },
+      {
+        "name": "fusion",
+        "page": "https://www.destinypedia.com/Fusion_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/fusion.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/6/6b/Fusion_Grenade.jpg/350px-Fusion_Grenade.jpg",
+        "sha256": "91361fc8e4c77f2fac51614c1e0b115c050e69c8edf503ff8f7ed7db0d6d6ffd",
+        "role": "In-flight bright spark"
+      },
+      {
+        "name": "suppressor",
+        "page": "https://www.destinypedia.com/Suppressor_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/suppressor.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/6/6a/Suppressor_Grenade.jpg/350px-Suppressor_Grenade.jpg",
+        "sha256": "87989dab7005a9bf7b9fb64fddc46388f0e93828a8e5f02f317978ac01be9e80",
+        "role": "Detonation/energy reference only, not projectile-shell topology proof"
+      },
+      {
+        "name": "storm",
+        "page": "https://www.destinypedia.com/Storm_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/storm.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/8/81/Storm_Grenade.jpg/350px-Storm_Grenade.jpg",
+        "sha256": "e02d1b24410886daa2cf3cca718f43ff5e34a5442a79395b40603d7a21ce3131",
+        "role": "Detonation/energy reference only, not projectile-shell topology proof"
+      },
+      {
+        "name": "solar",
+        "page": "https://www.destinypedia.com/Solar_Grenade",
+        "local": "/private/tmp/destiny-w252/assets/solar.jpg",
+        "url": "https://destiny.wiki.gallery/images/thumb/1/14/Solar_Grenade.jpg/350px-Solar_Grenade.jpg",
+        "sha256": "76709d83b626f03e9908ccc4dd086a5bce5090048e5af548d16083590c752771",
+        "role": "Detonation/energy reference only, not projectile-shell topology proof"
+      }
+    ]
+  },
+  "coordinates": {
+    "center_units": [
+      8,
+      8,
+      8
+    ],
+    "units_per_block": 16,
+    "max_extent_units": 8,
+    "max_extent_blocks_none_scale1": 0.5,
+    "fp_scale_suggested": [
+      0.5,
+      0.6
+    ],
+    "fp_max_extent_blocks": [
+      0.25,
+      0.3
+    ],
+    "hand_grip": "Center; tall mechanical props point +Y. No embedded NONE/hand scale or hand translation.",
+    "gui_only": "18/-32/0 degrees, scale 1.55; does not affect NONE ItemDisplays"
+  },
+  "enemy": "Identical per-species geometry/UV, separate warm warning atlas selected by existing AbilityVisualVariants.item; no new team resolver.",
+  "models": [
+    {
+      "name": "flashbang",
+      "elements": 87,
+      "geometry_sha256": "e2ee80b2d9459d0ee382eed74f2f527ffe5303c27998866f7b8cf7e4e3245115",
+      "identity": "Dark rounded lower shell, pale tapered fuse and offset lever; reviewed Explosion FBX plus Flashbang gameplay screenshot.",
+      "bounds_units": [
+        [
+          5.03544,
+          4.0,
+          5.03544
+        ],
+        [
+          10.96456,
+          12.0,
+          10.96456
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.37057,
+        0.5,
+        0.37057
+      ],
+      "source_status": "reviewed_original_mesh_reconstruction"
+    },
+    {
+      "name": "incendiary",
+      "elements": 88,
+      "geometry_sha256": "c14baa13dedce7cc8e522ee2b97c753657b6af1f0cea4d9e1acc13f1ecef3011",
+      "identity": "Compact explosive casing, recessed hot equator and narrow fuse; Explosion-family adaptation, species-specific shell unverified.",
+      "bounds_units": [
+        [
+          4.87728,
+          4.0,
+          4.87728
+        ],
+        [
+          11.12272,
+          12.0,
+          11.12272
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.39034,
+        0.5,
+        0.39034
+      ],
+      "source_status": "provisional_family_adaptation"
+    },
+    {
+      "name": "vortex",
+      "elements": 65,
+      "geometry_sha256": "fa02e65770caa163164b7408dd81b043a513c9b70816e00f13eea2e7c015e139",
+      "identity": "Dark hollow core with separated tilted violet arcs; gameplay vortex-energy interpretation, projectile topology unverified.",
+      "bounds_units": [
+        [
+          4.0,
+          5.37624,
+          4.57066
+        ],
+        [
+          12.0,
+          10.62376,
+          11.42934
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.5,
+        0.32797,
+        0.42867
+      ],
+      "source_status": "gameplay_energy_interpretation_not_verified_projectile_mesh"
+    },
+    {
+      "name": "pulse",
+      "elements": 80,
+      "geometry_sha256": "0766fe3ca46dd1403aa78143e7dee57895a3fd3eac2920ba0678fc302d26b4bf",
+      "identity": "Tall capsule, central drum, paired polar caps and external electrodes; reviewed original Pulse FBX, not a recolored orb.",
+      "bounds_units": [
+        [
+          5.7546,
+          4.0,
+          5.7546
+        ],
+        [
+          10.2454,
+          12.0,
+          10.2454
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.28067,
+        0.5,
+        0.28067
+      ],
+      "source_status": "reviewed_original_mesh_reconstruction"
+    },
+    {
+      "name": "fusion",
+      "elements": 59,
+      "geometry_sha256": "3f191888dabb0ecd6782ad2f55e6323afaff8c6395e1ec8248ad750984fba696",
+      "identity": "Tiny bright seed with asymmetric six-point star corona; gameplay flying spark reference, not a metal grenade.",
+      "bounds_units": [
+        [
+          4.0,
+          4.97812,
+          6.81168
+        ],
+        [
+          12.0,
+          11.02188,
+          9.18832
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.5,
+        0.37773,
+        0.14854
+      ],
+      "source_status": "gameplay_energy_interpretation_not_verified_projectile_mesh"
+    },
+    {
+      "name": "suppressor",
+      "elements": 88,
+      "geometry_sha256": "749a9164228e95312cf4b9e41399ab32174b5a06a3b6f72a4ebde0d89b551ac8",
+      "identity": "Squat explosive casing with broad recessed void belt and low fuse; Explosion-family adaptation, species-specific shell unverified.",
+      "bounds_units": [
+        [
+          4.07675,
+          4.0,
+          4.07675
+        ],
+        [
+          11.92325,
+          12.0,
+          11.92325
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.49041,
+        0.5,
+        0.49041
+      ],
+      "source_status": "provisional_family_adaptation"
+    },
+    {
+      "name": "storm",
+      "elements": 57,
+      "geometry_sha256": "646cbdd2fe611f2ad896d5bdaf2b40ae873b872996de0eb7a4b3e7600f0cf0f2",
+      "identity": "Broken arc nucleus with separated forked lightning branches; gameplay arc-energy interpretation, projectile topology unverified.",
+      "bounds_units": [
+        [
+          4.40007,
+          4.0,
+          6.77369
+        ],
+        [
+          11.59993,
+          12.0,
+          9.22631
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.44999,
+        0.5,
+        0.15329
+      ],
+      "source_status": "gameplay_energy_interpretation_not_verified_projectile_mesh"
+    },
+    {
+      "name": "solar",
+      "elements": 61,
+      "geometry_sha256": "3b879b6af7e1034a7c2ee52856d63942f73d8291c91d6d9a6d662ab2ea296eaf",
+      "identity": "Full warm luminous sphere, ragged radial flame tongues and open flare arcs; gameplay solar-energy interpretation.",
+      "bounds_units": [
+        [
+          4.0,
+          4.03047,
+          5.24845
+        ],
+        [
+          12.0,
+          11.96953,
+          10.75155
+        ]
+      ],
+      "dimensions_blocks_none_scale1": [
+        0.5,
+        0.49619,
+        0.34394
+      ],
+      "source_status": "gameplay_energy_interpretation_not_verified_projectile_mesh"
+    }
+  ],
+  "checks": {
+    "species_unique_geometry": true,
+    "finite_coordinates": true,
+    "centered_aabb": true,
+    "explicit_face_uv": true,
+    "max_elements": 100,
+    "generated_files_excluding_manifest": 48
+  },
+  "unverified": [
+    "Native resource-pack load / shader / transparency rendering",
+    "Actual first/third-person hand fit and 6-tick release",
+    "Projectile shells for the six species without individually mapped source FBX",
+    "Particle animation, additive bloom, native emissive behavior, 10-20 simultaneous props",
+    "Java compilation (master only)"
+  ],
+  "outputs": {
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/flashbang.json": "da3c7573f11c1ad58536db4de19b029c0764286d0f1434ec74c2c157fd4b17d2",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/flashbang_enemy.json": "d20bc30770d6dd4bab4f4f29d188af07a8a03ce37529cdd92da68d2f6a3f34a6",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/fusion.json": "b8b7bab3cc1b51f8c804750f6f3eb31d6025b2d4093c4912cf03e5e0f0b60298",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/fusion_enemy.json": "6586525b637159c7cc5421e2c9b53eae935f1bcf8822d24e90e11e4108dcddb5",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/incendiary.json": "a66067d5784e12ddb2b971e35d398ec4395de5863c06d85e88718321255e202d",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/incendiary_enemy.json": "b72ceb445e3527c638955526bf01034931c8ca27c90871b51de1f6de4e48b62d",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/pulse.json": "75a55593fb11bded277013b66c55dea2a1dfb84db5c4ee3afdc90271e270ecdd",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/pulse_enemy.json": "ae9a2e767d0ff5853c81fca5eb3d66ecbf76042bbb1adc6ffc8f8be6a476d042",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/solar.json": "c564ec62f89ae2717e231e5feb0b4ea45145d9002eed39b230f0e4f6ccbf24b1",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/solar_enemy.json": "7a290c00980eb68b8148653d86fd0953488bd9efb5b1f8067d8101819658ec87",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/storm.json": "7f80b84a4cbccfaf9320d97585a47ee22025774dac594aa99e820ba9f188c4a7",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/storm_enemy.json": "a0e1b80183d18430506c394d258a0a9ac5743ce47a8a48da250efa734be83ca8",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/suppressor.json": "73eba7682a52b4de4e3a8b8f43a6242bf35844e70458180202097df942050169",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/suppressor_enemy.json": "973c7d79290efc30ccff04400146198f8c750f964acbdca42516e3f4e980690f",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/vortex.json": "9af4cf5717182af62e7545526df0a5a20803d4ba4c45c38699b4cb0a6842e1ed",
+    "src/main/resources/assets/destiny/items/ability_w252/grenade/vortex_enemy.json": "ec2598976d0ee6e4a690e02bd09dcb99c85765cbaf89425c929c76f9382cd7f6",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/flashbang.json": "16144a5bf49a6848ca3c39dfed370b5a6c3e91336f88ea4b36108a8698c7f9ef",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/flashbang_enemy.json": "c81dd6b972d3ceb196a82b13ff41993d39fbff38ab88432a26d91f2e7f63b1c5",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/fusion.json": "5b697277d7243161c8378119ceb1664681ee02255b2041260673facf4d7c08c4",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/fusion_enemy.json": "1afa630513e4a8d03a66ee3d58d1f80cf1c4d5dee0fa2f7c546e166e3e43c461",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/incendiary.json": "ba1bb16bb0ac45f8d6963b794744e8eda605cf44898fcd9f4c2a3b23f38d4969",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/incendiary_enemy.json": "21767856ece4f5dab846992fa36274141d5d255cabc6d974ccc87be0c8653675",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/pulse.json": "49a172b1191b4f2c066060056215e83437177df256012da64e3fab749d83f7df",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/pulse_enemy.json": "064f2c67976ad72cae174e79bed72665ae235f2a7d6076da383db270305c4998",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/solar.json": "0214e56793a8cc89bdfcc71843640b2cca00bca36d56fc753af581e7cb4fd6d5",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/solar_enemy.json": "006dc53dfbfe5b72274daf5fba4396afc0b61c6e1f0596a5b3e5125b3c1de8d7",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/storm.json": "466b94aae78a817e76b14354ec5ae55ea4130341c4fe92cfe8de9c9bd936bdf5",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/storm_enemy.json": "e1b4e94c809e1a9f83e57522b7c84020a6cf9d6467ce62049b8cbe68fc0f802f",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/suppressor.json": "7cf4d328b2f2bda911b89ab282f07e5815f3ca6ee33620d7f4dea83e87ee46fa",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/suppressor_enemy.json": "1056a45d8e2e703dbaf793bd318b613e88ce3fab836cc138cb9485b4351055d9",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/vortex.json": "50a97373441a2c07f3418906d1db8a0efa57e9bfcdf6f5f60e9e846d6e0620d5",
+    "src/main/resources/assets/destiny/models/item/ability_w252/grenade/vortex_enemy.json": "f7ca7f4d7712963ceab13ffa24583667b5f7a758cf52dbef9a977b4d10e8cb12",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/flashbang.png": "646c7d3f4a980ed2a212fb5fe8ef0d7fa32826f7e842f19a73f240a02c043e4f",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/flashbang_enemy.png": "d851a78d033fbbc58cd102a96b7392dffd07664c3821c5fabc7dc5eeaa1962d1",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/fusion.png": "362e6437c03aeef7c0adf12432b67bb907726b46fd4d09651da446fabdd02615",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/fusion_enemy.png": "611fb2bb5c911656a29414c3ed4b9d3ead197f5ebbf636c3e438e95a9c2707cd",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/incendiary.png": "939ca0f693a02a13dc1602faaaa9b528a2bfaba952e13f624ab581580aae0169",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/incendiary_enemy.png": "f0bee01a97e97d9107f19a14e477a8c44562656105866e7a40b8fbb8bc798b56",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/pulse.png": "39a1d62318772b659ef74976626254ce01dfaa2c3e9bcf927eec32b9839c259f",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/pulse_enemy.png": "106ee7743f9933797cc12028f35a4717358b320607acb294c8c873372545cf12",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/solar.png": "2b159596a6eecc612ca13fbbaccec41b4528564b6b0297136a303b96bd8ac29d",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/solar_enemy.png": "a33cb6ed80d631b064e93d70bfaf9168c1033854516fbea939f807d2a36d527a",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/storm.png": "cb89a82d67de2b3c8c4a85935056ac4effc2049d983cfc72cf9ecb995861b307",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/storm_enemy.png": "72fb692ae1f0332d8c94fba44cd64fe390b8ebbf2b23d3404ea3d11f9afca211",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/suppressor.png": "a3b8fe132701c95b894263d4e81986d4207fa70b691e278bb3237b445eb9e049",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/suppressor_enemy.png": "aa0451c1c86eb1bfdec2de2754a3fca1cd10aef08e71e75b8b1028eda1944056",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/vortex.png": "576fa1ad305ed630cfa8983e71dfc941d79c58c9f630dbfd216997ebdc98b844",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/grenade/vortex_enemy.png": "75bc902f0ff92df83fcaf88b5830778c50e9e33f78aab8e182bfffbb9aa81457"
+  }
+}

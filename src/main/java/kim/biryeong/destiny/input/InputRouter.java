@@ -27,10 +27,6 @@ public final class InputRouter {
     /** 같은 동작이 같은 틱에 두 경로로 들어오면 한 번만 처리한다. */
     public static boolean dispatch(ServerPlayer player, GuardianAction action) {
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return false;
-        if (action == GuardianAction.AIR_JUMP) {
-            // 점프는 바닐라 입력에서만 온다. 같은 틱 중복이 생기지 않는다.
-            return AbilityService.perform(player, action);
-        }
         // GCB 키와 바닐라 키가 같은 틱에 같은 동작을 보내면 한 번만 처리한다.
         // 실패한 시도(쿨다운·에너지 부족)는 기록하지 않아 같은 틱의 다른 경로가 다시 시도할 수 있다.
         GuardianRuntime runtime = Guardians.runtime(player);
@@ -114,6 +110,8 @@ public final class InputRouter {
         return !player.onGround()
                 && !player.getAbilities().flying
                 && !player.isInWater()
+                && !player.isInLava()
+                && !player.isNoGravity()
                 && !player.isPassenger()
                 && !player.onClimbable()
                 && !player.isFallFlying();

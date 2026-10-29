@@ -28,7 +28,6 @@ public final class WarlockAbilities {
     private static Identifier id(String path) { return DestinyGuardians.id("warlock/" + path); }
 
     public static void register() {
-        AbilityRegistry.register(new WarlockJump(JUMP));
         AbilityRegistry.register(new WarlockClassAbility(CLASS_ABILITY));
         for (Element e : List.of(Element.ARC, Element.SOLAR, Element.VOID)) {
             AbilityRegistry.register(new WarlockGrenade(grenade(e), e));

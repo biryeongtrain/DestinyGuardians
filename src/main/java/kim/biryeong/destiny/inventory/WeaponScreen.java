@@ -36,7 +36,7 @@ public final class WeaponScreen {
     private static final Map<UUID, Session> OPEN = new HashMap<>();
     private static final net.minecraft.resources.Identifier FREEZE = DestinyGuardians.id("equipment_screen");
     private static final int PAGE_SIZE = 9;
-    private static final String[] CHARACTER_FIELDS = {"CLASS", "SUBCLASS", "GRENADE", "MELEE", "CLASS_ABILITY", "SUPER"};
+    private static final String[] CHARACTER_FIELDS = {"CLASS", "SUBCLASS", "GRENADE", "MELEE", "CLASS_ABILITY", "SUPER", "JUMP"};
     private static final class Session {
         final ServerPlayer owner;
         final ServerLevel level;
@@ -338,8 +338,8 @@ public final class WeaponScreen {
 
     private static void characterClick(Session s, int node) {
         if (node == WeaponScreenLayout.CLOSE) { close(s.owner); return; }
-        if (s.stage.equals("CHARACTER") && node >= WeaponScreenLayout.CLASS && node <= WeaponScreenLayout.SUPER) {
-            int index = node - WeaponScreenLayout.CLASS;
+        if (s.stage.equals("CHARACTER") && node >= WeaponScreenLayout.CLASS && (node <= WeaponScreenLayout.SUPER || node == WeaponScreenLayout.JUMP)) {
+            int index = node == WeaponScreenLayout.JUMP ? 6 : node - WeaponScreenLayout.CLASS;
             var field = s.character.fields().get(index);
             if (!field.enabled()) { s.message = field.reason(); render(s); return; }
             s.characterField = CHARACTER_FIELDS[index]; s.stage = "CHARACTER_OPTIONS"; s.page = 0;
@@ -372,7 +372,8 @@ public final class WeaponScreen {
 
     private static void characterRoot(Session s) {
         s.stage = "CHARACTER"; s.page = 0;
-        focus(s, WeaponScreenLayout.CLASS + Arrays.asList(CHARACTER_FIELDS).indexOf(s.characterField));
+        int index = Arrays.asList(CHARACTER_FIELDS).indexOf(s.characterField);
+        focus(s, index == 6 ? WeaponScreenLayout.JUMP : WeaponScreenLayout.CLASS + Math.max(0, index));
     }
 
     private static void refreshCharacter(Session s) {
@@ -425,7 +426,7 @@ public final class WeaponScreen {
     private static String fieldName(String field) {
         return switch (field) {
             case "CLASS" -> "직업"; case "SUBCLASS" -> "하위직업"; case "GRENADE" -> "수류탄";
-            case "MELEE" -> "근접 능력"; case "CLASS_ABILITY" -> "직업 능력"; case "SUPER" -> "궁극기";
+            case "MELEE" -> "근접 능력"; case "CLASS_ABILITY" -> "직업 능력"; case "SUPER" -> "궁극기"; case "JUMP" -> "점프";
             default -> "능력";
         };
     }
@@ -449,6 +450,18 @@ public final class WeaponScreen {
     }
 
     private static String abilityDescription(Ability ability) {
+        if (ability.slot() == AbilitySlot.JUMP) return switch (ability.id().getPath()) {
+            case "hunter/double_jump" -> "공중에서 한 번 더 점프해 더 높이 상승합니다.";
+            case "hunter/strafe_jump" -> "공중에서 한 번 더 점프하며 입력 방향으로 궤도를 바꿉니다.";
+            case "hunter/triple_jump" -> "착지 전 두 번 더 점프해 높이와 체공을 나눠 제어합니다.";
+            case "titan/high_lift" -> "높은 상승에 특화된 리프트. 공중 점프로 켜고 다시 눌러 중단합니다.";
+            case "titan/jump" -> "방향 제어에 특화된 리프트. 공중 점프로 켜고 다시 눌러 중단합니다.";
+            case "titan/catapult_lift" -> "강한 초기 추진력의 리프트. 공중 재입력은 남은 추진 자원을 공유합니다.";
+            case "warlock/strafe_glide" -> "활공 중 방향 제어를 강화합니다. 상승 중 켜면 상승 관성을 유지합니다.";
+            case "warlock/burst_glide" -> "활공을 켤 때 전진 추진을 강화합니다. 낙하를 새 상승으로 바꾸지는 않습니다.";
+            case "warlock/jump" -> "전진 추진과 방향 제어를 절충한 활공. 다시 누르면 중단하고 남은 자원으로 재개합니다.";
+            default -> "공중 이동 방향으로 짧게 점멸합니다. 벽과 천장을 통과할 수 없습니다.";
+        };
         return className(ability.guardianClass()) + " · " + elementName(ability.element()) + " "
                 + fieldName(ability.slot().name()) + " 능력입니다. 선택하면 해당 슬롯에 즉시 장착됩니다.";
     }

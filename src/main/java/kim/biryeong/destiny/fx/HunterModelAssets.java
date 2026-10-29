@@ -21,8 +21,8 @@ import java.util.Map;
 
 /** Installs a versioned limb without ever opening an artist-owned installed model for writing. */
 public final class HunterModelAssets {
-    public static final String MODEL_NAME = "guardian_hunter_h19";
-    static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_h19.animation.json";
+    public static final String MODEL_NAME = "guardian_hunter_w252_r1";
+    static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_w199.animation.json";
 
     private HunterModelAssets() { }
 
@@ -32,17 +32,24 @@ public final class HunterModelAssets {
         if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) return;
         try (var template = HunterModelAssets.class.getResourceAsStream("/steve.bbmodel");
              var clips = HunterModelAssets.class.getResourceAsStream(ANIMATION_RESOURCE)) {
-            if (template == null || clips == null) throw new IOException("Hunter template or H19 clips missing");
+            if (template == null || clips == null) throw new IOException("Hunter template or W199 clips missing");
+            JsonArray animations=JsonParser.parseReader(new InputStreamReader(clips,StandardCharsets.UTF_8))
+                    .getAsJsonObject().getAsJsonArray("animations");
+            try(var grenade=HunterModelAssets.class.getResourceAsStream("/destiny/animation/grenade_w252.animation.json")) {
+                if(grenade==null)throw new IOException("W252 throw animation missing");
+                JsonObject replacement=JsonParser.parseReader(new InputStreamReader(grenade,StandardCharsets.UTF_8))
+                        .getAsJsonObject().getAsJsonArray("animations").get(0).getAsJsonObject();
+                for(int i=0;i<animations.size();i++)if(animations.get(i).getAsJsonObject().get("name").getAsString().equals("h15_grenade"))
+                    animations.set(i,replacement);
+            }
             JsonObject model = buildModel(
-                    JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),
-                    JsonParser.parseReader(new InputStreamReader(clips, StandardCharsets.UTF_8))
-                            .getAsJsonObject().getAsJsonArray("animations"));
+                    JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),animations);
             if (installIfAbsent(target, model)) {
-                DestinyGuardians.LOGGER.info("Installed H19 hunter limb: {}", target);
+                DestinyGuardians.LOGGER.info("Installed W199 hunter limb: {}", target);
             }
         } catch (Exception e) {
             // Cosmetic failure must not prevent startup: PlayerAnimations tries legacy limb then Steve.
-            DestinyGuardians.LOGGER.warn("Cannot prepare H19 hunter limb; legacy fallback remains available: {}", e.toString());
+            DestinyGuardians.LOGGER.warn("Cannot prepare W199 hunter limb; legacy fallback remains available: {}", e.toString());
         }
     }
 

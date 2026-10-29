@@ -80,7 +80,8 @@ public final class TitanGrenade extends Ability {
         var c=TitanAbilities.context(p);
         if(!c.valid()||!c.room()||FIELDS.stream().filter(f->f.c.owner==p).count()>=2)return false;
         var junkie=WeaponAdrenalineJunkie.grenadeAccepted(p);var demo=WeaponDemolitionist.grenadeAccepted(p);
-        Vec3 launchOrigin=p.getEyePosition();
+        return GrenadeThrow.begin(p,id(),GrenadeModels.item(GuardianClass.TITAN,element()),c::valid,()->{
+        Vec3 launchOrigin=GrenadeThrow.origin(p);
         boolean launched=c.launch(launchOrigin,p.getLookAngle().scale(TitanAbilities.value(this,"throw_speed",1.1,.2,2)).add(0,.1,0),
                 .04,60,element(),id().getPath(),hit->{
                     if(hit instanceof EntityHitResult collision&&collision.getEntity() instanceof LivingEntity entity
@@ -88,8 +89,9 @@ public final class TitanGrenade extends Ability {
                     LivingEntity attach=element()==Element.SOLAR&&hit instanceof EntityHitResult eh&&eh.getEntity() instanceof LivingEntity e?e:null;
                     FIELDS.add(new Field(c,this,TitanAbilities.impactPosition(hit),attach,junkie));
                 });
-        if(!launched)return false;
-        WeaponDemolitionist.grenadeReleased(p,demo);ClassAbilityEffects.sound(p,element(),"grenade.throw");return true;
+        if(!launched)return;
+        WeaponDemolitionist.grenadeReleased(p,demo);ClassAbilityEffects.sound(p,element(),"grenade.throw");
+        });
     }
     static void tick(MinecraftServer server) {
         for(Field f:List.copyOf(FIELDS)) {

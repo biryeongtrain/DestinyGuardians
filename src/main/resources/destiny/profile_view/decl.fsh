@@ -18,13 +18,15 @@ vec4 destinyArmSample(vec2 uv, int encoded) {
     if (px.y < 8.0) {
         bool topFace = px.x < 16.0;
         // Elbow seam omits the internal cap, exactly like W204 cuboid arms.
-        if (topFace != upper) discard;
+        if (topFace == upper) discard;
         local = vec2((px.x - (topFace ? 8.0 : 16.0))/8.0, px.y/8.0);
         dest = upper ? origin-vec2(0.0,4.0) : origin+vec2(w,-10.0);
         size = vec2(w,4.0);
     } else {
         float face = floor(min(px.x,31.999)/8.0);
         local = vec2((px.x-face*8.0)/8.0, (px.y-8.0)/8.0);
+        // Native head side UV runs opposite the arm's shoulder-to-wrist axis.
+        local.y = 1.0-local.y;
         // head east, north, west, south -> native arm face origins
         dest = origin + vec2(face < 0.5 ? -4.0 : face < 1.5 ? 0.0 : face < 2.5 ? w : w+4.0, 0.0);
         size = vec2((face < 0.5 || (face > 1.5 && face < 2.5)) ? 4.0 : w,6.0);

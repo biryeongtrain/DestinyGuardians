@@ -167,12 +167,12 @@ public final class WeaponScreenHud {
         p.rect("detail_panel", 1440, 558, 672, 676, 103, 0x273139);
         p.rect("detail_rarity_rule", 1440, 221, 672, 3, 106, subclassStyle == null ? GOLD : subclassStyle.color());
         if (root) {
-            for (int index = 0; index < Math.min(6, character.fields().size()); index++)
-                characterField(p, WeaponScreenLayout.CLASS + index, character.fields().get(index),
+            for (int index = 0; index < Math.min(7, character.fields().size()); index++)
+                characterField(p, index == 6 ? WeaponScreenLayout.JUMP : WeaponScreenLayout.CLASS + index, character.fields().get(index),
                         character.fields().get(index).id().equals(character.field()),
                         identityStyle(character.fields().get(index).id(), "CLASS".equals(character.fields().get(index).id())
                                 ? character.guardianClass() : character.subclass()));
-            int index = view.focus() - WeaponScreenLayout.CLASS;
+            int index = view.focus() == WeaponScreenLayout.JUMP ? 6 : view.focus() - WeaponScreenLayout.CLASS;
             CharacterField field = index >= 0 && index < character.fields().size() ? character.fields().get(index) : null;
             p.text("character_detail_title", field == null ? "수호자 능력 구성" : field.name(), 1440, 300, 28, WHITE);
             p.wrapped("character_current", field == null ? "직업과 하위직업에 맞는 능력을 선택하세요."
@@ -243,14 +243,14 @@ public final class WeaponScreenHud {
         String key = "character_field_" + field.id();
         p.tile(key, box, 108, !field.enabled() ? 0x252E36 : style == null ? 0x303B44 : identityWash(style.color()), null, false);
         p.frame(key + "_edge", box, selected ? 2 : 1, 110, selected ? GOLD : style == null ? LINE : style.color());
-        p.text(key + "_label", field.name(), box.x(), box.y() - 52, 20, style == null ? GOLD : style.color());
+        p.text(key + "_label", field.name(), box.x(), box.y() - (node == WeaponScreenLayout.JUMP ? 32 : 52), 20, style == null ? GOLD : style.color());
         if (style != null) {
             p.icon(key + "_icon", style.icon(), box.x() - 112, box.y() - 3, 62, style.color());
             p.wrapped(key + "_value", field.value(), box.x() + 34, box.y() - 8, 22, WHITE, 222, 2, 30);
         } else {
             p.wrapped(key + "_value", field.value(), box.x(), box.y() - 8, 22, WHITE, box.width() - 28, 2, 30);
         }
-        p.text(key + "_state", field.enabled() ? "변경하기" : "선택 불가", box.x(), box.y() + 57, 18,
+        p.text(key + "_state", field.enabled() ? "변경하기" : "선택 불가", box.x(), box.y() + (node == WeaponScreenLayout.JUMP ? 34 : 57), 18,
                 field.enabled() ? MUTED : DISABLED);
     }
 

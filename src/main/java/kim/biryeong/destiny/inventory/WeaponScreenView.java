@@ -65,7 +65,7 @@ public record WeaponScreenView(String playerName, WeaponSlot selectedSlot, List<
         }
     }
 
-    /** Stable IDs: CLASS, SUBCLASS, GRENADE, MELEE, CLASS_ABILITY, SUPER (in that order). */
+    /** Stable IDs: CLASS, SUBCLASS, GRENADE, MELEE, CLASS_ABILITY, SUPER, JUMP (in that order). */
     public record CharacterField(String id, String name, String value, boolean enabled, String reason) { }
 
     /** Current page only (at most nine). IDs are enum names or a registered ability identifier. */

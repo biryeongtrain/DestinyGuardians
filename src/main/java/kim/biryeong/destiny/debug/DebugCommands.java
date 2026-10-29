@@ -48,6 +48,22 @@ public final class DebugCommands {
         dispatcher.register(Commands.literal("destiny")
                 .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands.literal("debug")
+                        .then(Commands.literal("ability-status").then(Commands.argument("player", EntityArgument.player())
+                                .executes(c -> {
+                                    ServerPlayer p=EntityArgument.getPlayer(c,"player");
+                                    c.getSource().sendSuccess(()->Component.literal("AbilityStatus tick="+p.level().getGameTime()
+                                            +" class="+kim.biryeong.destiny.guardian.Guardians.data(p).guardianClass()
+                                            +" pos="+p.position()+" velocity="+p.getDeltaMovement()+" ground="+p.onGround()
+                                            +" airUsed="+kim.biryeong.destiny.guardian.Guardians.runtime(p).airJumpsUsed
+                                            +" jump="+kim.biryeong.destiny.ability.AbilityService.idOf(p,kim.biryeong.destiny.guardian.AbilitySlot.JUMP)
+                                            +" lift="+kim.biryeong.destiny.ability.titan.TitanJump.active(p)
+                                            +" glide="+kim.biryeong.destiny.ability.warlock.WarlockJump.active(p)
+                                            +" throw="+kim.biryeong.destiny.ability.GrenadeThrow.active(p)
+                                            +" age="+kim.biryeong.destiny.ability.GrenadeThrow.age(p)
+                                            +" flights="+kim.biryeong.destiny.fx.SimProjectile.activeCount(p)
+                                            +" clip="+kim.biryeong.destiny.fx.PlayerAnimations.activeClip(p)),false);
+                                    return 1;
+                                })))
                         .then(Commands.literal("weapon-honed-reload").then(Commands.argument("player", EntityArgument.player())
                                 .executes(c -> {
                                     // Authorized fixture input to the real transaction, not a completed charge grant.

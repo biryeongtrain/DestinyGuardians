@@ -115,7 +115,7 @@ public final class CharacterLoadoutW247GameTests {
                 && Math.abs(view(p).cursorY()-230)<.1,"Pointer stays in blank canvas across three refresh cycles"));
         var actions=List.<Runnable>of(
             ()->click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.CHARACTER_TAB),
-            ()->{check(h,view(p).character().fields().size()==6,"Six editable character fields");click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.CLASS);},
+            ()->{check(h,view(p).character().fields().size()==7,"Seven editable character fields including jump");click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.CLASS);},
             ()->choose(h,p,"HUNTER"),
             ()->click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.SUBCLASS),
             ()->choose(h,p,"SOLAR"),
@@ -126,6 +126,9 @@ public final class CharacterLoadoutW247GameTests {
                 choose(h,p,options.getLast().id());},
             ()->click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.CLASS_ABILITY),
             ()->choose(h,p,view(p).character().options().getLast().id()),
+            ()->click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.JUMP),
+            ()->{choose(h,p,"destiny:hunter/triple_jump");check(h,
+                    AbilityService.idOf(p,AbilitySlot.JUMP).toString().equals("destiny:hunter/triple_jump"),"Jump menu equips the chosen option");},
             ()->click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.GRENADE),
             ()->choose(h,p,view(p).character().options().getFirst().id()),
             ()->click(h,p,kim.biryeong.destiny.inventory.WeaponScreenLayout.MELEE),

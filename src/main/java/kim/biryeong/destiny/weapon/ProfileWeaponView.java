@@ -25,12 +25,14 @@ public final class ProfileWeaponView {
     private static final float SCALE=32000;
     private static final Map<UUID,Session> ACTIVE=new HashMap<>();
     private static final class Session {
-        final ServerPlayer owner;final ItemDisplayHud gun;final ItemDisplayHud[] arms=new ItemDisplayHud[4];
+        final ServerPlayer owner;final ItemDisplayHud gun,grenade;final ItemDisplayHud[] arms=new ItemDisplayHud[4];
         final Object profile;final boolean slim;boolean leftHand,lastTwoHand;ItemStack lastGun=ItemStack.EMPTY;
-        Matrix4f lastRoot;
+        Matrix4f lastRoot,throwRoot;boolean throwing;
+        final Matrix4f[] readyArms=new Matrix4f[4];
         final String[] lastPoses=new String[4];final int[] lastMarkers={-1,-1,-1,-1};int sleeves=-1;float lastHandX=Float.NaN;
         Session(ServerPlayer p){owner=p;profile=p.getGameProfile();slim=slim(p);
             gun=create(p,"gun",new ItemStack(Items.STICK),ItemDisplayContext.FIRST_PERSON_RIGHT_HAND,new Brightness(0,12));
+            grenade=create(p,"grenade",ItemStack.EMPTY,ItemDisplayContext.NONE,new Brightness(0,12));
             for(int i=0;i<4;i++) {var carrier=ProfileSkinArmCarrier.createCarrier(p.getGameProfile());carrier.set(DataComponents.ITEM_MODEL,kim.biryeong.destiny.DestinyGuardians.id(ProfileArmAssets.ITEM));
                 arms[i]=create(p,"arm_"+i,carrier,ItemDisplayContext.NONE,ProfileSkinArmCarrier.marker(i));}
         }
@@ -51,14 +53,23 @@ public final class ProfileWeaponView {
     }
     private static void update(ServerPlayer p){
         var original=p.getMainHandItem();
-        if(kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||WeaponModels.entry(original).isEmpty()
+        boolean throwing=kim.biryeong.destiny.ability.GrenadeThrow.active(p);
+        if(kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||(!throwing&&WeaponModels.entry(original).isEmpty())
                 ||kim.biryeong.destiny.fx.PlayerAnimations.ownsSwordHand(p,original)){remove(p);return;}
+        if(throwing) {
+            var session=ACTIVE.get(p.getUUID());
+            if(session!=null&&(session.owner!=p||!session.profile.equals(p.getGameProfile()))){remove(session.owner);session=null;}
+            if(session==null){session=new Session(p);ACTIVE.put(p.getUUID(),session);}
+            throwView(p,session);return;
+        }
         Identifier route=original.is(WeaponCombatItem.INSTANCE)?WeaponCombatItem.INSTANCE.getPolymerItemModel(original,null,p.level().registryAccess()):original.get(DataComponents.ITEM_MODEL);
         var graph=ProfileArmAssets.graph(route);if(graph==null){remove(p);return;}
         var s=ACTIVE.get(p.getUUID());
         if(s!=null&&(s.owner!=p||!s.profile.equals(p.getGameProfile()))){remove(s.owner);s=null;}
         // Do not clear a first accepted shot just because its first view display is being created.
         if(s==null){s=new Session(p);ACTIVE.put(p.getUUID(),s);}
+        boolean returningFromThrow=s.throwing;
+        s.throwing=false;s.grenade.setItem(ItemStack.EMPTY);s.grenade.update();
         WeaponFireMotion.retire(p);
         boolean left=p.getMainArm()==HumanoidArm.LEFT;
         var originalData=original.getOrDefault(DataComponents.CUSTOM_MODEL_DATA,CustomModelData.EMPTY);
@@ -66,7 +77,7 @@ public final class ProfileWeaponView {
         flags.set(0,WeaponModels.twoHanded(original));flags.set(1,WeaponCrouchPresentation.supports(original)&&WeaponCrouchPresentation.crouched(original));
         var data=new CustomModelData(originalData.floats(),flags,originalData.strings(),originalData.colors());
         var gun=new ItemStack(Items.STICK);gun.set(DataComponents.ITEM_MODEL,ProfileArmAssets.view(route));gun.set(DataComponents.CUSTOM_MODEL_DATA,data);
-        if(!ItemStack.matches(gun,s.lastGun)){s.gun.setItem(gun);s.lastGun=gun.copy();}
+        if(returningFromThrow||!ItemStack.matches(gun,s.lastGun)){s.gun.setItem(gun);s.lastGun=gun.copy();}
         boolean handChanged=left!=s.leftHand;
         if(handChanged){s.leftHand=left;s.gun.setItemTransform(left?ItemDisplayContext.FIRST_PERSON_LEFT_HAND:ItemDisplayContext.FIRST_PERSON_RIGHT_HAND);Arrays.fill(s.lastPoses,null);}
         // Move the whole grip inward at hip; keep the calibrated ADS sight line unchanged.
@@ -86,11 +97,42 @@ public final class ProfileWeaponView {
                 var m=new Matrix4f(hand).mul(left?pose.left():pose.right());
                 // Native head spans x/z -4..4 and y -8..0 in sixteenths. Preserve W204 contact geometry exactly.
                 m.translate(.5f,pose.upper()?.5f:.5625f,.5f).scale(s.slim?-.225f:-.3f,.9375f,.3f);
-                apply(s.arms[index],m,s.lastPoses[index]!=null);s.lastPoses[index]=id;
+                apply(s.arms[index],m,s.lastPoses[index]!=null);s.readyArms[index]=new Matrix4f(m);s.lastPoses[index]=id;
             } else s.arms[index].update();
         }
         for(int i=0;i<4;i++)if(!seen[i]){if(s.lastPoses[i]!=null){apply(s.arms[i],new Matrix4f().translation(0,0,1).scale(0),false);s.lastPoses[i]=null;}else if(s.arms[i].getDisplay().getTransformationInterpolationDuration()==0)apply(s.arms[i],new Matrix4f().translation(0,0,1).scale(0),false);}
         s.sleeves=sleeves;s.lastHandX=handX;s.lastTwoHand=twoHand;s.lastRoot=new Matrix4f(hand);s.gun.update();
+    }
+    private static void throwView(ServerPlayer p,Session s) {
+        int age=kim.biryeong.destiny.ability.GrenadeThrow.age(p);
+        float progress=Math.clamp((age+1)/20f,0,1);
+        boolean mirror=p.getMainArm()==HumanoidArm.LEFT;
+        if(!s.throwing){s.throwing=true;s.throwRoot=s.lastRoot==null?null:new Matrix4f(s.lastRoot);}
+        float recovery=Math.clamp((age-15)/4f,0,1);
+        // A zero-scale display can retain the previous client interpolation state.
+        // Hide only this cosmetic carrier; never replace the gameplay inventory stack.
+        s.gun.setItem(recovery>0?s.lastGun:ItemStack.EMPTY);
+        apply(s.gun,s.throwRoot==null?new Matrix4f().scale(0):new Matrix4f(s.throwRoot)
+                .translate(0,-.12f*(1-recovery),0).scale(recovery),true);s.lastRoot=null;
+        var prop=kim.biryeong.destiny.ability.GrenadeThrow.prop(p);
+        s.grenade.setItem(prop);
+        Matrix4f propTransform=GrenadeThrowPose.prop(progress,mirror);
+        int sleeves=(p.isModelPartShown(PlayerModelPart.RIGHT_SLEEVE)?1:0)|(p.isModelPartShown(PlayerModelPart.LEFT_SLEEVE)?2:0);
+        for(int i=0;i<4;i++) {
+            boolean left=i%2==1,upper=i>=2;
+            int marker=(left?1:0)|(upper?2:0)|(s.slim?4:0)|((sleeves&(left?2:1))!=0?8:0);
+            if(s.lastMarkers[i]!=marker){s.arms[i].getDisplay().setBrightnessOverride(ProfileSkinArmCarrier.marker(marker));s.lastMarkers[i]=marker;}
+            var arm=GrenadeThrowPose.arm(i,progress,s.slim,mirror);
+            if(s.readyArms[i]!=null) {
+                if(age<2)arm=GrenadeThrowPose.blendArm(s.readyArms[i],arm,(age+1)/3f,s.slim);
+                else if(recovery>0)arm=GrenadeThrowPose.blendArm(arm,s.readyArms[i],recovery,s.slim);
+            }
+            if(i==(mirror?0:1))propTransform=new Matrix4f().translation(
+                    new org.joml.Vector3f(0,-.5f,0).mulPosition(arm)).scale(.56f);
+            apply(s.arms[i],arm,s.lastPoses[i]!=null);
+            s.lastPoses[i]="@throw";
+        }
+        apply(s.grenade,propTransform,true);
     }
     static float handX(boolean left,boolean twoHand,float adsProgress){
         float progress=Float.isFinite(adsProgress)?Math.clamp(adsProgress,0f,1f):0f;
@@ -122,5 +164,5 @@ public final class ProfileWeaponView {
         for(var property:values)try {var n=JsonParser.parseString(new String(Base64.getDecoder().decode(property.value()),StandardCharsets.UTF_8)).getAsJsonObject();var textures=n.getAsJsonObject("textures");if(textures!=null&&textures.has("SKIN")){var skin=textures.getAsJsonObject("SKIN");return skin.has("metadata")&&skin.getAsJsonObject("metadata").has("model")&&skin.getAsJsonObject("metadata").get("model").getAsString().equals("slim");}}catch(RuntimeException ignored){}
         return Math.floorMod(p.getUUID().hashCode(),18)<9;
     }
-    private static void remove(ServerPlayer p){WeaponFireMotion.clear(p);var s=ACTIVE.get(p.getUUID());if(s!=null&&s.owner==p){ACTIVE.remove(p.getUUID());s.gun.remove();for(var h:s.arms)h.remove();}}
+    private static void remove(ServerPlayer p){WeaponFireMotion.clear(p);var s=ACTIVE.get(p.getUUID());if(s!=null&&s.owner==p){ACTIVE.remove(p.getUUID());s.gun.remove();s.grenade.remove();for(var h:s.arms)h.remove();}}
 }

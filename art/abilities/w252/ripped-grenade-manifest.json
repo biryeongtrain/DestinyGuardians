@@ -1,0 +1,250 @@
+{
+  "revision": "W252 real ripped grenade temporary props",
+  "generator": "scripts/art/build_ripped_grenades_w252.py",
+  "archive": {
+    "url": "https://drive.google.com/uc?export=download&id=1yEfOLn_FJGT2tY5Q5oRNtA0OCnjkt2fQ",
+    "sha256": "b3183e471b5ce992a463e4b779a2ce9f0530aab538f770fd21c908ea772bb75f",
+    "ripper_game_build_date": "Not supplied in archive",
+    "credit": "Bungie Destiny design; community rip archive"
+  },
+  "method": "Actual FBX import with evaluated object transforms; weld positional duplicates; Blender collapse <=490 triangles; preserve/interpolate loop UV; bake original Diffuse into per-fragment alpha atlas; existing native_triangle_elements_w115 adapter.",
+  "native_rotation": "Rz*Ry*Rx, adapter rotationZYX, checked against fragment vertices",
+  "basis": "FBX importer -> Blender world -> native (x,z,-y), center original AABB at (8,8,8), max extent8 units=.5block; FP .5-.6 gives .25-.3block",
+  "blender": "5.4.0 Alpha",
+  "models": {
+    "explosion": {
+      "source_objects": [
+        {
+          "object": "f3eab080_0",
+          "matrix_world": [
+            [
+              0.009999999776482582,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              -2.8212998604004724e-09,
+              -0.009999999776482582,
+              7.352359276957543e-10
+            ],
+            [
+              0.0,
+              0.009999999776482582,
+              -2.8212998604004724e-09,
+              -3.2584130948976053e-09
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "materials": [
+            "Grenade02"
+          ],
+          "material_alpha": [
+            {
+              "name": "Grenade02",
+              "diffuse_alpha": 1.0,
+              "principled_alpha": [
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "original_triangles": 846,
+      "welded_triangles": 846,
+      "reduced_triangles": 474,
+      "decimate_ratio": 0.5614657210401891,
+      "source_bounds_native_basis": [
+        [
+          -0.06409835815429688,
+          -0.07116405665874481,
+          -0.08176518976688385
+        ],
+        [
+          0.06409834325313568,
+          0.1162470132112503,
+          0.06409861147403717
+        ]
+      ],
+      "normalization": {
+        "source_center": [
+          -7.450580596923828e-09,
+          0.022541478276252747,
+          -0.00883328914642334
+        ],
+        "scale": 42.6869128144325,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_units": 8
+      },
+      "uv_policy": "Blender loop UVs retained/interpolated by collapse decimation; diffuse sampled through each resulting triangle's UV.",
+      "elements": 948,
+      "geometry_mapping_max_error_units": 1.0658141036401503e-14,
+      "decimated_geometry_uv_sha256": "085b129d331f4d63d6898f510818f29f5fee25a0370580a3518fd30c7ea7f17e",
+      "fragment_uv_provenance_sha256": "d25f00cfad17c185e4aa3d29e90bc85552270bf78f9cc50b8d2421e8ba8e28f0",
+      "original_fbx_sha256": "d4833b00b30efea11d0a8e9fccdea75d7d2874a66c1d394a32b79136c6c7a9cc",
+      "original_diffuse_sha256": "e4a657a0ef9960a4aa4bbd20582cd612c84f0b2ce41c37ffb61804c9f439c1ef"
+    },
+    "pulse": {
+      "source_objects": [
+        {
+          "object": "20f2b080_6",
+          "matrix_world": [
+            [
+              0.009999999776482582,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              -2.8212998604004724e-09,
+              -0.009999999776482582,
+              0.0
+            ],
+            [
+              0.0,
+              0.009999999776482582,
+              -2.8212998604004724e-09,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "materials": [
+            "Grenade01Emi"
+          ],
+          "material_alpha": [
+            {
+              "name": "Grenade01Emi",
+              "diffuse_alpha": 1.0,
+              "principled_alpha": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "object": "20f2b080_0",
+          "matrix_world": [
+            [
+              0.009999999776482582,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              -2.8212998604004724e-09,
+              -0.009999999776482582,
+              0.0
+            ],
+            [
+              0.0,
+              0.009999999776482582,
+              -2.8212998604004724e-09,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "materials": [
+            "Grenade01"
+          ],
+          "material_alpha": [
+            {
+              "name": "Grenade01",
+              "diffuse_alpha": 1.0,
+              "principled_alpha": [
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "original_triangles": 1032,
+      "welded_triangles": 1032,
+      "reduced_triangles": 475,
+      "decimate_ratio": 0.46027131782945735,
+      "source_bounds_native_basis": [
+        [
+          -0.08226250112056732,
+          -0.10932478308677673,
+          -0.055858511477708817
+        ],
+        [
+          0.055118296295404434,
+          0.10932478308677673,
+          0.05585849657654762
+        ]
+      ],
+      "normalization": {
+        "source_center": [
+          -0.013572102412581444,
+          0.0,
+          -7.450580596923828e-09
+        ],
+        "scale": 36.58822718015359,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_units": 8
+      },
+      "uv_policy": "Blender loop UVs retained/interpolated by collapse decimation; diffuse sampled through each resulting triangle's UV.",
+      "elements": 950,
+      "geometry_mapping_max_error_units": 2.842170943040401e-14,
+      "decimated_geometry_uv_sha256": "22f9fcd98eedcdb99491d0e18a4183add02b6e54928fddf2b6775be5697534d2",
+      "fragment_uv_provenance_sha256": "e87ea24c914281a278f14bd7e75c262fa84cb59360560390e9ad74bcf4ef25e8",
+      "original_fbx_sha256": "1ed683efe866ec5e4611390fd3872e1b1663e4e7cdef71558dfd1179c4f08df0",
+      "original_diffuse_sha256": "b4a9f460c91c4af1001e778c2055e6a873e6fc8ddfeb881879786e53e5825ae4"
+    }
+  },
+  "mapping": {
+    "hunter/arc_flashbang": "explosion (Flashbang screenshot-corresponding explosive family; archive not individually named Flashbang)",
+    "titan/arc_grenade": "pulse (archive named Pulse Grenade)",
+    "warlock/arc_grenade": "pulse (Storm temporary substitute)",
+    "others": "explosion (Incendiary, Suppressor, Vortex, Fusion, Solar temporary substitute; not their exact individual shells)"
+  },
+  "enemy": "Red presentation tint of original Diffuse bake; same geometry/UV/alpha. Existing AbilityVisualVariants selects _enemy.",
+  "source_alpha": "Diffuse alpha is packed surface data, not imported as cutout opacity. Original RGB baked opaque inside triangle mask; PNG alpha comes only from geometric triangle coverage.",
+  "limitations": [
+    "Decimated derivative, not unchanged original polygon topology/UV",
+    "Diffuse only; original normal/PBR/emission not restored",
+    "Finite atlas resolution and conservative half-texel triangle edges",
+    "Native alpha rendering, resource load, first/third-person fit and performance require master",
+    "No further missing-rip requests; temporary substitutions intentional"
+  ],
+  "outputs": {
+    "src/main/resources/assets/destiny/models/item/ability_w252/ripped_grenade/explosion.json": "7db4ab5a19c84e92717b45079d831336b937ab1abd58ceaca55d78c04f4b0b78",
+    "src/main/resources/assets/destiny/items/ability_w252/ripped_grenade/explosion.json": "e8a27155dc7da706b8b5804d844cfe1511da57aedf13f2ced2e8935409320fb3",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/ripped_grenade/explosion.png": "418b3b974cde2bd73943d172717eb15ebda12f21e7ab40736080136e9c51f776",
+    "src/main/resources/assets/destiny/models/item/ability_w252/ripped_grenade/explosion_enemy.json": "cbcbdb499cdb13a8a2d1db5ff174f5c1a7249818c4f1248bde464e2eba9f3d2f",
+    "src/main/resources/assets/destiny/items/ability_w252/ripped_grenade/explosion_enemy.json": "bc9402748763dc8fe9c2f9dc3d9a50e92bcae9ee927b678751bd9c9b1f2ea6be",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/ripped_grenade/explosion_enemy.png": "8e7c5e511c55f597b9dc3e1bf62a891d888fc4d83b001efc68045dc8b6e8dc75",
+    "src/main/resources/assets/destiny/models/item/ability_w252/ripped_grenade/pulse.json": "5fce2237eedb770ff9a354dacecc29d5e1067200c1d755a613c6dbdd5fa9195e",
+    "src/main/resources/assets/destiny/items/ability_w252/ripped_grenade/pulse.json": "a7074bee7e50b7e7d387f2764b45f3b65a1af2bae499f397d4afb953f552964d",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/ripped_grenade/pulse.png": "dc3c7c25215f81828ba590bbc6a2d39940ad51ae3d3556f13c4ac92dbe71cf40",
+    "src/main/resources/assets/destiny/models/item/ability_w252/ripped_grenade/pulse_enemy.json": "6fd848af89400199322068836cb1088765291613dab3ce4d64228225c44d0616",
+    "src/main/resources/assets/destiny/items/ability_w252/ripped_grenade/pulse_enemy.json": "46811f6d76a0d48cb39bf648d5c19a8bfd258b21ec5749c365e22199abe22f7f",
+    "src/main/resources/assets/destiny/textures/item/ability_w252/ripped_grenade/pulse_enemy.png": "86198d541d8d9abce54b3ad8a44cefe452d48dad70cbeb4909c604a823466853"
+  }
+}

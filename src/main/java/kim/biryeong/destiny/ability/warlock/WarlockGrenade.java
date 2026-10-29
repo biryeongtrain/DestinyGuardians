@@ -43,10 +43,11 @@ public final class WarlockGrenade extends Ability {
         if (lease == null || ownedCount(p) >= 4) return false;
         var adrenaline = WeaponAdrenalineJunkie.grenadeAccepted(p);
         var demolitionist = WeaponDemolitionist.grenadeAccepted(p);
+        return kim.biryeong.destiny.ability.GrenadeThrow.begin(p,id(),GrenadeModels.item(GuardianClass.WARLOCK,element()),lease::valid,()->{
         Emission emission = new Emission(lease);
         Vec3 velocity = p.getLookAngle().scale(WarlockAbilities.value(this, "throw_speed", 1.1, .4, 2)).add(0, .12, 0);
-        emission.projectile = WarlockAbilities.own(lease, SimProjectile.launch(p, p.getEyePosition(), velocity, .045, 60,
-                ClassAbilityEffects.item(id().getPath()), .5f, element().color(), hit -> {
+        emission.projectile = WarlockAbilities.own(lease, SimProjectile.launch(p, kim.biryeong.destiny.ability.GrenadeThrow.origin(p), velocity, .045, 60,
+                GrenadeModels.item(GuardianClass.WARLOCK,element()), .5f, element().color(), hit -> {
                     if (!emission.valid()) return;
                     Vec3 center = WarlockAbilities.impactPoint(hit);
                     FIELDS.add(new Field(lease, this, center, adrenaline));
@@ -56,7 +57,7 @@ public final class WarlockGrenade extends Ability {
         FLIGHTS.add(emission);
         WeaponDemolitionist.grenadeReleased(p, demolitionist); // Actual successful emission, once.
         ClassAbilityEffects.sound(p, element(), "grenade.throw");
-        return true;
+        });
     }
     private static int ownedCount(ServerPlayer p) {
         return (int) (FLIGHTS.stream().filter(e -> e.lease.owner == p && !e.projectile.isDone()).count()

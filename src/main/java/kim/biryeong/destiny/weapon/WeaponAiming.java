@@ -38,7 +38,7 @@ public final class WeaponAiming {
         return WeaponSlickdraw.adsTicks(p,entry,WeaponSteadyHands.adsTicks(p,entry,WeaponRecoveryHandling.adsTicks(p,entry,WeaponBackupPlan.adsTicks(p,entry,WeaponWellRounded.adsTicks(p,entry,WeaponPugilist.adsTicks(p,entry,WeaponEnsemble.adsTicks(p,entry,ticks,entering),entering),entering),entering),entering),entering),entering);
     }
     private static boolean eligible(ServerPlayer p) {
-        return p.isAlive() && !p.isRemoved() && !p.isSpectator() && !p.hasDisconnected() && !AbilityService.inSuper(p)
+        return p.isAlive() && !p.isRemoved() && !p.isSpectator() && !p.hasDisconnected() && !AbilityService.inSuper(p) && !kim.biryeong.destiny.ability.GrenadeThrow.active(p)
                 && WeaponLoadout.canUse(p) && CameraViews.get(p)==null
                 && !kim.biryeong.destiny.camera.SuperCamera.active(p) && p.getCamera()==p
                 && WeaponItems.entry(p.getMainHandItem()).filter(WeaponAimProfile::supports).isPresent();

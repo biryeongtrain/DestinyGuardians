@@ -29,7 +29,6 @@ public final class TitanAbilities {
     private static Identifier id(String path) { return DestinyGuardians.id("titan/"+path); }
     public static void register() {
         if (registered) return;
-        AbilityRegistry.register(new TitanJump());
         AbilityRegistry.register(new TitanClassAbility());
         for (Element e:List.of(Element.ARC,Element.SOLAR,Element.VOID)) {
             AbilityRegistry.register(new TitanGrenade(e));
@@ -106,7 +105,7 @@ public final class TitanAbilities {
         }
         TitanJump.tick(server);TitanClassAbility.tick(server);TitanGrenade.tick(server);TitanSuper.tick(server);
         OWNERS.values().removeIf(c->c.shots.isEmpty()&&!TitanJump.active(c.owner)&&!TitanClassAbility.active(c.owner)
-                &&!TitanGrenade.active(c.owner)&&!TitanSuper.active(c.owner));
+                &&!TitanGrenade.active(c.owner)&&!TitanSuper.active(c.owner)&&!kim.biryeong.destiny.ability.GrenadeThrow.active(c.owner));
     }
     public static void cleanup(ServerPlayer p) {
         Context c=OWNERS.get(p.getUUID());

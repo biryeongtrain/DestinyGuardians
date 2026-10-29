@@ -66,6 +66,8 @@ public final class AbilityService {
             kim.biryeong.destiny.fx.PostEffects.clearAll();
             SimProjectile.clearAll();
             Tasks.clearAll();
+            GrenadeThrow.clearAll();
+            kim.biryeong.destiny.ability.jump.JumpAbilities.clearAll();
             Statuses.clearAll();
             kim.biryeong.destiny.ability.titan.TitanAbilities.clearAll();
             kim.biryeong.destiny.ability.warlock.WarlockAbilities.clearAll();
@@ -77,6 +79,8 @@ public final class AbilityService {
     }
 
     public static void cleanup(ServerPlayer player) {
+        GrenadeThrow.cleanup(player);
+        kim.biryeong.destiny.ability.jump.JumpAbilities.cleanup(player);
         kim.biryeong.destiny.ability.hunter.HunterExpandedSupers.cleanup(player);
         kim.biryeong.destiny.ability.titan.TitanExpandedSupers.cleanup(player);
         kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.cleanup(player);
@@ -102,6 +106,8 @@ public final class AbilityService {
             tickPlayer(player);
         }
         Statuses.tick(server);
+        GrenadeThrow.tick(server);
+        kim.biryeong.destiny.ability.jump.JumpAbilities.tick(server);
         SimProjectile.tickAll(server);
         Tasks.tickAll();
         kim.biryeong.destiny.ability.hunter.HunterExpandedSupers.tick(server);
@@ -193,6 +199,7 @@ public final class AbilityService {
         if (equipped.isEmpty()) {
             return Result.NO_ABILITY;
         }
+        if (GrenadeThrow.active(player) && slot != AbilitySlot.JUMP && slot != AbilitySlot.SUPER) return Result.BUSY;
         Ability ability = equipped.get();
         GuardianData data = Guardians.data(player);
         GuardianRuntime runtime = Guardians.runtime(player);
@@ -233,6 +240,7 @@ public final class AbilityService {
     }
 
     public static void startSuper(ServerPlayer player, SuperSession session) {
+        GrenadeThrow.cleanup(player);
         kim.biryeong.destiny.ability.hunter.HunterSkillCast.cancelPending(player);
         Guardians.runtime(player).superSession = session;
     }

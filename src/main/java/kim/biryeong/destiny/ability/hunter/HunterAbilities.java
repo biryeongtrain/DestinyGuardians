@@ -34,8 +34,7 @@ public final class HunterAbilities {
     }
 
     public static void register() {
-        AbilityRegistry.register(new HunterJump(DOUBLE_JUMP, "2단 점프", 1, 0.55));
-        AbilityRegistry.register(new HunterJump(TRIPLE_JUMP, "3단 점프", 2, 0.45));
+        kim.biryeong.destiny.ability.jump.JumpAbilities.register();
         AbilityRegistry.register(new HunterDodge(GAMBLERS_DODGE, "도박꾼의 회피", HunterDodge.Variant.GAMBLER, 11));
         AbilityRegistry.register(new HunterDodge(MARKSMANS_DODGE, "명사수의 회피", HunterDodge.Variant.MARKSMAN, 8));
         AbilityRegistry.register(new HunterGrenade(ARC_FLASHBANG, "섬광 수류탄", Element.ARC, 40));
