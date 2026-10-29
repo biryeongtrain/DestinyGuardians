@@ -95,3 +95,5 @@ R3 대표 Austringer의 hip/ADS/장전 캡처는 실제 PNG에서 메뉴가 남�
 19. 모델 담당자에게 R4 PNG와 Hunter 재검수 이미지를 전달했고 최종 FP anchor·기하/UV·normal/enemy 구분을 수락받았다. 추가 형식 수정 없이 freeze 유지. 점프 담당자도 R3 원본 trajectory와 동결 소스7개를 수락했다. 두 worker를 종료하고 슬롯1·4는 idle-needs-refresh/W252로 전환했다. 워크트리는 보존했다.
 
 20. 최종 anchor를 포함한 assemble PASS. 최종 QA 캡처는 [투척 준비](throw-ready-r4.png), [투척 회복](throw-recovery-r4.jpg), [원본/적군 모델](ripped-normal-enemy-r4.png), [대표 ADS](weapon-ads-r4.png), [대표 장전](weapon-reload-r4.png)에 보존했다. 물리 수치는 MC 초기 튜닝이며 원작 절대속도·모든 스킨·모든 무기·청취 검증 완료를 뜻하지 않는다.
+
+21. 구현 커밋 e25c6426 완료. 기존 미커밋 퍽과 GameTest 대량 등록 변경은 가능한 동일 파일 내에서도 index에서 분리했다. 온라인 운영 runServer를 재개해 25565 LISTEN, Done, BetterModel 로드와 Polymer 팩 생성 성공을 확인했다. online-mode=true와 andlist OP4 유지. QA용 bounded awake coordinator는 종료하고 사용자 요청 48시간 caffeinate PID79904는 보존했다.
