@@ -45,3 +45,7 @@ Shift+Q를 메뉴에서 제거하고 장전·특수 장전에 남긴다. 탄약�
 - 최종 병렬 정적 검수에서 잠긴 상자처럼 createMenu가 null을 반환하는 경우의 재무장 누락을 추가 발견했다. 운영 서버를 정상 save/stop한 뒤 openMenu 실패 반환에서도 inventoryMenu이면 재무장하도록 수정했다. null provider 실제 호출→새 seen→메뉴 열림 회귀를 추가했다.
 
 - 외부 메뉴 열기 실패 보완 후 최종 회귀6/6 재통과했다. 최종 로그는 `/private/tmp/destiny-w249/gametest-final2.log`다.
+
+## 완료
+
+기능 커밋: `94d800ef`. 관련 delta만 커밋하고 기존 dirty 소스·등록·다른 worktree 변경은 제외했다. `runServer`로 운영 서버 재개 후25565 listen과 Polymer 팩 생성 성공을 확인했다. 같은LAN 접속은 `192.168.35.237:25565`, online-mode=true, andlist OP4다. QA용8102·25611은 비었고 기존48시간 caffeinate PID79904는 유지했다. 이번 W249 전용 coordinator만 종료한다.
