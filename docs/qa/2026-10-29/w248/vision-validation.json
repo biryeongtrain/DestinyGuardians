@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "checks": [
+    "isolated-background-client-ready",
+    "character-root",
+    "three-class-choices",
+    "TITAN-selected",
+    "TITAN-three-elements",
+    "TITAN-ARC-selected",
+    "WARLOCK-selected",
+    "WARLOCK-three-elements",
+    "WARLOCK-SOLAR-selected",
+    "HUNTER-selected",
+    "HUNTER-three-elements",
+    "HUNTER-VOID-selected",
+    "pointer-whitespace-no-warp",
+    "ability-options-still-available",
+    "weapon-tab-restored",
+    "weapon-wizard-family",
+    "native-cleanup-neutral"
+  ],
+  "originalQaCharacter": [
+    "HUNTER",
+    "SOLAR"
+  ],
+  "control": {
+    "backgroundMode": true,
+    "backgroundActive": true,
+    "windowActive": true,
+    "mouseGrabbed": true,
+    "leaseActive": false,
+    "heldKeys": [],
+    "pendingSteps": 0
+  },
+  "screenshots": "frames/",
+  "framebufferReview": {
+    "reviewed": [
+      "class-choices-final.png",
+      "subclass-choices-final.png",
+      "warlock-root.png"
+    ],
+    "result": "PASS",
+    "findings": "6 distinct masks and tints, selected marker and hover detail visible, no text/icon overlap"
+  },
+  "cleanup": {
+    "qaClientStopped": true,
+    "qaServerStopped": true,
+    "ports8102and25611Free": true,
+    "externalInitRestored": true
+  }
+}

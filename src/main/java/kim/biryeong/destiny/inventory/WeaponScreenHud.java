@@ -158,14 +158,20 @@ public final class WeaponScreenHud {
         boolean root = "CHARACTER".equals(view.stage());
         var character = view.character();
         p.text("character_title", root ? "캐릭터 구성" : characterFieldName(view) + " 선택", 550, 227, 24, WHITE);
-        p.textFit("character_identity", character.className() + "  /  " + character.subclassName(),
-                1440, 247, 20, GOLD, 596);
+        IdentityStyle classStyle = identityStyle("CLASS", character.guardianClass());
+        IdentityStyle subclassStyle = identityStyle("SUBCLASS", character.subclass());
+        if (classStyle != null) p.icon("character_identity_class_icon", classStyle.icon(), 1150, 247, 28, classStyle.color());
+        p.textFit("character_identity_class", character.className(), 1295, 247, 20, classStyle == null ? MUTED : classStyle.color(), 228);
+        if (subclassStyle != null) p.icon("character_identity_subclass_icon", subclassStyle.icon(), 1448, 247, 28, subclassStyle.color());
+        p.textFit("character_identity_subclass", character.subclassName(), 1611, 247, 20, subclassStyle == null ? MUTED : subclassStyle.color(), 268);
         p.rect("detail_panel", 1440, 558, 672, 676, 103, 0x273139);
-        p.rect("detail_rarity_rule", 1440, 221, 672, 3, 106, GOLD);
+        p.rect("detail_rarity_rule", 1440, 221, 672, 3, 106, subclassStyle == null ? GOLD : subclassStyle.color());
         if (root) {
             for (int index = 0; index < Math.min(6, character.fields().size()); index++)
                 characterField(p, WeaponScreenLayout.CLASS + index, character.fields().get(index),
-                        character.fields().get(index).id().equals(character.field()));
+                        character.fields().get(index).id().equals(character.field()),
+                        identityStyle(character.fields().get(index).id(), "CLASS".equals(character.fields().get(index).id())
+                                ? character.guardianClass() : character.subclass()));
             int index = view.focus() - WeaponScreenLayout.CLASS;
             CharacterField field = index >= 0 && index < character.fields().size() ? character.fields().get(index) : null;
             p.text("character_detail_title", field == null ? "수호자 능력 구성" : field.name(), 1440, 300, 28, WHITE);
@@ -181,13 +187,15 @@ public final class WeaponScreenHud {
             p.rect("collection", 720, 540, 576, 584, 103, 0x27313A);
             p.textFit("collection_hint", "현재 선택 강조 · 선택하면 즉시 적용", 720, 264, 18, MUTED, 550);
             p.text("character_sidebar_title", "현재 구성", 240, 320, 20, GOLD);
-            p.wrapped("character_sidebar_class", character.className(), 240, 372, 24, WHITE, 260, 2, 32);
-            p.wrapped("character_sidebar_subclass", character.subclassName(), 240, 458, 22, MUTED, 260, 2, 30);
+            if (classStyle != null) p.icon("character_sidebar_class_icon", classStyle.icon(), 137, 372, 40, classStyle.color());
+            p.wrapped("character_sidebar_class", character.className(), 273, 372, 24, classStyle == null ? MUTED : classStyle.color(), 182, 2, 32);
+            if (subclassStyle != null) p.icon("character_sidebar_subclass_icon", subclassStyle.icon(), 137, 458, 40, subclassStyle.color());
+            p.wrapped("character_sidebar_subclass", character.subclassName(), 273, 458, 22, subclassStyle == null ? MUTED : subclassStyle.color(), 182, 3, 30);
             p.wrapped("character_sidebar_scope", "현재 직업·하위직업의 등록된 옵션만 선택할 수 있습니다.",
                     240, 586, 20, MUTED, 260, 5, 30);
             for (int node = 3; node < 12; node++) {
                 int index = node - 3;
-                characterOption(p, node, index < character.options().size() ? character.options().get(index) : null);
+                characterOption(p, node, index < character.options().size() ? character.options().get(index) : null, character.field());
             }
             int pages = Math.max(1, view.pages());
             int page = Math.clamp(view.page(), 0, pages - 1);
@@ -203,28 +211,67 @@ public final class WeaponScreenHud {
         finish(p, view, root ? "항목 선택" : "즉시 장착", "캐릭터 항목 → 옵션 선택 → 즉시 장착");
     }
 
-    private static void characterField(Painter p, int node, CharacterField field, boolean selected) {
+    /** A colour and a recognisable emblem travel together; selection still has its own gold marker. */
+    private record IdentityStyle(int color, String icon) { }
+
+    private static IdentityStyle identityStyle(String field, String value) {
+        if ("CLASS".equals(field)) return switch (value) {
+            case "HUNTER" -> new IdentityStyle(0x79B9DF, "class_hunter_w248");
+            case "TITAN" -> new IdentityStyle(0xE57575, "class_titan_w248");
+            case "WARLOCK" -> new IdentityStyle(0xEDCE79, "class_warlock_w248");
+            default -> null;
+        };
+        if ("SUBCLASS".equals(field)) return switch (value) {
+            case "ARC" -> new IdentityStyle(0x80D9F3, "subclass_arc_w248");
+            case "SOLAR" -> new IdentityStyle(0xFFAA63, "subclass_solar_w248");
+            case "VOID" -> new IdentityStyle(0xB695FF, "subclass_void_w248");
+            default -> null;
+        };
+        return null;
+    }
+
+    private static int identityWash(int color) {
+        // A restrained colour wash retains contrast with the white labels and gold equipped marker.
+        int red = Math.round(((color >> 16) & 255) * .18f + 0x2B * .82f);
+        int green = Math.round(((color >> 8) & 255) * .18f + 0x35 * .82f);
+        int blue = Math.round((color & 255) * .18f + 0x3E * .82f);
+        return red << 16 | green << 8 | blue;
+    }
+
+    private static void characterField(Painter p, int node, CharacterField field, boolean selected, IdentityStyle style) {
         Box box = WeaponScreenLayout.bounds(node);
         String key = "character_field_" + field.id();
-        p.tile(key, box, 108, field.enabled() ? 0x303B44 : 0x252E36, null, false);
-        p.frame(key + "_edge", box, selected ? 2 : 1, 110, selected ? GOLD : LINE);
-        p.text(key + "_label", field.name(), box.x(), box.y() - 52, 20, GOLD);
-        p.wrapped(key + "_value", field.value(), box.x(), box.y() - 8, 22, WHITE, box.width() - 28, 2, 30);
+        p.tile(key, box, 108, !field.enabled() ? 0x252E36 : style == null ? 0x303B44 : identityWash(style.color()), null, false);
+        p.frame(key + "_edge", box, selected ? 2 : 1, 110, selected ? GOLD : style == null ? LINE : style.color());
+        p.text(key + "_label", field.name(), box.x(), box.y() - 52, 20, style == null ? GOLD : style.color());
+        if (style != null) {
+            p.icon(key + "_icon", style.icon(), box.x() - 112, box.y() - 3, 62, style.color());
+            p.wrapped(key + "_value", field.value(), box.x() + 34, box.y() - 8, 22, WHITE, 222, 2, 30);
+        } else {
+            p.wrapped(key + "_value", field.value(), box.x(), box.y() - 8, 22, WHITE, box.width() - 28, 2, 30);
+        }
         p.text(key + "_state", field.enabled() ? "변경하기" : "선택 불가", box.x(), box.y() + 57, 18,
                 field.enabled() ? MUTED : DISABLED);
     }
 
-    private static void characterOption(Painter p, int node, CharacterOption option) {
+    private static void characterOption(Painter p, int node, CharacterOption option, String field) {
         Box box = WeaponScreenLayout.bounds(node);
         String key = "character_option_" + node;
         boolean selected = option != null && option.selected();
-        p.tile(key, box, 108, selected ? 0x5C5139 : 0x2B353E, null, false);
-        p.frame(key + "_edge", box, selected ? 2 : 1, 110, selected ? GOLD : LINE);
+        IdentityStyle style = option == null ? null : identityStyle(field, option.id());
+        p.tile(key, box, 108, style != null ? identityWash(style.color()) : selected ? 0x5C5139 : 0x2B353E, null, false);
+        p.frame(key + "_edge", box, selected ? 2 : 1, 110, style != null ? style.color() : selected ? GOLD : LINE);
         if (option == null) {
             p.text(key + "_empty", "빈 칸", box.x(), box.y(), 20, MUTED);
             return;
         }
-        p.wrapped(key + "_name", option.name(), box.x(), box.y() - 38, 20, WHITE, 132, 3, 27);
+        if (style != null) {
+            p.icon(key + "_icon", style.icon(), box.x(), box.y() - 26, 58, style.color());
+            p.textFit(key + "_name", option.name(), box.x(), box.y() + 23, 20, WHITE, 132);
+        } else {
+            p.wrapped(key + "_name", option.name(), box.x(), box.y() - 38, 20, WHITE, 132, 3, 27);
+        }
+        if (selected) p.rect(key + "_selected", box.x(), box.y() - 71, 28, 4, 114, GOLD);
         p.text(key + "_status", selected ? "선택 중" : option.enabled() ? "즉시 장착" : "선택 불가",
                 box.x(), box.y() + 57, 18, selected ? GOLD : option.enabled() ? MUTED : DISABLED);
     }
@@ -244,7 +291,10 @@ public final class WeaponScreenHud {
                     : "옵션을 가리키면 설명과 선택 조건을 확인할 수 있습니다.", 1440, 416, 22, MUTED, 596, 5, 32);
             return;
         }
-        p.wrapped("character_option_name", option.name(), 1440, 370, 26, WHITE, 596, 2, 36);
+        IdentityStyle style = identityStyle(view.character().field(), option.id());
+        if (style != null) p.icon("character_option_detail_icon", style.icon(), 1168, 378, 54, style.color());
+        p.wrapped("character_option_name", option.name(), style == null ? 1440 : 1480, 370, 26,
+                style == null ? WHITE : style.color(), style == null ? 596 : 516, 2, 36);
         p.text("character_option_status", option.selected() ? "현재 선택 중" : option.enabled() ? "선택 가능 · 즉시 적용" : "선택 불가",
                 1440, 465, 20, option.selected() ? GOLD : option.enabled() ? WHITE : DISABLED);
         p.text("character_description_label", "능력 설명", 1440, 523, 20, GOLD);
@@ -524,7 +574,7 @@ public final class WeaponScreenHud {
         p.rect("cursor_bottom", x, y + 5, 1, 4, 152, WHITE);
     }
 
-    private record Tile(Box box, float depth, int color, String weapon, boolean stretch) { }
+    private record Tile(Box box, float depth, int color, String weapon, Identifier model, boolean stretch) { }
     private record Label(String text, float x, float y, float pixels, int color) { }
 
     /** Cache belongs to the registered node, avoiding a separate player/session map or offline leaks. */
@@ -553,23 +603,33 @@ public final class WeaponScreenHud {
                 textFit(key + "_missing", "미리 보기 없음", x, y, 18, MUTED, size - 12);
         }
 
+        private void icon(String key, String icon, float x, float y, float size, int color) {
+            paintTile(key, new Box(x, y, size, size), 116, color, null,
+                    Identifier.parse("destiny:gui/hud/" + icon), false);
+        }
+
         private void tile(String key, Box box, float depth, int color, String weapon, boolean stretch) {
+            paintTile(key, box, depth, color, weapon, null, stretch);
+        }
+
+        private void paintTile(String key, Box box, float depth, int color, String weapon, Identifier model, boolean stretch) {
             String id = PREFIX + key;
             used.add(id);
-            Tile state = new Tile(box, depth, color, weapon, stretch);
+            Tile state = new Tile(box, depth, color, weapon, model, stretch);
             DisplayHud old = DisplayHud.getHud(player, id);
             if (old instanceof ItemDisplayHud && state.equals(old.getExtraData(STATE))) return;
             if (old != null && !(old instanceof ItemDisplayHud)) { old.remove(); old = null; }
             ItemDisplayHud hud = old instanceof ItemDisplayHud item ? item : new ItemDisplayHud();
             hud.updateWhenDataChanged(false);
             if (!(old != null && old.getExtraData(STATE) instanceof Tile last
-                    && last.color() == color && java.util.Objects.equals(last.weapon(), weapon))) {
+                    && last.color() == color && java.util.Objects.equals(last.weapon(), weapon)
+                    && java.util.Objects.equals(last.model(), model))) {
                 ItemStack stack;
                 if (weapon != null) {
                     stack = WeaponModels.create(WeaponCatalog.find(weapon).orElseThrow());
                 } else {
                     stack = new ItemStack(Items.PAPER);
-                    stack.set(DataComponents.ITEM_MODEL, SOLID);
+                    stack.set(DataComponents.ITEM_MODEL, model == null ? SOLID : model);
                     stack.set(DataComponents.CUSTOM_MODEL_DATA,
                             new CustomModelData(List.of(), List.of(), List.of(), List.of(color)));
                 }
