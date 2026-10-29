@@ -39,7 +39,7 @@ public final class HunterAnimationH15GameTests {
         ServerPlayer p = TestPlayers.create(h, new Vec3(2.5, 1, 6.5), -90, 12);
         p.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.DIAMOND_SWORD));
         p.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.TORCH));
-        h.runBeforeTestEnd(() -> TestPlayers.remove(p));
+        TestCleanup.register(h, () -> TestPlayers.remove(p));
         return p;
     }
 
@@ -75,13 +75,13 @@ public final class HunterAnimationH15GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void voidReleaseFinishesAfterGameplaySessionEnds(GameTestHelper h) { release(h, Element.VOID); }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void solarLastShotFinishesAfterGameplaySessionEnds(GameTestHelper h) { release(h, Element.SOLAR); }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void attackReturnsToReadyAndCanAttackAgain(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h);
@@ -98,7 +98,7 @@ public final class HunterAnimationH15GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void cardinalDodgesPreserveAimPhysicsAndRestoreVanilla(GameTestHelper h) {
         loaded(h, () -> {
             List<ServerPlayer> owners = new ArrayList<>();
@@ -131,7 +131,7 @@ public final class HunterAnimationH15GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void cleanupOverridesFinalReleaseAndPreservesOtherOwner(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h), other = owner(h);

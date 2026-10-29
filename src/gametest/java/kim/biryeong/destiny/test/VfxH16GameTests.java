@@ -46,7 +46,7 @@ public final class VfxH16GameTests {
 
         Owners(GameTestHelper h) {
             this.h = h;
-            h.runBeforeTestEnd(this::close);
+            TestCleanup.register(h, this::close);
         }
 
         ServerPlayer create() {
@@ -118,7 +118,7 @@ public final class VfxH16GameTests {
         beam(h, owner, 0, ticks);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void sevenOwnersExerciseIndependentGlobalCapsAndOldestEviction(GameTestHelper h) {
         start(h, owners -> {
             List<ServerPlayer> players = new ArrayList<>();
@@ -162,7 +162,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void ownerCapsAndCleanupPreserveOtherOwnerAndOtherPool(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer a = owners.create(), b = owners.create();
@@ -185,7 +185,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void normalTickExpiryIsIndependentForTwoOwnersAndBothPools(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer shortLived = owners.create(), longLived = owners.create();
@@ -208,7 +208,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void invalidOwnerGuardsDropBothPoolsWithoutDroppingHealthyOwner(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer dead = owners.create(), removed = owners.create(), moved = owners.create();
@@ -241,7 +241,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void targetRadiusBoundaryRefreshAndExitAreOwnerIsolated(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer a = owners.create(), b = owners.create();
@@ -269,7 +269,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void maximumBeamLengthAndRejectedGeometryPreserveBothOwners(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer a = owners.create(), b = owners.create();
@@ -289,7 +289,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void cancelOneAnchorPreservesOtherAnchorTrailAndOtherOwner(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer a = owners.create(), b = owners.create(), target = owners.create();
@@ -313,7 +313,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void twoOwnersSelectThreeNearestTargetsAndObserveSharedTargetDeath(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer a = owners.create(), b = owners.create();
@@ -346,7 +346,7 @@ public final class VfxH16GameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void distantOwnerDoesNotCancelWorldAnchoredEffects(GameTestHelper h) {
         start(h, owners -> {
             ServerPlayer moving = owners.create(), control = owners.create();

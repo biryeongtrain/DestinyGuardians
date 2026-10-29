@@ -91,7 +91,7 @@ public final class SuperReadyHudGameTests {
 
         private Owners(GameTestHelper h) {
             this.h = h;
-            h.runBeforeTestEnd(this::close);
+            TestCleanup.register(h, this::close);
         }
 
         private ServerPlayer create(Element element) {
@@ -180,7 +180,7 @@ public final class SuperReadyHudGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void baselineFullChargeHasNoBannerAndKeepsFilledGoldDiamondWithDarkIcon(GameTestHelper h) {
         scenario(h, owners -> {
             for (Element element : List.of(Element.ARC, Element.SOLAR, Element.VOID)) {
@@ -197,7 +197,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void chargeTransitionCreatesOneBannerAndSameTickUpdatesReuseItsEntity(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create(Element.ARC);
@@ -220,7 +220,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 90)
+    @GameTest(structure = FLOOR, maxTicks = 90, environment = "destiny-test:w90_isolated")
     public void bannerUsesServerTickDeadlineAndDoesNotReplayUntilAnotherChargeEdge(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create(Element.SOLAR);
@@ -252,7 +252,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void removeResetsOnlyItsOwnerAndNextFullBaselineDoesNotReplay(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer a = owners.create(Element.ARC), b = owners.create(Element.VOID);
@@ -274,7 +274,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void nonGuardianClearsTransientStateAndReturningFullIsBaseline(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create(Element.ARC);
@@ -294,7 +294,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void spectatorAndDeathRemoveTransientStateWithoutReplayingOnReturn(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer spectator = owners.create(Element.SOLAR), dead = owners.create(Element.VOID);
@@ -320,7 +320,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void realSuperActivationRemovesReadyAndHudCleanupPreservesPostEffects(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create(Element.ARC);
@@ -362,7 +362,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void classChangeDiscardsOldReadyBannerWithoutReplayingHunterBaseline(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create(Element.ARC);
@@ -380,14 +380,13 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 35)
+    @GameTest(structure = FLOOR, maxTicks = 35, environment = "destiny-test:w90_isolated")
     public void oneShotVoidReleaseSurvivesSessionEndThenExpires(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create(Element.VOID);
             chargeEdge(h, owner);
             check(h, AbilityService.use(owner, AbilitySlot.SUPER) == AbilityService.Result.OK, "Real Void activation");
             int castEntity = item(h, owner, CombatHud.CAST_ID).getEntityId();
-            AbilityService.perform(owner, kim.biryeong.destiny.input.GuardianAction.PRIMARY);
             for (int i = 0; i < kim.biryeong.destiny.fx.ShadowshotTiming.RELEASE_TICKS; i++)
                 AbilityService.tickPlayer(owner);
             check(h, !AbilityService.inSuper(owner), "One-shot session ends at bow release, not on button press");
@@ -405,7 +404,7 @@ public final class SuperReadyHudGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void loadoutChangeDropsStaleBannerAndKeepsNewReadyIconWithoutReplay(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create(Element.ARC);

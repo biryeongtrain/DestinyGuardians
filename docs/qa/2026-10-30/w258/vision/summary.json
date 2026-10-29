@@ -1,0 +1,34 @@
+{
+  "environment": "reused isolated Danmo/OpenGL QA; 4GiB client/server configuration",
+  "runtime": "/private/tmp/destiny-w235/qa",
+  "source_logs": "/private/tmp/destiny-w258/vision",
+  "scenarios": {
+    "grenade": {
+      "returncode": 0,
+      "completed": "completed",
+      "captures": 4,
+      "camera_other_observed": false,
+      "lease_released": true,
+      "held_keys": [],
+      "pending_steps": 0,
+      "native_neutral": true
+    },
+    "arc-super": {
+      "returncode": 0,
+      "completed": "completed",
+      "captures": 12,
+      "camera_other_observed": true,
+      "lease_released": true,
+      "held_keys": [],
+      "pending_steps": 0,
+      "native_neutral": true
+    }
+  },
+  "final_self_camera": true,
+  "final_neutral": true,
+  "limits": [
+    "Screenshots are bracketed samples, not a 60fps smoothness or interpolation-error measurement.",
+    "This repeated run took about 87s from server-pack reload log to player join; W257 single-run 14.31s is not a load-time guarantee.",
+    "No new Windows visual verification in W258."
+  ]
+}

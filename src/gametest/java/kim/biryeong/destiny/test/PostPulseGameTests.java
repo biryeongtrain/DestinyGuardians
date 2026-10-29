@@ -51,7 +51,7 @@ public final class PostPulseGameTests {
 
         private Owners(GameTestHelper h) {
             this.h = h;
-            h.runBeforeTestEnd(this::close);
+            TestCleanup.register(h, this::close);
         }
 
         private ServerPlayer create() {
@@ -133,27 +133,27 @@ public final class PostPulseGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void activationExpiresOnNormalServerTicks(GameTestHelper h) {
         normalTickLifetime(h, false, false);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void impactExpiresOnNormalServerTicks(GameTestHelper h) {
         normalTickLifetime(h, true, false);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void duplicateActivationDoesNotExtendLifetime(GameTestHelper h) {
         normalTickLifetime(h, false, true);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void duplicateImpactDoesNotExtendLifetime(GameTestHelper h) {
         normalTickLifetime(h, true, true);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void impactReplacesActivationOnceAndKeepsItsOwnDeadline(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create();
@@ -181,7 +181,7 @@ public final class PostPulseGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void cancelAndAbilityCleanupPreserveOtherOwnerAndUnrelatedEffects(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create();
@@ -209,7 +209,7 @@ public final class PostPulseGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void deathDimensionChangeAndDisconnectExpireOnlyInvalidOwners(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer dead = owners.create();
@@ -243,7 +243,7 @@ public final class PostPulseGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void preexistingManualPulseIsNotOwnedAndKineticIsNoOp(GameTestHelper h) {
         scenario(h, owners -> {
             ServerPlayer owner = owners.create();

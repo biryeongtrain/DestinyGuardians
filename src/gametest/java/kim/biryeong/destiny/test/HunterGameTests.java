@@ -49,7 +49,7 @@ public final class HunterGameTests {
 
     // ---------- 이동 ----------
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w90_isolated")
     public void airJumpOnlyOnceAndResetsOnGround(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
         try {
@@ -61,7 +61,7 @@ public final class HunterGameTests {
             p.setOnGround(false);
             p.setDeltaMovement(0, -0.2, 0);
             InputRouter.onPlayerInput(p, Input.EMPTY, JUMP);
-            check(h, rt.airJumpsUsed == 1 && Math.abs(p.getDeltaMovement().y - 0.55) < 1e-6, "Air jump should set vy=0.55, got " + p.getDeltaMovement());
+            check(h, rt.airJumpsUsed == 1 && Math.abs(p.getDeltaMovement().y - 0.62) < 1e-6, "Air jump should set vy=0.62 (registered HUNTER_HIGH), got " + p.getDeltaMovement());
 
             p.setDeltaMovement(0, -0.1, 0);
             InputRouter.onPlayerInput(p, Input.EMPTY, JUMP);
@@ -79,31 +79,33 @@ public final class HunterGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w90_isolated")
     public void tripleJumpAllowsTwoAirJumps(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
-        try {
-            GuardianData data = Guardians.data(p);
-            data.setLoadout(GuardianClass.HUNTER, data.loadout(GuardianClass.HUNTER).with(AbilitySlot.JUMP, HunterAbilities.TRIPLE_JUMP));
-            p.setOnGround(false);
-            int ok = 0;
-            for (int i = 0; i < 3; i++) {
+        TestCleanup.register(h, () -> TestPlayers.remove(p));
+        GuardianData data = Guardians.data(p);
+        data.setLoadout(GuardianClass.HUNTER, data.loadout(GuardianClass.HUNTER).with(AbilitySlot.JUMP, HunterAbilities.TRIPLE_JUMP));
+        // JumpPhysics.Budget admits at most one press per server tick. Three input
+        // edges in one synchronous callback exercise debounce, not the airborne budget.
+        var accepted = new java.util.concurrent.atomic.AtomicInteger();
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            final int expected = Math.min(attempt, 2);
+            h.runAfterDelay(attempt, () -> {
+                p.setOnGround(false);
                 p.setDeltaMovement(0, -0.3, 0);
                 InputRouter.onPlayerInput(p, Input.EMPTY, JUMP);
-                if (p.getDeltaMovement().y > 0) {
-                    ok++;
-                }
-            }
-            check(h, ok == 2, "Triple jump should allow exactly 2 air jumps, got " + ok);
-            h.succeed();
-        } finally {
-            TestPlayers.remove(p);
+                if (p.getDeltaMovement().y > 0) accepted.incrementAndGet();
+                check(h, accepted.get() == expected && Guardians.runtime(p).airJumpsUsed == expected,
+                        "Triple jump admits the first two distinct ticks and rejects the third");
+                InputRouter.onPlayerInput(p, JUMP, Input.EMPTY);
+            });
         }
+        h.runAfterDelay(4, h::succeed);
     }
 
     // ---------- 회피 ----------
 
-    @GameTest(structure = FLOOR, maxTicks = 60)
+    @GameTest(structure = FLOOR, maxTicks = 60, environment = "destiny-test:w90_isolated")
     public void doubleShiftDodgesWithIframesAndGamblerRefreshesMelee(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
         Husk husk = husk(h, 6.5, 6.5);
@@ -162,24 +164,24 @@ public final class HunterGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 80)
+    @GameTest(structure = FLOOR, maxTicks = 80, environment = "destiny-test:w90_isolated")
     public void arcFlashbangBlinds(GameTestHelper h) {
         grenadeTest(h, Element.ARC, Keyword.BLINDED);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 80)
+    @GameTest(structure = FLOOR, maxTicks = 80, environment = "destiny-test:w90_isolated")
     public void solarIncendiaryScorches(GameTestHelper h) {
         grenadeTest(h, Element.SOLAR, Keyword.SCORCHED);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 100)
+    @GameTest(structure = FLOOR, maxTicks = 100, environment = "destiny-test:w90_isolated")
     public void voidVortexDamagesOverTime(GameTestHelper h) {
         grenadeTest(h, Element.VOID, null);
     }
 
     // ---------- 근접 ----------
 
-    @GameTest(structure = FLOOR, maxTicks = 60)
+    @GameTest(structure = FLOOR, maxTicks = 60, environment = "destiny-test:w90_isolated")
     public void arcCombinationBlowWithShiftPunch(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
         Husk husk = husk(h, 4.5, 6.5);
@@ -197,7 +199,7 @@ public final class HunterGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 60)
+    @GameTest(structure = FLOOR, maxTicks = 60, environment = "destiny-test:w90_isolated")
     public void solarKnifeScorches(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.SOLAR, 5);
         Husk husk = husk(h, 8.5, 6.5);
@@ -209,7 +211,7 @@ public final class HunterGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 80)
+    @GameTest(structure = FLOOR, maxTicks = 80, environment = "destiny-test:w90_isolated")
     public void voidSmokeSuppresses(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.VOID, 20);
         Husk husk = husk(h, 5.5, 6.5);
@@ -222,7 +224,7 @@ public final class HunterGameTests {
 
     // ---------- 궁극기 ----------
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w90_isolated")
     public void superNeedsFullEnergyAndArcStaffStrikes(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
         Husk husk = husk(h, 5.5, 6.5);
@@ -236,7 +238,10 @@ public final class HunterGameTests {
             float start = husk.getHealth();
             p.setShiftKeyDown(false);
             InputRouter.onPunch(p);
-            check(h, husk.getHealth() < start, "Arc staff strike should hit the husk in front");
+            check(h, husk.getHealth() == start, "Deploy/wind-up is not a hit");
+            for (int i = 0; i < kim.biryeong.destiny.fx.SuperAttackTiming.ARC_DEPLOY
+                    + kim.biryeong.destiny.fx.SuperAttackTiming.ARC_CONTACT; i++) AbilityService.tickPlayer(p);
+            check(h, husk.getHealth() < start, "Arc staff contact should hit the husk in front");
             check(h, Guardians.data(p).cooldown(AbilitySlot.MELEE) == 0, "Punch during super is not a melee ability");
             for (int i = 0; i < 400; i++) {
                 AbilityService.tickPlayer(p);
@@ -249,14 +254,17 @@ public final class HunterGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w90_isolated")
     public void goldenGunThreeShots(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.SOLAR, 0);
         Husk husk = husk(h, 10.5, 6.5);
         try {
             Guardians.data(p).setSuperEnergy(1f);
             check(h, AbilityService.use(p, AbilitySlot.SUPER) == AbilityService.Result.OK, "Golden gun starts");
+            for (int i = 0; i < kim.biryeong.destiny.fx.SuperAttackTiming.SOLAR_DEPLOY; i++) AbilityService.tickPlayer(p);
             InputRouter.dispatch(p, GuardianAction.PRIMARY);
+            check(h, husk.isAlive(), "Gun wind-up is not a hit");
+            for (int i = 0; i < kim.biryeong.destiny.fx.SuperAttackTiming.SOLAR_CONTACT; i++) AbilityService.tickPlayer(p);
             check(h, !husk.isAlive() || husk.isDeadOrDying(), "Golden gun shot should kill a husk");
             for (int shot = 0; shot < 2; shot++) {
                 for (int i = 0; i < 8; i++) {
@@ -264,21 +272,20 @@ public final class HunterGameTests {
                 }
                 AbilityService.perform(p, GuardianAction.PRIMARY);
             }
-            AbilityService.tickPlayer(p);
-            check(h, !AbilityService.inSuper(p), "Golden gun ends after 3 shots");
+            for (int i = 0; i < 12; i++) AbilityService.tickPlayer(p);
+            check(h, !AbilityService.inSuper(p), "Golden gun ends after third contact and dissolve");
             h.succeed();
         } finally {
             TestPlayers.remove(p);
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 80)
+    @GameTest(structure = FLOOR, maxTicks = 80, environment = "destiny-test:w90_isolated")
     public void shadowshotTetherWeakens(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.VOID, 10);
         Husk husk = husk(h, 9.5, 6.5);
         Guardians.data(p).setSuperEnergy(1f);
         check(h, AbilityService.use(p, AbilitySlot.SUPER) == AbilityService.Result.OK, "Shadowshot starts");
-        AbilityService.perform(p, GuardianAction.PRIMARY);
         h.succeedWhen(() -> {
             // Embedded fixture is not in PlayerList: advance its pending H19 bow draw once per test tick.
             AbilityService.tickPlayer(p);
@@ -290,7 +297,7 @@ public final class HunterGameTests {
 
     // ---------- 에너지·HUD·데이터 ----------
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w90_isolated")
     public void superEnergyChargesAndHudShows(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
         try {
@@ -311,14 +318,14 @@ public final class HunterGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void tuningJsonLoadedFromDatapack(GameTestHelper h) {
         check(h, AbilityRegistry.tuning(HunterAbilities.GOLDEN_GUN).params().containsKey("damage"),
                 "data/destiny/destiny_ability/hunter/golden_gun.json should be loaded");
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void nonGuardianIgnoresInput(GameTestHelper h) {
         ServerPlayer p = TestPlayers.create(h, PLAYER_POS, -90, 0);
         try {
@@ -330,7 +337,7 @@ public final class HunterGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void projectilesCleanUp(GameTestHelper h) {
         ServerPlayer p = hunter(h, Element.ARC, 0);
         var projectile = SimProjectile.launch(p, p.getEyePosition(), Vec3.ZERO, 0, 2,
@@ -341,7 +348,7 @@ public final class HunterGameTests {
             TestPlayers.remove(p);
         });
     }
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void guardianDataCodecRoundTripsAndClassSwitchKeepsLoadouts(GameTestHelper h) {
         GuardianData data = new GuardianData();
         data.setGuardianClass(GuardianClass.HUNTER);
@@ -360,7 +367,7 @@ public final class HunterGameTests {
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void guardianAttachmentSurvivesDeathRespawnEvent(GameTestHelper h) {
         ServerPlayer old = hunter(h, Element.SOLAR, 0);
         ServerPlayer respawned = TestPlayers.create(h, PLAYER_POS, -90, 0);

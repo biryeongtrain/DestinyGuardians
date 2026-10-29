@@ -96,7 +96,7 @@ public final class HunterRegressionGameTests {
                 && off.is(Items.DIAMOND) && off.getCount() == 3, "Guardian packet must cancel the vanilla hand swap");
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void combatRejectsOwnerAndTargetDimensionMismatch(GameTestHelper h) {
         ServerPlayer player = hunter(h, Element.ARC);
         Husk target = null;
@@ -139,7 +139,7 @@ public final class HunterRegressionGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void projectileDimensionChangeCancelsWithoutImpact(GameTestHelper h) {
         ServerPlayer player = hunter(h, Element.ARC);
         AtomicInteger impacts = new AtomicInteger();
@@ -159,7 +159,7 @@ public final class HunterRegressionGameTests {
         }, () -> TestPlayers.remove(player));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void ownerTaskRunsWhileOwnerIsValid(GameTestHelper h) {
         ServerPlayer player = hunter(h, Element.VOID);
         AtomicInteger calls = new AtomicInteger();
@@ -188,23 +188,23 @@ public final class HunterRegressionGameTests {
         }, () -> TestPlayers.remove(player));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void ownerTaskCancelsWhenOwnerDies(GameTestHelper h) {
         // Set health directly so AFTER_DEATH cleanup cannot mask a missing scheduler guard.
         taskCancellation(h, player -> player.setHealth(0));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void ownerTaskCancelsWhenOwnerIsRemoved(GameTestHelper h) {
         taskCancellation(h, ServerPlayer::discard);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void ownerTaskCancelsWhenOwnerChangesDimension(GameTestHelper h) {
         taskCancellation(h, player -> player.setServerLevel(otherLevel(h)));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void weakenedHurtServerDealsThirteenForTen(GameTestHelper h) {
         Cow target = h.spawn(EntityTypes.COW, new Vec3(5.5, 1, 6.5));
         try {
@@ -228,7 +228,7 @@ public final class HunterRegressionGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void fPacketCancelsSwapAndStartsGrenadeCooldown(GameTestHelper h) {
         ServerPlayer player = hunter(h, Element.ARC);
         try {
@@ -240,12 +240,12 @@ public final class HunterRegressionGameTests {
             swapPacket(player);
             assertHandsUnchanged(h, player);
             int cooldown = data.cooldown(AbilitySlot.GRENADE);
-            check(h, cooldown > 0 && SimProjectile.activeCount(player) == 1,
-                    "F packet must launch one grenade and start its cooldown");
+            check(h, cooldown > 0 && SimProjectile.activeCount(player) == 0,
+                    "F packet starts cooldown; wind-up must not launch early");
             swapPacket(player);
             assertHandsUnchanged(h, player);
-            check(h, data.cooldown(AbilitySlot.GRENADE) == cooldown && SimProjectile.activeCount(player) == 1,
-                    "Repeated F packet must not bypass cooldown or duplicate the grenade");
+            check(h, data.cooldown(AbilitySlot.GRENADE) == cooldown && SimProjectile.activeCount(player) == 0,
+                    "Repeated F packet must not bypass cooldown or wind-up");
             check(h, !AbilityService.inSuper(player), "Unshifted F must not start a super");
             h.succeed();
         } finally {
@@ -253,7 +253,7 @@ public final class HunterRegressionGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void shiftFPacketRequiresAndConsumesFullSuperEnergy(GameTestHelper h) {
         ServerPlayer player = hunter(h, Element.ARC);
         try {
@@ -279,7 +279,7 @@ public final class HunterRegressionGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void nonGuardianFPacketStillSwapsHands(GameTestHelper h) {
         ServerPlayer player = TestPlayers.create(h, PLAYER_POS, -90, 0);
         try {
@@ -294,7 +294,7 @@ public final class HunterRegressionGameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w90_isolated")
     public void scorchDotDeathCreditsOwnerOnce(GameTestHelper h) {
         ServerPlayer player = hunter(h, Element.SOLAR);
         Cow[] target = new Cow[1];
@@ -319,7 +319,7 @@ public final class HunterRegressionGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void vanillaFireDeathCreditsScorchOwnerOnce(GameTestHelper h) {
         ServerPlayer player = hunter(h, Element.SOLAR);
         Cow target = null;
@@ -364,12 +364,12 @@ public final class HunterRegressionGameTests {
         }, () -> TestPlayers.remove(player));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void doubleTapAtSevenTicksDodges(GameTestHelper h) {
         doubleTapBoundary(h, 7, true);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void doubleTapAtEightTicksDoesNotDodge(GameTestHelper h) {
         doubleTapBoundary(h, 8, false);
     }

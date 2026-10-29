@@ -22,7 +22,7 @@ public final class HudGameTests {
         h.assertTrue(ok, Component.literal(message));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void healthBarUsesRealHealthAbsorptionAndCriticalTint(GameTestHelper h) {
         var p = TestPlayers.hunter(h, Element.ARC, new Vec3(2, 1, 2), 0, 0);
         try {
@@ -48,7 +48,7 @@ public final class HudGameTests {
         } finally { TestPlayers.remove(p); }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void nonGuardianStillHasVitalsBecauseHeartPackIsGlobal(GameTestHelper h) {
         var p = TestPlayers.hunter(h, Element.SOLAR, new Vec3(2, 1, 2), 0, 0);
         try {
@@ -64,7 +64,7 @@ public final class HudGameTests {
         } finally { TestPlayers.remove(p); }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void abilityChargeAndEquippedGlyphFollowActualLoadout(GameTestHelper h) {
         var p = TestPlayers.hunter(h, Element.SOLAR, new Vec3(2, 1, 2), 0, 0);
         try {

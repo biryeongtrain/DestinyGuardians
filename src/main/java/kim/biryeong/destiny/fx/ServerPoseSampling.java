@@ -8,6 +8,11 @@ public final class ServerPoseSampling {
     private ServerPoseSampling() { }
     public static boolean active() { return PUBLISH.get() != null; }
     public static boolean publishing() { return Boolean.TRUE.equals(PUBLISH.get()); }
+    /** BM adds 1ms before rounding its integer delay. That bias is not elapsed time. */
+    public static float reachedFraction(float frame, int remaining) {
+        int duration = Math.round(frame);
+        return duration <= 0 ? 1 : 1f - Math.clamp(remaining / (float) duration, 0f, 1f);
+    }
     public static void run(Runnable action) {
         run(true, action);
     }

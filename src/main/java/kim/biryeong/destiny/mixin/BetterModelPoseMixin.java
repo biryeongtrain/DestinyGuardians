@@ -52,7 +52,7 @@ public abstract class BetterModelPoseMixin {
         if (skipInterpolation) return original.call(next, bind, destination);
         state.beforeKeyframe(AnimationProgress.EMPTY).animate(bind, destiny$previous);
         next.animate(bind, destiny$next);
-        return destiny$previous.lerp(destiny$next, 1f - state.progress(), destination);
+        return destiny$previous.lerp(destiny$next, ServerPoseSampling.reachedFraction(state.frame(), state.getDelay()), destination);
     }
 
     @WrapMethod(method = "sendTransformation")

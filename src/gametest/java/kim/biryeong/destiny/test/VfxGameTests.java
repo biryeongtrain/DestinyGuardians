@@ -57,7 +57,7 @@ public final class VfxGameTests {
         try {
             setup.run();
             // Reserve cleanup even if models became available too late for the delayed assertion.
-            h.runBeforeTestEnd(() -> cleanup(owner));
+            TestCleanup.register(h, () -> cleanup(owner));
             h.runAfterDelay(ticks, () -> {
                 try {
                     assertions.run();
@@ -84,7 +84,7 @@ public final class VfxGameTests {
         return other;
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void fourModelsAndTheirAnimationsAreRegistered(GameTestHelper h) {
         whenModelsLoaded(h, () -> {
             for (var entry : ANIMATIONS.entrySet()) {
@@ -114,7 +114,7 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void everyKindCreatesARealTrackerAndCancels(GameTestHelper h) {
         whenModelsLoaded(h, () -> {
             ServerPlayer owner = owner(h);
@@ -138,7 +138,7 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void expiresOnServerTicksWithoutAbilityTasks(GameTestHelper h) {
         whenModelsLoaded(h, () -> {
             ServerPlayer owner = owner(h);
@@ -151,7 +151,7 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1500)
+    @GameTest(structure = FLOOR, maxTicks = 1500, environment = "destiny-test:w90_isolated")
     public void loopDurationIsBoundedAtTwoHundredTicks(GameTestHelper h) {
         whenModelsLoaded(h, () -> {
             ServerPlayer owner = owner(h);
@@ -162,7 +162,7 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void oneShotsExpireAtTheirAnimationLengths(GameTestHelper h) {
         whenModelsLoaded(h, () -> {
             ServerPlayer owner = owner(h);
@@ -182,7 +182,7 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void abilityCleanupCancelsOwnedVisuals(GameTestHelper h) {
         whenModelsLoaded(h, () -> {
             ServerPlayer owner = owner(h);
@@ -205,7 +205,7 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void ownerCapEvictsOldestAndKeepsFourNewest(GameTestHelper h) {
         whenModelsLoaded(h, () -> {
             ServerPlayer owner = owner(h);
@@ -220,7 +220,7 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void rejectsDimensionMismatchAndInvalidNumbers(GameTestHelper h) {
         ServerPlayer owner = owner(h);
         try {
@@ -265,22 +265,22 @@ public final class VfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void ownerDeathExpiresVisualWithoutDeathEvent(GameTestHelper h) {
         ownerInvalidation(h, owner -> owner.setHealth(0));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void ownerRemovalExpiresVisual(GameTestHelper h) {
         ownerInvalidation(h, ServerPlayer::discard);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void ownerDimensionChangeExpiresVisual(GameTestHelper h) {
         ownerInvalidation(h, owner -> owner.setServerLevel(otherLevel(h)));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void ownerDisconnectExpiresVisual(GameTestHelper h) {
         ownerInvalidation(h, ServerPlayer::disconnect);
     }

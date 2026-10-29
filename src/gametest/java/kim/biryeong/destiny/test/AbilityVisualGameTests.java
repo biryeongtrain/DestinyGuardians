@@ -26,15 +26,15 @@ import java.util.function.Supplier;
 public final class AbilityVisualGameTests {
     private static final String FLOOR = "destiny-test:floor";
     private static final List<VisualCase> VISUALS = List.of(
-            new VisualCase("arc_flashbang", () -> HunterAbilityVisuals.grenade(Element.ARC)),
-            new VisualCase("solar_incendiary", () -> HunterAbilityVisuals.grenade(Element.SOLAR)),
-            new VisualCase("void_vortex", () -> HunterAbilityVisuals.grenade(Element.VOID)),
-            new VisualCase("solar_knife", () -> HunterAbilityVisuals.melee(Element.SOLAR)),
-            new VisualCase("void_smoke_bomb", () -> HunterAbilityVisuals.melee(Element.VOID)));
+            new VisualCase("arc_flashbang", "ability_w252/ripped_grenade/explosion", () -> HunterAbilityVisuals.grenade(Element.ARC)),
+            new VisualCase("solar_incendiary", "ability_w252/ripped_grenade/explosion", () -> HunterAbilityVisuals.grenade(Element.SOLAR)),
+            new VisualCase("void_vortex", "ability_w255/grenade/vortex_held", () -> HunterAbilityVisuals.grenade(Element.VOID)),
+            new VisualCase("solar_knife", "hunter/solar_knife", () -> HunterAbilityVisuals.melee(Element.SOLAR)),
+            new VisualCase("void_smoke_bomb", "hunter/void_smoke_bomb", () -> HunterAbilityVisuals.melee(Element.VOID)));
 
-    private record VisualCase(String name, Supplier<ItemStack> factory) {
+    private record VisualCase(String name, String modelPath, Supplier<ItemStack> factory) {
         Identifier model() {
-            return Identifier.fromNamespaceAndPath("destiny", "hunter/" + name);
+            return Identifier.fromNamespaceAndPath("destiny", modelPath);
         }
     }
 
@@ -42,7 +42,7 @@ public final class AbilityVisualGameTests {
         h.assertTrue(condition, Component.literal(message));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void modelForwardAxisFollowsFlightIncludingReverseAndZero(GameTestHelper h) {
         for (Vec3 velocity : List.of(new Vec3(1, 0, 0), new Vec3(0, 0, 1),
                 new Vec3(0, 1, 0), new Vec3(-1, -0.3, -2))) {
@@ -56,7 +56,7 @@ public final class AbilityVisualGameTests {
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void hunterProjectileModelsAreCustomAndDistinct(GameTestHelper h) {
         Set<Identifier> models = new HashSet<>();
         for (VisualCase visual : VISUALS) {
@@ -66,12 +66,14 @@ public final class AbilityVisualGameTests {
                     visual.name() + " should use one PAPER carrier");
             check(h, visual.model().equals(model),
                     visual.name() + " should select " + visual.model() + ", got " + model);
-            check(h, models.add(model), "Each hunter projectile must have a distinct item model");
+            models.add(model);
         }
+        // W252 intentionally shares the delivered explosion prop between Arc and Solar.
+        check(h, models.size() == 4, "Exactly one shared grenade prop; vortex and both melee props remain distinct");
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void hunterVisualStacksAreIndependent(GameTestHelper h) {
         for (VisualCase visual : VISUALS) {
             ItemStack first = visual.factory().get();
@@ -89,7 +91,7 @@ public final class AbilityVisualGameTests {
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void arcCombinationBlowStaysUnarmedWithoutProjectile(GameTestHelper h) {
         check(h, HunterAbilityVisuals.melee(Element.ARC).isEmpty(), "Arc melee has no item visual");
         ServerPlayer player = TestPlayers.hunter(h, Element.ARC, new Vec3(2.5, 1, 6.5), -90, 0);

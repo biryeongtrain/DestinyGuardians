@@ -28,14 +28,14 @@ public final class SuperVfxGameTests {
     private ServerPlayer owner(GameTestHelper h) { return TestPlayers.create(h, ORIGIN, -90, 0); }
 
     private void delayed(GameTestHelper h, ServerPlayer p, int ticks, Runnable assertions) {
-        h.runBeforeTestEnd(() -> TestPlayers.remove(p));
+        TestCleanup.register(h, () -> TestPlayers.remove(p));
         h.runAfterDelay(ticks, () -> {
             try { assertions.run(); h.succeed(); }
             finally { TestPlayers.remove(p); }
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void dedicatedUltimateRenderersHaveThreeAnimatedRenderBones(GameTestHelper h) {
         h.startSequence().thenWaitUntil(() -> {
             for (String name : HunterVfxAssets.SUPER_MODELS)
@@ -59,7 +59,7 @@ public final class SuperVfxGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void flameTrailExpiresOnNormalServerTicks(GameTestHelper h) {
         ServerPlayer p = owner(h);
         try {
@@ -75,7 +75,7 @@ public final class SuperVfxGameTests {
         } catch (RuntimeException | Error e) { TestPlayers.remove(p); throw e; }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void movingTetherReusesDisplayAndDropsOutOfRadiusTarget(GameTestHelper h) {
         ServerPlayer p = owner(h);
         LivingEntity target = h.spawn(EntityTypes.HUSK, new Vec3(5.5, 1, 6.5));
@@ -91,7 +91,7 @@ public final class SuperVfxGameTests {
         } catch (RuntimeException | Error e) { TestPlayers.remove(p); throw e; }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 30)
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void tetherVisualsAreCappedToThreeEnemiesAndExpireWithoutRefresh(GameTestHelper h) {
         ServerPlayer p = owner(h);
         try {
@@ -107,7 +107,7 @@ public final class SuperVfxGameTests {
         } catch (RuntimeException | Error e) { TestPlayers.remove(p); throw e; }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void beamOwnerCapCleanupAndInvalidInputAreIsolated(GameTestHelper h) {
         ServerPlayer p = owner(h), other = owner(h);
         try {
@@ -126,7 +126,7 @@ public final class SuperVfxGameTests {
         } finally { TestPlayers.remove(p); TestPlayers.remove(other); }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 20)
+    @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void ownerDimensionChangeDropsBeamOnNextTick(GameTestHelper h) {
         ServerPlayer p = owner(h);
         try {

@@ -16,6 +16,22 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public final class ClassAbilityW255GameTests {
+    private static void profileReady(GameTestHelper h, Runnable action) {
+        // Headless SERVER_STARTED releases AutoHost generation through StartupPackCoordinator;
+        // compact() publishes graphs atomically after successful profile/pose preparation.
+        check(h, net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("polymer-autohost")
+                        && kim.biryeong.destiny.weapon.ProfileWeaponView.enabled(),
+                "HUD fixture requires startup autohost generation and enabled profile view");
+        h.startSequence().thenWaitUntil(() -> {
+            var gun = kim.biryeong.destiny.weapon.WeaponItems.create(
+                    kim.biryeong.destiny.weapon.WeaponCatalog.find("ace_of_spades").orElseThrow());
+            var route = kim.biryeong.destiny.weapon.WeaponCombatItem.INSTANCE.getPolymerItemModel(
+                    gun, null, h.getLevel().registryAccess());
+            check(h, kim.biryeong.destiny.compat.pack.ProfileArmAssets.graph(route) != null,
+                    "Await successful pack profile-graph publication before starting the HUD scenario");
+        }).thenExecute(action);
+    }
+
     private static void check(GameTestHelper h,boolean ok,String message){h.assertTrue(ok,Component.literal(message));}
     private static ServerPlayer player(GameTestHelper h,GuardianClass cls,int index) {
         int x=3+index*8;
@@ -36,26 +52,28 @@ public final class ClassAbilityW255GameTests {
         catch(ReflectiveOperationException e){throw new AssertionError(e);}
     }
     private static boolean field(ServerPlayer p) {return Guardians.data(p).guardianClass()==GuardianClass.TITAN?TitanClassAbility.active(p):WarlockClassAbility.active(p);}
-    @GameTest(structure="destiny-test:floor",environment="destiny-test:w90_isolated",maxTicks=60)
+    @GameTest(structure="destiny-test:floor",environment="destiny-test:w90_isolated",maxTicks=1200)
     public void classContactDelaysFieldAndRestoresCameraAndCurrentWeapon(GameTestHelper h) {
-        var players=List.of(player(h,GuardianClass.TITAN,0),player(h,GuardianClass.WARLOCK,1));
-        var guns=players.stream().map(ServerPlayer::getMainHandItem).toList();
-        for(var p:players) {
-            check(h,AbilityService.use(p,AbilitySlot.CLASS_ABILITY)==AbilityService.Result.OK,"Class accepted");
-            check(h,ClassAbilityCast.active(p)&&!field(p),"Preparation precedes field");
-            check(h,PlayerAnimations.activeClip(p).startsWith("h15_class_"),"Source clip selected");
-            check(h,SuperCamera.active(p),"Rear camera owned");
-            check(h,AbilityService.use(p,AbilitySlot.GRENADE)==AbilityService.Result.BUSY,"Cast blocks grenade");
-            check(h,!kim.biryeong.destiny.weapon.WeaponRuntime.beginUse(p),"No hidden firing");
-        }
-        h.runAfterDelay(10,()->players.forEach(p->check(h,!field(p),"No field before contact")));
-        h.runAfterDelay(22,()->players.forEach(p->check(h,field(p),"One field created at contact")));
-        h.runAfterDelay(45,()->{
-            for(int i=0;i<players.size();i++) {var p=players.get(i);
-                check(h,!ClassAbilityCast.active(p)&&!SuperCamera.active(p)&&!PlayerAnimations.isPlaying(p),"Recovery cleans model/camera");
-                check(h,p.getMainHandItem()==guns.get(i)&&field(p),"Real inventory and persistent field preserved");
-                check(h,kim.biryeong.minigamelib.displayhud.DisplayHud.getHuds(p).containsKey("destiny:profile_view_gun"),"FP gun view restored");
-            }h.succeed();
+        profileReady(h, () -> {
+            var players=List.of(player(h,GuardianClass.TITAN,0),player(h,GuardianClass.WARLOCK,1));
+            var guns=players.stream().map(ServerPlayer::getMainHandItem).toList();
+            for(var p:players) {
+                check(h,AbilityService.use(p,AbilitySlot.CLASS_ABILITY)==AbilityService.Result.OK,"Class accepted");
+                check(h,ClassAbilityCast.active(p)&&!field(p),"Preparation precedes field");
+                check(h,PlayerAnimations.activeClip(p).startsWith("h15_class_"),"Source clip selected");
+                check(h,SuperCamera.active(p),"Rear camera owned");
+                check(h,AbilityService.use(p,AbilitySlot.GRENADE)==AbilityService.Result.BUSY,"Cast blocks grenade");
+                check(h,!kim.biryeong.destiny.weapon.WeaponRuntime.beginUse(p),"No hidden firing");
+            }
+            h.runAfterDelay(10,()->players.forEach(p->check(h,!field(p),"No field before contact")));
+            h.runAfterDelay(22,()->players.forEach(p->check(h,field(p),"One field created at contact")));
+            h.runAfterDelay(45,()->{
+                for(int i=0;i<players.size();i++) {var p=players.get(i);
+                    check(h,!ClassAbilityCast.active(p)&&!SuperCamera.active(p)&&!PlayerAnimations.isPlaying(p),"Recovery cleans model/camera");
+                    check(h,p.getMainHandItem()==guns.get(i)&&field(p),"Real inventory and persistent field preserved");
+                    check(h,kim.biryeong.minigamelib.displayhud.DisplayHud.getHuds(p).containsKey("destiny:profile_view_gun"),"FP gun view restored");
+                }h.succeed();
+            });
         });
     }
     @GameTest(structure="destiny-test:floor",environment="destiny-test:w90_isolated",maxTicks=45)

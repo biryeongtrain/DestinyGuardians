@@ -84,7 +84,7 @@ public final class WeaponFireMotion {
 
     private static boolean visible(ServerPlayer p) {
         return p.isAlive() && !p.isRemoved() && !p.isSpectator() && !p.hasDisconnected() && p.getCamera() == p
-                && !kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson
+                && !kim.biryeong.destiny.guardian.Guardians.runtimeIfPresent(p).map(rt -> rt.gcbThirdPerson).orElse(false)
                 && !kim.biryeong.destiny.ability.AbilityService.inSuper(p);
     }
 

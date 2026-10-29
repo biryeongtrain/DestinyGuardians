@@ -114,8 +114,28 @@ public final class WarlockW229GameTests {
 
     @GameTest(structure = "destiny-test:floor", maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void elevenRegisteredAbilitiesAndThreeCompletePresets(GameTestHelper h) {
-        var all = AbilityRegistry.all().stream().filter(a -> a.guardianClass() == GuardianClass.WARLOCK).toList();
-        check(h, all.size() == 14, "Fourteen class-owned abilities including W230 supers");
+        // W230 adds three supers; the shared jump registry supplies each selectable variant.
+        var expected = Set.of(
+                "destiny:warlock/class_ability",
+                "destiny:warlock/arc_grenade",
+                "destiny:warlock/arc_melee",
+                "destiny:warlock/arc_super",
+                "destiny:warlock/solar_grenade",
+                "destiny:warlock/solar_melee",
+                "destiny:warlock/solar_super",
+                "destiny:warlock/void_grenade",
+                "destiny:warlock/void_melee",
+                "destiny:warlock/void_super",
+                "destiny:warlock/well_of_radiance",
+                "destiny:warlock/chaos_reach",
+                "destiny:warlock/nova_warp",
+                "destiny:warlock/strafe_glide",
+                "destiny:warlock/burst_glide",
+                "destiny:warlock/jump",
+                "destiny:warlock/blink");
+        var actual = AbilityRegistry.all().stream().filter(a -> a.guardianClass() == GuardianClass.WARLOCK)
+                .map(a -> a.id().toString()).collect(java.util.stream.Collectors.toSet());
+        check(h, actual.equals(expected), "Exact class roster including expanded supers and selectable jumps: " + actual);
         for (Element e : List.of(Element.ARC, Element.SOLAR, Element.VOID)) {
             Loadout loadout = WarlockAbilities.preset(e);
             check(h, loadout.abilities().size() == 5, "Five slots in each elemental preset");
@@ -213,8 +233,16 @@ public final class WarlockW229GameTests {
         check(h, ray(p, center(front)).getType() == HitResult.Type.MISS && ray(p, center(blocked)).getType() == HitResult.Type.BLOCK,
                 "Grenade fixture has a visible body target and an occluded control" + diagnostic(h, p, front, blocked));
         use(h, p, AbilitySlot.GRENADE);
-        check(h, SimProjectile.activeCount(p) == 1, "Real grenade projectile emitted");
-        check(h, AbilityService.use(p, AbilitySlot.GRENADE) == AbilityService.Result.COOLDOWN, "Repeat input cannot duplicate grenade");
+        check(h, GrenadeThrow.active(p) && !GrenadeThrow.prop(p).isEmpty() && SimProjectile.activeCount(p) == 0,
+                "Accepted grenade holds its prop during source windup, before contact release");
+        check(h, AbilityService.use(p, AbilitySlot.GRENADE) == AbilityService.Result.BUSY, "Repeat input cannot duplicate pending grenade");
+        h.runAfterDelay(GrenadeThrow.RELEASE_TICKS - 1, () ->
+                check(h, SimProjectile.activeCount(p) == 0 && WarlockGrenade.fieldCount(p) == 0,
+                        "Neither flight nor impact field exists before source contact"));
+        h.runAfterDelay(GrenadeThrow.RELEASE_TICKS + 1, () ->
+                check(h, GrenadeThrow.prop(p).isEmpty()
+                                && SimProjectile.activeCount(p) + WarlockGrenade.fieldCount(p) == 1,
+                        "Contact releases exactly one real flight or its already-collided field"));
         h.runAfterDelay(25, () -> {
             var fields = WarlockGrenade.fields(p);
             check(h, fields.size() == 1, "One actual collision field exists" + diagnostic(h, p, front, blocked));
@@ -276,7 +304,7 @@ public final class WarlockW229GameTests {
         h.onEachTick(() -> { var session = Guardians.runtime(p).superSession; if (session != null) for (int i = 0; i < 12; i++) session.primary(); });
         h.runAfterDelay(5, () -> check(h, SimProjectile.activeCount(p) == 0 && WarlockSuper.emitted(p) == 0, "Clicks cannot shorten automatic windup"));
         h.runAfterDelay(17, () -> check(h, WarlockSuper.emitted(p) == 1 && SimProjectile.activeCount(p) == 1, "Automatic single release despite repeated primary"));
-        h.runAfterDelay(42, () -> {
+        h.startSequence().thenExecuteAfter(42, () -> {
             check(h, !visible.isAlive() && blocked.getHealth() == 100, "Wall impact blast damages near side only");
             check(h, AmmoEconomy.meters(p).equals(AmmoGeneration.SUPER.gains(false)), "Real final blow recorded as SUPER, not generic ABILITY");
             check(h, !AbilityService.inSuper(p) && SimProjectile.activeCount(p) == 0, "Nova completes automatically after its one blast");
@@ -322,7 +350,7 @@ public final class WarlockW229GameTests {
                     "Stormtrance does not attack before primary input");
             for (int i = 0; i < 20; i++) Guardians.runtime(p).superSession.primary();
         });
-        h.runAfterDelay(65, () -> {
+        h.startSequence().thenExecuteAfter(65, () -> {
             check(h, first.getHealth() < 100 && second.getHealth() < 100 && third.getHealth() < 100, "Channel makes a real three-enemy chain" + diagnostic(h, p, first, second, third, fourth, blocked));
             check(h, fourth.getHealth() == 100 && blocked.getHealth() == 100, "Hop count and per-hop LOS enforced" + diagnostic(h, p, first, second, third, fourth, blocked));
             float before = first.getHealth();
@@ -386,33 +414,41 @@ public final class WarlockW229GameTests {
         a.getInventory().setItem(0, new ItemStack(Items.DIAMOND, 3));
         rearmRift(h, a); rearmRift(h, b);
         // Real visual holders for both owners: cleanup must detach only the retired owner.
-        AbilityRegistry.get(WarlockAbilities.ARC_GRENADE).orElseThrow().activate(a);
-        AbilityRegistry.get(WarlockAbilities.ARC_GRENADE).orElseThrow().activate(b);
+        // Aim above the floor so the real contact-released flights survive to ownership checks.
+        a.setXRot(-90); b.setXRot(-90);
+        check(h, AbilityRegistry.get(WarlockAbilities.ARC_GRENADE).orElseThrow().activate(a)
+                        && AbilityRegistry.get(WarlockAbilities.ARC_GRENADE).orElseThrow().activate(b),
+                "Both owners accept a real pending grenade cast");
+        check(h, GrenadeThrow.active(a) && GrenadeThrow.active(b)
+                        && SimProjectile.activeCount(a) == 0 && SimProjectile.activeCount(b) == 0,
+                "Windup does not allocate either owner's flight early");
         SimProjectile ordinary = SimProjectile.launch(a, a.position().add(0, 5, 0), Vec3.ZERO, 0, 80,
                 new ItemStack(Items.SNOWBALL), .2f, Element.KINETIC.color(), hit -> {});
-        check(h, SimProjectile.activeCount(a) == 2 && SimProjectile.activeCount(b) == 1, "Owned and unrelated projectile visuals allocated");
-        WarlockAbilities.cleanup(a); WarlockAbilities.cleanup(a);
-        check(h, WarlockClassAbility.visualCount(a) == 0, "Owned rift display removed by cleanup");
-        check(h, SimProjectile.activeCount(a) == 1 && !ordinary.isDone() && SimProjectile.activeCount(b) == 1,
-                "Idempotent cleanup discards only its owned visual, preserves same-owner ordinary emission and other owner");
-        rearmRift(h, a);
-        h.runAfterDelay(1, () -> Guardians.data(a).setGuardianClass(GuardianClass.HUNTER));
-        h.runAfterDelay(3, () -> {
+        h.startSequence().thenExecuteAfter(GrenadeThrow.RELEASE_TICKS + 1, () -> {
+            check(h, SimProjectile.activeCount(a) == 2 && SimProjectile.activeCount(b) == 1, "Owned and unrelated projectile visuals allocated");
+            WarlockAbilities.cleanup(a); WarlockAbilities.cleanup(a);
+            check(h, WarlockClassAbility.visualCount(a) == 0, "Owned rift display removed by cleanup");
+            check(h, SimProjectile.activeCount(a) == 1 && !ordinary.isDone() && SimProjectile.activeCount(b) == 1,
+                    "Idempotent cleanup discards only its owned visual, preserves same-owner ordinary emission and other owner");
+            rearmRift(h, a);
+        });
+        h.runAfterDelay(GrenadeThrow.RELEASE_TICKS + 2, () -> Guardians.data(a).setGuardianClass(GuardianClass.HUNTER));
+        h.runAfterDelay(GrenadeThrow.RELEASE_TICKS + 4, () -> {
             check(h, !WarlockClassAbility.active(a) && WarlockClassAbility.active(b), "Class change revokes only that owner");
             rearmRift(h, a);
             Guardians.data(a).setLoadout(GuardianClass.WARLOCK, WarlockAbilities.preset(Element.VOID));
         });
-        h.runAfterDelay(5, () -> {
+        h.runAfterDelay(GrenadeThrow.RELEASE_TICKS + 6, () -> {
             check(h, !WarlockClassAbility.active(a), "Subclass change revokes stationary field");
             rearmRift(h, a);
             var other = h.getLevel().getServer().getLevel(h.getLevel().dimension().equals(Level.NETHER) ? Level.OVERWORLD : Level.NETHER);
             check(h, other != null, "Dimension fixture available"); a.setServerLevel(other);
         });
-        h.runAfterDelay(7, () -> {
+        h.runAfterDelay(GrenadeThrow.RELEASE_TICKS + 8, () -> {
             check(h, !WarlockClassAbility.active(a), "Dimension change revokes old-world field");
             a.setServerLevel(h.getLevel()); rearmRift(h, a); a.setHealth(0);
         });
-        h.runAfterDelay(9, () -> {
+        h.runAfterDelay(GrenadeThrow.RELEASE_TICKS + 10, () -> {
             check(h, !WarlockClassAbility.active(a) && WarlockClassAbility.active(b), "Death and prior revocations preserve other owner's rift");
             WarlockAbilities.cleanup(a); WarlockAbilities.cleanup(a);
             WarlockAbilities.cleanup(b); WarlockAbilities.cleanup(b);

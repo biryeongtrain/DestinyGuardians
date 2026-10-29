@@ -31,12 +31,17 @@ final class TestPlayers {
     }
 
     static ServerPlayer create(GameTestHelper h, Vec3 relative, float yaw, float pitch) {
+        return create(h,relative,yaw,pitch,"HunterTest");
+    }
+    /** Explicit independent scoreboard identity for fixtures that mutate player teams. */
+    static ServerPlayer create(GameTestHelper h, Vec3 relative, float yaw, float pitch, String name) {
         var server = h.getLevel().getServer();
-        var profile = new GameProfile(UUID.randomUUID(), "HunterTest");
+        var profile = new GameProfile(UUID.randomUUID(), name);
         var cookie = CommonListenerCookie.createInitial(profile, false);
         var player = new ServerPlayer(server, h.getLevel(), profile, cookie.clientInformation());
         var connection = new Connection(PacketFlow.SERVERBOUND);
         CHANNELS.put(player.getUUID(), new EmbeddedChannel(connection));
+        TestPacketContexts.initialize(connection,server,profile);
         player.connection = new ServerGamePacketListenerImpl(server, connection, player, cookie);
         connection.setupInboundProtocol(GameProtocols.SERVERBOUND_TEMPLATE.bind(
                 RegistryFriendlyByteBuf.decorator(server.registryAccess()), player.connection), player.connection);
@@ -50,7 +55,10 @@ final class TestPlayers {
     }
 
     static ServerPlayer hunter(GameTestHelper h, Element element, Vec3 relative, float yaw, float pitch) {
-        ServerPlayer p = create(h, relative, yaw, pitch);
+        return hunter(h,element,relative,yaw,pitch,"HunterTest");
+    }
+    static ServerPlayer hunter(GameTestHelper h, Element element, Vec3 relative, float yaw, float pitch, String name) {
+        ServerPlayer p = create(h, relative, yaw, pitch, name);
         GuardianData data = Guardians.data(p);
         data.setGuardianClass(GuardianClass.HUNTER);
         data.setLoadout(GuardianClass.HUNTER, HunterAbilities.preset(element));
@@ -67,7 +75,24 @@ final class TestPlayers {
         }
     }
 
+    /** Packets actually queued by the server connection, not a sound audit counter. */
+    static java.util.List<net.minecraft.network.protocol.Packet<?>> outbound(ServerPlayer player) {
+        var out = new java.util.ArrayList<net.minecraft.network.protocol.Packet<?>>();
+        EmbeddedChannel channel = CHANNELS.get(player.getUUID());
+        if (channel != null) {
+            channel.runPendingTasks();
+            Object value;
+            while ((value = channel.readOutbound()) != null) {
+                if (value instanceof net.minecraft.network.protocol.Packet<?> packet) out.add(packet);
+                else io.netty.util.ReferenceCountUtil.release(value);
+            }
+        }
+        return out;
+    }
+
     static void remove(ServerPlayer player) {
+        kim.biryeong.destiny.fx.WeaponDamageNumbers.cleanup(player);
+        kim.biryeong.destiny.weapon.AmmoEconomy.cleanup(player);
         kim.biryeong.destiny.ability.AbilityService.cleanup(player);
         Guardians.forget(player);
         EmbeddedChannel channel = CHANNELS.remove(player.getUUID());

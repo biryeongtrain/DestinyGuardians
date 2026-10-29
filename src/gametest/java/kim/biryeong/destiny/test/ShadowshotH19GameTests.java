@@ -27,13 +27,13 @@ public final class ShadowshotH19GameTests {
     }
     private static ServerPlayer start(GameTestHelper h) {
         ServerPlayer p = TestPlayers.hunter(h, Element.VOID, new Vec3(2.5, 1, 6.5), -90, 0);
-        h.runBeforeTestEnd(() -> TestPlayers.remove(p));
+        TestCleanup.register(h, () -> TestPlayers.remove(p));
         Guardians.data(p).setSuperEnergy(1);
         check(h, AbilityService.use(p, AbilitySlot.SUPER) == AbilityService.Result.OK, "Void starts");
         return p;
     }
 
-    @GameTest(structure = "destiny-test:floor", maxTicks = 1200)
+    @GameTest(structure = "destiny-test:floor", maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void bowDrawDelaysArrowAndRepeatedPrimaryCannotDuplicate(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = start(h);
@@ -52,11 +52,30 @@ public final class ShadowshotH19GameTests {
         });
     }
 
-    @GameTest(structure = "destiny-test:floor", maxTicks = 1200)
+    @GameTest(structure = "destiny-test:floor", maxTicks = 1200, environment = "destiny-test:w90_isolated")
+    public void activationAloneDrawsAndReleasesExactlyOneArrow(GameTestHelper h) {
+        loaded(h, () -> {
+            ServerPlayer p = start(h);
+            check(h, Guardians.data(p).superEnergy() == 0f, "Activation consumes the charge once");
+            check(h, AbilityService.use(p, AbilitySlot.SUPER) == AbilityService.Result.BUSY,
+                    "Repeated activation cannot restart the automatic cast");
+            for (int i = 1; i < ShadowshotTiming.RELEASE_TICKS; i++) {
+                AbilityService.tickPlayer(p);
+                check(h, AbilityService.inSuper(p) && SimProjectile.activeCount(p) == 0,
+                        "Automatic windup has no early projectile at tick " + i);
+            }
+            AbilityService.tickPlayer(p);
+            check(h, SimProjectile.activeCount(p) == 1 && !AbilityService.inSuper(p),
+                    "Without any PRIMARY, activation releases once at tick seven");
+            check(h, PlayerAnimations.isPlaying(p), "Automatic shot retains recovery animation");
+            h.succeed();
+        });
+    }
+
+    @GameTest(structure = "destiny-test:floor", maxTicks = 1200, environment = "destiny-test:w90_isolated")
     public void cancelledDrawDoesNotLaunchLateArrow(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = start(h);
-            AbilityService.perform(p, GuardianAction.PRIMARY);
             for (int i = 0; i < ShadowshotTiming.DRAW_TICKS; i++) AbilityService.tickPlayer(p);
             AbilityService.cleanup(p);
             for (int i = 0; i < 20; i++) AbilityService.tickPlayer(p);

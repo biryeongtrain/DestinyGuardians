@@ -93,7 +93,27 @@ public final class TitanW229GameTests {
     @GameTest(structure=FLOOR,environment=ENV,maxTicks=20)
     public void elevenAbilitiesAndThreeCompleteTitanPresets(GameTestHelper h) {
         TitanAbilities.register();
-        check(h,AbilityRegistry.all().stream().filter(a->a.guardianClass()==GuardianClass.TITAN).count()==14,"Fourteen Titan abilities including W230 supers");
+        // W230 adds three supers; the shared jump registry supplies each selectable variant.
+        var expected = Set.of(
+                "destiny:titan/class_ability",
+                "destiny:titan/arc_grenade",
+                "destiny:titan/arc_melee",
+                "destiny:titan/arc_super",
+                "destiny:titan/solar_grenade",
+                "destiny:titan/solar_melee",
+                "destiny:titan/solar_super",
+                "destiny:titan/void_grenade",
+                "destiny:titan/void_melee",
+                "destiny:titan/void_super",
+                "destiny:titan/thundercrash",
+                "destiny:titan/burning_maul",
+                "destiny:titan/ward_of_dawn",
+                "destiny:titan/high_lift",
+                "destiny:titan/jump",
+                "destiny:titan/catapult_lift");
+        var actual = AbilityRegistry.all().stream().filter(a -> a.guardianClass() == GuardianClass.TITAN)
+                .map(a -> a.id().toString()).collect(java.util.stream.Collectors.toSet());
+        check(h, actual.equals(expected), "Exact class roster including expanded supers and selectable jumps: " + actual);
         for(Element e:List.of(Element.ARC,Element.SOLAR,Element.VOID)) {
             var preset=TitanAbilities.preset(e);
             for(AbilitySlot slot:AbilitySlot.values()) {
@@ -109,16 +129,28 @@ public final class TitanW229GameTests {
         var f=new Fixture(h,Element.ARC);f.p.setOnGround(false);f.p.setDeltaMovement(0,-.3,0);
         f.p.getInventory().setItem(0,new ItemStack(Items.DIAMOND,3));
         boolean flying=f.p.getAbilities().flying,mayfly=f.p.getAbilities().mayfly;
+        check(h,AbilityService.use(f.p,AbilitySlot.JUMP)==AbilityService.Result.FAILED
+                &&f.p.isNoGravity()&&f.p.getDeltaMovement().equals(new Vec3(0,-.3,0)),
+                "No-gravity fixture is ineligible and rejection preserves its velocity/flags");
+        // Shared jump eligibility requires real gravity; scope this to the lift test.
+        f.p.setNoGravity(false);
+        // Jump momentum reads the last client movement, not our last server velocity
+        // command. Start from a measured vanilla ascent; strafe lift is not catapult.
+        f.p.setKnownMovement(new Vec3(0,.05,0));f.p.setDeltaMovement(0,.05,0);
         f.cast(AbilitySlot.JUMP);
-        check(h,f.p.getDeltaMovement().y>0,"Lift actually changes upward velocity");
+        check(h,f.p.getDeltaMovement().y>0 && Math.abs(f.p.getDeltaMovement().y-.15)<1e-9,
+                "Strafe lift adds its .10 impulse to measured .05 ascent");
         check(h,AbilityService.use(f.p,AbilitySlot.JUMP)==AbilityService.Result.FAILED,"Repeated input cannot extend lift");
         h.onEachTick(f::tick);
         h.runAfterDelay(20,()->{
             check(h,!TitanJump.active(f.p),"Finite lift expires");
-            check(h,f.p.isNoGravity()&&f.p.getAbilities().flying==flying&&f.p.getAbilities().mayfly==mayfly,"Unrelated physics flags preserved");
+            check(h,!f.p.isNoGravity()&&f.p.getAbilities().flying==flying&&f.p.getAbilities().mayfly==mayfly,"Unrelated physics flags preserved");
             check(h,f.p.getInventory().getItem(0).is(Items.DIAMOND)&&f.p.getInventory().getItem(0).getCount()==3,"Inventory unchanged");
-            f.p.setOnGround(true);f.tick();f.p.setOnGround(false);f.cast(AbilitySlot.JUMP);h.succeed();
+            f.p.setOnGround(true);
         });
+        // Budget.observe is once per server tick. Leave an entire observed landing
+        // tick before asking for a fresh airborne budget.
+        h.runAfterDelay(22,()->{f.p.setOnGround(false);f.cast(AbilitySlot.JUMP);h.succeed();});
     }
     @GameTest(structure=FLOOR,environment=ENV,maxTicks=20)
     public void barricadeRejectsAirAndObstructionWithoutCooldownOrBlockWrites(GameTestHelper h) {
@@ -176,7 +208,7 @@ public final class TitanW229GameTests {
         var f=new Fixture(h,Element.ARC);f.p.setXRot(15);var target=f.target(6.5,6.5);var hidden=f.target(6.5,8.5);
         for(int x=4;x<=8;x++)for(int y=1;y<=3;y++)h.setBlock(new BlockPos(x,y,7),Blocks.STONE);
         float playerHealth=f.p.getHealth();f.cast(AbilitySlot.GRENADE);h.onEachTick(f::tick);
-        h.runAfterDelay(65,()->{
+        h.startSequence().thenExecuteAfter(65,()->{
             check(h,target.getHealth()<195,"Actual pulse field damages more than once");
             check(h,hidden.getHealth()==200&&f.p.getHealth()==playerHealth,"LOS wall and player exclusion");
             check(h,target.getLastHurtByPlayer()==f.p,"Accepted grenade owner credited");
@@ -187,7 +219,7 @@ public final class TitanW229GameTests {
     public void fusionWaitsForFuseAndSuppressorCleansOnlyItsOwnEffects(GameTestHelper h) {
         var f=new Fixture(h,Element.SOLAR);var target=f.target(6.5,6.5);f.cast(AbilitySlot.GRENADE);h.onEachTick(f::tick);
         h.runAfterDelay(10,()->check(h,target.getHealth()==200,"Fusion contact does not explode before fuse"));
-        h.runAfterDelay(35,()->{
+        h.startSequence().thenExecuteAfter(35,()->{
             check(h,target.getHealth()<200&&TitanGrenade.fields(f.p)==0,"Fusion detonates once after fuse");
             float after=target.getHealth();
             Guardians.data(f.p).setLoadout(GuardianClass.TITAN,TitanAbilities.preset(Element.VOID));f.tick();
@@ -210,11 +242,11 @@ public final class TitanW229GameTests {
         front.setPos(h.absoluteVec(new Vec3(7.5,1,6.5)));Guardians.data(f.p).setLoadout(GuardianClass.TITAN,TitanAbilities.preset(Element.SOLAR));f.tick();
         Guardians.data(f.p).setCooldown(AbilitySlot.MELEE,0);f.cast(AbilitySlot.MELEE);h.onEachTick(f::tick);
         float health=front.getHealth();
-        h.runAfterDelay(10,()->{
+        h.startSequence().thenExecuteAfter(10,()->{
             check(h,front.getHealth()<health,"Solar hammer actually collides and damages");
             Guardians.data(f.p).setLoadout(GuardianClass.TITAN,TitanAbilities.preset(Element.VOID));f.tick();
             Guardians.data(f.p).setCooldown(AbilitySlot.MELEE,0);float before=front.getHealth();f.cast(AbilitySlot.MELEE);
-            h.runAfterDelay(10,()->{check(h,front.getHealth()<before,"Void shield actually collides and damages");h.succeed();});
+            h.startSequence().thenExecuteAfter(10,()->{check(h,front.getHealth()<before,"Void shield actually collides and damages");h.succeed();});
         });
     }
     // The 16x8x12 floor is normally encased with a BARRIER ceiling. These upward

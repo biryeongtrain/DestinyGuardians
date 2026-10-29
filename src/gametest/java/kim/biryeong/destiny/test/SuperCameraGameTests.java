@@ -40,7 +40,7 @@ public final class SuperCameraGameTests {
 
     private static ServerPlayer owner(GameTestHelper h, Element element, Vec3 relative) {
         ServerPlayer p = TestPlayers.hunter(h, element, relative, -90, 0);
-        h.runBeforeTestEnd(() -> TestPlayers.remove(p));
+        TestCleanup.register(h, () -> TestPlayers.remove(p));
         Guardians.runtime(p).gcbClient = false;
         Guardians.runtime(p).gcbThirdPerson = false;
         return p;
@@ -75,7 +75,7 @@ public final class SuperCameraGameTests {
         check(h, SuperCamera.active(p), "Ready animation and rotation heartbeat retain camera");
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w258_camera_clock")
     public void solarIsStrictNoOp(GameTestHelper h) {
         ServerPlayer p = owner(h, Element.SOLAR, new Vec3(2.5, 1, 6.5));
         Vec3 before = p.position();
@@ -89,7 +89,7 @@ public final class SuperCameraGameTests {
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void arcVanillaOwnerSeesLimbWithoutRealMount(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h);
@@ -108,7 +108,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void rotationWrapsClampsAndRejectsNonfinitePairs(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h);
@@ -133,7 +133,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void positionGroundAndCollisionClaimsAreIgnored(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h);
@@ -158,7 +158,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void stopIsIdempotentAndOwnerLocal(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h), other = owner(h);
@@ -184,7 +184,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w258_camera_clock")
     public void flyingRejectsSuperWithoutSpendingEnergy(GameTestHelper h) {
         ServerPlayer p = owner(h);
         Guardians.data(p).setSuperEnergy(1f);
@@ -206,7 +206,7 @@ public final class SuperCameraGameTests {
         p.setLastClientInput(IDLE);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void nativeSingleTickConsumesKeysFromRestAndCollides(GameTestHelper h) {
         loaded(h, () -> {
             h.setBlock(3, 1, 6, Blocks.STONE);
@@ -251,7 +251,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void connectedSprintAccumulatesExactlyOneNativeStepForArcAndVoid(GameTestHelper h) {
         loaded(h, () -> {
             for (int x = 1; x <= 8; x++) {
@@ -309,7 +309,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 40)
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w258_camera_clock")
     public void unownedConnectionRetainsVanillaPositionRewind(GameTestHelper h) {
         ServerPlayer p = owner(h, Element.SOLAR, new Vec3(2.5, 1, 6.5));
         atRest(p);
@@ -325,7 +325,7 @@ public final class SuperCameraGameTests {
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void nativeDropDamagesDespiteSpoofedGroundPackets(GameTestHelper h) {
         loaded(h, () -> {
             // Source floor.snbt declares stone at relative y=0, but the running 26.3 fixture
@@ -376,7 +376,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void voidCameraRetainsFinalRecoveryThenRestores(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h, Element.VOID, new Vec3(2.5, 1, 6.5));
@@ -384,7 +384,6 @@ public final class SuperCameraGameTests {
             Guardians.data(p).setSuperEnergy(1f);
             check(h, AbilityService.use(p, AbilitySlot.SUPER) == AbilityService.Result.OK, "Actual Void super starts");
             check(h, SuperCamera.active(p) && AbilityService.inSuper(p), "Void owns camera and gameplay");
-            check(h, AbilityService.perform(p, GuardianAction.PRIMARY), "Actual Void bow draw accepted");
             check(h, AbilityService.inSuper(p), "Accepted bow draw retains gameplay until arrow contact");
             for (int delay = 1; delay <= ShadowshotTiming.RELEASE_TICKS; delay++) {
                 final int drawTick = delay;
@@ -406,7 +405,7 @@ public final class SuperCameraGameTests {
                 unchanged(h, p, before);
             });
             // Use the installed attack clip's length, including its start transition and callback
-            // grace, instead of the old fixed 25-tick deadline. Clip time starts at PRIMARY.
+            // grace, instead of the old fixed 25-tick deadline. Clip time starts at activation.
             int clipTicks = (int) Math.ceil(BetterModel.limb(HunterModelAssets.MODEL_NAME).orElseThrow()
                     .animation("h15_super_void_attack").orElseThrow().length() * 20);
             int recoveryDeadline = Math.max(ShadowshotTiming.RELEASE_TICKS + 3, clipTicks + 1 + 6 + 1);
@@ -424,7 +423,7 @@ public final class SuperCameraGameTests {
         });
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 1200)
+    @GameTest(structure = FLOOR, maxTicks = 1200, environment = "destiny-test:w258_camera_clock")
     public void rotationHeartbeatRetainsSuperThenWatchdogReleases(GameTestHelper h) {
         loaded(h, () -> {
             ServerPlayer p = owner(h);
