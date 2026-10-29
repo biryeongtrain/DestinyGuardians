@@ -85,3 +85,7 @@
 Outlaw의 실제 ray를 동일seed로검사·재생한 뒤 전체1,418개가 모두 통과했다(exit0, native suite2.111분). 테스트삭제·disabled/manual전환 없이 현재입력·시전/장전·팩게시 계약에 맞췄으며, 기존정밀/피해/소유권 조건을 유지했다. 수락된 자산검사4실패는 기대값을 완화하지 않고 별도결함으로 남겼다.
 
 제품수정은 일반발사 조회의 불필요한 GuardianRuntime 생성 방지, 정수엔진delay와 포즈phase정렬, 플레이어별 약한identity 포즈캐시다. 무기/수류탄/궁극기 자산을 이번 GameTest 수정 때문에 재생성하지 않았다. 고정5개worktree는 삭제하지 않고 다음배치 재사용 대기 상태로 유지한다.
+
+## 운영 테스트 서버 재개
+
+커밋 `71e0afe0` 이후 `runServer`로 재개했다. `Done`, BetterModel 로딩, Polymer 팩 생성 성공을 확인했다. 실제 서버 JVM의 MaxHeapSize=4,294,967,296 bytes(4GiB), online-mode=true, andlist OP4, LAN `192.168.35.237:25565`를 확인했으며 서버는 켜 둔다. 기동 증거는 `server-start.json`. 격리 QA client/server는 종료하고 이번 배치의 bounded awake만 해제한다.
