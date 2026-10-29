@@ -27,6 +27,7 @@ public final class WeaponPackOptimizer {
     static void compact(ResourcePackBuilder builder) {
         var files = new HashMap<String, PackResource>();
         builder.forEachResource(files::put);
+        kim.biryeong.destiny.weapon.WeaponSurfaceProjection.projectOutput(files);
         var active = WeaponPackRoots.active();
         if (kim.biryeong.destiny.weapon.ProfileWeaponView.enabled()) { ProfileArmAssets.compact(builder, files, active); return; }
         var excluded = new HashSet<String>();
@@ -54,6 +55,7 @@ public final class WeaponPackOptimizer {
                 json.add("model", specialize(sharedArms.rewrite(json.getAsJsonObject("model"))));
                 var output = PackResource.fromString(json.toString());
                 builder.addData(path, output);
+                entry.setValue(output);
                 before += original.length;
                 after += output.readAllBytes().length;
                 rewritten++;
@@ -76,6 +78,14 @@ public final class WeaponPackOptimizer {
         }
         for (String path : files.keySet())
             if (generatedPose(path) && !reachable.contains(path)) excluded.add(path);
+        int sharedModels = PackModelDeduplicator.compact(builder, files, excluded);
+        int previousOmitted = excluded.size();
+        PackModelPruner.prune(files, excluded);
+        DestinyGuardians.LOGGER.info("Weapon model sharing: {} exact aliases, {} additional unused models omitted",
+                sharedModels, excluded.size() - previousOmitted);
+        int removedTextures = Boolean.getBoolean("destiny.weapon.surface.w115") ? 0
+                : PackWeaponTexturePruner.prune(files, excluded);
+        DestinyGuardians.LOGGER.info("Weapon textures: {} unused versioned PNGs omitted without resampling", removedTextures);
         var omitted = Set.copyOf(excluded);
         builder.addResourceConverter((path, resource) -> omitted.contains(path) ? null : resource);
         DestinyGuardians.LOGGER.info("Weapon pack compacted: {} active routes, {} omitted files, {} hand graphs: {} -> {} bytes",

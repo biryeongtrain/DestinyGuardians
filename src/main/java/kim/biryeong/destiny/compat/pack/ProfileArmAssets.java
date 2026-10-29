@@ -61,6 +61,12 @@ public final class ProfileArmAssets {
             if(n.has("parent")) {String parent=WeaponPackOptimizer.modelPath(n.get("parent").getAsString());if(reachable.add(parent))queue.add(parent);}
         }
         for(String path:files.keySet())if(WeaponPackOptimizer.generatedPose(path)&&!reachable.contains(path))omitted.add(path);
+        int sharedModels=PackModelDeduplicator.compact(builder,files,omitted);
+        int previousOmitted=omitted.size();
+        PackModelPruner.prune(files,omitted);
+        DestinyGuardians.LOGGER.info("Weapon model sharing: {} exact aliases, {} additional unused models omitted",sharedModels,omitted.size()-previousOmitted);
+        int removedTextures=Boolean.getBoolean("destiny.weapon.surface.w115")?0:PackWeaponTexturePruner.prune(files,omitted);
+        DestinyGuardians.LOGGER.info("Weapon textures: {} unused versioned PNGs omitted without resampling",removedTextures);
         Set<String> excluded=Set.copyOf(omitted);builder.addResourceConverter((path,data)->excluded.contains(path)?null:data);
         patchShaders(builder);
         poses=Map.copyOf(newPoses);graphs=Map.copyOf(newGraphs);
@@ -72,11 +78,40 @@ public final class ProfileArmAssets {
     }
     private static JsonObject empty(){var n=new JsonObject();n.addProperty("type","minecraft:empty");return n;}
     static JsonObject gunOnly(JsonObject input) {
-        var n=input.deepCopy();String type=n.get("type").getAsString();
-        if(type.equals("minecraft:model")&&n.get("model").getAsString().startsWith("destiny:skin_arm_w204/"))return empty();
-        for(String key:List.of("fallback","on_true","on_false"))if(n.has(key))n.add(key,gunOnly(n.getAsJsonObject(key)));
-        for(String key:List.of("entries","cases"))if(n.has(key))for(var e:n.getAsJsonArray(key)){var c=e.getAsJsonObject();c.add("model",gunOnly(c.getAsJsonObject("model")));}
-        if(type.equals("minecraft:composite")){var out=new JsonArray();for(var e:n.getAsJsonArray("models")){var c=gunOnly(e.getAsJsonObject());if(!c.get("type").getAsString().equals("minecraft:empty"))out.add(c);}if(out.isEmpty())return empty();if(out.size()==1)return out.get(0).getAsJsonObject();n.add("models",out);}
+        String type=input.get("type").getAsString();
+        if(type.equals("minecraft:model")&&input.get("model").getAsString().startsWith("destiny:skin_arm_w204/"))return empty();
+        var n=new JsonObject();
+        // Copy opaque metadata once; model edges are rebuilt without copying their source subtrees.
+        // Iterate in source order so serialized field order also stays unchanged.
+        for(var field:input.entrySet()) {
+            String key=field.getKey();var value=field.getValue();
+            if(key.equals("fallback")||key.equals("on_true")||key.equals("on_false")) {
+                n.add(key,gunOnly(value.getAsJsonObject()));
+            } else if(key.equals("entries")||key.equals("cases")) {
+                var entries=new JsonArray();
+                for(var entry:value.getAsJsonArray()) {
+                    var source=entry.getAsJsonObject();
+                    var child=gunOnly(source.getAsJsonObject("model"));
+                    var copy=new JsonObject();
+                    for(var metadata:source.entrySet())
+                        copy.add(metadata.getKey(),metadata.getKey().equals("model")?child:metadata.getValue().deepCopy());
+                    entries.add(copy);
+                }
+                n.add(key,entries);
+            } else if(key.equals("models")&&type.equals("minecraft:composite")) {
+                var models=new JsonArray();
+                for(var entry:value.getAsJsonArray()) {
+                    var child=gunOnly(entry.getAsJsonObject());
+                    if(!child.get("type").getAsString().equals("minecraft:empty"))models.add(child);
+                }
+                n.add(key,models);
+            } else n.add(key,value.deepCopy());
+        }
+        if(type.equals("minecraft:composite")) {
+            var models=n.getAsJsonArray("models");
+            if(models.isEmpty())return empty();
+            if(models.size()==1)return models.get(0).getAsJsonObject();
+        }
         return n;
     }
     private static void collectPoses(JsonObject n,Map<String,PackResource> files,Map<String,Pose> out) {
