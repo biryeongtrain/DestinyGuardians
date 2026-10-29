@@ -39,6 +39,7 @@ public final class WeaponAiming {
     }
     private static boolean eligible(ServerPlayer p) {
         return p.isAlive() && !p.isRemoved() && !p.isSpectator() && !p.hasDisconnected() && !AbilityService.inSuper(p) && !kim.biryeong.destiny.ability.GrenadeThrow.active(p)
+                && !kim.biryeong.destiny.fx.PlayerAnimations.meleePlaying(p)
                 && WeaponLoadout.canUse(p) && CameraViews.get(p)==null
                 && !kim.biryeong.destiny.camera.SuperCamera.active(p) && p.getCamera()==p
                 && WeaponItems.entry(p.getMainHandItem()).filter(WeaponAimProfile::supports).isPresent();

@@ -27,7 +27,7 @@ public final class ProfileWeaponView {
     private static final class Session {
         final ServerPlayer owner;final ItemDisplayHud gun,grenade;final ItemDisplayHud[] arms=new ItemDisplayHud[4];
         final Object profile;final boolean slim;boolean leftHand,lastTwoHand;ItemStack lastGun=ItemStack.EMPTY;
-        Matrix4f lastRoot,throwRoot;boolean throwing;
+        Matrix4f lastRoot;boolean throwing,meleeHidden;long raiseAt=Long.MIN_VALUE;
         final Matrix4f[] readyArms=new Matrix4f[4];
         final String[] lastPoses=new String[4];final int[] lastMarkers={-1,-1,-1,-1};int sleeves=-1;float lastHandX=Float.NaN;
         Session(ServerPlayer p){owner=p;profile=p.getGameProfile();slim=slim(p);
@@ -62,14 +62,26 @@ public final class ProfileWeaponView {
             if(session==null){session=new Session(p);ACTIVE.put(p.getUUID(),session);}
             throwView(p,session);return;
         }
+        if(kim.biryeong.destiny.fx.PlayerAnimations.meleePlaying(p)) {
+            var session=ACTIVE.get(p.getUUID());
+            if(session!=null) {
+                session.meleeHidden=true;
+                session.gun.setItem(ItemStack.EMPTY);session.gun.update();
+                session.grenade.setItem(ItemStack.EMPTY);session.grenade.update();
+                for(var arm:session.arms)apply(arm,new Matrix4f().translation(0,-3,-1).scale(0),false);
+                Arrays.fill(session.lastPoses,null);session.lastRoot=null;
+            }
+            return;
+        }
         Identifier route=original.is(WeaponCombatItem.INSTANCE)?WeaponCombatItem.INSTANCE.getPolymerItemModel(original,null,p.level().registryAccess()):original.get(DataComponents.ITEM_MODEL);
         var graph=ProfileArmAssets.graph(route);if(graph==null){remove(p);return;}
         var s=ACTIVE.get(p.getUUID());
         if(s!=null&&(s.owner!=p||!s.profile.equals(p.getGameProfile()))){remove(s.owner);s=null;}
         // Do not clear a first accepted shot just because its first view display is being created.
         if(s==null){s=new Session(p);ACTIVE.put(p.getUUID(),s);}
-        boolean returningFromThrow=s.throwing;
-        s.throwing=false;s.grenade.setItem(ItemStack.EMPTY);s.grenade.update();
+        boolean returningFromThrow=s.throwing||s.meleeHidden;
+        if(returningFromThrow){s.raiseAt=p.level().getGameTime();Arrays.fill(s.lastPoses,null);}
+        s.throwing=false;s.meleeHidden=false;s.grenade.setItem(ItemStack.EMPTY);s.grenade.update();
         WeaponFireMotion.retire(p);
         boolean left=p.getMainArm()==HumanoidArm.LEFT;
         var originalData=original.getOrDefault(DataComponents.CUSTOM_MODEL_DATA,CustomModelData.EMPTY);
@@ -85,6 +97,11 @@ public final class ProfileWeaponView {
         float handX=handX(left,twoHand,WeaponAiming.progress(p));
         boolean framingChanged=handChanged||twoHand!=s.lastTwoHand||Float.compare(handX,s.lastHandX)!=0;
         var hand=motionRoot(handMatrix(left,twoHand,WeaponAiming.progress(p)),WeaponFireMotion.pose(p),left);
+        if(s.raiseAt!=Long.MIN_VALUE) {
+            float raised=Math.clamp((p.level().getGameTime()-s.raiseAt+1)/4f,0,1);
+            hand.translate(0,-.9f*(1-raised),0);
+            if(raised>=1)s.raiseAt=Long.MIN_VALUE;
+        }
         boolean rootChanged=s.lastRoot==null||!s.lastRoot.equals(hand);
         apply(s.gun,hand,(framingChanged||rootChanged)&&s.lastRoot!=null&&!handChanged);
         var selected=ProfileArmGraph.select(graph,data,s.slim,left);var seen=new boolean[4];
@@ -107,13 +124,10 @@ public final class ProfileWeaponView {
         int age=kim.biryeong.destiny.ability.GrenadeThrow.age(p);
         float progress=Math.clamp((age+1)/20f,0,1);
         boolean mirror=p.getMainArm()==HumanoidArm.LEFT;
-        if(!s.throwing){s.throwing=true;s.throwRoot=s.lastRoot==null?null:new Matrix4f(s.lastRoot);}
-        float recovery=Math.clamp((age-15)/4f,0,1);
-        // A zero-scale display can retain the previous client interpolation state.
-        // Hide only this cosmetic carrier; never replace the gameplay inventory stack.
-        s.gun.setItem(recovery>0?s.lastGun:ItemStack.EMPTY);
-        apply(s.gun,s.throwRoot==null?new Matrix4f().scale(0):new Matrix4f(s.throwRoot)
-                .translate(0,-.12f*(1-recovery),0).scale(recovery),true);s.lastRoot=null;
+        s.throwing=true;
+        // Keep the gun absent for the WHOLE throw. Re-raise the current gun and its
+        // grip arms together afterwards, never a cached weapon during recovery.
+        s.gun.setItem(ItemStack.EMPTY);s.gun.update();s.lastRoot=null;
         var prop=kim.biryeong.destiny.ability.GrenadeThrow.prop(p);
         s.grenade.setItem(prop);
         Matrix4f propTransform=GrenadeThrowPose.prop(progress,mirror);
@@ -122,13 +136,17 @@ public final class ProfileWeaponView {
             boolean left=i%2==1,upper=i>=2;
             int marker=(left?1:0)|(upper?2:0)|(s.slim?4:0)|((sleeves&(left?2:1))!=0?8:0);
             if(s.lastMarkers[i]!=marker){s.arms[i].getDisplay().setBrightnessOverride(ProfileSkinArmCarrier.marker(marker));s.lastMarkers[i]=marker;}
+            if(left==mirror) {
+                // The other arm lowers with the weapon; only the throwing arm enters view.
+                apply(s.arms[i],new Matrix4f().translation(0,-3,-1).scale(0),false);
+                s.lastPoses[i]="@lowered";continue;
+            }
             var arm=GrenadeThrowPose.arm(i,progress,s.slim,mirror);
             if(s.readyArms[i]!=null) {
                 if(age<2)arm=GrenadeThrowPose.blendArm(s.readyArms[i],arm,(age+1)/3f,s.slim);
-                else if(recovery>0)arm=GrenadeThrowPose.blendArm(arm,s.readyArms[i],recovery,s.slim);
             }
             if(i==(mirror?0:1))propTransform=new Matrix4f().translation(
-                    new org.joml.Vector3f(0,-.5f,0).mulPosition(arm)).scale(.56f);
+                    new org.joml.Vector3f().mulPosition(arm)).scale(.56f);
             apply(s.arms[i],arm,s.lastPoses[i]!=null);
             s.lastPoses[i]="@throw";
         }

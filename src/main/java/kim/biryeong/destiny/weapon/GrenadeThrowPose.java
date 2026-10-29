@@ -33,10 +33,10 @@ public final class GrenadeThrowPose {
         if(upper)start.set(segment%2==1?-.32f:.32f,-.80f,-.72f);
         Vector3f end=point(side+(upper?"Elbow":"Wrist"),progress,mirror);
         Vector3f axis=new Vector3f(end).sub(start);float length=axis.length();
-        Quaternionf q=new Quaternionf().rotationTo(new Vector3f(0,-1,0),axis.normalize());
+        Quaternionf q=new Quaternionf().rotationTo(new Vector3f(0,1,0),axis.normalize());
         // Native SkullModel head spans Y=-.5..0 after item-local centering.
-        // Map that negative axis from shoulder/elbow toward elbow/wrist.
-        return new Matrix4f().translation(start).rotate(q).scale(slim?-.225f:-.3f,length*2,.3f);
+        // Match weapon arms: negative Y is proximal, zero is distal.
+        return new Matrix4f().translation(end).rotate(q).scale(slim?-.225f:-.3f,length*2,.3f);
     }
     public static Matrix4f prop(float progress,boolean mirror) {
         return new Matrix4f().translation(point("leftWrist",progress,mirror)).scale(.56f);
@@ -45,13 +45,13 @@ public final class GrenadeThrowPose {
     public static Matrix4f blendArm(Matrix4f from,Matrix4f to,float t,boolean slim) {
         if(t<=0)return new Matrix4f(from);
         if(t>=1)return new Matrix4f(to);
-        var start=new Vector3f().mulPosition(from).lerp(new Vector3f().mulPosition(to),t);
-        var end=new Vector3f(0,-.5f,0).mulPosition(from).lerp(new Vector3f(0,-.5f,0).mulPosition(to),t);
+        var start=new Vector3f(0,-.5f,0).mulPosition(from).lerp(new Vector3f(0,-.5f,0).mulPosition(to),t);
+        var end=new Vector3f().mulPosition(from).lerp(new Vector3f().mulPosition(to),t);
         var axis=new Vector3f(end).sub(start);float length=axis.length();
         var rotation=rotation(from).slerp(rotation(to),t);
-        var direction=new Vector3f(0,-1,0).rotate(rotation);
+        var direction=new Vector3f(0,1,0).rotate(rotation);
         rotation=new Quaternionf().rotationTo(direction,axis.normalize()).mul(rotation);
-        return new Matrix4f().translation(start).rotate(rotation).scale(slim?-.225f:-.3f,length*2,.3f);
+        return new Matrix4f().translation(end).rotate(rotation).scale(slim?-.225f:-.3f,length*2,.3f);
     }
     private static Quaternionf rotation(Matrix4f arm) {
         var x=arm.getColumn(0,new Vector3f()).normalize().negate();

@@ -62,7 +62,12 @@ public final class HunterSkillCast {
         if (!cast.valid()) return null;
         VISUAL_OWNER.put(player, cast.visualToken);
         cast.modeled = HunterAbilityVisuals.play(player, animation);
-        if (cast.modeled) PlayerAnimations.superItem(player, hand);
+        if (cast.modeled && slot == AbilitySlot.MELEE) {
+            if (hand.isEmpty()) PlayerAnimations.superEmptyHands(player);
+            else PlayerAnimations.superItems(player, hand, ItemStack.EMPTY);
+            player.swing(net.minecraft.world.InteractionHand.MAIN_HAND,
+                    new net.minecraft.world.item.component.SwingAnimation(net.minecraft.world.item.SwingAnimationType.WHACK, 6), true);
+        } else if (cast.modeled) PlayerAnimations.superItem(player, hand);
         return cast;
     }
 
@@ -91,8 +96,12 @@ public final class HunterSkillCast {
         HunterSkillTiming timing = new HunterSkillTiming(acceptedTick, delay);
         Tasks.run(player, level, ignoredAge -> {
             if (timing.poll(level.getServer().getTickCount(), windupValid())) {
-                // Restore live equipment, not a captured inventory stack. Never mutate the inventory.
-                if (releaseHand && modeled) PlayerAnimations.superItem(player, ItemStack.EMPTY);
+                // The prop leaves at contact; keep both rig hands bare through recovery.
+                // EMPTY via superItem would restore the live gun before the clip finished.
+                if (releaseHand && modeled) {
+                    if (slot == AbilitySlot.MELEE) PlayerAnimations.superEmptyHands(player);
+                    else PlayerAnimations.superItem(player, ItemStack.EMPTY);
+                }
                 if (releaseHand) VISUAL_OWNER.remove(player, visualToken);
                 action.run();
             }

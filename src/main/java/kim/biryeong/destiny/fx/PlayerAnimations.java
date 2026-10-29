@@ -60,7 +60,7 @@ public final class PlayerAnimations {
         net.minecraft.world.phys.Vec3 previousPosition;
         int classMovingUntil;
         Run run;
-        boolean closingAfterRun;
+        boolean closingAfterRun, meleeCast;
         final LimbEquipment equipment;
         ItemStack swordStack;
         SwordHandPackets.Protection handProtection;
@@ -107,6 +107,14 @@ public final class PlayerAnimations {
         return start(player, animation, false);
     }
 
+    /** Keep the accepted melee purpose even when a legacy rig resolves a throw fallback. */
+    public static boolean playMelee(ServerPlayer player, String animation) {
+        if (!start(player, animation, false)) return false;
+        Playback state = ACTIVE.get(player.getUUID());
+        if (state != null && state.owner == player) state.meleeCast = true;
+        return true;
+    }
+
     /** Existing super_arc / super_solar / super_void callers select the H15 ready loop. */
     public static boolean loop(ServerPlayer player, String animation) {
         return start(player, animation, true);
@@ -146,6 +154,20 @@ public final class PlayerAnimations {
     public static boolean ownsSwordHand(ServerPlayer player, ItemStack stack) {
         Playback state = ACTIVE.get(player.getUUID());
         return state != null && state.owner == player && state.swordStack == stack && valid(state);
+    }
+
+    /** Preserve a nonempty owner carrier while the grenade HUD draws its own skin arm.
+     * BM's empty-slot disguise would otherwise make vanilla render an additional fist. */
+    public static boolean ownsGrenadeHand(ServerPlayer player, ItemStack stack) {
+        Playback state = ACTIVE.get(player.getUUID());
+        return state != null && state.owner == player && state.handProtection != null
+                && state.swordStack == null && "grenade".equals(logical(activeClip(player)))
+                && stack == player.getMainHandItem() && !stack.isEmpty() && valid(state);
+    }
+
+    public static boolean meleePlaying(ServerPlayer player) {
+        Playback state = ACTIVE.get(player.getUUID());
+        return state != null && state.owner == player && state.meleeCast && valid(state);
     }
 
     public static boolean swordAttacking(ServerPlayer player) {
@@ -231,7 +253,9 @@ public final class PlayerAnimations {
             } else clip = resolve(request);
             if (clip == null) return false; // A missing clip must not destroy a working loop.
             stop(player);
-            if (sword) handProtection = SwordHandPackets.begin(player);
+            if (sword || ("grenade".equals(logical(request))
+                    && kim.biryeong.destiny.ability.GrenadeThrow.active(player)))
+                handProtection = SwordHandPackets.begin(player);
             LimbEquipment equipment = new LimbEquipment();
             AtomicBoolean created = new AtomicBoolean();
             EntityTracker tracker = clip.renderer.getOrCreate(ModPlayer.of(player.connection),
@@ -263,7 +287,7 @@ public final class PlayerAnimations {
             ACTIVE.put(player.getUUID(), state);
             adopted = true;
             applyOwnerVisibility(player, tracker);
-            if (sword) SwordHandPackets.syncCurrent(player);
+            if (handProtection != null) SwordHandPackets.syncCurrent(player);
             boolean ok = loop ? tracker.animate(clip.animation, Modifiers.READY) : oneShot(state, clip.animation);
             if (ok && loop) ((ServerAnimationClock) (Object) tracker).destiny$primeAnimation();
             if (!ok) discard(state);
