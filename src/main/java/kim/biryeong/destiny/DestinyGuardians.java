@@ -23,6 +23,14 @@ public final class DestinyGuardians implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // W244: native movement-speed FOV only. Omit the optional projection override
+        // even when an older server config still enables it; keep HUD/core shaders intact.
+        var shaderConfig=kim.biryeong.minigamelib.shaderfx.impl.ModConfig.getInstance();
+        if(shaderConfig.dynamicFovShader) {
+            shaderConfig.dynamicFovShader=false;
+            kim.biryeong.minigamelib.shaderfx.impl.ModConfig.save();
+            LOGGER.info("Dynamic FOV projection disabled; ADS uses native movement speed");
+        }
         kim.biryeong.destiny.fx.HunterModelAssets.prepare();
         kim.biryeong.destiny.fx.ClassSuperModelAssets.prepare();
         kim.biryeong.destiny.fx.HunterVfxAssets.prepare();

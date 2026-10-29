@@ -108,7 +108,7 @@ public final class WeaponCommands {
         c.getSource().sendSuccess(() -> Component.literal("[전투] " + entry.get().name()
                 + (entry.get().family().equals("glaive")
                     ? " · 좌클릭 무료 근접 · 우클릭 발사 · 웅크리기 방패/방패사격 · Q 재장전"
-                    : " · 우클릭 발사/충전 · 웅크리기 유지 ADS · Q 재장전 · 검 좌클릭 근접")
+                    : " · 우클릭 발사/충전 · 좌클릭 ADS 토글 · Q 재장전 · 검 좌클릭 근접")
                 + (WeaponLoadout.enabled(player) ? " · 먼저 /destiny loadout equip 으로 슬롯 장착" : "")), false);
         return 1;
     }

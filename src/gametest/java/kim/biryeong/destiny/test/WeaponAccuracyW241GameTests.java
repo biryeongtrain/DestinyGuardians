@@ -23,7 +23,7 @@ public final class WeaponAccuracyW241GameTests {
         return p;
     }
     private static void tickAds(GameTestHelper h, ServerPlayer p) {
-        p.setShiftKeyDown(true);
+        WeaponRuntime.tickPlayer(p);WeaponAiming.toggle(p);
         for (int i=1;i<=12;i++) h.runAfterDelay(i, () -> WeaponRuntime.tickPlayer(p));
     }
     @GameTest(structure="destiny-test:floor", maxTicks=30, environment="destiny-test:w90_isolated")

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Input;
  *   <li>공중에서 점프 → AIR_JUMP</li>
  *   <li>웅크리기 두 번 (간격 {@link #DOUBLE_TAP_TICKS}틱 이내) → CLASS_ABILITY</li>
  *   <li>F → GRENADE, 웅크리기 + F → SUPER (바닐라 손 바꾸기는 취소)</li>
+ *   <li>총기 좌클릭 → ADS 토글 (Shift는 웅크리기 유지)</li>
  *   <li>웅크리기 + 좌클릭 → MELEE, 궁극기 중 좌클릭 → PRIMARY</li>
  * </ul>
  */
@@ -88,6 +89,9 @@ public final class InputRouter {
 
     public static void onPunch(ServerPlayer player) {
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
+        // Super and Shift+melee retain priority; ordinary supported guns use left-click ADS.
+        if (!AbilityService.inSuper(player) && !(player.isShiftKeyDown() && Guardians.isGuardian(player))
+                && kim.biryeong.destiny.weapon.WeaponAiming.toggle(player)) return;
         if (!Guardians.isGuardian(player)) {
             return;
         }

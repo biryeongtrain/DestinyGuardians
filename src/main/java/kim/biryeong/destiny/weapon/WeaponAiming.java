@@ -1,7 +1,6 @@
 package kim.biryeong.destiny.weapon;
 
 import kim.biryeong.destiny.ability.AbilityService;
-import kim.biryeong.minigamelib.camera.api.CameraEffects;
 import kim.biryeong.minigamelib.cinematic.CameraViews;
 import net.minecraft.network.protocol.game.ClientboundPlayerRotationPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +11,6 @@ import java.util.*;
 /** Server-owned ADS and relative-camera recoil; no custom client mod, movement spoof or teleport. */
 public final class WeaponAiming {
     private static final Map<UUID, Session> SESSIONS = new HashMap<>();
-    public static final float BASE_FOV = 70;
     private static final class Session {
         final ServerPlayer owner;
         final ItemStack stack;
@@ -22,14 +20,14 @@ public final class WeaponAiming {
         long flinchTick = Long.MIN_VALUE;
         float flinchBudget;
         final WeaponAimMovement movement;
-        Float applied, previous;
-        boolean ownsFov, blocked;
+        boolean toggled;
+        long lastToggleTick = Long.MIN_VALUE;
         WeaponModels.Pose pose = WeaponModels.Pose.HIP;
         Session(ServerPlayer p) {
             owner=p; stack=p.getMainHandItem();level=p.level();
             movement=new WeaponAimMovement(p);
             // A crash/save may retain the old cosmetic selector without its owner session.
-            // Never leave a freshly loaded sniper invisible until the first crouch/release.
+            // Never leave a freshly loaded sniper invisible until the first ADS toggle.
             var data=stack.get(net.minecraft.core.component.DataComponents.CUSTOM_MODEL_DATA);
             if(data!=null && ("scope".equals(data.getString(0)) || "ads".equals(data.getString(0))))
                 WeaponModels.setPose(stack,WeaponModels.Pose.HIP);
@@ -53,49 +51,46 @@ public final class WeaponAiming {
         if (!eligible(p)) { cleanup(p);return; }
         if(s!=null && (s.stack!=p.getMainHandItem() || s.level!=p.level())) { remove(s);s=null; }
         if(s==null) { s=new Session(p);SESSIONS.put(p.getUUID(),s); }
-        if(!p.isShiftKeyDown())s.blocked=false;
         var profile=WeaponAimProfile.of(WeaponItems.entry(s.stack).orElseThrow());
-        boolean aiming=p.isShiftKeyDown() && !s.blocked && !WeaponHandling.blocked(p) && !WeaponRuntime.reloading(p);
+        boolean aiming=aimingInput(s);
+        if(aiming)p.setSprinting(false);
         var motionEntry=WeaponItems.entry(s.stack).orElseThrow();
         s.state.tick(p.level().getServer().getTickCount(),aiming,
                 pugilistAdsTicks(p,motionEntry,WeaponFirmlyPlanted.adsTicks(p,motionEntry,WeaponElementalCapacitor.adsTicks(p,motionEntry,WeaponSurplus.adsTicks(p,motionEntry,WeaponThreatDetector.adsTicks(p,motionEntry,WeaponStatsForAll.adsTicks(p,motionEntry,WeaponFrenzy.adsTicks(p,motionEntry,WeaponAdrenalineJunkie.adsTicks(p,motionEntry,WeaponPerpetualMotion.adsTicks(p,motionEntry,SnapshotAimProfile.enterTicks(s.stack)),true),true),true),true),true),true),true),true),
                 pugilistAdsTicks(p,motionEntry,WeaponFirmlyPlanted.adsTicks(p,motionEntry,WeaponElementalCapacitor.adsTicks(p,motionEntry,WeaponSurplus.adsTicks(p,motionEntry,WeaponThreatDetector.adsTicks(p,motionEntry,WeaponStatsForAll.adsTicks(p,motionEntry,WeaponFrenzy.adsTicks(p,motionEntry,WeaponAdrenalineJunkie.adsTicks(p,motionEntry,WeaponPerpetualMotion.adsTicks(p,motionEntry,profile.transitionTicks()),false),false),false),false),false),false),false),false),profile.recoveryPerTick());
-        updateFov(s,profile);
         updateNoDistractions(s);
         WeaponBoxBreathing.update(p,aimInput(p));
-        // FOV takeover may have blocked/reset the session. Never retain speed after that boundary.
-        s.movement.update(WeaponItems.entry(s.stack).orElseThrow(),aiming && !s.blocked && s.state.progress()>0);
+        s.movement.update(motionEntry,aiming,s.state.progress());
         // The scope wrapper hides only first-person contexts; original ITEM_MODEL stays an identity key.
-        // Apply after FOV ownership handling so an external takeover clears the scope in the same tick.
         var entry=WeaponItems.entry(s.stack).orElseThrow();
         var pose=s.state.progress()<.5f?WeaponModels.Pose.HIP:
                 WeaponScopes.supports(entry)?WeaponModels.Pose.SCOPE:WeaponModels.Pose.ADS;
         if(pose!=s.pose) { WeaponModels.setPose(s.stack,pose);s.pose=pose; }
         WeaponAimPresentation.update(p,s.stack,s.state.progress());
     }
-    private static void updateFov(Session s,WeaponAimProfile profile) {
-        if(s.ownsFov && !Objects.equals(CameraEffects.getFov(s.owner),s.applied)) {
-            // Another camera owner took over: never overwrite/reset its projection.
-            s.ownsFov=false;s.blocked=true;s.state.reset();s.flinch.reset();return;
-        }
-        if(s.state.progress()<=0 || !kim.biryeong.minigamelib.shaderfx.impl.ModConfig.getInstance().dynamicFovShader) {
-            releaseFov(s);return;
-        }
-        if(!s.ownsFov) { s.previous=CameraEffects.getFov(s.owner);s.ownsFov=true; }
-        float base=s.previous==null?BASE_FOV:s.previous;
-        var entry=WeaponItems.entry(s.stack).orElseThrow();
-        float fov=base+(WeaponAimState.zoomFov(base,profile.zoom()*WeaponRangefinder.zoomScalar(s.owner,entry))-base)*s.state.progress();
-        // Optional projection transport has integer degree precision.
-        fov=Math.max(1,Math.round(fov));
-        if(!Objects.equals(s.applied,fov)) { CameraEffects.setFov(s.owner,fov);s.applied=fov; }
+    /** Left-click toggles only the exact supported live weapon. Shift remains native crouch/skills.
+     * Repeated mining punches are debounced until a three-tick quiet gap.
+     * Handling/reload consumes the click without queueing an ADS entry after the action ends. */
+    public static boolean toggle(ServerPlayer p) {
+        if (!eligible(p)) return false;
+        var s=SESSIONS.get(p.getUUID());
+        if(s!=null && (s.owner!=p || s.stack!=p.getMainHandItem() || s.level!=p.level())) { remove(s);s=null; }
+        if(s==null) { s=new Session(p);SESSIONS.put(p.getUUID(),s); }
+        long now=p.level().getServer().getTickCount();
+        long prior=s.lastToggleTick;
+        s.lastToggleTick=now;
+        if(prior!=Long.MIN_VALUE && now-prior<3)return true;
+        WeaponQuickdraw.aimInput(p,true);
+        if(WeaponHandling.blocked(p) || WeaponRuntime.reloading(p)) { suspend(p);return true; }
+        s.toggled=!s.toggled;
+        if(!s.toggled) { releasedAim(p);s.movement.release(); }
+        return true;
     }
-    private static void releaseFov(Session s) {
-        if(s.ownsFov && Objects.equals(CameraEffects.getFov(s.owner),s.applied)) {
-            if(s.previous==null)CameraEffects.resetFov(s.owner);else CameraEffects.setFov(s.owner,s.previous);
-        }
-        s.ownsFov=false;s.applied=null;s.previous=null;
+    /** Pure selected-source intent, also usable during handling without a recursive ADS tick. */
+    public static boolean requested(ServerPlayer p) {
+        var s=matching(p);return s!=null && s.toggled;
     }
-    /** Skill/reload cancels ADS immediately; do not re-enter until the player releases crouch. */
+    /** Skill/reload cancels the toggle immediately; the next click is a fresh ADS request. */
     public static void suspend(ServerPlayer p) { suspend(p,false); }
     /** An empty-magazine automatic reload may keep only the already-paid cosmetic shot tail. */
     static void suspend(ServerPlayer p, boolean preserveFireMotion) {
@@ -104,7 +99,7 @@ public final class WeaponAiming {
         WeaponBoxBreathing.released(p,p.getMainHandItem());
         var s=SESSIONS.get(p.getUUID());
         if(s==null || s.owner!=p)return;
-        s.blocked=true;s.state.reset();s.flinch.reset();releaseFov(s);
+        s.toggled=false;s.state.reset();s.flinch.reset();
         s.movement.release();
         restorePose(s);
         kim.biryeong.destiny.hud.WeaponScopeHud.remove(p);
@@ -121,19 +116,18 @@ public final class WeaponAiming {
         var s=matching(p);return s==null?0:s.state.bloom();
     }
     private static boolean aimingInput(Session s) {
-        return s.owner.isShiftKeyDown() && !s.blocked && !WeaponHandling.blocked(s.owner)
+        return s.toggled && !WeaponHandling.blocked(s.owner)
                 && !WeaponRuntime.reloading(s.owner);
     }
-    /** Actual owned ADS input, before transition completion; pure and FOV-takeover aware. */
+    /** Actual owned ADS input, before transition completion; pure and source-bound. */
     public static boolean aimInput(ServerPlayer p) {
         var s=matching(p);
-        return s!=null&&aimingInput(s)&&(!s.ownsFov||Objects.equals(CameraEffects.getFov(p),s.applied));
+        return s!=null&&aimingInput(s);
     }
-    /** Pure current input/ownership oracle for prelaunch tracking; does not tick ADS or restore FOV. */
+    /** Pure current input/ownership oracle for prelaunch tracking; does not tick ADS or mutate speed. */
     public static boolean trackingInput(ServerPlayer p) {
         var s=matching(p);
-        return s!=null && aimingInput(s) && s.state.progress()>=TrackingProfile.MIN_ADS
-                && (!s.ownsFov || Objects.equals(CameraEffects.getFov(p),s.applied));
+        return s!=null && aimingInput(s) && s.state.progress()>=TrackingProfile.MIN_ADS;
     }
     private static void updateNoDistractions(Session s) {
         boolean exactIza=WeaponItems.entry(s.stack).filter(WeaponExotics::izanagi).isPresent();
@@ -147,7 +141,6 @@ public final class WeaponAiming {
     public static boolean noDistractions(ServerPlayer p) {
         var s=matching(p);
         if(s==null)return false;
-        if(s.ownsFov && !Objects.equals(CameraEffects.getFov(p),s.applied)) { suspend(p);return false; }
         updateNoDistractions(s);
         return s.flinch.active();
     }
@@ -156,13 +149,12 @@ public final class WeaponAiming {
         WeaponTracking.invalidate(p);
         WeaponBoxBreathing.released(p,p.getMainHandItem());
         var s=SESSIONS.get(p.getUUID());
-        if(s!=null && s.owner==p)s.flinch.reset();
+        if(s!=null && s.owner==p) { s.toggled=false;s.flinch.reset();s.movement.release(); }
     }
     /** A validated inventory stow breaks the continuous ADS interval even if the same object returns. */
     public static void inventoryStowing(ServerPlayer p,ItemStack outgoing) {
         var s=SESSIONS.get(p.getUUID());
-        if(s!=null && s.owner==p && s.stack==outgoing) {s.flinch.reset();WeaponTracking.invalidate(p);
-        WeaponBoxBreathing.released(p,p.getMainHandItem());}
+        if(s!=null && s.owner==p && s.stack==outgoing) suspend(p);
     }
 
     /** Called only after native Player.actuallyHurt, with exclusive real HP+absorption loss.
@@ -178,8 +170,7 @@ public final class WeaponAiming {
         if(WeaponHandling.blocked(p) || WeaponRuntime.reloading(p))return;
         var s=matching(p);
         if(s==null) { tick(p);s=matching(p); }
-        if(s==null || s.blocked || WeaponHandling.blocked(p) || WeaponRuntime.reloading(p))return;
-        if(s.ownsFov && !Objects.equals(CameraEffects.getFov(p),s.applied)) { suspend(p);return; }
+        if(s==null || WeaponHandling.blocked(p) || WeaponRuntime.reloading(p))return;
         updateNoDistractions(s);
         var entry=WeaponItems.entry(s.stack).orElseThrow();
         var profile=WeaponAimProfile.of(entry);
@@ -273,7 +264,6 @@ public final class WeaponAiming {
         WeaponTracking.cleanup(s.owner);
         WeaponBoxBreathing.released(s.owner,s.stack);
         s.movement.release();
-        releaseFov(s);
         restorePose(s);
         kim.biryeong.destiny.hud.WeaponScopeHud.remove(s.owner);
         SESSIONS.remove(s.owner.getUUID(),s);
