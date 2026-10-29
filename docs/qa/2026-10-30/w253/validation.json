@@ -1,0 +1,42 @@
+{
+  "batch": "W253",
+  "date": "2026-10-30",
+  "change": "Persistent full-auto preference defaults on; explicit opt-out retained",
+  "unit": {
+    "tests": 9,
+    "failures": 0
+  },
+  "gametest": {
+    "tests": 10,
+    "failures": 0
+  },
+  "compileGametestJava": "PASS",
+  "assemble": "PASS",
+  "fullGate": "Not repeated; W252 documents four preexisting asset mismatches",
+  "vision": {
+    "environment": "Danmo4GB OpenGL + Vision26.3",
+    "nativeUseHoldTicks": 40,
+    "neutralTicks": 16,
+    "postReleaseNeutralTicks": 20,
+    "results": "native-results.json",
+    "neutral": "final-neutral.json",
+    "clientExit": -2,
+    "serverSaveStopExit": 0
+  },
+  "inputExceptions": [
+    "bow draw/release",
+    "sword heavy press",
+    "breach remote detonation release"
+  ],
+  "modelRequest": "model-request.md",
+  "audio": "not tested",
+  "production": {
+    "server": "192.168.35.237:25565",
+    "onlineMode": true,
+    "andlistOpLevel": 4,
+    "runServerSession": 28785,
+    "serverReady": true,
+    "packReady": true,
+    "consoleRelay": "/private/tmp/destiny-w253/production/server.sock"
+  }
+}
