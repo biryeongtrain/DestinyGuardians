@@ -43,3 +43,6 @@
 25. worker는2차 PNG를 검토하고5구역의 재질/수관 개선과106기존패널 skip이 설계와 일치한다고 반환했다. 추가 제품수정 없이 동결한다.
 
 26. QAclient/QAserver는 정상 종료했고8102/25611/25565 listener가 없다. 마지막native/lease 중립, 추가한forceload12개+재시작프로브1개 모두 회수했다. 이번coordinator의 sleep자식만 종료해 wrapper가 자기caffeinate PID71815를 회수했다. 별도48시간 PID79904는 유지한다. slot4는 idle-needs-refresh로 반환하고 worker종료, worktree는 삭제하지 않았다. 최종검사 후 제품13파일 해시와 원본voxel/manifest SHA가 일치한다.
+
+27. 제품/검수43파일을01012c6b로 선택 커밋했다. 다른 기존 dirty/untracked변경은 포함하지 않았다. 최초 접속용runServer에서는961디테일 완료 뒤 재질 적용 도중 기본 무인60초 pause가 발생했다. 명령 stdin이 닫힌 실행이라 소유 JVM에 SIGTERM을 보내 종료했고 Gradle exit143은 이 운영 종료 결과다. 해당 실행에서 명시save ACK를 받았다고 주장하지 않는다. 다음 실행은 보존된material ledger114,973bytes를 읽어 남은8,664셀만 적용했다.
+28. 재기동(session52834)은 명령 stdin을 유지하는TTY로 실행했다. 초기보강 동안 pause-when-empty-seconds만0으로 두었고 완료 뒤 디스크 설정은 기존60으로 복구했다(현재 세션만0 유지). detail0/0, material8,664변경/0skip완료·팩생성 성공·콘솔save-all flush ACK를 확인했다. 최종detail2,248bytes/material135,295bytes.25565 listener·online-mode=true·andlist OP4·dynamic-fov-shader=true 유지. 서버는192.168.35.237:25565에 켜 둔다. production.json참조.
