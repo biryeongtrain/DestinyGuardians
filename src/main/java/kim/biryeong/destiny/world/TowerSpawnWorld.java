@@ -62,7 +62,7 @@ public final class TowerSpawnWorld {
     private static State state;
     private static final Map<UUID, Integer> RETRY_AFTER = new HashMap<>();
     private static final Map<UUID, ServerPlayer> PENDING_JOINS = new HashMap<>();
-    private record State(MinecraftServer server, RuntimeLevelHandle handle, TowerVoxelMap map) {}
+    private record State(MinecraftServer server, RuntimeLevelHandle handle, TowerVoxelMap map, TowerDetailPass details, TowerMaterialPass materials) {}
     private TowerSpawnWorld() {}
 
     /** Exact 26.3 server hooks: all vanilla explosion entry points dispatch here. */
@@ -94,6 +94,12 @@ public final class TowerSpawnWorld {
             else DestinyGuardians.LOGGER.info("타워 스폰 월드 비활성화: destiny.tower.enabled=false");
         });
         // Fantasy PERSISTENT levels use the normal server save/close path. Never delete or enqueue an unload here.
+        ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+            if (state != null && state.server() == server) {
+                state.details().close();
+                state.materials().close();
+            }
+        });
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
             if (state != null && state.server() == server) { state = null; RETRY_AFTER.clear(); PENDING_JOINS.clear(); }
         });
@@ -174,8 +180,8 @@ public final class TowerSpawnWorld {
         var bounds = map.manifest().bounds();
         level.getWorldBorder().setCenter((bounds.minX() + bounds.maxX() + 1) / 2.0, (bounds.minZ() + bounds.maxZ() + 1) / 2.0);
         level.getWorldBorder().setSize(map.manifest().worldBorder());
-        state = new State(server, handle, map);
-        // Read generated/persisted blocks; do not build a platform, clear air, or repair player edits.
+        state = new State(server, handle, map, TowerDetailPass.start(level, map), TowerMaterialPass.start(level, map));
+        // Arrival remains source/persisted geometry. Details run later in bounded ticks and never repair edits.
         if (safeSpawn(level, map).isEmpty()) throw new IllegalStateException("타워 스폰 주변에 안전한 바닥과 머리 공간이 없습니다.");
         handle.setTickWhenEmpty(false);
         DestinyGuardians.LOGGER.info("타워 영구 월드 준비 완료: {} ({} blocks)", ID, map.blockCount());
@@ -200,6 +206,9 @@ public final class TowerSpawnWorld {
 
     public static void tick(MinecraftServer server) {
         if (!enabled() || state == null || state.server() != server) return;
+        state.details().tick();
+        // Preserve source-floor support checks: every prop/branch finishes before recoloring.
+        if (state.details().isFinished()) state.materials().tick();
         for (var player : java.util.List.copyOf(PENDING_JOINS.values())) {
             PENDING_JOINS.remove(player.getUUID(), player);
             if (player.level().getServer() == server && !player.hasDisconnected() && !player.isRemoved()

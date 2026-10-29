@@ -1,5 +1,6 @@
 
-    if (Position.y < -9000000.0 && Position.y > -11000000.0 && UV2.y == 192) {
+    // Cuboid emission 15 raises both light channels to 240, replacing the sky-12 marker.
+    if (Position.y < -9000000.0 && Position.y > -11000000.0 && (UV2.y == 192 || (UV2.x == 240 && UV2.y == 240))) {
         vec3 p = (Position + vec3(0.0,10000000.0,0.0)) / 32000.0;
         float aspect = displayhud_screen_aspect();
         float focal = 1.428148;
