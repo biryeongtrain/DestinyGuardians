@@ -63,6 +63,7 @@ public final class Combat {
         if (source.level() != level || target.level() != level || !source.isAlive() || !target.isAlive()) {
             return false;
         }
+        if (!kim.biryeong.destiny.world.TowerSpawnWorld.mayAttack(level, target)) return false;
         if (attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.PRIMARY
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.SPECIAL
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.HEAVY) {

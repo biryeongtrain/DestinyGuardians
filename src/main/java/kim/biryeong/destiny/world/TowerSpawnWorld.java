@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
@@ -136,6 +137,8 @@ public final class TowerSpawnWorld {
         PlayerBlockBreakEvents.BEFORE.register((level, player, pos, block, entity) -> mayModify(level, player));
         AttackBlockCallback.EVENT.register((player, level, hand, pos, direction) ->
                 mayModify(level, player) ? InteractionResult.PASS : InteractionResult.FAIL);
+        AttackEntityCallback.EVENT.register((player, level, hand, target, hit) ->
+                mayAttack(level, target) ? InteractionResult.PASS : InteractionResult.FAIL);
         UseBlockCallback.EVENT.register((player, level, hand, hit) ->
                 mayModify(level, player) ? InteractionResult.PASS : InteractionResult.FAIL);
         UseItemCallback.EVENT.register((player, level, hand) -> {
@@ -195,6 +198,10 @@ public final class TowerSpawnWorld {
         return enabled() && state != null && state.server() == server ? Optional.of(state.handle().asLevel()) : Optional.empty();
     }
     public static boolean isTower(Level level) { return state != null && level == state.handle().asLevel(); }
+    /** Hub combat is disabled for players, including creative administrators. */
+    public static boolean mayAttack(Level level, net.minecraft.world.entity.Entity target) {
+        return !isTower(level) || !(target instanceof Player);
+    }
     public static boolean mayModify(Level level, Player player) {
         return !isTower(level) || player.isCreative() && player.permissions().hasPermission(Permissions.COMMANDS_ADMIN);
     }
@@ -225,7 +232,7 @@ public final class TowerSpawnWorld {
         }
         int tick = server.getTickCount();
         for (var player : java.util.List.copyOf(state.handle().asLevel().players())) {
-            if (player.isAlive() && (player.getY() < state.map().manifest().returnBelowY()
+            if (player.isAlive() && (player.getY() <= state.map().manifest().returnBelowY()
                     || !player.level().getWorldBorder().isWithinBounds(player.position()))
                     && tick >= RETRY_AFTER.getOrDefault(player.getUUID(), 0)) {
                 if (!teleport(player)) {

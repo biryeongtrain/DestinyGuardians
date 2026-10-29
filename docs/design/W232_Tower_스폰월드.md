@@ -79,3 +79,9 @@ R3 새 JVM에서 동일 저장 폴더를 다시 열고, 저장한 시험용 gold
 Charm STATIC export의 UV에는 scale/translation이 이미 적용되어 있어 PS UV는 `(U,1-V)`로 변환한다. 중복 scale/offset 적용을 피했다. TEXCOORD8 vertex buffer와 원본 조명·일부 engine 입력은 없어 대표값 근사이며 원작 색 완전 복원은 아니다.
 
 서버는 W243 재질 pass 완료 후 별도 W245 ledger로 96,577개 후보를 128 operations/tick 상한으로 적용한다. 실제 블록이 expected와 일치할 때만 바꾸므로 저장된 사용자 편집은 보존한다. 최종 QA에서는 96,550변경/27보호 skip을 확인했다. 자세한 근거와 Blender·Danmo 비교는 [W245 검수 기록](../qa/2026-10-29/w245/README.md)에 있다.
+
+## W246 낙하 복귀와 플레이어 전투 차단
+
+현재 Courtyard는 발 위치 Y가60이하가 되면 안전 스폰(기준 Y75)으로 복귀한다. `courtyard.json.returnBelowY`와 재생성용 `courtyard-config.json`을 함께60으로 변경했고, 경계는 inclusive다. 다른 월드에는 적용하지 않는다. 귀환은 기존 카메라/능력 정리·낙하거리/속도 초기화 경로를 사용한다.
+
+타워의 기존 PVP=false와 플레이어 피해 거부에 더해 `AttackEntityCallback`에서 플레이어를 공격하는 시도를 차단한다. `Combat.damage`도 대상 상태나 공격자 기록을 바꾸기 전에 거부한다. Creative/OP의 블록 편집 권한은 전투 예외가 아니다. 자세한 결과는 [W246 기록](../qa/2026-10-29/w246/README.md)에 남긴다.

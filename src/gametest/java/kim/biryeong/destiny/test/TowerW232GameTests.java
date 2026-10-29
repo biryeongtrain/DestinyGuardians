@@ -7,10 +7,13 @@ import kim.biryeong.destiny.world.TowerChunkGenerator;
 import kim.biryeong.destiny.world.TowerSpawnWorld;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -93,6 +96,64 @@ public final class TowerW232GameTests {
             check(h, alternative.isEmpty() || !alternative.get().equals(safe), "Search rejects blocked exact spawn");
             check(h, tower.getBlockState(head).is(Blocks.STONE), "Safety lookup does not clear or repair the map");
         } finally { tower.setBlockAndUpdate(head, original); }
+        h.succeed();
+    }
+
+    @GameTest(structure=FLOOR, environment=ENV, maxTicks=100, manualOnly=true)
+    public void fallThresholdReturnsAlivePlayerAndClearsMomentum(GameTestHelper h) {
+        var tower = TowerSpawnWorld.open(h.getLevel().getServer());
+        var player = TestPlayers.create(h, new Vec3(2.5,1,6.5), 0, 0, "TowerFall");
+        TestCleanup.register(h, () -> {
+            player.level().removePlayerImmediately(player, Entity.RemovalReason.DISCARDED);
+            TestPlayers.remove(player);
+        });
+        check(h, TowerSpawnWorld.teleport(player), "Player enters tower");
+        var map = ((TowerChunkGenerator)tower.getChunkSource().getGenerator()).map();
+        int threshold = map.manifest().returnBelowY();
+        check(h, threshold == 60, "Courtyard rescue threshold is Y=60");
+        player.setPos(player.getX(), threshold + 0.01, player.getZ());
+        TowerSpawnWorld.tick(tower.getServer());
+        check(h, player.getY() < threshold + 1, "Above threshold is not rescued early");
+        player.setPos(player.getX(), threshold, player.getZ());
+        player.setDeltaMovement(0, -2, 0);
+        TowerSpawnWorld.tick(tower.getServer());
+        check(h, TowerSpawnWorld.isSafeArrival(tower, player.position()) && player.getY() > threshold,
+                "Exact threshold returns player to safe spawn");
+        check(h, player.isAlive() && player.getHealth() == 20 && player.getDeltaMovement().equals(Vec3.ZERO),
+                "Rescue preserves health and clears falling momentum");
+        player.setPos(player.getX(), threshold - 10, player.getZ());
+        TowerSpawnWorld.tick(tower.getServer());
+        check(h, TowerSpawnWorld.isSafeArrival(tower, player.position()), "Below threshold also returns safely");
+        h.succeed();
+    }
+
+    @GameTest(structure=FLOOR, environment=ENV, maxTicks=100, manualOnly=true)
+    public void playerAttacksAndCustomDamageAreBlockedOnlyInTower(GameTestHelper h) {
+        var tower = TowerSpawnWorld.open(h.getLevel().getServer());
+        var attacker = TestPlayers.create(h, new Vec3(2.5,1,6.5), 0, 0, "TowerAttacker");
+        var target = TestPlayers.create(h, new Vec3(3.5,1,6.5), 0, 0, "TowerTarget");
+        TestCleanup.register(h, () -> {
+            for (var p : java.util.List.of(attacker, target)) {
+                p.level().removePlayerImmediately(p, Entity.RemovalReason.DISCARDED);
+                TestPlayers.remove(p);
+            }
+        });
+        check(h, TowerSpawnWorld.mayAttack(h.getLevel(), target), "Other worlds retain their combat policy");
+        check(h, TowerSpawnWorld.teleport(attacker) && TowerSpawnWorld.teleport(target), "Both players enter tower");
+        check(h, !tower.getGameRules().get(GameRules.PVP), "Vanilla PvP rule is disabled");
+        for (var mode : java.util.List.of(GameType.SURVIVAL, GameType.CREATIVE)) {
+            attacker.setGameMode(mode);
+            check(h, AttackEntityCallback.EVENT.invoker().interact(attacker, tower, InteractionHand.MAIN_HAND, target, null)
+                    == InteractionResult.FAIL, "Melee attack is rejected in both survival and creative");
+        }
+        float health = target.getHealth();
+        target.damageCooldownTime = 7;
+        kim.biryeong.destiny.combat.Combat.damage(tower, attacker, target, 10,
+                kim.biryeong.destiny.guardian.Element.SOLAR);
+        check(h, target.getHealth() == health && target.damageCooldownTime == 7,
+                "Custom damage is rejected before touching target combat state");
+        target.hurtServer(tower, attacker.damageSources().playerAttack(attacker), 10);
+        check(h, target.getHealth() == health, "Vanilla damage cannot hurt hub players");
         h.succeed();
     }
 }
