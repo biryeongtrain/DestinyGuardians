@@ -831,7 +831,8 @@ public final class WeaponRuntime {
         }
         var mulligan=p.mode()==WeaponProfile.Mode.HITSCAN?WeaponMulligan.capture(player,entry):WeaponMulligan.Token.NONE;
         Vec3 from = player.getEyePosition();
-        // Deterministic symmetric spread; damage is aggregated so pellets do not fight vanilla immunity.
+        // Sample one stochastic firing axis; preserve the physical pellet/bolt pattern around it.
+        // Damage is aggregated so pellets do not fight vanilla immunity.
         Map<LivingEntity, HitDamage> damage = new LinkedHashMap<>();
         var ace = p.mode() == WeaponProfile.Mode.HITSCAN ? WeaponAce.shot(player,entry) : WeaponAce.Token.NONE;
         var ballistics = WeaponAce.ballistics(WeaponAiming.ballistics(player,entry,WeaponShotTraits.range(player,shotTraits)),ace);
@@ -839,8 +840,10 @@ public final class WeaponRuntime {
         var payload=WeaponPayload.capture(player,entry,p);
         HitResult payloadHit=null;
         var shotgunShape=ShotgunPatternProfile.shape(entry);
+        Vec3 firingAxis = p.mode() == WeaponProfile.Mode.MELEE ? player.getLookAngle().normalize()
+                : WeaponAiming.direction(player, WeaponShotTraits.accuracy(player, shotTraits));
         for (int i = 0; i < p.pellets(); i++) {
-            Vec3 direction = WeaponAiming.direction(player,WeaponShotTraits.accuracy(player,shotTraits));
+            Vec3 direction = firingAxis;
             int spreadIndex = entry.family().equals("fusion_rifle") ? boltIndex : i;
             int spreadCount = entry.family().equals("fusion_rifle") ? p.burst() : p.pellets();
             if (shotgunShape.isPresent()&&shotgunShape.get()!=ShotgunSpread.Shape.SLUG) {

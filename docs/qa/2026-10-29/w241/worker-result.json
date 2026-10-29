@@ -1,0 +1,65 @@
+{
+  "worker": "w241-random-shot-dispersion",
+  "status": "complete",
+  "worktree": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow",
+  "completed_at": "2026-10-29T04:16:24.643696+00:00",
+  "baseline_sha256": "e99e7f14fa82dbaf30535c9640026086d0db1dd676d11967c5881692fe38720e",
+  "files": [
+    {
+      "path": "src/main/java/kim/biryeong/destiny/weapon/ShotDispersion.java",
+      "absolute_path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow/src/main/java/kim/biryeong/destiny/weapon/ShotDispersion.java",
+      "operation": "add",
+      "before": null,
+      "baseline_absent": true,
+      "sha256": "daccb1c302119f16bd8664b7979fe97c6f34a007db325d1307003c9d2bcd9005",
+      "bytes": 2759
+    },
+    {
+      "path": "src/test/java/kim/biryeong/destiny/weapon/ShotDispersionW241Test.java",
+      "absolute_path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow/src/test/java/kim/biryeong/destiny/weapon/ShotDispersionW241Test.java",
+      "operation": "add",
+      "before": null,
+      "baseline_absent": true,
+      "sha256": "c9ccf2cca7750a6f779c1d3b973fb1321a5ee1eb2af3e2edf13c805ffd0ade5b",
+      "bytes": 7597
+    }
+  ],
+  "checks": {
+    "focused_test": {
+      "command": "rtk proxy env JAVA_HOME=/Users/qf/Library/Java/JavaVirtualMachines/graalvm-jdk-25/Contents/Home ./gradlew test --tests '*ShotDispersionW241Test' -Pgcb_server_dir=/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow/libs/gcb-server --offline --no-daemon --console=plain --max-workers=2",
+      "exit_code": 0,
+      "gradle_result": "BUILD SUCCESSFUL",
+      "gradle_duration": "1m 53s",
+      "runs": 1,
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "report": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-pyroclastic_flow/build/test-results/test/TEST-kim.biryeong.destiny.weapon.ShotDispersionW241Test.xml",
+      "test_cases": [
+        "zeroSpreadAndCenterSamplesReturnTheExactNormalizedForward()",
+        "fixedSeedDiskHasNoDirectionalBiasAndHasUniformArea()",
+        "airPenaltySurvivesZeroAccuracyScalarAndHipSurvives100Ae()",
+        "groundedFullAdsRemovesHipAndBloomRegardlessOfAirborneEffectiveness()",
+        "partialAdsCombinesIndependentTermsInQuadratureAndClampsControls()",
+        "airborneEffectivenessHasAnExactFullAdsCutoffAt100()",
+        "samplesStayFiniteUnitAndInsideTheConeAcrossAllAimOrientations()",
+        "malformedArgumentsHaveDeterministicFiniteFallbacks()"
+      ]
+    },
+    "whitespace": "pass: no trailing whitespace and final newline on both owned files",
+    "isolated_dependencies": "minigame-lib and gcb-server resolve inside slot; build.gradle inode differs from each source"
+  },
+  "no_source_changes_after_provisional_integration": true,
+  "export": {
+    "performed": false,
+    "reason": "Master requested owned-path baseline/hash integration instead of full snapshot scan after provisional integration."
+  },
+  "limitations": [
+    "Pure math unit tests only; no server, Vision or game-window QA.",
+    "Main runtime integration and full gate belong to master.",
+    "No full worktree drift scan; master reviews other drift explicitly.",
+    "Angles are local Minecraft tuning, not exact Destiny 2 values."
+  ],
+  "commit_created": false
+}
