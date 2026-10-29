@@ -66,12 +66,16 @@ public final class TitanAbilities {
         boolean valid() {return !cancelled&&eligible(owner)&&owner.level()==level
                 &&Guardians.data(owner).loadout().orElse(null)==loadout;}
         boolean room() {shots.removeIf(SimProjectile::isDone);return shots.size()<8;}
+        private net.minecraft.world.item.ItemStack flightItem(String path) {
+            var grenade=kim.biryeong.destiny.fx.GrenadeModels.projectile(DestinyGuardians.id(path));
+            return grenade.isEmpty()?ClassAbilityEffects.item(path):grenade;
+        }
         boolean launch(Vec3 origin,Vec3 velocity,double gravity,int life,Element e,String path,Consumer<HitResult> impact) {
             return launchFlight(origin,velocity,gravity,life,e,path,impact)!=null;
         }
         SimProjectile launchFlight(Vec3 origin,Vec3 velocity,double gravity,int life,Element e,String path,Consumer<HitResult> impact) {
             if(!valid()||!room())return null;
-            SimProjectile flight=SimProjectile.launch(owner,origin,velocity,gravity,life,ClassAbilityEffects.item(path),.65f,e.color(),
+            SimProjectile flight=SimProjectile.launch(owner,origin,velocity,gravity,life,flightItem(path),.65f,e.color(),
                     hit->{if(valid())impact.accept(hit);});
             shots.add(flight);
             return flight;
@@ -105,7 +109,7 @@ public final class TitanAbilities {
         }
         TitanJump.tick(server);TitanClassAbility.tick(server);TitanGrenade.tick(server);TitanSuper.tick(server);
         OWNERS.values().removeIf(c->c.shots.isEmpty()&&!TitanJump.active(c.owner)&&!TitanClassAbility.active(c.owner)
-                &&!TitanGrenade.active(c.owner)&&!TitanSuper.active(c.owner)&&!kim.biryeong.destiny.ability.GrenadeThrow.active(c.owner));
+                &&!TitanGrenade.active(c.owner)&&!TitanSuper.active(c.owner)&&!kim.biryeong.destiny.ability.GrenadeThrow.active(c.owner)&&!ClassAbilityCast.active(c.owner));
     }
     public static void cleanup(ServerPlayer p) {
         Context c=OWNERS.get(p.getUUID());

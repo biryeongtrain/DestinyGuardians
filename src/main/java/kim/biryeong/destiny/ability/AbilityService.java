@@ -67,6 +67,7 @@ public final class AbilityService {
             SimProjectile.clearAll();
             Tasks.clearAll();
             GrenadeThrow.clearAll();
+            ClassAbilityCast.clearAll();
             kim.biryeong.destiny.ability.jump.JumpAbilities.clearAll();
             Statuses.clearAll();
             kim.biryeong.destiny.ability.titan.TitanAbilities.clearAll();
@@ -80,6 +81,7 @@ public final class AbilityService {
 
     public static void cleanup(ServerPlayer player) {
         GrenadeThrow.cleanup(player);
+        ClassAbilityCast.cleanup(player);
         kim.biryeong.destiny.ability.jump.JumpAbilities.cleanup(player);
         kim.biryeong.destiny.ability.hunter.HunterExpandedSupers.cleanup(player);
         kim.biryeong.destiny.ability.titan.TitanExpandedSupers.cleanup(player);
@@ -107,6 +109,7 @@ public final class AbilityService {
         }
         Statuses.tick(server);
         GrenadeThrow.tick(server);
+        ClassAbilityCast.tick(server);
         kim.biryeong.destiny.ability.jump.JumpAbilities.tick(server);
         SimProjectile.tickAll(server);
         Tasks.tickAll();
@@ -199,6 +202,7 @@ public final class AbilityService {
         if (equipped.isEmpty()) {
             return Result.NO_ABILITY;
         }
+        if (ClassAbilityCast.active(player) && slot != AbilitySlot.SUPER) return Result.BUSY;
         if (GrenadeThrow.active(player) && slot != AbilitySlot.JUMP && slot != AbilitySlot.SUPER) return Result.BUSY;
         Ability ability = equipped.get();
         GuardianData data = Guardians.data(player);
@@ -241,6 +245,7 @@ public final class AbilityService {
 
     public static void startSuper(ServerPlayer player, SuperSession session) {
         GrenadeThrow.cleanup(player);
+        ClassAbilityCast.cleanup(player);
         kim.biryeong.destiny.ability.hunter.HunterSkillCast.cancelPending(player);
         Guardians.runtime(player).superSession = session;
     }

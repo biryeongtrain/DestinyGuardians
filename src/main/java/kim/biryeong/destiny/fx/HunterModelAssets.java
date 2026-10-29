@@ -21,7 +21,7 @@ import java.util.Map;
 
 /** Installs a versioned limb without ever opening an artist-owned installed model for writing. */
 public final class HunterModelAssets {
-    public static final String MODEL_NAME = "guardian_hunter_w252_r1";
+    public static final String MODEL_NAME = "guardian_hunter_w255_r2";
     static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_w199.animation.json";
 
     private HunterModelAssets() { }
@@ -41,6 +41,12 @@ public final class HunterModelAssets {
                         .getAsJsonObject().getAsJsonArray("animations").get(0).getAsJsonObject();
                 for(int i=0;i<animations.size();i++)if(animations.get(i).getAsJsonObject().get("name").getAsString().equals("h15_grenade"))
                     animations.set(i,replacement);
+            }
+            try(var source=HunterModelAssets.class.getResourceAsStream("/destiny/animation/class_ability_w255.animation.json")) {
+                if(source==null)throw new IOException("W255 class animations missing");
+                var classes=JsonParser.parseReader(new InputStreamReader(source,StandardCharsets.UTF_8))
+                        .getAsJsonObject().getAsJsonArray("animations");
+                classes.forEach(animations::add);
             }
             JsonObject model = buildModel(
                     JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),animations);
@@ -71,7 +77,7 @@ public final class HunterModelAssets {
         var names = new HashSet<String>();
         for (var entry : animations) names.add(entry.getAsJsonObject().get("name").getAsString());
         for (var entry : clips) {
-            JsonObject animation = entry.getAsJsonObject().deepCopy();
+            JsonObject animation = SourceAnimationGrid.compile(entry.getAsJsonObject());
             String name = animation.get("name").getAsString();
             if (!name.startsWith("h15_") || !names.add(name)) throw new IllegalArgumentException("Duplicate/foreign H15 clip: " + name);
             JsonObject remapped = new JsonObject();

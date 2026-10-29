@@ -1,0 +1,868 @@
+{
+  "revision": "W255 delivered grenade held/projectile models",
+  "generator": "scripts/art/build_grenades_w255.py",
+  "generator_sha256": "3b44a7a641d855b7968049f46842723c6358f3ff9f9d0b79ca8b19b61fe4689c",
+  "source_root": "/Volumes/qf-ssd/Destiny-Grenade-Models-W253-2026-10-30",
+  "source_provenance": {
+    "date": "2026-10-30",
+    "game": "Destiny 2 / Windows Steam",
+    "steamBuild": "25932352",
+    "charmRelease": "v3.5.0",
+    "charmSourceRevision": "058e2ec",
+    "officialRelease": "https://github.com/MontagueM/Charm/releases/tag/v3.5.0",
+    "officialReleaseArchiveSha256": "65f6cf10d5ef8e68a27c92c21b062ea9954f819f67bf764e3a70fdbf6ede9fcb",
+    "requestSource": "H:/내 드라이브/model-request.md",
+    "requestSha256": "91717d26a0e4d75d9d205c5acee26327e47997f8949e31408f99e146b7ea35b3",
+    "referenceArchiveUrl": "https://drive.google.com/file/d/1yEfOLn_FJGT2tY5Q5oRNtA0OCnjkt2fQ/view",
+    "referenceArchiveSha256": "b3183e471b5ce992a463e4b779a2ce9f0530aab538f770fd21c908ea772bb75f",
+    "scope": "W253 four grenade rendering sources; no new super/animation export"
+  },
+  "source_inputs_sha256": {
+    "PROVENANCE.json": "b79820b2142e934589d2480eb2604f3eb7f2c1bac9228a65758850ac01eda190",
+    "MATERIAL_MAPPING.md": "fd9338e7e0e569d601791ae8cf788102ccd92b32b13edc14999142c41d8506b7",
+    "material-details.json": "fc5574af4a9fa673499e836630a39d1066b493a798606517076ff3eaa2bc21bd",
+    "abilities/fusion/manifest.json": "eb736f3eb1c2efe55d7c4c80902f06149afa7b8f97ef82cd3b621f673c7a498f",
+    "abilities/solar/manifest.json": "c5a87536aea86182581f07dcdcd53f755872b2ef30ca9444f020564246ac1ec3",
+    "abilities/vortex/manifest.json": "a37d41cb8a39495ae02ad53dd645130cf74c14ecd57a6d5794317fe275514ce4",
+    "abilities/storm/manifest.json": "19e52d0a9184b3cfb39d1fb8c1674b7b675d9712a57a84948a0687032252d20e",
+    "geometry/80C308CB_80C30922/source-preview.blend": "1ce95672fae652be5a2339bb6d79190b14c5a5475e8d13497b5d88eb02e68f5a",
+    "geometry/80C308CB_80C30922/mesh-data.json": "3c421ce05fa2f4c907c155de442419d3394d86c4c4689bb94c6b6de45f68f558",
+    "geometry/80C3339B_80C3339C/source-preview.blend": "383028bb06b9c7981d57aed14a07ac1d02201339a82024a06243f3f702d67ff3",
+    "geometry/80C3339B_80C3339C/mesh-data.json": "f9e9ac44ca2066f3822a93f9672b2f13a9895d52a4b0e7afc03ccc2093e7452d",
+    "geometry/80C3659F_80C365A4/source-preview.blend": "f53efba88b8d746494b6552ebb2b0b82690da5c1ee0215d0e94c9a1e512d7753",
+    "geometry/80C3659F_80C365A4/mesh-data.json": "5088a42fc8127e0da9eca13d089550a2facdbd23d649a2a80df06ea05d86675e",
+    "geometry/80C38A9A_80C38A9B/source-preview.blend": "6d08f9a939e02dd573047c7b5d7127bfdadfaaae8ed7933c4a8900edb2ea3e50",
+    "geometry/80C38A9A_80C38A9B/mesh-data.json": "d20e3603501fdcecabde31b4264508f5299d03434512ee0355f0a0999ba8e06d",
+    "Materials/80C308C5.json": "164d663c1cabee72f1d7397e6634396ffc845336f6d3dc2a7f964ff89f171eab",
+    "Materials/80C308CA.json": "312c0db3ed99b0099f957ba659226c56326a19f4ceb0dfe845cef5e0d9aeefbc",
+    "Materials/80C33394.json": "fa5002e3532de97e74154785e6feab76695ca93a7fe63a34348537708ca0aa59",
+    "Materials/80C3659E.json": "117e6c8f6a54e73630c2e16239e7b6d15e5680d24486a9935ccef0a62edfef2c",
+    "Materials/80C38A97.json": "827d7ff8ccc0775e931809556b44dfc59680accde089f1ad69a0f630d1c2af91",
+    "Shaders/HLSL/PS_80C3D35F.hlsl": "8bb3bf4abbc5db119b922ea3c4663c40af6ab9fc075e35d135a188f85c50f0b1",
+    "Shaders/HLSL/PS_80C37280.hlsl": "ef6fa957967cd84c2f6d4ec6ba290be08e8180281c553328721708fedea19c20",
+    "Shaders/HLSL/PS_80C3A1A2.hlsl": "82235558fbb968b51bbd27b4024f7fc488b6d723b70637739d83ba510f49412d",
+    "Shaders/HLSL/PS_80C3A904.hlsl": "3fc223b5d4e4b369f6027bdfc7552f0d45054fe3923984fce6e845647318ba9e",
+    "TexturesPNG/80C3C18E.png": "e99d29f423c5f6c8b02d7a1457b17f15858c27b7ebb418076222e77cc9f61304",
+    "TexturesPNG/80C3C190.png": "f4d0402f1bd2e21c24a5db05eee2e762c4cc9c59c5ab26d3ab881053abc888b5"
+  },
+  "blender": "5.4.0 Alpha",
+  "bindings": {
+    "fusion": {
+      "product_ids": [
+        "titan/solar_grenade"
+      ],
+      "source_pattern": "80C2F93B",
+      "source_paths": [
+        "content\\sandbox\\abilities\\player\\grenades\\flux\\thermal\\thermal_flux.pattern.tft"
+      ],
+      "confidence": "internal grenade path family + live references; inventory plug to pattern activation link not decoded"
+    },
+    "solar": {
+      "product_ids": [
+        "warlock/solar_grenade"
+      ],
+      "source_pattern": "80A5A74D",
+      "source_paths": [
+        "content\\sandbox\\abilities\\player\\grenades\\flare\\thermal\\thermal_flare.pattern.tft"
+      ],
+      "confidence": "internal grenade path family + live references; inventory plug to pattern activation link not decoded"
+    },
+    "vortex": {
+      "product_ids": [
+        "hunter/void_vortex",
+        "warlock/void_grenade"
+      ],
+      "source_pattern": "80C2F17F",
+      "source_paths": [
+        "content\\sandbox\\abilities\\player\\grenades\\field\\void\\void_field.pattern.tft"
+      ],
+      "confidence": "internal grenade path family + live references; inventory plug to pattern activation link not decoded"
+    },
+    "storm": {
+      "product_ids": [
+        "warlock/arc_grenade"
+      ],
+      "source_pattern": "80A5BDF7",
+      "source_paths": [
+        "content\\sandbox\\abilities\\player\\grenades\\field\\arc\\arc_field.pattern.tft"
+      ],
+      "confidence": "internal grenade path family + live references; inventory plug to pattern activation link not decoded"
+    }
+  },
+  "models": {
+    "fusion_held": {
+      "candidate": {
+        "stage": "held",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80C372C1",
+        "model": "80C3339B",
+        "geometry": "80C3339B_80C3339C",
+        "evidence": [
+          {
+            "source": "80C2F93B",
+            "target": "80C3CAA0",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C3CAA0",
+            "target": "80C372C1",
+            "offset": 9800,
+            "kind": "mapped_u64_candidate",
+            "hash64": "7A73C24707190000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "adjacent skinned entity reference; held interpretation provisional"
+      },
+      "geometry": "80C3339B_80C3339C",
+      "selected_parts": [
+        0
+      ],
+      "passes": [
+        {
+          "object": "80A5A742_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "GenerateGbuffer",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80C33394"
+        },
+        {
+          "object": "80A5A742_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "ShadowGenerate",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80C3339A"
+        },
+        {
+          "object": "80A5A742_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "ComputeSkinning",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80A5B718"
+        }
+      ],
+      "source_blend_sha256": "383028bb06b9c7981d57aed14a07ac1d02201339a82024a06243f3f702d67ff3",
+      "source_triangles": 960,
+      "triangles": 460,
+      "decimate_ratio": 0.4791666666666667,
+      "elements": 920,
+      "normalization": {
+        "source_center": [
+          -0.00044362978951539844,
+          0.0004711198707809672,
+          -2.9103830456733704e-11
+        ],
+        "scale": 13333.331406530686,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 3.552713678800501e-15,
+      "geometry_uv_sha256": "0be8ce2d368b00a9f1466a199838667717a863424c85ecafdcd0623c52a92407",
+      "fragment_uv_sha256": "db088560129ebddda3d397db127d603bf8db16491c8d17660582033b39cb89f2",
+      "material_policy": "source UV + authored smooth energy ripples in project element palette"
+    },
+    "fusion_projectile": {
+      "candidate": {
+        "stage": "projectile",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80C2F960",
+        "model": "80C308CB",
+        "geometry": "80C308CB_80C30922",
+        "evidence": [
+          {
+            "source": "80C2F93B",
+            "target": "80C3CAA0",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C3CAA0",
+            "target": "80C2F960",
+            "offset": 9776,
+            "kind": "mapped_u64_candidate",
+            "hash64": "B66A508AAA8B0000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "first launch-related entity reference"
+      },
+      "geometry": "80C308CB_80C30922",
+      "selected_parts": [
+        0,
+        2
+      ],
+      "passes": [
+        {
+          "object": "80A5A77F_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "Transparents",
+          "triangles": 528,
+          "geometry_sha256": "36152f7619b7bedb3ee90de832692b0c181c9c68831ee260f111ba1ac5890242",
+          "material": "80C308C5"
+        },
+        {
+          "object": "80A5A77F_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "Transparents",
+          "triangles": 528,
+          "geometry_sha256": "0feb6e89aafed51b6ed355a5460c5fff1371757a8b660b63ae3acd2372b16db0",
+          "material": "80C308C5.001"
+        },
+        {
+          "object": "80A5A77F_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "LightShaftOcclusion",
+          "triangles": 528,
+          "geometry_sha256": "36152f7619b7bedb3ee90de832692b0c181c9c68831ee260f111ba1ac5890242",
+          "material": "80C308CA"
+        },
+        {
+          "object": "80A5A77F_Group0_Index6_3_GripStock0",
+          "part": 6,
+          "stage": "LightShaftOcclusion",
+          "triangles": 528,
+          "geometry_sha256": "0feb6e89aafed51b6ed355a5460c5fff1371757a8b660b63ae3acd2372b16db0",
+          "material": "80C308CA.001"
+        }
+      ],
+      "source_blend_sha256": "1ce95672fae652be5a2339bb6d79190b14c5a5475e8d13497b5d88eb02e68f5a",
+      "source_triangles": 1056,
+      "triangles": 460,
+      "decimate_ratio": 0.4356060606060606,
+      "elements": 920,
+      "normalization": {
+        "source_center": [
+          -0.000992277986370027,
+          0.0,
+          0.0
+        ],
+        "scale": 2327.0276477506186,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 1.2434497875801753e-14,
+      "geometry_uv_sha256": "783e41db2229d3b9006a89d3f402ac4d686c8a4ad45baf530d0088b3aa04fa2b",
+      "fragment_uv_sha256": "2f8e12dd0a49f4396255408321f6786ee7b7acbd5b93e71a20fb6c4a52a435c5",
+      "material_policy": "source UV + authored smooth energy ripples in project element palette"
+    },
+    "solar_held": {
+      "candidate": {
+        "stage": "held",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80C372C1",
+        "model": "80C3339B",
+        "geometry": "80C3339B_80C3339C",
+        "evidence": [
+          {
+            "source": "80A5A74D",
+            "target": "80C3474B",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C3474B",
+            "target": "80C372C1",
+            "offset": 9224,
+            "kind": "mapped_u64_candidate",
+            "hash64": "7A73C24707190000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "adjacent skinned entity reference; held interpretation provisional"
+      },
+      "geometry": "80C3339B_80C3339C",
+      "selected_parts": [
+        0
+      ],
+      "passes": [
+        {
+          "object": "80A5A742_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "GenerateGbuffer",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80C33394"
+        },
+        {
+          "object": "80A5A742_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "ShadowGenerate",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80C3339A"
+        },
+        {
+          "object": "80A5A742_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "ComputeSkinning",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80A5B718"
+        }
+      ],
+      "source_blend_sha256": "383028bb06b9c7981d57aed14a07ac1d02201339a82024a06243f3f702d67ff3",
+      "source_triangles": 960,
+      "triangles": 460,
+      "decimate_ratio": 0.4791666666666667,
+      "elements": 920,
+      "normalization": {
+        "source_center": [
+          -0.00044362978951539844,
+          0.0004711198707809672,
+          -2.9103830456733704e-11
+        ],
+        "scale": 13333.331406530686,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 3.552713678800501e-15,
+      "geometry_uv_sha256": "0be8ce2d368b00a9f1466a199838667717a863424c85ecafdcd0623c52a92407",
+      "fragment_uv_sha256": "db088560129ebddda3d397db127d603bf8db16491c8d17660582033b39cb89f2",
+      "material_policy": "source UV + authored smooth energy ripples in project element palette"
+    },
+    "solar_projectile": {
+      "candidate": {
+        "stage": "projectile",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80A5A77F",
+        "model": "80C308CB",
+        "geometry": "80C308CB_80C30922",
+        "evidence": [
+          {
+            "source": "80A5A74D",
+            "target": "80C3474B",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C3474B",
+            "target": "80A5A77F",
+            "offset": 9200,
+            "kind": "mapped_u64_candidate",
+            "hash64": "588E2D63A1E70000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "first launch-related entity reference"
+      },
+      "geometry": "80C308CB_80C30922",
+      "selected_parts": [
+        0,
+        2
+      ],
+      "passes": [
+        {
+          "object": "80A5A77F_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "Transparents",
+          "triangles": 528,
+          "geometry_sha256": "36152f7619b7bedb3ee90de832692b0c181c9c68831ee260f111ba1ac5890242",
+          "material": "80C308C5"
+        },
+        {
+          "object": "80A5A77F_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "Transparents",
+          "triangles": 528,
+          "geometry_sha256": "0feb6e89aafed51b6ed355a5460c5fff1371757a8b660b63ae3acd2372b16db0",
+          "material": "80C308C5.001"
+        },
+        {
+          "object": "80A5A77F_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "LightShaftOcclusion",
+          "triangles": 528,
+          "geometry_sha256": "36152f7619b7bedb3ee90de832692b0c181c9c68831ee260f111ba1ac5890242",
+          "material": "80C308CA"
+        },
+        {
+          "object": "80A5A77F_Group0_Index6_3_GripStock0",
+          "part": 6,
+          "stage": "LightShaftOcclusion",
+          "triangles": 528,
+          "geometry_sha256": "0feb6e89aafed51b6ed355a5460c5fff1371757a8b660b63ae3acd2372b16db0",
+          "material": "80C308CA.001"
+        }
+      ],
+      "source_blend_sha256": "1ce95672fae652be5a2339bb6d79190b14c5a5475e8d13497b5d88eb02e68f5a",
+      "source_triangles": 1056,
+      "triangles": 460,
+      "decimate_ratio": 0.4356060606060606,
+      "elements": 920,
+      "normalization": {
+        "source_center": [
+          -0.000992277986370027,
+          0.0,
+          0.0
+        ],
+        "scale": 2327.0276477506186,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 1.2434497875801753e-14,
+      "geometry_uv_sha256": "783e41db2229d3b9006a89d3f402ac4d686c8a4ad45baf530d0088b3aa04fa2b",
+      "fragment_uv_sha256": "2f8e12dd0a49f4396255408321f6786ee7b7acbd5b93e71a20fb6c4a52a435c5",
+      "material_policy": "source UV + authored smooth energy ripples in project element palette"
+    },
+    "vortex_held": {
+      "candidate": {
+        "stage": "held",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80A5A742",
+        "model": "80C3339B",
+        "geometry": "80C3339B_80C3339C",
+        "evidence": [
+          {
+            "source": "80C2F17F",
+            "target": "80C36591",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C36591",
+            "target": "80A5A742",
+            "offset": 8872,
+            "kind": "mapped_u64_candidate",
+            "hash64": "2701396ABB170000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "adjacent skinned entity reference; held interpretation provisional"
+      },
+      "geometry": "80C3339B_80C3339C",
+      "selected_parts": [
+        0
+      ],
+      "passes": [
+        {
+          "object": "80A5A742_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "GenerateGbuffer",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80C33394"
+        },
+        {
+          "object": "80A5A742_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "ShadowGenerate",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80C3339A"
+        },
+        {
+          "object": "80A5A742_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "ComputeSkinning",
+          "triangles": 960,
+          "geometry_sha256": "d19c816c8f795382f60cb61d66953418a2130725d120898ba3812ba66a51b759",
+          "material": "80A5B718"
+        }
+      ],
+      "source_blend_sha256": "383028bb06b9c7981d57aed14a07ac1d02201339a82024a06243f3f702d67ff3",
+      "source_triangles": 960,
+      "triangles": 460,
+      "decimate_ratio": 0.4791666666666667,
+      "elements": 920,
+      "normalization": {
+        "source_center": [
+          -0.00044362978951539844,
+          0.0004711198707809672,
+          -2.9103830456733704e-11
+        ],
+        "scale": 13333.331406530686,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 3.552713678800501e-15,
+      "geometry_uv_sha256": "0be8ce2d368b00a9f1466a199838667717a863424c85ecafdcd0623c52a92407",
+      "fragment_uv_sha256": "db088560129ebddda3d397db127d603bf8db16491c8d17660582033b39cb89f2",
+      "material_policy": "source UV + authored smooth energy ripples in project element palette"
+    },
+    "vortex_projectile": {
+      "candidate": {
+        "stage": "projectile",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80C2F19E",
+        "model": "80C3659F",
+        "geometry": "80C3659F_80C365A4",
+        "evidence": [
+          {
+            "source": "80C2F17F",
+            "target": "80C36591",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C36591",
+            "target": "80C2F19E",
+            "offset": 8848,
+            "kind": "mapped_u64_candidate",
+            "hash64": "F64D0866D2C70000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "first launch-related entity reference"
+      },
+      "geometry": "80C3659F_80C365A4",
+      "selected_parts": [
+        0
+      ],
+      "passes": [
+        {
+          "object": "80A5BE0C_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "GenerateGbuffer",
+          "triangles": 196,
+          "geometry_sha256": "f13288c33c8543e0d3a6e9c7f0c3f8ebf29f74fbc1eafb14998aada6efb433a2",
+          "material": "80C3659E"
+        },
+        {
+          "object": "80A5BE0C_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "ShadowGenerate",
+          "triangles": 196,
+          "geometry_sha256": "f13288c33c8543e0d3a6e9c7f0c3f8ebf29f74fbc1eafb14998aada6efb433a2",
+          "material": "80C3A560"
+        },
+        {
+          "object": "80A5BE0C_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "DepthPrepass",
+          "triangles": 196,
+          "geometry_sha256": "f13288c33c8543e0d3a6e9c7f0c3f8ebf29f74fbc1eafb14998aada6efb433a2",
+          "material": "80C3A563"
+        }
+      ],
+      "source_blend_sha256": "f53efba88b8d746494b6552ebb2b0b82690da5c1ee0215d0e94c9a1e512d7753",
+      "source_triangles": 196,
+      "triangles": 196,
+      "decimate_ratio": 1.0,
+      "elements": 392,
+      "normalization": {
+        "source_center": [
+          0.0,
+          0.0,
+          -2.1338928490877151e-07
+        ],
+        "scale": 4005.3723652615,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 5.329070518200751e-15,
+      "geometry_uv_sha256": "f6ec96c584d96eecb6faa777e6ade005e1c19c78b67b34e09a0f091bee99cde6",
+      "fragment_uv_sha256": "9dff52dbd20cef057a89caa20e4d02f34d2554f5cf3133ce6b60b47c03555b25",
+      "material_policy": "actual t0 diffuse with product element tint + hot-red energy accent"
+    },
+    "storm_held": {
+      "candidate": {
+        "stage": "held",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80A5BE45",
+        "model": "80C38A9A",
+        "geometry": "80C38A9A_80C38A9B",
+        "evidence": [
+          {
+            "source": "80A5BDF7",
+            "target": "80C38A10",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C38A10",
+            "target": "80A5BE45",
+            "offset": 7928,
+            "kind": "mapped_u64_candidate",
+            "hash64": "5A1D823F24B20000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "adjacent skinned entity reference; held interpretation provisional"
+      },
+      "geometry": "80C38A9A_80C38A9B",
+      "selected_parts": [
+        0
+      ],
+      "passes": [
+        {
+          "object": "80A5BE45_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "GenerateGbuffer",
+          "triangles": 196,
+          "geometry_sha256": "c25aa58a8592604ac02f1c782c731dd8bd874dd06182ed6020c0065c5149482b",
+          "material": "80C38A97"
+        },
+        {
+          "object": "80A5BE45_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "ShadowGenerate",
+          "triangles": 196,
+          "geometry_sha256": "c25aa58a8592604ac02f1c782c731dd8bd874dd06182ed6020c0065c5149482b",
+          "material": "80C3A844"
+        },
+        {
+          "object": "80A5BE45_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "DepthPrepass",
+          "triangles": 196,
+          "geometry_sha256": "c25aa58a8592604ac02f1c782c731dd8bd874dd06182ed6020c0065c5149482b",
+          "material": "80C3A841"
+        },
+        {
+          "object": "80A5BE45_Group0_Index6_3_GripStock0",
+          "part": 6,
+          "stage": "ComputeSkinning",
+          "triangles": 196,
+          "geometry_sha256": "c25aa58a8592604ac02f1c782c731dd8bd874dd06182ed6020c0065c5149482b",
+          "material": "80A5B718"
+        }
+      ],
+      "source_blend_sha256": "6d08f9a939e02dd573047c7b5d7127bfdadfaaae8ed7933c4a8900edb2ea3e50",
+      "source_triangles": 196,
+      "triangles": 196,
+      "decimate_ratio": 1.0,
+      "elements": 392,
+      "normalization": {
+        "source_center": [
+          -1.0477378964424133e-09,
+          9.051291272044182e-09,
+          -2.0407605916261673e-07
+        ],
+        "scale": 4005.390574950451,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 1.2434497875801753e-14,
+      "geometry_uv_sha256": "3e36cf555dd45ad58d2a95cd1a098aa92523ea1bf392c88f7ab633e4ec789c43",
+      "fragment_uv_sha256": "c76fe1f7f41cefcb933adcee9f41b25d67d4bc095ff453840879825b999e21a0",
+      "material_policy": "actual t0 diffuse with product element tint + hot-red energy accent"
+    },
+    "storm_projectile": {
+      "candidate": {
+        "stage": "projectile",
+        "status": "candidate_phase_not_runtime_verified",
+        "entity": "80A5BE0C",
+        "model": "80C3659F",
+        "geometry": "80C3659F_80C365A4",
+        "evidence": [
+          {
+            "source": "80A5BDF7",
+            "target": "80C38A10",
+            "evidence": "typed Entity.Components"
+          },
+          {
+            "source": "80C38A10",
+            "target": "80A5BE0C",
+            "offset": 7904,
+            "kind": "mapped_u64_candidate",
+            "hash64": "BC7B7408C4890000",
+            "reference": "80809AD8"
+          }
+        ],
+        "phaseReason": "first launch-related entity reference"
+      },
+      "geometry": "80C3659F_80C365A4",
+      "selected_parts": [
+        0
+      ],
+      "passes": [
+        {
+          "object": "80A5BE0C_Group0_Index0_0_GripStock0",
+          "part": 0,
+          "stage": "GenerateGbuffer",
+          "triangles": 196,
+          "geometry_sha256": "f13288c33c8543e0d3a6e9c7f0c3f8ebf29f74fbc1eafb14998aada6efb433a2",
+          "material": "80C3659E"
+        },
+        {
+          "object": "80A5BE0C_Group0_Index2_1_GripStock0",
+          "part": 2,
+          "stage": "ShadowGenerate",
+          "triangles": 196,
+          "geometry_sha256": "f13288c33c8543e0d3a6e9c7f0c3f8ebf29f74fbc1eafb14998aada6efb433a2",
+          "material": "80C3A560"
+        },
+        {
+          "object": "80A5BE0C_Group0_Index4_2_GripStock0",
+          "part": 4,
+          "stage": "DepthPrepass",
+          "triangles": 196,
+          "geometry_sha256": "f13288c33c8543e0d3a6e9c7f0c3f8ebf29f74fbc1eafb14998aada6efb433a2",
+          "material": "80C3A563"
+        }
+      ],
+      "source_blend_sha256": "f53efba88b8d746494b6552ebb2b0b82690da5c1ee0215d0e94c9a1e512d7753",
+      "source_triangles": 196,
+      "triangles": 196,
+      "decimate_ratio": 1.0,
+      "elements": 392,
+      "normalization": {
+        "source_center": [
+          0.0,
+          0.0,
+          -2.1338928490877151e-07
+        ],
+        "scale": 4005.3723652615,
+        "target_center": [
+          8,
+          8,
+          8
+        ],
+        "max_extent": 8
+      },
+      "atlas_size": [
+        512,
+        512
+      ],
+      "fragment_size": 16,
+      "geometry_mapping_max_error_units": 5.329070518200751e-15,
+      "geometry_uv_sha256": "f6ec96c584d96eecb6faa777e6ade005e1c19c78b67b34e09a0f091bee99cde6",
+      "fragment_uv_sha256": "9dff52dbd20cef057a89caa20e4d02f34d2554f5cf3133ce6b60b47c03555b25",
+      "material_policy": "actual t0 diffuse with product element tint + hot-red energy accent"
+    }
+  },
+  "method": "Source .blend evaluated in own headless --disable-autoexec process; visible parts only, weld positional seams and collapse <=470 triangles; retain/interpolate uv0; W252 barycentric bake + W115 native triangle adapter. Both thermal transparent parts retained.",
+  "basis": "Blender world -> native (x,z,-y); selected original AABB centered at(8,8,8), max extent8 native units. Includes thermal secondary silhouette; no copied preview geometry.",
+  "native_rotation": "Rz*Ry*Rx; reconstructed each emitted fragment vertex with error <1e-7 native units",
+  "shader_evidence": {
+    "thermal": "Materials/80C308C5.json: no diffuse; PushGlobalChannelVector25. PS_80C3D35F.hlsl: frac(10*v3.xy), abs difference of UV ramps, cb0[5]/[6] colors; selected Transparents0/2, omitted LightShaftOcclusion4/6.",
+    "shared_held": "80C33394 / PS_80C37280: same periodic UV-ramp motif, cb0[0]/[1] grey inspection values; Frame26 dissolve. GenerateGbuffer0 retained; ShadowGenerate2/ComputeSkinning4 omitted.",
+    "field": "80C3659E / PS_80C3A1A2 and 80C38A97 / PS_80C3A904 bind t0=80C3C18E(sRGB diffuse), t1=80C3C190(packed normal XY). t0 luminance/detail retained with authored element tint and hot-red energy accent. Source alpha not opacity. Gbuffer0 only; no shadow/depth/compute shells."
+  },
+  "energy_adaptation": {
+    "palette_source": "guardian/Element.java project Solar FF7A1A/FFD38A, Void A86BFF/E2C8FF, Arc 5FC8FF/C8F4FF; these are product colors, not decoded Destiny runtime globals",
+    "grid": "Authored continuous sine-warp noise and soft ripple bands sampled through source UV, R1-lifted radiance floor Solar[255,186,78] to[255,250,215], Void[150,100,225] to[235,210,255]; emission15 with shade=false and front GUI lighting. Source checker deliberately replaced after visual review; no hard checker cells or neutral inspection shell.",
+    "field": "Diffuse RGB blended35 percent original plus65 percent luminance times element color for readable blue/purple shells; source detail retained. t0 hot-red texels R>220,G<80,B<60 recolored to glow. Authored tint/energy accent, not decoded shader emission. Bright/mixed fragments emission15/6; shell fragments0.",
+    "enemy": "Separate red luminance presentation atlas; energy luminance compressed to a red ramp to preserve ripples after R1 brightness lift. Identical geometry, UV, alpha and emission. Existing AbilityVisualVariants suffix lookup remains compatible."
+  },
+  "r1_review": {
+    "evidence": "/private/tmp/destiny-w255/r1/frames/{fusion,solar,vortex,storm}-held-phase3.png and -flight-phase8.png, grenade-contact-sheet.png",
+    "finding": "Native four throws succeeded per master. Correct energy geometry appeared dark/faceted in held fixture: initial Solar atlas median luma153/255 versus approximate warm prop pixels89/255. Vanilla item.vsh applies minecraft_mix_light independently of sample_lightmap; light.glsl has0.4 ambient plus0.6 directional light. shade=false/light_emission15 are not an unlit material.",
+    "correction": "Energy-only texture radiance floor raised and contrast reduced; energy-only gui_light front selects GuiItemAtlas ITEMS_FLAT rather than ITEMS_3D via ModelRenderProperties. Geometry, UV, alpha, shade and emission unchanged. Physical field diffuse/tint unchanged.",
+    "limits": "No shader or runtime changes. Front GUI light selection still uses directional normal lighting; native faceting cannot be fully removed by asset brightness. Held/flight R2 Vision required, including enemy readability."
+  },
+  "fallbacks": {
+    "hunter/arc_flashbang": "W252 explosion",
+    "hunter/solar_incendiary": "W252 explosion",
+    "titan/void_grenade": "W252 explosion (Suppressor)",
+    "titan/arc_grenade": "W252 pulse"
+  },
+  "limitations": [
+    "Delivery stage/entity assignments are candidates, not runtime-verified phase identity; inventory plug activation is unresolved.",
+    "Source thermal globals, derivative filtering, Frame26 dissolve and stochastic discard are unsupported; smooth energy ripples and shell element tints are explicit authored product adaptations; source inspection checker is not shipped.",
+    "Original additive/premultiplied transparency, atmospheric/depth/volumetric inputs, normal/PBR and animated particle simulation are not reconstructed.",
+    "Native item planes use geometric alpha masks, not source translucent volumetric shells. No extra VFX mesh or depth/shadow/compute shell added.",
+    "460-triangle derivatives and 16px atlas islands trade smoothness/detail for <=1000 native elements and 512px atlases.",
+    "Master owns native codecs/tests, resource load, Vision first/third-person and flight validation; offline preview does not certify those."
+  ],
+  "outputs": {
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/fusion_held.json": "9aec08ac210063bb22d0a2502494655841949021b2e4ac6fa79d51eb51f6a7ad",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/fusion_held.json": "623f648227b7a1936cfcc1910d1673beda25626f1666d73610587454a2619416",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/fusion_held.png": "0206fd7349ffc3f2db449f28e2f878e056a69575c27732686e07be5d0fdd212f",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/fusion_held_enemy.json": "194da293fc818257226e1854a0eb20f9907ba0a1ea5ab1a7bc52046f7fff0089",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/fusion_held_enemy.json": "acf0efc19724359bcd155a93095b9b77ada0b308ae1eeaafd750d4041b9b8a63",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/fusion_held_enemy.png": "3832590d98e6afb056302f9bfe726d1443cd0ccc2cba8e02bcaccf369c47855a",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/fusion_projectile.json": "e9b02b7c8e8f6bf6483060fb52bd24667136b976ab0588192475f8f71773ae82",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/fusion_projectile.json": "2f6c72710c76193e8bd800253a58a5843f9ebd1e636185357123d67f98f32d0e",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/fusion_projectile.png": "d364b20a4ace490eb3ec5379f5b7abf90b40d637dfcf58e2e226305096c15701",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/fusion_projectile_enemy.json": "918ba211cdde180f5b60c2daf72db51563fb213147a0b0e9e4ca81cbd2e2b0ad",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/fusion_projectile_enemy.json": "97561220427c9a8b159687027a25ee4ab930b2f74d50ee80d9c15d059a3c0100",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/fusion_projectile_enemy.png": "311d323265b876934439e1464afdac2f933bdcddedf04c99826fcea69ae802cc",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/solar_held.json": "fdf50d477a5c801d2bfb63a233002a59740627a68f65964e96ab97b17a128a03",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/solar_held.json": "55e559745002d9fb71770c3bbef4bed1b8af377cb94e47e7849594d2d605b4ba",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/solar_held.png": "0206fd7349ffc3f2db449f28e2f878e056a69575c27732686e07be5d0fdd212f",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/solar_held_enemy.json": "8267a42550ca35999056eb5f8a6e3e79db4a45afc75ced14ea2c48045a8039f2",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/solar_held_enemy.json": "02bada49eb127bc5478996fa0ab9585eba8cc18a6d4e0ba9db25a373f0ddd9fc",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/solar_held_enemy.png": "3832590d98e6afb056302f9bfe726d1443cd0ccc2cba8e02bcaccf369c47855a",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/solar_projectile.json": "c75c106803c7d94512888892e38dac22fe0dcd261688581f6d5146a93ebeadec",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/solar_projectile.json": "7afe5e71511d64737d321df7dfd46de55494d24df1c8629d6f5015b2acd77ff3",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/solar_projectile.png": "d364b20a4ace490eb3ec5379f5b7abf90b40d637dfcf58e2e226305096c15701",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/solar_projectile_enemy.json": "b648a9f33cf3c4a6a7aa290566dfd5da882e46796c1ef8e65993032f07b76d18",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/solar_projectile_enemy.json": "cb60f60163fed82f8a408b2f6f0db644444cd674a0861a9bf7dbe2e5f8e31547",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/solar_projectile_enemy.png": "311d323265b876934439e1464afdac2f933bdcddedf04c99826fcea69ae802cc",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/vortex_held.json": "bb27df05534983c88eb53967236666ce02d14589095eb48c61f430d5ad848601",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/vortex_held.json": "c23241c4607de18d6742f8d7aedd9e89e2de0b4d0bf489f894ead137546644aa",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/vortex_held.png": "8698ee04597f9ae618b8000f3a748eced60dc8374ecee73c7f520836e0a6c0da",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/vortex_held_enemy.json": "0f83da638912b330d0e76ffee5a7656acb150ad0df7dae8aa69b7686d76b1a9a",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/vortex_held_enemy.json": "0893b3a2819be617bd4d1dfbc851e47e221a4f8adcd3842fdad18c251dbfbe39",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/vortex_held_enemy.png": "d5778edb27ad6ac67e8ffcc5a58d8c10053eec71dbef8d15083ead0fd12d98d3",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/vortex_projectile.json": "1c225d4f58ad106552fe96f6af5f8f60217654c17e065a4e7fc702ccfa4b4371",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/vortex_projectile.json": "1b0f65b8bd422a84423f80e54c7a85d8fe37f30304b5539e74d5f1665cdd5a16",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/vortex_projectile.png": "d589726de8fe055937ffdc642d6e8e58ec9e774788d9aad95d437b0be0268478",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/vortex_projectile_enemy.json": "c0d9e4f5c059b44d13af9e2cfc0ac5eedc4160cb850f7256a7658af7742d85c4",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/vortex_projectile_enemy.json": "c7fb705a82d5cbe74abb6e3ee759a5e9ae343055fee797e897d6f7afeaad2f47",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/vortex_projectile_enemy.png": "92133de682c6f3bf8300b2b91720c6f9372e003286e7b47c58fa7371f0a291b4",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/storm_held.json": "a0fac125e0df4f8ae1c1f8a987e49fb50751f6d8fe9b51a612c6511f6e87c177",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/storm_held.json": "1ca0ef072ad082f538ff01bd9826f356dc611fb24fa09624667fbf2737179779",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/storm_held.png": "02d3568511155f7d09a10a7ad6fb6cf1bdb6d3b3526f0581d78df6db372c39b6",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/storm_held_enemy.json": "31af91280d1fd0b9ddb8875c539911bfb7773ca094262e1e708370f1572ba296",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/storm_held_enemy.json": "3aa7d9cd112b27f79cc704fa2dfb782100d36d1abfdfcb0775c42d139082c09e",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/storm_held_enemy.png": "f59ab38a1a5c56568bd96aed21305f0141a9b65bfca5dbfcc8218cdec1e84497",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/storm_projectile.json": "d7747a7e0e81cd385debf36263cb07691a2bb7b3350d67fb2103075996b64820",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/storm_projectile.json": "8075802c1572f78f7c3483ebdefe9f158c5247840f2ce7c0992de0f3edd4a519",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/storm_projectile.png": "5873cabe55bdd91f19599445e4de271689ab058d39c4d3f1ef7d0bc0fe06f210",
+    "src/main/resources/assets/destiny/models/item/ability_w255/grenade/storm_projectile_enemy.json": "7dc97385eecdee8a04a6616bdf4b9105661a2390a8cc8534708f3f579b734227",
+    "src/main/resources/assets/destiny/items/ability_w255/grenade/storm_projectile_enemy.json": "61d648cfb2d060e55b4005bec644a91373ecc1046470722aed0b3e66aa3dbdeb",
+    "src/main/resources/assets/destiny/textures/item/ability_w255/grenade/storm_projectile_enemy.png": "df4eb577b0ee832646f9354c212cd1eb88b15d4dc45f488373e5b1701cf16431"
+  }
+}

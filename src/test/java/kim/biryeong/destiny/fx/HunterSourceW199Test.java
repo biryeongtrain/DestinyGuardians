@@ -24,12 +24,12 @@ class HunterSourceW199Test {
         return clips;
     }
     @Test void installedVersionUsesSourceVoidWithoutChangingOtherClipsOrGeometry() throws Exception {
-        assertEquals("guardian_hunter_w252_r1", HunterModelAssets.MODEL_NAME);
+        assertEquals("guardian_hunter_w255_r2", HunterModelAssets.MODEL_NAME);
         assertEquals("/destiny/animation/hunter_w199.animation.json", HunterModelAssets.ANIMATION_RESOURCE);
         var root = "src/main/resources/destiny/animation/";
         var before = read(root + "hunter_w197.animation.json");
         var after = read(root + "hunter_w199.animation.json");
-        // W252 installs the accepted W199 rig under a new name with a grenade-only overlay.
+        // W255 retains the W199 baseline and W252 throw while appending source class casts.
         assertEquals("guardian_hunter_w199_r1", after.get("model").getAsString());
         var overlay=clips(read(root+"grenade_w252.animation.json"));
         assertEquals(Set.of("h15_grenade"),overlay.keySet());

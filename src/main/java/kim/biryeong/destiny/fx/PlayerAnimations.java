@@ -253,7 +253,7 @@ public final class PlayerAnimations {
             } else clip = resolve(request);
             if (clip == null) return false; // A missing clip must not destroy a working loop.
             stop(player);
-            if (sword || ("grenade".equals(logical(request))
+            if (sword || logical(request).startsWith("class_") || ("grenade".equals(logical(request))
                     && kim.biryeong.destiny.ability.GrenadeThrow.active(player)))
                 handProtection = SwordHandPackets.begin(player);
             LimbEquipment equipment = new LimbEquipment();

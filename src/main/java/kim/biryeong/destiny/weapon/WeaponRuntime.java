@@ -248,6 +248,7 @@ public final class WeaponRuntime {
     private static boolean available(ServerPlayer player) {
         return player.isAlive() && !player.isRemoved() && !player.isSpectator() && !player.hasDisconnected()
                 && !AbilityService.inSuper(player) && !kim.biryeong.destiny.ability.GrenadeThrow.active(player)
+                && !kim.biryeong.destiny.ability.ClassAbilityCast.active(player)
                 && !kim.biryeong.destiny.fx.PlayerAnimations.meleePlaying(player) && WeaponLoadout.canUse(player);
     }
     private static State bind(ServerPlayer player) {

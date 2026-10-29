@@ -47,7 +47,7 @@ public final class WarlockGrenade extends Ability {
         Emission emission = new Emission(lease);
         Vec3 velocity = p.getLookAngle().scale(WarlockAbilities.value(this, "throw_speed", 1.1, .4, 2)).add(0, .12, 0);
         emission.projectile = WarlockAbilities.own(lease, SimProjectile.launch(p, kim.biryeong.destiny.ability.GrenadeThrow.origin(p), velocity, .045, 60,
-                GrenadeModels.item(GuardianClass.WARLOCK,element()), .5f, element().color(), hit -> {
+                GrenadeModels.projectile(id()), .5f, element().color(), hit -> {
                     if (!emission.valid()) return;
                     Vec3 center = WarlockAbilities.impactPoint(hit);
                     FIELDS.add(new Field(lease, this, center, adrenaline));

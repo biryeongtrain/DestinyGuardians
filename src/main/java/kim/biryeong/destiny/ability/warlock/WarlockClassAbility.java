@@ -85,9 +85,13 @@ public final class WarlockClassAbility extends Ability {
         var lease = WarlockAbilities.acquire(p, this);
         if (lease == null || ACTIVE.containsKey(p)) return false;
         Vec3 origin = new Vec3(p.getX(), ground.getLocation().y + .04, p.getZ());
-        ACTIVE.put(p, new Rift(lease, this, origin));
-        ClassAbilityEffects.sound(p, elementFor(lease), "class.cast");
-        return true;
+        return kim.biryeong.destiny.ability.ClassAbilityCast.begin(p,id(),"class_warlock_healing",lease::valid,()->{
+            var support=p.level().clip(new ClipContext(origin.add(0,.15,0),origin.add(0,-.3,0),
+                    ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,p));
+            if(!p.onGround()||support.getType()!=HitResult.Type.BLOCK)return;
+            ACTIVE.put(p,new Rift(lease,this,origin));
+            ClassAbilityEffects.sound(p,elementFor(lease),"class.cast");
+        });
     }
     private static Element elementFor(WarlockAbilities.Lease lease) {
         return kim.biryeong.destiny.ability.AbilityRegistry.get(lease.loadout.get(AbilitySlot.SUPER)).map(Ability::element).orElse(Element.ARC);

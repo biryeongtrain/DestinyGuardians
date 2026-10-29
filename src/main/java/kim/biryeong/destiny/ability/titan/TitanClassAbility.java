@@ -94,10 +94,16 @@ public final class TitanClassAbility extends Ability {
         if(support.getType()!=HitResult.Type.BLOCK||!p.level().noCollision(p,box)
                 ||p.level().clip(new ClipContext(p.getEyePosition(),center,ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,p)).getType()!=HitResult.Type.MISS)return false;
         var c=TitanAbilities.context(p);if(!c.valid())return false;
-        Barrier next=new Barrier(c,center,normal,width,height,TitanAbilities.ticks(this,"duration_ticks",400,600),
-                TitanAbilities.value(this,"health",80,1,500));
-        remove(p);ACTIVE.put(p.getUUID(),next);
-        ClassAbilityEffects.sound(p,elementFor(p),"class.cast");return true;
+        return ClassAbilityCast.begin(p,id(),"class_titan_towering",c::valid,()->{
+            if(!p.onGround()||!p.level().noCollision(p,box))return;
+            var contactSupport=p.level().clip(new ClipContext(center.add(0,-height/2+.15,0),center.add(0,-height/2-.4,0),
+                    ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,p));
+            if(contactSupport.getType()!=HitResult.Type.BLOCK)return;
+            Barrier next=new Barrier(c,center,normal,width,height,TitanAbilities.ticks(this,"duration_ticks",400,600),
+                    TitanAbilities.value(this,"health",80,1,500));
+            remove(p);ACTIVE.put(p.getUUID(),next);
+            ClassAbilityEffects.sound(p,elementFor(p),"class.cast");
+        });
     }
     private static Element elementFor(ServerPlayer p) {
         return AbilityService.equipped(p,AbilitySlot.SUPER).map(Ability::element).orElse(Element.ARC);

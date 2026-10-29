@@ -15,7 +15,7 @@ import java.util.HashSet;
 
 /** Source-derived Titan/Warlock clips on BetterModel's complete player-skin rig. */
 public final class ClassSuperModelAssets {
-    public static final String MODEL_NAME = "guardian_classes_w230_r3";
+    public static final String MODEL_NAME = "guardian_classes_w255_r1";
     static final String RESOURCE = "/destiny/animation/classes_w230.animation.json";
     private static final java.util.Set<String> EXPANDED = java.util.Set.of(
             "hunter/blade_barrage", "hunter/spectral_blades", "hunter/gathering_storm", "hunter/storms_edge",
@@ -87,7 +87,7 @@ public final class ClassSuperModelAssets {
         var names = new HashSet<String>();
         for (var a : animations) names.add(a.getAsJsonObject().get("name").getAsString());
         for (var a : clips) {
-            var animation = a.getAsJsonObject().deepCopy();
+            var animation = SourceAnimationGrid.compile(a.getAsJsonObject());
             String name = animation.get("name").getAsString();
             if (!(name.startsWith("w229_") || name.startsWith("w230_")) || !names.add(name))
                 throw new IllegalArgumentException("Foreign/duplicate class clip " + name);

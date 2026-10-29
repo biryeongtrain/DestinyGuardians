@@ -102,6 +102,7 @@ public final class WarlockW229GameTests {
     private static void use(GameTestHelper h, ServerPlayer p, AbilitySlot slot) {
         AbilityService.Result result = AbilityService.use(p, slot);
         check(h, result == AbilityService.Result.OK, "Accepted " + slot + " result=" + result + diagnostic(h, p));
+        if(slot==AbilitySlot.CLASS_ABILITY)ClassCastFieldFixture.installAcceptedField(p);
     }
     private static void rearmRift(GameTestHelper h, ServerPlayer p) {
         Guardians.data(p).setGuardianClass(GuardianClass.WARLOCK);
@@ -114,7 +115,7 @@ public final class WarlockW229GameTests {
     @GameTest(structure = "destiny-test:floor", maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void elevenRegisteredAbilitiesAndThreeCompletePresets(GameTestHelper h) {
         var all = AbilityRegistry.all().stream().filter(a -> a.guardianClass() == GuardianClass.WARLOCK).toList();
-        check(h, all.size() == 11, "Exactly eleven class-owned abilities registered by initializer");
+        check(h, all.size() == 14, "Fourteen class-owned abilities including W230 supers");
         for (Element e : List.of(Element.ARC, Element.SOLAR, Element.VOID)) {
             Loadout loadout = WarlockAbilities.preset(e);
             check(h, loadout.abilities().size() == 5, "Five slots in each elemental preset");

@@ -46,7 +46,7 @@ public final class HunterGrenade extends Ability {
         // Aim/origin are sampled at release, so aiming during anticipation remains responsive.
         Vec3 eye = kim.biryeong.destiny.ability.GrenadeThrow.origin(player);
         Vec3 velocity = player.getLookAngle().scale(param("throw_speed", 1.1)).add(0, 0.12, 0);
-        ItemStack visual = HunterAbilityVisuals.grenade(element());
+        ItemStack visual = kim.biryeong.destiny.fx.GrenadeModels.projectile(id());
         SimProjectile.launch(player, eye, velocity, 0.045, 80, visual, 0.5f, element().color(), hit -> {
             if (cast.valid()) detonate(player, cast, hit, adrenalineJunkie);
         });

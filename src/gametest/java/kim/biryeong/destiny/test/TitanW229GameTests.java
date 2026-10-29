@@ -86,6 +86,7 @@ public final class TitanW229GameTests {
         void cast(AbilitySlot slot) {
             var result=AbilityService.use(p,slot);
             check(h,result==AbilityService.Result.OK,"Accepted "+slot+", got "+result+" ["+clock()+"]");
+            if(slot==AbilitySlot.CLASS_ABILITY)ClassCastFieldFixture.installAcceptedField(p);
         }
         void barrier() {prepareGround();p.setOnGround(true);Guardians.data(p).setCooldown(AbilitySlot.CLASS_ABILITY,0);cast(AbilitySlot.CLASS_ABILITY);}
     }
@@ -229,6 +230,12 @@ public final class TitanW229GameTests {
     private static void ordinaryFlightCoexists(GameTestHelper h,Fixture f,Runnable next) {
         Guardians.data(f.p).setLoadout(GuardianClass.TITAN,TitanAbilities.preset(Element.VOID));
         f.p.setXRot(-90);f.cast(AbilitySlot.GRENADE);
+        // W252 owns preparation/release/recovery before another ability may begin.
+        // This coexistence test starts from a real released flight, never an instant-emission fixture.
+        f.afterGameTicks(kim.biryeong.destiny.ability.GrenadeThrow.DURATION_TICKS+1,
+                ()->ordinaryReleasedFlightCoexists(h,f,next));
+    }
+    private static void ordinaryReleasedFlightCoexists(GameTestHelper h,Fixture f,Runnable next) {
         check(h,SimProjectile.activeCount(f.p)==1,"Real accepted ordinary grenade flight exists before super");
         Guardians.data(f.p).setSuperEnergy(1);f.cast(AbilitySlot.SUPER);
         check(h,SimProjectile.activeCount(f.p)==1&&AbilityService.inSuper(f.p),"Ordinary context flight does not reject or disappear on super start");

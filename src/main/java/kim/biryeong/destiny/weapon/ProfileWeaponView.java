@@ -54,7 +54,7 @@ public final class ProfileWeaponView {
     private static void update(ServerPlayer p){
         var original=p.getMainHandItem();
         boolean throwing=kim.biryeong.destiny.ability.GrenadeThrow.active(p);
-        if(kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||(!throwing&&WeaponModels.entry(original).isEmpty())
+        if(kim.biryeong.destiny.ability.ClassAbilityCast.active(p)||kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||(!throwing&&WeaponModels.entry(original).isEmpty())
                 ||kim.biryeong.destiny.fx.PlayerAnimations.ownsSwordHand(p,original)){remove(p);return;}
         if(throwing) {
             var session=ACTIVE.get(p.getUUID());
