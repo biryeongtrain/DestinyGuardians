@@ -96,7 +96,10 @@ public final class WeaponAiming {
         s.ownsFov=false;s.applied=null;s.previous=null;
     }
     /** Skill/reload cancels ADS immediately; do not re-enter until the player releases crouch. */
-    public static void suspend(ServerPlayer p) {
+    public static void suspend(ServerPlayer p) { suspend(p,false); }
+    /** An empty-magazine automatic reload may keep only the already-paid cosmetic shot tail. */
+    static void suspend(ServerPlayer p, boolean preserveFireMotion) {
+        if(!preserveFireMotion)WeaponFireMotion.clear(p);
         WeaponTracking.invalidate(p);
         WeaponBoxBreathing.released(p,p.getMainHandItem());
         var s=SESSIONS.get(p.getUUID());

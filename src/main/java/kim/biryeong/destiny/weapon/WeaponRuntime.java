@@ -68,6 +68,7 @@ public final class WeaponRuntime {
         void releaseHold() { WeaponDynamicSway.released(owner,stack); WeaponTapTheTrigger.released(owner,stack); holding = false; fired = false; heldUntil = -1; cycle.cancelCharge(); acceptedBowDraw=null; }
         void cancel() { cancel(false); }
         void cancel(boolean preserveFundedIzanagiCue) {
+            WeaponFireMotion.clear(owner);
             WeaponClownCartridge.changed(owner,stack);
             WeaponSympatheticArsenal.reloadCancelled(owner,stack);
             arsenalReload=WeaponSympatheticArsenal.ReloadToken.NONE;
@@ -537,6 +538,7 @@ public final class WeaponRuntime {
         WeaponKillingTally.stowing(player,player.getMainHandItem()); WeaponSympatheticArsenal.stowing(player,player.getMainHandItem());
         WeaponAdagio.stowing(player,player.getMainHandItem()); WeaponClownCartridge.stowing(player,player.getMainHandItem());
         WeaponAiming.inventoryStowing(player,player.getMainHandItem());
+        WeaponFireMotion.inventoryStowing(player,player.getMainHandItem());
         State s=STATES.get(player.getUUID());
         if(s!=null&&s.owner==player&&(SwordItems.isSword(s.stack)
                 ||WeaponAccessibility.enabled(player)||WeaponFullAuto.selected(player)
@@ -557,6 +559,7 @@ public final class WeaponRuntime {
         WeaponKillingTally.stowing(player,previous); WeaponSympatheticArsenal.stowing(player,previous);
         WeaponAdagio.stowing(player,previous); WeaponClownCartridge.stowing(player,previous);
         WeaponAiming.inventoryStowing(player,previous);
+        WeaponFireMotion.inventoryStowing(player,previous);
         var s=STATES.get(player.getUUID());
         if(s!=null&&s.owner==player&&s.stack==previous
                 &&(s.acceptedCharge!=null || WeaponAccessibility.enabled(player)||WeaponFullAuto.selected(player)
@@ -629,7 +632,9 @@ public final class WeaponRuntime {
         s.emptyReloadPending=false;
         s.reloadAllowsHeldInput=shotCaused&&(heldAutomatic(player,entry)||entry.family().equals("bow"));
         s.heartbeatNeedsFreshPress=!s.reloadAllowsHeldInput;
-        WeaponAiming.suspend(player);
+        // Keep the paid shot's source recovery through automatic empty-mag reload;
+        // manual reload/skills still retire it. Ammo and reload timing are unchanged.
+        WeaponAiming.suspend(player,shotCaused);
         boolean liveHold=s.holding&&(WeaponModels.twoHanded(s.stack)?s.heldUntil>now(player)
                 :player.isUsingItem()&&player.getUseItem()==s.stack);
         // Keep an already-fired native semiauto consumption session alive until
@@ -811,6 +816,7 @@ public final class WeaponRuntime {
     }
     private static void emit(ServerPlayer player, WeaponCatalog.Entry entry, WeaponProfile p, boolean playFire, int boltIndex,
                              WeaponHighImpactReserves.Token highImpact, DamageTraits acceptedTraits, WeaponShotTraits.Snapshot shotTraits) {
+        WeaponFireMotion.emitted(player,entry,p,playFire,boltIndex);
         int honed=p.mode()==WeaponProfile.Mode.HITSCAN?WeaponIzanagi.shot(player,entry):0;
         if (WeaponExotics.izanagi(entry))
             WeaponIzanagiPresentation.update(player,player.getMainHandItem(),WeaponIzanagiPresentation.Mode.IDLE,0);
