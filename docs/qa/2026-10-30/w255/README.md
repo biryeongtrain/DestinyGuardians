@@ -100,3 +100,5 @@ R4는 Computer Use로 실제 데스크톱을 확인했고 새3시간 상한의 W
 Fusion 단계 fixture는 충분한 렌더 대기 후 phase3에서 손 위 구체, phase8에서 분리된 비행 소품과 궤적을 확인했다. `fusion-held-phase3.png`, `fusion-flight-phase8.png`. 원본 메시를 Minecraft 재질로 표현한 결과이며 원작 셰이더와 동일한 에너지 표현이라고 하지 않는다.
 
 03:45 KST tick unfreeze ACK 및 최종 카메라/lease/native 중립을 확인하고 소유 QA client와 server에 정상 종료를 요청했다. 원본 시간 보존 수정, 신규 class 시전 및 수류탄 자산의 범위로 커밋한다. 남은 표시 문제와 반복 경계25ms 한계는 완료 주장에 포함하지 않는다. 상세 요약은 `verification-summary.json`, 자동 gate는 함께 보존한 JSON을 참조한다.
+
+후속: 위에서 발견한3인칭 중1인칭 무기 중복은 [W256](../w256/README.md)에서 수정·재검증했다. 최초 W255 캡처는 수정 전 증거로 그대로 보존한다.

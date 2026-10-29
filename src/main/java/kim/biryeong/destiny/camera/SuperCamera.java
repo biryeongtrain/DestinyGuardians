@@ -125,6 +125,7 @@ public final class SuperCamera {
         Session s = new Session(p, element,swordStack);
         ACTIVE.put(p.getUUID(), s);
         try {
+            kim.biryeong.destiny.weapon.ProfileWeaponView.hideForCamera(p);
             updatePositions(s);
             spawn(p, s.mount);
             spawn(p, s.camera);

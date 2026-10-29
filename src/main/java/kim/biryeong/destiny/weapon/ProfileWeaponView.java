@@ -39,6 +39,11 @@ public final class ProfileWeaponView {
     }
     private ProfileWeaponView(){}
     public static boolean enabled(){return !Boolean.getBoolean(LEGACY_PROPERTY);}
+    /** The vanilla rear camera is packet-only: ServerPlayer.getCamera() still returns the player.
+     * Retire the owner-only HUD before switching views; never replace the gameplay inventory. */
+    public static void hideForCamera(ServerPlayer p){
+        if(kim.biryeong.destiny.camera.SuperCamera.active(p))remove(p);
+    }
     public static void init(){
         if(!enabled())return;
         ServerTickEvents.END_SERVER_TICK.register(server->{for(var p:server.getPlayerList().getPlayers())update(p);});
@@ -54,7 +59,7 @@ public final class ProfileWeaponView {
     private static void update(ServerPlayer p){
         var original=p.getMainHandItem();
         boolean throwing=kim.biryeong.destiny.ability.GrenadeThrow.active(p);
-        if(kim.biryeong.destiny.ability.ClassAbilityCast.active(p)||kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||(!throwing&&WeaponModels.entry(original).isEmpty())
+        if(kim.biryeong.destiny.camera.SuperCamera.active(p)||kim.biryeong.destiny.ability.ClassAbilityCast.active(p)||kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||(!throwing&&WeaponModels.entry(original).isEmpty())
                 ||kim.biryeong.destiny.fx.PlayerAnimations.ownsSwordHand(p,original)){remove(p);return;}
         if(throwing) {
             var session=ACTIVE.get(p.getUUID());

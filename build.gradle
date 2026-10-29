@@ -62,6 +62,13 @@ loom {
     }
 }
 
+// Bound both local test-server launch paths; do not rely on host-memory ergonomics.
+tasks.withType(JavaExec).configureEach {
+    if (name in ['runServer', 'runGameTest']) {
+        maxHeapSize = '4g'
+    }
+}
+
 test {
     useJUnitPlatform()
     // 큰 1인칭 손/무기 JSON을 바닐라 codec으로 검사할 때 기본 512MiB로는 부족하다.
