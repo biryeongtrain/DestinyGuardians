@@ -72,7 +72,8 @@ public final class HunterSuper extends Ability {
         // Keep the core silhouette readable; the old eye-height flame cloud obscured first person.
         AbilityParticles.send(player, player.level(), Fx.dust(element().color(), 0.65f), player.getX(), player.getY() + 0.25,
                 player.getZ(), 16, 0.55, 0.12, 0.55, 0.01);
-        Fx.sound(player.level(), player.position(), SoundEvents.BEACON_ACTIVATE, 1f, 1.4f);
+        kim.biryeong.destiny.sound.SuperCastSounds.play(player, player.position(),
+                "hunter." + element().getSerializedName() + ".super.start", SoundEvents.BEACON_ACTIVATE, 1f, 1.4f);
         return true;
     }
 

@@ -68,7 +68,7 @@ public final class DestinySounds {
         return true;
     }
 
-    private static void send(ServerPlayer listener, ClientboundSoundPacket packet) {
+    static void send(ServerPlayer listener, ClientboundSoundPacket packet) {
         listener.connection.send(packet);
         // Explicit QA only; a server queue log is not evidence of client decode or acoustic output.
         if (QA_TRACE) DestinyGuardians.LOGGER.info("[W33 sound QA] receiver={} event={} x={} y={} z={}",

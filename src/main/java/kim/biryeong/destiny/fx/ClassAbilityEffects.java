@@ -227,9 +227,13 @@ public final class ClassAbilityEffects {
                 ? action.replace("super.", path.substring(path.indexOf('/') + 1) + ".") : action;
         if (path.equals("titan/arc_super")) routed = action.replace("super.", "fists_of_havoc.");
         String key = Guardians.data(p).guardianClass().getSerializedName() + "." + e.getSerializedName() + "." + routed;
-        DestinySounds.orVanilla(p.level(), position, key, action.equals("super.fire")
+        var fallback = action.equals("super.fire")
                 ? SoundEvents.PLAYER_ATTACK_SWEEP : action.endsWith("impact")
-                ? SoundEvents.GENERIC_EXPLODE.value() : SoundEvents.BEACON_ACTIVATE, .65f, 1f);
+                ? SoundEvents.GENERIC_EXPLODE.value() : SoundEvents.BEACON_ACTIVATE;
+        // Blade Barrage's single throw is its cast cue; keep its suppressed start/end silent.
+        if (action.equals("super.start") || path.equals("hunter/blade_barrage") && action.equals("super.fire"))
+            kim.biryeong.destiny.sound.SuperCastSounds.play(p, position, key, fallback, .65f, 1f);
+        else DestinySounds.orVanilla(p.level(), position, key, fallback, .65f, 1f);
     }
 
     public static void burst(ServerPlayer p, Vec3 at, Element e, double radius) {
