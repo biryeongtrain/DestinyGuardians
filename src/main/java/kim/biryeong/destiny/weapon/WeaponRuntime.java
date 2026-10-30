@@ -567,7 +567,7 @@ public final class WeaponRuntime {
                 &&(s.acceptedCharge!=null || WeaponAccessibility.enabled(player)||WeaponFullAuto.selected(player)
                 ||WeaponItems.entry(previous).filter(WeaponExotics::izanagi).isPresent()))s.cancel();
     }
-    /** Vanilla Ctrl+Q alternate weapon action; Q remains ordinary reload. */
+    /** Shift+Q alternate weapon action; Q remains ordinary reload. */
     public static boolean reloadHoned(ServerPlayer player) {
         if(!available(player) || !WeaponIzanagi.canStart(player))return false;
         WeaponQuickdraw.update(player);

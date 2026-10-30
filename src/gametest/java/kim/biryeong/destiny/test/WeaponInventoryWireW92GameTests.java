@@ -63,11 +63,16 @@ public final class WeaponInventoryWireW92GameTests {
                 && WeaponIzanagi.charge(stack) == charge, "Actual magazine/reserve/charge: " + loaded + "/" + reserve + " x" + charge);
     }
     private static void request(GameTestHelper h, ServerPlayer player, boolean honed) {
-        player.connection.handlePlayerAction(new ServerboundPlayerActionPacket(honed
-                ? ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS
-                : ServerboundPlayerActionPacket.Action.DROP_ITEM, BlockPos.ZERO, Direction.UP));
+        boolean wasShift = player.isShiftKeyDown();
+        player.setShiftKeyDown(honed);
+        try {
+            player.connection.handlePlayerAction(new ServerboundPlayerActionPacket(
+                    ServerboundPlayerActionPacket.Action.DROP_ITEM, BlockPos.ZERO, Direction.UP));
+        } finally {
+            player.setShiftKeyDown(wasShift);
+        }
         check(h, WeaponRuntime.reloading(player) && WeaponIzanagi.honing(player) == honed,
-                "Production Q/CtrlQ packet starts the intended reload transaction");
+                "Production Q/ShiftQ packet starts the intended reload transaction");
     }
 
     private static final class Fixture {

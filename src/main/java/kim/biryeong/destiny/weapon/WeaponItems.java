@@ -110,7 +110,7 @@ public final class WeaponItems {
                 ammoLine(stack, magazine),
                 Component.literal(SwordItems.isSword(stack)?"좌클릭 약공격 / 우클릭 강공격 / 웅크리기 가드 / 검은 재장전 없음"
                         :GlaiveItems.isGlaive(stack)?"우클릭 발사 / 웅크리기 방패·방패사격 / Q 재장전"
-                        :entry(stack).filter(WeaponExotics::izanagi).isPresent()?"우클릭 발사 / 좌클릭 ADS 토글 / Q 재장전 / Ctrl+Q 연마된 칼날"
+                        :entry(stack).filter(WeaponExotics::izanagi).isPresent()?"우클릭 발사 / 좌클릭 ADS 토글 / Q 재장전 / Shift+Q 연마된 칼날"
                         :"우클릭 발사·유지 / 좌클릭 ADS 토글 / Q 재장전"),
                 Component.literal(entry(stack).map(e->e.family().equals("bow")).orElse(false)
                         ?"활: 유지해 당김 · 놓아 발사 · Q: 시위 풀기 · 발사 후 자동 재노킹"

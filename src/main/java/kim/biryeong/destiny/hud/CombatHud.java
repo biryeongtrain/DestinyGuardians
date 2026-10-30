@@ -124,6 +124,7 @@ public final class CombatHud {
                 case GRENADE -> "수류탄 "; case MELEE -> "근접 "; default -> "직업 ";
             }).append(data.cooldown(slot) > 0 ? (data.cooldown(slot) + 19) / 20 + "s" : "ready");
         }
+        AbilityKeyHud.update(player);
         LAST.put(player.getUUID(), debug.append("|궁극기 ").append(Math.round(superCharge * 100)).append('%').toString());
     }
 

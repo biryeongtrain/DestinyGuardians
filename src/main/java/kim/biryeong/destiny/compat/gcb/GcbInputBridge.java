@@ -5,6 +5,8 @@ import kim.biryeong.destiny.fx.PlayerAnimations;
 import kim.biryeong.destiny.guardian.GuardianRuntime;
 import kim.biryeong.destiny.guardian.Guardians;
 import kim.biryeong.destiny.input.GuardianAction;
+import kim.biryeong.destiny.input.ClientControls;
+import kim.biryeong.gcbserver.player.GCBPlayer;
 import kim.biryeong.destiny.input.InputRouter;
 import kim.biryeong.gcbserver.events.PlayerCameraTypeChangedEvent;
 import kim.biryeong.gcbserver.events.PlayerKeyStateChangedEvent;
@@ -14,13 +16,17 @@ import net.minecraft.server.level.ServerPlayer;
 
 /**
  * GCB-mod 클라이언트의 키·시점 이벤트 연결 (docs/design/12).
- * Z 수류탄, V 근접, C 직업 능력, X 궁극기, 좌클릭(누름) 궁극기 기본 공격.
+ * Z 수류탄, C 근접, V 직업 능력. F 궁극기는 InputRouter의 손 교환 패킷으로 처리한다.
  */
 public final class GcbInputBridge {
     private GcbInputBridge() {
     }
 
     public static void init() {
+        ClientControls.setDetector(player -> {
+            GCBPlayer gcb = (GCBPlayer) player;
+            return new ClientControls.Capability(gcb.gcb$hasMod(), gcb.gcb$getModVersion());
+        });
         PlayerKeyStateChangedEvent.EVENT.register(GcbInputBridge::onKey);
         PlayerCameraTypeChangedEvent.EVENT.register(GcbInputBridge::onCamera);
     }
@@ -28,16 +34,15 @@ public final class GcbInputBridge {
     public static GuardianAction actionFor(Key key) {
         return switch (key) {
             case KEY_Z -> GuardianAction.GRENADE;
-            case KEY_V -> GuardianAction.MELEE;
-            case KEY_C -> GuardianAction.CLASS_ABILITY;
-            case KEY_X -> GuardianAction.SUPER;
+            case KEY_C -> GuardianAction.MELEE;
+            case KEY_V -> GuardianAction.CLASS_ABILITY;
             case KEY_ATTACK -> GuardianAction.PRIMARY;
             default -> null;
         };
     }
 
     static void onKey(ServerPlayer player, boolean pushed, Key key) {
-        Guardians.runtime(player).gcbClient = true;
+        ClientControls.gcb(player);
         if (pushed && key == Key.KEY_0) {
             kim.biryeong.destiny.inventory.WeaponScreen.toggle(player); return;
         }
@@ -54,7 +59,7 @@ public final class GcbInputBridge {
 
     static void onCamera(ServerPlayer player, CameraType type) {
         GuardianRuntime runtime = Guardians.runtime(player);
-        runtime.gcbClient = true;
+        ClientControls.gcb(player);
         runtime.gcbThirdPerson = !type.isFirstPerson();
         PlayerAnimations.refreshOwnerVisibility(player);
     }

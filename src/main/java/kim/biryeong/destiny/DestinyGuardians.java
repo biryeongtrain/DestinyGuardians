@@ -42,6 +42,7 @@ public final class DestinyGuardians implements ModInitializer {
         kim.biryeong.destiny.experimental.ProfileArmProbe.init();
         kim.biryeong.destiny.weapon.ProfileWeaponView.init();
         Guardians.init();
+        kim.biryeong.destiny.input.ClientControls.init();
         kim.biryeong.destiny.inventory.WeaponScreen.init();
         HunterAbilities.register();
         kim.biryeong.destiny.ability.titan.TitanAbilities.register();

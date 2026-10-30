@@ -12,6 +12,8 @@ import net.minecraft.world.entity.player.Input;
  *
  * <ul>
  *   <li>공중에서 점프 → AIR_JUMP</li>
+ *   <li>GCB 사용자는 Z/C/V 및 손 교환 F만 능력 키로 사용한다.</li>
+ *   <li>아래 웅크리기 조합과 수류탄 F는 GCB 미설치자에게만 적용한다.</li>
  *   <li>웅크리기 두 번 (간격 {@link #DOUBLE_TAP_TICKS}틱 이내) → CLASS_ABILITY</li>
  *   <li>F → GRENADE, 웅크리기 + F → SUPER (바닐라 손 바꾸기는 취소)</li>
  *   <li>총기 좌클릭 → ADS 토글 (Shift는 웅크리기 유지)</li>
@@ -52,7 +54,7 @@ public final class InputRouter {
         if (next.jump() && !previous.jump() && canAirJump(player)) {
             dispatch(player, GuardianAction.AIR_JUMP);
         }
-        if (next.shift() && !previous.shift()) {
+        if (!ClientControls.gcb(player) && next.shift() && !previous.shift()) {
             int tick = player.level().getServer().getTickCount();
             if (tick - runtime.lastShiftPressTick <= DOUBLE_TAP_TICKS) {
                 runtime.lastShiftPressTick = Integer.MIN_VALUE / 2;
@@ -69,7 +71,9 @@ public final class InputRouter {
         if ((action == ServerboundPlayerActionPacket.Action.DROP_ITEM
                 || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
                 && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem()).isPresent()) {
-            if ((player.isShiftKeyDown() || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
+            // Ctrl+Q is reserved: cancel the predicted drop without starting either reload.
+            if (action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS) return true;
+            if (player.isShiftKeyDown()
                     && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem())
                         .filter(kim.biryeong.destiny.weapon.WeaponExotics::izanagi).isPresent()) {
                 kim.biryeong.destiny.weapon.WeaponRuntime.reloadHoned(player);
@@ -82,7 +86,13 @@ public final class InputRouter {
             return false;
         }
         if (action == ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND) {
-            dispatch(player, player.isShiftKeyDown() ? GuardianAction.SUPER : GuardianAction.GRENADE);
+            // GCB reports Z/C/V directly; F uses vanilla swap-offhand transport.
+            // A GCB client must not also activate the old Shift+F fallback.
+            if (ClientControls.gcb(player)) {
+                if (!player.isShiftKeyDown()) dispatch(player, GuardianAction.SUPER);
+            } else {
+                dispatch(player, player.isShiftKeyDown() ? GuardianAction.SUPER : GuardianAction.GRENADE);
+            }
             return true;
         }
         if (action == ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK && AbilityService.inSuper(player)) {
@@ -93,15 +103,17 @@ public final class InputRouter {
 
     public static void onPunch(ServerPlayer player) {
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
-        // Super and Shift+melee retain priority; ordinary supported guns use left-click ADS.
-        if (!AbilityService.inSuper(player) && !(player.isShiftKeyDown() && Guardians.isGuardian(player))
+        // Only non-GCB players use the crouch/punch melee chord. GCB players may
+        // still toggle ordinary gun ADS while crouching; their melee ability is C.
+        boolean vanillaMelee = player.isShiftKeyDown() && Guardians.isGuardian(player) && !ClientControls.gcb(player);
+        if (!AbilityService.inSuper(player) && !vanillaMelee
                 && kim.biryeong.destiny.weapon.WeaponAiming.toggle(player)) return;
         if (!Guardians.isGuardian(player)) {
             return;
         }
         if (AbilityService.inSuper(player)) {
             dispatch(player, GuardianAction.PRIMARY);
-        } else if (player.isShiftKeyDown()) {
+        } else if (vanillaMelee) {
             dispatch(player, GuardianAction.MELEE);
         }
     }

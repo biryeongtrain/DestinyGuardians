@@ -62,11 +62,16 @@ public final class WeaponIzanagiPresentationW91GameTests {
                 "Live slot6 must be in " + low + ".." + high + "; actual " + selector(stack));
     }
     private static void request(GameTestHelper h, ServerPlayer p, boolean honed) {
-        p.connection.handlePlayerAction(new ServerboundPlayerActionPacket(honed
-                ? ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS
-                : ServerboundPlayerActionPacket.Action.DROP_ITEM, BlockPos.ZERO, Direction.UP));
+        boolean wasShift = p.isShiftKeyDown();
+        p.setShiftKeyDown(honed);
+        try {
+            p.connection.handlePlayerAction(new ServerboundPlayerActionPacket(
+                    ServerboundPlayerActionPacket.Action.DROP_ITEM, BlockPos.ZERO, Direction.UP));
+        } finally {
+            p.setShiftKeyDown(wasShift);
+        }
         check(h, WeaponRuntime.reloading(p) && WeaponIzanagi.honing(p) == honed,
-                "Actual Q/CtrlQ packet admits the intended owned reload");
+                "Actual Q/ShiftQ packet admits the intended owned reload");
     }
     private static ItemStack wire(GameTestHelper h, ServerPlayer p, ItemStack stack) {
         var context = ((PacketContextProvider) (Object) p.connection).getPacketContext();

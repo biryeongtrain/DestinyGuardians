@@ -186,16 +186,21 @@ public final class WeaponIzanagiW84GameTests {
         check(h, !tag.contains(WeaponIzanagi.CHARGE), "Actual paid emission removes saved Honed charge, including misses");
     }
     private static void request(ServerPlayer p, boolean honed) {
-        p.connection.handlePlayerAction(new ServerboundPlayerActionPacket(honed
-                ? ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS
-                : ServerboundPlayerActionPacket.Action.DROP_ITEM, BlockPos.ZERO, Direction.UP));
+        boolean wasShift = p.isShiftKeyDown();
+        p.setShiftKeyDown(honed);
+        try {
+            p.connection.handlePlayerAction(new ServerboundPlayerActionPacket(
+                    ServerboundPlayerActionPacket.Action.DROP_ITEM, BlockPos.ZERO, Direction.UP));
+        } finally {
+            p.setShiftKeyDown(wasShift);
+        }
     }
     private static void reload(GameTestHelper h, ServerPlayer p, boolean honed) {
         var gun = p.getMainHandItem(); var before = ammo(gun);
         int loaded = before.rounds(), reserve = before.reserve(); long overflow = before.overflow();
         request(p, honed);
         check(h, WeaponRuntime.reloading(p) && p.getMainHandItem() == gun,
-                "Actual Q/CtrlQ packet starts reload without dropping or replacing the exact stack");
+                "Actual Q/ShiftQ packet starts reload without dropping or replacing the exact stack");
         state(h, gun, loaded, reserve, overflow, 0);
         if (honed) check(h, !WeaponIzanagi.canStart(p), "Accepted pending Honed transaction rejects duplicate starts");
     }
@@ -309,7 +314,7 @@ public final class WeaponIzanagiW84GameTests {
     }
 
     @GameTest(structure = FLOOR, maxTicks = 75, environment = "destiny-test:w90_isolated")
-    public void normalQAndAlternateCtrlQBothWaitFullSixtyOneWithoutEarlyCreditOrDuplicateRestart(GameTestHelper h) {
+    public void normalQAndAlternateShiftQBothWaitFullSixtyOneWithoutEarlyCreditOrDuplicateRestart(GameTestHelper h) {
         var f = new Fixture(h); var normal = f.player(8); var honed = f.player(24);
         var ordinaryGun = f.equip(normal, 1, 5, 0); var honedGun = f.equip(honed, 1, 5, 0);
         reload(h, normal, false); reload(h, honed, true);
@@ -339,7 +344,7 @@ public final class WeaponIzanagiW84GameTests {
         for (int n = 0; n < 2; n++) {
             var p = f.player(26 + n * 4); var gun = f.equip(p, n, 0, 0);
             check(h, !WeaponIzanagi.canStart(p), "Less than two finite cartridges cannot fund Honed"); request(p, true);
-            check(h, !WeaponRuntime.reloading(p) && p.getMainHandItem() == gun, "Denied CtrlQ cannot drop or start a timer");
+            check(h, !WeaponRuntime.reloading(p) && p.getMainHandItem() == gun, "Denied ShiftQ cannot drop or start a timer");
             state(h, gun, n, 0, 0, 0);
         }
         f.at(60, () -> {

@@ -52,7 +52,7 @@ public final class ReloadInputW249GameTests {
         w=wire(h,"izanagis_burden",false);item=w.player.getMainHandItem();
         var profile=WeaponProfile.forEntry(WeaponItems.entry(item).orElseThrow());
         WeaponItems.save(item,new WeaponMagazine(profile,0,0));w.full();w.discard();
-        action(w,true,true);check(h,!WeaponRuntime.reloading(w.player)&&!WeaponScreen.active(w.player),"Empty reserve ShiftQ rejects without opening menu");
+        action(w,false,true);check(h,!WeaponRuntime.reloading(w.player)&&!WeaponScreen.active(w.player),"Empty reserve ShiftQ rejects without opening menu");
         restored(h,w,item);h.succeed();
     }
     @GameTest(structure="destiny-test:w78_floor",maxTicks=30,environment="destiny-test:w90_isolated")
@@ -62,11 +62,20 @@ public final class ReloadInputW249GameTests {
         action(w,false,false);check(h,WeaponRuntime.reloading(w.player),"Repeated Q keeps reload");restored(h,w,item);h.succeed();
     }
     @GameTest(structure="destiny-test:w78_floor",maxTicks=30,environment="destiny-test:w90_isolated")
-    public void izanagiShiftQAndCtrlQBothHone(GameTestHelper h) {
+    public void izanagiShiftQHonesButCtrlQOnlyRepairsPredictedDrop(GameTestHelper h) {
         var a=wire(h,"izanagis_burden",true);action(a,false,true);
         check(h,WeaponRuntime.reloading(a.player)&&WeaponIzanagi.honing(a.player)&&!WeaponScreen.active(a.player),"Izanagi ShiftQ hones");restored(h,a,a.player.getMainHandItem());
-        var b=wire(h,"izanagis_burden",true);action(b,true,false);
-        check(h,WeaponRuntime.reloading(b.player)&&WeaponIzanagi.honing(b.player),"Existing CtrlQ honing remains supported");restored(h,b,b.player.getMainHandItem());h.succeed();
+        for (String id : List.of("izanagis_burden", "ace_of_spades")) {
+            for (boolean shift : List.of(false, true)) {
+                var b=wire(h,id,false);var item=b.player.getMainHandItem();var before=item.copy();
+                action(b,true,shift);
+                check(h,!WeaponRuntime.reloading(b.player)&&!WeaponIzanagi.honing(b.player)&&!WeaponScreen.active(b.player),
+                        "CtrlQ (including Ctrl+Shift+Q) starts neither reload nor honing: "+id);
+                restored(h,b,item);
+                check(h,ItemStack.matches(item,before),"Cancelled CtrlQ preserves all ammo, charge and components: "+id);
+            }
+        }
+        h.succeed();
     }
     @GameTest(structure="destiny-test:w78_floor",maxTicks=30,environment="destiny-test:w90_isolated")
     public void menuQStaysOpenAndRepairsHiddenCarrier(GameTestHelper h) {

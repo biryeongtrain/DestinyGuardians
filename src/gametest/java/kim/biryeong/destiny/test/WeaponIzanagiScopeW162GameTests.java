@@ -147,9 +147,11 @@ public final class WeaponIzanagiScopeW162GameTests {
         var f = new Fixture(h); var p = f.player(10, WeaponModels.Grip.TWO_HAND, 1, 5);
         var normal = f.player(22, WeaponModels.Grip.TWO_HAND, 1, 5);
         var stack = p.getMainHandItem();
+        p.setShiftKeyDown(true);
         p.connection.handlePlayerAction(new ServerboundPlayerActionPacket(
-                ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS, BlockPos.ZERO, Direction.UP));
-        check(h, WeaponRuntime.reloading(p) && WeaponIzanagi.honing(p), "Real CtrlQ admits funded transaction");
+                ServerboundPlayerActionPacket.Action.DROP_ITEM, BlockPos.ZERO, Direction.UP));
+        p.setShiftKeyDown(false);
+        check(h, WeaponRuntime.reloading(p) && WeaponIzanagi.honing(p), "Real ShiftQ admits funded transaction");
         for (int tick = 1; tick <= 60; tick++) f.at(tick, () -> {
             ammo(h, stack, 1, 5, 0);
             WeaponScopeHud.update(p, WeaponRuntime.reloading(p));
