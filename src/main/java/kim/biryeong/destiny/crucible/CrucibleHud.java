@@ -10,7 +10,7 @@ import java.util.Locale;
 /** Top-centre score, timer and three capture diamonds, colored relative to the viewer's team. */
 public final class CrucibleHud {
     private static final String ID = "destiny:crucible_control";
-    private static final int FRIEND = 0x7BCBEF, ENEMY = 0xFF6262, NEUTRAL = 0xE5E3DB;
+    private static final int FRIEND = CrucibleTeamVisuals.FRIEND, ENEMY = CrucibleTeamVisuals.ENEMY, NEUTRAL = 0xE5E3DB;
     private CrucibleHud() { }
     public static void render(ServerPlayer p, ControlMatch.Snapshot snap, String map, int respawnTicks) {
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(p)) { remove(p); return; }
@@ -41,6 +41,8 @@ public final class CrucibleHud {
                 if (respawnTicks > 0) text.append(Component.literal("\n부활 준비 " + (respawnTicks+19)/20).withColor(NEUTRAL));
             }
         }
+        text.append(Component.literal("\n◆ 아군 · 나의 팀").withColor(FRIEND))
+                .append(Component.literal("     ◆ 적 팀").withColor(ENEMY));
         var existing = DisplayHud.getHud(p, ID);
         if (existing != null && text.equals(existing.getExtraData("content"))) return;
         TextDisplayHud hud = existing instanceof TextDisplayHud h ? h : new TextDisplayHud();

@@ -90,6 +90,7 @@ public final class WeaponRuntime {
             chargeEntry=null; acceptedCharge=null;
             paidHighImpact=WeaponHighImpactReserves.Token.NONE;
             WeaponReloadPresentation.clear(owner,stack);
+            WeaponIzanagiPresentation.cancelReturn(owner,stack);
             if (!preserveFundedIzanagiCue || WeaponIzanagi.charge(stack) < 2)
                 WeaponIzanagiPresentation.clear(owner,stack);
             WeaponInsertPresentation.clear(owner,stack);
@@ -307,7 +308,8 @@ public final class WeaponRuntime {
             if(s.cycle.startCharge(now(player))) {
                 if(entry.get().family().equals("bow")) s.acceptedBowDraw=WeaponArcherTempo.draw(player,entry.get(),p);
                 else if(entry.get().family().equals("fusion_rifle") || entry.get().family().equals("linear_fusion_rifle")) {
-                    s.chargeEntry=entry.get(); s.acceptedCharge=WeaponBackupPlan.charge(player,entry.get(),p);
+                    WeaponCornered.update(player);
+                    s.chargeEntry=entry.get(); s.acceptedCharge=WeaponCornered.charge(player,entry.get(),WeaponBackupPlan.charge(player,entry.get(),p));
                 }
             }
             DestinySounds.weapon(player, entry.get(), "charge");
@@ -382,7 +384,8 @@ public final class WeaponRuntime {
             if (automatic && !s.cycle.charging() && s.cycle.ready(now(player))
                     && WeaponItems.magazine(s.stack, p).rounds() > 0 && s.cycle.startCharge(now(player))) {
                 s.fired = false;
-                s.chargeEntry = entry.get(); s.acceptedCharge = WeaponBackupPlan.charge(player,entry.get(),p);
+                WeaponCornered.update(player);
+                s.chargeEntry = entry.get(); s.acceptedCharge = WeaponCornered.charge(player,entry.get(),WeaponBackupPlan.charge(player,entry.get(),p));
                 DestinySounds.weapon(player, entry.get(), "charge");
             }
             var accepted=entry.get().equals(s.chargeEntry)&&s.acceptedCharge!=null?s.acceptedCharge:p;
@@ -538,7 +541,7 @@ public final class WeaponRuntime {
         WeaponPugilist.stowing(player,player.getMainHandItem());
         WeaponAssassinsBlade.stowing(player,player.getMainHandItem()); WeaponUnrelenting.stowing(player,player.getMainHandItem()); WeaponWhirlwindBlade.stowing(player,player.getMainHandItem()); WeaponEnGarde.stowing(player,player.getMainHandItem()); WeaponOpeningShot.stowing(player,player.getMainHandItem()); WeaponBoxBreathing.stowing(player,player.getMainHandItem()); WeaponHeadseeker.stowing(player,player.getMainHandItem()); WeaponOsmosis.stowing(player,player.getMainHandItem()); WeaponSteadyHands.stowing(player,player.getMainHandItem()); WeaponDynamicSway.released(player,player.getMainHandItem());
         WeaponKillingTally.stowing(player,player.getMainHandItem()); WeaponSympatheticArsenal.stowing(player,player.getMainHandItem());
-        WeaponAdagio.stowing(player,player.getMainHandItem()); WeaponClownCartridge.stowing(player,player.getMainHandItem());
+        WeaponCornered.stowing(player,player.getMainHandItem()); WeaponAdagio.stowing(player,player.getMainHandItem()); WeaponClownCartridge.stowing(player,player.getMainHandItem());
         WeaponAiming.inventoryStowing(player,player.getMainHandItem());
         WeaponFireMotion.inventoryStowing(player,player.getMainHandItem());
         State s=STATES.get(player.getUUID());
@@ -548,7 +551,7 @@ public final class WeaponRuntime {
     }
     /** An accepted inventory mutation can stow/restore the exact object within one tick. */
     public static void inventoryStowing(ServerPlayer player,ItemStack previous) {
-        WeaponBackupPlan.stowing(player,previous);
+        WeaponBackupPlan.stowing(player,previous); WeaponCornered.stowing(player,previous);
         WeaponQuickdraw.changed(player,previous);
         WeaponSurrounded.stowing(player,previous); WeaponThreatDetector.stowing(player,previous);
         WeaponFocusedFury.stowing(player,previous);
@@ -819,6 +822,10 @@ public final class WeaponRuntime {
     }
     private static void emit(ServerPlayer player, WeaponCatalog.Entry entry, WeaponProfile p, boolean playFire, int boltIndex,
                              WeaponHighImpactReserves.Token highImpact, DamageTraits acceptedTraits, WeaponShotTraits.Snapshot shotTraits) {
+        // Cosmetic recovery never blocks an accepted shot or leaves its old arms/parts behind.
+        WeaponReloadPresentation.clear(player,player.getMainHandItem());
+        WeaponInsertPresentation.clear(player,player.getMainHandItem());
+        WeaponIzanagiPresentation.cancelReturn(player,player.getMainHandItem());
         WeaponFireMotion.emitted(player,entry,p,playFire,boltIndex);
         int honed=p.mode()==WeaponProfile.Mode.HITSCAN?WeaponIzanagi.shot(player,entry):0;
         if (WeaponExotics.izanagi(entry))
@@ -1088,7 +1095,7 @@ public final class WeaponRuntime {
             WeaponRampage.update(player);
             WeaponPrecisionReturn.update(player);
             WeaponDemolitionist.update(player);
-            WeaponEnergyPerks.update(player); WeaponPugilist.update(player); WeaponBackupPlan.update(player); WeaponEncore.update(player); WeaponAmbitiousAssassin.update(player); WeaponClownCartridge.update(player); WeaponAdagio.update(player); WeaponWellRounded.update(player); WeaponKillingTally.update(player); WeaponSympatheticArsenal.update(player); WeaponRelentlessStrikes.update(player); WeaponTirelessBlade.update(player); WeaponWhirlwindBlade.update(player); WeaponOpeningShot.update(player); WeaponDynamicSway.update(player); WeaponAssassinsBlade.update(player); WeaponPerkMovement.update(player); WeaponPulseMonitor.update(player); WeaponUnrelenting.update(player); WeaponHeadseeker.update(player); WeaponOsmosis.update(player); WeaponSteadyHands.update(player);
+            WeaponEnergyPerks.update(player); WeaponPugilist.update(player); WeaponBackupPlan.update(player); WeaponEncore.update(player); WeaponAmbitiousAssassin.update(player); WeaponClownCartridge.update(player); WeaponAdagio.update(player); WeaponWellRounded.update(player); WeaponKillingTally.update(player); WeaponSympatheticArsenal.update(player); WeaponRelentlessStrikes.update(player); WeaponTirelessBlade.update(player); WeaponWhirlwindBlade.update(player); WeaponOpeningShot.update(player); WeaponDynamicSway.update(player); WeaponAssassinsBlade.update(player); WeaponPerkMovement.update(player); WeaponPulseMonitor.update(player); WeaponUnrelenting.update(player); WeaponHeadseeker.update(player); WeaponOsmosis.update(player); WeaponSteadyHands.update(player); WeaponCornered.update(player);
             WeaponHolster.update(player);
             WeaponQuickdraw.update(player);
         WeaponHandling.update(player);
@@ -1124,7 +1131,7 @@ public final class WeaponRuntime {
         WeaponRampage.update(player);
         WeaponPrecisionReturn.update(player);
         WeaponDemolitionist.update(player);
-        WeaponEnergyPerks.update(player); WeaponPugilist.update(player); WeaponBackupPlan.update(player); WeaponEncore.update(player); WeaponAmbitiousAssassin.update(player); WeaponClownCartridge.update(player); WeaponAdagio.update(player); WeaponWellRounded.update(player); WeaponKillingTally.update(player); WeaponSympatheticArsenal.update(player); WeaponRelentlessStrikes.update(player); WeaponTirelessBlade.update(player); WeaponWhirlwindBlade.update(player); WeaponOpeningShot.update(player); WeaponDynamicSway.update(player); WeaponAssassinsBlade.update(player); WeaponPerkMovement.update(player); WeaponPulseMonitor.update(player); WeaponUnrelenting.update(player); WeaponHeadseeker.update(player); WeaponOsmosis.update(player); WeaponSteadyHands.update(player);
+        WeaponEnergyPerks.update(player); WeaponPugilist.update(player); WeaponBackupPlan.update(player); WeaponEncore.update(player); WeaponAmbitiousAssassin.update(player); WeaponClownCartridge.update(player); WeaponAdagio.update(player); WeaponWellRounded.update(player); WeaponKillingTally.update(player); WeaponSympatheticArsenal.update(player); WeaponRelentlessStrikes.update(player); WeaponTirelessBlade.update(player); WeaponWhirlwindBlade.update(player); WeaponOpeningShot.update(player); WeaponDynamicSway.update(player); WeaponAssassinsBlade.update(player); WeaponPerkMovement.update(player); WeaponPulseMonitor.update(player); WeaponUnrelenting.update(player); WeaponHeadseeker.update(player); WeaponOsmosis.update(player); WeaponSteadyHands.update(player); WeaponCornered.update(player);
         WeaponHolster.update(player);
         WeaponQuickdraw.update(player);
         WeaponHandling.update(player);
@@ -1153,10 +1160,13 @@ public final class WeaponRuntime {
         var p = WeaponProfile.forEntry(entry);
         var ammo = WeaponItems.magazine(s.stack, p);
         int beforeReload=ammo.rounds();
+        boolean wasReloading = s.cycle.reloading();
+        boolean wasHoning = WeaponIzanagi.honing(player);
         boolean inserted=s.cycle.finishReload(now(player), ammo);
         int creditedRounds=Math.max(0,ammo.rounds()-beforeReload);
         if (inserted) kim.biryeong.destiny.sound.ShotgunReloadAudio.inserted(player,entry,s.cycle.reloading());
-        if(WeaponIzanagi.finishReload(player,s.stack))ammo=WeaponItems.magazine(s.stack,p);
+        boolean honedCompleted = WeaponIzanagi.finishReload(player,s.stack);
+        if(honedCompleted)ammo=WeaponItems.magazine(s.stack,p);
         if (inserted) {
             ammo.reloadOverflow(WeaponAmbitiousAssassin.target(player,s.assassinReload));
             ammo.reloadOverflow(WeaponClownCartridge.target(player,s.clownReload));
@@ -1168,6 +1178,12 @@ public final class WeaponRuntime {
             boolean refillArsenal=WeaponSympatheticArsenal.reloaded(player,s.arsenalReload,creditedRounds);
             s.arsenalReload=WeaponSympatheticArsenal.ReloadToken.NONE;
             if(refillArsenal)refillStowedArsenal(player);
+        }
+        // Ammo can credit before full-ready. Only the natural terminal transition starts recovery;
+        // failed Honed transactions and all cancellation paths must remain immediate cleanup.
+        if (wasReloading && !s.cycle.reloading() && (!wasHoning || honedCompleted)) {
+            WeaponReloadPresentation.completed(player,s.stack);
+            WeaponIzanagiPresentation.completed(player,s.stack);
         }
         WeaponAce.reloadTick(player,s.stack,inserted,s.cycle.reloading());
         if (!s.cycle.reloading()) s.reloadAllowsHeldInput=false;
@@ -1516,7 +1532,7 @@ public final class WeaponRuntime {
         WeaponRampage.cleanup(owner);
         WeaponPrecisionReturn.cleanup(owner);
         WeaponDemolitionist.cleanup(owner);
-        WeaponEnergyPerks.cleanup(owner); WeaponPugilist.cleanup(owner); WeaponBackupPlan.cleanup(owner); WeaponEncore.cleanup(owner); WeaponAmbitiousAssassin.cleanup(owner); WeaponClownCartridge.cleanup(owner); WeaponAdagio.cleanup(owner); WeaponWellRounded.cleanup(owner); WeaponKillingTally.cleanup(owner); WeaponSympatheticArsenal.cleanup(owner); WeaponRelentlessStrikes.cleanup(owner); WeaponTirelessBlade.cleanup(owner); WeaponWhirlwindBlade.cleanup(owner); WeaponEnGarde.cleanup(owner); WeaponOpeningShot.cleanup(owner); WeaponBoxBreathing.cleanup(owner); WeaponDynamicSway.cleanup(owner); WeaponAssassinsBlade.cleanup(owner); WeaponPerkMovement.cleanup(owner); WeaponPulseMonitor.cleanup(owner); WeaponRecoveryHandling.cleanup(owner); WeaponUnrelenting.cleanup(owner); WeaponHeadseeker.cleanup(owner); WeaponOsmosis.cleanup(owner); WeaponSteadyHands.cleanup(owner);
+        WeaponEnergyPerks.cleanup(owner); WeaponPugilist.cleanup(owner); WeaponBackupPlan.cleanup(owner); WeaponEncore.cleanup(owner); WeaponAmbitiousAssassin.cleanup(owner); WeaponClownCartridge.cleanup(owner); WeaponAdagio.cleanup(owner); WeaponWellRounded.cleanup(owner); WeaponKillingTally.cleanup(owner); WeaponSympatheticArsenal.cleanup(owner); WeaponRelentlessStrikes.cleanup(owner); WeaponTirelessBlade.cleanup(owner); WeaponWhirlwindBlade.cleanup(owner); WeaponEnGarde.cleanup(owner); WeaponOpeningShot.cleanup(owner); WeaponBoxBreathing.cleanup(owner); WeaponDynamicSway.cleanup(owner); WeaponAssassinsBlade.cleanup(owner); WeaponPerkMovement.cleanup(owner); WeaponPulseMonitor.cleanup(owner); WeaponRecoveryHandling.cleanup(owner); WeaponUnrelenting.cleanup(owner); WeaponHeadseeker.cleanup(owner); WeaponOsmosis.cleanup(owner); WeaponSteadyHands.cleanup(owner); WeaponCornered.cleanup(owner);
         WeaponTracking.cleanup(owner);
         WeaponHolster.cleanup(owner);
         WeaponQuickdraw.cleanup(owner);
@@ -1538,7 +1554,7 @@ public final class WeaponRuntime {
         for(var shot:SHOTS)if(shot.wave!=null)shot.wave.close();
         STATES.clear(); SHOTS.clear(); WeaponAiming.clear(); WeaponHandling.clear(); WeaponQuickdraw.clear(); WeaponHolster.clear(); WeaponKillClip.clear(); WeaponAce.clear(); WeaponIzanagi.clear(); WeaponOutlaw.clear(); WeaponFeedingFrenzy.clear(); WeaponRapidHit.clear(); WeaponPerpetualMotion.clear(); WeaponTapTheTrigger.clear(); WeaponZenMoment.clear(); WeaponFrenzy.clear(); WeaponAdrenalineJunkie.clear(); WeaponFocusedFury.clear(); WeaponStatsForAll.clear(); WeaponHeatingUp.clear(); WeaponThreatDetector.clear(); WeaponEnsemble.clear(); WeaponOneForAll.clear(); WeaponSurrounded.clear(); WeaponSwashbuckler.clear(); WeaponMultikillClip.clear(); WeaponSubsistence.clear(); WeaponGraveRobber.clear(); WeaponArcherTempo.clear(); WeaponRampage.clear();
         WeaponPrecisionReturn.clear();
-        WeaponDemolitionist.clear(); WeaponEnergyPerks.clear(); WeaponPugilist.clear(); WeaponBackupPlan.clear(); WeaponEncore.clear(); WeaponAmbitiousAssassin.clear(); WeaponClownCartridge.clear(); WeaponAdagio.clear(); WeaponWellRounded.clear(); WeaponKillingTally.clear(); WeaponSympatheticArsenal.clear(); WeaponRelentlessStrikes.clear(); WeaponTirelessBlade.clear(); WeaponWhirlwindBlade.clear(); WeaponEnGarde.clear(); WeaponOpeningShot.clear(); WeaponBoxBreathing.clear(); WeaponDynamicSway.clear(); WeaponAssassinsBlade.clear(); WeaponPerkMovement.clear(); WeaponPulseMonitor.clear(); WeaponRecoveryHandling.clear(); WeaponUnrelenting.clear(); WeaponHeadseeker.clear(); WeaponOsmosis.clear(); WeaponSteadyHands.clear();
+        WeaponDemolitionist.clear(); WeaponEnergyPerks.clear(); WeaponPugilist.clear(); WeaponBackupPlan.clear(); WeaponEncore.clear(); WeaponAmbitiousAssassin.clear(); WeaponClownCartridge.clear(); WeaponAdagio.clear(); WeaponWellRounded.clear(); WeaponKillingTally.clear(); WeaponSympatheticArsenal.clear(); WeaponRelentlessStrikes.clear(); WeaponTirelessBlade.clear(); WeaponWhirlwindBlade.clear(); WeaponEnGarde.clear(); WeaponOpeningShot.clear(); WeaponBoxBreathing.clear(); WeaponDynamicSway.clear(); WeaponAssassinsBlade.clear(); WeaponPerkMovement.clear(); WeaponPulseMonitor.clear(); WeaponRecoveryHandling.clear(); WeaponUnrelenting.clear(); WeaponHeadseeker.clear(); WeaponOsmosis.clear(); WeaponSteadyHands.clear(); WeaponCornered.clear();
         WeaponTracking.clear();
         WeaponIzanagiPresentation.clearAll();
         kim.biryeong.destiny.sound.ReloadAudio.clear();

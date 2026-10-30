@@ -34,6 +34,7 @@ public final class WeaponIzanagiPresentation {
         final float offset;
         Mode mode;
         float written;
+        WeaponReloadReturn playback;
 
         Binding(ServerPlayer owner, ItemStack stack, List<Float> current, float offset) {
             this.owner = owner; this.level = owner.level(); this.stack = stack;
@@ -66,7 +67,7 @@ public final class WeaponIzanagiPresentation {
         return b != null && OWNERS.get(b.owner) == b && b.owner.level() == b.level
                 && data != null && data.floats().size() > SELECTOR_INDEX
                 && Float.compare(data.floats().get(SELECTOR_INDEX), b.written) == 0
-                && admitted(b.owner, stack, b.mode);
+                && (admitted(b.owner, stack, b.mode) || returning(b.owner, stack));
     }
 
     /** Recipient-scoped transport admission; snapshots still never own a binding. */
@@ -94,8 +95,12 @@ public final class WeaponIzanagiPresentation {
         var owned = OWNERS.get(owner);
         if (owned != null && (owned.stack != stack || owned.level != owner.level()))
             clear(owner, owned.stack);
-        if (!admitted(owner, stack, mode)) { clear(owner, stack); return; }
         var b = ACTIVE.get(stack);
+        if (mode == Mode.IDLE && returning(owner, stack)) {
+            writeSample(stack, b, b.playback.progress(now(owner), 1));
+            return;
+        }
+        if (!admitted(owner, stack, mode)) { clear(owner, stack); return; }
         Float replaced = b == null ? null : b.written;
         if (b != null && b.owner != owner) {
             // A mistaken donor update must not steal a still-live recipient binding.
@@ -112,10 +117,33 @@ public final class WeaponIzanagiPresentation {
             b = new Binding(owner, stack, current, offset);
             ACTIVE.put(stack, b); OWNERS.put(owner, b);
         }
+        if (mode != Mode.IDLE && (b.mode != mode || b.playback == null || b.playback.completed()))
+            b.playback = new WeaponReloadReturn(WeaponRuntime.ammunition(owner).orElseThrow().reloadDuration());
         b.mode = mode;
+        if (mode == Mode.IDLE) b.playback = null;
         float p = Float.isFinite(progress) ? Math.clamp(progress, 0, 1) : 0;
-        float sample = (float) Math.floor(p * INTERVALS + 1e-6f) / INTERVALS;
-        b.written = (mode == Mode.IDLE ? 4 : (mode == Mode.HONED ? 2 : 0) + sample) + b.offset;
+        writeSample(stack, b, b.playback == null ? p : b.playback.progress(now(owner), p));
+    }
+
+    private static long now(ServerPlayer owner) { return owner.level().getServer().getTickCount(); }
+    static void completed(ServerPlayer owner, ItemStack stack) {
+        var b = ACTIVE.get(stack);
+        if (b != null && b.owner == owner && b.playback != null && live(owner, stack)
+                && b.level == owner.level()) b.playback.complete(now(owner));
+    }
+    public static boolean returning(ServerPlayer owner, ItemStack stack) {
+        var b = ACTIVE.get(stack);
+        return b != null && b.owner == owner && b.level == owner.level() && live(owner, stack)
+                && b.playback != null && b.playback.active(now(owner));
+    }
+    /** A funded charge may survive a skill; its cosmetic return must not. */
+    static void cancelReturn(ServerPlayer owner, ItemStack stack) {
+        var b = ACTIVE.get(stack);
+        if (b != null && b.owner == owner && b.playback != null && b.playback.completed()) clear(owner, stack);
+    }
+    private static void writeSample(ItemStack stack, Binding b, float progress) {
+        float sample = (float) Math.floor(progress * INTERVALS + 1e-6f) / INTERVALS;
+        b.written = (b.mode == Mode.IDLE ? 4 : (b.mode == Mode.HONED ? 2 : 0) + sample) + b.offset;
         write(stack, b.written);
     }
 

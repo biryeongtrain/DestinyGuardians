@@ -106,6 +106,11 @@ public final class PlayerAnimations {
     }
 
     /** One-shot: returns to the active ready loop, or the vanilla player, on completion. */
+    /** Crucible entrances are authored in place by HunterModelAssets.inPlaceIntro. */
+    public static boolean playIntroInPlace(ServerPlayer player, String clip) {
+        return clip != null && clip.startsWith("h15_intro_") && start(player, clip, false);
+    }
+
     public static boolean play(ServerPlayer player, String animation) {
         return start(player, animation, false);
     }

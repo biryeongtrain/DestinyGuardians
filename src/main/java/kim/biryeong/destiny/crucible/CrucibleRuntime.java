@@ -94,6 +94,7 @@ public final class CrucibleRuntime {
                 next.experienceProgress = old.experienceProgress;
                 next.setScore(old.getScore());
             }
+            CrucibleTeamVisuals.remove(old);
             member.player = next;
             // Native respawn may still complete its own position/connection restoration.
             // Apply the arena transfer after that stack unwinds, before combat is enabled.
@@ -121,12 +122,17 @@ public final class CrucibleRuntime {
             for (Member member : List.copyOf(MEMBERS.values())) leave(member.player, true);
         });
         ServerLifecycleEvents.SERVER_STOPPED.register(s -> {
-            if (server == s) { closeIntro(); CrucibleAmmo.clear(); PENDING_RETURNS.clear(); MEMBERS.clear(); match = new ControlMatch(); server = null; arena = null; observed = match.phase(); }
+            if (server == s) { closeIntro(); CrucibleTeamVisuals.clear(); CrucibleAmmo.clear(); PENDING_RETURNS.clear(); MEMBERS.clear(); match = new ControlMatch(); server = null; arena = null; observed = match.phase(); }
         });
         kim.biryeong.destiny.sound.ActivityMusic.init();
     }
 
     public static boolean participating(ServerPlayer p) { return p != null && MEMBERS.containsKey(p.getUUID()); }
+    /** Identity only: arrival/respawn may legitimately precede canAct becoming true. */
+    public static boolean currentParticipant(ServerPlayer p) {
+        var m = p == null ? null : MEMBERS.get(p.getUUID());
+        return m != null && m.player == p;
+    }
     public static ControlMatch.Team team(ServerPlayer p) { return p == null ? null : match.team(p.getUUID()); }
     /** Viewer relationship independent of invulnerability or match phase. */
     public static boolean enemies(ServerPlayer owner, ServerPlayer viewer) {
@@ -163,16 +169,9 @@ public final class CrucibleRuntime {
         }
         if(shots.isEmpty())throw new IllegalStateException("맵 소개 카메라 경로가 없습니다.");
         if(shots.size()==1) {var first=shots.getFirst();shots.set(0,new CrucibleIntro.Shot(first.from(),first.to(),first.lookAt(),100));}
-        // Authored face-off: Alpha looks east toward Bravo, Bravo west toward Alpha.
-        // Team rows run perpendicular to their gaze; source poses and timing stay intact.
-        var stage = new CrucibleIntro.Stage(new Vec3(32.5,85.0,85.5), new Vec3(40.5,85.0,85.5),-90f,90f);
-        // Establish both sides, then reverse the view across the gap without crossing the action axis.
-        shots.add(new CrucibleIntro.Shot(new Vec3(36.5,91.0,98.5),new Vec3(36.5,91.0,98.5),new Vec3(36.5,86.2,85.5),130));
-        shots.add(new CrucibleIntro.Shot(new Vec3(40.5,89.5,93.5),new Vec3(40.5,89.5,93.5),new Vec3(32.5,86.3,85.5),50));
-        shots.add(new CrucibleIntro.Shot(new Vec3(39.5,89.5,93.5),new Vec3(39.5,89.5,93.5),new Vec3(40.5,86.3,85.5),50));
-        // Both sides have landed: end on their confrontation, not an isolated portrait.
-        shots.add(new CrucibleIntro.Shot(new Vec3(36.5,91.0,98.5),new Vec3(36.5,91.0,98.5),new Vec3(36.5,86.2,85.5),70));
         try {
+            var stage = CrucibleIntro.confrontationStage(arena.level());
+            shots.addAll(CrucibleIntro.confrontationShots(arena.level(), stage));
             intro=CrucibleIntro.begin(alpha,bravo,arena.level(),shots,
                     stage,
                     CrucibleIntro.cameraViews(), new CrucibleIntro.ActorAudience() {
@@ -186,7 +185,10 @@ public final class CrucibleRuntime {
             for(var actor:intro.actorPlacements()) {
                 ServerPlayer p=actor.player();INTRO_GRAVITY.put(p,p.isNoGravity());p.setNoGravity(true);
                 Vec3 at=actor.position();
-                p.teleportTo(arena.level(),at.x,at.y,at.z,Set.of(),actor.yaw(),0,false);
+                if (!p.teleportTo(arena.level(),at.x,at.y,at.z,Set.of(),actor.yaw(),0,false))
+                    throw new IllegalStateException("Intro actor teleport refused");
+                p.setYHeadRot(actor.yaw()); p.yBodyRot = actor.yaw();
+                p.setDeltaMovement(Vec3.ZERO); p.fallDistance = 0;
             }
             for(var m:MEMBERS.values()) {
                 kim.biryeong.destiny.weapon.ProfileWeaponView.hideForCamera(m.player);
@@ -221,6 +223,7 @@ public final class CrucibleRuntime {
             player.setGameMode(GameType.ADVENTURE);
             arrive(member, true);
             if (intro != null && match.phase() == ControlMatch.Phase.INTRO) intro.start(player);
+            refreshTeamVisuals();
             player.sendSystemMessage(Component.literal("시련의 장 · 점령에 참가했습니다. /시련의장 나가기 로 탑에 돌아갑니다."));
             return true;
         } catch (RuntimeException error) {
@@ -248,6 +251,9 @@ public final class CrucibleRuntime {
             if (m.previousTeam != null && scoreboard.getPlayerTeam(m.previousTeam) != null)
                 scoreboard.addPlayerToTeam(p.getScoreboardName(), scoreboard.getPlayerTeam(m.previousTeam));
         }
+        // Restore the departing connection only after its authoritative team has been restored.
+        CrucibleTeamVisuals.remove(p);
+        refreshTeamVisuals();
         p.setGameMode(m.previousMode);
         CrucibleRecovery.restore(p);
         p.setDeltaMovement(Vec3.ZERO); p.fallDistance = 0;
@@ -297,6 +303,7 @@ public final class CrucibleRuntime {
         t.setAllowFriendlyFire(false); t.setSeeFriendlyInvisibles(true);
         t.setCollisionRule(net.minecraft.world.scores.Team.CollisionRule.NEVER);
         scoreboard.addPlayerToTeam(p.getScoreboardName(), t);
+        CrucibleTeamVisuals.invalidate();
     }
 
     private static boolean allowDamage(LivingEntity entity, DamageSource source, float amount) {
@@ -398,6 +405,7 @@ public final class CrucibleRuntime {
             observed = phase;
         }
         if (intro != null) kim.biryeong.minigamelib.cinematic.CameraViews.sending(intro::tick);
+        refreshTeamVisuals();
         if (s.getTickCount() % 5 == 0) {
             var snap = match.snapshot();
             for (Member m : MEMBERS.values()) if (m.player.isAlive()) {
@@ -408,6 +416,9 @@ public final class CrucibleRuntime {
             }
             arena.updateZones(snap);
         }
+    }
+    private static void refreshTeamVisuals() {
+        CrucibleTeamVisuals.refresh(MEMBERS.values().stream().filter(m -> !m.needsArrival).map(m -> m.player).toList());
     }
     private static int sTick(ServerPlayer player) { return player.level().getServer().getTickCount(); }
     private static int now() { return server == null ? 0 : server.getTickCount(); }

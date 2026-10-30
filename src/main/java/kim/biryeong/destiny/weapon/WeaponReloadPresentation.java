@@ -18,7 +18,8 @@ import java.util.Map;
  */
 public final class WeaponReloadPresentation {
     private static final Set<ItemStack> ACTIVE = Collections.newSetFromMap(new IdentityHashMap<>());
-    private record Binding(ServerPlayer owner, float offset) {}
+    private record Binding(ServerPlayer owner, net.minecraft.server.level.ServerLevel level,
+                           float offset, WeaponReloadReturn playback) {}
     private static final Map<ItemStack, Binding> OWNERS = new IdentityHashMap<>();
     public static final int PROGRESS_INDEX = 1;
     /** Dense reload banks; older unaffected weapon banks still have 21 poses. */
@@ -75,20 +76,31 @@ public final class WeaponReloadPresentation {
         return Identifier.fromNamespaceAndPath("destiny", namespace + entry.id());
     }
     public static boolean active(ItemStack stack) {
-        return ACTIVE.contains(stack) && WeaponItems.entry(stack).filter(WeaponReloadPresentation::supports).isPresent();
+        var binding = OWNERS.get(stack);
+        return ACTIVE.contains(stack) && (binding == null || live(binding, stack)
+                && (!binding.playback.completed() || binding.playback.active(now(binding.owner))))
+                && WeaponItems.entry(stack).filter(WeaponReloadPresentation::supports).isPresent();
     }
     /** The legacy identity set alone has no recipient: require the real reload owner too. */
     public static boolean ownedBy(ServerPlayer owner, ItemStack stack) {
         var binding = OWNERS.get(stack);
-        return binding != null && binding.owner == owner && active(stack) && WeaponRuntime.reloadOwnedBy(owner, stack);
+        return binding != null && binding.owner == owner && active(stack)
+                && (WeaponRuntime.reloadOwnedBy(owner, stack) || binding.playback.active(now(owner)));
     }
     /** Production acquisition tracks retirement ownership independently of the legacy test API. */
     public static void update(ServerPlayer owner, ItemStack stack, boolean reloading, float progress) {
-        if (!reloading || !WeaponItems.entry(stack).filter(WeaponReloadPresentation::supports).isPresent()) {
+        var binding = OWNERS.get(stack);
+        if (!reloading) {
+            if (binding != null && binding.owner == owner && live(binding, stack)
+                    && binding.playback.active(now(owner))) {
+                writeSample(stack, binding, binding.playback.progress(now(owner), 1));
+            } else clear(owner, stack);
+            return;
+        }
+        if (!WeaponItems.entry(stack).filter(WeaponReloadPresentation::supports).isPresent()) {
             clear(owner, stack); return;
         }
-        var binding = OWNERS.get(stack);
-        if (binding == null || binding.owner != owner) {
+        if (binding == null || binding.owner != owner || binding.playback.completed()) {
             Float previous = stack.getOrDefault(DataComponents.CUSTOM_MODEL_DATA, CustomModelData.EMPTY).getFloat(PROGRESS_INDEX);
             float offset = 0;
             // Distinguish even a saved frame0 activation from RemoteSlot's idle snapshot.
@@ -96,13 +108,32 @@ public final class WeaponReloadPresentation {
             int intervals = intervals(stack);
             if (previous != null) for (int i = 0; i <= intervals; i++)
                 if (Float.compare(previous, i / (float) intervals) == 0) { offset = .001f; break; }
-            binding = new Binding(owner, offset);
+            binding = new Binding(owner, owner.level(), offset,
+                    new WeaponReloadReturn(WeaponRuntime.ammunition(owner).orElseThrow().reloadDuration()));
             OWNERS.put(stack, binding);
         }
         ACTIVE.add(stack);
         float normalized = Float.isFinite(progress) ? Math.clamp(progress, 0, 1) : 0;
+        writeSample(stack, binding, binding.playback.progress(now(owner), normalized));
+    }
+    private static long now(ServerPlayer owner) { return owner.level().getServer().getTickCount(); }
+    private static boolean live(Binding binding, ItemStack stack) {
+        var owner = binding.owner;
+        return owner.getMainHandItem() == stack && owner.level() == binding.level
+                && owner.isAlive() && !owner.isRemoved() && !owner.isSpectator() && !owner.hasDisconnected()
+                && WeaponLoadout.canUse(owner) && !kim.biryeong.destiny.ability.AbilityService.inSuper(owner);
+    }
+    private static void writeSample(ItemStack stack, Binding binding, float progress) {
         int intervals = intervals(stack);
-        writeProgress(stack, (float)Math.floor(normalized * intervals + 1e-6f) / intervals + binding.offset);
+        writeProgress(stack, (float)Math.floor(progress * intervals + 1e-6f) / intervals + binding.offset);
+    }
+    static void completed(ServerPlayer owner, ItemStack stack) {
+        var binding = OWNERS.get(stack);
+        if (binding != null && binding.owner == owner && live(binding, stack)) binding.playback.complete(now(owner));
+    }
+    public static boolean returning(ServerPlayer owner, ItemStack stack) {
+        var binding = OWNERS.get(stack);
+        return binding != null && binding.owner == owner && live(binding, stack) && binding.playback.active(now(owner));
     }
     /** A stale donor must not retire the recipient's newly acquired binding. */
     public static void clear(ServerPlayer owner, ItemStack stack) {

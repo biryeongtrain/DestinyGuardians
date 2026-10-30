@@ -21,7 +21,7 @@ import java.util.Map;
 
 /** Installs a versioned limb without ever opening an artist-owned installed model for writing. */
 public final class HunterModelAssets {
-    public static final String MODEL_NAME = "guardian_hunter_w260_r1";
+    public static final String MODEL_NAME = "guardian_hunter_w273_r1";
     static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_w199.animation.json";
 
     private HunterModelAssets() { }
@@ -68,7 +68,8 @@ public final class HunterModelAssets {
             try (var source = HunterModelAssets.class.getResourceAsStream("/destiny/animation/crucible_intro_w260.animation.json")) {
                 if (source == null) throw new IOException("W260 intro animations missing");
                 JsonParser.parseReader(new InputStreamReader(source, StandardCharsets.UTF_8))
-                        .getAsJsonObject().getAsJsonArray("animations").forEach(animations::add);
+                        .getAsJsonObject().getAsJsonArray("animations")
+                        .forEach(entry -> animations.add(inPlaceIntro(entry.getAsJsonObject().deepCopy())));
             }
             JsonObject model = buildModel(
                     JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),animations);
@@ -79,6 +80,35 @@ public final class HunterModelAssets {
             // Cosmetic failure must not prevent startup: PlayerAnimations tries legacy limb then Steve.
             DestinyGuardians.LOGGER.warn("Cannot prepare W260 hunter limb; legacy fallback remains available: {}", e.toString());
         }
+    }
+
+
+    /** W273: the raw entrance travels tens of blocks and can pass through the floor. Keep the authored
+     * pose, timing and vertical landing, but pin horizontal root travel to the final landing spot so
+     * the actor stays on its stage anchor. */
+    static JsonObject inPlaceIntro(JsonObject clip) {
+        for (var animator : clip.getAsJsonObject("animators").entrySet()) {
+            JsonObject bone = animator.getValue().getAsJsonObject();
+            JsonObject last = null;
+            double lastTime = Double.NEGATIVE_INFINITY;
+            for (var key : bone.getAsJsonArray("keyframes")) {
+                JsonObject k = key.getAsJsonObject();
+                if (!"position".equals(k.get("channel").getAsString())) continue;
+                double time = k.get("time").getAsDouble();
+                if (time >= lastTime) { lastTime = time; last = k; }
+            }
+            if (last == null) continue;
+            var end = last.getAsJsonArray("data_points").get(0).getAsJsonObject();
+            for (var key : bone.getAsJsonArray("keyframes")) {
+                JsonObject k = key.getAsJsonObject();
+                if (!"position".equals(k.get("channel").getAsString())) continue;
+                for (var point : k.getAsJsonArray("data_points")) {
+                    point.getAsJsonObject().add("x", end.get("x"));
+                    point.getAsJsonObject().add("z", end.get("z"));
+                }
+            }
+        }
+        return clip;
     }
 
     /** Remap by bone name, retaining the installed BetterModel version's complete skin/armor rig. */

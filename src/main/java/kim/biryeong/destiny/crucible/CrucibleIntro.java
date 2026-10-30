@@ -7,6 +7,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.core.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +59,48 @@ public final class CrucibleIntro implements AutoCloseable {
             if (!Float.isFinite(alphaYaw) || !Float.isFinite(bravoYaw))
                 throw new IllegalArgumentException("Stage yaw must be finite");
         }
+    }
+
+    /** Compact, grounded rows on the inspected Javelin-4 courtyard. Y is resolved from real collision. */
+    public static Stage confrontationStage(ServerLevel level) {
+        Vec3 alpha = grounded(level, new Vec3(33.5, 85, 85.5));
+        Vec3 bravo = grounded(level, new Vec3(39.5, 85, 85.5));
+        return new Stage(alpha, bravo, facing(alpha, bravo), facing(bravo, alpha));
+    }
+
+    public static List<Shot> confrontationShots(ServerLevel level, Stage stage) {
+        Vec3 center = stage.alphaOrigin().add(stage.bravoOrigin()).scale(.5);
+        Vec3 target = center.add(0, 1.3, 0);
+        Vec3 wide = center.add(0, 3.4, 10);
+        List<Shot> result = List.of(new Shot(wide, wide, target, 130),
+                new Shot(center.add(3, 3.4, 8), center.add(3, 3.4, 8), stage.alphaOrigin().add(0, 1.3, 0), 50),
+                new Shot(center.add(-3, 3.4, 8), center.add(-3, 3.4, 8), stage.bravoOrigin().add(0, 1.3, 0), 50),
+                new Shot(wide, wide, target, 70));
+        for (Shot shot : result) {
+            if (!level.noBlockCollision(null, new AABB(shot.from(), shot.from()).inflate(.4)))
+                throw new IllegalStateException("Intro camera near plane intersects terrain");
+            if (level.clip(new ClipContext(shot.from(), shot.lookAt(), ClipContext.Block.COLLIDER,
+                    ClipContext.Fluid.NONE, CollisionContext.empty())).getType() != HitResult.Type.MISS)
+                throw new IllegalStateException("Intro camera sightline intersects terrain");
+        }
+        return result;
+    }
+
+    private static float facing(Vec3 from, Vec3 to) {
+        Vec3 direction = to.subtract(from);
+        return (float) Math.toDegrees(Math.atan2(-direction.x, direction.z));
+    }
+
+    private static Vec3 grounded(ServerLevel level, Vec3 point) {
+        var hit = level.clip(new ClipContext(point.add(0, .75, 0), point.add(0, -1, 0),
+                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty()));
+        if (hit.getType() != HitResult.Type.BLOCK || hit.getDirection() != Direction.UP)
+            throw new IllegalStateException("Intro actor has no supporting floor");
+        Vec3 feet = new Vec3(point.x, hit.getLocation().y + .02, point.z);
+        if (!level.noBlockCollision(null, new AABB(feet.x - .4, feet.y, feet.z - .4,
+                feet.x + .4, feet.y + 2.2, feet.z + .4)))
+            throw new IllegalStateException("Intro actor intersects terrain");
+        return feet;
     }
 
     /** Complete participant snapshot for Runtime HUD/roster, independent of actor budget. */
@@ -263,7 +310,7 @@ public final class CrucibleIntro implements AutoCloseable {
                     if (!PlayerAnimations.isPlaying(actor.player)) {
                         // Tracker creation and initial animation packets must reach viewers
                         // whose CameraViews session filters ordinary world packets.
-                        CameraViews.sending(() -> actor.playing = PlayerAnimations.play(actor.player, actor.clip));
+                        CameraViews.sending(() -> actor.playing = PlayerAnimations.playIntroInPlace(actor.player, actor.clip));
                     }
                     if (!actor.playing) releaseActor(actor);
                 } catch (RuntimeException | LinkageError error) {
@@ -327,9 +374,13 @@ public final class CrucibleIntro implements AutoCloseable {
         Vec3 right = new Vec3(Math.cos(radians), 0, Math.sin(radians));
         for (int i = 0; i < selected.size(); i++) {
             ServerPlayer player = selected.get(i);
-            Vec3 position = origin.add(right.scale((i - (selected.size() - 1) / 2.0) * 2.4));
+            // First participant stays in the centre even in 1v1 or with an uneven roster.
+            int lane = i == 0 ? 0 : i == 1 ? -1 : 1;
+            Vec3 position = grounded(level, origin.add(right.scale(lane * 3.2)));
             inWorld(position);
-            Actor actor = new Actor(new ActorPlacement(player, position, yaw, CLIPS.get(clipOffset + i)));
+            // Pair matching source motions across the gap, rather than unrelated first clips.
+            int clip = clipOffset == 0 ? new int[]{1, 0, 2}[i] : new int[]{4, 5, 3}[i];
+            Actor actor = new Actor(new ActorPlacement(player, position, yaw, CLIPS.get(clip)));
             actors.put(player.getUUID(), actor);
             ACTOR_OWNERS.put(player.getUUID(), this);
         }

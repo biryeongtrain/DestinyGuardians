@@ -67,7 +67,7 @@ public final class CrucibleW263GameTests {
                 message + "; expected=" + expected + ", actual=" + actual);
     }
 
-    private static final class Login {
+    static final class Login {
         final ServerPlayer initial;
         final io.netty.channel.embedded.EmbeddedChannel channel;
         net.minecraft.world.entity.PositionMoveRotation clientPose;
@@ -79,7 +79,7 @@ public final class CrucibleW263GameTests {
         }
     }
 
-    private static ServerPlayer login(GameTestHelper h, List<Login> logins, String name, Element element) {
+    static ServerPlayer login(GameTestHelper h, List<Login> logins, String name, Element element) {
         check(h, name.length() <= 16, "Fixture profile respects protocol username length");
         var server = h.getLevel().getServer();
         var profile = new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), name);
@@ -145,7 +145,7 @@ public final class CrucibleW263GameTests {
         }
     }
 
-    private static void tickLogin(net.minecraft.server.MinecraftServer server, Login login) {
+    static void tickLogin(net.minecraft.server.MinecraftServer server, Login login) {
         var player = server.getPlayerList().getPlayer(login.initial.getUUID());
         if (player != null && !player.hasDisconnected()) player.connection.tick();
         login.channel.runPendingTasks();
@@ -333,7 +333,7 @@ public final class CrucibleW263GameTests {
         check(h, CrucibleRuntime.join(shooter) && CrucibleRuntime.join(enemy), "Two simulated login players join Control");
         check(h, shooter.level() == enemy.level() && CrucibleWorld.isArena(shooter.level()), "Both share the Control arena");
         check(h, shooter.gameMode() == GameType.ADVENTURE && !CrucibleRuntime.canAct(shooter), "Intro blocks combat");
-        check(h, ammo(h, shooter, sniper).total() == 1, "First-life join grants exactly one sniper cartridge");
+        check(h, ammo(h, shooter, sniper).total() == 2, "First-life join grants exactly two sniper cartridges");
         ServerPlayer[] ally = new ServerPlayer[1];
         int[] scoreAfterKill = new int[1];
 
@@ -341,9 +341,9 @@ public final class CrucibleW263GameTests {
             check(h, CrucibleRuntime.snapshot().phase() == ControlMatch.Phase.PLAYING, "450-tick intro wait reaches play");
             check(h, CrucibleRuntime.canFight(shooter, enemy), "Initial enemy protection expires before measurements");
             var magazine = ammo(h, shooter, sniper);
-            check(h, magazine.total() == 1, "Intro/tick hooks cannot repeat the first-life ammo grant");
+            check(h, magazine.total() == 2, "Intro/tick hooks cannot repeat the first-life ammo grant");
             if (magazine.rounds() == 0) magazine.reload();
-            check(h, magazine.consume(), "Consume the one real sniper cartridge");
+            check(h, magazine.consume(2), "Consume both real starting sniper cartridges");
             WeaponItems.save(shooter.getInventory().getItem(sniperSlot), magazine);
             check(h, ammo(h, shooter, sniper).total() == 0, "Consumed sniper state is persisted on its item");
             ally[0] = login(h, logins, "W263Ally", Element.VOID);
@@ -422,6 +422,7 @@ public final class CrucibleW263GameTests {
                         "Actual armored health after Ace headshot " + shot);
             }
             check(h, shooter.isDeadOrDying(), "Third Ace headshot enters real death lifecycle");
+            check(h, CrucibleAmmo.sharedPositions(enemy).isEmpty(), "Empty Special death creates no shared brick");
             crucibleSource(h, shooter, enemy);
             check(h, shooter.getLastHurtByPlayer() == enemy, "Lethal damage retains killer attribution");
             scoreAfterKill[0] = before + 1;
@@ -439,17 +440,15 @@ public final class CrucibleW263GameTests {
             float hp = next.getHealth();
             check(h, !Combat.damage(enemy, next, 10000, Element.ARC), "Actual lethal request is rejected during respawn protection");
             near(h, next.getHealth(), hp, "Protected replacement keeps its HP");
-            check(h, ammo(h, next, sniper).total() == 0, "Respawn retains zero spent Special ammo; no second starting grant");
+            check(h, ammo(h, next, sniper).total() == 2, "Respawn grants two Special cartridges even after an empty death");
             check(h, CrucibleRuntime.snapshot().scores().get(CrucibleRuntime.team(enemy)) == scoreAfterKill[0],
                     "Respawn/protected damage cannot duplicate the kill score");
         });
         h.runAfterDelay(720, () -> {
             var next = server.getPlayerList().getPlayer(shooter.getUUID());
             check(h, next != null && next.isAlive() && CrucibleRuntime.canFight(enemy, next), "Replacement returns to combat after protection");
-            check(h, ammo(h, next, sniper).total() == 0, "Subsequent ticks cannot mint ammo after respawn");
-            // Ammo extension point: add separate retained-positive/cap and equipment-switch scenarios here
-            // when the master's complete policy is integrated. This test already exercises arrive/died/tick
-            // through runtime hooks; it deliberately never calls CrucibleAmmo to manufacture lifecycle state.
+            check(h, ammo(h, next, sniper).total() == 2, "Subsequent ticks cannot duplicate the respawn allocation");
+            // Actual Runtime hooks supplied the fresh life allocation; no manual arrive/died was used.
             for (var login : logins) {
                 var current = server.getPlayerList().getPlayer(login.initial.getUUID());
                 check(h, current != null && CrucibleRuntime.leave(current, true), "Every owned participant leaves normally");
@@ -460,7 +459,7 @@ public final class CrucibleW263GameTests {
         });
     }
 
-    private static void moveFixture(GameTestHelper h, ServerPlayer p, Vec3 at) {
+    static void moveFixture(GameTestHelper h, ServerPlayer p, Vec3 at) {
         check(h, p.teleportTo(p.level(), at.x, at.y, at.z, java.util.Set.of(), 0, 0, false),
                 "Owned fixture teleport succeeds");
         p.setDeltaMovement(Vec3.ZERO);
@@ -470,7 +469,7 @@ public final class CrucibleW263GameTests {
     /** One paid PRIMARY kill, real pickups and real death/respawn; seeded health/ammo are fixture data. */
     @GameTest(structure = "destiny-test:floor", environment = "destiny-test:w90_isolated",
             maxTicks = 1200, manualOnly = true)
-    public void runtimeKillCratesAndRetainedSpecialAmmo(GameTestHelper h) {
+    public void runtimeDeathDropsRespawnAllocationsAndDisabledSpecialCrates(GameTestHelper h) {
         check(h, CrucibleRuntime.snapshot().members().isEmpty(), "Extended fixture owns an empty singleton match");
         var defaults = CrucibleAmmoRules.Config.localDefaults();
         TestCleanup.register(h, () -> CrucibleAmmo.configure(defaults));
@@ -490,25 +489,15 @@ public final class CrucibleW263GameTests {
         shooter.getInventory().setItem(aceSlot, WeaponItems.create(ace));
         shooter.getInventory().setSelectedSlot(aceSlot);
         check(h, WeaponLoadout.equipHeld(shooter) == null, "Primary plus stowed sniper equipped before join");
+        enemy.getInventory().setItem(sniperSlot, WeaponItems.create(sniper));
+        enemy.getInventory().setSelectedSlot(sniperSlot);
+        check(h, WeaponLoadout.equipHeld(enemy) == null, "Victim equips Special before joining");
         check(h, CrucibleRuntime.join(shooter) && CrucibleRuntime.join(enemy), "Both players join Control");
-        Vec3[] meterPickup = new Vec3[1], crateOrigin = new Vec3[1];
-        boolean[] observeCrate = {false}, sawCrate = {false};
-        h.onEachTick(() -> {
-            for (var login : logins) tickLogin(server, login);
-            var current = server.getPlayerList().getPlayer(shooter.getUUID());
-            if (observeCrate[0] && current != null) {
-                int phaseTicks = CrucibleRuntime.snapshot().phaseTicks();
-                if (CrucibleAmmo.bricks(current) > 0 && !sawCrate[0]) {
-                    check(h, phaseTicks >= 600 && phaseTicks <= 605,
-                            "Actual first Special shell appears at 30s of PLAYING; phaseTicks=" + phaseTicks);
-                    sawCrate[0] = true;
-                }
-                if (phaseTicks < 600) check(h, CrucibleAmmo.bricks(current) == 0, "No early timed crate");
-            }
-        });
+        Vec3[] deathPickup = new Vec3[1];
+        h.onEachTick(() -> { for (var login : logins) tickLogin(server, login); });
         h.runAfterDelay(450, () -> {
             check(h, CrucibleRuntime.canFight(shooter, enemy), "Intro/protection complete before paid shot");
-            check(h, ammo(h, shooter, sniper).total() == 1, "Initial Special allocation is one sniper round");
+            check(h, ammo(h, shooter, sniper).total() == 2, "Initial Special allocation is two sniper rounds");
             var old = shooter.getInventory().getItem(sniperSlot);
             var fresh = WeaponItems.create(sniper);
             check(h, WeaponItems.magazine(fresh, WeaponProfile.forEntry(sniper)).total() > 1,
@@ -538,6 +527,9 @@ public final class CrucibleW263GameTests {
             moveFixture(h, enemy, targetAt);
             noDefenses(enemy);
             enemy.setHealth(1); // Explicit low-health fixture; WeaponRuntime must cause the actual death.
+            WeaponItems.save(enemy.getInventory().getItem(sniperSlot), new WeaponMagazine(WeaponProfile.forEntry(sniper), 0, 1));
+            check(h, ammo(h, enemy, sniper).rounds() == 0 && ammo(h, enemy, sniper).reserve() == 1,
+                    "Reserve-only Special must qualify for a death drop");
             Vec3 aim = enemy.getBoundingBox().getCenter().subtract(shooter.getEyePosition());
             float yaw = (float)Math.toDegrees(Math.atan2(-aim.x, aim.z));
             float pitch = (float)-Math.toDegrees(Math.atan2(aim.y, Math.sqrt(aim.x * aim.x + aim.z * aim.z)));
@@ -551,7 +543,7 @@ public final class CrucibleW263GameTests {
                     shooter, from, to, new net.minecraft.world.phys.AABB(from, to).inflate(.23),
                     e -> Combat.isEnemy(shooter, e), .03f);
             check(h, witness != null && witness.getEntity() == enemy, "Paid ray preflight selects the intended enemy");
-            meterPickup[0] = AmmoEconomy.safePosition(shooter.level(), enemy.position()).orElseThrow();
+            deathPickup[0] = AmmoEconomy.safePosition(shooter.level(), enemy.position()).orElseThrow();
             var gun = shooter.getMainHandItem();
             int paidBefore = WeaponItems.magazine(gun, WeaponProfile.forEntry(ace)).rounds();
             shooter.getRandom().setSeed(0x5DEECE66DL);
@@ -561,55 +553,53 @@ public final class CrucibleW263GameTests {
                     "One actual runtime emission consumes exactly one primary round");
             check(h, enemy.isDeadOrDying(), "The paid runtime ray causes a real enemy death");
             crucibleSource(h, enemy, shooter);
-            check(h, CrucibleAmmo.bricks(shooter) == 1, "One real primary kill funds one personal meter shell");
-            check(h, ammo(h, shooter, sniper).total() == 0, "Meter shell is not a remote ammo grant");
+            check(h, CrucibleAmmo.bricks(shooter) == 1, "Victim with reserve Special leaves one shared death shell");
+            check(h, ammo(h, shooter, sniper).total() == 0, "Death shell requires physical pickup");
+            CrucibleAmmo.died(enemy);
+            check(h, CrucibleAmmo.bricks(shooter) == 1 && CrucibleAmmo.meter(shooter) == 0,
+                    "Duplicate death and configured full kill credit cannot create another shell");
         });
-        h.runAfterDelay(500, () -> moveFixture(h, shooter, meterPickup[0]));
+        h.runAfterDelay(500, () -> moveFixture(h, shooter, deathPickup[0]));
         h.runAfterDelay(520, () -> {
             check(h, ammo(h, shooter, sniper).total() == 2 && CrucibleAmmo.bricks(shooter) == 0,
-                    "Actual meter-shell pickup grants two sniper rounds and consumes its shell");
-            observeCrate[0] = true;
+                    "Actual shared death-shell pickup grants two sniper rounds and consumes its shell");
         });
         h.runAfterDelay(640, () -> {
             var killer = server.getPlayerList().getPlayer(enemy.getUUID());
             check(h, killer != null && killer != enemy && killer.isAlive()
-                    && CrucibleRuntime.canFight(killer, shooter), "Enemy has genuinely respawned before retention death");
+                    && CrucibleRuntime.canFight(killer, shooter), "Enemy has genuinely respawned before the next death");
             var stack = shooter.getInventory().getItem(sniperSlot);
-            // Explicit fixture seed on an already recognized equipped item, not an earned-ammo claim.
+            // Explicit positive-ammo fixture on an already recognized equipped item, not an earned-ammo claim.
             WeaponItems.save(stack, new WeaponMagazine(WeaponProfile.forEntry(sniper), 3, 6));
-            check(h, ammo(h, shooter, sniper).total() == 9, "Retention fixture explicitly seeds nine rounds");
+            check(h, ammo(h, shooter, sniper).total() == 9, "Positive-ammo death fixture explicitly seeds nine rounds");
             check(h, Combat.damage(killer, shooter, shooter.getHealth() + shooter.getAbsorptionAmount() + 1, Element.ARC),
-                    "A living enemy causes the retention fixture's real death");
+                    "A living enemy causes the positive-ammo fixture's real death");
             crucibleSource(h, shooter, killer);
-            check(h, ammo(h, shooter, sniper).total() == 3, "Death hook retains three of nine before native copying");
+            check(h, ammo(h, shooter, sniper).total() == 0, "Death clears all nine before native copying");
+            check(h, CrucibleAmmo.sharedPositions(killer).size() == 1, "Positive death leaves exactly one shared shell");
+            moveFixture(h, killer, CrucibleAmmo.sharedPositions(killer).getFirst());
         });
         h.runAfterDelay(760, () -> {
             var next = server.getPlayerList().getPlayer(shooter.getUUID());
             check(h, next != null && next != shooter && next.isAlive() && CrucibleRuntime.participating(next),
                     "Runtime creates a living participating replacement");
-            check(h, next.connection.getPlayer() == next && ammo(h, next, sniper).total() == 3,
-                    "Native respawn preserves exactly three retained rounds");
+            check(h, next.connection.getPlayer() == next && ammo(h, next, sniper).total() == 2,
+                    "Native respawn grants exactly two fresh rounds");
             var remaining = ammo(h, next, sniper);
-            if (remaining.rounds() < 3) remaining.reload();
-            check(h, remaining.consume(3), "Explicit fixture consumes all retained rounds");
+            if (remaining.rounds() < 2) remaining.reload();
+            check(h, remaining.consume(2), "Explicit fixture consumes the fresh life allocation");
             WeaponItems.save(next.getInventory().getItem(sniperSlot), remaining);
             CrucibleAmmo.arrive(next, true);
             CrucibleAmmo.arrive(next, false);
-            check(h, ammo(h, next, sniper).total() == 0, "Repeated arrive cannot refill spent retained ammo");
-            crateOrigin[0] = next.position();
+            check(h, ammo(h, next, sniper).total() == 0, "Repeated arrive cannot refill spent respawn ammo");
         });
         h.runAfterDelay(1100, () -> {
             var next = server.getPlayerList().getPlayer(shooter.getUUID());
-            check(h, sawCrate[0] && CrucibleAmmo.bricks(next) == 1, "First timed crate actually exists after 30s");
-            check(h, ammo(h, next, sniper).total() == 0, "Timed crate also requires physical pickup");
-            var pickup = AmmoEconomy.safePosition(next.level(), crateOrigin[0].add(2, 0, 0)).orElseThrow();
-            moveFixture(h, next, pickup);
-        });
-        h.runAfterDelay(1120, () -> {
-            var next = server.getPlayerList().getPlayer(shooter.getUUID());
-            check(h, ammo(h, next, sniper).total() == 1 && CrucibleAmmo.bricks(next) == 0,
-                    "Actual timed crate grants one sniper round, unlike the two-round meter shell");
-            observeCrate[0] = false;
+            check(h, CrucibleRuntime.snapshot().phaseTicks() >= CrucibleAmmoRules.FIRST_CRATE_TICKS,
+                    "Actual match passes the old thirty-second Special crate boundary");
+            check(h, CrucibleAmmo.bricks(next) == 0 && ammo(h, next, sniper).total() == 0
+                            && CrucibleAmmo.meter(next) == 0,
+                    "No timed Special crate, meter payout or remote refill after the consumed death shells");
             for (var login : logins) {
                 var current = server.getPlayerList().getPlayer(login.initial.getUUID());
                 check(h, current != null && CrucibleRuntime.leave(current, true), "Both lifecycle fixtures leave normally");

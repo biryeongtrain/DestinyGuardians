@@ -1,10 +1,17 @@
 package kim.biryeong.destiny.crucible;
 
 import eu.pb4.polymer.virtualentity.api.ElementHolder;
+import eu.pb4.polymer.virtualentity.api.attachment.ManualAttachment;
+import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import kim.biryeong.destiny.fx.AmmoBrickVisual;
 import kim.biryeong.destiny.weapon.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Brightness;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemDisplayContext;
+import org.joml.Vector3f;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -13,32 +20,23 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
-/** Server-thread-only Control ammunition; no self-registering events and no PvE meter.
- * Main must call arrive after inventory restoration, died BEFORE native respawn,
- * tickArena once per match tick, tick per player, guard before firing, and
- * equipmentChanged AFTER successful inventory equipment mutations. Same-slot selection
- * does not discard ammo. Call leave on exit/disconnect, clear on server shutdown.
- * Glaive melee uses AmmoGeneration.GLAIVE_MELEE; the explicit helper is equivalent.
- * Crates are personal proximity pickups, one allotment per shell, not shared world blocks.
- * Special: first 30s, LOCAL repeat 60s. Heavy: LOCAL 90s then 120s. Both expire in 60s.
- * Master owns research documentation; see CrucibleAmmoRules for sourced/local boundaries.
+/** Server-thread-only Control ammunition. Runtime calls arrive after inventory restoration,
+ * died before native respawn, tickArena once per match tick, tick per current player,
+ * guard before firing and equipmentChanged after an actual inventory mutation.
+ * W273: each accepted life gets Special 2 (trace 30) per equipped weapon. Death with
+ * loaded/reserve Special leaves one shared field pickup; no Special meter/timed crates.
+ * Shared pickups outlive their donor's death/respawn/exit, expire after 60s, and are
+ * collectible by either living, active team. Heavy remains personal and unchanged.
  */
 public final class CrucibleAmmo {
     private static CrucibleAmmoRules.Config config = CrucibleAmmoRules.Config.localDefaults();
     private static final Map<UUID, Session> SESSIONS = new HashMap<>();
-    private static final Map<UUID, Victim> VICTIMS = new HashMap<>();
+    private static final List<SharedBrick> SHARED = new ArrayList<>();
     private static final Set<UUID> INITIALIZED = new HashSet<>();
     private static long round = -1;
     private static CrucibleWorld.Arena currentArena;
     private record Saved(WeaponCatalog.Entry weapon, int rounds, int reserve, long overflow) { }
-    private record Contribution(UUID player, CrucibleAmmoRules.Credit kind, long tick) { }
-    private static final class Victim {
-        final LivingEntity entity;
-        final Map<UUID, Contribution> hits = new LinkedHashMap<>();
-        boolean paid;
-        long updated;
-        Victim(LivingEntity entity) { this.entity = entity; }
-    }
+    private record SharedBrick(ServerLevel level, Vec3 at, long expires, ElementHolder visual) { }
     private record Brick(WeaponAmmoType type, boolean crate, Vec3 at, long expires, ElementHolder visual) { }
     private static final class Session {
         ServerPlayer owner;
@@ -46,9 +44,8 @@ public final class CrucibleAmmo {
         final EnumMap<WeaponSlot, ItemStack> equipped = new EnumMap<>(WeaponSlot.class);
         final Map<Integer, Saved> respawn = new HashMap<>();
         final List<Brick> bricks = new ArrayList<>();
-        Vec3 spawn;
-        double meter;
-        int specialWave = -1, heavyWave = -1;
+        Vec3 spawn, lastSafe;
+        int heavyWave = -1;
         boolean dead, reconciling;
         Session(ServerPlayer owner) { this.owner = owner; this.spawn = owner.position(); }
     }
@@ -57,14 +54,15 @@ public final class CrucibleAmmo {
     public static void configure(CrucibleAmmoRules.Config value) { config = Objects.requireNonNull(value); }
     /** firstLife is advisory only: repeated intro/fresh callbacks cannot mint an allocation. */
     public static void arrive(ServerPlayer p, boolean firstLife) {
-        if (!CrucibleRuntime.participating(p)) return;
+        if (!CrucibleRuntime.currentParticipant(p) || !p.isAlive() || p.isRemoved() || p.hasDisconnected()) return;
         observeRound(CrucibleRuntime.snapshot().round());
         Session s = SESSIONS.get(p.getUUID());
         boolean fresh = s == null;
         if (fresh) { s = new Session(p); SESSIONS.put(p.getUUID(), s); }
         WeaponRuntime.cancelUseForSkill(p);
         boolean changed = false;
-        if (s.dead) {
+        boolean respawning = s.dead;
+        if (respawning) {
             // keepInventory may copy ItemStacks. Only this explicit death -> arrival boundary
             // authorizes replacement identities, by exact saved slot and catalog entry.
             s.known.clear(); s.equipped.clear();
@@ -80,15 +78,14 @@ public final class CrucibleAmmo {
                 }
             }
             s.respawn.clear(); s.dead = false;
-            VICTIMS.remove(p.getUUID());
         }
         if (s.owner != p) destroyBricks(s);
         s.owner = p; s.spawn = p.position();
+        s.lastSafe = AmmoEconomy.safePosition(p.level(), p.position()).orElse(null);
         changed |= reconcile(p, s);
-        if (fresh && INITIALIZED.add(p.getUUID())) {
-            int count = specialCount(p);
+        if (respawning || fresh && INITIALIZED.add(p.getUUID())) {
             for (var e : WeaponLoadout.equipped(p)) if (e.characteristics().ammo() == WeaponAmmoType.SPECIAL) {
-                int amount = CrucibleAmmoRules.split(CrucibleAmmoRules.starting(e.weapon().family()), count);
+                int amount = CrucibleAmmoRules.starting(e.weapon().family());
                 var profile = WeaponProfile.forEntry(e.weapon());
                 WeaponItems.save(e.stack(), new WeaponMagazine(profile, Math.min(amount, profile.magazine()),
                         Math.max(0, amount - profile.magazine())));
@@ -97,40 +94,45 @@ public final class CrucibleAmmo {
         }
         if (changed) sync(p);
     }
-    /** Retention is written before native keepInventory copying. Do NOT remove victim hits here:
-     * AFTER_DEATH precedes Combat.afterDamage, which still needs them for kill/assist credit. */
+    /** Called for the current dead object before native keepInventory copies its inventory.
+     * Mark the epoch dead before emitting anything: duplicate death notifications pay nothing. */
     public static void died(ServerPlayer p) {
-        Session s = owned(p); if (s == null || s.dead) return;
+        Session s = owned(p);
+        if (s == null || s.dead || p.isAlive() || !CrucibleRuntime.currentParticipant(p)) return;
         WeaponRuntime.cancelUseForSkill(p);
         boolean changed = reconcile(p, s);
-        int count = specialCount(p);
+        boolean hadSpecial = WeaponLoadout.equipped(p).stream()
+                .filter(e -> e.characteristics().ammo() == WeaponAmmoType.SPECIAL)
+                .anyMatch(e -> {
+                    var ammo = WeaponItems.magazine(e.stack(), WeaponProfile.forEntry(e.weapon()));
+                    return (long) ammo.rounds() + ammo.reserve() > 0;
+                });
+        s.dead = true;
         for (int i = 0; i < p.getInventory().getContainerSize(); i++) {
             ItemStack stack = p.getInventory().getItem(i);
             var e = WeaponItems.entry(stack).orElse(null);
             if (e == null || !finite(e)) continue;
             var profile = WeaponProfile.forEntry(e);
             var ammo = WeaponItems.magazine(stack, profile);
-            long keep = WeaponCharacteristics.of(e).ammo() == WeaponAmmoType.SPECIAL
-                    ? CrucibleAmmoRules.retained(ammo.total(), CrucibleAmmoRules.split(CrucibleAmmoRules.starting(e.family()), count)) : 0;
-            int loaded = (int)Math.min(ammo.rounds(), keep);
-            var retained = new WeaponMagazine(profile, loaded, keep - loaded, 0, ammo.loadedLimit());
-            if (ammo.total() != retained.total()) { WeaponItems.save(stack, retained); changed = true; }
+            var retained = new WeaponMagazine(profile, 0, 0);
+            if (ammo.total() != 0) { WeaponItems.save(stack, retained); changed = true; }
             s.respawn.put(i, new Saved(e, retained.rounds(), retained.reserve(), retained.overflow()));
         }
-        s.dead = true;
-        destroyBricks(s); // LOCAL: transient personal pickups end with their owner's life.
+        destroyBricks(s); // Personal Heavy pickups still end with their owner's life.
+        if (hadSpecial) dropShared(s);
         if (changed) sync(p);
     }
     public static void leave(ServerPlayer p) {
         Session s = owned(p); if (s == null) return;
         destroyBricks(s); SESSIONS.remove(p.getUUID());
-        VICTIMS.remove(p.getUUID());
-        VICTIMS.values().forEach(v -> v.hits.remove(p.getUUID()));
+        for (var b : SHARED) b.visual().stopWatching(p);
+        if (SESSIONS.isEmpty()) destroyShared();
         // INITIALIZED survives a same-round leave/rejoin: no new starting grant.
     }
     public static void clear() {
         SESSIONS.values().forEach(CrucibleAmmo::destroyBricks);
-        SESSIONS.clear(); VICTIMS.clear(); INITIALIZED.clear(); round = -1; currentArena = null;
+        destroyShared();
+        SESSIONS.clear(); INITIALIZED.clear(); round = -1; currentArena = null;
     }
     /** Safe before WeaponLoadout.canUse: never calls canUse or changes selected slot. */
     public static void guard(ServerPlayer p) {
@@ -181,47 +183,65 @@ public final class CrucibleAmmo {
         WeaponItems.save(stack, new WeaponMagazine(profile, 0, 0)); return true;
     }
     private static boolean finite(WeaponCatalog.Entry e) { return WeaponCharacteristics.of(e).ammo() != WeaponAmmoType.PRIMARY; }
-    private static int specialCount(ServerPlayer p) {
-        return (int)WeaponLoadout.equipped(p).stream().filter(e -> e.characteristics().ammo() == WeaponAmmoType.SPECIAL).count();
-    }
     private static Session owned(ServerPlayer p) {
         Session s = SESSIONS.get(p.getUUID()); return s != null && s.owner == p ? s : null;
     }
     private static void sync(ServerPlayer p) { p.getInventory().setChanged(); p.containerMenu.broadcastChanges(); }
     private static void destroyBricks(Session s) { s.bricks.forEach(b -> b.visual().destroy()); s.bricks.clear(); }
 
-    public static void afterDamage(ServerPlayer source, LivingEntity target, AmmoGeneration generation, float before, float after) {
-        if (generation == null) return;
-        credit(source, target, CrucibleAmmoRules.Credit.valueOf(generation.kind().name()), before, after);
+    /** Legacy Combat callbacks intentionally cannot fund a Special meter or duplicate a death brick. */
+    public static void afterDamage(ServerPlayer source, LivingEntity target, AmmoGeneration generation, float before, float after) { }
+    public static void afterGlaiveDamage(ServerPlayer source, LivingEntity target, float before, float after) { }
+
+    private static boolean pickupEligible(ServerPlayer p) {
+        return CrucibleRuntime.currentParticipant(p) && CrucibleRuntime.canAct(p)
+                && p.isAlive() && !p.isRemoved() && !p.isSpectator() && !p.hasDisconnected();
     }
-    public static void afterGlaiveDamage(ServerPlayer source, LivingEntity target, float before, float after) {
-        credit(source, target, CrucibleAmmoRules.Credit.GLAIVE_MELEE, before, after);
+    private static void destroyShared() {
+        SHARED.forEach(b -> b.visual().destroy()); SHARED.clear();
     }
-    private static void credit(ServerPlayer source, LivingEntity target, CrucibleAmmoRules.Credit kind, float before, float after) {
-        if (!(target instanceof ServerPlayer victim) || owned(source) == null || owned(victim) == null
-                || !CrucibleRuntime.enemies(source, victim) || !Float.isFinite(before) || !Float.isFinite(after)
-                || before <= 0 || after >= before) return;
+    private static void refreshViewers(SharedBrick b) {
+        var viewers = new HashSet<net.minecraft.server.network.ServerGamePacketListenerImpl>();
+        for (var s : SESSIONS.values()) {
+            var p = s.owner;
+            if (p.level() == b.level() && pickupEligible(p)) viewers.add(p.connection);
+        }
+        for (var watcher : List.copyOf(b.visual().getWatchingPlayers()))
+            if (!viewers.contains(watcher)) b.visual().stopWatching(watcher);
+        for (var watcher : viewers) b.visual().startWatching(watcher);
+    }
+    private static ElementHolder sharedVisual(ServerLevel level, Vec3 at) {
+        var holder = new ElementHolder();
+        new ManualAttachment(holder, level, () -> at);
+        var item = new ItemStack(Items.PAPER);
+        item.set(DataComponents.ITEM_MODEL, kim.biryeong.destiny.DestinyGuardians.id("fx/ammo_brick_special_w42"));
+        var display = new ItemDisplayElement(item);
+        display.setItemDisplayContext(ItemDisplayContext.NONE);
+        display.setScale(new Vector3f(AmmoBrickVisual.SCALE));
+        display.setTranslation(new Vector3f(0, AmmoBrickVisual.SCALE * .5f, 0));
+        display.setBrightness(new Brightness(15, 15));
+        display.setViewRange(1); holder.addElement(display); holder.tick();
+        return holder;
+    }
+    private static void dropShared(Session s) {
+        var p = s.owner;
         var snapshot = CrucibleRuntime.snapshot();
-        if (snapshot.phase() != ControlMatch.Phase.PLAYING || snapshot.paused()) return;
-        long now = source.level().getGameTime();
-        Victim v = VICTIMS.get(victim.getUUID());
-        if (v == null || v.entity != victim) {
-            if (VICTIMS.size() >= 2048) return;
-            v = new Victim(victim); VICTIMS.put(victim.getUUID(), v);
-        }
-        if (v.paid) return;
-        v.updated = now;
-        if (v.hits.size() < 32 || v.hits.containsKey(source.getUUID()))
-            v.hits.put(source.getUUID(), new Contribution(source.getUUID(), kind, now));
-        if (victim.isAlive() && !victim.isDeadOrDying()) return;
-        v.paid = true;
-        for (var hit : v.hits.values()) {
-            Session s = SESSIONS.get(hit.player());
-            if (s == null || now - hit.tick() > config.assistTicks() || s.owner.level() != victim.level()
-                    || !CrucibleRuntime.enemies(s.owner, victim) || specialCount(s.owner) == 0) continue;
-            s.meter = Math.min(config.maxBricks(), s.meter + CrucibleAmmoRules.gain(config, hit.kind(), !hit.player().equals(source.getUUID())));
-            if (!s.dead) dropOwed(s, victim.position());
-        }
+        if (currentArena == null || p.level() != currentArena.level()
+                || snapshot.phase() != ControlMatch.Phase.PLAYING || snapshot.paused()) return;
+        // A void/liquid death uses the last verified field position, then its safe arrival point.
+        var safe = AmmoEconomy.safePosition(p.level(), p.position());
+        if (safe.isEmpty() && s.lastSafe != null) safe = AmmoEconomy.safePosition(p.level(), s.lastSafe);
+        if (safe.isEmpty()) safe = AmmoEconomy.safePosition(p.level(), s.spawn);
+        if (safe.isEmpty()) return; // Never force-load chunks or place a pickup in solid/unsafe terrain.
+        Vec3 at = safe.get();
+        var b = new SharedBrick(p.level(), at, p.level().getGameTime() + CrucibleAmmoRules.BRICK_TICKS,
+                sharedVisual(p.level(), at));
+        SHARED.add(b); refreshViewers(b);
+    }
+    private static boolean inReach(ServerPlayer p, Vec3 at) {
+        return p.position().distanceToSqr(at) <= 2.25
+                && p.level().clip(new ClipContext(p.position().add(0, .4, 0), at,
+                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p)).getType() == HitResult.Type.MISS;
     }
     private static boolean spawn(Session s, WeaponAmmoType type, Vec3 at, boolean crate) {
         if (s.bricks.size() >= config.maxBricks()) return false;
@@ -230,13 +250,6 @@ public final class CrucibleAmmo {
         s.bricks.add(new Brick(type, crate, pos, s.owner.level().getGameTime() + CrucibleAmmoRules.BRICK_TICKS,
                 AmmoBrickVisual.create(s.owner, type, pos)));
         return true;
-    }
-    private static void dropOwed(Session s, Vec3 at) {
-        boolean dropped = false;
-        while (s.meter >= 1 && spawn(s, WeaponAmmoType.SPECIAL, at, false)) { s.meter -= 1; dropped = true; }
-        if (dropped) for (var viewer : s.owner.level().players())
-            if (CrucibleRuntime.enemies(s.owner, viewer))
-                viewer.sendSystemMessage(Component.literal("적이 특수 탄약을 생성했습니다."));
     }
     /** Call even in INTRO/RESULTS; round transitions reset once. The first 0 -> 1 round
      * adopts pre-intro arrivals without issuing a second starting grant. */
@@ -248,15 +261,19 @@ public final class CrucibleAmmo {
                 if (snapshot.members().containsKey(p.getUUID())) arrive(p, true);
         }
         long now = arena.level().getGameTime();
-        VICTIMS.values().removeIf(v -> now - v.updated > config.assistTicks());
+        for (var it = SHARED.iterator(); it.hasNext();) {
+            var b = it.next();
+            if (snapshot.phase() != ControlMatch.Phase.PLAYING || b.level() != arena.level()
+                    || now >= b.expires() || !b.level().hasChunkAt(BlockPos.containing(b.at()))) {
+                b.visual().destroy(); it.remove();
+            } else refreshViewers(b);
+        }
         if (snapshot.phase() != ControlMatch.Phase.PLAYING || snapshot.paused()) return;
-        int special = CrucibleAmmoRules.crateWave(snapshot.phaseTicks(), config);
         int heavy = snapshot.phaseTicks() < CrucibleAmmoRules.HEAVY_FIRST_TICKS ? -1
                 : (snapshot.phaseTicks() - CrucibleAmmoRules.HEAVY_FIRST_TICKS) / CrucibleAmmoRules.HEAVY_REPEAT_TICKS;
         for (var s : SESSIONS.values()) {
             if (!snapshot.members().containsKey(s.owner.getUUID()) || s.owner.level() != arena.level() || s.dead) continue;
             // Late join gets only current wave, never a backlog. Unsafe positions retry.
-            if (special > s.specialWave && spawn(s, WeaponAmmoType.SPECIAL, s.spawn.add(2, 0, 0), true)) s.specialWave = special;
             if (config.heavyCrates() && heavy > s.heavyWave && spawn(s, WeaponAmmoType.HEAVY, s.spawn.add(-2, 0, 0), true)) s.heavyWave = heavy;
         }
     }
@@ -267,7 +284,8 @@ public final class CrucibleAmmo {
         boolean reset = round > 0;
         if (reset) {
             SESSIONS.values().forEach(CrucibleAmmo::destroyBricks);
-            SESSIONS.clear(); VICTIMS.clear(); INITIALIZED.clear();
+            destroyShared();
+            SESSIONS.clear(); INITIALIZED.clear();
         }
         round = next;
         return reset;
@@ -276,16 +294,20 @@ public final class CrucibleAmmo {
         Session s = owned(p); if (s == null || s.dead) return;
         boolean changed = reconcile(p, s);
         long now = p.level().getGameTime();
-        boolean active = CrucibleRuntime.participating(p) && CrucibleRuntime.canAct(p)
-                && p.isAlive() && !p.isRemoved() && !p.isSpectator();
-        // An owed brick from an unsafe kill waits for the next safe confirmed kill, not a free body spawn.
+        boolean active = pickupEligible(p);
+        if (active) s.lastSafe = AmmoEconomy.safePosition(p.level(), p.position()).orElse(s.lastSafe);
+        if (active) for (var it = SHARED.iterator(); it.hasNext();) {
+            var b = it.next();
+            if (b.level() != p.level() || now >= b.expires() || !p.level().hasChunkAt(BlockPos.containing(b.at()))) continue;
+            if (inReach(p, b.at()) && grant(p, WeaponAmmoType.SPECIAL, false)) {
+                b.visual().destroy(); it.remove(); changed = true;
+            }
+        }
         for (var it = s.bricks.iterator(); it.hasNext();) {
             Brick b = it.next();
             boolean expired = now >= b.expires() || !p.level().hasChunkAt(BlockPos.containing(b.at()));
             boolean picked = false;
-            if (!expired && active && p.position().distanceToSqr(b.at()) <= 2.25
-                    && p.level().clip(new ClipContext(p.position().add(0, .4, 0), b.at(),
-                    ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p)).getType() == HitResult.Type.MISS) {
+            if (!expired && active && inReach(p, b.at())) {
                 picked = grant(p, b.type(), b.crate()); changed |= picked;
             }
             if (expired || picked) { b.visual().destroy(); it.remove(); }
@@ -299,12 +321,19 @@ public final class CrucibleAmmo {
             var ammo = WeaponItems.magazine(e.stack(), WeaponProfile.forEntry(e.weapon()));
             int amount = type == WeaponAmmoType.SPECIAL ? CrucibleAmmoRules.specialPayout(e.weapon().family(), crate)
                     : CrucibleAmmoRules.heavyBrick(e.weapon().family());
-            amount = CrucibleAmmoRules.split(amount, weapons.size());
+            if (type == WeaponAmmoType.HEAVY) amount = CrucibleAmmoRules.split(amount, weapons.size());
             int gained = e.weapon().family().equals("sword") ? ammo.addLoaded(amount) : ammo.addReserve(amount);
             if (gained > 0) { WeaponItems.save(e.stack(), ammo); changed = true; }
         }
         return changed; // Full pools keep the shell; partial acceptance consumes one allotment.
     }
-    public static double meter(ServerPlayer p) { Session s = owned(p); return s == null ? 0 : s.meter; }
-    public static int bricks(ServerPlayer p) { Session s = owned(p); return s == null ? 0 : s.bricks.size(); }
+    public static double meter(ServerPlayer p) { return 0; }
+    /** Read-only diagnostics: Heavy remains personal; Special has one shared position per death. */
+    public static List<Vec3> sharedPositions(ServerPlayer p) {
+        if (!CrucibleRuntime.currentParticipant(p)) return List.of();
+        return SHARED.stream().filter(b -> b.level() == p.level()).map(SharedBrick::at).toList();
+    }
+    public static int bricks(ServerPlayer p) {
+        Session s = owned(p); return s == null ? 0 : s.bricks.size() + sharedPositions(p).size();
+    }
 }

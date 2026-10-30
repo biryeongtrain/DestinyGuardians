@@ -27,6 +27,7 @@ public final class ProfileWeaponView {
     private static final class Session {
         final ServerPlayer owner;final ItemDisplayHud gun,grenade;final ItemDisplayHud[] arms=new ItemDisplayHud[4];
         final Object profile;final boolean slim;boolean leftHand,lastTwoHand;ItemStack lastGun=ItemStack.EMPTY;
+        ItemStack source;
         Matrix4f lastRoot;boolean throwing,meleeHidden;long raiseAt=Long.MIN_VALUE;
         final Matrix4f[] readyArms=new Matrix4f[4];
         final String[] lastPoses=new String[4];final int[] lastMarkers={-1,-1,-1,-1};int sleeves=-1;float lastHandX=Float.NaN;
@@ -84,6 +85,14 @@ public final class ProfileWeaponView {
         if(s!=null&&(s.owner!=p||!s.profile.equals(p.getGameProfile()))){remove(s.owner);s=null;}
         // Do not clear a first accepted shot just because its first view display is being created.
         if(s==null){s=new Session(p);ACTIVE.put(p.getUUID(),s);}
+        // A copied/equivalent replacement is still a different owner source. Do not interpolate
+        // its hands from a retired reload pose (or reuse those arms after a later grenade throw).
+        if (s.source != original) {
+            Arrays.fill(s.lastPoses,null);Arrays.fill(s.readyArms,null);s.lastRoot=null;
+            s.source=original;
+        }
+        // Whole-mag/Honed completion keeps its existing pose graph through the cosmetic tail.
+        // No independent view clock: gun and all four arm segments consume the same selector.
         boolean returningFromThrow=s.throwing||s.meleeHidden;
         if(returningFromThrow){s.raiseAt=p.level().getGameTime();Arrays.fill(s.lastPoses,null);}
         s.throwing=false;s.meleeHidden=false;s.grenade.setItem(ItemStack.EMPTY);s.grenade.update();

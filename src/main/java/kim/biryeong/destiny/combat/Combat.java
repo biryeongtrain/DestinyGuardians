@@ -18,6 +18,15 @@ import java.util.List;
 
 /** 능력 피해·대상 선택. 플레이어 PvP는 시련의 장 세션의 적 팀 사이에서만 허용한다. */
 public final class Combat {
+    private record HurtContext(LivingEntity target, net.minecraft.world.damagesource.DamageSource source) { }
+    private static final ThreadLocal<HurtContext> ACTIVE_HURT = new ThreadLocal<>();
+
+    /** Only the synchronous custom damage call may suppress its damage-driven impulse.
+     * Explicit jump/dodge/ability movement outside hurtServer is never rewritten. */
+    public static boolean suppressesKnockback(LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
+        var context = ACTIVE_HURT.get();
+        return context != null && context.target() == target && context.source() == source;
+    }
     private Combat() {
     }
 
@@ -62,7 +71,9 @@ public final class Combat {
 
     public static boolean damage(ServerLevel level, ServerPlayer source, LivingEntity target, float amount, Element element,
                                  kim.biryeong.destiny.weapon.AmmoGeneration attribution) {
-        if (source.level() != level || target.level() != level || !source.isAlive() || !target.isAlive()) {
+        if (!Float.isFinite(amount) || amount <= 0 || source == target
+                || source.level() != level || target.level() != level || !source.isAlive() || !target.isAlive()
+                || source.isRemoved() || target.isRemoved()) {
             return false;
         }
         if (!kim.biryeong.destiny.world.TowerSpawnWorld.mayAttack(level, target)) return false;
@@ -73,6 +84,7 @@ public final class Combat {
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.HEAVY) {
             amount *= (float) kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.outgoingDamageMultiplier(source);
         }
+        if (!Float.isFinite(amount) || amount <= 0) return false;
         float before=target.getHealth()+target.getAbsorptionAmount();
         target.damageCooldownTime = 0;
         var damageSource = target instanceof ServerPlayer
@@ -81,12 +93,23 @@ public final class Combat {
                         net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DAMAGE_TYPE,
                                 kim.biryeong.destiny.DestinyGuardians.id("crucible"))), source, attribution)
                 : source.damageSources().playerAttack(source);
-        target.hurtServer(level, damageSource, amount);
+        var reward = kim.biryeong.destiny.crucible.CrucibleSuperRewards.begin(source, target, attribution);
+        var previous = ACTIVE_HURT.get();
+        ACTIVE_HURT.set(new HurtContext(target, damageSource));
+        boolean completed = false;
+        try {
+            target.hurtServer(level, damageSource, amount);
+            completed = true;
+        } finally {
+            if (previous == null) ACTIVE_HURT.remove(); else ACTIVE_HURT.set(previous);
+            reward.finish(completed);
+        }
         kim.biryeong.destiny.weapon.AmmoEconomy.afterDamage(source,target,attribution,before,
                 target.getHealth()+target.getAbsorptionAmount());
         target.setLastHurtByPlayer(source, 100);
         boolean killed = !target.isAlive() || target.isDeadOrDying();
-        if (killed) {
+        // PvP has its own actual-loss payout; do not also grant the old generic 4% kill reward.
+        if (killed && !(target instanceof ServerPlayer)) {
             AbilityService.onKill(source, target, element);
         }
         return killed;
