@@ -247,6 +247,8 @@ public final class CrucibleRuntime {
         CrucibleAmmo.leave(p);
         var scoreboard = p.level().getServer().getScoreboard();
         if (p.getTeam() != null && p.getTeam().getName().startsWith("dg_control_")) {
+            // Viewers' client-side virtual teams hold this name; restore real teams before the REMOVE broadcast.
+            CrucibleTeamVisuals.invalidate();
             scoreboard.removePlayerFromTeam(p.getScoreboardName());
             if (m.previousTeam != null && scoreboard.getPlayerTeam(m.previousTeam) != null)
                 scoreboard.addPlayerToTeam(p.getScoreboardName(), scoreboard.getPlayerTeam(m.previousTeam));
@@ -302,6 +304,7 @@ public final class CrucibleRuntime {
         if (t == null) t = scoreboard.addPlayerTeam(name);
         t.setAllowFriendlyFire(false); t.setSeeFriendlyInvisibles(true);
         t.setCollisionRule(net.minecraft.world.scores.Team.CollisionRule.NEVER);
+        CrucibleTeamVisuals.invalidate();
         scoreboard.addPlayerToTeam(p.getScoreboardName(), t);
         CrucibleTeamVisuals.invalidate();
     }
@@ -386,7 +389,10 @@ public final class CrucibleRuntime {
         var after = match.snapshot();
         CrucibleAmmo.tickArena(arena, after);
         if (before.phase() == ControlMatch.Phase.PLAYING && after.phase() == ControlMatch.Phase.PLAYING)
-            for (Member m : MEMBERS.values()) CrucibleSounds.zones(m.player, before, after);
+            for (Member m : MEMBERS.values()) {
+                CrucibleSounds.zones(m.player, before, after);
+                CrucibleUi.zoneCue(m.player, CrucibleSounds.zoneCue(m.player.getUUID(), before, after), s.getTickCount());
+            }
         var phase = match.phase();
         if (phase != observed) {
             if (phase == ControlMatch.Phase.INTRO) {
@@ -411,11 +417,22 @@ public final class CrucibleRuntime {
             for (Member m : MEMBERS.values()) if (m.player.isAlive()) {
                 // HUD displays are owned UI in the cinematic world; its packet filter must
                 // not silently discard the new content while the HUD caches it as delivered.
+                var roster = rosterFor(m.player);
                 kim.biryeong.minigamelib.cinematic.CameraViews.sending(() ->
-                        CrucibleHud.render(m.player, snap, arena.name(), Math.max(0, m.respawnAt-now())));
+                        CrucibleHud.render(m.player, snap, arena.name(), Math.max(0, m.respawnAt-now()),
+                                roster, s.getTickCount(), match.config().introTicks()));
             }
             arena.updateZones(snap);
         }
+    }
+    private static CrucibleUi.Roster rosterFor(ServerPlayer viewer) {
+        var mine = team(viewer);
+        List<String> friends = new ArrayList<>(), enemies = new ArrayList<>();
+        for (Member m : MEMBERS.values()) {
+            String name = m.player.getGameProfile().name();
+            (team(m.player) == mine ? friends : enemies).add(name);
+        }
+        return new CrucibleUi.Roster(friends, enemies);
     }
     private static void refreshTeamVisuals() {
         CrucibleTeamVisuals.refresh(MEMBERS.values().stream().filter(m -> !m.needsArrival).map(m -> m.player).toList());

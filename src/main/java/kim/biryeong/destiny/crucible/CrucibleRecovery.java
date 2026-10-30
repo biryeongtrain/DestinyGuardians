@@ -35,7 +35,7 @@ final class CrucibleRecovery {
         var board = p.level().getServer().getScoreboard();
         // A different system's later team assignment is not ours to remove.
         if (p.getTeam() == null || p.getTeam().getName().startsWith("dg_control_")) {
-            if (p.getTeam() != null) board.removePlayerFromTeam(p.getScoreboardName());
+            if (p.getTeam() != null) { CrucibleTeamVisuals.invalidate(); board.removePlayerFromTeam(p.getScoreboardName()); }
             if (!state.team().isEmpty() && board.getPlayerTeam(state.team()) != null)
                 board.addPlayerToTeam(p.getScoreboardName(), board.getPlayerTeam(state.team()));
         }
