@@ -57,6 +57,7 @@ public final class WeaponTestArmory {
     }
 
     private static void sync(ServerPlayer p) {
+        kim.biryeong.destiny.crucible.CrucibleAmmo.equipmentChanged(p);
         p.getInventory().setChanged();
         p.containerMenu.broadcastChanges();
     }

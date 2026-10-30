@@ -90,7 +90,8 @@ public final class Statuses {
 
     /** 받는 피해 보정 (LivingEntityMixin). */
     public static float modifyIncoming(LivingEntity target, float amount) {
-        return has(target, Keyword.WEAKENED) ? amount * WEAKEN_MULTIPLIER : amount;
+        return has(target, Keyword.WEAKENED)
+                ? amount * (target instanceof Player ? 1.075f : WEAKEN_MULTIPLIER) : amount;
     }
 
     public static void tick(MinecraftServer server) {

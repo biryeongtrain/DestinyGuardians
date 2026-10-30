@@ -38,6 +38,7 @@ public final class WeaponLoadout {
     }
     public static boolean canUse(ServerPlayer p) {
         if(!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(p))return false;
+        kim.biryeong.destiny.crucible.CrucibleAmmo.guard(p);
         if(!enabled(p))return true;
         int index=p.getInventory().getSelectedSlot();
         return equipped(p).stream().anyMatch(e->e.slot().hotbar()==index&&e.stack()==p.getMainHandItem());
@@ -76,6 +77,7 @@ public final class WeaponLoadout {
         p.getInventory().setSelectedSlot(to);
         p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetHeldSlotPacket(to));
         WeaponHandling.update(p);
+        kim.biryeong.destiny.crucible.CrucibleAmmo.equipmentChanged(p);
         p.getInventory().setChanged();
         p.containerMenu.broadcastChanges();
         return null;

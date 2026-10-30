@@ -73,8 +73,17 @@ public final class Combat {
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.HEAVY) {
             amount *= (float) kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.outgoingDamageMultiplier(source);
         }
+        float before=target.getHealth()+target.getAbsorptionAmount();
         target.damageCooldownTime = 0;
-        target.hurtServer(level, source.damageSources().playerAttack(source), amount);
+        var damageSource = target instanceof ServerPlayer
+                ? new net.minecraft.world.damagesource.DamageSource(level.registryAccess().lookupOrThrow(
+                        net.minecraft.core.registries.Registries.DAMAGE_TYPE).getOrThrow(
+                        net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DAMAGE_TYPE,
+                                kim.biryeong.destiny.DestinyGuardians.id("crucible"))), source)
+                : source.damageSources().playerAttack(source);
+        target.hurtServer(level, damageSource, amount);
+        kim.biryeong.destiny.weapon.AmmoEconomy.afterDamage(source,target,attribution,before,
+                target.getHealth()+target.getAbsorptionAmount());
         target.setLastHurtByPlayer(source, 100);
         boolean killed = !target.isAlive() || target.isDeadOrDying();
         if (killed) {

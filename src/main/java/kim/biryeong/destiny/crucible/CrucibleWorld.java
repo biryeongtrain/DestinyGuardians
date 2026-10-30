@@ -140,7 +140,7 @@ public final class CrucibleWorld {
                 .setGameRule(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER,0).setGameRule(GameRules.RANDOM_TICK_SPEED,0)
                 .setGameRule(GameRules.BLOCK_DROPS,false).setGameRule(GameRules.PVP,true)
                 .setGameRule(GameRules.KEEP_INVENTORY,true).setGameRule(GameRules.IMMEDIATE_RESPAWN,false)
-                .setGameRule(GameRules.NATURAL_HEALTH_REGENERATION,true);
+                .setGameRule(GameRules.NATURAL_HEALTH_REGENERATION,false);
         var handle=Fantasy.get(server).openTemporaryLevel(ID,config);
         var arena=new Arena(handle,map);
         arena.level().getWorldBorder().setCenter(0,0);arena.level().getWorldBorder().setSize(map.manifest().worldBorder());

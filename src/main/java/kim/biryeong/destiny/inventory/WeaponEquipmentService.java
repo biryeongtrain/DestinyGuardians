@@ -96,6 +96,7 @@ public final class WeaponEquipmentService {
         p.getInventory().setSelectedSlot(to);
         p.connection.send(new ClientboundSetHeldSlotPacket(to));
         WeaponHandling.update(p);
+        kim.biryeong.destiny.crucible.CrucibleAmmo.equipmentChanged(p);
         p.getInventory().setChanged();
         p.containerMenu.broadcastChanges();
         return null;

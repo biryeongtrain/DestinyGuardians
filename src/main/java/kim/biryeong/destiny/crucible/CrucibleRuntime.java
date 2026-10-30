@@ -84,6 +84,16 @@ public final class CrucibleRuntime {
                 if (CrucibleRecovery.pending(next)) PENDING_RETURNS.put(next.getUUID(), next);
                 return;
             }
+            // ServerPlayer.restoreFrom consults the NEW respawn world's keep_inventory.
+            // Native respawn can construct in overworld (false) before we return to the arena
+            // (true). Transfer only our confirmed arena member, after death retention ran.
+            if (!alive && arena != null && old.level() == arena.level()) {
+                next.getInventory().replaceWith(old.getInventory());
+                next.experienceLevel = old.experienceLevel;
+                next.totalExperience = old.totalExperience;
+                next.experienceProgress = old.experienceProgress;
+                next.setScore(old.getScore());
+            }
             member.player = next;
             // Native respawn may still complete its own position/connection restoration.
             // Apply the arena transfer after that stack unwinds, before combat is enabled.
@@ -111,7 +121,7 @@ public final class CrucibleRuntime {
             for (Member member : List.copyOf(MEMBERS.values())) leave(member.player, true);
         });
         ServerLifecycleEvents.SERVER_STOPPED.register(s -> {
-            if (server == s) { closeIntro(); PENDING_RETURNS.clear(); MEMBERS.clear(); match = new ControlMatch(); server = null; arena = null; observed = match.phase(); }
+            if (server == s) { closeIntro(); CrucibleAmmo.clear(); PENDING_RETURNS.clear(); MEMBERS.clear(); match = new ControlMatch(); server = null; arena = null; observed = match.phase(); }
         });
         kim.biryeong.destiny.sound.ActivityMusic.init();
     }
@@ -230,6 +240,8 @@ public final class CrucibleRuntime {
         AbilityService.cleanup(p);
         MEMBERS.remove(p.getUUID()); match.leave(p.getUUID());
         CrucibleHud.remove(p); CrucibleSounds.stop(p); thaw(p);
+        CrucibleHealth.leave(p);
+        CrucibleAmmo.leave(p);
         var scoreboard = p.level().getServer().getScoreboard();
         if (p.getTeam() != null && p.getTeam().getName().startsWith("dg_control_")) {
             scoreboard.removePlayerFromTeam(p.getScoreboardName());
@@ -263,6 +275,8 @@ public final class CrucibleRuntime {
         } finally { transferring--; }
         p.setDeltaMovement(Vec3.ZERO); p.fallDistance = 0; p.clearFire();
         p.setHealth(p.getMaxHealth()); p.setAbsorptionAmount(0);
+        CrucibleHealth.arrive(p);
+        CrucibleAmmo.arrive(p, fresh);
         p.getFoodData().setFoodLevel(20);
         p.setGameMode(GameType.ADVENTURE);
         if (fresh) {
@@ -296,6 +310,7 @@ public final class CrucibleRuntime {
     private static void died(ServerPlayer p, DamageSource source) {
         Member m = MEMBERS.get(p.getUUID());
         if (m == null || m.player != p) return;
+        CrucibleAmmo.died(p);
         Entity killer = source.getEntity();
         if (!(killer instanceof ServerPlayer)) killer = p.getLastHurtByPlayer();
         UUID id = killer instanceof ServerPlayer k && enemies(k, p) ? k.getUUID() : null;
@@ -346,6 +361,8 @@ public final class CrucibleRuntime {
                 if (match.phase() == ControlMatch.Phase.PLAYING) p.hurtServer(p.level(), p.damageSources().fellOutOfWorld(), 10000);
                 else arrive(member, false);
             }
+            CrucibleHealth.tick(p);
+            CrucibleAmmo.tick(p);
             if (canAct(p) || match.phase() == ControlMatch.Phase.WAITING) thaw(p); else freeze(p);
             p.getFoodData().setFoodLevel(20);
         }
@@ -360,6 +377,7 @@ public final class CrucibleRuntime {
         var before = match.snapshot();
         match.tick(occupants);
         var after = match.snapshot();
+        CrucibleAmmo.tickArena(arena, after);
         if (before.phase() == ControlMatch.Phase.PLAYING && after.phase() == ControlMatch.Phase.PLAYING)
             for (Member m : MEMBERS.values()) CrucibleSounds.zones(m.player, before, after);
         var phase = match.phase();

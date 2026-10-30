@@ -1,0 +1,422 @@
+{
+  "retrievedAtUtc": "2026-10-30T06:39:11.195382+00:00",
+  "units": "Destiny PvP damage points",
+  "scope": "15 missing entries only; no integrated files edited",
+  "health": {
+    "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit",
+    "tab": "Game Mechanics",
+    "gid": 1800463143,
+    "row": 157,
+    "cell": "C157",
+    "pvpHealth": 100,
+    "pvpShields": 130,
+    "pvpTotal": 230,
+    "healthStatAbove100": "additional shield HP described for combatants, not Guardians",
+    "normalizationPortingPolicy": "Scaling these points to Minecraft maxHealth is a porting decision, not DDC or direct user-specified D2 rule."
+  },
+  "precision": {
+    "globalPrecisionMultiplier": null,
+    "rule": "Use source-specific absolute precision/body; no universal multiplier. Coriolis precision multiplier1.0. Unknown precision stays unknown.",
+    "shieldCaution": "DDC statements that elemental shields prevent precision concern PvE combatants, not evidence for disabling precision against ordinary Guardian shields."
+  },
+  "sourceAgeCaution": "Oracle May2026 commit still has pre-Feb2025 Coriolis behavior. Never equate commit timestamp with sandbox validation.",
+  "swordEvidence": {
+    "url": "https://www.bungie.net/7/en/News/Article/destiny_2_update_8_0_0_1",
+    "date": "2024-06-04",
+    "finding": "Swords increased7% globally including PvP, but no absolute base light damage is provided; no baseline derived."
+  },
+  "rejectedSwordSources": [
+    {
+      "url": "https://d2.destinygamewiki.com/wiki/Sword_Stats_in_PvP",
+      "reason": "Manifest stat table, not attack damage."
+    },
+    {
+      "url": "https://www.reddit.com/r/DestinyTheGame/comments/hbgm94",
+      "reason": "Original community comparison, no usable absolute current PvP base light numbers."
+    }
+  ],
+  "weapons": {
+    "coriolis_force": {
+      "projectFamily": "fusion_rifle",
+      "projectFrame": "aggressive",
+      "body": 28.8,
+      "precision": 28.8,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "recommended_after_runtime_pattern_update",
+      "reason": "Exact weapon mapping resolved by Bungie rework; old seven-bolt profile obsolete.",
+      "historicalOracle": {
+        "body": 53.989,
+        "precision": 53.989,
+        "encodedCrit": -25.5,
+        "burstSize": 7,
+        "jsonPointer": "/Fusion Rifle/subFam/Aggressive",
+        "line": 258,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      },
+      "component": "per_pellet",
+      "critCapable": false,
+      "burstsPerAmmo": 3,
+      "pelletsPerBurst": 4,
+      "pelletsPerAmmo": 12,
+      "totalPerAmmo": 345.6,
+      "sources": [
+        {
+          "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit",
+          "tab": "Weapon Perks",
+          "row": 316,
+          "cell": "C316",
+          "publishedDate": null,
+          "retrievedAtUtc": "2026-10-30T06:39:11.195269+00:00"
+        },
+        {
+          "url": "https://www.bungie.net/7/en/News/Article/twid-01-23-25",
+          "date": "2025-01-23",
+          "section": "Aggressive Frame Fusion Rifle(s)"
+        },
+        {
+          "url": "https://www.bungie.net/7/en/News/Article/destiny_update_8_2_0",
+          "date": "2025-02-04",
+          "section": "Weapon Archetypes & Subfamilies / Aggressive-Frame Fusion Rifles"
+        }
+      ],
+      "alternate": {
+        "url": "https://docs.google.com/spreadsheets/d/1FWMC-Vd_bGEoRkkrn3drWIORCFYyWQVMNlMasa4OE6I/edit",
+        "tab": "WeaponData",
+        "row": 113,
+        "cells": "K113:L113",
+        "body": 28.8159,
+        "precision": 28.8159,
+        "status": "chart computed precision; DDC28.8 selected by project source priority"
+      },
+      "integration": "Do not apply per-pellet28.8 to seven-bolt cadence. Emit 3 groups of4; no invented scale to compensate."
+    },
+    "salvager_s_salvo": {
+      "projectFamily": "grenade_launcher",
+      "projectFrame": "lightweight",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Current exact total depends on Blast Radius and grenade selection. Bungie 2024-04-04 increased impact40%, approx total15%, both PvP/PvE. Oracle200 alone not verified current.",
+      "historicalOracle": {
+        "body": 200.0,
+        "precision": 200.0,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Grenade Launcher/subFam/Lightweight",
+        "line": 376,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      },
+      "patchEvidence": {
+        "url": "https://www.bungie.net/7/en/news/article/this-week-in-destiny-04-04-24",
+        "date": "2024-04-04",
+        "section": "Weapon Archetypes / Breech-Loaded Grenade Launchers",
+        "impactIncrease": 0.4,
+        "totalIncreaseApproximate": 0.15
+      }
+    },
+    "deafening_whisper": {
+      "projectFamily": "grenade_launcher",
+      "projectFrame": "wave",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 130.0,
+        "precision": 130.0,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Grenade Launcher/subFam/WaveFrame",
+        "line": 375,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      }
+    },
+    "edge_transit": {
+      "projectFamily": "heavy_grenade_launcher",
+      "projectFrame": "adaptive",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 280.5,
+        "precision": 280.5,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Grenade Launcher/subFam/Adaptive",
+        "line": 378,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      }
+    },
+    "canis_major": {
+      "projectFamily": "heavy_grenade_launcher",
+      "projectFrame": "rapid_fire",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 240.75,
+        "precision": 240.75,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Grenade Launcher/subFam/Rapid-Fire",
+        "line": 379,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      }
+    },
+    "dimensional_hypotrochoid": {
+      "projectFamily": "heavy_grenade_launcher",
+      "projectFrame": "compressed_wave",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 130.0,
+        "precision": 130.0,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Grenade Launcher/subFam/WaveFrame",
+        "line": 375,
+        "status": "reject_mapping",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "W43 maps heavy Compressed Wave to generic WaveFrame130 also used for special wave. Not verified as heavy-frame damage."
+      }
+    },
+    "bad_omens": {
+      "projectFamily": "rocket_launcher",
+      "projectFrame": "aggressive",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 424.193,
+        "precision": 424.193,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Rocket Launcher/subFam/Aggressive",
+        "line": 810,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      },
+      "componentRatioEvidence": {
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit",
+        "tab": "Weapon Perks",
+        "row": 317,
+        "cell": "C317",
+        "impactToExplosion": [
+          1,
+          3.5
+        ],
+        "caution": "Ratio only, no current absolute PvP baseline verified; do not combine dates silently."
+      }
+    },
+    "bellowing_giant": {
+      "projectFamily": "rocket_launcher",
+      "projectFrame": "adaptive",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 424.193,
+        "precision": 424.193,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Rocket Launcher/subFam/Adaptive",
+        "line": 812,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      },
+      "componentRatioEvidence": {
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit",
+        "tab": "Weapon Perks",
+        "row": 313,
+        "cell": "C313",
+        "impactToExplosion": [
+          1,
+          3.5
+        ],
+        "caution": "Ratio only, no current absolute PvP baseline verified; do not combine dates silently."
+      }
+    },
+    "code_duello": {
+      "projectFamily": "rocket_launcher",
+      "projectFrame": "high_impact",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 390.291,
+        "precision": 390.291,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Rocket Launcher/subFam/High-Impact",
+        "line": 809,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      },
+      "componentRatioEvidence": {
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit",
+        "tab": "Weapon Perks",
+        "row": 327,
+        "cell": "C327",
+        "impactToExplosion": [
+          1,
+          8.7
+        ],
+        "caution": "Ratio only, no current absolute PvP baseline verified; do not combine dates silently."
+      }
+    },
+    "pyroclastic_flow": {
+      "projectFamily": "rocket_launcher",
+      "projectFrame": "precision",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "Blank/zero/absent chart damage or explosive impact/splash component unverified",
+      "historicalOracle": {
+        "body": 366.326,
+        "precision": 366.326,
+        "encodedCrit": -25.5,
+        "burstSize": 1,
+        "jsonPointer": "/Rocket Launcher/subFam/Precision",
+        "line": 811,
+        "status": "historical snapshot; explosive component split not verified",
+        "source": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+        "commitDate": "2026-05-20T00:04:31Z",
+        "component": "PvP calculator firing damage; direct/splash split not verified",
+        "warning": "Commit date is not measurement date. Snapshot demonstrably retains obsolete Coriolis and possibly obsolete GL data; do not label current."
+      },
+      "componentRatioEvidence": {
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit",
+        "tab": "Weapon Perks",
+        "row": 334,
+        "cell": "C334",
+        "impactToExplosion": [
+          1,
+          3.5
+        ],
+        "caution": "Ratio only, no current absolute PvP baseline verified; do not combine dates silently."
+      }
+    },
+    "abide_the_return": {
+      "projectFamily": "sword",
+      "projectFrame": "adaptive",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "No absolute PvP light-attack measurement found in bounded search. Manifest Impact stat and PvE damage are not PvP damage."
+    },
+    "goldtusk": {
+      "projectFamily": "sword",
+      "projectFrame": "lightweight",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "No absolute PvP light-attack measurement found in bounded search. Manifest Impact stat and PvE damage are not PvP damage."
+    },
+    "crown_splitter": {
+      "projectFamily": "sword",
+      "projectFrame": "aggressive",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "No absolute PvP light-attack measurement found in bounded search. Manifest Impact stat and PvE damage are not PvP damage."
+    },
+    "falling_guillotine": {
+      "projectFamily": "sword",
+      "projectFrame": "vortex",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "No absolute PvP light-attack measurement found in bounded search. Manifest Impact stat and PvE damage are not PvP damage."
+    },
+    "temptation_s_hook": {
+      "projectFamily": "sword",
+      "projectFrame": "caster",
+      "body": null,
+      "precision": null,
+      "direct": null,
+      "explosion": null,
+      "melee": null,
+      "status": "unknown_current",
+      "reason": "No absolute PvP light-attack measurement found in bounded search. Manifest Impact stat and PvE damage are not PvP damage."
+    }
+  }
+}

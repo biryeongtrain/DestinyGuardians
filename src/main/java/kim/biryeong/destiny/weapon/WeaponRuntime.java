@@ -880,11 +880,14 @@ public final class WeaponRuntime {
                 if(contact.isPresent())hit=new EntityHitResult(contact.get(),from);
             }
             if (hit instanceof EntityHitResult entity && entity.getEntity() instanceof LivingEntity target) {
+                var targetBallistics = CrucibleDamage.ballistics(entry, target, ballistics);
+                float targetBase = p.mode() == WeaponProfile.Mode.MELEE ? CrucibleDamage.melee(entry,target,p.damage())
+                        : CrucibleDamage.base(entry, target, p.damage());
                 boolean precision = p.mode() != WeaponProfile.Mode.MELEE
-                        && WeaponPrecision.critical(target, from, hit.getLocation(), ballistics.precision());
-                float amount = p.mode() == WeaponProfile.Mode.MELEE ? p.damage()
-                        : ballistics.damage(p.damage(), from.distanceTo(hit.getLocation()), precision);
-                if(payload.active())amount=PayloadProfile.impact(p.damage(),ballistics.precision(),precision,
+                        && WeaponPrecision.critical(target, from, hit.getLocation(), targetBallistics.precision());
+                float amount = p.mode() == WeaponProfile.Mode.MELEE ? targetBase
+                        : targetBallistics.damage(targetBase, from.distanceTo(hit.getLocation()), precision);
+                if(payload.active())amount=PayloadProfile.impact(targetBase,targetBallistics.precision(),precision,
                         ballistics.falloff(from.distanceTo(hit.getLocation())));
                 damage.computeIfAbsent(target, ignored -> new HitDamage()).add(amount, precision, hit.getLocation());
             }
@@ -894,7 +897,7 @@ public final class WeaponRuntime {
         }
         WeaponMulligan.resolved(player,mulligan,!damage.isEmpty());
         var attribution=entry.family().equals("glaive")&&p.mode()==WeaponProfile.Mode.MELEE
-                ?AmmoGeneration.ABILITY:AmmoGeneration.weapon(entry);
+                ?AmmoGeneration.GLAIVE_MELEE:AmmoGeneration.weapon(entry);
         var perks = p.mode() == WeaponProfile.Mode.MELEE ? WeaponKillClip.Token.NONE : WeaponKillClip.capture(player);
         var reloadPerk = p.mode() == WeaponProfile.Mode.MELEE ? WeaponOutlaw.Token.NONE : WeaponOutlaw.capture(player);
         var feedingFrenzy = p.mode() == WeaponProfile.Mode.MELEE ? WeaponFeedingFrenzy.Token.NONE : WeaponFeedingFrenzy.capture(player);
@@ -923,7 +926,7 @@ public final class WeaponRuntime {
         // A separate body-only transaction: explosive final blows cannot become precision kills/refunds.
         // Capture the same source's damage buffs above, never whichever weapon a callback equipped later.
         for(var contact:WeaponPayload.detonate(player,payload,payloadHit))
-            apply(player,contact.target(),PayloadProfile.explosion(p.damage())*contact.fraction(),false,contact.point(),
+            apply(player,contact.target(),CrucibleDamage.payload(entry, contact.target(), p.damage())*contact.fraction(),false,contact.point(),
                     attribution,perks,WeaponOutlaw.Token.NONE,rampage,WeaponPrecisionReturn.Token.NONE,demolitionist,feedingFrenzy,damageTraits.perkSplash());
         if (impactPosition != null) DestinySounds.at(player.level(), impactPosition, DestinySounds.weaponKey(entry, "impact"), .8f);
     }
@@ -955,8 +958,9 @@ public final class WeaponRuntime {
                                WeaponKillClip.Token perks, WeaponOutlaw.Token reloadPerk, WeaponRampage.Token rampage,
                                WeaponPrecisionReturn.Token precisionReturn, WeaponDemolitionist.Token demolitionist,
                                WeaponFeedingFrenzy.Token feedingFrenzy, DamageTraits damageTraits) {
-        float effectivePrecision=WeaponPrecisionDamage.boost(WeaponShotTraits.precisionDamage(owner,damageTraits.shotTraits(),hits.precision),damageTraits.firingLine().precisionMultiplier())*WeaponShotTraits.precision(owner,damageTraits.shotTraits());
-        float requested = (hits.body + effectivePrecision) * perks.multiplier() * rampage.multiplier() * damageTraits.multiplier(owner,target);
+        float effectivePrecision=WeaponPrecisionDamage.boost(WeaponShotTraits.precisionDamage(owner,damageTraits.shotTraits(),hits.precision,target),damageTraits.firingLine().precisionMultiplier())*WeaponShotTraits.precision(owner,damageTraits.shotTraits());
+        float effectiveBody = WeaponShotTraits.bodyDamage(damageTraits.shotTraits(), hits.body);
+        float requested = (effectiveBody + effectivePrecision) * perks.multiplier() * rampage.multiplier() * damageTraits.multiplier(owner,target);
         if (!Float.isFinite(requested) || requested <= 0) return 0;
         boolean weakened = kim.biryeong.destiny.combat.Statuses.has(target, kim.biryeong.destiny.combat.Keyword.WEAKENED);
         float before = target.getHealth() + target.getAbsorptionAmount();
@@ -997,11 +1001,13 @@ public final class WeaponRuntime {
             WeaponUnrelenting.killed(owner,damageTraits.unrelenting(),target);
             WeaponFeedingFrenzy.killed(owner,feedingFrenzy);
         }
+        // Display D2 units for guardians; all accounting/traits above still use actual MC HP loss.
+        float shown = target instanceof ServerPlayer ? (float)(actual * CrucibleDamage.GUARDIAN_HP / target.getMaxHealth()) : actual;
         // Mixed pellets share the observed transaction proportionally, not imaginary per-pellet HP measurements.
         if (hits.body > 0) kim.biryeong.destiny.fx.WeaponDamageNumbers.confirm(owner, owner.level(), hits.bodyPoint,
-                actual * hits.body / (hits.body + effectivePrecision), weakened);
+                shown * effectiveBody / (effectiveBody + effectivePrecision), weakened);
         if (hits.precision > 0) kim.biryeong.destiny.fx.WeaponDamageNumbers.confirm(owner, owner.level(), hits.precisionPoint,
-                actual * effectivePrecision / (hits.body + effectivePrecision), true);
+                shown * effectivePrecision / (effectiveBody + effectivePrecision), true);
         return actual;
     }
     private static float apply(ServerPlayer owner, LivingEntity target, float amount, boolean precision,
@@ -1301,7 +1307,7 @@ public final class WeaponRuntime {
         if(--shot.life<0)return false;
         if(shot.wave!=null) {
             for(var contact:shot.wave.advance())
-                apply(owner,contact.target(),shot.profile.damage()*shot.waveProfile.waveMultiplier(),false,
+                apply(owner,contact.target(),CrucibleDamage.base(shot.entry,contact.target(),shot.profile.damage())*shot.waveProfile.waveMultiplier(),false,
                         contact.point(),AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,shot.precisionReturn,shot.demolitionist,shot.feedingFrenzy,shot.damageTraits);
             return shot.wave.alive();
         }
@@ -1359,7 +1365,7 @@ public final class WeaponRuntime {
         if(hit instanceof EntityHitResult entity&&entity.getEntity() instanceof LivingEntity target) {
             if(!shot.directContacts.add(target)||shot.directContacts.size()>16)return false;
             if(shot.waveProfile.directMultiplier()>0)
-                apply(shot.owner,target,shot.profile.damage()*shot.waveProfile.directMultiplier(),false,hit.getLocation(),
+                apply(shot.owner,target,CrucibleDamage.base(shot.entry,target,shot.profile.damage())*shot.waveProfile.directMultiplier(),false,hit.getLocation(),
                         AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,shot.precisionReturn,shot.demolitionist,shot.feedingFrenzy,shot.damageTraits);
             if(++shot.bounces>6)return false;
             // Historical reports support pre-ground combatant ricochet; exact restitution and
@@ -1395,14 +1401,14 @@ public final class WeaponRuntime {
                 var wall = shot.level.clip(new ClipContext(center, aim, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, shot.owner));
                 if (wall.getType() != HitResult.Type.MISS && center.distanceToSqr(wall.getLocation()) + 0.001 < center.distanceToSqr(aim)) continue;
                 float falloff = (float)Math.max(0.3, 1 - center.distanceTo(aim) / p.blastRadius());
-                apply(shot.owner, target, p.damage() * falloff, false, aim, AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,
+                apply(shot.owner, target, CrucibleDamage.base(shot.entry,target,p.damage()) * falloff, false, aim, AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,
                         shot.precisionReturn,shot.demolitionist,shot.feedingFrenzy,shot.damageTraits);
             }
             Fx.ring(shot.level, center, p.blastRadius(), shot.breach==null?0xFFAF50:WeaponCharacteristics.of(shot.entry).damage().color(), 24);
         } else if (hit instanceof EntityHitResult entity && entity.getEntity() instanceof LivingEntity target && enemy(shot.owner, target)) {
-            var ballistics = shot.ballistics;
+            var ballistics = CrucibleDamage.ballistics(shot.entry, target, shot.ballistics);
             boolean precision = WeaponPrecision.critical(target, segmentFrom, hit.getLocation(), ballistics.precision());
-            float actual = apply(shot.owner, target, ballistics.damage(p.damage(), shot.travelled, precision),
+            float actual = apply(shot.owner, target, ballistics.damage(CrucibleDamage.base(shot.entry,target,p.damage()), shot.travelled, precision),
                     precision, hit.getLocation(), AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,shot.precisionReturn,shot.demolitionist,shot.feedingFrenzy,shot.damageTraits);
             if(actual>0) {
                 WeaponArcherTempo.confirmed(shot.owner,shot.archerTempo,precision);
