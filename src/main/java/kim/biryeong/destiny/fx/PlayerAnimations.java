@@ -279,6 +279,17 @@ public final class PlayerAnimations {
             ((ServerAnimationClock) (Object) tracker).destiny$claimServerClock();
             Playback state = new Playback(player, tracker, loop ? logical(request) : null, loop ? clip.animation : null, equipment);
             state.introOwned = clip.animation.startsWith("h15_intro_");
+            if (state.introOwned) {
+                // Freeze the authored stage facing instead of BM's movement-smoothed body yaw.
+                float stageYaw = player.getYRot();
+                tracker.rotation(() -> new ModelRotation(0, stageYaw));
+                float correction = IntroFacing.correctionRadians(clip.animation);
+                // BM cancels a parent's GLOBAL modifier for each child: repeat the same
+                // correction through the subtree. Root translation/entry path stays untouched.
+                tracker.getPipeline().addGlobalRotModifier(
+                        BonePredicate.from(b -> b.name().rawName().equals("player_root")).children(true),
+                        q -> q.rotationY(correction));
+            }
             if(sword) {
                 state.swordStack=player.getMainHandItem();
                 tracker.rotation(() -> new ModelRotation(0,player.getYRot()));

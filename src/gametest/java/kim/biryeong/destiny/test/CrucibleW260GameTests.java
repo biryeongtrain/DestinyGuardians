@@ -125,6 +125,10 @@ public final class CrucibleW260GameTests {
         check(h,CrucibleRuntime.join(p),"Counterpart joins the real session");
         var ally=login(h,logins,"ControlAllyQA",Element.ARC);
         check(h,CrucibleRuntime.join(ally),"Friendly counterpart joins the real session");
+        // Fill the authored three-per-team intro, including the real client's own actor.
+        for (String name : List.of("ControlBravo2", "ControlAlpha3", "ControlBravo3")) {
+            check(h,CrucibleRuntime.join(login(h,logins,name,Element.ARC)),"Additional intro counterpart joins");
+        }
         h.onEachTick(()->{
             for(var login:logins) {
                 tickLogin(server,login);

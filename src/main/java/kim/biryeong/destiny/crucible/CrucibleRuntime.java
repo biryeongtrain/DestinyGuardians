@@ -152,11 +152,15 @@ public final class CrucibleRuntime {
         }
         if(shots.isEmpty())throw new IllegalStateException("맵 소개 카메라 경로가 없습니다.");
         if(shots.size()==1) {var first=shots.getFirst();shots.set(0,new CrucibleIntro.Shot(first.from(),first.to(),first.lookAt(),100));}
-        // Authored common stage, inspected against the baked map. Original root motion is retained.
-        var stage = new CrucibleIntro.Stage(new Vec3(32.5,85.0,85.5), new Vec3(40.5,85.0,85.5),0f,0f);
-        shots.add(new CrucibleIntro.Shot(new Vec3(46.5,93.0,97.5),new Vec3(46.5,93.0,97.5),new Vec3(44.5,86.2,85.5),130));
-        shots.add(new CrucibleIntro.Shot(new Vec3(34.5,89.5,93.5),new Vec3(34.5,89.5,93.5),new Vec3(32.5,86.3,85.5),85));
-        shots.add(new CrucibleIntro.Shot(new Vec3(42.5,89.5,93.5),new Vec3(42.5,89.5,93.5),new Vec3(40.5,86.3,85.5),85));
+        // Authored face-off: Alpha looks east toward Bravo, Bravo west toward Alpha.
+        // Team rows run perpendicular to their gaze; source poses and timing stay intact.
+        var stage = new CrucibleIntro.Stage(new Vec3(32.5,85.0,85.5), new Vec3(40.5,85.0,85.5),-90f,90f);
+        // Establish both sides, then reverse the view across the gap without crossing the action axis.
+        shots.add(new CrucibleIntro.Shot(new Vec3(36.5,91.0,98.5),new Vec3(36.5,91.0,98.5),new Vec3(36.5,86.2,85.5),130));
+        shots.add(new CrucibleIntro.Shot(new Vec3(40.5,89.5,93.5),new Vec3(40.5,89.5,93.5),new Vec3(32.5,86.3,85.5),50));
+        shots.add(new CrucibleIntro.Shot(new Vec3(39.5,89.5,93.5),new Vec3(39.5,89.5,93.5),new Vec3(40.5,86.3,85.5),50));
+        // Both sides have landed: end on their confrontation, not an isolated portrait.
+        shots.add(new CrucibleIntro.Shot(new Vec3(36.5,91.0,98.5),new Vec3(36.5,91.0,98.5),new Vec3(36.5,86.2,85.5),70));
         try {
             intro=CrucibleIntro.begin(alpha,bravo,arena.level(),shots,
                     stage,
