@@ -414,12 +414,12 @@ public final class WeaponScreen {
             GuardianClass cls, Element element, String field) {
         if (field.equals("CLASS")) return Arrays.stream(GuardianClass.values()).filter(c -> c != GuardianClass.NONE)
                 .map(c -> new WeaponScreenView.CharacterOption(c.name(), className(c),
-                        classDescription(c), c == cls, true, "직업 변경은 즉시 적용됩니다. 능력 구성은 선택한 직업에 맞춰집니다.")).toList();
+                        classDescription(c), c == cls, true, "직업을 선택하면 해당 직업의 능력을 장착합니다. 궁극기 에너지는 초기화합니다.")).toList();
         if (cls == GuardianClass.NONE) return List.of();
         if (field.equals("SUBCLASS")) return CharacterLoadouts.subclasses(cls).stream()
                 .map(e -> new WeaponScreenView.CharacterOption(e.name(), elementName(e),
-                        className(cls) + "의 " + elementName(e) + " 하위직업입니다.", e == element, true,
-                        "하위직업 변경 시 해당 속성의 능력 구성이 즉시 적용됩니다.")).toList();
+                        subclassDescription(cls, e), e == element, true,
+                        "하위직업을 선택하면 같은 속성의 능력을 장착합니다. 궁극기 에너지는 초기화합니다.")).toList();
         if (element == null) return List.of();
         AbilitySlot slot = AbilitySlot.valueOf(field);
         Identifier equipped = data.loadout().map(l -> l.get(slot)).orElse(null);
@@ -449,27 +449,39 @@ public final class WeaponScreen {
 
     private static String classDescription(GuardianClass cls) {
         return switch (cls) {
-            case TITAN -> "방벽과 강력한 근접 능력을 사용하는 수호자입니다.";
-            case HUNTER -> "회피와 기동성을 활용하는 수호자입니다.";
-            case WARLOCK -> "균열과 빛의 능력을 사용하는 수호자입니다.";
+            case TITAN -> "방벽으로 사격을 막고 근접 능력으로 길을 여세요. 리프트를 켜면 공중에서 추진력을 얻습니다.";
+            case HUNTER -> "회피로 사격을 피하고 위치를 바꾸세요. 공중에서 추가 점프를 써서 높이와 착지 지점을 조절합니다.";
+            case WARLOCK -> "균열을 깔아 자신과 아군을 지원하세요. 활공으로 체공 시간을 늘리거나 공허 점멸로 이동할 수 있습니다.";
             case NONE -> "직업을 선택하세요.";
         };
     }
 
-    private static String abilityDescription(Ability ability) {
-        if (ability.slot() == AbilitySlot.JUMP) return switch (ability.id().getPath()) {
-            case "hunter/double_jump" -> "공중에서 한 번 더 점프해 더 높이 상승합니다.";
-            case "hunter/strafe_jump" -> "공중에서 한 번 더 점프하며 입력 방향으로 궤도를 바꿉니다.";
-            case "hunter/triple_jump" -> "착지 전 두 번 더 점프해 높이와 체공을 나눠 제어합니다.";
-            case "titan/high_lift" -> "높은 상승에 특화된 리프트. 공중 점프로 켜고 다시 눌러 중단합니다.";
-            case "titan/jump" -> "방향 제어에 특화된 리프트. 공중 점프로 켜고 다시 눌러 중단합니다.";
-            case "titan/catapult_lift" -> "강한 초기 추진력의 리프트. 공중 재입력은 남은 추진 자원을 공유합니다.";
-            case "warlock/strafe_glide" -> "활공 중 방향 제어를 강화합니다. 상승 중 켜면 상승 관성을 유지합니다.";
-            case "warlock/burst_glide" -> "활공을 켤 때 전진 추진을 강화합니다. 낙하를 새 상승으로 바꾸지는 않습니다.";
-            case "warlock/jump" -> "전진 추진과 방향 제어를 절충한 활공. 다시 누르면 중단하고 남은 자원으로 재개합니다.";
-            default -> "공중 이동 방향으로 짧게 점멸합니다. 벽과 천장을 통과할 수 없습니다.";
+    private static String subclassDescription(GuardianClass cls, Element element) {
+        return switch (cls) {
+            case HUNTER -> switch (element) {
+                case ARC -> "섬광 수류탄으로 적의 시야를 막고 근접전을 여세요. 궁극기에서 지팡이 근접전이나 투척 공격을 선택합니다.";
+                case SOLAR -> "소이 수류탄과 칼로 적을 불태우세요. 황금 총의 조준 사격과 칼날 장전의 투척 공격 중 궁극기를 고릅니다.";
+                case VOID -> "연막탄으로 적의 능력을 막고 소용돌이로 길을 막으세요. 공허 활과 쌍검 중 궁극기를 고릅니다.";
+                default -> "하위직업을 선택하세요.";
+            };
+            case TITAN -> switch (element) {
+                case ARC -> "전기 근접 능력으로 파고들고 파동 수류탄으로 길목을 압박하세요. 주먹 강타나 천둥충돌로 적진을 공격합니다.";
+                case SOLAR -> "망치와 융합 수류탄을 던져 공격하세요. 궁극기에서 망치 투척과 불타는 망치의 근접전을 선택합니다.";
+                case VOID -> "방패를 던져 적을 공격하고 억제 수류탄으로 능력을 막으세요. 방패 궁극기나 새벽의 수호물로 아군을 보호합니다.";
+                default -> "하위직업을 선택하세요.";
+            };
+            case WARLOCK -> switch (element) {
+                case ARC -> "연쇄 번개와 폭풍 수류탄으로 모인 적을 압박하세요. 궁극기에서 연쇄 공격과 혼돈 범위의 광선을 선택합니다.";
+                case SOLAR -> "태양 수류탄으로 길목을 막고 불꽃을 던져 공격하세요. 새벽칼날로 공격하거나 빛의 샘으로 아군을 지원합니다.";
+                case VOID -> "소용돌이와 공허 투사체로 적을 몰아내세요. 신성 폭탄이나 충전 폭발로 공격하고 점멸을 선택해 이동할 수 있습니다.";
+                default -> "하위직업을 선택하세요.";
+            };
+            case NONE -> "먼저 직업을 선택하세요.";
         };
-        return className(ability.guardianClass()) + " · " + elementName(ability.element()) + " "
-                + fieldName(ability.slot().name()) + " 능력입니다. 선택하면 해당 슬롯에 즉시 장착됩니다.";
+    }
+
+    private static String abilityDescription(Ability ability) {
+        String help = AbilityHelpText.description(ability.id().getPath());
+        return help.isBlank() ? ability.displayName() + "을 선택해 " + fieldName(ability.slot().name()) + " 슬롯에 장착하세요." : help;
     }
 }

@@ -387,13 +387,20 @@ public final class WeaponScreenHud {
         int index = view.focus() - 3;
         FamilyOption hovered = index >= 0 && index < Math.min(9, view.families().size())
                 ? view.families().get(index) : null;
-        p.textFit("family_name", hovered == null ? "원하는 무기군을 선택하세요" : hovered.name(),
-                1440, 416, 26, WHITE, 596);
-        if (hovered != null)
-            p.text("family_count", "선택 가능한 무기 " + hovered.count() + "종", 1440, 465, 20, GOLD);
-        p.text("family_next", "다음: 무기 선택 → 퍽 선택", 1440, 561, 20, WHITE);
-        p.wrapped("family_apply_hint", "마지막에 로드아웃에 추가를 눌러야 실제 장비가 변경됩니다.",
-                1440, 626, 20, MUTED, 560, 2, 30);
+        p.textFit("family_name", hovered == null ? "원하는 무기군에 커서를 올리세요" : hovered.name(),
+                1440, 350, 26, WHITE, 596);
+        if (hovered != null) {
+            p.text("family_count", "선택 가능한 무기 " + hovered.count() + "종", 1440, 393, 20, GOLD);
+            p.wrapped("family_help", WeaponHelpText.family(hovered.id()),
+                    1440, 450, 20, WHITE, 596, 5, 29);
+            String ammo = WeaponTestArmory.catalog(view.selectedSlot()).stream()
+                    .filter(entry -> entry.family().equals(hovered.id())).findFirst()
+                    .map(entry -> kim.biryeong.destiny.weapon.WeaponCharacteristics.of(entry).ammo().name()).orElse("");
+            p.text("family_ammo_label", "시련의 장 탄약", 1440, 620, 20, GOLD);
+            p.wrapped("family_ammo_help", CrucibleAmmoHelpText.description(hovered.id(), ammo),
+                    1440, 658, 18, WHITE, 596, 6, 26);
+        }
+        p.text("family_next", "무기 선택 → 퍽 선택 → 로드아웃에 추가", 1440, 850, 18, MUTED);
     }
 
     private static void perkCard(Painter p, int node, PerkOption option) {
@@ -457,8 +464,12 @@ public final class WeaponScreenHud {
         // Catalog cards have no live ammunition. Owned stacks preserve zero/overflow state exactly.
         p.text("magazine_count", preview ? Integer.toString(card.capacity())
                 : card.rounds() + " / " + card.capacity(), 1512, 778, 26, WHITE);
+        if ("SPECIAL".equals(card.ammo())) {
+            p.textFit("weapon_special_grant", CrucibleAmmoHelpText.shortSpecial(card.family()), 1440, 813, 18, WHITE, 596);
+            p.textFit("weapon_special_rule", "특수 화기 1개 기준 · 부활 재지급 없음", 1440, 840, 18, MUTED, 596);
+        }
         if (selectingWeapon)
-            p.textFit("weapon_next", "다음: 퍽 선택 · 실제 장착은 마지막에 확정", 1440, 850, 20, GOLD, 596);
+            p.textFit("weapon_next", "다음: 퍽 선택 · 마지막에 장착 확정", 1440, 875, 18, GOLD, 596);
     }
 
     private static void perkControls(Painter p, WeaponScreenView view) {
