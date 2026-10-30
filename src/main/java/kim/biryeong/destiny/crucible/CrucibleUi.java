@@ -121,7 +121,7 @@ public final class CrucibleUi {
             case PLAYING -> {
                 playing(f, snap, own, foe, respawnTicks);
                 int sincePlay = nowTick - s.introStart;
-                if (sincePlay < 120) objective(f, sincePlay);
+                if (sincePlay < 120 && s.toast == null) objective(f, sincePlay);
                 if (s.toast != null) {
                     if (nowTick >= s.toast.until) s.toast = null; else toastPanel(f, s.toast);
                 }

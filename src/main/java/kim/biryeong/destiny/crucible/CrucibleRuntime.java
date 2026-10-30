@@ -71,7 +71,14 @@ public final class CrucibleRuntime {
                     })));
             dispatcher.register(Commands.literal("crucible")
                     .executes(c -> join(c.getSource().getPlayerOrException()) ? 1 : 0)
-                    .then(Commands.literal("leave").executes(c -> leave(c.getSource().getPlayerOrException(), true) ? 1 : 0)));
+                    .then(Commands.literal("leave").executes(c -> leave(c.getSource().getPlayerOrException(), true) ? 1 : 0))
+                    // QA only: previews zone-event toasts without a real capture.
+                    .then(Commands.literal("toast").requires(src -> src.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER))
+                            .then(Commands.argument("cue", com.mojang.brigadier.arguments.StringArgumentType.word()).executes(c -> {
+                                var p = c.getSource().getPlayerOrException();
+                                CrucibleUi.zoneCue(p, com.mojang.brigadier.arguments.StringArgumentType.getString(c, "cue"), p.level().getServer().getTickCount());
+                                return 1;
+                            }))));
         });
         ServerTickEvents.END_SERVER_TICK.register(CrucibleRuntime::tick);
         ServerLivingEntityEvents.ALLOW_DAMAGE.register(CrucibleRuntime::allowDamage);
