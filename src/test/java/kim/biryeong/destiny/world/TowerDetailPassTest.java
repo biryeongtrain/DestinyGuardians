@@ -63,7 +63,7 @@ class TowerDetailPassTest {
         System.out.println("TOWER_DETAIL_COUNTS=" + counts + " pieces=" + plan.size() + " cells=" + touched.size());
         System.out.println("TOWER_DETAIL_OBJECTS=" + plan.stream().map(TowerDetailPass.Piece::id)
                 .filter(s -> !s.contains("inlay/") && !s.contains("apron-")).toList());
-        assertEquals(Set.of("arrival", "market", "garden", "overlook", "service"), counts.keySet());
+        assertEquals(Set.of("arrival", "market", "garden", "overlook", "service", "w274"), counts.keySet());
         for (var e : counts.entrySet()) assertTrue(e.getValue() >= 35, e.getKey() + " needs substantial furnishing");
         assertTrue(counts.values().stream().mapToInt(Integer::intValue).sum() < 4_000);
         assertTrue(TowerDetailPass.OPERATIONS_PER_TICK <= 48);
@@ -81,7 +81,9 @@ class TowerDetailPassTest {
         oldCells.forEach(e -> { ledger.consider(e.pos()); world.put(e.pos(), parse(e.replacement())); });
         var encoded = TowerDetailPass.Ledger.CODEC.encodeStart(JsonOps.INSTANCE, ledger).getOrThrow();
         var reopened = TowerDetailPass.Ledger.CODEC.parse(JsonOps.INSTANCE, encoded).getOrThrow();
-        var additions = revised.subList(initial.size(), revised.size());
+        var additions = revised.subList(initial.size(), initial.size() + 2);
+        for (var later : revised.subList(initial.size() + 2, revised.size()))
+            assertTrue(later.id().startsWith("w274/"), "Later additions are the W274 dressing");
         assertEquals(2, additions.size(), "Both arrival trees need a measured extension");
         int changed = 0;
         for (var piece : additions) {

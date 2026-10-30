@@ -185,6 +185,21 @@ public final class TowerDetailPass implements AutoCloseable {
         // remain untouched, so a saved Tower receives these additions without replaying art.
         b.arrivalCrown("arrival/crown-west-r2", 64, 74, -38, -1);
         b.arrivalCrown("arrival/crown-east-r2", 78, 74, -32, 1);
+        // W274: appended garden/market dressing at measured flat, 8-block-clear spots. Existing pieces
+        // and the persistent ledger are untouched; each object cancels itself if its footprint is not pristine.
+        b.cherryTree("w274/cherry-lower-west", -26, 72, -2);
+        b.cherryTree("w274/cherry-garden-east", 23, 72, -48);
+        b.cherryTree("w274/cherry-west-walk", -58, 74, -50);
+        b.cherryTree("w274/cherry-south", 70, 74, 21);
+        b.pond("w274/pond-garden", 9, 72, -6);
+        b.pond("w274/pond-west", -37, 74, -48);
+        b.planter("w274/flowers-garden", 12, 72, 6, false);
+        b.planter("w274/flowers-west", -56, 74, -64, false);
+        b.planter("w274/flowers-east", 107, 74, 0, false);
+        b.planter("w274/oak-market", 60, 74, -50, true);
+        b.flag("w274/flag-market", 55, 74, -79);
+        b.flag("w274/flag-north", 70, 74, -95);
+        b.hedge("w274/hedge-market", 57, 74, -67, 7);
         return List.copyOf(b.pieces);
     }
 
@@ -326,6 +341,54 @@ public final class TowerDetailPass implements AutoCloseable {
         private void fresh(ObjectBuilder o, int x, int y, int z, String state) {
             BlockPos p = new BlockPos(x, y, z);
             if (!occupied.contains(p) && !o.targets.containsKey(p)) o.put(x, y, z, state);
+        }
+        void cherryTree(String id, int x, int y, int z) {
+            var o = new ObjectBuilder(id, y);
+            for (int dx = -2; dx <= 2; dx++) for (int dz = -2; dz <= 2; dz++) {
+                if (Math.abs(dx) == 2 && Math.abs(dz) == 2) continue;
+                o.put(x + dx, y + 1, z + dz, "rooted_dirt");
+                if (dx != 0 || dz != 0) o.put(x + dx, y + 2, z + dz, ((dx + dz) & 1) == 0
+                        ? "pink_petals[flower_amount=3,facing=north]" : "moss_carpet");
+            }
+            for (int h = 2; h <= 5; h++) o.put(x, y + h, z, "cherry_log[axis=y]");
+            o.put(x + 1, y + 5, z, "cherry_log[axis=x]");
+            o.put(x, y + 5, z - 1, "cherry_log[axis=z]");
+            int[] radius = {3, 3, 2, 1};
+            for (int i = 0; i < radius.length; i++) {
+                int h = y + 5 + i, r = radius[i];
+                for (int dx = -r; dx <= r; dx++) for (int dz = -r; dz <= r; dz++) {
+                    if (dx * dx + dz * dz > r * r + 1 || dx == 0 && dz == 0 && i == 0) continue;
+                    if (dx == 1 && dz == 0 && i == 0 || dx == 0 && dz == -1 && i == 0) continue;
+                    o.put(x + dx, h, z + dz, "cherry_leaves[persistent=true]");
+                }
+            }
+            o.finish(false);
+        }
+        void pond(String id, int x, int y, int z) {
+            // Replaces 5x5 source floor: water sits inside a solid same-level rim, so it cannot spread.
+            var o = new ObjectBuilder(id, y);
+            for (int dx = -2; dx <= 2; dx++) for (int dz = -2; dz <= 2; dz++)
+                o.put(x + dx, y, z + dz, Math.abs(dx) == 2 || Math.abs(dz) == 2
+                        ? ((dx + dz) % 2 == 0 ? "quartz_bricks" : "smooth_quartz") : "water");
+            o.finish(true);
+        }
+        void flag(String id, int x, int y, int z) {
+            var o = new ObjectBuilder(id, y);
+            o.put(x, y + 1, z, "polished_andesite");
+            for (int h = 2; h <= 8; h++) o.put(x, y + h, z, "iron_bars");
+            o.put(x, y + 9, z, "ochre_froglight");
+            for (int dx = 1; dx <= 3; dx++) for (int h = 5; h <= 7; h++)
+                o.put(x + dx, y + h, z, h == 6 ? "white_concrete" : "orange_concrete");
+            o.finish(false);
+        }
+        void hedge(String id, int x, int y, int z, int length) {
+            var o = new ObjectBuilder(id, y);
+            for (int dz = 0; dz < length; dz++) {
+                o.put(x, y + 1, z + dz, "rooted_dirt");
+                o.put(x, y + 2, z + dz, dz % 3 == 1 ? "flowering_azalea_leaves[persistent=true]" : "azalea_leaves[persistent=true]");
+                if (dz > 0 && dz < length - 1) o.put(x, y + 3, z + dz, "azalea_leaves[persistent=true]");
+            }
+            o.finish(false);
         }
         void bench(String id, int x, int y, int z) {
             var o = new ObjectBuilder(id, y);
