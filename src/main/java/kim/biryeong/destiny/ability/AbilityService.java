@@ -145,6 +145,7 @@ public final class AbilityService {
             runtime.airJumpsUsed = 0;
         }
         if (!Guardians.isGuardian(player)) {
+            MeleeSuperMovement.clear(player);
             CombatHud.update(player);
             return;
         }
@@ -164,6 +165,7 @@ public final class AbilityService {
             }
             data.setSuperEnergy(data.superEnergy() + (float) (1.0 / rechargeTicks));
         }
+        MeleeSuperMovement.tick(player);
         CombatHud.update(player);
     }
 
@@ -186,6 +188,7 @@ public final class AbilityService {
                     yield false;
                 }
                 runtime.superSession.primary();
+                MeleeSuperMovement.attackStep(player, runtime);
                 yield true;
             }
             case AIR_JUMP -> use(player, AbilitySlot.JUMP) == Result.OK;
@@ -270,6 +273,7 @@ public final class AbilityService {
         SuperSession session = runtime.superSession;
         runtime.superSession = null;
         runtime.superResistance = null;
+        MeleeSuperMovement.clear(player);
         if (session != null) {
             session.end();
         }

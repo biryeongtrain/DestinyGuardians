@@ -9,6 +9,8 @@ import java.util.Map;
 
 /** 저장하지 않는 플레이어별 실행 상태. 접속 중에만 유지된다. */
 public final class GuardianRuntime {
+    /** Server tick of the last melee-super forward step (MeleeSuperMovement). */
+    public int meleeSuperStepAt = Integer.MIN_VALUE / 2;
     public Input lastInput = Input.EMPTY;
     public int lastShiftPressTick = Integer.MIN_VALUE / 2;
     public int airJumpsUsed;

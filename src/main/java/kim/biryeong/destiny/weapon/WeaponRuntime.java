@@ -752,7 +752,8 @@ public final class WeaponRuntime {
             // Keep legal start contacts when lunging past nearby side enemies. This authored
             // start/end sweep is deduplicated; one enemy never pays damage twice.
             var contacts=new LinkedHashSet<>(SwordMelee.cleave(player));
-            if(!contact.empty) { SwordMelee.lunge(player);contacts.addAll(SwordMelee.cleave(player)); }
+            if(!contact.empty) SwordMelee.lunge(player); else SwordMelee.move(player,Vec3.directionFromRotation(0,player.getYRot()),SwordArc.STEP);
+            contacts.addAll(SwordMelee.cleave(player));
             int hits=0;
             for(var target:contacts) {
                 if(hits++>=SwordArc.MAX_HITS)break;
