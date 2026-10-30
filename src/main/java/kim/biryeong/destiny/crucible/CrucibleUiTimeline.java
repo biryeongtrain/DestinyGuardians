@@ -2,7 +2,7 @@ package kim.biryeong.destiny.crucible;
 
 /** Pure layout/timing rules for the Crucible UI (ticks at 20 TPS, 1920x1080 reference pixels). */
 public final class CrucibleUiTimeline {
-    public static final int TITLE_START = 8, TITLE_END = 96, ROSTER_START = 104, COUNTDOWN_TICKS = 100;
+    public static final int TITLE_START = 8, TITLE_END = 176, ROSTER_START = 184, COUNTDOWN_TICKS = 100;
     public static final float SCREEN_W = 1920f;
     public static final float BAR_W = 566f, BAR_GAP = 8f, PLATE_W = 230f;
     private CrucibleUiTimeline() { }

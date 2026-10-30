@@ -72,18 +72,34 @@ public final class CrucibleIntro implements AutoCloseable {
         Vec3 center = stage.alphaOrigin().add(stage.bravoOrigin()).scale(.5);
         Vec3 target = center.add(0, 1.3, 0);
         Vec3 wide = center.add(0, 3.4, 10);
-        List<Shot> result = List.of(new Shot(wide, wide, target, 130),
-                new Shot(center.add(3, 3.4, 8), center.add(3, 3.4, 8), stage.alphaOrigin().add(0, 1.3, 0), 50),
-                new Shot(center.add(-3, 3.4, 8), center.add(-3, 3.4, 8), stage.bravoOrigin().add(0, 1.3, 0), 50),
-                new Shot(wide, wide, target, 70));
+        Vec3 alphaEye = stage.alphaOrigin().add(0, 1.3, 0), bravoEye = stage.bravoOrigin().add(0, 1.3, 0);
+        // Destiny-style reveal: high establishing crane that descends into the face-off, then slow push-ins on each
+        // side and a final pull-back to the wide. Moves fall back to a static frame when an endpoint is blocked.
+        List<Shot> result = List.of(
+                safe(level, center.add(0, 9, 22), wide, target, 130),
+                safe(level, center.add(5, 3.0, 9), center.add(3, 3.4, 6.5), alphaEye, 50),
+                safe(level, center.add(-5, 3.0, 9), center.add(-3, 3.4, 6.5), bravoEye, 50),
+                safe(level, wide, center.add(0, 4.2, 13), target, 70));
         for (Shot shot : result) {
-            if (!level.noBlockCollision(null, new AABB(shot.from(), shot.from()).inflate(.4)))
+            if (!level.noBlockCollision(null, new AABB(shot.from(), shot.from()).inflate(.4))
+                    || !level.noBlockCollision(null, new AABB(shot.to(), shot.to()).inflate(.4)))
                 throw new IllegalStateException("Intro camera near plane intersects terrain");
             if (level.clip(new ClipContext(shot.from(), shot.lookAt(), ClipContext.Block.COLLIDER,
                     ClipContext.Fluid.NONE, CollisionContext.empty())).getType() != HitResult.Type.MISS)
                 throw new IllegalStateException("Intro camera sightline intersects terrain");
         }
         return result;
+    }
+
+    private static Shot safe(ServerLevel level, Vec3 from, Vec3 to, Vec3 lookAt, int ticks) {
+        Vec3 mid = from.add(to).scale(.5);
+        for (Vec3 p : new Vec3[]{from, mid, to}) {
+            if (!level.noBlockCollision(null, new AABB(p, p).inflate(.4))
+                    || level.clip(new ClipContext(p, lookAt, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE,
+                    CollisionContext.empty())).getType() != HitResult.Type.MISS)
+                return new Shot(to, to, lookAt, ticks);
+        }
+        return new Shot(from, to, lookAt, ticks);
     }
 
     private static float facing(Vec3 from, Vec3 to) {
