@@ -27,7 +27,7 @@ public final class ProfileWeaponView {
     private static final class Session {
         final ServerPlayer owner;final ItemDisplayHud gun,grenade;final ItemDisplayHud[] arms=new ItemDisplayHud[4];
         final Object profile;final boolean slim;boolean leftHand,lastTwoHand;ItemStack lastGun=ItemStack.EMPTY;
-        ItemStack source;
+        ItemStack source;boolean lastCarrier;
         Matrix4f lastRoot;boolean throwing,meleeHidden;long raiseAt=Long.MIN_VALUE;
         final Matrix4f[] readyArms=new Matrix4f[4];
         final String[] lastPoses=new String[4];final int[] lastMarkers={-1,-1,-1,-1};int sleeves=-1;float lastHandX=Float.NaN;
@@ -108,17 +108,25 @@ public final class ProfileWeaponView {
         if(handChanged){s.leftHand=left;s.gun.setItemTransform(left?ItemDisplayContext.FIRST_PERSON_LEFT_HAND:ItemDisplayContext.FIRST_PERSON_RIGHT_HAND);Arrays.fill(s.lastPoses,null);}
         // Move the whole grip inward at hip; keep the calibrated ADS sight line unchanged.
         boolean twoHand=WeaponModels.twoHanded(original);
+        var selected=ProfileArmGraph.select(graph,data,s.slim,left);
+        // W278: most reload/insert banks bake the native grip into their two-hand branch too.
+        // Undoing the charged-crossbow carrier for those routes shifted the whole reload
+        // .64 block sideways, then snapped back when the idle route returned.
+        boolean carrier=twoHand&&carrierCompensated(graph,data,s.slim,left,selected);
         float handX=handX(left,twoHand,WeaponAiming.progress(p));
-        boolean framingChanged=handChanged||twoHand!=s.lastTwoHand||Float.compare(handX,s.lastHandX)!=0;
-        var hand=motionRoot(handMatrix(left,twoHand,WeaponAiming.progress(p)),WeaponFireMotion.pose(p),left);
+        boolean framingChanged=handChanged||twoHand!=s.lastTwoHand||carrier!=s.lastCarrier||Float.compare(handX,s.lastHandX)!=0;
+        var hand=motionRoot(handMatrix(left,twoHand,carrier,WeaponAiming.progress(p)),WeaponFireMotion.pose(p),left);
         if(s.raiseAt!=Long.MIN_VALUE) {
             float raised=Math.clamp((p.level().getGameTime()-s.raiseAt+1)/4f,0,1);
             hand.translate(0,-.9f*(1-raised),0);
             if(raised>=1)s.raiseAt=Long.MIN_VALUE;
         }
         boolean rootChanged=s.lastRoot==null||!s.lastRoot.equals(hand);
-        apply(s.gun,hand,(framingChanged||rootChanged)&&s.lastRoot!=null&&!handChanged);
-        var selected=ProfileArmGraph.select(graph,data,s.slim,left);var seen=new boolean[4];
+        // A route swap (reload/insert bank <-> idle) changes the item model instantly. Its carrier
+        // compensation must land on the same frame; interpolating it shows a one-frame lurch.
+        boolean snap=handChanged||carrier!=s.lastCarrier;
+        apply(s.gun,hand,(framingChanged||rootChanged)&&s.lastRoot!=null&&!snap);
+        var seen=new boolean[4];
         int sleeves=(p.isModelPartShown(PlayerModelPart.RIGHT_SLEEVE)?1:0)|(p.isModelPartShown(PlayerModelPart.LEFT_SLEEVE)?2:0);
         for(String id:selected){var pose=ProfileArmAssets.pose(id);if(pose==null)throw new IllegalStateException("Missing profile pose "+id);
             int index=(pose.leftArm()?1:0)+(pose.upper()?2:0);if(seen[index])throw new IllegalStateException("Duplicate profile arm segment");seen[index]=true;
@@ -128,11 +136,11 @@ public final class ProfileWeaponView {
                 var m=new Matrix4f(hand).mul(left?pose.left():pose.right());
                 // Native head spans x/z -4..4 and y -8..0 in sixteenths. Preserve W204 contact geometry exactly.
                 m.translate(.5f,pose.upper()?.5f:.5625f,.5f).scale(s.slim?-.225f:-.3f,.9375f,.3f);
-                apply(s.arms[index],m,s.lastPoses[index]!=null);s.readyArms[index]=new Matrix4f(m);s.lastPoses[index]=id;
+                apply(s.arms[index],m,s.lastPoses[index]!=null&&!snap);s.readyArms[index]=new Matrix4f(m);s.lastPoses[index]=id;
             } else s.arms[index].update();
         }
         for(int i=0;i<4;i++)if(!seen[i]){if(s.lastPoses[i]!=null){apply(s.arms[i],new Matrix4f().translation(0,0,1).scale(0),false);s.lastPoses[i]=null;}else if(s.arms[i].getDisplay().getTransformationInterpolationDuration()==0)apply(s.arms[i],new Matrix4f().translation(0,0,1).scale(0),false);}
-        s.sleeves=sleeves;s.lastHandX=handX;s.lastTwoHand=twoHand;s.lastRoot=new Matrix4f(hand);s.gun.update();
+        s.sleeves=sleeves;s.lastHandX=handX;s.lastTwoHand=twoHand;s.lastCarrier=carrier;s.lastRoot=new Matrix4f(hand);s.gun.update();
     }
     private static void throwView(ServerPlayer p,Session s) {
         int age=kim.biryeong.destiny.ability.GrenadeThrow.age(p);
@@ -173,10 +181,22 @@ public final class ProfileWeaponView {
         return left?-x:x;
     }
     static Matrix4f handMatrix(boolean left,boolean twoHand,float adsProgress){
+        return handMatrix(left,twoHand,twoHand,adsProgress);
+    }
+    /** A two-hand route whose CMD graph selects identical poses for both grip flags carries no
+     * crossbow compensation of its own; keep the two-hand hip X but skip the inverse carrier. */
+    static boolean carrierCompensated(com.google.gson.JsonObject graph,CustomModelData data,boolean slim,boolean left,java.util.List<String> twoHandPoses){
+        if(twoHandPoses.isEmpty())return true;
+        var flags=new ArrayList<>(data.flags());while(flags.size()<1)flags.add(false);
+        flags.set(0,false);
+        var nativePoses=ProfileArmGraph.select(graph,new CustomModelData(data.floats(),flags,data.strings(),data.colors()),slim,left);
+        return !nativePoses.equals(twoHandPoses);
+    }
+    static Matrix4f handMatrix(boolean left,boolean twoHand,boolean carrier,float adsProgress){
         var hand=new Matrix4f().translation(handX(left,twoHand,adsProgress),-.52f,-.72f);
         // FirstPersonHandsAndItemsRenderer charged-crossbow idle branch. ItemDisplayRenderer
         // does not apply it, but both the two-hand gun and arm poses compensate for it.
-        if(twoHand){float sign=left?-1:1;hand.translate(sign*-.641864f,0,0).rotateY(sign*(float)Math.toRadians(10));}
+        if(twoHand&&carrier){float sign=left?-1:1;hand.translate(sign*-.641864f,0,0).rotateY(sign*(float)Math.toRadians(10));}
         return hand;
     }
     /** Source axes are view axes: rotate about the existing common grip origin, before its
