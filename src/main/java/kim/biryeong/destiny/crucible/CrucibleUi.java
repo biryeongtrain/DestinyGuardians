@@ -254,13 +254,13 @@ public final class CrucibleUi {
     }
 
     private static void titleCard(Frame f, String map) {
-        float left = 200;
-        f.sprite("t_fade", "crucible_fade_l", 560, 800, 900, 260, 20, 0x04070B, -500, 12);
-        f.sprite("t_line", "crucible_line", 420, 722, 520, 3, 22, GOLD, -400, 10);
-        f.text("t_label", c("시련의 장", GOLD), left + 5, 740, 26, 600, 30, Display.TextDisplay.Align.LEFT, -300, 12);
-        f.text("t_mode", bold("점령", WHITE), left + 5, 790, 78, 800, 30, Display.TextDisplay.Align.LEFT, -300, 14);
-        f.text("t_map", bold(map, WHITE), left + 5, 868, 40, 800, 30, Display.TextDisplay.Align.LEFT, -300, 16);
-        f.text("t_loc", c("코스모드롬 · 지구", GREY), left + 5, 912, 24, 800, 30, Display.TextDisplay.Align.LEFT, -300, 18);
+        float left = 140;
+        f.sprite("t_fade", "crucible_fade_l", 640, 780, 1280, 380, 20, 0x04070B, -700, 12);
+        f.sprite("t_line", "crucible_line", 440, 660, 640, 4, 22, GOLD, -400, 10);
+        f.text("t_label", c("시련의 장", GOLD), left, 690, 40, 800, 30, Display.TextDisplay.Align.LEFT, -300, 12);
+        f.text("t_mode", bold("점령", WHITE), left, 760, 120, 1000, 30, Display.TextDisplay.Align.LEFT, -300, 14);
+        f.text("t_map", bold(map, WHITE), left, 880, 56, 1000, 30, Display.TextDisplay.Align.LEFT, -300, 16);
+        f.text("t_loc", c("코스모드롬 · 지구", GREY), left, 950, 32, 1000, 30, Display.TextDisplay.Align.LEFT, -300, 18);
     }
 
     private static void rosters(Frame f, Roster roster, ControlMatch.Team own) {

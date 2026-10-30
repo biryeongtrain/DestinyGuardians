@@ -70,9 +70,9 @@ public final class CrucibleIntro implements AutoCloseable {
 
     public static List<Shot> confrontationShots(ServerLevel level, Stage stage) {
         Vec3 center = stage.alphaOrigin().add(stage.bravoOrigin()).scale(.5);
-        Vec3 target = center.add(0, 1.3, 0);
+        Vec3 target = center.add(0, 0.6, 0);
         Vec3 wide = center.add(0, 3.4, 10);
-        Vec3 alphaEye = stage.alphaOrigin().add(0, 1.3, 0), bravoEye = stage.bravoOrigin().add(0, 1.3, 0);
+        Vec3 alphaEye = stage.alphaOrigin().add(0, 0.7, 0), bravoEye = stage.bravoOrigin().add(0, 0.7, 0);
         // Destiny-style reveal: high establishing crane that descends into the face-off, then slow push-ins on each
         // side and a final pull-back to the wide. Moves fall back to a static frame when an endpoint is blocked.
         List<Shot> result = List.of(
