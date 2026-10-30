@@ -29,3 +29,11 @@
 - 실제팩67,925,308bytes, 이전63,726,887bytes 대비4,198,421bytes증가(약4.2MB). 음원6개만포함, 모든음악stream:true. [팩기록](pack-r2.json).
 - 초기경기장준비에서2.126초밀림1회 기록. 지속부하벤치마크나오디오끊김청취확인으로해석하지않는다.
 - QA서버console stop exit0, client소유wrapper stop -2, master awake coordinator exit0. 소유입력·창·서버·잠자기방지정리완료. worktree는보존.
+
+## 커밋
+
+- minigame-lib `c0900ef`: 기존팩음원 재생 API.
+- Destiny `70ec79ff`: 탑/시련 음악 연결·음원·회귀검사·실게임검증.
+- 기존 main dirty/untracked 변경은 보존했고 관련파일만 커밋했다. 원격 push는 하지 않았다.
+
+운영 runServer 재개: **192.168.35.237:25565**, online-mode=true, andlist OP4, 실제JVM4GB 확인. 운영팩은68,090,200bytes(약68.1MB), 이전운영팩대비4,363,313bytes 증가. QA팩과 생성환경차이는 server-start.json에별도기록했고, 신규음원6개의해시는수락본과모두같다. [운영기록](server-start.json).
