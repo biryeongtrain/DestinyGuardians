@@ -37,11 +37,13 @@ dependencies {
     implementation "eu.pb4:polymer-resource-pack-extras:${project.polymer_version}"
     implementation "eu.pb4:polymer-autohost:${project.polymer_version}"
 
-    // BetterModel: 플레이어 limb·적·보스 모델과 애니메이션 (서버에 함께 설치하는 모드, jar 에 포함하지 않음)
+    // BetterModel: 플레이어 limb·적·보스 모델과 애니메이션. 배포 JAR에 포함한다.
     implementation "io.github.toxicity188:bettermodel-fabric:${project.bettermodel_version}"
+    include "io.github.toxicity188:bettermodel-fabric:${project.bettermodel_version}"
 
     // minigame-lib: libs/minigame-lib submodule 에서 includeBuild 로 대체됨
     implementation "kim.biryeong:minigame-lib:${project.minigamelib_version}"
+    include "kim.biryeong:minigame-lib:${project.minigamelib_version}"
 
     if (gcbAvailable) {
         implementation "kim.biryeong:GCB-server:${project.gcb_server_version}"
