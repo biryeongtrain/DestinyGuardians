@@ -129,6 +129,8 @@ public final class CrucibleIntro implements AutoCloseable {
      */
     public interface Camera extends AutoCloseable {
         void move(Vec3 position, float yaw, float pitch, boolean cut);
+        /** Stream chunks for an upcoming cut so it does not need a loading curtain. */
+        default void preload(Vec3 position) { }
         boolean closed();
         /** Chunk readiness, not just a successful open/respawn packet. */
         default boolean ready() { return !closed(); }
@@ -248,6 +250,7 @@ public final class CrucibleIntro implements AutoCloseable {
                     if (closed()) throw new IllegalStateException("Intro camera ownership lost");
                     owned.move(level, next, nextYaw, nextPitch, cut);
                 }
+                @Override public void preload(Vec3 next) { if (!closed()) owned.preload(next); }
                 @Override public boolean closed() {
                     return owned.closed() || CameraViews.get(viewer) != owned;
                 }
@@ -307,6 +310,8 @@ public final class CrucibleIntro implements AutoCloseable {
                 if (cut) viewer.syncedActors.clear();
                 viewer.camera.move(pose.position(), pose.yaw(), pose.pitch(), cut);
                 viewer.lastShot = pose.shot();
+                // Stream the next shot's chunks for the whole current shot so the cut lands on rendered terrain.
+                if (pose.shot() + 1 < shots.size()) viewer.camera.preload(shots.get(pose.shot() + 1).from());
             } catch (RuntimeException | LinkageError error) {
                 warn("camera tick", error);
                 cancel(viewer.player);
