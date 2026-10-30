@@ -5,6 +5,7 @@ import eu.pb4.polymer.virtualentity.api.attachment.ChunkAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.ability.*;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.camera.SuperCamera;
 import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.fx.*;
@@ -101,11 +102,11 @@ public final class TitanExpandedSupers {
                     &&level.clip(new ClipContext(from,target.getBoundingBox().getCenter(),ClipContext.Block.COLLIDER,
                     ClipContext.Fluid.NONE,p)).getType()==HitResult.Type.MISS;
         }
-        void damage(Vec3 center,double radius,float amount,Set<UUID> once) {
+        void damage(Vec3 center,double radius,float amount,Set<UUID> once,String contact) {
             if(!valid())return;
             for(LivingEntity e:Combat.enemiesNear(level,p,center,radius)) {
                 if(!visible(center,e)||(once!=null&&!once.add(e.getUUID())))continue;
-                Combat.damage(level,p,e,amount,ability.element(),AmmoGeneration.SUPER);
+                Combat.damage(level,p,e,AbilityDamage.pvp(ability,contact,e,amount),ability.element(),AmmoGeneration.SUPER);
             }
         }
         void burst(Vec3 center,double radius) {
@@ -208,7 +209,7 @@ public final class TitanExpandedSupers {
             if(impacted||!o.valid())return;impacted=true;restorePhysics();
             double radius=o.value("radius",4.5,1,7);
             Vec3 center=o.p.position().add(0,.7,0);
-            o.damage(center,radius,(float)o.value("damage",38,0,160),null);o.burst(center,radius);
+            o.damage(center,radius,(float)o.value("damage",38,0,160),null,"impact");o.burst(center,radius);
             ClassAbilityEffects.sound(o.p,Element.ARC,o.path(),"super.impact");
             Aftershock prior=AFTERSHOCKS.remove(o.p.getUUID());if(prior!=null)prior.close();
             AFTERSHOCKS.put(o.p.getUUID(),new Aftershock(o,center,radius));
@@ -258,7 +259,7 @@ public final class TitanExpandedSupers {
             if(closed||!o.valid()||o.now()>=until)return false;
             long now=o.now();if(lastTick==now)return true;lastTick=now;
             if(now>=next) {
-                next=now+20;o.damage(center,radius,(float)o.value("aftershock_damage",6,0,40),null);o.burst(center,radius);
+                next=now+20;o.damage(center,radius,(float)o.value("aftershock_damage",6,0,40),null,"aftershock");o.burst(center,radius);
             }
             return true;
         }
@@ -281,7 +282,7 @@ public final class TitanExpandedSupers {
                     if(supported(o.p)&&waves.size()<3)waves.add(new Firewave(o));
                 } else {
                     Vec3 center=o.p.position().add(0,.9,0);
-                    o.damage(center,o.value("spin_radius",3,1,5),(float)o.value("spin_damage",14,0,80),null);
+                    o.damage(center,o.value("spin_radius",3,1,5),(float)o.value("spin_damage",14,0,80),null,"spin");
                     o.burst(center,2);
                 }
                 ClassAbilityEffects.sound(o.p,Element.SOLAR,o.path(),"super.fire");
@@ -335,7 +336,7 @@ public final class TitanExpandedSupers {
                     ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,o.p));
             if(support.getType()!=HitResult.Type.BLOCK) {close();return false;}
             pos=support.getLocation().add(0,.12,0);travelled+=.5;
-            o.damage(pos.add(0,.45,0),1.6,(float)o.value("wave_damage",28,0,120),hit);
+            o.damage(pos.add(0,.45,0),1.6,(float)o.value("wave_damage",28,0,120),hit,"wave");
             Fx.burst(o.p, o.level,pos,Element.SOLAR,6,.25);display.setOffset(pos.subtract(origin));holder.tick();return true;
         }
         void close() {if(closed)return;closed=true;holder.destroy();}

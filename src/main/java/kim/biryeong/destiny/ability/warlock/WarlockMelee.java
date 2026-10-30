@@ -2,6 +2,7 @@ package kim.biryeong.destiny.ability.warlock;
 
 import kim.biryeong.destiny.ability.Ability;
 import kim.biryeong.destiny.combat.Combat;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.fx.*;
 import kim.biryeong.destiny.guardian.*;
 import kim.biryeong.destiny.weapon.MeleeWeaponTraits;
@@ -15,16 +16,19 @@ import java.util.*;
 public final class WarlockMelee extends Ability {
     private static final List<Burn> BURNS = new ArrayList<>();
     private static final class Burn {
-        final WarlockAbilities.Lease lease; final LivingEntity target; final Vec3 origin;
+        final WarlockAbilities.Lease lease; final WarlockMelee ability; final LivingEntity target; final Vec3 origin;
         int age;
-        Burn(WarlockAbilities.Lease lease, LivingEntity target, Vec3 origin) { this.lease = lease; this.target = target; this.origin = origin; }
+        Burn(WarlockAbilities.Lease lease, WarlockMelee ability, LivingEntity target, Vec3 origin) {
+            this.lease = lease; this.ability = ability; this.target = target; this.origin = origin;
+        }
     }
     static void tick() {
         for (Burn burn : List.copyOf(BURNS)) {
             if (!burn.lease.valid() || !WarlockAbilities.enemy(burn.lease.owner, burn.target) || burn.age >= 30) { BURNS.remove(burn); continue; }
             if (++burn.age % 10 == 0 && WarlockAbilities.center(burn.target).distanceToSqr(burn.origin) <= 36
                     && WarlockAbilities.visible(burn.lease, burn.origin, WarlockAbilities.center(burn.target)))
-                Combat.damage(burn.lease.level, burn.lease.owner, burn.target, 1f, Element.SOLAR);
+                Combat.damage(burn.lease.level, burn.lease.owner, burn.target,
+                        AbilityDamage.pvp(burn.ability, "burn_pulse", burn.target, 1f), Element.SOLAR);
         }
     }
     static void cleanup(ServerPlayer p) { BURNS.removeIf(b -> b.lease.owner == p); }
@@ -55,10 +59,11 @@ public final class WarlockMelee extends Ability {
                                 if (!lease.valid() || !(hit instanceof EntityHitResult eh)
                                         || !(eh.getEntity() instanceof LivingEntity target)
                                         || !WarlockAbilities.enemy(p, target) || !contacted.add(target.getUUID())) return;
-                                MeleeWeaponTraits.poweredDamage(lease.level, p, target, damage, element(), traits);
+                                MeleeWeaponTraits.poweredDamage(lease.level, p, target,
+                                        AbilityDamage.pvp(this, "direct", target, damage), element(), traits);
                                 if (target.isAlive()) {
                                     BURNS.removeIf(b -> b.lease.owner == p && b.target == target);
-                                    BURNS.add(new Burn(lease, target, p.getEyePosition()));
+                                    BURNS.add(new Burn(lease, this, target, p.getEyePosition()));
                                 }
                                 ClassAbilityEffects.sound(p, element(), "melee.impact");
                                 ClassAbilityEffects.burst(p, hit.getLocation(), element(), .6);
@@ -72,7 +77,8 @@ public final class WarlockMelee extends Ability {
                         ClassAbilityEffects.sound(p, element(), "melee.impact");
                         if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity target
                                 && WarlockAbilities.enemy(p, target)) {
-                            MeleeWeaponTraits.poweredDamage(lease.level, p, target, damage, element(), traits);
+                            MeleeWeaponTraits.poweredDamage(lease.level, p, target,
+                                    AbilityDamage.pvp(this, "direct", target, damage), element(), traits);
                             if (target.isAlive()) {
                                 Vec3 away = WarlockAbilities.center(target).subtract(p.getEyePosition());
                                 if (away.lengthSqr() > .001) target.setDeltaMovement(target.getDeltaMovement()
@@ -94,7 +100,8 @@ public final class WarlockMelee extends Ability {
             Vec3 end = WarlockAbilities.center(target);
             if (!WarlockAbilities.visible(lease, from, end)) break;
             visited.add(target.getUUID());
-            MeleeWeaponTraits.poweredDamage(lease.level, lease.owner, target, damage, element(), traits);
+            MeleeWeaponTraits.poweredDamage(lease.level, lease.owner, target,
+                    AbilityDamage.pvp(this, i == 0 ? "direct" : "chain", target, damage), element(), traits);
             Fx.line(lease.owner, lease.level, from, end, element().color(), .25, .8f);
             from = end;
             target = WarlockAbilities.targets(lease, from, hop).stream().filter(e -> !visited.contains(e.getUUID())).findFirst().orElse(null);

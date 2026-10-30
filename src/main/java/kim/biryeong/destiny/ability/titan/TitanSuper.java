@@ -1,6 +1,7 @@
 package kim.biryeong.destiny.ability.titan;
 
 import kim.biryeong.destiny.ability.*;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.camera.SuperCamera;
 import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.fx.*;
@@ -148,7 +149,7 @@ public final class TitanSuper extends Ability {
                             if(hit instanceof EntityHitResult collision&&collision.getEntity() instanceof LivingEntity entity
                                     &&!TitanAbilities.visible(c,launchOrigin,entity))return;
                             Vec3 center=TitanAbilities.impactPosition(hit);
-                            for(LivingEntity e:TitanAbilities.targets(c,center,TitanAbilities.value(ability,"radius",3,1,5)))damage(e);
+                            for(LivingEntity e:TitanAbilities.targets(c,center,TitanAbilities.value(ability,"radius",3,1,5)))damage(e,"impact");
                             ClassAbilityEffects.burst(p,center,ability.element(),2);
                             ClassAbilityEffects.soundAt(p,ability.element(),ability.id().getPath(),"super.impact",center);
                         });
@@ -170,13 +171,14 @@ public final class TitanSuper extends Ability {
             ClassAbilityEffects.sound(p,ability.element(),"super.fire");
             for(LivingEntity e:TitanAbilities.targets(c,center,TitanAbilities.value(ability,"radius",3.5,1,5))) {
                 Vec3 delta=e.getBoundingBox().getCenter().subtract(center);
-                if(slam||delta.lengthSqr()<1e-8||forward.dot(delta.normalize())>.25)damage(e);
+                if(slam||delta.lengthSqr()<1e-8||forward.dot(delta.normalize())>.25)damage(e,slam?"slam":"light");
             }
             ClassAbilityEffects.burst(p,center,ability.element(),slam?3:1.5);
             ClassAbilityEffects.soundAt(p,ability.element(),ability.id().getPath(),"super.impact",center);
         }
-        void damage(LivingEntity e) {
-            Combat.damage(c.level,c.owner,e,(float)TitanAbilities.value(ability,"damage",24,0,150),ability.element(),AmmoGeneration.SUPER);
+        void damage(LivingEntity e,String contact) {
+            Combat.damage(c.level,c.owner,e,AbilityDamage.pvp(ability,contact,e,
+                    (float)TitanAbilities.value(ability,"damage",24,0,150)),ability.element(),AmmoGeneration.SUPER);
         }
         @Override public void end() {
             if(ended)return;ended=true;pendingSlam=false;pendingAirAttack=false;pendingRelease=-1;

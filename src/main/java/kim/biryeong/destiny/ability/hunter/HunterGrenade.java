@@ -2,6 +2,7 @@ package kim.biryeong.destiny.ability.hunter;
 
 import kim.biryeong.destiny.ability.Ability;
 import kim.biryeong.destiny.ability.Tasks;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
@@ -65,7 +66,7 @@ public final class HunterGrenade extends Ability {
                 if (!modeled) Fx.ring(player, level, pos, radius, element().glow(), 40);
                 DestinySounds.hunterOrVanilla(level, pos, element(), "grenade.impact", SoundEvents.LIGHTNING_BOLT_IMPACT, 0.8f, 1.6f);
                 for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
-                    kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, (float) param("damage", 5), element());
+                    kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, AbilityDamage.pvp(this, "explosion", e, (float) param("damage", 5)), element());
                     Statuses.apply(e, Keyword.BLINDED, (int) param("blind_ticks", 80));
                 }
             }
@@ -75,7 +76,7 @@ public final class HunterGrenade extends Ability {
                 AbilityParticles.send(player, level, ParticleTypes.LAVA, pos.x, pos.y, pos.z, modeled ? 4 : 12, radius / 3, 0.2, radius / 3, 0.0);
                 DestinySounds.hunterOrVanilla(level, pos, element(), "grenade.impact", SoundEvents.GENERIC_EXPLODE.value(), 0.8f, 1.3f);
                 for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
-                    kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, (float) param("damage", 7), element());
+                    kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, AbilityDamage.pvp(this, "explosion", e, (float) param("damage", 7)), element());
                     if (e.isAlive()) Statuses.scorch(player, e, (int) param("scorch_ticks", 100), adrenalineJunkie);
                 }
             }
@@ -95,7 +96,7 @@ public final class HunterGrenade extends Ability {
                         e.setDeltaMovement(e.getDeltaMovement().add(pull.x, 0, pull.z));
                         e.needsSync = true;
                         if (age % 10 == 0) {
-                            kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, pulse, element());
+                            kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, AbilityDamage.pvp(this, "pulse", e, pulse), element());
                         }
                     }
                     return age < duration;

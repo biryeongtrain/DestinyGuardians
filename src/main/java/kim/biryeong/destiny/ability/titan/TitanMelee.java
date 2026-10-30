@@ -1,6 +1,7 @@
 package kim.biryeong.destiny.ability.titan;
 
 import kim.biryeong.destiny.ability.*;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.fx.*;
 import kim.biryeong.destiny.guardian.*;
 import kim.biryeong.destiny.weapon.MeleeWeaponTraits;
@@ -22,7 +23,7 @@ public final class TitanMelee extends Ability {
             for(LivingEntity e:TitanAbilities.targets(c,eye,TitanAbilities.value(this,"reach",4,1,6))) {
                 Vec3 delta=e.getBoundingBox().getCenter().subtract(eye);
                 if(delta.lengthSqr()>1e-8&&forward.dot(delta.normalize())>=.55) {
-                    MeleeWeaponTraits.poweredDamage(c.level,p,e,damage,element(),token);
+                    MeleeWeaponTraits.poweredDamage(c.level,p,e,AbilityDamage.pvp(this,"strike",e,damage),element(),token);
                     Fx.line(c.owner, c.level,eye,e.getBoundingBox().getCenter(),element().color(),.3,1.2f);
                 }
             }
@@ -33,7 +34,7 @@ public final class TitanMelee extends Ability {
                     element()==Element.SOLAR?.025:0,40,element(),id().getPath(),hit->{
                         if(hit instanceof EntityHitResult eh&&eh.getEntity() instanceof LivingEntity target&&TitanAbilities.visible(c,launchOrigin,target)) {
                             // Extra LOS prevents an inflated entity collision box from reaching through thin walls.
-                            MeleeWeaponTraits.poweredDamage(c.level,p,target,damage,element(),token);
+                            MeleeWeaponTraits.poweredDamage(c.level,p,target,AbilityDamage.pvp(this,"impact",target,damage),element(),token);
                         }
                         ClassAbilityEffects.burst(p,TitanAbilities.impactPosition(hit),element(),.7);
                         ClassAbilityEffects.sound(p,element(),"melee.impact");

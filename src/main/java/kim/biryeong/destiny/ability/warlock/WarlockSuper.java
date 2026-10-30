@@ -2,6 +2,7 @@ package kim.biryeong.destiny.ability.warlock;
 
 import kim.biryeong.destiny.ability.*;
 import kim.biryeong.destiny.combat.Combat;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.fx.*;
 import kim.biryeong.destiny.guardian.*;
 import kim.biryeong.destiny.weapon.AmmoGeneration;
@@ -20,13 +21,14 @@ public final class WarlockSuper extends Ability {
     /** Post-impact field owns its lease, not the completed one-shot camera/session. */
     private static final class Vortex {
         final WarlockAbilities.Lease lease;
+        final WarlockSuper ability;
         final Vec3 origin;
         final int delay, duration, interval;
         final double radius;
         final float damage;
         int age;
         Vortex(WarlockAbilities.Lease lease, WarlockSuper ability, Vec3 origin) {
-            this.lease = lease; this.origin = origin;
+            this.lease = lease; this.ability = ability; this.origin = origin;
             delay = WarlockAbilities.ticks(ability, "vortex_delay_ticks", 9, 0, 40);
             duration = WarlockAbilities.ticks(ability, "vortex_duration_ticks", 200, 1, 400);
             interval = WarlockAbilities.ticks(ability, "vortex_pulse_ticks", 10, 5, 40);
@@ -44,7 +46,8 @@ public final class WarlockSuper extends Ability {
             if (activeAge % 5 == 0) Fx.ring(vortex.lease.owner, vortex.lease.level, vortex.origin, vortex.radius, Element.VOID.color(), 32);
             if (activeAge % vortex.interval != 0) continue;
             for (LivingEntity target : WarlockAbilities.targets(vortex.lease, vortex.origin, vortex.radius))
-                Combat.damage(vortex.lease.level, vortex.lease.owner, target, vortex.damage, Element.VOID, AmmoGeneration.SUPER);
+                Combat.damage(vortex.lease.level, vortex.lease.owner, target,
+                        AbilityDamage.pvp(vortex.ability, "vortex_pulse", target, vortex.damage), Element.VOID, AmmoGeneration.SUPER);
         }
     }
     public static int vortexCount(ServerPlayer p) {
@@ -144,7 +147,7 @@ public final class WarlockSuper extends Ability {
                 Vec3 end = WarlockAbilities.center(target);
                 if (!WarlockAbilities.visible(lease, from, end)) break;
                 visited.add(target.getUUID());
-                superDamage(target, damage);
+                superDamage(target, "chain_pulse", damage);
                 Fx.line(lease.owner, lease.level, from, end, ability.element().color(), .2, 1f);
                 from = end;
                 target = WarlockAbilities.targets(lease, from, hop).stream().filter(e -> !visited.contains(e.getUUID())).findFirst().orElse(null);
@@ -160,7 +163,7 @@ public final class WarlockSuper extends Ability {
                         Vec3 origin = WarlockAbilities.impactPoint(hit);
                         float damage = (float) WarlockAbilities.value(ability, "damage", 12, .1, 60);
                         double radius = WarlockAbilities.value(ability, "radius", 2.5, .5, 4);
-                        for (LivingEntity target : WarlockAbilities.targets(lease, origin, radius)) superDamage(target, damage);
+                        for (LivingEntity target : WarlockAbilities.targets(lease, origin, radius)) superDamage(target, "sword_blast", damage);
                         impact(origin, radius);
                     })));
         }
@@ -174,7 +177,7 @@ public final class WarlockSuper extends Ability {
                         Vec3 origin = WarlockAbilities.impactPoint(hit);
                         double radius = WarlockAbilities.value(ability, "radius", 4, 1, 6);
                         float damage = (float) WarlockAbilities.value(ability, "damage", 24, .1, 100);
-                        for (LivingEntity target : WarlockAbilities.targets(lease, origin, radius)) superDamage(target, damage);
+                        for (LivingEntity target : WarlockAbilities.targets(lease, origin, radius)) superDamage(target, "nova_blast", damage);
                         // Finite post-blast Vortex continues after Nova's cast/camera recovery ends.
                         VORTICES.removeIf(v -> v.lease.owner == lease.owner);
                         VORTICES.add(new Vortex(lease, ability, origin));
@@ -182,9 +185,10 @@ public final class WarlockSuper extends Ability {
                     })));
         }
         private boolean live() { return !ended && lease.valid(); }
-        private void superDamage(LivingEntity target, float damage) {
+        private void superDamage(LivingEntity target, String contact, float damage) {
             if (live() && WarlockAbilities.enemy(lease.owner, target))
-                Combat.damage(lease.level, lease.owner, target, damage, ability.element(), AmmoGeneration.SUPER);
+                Combat.damage(lease.level, lease.owner, target,
+                        AbilityDamage.pvp(ability, contact, target, damage), ability.element(), AmmoGeneration.SUPER);
         }
         private void impact(Vec3 origin, double radius) {
             ClassAbilityEffects.burst(lease.owner, origin, ability.element(), radius);

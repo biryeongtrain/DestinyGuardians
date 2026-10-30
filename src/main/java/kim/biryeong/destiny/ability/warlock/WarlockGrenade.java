@@ -1,6 +1,7 @@
 package kim.biryeong.destiny.ability.warlock;
 
 import kim.biryeong.destiny.ability.Ability;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.fx.*;
 import kim.biryeong.destiny.guardian.*;
 import kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie;
@@ -78,7 +79,8 @@ public final class WarlockGrenade extends Ability {
         f.pulses++; f.lastTargets = targets.size();
         for (LivingEntity target : targets) {
             float before = target.getHealth() + target.getAbsorptionAmount();
-            WeaponAdrenalineJunkie.grenadeDamage(f.lease.owner, f.token, f.lease.level, target, f.damage, element);
+            WeaponAdrenalineJunkie.grenadeDamage(f.lease.owner, f.token, f.lease.level, target,
+                    AbilityDamage.pvp(f.ability, "field_pulse", target, f.damage), element);
             f.actualDamage += Math.max(0, before - target.getHealth() - target.getAbsorptionAmount());
             if (element == Element.VOID && target.isAlive()) {
                 Vec3 pull = f.origin.subtract(WarlockAbilities.center(target));

@@ -3,6 +3,7 @@ package kim.biryeong.destiny.ability.hunter;
 import kim.biryeong.destiny.ability.Ability;
 import kim.biryeong.destiny.ability.Motion;
 import kim.biryeong.destiny.ability.Tasks;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
@@ -56,7 +57,7 @@ public final class HunterMelee extends Ability {
             if (age == 3) {
                 for (LivingEntity e : Combat.enemiesNear(level, player, center, reach)) {
                     Fx.line(player, level, player.getEyePosition(), e.position().add(0, e.getBbHeight() / 2, 0), element().color(), 0.25, 1.0f);
-                    if (Combat.damage(level, player, e, damage, element())) {
+                    if (Combat.damage(level, player, e, AbilityDamage.pvp(this, "strike", e, damage), element())) {
                         Statuses.apply(player, Keyword.AMPLIFIED, (int) param("amplified_ticks", 120));
                         player.heal((float) param("heal_on_kill", 4));
                     }
@@ -78,7 +79,7 @@ public final class HunterMelee extends Ability {
                     boolean modeled = HunterVfx.play(player, level, hit.getLocation(), HunterVfx.Kind.SOLAR_KNIFE, 0.65, 22);
                     Fx.burst(player, level, hit.getLocation(), element(), modeled ? 6 : 20, 0.3);
                     if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity target) {
-                        Combat.damage(level, player, target, damage, element());
+                        Combat.damage(level, player, target, AbilityDamage.pvp(this, "knife", target, damage), element());
                         Statuses.scorch(player, target, (int) param("scorch_ticks", 80));
                     }
                 });

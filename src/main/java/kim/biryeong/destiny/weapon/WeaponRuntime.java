@@ -753,7 +753,8 @@ public final class WeaponRuntime {
             int hits=0;
             for(var target:contacts) {
                 if(hits++>=SwordArc.MAX_HITS)break;
-                apply(player,target,damage,false,SwordMelee.point(target),AmmoGeneration.weapon(entry),damageTraits);
+                apply(player,target,contact.empty ? damage : CrucibleDamage.melee(entry,target,damage),
+                        false,SwordMelee.point(target),AmmoGeneration.weapon(entry),damageTraits);
             }
             return;
         }
@@ -776,7 +777,7 @@ public final class WeaponRuntime {
                 if(!player.level().hasChunkAt(BlockPos.containing(point)))continue;
                 var wall=player.level().clip(new ClipContext(center,point,ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,player));
                 if(wall.getType()!=HitResult.Type.MISS&&center.distanceToSqr(wall.getLocation())+1e-3<center.distanceToSqr(point))continue;
-                apply(player,target,damage,false,point,AmmoGeneration.weapon(entry),damageTraits);
+                apply(player,target,CrucibleDamage.melee(entry,target,damage),false,point,AmmoGeneration.weapon(entry),damageTraits);
             }
             Fx.ring(player.level(),center,radius,WeaponCharacteristics.of(entry).damage().color(),24);
         }

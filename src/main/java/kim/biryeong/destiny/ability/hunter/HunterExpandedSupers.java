@@ -6,6 +6,7 @@ import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.ability.*;
 import kim.biryeong.destiny.camera.SuperCamera;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.fx.*;
 import kim.biryeong.destiny.guardian.*;
@@ -147,8 +148,8 @@ public final class HunterExpandedSupers {
         return Combat.enemiesNear(l.level,l.owner,origin,radius).stream().filter(e -> enemy(l,e)
                 && visible(l,origin,center(e))).limit(32).toList();
     }
-    private static void damage(Lease l, LivingEntity e, float damage) {
-        if (l.valid() && enemy(l,e)) Combat.damage(l.level,l.owner,e,damage,l.ability.element(),AmmoGeneration.SUPER);
+    private static void damage(Lease l, LivingEntity e, String contact, float damage) {
+        if (l.valid() && enemy(l,e)) Combat.damage(l.level,l.owner,e,AbilityDamage.pvp(l.ability,contact,e,damage),l.ability.element(),AmmoGeneration.SUPER);
     }
     private static Vec3 impactPoint(HitResult h) {
         if (h instanceof BlockHitResult b) {
@@ -156,8 +157,8 @@ public final class HunterExpandedSupers {
         }
         return h.getLocation();
     }
-    private static void blast(Lease l, Vec3 at, double radius, float damage) {
-        for (LivingEntity e : targets(l,at,radius)) damage(l,e,damage);
+    private static void blast(Lease l, Vec3 at, double radius, String contact, float damage) {
+        for (LivingEntity e : targets(l,at,radius)) damage(l,e,contact,damage);
         ClassAbilityEffects.burst(l.owner,at,l.ability.element(),radius);
     }
     /**
@@ -316,7 +317,7 @@ public final class HunterExpandedSupers {
                             if (!lease.valid()) return;
                             lease.impacts++;
                             if (hit instanceof EntityHitResult entity && entity.getEntity() instanceof LivingEntity target)
-                                damage(lease,target,(float)value(ability,"impact_damage",1,.1,10));
+                                damage(lease,target,"impact",(float)value(ability,"impact_damage",1,.1,10));
                             KNIVES.add(new EmbeddedKnife(lease,hit));
                         });
                 lease.flights.add(flight);
@@ -336,7 +337,7 @@ public final class HunterExpandedSupers {
                         // A lifetime miss is not a collision-stuck staff: leave no airborne field.
                         if (hit instanceof BlockHitResult b && lease.level.getBlockState(b.getBlockPos()).isAir()) return;
                         for (StaffField old : List.copyOf(FIELDS)) if (old.lease.owner==lease.owner) { old.destroy(); FIELDS.remove(old); }
-                        blast(lease,at,value(ability,"radius",4,1,6),(float)value(ability,"impact_damage",15,.1,60));
+                        blast(lease,at,value(ability,"radius",4,1,6),"impact",(float)value(ability,"impact_damage",15,.1,60));
                         FIELDS.add(new StaffField(lease,at));
                         ClassAbilityEffects.sound(lease.owner,ability.element(),path,"super.impact");
                     }));
@@ -349,7 +350,7 @@ public final class HunterExpandedSupers {
             for (LivingEntity e : targets(lease,eye,range)) {
                 Vec3 delta=center(e).subtract(eye);
                 if (delta.lengthSqr()<.01 || delta.normalize().dot(look) > (heavy?.15:.3))
-                    damage(lease,e,(float)value(ability,heavy?"heavy_damage":"damage",heavy?18:11,.1,60));
+                    damage(lease,e,heavy?"heavy":"light",(float)value(ability,heavy?"heavy_damage":"damage",heavy?18:11,.1,60));
             }
             ClassAbilityEffects.burst(lease.owner,eye.add(look.scale(1.5)),Element.VOID,heavy?2:1.2);
         }
@@ -365,7 +366,7 @@ public final class HunterExpandedSupers {
                         lease.owner.teleportTo(destination.x,destination.y,destination.z);
                         lease.blinks++;
                         // Do not acquire gravity/flying/noPhysics or touch the real inventory.
-                        blast(lease,lease.owner.position().add(0,1,0),value(ability,"radius",4,1,6),
+                        blast(lease,lease.owner.position().add(0,1,0),value(ability,"radius",4,1,6),"whirl",
                                 (float)value(ability,"damage",20,.1,80));
                         playAttack("blink");
                         nextAttack=Math.max(nextAttack,now()+clipTicks("blink",12));
@@ -431,7 +432,7 @@ public final class HunterExpandedSupers {
             if (!lease.valid()) return false;
             if (lease.level.getGameTime()<detonate) return true;
             Vec3 at=target!=null && !target.isRemoved() && target.level()==lease.level?target.position().add(local):origin;
-            blast(lease,at,value(lease.ability,"radius",2.2,.5,4),(float)value(lease.ability,"damage",8,.1,40));
+            blast(lease,at,value(lease.ability,"radius",2.2,.5,4),"explosion",(float)value(lease.ability,"damage",8,.1,40));
             return false;
         }
     }
@@ -461,13 +462,13 @@ public final class HunterExpandedSupers {
             if ((now-started)%5==0) Fx.ring(lease.owner, lease.level,visualOrigin,radius,Element.ARC.color(),28);
             if (!struck && now>=started+ticks(lease.ability,"lightning_delay_ticks",40,0,100)) {
                 struck=true;
-                blast(lease,origin,radius,(float)value(lease.ability,"lightning_damage",12,.1,60));
+                blast(lease,origin,radius,"lightning",(float)value(lease.ability,"lightning_damage",12,.1,60));
                 ClassAbilityEffects.sound(lease.owner,Element.ARC,lease.ability.id().getPath(),"super.impact");
             }
             if (now>=nextPulse) {
                 nextPulse=now+ticks(lease.ability,"pulse_ticks",14,5,60);
                 for (LivingEntity e : targets(lease,origin,radius)) {
-                    damage(lease,e,(float)value(lease.ability,"pulse_damage",5,.1,30));
+                    damage(lease,e,"pulse",(float)value(lease.ability,"pulse_damage",5,.1,30));
                     Fx.line(lease.owner, lease.level,origin,center(e),Element.ARC.color(),.18,1f);
                 }
                 // Local lightning stroke stops at the field, not at a global weather strike.

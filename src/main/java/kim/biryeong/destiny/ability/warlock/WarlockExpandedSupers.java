@@ -7,6 +7,7 @@ import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.ability.*;
 import kim.biryeong.destiny.camera.SuperCamera;
 import kim.biryeong.destiny.combat.Combat;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.fx.*;
 import kim.biryeong.destiny.guardian.*;
 import kim.biryeong.destiny.weapon.AmmoGeneration;
@@ -230,7 +231,7 @@ public final class WarlockExpandedSupers {
             if ((age - windup) % ticks(ability, "pulse_ticks", 3, 1, 10) == 0) {
                 pulses++;
                 if (nearest != null && visible(epoch, from, end))
-                    damage(nearest, (float) value(ability, "damage", 3, .1, 30));
+                    damage(nearest, "beam_pulse", (float) value(ability, "damage", 3, .1, 30));
                 Fx.line(epoch.owner, epoch.level, from, end, Element.ARC.glow(), .25, .7f);
             }
             return true;
@@ -248,7 +249,7 @@ public final class WarlockExpandedSupers {
                     Vec3 origin = epoch.owner.position().add(0, .8, 0);
                     for (LivingEntity target : Combat.enemiesNear(epoch.level, epoch.owner, origin, radius))
                         if (WarlockAbilities.enemy(epoch.owner, target) && visible(epoch, origin, WarlockAbilities.center(target)))
-                            damage(target, (float) value(ability, "damage", 16, .1, 100));
+                            damage(target, "charged_blast", (float) value(ability, "damage", 16, .1, 100));
                     ClassAbilityEffects.burst(epoch.owner, origin, Element.VOID, radius);
                     ClassAbilityEffects.sound(epoch.owner, Element.VOID, path, "super.impact");
                 }
@@ -294,9 +295,10 @@ public final class WarlockExpandedSupers {
             ClassAbilityEffects.burst(p, safe.add(0, .8, 0), Element.VOID, .7);
             return true;
         }
-        void damage(LivingEntity target, float damage) {
+        void damage(LivingEntity target, String contact, float damage) {
             if (alive && epoch.valid() && WarlockAbilities.enemy(epoch.owner, target))
-                Combat.damage(epoch.level, epoch.owner, target, damage, ability.element(), AmmoGeneration.SUPER);
+                Combat.damage(epoch.level, epoch.owner, target,
+                        AbilityDamage.pvp(ability, contact, target, damage), ability.element(), AmmoGeneration.SUPER);
         }
         void play(String phase) {
             String clip = ClassSuperModelAssets.prefix(path) + "_" + phase;

@@ -361,6 +361,31 @@ public final class CrucibleW263GameTests {
             check(h, ally[0].getLastDamageSource() == previousSource, "Rejected friendly hit cannot replace attribution");
             aceDamage(h, shooter, enemy);
             pveUnchanged(h, shooter);
+            // W267: exercise the shared ability scaling/real damage route, not every tuning row.
+            noDefenses(enemy);
+            var meleeId = DestinyGuardians.id("titan/arc_melee");
+            float abilityHit = kim.biryeong.destiny.combat.AbilityDamage.pvp(meleeId, "strike", enemy, 6f);
+            float abilityHealth = enemy.getHealth();
+            Combat.damage(shooter, enemy, abilityHit, Element.ARC);
+            near(h, abilityHealth - enemy.getHealth(), abilityHit, "Ability PvP contact reaches actual HP once");
+            var sword = WeaponCatalog.find("abide_the_return").orElseThrow();
+            float swordBase = WeaponProfile.forEntry(sword).damage();
+            near(h, CrucibleDamage.melee(sword, enemy, swordBase * .35f),
+                    CrucibleDamage.melee(sword, enemy, swordBase) * .35f,
+                    "Sword energy multiplier survives PvP conversion");
+            // W267: real PvP scorch stays non-lethal and does not add a second vanilla fire source.
+            noDefenses(enemy);
+            enemy.setRemainingFireTicks(0);
+            enemy.setHealth(.2f);
+            kim.biryeong.destiny.combat.Statuses.apply(enemy, kim.biryeong.destiny.combat.Keyword.WEAKENED, 40);
+            kim.biryeong.destiny.combat.Statuses.scorch(shooter, enemy, 100);
+            check(h, enemy.getRemainingFireTicks() == 0, "PvP scorch must not also ignite vanilla fire");
+        });
+        h.runAfterDelay(534, () -> {
+            check(h, enemy.isAlive() && enemy.getHealth() >= .099f && enemy.getHealth() < .2f,
+                    "Normalized scorch damages an enemy but preserves its last HP even when weakened");
+            kim.biryeong.destiny.combat.Statuses.forget(enemy);
+            enemy.setHealth(enemy.getMaxHealth());
         });
         h.runAfterDelay(560, () -> {
             check(h, shooter.isAlive() && enemy.isAlive() && CrucibleRuntime.canFight(enemy, shooter),

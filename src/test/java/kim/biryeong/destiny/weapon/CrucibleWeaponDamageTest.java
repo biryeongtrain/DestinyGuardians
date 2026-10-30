@@ -21,10 +21,7 @@ class CrucibleWeaponDamageTest {
         assertEquals("per_bolt", fusion.component());
         assertEquals(48.0039, fusion.body(), 1e-9);
     }
-    @Test void preservesUnknownsAndSeparatesGlaiveMelee() {
-        assertTrue(CrucibleWeaponDamage.find("abide_the_return").isEmpty());
-        assertTrue(CrucibleWeaponDamage.find("dimensional_hypotrochoid").isEmpty());
-        assertTrue(CrucibleWeaponDamage.find("coriolis_force").isEmpty());
+    @Test void preservesUnknownIdsAndSeparatesGlaiveMelee() {
         assertTrue(CrucibleWeaponDamage.find("not_a_weapon").isEmpty());
         assertTrue(CrucibleWeaponDamage.find(null).isEmpty());
         var glaive = CrucibleWeaponDamage.find("nezarec_s_whisper").orElseThrow();

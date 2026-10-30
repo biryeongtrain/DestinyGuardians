@@ -1,6 +1,7 @@
 package kim.biryeong.destiny.ability.titan;
 
 import kim.biryeong.destiny.ability.*;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.fx.*;
 import kim.biryeong.destiny.guardian.*;
 import kim.biryeong.destiny.weapon.*;
@@ -55,10 +56,14 @@ public final class TitanGrenade extends Ability {
             if(now<nextPulse)return true;
             nextPulse=now+TitanAbilities.ticks(ability,"pulse_ticks",20,60);
             ClassAbilityEffects.burst(c.owner,position,ability.element(),radius());
+            // Pulse grenade has a separate first impact; suppressor is a local four-pulse field.
+            String contact=ability.element()==Element.ARC?(fired?"pulse":"detonation")
+                    :ability.element()==Element.SOLAR?"explosion":"pulse";
             if(!fired)ClassAbilityEffects.sound(c.owner,ability.element(),"grenade.impact");fired=true;
             for(LivingEntity e:TitanAbilities.targets(c,position,radius())) {
                 WeaponAdrenalineJunkie.grenadeDamage(c.owner,token,c.level,e,
-                        (float)TitanAbilities.value(ability,"damage",ability.element()==Element.SOLAR?16:5,0,100),ability.element());
+                        AbilityDamage.pvp(ability,contact,e,
+                                (float)TitanAbilities.value(ability,"damage",ability.element()==Element.SOLAR?16:5,0,100)),ability.element());
                 if(ability.element()==Element.VOID&&e.isAlive())suppress(e,now);
             }
             return ability.element()!=Element.SOLAR;

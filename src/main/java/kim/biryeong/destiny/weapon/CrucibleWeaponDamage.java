@@ -14,8 +14,8 @@ import java.util.OptionalDouble;
 
 /** Raw Destiny PvP points per bullet, pellet, bolt or projectile.
  * Precision is absolute damage, never a multiplier. No health scaling or perks here.
- * Missing weapons/components are deliberately absent, not zero or estimated.
- * W263 provenance records source dates, frame mappings and provisional source warnings.
+ * Unknown components remain absent; W267 adds explicitly documented approximations for 15 weapons.
+ * W263/W267 provenance records source dates, frame mappings and approximation limits.
  */
 public final class CrucibleWeaponDamage {
     public record Row(double body, double precision, OptionalDouble explosion,

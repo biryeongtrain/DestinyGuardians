@@ -5,7 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 /** D2 displayed HP is normalized to the guardian health bar (230 -> maxHealth).
  * Per-target evaluation keeps a single shot's PvE and PvP contacts independent.
- * Unknown source rows deliberately retain the existing local value, never a guessed D2 value. */
+ * W267 explicitly documented approximations fill source gaps; unknown future rows retain local values. */
 public final class CrucibleDamage {
     public static final double GUARDIAN_HP = 230;
     private CrucibleDamage() {}
@@ -27,6 +27,8 @@ public final class CrucibleDamage {
     }
     public static float melee(WeaponCatalog.Entry entry, LivingEntity target, float local) {
         if (!(target instanceof ServerPlayer)) return local;
+        // Sword contacts retain their paid combo and energy-dependent heavy multipliers.
+        if (entry.family().equals("sword")) return base(entry, target, local);
         var row = CrucibleWeaponDamage.find(entry.id());
         if (row.isEmpty() || row.get().melee().isEmpty()) return local;
         // Glaive's old local 7/14 combo is not a D2 double-damage third hit.

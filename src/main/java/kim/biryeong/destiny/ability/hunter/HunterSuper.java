@@ -5,6 +5,7 @@ import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.ability.Motion;
 import kim.biryeong.destiny.ability.SuperSession;
 import kim.biryeong.destiny.ability.Tasks;
+import kim.biryeong.destiny.combat.AbilityDamage;
 import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
@@ -171,7 +172,7 @@ public final class HunterSuper extends Ability {
             for (LivingEntity e : Combat.enemiesNear(level, player, eye, reach)) {
                 Vec3 to = e.position().add(0, e.getBbHeight() / 2, 0).subtract(eye).normalize();
                 if (to.dot(look) >= cosHalf) {
-                    Combat.damage(level, player, e, (float) param("damage", 16), element());
+                    Combat.damage(level, player, e, AbilityDamage.pvp(HunterSuper.this, "strike", e, (float) param("damage", 16)), element());
                     if (impactVisuals++ < 2) SuperVfx.arcHit(player, e);
                     PostEffects.pulse(player, element(), true);
                     AbilityParticles.send(player, level, ParticleTypes.ELECTRIC_SPARK, e.getX(), e.getY() + 1, e.getZ(), 12, 0.3, 0.5, 0.3, 0.2);
@@ -269,7 +270,7 @@ public final class HunterSuper extends Ability {
                         Fx.burst(player, level, anchor, element(), 80, 1.0);
                         Fx.sound(level, anchor, SoundEvents.ENDER_EYE_DEATH, 1f, 0.5f);
                         for (LivingEntity e : Combat.enemiesNear(level, player, anchor, radius)) {
-                            Combat.damage(level, player, e, impactDamage, element());
+                            Combat.damage(level, player, e, AbilityDamage.pvp(HunterSuper.this, "impact", e, impactDamage), element());
                         }
                         Tasks.run(player, level, age -> {
                             var enemies = Combat.enemiesNear(level, player, anchor, radius);
@@ -308,7 +309,7 @@ public final class HunterSuper extends Ability {
     }
 
     /** 즉발 사격: 시선 방향 레이캐스트로 첫 적에게 피해. */
-    static LivingEntity hitscan(ServerPlayer player, double range, float damage, Element element, Keyword keyword) {
+    LivingEntity hitscan(ServerPlayer player, double range, float damage, Element element, Keyword keyword) {
         ServerLevel level = player.level();
         Vec3 eye = player.getEyePosition();
         Vec3 end = eye.add(player.getLookAngle().scale(range));
@@ -325,7 +326,7 @@ public final class HunterSuper extends Ability {
         Fx.line(player, level, eye.add(player.getLookAngle().scale(0.8)).add(0, -0.15, 0), impact, element.color(), 0.3, 1.1f);
         Fx.burst(player, level, impact, element, 30, 0.3);
         if (entity != null && entity.getEntity() instanceof LivingEntity target) {
-            Combat.damage(level, player, target, damage, element);
+            Combat.damage(level, player, target, AbilityDamage.pvp(this, "shot", target, damage), element);
             PostEffects.pulse(player, element, true);
             if (keyword != null && target.isAlive()) {
                 if (keyword == Keyword.SCORCHED) Statuses.scorch(player, target, 100);

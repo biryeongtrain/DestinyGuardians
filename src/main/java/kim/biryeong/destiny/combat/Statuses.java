@@ -44,7 +44,11 @@ public final class Statuses {
                 clearTarget(target);
             }
             case AMPLIFIED -> target.addEffect(new MobEffectInstance(MobEffects.SPEED, ticks, 1));
-            case SCORCHED -> target.setRemainingFireTicks(Math.max(target.getRemainingFireTicks(), ticks));
+            case SCORCHED -> {
+                // PvP scorch has its own normalized non-lethal pulse; vanilla fire would double-charge it.
+                if (!(target instanceof Player))
+                    target.setRemainingFireTicks(Math.max(target.getRemainingFireTicks(), ticks));
+            }
             case WEAKENED -> target.addEffect(new MobEffectInstance(MobEffects.GLOWING, ticks, 0));
             case SUPPRESSED -> {
                 target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, ticks, 3));
@@ -117,9 +121,22 @@ public final class Statuses {
             if (entry.getValue().containsKey(Keyword.BLINDED) || entry.getValue().containsKey(Keyword.SUPPRESSED)) {
                 clearTarget(living);
             }
-            if (entry.getValue().containsKey(Keyword.SCORCHED) && now % 20 == 0) {
-                living.damageCooldownTime = 0;
-                living.hurtServer(level, living.damageSources().onFire(), 2f);
+            if (entry.getValue().containsKey(Keyword.SCORCHED)) {
+                if (living instanceof net.minecraft.server.level.ServerPlayer player) {
+                    // DDC x50 representative: 6.5 points / .56s, rounded to 11 server ticks.
+                    // Stack/ignition simulation is not implemented; retain the accepted cast duration.
+                    var owner = SCORCH_OWNERS.get(player.getUUID());
+                    if (now % 11 == 0 && owner != null) {
+                        float points = 6.5f * player.getMaxHealth() / 230f;
+                        // Reserve HP even if the common PvP weakness (7.5%) modifies this pulse later.
+                        float budget = Math.max(0, (player.getHealth() - .1f) / 1.075f);
+                        if (budget > 0) Combat.damage(level, owner, player, Math.min(points, budget),
+                                kim.biryeong.destiny.guardian.Element.SOLAR);
+                    }
+                } else if (now % 20 == 0) {
+                    living.damageCooldownTime = 0;
+                    living.hurtServer(level, living.damageSources().onFire(), 2f);
+                }
             }
         }
     }
