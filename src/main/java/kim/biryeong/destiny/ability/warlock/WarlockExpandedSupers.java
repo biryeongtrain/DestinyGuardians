@@ -119,6 +119,11 @@ public final class WarlockExpandedSupers {
         return result;
     }
 
+    /** Query the live field, so leaving, destruction and expiry revoke protection immediately. */
+    public static boolean inWell(ServerPlayer p) {
+        return WELLS.values().stream().anyMatch(field -> field.contains(p));
+    }
+
     public static String status(ServerPlayer p) {
         Session s = ACTIVE.get(p); Well w = WELLS.get(p);
         return "active=" + (s == null ? "none" : s.path) + " age=" + (s == null ? 0 : s.age)
@@ -153,6 +158,9 @@ public final class WarlockExpandedSupers {
         }
         boolean well() { return ability.id().equals(WELL_OF_RADIANCE); }
         boolean chaos() { return ability.id().equals(CHAOS_REACH); }
+        @Override public boolean damageResistanceActive() {
+            return alive && epoch.valid() && !well() && age + spent < duration;
+        }
         void begin() {
             // beginSuper selects _start_air/_start once. Never restart the same source clip here.
             SuperCamera.blockMovement(epoch.owner, chaos() ? duration + exit : well() && airCast ? 160 : windup);

@@ -1,0 +1,23 @@
+{
+  "tests": 2301,
+  "failures": [
+    {
+      "class": "kim.biryeong.destiny.weapon.ReloadW168AustringerTest",
+      "test": "exactSourceElementsAndUvPartitionWithoutDuplication()"
+    },
+    {
+      "class": "kim.biryeong.destiny.hud.WeaponSilhouetteW112AssetTest",
+      "test": "currentSourceInputsAndAllOutputBytesMatchManifestHashes()"
+    },
+    {
+      "class": "kim.biryeong.destiny.weapon.WeaponSurfaceW115Test",
+      "test": "everyExistingAimGripInspectAndReloadPoseResolvesToExactlyOneReplacedGeometry()"
+    },
+    {
+      "class": "kim.biryeong.destiny.weapon.InsertW179MindbenderTest",
+      "test": "canonicalBodyAndUvsExactAndConnectedHiddenShellBudget()"
+    }
+  ],
+  "baseline": "Same four preexisting asset regressions as W264; no new failures",
+  "command": "./gradlew test compileGametestJava --offline --no-daemon --console=plain --max-workers=2"
+}

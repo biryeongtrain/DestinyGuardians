@@ -84,6 +84,9 @@ public final class WarlockSuper extends Ability {
             interval = WarlockAbilities.ticks(ability, "attack_interval_ticks", ability.element() == Element.ARC ? 8 : 12, 5, 40);
             projectileLife = WarlockAbilities.ticks(ability, "projectile_life_ticks", 60, 10, 80);
         }
+        @Override public boolean damageResistanceActive() {
+            return !ended && lease.valid() && age < (ability.element() == Element.VOID ? attackDuration : duration);
+        }
         @Override public boolean tick() {
             if (ended || !lease.valid()) return false;
             ClassAbilityEffects.superTick(lease.owner, ability.element(), ability.id().getPath(), age);

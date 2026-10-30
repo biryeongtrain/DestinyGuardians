@@ -249,7 +249,10 @@ public final class AbilityService {
         GrenadeThrow.cleanup(player);
         ClassAbilityCast.cleanup(player);
         kim.biryeong.destiny.ability.hunter.HunterSkillCast.cancelPending(player);
-        Guardians.runtime(player).superSession = session;
+        var runtime = Guardians.runtime(player);
+        runtime.superSession = session;
+        runtime.superResistance = new kim.biryeong.destiny.combat.SuperDamageResistance.Binding(session,
+                equipped(player, AbilitySlot.SUPER).map(Ability::id).orElse(null), player.level());
     }
 
     public static void endSuper(ServerPlayer player) {
@@ -264,6 +267,7 @@ public final class AbilityService {
         GuardianRuntime runtime = Guardians.runtime(player);
         SuperSession session = runtime.superSession;
         runtime.superSession = null;
+        runtime.superResistance = null;
         if (session != null) {
             session.end();
         }

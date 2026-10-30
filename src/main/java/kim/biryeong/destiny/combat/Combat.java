@@ -76,10 +76,10 @@ public final class Combat {
         float before=target.getHealth()+target.getAbsorptionAmount();
         target.damageCooldownTime = 0;
         var damageSource = target instanceof ServerPlayer
-                ? new net.minecraft.world.damagesource.DamageSource(level.registryAccess().lookupOrThrow(
+                ? new GuardianDamageSource(level.registryAccess().lookupOrThrow(
                         net.minecraft.core.registries.Registries.DAMAGE_TYPE).getOrThrow(
                         net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.DAMAGE_TYPE,
-                                kim.biryeong.destiny.DestinyGuardians.id("crucible"))), source)
+                                kim.biryeong.destiny.DestinyGuardians.id("crucible"))), source, attribution)
                 : source.damageSources().playerAttack(source);
         target.hurtServer(level, damageSource, amount);
         kim.biryeong.destiny.weapon.AmmoEconomy.afterDamage(source,target,attribution,before,

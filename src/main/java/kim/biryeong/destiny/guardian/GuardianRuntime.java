@@ -14,6 +14,7 @@ public final class GuardianRuntime {
     public int airJumpsUsed;
     public int invulnerableTicks;
     public SuperSession superSession;
+    public kim.biryeong.destiny.combat.SuperDamageResistance.Binding superResistance;
     public boolean gcbClient;
     public boolean gcbThirdPerson;
     public final Map<GuardianAction, Integer> lastActionTick = new EnumMap<>(GuardianAction.class);

@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class LivingEntityMixin {
     @ModifyVariable(method = "hurtServer", at = @At("HEAD"), argsOnly = true)
     private float destiny$weaken(float amount, ServerLevel level, DamageSource source) {
-        return Statuses.modifyIncoming((LivingEntity) (Object) this, amount);
+        float modified = Statuses.modifyIncoming((LivingEntity) (Object) this, amount);
+        return (Object)this instanceof net.minecraft.server.level.ServerPlayer player
+                ? kim.biryeong.destiny.combat.SuperDamageResistance.modifyIncoming(player, source, modified) : modified;
     }
 }

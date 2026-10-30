@@ -1,0 +1,852 @@
+{
+  "task": "W265 current Light super resistance data",
+  "source_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+  "retrieved": "2026-10-30T07:29:13+00:00",
+  "resource_path": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-ikelos_sg_v1_0_1/src/main/resources/destiny/abilities/w265-super-resistance.json",
+  "resource_sha256": "86939c457a1a61cf0119b25cb149a0f778da8d2043a2b63ae812e9338795a695",
+  "retrieval_method": "Direct HTTPS GET using Python urllib for Arc/Solar/Void gviz CSV and individually resolved B:D single-row ranges; final raw texts read from master-provided CSV. No Google Sheets modifications.",
+  "retrieved_semantics": "UTC time final source inspection and artifact assembly completed; original master CSV download timestamp was not supplied.",
+  "requested_gid": {
+    "gid": 1038486120,
+    "used_for_values": false,
+    "reason": "Requested gid is the Champions section, not a super-resistance source."
+  },
+  "raw_inputs": [
+    {
+      "sheet": "Arc",
+      "path": "/private/tmp/destiny-w265/Arc.csv",
+      "sha256": "09672660ec73b74b426d0513134b68bc9d80cca7de056c9e3715be62bcefb4f2",
+      "csv_records": 78,
+      "acquisition": "Master-provided complete gviz CSV, read directly; individual ability ranges independently fetched in this worker.",
+      "original_download_timestamp": null,
+      "inspected": "2026-10-30T07:29:13+00:00",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc"
+    },
+    {
+      "sheet": "Solar",
+      "path": "/private/tmp/destiny-w265/Solar.csv",
+      "sha256": "c75e73f6d3c4f16e8cacfc9760dce3930defa5c62c95a545051f6d1291eed20e",
+      "csv_records": 85,
+      "acquisition": "Master-provided complete gviz CSV, read directly; individual ability ranges independently fetched in this worker.",
+      "original_download_timestamp": null,
+      "inspected": "2026-10-30T07:29:13+00:00",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar"
+    },
+    {
+      "sheet": "Void",
+      "path": "/private/tmp/destiny-w265/Void.csv",
+      "sha256": "8d4537777e3ac4374826dd9906a5b940e1f763e528d7f9f4e00202524b39ca8b",
+      "csv_records": 78,
+      "acquisition": "Master-provided complete gviz CSV, read directly; individual ability ranges independently fetched in this worker.",
+      "original_download_timestamp": null,
+      "inspected": "2026-10-30T07:29:13+00:00",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Void"
+    }
+  ],
+  "range_method": "Recursively narrowed explicit B1:D256 ranges using ability names, then queried each Bn:Dn independently. Name and complete D-cell text matched the master CSV exactly. CSV record ordinal is stored only as a CSV locator.",
+  "gid_policy": "Numeric tab gid omitted from value citations; verified sheet-name and explicit-range HTTPS GETs identify the source without inferring gid from an unrelated HTML link.",
+  "coverage": {
+    "expected": 19,
+    "actual": 19,
+    "hunter": 7,
+    "titan": 6,
+    "warlock": 6,
+    "excluded_unregistered": [
+      "Song of Flame",
+      "Twilight Arsenal"
+    ]
+  },
+  "implementation_sources": [
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/hunter/HunterAbilities.java",
+      "sha256": "8cb81ebac49e0937df66b77071d3992a387a3c30f598ea4fb4d88819074abfcd",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 25,
+          "text": "    public static final Identifier ARC_STAFF = id(\"arc_staff\");"
+        },
+        {
+          "line": 26,
+          "text": "    public static final Identifier GOLDEN_GUN = id(\"golden_gun\");"
+        },
+        {
+          "line": 27,
+          "text": "    public static final Identifier SHADOWSHOT = id(\"shadowshot\");"
+        },
+        {
+          "line": 32,
+          "text": "    private static Identifier id(String path) {"
+        },
+        {
+          "line": 36,
+          "text": "    public static void register() {"
+        },
+        {
+          "line": 37,
+          "text": "        kim.biryeong.destiny.ability.jump.JumpAbilities.register();"
+        },
+        {
+          "line": 38,
+          "text": "        AbilityRegistry.register(new HunterDodge(GAMBLERS_DODGE, \"도박꾼의 회피\", HunterDodge.Variant.GAMBLER, 11));"
+        },
+        {
+          "line": 39,
+          "text": "        AbilityRegistry.register(new HunterDodge(MARKSMANS_DODGE, \"명사수의 회피\", HunterDodge.Variant.MARKSMAN, 8));"
+        },
+        {
+          "line": 40,
+          "text": "        AbilityRegistry.register(new HunterGrenade(ARC_FLASHBANG, \"섬광 수류탄\", Element.ARC, 40));"
+        },
+        {
+          "line": 41,
+          "text": "        AbilityRegistry.register(new HunterGrenade(SOLAR_INCENDIARY, \"소이 수류탄\", Element.SOLAR, 40));"
+        },
+        {
+          "line": 42,
+          "text": "        AbilityRegistry.register(new HunterGrenade(VOID_VORTEX, \"소용돌이 수류탄\", Element.VOID, 45));"
+        },
+        {
+          "line": 43,
+          "text": "        AbilityRegistry.register(new HunterMelee(ARC_COMBINATION_BLOW, \"연속 타격\", Element.ARC, 22));"
+        },
+        {
+          "line": 44,
+          "text": "        AbilityRegistry.register(new HunterMelee(SOLAR_KNIFE, \"칼 투척\", Element.SOLAR, 18));"
+        },
+        {
+          "line": 45,
+          "text": "        AbilityRegistry.register(new HunterMelee(VOID_SMOKE_BOMB, \"연막탄\", Element.VOID, 25));"
+        },
+        {
+          "line": 46,
+          "text": "        AbilityRegistry.register(new HunterSuper(ARC_STAFF, \"아크 지팡이\", Element.ARC));"
+        },
+        {
+          "line": 47,
+          "text": "        AbilityRegistry.register(new HunterSuper(GOLDEN_GUN, \"황금 총\", Element.SOLAR));"
+        },
+        {
+          "line": 48,
+          "text": "        AbilityRegistry.register(new HunterSuper(SHADOWSHOT, \"그림자 사격\", Element.VOID));"
+        },
+        {
+          "line": 49,
+          "text": "        HunterExpandedSupers.register();"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/hunter/HunterExpandedSupers.java",
+      "sha256": "2b6ed22fb13cc5e46b2884ca90ca114986bc3568c7499ec795b2825f81299fae",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 32,
+          "text": "    public static final Identifier BLADE_BARRAGE = id(\"blade_barrage\");"
+        },
+        {
+          "line": 33,
+          "text": "    public static final Identifier SPECTRAL_BLADES = id(\"spectral_blades\");"
+        },
+        {
+          "line": 34,
+          "text": "    public static final Identifier GATHERING_STORM = id(\"gathering_storm\");"
+        },
+        {
+          "line": 35,
+          "text": "    public static final Identifier STORMS_EDGE = id(\"storms_edge\");"
+        },
+        {
+          "line": 42,
+          "text": "    private static Identifier id(String name) { return DestinyGuardians.id(\"hunter/\" + name); }"
+        },
+        {
+          "line": 44,
+          "text": "        AbilityRegistry.register(new Expanded(BLADE_BARRAGE, Element.SOLAR, \"칼날 장전\", Kind.BARRAGE));"
+        },
+        {
+          "line": 45,
+          "text": "        AbilityRegistry.register(new Expanded(SPECTRAL_BLADES, Element.VOID, \"스펙트럼 칼날\", Kind.SPECTRAL));"
+        },
+        {
+          "line": 46,
+          "text": "        AbilityRegistry.register(new Expanded(GATHERING_STORM, Element.ARC, \"폭풍결집\", Kind.GATHERING));"
+        },
+        {
+          "line": 47,
+          "text": "        AbilityRegistry.register(new Expanded(STORMS_EDGE, Element.ARC, \"폭풍의 칼날\", Kind.EDGE));"
+        },
+        {
+          "line": 51,
+          "text": "        Expanded(Identifier id, Element element, String name, Kind kind) {"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/hunter/HunterSuper.java",
+      "sha256": "69ee99bca920cf88ca328305cb076b87eb48325f542f70b07f3dd62905e09e82",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 231,
+          "text": "            this.shots = (int) param(\"shots\", 3);"
+        },
+        {
+          "line": 325,
+          "text": "            // Deadfall is one automatic cast. Clicks cannot restart, rush or duplicate it."
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/titan/TitanAbilities.java",
+      "sha256": "4af994616032c1808e0425124edf1bcfe99e720e063bd5572dfdd3d911eb2d9f",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 25,
+          "text": "    public static final Identifier ARC_SUPER=id(\"arc_super\"), SOLAR_SUPER=id(\"solar_super\"), VOID_SUPER=id(\"void_super\");"
+        },
+        {
+          "line": 29,
+          "text": "    private static Identifier id(String path) { return DestinyGuardians.id(\"titan/\"+path); }"
+        },
+        {
+          "line": 30,
+          "text": "    public static void register() {"
+        },
+        {
+          "line": 32,
+          "text": "        AbilityRegistry.register(new TitanClassAbility());"
+        },
+        {
+          "line": 34,
+          "text": "            AbilityRegistry.register(new TitanGrenade(e));"
+        },
+        {
+          "line": 35,
+          "text": "            AbilityRegistry.register(new TitanMelee(e));"
+        },
+        {
+          "line": 36,
+          "text": "            AbilityRegistry.register(new TitanSuper(e));"
+        },
+        {
+          "line": 38,
+          "text": "        TitanExpandedSupers.register();"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/titan/TitanExpandedSupers.java",
+      "sha256": "a5f51630f4a5df7c49fac1033fe74197596c452b1f214612033ec4c7c6111b7f",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 32,
+          "text": "    public static final net.minecraft.resources.Identifier THUNDERCRASH=DestinyGuardians.id(\"titan/thundercrash\"),"
+        },
+        {
+          "line": 33,
+          "text": "            BURNING_MAUL=DestinyGuardians.id(\"titan/burning_maul\"), WARD_OF_DAWN=DestinyGuardians.id(\"titan/ward_of_dawn\");"
+        },
+        {
+          "line": 42,
+          "text": "        AbilityRegistry.register(new Expanded(\"thundercrash\",Element.ARC,556,\"천둥충돌\"));"
+        },
+        {
+          "line": 43,
+          "text": "        AbilityRegistry.register(new Expanded(\"burning_maul\",Element.SOLAR,500,\"불타는 망치\"));"
+        },
+        {
+          "line": 44,
+          "text": "        AbilityRegistry.register(new Expanded(\"ward_of_dawn\",Element.VOID,455,\"새벽의 수호물\"));"
+        },
+        {
+          "line": 51,
+          "text": "            super(DestinyGuardians.id(\"titan/\"+kind),GuardianClass.TITAN,AbilitySlot.SUPER,element,cooldown,name);"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/titan/TitanSuper.java",
+      "sha256": "96e8e069bf53de30fb941021a99b943c5d1d37debc5740d3f62fff57922f9471",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 20,
+          "text": "            switch(e){case ARC->\"대혼란의 주먹\";case SOLAR->\"태양의 망치\";default->\"파수병 방패\";});}"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/warlock/WarlockAbilities.java",
+      "sha256": "4834dbf20ed1e88eafe5e4de7ff80ddbba11b129625eb60aba1c038ebdc2973e",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 25,
+          "text": "    public static final Identifier ARC_SUPER = id(\"arc_super\"), SOLAR_SUPER = id(\"solar_super\"), VOID_SUPER = id(\"void_super\");"
+        },
+        {
+          "line": 28,
+          "text": "    private static Identifier id(String path) { return DestinyGuardians.id(\"warlock/\" + path); }"
+        },
+        {
+          "line": 30,
+          "text": "    public static void register() {"
+        },
+        {
+          "line": 31,
+          "text": "        AbilityRegistry.register(new WarlockClassAbility(CLASS_ABILITY));"
+        },
+        {
+          "line": 33,
+          "text": "            AbilityRegistry.register(new WarlockGrenade(grenade(e), e));"
+        },
+        {
+          "line": 34,
+          "text": "            AbilityRegistry.register(new WarlockMelee(melee(e), e));"
+        },
+        {
+          "line": 35,
+          "text": "            AbilityRegistry.register(new WarlockSuper(superId(e), e));"
+        },
+        {
+          "line": 37,
+          "text": "        WarlockExpandedSupers.register();"
+        },
+        {
+          "line": 41,
+          "text": "    private static Identifier superId(Element e) { return e == Element.SOLAR ? SOLAR_SUPER : e == Element.VOID ? VOID_SUPER : ARC_SUPER; }"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/warlock/WarlockExpandedSupers.java",
+      "sha256": "ceda4d05bf342a74f0d39dfa2befda1fb0bb2e3c8602fade965d6e532fb0a54a",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 33,
+          "text": "    public static final Identifier WELL_OF_RADIANCE = DestinyGuardians.id(\"warlock/well_of_radiance\");"
+        },
+        {
+          "line": 34,
+          "text": "    public static final Identifier CHAOS_REACH = DestinyGuardians.id(\"warlock/chaos_reach\");"
+        },
+        {
+          "line": 35,
+          "text": "    public static final Identifier NOVA_WARP = DestinyGuardians.id(\"warlock/nova_warp\");"
+        },
+        {
+          "line": 41,
+          "text": "        AbilityRegistry.register(new Expanded(WELL_OF_RADIANCE, Element.SOLAR, 455, \"빛의 샘\"));"
+        },
+        {
+          "line": 42,
+          "text": "        AbilityRegistry.register(new Expanded(CHAOS_REACH, Element.ARC, 455, \"혼돈 범위\"));"
+        },
+        {
+          "line": 43,
+          "text": "        AbilityRegistry.register(new Expanded(NOVA_WARP, Element.VOID, 556, \"신성 차원\"));"
+        },
+        {
+          "line": 47,
+          "text": "        Expanded(Identifier id, Element e, double cooldown, String name) {"
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/java/kim/biryeong/destiny/ability/warlock/WarlockSuper.java",
+      "sha256": "4e1e1477c6eec4e136e0a2bb4b896e13bcebbcc95645a1a318fd1c16b1aaee38",
+      "read_at": "2026-10-30T07:29:13+00:00",
+      "excerpts": [
+        {
+          "line": 55,
+          "text": "                e == Element.ARC ? \"폭풍몰입\" : e == Element.SOLAR ? \"새벽칼날\" : \"신성 폭탄\");"
+        },
+        {
+          "line": 180,
+          "text": "                        VORTICES.add(new Vortex(lease, ability, origin));"
+        }
+      ]
+    }
+  ],
+  "variant_mapping": {
+    "hunter/golden_gun": "Three-shot current implementation. Marksman source selected; unmodified Deadshot has identical base resistance. Deadshot aspect-specific increase excluded.",
+    "hunter/shadowshot": "Current implementation explicitly says Deadfall is one automatic cast.",
+    "warlock/void_super": "Current implementation creates a post-blast Vortex; Vortex source selected."
+  },
+  "additional_variant_source": {
+    "id": "hunter/golden_gun",
+    "applies_to_current_id": false,
+    "variant": "Golden Gun: Deadshot + Knock'Em Down",
+    "pvp": 0.15,
+    "pve": 0.66,
+    "source": {
+      "sheet": "Solar",
+      "range": "D77",
+      "text": "General Super Information\nDamage Resistance: 60% [0%]\nDamage Resistance +Knock'Em Down: 66% [15%]\nBase Duration: 12 seconds, or 8.34% Super Drain per Second\n\n6 Shot Golden Gun\nDeals 1453 [393] damage and inflicts x40+10 Scorch per shot, without the ability to score Precision Hits.\nDamage Falloff begins at 26m and decreases down to 34.5% damage at 100m. ADS Zoom has no effect on damage falloff (1x ADS scalar).\n Radiant's damage bonus affects its damage output.\n\nSuper Kills grant an additional bullet to the magazine and refund Super Energy.\nInitially refunds ~80% Super Energy per kill, decreasing by ~10% per kill, down to a minimum of ~12% Super Energy per kill.",
+      "verification_range": "B77:D77",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B77%3AD77&headers=0",
+      "csv_record_1based": 51,
+      "csv_column_1based": 4,
+      "range_verified_by_https_get": true,
+      "range_response_matches_csv_text": true
+    }
+  },
+  "interpretation": {
+    "base_values": "Exact source percentages divided by 100. Source convention is PvE [PvP], also confirmed by task owner.",
+    "uncertainty": "Question marks, blank percentages, and unstated cast DR remain null. Loader no-effect fallback must not be described as a confirmed source zero.",
+    "conditional": "Spectral visible .58 used as requested; invisible 59?% not promoted. Arc Staff dodge, Ward cast/aura/construct and Sentinel guarding are explicitly distinguished.",
+    "well": "Top-level well carries only guardian aura DR; no cast DR inferred. Existing main containment owns recipients/radius."
+  },
+  "supers": [
+    {
+      "id": "hunter/arc_staff",
+      "name": "Arc Staff",
+      "pvp": 0.53,
+      "pve": 0.9,
+      "note": "Base DR is 53% PvP / 90% PvE. Dodge DR is explicitly unknown. Frontal guarding/reflecting is a separate action, not unconditional resistance.",
+      "source": {
+        "sheet": "Arc",
+        "range": "D64",
+        "text": "General Super Information\nDamage Resistance: 90% [53%]\nBase Duration: 20 seconds, or 5% Super Drain per Second\n\nKills grant x1 Bolt Charge.\n\nAerial and Grounded Light Attack | Drains 2.5% Super Energy.\nHits deal 864 [?] damag up to 8 meters away.\nGrounded Attacks can be chained up to 3 hits.\n\nGrounded Heavy Attack | Drains 8% Super Energy\nDeals 1,264 [?] damage in a ~45° angle up to 8 meters away.\n\nAirborne Heavy Attack | Drains 8%? Super Energy\nDeals 1,264 [?] damage and inflicts blind over 7 meters away\n\nPalm Strike | Light-Light-Heavy Combo.\nDeals 2,950 [?] damage and inflicts blind in a ~45° angle up to 8 meters away.\n\nGuarding | Drains an additional ?% Super Energy per second.\nFully blocks and reflects all attacks in a 180?° Angle, granting x1 Bolt Charge per attack reflected.\nReflected Projectiles are redirected to the reticle and deal 100% increased damage against Combatants.\n\nClass Ability | Does not drain Super Energy.\nPerfoms an evasive dodge. Grants ?% [?%] Damage Resist while dodging. \n Allows the repeated usage of Ascension while the Aspect is equipped at the cost of ?% Super Energy.",
+        "verification_range": "B64:D64",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc&range=B64%3AD64&headers=0",
+        "csv_record_1based": 44,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      },
+      "conditional": [
+        {
+          "condition": "during dodge",
+          "pvp": null,
+          "pve": null,
+          "why": {
+            "pvp": "Source says [?%].",
+            "pve": "Source says ?%."
+          },
+          "source_text": "Perfoms an evasive dodge. Grants ?% [?%] Damage Resist while dodging. "
+        },
+        {
+          "condition": "guarding",
+          "effect": "blocks_and_reflects_attacks",
+          "angle_degrees": null,
+          "why": {
+            "angle_degrees": "Source says 180?°; uncertain."
+          },
+          "source_text": "Fully blocks and reflects all attacks in a 180?° Angle, granting x1 Bolt Charge per attack reflected."
+        }
+      ]
+    },
+    {
+      "id": "hunter/golden_gun",
+      "name": "Golden Gun: Marksman",
+      "pvp": 0.0,
+      "pve": 0.6,
+      "note": "Current hunter/golden_gun has a three-shot implementation, mapped to Marksman. Both Marksman and Deadshot have confirmed base 0% PvP / 60% PvE. Deadshot +Knock'Em Down 15% PvP / 66% PvE is a different variant and is not applied here.",
+      "source": {
+        "sheet": "Solar",
+        "range": "D79",
+        "text": "General Super Information\nDamage Resistance: 60% [0%]\nBase Duration: 12 seconds, or 8.34% Super Drain per Second\nBase Duration +Knock'Em Down: 16 seconds, or 6.25% Super Drain per Second.\n\n3 Shot Golden Gun\nDeals 1574 [426] damage and inflicts x40+10 Scorch per shot with a 2x Precision Multiplier.\n Radiant's damage bonus affects its damage output.\n\nOn Precision Hit: \nGrants a stack of Line'Em Up, up to a maximum of 2 stacks, and spawns 2 Orbs of Power. Buff lasts until Super End.\nLine'Em Up x1 | 45.8% increased damage, and 25?% Decreased Passive Super Drain.\nLine'Em Up x2 | 90% increased damage, and 50?% Decreased Passive Super Drain.\n\nPrecision Hit Orbs of Power Super Gains:\nNon-Boss Combatants = 3.57% Super Energy | Boss Combatants = 2.85% Super Energy | Boss + Star-Eater Scales = 2.5% Super Energy",
+        "verification_range": "B79:D79",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B79%3AD79&headers=0",
+        "csv_record_1based": 52,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "hunter/shadowshot",
+      "name": "Shadowshot: Deadfall",
+      "pvp": 0.53,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Void",
+        "range": "D69",
+        "text": "General Super Information\nDamage Resistance: 90% [53%]\n\nShadowshot fires a single Deadfall Anchor that attaches to surfaces and enemies, pulling all enemies within 12.5 metres towards it upon impact. \nVoid Anchor activates on a 1 second delay after it detects an enemy within 12.5 metres, or automatically after 30 seconds have passed.\n\nDeadfall Anchor:\nDeals 2,583 [?] Damage on impact, inflicting Deadfall Weaken and Suppression to enemies within ? meters. Counts as a Construct with ? HP.\nEnemies within 12.5 meters of the anchor are tethered. Tethered enemies are inflicted with Deadfall Weaken, Suppression, and Mark for 30 [10] seconds.\n50% of the Bodyshot (Base) Damage dealt to tethered enemies is also inflicted to other tethered enemies.\n\nDeadfall Weaken UNIQUELY increases damage taken by 35%.\n\nDeadfall Anchor lasts for 12 seconds by default. Tethered Enemy kills increase its duration by 0.5 seconds, up to a maximum of 25 seconds.",
+        "verification_range": "B69:D69",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Void&range=B69%3AD69&headers=0",
+        "csv_record_1based": 47,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "hunter/blade_barrage",
+      "name": "Blade Barrage",
+      "pvp": 0.49,
+      "pve": null,
+      "note": "PvP 49% confirmed. PvE is null because 90?% is uncertain. No inferred PvE resistance.",
+      "source": {
+        "sheet": "Solar",
+        "range": "D75",
+        "text": "General Super Information\nDamage Resistance: 90?% [49%]\n\nReleases two volleys of 7 homing knives each, totalling 14 knives.\nKnock 'Em Down adds an additional 3 knives to each fan, totalling 20 knives.\n\nKnives embed themselves on impact, dealing 99 [not much?] damage and detonate after 0.5 seconds.\nKnife explosions deal up to an additional 560 [generally dead?] damage each and inflict x?+? Scorch over 4.25m.\nDeals a total of 8,512 [death] (12160 [deathx1.43] with Knock'Em Down) damage with all knife hits+explosions",
+        "verification_range": "B75:D75",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B75%3AD75&headers=0",
+        "csv_record_1based": 50,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      },
+      "why": {
+        "pve": "Source explicitly says 90?%; the question mark makes this unconfirmed. Not rounded or promoted to 90%."
+      }
+    },
+    {
+      "id": "hunter/spectral_blades",
+      "name": "Spectral Blades",
+      "pvp": 0.58,
+      "pve": 0.9,
+      "note": "Base PvP 58% is the confirmed visible value, as requested. Invisible 59?% is unconfirmed; do not apply a cloaked increase. PvE 90% has no visibility qualifier in the source.",
+      "source": {
+        "sheet": "Void",
+        "range": "D67",
+        "text": "General Super Information\nDamage Resistance: 90% [59?% Invisible | 58% Visible]\nBase Duration: 23.5 seconds or 4.25% Super Drain per second. Drains 50% faster if not invisible.\n\nLight Attack | Drains 5?% Super Energy.\nDeals 1,107 [?] damage and removes Void Invisibility.\nAttacks ? times per second. Uninterrupted hits against enemies grants up to 25?% Increased Melee Attack Speed\n\nHeavy Attack | Drains 15?% Super Energy.\n[Heavy Attack] performs an uppercut, dealing 1,620 [?] damage and applying Weaken and granting Invisibility.\n\nAllows unlimited Trapper's Ambush usage, at the cost of 15%? Super Energy.",
+        "verification_range": "B67:D67",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Void&range=B67%3AD67&headers=0",
+        "csv_record_1based": 46,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      },
+      "conditional": [
+        {
+          "condition": "invisible",
+          "pvp": null,
+          "pve": 0.9,
+          "why": {
+            "pvp": "59?% Invisible is unconfirmed; no confirmed cloaked increase."
+          },
+          "apply_pvp_increase": false,
+          "source_text": "Damage Resistance: 90% [59?% Invisible | 58% Visible]"
+        }
+      ]
+    },
+    {
+      "id": "hunter/gathering_storm",
+      "name": "Gathering Storm",
+      "pvp": 0.49,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Arc",
+        "range": "D66",
+        "text": "General Super Information\nDamage Resistance: 90% [49%]\n\nHurls forward an Arc Staff that explodes and embeds itself on whatever it hits on impact.\nDeals 544 [300] damage and inflicts jolt on impact. Explosion deals up to 608 [?] damage in a 10 meter radius.\n\nAfter 2 seconds, the Arc Staff gets struck by a lightning strike, dealing up to 1350 [500] damage in a 10 meter radius.\n\nAfter 1.2 seconds of being struck by lightning, the Staff emits a damaging field, dealing 446 [60] damage every 0.7 seconds in a 10 meter radius for 8 seconds.",
+        "verification_range": "B66:D66",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc&range=B66%3AD66&headers=0",
+        "csv_record_1based": 45,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "hunter/storms_edge",
+      "name": "Storm's Edge",
+      "pvp": 0.45,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Arc",
+        "range": "D68",
+        "text": "General Super Information\nDamage Resistance: 90% [45%]\nBase Duration: ? seconds, or ?% Super Drain per Second.\n\nThrows out a homing knife, dealing 90 [?] impact damage and up to 171 [45?] radial damage to enemies within 3 meters on impact, teleporting to it afterwards.\nPerforms a wide whirling strike after teleporting, dealing 1,440 x 2 [300?] damage to enemies within 6 metres.\nConsumes ?% Super Energy per knife thrown, up to 3 times per Super activation.",
+        "verification_range": "B68:D68",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc&range=B68%3AD68&headers=0",
+        "csv_record_1based": 46,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "titan/arc_super",
+      "name": "Fists of Havoc",
+      "pvp": 0.58,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Arc",
+        "range": "D98",
+        "text": "General Super Information\nDamage Resistance: 90% [58%]\nBase Duration: 25 seconds, or 4% Super Drain per Second\n\nLight Attack | Drains 6% Super Energy.\nHits deal 499 [?] damage and heavily knock enemies back.\nScoring a Light Attack grants the next heavy attack hit 4 additional damage instances of 273 [?] damage each.\n\nHeavy Attack | Drains 12% Super Energy.\nSlams downwards, dealing 1619 [?] damage and inflicting blind in a 11 metre radius. Super Cast also slams, without the aftershocks\nSlam deals 4 additional damage instances of 273 [?] damage each if the user is in the animation for at least 1 second. Requires inputting a directional key.\nCreates up to 4 aftershocks, each dealing up to 292 [?] damage.",
+        "verification_range": "B98:D98",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc&range=B98%3AD98&headers=0",
+        "csv_record_1based": 60,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "titan/solar_super",
+      "name": "Hammer of Sol",
+      "pvp": 0.51,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Solar",
+        "range": "D105",
+        "text": "General Super Information\nDamage Resistance: 90% [51%]\nBase Duration: 21 seconds, or 4.75% Super Drain per Second\n\nLight Attack | Drains 12% Super Energy\nThrows a Hammer that explodes on impact, dealing up to 445 [?] damage. Has a 1.5 seconds delay between Hammer Throws.\nImpacts release 4 shrapnel, dealing up to 396 [?] damage each.\n\nHammers visually flares up after being airborne for 0.7 seconds, increasing Shrapnel amount to 5.\n\nPhoenix Cradle Interaction:\nReduces Passive Drain by 20%, increasing duration to 26.25 seconds, or 3.81% Super Drain per second.\nLight Attacks drain 7.5% Super Energy and the delay between Hammer Throws is reduced to 1 second.\n\nLoreley Splendor Helm Interaction:\nReduces Passive Drain by 40%, increasing duration to 35 seconds, or 3.63% Super Drain per second.\nLight Attacks drain 8.2% Super Energy and the delay between Hammer Throws is reduced to 1 second.\n\nBoth Exotic Interactions assume 100% Sol Invictus buff uptime, which is not always possible.",
+        "verification_range": "B105:D105",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B105%3AD105&headers=0",
+        "csv_record_1based": 64,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "titan/void_super",
+      "name": "Sentinel Shield",
+      "pvp": 0.53,
+      "pve": 0.9,
+      "note": "Base DR is 53% PvP / 90% PvE. Frontal damage immunity applies only while guarding with the heavy-attack barrier.",
+      "source": {
+        "sheet": "Void",
+        "range": "D96",
+        "text": "General Super Information\nDamage Resistance: 90% [53%]\nBase Duration: 17 seconds or 5.88% Super Drain per second.\n\nLight Attack | Drains 4.5% Super Energy per Attack. The Final Hit in the combo drains 2% Super Energy.\nGrounded 3-Hit Combo, dealing 797 [?] and 856 [?] damage. \nAirborne 2-Hit Combo, dealing 797 [?] damage\nThe Final Hit in a combo deals 1,516 [?] damage in a ? metre cone.\n\nHeavy Attack\nGenerates an impenetrable barrier that allies can shoot through, at the cost of 20% Decreased Movement Speed.\nCaster is granted damage immunity from all frontal damage, including Enemy Guardians.\nEnemies that touch the barrier receive 7 [?] Damage every 0.05 seconds.\nBlocking ? [any] damage generates an Orb of Power that grants 2.5?% Super Energy. Incurs a 1.5 second cooldown between Orb of Power spawns.\nEnhances Shield Throw Damage as more damage is blocked, up to 1787% increased damage after blocking ? damage.\nExtends Super Duration by up to ?% by continuously blocking damage.\nGuardian Damage is completely nullified and do not proc on-hit related effects on the Impenetrable Barrier. \nAbility Damage removes Super Energy but partially extends it at the same time.\n\nAllies standing within 5m behind the barrier are granted 25% Increased Damage, a 45 HP Void Overshield, +50 Handling, and +50 Reload Speed. \nAdditionally, all of their weapons are refilled every 2.5 seconds.\nAllied Guardian's Void Overshield begins regenerating at a rate of 9HP/s after not receiving damage for 3 seconds.\n\nPassive Super Energy Drain while Blocking can be decreased by having allies behind the shield.\nx1 = 20% | x2 = 35% | x3 = ?% | x4 = ?% | x5 = 50%\n\nGrenade Ability | Does not drain Super Energy. Incurs a 3 second cooldown between Shield Throws.\nPerforms a Shield Throw, tossing the Sentinel Shield towards enemies.\nSentinel Shield deals 723 [?] damage, and can ricochet on impact, up to ? times. Ricochets are aimed towards enemies within ? meters.",
+        "verification_range": "B96:D96",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Void&range=B96%3AD96&headers=0",
+        "csv_record_1based": 59,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      },
+      "conditional": [
+        {
+          "condition": "heavy attack barrier guarding; frontal incoming damage only",
+          "damage_immunity": true,
+          "pvp": 1.0,
+          "pve": 1.0,
+          "source_text": "Caster is granted damage immunity from all frontal damage, including Enemy Guardians."
+        }
+      ]
+    },
+    {
+      "id": "titan/thundercrash",
+      "name": "Thundercrash",
+      "pvp": 0.25,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Arc",
+        "range": "D100",
+        "text": "General Super Information\nDamage Resistance: 90% [25%]\nBase Duration: Up to 4.5 seconds, or 22.2% Super Drain per Second\n\nEnemies that are very close when flying receive 150 [?] Collision Damage.\n\nDetonates on impact with a surface or enemy, dealing 180 [?] impact damage, as well as up to 8,260 [?] explosive damage over 10 meters.\nExplosion releases aftershocks 0.75 seconds after impact, dealing up to 108 [?] damage every second for 4 seconds. ",
+        "verification_range": "B100:D100",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc&range=B100%3AD100&headers=0",
+        "csv_record_1based": 61,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "titan/burning_maul",
+      "name": "Burning Maul",
+      "pvp": 0.53,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Solar",
+        "range": "D103",
+        "text": "General Super Information\nDamage Resistance: 90% [53%]\nBase Duration: 25 seconds, or 4% Super Drain per Second\nSol Invictus creates a Sunspot on cast if grounded, and reduces Passive Drain by 40%, increasing duration to 42 seconds, or 2.4% Super Drain per second.\n\nLight Attack | Drains 4% Super Energy.\nSpinning attack that deals 111 [?] damage 4 times. Has a 0.67 second delay between light attacks.\nContinously scoring hits grants 40% Increased Attack Speed until no longer scoring hits.\nScoring 10 hits with Light Attacks spawns a Cyclone. Can only spawn 1 Cyclone per Super Activation.\n\nHeavy Attack | Drains 8% Super Energy\nSlams down, releasing a homing projectile which explodes on impact, dealing 276 [?] damage and creating a Cyclone.\nCyclones deal 24 [16] damage every 0.2 seconds, and apply x3+2 Scorch every 0.56 seconds for 4 seconds.",
+        "verification_range": "B103:D103",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B103%3AD103&headers=0",
+        "csv_record_1based": 63,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "titan/ward_of_dawn",
+      "name": "Ward of Dawn",
+      "pvp": 0.265,
+      "pve": null,
+      "note": "26.5% PvP applies during cast animation only. PvE cast DR is unknown. Armor of Light inside the dome and damage resistance of the dome construct are separate from caster cast DR.",
+      "source": {
+        "sheet": "Void",
+        "range": "D100",
+        "text": "General Super Information\nDamage Resistance while in Cast Animation: ?% [26.5%]\nGrants 1 Grenade Ability Charge and creates 3 Orbs of Power that each grant 2.3% Super Energy on Super Cast.\n\nWard of Dawn:\nProjects a 8,000 Construct HP Protective Dome with 75??% NEEDS TESTING Damage Resistance against Combatants alongside an internal core with 200 HP.\nGuardians deal 50% increased damage to the Protective Dome itself. Ability Damage scales uniquely.\nProtective Dome covers an 8 meter radius centered around its internal core for 30 seconds. Destroying the core destroys the Ward of Dawn.\nThe Ward of Dawn prevents all projectiles from entering or leaving the dome unless an enemy is within it.\nWhile a Combatant is inside the dome: The caster and their allies are able to shoot through the dome.\nDeploying or redeploying the Ward of Dawn pulls Combatants within 15 meters inwards.\nSuper Stat scales its duration by up to +10 seconds at 200 Super Stat.\n\nWhile inside the Ward of Dawn Dome:\nWard of Dawn Caster receives +50% Increased Melee Damage. Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.\nEnemies are constantly weakened. Combatants up to ? meters away are taunted towards Guardians inside the dome.\nArmor of Light | Constantly generates 15 Void Overshield/s and grants 40% [?%] Damage Resist, +50 Handling, and +50 Reload Speed.\nWeapons of Light | 25% Damage Increase that lingers for 0.3 seconds. Helm of Saint-14 allows it to linger for 15 seconds.\n\nRedeployement:\nThe Ward of Dawn Core can be picked up by the caster after 3 seconds of being deployed, up to twice per cast. Swirling orbs represent the amount of pickups left.\nWhile picked up: Remaining Ward of Dawn duration is decreased by 1 second every (77 / Armor of Light seconds left on pickup).\nThe Core can be thrown to redeploy by the caster up to 2 times per cast.",
+        "verification_range": "B100:D100",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Void&range=B100%3AD100&headers=0",
+        "csv_record_1based": 61,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      },
+      "during_cast_only": true,
+      "why": {
+        "pve": "Cast-animation source explicitly says ?%."
+      },
+      "conditional": [
+        {
+          "condition": "inside Ward of Dawn dome; Armor of Light",
+          "target": "guardians_inside_dome",
+          "pvp": null,
+          "pve": 0.4,
+          "why": {
+            "pvp": "Armor of Light source says [?%]."
+          },
+          "source_text": "Armor of Light | Constantly generates 15 Void Overshield/s and grants 40% [?%] Damage Resist, +50 Handling, and +50 Reload Speed."
+        },
+        {
+          "condition": "damage against protective dome construct, not caster",
+          "target": "dome_construct",
+          "pvp": null,
+          "pve": null,
+          "why": {
+            "pvp": "No dome PvP DR percentage stated; separate increased-damage modifiers are not guardian DR.",
+            "pve": "75??% NEEDS TESTING is explicitly unconfirmed."
+          },
+          "source_text": "Projects a 8,000 Construct HP Protective Dome with 75??% NEEDS TESTING Damage Resistance against Combatants alongside an internal core with 200 HP."
+        }
+      ]
+    },
+    {
+      "id": "warlock/arc_super",
+      "name": "Stormtrance",
+      "pvp": 0.58,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Arc",
+        "range": "D126",
+        "text": "General Super Information\nDamage Resistance: 90% [58%]\nBase Duration: 16 seconds, or 6.25% Super Drain per Second.\n\nOn Super Cast:\nDeals up to 690 [?] damage in a 6 meter radius, knocking enemies back, and releases 5 Lightning Seekers around the caster.\nLightning Seekers deal 440 [150] damage and inflict jolt for 16 seconds.\n\nLight Attack | Drains ?% Super Energy.\nTargets enemies within 12 meters, releasing chain lighting that deals 178 [90] damage every 0.34 seconds.\nDamage ramps up over time, increasing by 5% every 0.33 seconds, up to 65% increased damage after 3.33 seconds.\n Damage Increase decays after 2 seconds of not dealing damage.\n\nHeavy Attack | Sprint\nPerforms an Ionic Blink, consuming 6.25% Super Energy and teleporting up to 7 meters away towards the currently input movement direction.",
+        "verification_range": "B126:D126",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc&range=B126%3AD126&headers=0",
+        "csv_record_1based": 73,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "warlock/solar_super",
+      "name": "Daybreak",
+      "pvp": 0.51,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Solar",
+        "range": "D137",
+        "text": "General Super Information\nDamage Resistance: 90% [51%]\nBase Duration: 24 seconds, or 4.167% Super Drain per Second.\n\nLight Attack | Drains 6.5% Super Energy to launch a Daybreak Projectile.\nDaybreak Projectile deal 426 [?] Impact Damage, exploding on impact, dealing up to 598 [?] Splash Damage, down to 0% damage, inflicting x50+0 Scorch over 5 meters, and launching a streak of flames behind them.\nFlame streaks travel ahead, scaling from ~4m to 9m if the Daybreak Projectile traveled at least 12 meters, dealing up to 292 [?] Damage on hit.\n\nAllows the usage of an enhanced Icarus Dash without cooldown that drains 4.2% Super Energy per usage.\n\nPhoenix Dive is enhanced, dealing up to 642 [220?] Damage, down to a minimum of 292 [?] Damage, and inflicting x60+30 Scorch over a 6 meter radius. Deals 45% damage at max falloff.\nPhoenix Dive damage is enhanced by Super Damage Increases.",
+        "verification_range": "B137:D137",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B137%3AD137&headers=0",
+        "csv_record_1based": 79,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "warlock/void_super",
+      "name": "Nova Bomb: Vortex",
+      "pvp": 0.49,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Void",
+        "range": "D127",
+        "text": "General Super Information\nDamage Resistance: 90% [49%]\n\nReleases a fast moving, arcing Nova Bomb that detonates on impact, dealing up to 3,021 [?] damage in a ? meter radius.\nCreates a singularity after 0.43 seconds of detonating, instantly pulling enemies inwards.\n\nSingularity deals 52 [?] damage every 0.13 seconds for 10 seconds to enemies within ? metres, and repeatedly pulls enemies within ? meters every ? seconds towards it.",
+        "verification_range": "B127:D127",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Void&range=B127%3AD127&headers=0",
+        "csv_record_1based": 72,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "warlock/well_of_radiance",
+      "name": "Well of Radiance",
+      "pvp": null,
+      "pve": null,
+      "note": "Caster cast-animation DR is not stated, so both base fields are null. Guardian aura DR is stored separately in top-level well. Combatant damage scaling against the Well construct does not describe guardian DR.",
+      "source": {
+        "sheet": "Solar",
+        "range": "D139",
+        "text": "Places down a Well of Radiance for 30 seconds, restoring 300HP to the caster, dealing up to 150 damage, and inflicting 40+20 Scorch to enemies within 8.5 metres.\nCreates 3 Orbs of Power, each granting 3.6% Super Energy.\nSuper Duration scales with Super Stat, up to 40 seconds at 200 Super.\n\nWell of Radiance:\nConstruct with 800 HP. Can be frozen and damaged by Stasis Shatter\nProjects an aura that buffs the caster and allies within 6 metres. Leaving the aura grants Radiant for 8+4 seconds.\nCombatants deal 0.25x Damage against the Well of Radiance.\n\nFor Guardians inside the Well of Radiance:\n25% Increased Weapon Damage, 20% Damage Resist against Combatants (10% vs Boss Combatants), immunity to Stasis Effects, and restores 50HP/s.\nGuardians receive 50% Damage Resist against Special and Power Weapons, as well as Abilities. Primary Weapons remain at 40% Damage Resist.\nRemoves any active Restoration effect. \nWeapon Damage dealt by the Caster is counted as Super Ability Damage. Caster can spawn up to 5 Orbs from scoring kills within the Well.",
+        "verification_range": "B139:D139",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B139%3AD139&headers=0",
+        "csv_record_1based": 80,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      },
+      "why": {
+        "pvp": "No caster cast-animation DR stated in Well source cell.",
+        "pve": "No caster cast-animation DR stated in Well source cell."
+      }
+    },
+    {
+      "id": "warlock/chaos_reach",
+      "name": "Chaos Reach",
+      "pvp": 0.55,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Arc",
+        "range": "D124",
+        "text": "General Super Information\nDamage Resistance: 90% [55%]\nBase Duration: 4 seconds, or 25% Super Drain per Second\nMovement Speed: 4.5 meters per second.\n\nChannels a long range beam towards the reticle, dealing 378 [?] damage every 0.13 seconds. Does not deal damage for the first 0.67 seconds of the animation.\nScoring 7 hits on an enemy summons a jolting lightning strike on the enemy's location, dealing 202 [?] damage.\n\nPartially refunds Super Energy on early deactivation, up to a maximum of 30% Super Energy if immediately cancelled.",
+        "verification_range": "B124:D124",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Arc&range=B124%3AD124&headers=0",
+        "csv_record_1based": 72,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    },
+    {
+      "id": "warlock/nova_warp",
+      "name": "Nova Warp",
+      "pvp": 0.58,
+      "pve": 0.9,
+      "note": "General Super Information DR. The source does not establish DR lasting for the full lifetime of a detached projectile or persistent field.",
+      "source": {
+        "sheet": "Void",
+        "range": "D129",
+        "text": "General Super Information\nDamage Resistance: 90% [58%]\nBase Duration: 24.5 seconds, or 4.1% Super Drain per second.\n\nLight Attack\nDrains 5% Super Energy.\nDeals up to 964 [200] damage, and inflicting Volatile in a 6 metre radius. Maximum Damage Falloff reduces damage by up to 50%.\nCan be charged by holding [Fire] for 0.6 seconds, pulling enemies within ~14 meters towards the user and linearly increasing its damage and radius by 120%.\nDecreases Movement Speed by ?% while charging.\n\nHeavy Attack / Sprint\nPerforms a Dark Blink, draining 3.5% Super Energy to rapidly accelerate towards the currently input direction and release 4 Weakening Seekers, one in each cardinal direction.\nWeakening Seekers target enemies within 8 meters, dealing 193 [?] Damage and inflicting Weaken on impact.",
+        "verification_range": "B129:D129",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Void&range=B129%3AD129&headers=0",
+        "csv_record_1based": 73,
+        "csv_column_1based": 4,
+        "range_verified_by_https_get": true,
+        "range_response_matches_csv_text": true
+      }
+    }
+  ],
+  "well": {
+    "pvp_primary": 0.4,
+    "pvp_other": 0.5,
+    "pve": 0.2,
+    "pve_boss": 0.1,
+    "condition": "Caster and allied Guardians inside the Well of Radiance aura.",
+    "note": "PvP other means Special weapons, Power weapons, and Abilities as enumerated by the source. PvE boss 10% replaces ordinary combatant 20%. These are aura DR, not cast-animation DR or construct DR. Existing main aura containment owns membership/radius.",
+    "source": {
+      "sheet": "Solar",
+      "range": "D139",
+      "text": "Places down a Well of Radiance for 30 seconds, restoring 300HP to the caster, dealing up to 150 damage, and inflicting 40+20 Scorch to enemies within 8.5 metres.\nCreates 3 Orbs of Power, each granting 3.6% Super Energy.\nSuper Duration scales with Super Stat, up to 40 seconds at 200 Super.\n\nWell of Radiance:\nConstruct with 800 HP. Can be frozen and damaged by Stasis Shatter\nProjects an aura that buffs the caster and allies within 6 metres. Leaving the aura grants Radiant for 8+4 seconds.\nCombatants deal 0.25x Damage against the Well of Radiance.\n\nFor Guardians inside the Well of Radiance:\n25% Increased Weapon Damage, 20% Damage Resist against Combatants (10% vs Boss Combatants), immunity to Stasis Effects, and restores 50HP/s.\nGuardians receive 50% Damage Resist against Special and Power Weapons, as well as Abilities. Primary Weapons remain at 40% Damage Resist.\nRemoves any active Restoration effect. \nWeapon Damage dealt by the Caster is counted as Super Ability Damage. Caster can spawn up to 5 Orbs from scoring kills within the Well.",
+      "verification_range": "B139:D139",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out%3Acsv&sheet=Solar&range=B139%3AD139&headers=0",
+      "csv_record_1based": 80,
+      "csv_column_1based": 4,
+      "range_verified_by_https_get": true,
+      "range_response_matches_csv_text": true
+    }
+  },
+  "checks": {
+    "json_parse": true,
+    "unique_ids": 19,
+    "all_19_source_ranges_verified": true,
+    "data_only": true,
+    "build_server_commit": "Not run",
+    "numeric_tests": "No test files created or test suite run; only JSON/source consistency and coverage checks."
+  }
+}

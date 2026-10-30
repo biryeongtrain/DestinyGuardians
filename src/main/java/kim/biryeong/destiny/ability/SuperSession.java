@@ -13,4 +13,8 @@ public interface SuperSession {
 
     /** HUD 에 보일 남은 비율 0~1. */
     float remaining();
+
+    /** Cast/roaming protection can end before a projectile or recovery session finishes. */
+    default boolean damageResistanceActive() { return true; }
+
 }
