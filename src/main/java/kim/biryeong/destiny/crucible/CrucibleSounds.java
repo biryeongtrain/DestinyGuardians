@@ -1,7 +1,8 @@
 package kim.biryeong.destiny.crucible;
 
 import net.minecraft.core.Holder;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.network.protocol.game.ClientboundSoundEntityPacket;
+import kim.biryeong.minigamelib.cinematic.CameraViews;
 import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,14 +20,15 @@ public final class CrucibleSounds {
         if (!EVENTS.contains(event) || p.hasDisconnected()) return;
         stop(p);
         Identifier sound=Identifier.fromNamespaceAndPath("destiny_crucible",event);
-        var at=p.getEyePosition();
-        p.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvent.createFixedRangeEvent(sound,16)),
-                SoundSource.VOICE,at.x,at.y,at.z,.8f,1f,p.getRandom().nextLong()));
+        var view=CameraViews.get(p);
+        var anchor=view==null?p:view.soundAnchor();
+        CameraViews.send(p,new ClientboundSoundEntityPacket(Holder.direct(SoundEvent.createVariableRangeEvent(sound)),
+                SoundSource.VOICE,anchor,.8f,1f,p.getRandom().nextLong()));
         PLAYING.put(p.getUUID(),event);
     }
     public static void stop(ServerPlayer p) {
         String event=PLAYING.remove(p.getUUID());
-        if(event!=null && !p.hasDisconnected())p.connection.send(new ClientboundStopSoundPacket(
+        if(event!=null && !p.hasDisconnected())CameraViews.send(p,new ClientboundStopSoundPacket(
                 Identifier.fromNamespaceAndPath("destiny_crucible",event),SoundSource.VOICE));
     }
     public static void zones(ServerPlayer p,ControlMatch.Snapshot before,ControlMatch.Snapshot after) {

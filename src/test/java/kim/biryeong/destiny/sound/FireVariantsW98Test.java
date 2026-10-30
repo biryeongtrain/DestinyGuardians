@@ -162,6 +162,21 @@ class FireVariantsW98Test {
                     .getAsJsonArray("sounds").get(0).getAsJsonObject().get("name").getAsString());
             assertTrue(expected.add(path), "Crucible does not replace inherited audio");
         }
+        var music = json(Path.of("art/audio/w262/provenance.json")).getAsJsonArray("tracks");
+        var musicEvents = new HashSet<String>();
+        for (var value : music) {
+            var track = value.getAsJsonObject();
+            String path = track.get("output").getAsString();
+            String event = track.get("event").getAsString();
+            assertTrue(musicEvents.add(event));
+            assertEquals("src/main/resources/assets/destiny_music/sounds/" + event.substring("destiny_music:".length()) + ".ogg", path);
+            assertEquals(track.get("sha256").getAsString(), sha(Path.of(path)), path);
+            assertEquals(track.get("bytes").getAsLong(), Files.size(Path.of(path)));
+            assertTrue(expected.add(path), "W262 music does not replace inherited audio");
+        }
+        assertEquals(Set.of("destiny_music:tower_80d73421", "destiny_music:tower_80d7341d",
+                "destiny_music:tower_80d73424", "destiny_music:tower_80d73419",
+                "destiny_music:crucible_intro", "destiny_music:crucible_result"), musicEvents);
         assertAudioInventory(expected, actual);
         assertSixOggBytes(w98);
     }

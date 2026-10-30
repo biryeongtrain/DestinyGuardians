@@ -113,6 +113,7 @@ public final class CrucibleRuntime {
         ServerLifecycleEvents.SERVER_STOPPED.register(s -> {
             if (server == s) { closeIntro(); PENDING_RETURNS.clear(); MEMBERS.clear(); match = new ControlMatch(); server = null; arena = null; observed = match.phase(); }
         });
+        kim.biryeong.destiny.sound.ActivityMusic.init();
     }
 
     public static boolean participating(ServerPlayer p) { return p != null && MEMBERS.containsKey(p.getUUID()); }
@@ -364,8 +365,9 @@ public final class CrucibleRuntime {
         var phase = match.phase();
         if (phase != observed) {
             if (phase == ControlMatch.Phase.INTRO) {
-                for (Member m : MEMBERS.values()) { arrive(m, true); freeze(m.player); CrucibleSounds.play(m.player, "control"); }
+                for (Member m : MEMBERS.values()) { arrive(m, true); freeze(m.player); }
                 startIntro();
+                for (Member m : MEMBERS.values()) CrucibleSounds.play(m.player, "control");
             } else if (phase == ControlMatch.Phase.PLAYING) {
                 closeIntro();
                 for (Member m : MEMBERS.values()) { arrive(m, false); thaw(m.player); CrucibleSounds.play(m.player, "start"); }

@@ -230,4 +230,55 @@ public final class CrucibleW260GameTests {
             h.succeed();
         });
     }
+    /** Actual connected QA client: packet readiness and phase switching, not acoustic verification. */
+    @GameTest(structure="destiny-test:floor", environment="destiny-test:w90_isolated", maxTicks=1350, manualOnly=true)
+    public void musicLifecycleForOwnedVisionClient(GameTestHelper h) {
+        var server=h.getLevel().getServer();
+        check(h,server.getPort()==25611,"Music fixture restricted to owned QA port");
+        var p=server.getPlayerList().getPlayerByName("WeaponW129QA");
+        check(h,p!=null && p.isAlive() && TowerSpawnWorld.isTower(p.level()),"QA starts alive in Tower");
+        check(h,kim.biryeong.minigamelib.music.MusicPacks.ready(p),"Client acknowledged the current resource pack");
+        check(h,kim.biryeong.destiny.sound.ActivityMusic.current(p).startsWith("destiny_music:tower_"),"Tower music starts after pack load");
+        check(h,CrucibleRuntime.snapshot().members().isEmpty(),"Fixture owns empty match");
+        var logins=new ArrayList<Login>();
+        TestCleanup.register(h,()->{
+            CrucibleRuntime.leave(p,true);
+            for(var login:logins) {
+                var current=server.getPlayerList().getPlayer(login.initial().getUUID());
+                if(current!=null) {CrucibleRuntime.leave(current,true);current.connection.disconnect(Component.literal("Music QA complete"));}
+                login.channel().finishAndReleaseAll();
+                kim.biryeong.destiny.guardian.Guardians.forget(login.initial());
+            }
+        });
+        var data=kim.biryeong.destiny.guardian.Guardians.data(p);
+        data.setGuardianClass(kim.biryeong.destiny.guardian.GuardianClass.HUNTER);
+        data.setLoadout(kim.biryeong.destiny.guardian.GuardianClass.HUNTER,
+                kim.biryeong.destiny.ability.hunter.HunterAbilities.preset(Element.ARC));
+        var opponent=login(h,logins,"MusicOpponent",Element.ARC);
+        h.onEachTick(()->{for(var login:logins)tickLogin(server,login);});
+        h.runAfterDelay(20,()->check(h,CrucibleRuntime.join(p)&&CrucibleRuntime.join(opponent),"Both players join"));
+        h.runAfterDelay(70,()->{
+            check(h,CrucibleRuntime.snapshot().phase()==ControlMatch.Phase.INTRO,"Intro phase");
+            check(h,kim.biryeong.destiny.sound.ActivityMusic.current(p).equals("destiny_music:crucible_intro"),"Intro replaces Tower music through cinematic filter");
+        });
+        h.runAfterDelay(350,()->{
+            check(h,CrucibleRuntime.snapshot().phase()==ControlMatch.Phase.INTRO,"Still in intro after audio end");
+            check(h,kim.biryeong.destiny.sound.ActivityMusic.current(p).isEmpty(),"Library Playback completes at file duration without replay");
+        });
+        h.runAfterDelay(450,()->{
+            check(h,CrucibleRuntime.snapshot().phase()==ControlMatch.Phase.PLAYING,"Combat phase");
+            check(h,kim.biryeong.destiny.sound.ActivityMusic.current(p).isEmpty(),"No intro/tower music remains during combat");
+            check(h,CrucibleRuntime.leave(opponent,true),"Opponent leaves for authoritative result");
+        });
+        h.runAfterDelay(1070,()->{
+            check(h,CrucibleRuntime.snapshot().phase()==ControlMatch.Phase.RESULTS,"Forfeit reaches results");
+            check(h,kim.biryeong.destiny.sound.ActivityMusic.current(p).equals("destiny_music:crucible_result"),"Result music plays once alongside voice");
+        });
+        h.runAfterDelay(1290,()->{
+            check(h,TowerSpawnWorld.isTower(p.level())&&!CrucibleRuntime.participating(p),"Result returns to Tower");
+            check(h,kim.biryeong.destiny.sound.ActivityMusic.current(p).startsWith("destiny_music:tower_"),"Tower music resumes after result");
+            h.succeed();
+        });
+    }
+
 }
