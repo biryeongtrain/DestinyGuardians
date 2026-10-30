@@ -151,3 +151,9 @@ Danmo/OpenGL·클라이언트4GB·서버4GB에서 실제 QA 1명과 아군/적 �
 - 테스트 대상은 기존 미커밋 작업을 포함한 통합 working tree다. W260 변경만 분리 커밋하므로 clean HEAD 전체가 동일하게 검증됐다고 해석하지 않는다. 다른 작업의 변경은 보존한다.
 
 색상 담당은 r8 방벽·균열·수류탄·본인 균열의 색 구분도 수락했다. 수류탄은 주변 입자 표본이며 투사체/전체 수명 검증은 아니다.
+
+## 최종 커밋·운영 서버 재개
+
+점령 상태와27tests는 `74a00e18`, 런타임·맵·인트로·적 색상·검수 증거는 `a87f4f98`에 커밋했다. 기존 무관한 dirty/untracked 작업은 보존했다. 일부 공유 파일은 W260 delta만 index에 분리해 커밋했으며 테스트는 통합 working tree 기준이다.
+
+`runServer`로 운영 서버를 재개했다: **192.168.35.237:25565**, online-mode=true, andlist OP4, 실제 JVM 최대 힙4GiB. BetterModel 로딩과 Polymer 팩 생성 완료를 확인했다. 최종 운영 팩은 **63,726,887 bytes**이며 샤크스14음원이 포함되어 있다. [기동 확인](server-start.json). 서버는 켜 두고 격리 QA client/server 및 이번 소유 잠자기 방지 coordinator만 정상 종료했다. 고정 worktree는 다음 작업용으로 보존했다.
