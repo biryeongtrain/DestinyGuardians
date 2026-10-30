@@ -1,3 +1,9 @@
+buildscript {
+    repositories { mavenCentral() }
+    // Parallel ZIP deflate for the 2.3 GiB / 160k-entry asset jar (see jar.doLast below).
+    dependencies { classpath 'org.apache.commons:commons-compress:1.28.0' }
+}
+
 plugins {
     id 'net.fabricmc.fabric-loom' version '1.18.2'
 }
@@ -99,6 +105,8 @@ fabricApi {
 }
 
 processResources {
+    exclude 'assets/**' // synced incrementally by syncAssets below
+    finalizedBy 'syncAssets'
     inputs.property 'version', project.version
     inputs.property 'minecraft_version', project.minecraft_version
     inputs.property 'loader_version', project.loader_version
@@ -112,14 +120,125 @@ processResources {
     }
 }
 
+
+// Mirror into processResources' own directory: the dev mod root (Polymer pack source) is that directory.
+def assetsOut = tasks.named('processResources').map { it.destinationDir }
+// Gradle recopies all ~160k asset files whenever any resource changes (~70 s) and cleans its
+// outputs first. Assets need no expansion: processResources excludes them (so it never records or
+// cleans them) and this task mirrors them beside its output: stat in parallel, copy only changed
+// files, delete removed ones. No declared outputs on purpose; an unchanged tree takes a few seconds.
+def syncAssets = tasks.register('syncAssets') {
+    def src = file('src/main/resources/assets').toPath()
+    def root = assetsOut
+    doLast {
+        def dst = new File(root.get(), 'assets').toPath()
+        def copied = new java.util.concurrent.atomic.AtomicInteger(), removed = new java.util.concurrent.atomic.AtomicInteger()
+        def wanted = java.util.concurrent.ConcurrentHashMap.newKeySet()
+        java.nio.file.Files.walk(src).withCloseable { paths ->
+            paths.parallel().forEach { from ->
+                def rel = src.relativize(from).toString()
+                wanted.add(rel)
+                def to = dst.resolve(rel)
+                if (java.nio.file.Files.isDirectory(from)) { java.nio.file.Files.createDirectories(to); return }
+                java.nio.file.Files.createDirectories(to.parent)
+                if (java.nio.file.Files.exists(to) && java.nio.file.Files.size(to) == java.nio.file.Files.size(from)
+                        && java.nio.file.Files.getLastModifiedTime(to) == java.nio.file.Files.getLastModifiedTime(from)) return
+                java.nio.file.Files.copy(from, to, java.nio.file.StandardCopyOption.REPLACE_EXISTING, java.nio.file.StandardCopyOption.COPY_ATTRIBUTES)
+                copied.incrementAndGet()
+            }
+        }
+        java.nio.file.Files.walk(dst).withCloseable { paths ->
+            paths.sorted(Comparator.reverseOrder()).forEach { to ->
+                if (!wanted.contains(dst.relativize(to).toString())) { java.nio.file.Files.delete(to); removed.incrementAndGet() }
+            }
+        }
+        logger.lifecycle("syncAssets: {} copied, {} removed", copied.get(), removed.get())
+    }
+}
+tasks.named('classes') { dependsOn syncAssets }
+
 def targetJavaVersion = 25
-tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = 'UTF-8'
-    it.options.release.set(targetJavaVersion)
+// Shared per-frame first-person arm/weapon poses exceed the classic ZIP entry limit.
+tasks.withType(Jar).configureEach {
+    zip64 = true
 }
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    withSourcesJar()
+// The ~160k generated JSON assets dominate the jar. Gradle's Jar task spends ~1 min on per-file
+// overhead plus ~1 min deflating them on one thread. Let Gradle package everything except
+// assets/ (STORED), then rebuild the jar: Gradle's entries first in their order, then the
+// assets tree walked directly and deflated on all cores. Already-compressed media stays STORED.
+tasks.named('jar', Jar) {
+    entryCompression = ZipEntryCompression.STORED
+    exclude 'assets/**'
+    dependsOn 'syncAssets'
+    inputs.dir(file('src/main/resources/assets')).withPropertyName('parallelAssets').withPathSensitivity(PathSensitivity.RELATIVE)
+    doFirst { ext.t0 = System.nanoTime() }
+    doLast {
+        long t1 = System.nanoTime()
+        File out = archiveFile.get().asFile
+        File tmp = new File(out.parentFile, out.name + '.stored')
+        java.nio.file.Files.move(out.toPath(), tmp.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+        def pool = java.util.concurrent.Executors.newFixedThreadPool(Runtime.runtime.availableProcessors())
+        def creator = new org.apache.commons.compress.archivers.zip.ParallelScatterZipCreator(pool)
+        def entry = { name, time, store ->
+            def e = new org.apache.commons.compress.archivers.zip.ZipArchiveEntry(name)
+            e.time = time
+            e.method = store ? java.util.zip.ZipEntry.STORED : java.util.zip.ZipEntry.DEFLATED
+            e
+        }
+        def media = { name -> name ==~ /.*\.(png|ogg|jar|zip)$/ }
+        def zip = new org.apache.commons.compress.archivers.zip.ZipFile.Builder().setFile(tmp).get()
+        try {
+            long stamp = zip.getEntry('META-INF/MANIFEST.MF').time
+            def stream = new org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream(out)
+            stream.useZip64 = org.apache.commons.compress.archivers.zip.Zip64Mode.AsNeeded
+            try {
+                for (def e : zip.entriesInPhysicalOrder) {
+                    boolean store = e.isDirectory() || media(e.name)
+                    def copy = entry(e.name, e.time, store)
+                    if (e.name == 'META-INF/' || e.name == 'META-INF/MANIFEST.MF') {
+                        // MANIFEST must stay first for JarInputStream readers.
+                        stream.putArchiveEntry(copy)
+                        zip.getInputStream(e).withCloseable { stream << it }
+                        stream.closeArchiveEntry()
+                        continue
+                    }
+                    if (store) { copy.size = e.size; copy.crc = e.crc; copy.compressedSize = e.size }
+                    def source = e
+                    creator.addArchiveEntry(copy, { zip.getInputStream(source) } as org.apache.commons.compress.parallel.InputStreamSupplier)
+                }
+                File root = assetsOut.get()
+                def base = root.toPath()
+                java.nio.file.Files.walk(new File(root, 'assets').toPath()).withCloseable { paths ->
+                    paths.sorted().forEach { path ->
+                        String name = base.relativize(path).toString().replace(File.separatorChar, (char) '/')
+                        if (java.nio.file.Files.isDirectory(path)) {
+                            def d = entry(name + '/', stamp, true)
+                            d.size = 0; d.crc = 0; d.compressedSize = 0
+                            creator.addArchiveEntry(d, { new ByteArrayInputStream(new byte[0]) } as org.apache.commons.compress.parallel.InputStreamSupplier)
+                        } else {
+                            boolean store = media(name)
+                            def f = entry(name, stamp, store)
+                            if (store) {
+                                byte[] bytes = java.nio.file.Files.readAllBytes(path)
+                                def crc = new java.util.zip.CRC32(); crc.update(bytes)
+                                f.size = bytes.length; f.crc = crc.value; f.compressedSize = bytes.length
+                                creator.addArchiveEntry(f, { new ByteArrayInputStream(bytes) } as org.apache.commons.compress.parallel.InputStreamSupplier)
+                            } else {
+                                creator.addArchiveEntry(f, { java.nio.file.Files.newInputStream(path) } as org.apache.commons.compress.parallel.InputStreamSupplier)
+                            }
+                        }
+                    }
+                }
+                creator.writeTo(stream)
+            } finally { stream.close() }
+        } finally { zip.close(); pool.shutdownNow() }
+        java.nio.file.Files.delete(tmp.toPath())
+        logger.lifecycle("jar: gradle copy {}s, parallel assets+deflate {}s",
+                (t1 - ext.t0).intdiv(1_000_000_000), (System.nanoTime() - t1).intdiv(1_000_000_000))
+    }
 }
-
+// Sources jar holds code only; the ~2.3 GiB generated assets doubled the jar time and size.
+tasks.matching { it.name == 'sourcesJar' }.configureEach {
+    exclude 'assets/**', 'data/**', 'destiny/**', 'weapon_surface_*/**'
+}
