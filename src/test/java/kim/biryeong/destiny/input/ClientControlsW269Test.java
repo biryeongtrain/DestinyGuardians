@@ -7,6 +7,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClientControlsW269Test {
+    @Test void versionResponseDetectsLegacyAndNonSemanticVersionsWithoutPresenceFlag() {
+        for (String version : new String[]{"1.0.0", "4.0.0", "4.1.9", "4.2.0", "dev-build"}) {
+            assertTrue(new ClientControls.Capability(false, version).detected(), version);
+        }
+    }
+
+    @Test void absentVersionDoesNotInventInstallationButExplicitPresenceStillWorks() {
+        for (String version : new String[]{null, "", "  ", "unknown", "UNKNOWN"}) {
+            assertFalse(new ClientControls.Capability(false, version).detected());
+            assertTrue(new ClientControls.Capability(true, version).detected());
+        }
+    }
+
     @Test void clientVersionCannotInjectFormattingAndHasBoundedLength() {
         assertEquals("4.0.0+26.3-beta.1", ClientControls.versionLabel("4.0.0+26.3-beta.1"));
         assertEquals("", ClientControls.versionLabel(null));

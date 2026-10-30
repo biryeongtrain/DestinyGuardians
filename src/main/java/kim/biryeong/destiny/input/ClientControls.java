@@ -22,7 +22,10 @@ public final class ClientControls {
     private static final Map<UUID, Session> SESSIONS = new HashMap<>();
     private static Function<ServerPlayer, Capability> detector = player -> new Capability(false, "");
 
-    public record Capability(boolean installed, String version) { }
+    public record Capability(boolean installed, String version) {
+        /** Legacy peers may report a version without setting the separate presence flag. */
+        public boolean detected() { return installed || !versionLabel(version).isEmpty(); }
+    }
 
     private static final class Session {
         final int joined;
@@ -63,7 +66,7 @@ public final class ClientControls {
         Session session = SESSIONS.computeIfAbsent(player.getUUID(),
                 ignored -> new Session(player.level().getServer().getTickCount()));
         Capability current = detector.apply(player);
-        if (current.installed()) {
+        if (current.detected()) {
             if (!session.installed) Guardians.runtime(player).lastShiftPressTick = Integer.MIN_VALUE / 2;
             session.installed = true;
             String version = versionLabel(current.version());

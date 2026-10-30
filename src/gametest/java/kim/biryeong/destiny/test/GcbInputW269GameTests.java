@@ -164,6 +164,25 @@ public final class GcbInputW269GameTests {
     }
 
     @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
+    public void versionOnlyLegacyClientUsesDedicatedKeysAndBlocksFallbacks(GameTestHelper h) {
+        var p = hunter(h, false);
+        var client = (GCBPlayer) p;
+        client.gcb$setModVersion("4.0.0");
+        check(h, !client.gcb$hasMod(), "Version-only fixture has no presence flag");
+        check(h, ClientControls.gcb(p), "Any reported version detects installation without a minimum");
+        noFallbacks(h, p);
+        key(p, true, Key.KEY_Z);
+        check(h, Guardians.data(p).cooldown(AbilitySlot.GRENADE) > 0,
+                "Version-only client uses the registered dedicated key callback");
+        Guardians.forget(p);
+        client.gcb$setModVersion("unknown");
+        check(h, ClientControls.gcb(p), "Detected connection persists after runtime reset");
+        ClientControls.forget(p);
+        check(h, !ClientControls.gcb(p), "Disconnect removes version-only detection");
+        h.succeed();
+    }
+
+    @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void handshakeAndRetainedSessionSurviveGuardianRuntimeForget(GameTestHelper h) {
         var p = hunter(h, false);
         InputRouter.onPlayerInput(p, Input.EMPTY, SHIFT);

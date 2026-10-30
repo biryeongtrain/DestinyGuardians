@@ -71,9 +71,11 @@ public final class InputRouter {
         if ((action == ServerboundPlayerActionPacket.Action.DROP_ITEM
                 || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
                 && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem()).isPresent()) {
-            // Ctrl+Q is reserved: cancel the predicted drop without starting either reload.
-            if (action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS) return true;
-            if (player.isShiftKeyDown()
+            // Holding Ctrl to sprint changes Q into DROP_ALL_ITEMS on vanilla clients.
+            // While actually sprinting it is ordinary reload, never the removed Ctrl+Q special action.
+            boolean dropAll = action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS;
+            if (dropAll && !player.isSprinting()) return true;
+            if (!dropAll && player.isShiftKeyDown()
                     && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem())
                         .filter(kim.biryeong.destiny.weapon.WeaponExotics::izanagi).isPresent()) {
                 kim.biryeong.destiny.weapon.WeaponRuntime.reloadHoned(player);

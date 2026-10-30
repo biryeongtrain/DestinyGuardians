@@ -77,6 +77,40 @@ public final class ReloadInputW249GameTests {
         }
         h.succeed();
     }
+    @GameTest(structure="destiny-test:w78_floor",maxTicks=160,environment="destiny-test:w90_isolated")
+    public void sprintQAndCtrlQReloadWithoutHoningOrDroppingWeapon(GameTestHelper h) {
+        var fixtures=new ArrayList<InventoryWireW92>();
+        int finish=1;
+        for (String id : List.of("ace_of_spades", "izanagis_burden")) {
+            for (boolean all : List.of(false,true)) {
+                var w=wire(h,id,false);fixtures.add(w);
+                var item=w.player.getMainHandItem();
+                w.player.setSprinting(true);action(w,all,false);
+                check(h,WeaponRuntime.reloading(w.player)&&!WeaponIzanagi.honing(w.player),
+                        "Sprint Q and Ctrl+Q start ordinary reload: "+id);
+                check(h,w.player.isSprinting(),"Reload does not cancel sprint");
+                restored(h,w,item);
+                int ticks=WeaponProfile.forEntry(WeaponItems.entry(item).orElseThrow()).reloadTicks();
+                finish=Math.max(finish,ticks+2);
+                for(int i=1;i<=ticks+1;i++)h.runAfterDelay(i,()->{
+                    w.player.setSprinting(true);
+                    WeaponRuntime.tickPlayer(w.player);
+                });
+            }
+        }
+        h.runAfterDelay(finish,()->{
+            for(var w:fixtures) {
+                var item=w.player.getMainHandItem();
+                var profile=WeaponProfile.forEntry(WeaponItems.entry(item).orElseThrow());
+                var ammo=WeaponItems.magazine(item,profile);
+                check(h,!WeaponRuntime.reloading(w.player)&&ammo.rounds()==profile.magazine()
+                        &&(profile.infiniteReserve()||ammo.total()==81),
+                        "Sprint reload completes; finite ammo includes overflow and primary keeps infinite reserves");
+            }
+            h.succeed();
+        });
+    }
+
     @GameTest(structure="destiny-test:w78_floor",maxTicks=30,environment="destiny-test:w90_isolated")
     public void menuQStaysOpenAndRepairsHiddenCarrier(GameTestHelper h) {
         var w=wire(h,"ace_of_spades",true);check(h,WeaponScreen.open(w.player),"Open menu fixture");
