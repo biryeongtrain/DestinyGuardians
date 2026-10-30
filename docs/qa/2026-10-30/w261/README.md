@@ -33,3 +33,7 @@ Java25 compileJava/compileGametestJava 통과(29초). 카메라/무대 좌표만
 - 새로운 텍스처/메시/음원을 추가하지 않았다. 원본 애니메이션과 timing리소스 SHA256이 같음을 [확인](source-preserved.json)했다.
 
 맵담당의2차PNG검수도17/20/24를직접보고수락했다. 최종wide의6명전신·마주봄·간격·border없음확인, 추가수정요청없음.
+
+## 커밋 및 운영 반영
+
+구현·검수 커밋 `2289d363`. 기존 다른 변경은 보존했고 원격 push는 하지 않았다. 운영 runServer를재개해 **192.168.35.237:25565**, online-mode=true, 실제JVM4GiB, BetterModel/Polymer팩생성완료를 확인했다. 운영팩 63,726,887 bytes. [기동기록](server-start.json). QA소유클라이언트/서버/잠자기방지coordinator는종료했고 운영서버만켜뒀다.
