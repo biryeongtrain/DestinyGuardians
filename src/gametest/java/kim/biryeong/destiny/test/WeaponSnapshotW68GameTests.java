@@ -311,7 +311,7 @@ public final class WeaponSnapshotW68GameTests {
             h.runAfterDelay(i, () -> {
                 for (int j = 0; j < players.size(); j++) {
                     var p = players.get(j); tick(p);
-                    near(h, WeaponAiming.progress(p), Math.min(1f, elapsed / (float)durations.get(j)), "Forged selection uses actual base crouch timing");
+                    near(h, WeaponAiming.progress(p), Math.min(1f, elapsed / (float)WeaponAiming.fast(durations.get(j))), "Forged selection uses actual base crouch timing");
                     check(h, WeaponPerks.selected(p.getMainHandItem(), SNAPSHOT).isEmpty(), "Runtime never blesses forged selection");
                 }
                 if (elapsed == 10) h.succeed();
@@ -331,7 +331,7 @@ public final class WeaponSnapshotW68GameTests {
             h.runAfterDelay(i, () -> {
                 for (int j = 0; j < players.size(); j++) {
                     var p = players.get(j); tick(p);
-                    near(h, WeaponAiming.progress(p), Math.min(1f, elapsed / (float)enters[j]), "Actual selected/unselected crouch entry " + j);
+                    near(h, WeaponAiming.progress(p), Math.min(1f, elapsed / (float)WeaponAiming.fast(enters[j])), "Actual selected/unselected crouch entry " + j);
                     check(h, !WeaponRuntime.reloading(p), "Crouch never starts reload");
                 }
                 if (elapsed == 10) for (var p : players) ads(p, false);
@@ -342,7 +342,7 @@ public final class WeaponSnapshotW68GameTests {
             h.runAfterDelay(10 + i, () -> {
                 for (int j = 0; j < players.size(); j++) {
                     var p = players.get(j); tick(p);
-                    near(h, WeaponAiming.progress(p), Math.max(0f, 1 - elapsed / (float)exits[j]), "Actual release retains base exit " + j);
+                    near(h, WeaponAiming.progress(p), Math.max(0f, 1 - elapsed / (float)WeaponAiming.fast(exits[j])), "Actual release retains base exit " + j);
                 }
                 if (elapsed == 10) {
                     for (var p : players) { absent(h, p); check(h, "hip".equals(pose(p.getMainHandItem())), "Release restores hip selector"); }
@@ -363,14 +363,15 @@ public final class WeaponSnapshotW68GameTests {
             int elapsed = i;
             h.runAfterDelay(i, () -> {
                 for (var p : List.of(fast, normal)) {
-                    tick(p); boolean half = elapsed >= (p == fast ? 4 : 5);
+                    tick(p); boolean half = WeaponAiming.progress(p) >= .5f;
+                    near(h, WeaponAiming.progress(p), Math.min(1f, elapsed / (float)WeaponAiming.fast(
+                            p == fast ? SnapshotAimProfile.enterTicks(fastStack) : SnapshotAimProfile.enterTicks(normalStack))), "Real accelerated entry progress");
                     check(h, (half ? "scope" : "hip").equals(pose(p.getMainHandItem())), "Selector changes at half, not only at full ADS");
                     if (half) scoped(h, p); else absent(h, p);
                 }
-                if (elapsed == 4) {
-                    near(h, WeaponAiming.progress(fast), .5f, "Snapshot reaches exact inclusive threshold");
-                    check(h, !WeaponAiming.scoped(normal), "Same real tick unselected sniper is still below threshold");
-                }
+                // W277: faster ADS moves the exact crossing tick; assert the ordering wherever it occurs.
+                if (WeaponAiming.progress(fast) >= .5f && WeaponAiming.progress(normal) < .5f)
+                    check(h, WeaponAiming.scoped(fast) && !WeaponAiming.scoped(normal), "Snapshot scopes before the unselected sniper");
                 if (elapsed == 11) {
                     var center = DisplayHud.getHud(fast, WeaponScopeHud.CENTER_ID);
                     var frame = DisplayHud.getHud(fast, WeaponScopeHud.FRAME_ID);
@@ -414,7 +415,7 @@ public final class WeaponSnapshotW68GameTests {
             h.runAfterDelay(i, () -> {
                 tick(p); tick(handling);
                 if (elapsed == 1) {
-                    near(h, WeaponAiming.progress(p), 1f / 6, "One unselected ADS tick");
+                    near(h, WeaponAiming.progress(p), 1f / WeaponAiming.fast(6), "One unselected ADS tick");
                     edit(h, p, "select " + SNAPSHOT);
                     check(h, WeaponPerks.selected(stack, SNAPSHOT).orElseThrow().equals(
                                     new WeaponPerks.Roll("austringer", 3055790362L, 3, HASH, 2750499928L))
@@ -424,7 +425,7 @@ public final class WeaponSnapshotW68GameTests {
                     edit(h, handling, "clear"); edit(h, handling, "select " + SNAPSHOT);
                 }
                 if (elapsed == 2) {
-                    near(h, WeaponAiming.progress(p), .5f, "Next real tick uses newly selected three-tick entry rate");
+                    near(h, WeaponAiming.progress(p), Math.min(1f, 1f / WeaponAiming.fast(6) + 1f / WeaponAiming.fast(3)), "Next real tick uses newly selected three-tick entry rate");
                     edit(h, p, "select outlaw");
                     check(h, WeaponPerks.selected(stack, SNAPSHOT).isEmpty()
                                     && WeaponPerks.selected(stack, "outlaw").orElseThrow().equals(
@@ -432,7 +433,7 @@ public final class WeaponSnapshotW68GameTests {
                                     && WeaponPerks.selected(stack, "rampage").isPresent(), "Same socket replaces only Snapshot");
                 }
                 if (elapsed == 3) {
-                    near(h, WeaponAiming.progress(p), 2f / 3, "Next tick returns to base rate without resetting existing progress");
+                    near(h, WeaponAiming.progress(p), Math.min(1f, 1f / WeaponAiming.fast(6) + 1f / WeaponAiming.fast(3) + 1f / WeaponAiming.fast(6)), "Next tick returns to base rate without resetting existing progress");
                     edit(h, p, "select " + SNAPSHOT); edit(h, p, "select " + SNAPSHOT);
                     check(h, WeaponPerks.selected(stack, "outlaw").isEmpty(), "Snapshot replaces same-socket Outlaw");
                 }
@@ -497,8 +498,9 @@ public final class WeaponSnapshotW68GameTests {
             var cleaned = actors.get(5);
             check(h,!WeaponAiming.requested(cleaned)&&WeaponAiming.progress(cleaned)==0,"Cleanup discards the old toggle");
             ads(cleaned, true); tick(cleaned);
-            near(h, WeaponAiming.progress(cleaned), 1f / 7, "A fresh click starts a new Snapshot session, never old full progress");
-            absent(h, cleaned); scoped(h, actors.get(6)); h.succeed();
+            near(h, WeaponAiming.progress(cleaned), 1f / WeaponAiming.fast(7), "A fresh click starts a new Snapshot session, never old full progress");
+            if (WeaponAiming.progress(cleaned) >= .5f) scoped(h, cleaned); else absent(h, cleaned);
+            scoped(h, actors.get(6)); h.succeed();
         });
     }
 
@@ -539,7 +541,7 @@ public final class WeaponSnapshotW68GameTests {
                 if (elapsed == done) check(h, !WeaponRuntime.reloading(reload) && ammo(stack).rounds() == profile.magazine()
                                 && ammo(stack).reserve() == 6 - (profile.magazine() - 1), "Only real Beloved full deadline transfers reserve");
                 if (elapsed == done + 2) for (var p : List.of(reload, suspended))
-                    near(h, WeaponAiming.progress(p), 1f / 7, "Fresh left-click starts first real Snapshot tick");
+                    near(h, WeaponAiming.progress(p), 1f / WeaponAiming.fast(7), "Fresh left-click starts first real Snapshot tick");
                 if (elapsed == done + 9) {
                     scoped(h, reload); scoped(h, suspended);
                     check(h, WeaponPerks.selected(stack, SNAPSHOT).isPresent(), "Reload/suspend preserve selected socket"); h.succeed();
@@ -558,7 +560,7 @@ public final class WeaponSnapshotW68GameTests {
     private static void fov(GameTestHelper h, ServerPlayer p, Float prior, float zoom) {
         check(h, Objects.equals(CameraEffects.getFov(p), prior),
                 "ADS never acquires or overwrites shader FOV, including prior/null and both feature flags");
-        float progress = WeaponAiming.progress(p);
+        float progress = WeaponAiming.aimInput(p) ? 1 : 0; // W277: full native target on accept
         var speed = p.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
         var modifier = speed.getModifier(Identifier.parse("destiny:weapon_ads_movement_w75"));
         if (WeaponAiming.requested(p)) {
@@ -586,8 +588,8 @@ public final class WeaponSnapshotW68GameTests {
                 for (var p : off) tickWithShader(p, false);
                 fov(h, prior, 83f, 4); fov(h, noPrior, null, 4); fov(h, foreign, 80f, 4);
                 for (var p : off) {
-                    near(h, WeaponAiming.progress(p), Math.min(1f, elapsed / 7f), "Disabled shader keeps actual Snapshot timing");
-                    if (elapsed >= 4) scoped(h, p); else absent(h, p);
+                    near(h, WeaponAiming.progress(p), Math.min(1f, elapsed / (float)WeaponAiming.fast(7)), "Disabled shader keeps actual Snapshot timing");
+                    if (WeaponAiming.progress(p) >= .5f) scoped(h, p); else absent(h, p);
                 }
                 check(h, Objects.equals(CameraEffects.getFov(disabled), 87f) && CameraEffects.getFov(disabledNoPrior) == null,
                         "Disabled shader preserves prior override/null while ADS and HUD work");

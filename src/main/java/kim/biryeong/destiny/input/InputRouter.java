@@ -84,7 +84,22 @@ public final class InputRouter {
             }
             return true; // 모든 실전 무기의 Q 계열 입력은 장전 성공·거절과 무관하게 버리기를 취소한다.
         }
+        if (action == ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK
+                && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem()).isPresent()) return true;
         if (!Guardians.isGuardian(player)) {
+            if(action==ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND) {
+                kim.biryeong.destiny.weapon.WeaponQuickdraw.changed(player,player.getMainHandItem());
+                kim.biryeong.destiny.weapon.WeaponAiming.inventoryStowing(player,player.getMainHandItem());
+                // Unlike Guardian F, this packet really stows the main hand. Observe it BEFORE
+                // vanilla swaps, including away/back in one tick that identity polling misses.
+                kim.biryeong.destiny.weapon.WeaponArcherTempo.cleanup(player);
+                kim.biryeong.destiny.weapon.WeaponAce.stowing(player);
+                if(kim.biryeong.destiny.weapon.SwordItems.isSword(player.getMainHandItem())
+                        ||kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem())
+                            .filter(e->e.family().equals("bow")||kim.biryeong.destiny.weapon.BreachGrenade.supports(e)
+                                    ||kim.biryeong.destiny.weapon.WeaponExotics.izanagi(e)).isPresent())
+                    kim.biryeong.destiny.weapon.WeaponRuntime.cancelUseForSkill(player);
+            }
             return false;
         }
         if (action == ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND) {
@@ -108,8 +123,17 @@ public final class InputRouter {
         // Only non-GCB players use the crouch/punch melee chord. GCB players may
         // still toggle ordinary gun ADS while crouching; their melee ability is C.
         boolean vanillaMelee = player.isShiftKeyDown() && Guardians.isGuardian(player) && !ClientControls.gcb(player);
-        if (!AbilityService.inSuper(player) && !vanillaMelee
-                && kim.biryeong.destiny.weapon.WeaponAiming.toggle(player)) return;
+        // Vanilla clients drop left clicks for 10 ticks after a click into empty air (missTime),
+        // so GCB players toggle ADS from the real attack-key event instead (gcbAttack below).
+        boolean gcbKeyDriven = ClientControls.gcb(player) && Guardians.runtime(player).gcbAttackKey;
+        if (!AbilityService.inSuper(player) && !vanillaMelee && !gcbKeyDriven
+                && kim.biryeong.destiny.weapon.WeaponAiming.toggle(player)) {
+            Guardians.runtime(player).punchToggleTick = player.level().getServer().getTickCount();
+            return;
+        }
+        if (gcbKeyDriven && !AbilityService.inSuper(player) && !vanillaMelee
+                && kim.biryeong.destiny.weapon.WeaponAiming.handles(player)) return;
+        if (kim.biryeong.destiny.weapon.WeaponRuntime.onPunch(player)) return;
         if (!Guardians.isGuardian(player)) {
             return;
         }
@@ -118,6 +142,18 @@ public final class InputRouter {
         } else if (vanillaMelee) {
             dispatch(player, GuardianAction.MELEE);
         }
+    }
+
+    /** GCB attack-key press. Not subject to the client's missTime click suppression. */
+    public static void gcbAttack(ServerPlayer player) {
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player) || AbilityService.inSuper(player)) return;
+        var runtime = Guardians.runtime(player);
+        boolean first = !runtime.gcbAttackKey;
+        runtime.gcbAttackKey = true;
+        // The very first press may already have toggled through the punch packet this/last tick.
+        if (first && player.level().getServer().getTickCount() - runtime.punchToggleTick <= 1) return;
+        boolean vanillaMelee = player.isShiftKeyDown() && Guardians.isGuardian(player) && !ClientControls.gcb(player);
+        if (!vanillaMelee) kim.biryeong.destiny.weapon.WeaponAiming.toggleKey(player);
     }
 
     public static boolean canAirJump(ServerPlayer player) {

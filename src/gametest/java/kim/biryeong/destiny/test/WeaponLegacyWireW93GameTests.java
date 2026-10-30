@@ -335,12 +335,12 @@ public final class WeaponLegacyWireW93GameTests {
             var w = f.player(); var s = f.equip(w, id, 1, 2, grip); actors.add(w);
             lastSent.put(w, s.copy()); ads(w.player, true);
         }
-        int duration = actors.stream().mapToInt(w -> WeaponAimProfile.of(entry(w.player.getMainHandItem())).transitionTicks()).max().orElseThrow();
+        int duration = actors.stream().mapToInt(w -> WeaponAiming.fast(WeaponAimProfile.of(entry(w.player.getMainHandItem())).transitionTicks())).max().orElseThrow();
         for (int t = 1; t <= 2 * duration + 2; t++) {
             int elapsed = t;
             f.at(t, () -> {
                 for (var w : actors) {
-                    var s = w.player.getMainHandItem(); var e = entry(s); int n = WeaponAimProfile.of(e).transitionTicks();
+                    var s = w.player.getMainHandItem(); var e = entry(s); int n = WeaponAiming.fast(WeaponAimProfile.of(e).transitionTicks());
                     float expected = elapsed <= duration ? Math.min(1, elapsed / (float)n)
                             : Math.max(0, 1 - (elapsed - duration) / (float)n);
                     float raw = WeaponAiming.progress(w.player);

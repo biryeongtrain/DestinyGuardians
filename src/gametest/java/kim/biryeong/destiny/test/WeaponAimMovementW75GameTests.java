@@ -101,7 +101,8 @@ public final class WeaponAimMovementW75GameTests {
         check(h, !speed(p).getPermanentModifiers().contains(movement), "ADS movement is never permanent");
     }
     private static double zoomed(ServerPlayer p, double scalar) {
-        double progress = WeaponAiming.progress(p);
+        // W277: the native FOV target is requested in full on the first accepted tick (client eases it).
+        double progress = WeaponAiming.aimInput(p) ? 1 : 0;
         double zoom = WeaponAimProfile.of(WeaponItems.entry(p.getMainHandItem()).orElseThrow()).zoom();
         return (1 - progress) + progress * (scalar / Math.max(1, zoom));
     }

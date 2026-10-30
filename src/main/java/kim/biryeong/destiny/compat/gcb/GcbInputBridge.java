@@ -47,6 +47,7 @@ public final class GcbInputBridge {
             kim.biryeong.destiny.inventory.WeaponScreen.toggle(player); return;
         }
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
+        if (pushed && key == Key.KEY_ATTACK) InputRouter.gcbAttack(player);
         if (!pushed || !Guardians.isGuardian(player)) {
             return;
         }

@@ -100,9 +100,9 @@ public final class ThreatDetectorW178GameTests {
         int enter=ThreatDetectorProfile.adsTicks(f.entry,100,false),exit=enter;
         check(h,WeaponThreatDetector.adsTicks(f.p,f.entry,999,true)==enter&&WeaponThreatDetector.adsTicks(f.p,f.entry,999,false)==exit,"Handling-derived entry and exit; no .81 ADS scalar");
         WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);
-        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/enter)<.0001,"Real ADS tick uses new effective stat");
+        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/WeaponAiming.fast(enter))<.0001,"Real ADS tick uses new effective stat");
         h.startSequence().thenIdle(20).thenExecute(()->{check(h,WeaponAiming.progress(f.p)==1,"Actual elapsed ticks finish ADS");ads(f.p,false);});
-        h.startSequence().thenIdle(21).thenExecute(()->{WeaponAiming.tick(f.p);check(h,Math.abs(WeaponAiming.progress(f.p)-(1f-1f/exit))<.0001,"Actual exit tick uses handling, not ready/stow scalar; progress="+WeaponAiming.progress(f.p)+" expected="+(1f-1f/exit)+" exit="+exit+" stacks="+f.stacks()+" pugilist="+WeaponPugilist.handlingBonus(f.p));
+        h.startSequence().thenIdle(21).thenExecute(()->{WeaponAiming.tick(f.p);check(h,Math.abs(WeaponAiming.progress(f.p)-(1f-1f/WeaponAiming.fast(exit)))<.0001,"Actual exit tick uses handling, not ready/stow scalar; progress="+WeaponAiming.progress(f.p)+" expected="+(1f-1f/WeaponAiming.fast(exit))+" exit="+exit+" stacks="+f.stacks()+" pugilist="+WeaponPugilist.handlingBonus(f.p));
             int stow=ThreatDetectorProfile.handlingTicks(f.entry,100,.81,false);WeaponRuntime.selectedSlotChanging(f.p,7);f.p.getInventory().setSelectedSlot(7);
             check(h,WeaponHandling.remaining(f.p)==0,"Readiness getter rejects now-nonweapon slot");
             check(h,WeaponThreatDetector.stacks(f.p)==0,"Stowing removes proximity immediately");

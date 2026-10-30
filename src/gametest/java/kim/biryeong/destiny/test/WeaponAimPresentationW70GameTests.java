@@ -127,7 +127,7 @@ public final class WeaponAimPresentationW70GameTests {
         for (int i = 1; i <= 7; i++) {
             int elapsed = i;
             h.runAfterDelay(i, () -> {
-                tick(p); aiming(h, p, Math.min(1, elapsed / 7f), 0);
+                tick(p); aiming(h, p, Math.min(1, elapsed / (float)WeaponAiming.fast(7)), 0);
                 var saved = stack.copy(); var fov = CameraEffects.getFov(p);
                 var ballistics = WeaponAiming.ballistics(p, entry("ammit_ar2"));
                 for (int read = 0; read < 3; read++) {
@@ -146,7 +146,7 @@ public final class WeaponAimPresentationW70GameTests {
             h.runAfterDelay(7 + i, () -> {
                 tick(p);
                 float raw = WeaponAiming.progress(p);
-                near(h, raw, Math.max(0, 1 - elapsed / 7f), "Release retains base seven-tick exit");
+                near(h, raw, Math.max(0, 1 - elapsed / (float)WeaponAiming.fast(7)), "Release retains base seven-tick exit");
                 if (raw > 0) aiming(h, p, raw, 0); else restored(h, stack, SENTINEL);
                 if (elapsed == 9) {
                     check(h, projected(stack.get(DataComponents.ITEM_MODEL)).equals(wire(p, stack).get(DataComponents.ITEM_MODEL)),
@@ -179,7 +179,7 @@ public final class WeaponAimPresentationW70GameTests {
                 for (int j = 0; j < actors.size(); j++) {
                     var p = actors.get(j);
                     // Toggle off after four ticks; three quiet ticks permit a fresh click, with base-speed exit throughout.
-                    expected[j] = Math.clamp(expected[j] + (elapsed >= 5 && elapsed <= 7 ? -1f / 6 : 1f / (j == 0 ? 6 : 3)), 0, 1);
+                    expected[j] = Math.clamp(expected[j] + (elapsed >= 5 && elapsed <= 7 ? -1f / WeaponAiming.fast(6) : 1f / WeaponAiming.fast(j == 0 ? 6 : 3)), 0, 1);
                     tick(p); aiming(h, p, expected[j], 0);
                     check(h, WeaponRuntime.beginUse(p) == (elapsed == 9), "Original nine-tick fire deadline");
                     WeaponRuntime.releaseUse(p, p.getMainHandItem());
@@ -229,7 +229,7 @@ public final class WeaponAimPresentationW70GameTests {
             donor.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
             check(h, !WeaponAimPresentation.active(transferred), "Stack detached from donor has no authority");
             recipient.setItemInHand(InteractionHand.MAIN_HAND, transferred); ads(recipient, true);
-            tick(recipient); aiming(h, recipient, 1f / 7, .001f);
+            tick(recipient); aiming(h, recipient, Math.min(1f, 1f / WeaponAiming.fast(7)), .001f);
         });
         for (int i = 9; i <= 12; i++) h.runAfterDelay(i, () -> {
             tick(recipient); tick(actors.get(0)); tick(actors.get(1));
@@ -256,10 +256,10 @@ public final class WeaponAimPresentationW70GameTests {
         // Direct actual Aiming sessions deliberately avoid Runtime eagerly retiring donors.
         WeaponAiming.tick(first); ads(first, true);
         h.runAfterDelay(1, () -> {
-            WeaponAiming.tick(first); aiming(h, first, 1f / 7, .001f);
+            WeaponAiming.tick(first); aiming(h, first, Math.min(1f, 1f / WeaponAiming.fast(7)), .001f);
             var before = stack.copy(); first.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
             second.setItemInHand(InteractionHand.MAIN_HAND, stack); ads(second, true);
-            WeaponAiming.tick(second); aiming(h, second, 1f / 7, .002f);
+            WeaponAiming.tick(second); aiming(h, second, Math.min(1f, 1f / WeaponAiming.fast(7)), .002f);
             check(h, !ItemStack.matches(before, stack), "Second owner cannot reuse identical donor sample");
             var current = stack.copy(); WeaponAiming.cleanup(first);
             check(h, ItemStack.matches(current, stack), "First donor cleanup leaves second owner intact");
@@ -268,7 +268,7 @@ public final class WeaponAimPresentationW70GameTests {
             WeaponAiming.tick(second); var before = stack.copy();
             second.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
             third.setItemInHand(InteractionHand.MAIN_HAND, stack); ads(third, true);
-            WeaponAiming.tick(third); aiming(h, third, 1f / 7, .001f);
+            WeaponAiming.tick(third); aiming(h, third, Math.min(1f, 1f / WeaponAiming.fast(7)), .001f);
             check(h, !ItemStack.matches(before, stack), "Third owner acquisition changes selector");
             var current = stack.copy(); WeaponAiming.cleanup(second);
             check(h, ItemStack.matches(current, stack), "Second donor cleanup leaves third owner intact");
@@ -344,8 +344,8 @@ public final class WeaponAimPresentationW70GameTests {
         // An actual Aiming tick is enough to test the base bow wrapper independently
         // of Runtime's real W50 binding; stored float2=47 is deliberately not authority.
         h.runAfterDelay(1, () -> {
-            tick(p); aiming(h, p, 1f / 7, .001f);
-            tick(later); aiming(h, later, 1f / 7, .001f);
+            tick(p); aiming(h, p, Math.min(1f, 1f / WeaponAiming.fast(7)), .001f);
+            tick(later); aiming(h, later, Math.min(1f, 1f / WeaponAiming.fast(7)), .001f);
             check(h, !ItemStack.matches(saved, stack), "Saved first sample .1 must change to .101 on acquisition");
             var ops = h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
             var decoded = ItemStack.CODEC.parse(ops, ItemStack.CODEC.encodeStart(ops, stack).getOrThrow()).getOrThrow();
@@ -365,27 +365,27 @@ public final class WeaponAimPresentationW70GameTests {
             ads(loaded, true);
             WeaponAiming.tick(fakeBow);
             check(h, !WeaponBowPresentation.active(bowStack), "Stored draw/nock selector grants no W50 binding");
-            aiming(h, fakeBow, 1f / 9, 0);
+            aiming(h, fakeBow, Math.min(1f, 1f / WeaponAiming.fast(9)), 0);
             check(h, WeaponAimPresentation.model(bowStack).equals(aimModel("biting_winds", false))
                             && bowStack.get(DataComponents.CUSTOM_MODEL_DATA).getFloat(2) == 47,
                     "Actual aim with fake saved bow keeps base W70 variant and float2");
         });
         h.runAfterDelay(2, () -> {
-            tick(p); aiming(h, p, 2f / 7, .001f);
-            tick(later); aiming(h, later, 2f / 7, .001f);
+            tick(p); aiming(h, p, Math.min(1f, 2f / WeaponAiming.fast(7)), .001f);
+            tick(later); aiming(h, later, Math.min(1f, 2f / WeaponAiming.fast(7)), .001f);
             WeaponCombatItem.INSTANCE.use(h.getLevel(), fakeBow, InteractionHand.MAIN_HAND);
             check(h, fakeBow.isUsingItem() && fakeBow.getUseItem() == bowStack, "Real bow use acquires Runtime ownership");
-            tick(fakeBow); aiming(h, fakeBow, 2f / 9, 0);
+            tick(fakeBow); aiming(h, fakeBow, Math.min(1f, 2f / WeaponAiming.fast(9)), 0);
             check(h, WeaponBowPresentation.active(bowStack)
                             && WeaponAimPresentation.model(bowStack).equals(aimModel("biting_winds", true))
                             && (int)Math.floor(bowStack.get(DataComponents.CUSTOM_MODEL_DATA).getFloat(2)) == 2,
                     "Only real Runtime bow binding enables _bow");
-            tick(loaded); aiming(h, loaded, 1f / 7, 0);
+            tick(loaded); aiming(h, loaded, Math.min(1f, 1f / WeaponAiming.fast(7)), 0);
             WeaponRuntime.cleanup(p); restored(h, stack, saved.get(DataComponents.CUSTOM_MODEL_DATA));
             check(h, ItemStack.matches(saved, stack), "Cleanup restores all original saved components");
         });
         h.runAfterDelay(3, () -> {
-            tick(later); aiming(h, later, 3f / 7, .001f);
+            tick(later); aiming(h, later, Math.min(1f, 3f / WeaponAiming.fast(7)), .001f);
             var active = laterStack.copy();
             WeaponRuntime.cancelUseForSkill(later);
             restored(h, laterStack, laterSaved.get(DataComponents.CUSTOM_MODEL_DATA));
@@ -412,7 +412,7 @@ public final class WeaponAimPresentationW70GameTests {
                 tick(p); var stack = p.getMainHandItem(); var e = WeaponItems.entry(stack).orElseThrow();
                 boolean ranged = WeaponAimProfile.supports(e);
                 check(h, WeaponAimPresentation.active(stack) == ranged, "Exact ranged authorization: " + e.id());
-                if (ranged) { supported++; aiming(h, p, 1f / WeaponAimProfile.of(e).transitionTicks(), 0); }
+                if (ranged) { supported++; aiming(h, p, 1f / WeaponAiming.fast(WeaponAimProfile.of(e).transitionTicks()), 0); }
                 else {
                     excluded++;
                     check(h, (e.family().equals("sword") || e.family().equals("glaive"))
@@ -486,7 +486,7 @@ public final class WeaponAimPresentationW70GameTests {
                     if (elapsed < shotAt) {
                         long held = Math.min(profile.chargeTicks(), p.level().getServer().getTickCount() - started);
                         check(h, frame == 2 + (int)(held * 20 / profile.chargeTicks()), "Real charge controls current float2 draw sample");
-                        aiming(h, p, Math.min(1, elapsed / 9f), 0);
+                        aiming(h, p, Math.min(1, elapsed / (float)WeaponAiming.fast(9)), 0);
                         check(h, ammo(stack).rounds() == 1 && WeaponRuntime.activeProjectiles(p) == 0,
                                 "ADS/draw never fires before real release");
                     } else if (elapsed == shotAt) {
@@ -528,7 +528,7 @@ public final class WeaponAimPresentationW70GameTests {
         }
         h.runAfterDelay(end + 1, () -> { for (var p : actors) { tick(p); ads(p, true); } });
         h.runAfterDelay(end + 2, () -> {
-            for (var p : actors) { tick(p); aiming(h, p, 1f / 9, 0); }
+            for (var p : actors) { tick(p); aiming(h, p, Math.min(1f, 1f / WeaponAiming.fast(9)), 0); }
             h.succeed();
         });
     }

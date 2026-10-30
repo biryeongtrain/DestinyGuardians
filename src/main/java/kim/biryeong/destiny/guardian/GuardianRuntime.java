@@ -19,5 +19,8 @@ public final class GuardianRuntime {
     public kim.biryeong.destiny.combat.SuperDamageResistance.Binding superResistance;
     public boolean gcbClient;
     public boolean gcbThirdPerson;
+    /** GCB reported a real attack-key press: it, not the vanilla punch packet, drives ADS. */
+    public boolean gcbAttackKey;
+    public int punchToggleTick = Integer.MIN_VALUE / 2;
     public final Map<GuardianAction, Integer> lastActionTick = new EnumMap<>(GuardianAction.class);
 }

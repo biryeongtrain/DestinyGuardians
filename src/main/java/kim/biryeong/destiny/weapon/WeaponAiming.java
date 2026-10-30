@@ -34,6 +34,10 @@ public final class WeaponAiming {
         }
     }
     private WeaponAiming() {}
+    /** W277: authored ADS transitions felt sluggish in play; every enter/exit runs at 60% duration. */
+    public static final float ADS_TIME_SCALE = .6f;
+    public static int fast(int ticks) { return Math.max(2, Math.round(ticks * ADS_TIME_SCALE)); }
+
     private static int pugilistAdsTicks(ServerPlayer p,WeaponCatalog.Entry entry,int ticks,boolean entering) {
         return WeaponSlickdraw.adsTicks(p,entry,WeaponSteadyHands.adsTicks(p,entry,WeaponRecoveryHandling.adsTicks(p,entry,WeaponBackupPlan.adsTicks(p,entry,WeaponWellRounded.adsTicks(p,entry,WeaponPugilist.adsTicks(p,entry,WeaponEnsemble.adsTicks(p,entry,ticks,entering),entering),entering),entering),entering),entering),entering);
     }
@@ -57,11 +61,13 @@ public final class WeaponAiming {
         if(aiming)p.setSprinting(false);
         var motionEntry=WeaponItems.entry(s.stack).orElseThrow();
         s.state.tick(p.level().getServer().getTickCount(),aiming,
-                pugilistAdsTicks(p,motionEntry,WeaponFirmlyPlanted.adsTicks(p,motionEntry,WeaponElementalCapacitor.adsTicks(p,motionEntry,WeaponSurplus.adsTicks(p,motionEntry,WeaponThreatDetector.adsTicks(p,motionEntry,WeaponStatsForAll.adsTicks(p,motionEntry,WeaponFrenzy.adsTicks(p,motionEntry,WeaponAdrenalineJunkie.adsTicks(p,motionEntry,WeaponPerpetualMotion.adsTicks(p,motionEntry,SnapshotAimProfile.enterTicks(s.stack)),true),true),true),true),true),true),true),true),
-                pugilistAdsTicks(p,motionEntry,WeaponFirmlyPlanted.adsTicks(p,motionEntry,WeaponElementalCapacitor.adsTicks(p,motionEntry,WeaponSurplus.adsTicks(p,motionEntry,WeaponThreatDetector.adsTicks(p,motionEntry,WeaponStatsForAll.adsTicks(p,motionEntry,WeaponFrenzy.adsTicks(p,motionEntry,WeaponAdrenalineJunkie.adsTicks(p,motionEntry,WeaponPerpetualMotion.adsTicks(p,motionEntry,profile.transitionTicks()),false),false),false),false),false),false),false),false),profile.recoveryPerTick());
+                fast(pugilistAdsTicks(p,motionEntry,WeaponFirmlyPlanted.adsTicks(p,motionEntry,WeaponElementalCapacitor.adsTicks(p,motionEntry,WeaponSurplus.adsTicks(p,motionEntry,WeaponThreatDetector.adsTicks(p,motionEntry,WeaponStatsForAll.adsTicks(p,motionEntry,WeaponFrenzy.adsTicks(p,motionEntry,WeaponAdrenalineJunkie.adsTicks(p,motionEntry,WeaponPerpetualMotion.adsTicks(p,motionEntry,SnapshotAimProfile.enterTicks(s.stack)),true),true),true),true),true),true),true),true)),
+                fast(pugilistAdsTicks(p,motionEntry,WeaponFirmlyPlanted.adsTicks(p,motionEntry,WeaponElementalCapacitor.adsTicks(p,motionEntry,WeaponSurplus.adsTicks(p,motionEntry,WeaponThreatDetector.adsTicks(p,motionEntry,WeaponStatsForAll.adsTicks(p,motionEntry,WeaponFrenzy.adsTicks(p,motionEntry,WeaponAdrenalineJunkie.adsTicks(p,motionEntry,WeaponPerpetualMotion.adsTicks(p,motionEntry,profile.transitionTicks()),false),false),false),false),false),false),false),false)),profile.recoveryPerTick());
         updateNoDistractions(s);
         WeaponBoxBreathing.update(p,aimInput(p));
-        s.movement.update(motionEntry,aiming,s.state.progress());
+        // Native FOV already eases per frame on the client; ramping the target per server tick too
+        // stacked two lags. Request the full ADS target as soon as the input is accepted.
+        s.movement.update(motionEntry,aiming,aiming?1f:0f);
         // The scope wrapper hides only first-person contexts; original ITEM_MODEL stays an identity key.
         var entry=WeaponItems.entry(s.stack).orElseThrow();
         var pose=s.state.progress()<.5f?WeaponModels.Pose.HIP:
@@ -80,12 +86,20 @@ public final class WeaponAiming {
         long now=p.level().getServer().getTickCount();
         long prior=s.lastToggleTick;
         s.lastToggleTick=now;
-        if(prior!=Long.MIN_VALUE && now-prior<3)return true;
+        if(prior!=Long.MIN_VALUE && now-prior<2)return true;
         WeaponQuickdraw.aimInput(p,true);
         if(WeaponHandling.blocked(p) || WeaponRuntime.reloading(p)) { suspend(p);return true; }
         s.toggled=!s.toggled;
         if(!s.toggled) { releasedAim(p);s.movement.release(); }
         return true;
+    }
+    /** True when the held item is an ADS weapon this system owns (so its punch is consumed). */
+    public static boolean handles(ServerPlayer p) { return eligible(p); }
+    /** Key-event toggle: one event per real press, so no punch-repeat debounce is needed. */
+    public static boolean toggleKey(ServerPlayer p) {
+        var s=SESSIONS.get(p.getUUID());
+        if(s!=null)s.lastToggleTick=Long.MIN_VALUE;
+        return toggle(p);
     }
     /** Pure selected-source intent, also usable during handling without a recursive ADS tick. */
     public static boolean requested(ServerPlayer p) {

@@ -100,7 +100,7 @@ public final class FirmlyPlantedW189GameTests {
         int total=80;int ads=FirmlyPlantedProfile.adsTicks(f.entry,total,false);
         check(h,WeaponFirmlyPlanted.adsTicks(f.p,f.entry,99,true)==ads,"Raw30+50 stats before one ceil");
         WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);
-        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/ads)<.00001,"Production outer ADS wrapper exact raw composition");ads(f.p,false);
+        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/WeaponAiming.fast(ads))<.00001,"Production outer ADS wrapper exact raw composition");ads(f.p,false);
         int stow=FirmlyPlantedProfile.handlingTicks(f.entry,total,1,false),ready=FirmlyPlantedProfile.handlingTicks(f.entry,total,1,true);
         WeaponRuntime.selectedSlotChanging(f.p,7);f.p.getInventory().setSelectedSlot(7);
         check(h,!WeaponFirmlyPlanted.active(f.p),"Stowed source cannot grant held effects");
@@ -115,7 +115,7 @@ public final class FirmlyPlantedW189GameTests {
         check(h,WeaponPerks.selected(f.gun,ID).isPresent(),"Snapshot does not erase FirmlyPlanted");f.crouch(true);
         int enter=FirmlyPlantedProfile.adsTicks(f.entry,30,true),exit=FirmlyPlantedProfile.adsTicks(f.entry,30,false);
         check(h,enter<exit&&WeaponFirmlyPlanted.adsTicks(f.p,f.entry,99,true)==enter&&WeaponFirmlyPlanted.adsTicks(f.p,f.entry,99,false)==exit,"Snapshot entry scalar composed raw, exit unchanged");
-        WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);check(h,Math.abs(WeaponAiming.progress(f.p)-1f/enter)<.00001,"Actual ADS first tick");h.succeed();
+        WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);check(h,Math.abs(WeaponAiming.progress(f.p)-1f/WeaponAiming.fast(enter))<.00001,"Actual ADS first tick");h.succeed();
     }
     @GameTest(structure=FLOOR,maxTicks=20,environment=ENV)
     public void sourceCopiesBackpackOffhandAndInvalidCountDoNotGrant(GameTestHelper h){
@@ -174,7 +174,7 @@ public final class FirmlyPlantedW189GameTests {
             check(h,WeaponFirmlyPlanted.handlingTicks(f.p,f.gun,true,99)==FirmlyPlantedProfile.handlingTicks(f.entry,total,1,true),"Fusion15 plus actual Frenzy100 raw curve");
             int ads=FirmlyPlantedProfile.adsTicks(f.entry,total,false);
             WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);
-            check(h,Math.abs(WeaponAiming.progress(f.p)-1f/ads)<.0001,"Actual capped raw handling ADS, no rounded-duration multiplication");h.succeed();
+            check(h,Math.abs(WeaponAiming.progress(f.p)-1f/WeaponAiming.fast(ads))<.0001,"Actual capped raw handling ADS, no rounded-duration multiplication");h.succeed();
         });
     }
     @GameTest(structure=FLOOR,maxTicks=20,environment=ENV)

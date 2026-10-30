@@ -88,7 +88,7 @@ public final class SurplusW183GameTests {
         var f=new Fixture(h);f.charged(3);int baseAds=SnapshotAimProfile.enterTicks(f.gun);
         int enter=WeaponSurplus.adsTicks(f.p,f.entry,baseAds,true);check(h,enter<baseAds,"Sourced handling shortens ADS");
         WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);
-        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/enter)<.0001,"Actual first ADS tick uses Surplus wrapper");ads(f.p,false);
+        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/WeaponAiming.fast(enter))<.0001,"Actual first ADS tick uses Surplus wrapper");ads(f.p,false);
         var handling=WeaponHandlingProfile.of(f.entry);int stow=WeaponSurplus.handlingTicks(f.p,f.gun,false,handling.stowTicks()),ready=WeaponSurplus.handlingTicks(f.p,f.gun,true,handling.readyTicks());
         check(h,stow<=handling.stowTicks()&&ready<handling.readyTicks(),"Handling raw-stat ready/stow");
         WeaponRuntime.selectedSlotChanging(f.p,7);f.p.getInventory().setSelectedSlot(7);
@@ -116,7 +116,7 @@ public final class SurplusW183GameTests {
         int together=WeaponSurplus.adsTicks(f.p,f.entry,SnapshotAimProfile.enterTicks(f.gun),true);
         check(h,together<=surplusOnly&&together<=SnapshotAimProfile.enterTicks(f.gun),"Real Snapshot and handling do not erase one another");
         WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);
-        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/together)<.0001,"Actual ADS clock uses legal combined plan");
+        check(h,Math.abs(WeaponAiming.progress(f.p)-1f/WeaponAiming.fast(together))<.0001,"Actual ADS clock uses legal combined plan");
         f.hud(3);h.succeed();
     }
     @GameTest(structure=FLOOR,maxTicks=20,environment=ENV) public void exactOptionalSocketsWithoutDefaultOrEnhancedGrant(GameTestHelper h){

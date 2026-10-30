@@ -85,7 +85,7 @@ public final class QuickdrawW185GameTests {
         check(h,WeaponItems.magazine(f.incoming,f.profile).rounds()==f.profile.magazine(),"Draw creates no ammo transfer");
         h.startSequence().thenIdle(delay).thenExecute(()->{
             WeaponAiming.cleanup(f.p);ads(f.p,true);WeaponAiming.tick(f.p);
-            int ads=WeaponAimProfile.of(f.entry).transitionTicks();check(h,Math.abs(WeaponAiming.progress(f.p)-1f/ads)<.0001,"No Quickdraw ADS stat or scalar");
+            int ads=WeaponAimProfile.of(f.entry).transitionTicks();check(h,Math.abs(WeaponAiming.progress(f.p)-1f/WeaponAiming.fast(ads))<.0001,"No Quickdraw ADS stat or scalar");
             ads(f.p,false);WeaponAiming.cleanup(f.p);check(h,beginUse(f.p),"Ready real trigger accepted");WeaponRuntime.releaseUse(f.p,f.incoming);
             check(h,WeaponItems.magazine(f.incoming,f.profile).rounds()==f.profile.magazine()-1,"One real paid shot, no free cartridge");
             check(h,WeaponRuntime.reload(f.p),"Actual normal reload accepted");check(h,WeaponRuntime.ammunition(f.p).orElseThrow().reloadDuration()==f.profile.reloadTicks(),"Quickdraw does not accelerate reload");h.succeed();
