@@ -8,7 +8,8 @@ import kim.biryeong.destiny.ability.Motion;
 import kim.biryeong.destiny.ability.hunter.HunterJump;
 import kim.biryeong.destiny.ability.titan.TitanJump;
 import kim.biryeong.destiny.ability.warlock.WarlockJump;
-import kim.biryeong.destiny.fx.ClassAbilityEffects;
+import kim.biryeong.destiny.sound.JumpSounds;
+import kim.biryeong.destiny.sound.DestinySounds;
 import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.guardian.*;
 import net.minecraft.core.BlockPos;
@@ -71,12 +72,16 @@ public final class JumpAbilities {
         Loadout loadout;
         double acceleration, ceiling, descent, horizontalLimit;
         GlideCarry glide;
+        JumpSounds.Playback audio;
         AirState(ServerPlayer owner) { this.owner = owner; level = owner.level(); }
         boolean alive() {
             return owner.isAlive() && !owner.isRemoved() && !owner.hasDisconnected()
                     && !owner.isSpectator() && owner.level() == level;
         }
-        void cancel() { budget.cancel(); ability = null; loadout = null; glide = null; }
+        void cancel() {
+            if (audio != null) { audio.stop(); audio = null; }
+            budget.cancel(); ability = null; loadout = null; glide = null;
+        }
     }
 
     /** Track all connected players before their first air-jump, not only active ability sessions. */
@@ -130,7 +135,7 @@ public final class JumpAbilities {
                 || kim.biryeong.destiny.camera.SuperCamera.movementBlocked(player)) return false;
         AirState state = STATES.get(player.getUUID());
         if (state != null && (state.owner != player || !state.alive())) {
-            STATES.remove(player.getUUID()); state = null;
+            state.cancel(); STATES.remove(player.getUUID()); state = null;
         }
         if (state == null) { state = new AirState(player); STATES.put(player.getUUID(), state); }
         int now = state.level.getServer().getTickCount();
@@ -175,7 +180,9 @@ public final class JumpAbilities {
             }
             case BLINK -> {
                 Vec3 start = player.position();
+                DestinySounds.at(state.level, start, "jump.blink.out", .65f);
                 player.teleportTo(destination.x, destination.y, destination.z);
+                DestinySounds.at(state.level, player.position(), "jump.blink.in", .65f);
                 MOVEMENT.put(player.getUUID(), new MovementSample(player, now));
                 // Teleport has no additional launch impulse; preserve the accepted incoming velocity.
                 Motion.setVelocity(player, new Vec3(current.x(), current.y(), current.z()));
@@ -184,6 +191,8 @@ public final class JumpAbilities {
                 Guardians.runtime(player).airJumpsUsed++;
             }
         }
+        if (mode.continuous()) state.audio = JumpSounds.start(player, mode.kind);
+        else if (mode.kind == Kind.HUNTER) DestinySounds.at(state.level, player.position(), "jump.hunter", .65f);
         effects(player, ability);
         return true;
     }
@@ -209,7 +218,7 @@ public final class JumpAbilities {
 
     private static void tick(AirState state, long now) {
         ServerPlayer player = state.owner;
-        if (!state.alive()) { STATES.remove(player.getUUID(), state); return; }
+        if (!state.alive()) { state.cancel(); STATES.remove(player.getUUID(), state); return; }
         if (!state.budget.observe(now, player.onGround())) return;
         if (player.onGround()) {
             state.cancel(); Guardians.runtime(player).airJumpsUsed = 0; return;
@@ -221,7 +230,10 @@ public final class JumpAbilities {
             state.cancel(); return;
         }
         Mode mode = state.budget.active();
-        if (!state.budget.propel(now)) return;
+        if (!state.budget.propel(now)) {
+            if (state.budget.active() == null) state.cancel();
+            return;
+        }
         MotionEstimate observed = momentum(player, now);
         Velocity current = capHorizontal(observed.velocity(), state.horizontalLimit);
         Vec3 direction = inputDirection(player);
@@ -250,14 +262,17 @@ public final class JumpAbilities {
                 || player.hasDisconnected() || player.level() != movement.level)) MOVEMENT.remove(player.getUUID());
         AirState state = STATES.get(player.getUUID());
         if (state == null || state.owner != player) return;
-        if (!state.alive()) STATES.remove(player.getUUID(), state);
+        if (!state.alive()) { state.cancel(); STATES.remove(player.getUUID(), state); }
         else {
             state.cancel();
             if (player.onGround()) state.budget.observe(state.level.getServer().getTickCount(), true);
         }
     }
 
-    public static void clearAll() { STATES.clear(); MOVEMENT.clear(); }
+    public static void clearAll() {
+        for (AirState state : List.copyOf(STATES.values())) state.cancel();
+        STATES.clear(); MOVEMENT.clear();
+    }
 
     private static Vec3 inputDirection(ServerPlayer player) {
         var input = Guardians.runtime(player).lastInput;
@@ -282,7 +297,6 @@ public final class JumpAbilities {
         Element element = ability.element() == Element.KINETIC ? CharacterLoadouts.subclass(Guardians.data(player)) : ability.element();
         if (element == null) element = Element.KINETIC;
         Fx.burst(player, player.level(), player.position(), element, 8, .22);
-        ClassAbilityEffects.sound(player, element, "jump");
     }
 
     private static Vec3 blinkDestination(ServerPlayer player, Ability ability) {

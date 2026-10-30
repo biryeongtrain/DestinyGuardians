@@ -15,7 +15,7 @@ class ReviewedAudioW234Test {
             var old = entry.getValue().getAsJsonObject();
             if (old.has("subtitle")) assertEquals(old.get("subtitle"), current.getAsJsonObject(entry.getKey()).get("subtitle"), entry.getKey());
         }
-        assertEquals(76, ReviewedAudioW234.verifiedLaterAudioPaths().size(), "W210 + W229 + W230 + W233 exact additions");
+        assertEquals(87, ReviewedAudioW234.verifiedLaterAudioPaths().size(), "W210 + W229 + W230 + W233 + W270 exact additions");
     }
     @Test void missingAddedEventAndAlteredClipOrSubtitleAreRejected() throws Exception {
         String event = "warlock.void.super.start";

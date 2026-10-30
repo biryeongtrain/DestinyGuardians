@@ -57,6 +57,7 @@ final class ReviewedAudioW234 {
             result.add(event, definition(assetId(binding.get("output").getAsString()),
                     previous.isJsonNull() ? null : previous.getAsJsonObject()));
         }
+        merge(result, json("docs/qa/2026-10-30/w270/sounds-fragment.json"));
         return result;
     }
     /** Validate the complete current index, then expose the historical layer to its old assertions. */
@@ -94,6 +95,10 @@ final class ReviewedAudioW234 {
         for (var value : json("art/audio/w233/applied.json").getAsJsonArray("bindings")) {
             var entry = value.getAsJsonObject();
             pin(result, entry.get("output").getAsString(), entry.getAsJsonObject("processed").get("sha256").getAsString(), null);
+        }
+        for (var value : json("docs/qa/2026-10-30/w270/audio-import.json").getAsJsonArray("entries")) {
+            var entry = value.getAsJsonObject();
+            pin(result, entry.get("output").getAsString(), entry.get("sha256").getAsString(), entry.get("bytes").getAsLong());
         }
         return Map.copyOf(result);
     }

@@ -4,6 +4,7 @@ import kim.biryeong.destiny.ability.Ability;
 import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.ability.Motion;
 import kim.biryeong.destiny.combat.Combat;
+import kim.biryeong.destiny.camera.SuperCamera;
 import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.fx.AbilityParticles;
 import kim.biryeong.destiny.sound.DestinySounds;
@@ -35,9 +36,23 @@ public final class HunterDodge extends Ability {
 
     @Override
     public boolean activate(ServerPlayer player) {
+        // A class cast may replace our sword view, never another camera owner.
+        if (SuperCamera.active(player) && !SuperCamera.swordActive(player)
+                || player.getCamera() != player
+                || kim.biryeong.minigamelib.cinematic.CameraViews.get(player) != null) return false;
+        SuperCamera.stopSword(player);
         GuardianRuntime runtime = Guardians.runtime(player);
         HunterSkillCast cast = HunterSkillCast.begin(player, slot(), PlayerAnimations.dodgeAnimation(runtime.lastInput, variant == Variant.MARKSMAN), ItemStack.EMPTY);
         if (cast == null) return false;
+        // Never accept a first-person dodge when the authored limb/camera cannot start.
+        if (!cast.modeled() || !SuperCamera.startDodge(player)) {
+            HunterSkillCast.cancelPending(player);
+            if (cast.modeled()) PlayerAnimations.stop(player);
+            return false;
+        }
+        DestinySounds.orVanilla(cast.level(), player.position(),
+                variant == Variant.GAMBLER ? "class.hunter.dodge.gambler" : "class.hunter.dodge.marksman",
+                SoundEvents.PLAYER_ATTACK_SWEEP, 0.6f, 1.4f);
         if (variant == Variant.MARKSMAN) kim.biryeong.destiny.weapon.WeaponRuntime.reloadFromMarksmanDodge(player);
         Vec3 dir = Motion.inputDirection(player, runtime.lastInput);
         double speed = param("speed", 1.15);
@@ -47,7 +62,6 @@ public final class HunterDodge extends Ability {
         cast.contact(HunterSkillTiming.DODGE_CONTACT_TICKS, () -> {
             Vec3 feet = player.position();
             AbilityParticles.send(player, cast.level(), Fx.dust(0xC9B79C, 1.4f), feet.x, feet.y + 0.1, feet.z, 16, 0.4, 0.05, 0.4, 0.0);
-            DestinySounds.orVanilla(cast.level(), feet, "hunter.dodge", SoundEvents.PLAYER_ATTACK_SWEEP, 0.6f, 1.4f);
         });
         if (variant == Variant.GAMBLER && !Combat.enemiesNear(player, player.position(), param("enemy_radius", 8)).isEmpty()) {
             AbilityService.resetCooldown(player, AbilitySlot.MELEE);

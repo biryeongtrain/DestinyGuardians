@@ -45,6 +45,7 @@ public final class SuperCamera {
         Vec3 physicsStart;
         int lastRotation, rotations;
         int movementUnlockTick;
+        String dodgeClip;
 
         Session(ServerPlayer owner, Element element,net.minecraft.world.item.ItemStack swordStack) {
             this.owner = owner;
@@ -106,6 +107,16 @@ public final class SuperCamera {
     /** All Titan/Warlock supers use the normal rear camera, including Solar. Golden Gun keeps start(). */
     public static boolean startThirdPerson(ServerPlayer p) {
         return !ENABLED || startSession(p, Element.KINETIC, null);
+    }
+
+    /** A dodge owns the rear view only while its accepted clip remains current. */
+    public static boolean startDodge(ServerPlayer p) {
+        String clip = PlayerAnimations.activeClip(p);
+        if (!clip.startsWith("h15_roll_") && !clip.startsWith("h15_dodge_marksman_")) return false;
+        if (!startThirdPerson(p)) return false;
+        Session s = ACTIVE.get(p.getUUID());
+        if (s != null) s.dodgeClip = clip;
+        return true;
     }
 
     /** Sword stays third-person while this exact held stack is selected, not only during a swing. */
@@ -237,6 +248,10 @@ public final class SuperCamera {
                     PlayerAnimations.stop(p);
                 } else PlayerAnimations.stopSword(p);
                 if (timedOut) DestinyGuardians.LOGGER.warn("Super camera rotation timed out for {}; safe release", p.getName().getString());
+                continue;
+            }
+            if (s.dodgeClip != null && !s.dodgeClip.equals(PlayerAnimations.activeClip(p))) {
+                stop(p); // A replacement ordinary animation never inherits the dodge camera.
                 continue;
             }
             if (s.swordStack==null && !AbilityService.inSuper(p) && !PlayerAnimations.isPlaying(p)) {

@@ -62,16 +62,17 @@ public final class HunterSkillCast {
         if (!cast.valid()) return null;
         VISUAL_OWNER.put(player, cast.visualToken);
         cast.modeled = HunterAbilityVisuals.play(player, animation);
-        if (cast.modeled && slot == AbilitySlot.MELEE) {
+        if (cast.modeled && (slot == AbilitySlot.MELEE || slot == AbilitySlot.CLASS_ABILITY)) {
             if (hand.isEmpty()) PlayerAnimations.superEmptyHands(player);
             else PlayerAnimations.superItems(player, hand, ItemStack.EMPTY);
-            player.swing(net.minecraft.world.InteractionHand.MAIN_HAND,
+            if (slot == AbilitySlot.MELEE) player.swing(net.minecraft.world.InteractionHand.MAIN_HAND,
                     new net.minecraft.world.item.component.SwingAnimation(net.minecraft.world.item.SwingAnimationType.WHACK, 6), true);
         } else if (cast.modeled) PlayerAnimations.superItem(player, hand);
         return cast;
     }
 
     ServerLevel level() { return level; }
+    boolean modeled() { return modeled; }
 
     private Identifier equipped() {
         return Guardians.data(player).loadout().map(l -> l.get(slot)).orElse(null);
@@ -99,7 +100,7 @@ public final class HunterSkillCast {
                 // The prop leaves at contact; keep both rig hands bare through recovery.
                 // EMPTY via superItem would restore the live gun before the clip finished.
                 if (releaseHand && modeled) {
-                    if (slot == AbilitySlot.MELEE) PlayerAnimations.superEmptyHands(player);
+                    if (slot == AbilitySlot.MELEE || slot == AbilitySlot.CLASS_ABILITY) PlayerAnimations.superEmptyHands(player);
                     else PlayerAnimations.superItem(player, ItemStack.EMPTY);
                 }
                 if (releaseHand) VISUAL_OWNER.remove(player, visualToken);

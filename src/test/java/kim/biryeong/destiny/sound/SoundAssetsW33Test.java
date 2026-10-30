@@ -61,6 +61,11 @@ class SoundAssetsW33Test {
             assertFalse(values.isEmpty(), event.getKey());
             for (var value : values) {
                 var name = value.isJsonPrimitive() ? value.getAsString() : value.getAsJsonObject().get("name").getAsString();
+                if (value.isJsonObject() && value.getAsJsonObject().has("type")
+                        && value.getAsJsonObject().get("type").getAsString().equals("event")) {
+                    assertTrue(name.startsWith("destiny:") && root.has(name.substring(8)), "Resolvable alias: " + name);
+                    continue;
+                }
                 assertTrue(name.startsWith("destiny:w33/") || name.startsWith("destiny:w34/") || name.startsWith("destiny:w36/") || name.startsWith("destiny:w56/") || name.startsWith("destiny:w63/reload/")
                         || java.util.Set.of("destiny:w83/ace_of_spades/fire", "destiny:w83/ace_of_spades/reload",
                                 "destiny:w83/reload/ace_of_spades_55", "destiny:w83/reload/ace_of_spades_39").contains(name) || izanagiSounds.contains(name)
