@@ -424,6 +424,15 @@ public final class TitanExpandedSupers {
         void close() {if(closed)return;closed=true;holder.destroy();}
     }
 
+    /** Live owner/ally membership; no cached potion and no enemy benefits. */
+    public static boolean inWard(ServerPlayer p) {
+        if (!p.isAlive() || p.isRemoved() || p.isSpectator() || p.hasDisconnected()) return false;
+        for (Ward ward : WARDS.values())
+            if (ward.valid() && p.level() == ward.o.level && ward.ally(p)
+                    && ward.contains(p.getBoundingBox().getCenter())) return true;
+        return false;
+    }
+
     /** Master wires this exactly once into ALLOW_DAMAGE. Directionless/environmental damage passes. */
     public static boolean allowDamage(LivingEntity victim,DamageSource source,float amount) {
         if(!Float.isFinite(amount)||amount<=0||source.is(DamageTypeTags.BYPASSES_INVULNERABILITY))return true;

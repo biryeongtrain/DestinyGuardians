@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "task": "W266 overshield provenance",
+  "created_at_utc": "2026-10-30T07:53:26.875973+00:00",
+  "source_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+  "scope": {
+    "main_checkout": "/Users/qf/IdeaProjects/DestinyGuardians",
+    "main_access": "read-only",
+    "exclusive_new_file": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-ikelos_sg_v1_0_1/docs/qa/2026-10-30/w266/overshield-provenance.json",
+    "artifact_kind": "source evidence only",
+    "worktree_state": "User-designated stale fixed slot; not refreshed or built.",
+    "source_units": "Destiny 2 HP and seconds; no Minecraft HP scaling or tuning values assigned."
+  },
+  "verification_method": {
+    "transport": "Direct HTTPS GET to Google Sheets gviz JSON with explicit sheet and single-row Bn:Dn range, headers=0.",
+    "cell_identity": "Each response must contain exactly one data row, the expected ability name in column B, and nonempty text in column D. Void!D8, Void!D100 and Solar!D139 were also queried as individual D cells during discovery.",
+    "row_number_warning": "GViz output omits blank rows; neither CSV record ordinals nor a multi-row GViz response array index is an actual spreadsheet row. Addresses here were independently confirmed using explicit single-row/cell requests.",
+    "gid_policy": "Sheet names and verified A1 ranges used; no numeric gid inferred.",
+    "source_status": "Current DDC sheet text at retrieval time; not a new in-game measurement."
+  },
+  "sources": {
+    "void_overshield": {
+      "sheet": "Void",
+      "name_cell": "B8",
+      "name": "Overshield",
+      "text_cell": "D8",
+      "verification_range": "B8:D8",
+      "request_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Void&range=B8%3AD8&headers=0&tqx=out%3Ajson",
+      "response_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Void&range=B8%3AD8&headers=0&tqx=out%3Ajson",
+      "request_started_utc": "2026-10-30T07:53:26.331554+00:00",
+      "retrieved_at_utc": "2026-10-30T07:53:26.871857+00:00",
+      "http_status": 200,
+      "gviz_status": "ok",
+      "gviz_signature": "613604389",
+      "parsed_num_headers": 0,
+      "range_verified_by_direct_https_get": true,
+      "text": "Void Overshield with up to 45 HP for 10+5 seconds.\nVoid Overshield's HP portion has 70% Damage Resist (150eHP) against Combatants.\n\nDamage dealt to Void Overshields does not stop Health Regeneration.\nOvershield can stack with other overshields, such as Turnabout's OS and Class Stat's OS. Overshield layers are determined by \"First In, First Out\".",
+      "text_utf8_sha256": "830882e2609fa64c0d40c6d225f540eb8e419092188996547f83c3f1680d769e",
+      "response_sha256": "513674c80ea19204b9630ac21f60f239b9ea42a1128cb6178d26498b31db6874",
+      "raw_response_utf8": "/*O_o*/\ngoogle.visualization.Query.setResponse({\"version\":\"0.6\",\"reqId\":\"0\",\"status\":\"ok\",\"sig\":\"613604389\",\"table\":{\"cols\":[{\"id\":\"B\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"C\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"D\",\"label\":\"\",\"type\":\"string\"}],\"rows\":[{\"c\":[{\"v\":\"Overshield\"},null,{\"v\":\"Void Overshield with up to 45 HP for 10+5 seconds.\\nVoid Overshield\\u0027s HP portion has 70% Damage Resist (150eHP) against Combatants.\\n\\nDamage dealt to Void Overshields does not stop Health Regeneration.\\nOvershield can stack with other overshields, such as Turnabout\\u0027s OS and Class Stat\\u0027s OS. Overshield layers are determined by \\u0022First In, First Out\\u0022.\"}]}],\"parsedNumHeaders\":0}});"
+    },
+    "ward_of_dawn": {
+      "sheet": "Void",
+      "name_cell": "B100",
+      "name": "Ward of Dawn",
+      "text_cell": "D100",
+      "verification_range": "B100:D100",
+      "request_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Void&range=B100%3AD100&headers=0&tqx=out%3Ajson",
+      "response_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Void&range=B100%3AD100&headers=0&tqx=out%3Ajson",
+      "request_started_utc": "2026-10-30T07:53:26.331981+00:00",
+      "retrieved_at_utc": "2026-10-30T07:53:26.838857+00:00",
+      "http_status": 200,
+      "gviz_status": "ok",
+      "gviz_signature": "29911600",
+      "parsed_num_headers": 0,
+      "range_verified_by_direct_https_get": true,
+      "text": "General Super Information\nDamage Resistance while in Cast Animation: ?% [26.5%]\nGrants 1 Grenade Ability Charge and creates 3 Orbs of Power that each grant 2.3% Super Energy on Super Cast.\n\nWard of Dawn:\nProjects a 8,000 Construct HP Protective Dome with 75??% NEEDS TESTING Damage Resistance against Combatants alongside an internal core with 200 HP.\nGuardians deal 50% increased damage to the Protective Dome itself. Ability Damage scales uniquely.\nProtective Dome covers an 8 meter radius centered around its internal core for 30 seconds. Destroying the core destroys the Ward of Dawn.\nThe Ward of Dawn prevents all projectiles from entering or leaving the dome unless an enemy is within it.\nWhile a Combatant is inside the dome: The caster and their allies are able to shoot through the dome.\nDeploying or redeploying the Ward of Dawn pulls Combatants within 15 meters inwards.\nSuper Stat scales its duration by up to +10 seconds at 200 Super Stat.\n\nWhile inside the Ward of Dawn Dome:\nWard of Dawn Caster receives +50% Increased Melee Damage. Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.\nEnemies are constantly weakened. Combatants up to ? meters away are taunted towards Guardians inside the dome.\nArmor of Light | Constantly generates 15 Void Overshield/s and grants 40% [?%] Damage Resist, +50 Handling, and +50 Reload Speed.\nWeapons of Light | 25% Damage Increase that lingers for 0.3 seconds. Helm of Saint-14 allows it to linger for 15 seconds.\n\nRedeployement:\nThe Ward of Dawn Core can be picked up by the caster after 3 seconds of being deployed, up to twice per cast. Swirling orbs represent the amount of pickups left.\nWhile picked up: Remaining Ward of Dawn duration is decreased by 1 second every (77 / Armor of Light seconds left on pickup).\nThe Core can be thrown to redeploy by the caster up to 2 times per cast.",
+      "text_utf8_sha256": "1587820347e7c21451d1dce380c0ebae6deb28b48ab14629c766b12a65f2995b",
+      "response_sha256": "85ff3187fa1c36f52ab31de6b4716aade6249ee6fe55aa22f378abd0ee7c3545",
+      "raw_response_utf8": "/*O_o*/\ngoogle.visualization.Query.setResponse({\"version\":\"0.6\",\"reqId\":\"0\",\"status\":\"ok\",\"sig\":\"29911600\",\"table\":{\"cols\":[{\"id\":\"B\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"C\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"D\",\"label\":\"\",\"type\":\"string\"}],\"rows\":[{\"c\":[{\"v\":\"Ward of Dawn\"},null,{\"v\":\"General Super Information\\nDamage Resistance while in Cast Animation: ?% [26.5%]\\nGrants 1 Grenade Ability Charge and creates 3 Orbs of Power that each grant 2.3% Super Energy on Super Cast.\\n\\nWard of Dawn:\\nProjects a 8,000 Construct HP Protective Dome with 75??% NEEDS TESTING Damage Resistance against Combatants alongside an internal core with 200 HP.\\nGuardians deal 50% increased damage to the Protective Dome itself. Ability Damage scales uniquely.\\nProtective Dome covers an 8 meter radius centered around its internal core for 30 seconds. Destroying the core destroys the Ward of Dawn.\\nThe Ward of Dawn prevents all projectiles from entering or leaving the dome unless an enemy is within it.\\nWhile a Combatant is inside the dome: The caster and their allies are able to shoot through the dome.\\nDeploying or redeploying the Ward of Dawn pulls Combatants within 15 meters inwards.\\nSuper Stat scales its duration by up to +10 seconds at 200 Super Stat.\\n\\nWhile inside the Ward of Dawn Dome:\\nWard of Dawn Caster receives +50% Increased Melee Damage. Scoring a Melee Kill as the Caster generates an Orb of Power up to 5 times per Super cast.\\nEnemies are constantly weakened. Combatants up to ? meters away are taunted towards Guardians inside the dome.\\nArmor of Light | Constantly generates 15 Void Overshield/s and grants 40% [?%] Damage Resist, +50 Handling, and +50 Reload Speed.\\nWeapons of Light | 25% Damage Increase that lingers for 0.3 seconds. Helm of Saint-14 allows it to linger for 15 seconds.\\n\\nRedeployement:\\nThe Ward of Dawn Core can be picked up by the caster after 3 seconds of being deployed, up to twice per cast. Swirling orbs represent the amount of pickups left.\\nWhile picked up: Remaining Ward of Dawn duration is decreased by 1 second every (77 / Armor of Light seconds left on pickup).\\nThe Core can be thrown to redeploy by the caster up to 2 times per cast.\"}]}],\"parsedNumHeaders\":0}});"
+    },
+    "well_of_radiance": {
+      "sheet": "Solar",
+      "name_cell": "B139",
+      "name": "Well of Radiance",
+      "text_cell": "D139",
+      "verification_range": "B139:D139",
+      "request_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Solar&range=B139%3AD139&headers=0&tqx=out%3Ajson",
+      "response_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Solar&range=B139%3AD139&headers=0&tqx=out%3Ajson",
+      "request_started_utc": "2026-10-30T07:53:26.332154+00:00",
+      "retrieved_at_utc": "2026-10-30T07:53:26.839037+00:00",
+      "http_status": 200,
+      "gviz_status": "ok",
+      "gviz_signature": "823305001",
+      "parsed_num_headers": 0,
+      "range_verified_by_direct_https_get": true,
+      "text": "Places down a Well of Radiance for 30 seconds, restoring 300HP to the caster, dealing up to 150 damage, and inflicting 40+20 Scorch to enemies within 8.5 metres.\nCreates 3 Orbs of Power, each granting 3.6% Super Energy.\nSuper Duration scales with Super Stat, up to 40 seconds at 200 Super.\n\nWell of Radiance:\nConstruct with 800 HP. Can be frozen and damaged by Stasis Shatter\nProjects an aura that buffs the caster and allies within 6 metres. Leaving the aura grants Radiant for 8+4 seconds.\nCombatants deal 0.25x Damage against the Well of Radiance.\n\nFor Guardians inside the Well of Radiance:\n25% Increased Weapon Damage, 20% Damage Resist against Combatants (10% vs Boss Combatants), immunity to Stasis Effects, and restores 50HP/s.\nGuardians receive 50% Damage Resist against Special and Power Weapons, as well as Abilities. Primary Weapons remain at 40% Damage Resist.\nRemoves any active Restoration effect. \nWeapon Damage dealt by the Caster is counted as Super Ability Damage. Caster can spawn up to 5 Orbs from scoring kills within the Well.",
+      "text_utf8_sha256": "b64c6b02e94c43b1318e04cbc6982dd2038e0f5f5ea8e790384bd2c2c8af5e91",
+      "response_sha256": "702b1732ce7ba184ef9610e54d0d5dbe47afde32424eddb510bcc4dce2ff4766",
+      "raw_response_utf8": "/*O_o*/\ngoogle.visualization.Query.setResponse({\"version\":\"0.6\",\"reqId\":\"0\",\"status\":\"ok\",\"sig\":\"823305001\",\"table\":{\"cols\":[{\"id\":\"B\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"C\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"D\",\"label\":\"\",\"type\":\"string\"}],\"rows\":[{\"c\":[{\"v\":\"Well of Radiance\"},null,{\"v\":\"Places down a Well of Radiance for 30 seconds, restoring 300HP to the caster, dealing up to 150 damage, and inflicting 40+20 Scorch to enemies within 8.5 metres.\\nCreates 3 Orbs of Power, each granting 3.6% Super Energy.\\nSuper Duration scales with Super Stat, up to 40 seconds at 200 Super.\\n\\nWell of Radiance:\\nConstruct with 800 HP. Can be frozen and damaged by Stasis Shatter\\nProjects an aura that buffs the caster and allies within 6 metres. Leaving the aura grants Radiant for 8+4 seconds.\\nCombatants deal 0.25x Damage against the Well of Radiance.\\n\\nFor Guardians inside the Well of Radiance:\\n25% Increased Weapon Damage, 20% Damage Resist against Combatants (10% vs Boss Combatants), immunity to Stasis Effects, and restores 50HP/s.\\nGuardians receive 50% Damage Resist against Special and Power Weapons, as well as Abilities. Primary Weapons remain at 40% Damage Resist.\\nRemoves any active Restoration effect. \\nWeapon Damage dealt by the Caster is counted as Super Ability Damage. Caster can spawn up to 5 Orbs from scoring kills within the Well.\"}]}],\"parsedNumHeaders\":0}});"
+    },
+    "persistence": {
+      "sheet": "Void",
+      "name_cell": "B25",
+      "name": "Persistence",
+      "text_cell": "D25",
+      "verification_range": "B25:D25",
+      "request_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Void&range=B25%3AD25&headers=0&tqx=out%3Ajson",
+      "response_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?sheet=Void&range=B25%3AD25&headers=0&tqx=out%3Ajson",
+      "request_started_utc": "2026-10-30T07:53:26.332226+00:00",
+      "retrieved_at_utc": "2026-10-30T07:53:26.836288+00:00",
+      "http_status": 200,
+      "gviz_status": "ok",
+      "gviz_signature": "2074245356",
+      "parsed_num_headers": 0,
+      "range_verified_by_direct_https_get": true,
+      "text": "Void Buffs applied to the user last longer.\nDevour: 50% Increased duration.\nInvisibility: 40% increased duration.\nVoid Overshield: 50% increased duration.",
+      "text_utf8_sha256": "bf8c4644715d0b70078ded02388531137743b92759bc57730ec371e762da37e6",
+      "response_sha256": "8bbf393e39a4479ea4e22ebe8ebf5041b680d208bfbcc6f3484b1989cb97da84",
+      "raw_response_utf8": "/*O_o*/\ngoogle.visualization.Query.setResponse({\"version\":\"0.6\",\"reqId\":\"0\",\"status\":\"ok\",\"sig\":\"2074245356\",\"table\":{\"cols\":[{\"id\":\"B\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"C\",\"label\":\"\",\"type\":\"string\"},{\"id\":\"D\",\"label\":\"\",\"type\":\"string\"}],\"rows\":[{\"c\":[{\"v\":\"Persistence\"},null,{\"v\":\"Void Buffs applied to the user last longer.\\nDevour: 50% Increased duration.\\nInvisibility: 40% increased duration.\\nVoid Overshield: 50% increased duration.\"}]}],\"parsedNumHeaders\":0}});"
+    }
+  },
+  "findings": {
+    "void_overshield": {
+      "source_ids": [
+        "void_overshield"
+      ],
+      "maximum_hp": 45,
+      "duration": {
+        "base_seconds": 10,
+        "source_notation": "10+5 seconds",
+        "conditional_extension_seconds": 5,
+        "extended_total_seconds": 15,
+        "extension_condition": "Persistence increases Void Overshield duration by 50%.",
+        "extension_source_id": "persistence",
+        "extension_total_interpretation": "10 seconds multiplied by 1.5 gives 15 seconds; the extra 5 seconds is conditional, not baseline."
+      },
+      "damage_resistance": {
+        "fraction": 0.7,
+        "percent": 70,
+        "incoming_damage_scope": "Combatants (PvE)",
+        "protected_pool": "Void Overshield HP portion only",
+        "pvp_resistance_percent": null,
+        "pvp_status": "No PvP resistance value stated in this glossary entry.",
+        "effective_hp_at_full_shield": 150,
+        "effective_hp_status": "150eHP explicitly stated in the source.",
+        "interpretation": "Do not apply this 70% as global player health damage resistance or as Well aura resistance."
+      },
+      "additional_source_facts": [
+        "Damage dealt to Void Overshields does not stop Health Regeneration.",
+        "May stack with other overshields; layers are First In, First Out."
+      ]
+    },
+    "ward_of_dawn": {
+      "source_ids": [
+        "ward_of_dawn",
+        "void_overshield"
+      ],
+      "grants_void_overshield": true,
+      "charge_hp_per_second": 15,
+      "maximum_void_overshield_hp": 45,
+      "charge_condition": "While inside the Ward of Dawn dome, Armor of Light constantly generates Void Overshield.",
+      "charge_quote": "Armor of Light | Constantly generates 15 Void Overshield/s and grants 40% [?%] Damage Resist, +50 Handling, and +50 Reload Speed.",
+      "maximum_hp_source": "Void!D8 glossary; the 45 HP cap is not separately stated in Void!D100.",
+      "separate_effects": "Armor of Light damage resistance, cast-animation resistance, and dome/core construct HP or resistance are separate from the Void Overshield HP pool and its 70% PvE resistance.",
+      "unknowns_preserved": [
+        "Armor of Light resistance retains the literal 40% [?%] notation.",
+        "Dome resistance retains 75??% NEEDS TESTING; it is not treated as a verified number.",
+        "The cited entries do not specify the precise per-tick recharge schedule or Ward exit/refresh timer algorithm. The 10-second glossary duration does not itself prove a full 10 seconds remaining on every Ward exit."
+      ]
+    },
+    "well_of_radiance": {
+      "source_ids": [
+        "well_of_radiance"
+      ],
+      "current_ddc_original_overshield": "없음: 현재 Solar!D139의 Well of Radiance 원작 설명에는 초과체력 부여 또는 충전 효과가 기재되어 있지 않음.",
+      "evidence_boundary": "The current source describes health restoration and damage resistance, not an overshield pool. This is a statement about the current cited sheet entry, not all historical versions or interactions with other effects.",
+      "overshield_cap_hp": null,
+      "overshield_charge_hp_per_second": null,
+      "null_semantics": "No original-game overshield values are supplied by this source; absence is not converted to numeric zero."
+    }
+  },
+  "reference_only_inputs": [
+    {
+      "path": "/private/tmp/destiny-w265/Void.csv",
+      "sha256": "8d4537777e3ac4374826dd9906a5b940e1f763e528d7f9f4e00202524b39ca8b",
+      "role": "Reference only; not the primary evidence or authority for spreadsheet cell addresses.",
+      "matches": [
+        {
+          "source_id": "void_overshield",
+          "csv_record_1based_not_sheet_row": 6,
+          "csv_column_1based": 4,
+          "actual_sheet_text_cell": "D8",
+          "text_matches_live_source": true
+        },
+        {
+          "source_id": "ward_of_dawn",
+          "csv_record_1based_not_sheet_row": 61,
+          "csv_column_1based": 4,
+          "actual_sheet_text_cell": "D100",
+          "text_matches_live_source": true
+        },
+        {
+          "source_id": "persistence",
+          "csv_record_1based_not_sheet_row": 22,
+          "csv_column_1based": 4,
+          "actual_sheet_text_cell": "D25",
+          "text_matches_live_source": true
+        }
+      ]
+    },
+    {
+      "path": "/private/tmp/destiny-w265/Solar.csv",
+      "sha256": "c75e73f6d3c4f16e8cacfc9760dce3930defa5c62c95a545051f6d1291eed20e",
+      "role": "Reference only; not the primary evidence or authority for spreadsheet cell addresses.",
+      "matches": [
+        {
+          "source_id": "well_of_radiance",
+          "csv_record_1based_not_sheet_row": 80,
+          "csv_column_1based": 4,
+          "actual_sheet_text_cell": "D139",
+          "text_matches_live_source": true
+        }
+      ]
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-30/w265/super-resistance-provenance.json",
+      "sha256": "34998bcaf10c8b6414f7fbf563da18e592a2524275dd83d216153dccd744cff1",
+      "role": "W265 reference only; all W266 claims independently checked against live HTTPS ranges.",
+      "matches": [
+        {
+          "source_id": "ward_of_dawn",
+          "prior_sheet": "Void",
+          "prior_cell": "D100",
+          "prior_text_matches_live_source": true
+        },
+        {
+          "source_id": "well_of_radiance",
+          "prior_sheet": "Solar",
+          "prior_cell": "D139",
+          "prior_text_matches_live_source": true
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "all_four_named_ranges_fetched_live": true,
+    "required_numeric_quotes_present": true,
+    "well_source_has_no_overshield_text": true,
+    "csv_records_not_used_as_cell_addresses": true,
+    "raw_source_text_and_response_hashes_embedded": true,
+    "unknown_source_notation_preserved": true,
+    "json_parse": "Validated from serialized JSON before writing and reloaded after writing.",
+    "only_deliverable_written": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-ikelos_sg_v1_0_1/docs/qa/2026-10-30/w266/overshield-provenance.json",
+    "builds_tests_server_vision_cu_agents_commits": "Not run; evidence-only task."
+  }
+}

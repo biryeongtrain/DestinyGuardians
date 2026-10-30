@@ -1,0 +1,38 @@
+{
+  "newGameTestsPassed": 2,
+  "fullJUnit": {
+    "total": 2301,
+    "passed": 2297,
+    "preexistingFailures": 4
+  },
+  "vision": {
+    "well": {
+      "shieldFull": 3.9130435,
+      "afterTwoDamage": 1.9130435,
+      "healthBeforeAndAfter": 20,
+      "recharged": 3.9130435,
+      "afterLeaving10s": 0
+    },
+    "ward": {
+      "shieldFull": 3.9130435,
+      "afterTwoDamage": 1.9130435,
+      "healthBeforeAndAfter": 20,
+      "recharged": 3.9130435,
+      "afterLeaving10s": 0
+    },
+    "cast": "native sneak+swap_offhand",
+    "exit": "native forward+sprint 50 client ticks",
+    "damage": "console generic damage fixture, not natural AI or PVP attack",
+    "audio": "not listened",
+    "neutral": true
+  },
+  "cleanup": {
+    "clientWrapper": -2,
+    "qaServer": 0,
+    "awakeWrapper": 0
+  },
+  "setupCorrections": [
+    "Second test selector uses at200ticks (not at200_ticks); one no-match attempt, not a test failure",
+    "First Well probe was after its lifetime and linger had expired; repeated with bounded automatic capture timing"
+  ]
+}
