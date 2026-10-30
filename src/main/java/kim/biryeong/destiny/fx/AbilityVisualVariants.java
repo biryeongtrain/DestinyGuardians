@@ -4,7 +4,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
-/** Presentation-only choices for a future per-viewer PvP team resolver. Never changes combat/team rules. */
+/** Presentation-only choices used by the Crucible per-viewer team resolver. */
 public final class AbilityVisualVariants {
     private AbilityVisualVariants() { }
 

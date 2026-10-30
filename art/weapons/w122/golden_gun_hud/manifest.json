@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "batch": "W122",
+  "id": "golden_gun",
+  "source_model": "src/main/resources/assets/destiny/models/item/golden_gun_h29.json",
+  "source_sha256": "1c12e34eb47e86500592f62a5fe5a2f359ca8f76d5ae72ad6092c5e8d11027df",
+  "runtime_item": "src/main/resources/assets/destiny/items/golden_gun_h29.json",
+  "runtime_primitive": "src/main/resources/assets/destiny/models/mesh/h29/golden_gun_triangle.json",
+  "source_model_role": "display metadata; empty elements; not held geometry",
+  "runtime_path": "HunterSuper.GoldenGun -> SuperVisuals.item(SOLAR) -> destiny:golden_gun_h29 -> composite -> destiny:mesh/h29/golden_gun_triangle",
+  "source_mesh": "art/mesh/supers/h29/golden_gun.mesh.json",
+  "max_runtime_mesh_vertex_error": 1.7108444971825065e-06,
+  "method": "union of actual H29 composite alpha-cut triangles; row-major affine matrices; Y yaw180 then W112 upright YZ; 8x BOX coverage",
+  "orientation": {
+    "plane": "YZ",
+    "screen_x": "-Z",
+    "screen_y": "-Y",
+    "side_rotation_degrees": 180,
+    "direction": "H29 +Z muzzle points left; +Y stays up",
+    "policy": "upright_side"
+  },
+  "texture_size": [
+    160,
+    64
+  ],
+  "selected_quad_size": [
+    80,
+    32
+  ],
+  "padding_pixels": 4,
+  "supersampling": 8,
+  "pillow_version": "12.3.0",
+  "alpha_policy": "Neutral RGB white including transparent pixels; union of analytic right triangles validated against current 128x128 x<=y atlas; 8x BOX edge coverage; no source color",
+  "framing": "Same W112 uniform fit and >=4 clear pixels, yaw180 for H29 muzzle+Z; no hull, dilation, rectangle filling or aspect stretch",
+  "provenance": "Current H29 Bungie Eyasluna-derived product geometry; see existing H29 provenance; not extracted official HUD art or native QA",
+  "triangles": 2350,
+  "projected_triangles": 2320,
+  "projected_bounds": [
+    -25.9109904,
+    -13.62221448,
+    -5.89730928,
+    -4.577788182
+  ],
+  "pixels_per_model_unit": 6.081093282,
+  "alpha_bbox": [
+    18,
+    4,
+    141,
+    60
+  ],
+  "visible_pixels": 3419,
+  "alpha_sha256": "83bc2df052e9dd153f6406a2aa64dca8c9c79ce8b8f9163a239fa524092eb7dd",
+  "inputs_sha256": {
+    "src/main/resources/assets/destiny/models/item/golden_gun_h29.json": "1c12e34eb47e86500592f62a5fe5a2f359ca8f76d5ae72ad6092c5e8d11027df",
+    "src/main/resources/assets/destiny/items/golden_gun_h29.json": "8afe27077eee722c3b42fc32e29c2dff767264b952843bffb82685b0c80135e1",
+    "src/main/resources/assets/destiny/models/mesh/h29/golden_gun_triangle.json": "0a0940b56ef7fee80d084fb8263511f6f93e54df7b59fac9f727d25093b2e55c",
+    "src/main/resources/assets/destiny/textures/item/supers/mesh_triangle_h28.png": "f3d531eb9bfb14feb06167c2da844f32df6d9038120d31179782d24f3062d947",
+    "art/mesh/supers/h29/golden_gun.mesh.json": "406eac6556ef7854d2d2348d5762db83791afbe5c60d17fce6f9993f6cf49162",
+    "src/main/java/kim/biryeong/destiny/fx/SuperVisuals.java": "8f8b04a9adeae2c08cfdc8ca3b1ddc32f7aa7a251943195581647c8181e15407",
+    "src/main/java/kim/biryeong/destiny/ability/hunter/HunterSuper.java": "b92d6f273224b2904488236bdbb160cab9ea452cad2211a2954f153a1cea1adc",
+    "scripts/build_weapon_hud_w112.py": "6f2a944211e4104828bc5960e04310a8223b987ec771d7a87a3efadbe3be0b93",
+    "scripts/build_golden_gun_hud_w122.py": "f7b33aac013f805eeb73aa8ce8051a5e8a9f118b505eeb9480d4e04311c55f57",
+    "src/main/resources/assets/destiny/items/gui/hud/ammo_hand_cannon.json": "71cabc60974c4498c6a4db146cd7bb4abff36a96b2f9e3eb5e056402744e541c",
+    "src/main/resources/assets/destiny/models/gui/hud/ammo_hand_cannon.json": "e0c3a981249fb6d822a110ee7da417c9783a9ab83674e1291c7b239b6254b2db"
+  },
+  "outputs_sha256": {
+    "src/main/resources/assets/destiny/items/gui/hud/ammo_golden_gun_w122.json": "ab1966b54d2f65af1dcc1df73b84e4646d5e439b650b312caf5bdde509225b94",
+    "src/main/resources/assets/destiny/models/gui/hud/ammo_golden_gun_w122.json": "03ca0b428072f28381a7e85d33c1b31259e6d9b3a872d40df7e5777f34226dac",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_golden_gun_w122.png": "1fb33f02797b1ea75efa992a588b55dd1dcd95479ea25638bba5456e6216f5e5",
+    "art/weapons/w122/golden_gun_hud/contact.png": "ad44c770e69fe963e2d02a7638dcd7e858d49aea66bfa9dfe7127fc40accd4e7"
+  }
+}

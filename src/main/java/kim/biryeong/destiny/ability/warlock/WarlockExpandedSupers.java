@@ -223,7 +223,7 @@ public final class WarlockExpandedSupers {
                 pulses++;
                 if (nearest != null && visible(epoch, from, end))
                     damage(nearest, (float) value(ability, "damage", 3, .1, 30));
-                Fx.line(epoch.level, from, end, Element.ARC.glow(), .25, .7f);
+                Fx.line(epoch.owner, epoch.level, from, end, Element.ARC.glow(), .25, .7f);
             }
             return true;
         }
@@ -279,7 +279,7 @@ public final class WarlockExpandedSupers {
                 safe = next;
             }
             if (safe.distanceToSqr(start) < .25) return false;
-            Fx.line(epoch.level, start.add(0, .9, 0), safe.add(0, .9, 0), Element.VOID.glow(), .2, .6f);
+            Fx.line(epoch.owner, epoch.level, start.add(0, .9, 0), safe.add(0, .9, 0), Element.VOID.glow(), .2, .6f);
             Vec3 velocity = p.getDeltaMovement();
             p.teleportTo(safe.x, safe.y, safe.z);
             p.setDeltaMovement(velocity);
@@ -343,7 +343,7 @@ public final class WarlockExpandedSupers {
             if (lastTick == now) return true;
             lastTick = now;
             ring.tick(); sword.tick();
-            if (age % 5 == 0) Fx.ring(epoch.level, origin, radius, Element.SOLAR.glow(), 40);
+            if (age % 5 == 0) Fx.ring(epoch.owner, epoch.level, origin, radius, Element.SOLAR.glow(), 40);
             if (age % interval == 0) {
                 for (Player ally : epoch.level.getEntitiesOfClass(Player.class,
                         new AABB(origin, origin).inflate(radius, height, radius)))
@@ -367,7 +367,7 @@ public final class WarlockExpandedSupers {
             try {
                 var item = ClassAbilityEffects.item(path);
                 if (!item.has(DataComponents.ITEM_MODEL)) return;
-                holder = new ElementHolder(); display = new ItemDisplayElement(item);
+                holder = new ElementHolder(); display = new AbilityDisplayElement(epoch.owner, item);
                 display.setItemDisplayContext(ItemDisplayContext.NONE);
                 display.setBrightness(new Brightness(15, 15));
                 display.setTeleportDuration(1);

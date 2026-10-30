@@ -204,10 +204,10 @@ class WeaponScreenLayoutW228Test {
 
     @Test void eachWizardStageHitsAndNavigatesOnlyItsVisibleControls() {
         Map<String, Set<Integer>> controls = Map.of(
-                "LOADOUT", Set.of(0, 1, 2, 14, 15, 20, 21),
-                "FAMILY", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 20, 21),
-                "WEAPON", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 20, 21),
-                "PERKS", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21));
+                "LOADOUT", Set.of(0, 1, 2, 14, 15, 20, 21, WeaponScreenLayout.CRUCIBLE),
+                "FAMILY", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 20, 21, WeaponScreenLayout.CRUCIBLE),
+                "WEAPON", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 20, 21, WeaponScreenLayout.CRUCIBLE),
+                "PERKS", Set.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, WeaponScreenLayout.CRUCIBLE));
         for (var stage : controls.entrySet()) {
             String name = stage.getKey();
             Set<Integer> expected = stage.getValue();

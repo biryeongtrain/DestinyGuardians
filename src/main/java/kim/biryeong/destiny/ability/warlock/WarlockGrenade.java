@@ -67,7 +67,7 @@ public final class WarlockGrenade extends Ability {
         FLIGHTS.removeIf(e -> !e.valid() || e.projectile.isDone());
         for (Field f : List.copyOf(FIELDS)) {
             if (!f.lease.valid() || f.age >= f.duration) { FIELDS.remove(f); continue; }
-            if (f.age % 5 == 0) Fx.ring(f.lease.level, f.origin, f.radius, f.ability.element().color(), 24);
+            if (f.age % 5 == 0) Fx.ring(f.lease.owner, f.lease.level, f.origin, f.radius, f.ability.element().color(), 24);
             if (f.age % f.interval == 0) pulse(f);
             f.age++;
         }
@@ -84,7 +84,7 @@ public final class WarlockGrenade extends Ability {
                 Vec3 pull = f.origin.subtract(WarlockAbilities.center(target));
                 if (pull.lengthSqr() > .04) target.setDeltaMovement(target.getDeltaMovement().add(pull.normalize().scale(.08)));
             }
-            if (element == Element.ARC) Fx.line(f.lease.level, f.origin, WarlockAbilities.center(target), element.color(), .3, .6f);
+            if (element == Element.ARC) Fx.line(f.lease.owner, f.lease.level, f.origin, WarlockAbilities.center(target), element.color(), .3, .6f);
         }
     }
     static void cleanup(ServerPlayer p) {

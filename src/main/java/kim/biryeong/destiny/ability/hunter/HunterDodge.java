@@ -5,6 +5,7 @@ import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.ability.Motion;
 import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.fx.Fx;
+import kim.biryeong.destiny.fx.AbilityParticles;
 import kim.biryeong.destiny.sound.DestinySounds;
 import kim.biryeong.destiny.fx.PlayerAnimations;
 import kim.biryeong.destiny.guardian.AbilitySlot;
@@ -45,7 +46,7 @@ public final class HunterDodge extends Ability {
         player.resetFallDistance();
         cast.contact(HunterSkillTiming.DODGE_CONTACT_TICKS, () -> {
             Vec3 feet = player.position();
-            cast.level().sendParticles(Fx.dust(0xC9B79C, 1.4f), feet.x, feet.y + 0.1, feet.z, 16, 0.4, 0.05, 0.4, 0.0);
+            AbilityParticles.send(player, cast.level(), Fx.dust(0xC9B79C, 1.4f), feet.x, feet.y + 0.1, feet.z, 16, 0.4, 0.05, 0.4, 0.0);
             DestinySounds.orVanilla(cast.level(), feet, "hunter.dodge", SoundEvents.PLAYER_ATTACK_SWEEP, 0.6f, 1.4f);
         });
         if (variant == Variant.GAMBLER && !Combat.enemiesNear(player, player.position(), param("enemy_radius", 8)).isEmpty()) {

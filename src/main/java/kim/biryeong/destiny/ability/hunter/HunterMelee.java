@@ -7,6 +7,7 @@ import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
 import kim.biryeong.destiny.fx.Fx;
+import kim.biryeong.destiny.fx.AbilityParticles;
 import kim.biryeong.destiny.fx.HunterVfx;
 import kim.biryeong.destiny.fx.SimProjectile;
 import kim.biryeong.destiny.guardian.AbilitySlot;
@@ -51,17 +52,17 @@ public final class HunterMelee extends Ability {
         double reach = param("reach", 2.8);
         Tasks.run(player, level, age -> {
             Vec3 center = player.position().add(0, 1, 0).add(Motion.horizontalLook(player).scale(1.2));
-            level.sendParticles(ParticleTypes.ELECTRIC_SPARK, center.x, center.y, center.z, 6, 0.4, 0.4, 0.4, 0.1);
+            AbilityParticles.send(player, level, ParticleTypes.ELECTRIC_SPARK, center.x, center.y, center.z, 6, 0.4, 0.4, 0.4, 0.1);
             if (age == 3) {
                 for (LivingEntity e : Combat.enemiesNear(level, player, center, reach)) {
-                    Fx.line(level, player.getEyePosition(), e.position().add(0, e.getBbHeight() / 2, 0), element().color(), 0.25, 1.0f);
+                    Fx.line(player, level, player.getEyePosition(), e.position().add(0, e.getBbHeight() / 2, 0), element().color(), 0.25, 1.0f);
                     if (Combat.damage(level, player, e, damage, element())) {
                         Statuses.apply(player, Keyword.AMPLIFIED, (int) param("amplified_ticks", 120));
                         player.heal((float) param("heal_on_kill", 4));
                     }
                 }
                 boolean modeled = HunterVfx.play(player, level, center, HunterVfx.Kind.ARC_STRIKE, 1.1, 16);
-                Fx.burst(level, center, element(), modeled ? 8 : 30, 0.6);
+                Fx.burst(player, level, center, element(), modeled ? 8 : 30, 0.6);
                 return false;
             }
             return true;
@@ -75,7 +76,7 @@ public final class HunterMelee extends Ability {
                 HunterAbilityVisuals.melee(element()), 0.6f, element().color(), hit -> {
                     ServerLevel level = player.level();
                     boolean modeled = HunterVfx.play(player, level, hit.getLocation(), HunterVfx.Kind.SOLAR_KNIFE, 0.65, 22);
-                    Fx.burst(level, hit.getLocation(), element(), modeled ? 6 : 20, 0.3);
+                    Fx.burst(player, level, hit.getLocation(), element(), modeled ? 6 : 20, 0.3);
                     if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity target) {
                         Combat.damage(level, player, target, damage, element());
                         Statuses.scorch(player, target, (int) param("scorch_ticks", 80));
@@ -96,8 +97,8 @@ public final class HunterMelee extends Ability {
                     Fx.sound(level, pos, SoundEvents.FIRE_EXTINGUISH, 0.8f, 0.6f);
                     Tasks.run(player, level, age -> {
                         if (!modeled || age % 4 == 0) {
-                            level.sendParticles(ParticleTypes.LARGE_SMOKE, pos.x, pos.y + 0.5, pos.z, modeled ? 2 : 6, radius / 2, 0.5, radius / 2, 0.01);
-                            level.sendParticles(Fx.dust(element().color(), 2.0f), pos.x, pos.y + 0.5, pos.z, modeled ? 1 : 4, radius / 2, 0.5, radius / 2, 0.0);
+                            AbilityParticles.send(player, level, ParticleTypes.LARGE_SMOKE, pos.x, pos.y + 0.5, pos.z, modeled ? 2 : 6, radius / 2, 0.5, radius / 2, 0.01);
+                            AbilityParticles.send(player, level, Fx.dust(element().color(), 2.0f), pos.x, pos.y + 0.5, pos.z, modeled ? 1 : 4, radius / 2, 0.5, radius / 2, 0.0);
                         }
                         if (age % 10 == 0) {
                             for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {

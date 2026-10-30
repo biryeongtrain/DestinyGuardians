@@ -21,7 +21,7 @@ import java.util.Map;
 
 /** Installs a versioned limb without ever opening an artist-owned installed model for writing. */
 public final class HunterModelAssets {
-    public static final String MODEL_NAME = "guardian_hunter_w259_r1";
+    public static final String MODEL_NAME = "guardian_hunter_w260_r1";
     static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_w199.animation.json";
 
     private HunterModelAssets() { }
@@ -65,14 +65,19 @@ public final class HunterModelAssets {
                     if (!replaced) animations.add(entry);
                 }
             }
+            try (var source = HunterModelAssets.class.getResourceAsStream("/destiny/animation/crucible_intro_w260.animation.json")) {
+                if (source == null) throw new IOException("W260 intro animations missing");
+                JsonParser.parseReader(new InputStreamReader(source, StandardCharsets.UTF_8))
+                        .getAsJsonObject().getAsJsonArray("animations").forEach(animations::add);
+            }
             JsonObject model = buildModel(
                     JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),animations);
             if (installIfAbsent(target, model)) {
-                DestinyGuardians.LOGGER.info("Installed W259 hunter limb: {}", target);
+                DestinyGuardians.LOGGER.info("Installed W260 hunter limb: {}", target);
             }
         } catch (Exception e) {
             // Cosmetic failure must not prevent startup: PlayerAnimations tries legacy limb then Steve.
-            DestinyGuardians.LOGGER.warn("Cannot prepare W259 hunter limb; legacy fallback remains available: {}", e.toString());
+            DestinyGuardians.LOGGER.warn("Cannot prepare W260 hunter limb; legacy fallback remains available: {}", e.toString());
         }
     }
 

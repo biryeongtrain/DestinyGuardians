@@ -1,0 +1,32 @@
+{
+  "verdict": "FAIL enemy super all-red; staff body appears red, attached lightning remains cyan",
+  "frames_reviewed": [
+    "/private/tmp/destiny-w260/vision-r6/frames/enemy-arc-0.png",
+    "/private/tmp/destiny-w260/vision-r6/frames/enemy-arc-1.png",
+    "/private/tmp/destiny-w260/vision-r6/frames/enemy-arc-2.png",
+    "/private/tmp/destiny-w260/vision-r6/frames/enemy-arc-3.png",
+    "/private/tmp/destiny-w260/vision-r6/frames/enemy-arc-4.png",
+    "/private/tmp/destiny-w260/vision-r6/frames/enemy-arc-5.png"
+  ],
+  "image_evidence": "enemy-arc-3-enlarged.png crop x740 y370 w220 h180, resized 4x; body dark red along both ends, cyan zigzag strands",
+  "confirmed_source_cause": "SuperEnergyVfx creates owner-aware AbilityDisplayElement with destiny:fx/arc_filament_h25. AbilityVisualVariants.item falls back to original when items/fx/arc_filament_h25_enemy.json is absent. That enemy asset is absent. Original texture is cyan.",
+  "routing_limit": "PNG is not a live packet ID trace; cannot prove every packet rewrite from image alone. Missing filament enemy asset is directly established and sufficient to retain original cyan filament even with correct routing. No evidence here requires altering BM handler again.",
+  "staff_asset_check": {
+    "original_cyan_dominant_tints": 210,
+    "enemy_cyan_dominant_tints": 0,
+    "triangles_each": 2298
+  },
+  "product_files_changed": [],
+  "operations": "Read-only source/hash/image inspection; only crop and this report written in own tmp directory. No server/client/Gradle/test execution.",
+  "minimal_next_scope": [
+    "src/main/resources/assets/destiny/items/fx/arc_filament_h25_enemy.json",
+    "src/main/resources/assets/destiny/models/fx/arc_filament_h25_enemy.json",
+    "src/main/resources/assets/destiny/textures/item/fx/arc_filament_h25_enemy.png"
+  ],
+  "next_change": "Create enemy-only red filament variant preserving geometry/UV/alpha; existing AbilityDisplayElement selects it for enemies automatically; originals retained for self/friendly/PvE. Asset edits require scope assignment first.",
+  "other_missing_enemy_variants": [
+    "fx/void_filament_h25",
+    "fx/void_spark_h25"
+  ],
+  "remaining_acceptance": "Master close cast PNG after enemy asset integration; compare enemy and friendly. r6 remains unaccepted for complete red super."
+}

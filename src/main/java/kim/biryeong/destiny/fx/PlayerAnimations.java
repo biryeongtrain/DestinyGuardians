@@ -3,6 +3,7 @@ package kim.biryeong.destiny.fx;
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.Guardians;
+import kim.biryeong.minigamelib.cinematic.CameraViews;
 import kr.toxicity.model.api.BetterModel;
 import kr.toxicity.model.api.animation.AnimationIterator;
 import kr.toxicity.model.api.animation.AnimationModifier;
@@ -61,6 +62,8 @@ public final class PlayerAnimations {
         int classMovingUntil;
         Run run;
         boolean closingAfterRun, meleeCast;
+        boolean introOwned; // Survives run=null on completion, failure and explicit stop.
+        IntroSelfCarrier introSelfCarrier;
         final LimbEquipment equipment;
         ItemStack swordStack;
         SwordHandPackets.Protection handProtection;
@@ -275,6 +278,7 @@ public final class PlayerAnimations {
             if (!created.get()) return false;
             ((ServerAnimationClock) (Object) tracker).destiny$claimServerClock();
             Playback state = new Playback(player, tracker, loop ? logical(request) : null, loop ? clip.animation : null, equipment);
+            state.introOwned = clip.animation.startsWith("h15_intro_");
             if(sword) {
                 state.swordStack=player.getMainHandItem();
                 tracker.rotation(() -> new ModelRotation(0,player.getYRot()));
@@ -383,7 +387,10 @@ public final class PlayerAnimations {
                     discard(state);
                     continue;
                 }
-                ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick();
+                if (state.run != null && state.run.animation.startsWith("h15_intro_"))
+                    kim.biryeong.minigamelib.cinematic.CameraViews.sending(() ->
+                            ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
+                else ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick();
                 var position = state.owner.position();
                 double moved = position.subtract(state.previousPosition).horizontalDistanceSqr();
                 state.previousPosition = position;
@@ -487,6 +494,11 @@ public final class PlayerAnimations {
     }
 
     private static void close(Playback state) {
+        if (state.introOwned) CameraViews.sending(() -> closeNow(state));
+        else closeNow(state);
+    }
+
+    private static void closeNow(Playback state) {
         state.run = null;
         state.equipment.clear();
         try {
@@ -499,6 +511,7 @@ public final class PlayerAnimations {
             catch (RuntimeException | LinkageError e) {
                 DestinyGuardians.LOGGER.warn("Limb close failed: {}", e.toString());
             } finally {
+                closeIntroSelfCarrier(state);
                 if (state.handProtection != null) {
                     try { SwordHandPackets.syncCurrent(state.owner); }
                     finally { SwordHandPackets.end(state.handProtection); }
@@ -522,7 +535,9 @@ public final class PlayerAnimations {
 
     public static boolean ownerSeesLimb(ServerPlayer player) {
         var runtime = Guardians.runtime(player);
-        return kim.biryeong.destiny.camera.SuperCamera.active(player) || (runtime.gcbClient && runtime.gcbThirdPerson);
+        return kim.biryeong.destiny.camera.SuperCamera.active(player)
+                || kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(player)
+                || (runtime.gcbClient && runtime.gcbThirdPerson);
     }
 
     private static void applyOwnerVisibility(ServerPlayer player, EntityTracker tracker) {
@@ -534,6 +549,87 @@ public final class PlayerAnimations {
     public static boolean isPlaying(ServerPlayer player) {
         Playback state = ACTIVE.get(player.getUUID());
         return state != null && !state.tracker.isClosed();
+    }
+
+    /** Submit the existing intro pose to one viewer; never replay or advance its clock.
+     * A successful return means submitted, not acknowledged by the native client.
+     */
+    public static boolean syncIntroViewer(ServerPlayer owner, ServerPlayer viewer, String expectedClip) {
+        Playback state = ACTIVE.get(owner.getUUID());
+        if (expectedClip == null || !expectedClip.startsWith("h15_intro_") || state == null
+                || state.owner != owner || !state.introOwned || state.run == null
+                || !expectedClip.equals(state.run.animation)) return false;
+        if (!state.server.isSameThread()) throw new IllegalStateException("Intro audience requires server thread");
+        if (!valid(state) || viewer.hasDisconnected() || viewer.isRemoved() || !viewer.isAlive()
+                || viewer.level() != state.level || state.server.getPlayerList().getPlayer(viewer.getUUID()) != viewer
+                || !kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(viewer)) return false;
+        var tracker = state.tracker;
+        var registry = tracker.registry();
+        // Registry.spawn includes every tracker. Do not resend a foreign model.
+        if (registry.trackers().stream().anyMatch(t -> t != tracker && !t.isClosed())) return false;
+        boolean[] submitted = {false};
+        CameraViews.sending(() -> {
+            tracker.getPipeline().viewFilter(candidate -> {
+                var player = state.server.getPlayerList().getPlayer(candidate.uuid());
+                return (player != null && player.level() == state.level
+                        && kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(player))
+                        || !tracker.modifier().sightTrace()
+                        || kr.toxicity.model.api.util.EntityUtil.canSee(candidate.eyeLocation(), tracker.location());
+            });
+            if (viewer == owner) {
+                if (state.introSelfCarrier == null)
+                    state.introSelfCarrier = new IntroSelfCarrier(owner, tracker);
+                // Installation is ordered on Netty, never block the server thread.
+                // CrucibleIntro retries this pair next tick without restarting the cast.
+                if (!state.introSelfCarrier.ready()) return;
+                state.introSelfCarrier.spawn();
+            }
+            var target = ModPlayer.of(viewer.connection);
+            tracker.show(target);
+            // Fake camera respawn/cuts can erase the client model while BM still
+            // reports isSpawned=true. A full resend also registers new viewers.
+            if (!registry.spawn(target)) return;
+            var channel = tracker.getPipeline().channel(viewer.getUUID());
+            if (channel == null) return;
+            // BM's spawn-success callback runs on Netty, outside this ThreadLocal
+            // scope. Submit the vanilla-body disguise synchronously as well.
+            BetterModel.nms().hide(channel, registry);
+            submitted[0] = tracker.isSpawned(target);
+        });
+        return submitted[0];
+    }
+
+    /** Detach this viewer from only the still-owned intro; a foreign replacement survives. */
+    public static void removeIntroViewer(ServerPlayer owner, ServerPlayer viewer, String expectedClip) {
+        Playback state = ACTIVE.get(owner.getUUID());
+        if (expectedClip == null || !expectedClip.startsWith("h15_intro_") || state == null
+                || state.owner != owner || !state.introOwned || state.run == null
+                || !expectedClip.equals(state.run.animation) || state.tracker.isClosed()) return;
+        if (!state.server.isSameThread()) throw new IllegalStateException("Intro audience requires server thread");
+        var connected = state.server.getPlayerList().getPlayer(viewer.getUUID());
+        if (connected != null && connected != viewer) return; // Old disconnect after reconnect.
+        CameraViews.sending(() -> {
+            var target = ModPlayer.of(viewer.connection);
+            var registry = state.tracker.registry();
+            try {
+                if (registry.trackers().stream().noneMatch(t -> t != state.tracker && !t.isClosed()))
+                    registry.remove(target);
+                else state.tracker.remove(target);
+            } finally {
+                if (viewer == owner) closeIntroSelfCarrier(state);
+            }
+        });
+    }
+
+    private static void closeIntroSelfCarrier(Playback state) {
+        IntroSelfCarrier carrier = state.introSelfCarrier;
+        state.introSelfCarrier = null;
+        if (carrier != null) {
+            try { carrier.close(); }
+            catch (RuntimeException | LinkageError e) {
+                DestinyGuardians.LOGGER.warn("Intro self carrier close failed: {}", e.toString());
+            }
+        }
     }
 
     /** Read-only effective clip for server QA; does not create or advance a tracker. */

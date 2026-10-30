@@ -37,6 +37,7 @@ public final class WeaponLoadout {
         return List.copyOf(result);
     }
     public static boolean canUse(ServerPlayer p) {
+        if(!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(p))return false;
         if(!enabled(p))return true;
         int index=p.getInventory().getSelectedSlot();
         return equipped(p).stream().anyMatch(e->e.slot().hotbar()==index&&e.stack()==p.getMainHandItem());

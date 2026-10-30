@@ -16,12 +16,14 @@ import net.minecraft.world.phys.Vec3;
 import java.util.Comparator;
 import java.util.List;
 
-/** 능력 피해·대상 선택 공통 함수. PvE 기준: 플레이어는 대상이 아니다. */
+/** 능력 피해·대상 선택. 플레이어 PvP는 시련의 장 세션의 적 팀 사이에서만 허용한다. */
 public final class Combat {
     private Combat() {
     }
 
     public static boolean isEnemy(ServerPlayer source, Entity entity) {
+        if (entity instanceof ServerPlayer player) return player.isAlive()
+                && kim.biryeong.destiny.crucible.CrucibleRuntime.canFight(source, player);
         return entity instanceof LivingEntity living
                 && entity != source
                 && living.isAlive()
@@ -64,6 +66,8 @@ public final class Combat {
             return false;
         }
         if (!kim.biryeong.destiny.world.TowerSpawnWorld.mayAttack(level, target)) return false;
+        if (target instanceof ServerPlayer player
+                && !kim.biryeong.destiny.crucible.CrucibleRuntime.canFight(source, player)) return false;
         if (attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.PRIMARY
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.SPECIAL
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.HEAVY) {

@@ -59,7 +59,7 @@ public final class SimProjectile {
         this.trailColor = trailColor;
         this.onImpact = onImpact;
         this.holder = new ElementHolder();
-        this.display = new ItemDisplayElement(visual);
+        this.display = new AbilityDisplayElement(owner, visual);
         // Authored 3D props follow flight, rather than turning into camera-facing sprites.
         // Legacy vanilla sprites (e.g. Shadowshot's arrow) retain their previous presentation.
         this.directional = visual.has(DataComponents.ITEM_MODEL);
@@ -137,7 +137,7 @@ public final class SimProjectile {
             hit = entityHit;
             end = entityHit.getLocation();
         }
-        Fx.line(level, pos, end, trailColor, 0.4, 0.8f);
+        Fx.line(owner, level, pos, end, trailColor, 0.4, 0.8f);
         pos = end;
         display.setOffset(pos.subtract(origin));
         if (directional) display.setLeftRotation(flightRotation(velocity));

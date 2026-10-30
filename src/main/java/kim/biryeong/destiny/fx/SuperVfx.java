@@ -48,7 +48,7 @@ public final class SuperVfx {
             this.radius = radius;
             this.expires = level.getServer().getTickCount() + ticks;
             holder = new ElementHolder();
-            display = new ItemDisplayElement(beamItem(target == null ? "solar_trail" : "void_link"));
+            display = new AbilityDisplayElement(owner, beamItem(target == null ? "solar_trail" : "void_link"));
             display.setItemDisplayContext(ItemDisplayContext.NONE);
             display.setBillboardMode(Display.BillboardConstraints.FIXED);
             display.setBrightness(new Brightness(15, 15));

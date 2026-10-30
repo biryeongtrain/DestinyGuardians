@@ -6,7 +6,8 @@ package kim.biryeong.destiny.inventory;
  * Boxes store their CENTRES, never their upper-left corners. Page numbers do not affect geometry.
  */
 public final class WeaponScreenLayout {
-    public static final int NODE_COUNT = 30;
+    public static final int NODE_COUNT = 31;
+    public static final int CRUCIBLE = 30;
     public static final int PREVIOUS = 12;
     public static final int NEXT = 13;
     public static final int CLOSE = 14;
@@ -59,7 +60,8 @@ public final class WeaponScreenLayout {
             new Box(330, 540, 340, 156), new Box(800, 540, 340, 156),
             new Box(330, 720, 340, 156), new Box(800, 720, 340, 156),
             new Box(720, 925, 220, 44),
-            new Box(565, 875, 810, 116)
+            new Box(565, 875, 810, 116),
+            new Box(645, 112, 210, 52)
     };
 
     private WeaponScreenLayout() { }
@@ -89,7 +91,7 @@ public final class WeaponScreenLayout {
     /** Live wizard geometry. A missing/unknown stage safely exposes only the loadout controls. */
     public static boolean visible(int node, String stage) {
         if (node < 0 || node >= NODE_COUNT) return false;
-        if (node == CHARACTER_TAB || node == LOADOUT_TAB || node == CLOSE) return true;
+        if (node == CHARACTER_TAB || node == LOADOUT_TAB || node == CLOSE || node == CRUCIBLE) return true;
         if ("CHARACTER".equals(stage)) return node >= CLASS && node <= SUPER || node == JUMP;
         if ("CHARACTER_OPTIONS".equals(stage))
             return (node >= 3 && node <= NEXT) || node == BACK_CHARACTER;

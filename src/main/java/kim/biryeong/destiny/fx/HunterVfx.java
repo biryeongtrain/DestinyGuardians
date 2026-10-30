@@ -77,7 +77,9 @@ public final class HunterVfx {
         final int duration;
         final int startedAt;
         final Map<UUID, ModPlayer> viewers = new HashMap<>();
+        final Map<UUID, Boolean> hostileViewers = new HashMap<>();
         DummyTracker tracker;
+        DummyTracker enemyTracker;
         int nextViewerRefresh = VIEWER_INTERVAL;
 
         Effect(ServerPlayer owner, ServerLevel level, Vec3 position, Kind kind, double radius, int duration) {
@@ -149,6 +151,18 @@ public final class HunterVfx {
             var type = kind.looping() ? AnimationIterator.Type.LOOP : AnimationIterator.Type.PLAY_ONCE;
             if (!effect.tracker.animate(kind.animation(), new AnimationModifier(0, 0, type))) {
                 return false;
+            }
+            if (kim.biryeong.destiny.crucible.CrucibleRuntime.participating(owner)) {
+                String enemyModel = AbilityVisualVariants.model(kind.modelName(), true);
+                var hostile = BetterModel.model(enemyModel).orElse(null);
+                if (hostile != null && !enemyModel.equals(kind.modelName())) {
+                    effect.enemyTracker = hostile.create(ModLocation.of(level,pos,pitch,yaw),TrackerModifier.DEFAULT,
+                            tracker -> effect.enemyTracker = tracker);
+                    effect.enemyTracker.update(TrackerUpdateAction.brightness(15,15));
+                    if (kind == Kind.VOID_SMOKE) effect.enemyTracker.update(TrackerUpdateAction.billboard(PlatformBillboard.CENTER));
+                    effect.enemyTracker.animate(kind.animation(),new AnimationModifier(0,0,type));
+                    updateScale(effect,0);
+                }
             }
             refreshViewers(effect);
             if (effect.tracker.isClosed()) {
@@ -246,6 +260,7 @@ public final class HunterVfx {
                 : 1;
         // Authored radius is 16 Blockbench units = one block, so no unit conversion is needed.
         effect.tracker.scaler(ModelScaler.value((float) (effect.radius * factor)));
+        if (effect.enemyTracker != null) effect.enemyTracker.scaler(ModelScaler.value((float) (effect.radius * factor)));
     }
 
     private static void refreshViewers(Effect effect) {
@@ -263,13 +278,22 @@ public final class HunterVfx {
             ServerPlayer player = nearby.get(entry.getKey());
             if (player == null || entry.getValue().source() != player.connection) {
                 effect.tracker.remove(entry.getValue());
+                if (effect.enemyTracker != null) effect.enemyTracker.remove(entry.getValue());
+                effect.hostileViewers.remove(entry.getKey());
                 iterator.remove();
             }
         }
         for (ServerPlayer player : nearby.values()) {
             ModPlayer viewer = effect.viewers.computeIfAbsent(player.getUUID(), id -> ModPlayer.of(player.connection));
-            if (!effect.tracker.isSpawned(viewer)) {
-                effect.tracker.spawn(viewer);
+            boolean hostile = effect.enemyTracker != null && kim.biryeong.destiny.crucible.CrucibleRuntime.enemies(effect.owner,player);
+            var selected = hostile ? effect.enemyTracker : effect.tracker;
+            Boolean previous = effect.hostileViewers.put(player.getUUID(),hostile);
+            if (previous != null && previous != hostile) {
+                effect.tracker.remove(viewer);
+                if(effect.enemyTracker!=null)effect.enemyTracker.remove(viewer);
+            }
+            if (!selected.isSpawned(viewer)) {
+                selected.spawn(viewer);
             }
         }
     }
@@ -294,11 +318,17 @@ public final class HunterVfx {
         for (ModPlayer viewer : effect.viewers.values()) {
             try {
                 effect.tracker.remove(viewer);
+                if(effect.enemyTracker!=null)effect.enemyTracker.remove(viewer);
             } catch (RuntimeException e) {
                 DestinyGuardians.LOGGER.warn("Hunter VFX {} viewer cleanup failed: {}", effect.kind.modelName(), e.toString());
             }
         }
         effect.viewers.clear();
+        effect.hostileViewers.clear();
+        if(effect.enemyTracker!=null) {
+            try {effect.enemyTracker.close();}
+            catch(RuntimeException e) {DestinyGuardians.LOGGER.warn("Enemy Hunter VFX cleanup failed: {}",e.toString());}
+        }
         try {
             effect.tracker.close();
         } catch (RuntimeException e) {

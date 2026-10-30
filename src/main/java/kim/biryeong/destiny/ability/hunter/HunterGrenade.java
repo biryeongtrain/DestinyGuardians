@@ -6,6 +6,7 @@ import kim.biryeong.destiny.combat.Combat;
 import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
 import kim.biryeong.destiny.fx.Fx;
+import kim.biryeong.destiny.fx.AbilityParticles;
 import kim.biryeong.destiny.sound.DestinySounds;
 import kim.biryeong.destiny.fx.HunterVfx;
 import kim.biryeong.destiny.fx.SimProjectile;
@@ -60,8 +61,8 @@ public final class HunterGrenade extends Ability {
         switch (element()) {
             case ARC -> {
                 boolean modeled = HunterVfx.play(player, level, pos, HunterVfx.Kind.ARC_FLASH, radius, 16);
-                Fx.burst(level, pos, element(), modeled ? 18 : 60, radius / 3);
-                if (!modeled) Fx.ring(level, pos, radius, element().glow(), 40);
+                Fx.burst(player, level, pos, element(), modeled ? 18 : 60, radius / 3);
+                if (!modeled) Fx.ring(player, level, pos, radius, element().glow(), 40);
                 DestinySounds.hunterOrVanilla(level, pos, element(), "grenade.impact", SoundEvents.LIGHTNING_BOLT_IMPACT, 0.8f, 1.6f);
                 for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                     kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, (float) param("damage", 5), element());
@@ -70,8 +71,8 @@ public final class HunterGrenade extends Ability {
             }
             case SOLAR -> {
                 boolean modeled = HunterVfx.play(player, level, pos, HunterVfx.Kind.SOLAR_BURST, radius, 22);
-                Fx.burst(level, pos, element(), modeled ? 18 : 70, radius / 3);
-                level.sendParticles(ParticleTypes.LAVA, pos.x, pos.y, pos.z, modeled ? 4 : 12, radius / 3, 0.2, radius / 3, 0.0);
+                Fx.burst(player, level, pos, element(), modeled ? 18 : 70, radius / 3);
+                AbilityParticles.send(player, level, ParticleTypes.LAVA, pos.x, pos.y, pos.z, modeled ? 4 : 12, radius / 3, 0.2, radius / 3, 0.0);
                 DestinySounds.hunterOrVanilla(level, pos, element(), "grenade.impact", SoundEvents.GENERIC_EXPLODE.value(), 0.8f, 1.3f);
                 for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                     kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, (float) param("damage", 7), element());
@@ -86,8 +87,8 @@ public final class HunterGrenade extends Ability {
                 Tasks.run(player, level, age -> {
                     if (!cast.valid()) return false;
                     if (!modeled && age % 2 == 0) {
-                        Fx.ring(level, pos, radius * (1 - (age % 20) / 20.0), element().color(), 24);
-                        level.sendParticles(ParticleTypes.PORTAL, pos.x, pos.y, pos.z, 12, radius / 3, 0.4, radius / 3, 0.5);
+                        Fx.ring(player, level, pos, radius * (1 - (age % 20) / 20.0), element().color(), 24);
+                        AbilityParticles.send(player, level, ParticleTypes.PORTAL, pos.x, pos.y, pos.z, 12, radius / 3, 0.4, radius / 3, 0.5);
                     }
                     for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                         Vec3 pull = pos.subtract(e.position()).scale(0.08);

@@ -260,7 +260,7 @@ public final class HunterExpandedSupers {
                     }
                     if (pendingAt >= 0 && now() >= pendingAt) { pendingAt=-1; slash(heavyPending); }
                     cloak.sync(cloaked());
-                    if (cloaked() && age % 8 == 0) Fx.ring(lease.level,lease.owner.position().add(0,.12,0),.65,Element.VOID.color(),10);
+                    if (cloaked() && age % 8 == 0) Fx.ring(lease.owner, lease.level,lease.owner.position().add(0,.12,0),.65,Element.VOID.color(),10);
                 }
             }
             return true;
@@ -446,7 +446,7 @@ public final class HunterExpandedSupers {
                     +ticks(l.ability,"field_delay_ticks",24,0,100)+ticks(l.ability,"field_duration_ticks",160,20,600);
             nextPulse=started+ticks(l.ability,"lightning_delay_ticks",40,0,100)+ticks(l.ability,"field_delay_ticks",24,0,100);
             holder=new ElementHolder();
-            ItemDisplayElement display=new ItemDisplayElement(ClassAbilityEffects.item("hunter/gathering_storm_embedded"));
+            ItemDisplayElement display=new AbilityDisplayElement(l.owner,ClassAbilityEffects.item("hunter/gathering_storm_embedded"));
             display.setItemDisplayContext(ItemDisplayContext.NONE);
             display.setScale(new Vector3f(1f)); display.setTeleportDuration(1);
             holder.addElement(display);
@@ -458,7 +458,7 @@ public final class HunterExpandedSupers {
             if (destroyed || !lease.valid() || now>=expires) return false;
             if (lastTick==now) return true; lastTick=now;
             double radius=value(lease.ability,"radius",4,1,6);
-            if ((now-started)%5==0) Fx.ring(lease.level,visualOrigin,radius,Element.ARC.color(),28);
+            if ((now-started)%5==0) Fx.ring(lease.owner, lease.level,visualOrigin,radius,Element.ARC.color(),28);
             if (!struck && now>=started+ticks(lease.ability,"lightning_delay_ticks",40,0,100)) {
                 struck=true;
                 blast(lease,origin,radius,(float)value(lease.ability,"lightning_damage",12,.1,60));
@@ -468,13 +468,13 @@ public final class HunterExpandedSupers {
                 nextPulse=now+ticks(lease.ability,"pulse_ticks",14,5,60);
                 for (LivingEntity e : targets(lease,origin,radius)) {
                     damage(lease,e,(float)value(lease.ability,"pulse_damage",5,.1,30));
-                    Fx.line(lease.level,origin,center(e),Element.ARC.color(),.18,1f);
+                    Fx.line(lease.owner, lease.level,origin,center(e),Element.ARC.color(),.18,1f);
                 }
                 // Local lightning stroke stops at the field, not at a global weather strike.
                 var roof=lease.level.clip(new ClipContext(origin,origin.add(0,5,0),
                         ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,lease.owner));
                 Vec3 top=roof.getType()==HitResult.Type.MISS?origin.add(0,5,0):roof.getLocation();
-                Fx.line(lease.level,top,origin,Element.ARC.glow(),.2,1f);
+                Fx.line(lease.owner, lease.level,top,origin,Element.ARC.glow(),.2,1f);
             }
             holder.tick(); return true;
         }

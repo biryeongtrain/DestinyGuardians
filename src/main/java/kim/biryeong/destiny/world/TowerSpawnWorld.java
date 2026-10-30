@@ -98,6 +98,8 @@ public final class TowerSpawnWorld {
         // Fantasy PERSISTENT levels use the normal server save/close path. Never delete or enqueue an unload here.
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             if (state != null && state.server() == server) {
+                // Fantasy must still drain queued chunk unload/light work after the last player leaves.
+                state.handle().setTickWhenEmpty(true);
                 state.details().close();
                 state.materials().close();
                 state.baked().close();
@@ -130,7 +132,7 @@ public final class TowerSpawnWorld {
             PENDING_JOINS.remove(handler.getPlayer().getUUID(), handler.getPlayer());
         });
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-            if (!alive && enabled()) teleport(newPlayer);
+            if (!alive && enabled() && !kim.biryeong.destiny.crucible.CrucibleRuntime.participating(newPlayer)) teleport(newPlayer);
         });
         // Rescue before player physics/damage. Returning is allowed for creative administrators as well.
         ServerTickEvents.START_SERVER_TICK.register(TowerSpawnWorld::tick);

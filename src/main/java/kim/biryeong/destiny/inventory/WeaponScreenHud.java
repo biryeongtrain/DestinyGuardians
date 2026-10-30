@@ -69,6 +69,8 @@ public final class WeaponScreenHud {
         p.text("identity_sub", "수호자  /  캐릭터", 365, 138, 20, MUTED);
         button(p, WeaponScreenLayout.CHARACTER_TAB, "캐릭터", true);
         button(p, WeaponScreenLayout.LOADOUT_TAB, "로드아웃", true);
+        button(p, WeaponScreenLayout.CRUCIBLE,
+                kim.biryeong.destiny.crucible.CrucibleRuntime.participating(player) ? "탑으로 복귀" : "시련의 장", true);
         p.rect("active_tab", view.characterMode() ? 890 : 1130, 178, 186, 3, 105, GOLD);
         if (view.characterMode()) {
             character(p, view);

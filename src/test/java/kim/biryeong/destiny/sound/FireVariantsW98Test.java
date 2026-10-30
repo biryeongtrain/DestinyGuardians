@@ -149,6 +149,19 @@ class FireVariantsW98Test {
         assertEquals(209, expected.size(), "Historical W102 inventory remains unchanged");
         for (String path : ReviewedAudioW234.verifiedLaterAudioPaths())
             assertTrue(expected.add(path), "Later stages cannot overwrite inherited audio: " + path);
+        var crucible = json(Path.of("art/crucible/w260/sound-provenance.json")).getAsJsonObject("cues");
+        var definitions = json(Path.of("src/main/resources/assets/destiny_crucible/sounds.json"));
+        assertEquals(Set.of("control", "start", "capture_a", "capture_b", "capture_c",
+                "lost_a", "lost_b", "lost_c", "advantage", "enemy_advantage",
+                "power_play", "enemy_power_play", "victory", "defeat"), crucible.keySet());
+        assertEquals(crucible.keySet(), definitions.keySet());
+        for (var entry : crucible.entrySet()) {
+            String path = "src/main/resources/assets/destiny_crucible/sounds/w260/" + entry.getKey() + ".ogg";
+            assertEquals(entry.getValue().getAsJsonObject().get("sha256").getAsString(), sha(Path.of(path)), path);
+            assertEquals("destiny_crucible:w260/" + entry.getKey(), definitions.getAsJsonObject(entry.getKey())
+                    .getAsJsonArray("sounds").get(0).getAsJsonObject().get("name").getAsString());
+            assertTrue(expected.add(path), "Crucible does not replace inherited audio");
+        }
         assertAudioInventory(expected, actual);
         assertSixOggBytes(w98);
     }

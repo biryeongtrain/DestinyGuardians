@@ -41,7 +41,7 @@ public final class WarlockSuper extends Ability {
             }
             int activeAge = vortex.age++ - vortex.delay;
             if (activeAge < 0) continue;
-            if (activeAge % 5 == 0) Fx.ring(vortex.lease.level, vortex.origin, vortex.radius, Element.VOID.color(), 32);
+            if (activeAge % 5 == 0) Fx.ring(vortex.lease.owner, vortex.lease.level, vortex.origin, vortex.radius, Element.VOID.color(), 32);
             if (activeAge % vortex.interval != 0) continue;
             for (LivingEntity target : WarlockAbilities.targets(vortex.lease, vortex.origin, vortex.radius))
                 Combat.damage(vortex.lease.level, vortex.lease.owner, target, vortex.damage, Element.VOID, AmmoGeneration.SUPER);
@@ -142,7 +142,7 @@ public final class WarlockSuper extends Ability {
                 if (!WarlockAbilities.visible(lease, from, end)) break;
                 visited.add(target.getUUID());
                 superDamage(target, damage);
-                Fx.line(lease.level, from, end, ability.element().color(), .2, 1f);
+                Fx.line(lease.owner, lease.level, from, end, ability.element().color(), .2, 1f);
                 from = end;
                 target = WarlockAbilities.targets(lease, from, hop).stream().filter(e -> !visited.contains(e.getUUID())).findFirst().orElse(null);
             }

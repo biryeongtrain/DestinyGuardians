@@ -95,7 +95,7 @@ public final class WarlockMelee extends Ability {
             if (!WarlockAbilities.visible(lease, from, end)) break;
             visited.add(target.getUUID());
             MeleeWeaponTraits.poweredDamage(lease.level, lease.owner, target, damage, element(), traits);
-            Fx.line(lease.level, from, end, element().color(), .25, .8f);
+            Fx.line(lease.owner, lease.level, from, end, element().color(), .25, .8f);
             from = end;
             target = WarlockAbilities.targets(lease, from, hop).stream().filter(e -> !visited.contains(e.getUUID())).findFirst().orElse(null);
         }

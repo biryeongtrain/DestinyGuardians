@@ -180,7 +180,7 @@ public final class JumpAbilities {
                 // Teleport has no additional launch impulse; preserve the accepted incoming velocity.
                 Motion.setVelocity(player, new Vec3(current.x(), current.y(), current.z()));
                 player.resetFallDistance();
-                Fx.line(state.level, start.add(0, .9, 0), destination.add(0, .9, 0), ability.element().glow(), .2, .6f);
+                Fx.line(player, state.level, start.add(0, .9, 0), destination.add(0, .9, 0), ability.element().glow(), .2, .6f);
                 Guardians.runtime(player).airJumpsUsed++;
             }
         }
@@ -231,7 +231,7 @@ public final class JumpAbilities {
         move(player, new Velocity(velocity.x(), vertical, velocity.z()));
         if (now % 4 == 0) {
             Element element = CharacterLoadouts.subclass(Guardians.data(player));
-            Fx.burst(state.level, player.position(), element == null ? Element.KINETIC : element, 3, .15);
+            Fx.burst(player, state.level, player.position(), element == null ? Element.KINETIC : element, 3, .15);
         }
     }
 
@@ -281,7 +281,7 @@ public final class JumpAbilities {
     private static void effects(ServerPlayer player, Ability ability) {
         Element element = ability.element() == Element.KINETIC ? CharacterLoadouts.subclass(Guardians.data(player)) : ability.element();
         if (element == null) element = Element.KINETIC;
-        Fx.burst(player.level(), player.position(), element, 8, .22);
+        Fx.burst(player, player.level(), player.position(), element, 8, .22);
         ClassAbilityEffects.sound(player, element, "jump");
     }
 

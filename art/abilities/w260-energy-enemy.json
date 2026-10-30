@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "purpose": "W260 enemy-only Arc/Void equipment energy variants; r6 cyan filament fallback fix",
+  "generator": {
+    "name": "w260-energy-enemy-v1",
+    "implementation": "Java 25 ImageIO, TYPE_INT_ARGB, PNG encoder; JSON exact identifier replacement",
+    "pixel_rule": "For RGBA: if A == 0 keep RGBA; otherwise V=max(R,G,B), L=floor((18*V+50)/100), output=(V,L,L,A).",
+    "preserves": [
+      "pixel dimensions",
+      "max RGB channel value",
+      "every alpha byte",
+      "model geometry",
+      "UV",
+      "display transforms",
+      "light emission",
+      "source files"
+    ],
+    "json_rule": "Item model reference gets _enemy; model texture references get _enemy. All other content unchanged."
+  },
+  "routing": "Existing AbilityDisplayElement + CrucibleRuntime.enemies selects packaged _enemy items. Self/friendly/PvE retain original assets.",
+  "files": [
+    {
+      "source": "src/main/resources/assets/destiny/items/fx/arc_filament_h25.json",
+      "source_sha256": "d12a2420d93da416dc0bb27db5ae29745c238d3a08f81e4156587bfb6d8e9dec",
+      "output": "src/main/resources/assets/destiny/items/fx/arc_filament_h25_enemy.json",
+      "output_sha256": "aabb301ea7bea36dece67208e422892a9d5ef908438f0ad8dd82f9689816c9c4"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/fx/arc_filament_h25.json",
+      "source_sha256": "2aae45e722bb11921a0b2c704f2fe15f545fd8211330eb0f21ed225258960aff",
+      "output": "src/main/resources/assets/destiny/models/fx/arc_filament_h25_enemy.json",
+      "output_sha256": "6dbb11cc05dfd4f6df023eba23a9b0e5cbb69b415c803b8d9f71d2b24be7c693"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/textures/item/fx/arc_filament_h25.png",
+      "source_sha256": "db34c0fbc05b9ce3ae8143bc0ec3cecc03d6a3dd5770c5cdec7c2cca74a8f700",
+      "output": "src/main/resources/assets/destiny/textures/item/fx/arc_filament_h25_enemy.png",
+      "output_sha256": "8dac54967ee8b99e01c3e3fbc0e6d21a7cfb72693896007266b3e00fa8101088"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/items/fx/void_filament_h25.json",
+      "source_sha256": "7ff809fbc63bc6bdd49bfe224e57e910f45146e2620bcf4afd60d68b23f7a892",
+      "output": "src/main/resources/assets/destiny/items/fx/void_filament_h25_enemy.json",
+      "output_sha256": "110a45b6233ce5c1f9139a953d74b4d6ede2c14fbfb6841d2ce017e5b0248d85"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/fx/void_filament_h25.json",
+      "source_sha256": "103c04f9f26269142e05000f533edf3634c05a2466b43edbf8cfca2ff16806a3",
+      "output": "src/main/resources/assets/destiny/models/fx/void_filament_h25_enemy.json",
+      "output_sha256": "6fc970932f2154d41163017de888f79584f7545941914c018108bed23716de5e"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/textures/item/fx/void_filament_h25.png",
+      "source_sha256": "c25f3aab5f5299f9fb5daed5c8a9552e7f882e5622bad80c9f94d17baf7792a8",
+      "output": "src/main/resources/assets/destiny/textures/item/fx/void_filament_h25_enemy.png",
+      "output_sha256": "773b69785ba2033771a7440a2554c9c76db0b371b6d9416a384f9557d89f2428"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/items/fx/void_spark_h25.json",
+      "source_sha256": "920da4a68abc27bc24925b72d2c76bb6fa4851550fe04fa868372bf5cae2b17c",
+      "output": "src/main/resources/assets/destiny/items/fx/void_spark_h25_enemy.json",
+      "output_sha256": "afc2ffa8127105ef17ca9fb8d5fe20bec1951b6805fe960d291a0bcdb720dba4"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/fx/void_spark_h25.json",
+      "source_sha256": "6993bff9bbed2529a0ff9faf6e1d9604bd7bed3016bc011f38a194e194fff859",
+      "output": "src/main/resources/assets/destiny/models/fx/void_spark_h25_enemy.json",
+      "output_sha256": "e9bc90c665486492ec92b4e7c748785f1dac3eb821b4c3560216b98c895f39e4"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/textures/item/fx/void_spark_h25.png",
+      "source_sha256": "c25f3aab5f5299f9fb5daed5c8a9552e7f882e5622bad80c9f94d17baf7792a8",
+      "output": "src/main/resources/assets/destiny/textures/item/fx/void_spark_h25_enemy.png",
+      "output_sha256": "773b69785ba2033771a7440a2554c9c76db0b371b6d9416a384f9557d89f2428"
+    }
+  ],
+  "validation": {
+    "json_files": 6,
+    "json_parse": "pass",
+    "model_geometry_uv_display_unchanged": "pass",
+    "all_item_model_texture_references_resolve": "pass",
+    "texture_dimensions": "3 x 64x64",
+    "alpha_exact": "all 12288 pixels",
+    "visible_red_pixels": 12288,
+    "original_sources_equal_main": "pass",
+    "vision": "pending master; no server/client operations"
+  }
+}

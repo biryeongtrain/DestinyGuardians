@@ -189,6 +189,13 @@ public final class WeaponScreen {
         int node = s.focus;
         // A stale/hidden node must never activate a control from another tab.
         if (!WeaponScreenLayout.visible(node, s.stage)) return true;
+        if (node == WeaponScreenLayout.CRUCIBLE) {
+            close(p);
+            if (kim.biryeong.destiny.crucible.CrucibleRuntime.participating(p))
+                kim.biryeong.destiny.crucible.CrucibleRuntime.leave(p, true);
+            else kim.biryeong.destiny.crucible.CrucibleRuntime.join(p);
+            return true;
+        }
         if (node == WeaponScreenLayout.CHARACTER_TAB) {
             if (!s.stage.equals("CHARACTER")) {
                 resetDraft(s); s.family = ""; s.stage = "CHARACTER"; s.page = 0;

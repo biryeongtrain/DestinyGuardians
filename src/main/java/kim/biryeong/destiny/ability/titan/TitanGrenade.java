@@ -51,7 +51,7 @@ public final class TitanGrenade extends Ability {
             long now=c.level.getGameTime();if(now>=until)return false;
             if(last==now)return true;last=now;
             if(attached!=null&&attached.isAlive()&&attached.level()==c.level)position=attached.getBoundingBox().getCenter();
-            if(now<detonate) {if(now%4==0)Fx.burst(c.level,position,ability.element(),3,.12);return true;}
+            if(now<detonate) {if(now%4==0)Fx.burst(c.owner, c.level,position,ability.element(),3,.12);return true;}
             if(now<nextPulse)return true;
             nextPulse=now+TitanAbilities.ticks(ability,"pulse_ticks",20,60);
             ClassAbilityEffects.burst(c.owner,position,ability.element(),radius());

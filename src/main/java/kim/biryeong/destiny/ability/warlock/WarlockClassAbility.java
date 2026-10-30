@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3f;
 import org.joml.Quaternionf;
 import kim.biryeong.destiny.fx.ClassAbilityEffects;
+import kim.biryeong.destiny.fx.AbilityDisplayElement;
 import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.guardian.*;
 import net.minecraft.resources.Identifier;
@@ -45,7 +46,7 @@ public final class WarlockClassAbility extends Ability {
                 // Canonical art metadata must be supplied. Never display a fallback fire-charge sprite.
                 if (item.has(DataComponents.ITEM_MODEL) && modelDiameterPixels > 0) {
                     allocated = new ElementHolder();
-                    element = new ItemDisplayElement(item);
+                    element = new AbilityDisplayElement(lease.owner, item);
                     element.setItemDisplayContext(ItemDisplayContext.NONE);
                     element.setBillboardMode(Display.BillboardConstraints.FIXED);
                     element.setBrightness(new Brightness(15, 15));
@@ -100,7 +101,7 @@ public final class WarlockClassAbility extends Ability {
         for (Rift r : List.copyOf(ACTIVE.values())) {
             if (!r.lease.valid() || r.age >= r.duration) { ACTIVE.remove(r.lease.owner); r.destroy(); continue; }
             if (r.holder != null) r.holder.tick();
-            if (r.age % 5 == 0) Fx.ring(r.lease.level, r.origin, r.radius, 0xF4F3E8, 32);
+            if (r.age % 5 == 0) Fx.ring(r.lease.owner, r.lease.level, r.origin, r.radius, 0xF4F3E8, 32);
             if (r.age % r.interval == 0) {
                 for (Player ally : r.lease.level.getEntitiesOfClass(Player.class, new AABB(r.origin, r.origin).inflate(r.radius, r.height + 2, r.radius))) if (ally != r.lease.owner) heal(r, ally);
                 // TestPlayers and some server-side NPC players are not in the world's entity index.
@@ -118,7 +119,9 @@ public final class WarlockClassAbility extends Ability {
     }
     private static boolean friendly(ServerPlayer owner, Player ally) {
         // Untagged PvE co-op players share the field; explicit opposing teams do not.
-        return ally == owner || owner.isAlliedTo(ally) || owner.getTeam() == null && ally.getTeam() == null;
+        return ally instanceof ServerPlayer player
+                ? kim.biryeong.destiny.crucible.CrucibleRuntime.friendly(owner, player)
+                : ally == owner || owner.isAlliedTo(ally) || owner.getTeam() == null && ally.getTeam() == null;
     }
     static void cleanup(ServerPlayer p) {
         Rift r = ACTIVE.remove(p);

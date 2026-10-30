@@ -46,7 +46,7 @@ public final class ClassAbilityEffects {
             this.ownsPostEffect = ownsPostEffect;
             origin = p.position();
             holder = new ElementHolder();
-            prop = new ItemDisplayElement(bareHands(path) || path.equals("warlock/void_super") ? ItemStack.EMPTY : item(path));
+            prop = new AbilityDisplayElement(p, bareHands(path) || path.equals("warlock/void_super") ? ItemStack.EMPTY : item(path));
             prop.setItemDisplayContext(ItemDisplayContext.NONE);
             prop.setBrightness(new Brightness(15, 15));
             prop.setTeleportDuration(1);
@@ -106,7 +106,7 @@ public final class ClassAbilityEffects {
         s.prop.setLeftRotation(new Quaternionf().rotationY((float)-Math.toRadians(p.getYRot()))
                 .rotateX((float)(-.15 - swing * 1.4)));
         s.holder.tick();
-        if (age % 4 == 0) p.level().sendParticles(Fx.dust(e.color(), .65f), p.getX(), p.getY() + .5,
+        if (age % 4 == 0) AbilityParticles.send(p, p.level(), Fx.dust(e.color(), .65f), p.getX(), p.getY() + .5,
                 p.getZ(), 4, .4, .4, .4, .01);
     }
 
@@ -233,8 +233,8 @@ public final class ClassAbilityEffects {
     }
 
     public static void burst(ServerPlayer p, Vec3 at, Element e, double radius) {
-        Fx.burst(p.level(), at, e, 24, Math.min(1.5, radius / 3));
-        Fx.ring(p.level(), at, radius, e.glow(), 28);
+        Fx.burst(p, p.level(), at, e, 24, Math.min(1.5, radius / 3));
+        Fx.ring(p, p.level(), at, radius, e.glow(), 28);
         PostEffects.pulse(p, e, true);
     }
 }

@@ -44,7 +44,7 @@ public final class TitanClassAbility extends Ability {
             if(model!=null&&model.getNamespace().equals("destiny")&&model.getPath().equals("class_ability/titan/class_ability")) {
                 // Authored energy VFX: canonical [0,0,0]..[16,16,16], anchor[8,8,8].
                 // Scale the unit model to the same physical cover rectangle and thickness.
-                var display=new ItemDisplayElement(item);
+                var display=new AbilityDisplayElement(c.owner,item);
                 display.setItemDisplayContext(ItemDisplayContext.NONE);
                 display.setBillboardMode(Display.BillboardConstraints.FIXED);
                 display.setScale(new Vector3f((float)width,(float)height,(float)THICKNESS));
@@ -156,7 +156,7 @@ public final class TitanClassAbility extends Ability {
                 var obstruction=b.c.level.clip(new ClipContext(from,hit,ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,arrow));
                 if(obstruction.getType()!=HitResult.Type.MISS)continue;
                 arrow.discard();b.spend(10);
-                Fx.burst(b.c.level,hit,elementFor(b.c.owner),5,.15);
+                Fx.burst(b.c.owner, b.c.level,hit,elementFor(b.c.owner),5,.15);
                 if(b.hp<=0)break;
             }
         }

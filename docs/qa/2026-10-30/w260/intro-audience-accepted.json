@@ -1,0 +1,39 @@
+{
+  "ownedPath": "src/main/java/kim/biryeong/destiny/fx/PlayerAnimations.java",
+  "worktree": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w221-parcel_of_stardust_fell_to_earth",
+  "baselineMainSha256": "b4a3b41c182fdb46a41949ec6c20e009e2cc9ee1386feba55bffac8927223b71",
+  "finalSha256": "3e90bf1e8b42932ca666cc3f60469183a3979496139edb457190fcb29c15d1f9",
+  "currentMainSha256": "b4a3b41c182fdb46a41949ec6c20e009e2cc9ee1386feba55bffac8927223b71",
+  "mainStillMatchesBaseline": true,
+  "delta": "/private/tmp/destiny-w260/intro-draft/player-audience/w260-player-audience-delta.zip",
+  "deltaSha256": "d8aa0e2eb37fe9b481a183d876e22e3a1188f62c32c94de42e6bb74d177fb8f7",
+  "diff": "/private/tmp/destiny-w260/intro-draft/player-audience/PlayerAnimations.patch",
+  "changes": [
+    "syncIntroViewer: current-pose full resend, dynamic intro view filter, synchronous disguise in sending scope",
+    "removeIntroViewer: exact clip/owner/viewer identity; sole-registry or owned-tracker-only removal",
+    "introOwned set from resolved clip; close delegates to closeNow within sending after run=null"
+  ],
+  "preserved": "Removing exactly the new additions recovers main baseline text byte-for-byte.",
+  "checks": [
+    "JDK25 Java syntax pass",
+    "exact baseline preservation pass",
+    "extracted actual helper methods javac/offline regressions pass",
+    "no trailing whitespace"
+  ],
+  "notRun": [
+    "Gradle",
+    "server",
+    "client",
+    "Vision",
+    "full production API type compilation"
+  ],
+  "nativePending": [
+    "actual recipient packet receipt",
+    "model owner self carrier placement",
+    "native disguise/restore"
+  ],
+  "API": [
+    "boolean syncIntroViewer(ServerPlayer owner, ServerPlayer viewer, String expectedClip)",
+    "void removeIntroViewer(ServerPlayer owner, ServerPlayer viewer, String expectedClip)"
+  ]
+}

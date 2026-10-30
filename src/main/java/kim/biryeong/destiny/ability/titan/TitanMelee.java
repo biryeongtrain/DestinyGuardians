@@ -23,7 +23,7 @@ public final class TitanMelee extends Ability {
                 Vec3 delta=e.getBoundingBox().getCenter().subtract(eye);
                 if(delta.lengthSqr()>1e-8&&forward.dot(delta.normalize())>=.55) {
                     MeleeWeaponTraits.poweredDamage(c.level,p,e,damage,element(),token);
-                    Fx.line(c.level,eye,e.getBoundingBox().getCenter(),element().color(),.3,1.2f);
+                    Fx.line(c.owner, c.level,eye,e.getBoundingBox().getCenter(),element().color(),.3,1.2f);
                 }
             }
             ClassAbilityEffects.burst(p,eye.add(forward.scale(1.5)),element(),1.2);

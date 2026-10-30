@@ -225,7 +225,7 @@ public final class TitanExpandedSupers {
         void startAura() {
             ElementHolder next=new ElementHolder();
             try {
-                var display=new ItemDisplayElement(ClassAbilityEffects.item(o.path()));
+                var display=new AbilityDisplayElement(o.p,ClassAbilityEffects.item(o.path()));
                 display.setItemDisplayContext(ItemDisplayContext.NONE);display.setBrightness(new Brightness(15,15));
                 display.setScale(new Vector3f(1.2f));display.setTeleportDuration(1);next.addElement(display);
                 auraOrigin=o.p.position().add(0,.9,0);ChunkAttachment.ofTicking(next,o.level,auraOrigin);next.startWatching(o.p);
@@ -318,7 +318,7 @@ public final class TitanExpandedSupers {
         boolean closed;
         Firewave(Owner o) {
             this.o=o;direction=Motion.horizontalLook(o.p);pos=o.p.position().add(0,.1,0);origin=pos;until=o.now()+80;
-            display=new ItemDisplayElement(ClassAbilityEffects.item(o.path()+"_wave"));
+            display=new AbilityDisplayElement(o.p,ClassAbilityEffects.item(o.path()+"_wave"));
             display.setItemDisplayContext(ItemDisplayContext.NONE);display.setScale(new Vector3f(1));
             display.setLeftRotation(new Quaternionf().rotationTo(0,0,1,(float)direction.x,0,(float)direction.z).rotateY((float)Math.PI));
             display.setBrightness(new Brightness(15,15));display.setTeleportDuration(1);holder.addElement(display);
@@ -336,7 +336,7 @@ public final class TitanExpandedSupers {
             if(support.getType()!=HitResult.Type.BLOCK) {close();return false;}
             pos=support.getLocation().add(0,.12,0);travelled+=.5;
             o.damage(pos.add(0,.45,0),1.6,(float)o.value("wave_damage",28,0,120),hit);
-            Fx.burst(o.level,pos,Element.SOLAR,6,.25);display.setOffset(pos.subtract(origin));holder.tick();return true;
+            Fx.burst(o.p, o.level,pos,Element.SOLAR,6,.25);display.setOffset(pos.subtract(origin));holder.tick();return true;
         }
         void close() {if(closed)return;closed=true;holder.destroy();}
     }
@@ -385,7 +385,7 @@ public final class TitanExpandedSupers {
         Ward(Owner o,Vec3 center) {
             this.o=o;this.center=center;radius=o.value("radius",4,2,6);
             hp=o.value("health",160,1,1000);until=o.now()+o.ticks("field_ticks",600,800);
-            var display=new ItemDisplayElement(ClassAbilityEffects.item(o.path()));
+            var display=new AbilityDisplayElement(o.p,ClassAbilityEffects.item(o.path()));
             display.setItemDisplayContext(ItemDisplayContext.NONE);display.setBrightness(new Brightness(15,15));
             // Art contract: item center[8,8,8], hemisphere radius8 raw units, base at centerY8.
             display.setScale(new Vector3f((float)(2*radius)));holder.addElement(display);
