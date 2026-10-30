@@ -77,22 +77,55 @@ public final class CrucibleWorld {
                 markers.add(holder);
             }
         }
+        /** Particle wireframe per zone: ground ring, capture-progress arc, cylinder lines, tall beam. Colours are per viewer. */
         public void updateZones(ControlMatch.Snapshot snapshot) {
-            if (snapshot.phase() != ControlMatch.Phase.PLAYING) return;
+            if (snapshot.phase() != ControlMatch.Phase.PLAYING || snapshot.tick() % 2 != 0) return;
+            long t = snapshot.tick();
             for (var viewer : level().players()) {
                 var own = snapshot.members().get(viewer.getUUID()); if (own == null) continue;
                 for (Zone zone : zones) {
-                    if (viewer.position().distanceToSqr(zone.position()) > 48*48) continue;
-                    var owner = snapshot.zones().get(zone.id()).owner();
-                    int color = owner == null ? 0xE5E3DB : owner == own ? 0x7BCBEF : 0xFF5050;
-                    for (int i=0;i<16;i++) {
-                        double angle=i*Math.PI/8;
-                        level().sendParticles(viewer,Fx.dust(color,1),false,false,
-                                zone.position().x+Math.cos(angle)*zone.radius(),zone.position().y+.1,
-                                zone.position().z+Math.sin(angle)*zone.radius(),1,0,0,0,0);
+                    double dist2 = viewer.position().distanceToSqr(zone.position());
+                    if (dist2 > 110 * 110) continue;
+                    var zs = snapshot.zones().get(zone.id());
+                    var owner = zs.owner();
+                    int color = owner == null ? 0xE5E3DB : owner == own ? 0x4FD6FF : 0xFF4545;
+                    boolean capturing = zs.capturingTeam() != null && zs.progress() > .01;
+                    int capColor = !capturing ? color : zs.contested() ? 0xFFFFFF : zs.capturingTeam() == own ? 0x4FD6FF : 0xFF4545;
+                    Vec3 c = zone.position(); double r = zone.radius(), h = manifest().zones().stream()
+                            .filter(z -> z.key().equals(zone.id())).findFirst().map(CrucibleMap.Zone::height).orElse(4.0);
+                    // tall beam: visible across the whole arena
+                    double top = 16 + 2 * Math.sin(t / 10.0);
+                    for (double y = 0; y < top; y += .7)
+                        dot(viewer, color, y > top - 3 ? 1.1f : 1.6f, c.x, c.y + y, c.z);
+                    if (dist2 > 64 * 64) continue;
+                    int n = 64;
+                    for (int i = 0; i < n; i++) {
+                        double a = i * 2 * Math.PI / n;
+                        dot(viewer, color, 1.2f, c.x + Math.cos(a) * r, c.y + .12, c.z + Math.sin(a) * r);
+                    }
+                    // top ring + vertical lines make a readable cylinder
+                    for (int i = 0; i < 32; i++) {
+                        double a = i * Math.PI / 16 + t / 40.0;
+                        dot(viewer, color, 1.0f, c.x + Math.cos(a) * r, c.y + h, c.z + Math.sin(a) * r);
+                    }
+                    for (int k = 0; k < 8; k++) {
+                        double a = k * Math.PI / 4;
+                        for (double y = .5; y < h; y += .6)
+                            dot(viewer, color, .9f, c.x + Math.cos(a) * r, c.y + y, c.z + Math.sin(a) * r);
+                    }
+                    if (capturing) { // progress arc, thicker, inside the ring
+                        int steps = (int) (zs.progress() * n);
+                        for (int i = 0; i < steps; i++) {
+                            double a = -Math.PI / 2 + i * 2 * Math.PI / n;
+                            for (double rr = r - .8; rr <= r - .3; rr += .25)
+                                dot(viewer, capColor, 1.3f, c.x + Math.cos(a) * rr, c.y + .2, c.z + Math.sin(a) * rr);
+                        }
                     }
                 }
             }
+        }
+        private void dot(net.minecraft.server.level.ServerPlayer viewer, int color, float size, double x, double y, double z) {
+            level().sendParticles(viewer, Fx.dust(color, size), true, true, x, y, z, 1, 0, 0, 0, 0);
         }
         private void closeMarkers() { markers.forEach(ElementHolder::destroy); markers.clear(); }
     }
