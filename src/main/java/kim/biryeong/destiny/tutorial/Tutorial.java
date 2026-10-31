@@ -13,7 +13,6 @@ import kim.biryeong.destiny.guardian.Guardians;
 import kim.biryeong.destiny.hud.CombatHud;
 import kim.biryeong.destiny.input.ClientControls;
 import kim.biryeong.destiny.inventory.WeaponScreen;
-import kim.biryeong.destiny.inventory.WeaponTestArmory;
 import kim.biryeong.destiny.weapon.*;
 import kim.biryeong.destiny.world.TowerSpawnWorld;
 import kim.biryeong.minigamelib.cinematic.CameraViews;
@@ -76,7 +75,7 @@ public final class Tutorial {
         WALK("각성", "몸을 움직이세요"),
         CLASS("수호자의 길", "직업을 고르세요"),
         LIGHT("여행자의 빛", "빛을 고르세요"),
-        EQUIP("무장", "무기를 장착하세요"),
+        EQUIP("무장", "첫 전투를 준비하세요"),
         FIRE("사격 훈련", "표적을 쓰러뜨리세요"),
         AIM("사격 훈련", "정조준으로 쏘세요"),
         RELOAD("사격 훈련", "재장전하세요"),
@@ -535,6 +534,7 @@ public final class Tutorial {
                 s.checkpoint = TutorialCourse.CLASS_ENTRY;
                 toast(s, "수호자의 길", "당신은 어떤 수호자였나요?", TutorialUi.WHITE, 70);
                 say(s, "빛은 수호자마다 다른 모습으로 깃들어요.");
+                say(s, "이 선택은 고정되지 않아요. E 키의 장비 메뉴에서 언제든 직업을 바꿀 수 있어요.");
                 say(s, "방벽을 세우는 타이탄, 그림자를 걷는 헌터, 빛을 읽는 워록.");
                 say(s, "끌리는 쪽의 원 안에 잠시 서 있어 보세요.");
             }
@@ -547,10 +547,12 @@ public final class Tutorial {
             case EQUIP -> {
                 s.checkpoint = TutorialCourse.RANGE_ENTRY;
                 voice(s, "equip");
-                say(s, "장비 창을 열고 1번 칸에 무기를 추가하세요. " + (ClientControls.gcb(p) ? "E 키" : "E 키나 /메뉴") + "로 열 수 있어요.");
-                if (kineticEquipped(p) != null) s.flagA = true;
+                grantStarterWeapon(p);
+                say(s, "앞에 적이 있어요. 연습용 자동소총을 손에 쥐여 드렸어요. 발사 버튼을 누르고 있으면 연속 사격해요.");
+                say(s, "무기는 E 키의 장비 메뉴에서 언제든 설정하고 바꿀 수 있어요. /메뉴로도 열 수 있어요.");
             }
             case FIRE -> {
+                if (WeaponItems.entry(p.getMainHandItem()).isEmpty()) grantStarterWeapon(p);
                 toast(s, "사격 훈련", ClientControls.gcb(p) ? "좌클릭으로 사격합니다" : "우클릭으로 사격합니다", TutorialUi.GOLD, 60);
                 voice(s, "fire");
                 for (Vec3 t : TutorialCourse.NEAR_TARGETS) spawnTarget(s, t, 20);
@@ -632,7 +634,7 @@ public final class Tutorial {
             case CLASS -> choose(s, TutorialCourse.CLASSES, c -> {
                 String error = CharacterLoadouts.selectClass(p, c.value());
                 if (error != null) { p.sendSystemMessage(Component.literal(error)); return false; }
-                toast(s, c.name(), "당신의 직업", c.color(), 80);
+                toast(s, c.name(), "E 키 메뉴에서 언제든 직업 변경 가능", c.color(), 80);
                 voice(s, c.value().getSerializedName());
                 openGate(s, TutorialCourse.Gate.CLASS);
                 enter(s, Step.LIGHT);
@@ -652,20 +654,9 @@ public final class Tutorial {
                 return true;
             });
             case EQUIP -> {
-                if (WeaponScreen.active(p)) s.flagB = true;
-                var kinetic = kineticEquipped(p);
-                if (kinetic != null) s.flagA = true;
-                if (kinetic != null && !WeaponScreen.active(p) && p.getMainHandItem() == kinetic.stack()) {
+                if (age >= 40 && !WeaponScreen.active(p)) {
                     chime(s);
-                    toast(s, "무장 완료", kinetic.weapon().family().equals("bow") ? "활을 장착했습니다" : "무기를 장착했습니다", TutorialUi.GOLD, 60);
                     enter(s, Step.FIRE);
-                    return;
-                }
-                if (age == 900) say(s, "장비 창에서 1번 칸 → 새 무기 → 무기군 → 무기 → 퍽 순서로 고르면 돼요.");
-                if (age >= 2400 && kinetic == null && !WeaponScreen.active(p)) {
-                    String error = grantStarterWeapon(p);
-                    if (error == null) say(s, "제가 쓰던 무기를 빌려 드릴게요. 1번 키로 드세요.");
-                    else if (age == 2400) p.sendSystemMessage(Component.literal(error));
                 }
             }
             case FIRE -> { if (s.count >= TutorialCourse.NEAR_TARGETS.size()) { voice(s, "aim"); enter(s, Step.AIM); } }
@@ -767,22 +758,8 @@ public final class Tutorial {
         clearTargets(s);
     }
 
-    private static String grantStarterWeapon(ServerPlayer p) {
-        var entry = WeaponTestArmory.catalog(WeaponSlot.KINETIC).stream()
-                .filter(e -> !WeaponCharacteristics.of(e).exotic())
-                .filter(e -> e.family().equals("hand_cannon") || e.family().equals("auto_rifle") || e.family().equals("pulse_rifle"))
-                .findFirst();
-        if (entry.isEmpty()) return "기본 무기를 찾지 못했습니다. 장비 창에서 직접 추가해 주세요.";
-        String error = WeaponTestArmory.equip(p, entry.get().id());
-        if (error != null) return error;
-        p.setAttached(WeaponLoadout.ENABLED, true);
-        WeaponLoadout.select(p, WeaponSlot.KINETIC);
-        return null;
-    }
-
-    private static WeaponLoadout.Equipped kineticEquipped(ServerPlayer p) {
-        if (!WeaponLoadout.enabled(p)) return null;
-        return WeaponLoadout.equipped(p).stream().filter(e -> e.slot() == WeaponSlot.KINETIC).findFirst().orElse(null);
+    private static void grantStarterWeapon(ServerPlayer p) {
+        TutorialLoan.equip(p, WeaponCatalog.find("halfdan_d").orElseThrow());
     }
 
     private static boolean reloadable(ServerPlayer p) {
@@ -889,9 +866,12 @@ public final class Tutorial {
             if (s.lessonIndex + 1 < TutorialArsenal.LESSONS.size()) { s.lessonIndex++; startLesson(s); }
             else {
                 TutorialLoan.restore(p);
+                boolean needsStarter = WeaponLoadout.equipped(p).isEmpty();
+                if (needsStarter) grantStarterWeapon(p);
                 clearTargets(s);
                 openGate(s, TutorialCourse.Gate.RANGE);
-                say(s, "모든 무기군을 익혔어요. 원래 장비를 돌려드렸어요. 다음은 기동 훈련이에요.");
+                say(s, needsStarter ? "모든 무기군을 익혔어요. 남은 훈련에도 연습용 자동소총을 쓰세요. 다음은 기동 훈련이에요."
+                        : "모든 무기군을 익혔어요. 원래 장비를 돌려드렸어요. 다음은 기동 훈련이에요.");
                 enter(s, Step.TRAVERSE);
             }
             return;
@@ -926,17 +906,20 @@ public final class Tutorial {
         switch (s.step) {
             case AWAKEN -> { objectives.add(new TutorialUi.Objective("고스트 바라보기", s.lookTicks >= 12 ? 1 : 0, 1)); key = "마우스"; action = "주위 둘러보기"; }
             case WALK -> { objectives.add(new TutorialUi.Objective("앞으로 걷기", 0, 1)); key = "W A S D"; action = "이동"; }
-            case CLASS -> objectives.add(new TutorialUi.Objective("타이탄 · 헌터 · 워록 중 선택", 0, 1));
+            case CLASS -> {
+                objectives.add(new TutorialUi.Objective("타이탄 · 헌터 · 워록 중 선택", 0, 1));
+                key = "E"; action = "직업은 언제든 변경 가능";
+            }
             case LIGHT -> objectives.add(new TutorialUi.Objective("아크 · 솔라 · 공허 중 선택", 0, 1));
             case EQUIP -> {
-                var kinetic = kineticEquipped(p);
-                objectives.add(new TutorialUi.Objective("장비 창 열기", s.flagB || s.flagA ? 1 : 0, 1));
-                objectives.add(new TutorialUi.Objective("1번 칸에 무기 추가", s.flagA ? 1 : 0, 1));
-                objectives.add(new TutorialUi.Objective("무기 들기", kinetic != null && p.getMainHandItem() == kinetic.stack() ? 1 : 0, 1));
-                if (!s.flagA && !WeaponScreen.active(p)) { key = gcb ? "E" : "E · /메뉴"; action = "장비 창 열기"; }
-                else if (s.flagA && !WeaponScreen.active(p)) { key = "1"; action = "1번 무기 들기"; }
+                objectives.add(new TutorialUi.Objective("연습용 자동소총 지급", 1, 1));
+                key = "E"; action = "무기 설정 · 변경";
             }
-            case FIRE -> { objectives.add(new TutorialUi.Objective("가까운 표적 처치", s.count, TutorialCourse.NEAR_TARGETS.size())); key = gcb ? "좌클릭" : "우클릭"; action = "사격"; }
+            case FIRE -> {
+                objectives.add(new TutorialUi.Objective("가까운 표적 처치", s.count, TutorialCourse.NEAR_TARGETS.size()));
+                objectives.add(new TutorialUi.Objective("E 키 · 무기 설정 및 변경", 0, 0));
+                key = gcb ? "좌클릭" : "우클릭"; action = "누르고 있으면 연속 사격";
+            }
             case AIM -> { objectives.add(new TutorialUi.Objective("정조준으로 먼 표적 처치", s.count, TutorialCourse.FAR_TARGETS.size())); key = gcb ? "우클릭 홀드" : "좌클릭"; action = gcb ? "정조준" : "정조준 켜기 · 끄기"; }
             case RELOAD -> { objectives.add(new TutorialUi.Objective("재장전", s.flagB ? 1 : 0, 1)); key = "Q"; action = "재장전 (몇 발 쏜 뒤)"; }
             case ARSENAL -> {
