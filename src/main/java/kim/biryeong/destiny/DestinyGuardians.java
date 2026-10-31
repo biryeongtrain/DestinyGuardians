@@ -51,6 +51,7 @@ public final class DestinyGuardians implements ModInitializer {
         AbilityService.init();
         kim.biryeong.destiny.world.TowerSpawnWorld.init();
         kim.biryeong.destiny.crucible.CrucibleRuntime.init();
+        kim.biryeong.destiny.tutorial.Tutorial.init();
         GuardianCommands.register();
         DebugCommands.register();
         kim.biryeong.destiny.debug.HunterQa.init();

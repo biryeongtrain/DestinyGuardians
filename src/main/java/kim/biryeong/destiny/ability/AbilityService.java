@@ -209,6 +209,8 @@ public final class AbilityService {
         if (equipped.isEmpty()) {
             return Result.NO_ABILITY;
         }
+        // New Light tutorial: each ability returns at its own lesson.
+        if (!kim.biryeong.destiny.tutorial.Tutorial.allows(player, slot)) return Result.BUSY;
         if (ClassAbilityCast.active(player) && slot != AbilitySlot.SUPER) return Result.BUSY;
         if (GrenadeThrow.active(player) && slot != AbilitySlot.JUMP && slot != AbilitySlot.SUPER) return Result.BUSY;
         Ability ability = equipped.get();
@@ -246,6 +248,7 @@ public final class AbilityService {
         }
         kim.biryeong.destiny.weapon.WeaponWellRounded.abilityUsed(player,wellRounded,slot);
         if (slot == AbilitySlot.GRENADE) kim.biryeong.destiny.weapon.WeaponOsmosis.abilityUsed(player,osmosis);
+        kim.biryeong.destiny.tutorial.Tutorial.abilityUsed(player, slot);
         CombatHud.update(player);
         return Result.OK;
     }

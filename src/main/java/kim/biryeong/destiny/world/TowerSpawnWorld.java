@@ -132,7 +132,8 @@ public final class TowerSpawnWorld {
             PENDING_JOINS.remove(handler.getPlayer().getUUID(), handler.getPlayer());
         });
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-            if (!alive && enabled() && !kim.biryeong.destiny.crucible.CrucibleRuntime.participating(newPlayer)) teleport(newPlayer);
+            if (!alive && enabled() && !kim.biryeong.destiny.crucible.CrucibleRuntime.participating(newPlayer)
+                    && !kim.biryeong.destiny.tutorial.Tutorial.active(newPlayer)) teleport(newPlayer);
         });
         // Rescue before player physics/damage. Returning is allowed for creative administrators as well.
         ServerTickEvents.START_SERVER_TICK.register(TowerSpawnWorld::tick);
@@ -227,9 +228,11 @@ public final class TowerSpawnWorld {
             PENDING_JOINS.remove(player.getUUID(), player);
             if (player.level().getServer() == server && !player.hasDisconnected() && !player.isRemoved()
                     && server.getPlayerList().getPlayer(player.getUUID()) == player
-                    && player.level().getEntity(player.getId()) == player
-                    && (player.getStats().getValue(Stats.CUSTOM.get(Stats.PLAY_TIME)) == 0 || isTower(player.level()))) {
-                teleport(player);
+                    && player.level().getEntity(player.getId()) == player) {
+                // A brand-new Guardian (no class, tutorial never finished) wakes in the tutorial instead.
+                if (kim.biryeong.destiny.tutorial.Tutorial.shouldStart(player)
+                        && kim.biryeong.destiny.tutorial.Tutorial.start(player) == null) continue;
+                if (player.getStats().getValue(Stats.CUSTOM.get(Stats.PLAY_TIME)) == 0 || isTower(player.level())) teleport(player);
             }
         }
         int tick = server.getTickCount();
