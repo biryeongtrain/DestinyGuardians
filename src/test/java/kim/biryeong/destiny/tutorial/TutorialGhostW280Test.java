@@ -52,10 +52,15 @@ class TutorialGhostW280Test {
     @Test void voiceCuesResolveAndHaveBoundedRealDurations() throws Exception {
         var root = Path.of("src/main/resources/assets/destiny");
         var sounds = JsonParser.parseString(Files.readString(root.resolve("sounds.json"))).getAsJsonObject();
+        var korean = JsonParser.parseString(Files.readString(Path.of("art/ghost/w282/audio-manifest.json"))).getAsJsonObject();
         for (String key : java.util.List.of("awaken", "walk", "titan", "hunter", "warlock", "light", "equip", "fire", "aim", "traverse", "grenade", "melee", "class_ability", "super", "ascend")) {
             var cue = TutorialVoice.cue(key);
             assertNotNull(cue); assertFalse(cue.text().isBlank());
-            assertTrue(cue.ticks() >= 20 && cue.ticks() <= 160);
+            var recording = korean.getAsJsonObject(key);
+            assertEquals("ko", recording.get("locale").getAsString());
+            assertEquals(recording.get("text").getAsString(), cue.text());
+            assertEquals((int) Math.ceil(recording.get("duration_sec").getAsDouble() * 20) + 10, cue.ticks());
+            assertTrue(cue.ticks() >= 20 && cue.ticks() <= 210);
             var sound = sounds.getAsJsonObject("tutorial.ghost." + key).getAsJsonArray("sounds").get(0).getAsJsonObject();
             assertTrue(sound.get("stream").getAsBoolean());
             byte[] bytes = Files.readAllBytes(root.resolve("sounds/" + sound.get("name").getAsString().substring(8) + ".ogg"));

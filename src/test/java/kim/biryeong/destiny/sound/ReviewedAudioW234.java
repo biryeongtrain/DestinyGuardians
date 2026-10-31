@@ -101,7 +101,7 @@ final class ReviewedAudioW234 {
             var entry = value.getAsJsonObject();
             pin(result, entry.get("output").getAsString(), entry.get("sha256").getAsString(), entry.get("bytes").getAsLong());
         }
-        for (var entry : json("art/ghost/w280/audio-manifest.json").entrySet()) {
+        for (var entry : json("art/ghost/w282/audio-manifest.json").entrySet()) {
             var value = entry.getValue().getAsJsonObject();
             pin(result, "assets/destiny/sounds/tutorial/ghost/" + entry.getKey() + ".ogg",
                     value.get("output_sha256").getAsString(), value.get("output_bytes").getAsLong());
