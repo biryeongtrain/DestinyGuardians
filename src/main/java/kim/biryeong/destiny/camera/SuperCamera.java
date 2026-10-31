@@ -13,6 +13,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Display;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.cubemob.Slime;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Input;
@@ -39,7 +41,9 @@ public final class SuperCamera {
         final ServerPlayer owner;
         final ServerLevel level;
         final boolean bow;
-        final Display.ItemDisplay mount, camera;
+        final Entity mount;
+        final Display.ItemDisplay camera;
+        final boolean predictedMount;
         final net.minecraft.world.item.ItemStack swordStack;
         Vec3 previous;
         Vec3 physicsStart;
@@ -52,7 +56,8 @@ public final class SuperCamera {
             this.swordStack=swordStack;
             bow = element == Element.VOID;
             level = owner.level();
-            mount = marker(owner);
+            predictedMount = kim.biryeong.destiny.input.ClientControls.mountPrediction(owner);
+            mount = predictedMount ? predictionMount(owner) : marker(owner);
             camera = marker(owner);
             previous = owner.position();
             lastRotation = level.getServer().getTickCount();
@@ -60,6 +65,19 @@ public final class SuperCamera {
     }
 
     private SuperCamera() { }
+
+    /** Packet-only size-one Mob: eligible for GCB 4.2 MountPrediction, never local-authoritative.
+     * The server player remains unmounted and keeps its normal collision and damage rules. */
+    private static Slime predictionMount(ServerPlayer p) {
+        Slime e = new Slime(EntityTypes.SLIME, p.level());
+        e.setSize(1, true);
+        e.setInvisible(true);
+        e.setNoAi(true);
+        e.setNoGravity(true);
+        e.setSilent(true);
+        e.setPos(p.position());
+        return e;
+    }
 
     private static Display.ItemDisplay marker(ServerPlayer p) {
         Display.ItemDisplay e = new Display.ItemDisplay(EntityTypes.ITEM_DISPLAY, p.level());
@@ -152,7 +170,7 @@ public final class SuperCamera {
         }
     }
 
-    private static void spawn(ServerPlayer p, Display.ItemDisplay e) {
+    private static void spawn(ServerPlayer p, Entity e) {
         Vec3 v = e.position();
         p.connection.send(new ClientboundAddEntityPacket(e.getId(), e.getUUID(), v.x, v.y, v.z,
                 e.getXRot(), e.getYRot(), e.getType(), 0, Vec3.ZERO, e.getYRot()));
@@ -260,6 +278,8 @@ public final class SuperCamera {
             }
             updatePositions(s);
             p.connection.send(ClientboundEntityPositionSyncPacket.of(s.mount));
+            if (s.predictedMount)
+                p.connection.send(new ClientboundSetEntityMotionPacket(s.mount.getId(), s.mount.getDeltaMovement()));
             p.connection.send(ClientboundEntityPositionSyncPacket.of(s.camera));
             // Sneak can locally dismount a fake mount. Reassert ownership; rotation watchdog handles failures.
             p.connection.send(passengers(s.mount.getId(), p.getId()));
@@ -290,8 +310,12 @@ public final class SuperCamera {
             }
         }
         Vec3 camera = eye.add(delta.scale(fraction));
-        // Vanilla player's vehicle attachment offset is -0.6; the virtual seat compensates it.
-        s.mount.setPos(p.position().add(0, 0.6, 0));
+        // BM limb displays ride the client player, who rides this packet-only carrier.
+        // Predict that body chain, not the separate collision-clipped view camera.
+        Vec3 seat = s.mount.getPassengerRidingPosition(p).subtract(s.mount.position())
+                .subtract(p.getVehicleAttachmentPoint(s.mount));
+        s.mount.setPos(p.position().subtract(seat));
+        s.mount.setDeltaMovement(s.predictedMount ? p.position().subtract(s.previous) : Vec3.ZERO);
         s.camera.setPos(camera);
         s.camera.setYRot(p.getYRot());
         s.camera.setXRot(p.getXRot());

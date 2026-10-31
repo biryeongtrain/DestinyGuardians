@@ -62,6 +62,7 @@ public final class PlayerAnimations {
         int classMovingUntil;
         Run run;
         boolean closingAfterRun, meleeCast;
+        boolean ownerBodyHidden;
         boolean introOwned; // Survives run=null on completion, failure and explicit stop.
         IntroSelfCarrier introSelfCarrier;
         final LimbEquipment equipment;
@@ -305,7 +306,7 @@ public final class PlayerAnimations {
                 float dodgeYaw = player.getYRot();
                 tracker.rotation(() -> new ModelRotation(0, dodgeYaw));
             }
-            if ("super_void".equals(state.loopRequest) || "super_solar".equals(state.loopRequest)
+            if ("super_arc".equals(state.loopRequest) || "super_void".equals(state.loopRequest) || "super_solar".equals(state.loopRequest)
                     || request.startsWith("w229_") || request.startsWith("w230_")) {
                 // Aim supers face the authoritative view, not BM's independently smoothed
                 // body yaw. This only rotates the visual tracker; camera/body input is untouched.
@@ -407,6 +408,7 @@ public final class PlayerAnimations {
                     kim.biryeong.minigamelib.cinematic.CameraViews.sending(() ->
                             ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
                 else ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick();
+                syncOwnerBody(state);
                 var position = state.owner.position();
                 double moved = position.subtract(state.previousPosition).horizontalDistanceSqr();
                 state.previousPosition = position;
@@ -545,6 +547,7 @@ public final class PlayerAnimations {
     public static void refreshOwnerVisibility(ServerPlayer player) {
         Playback state = ACTIVE.get(player.getUUID());
         if (state == null) return;
+        if (!kim.biryeong.destiny.camera.SuperCamera.active(player)) state.ownerBodyHidden = false;
         try { applyOwnerVisibility(player, state.tracker); }
         catch (RuntimeException | LinkageError e) { fail(player, "visibility", e); }
     }
@@ -554,6 +557,26 @@ public final class PlayerAnimations {
         return kim.biryeong.destiny.camera.SuperCamera.active(player)
                 || kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(player)
                 || (runtime.gcbClient && runtime.gcbThirdPerson);
+    }
+
+    /** The owner can begin in first person with a hidden limb, then acquire the rear camera.
+     * BM's initial spawn disguise can precede that visibility change. Resubmit it once
+     * the owner channel is spawned, otherwise the vanilla body obscures the moving rig.
+     * BM owns metadata/equipment projection and restores current values on hide/close.
+     */
+    private static void syncOwnerBody(Playback state) {
+        if (!kim.biryeong.destiny.camera.SuperCamera.active(state.owner) || !ownerSeesLimb(state.owner)) {
+            state.ownerBodyHidden = false;
+            return;
+        }
+        if (state.ownerBodyHidden) return;
+        var tracker = state.tracker;
+        var self = ModPlayer.of(state.owner.connection);
+        var channel = tracker.getPipeline().channel(state.owner.getUUID());
+        if (channel == null || !tracker.isSpawned(self)
+                || !tracker.registry().hideOption(state.owner.getUUID()).visibility()) return;
+        BetterModel.nms().hide(channel, tracker.registry());
+        state.ownerBodyHidden = true;
     }
 
     private static void applyOwnerVisibility(ServerPlayer player, EntityTracker tracker) {

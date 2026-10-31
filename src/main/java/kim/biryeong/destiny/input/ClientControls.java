@@ -79,6 +79,18 @@ public final class ClientControls {
 
     public static void forget(ServerPlayer player) { SESSIONS.remove(player.getUUID()); }
 
+    /** The existing 4.2 client predicts server-authoritative Mob mounts automatically. */
+    public static boolean mountPrediction(ServerPlayer player) {
+        if (!gcb(player)) return false;
+        String version = SESSIONS.get(player.getUUID()).version;
+        var match = java.util.regex.Pattern.compile("^(\\d+)\\.(\\d+)(?:\\.|$|[+\\-]).*").matcher(version);
+        if (!match.matches()) return false;
+        try {
+            int major = Integer.parseInt(match.group(1)), minor = Integer.parseInt(match.group(2));
+            return major > 4 || major == 4 && minor >= 2;
+        } catch (NumberFormatException ignored) { return false; }
+    }
+
     static String versionLabel(String raw) {
         if (raw == null || raw.isBlank() || raw.equalsIgnoreCase("unknown")) return "";
         // A client-provided version is plain bounded text, not formatting or a click target.
