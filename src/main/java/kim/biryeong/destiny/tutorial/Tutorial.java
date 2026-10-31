@@ -60,6 +60,11 @@ import java.util.*;
 public final class Tutorial {
     public static final AttachmentType<Boolean> COMPLETED = AttachmentRegistry.create(DestinyGuardians.id("tutorial_completed"),
             b -> b.persistent(Codec.BOOL).copyOnDeath().initializer(() -> false));
+    // One-time rollout for every account, including legacy tutorial completers.
+    public static final int REQUIRED_REVISION = TutorialEnrollment.REQUIRED_REVISION;
+    public static final AttachmentType<Integer> COMPLETED_REVISION = AttachmentRegistry.create(
+            DestinyGuardians.id("tutorial_completed_revision"),
+            b -> b.persistent(Codec.INT).copyOnDeath().initializer(() -> 0));
     private static final String TARGET_TAG = "destiny_tutorial_target";
     private static final Identifier FLASH = DestinyGuardians.id("crucible/start_flash");
     private static final Map<UUID, Session> SESSIONS = new HashMap<>();
@@ -85,7 +90,7 @@ public final class Tutorial {
         Step(String chapter, String title) { this.chapter = chapter; this.title = title; }
     }
 
-    private record Line(String text, int ticks, int at) { }
+    private record Line(String text, int ticks, int at, String voice) { }
     private record Pending(Vec3 rel, int at) { }
 
     static final class Session {
@@ -106,6 +111,7 @@ public final class Tutorial {
         final List<UUID> targets = new ArrayList<>();
         final Deque<Line> lines = new ArrayDeque<>();
         String currentLine;
+        String activeVoice;
         int lineUntil;
         TutorialUi.Toast toast;
         int toastUntil;
@@ -180,9 +186,9 @@ public final class Tutorial {
 
     public static boolean active(ServerPlayer p) { return p != null && SESSIONS.containsKey(p.getUUID()); }
 
-    /** New Guardians (no class, never finished) start here instead of the Tower. */
+    /** Every account completes this rollout once; class and legacy completion are irrelevant. */
     public static boolean shouldStart(ServerPlayer p) {
-        return !p.getAttachedOrElse(COMPLETED, false) && !Guardians.isGuardian(p) && !active(p);
+        return TutorialEnrollment.required(p.getAttachedOrElse(COMPLETED_REVISION, 0), active(p));
     }
 
     /** Abilities return piece by piece; each slot unlocks at its own lesson. */
@@ -273,6 +279,9 @@ public final class Tutorial {
             case GRENADE, MELEE, CLASS_ABILITY -> TutorialCourse.ARENA_ENTRY;
             case SUPER, ASCEND -> TutorialCourse.FINALE_ENTRY;
         };
+        TutorialVoice.stop(s.player, s.activeVoice);
+        s.activeVoice = null;
+        s.lineUntil = 0;
         s.lines.clear();
         teleport(s, at);
         enter(s, target);
@@ -298,6 +307,7 @@ public final class Tutorial {
     private static void end(Session s, boolean toTower) {
         if (!SESSIONS.remove(s.player.getUUID(), s)) return;
         clearTargets(s);
+        TutorialVoice.stop(s.player, s.activeVoice);
         s.ghost.destroy();
         if (s.flashUntil >= 0) s.player.removePostEffect(FLASH);
         TutorialUi.remove(s.player);
@@ -361,17 +371,25 @@ public final class Tutorial {
     // ---- dialogue / feedback -------------------------------------------------------------------------------
 
     private static void say(Session s, String text) {
-        s.lines.add(new Line(text, 50 + text.length() * 2, now(s.player)));
+        s.lines.add(new Line(text, 50 + text.length() * 2, now(s.player), null));
+    }
+    private static void voice(Session s, String key) {
+        var cue = TutorialVoice.cue(key);
+        s.lines.add(new Line(cue.text(), cue.ticks(), now(s.player), key));
     }
     private static void advanceLines(Session s, int now) {
         if (now < s.lineUntil) return;
+        TutorialVoice.stop(s.player, s.activeVoice);
+        s.activeVoice = null;
         var next = s.lines.poll();
         if (next == null) { if (now > s.lineUntil + 60) s.currentLine = null; return; }
         s.currentLine = next.text();
         s.lineUntil = now + next.ticks();
-        s.ghost.speak(now + Math.min(40, next.ticks()));
-        s.player.level().playSound(null, s.ghost.position().x, s.ghost.position().y, s.ghost.position().z,
-                SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, .6f, 1.7f);
+        s.ghost.speak(now + next.ticks());
+        s.activeVoice = next.voice();
+        if (next.voice() != null) { TutorialVoice.play(s.player, next.voice()); return; }
+        kim.biryeong.destiny.sound.DestinySounds.personal(s.player,
+                "tutorial.ghost.chirp" + (1 + s.player.level().getRandom().nextInt(3)), .3f);
     }
     private static void toast(Session s, String title, String sub, int color, int ticks) {
         s.toast = new TutorialUi.Toast(title, sub, color);
@@ -469,7 +487,7 @@ public final class Tutorial {
         // A new lesson drops stale advice from the previous one, but keeps this tick's reaction line.
         int tick = now(p);
         s.lines.removeIf(line -> line.at() < tick);
-        if (s.lineUntil > tick + 30) s.lineUntil = tick + 30;
+        if (s.activeVoice == null && s.lineUntil > tick + 30) s.lineUntil = tick + 30;
         s.flagA = s.flagB = s.flagC = false;
         s.count = 0;
         s.choiceTicks = 0;
@@ -484,13 +502,13 @@ public final class Tutorial {
                 s.ghost.anchor(s.course.world(TutorialCourse.GHOST_WAKE));
                 p.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 0, false, false));
                 p.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 90, 0, false, false));
-                say(s, "...수호자? 수호자! 드디어 찾았어요.");
+                voice(s, "awaken");
                 say(s, "놀라지 마세요. 저는 고스트예요. 방금 당신을 되살렸어요.");
                 say(s, "눈을 떠요, 수호자. 저를 봐 줄래요?");
             }
             case WALK -> {
                 s.ghost.anchor(null);
-                say(s, "좋아요. 몸은 기억하고 있을 거예요. 걸어 볼까요?");
+                voice(s, "walk");
             }
             case CLASS -> {
                 s.checkpoint = TutorialCourse.CLASS_ENTRY;
@@ -507,13 +525,13 @@ public final class Tutorial {
             }
             case EQUIP -> {
                 s.checkpoint = TutorialCourse.RANGE_ENTRY;
-                say(s, "빛만으로는 부족해요. 무기가 필요해요.");
+                voice(s, "equip");
                 say(s, "장비 창을 열고 1번 칸에 무기를 추가하세요. " + (ClientControls.gcb(p) ? "E 키" : "E 키나 /메뉴") + "로 열 수 있어요.");
                 if (kineticEquipped(p) != null) s.flagA = true;
             }
             case FIRE -> {
                 toast(s, "사격 훈련", "우클릭으로 사격합니다", TutorialUi.GOLD, 60);
-                say(s, "저기 표적이 보이죠? 쏴 보세요.");
+                voice(s, "fire");
                 for (Vec3 t : TutorialCourse.NEAR_TARGETS) spawnTarget(s, t, 20);
             }
             case AIM -> {
@@ -561,7 +579,8 @@ public final class Tutorial {
             }
             case ASCEND -> {
                 toast(s, "임무 완료", "빛의 문을 지나 타워로 향하세요", TutorialUi.GOLD, 80);
-                say(s, "잘했어요, 수호자. 이제 타워로 가요. 다른 수호자들이 기다리고 있어요.");
+                voice(s, "ascend");
+                say(s, "이제 빛의 문을 지나 타워로 가요.");
             }
         }
     }
@@ -588,7 +607,7 @@ public final class Tutorial {
                 String error = CharacterLoadouts.selectClass(p, c.value());
                 if (error != null) { p.sendSystemMessage(Component.literal(error)); return false; }
                 toast(s, c.name(), "당신의 직업", c.color(), 80);
-                say(s, "역시. " + c.name() + "였군요. 처음 봤을 때부터 알았어요.");
+                voice(s, c.value().getSerializedName());
                 openGate(s, TutorialCourse.Gate.CLASS);
                 enter(s, Step.LIGHT);
                 return true;
@@ -601,7 +620,7 @@ public final class Tutorial {
                 Vec3 w = s.course.world(c.center());
                 s.course.level().sendParticles(Fx.dust(c.color(), 2f), w.x, w.y + 1.2, w.z, 80, .6, 1.2, .6, 0);
                 toast(s, "빛을 되찾았습니다", c.name() + " · " + className(p), c.color(), 90);
-                say(s, "느껴지나요? 빛이 돌아왔어요. 아직은 일부지만요.");
+                voice(s, "light");
                 openGate(s, TutorialCourse.Gate.LIGHT);
                 enter(s, Step.EQUIP);
                 return true;
@@ -623,7 +642,7 @@ public final class Tutorial {
                     else if (age == 2400) p.sendSystemMessage(Component.literal(error));
                 }
             }
-            case FIRE -> { if (s.count >= TutorialCourse.NEAR_TARGETS.size()) { say(s, "좋은 솜씨예요!"); enter(s, Step.AIM); } }
+            case FIRE -> { if (s.count >= TutorialCourse.NEAR_TARGETS.size()) { voice(s, "aim"); enter(s, Step.AIM); } }
             case AIM -> { if (s.count >= TutorialCourse.FAR_TARGETS.size()) enter(s, Step.RELOAD); }
             case RELOAD -> {
                 if (WeaponRuntime.reloading(p)) s.flagB = true;
@@ -638,7 +657,7 @@ public final class Tutorial {
                 Vec3 pos = p.position();
                 if (p.isSprinting() && s.course.beyond(pos, 94)) s.sprinted += pos.subtract(s.lastPos).horizontalDistance();
                 s.lastPos = pos;
-                if (s.sprinted >= 12 && !s.flagA) { s.flagA = true; chime(s); }
+                if (s.sprinted >= 12 && !s.flagA) { s.flagA = true; chime(s); voice(s, "traverse"); }
                 if (s.course.acrossChasm(pos) && p.onGround() && !s.flagC) { s.flagC = true; chime(s); }
                 if (age == 700 && !s.flagC) {
                     s.course.fallbackBridge(true);
@@ -649,13 +668,14 @@ public final class Tutorial {
                     enter(s, Step.GRENADE);
                 }
             }
-            case GRENADE -> { if (s.flagA && age > 20) { chime(s); enter(s, Step.MELEE); } }
-            case MELEE -> { if (s.flagA && age > 20) { chime(s); enter(s, Step.CLASS_ABILITY); } }
+            case GRENADE -> { if (s.flagA && age > 20) { chime(s); voice(s, "grenade"); enter(s, Step.MELEE); } }
+            case MELEE -> { if (s.flagA && age > 20) { chime(s); voice(s, "melee"); enter(s, Step.CLASS_ABILITY); } }
             case CLASS_ABILITY -> {
                 if (s.flagA && age > 20) {
                     chime(s);
                     clearTargets(s);
                     openGate(s, TutorialCourse.Gate.ARENA);
+                    voice(s, "class_ability");
                     enter(s, Step.SUPER);
                 }
             }
@@ -666,7 +686,7 @@ public final class Tutorial {
                     CombatHud.update(p);
                     unlockSound(s);
                     toast(s, "궁극기 준비 완료", abilityName(p, AbilitySlot.SUPER), subclassColor(p), 90);
-                    say(s, "빛이 가득 찼어요. 지금이에요, 수호자! 궁극기를 쓰세요!");
+                    voice(s, "super");
                     for (Vec3 t : TutorialCourse.WAVE) spawnTarget(s, t, 30);
                 }
                 if (s.flagC && s.flagA && s.count >= TutorialCourse.WAVE.size() && !AbilityService.inSuper(p)) {
@@ -708,10 +728,14 @@ public final class Tutorial {
     private static void finish(Session s, int now) {
         var p = s.player;
         p.setAttached(COMPLETED, true);
+        p.setAttached(COMPLETED_REVISION, REQUIRED_REVISION);
         s.finishAt = now + 80;
         if (p.addPostEffect(FLASH)) s.flashUntil = now + 12;
         p.level().playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 1f, 1f);
         toast(s, "전설이 되십시오", "튜토리얼 완료 · 언제든 /튜토리얼로 다시 할 수 있습니다", TutorialUi.GOLD, 100);
+        TutorialVoice.stop(s.player, s.activeVoice);
+        s.activeVoice = null;
+        s.lineUntil = 0;
         s.lines.clear();
         s.currentLine = "타워에서 봐요, 수호자.";
         s.lineUntil = now + 80;

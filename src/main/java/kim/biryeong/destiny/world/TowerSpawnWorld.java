@@ -229,7 +229,7 @@ public final class TowerSpawnWorld {
             if (player.level().getServer() == server && !player.hasDisconnected() && !player.isRemoved()
                     && server.getPlayerList().getPlayer(player.getUUID()) == player
                     && player.level().getEntity(player.getId()) == player) {
-                // A brand-new Guardian (no class, tutorial never finished) wakes in the tutorial instead.
+                // Every account completes the current tutorial rollout once, regardless of class or play time.
                 if (kim.biryeong.destiny.tutorial.Tutorial.shouldStart(player)
                         && kim.biryeong.destiny.tutorial.Tutorial.start(player) == null) continue;
                 if (player.getStats().getValue(Stats.CUSTOM.get(Stats.PLAY_TIME)) == 0 || isTower(player.level())) teleport(player);

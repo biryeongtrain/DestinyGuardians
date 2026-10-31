@@ -58,6 +58,7 @@ final class ReviewedAudioW234 {
                     previous.isJsonNull() ? null : previous.getAsJsonObject()));
         }
         merge(result, json("docs/qa/2026-10-30/w270/sounds-fragment.json"));
+        merge(result, json("art/ghost/w280/sounds-fragment.json"));
         return result;
     }
     /** Validate the complete current index, then expose the historical layer to its old assertions. */
@@ -99,6 +100,11 @@ final class ReviewedAudioW234 {
         for (var value : json("docs/qa/2026-10-30/w270/audio-import.json").getAsJsonArray("entries")) {
             var entry = value.getAsJsonObject();
             pin(result, entry.get("output").getAsString(), entry.get("sha256").getAsString(), entry.get("bytes").getAsLong());
+        }
+        for (var entry : json("art/ghost/w280/audio-manifest.json").entrySet()) {
+            var value = entry.getValue().getAsJsonObject();
+            pin(result, "assets/destiny/sounds/tutorial/ghost/" + entry.getKey() + ".ogg",
+                    value.get("output_sha256").getAsString(), value.get("output_bytes").getAsLong());
         }
         return Map.copyOf(result);
     }

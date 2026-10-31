@@ -247,8 +247,9 @@ public final class TutorialCourse {
 
     // ---- decorations (display entities) ----------------------------------------------------------------------
     private void decorate() {
-        for (var c : CLASSES) label(c.center().add(0, 2.6, 0), c.icon(), c.color(), c.name());
-        for (var c : SUBCLASSES) label(c.center().add(0, 2.6, 0), c.icon(), c.color(), c.name());
+        // Keep signs above eye level even when the player stands inside a selection circle.
+        for (var c : CLASSES) label(c.center().add(0, 3.4, 0), c.icon(), c.color(), c.name());
+        for (var c : SUBCLASSES) label(c.center().add(0, 3.4, 0), c.icon(), c.color(), c.name());
         // Traveler shard: a slowly turning pale monolith with a lit core.
         var holder = new ElementHolder();
         shard = new BlockDisplayElement(Blocks.CALCITE.defaultBlockState());
@@ -284,9 +285,13 @@ public final class TutorialCourse {
         holder.addElement(item);
         var text = new TextDisplayElement(Component.literal(name).withStyle(s -> s.withColor(color).withBold(true)));
         text.setBillboardMode(Display.BillboardConstraints.CENTER);
-        text.setBackground(0x50000000);
-        text.setScale(new Vector3f(1.2f));
-        text.setOffset(new Vec3(0, -1.0, 0));
+        // Native world text needs no panel; avoid exposing a glyph atlas on the background quad.
+        text.setBackground(0);
+        text.setShadow(true);
+        text.setLineWidth(240);
+        text.setViewRange(.75f);
+        text.setScale(new Vector3f(.85f));
+        text.setOffset(new Vec3(0, -.8, 0));
         holder.addElement(text);
         ChunkAttachment.ofTicking(holder, level, world(rel));
         decorations.add(holder);
@@ -296,7 +301,11 @@ public final class TutorialCourse {
         var holder = new ElementHolder();
         var text = new TextDisplayElement(Component.literal(value).withStyle(s -> s.withColor(color).withBold(true)));
         text.setBillboardMode(Display.BillboardConstraints.CENTER);
-        text.setBackground(0x50000000);
+        // Native world text needs no panel; avoid exposing a glyph atlas on the background quad.
+        text.setBackground(0);
+        text.setShadow(true);
+        text.setLineWidth(240);
+        text.setViewRange(.75f);
         text.setScale(new Vector3f(scale));
         holder.addElement(text);
         ChunkAttachment.ofTicking(holder, level, world(rel));
