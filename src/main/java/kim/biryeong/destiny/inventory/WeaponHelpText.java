@@ -49,6 +49,15 @@ public final class WeaponHelpText {
 
     private WeaponHelpText() {}
 
+    public static String family(String id, boolean gcb) {
+        String text = family(id);
+        if (!gcb || "sword".equals(id)) return text;
+        text = text.replace("우클릭", "__FIRE__").replace("좌클릭", "우클릭").replace("__FIRE__", "좌클릭");
+        return text.replace("우클릭으로 조준을 켜고", "우클릭을 누른 채 조준하고")
+                .replace("우클릭으로 조준경을 켜고", "우클릭을 누른 채 조준경을 보고")
+                .replace("우클릭으로 조준경을 끄세요", "우클릭을 놓으세요")
+                .replace("조준 화면은 우클릭으로 켜세요", "조준은 우클릭을 누르는 동안 유지됩니다");
+    }
     /** Returns help for an exact family ID; null, blank and unknown IDs use generic help. */
     public static String family(String id) {
         return id == null ? UNKNOWN : FAMILIES.getOrDefault(id, UNKNOWN);

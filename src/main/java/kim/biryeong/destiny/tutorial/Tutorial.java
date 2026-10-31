@@ -80,6 +80,7 @@ public final class Tutorial {
         FIRE("사격 훈련", "표적을 쓰러뜨리세요"),
         AIM("사격 훈련", "정조준으로 쏘세요"),
         RELOAD("사격 훈련", "재장전하세요"),
+        ARSENAL("무기군 실습", "대표 무기를 사용하세요"),
         TRAVERSE("기동 훈련", "틈을 건너세요"),
         GRENADE("빛의 능력", "수류탄"),
         MELEE("빛의 능력", "근접 능력"),
@@ -118,6 +119,9 @@ public final class Tutorial {
         int flashUntil = -1;
         int lockedNoticeAt = -100;
         int finishAt = -1;
+        int lessonIndex, lessonStarted, lessonDoneAt = -1;
+        int lessonInitialRounds;
+        boolean lessonFired;
         final List<Pending> pending = new ArrayList<>();
 
         Session(ServerPlayer player, TutorialCourse course) {
@@ -132,6 +136,7 @@ public final class Tutorial {
     public static void init() {
         if (initialized) return;
         initialized = true;
+        TutorialLoan.init();
         ServerTickEvents.END_SERVER_TICK.register(Tutorial::tick);
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             for (var s : List.copyOf(SESSIONS.values())) end(s, false);
@@ -141,11 +146,13 @@ public final class Tutorial {
             var s = SESSIONS.get(handler.getPlayer().getUUID());
             if (s != null && s.player == handler.getPlayer()) end(s, false);
         });
+        // Recover an interrupted loan even if this account already completed the tutorial.
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> TutorialLoan.restore(handler.getPlayer()));
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
             UUID owner = TARGET_OWNERS.remove(entity.getUUID());
             if (owner == null) return;
             var s = SESSIONS.get(owner);
-            if (s != null) targetDown(s, entity);
+            if (s != null) targetDown(s, entity, source.getEntity() == s.player);
         });
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
                 !(entity instanceof ServerPlayer) || !TutorialWorld.isTutorial(entity.level()));
@@ -167,11 +174,16 @@ public final class Tutorial {
                         .executes(c -> {
                     var p = c.getSource().getPlayerOrException();
                     var s = SESSIONS.get(p.getUUID());
+                    String requested = com.mojang.brigadier.arguments.StringArgumentType.getString(c, "step");
+                    int lesson = -1;
+                    for (int i = 0; i < TutorialArsenal.LESSONS.size(); i++)
+                        if (TutorialArsenal.LESSONS.get(i).family().equals(requested)) lesson = i;
                     Step target;
-                    try { target = Step.valueOf(com.mojang.brigadier.arguments.StringArgumentType.getString(c, "step").toUpperCase(Locale.ROOT)); }
+                    try { target = lesson >= 0 ? Step.ARSENAL : Step.valueOf(requested.toUpperCase(Locale.ROOT)); }
                     catch (IllegalArgumentException e) { c.getSource().sendFailure(Component.literal("알 수 없는 단계입니다.")); return 0; }
                     if (s == null) { c.getSource().sendFailure(Component.literal("먼저 /튜토리얼로 시작하세요.")); return 0; }
                     skipTo(s, target);
+                    if (lesson >= 0) { s.lessonIndex = lesson; startLesson(s); }
                     return 1;
                 }))).then(Commands.literal("나가기").executes(c -> {
                     var p = c.getSource().getPlayerOrException();
@@ -231,6 +243,7 @@ public final class Tutorial {
         if (AbilityService.inSuper(p)) return "궁극기 사용 중에는 시작할 수 없습니다.";
         var old = SESSIONS.get(p.getUUID());
         if (old != null) end(old, false);
+        TutorialLoan.restore(p);
         var course = TutorialWorld.acquire(p.level().getServer());
         course.build();
         cleanupForTeleport(p);
@@ -259,13 +272,14 @@ public final class Tutorial {
 
     /** QA/admin: jump to a step, opening every earlier gate and moving to its checkpoint. */
     private static void skipTo(Session s, Step target) {
+        TutorialLoan.restore(s.player);
         clearTargets(s);
         for (var gate : TutorialCourse.Gate.values()) {
             boolean open = switch (gate) {
                 case AWAKEN -> target.ordinal() > Step.WALK.ordinal();
                 case CLASS -> target.ordinal() > Step.CLASS.ordinal();
                 case LIGHT -> target.ordinal() > Step.LIGHT.ordinal();
-                case RANGE -> target.ordinal() > Step.RELOAD.ordinal();
+                case RANGE -> target.ordinal() > Step.ARSENAL.ordinal();
                 case ARENA -> target.ordinal() > Step.CLASS_ABILITY.ordinal();
             };
             if (open) s.course.open(gate); else s.course.close(gate);
@@ -274,7 +288,7 @@ public final class Tutorial {
             case AWAKEN, WALK -> TutorialCourse.SPAWN;
             case CLASS -> TutorialCourse.CLASS_ENTRY;
             case LIGHT -> TutorialCourse.LIGHT_ENTRY;
-            case EQUIP, FIRE, AIM, RELOAD -> TutorialCourse.RANGE_ENTRY;
+            case EQUIP, FIRE, AIM, RELOAD, ARSENAL -> TutorialCourse.RANGE_ENTRY;
             case TRAVERSE -> TutorialCourse.RUN_ENTRY;
             case GRENADE, MELEE, CLASS_ABILITY -> TutorialCourse.ARENA_ENTRY;
             case SUPER, ASCEND -> TutorialCourse.FINALE_ENTRY;
@@ -283,6 +297,7 @@ public final class Tutorial {
         s.activeVoice = null;
         s.lineUntil = 0;
         s.lines.clear();
+        s.ghost.anchor(target == Step.AWAKEN ? s.course.world(TutorialCourse.GHOST_WAKE) : null);
         teleport(s, at);
         enter(s, target);
     }
@@ -307,6 +322,7 @@ public final class Tutorial {
     private static void end(Session s, boolean toTower) {
         if (!SESSIONS.remove(s.player.getUUID(), s)) return;
         clearTargets(s);
+        TutorialLoan.restore(s.player);
         TutorialVoice.stop(s.player, s.activeVoice);
         s.ghost.destroy();
         if (s.flashUntil >= 0) s.player.removePostEffect(FLASH);
@@ -454,7 +470,7 @@ public final class Tutorial {
         s.count = 0;
     }
 
-    private static void targetDown(Session s, LivingEntity entity) {
+    private static void targetDown(Session s, LivingEntity entity, boolean playerKill) {
         s.targets.remove(entity.getUUID());
         Vec3 rel = s.course.local(entity.position());
         switch (s.step) {
@@ -462,9 +478,14 @@ public final class Tutorial {
             case AIM -> {
                 if (WeaponAiming.progress(s.player) >= .85f || !WeaponAiming.handles(s.player)) { s.count++; chime(s); }
                 else {
-                    say(s, "정조준 상태로 맞혀야 해요. 좌클릭으로 조준하고 쏘세요.");
+                    say(s, ClientControls.gcb(s.player) ? "우클릭을 누른 채 조준하고 좌클릭으로 쏘세요." : "정조준 상태로 맞혀야 해요. 좌클릭으로 조준하고 쏘세요.");
                     s.pending.add(new Pending(rel, now(s.player) + 30));
                 }
+            }
+            case ARSENAL -> {
+                if (playerKill && lessonWeaponHeld(s) && (s.lessonFired || lessonSpentAmmo(s))) {
+                    s.count++; chime(s); s.lessonDoneAt = now(s.player);
+                } else s.pending.add(new Pending(rel, now(s.player) + 20));
             }
             case SUPER -> { s.count++; chime(s); }
             default -> { }
@@ -530,12 +551,12 @@ public final class Tutorial {
                 if (kineticEquipped(p) != null) s.flagA = true;
             }
             case FIRE -> {
-                toast(s, "사격 훈련", "우클릭으로 사격합니다", TutorialUi.GOLD, 60);
+                toast(s, "사격 훈련", ClientControls.gcb(p) ? "좌클릭으로 사격합니다" : "우클릭으로 사격합니다", TutorialUi.GOLD, 60);
                 voice(s, "fire");
                 for (Vec3 t : TutorialCourse.NEAR_TARGETS) spawnTarget(s, t, 20);
             }
             case AIM -> {
-                say(s, "먼 표적은 정조준이 정확해요. 좌클릭으로 조준을 켜고 꺼요.");
+                say(s, ClientControls.gcb(p) ? "먼 표적은 정조준이 정확해요. 우클릭을 누르는 동안 조준하고 좌클릭으로 쏘세요." : "먼 표적은 정조준이 정확해요. 좌클릭으로 조준을 켜고 꺼요.");
                 for (Vec3 t : TutorialCourse.FAR_TARGETS) spawnTarget(s, t, 20);
             }
             case RELOAD -> {
@@ -543,6 +564,11 @@ public final class Tutorial {
                     say(s, "이 무기는 재장전이 필요 없어요. 다음으로 가죠.");
                     s.flagA = true;
                 } else say(s, "탄창이 비기 전에 재장전하는 습관을 들여요. Q예요.");
+            }
+            case ARSENAL -> {
+                s.checkpoint = TutorialCourse.RANGE_ENTRY;
+                s.lessonIndex = 0;
+                startLesson(s);
             }
             case TRAVERSE -> {
                 s.checkpoint = TutorialCourse.RUN_ENTRY;
@@ -648,11 +674,10 @@ public final class Tutorial {
                 if (WeaponRuntime.reloading(p)) s.flagB = true;
                 if ((s.flagB && !WeaponRuntime.reloading(p)) || (s.flagA && age > 40)) {
                     chime(s);
-                    openGate(s, TutorialCourse.Gate.RANGE);
-                    say(s, "완벽해요. 다음 문이 열렸어요.");
-                    enter(s, Step.TRAVERSE);
+                    enter(s, Step.ARSENAL);
                 }
             }
+            case ARSENAL -> tickLesson(s, now);
             case TRAVERSE -> {
                 Vec3 pos = p.position();
                 if (p.isSprinting() && s.course.beyond(pos, 94)) s.sprinted += pos.subtract(s.lastPos).horizontalDistance();
@@ -830,6 +855,69 @@ public final class Tutorial {
         }
     }
 
+    private static boolean lessonWeaponHeld(Session s) {
+        return TutorialLoan.borrowed(s.player, s.player.getMainHandItem())
+                && WeaponItems.entry(s.player.getMainHandItem()).filter(TutorialArsenal.LESSONS.get(s.lessonIndex).weapon()::equals).isPresent();
+    }
+    private static boolean lessonSpentAmmo(Session s) {
+        if (!lessonWeaponHeld(s)) return false;
+        var lesson = TutorialArsenal.LESSONS.get(s.lessonIndex);
+        return WeaponItems.magazine(s.player.getMainHandItem(), WeaponProfile.forEntry(lesson.weapon())).rounds() < s.lessonInitialRounds;
+    }
+    private static void startLesson(Session s) {
+        clearTargets(s);
+        var p = s.player;
+        var lesson = TutorialArsenal.LESSONS.get(s.lessonIndex);
+        TutorialLoan.equip(p, lesson.weapon());
+        teleport(s, TutorialCourse.RANGE_ENTRY);
+        s.lessonStarted = now(p); s.lessonDoneAt = -1; s.lessonFired = false;
+        s.lessonInitialRounds = WeaponProfile.forEntry(lesson.weapon()).magazine();
+        s.lines.clear();
+        TutorialVoice.stop(p, s.activeVoice); s.activeVoice = null; s.lineUntil = 0;
+        boolean newAmmo = s.lessonIndex == 0 || !TutorialArsenal.LESSONS.get(s.lessonIndex - 1).ammunition().equals(lesson.ammunition());
+        if (newAmmo) say(s, TutorialArsenal.ammoExplanation(lesson.ammunition()));
+        say(s, lesson.description());
+        toast(s, lesson.title() + " · " + (s.lessonIndex + 1) + "/" + TutorialArsenal.LESSONS.size(),
+                lesson.weapon().name() + " · " + lesson.ammoLabel(), TutorialUi.GOLD, 100);
+        spawnTarget(s, TutorialCourse.RANGE_ENTRY.add(0, 0, lesson.distance()), 20);
+    }
+    private static void tickLesson(Session s, int now) {
+        var p = s.player;
+        s.lessonFired |= lessonSpentAmmo(s);
+        if (s.lessonDoneAt >= 0 && now >= s.lessonDoneAt + 30 && s.lines.isEmpty() && now >= s.lineUntil
+                && !GcbWeaponInput.buttonsDown(p) && !WeaponRuntime.triggerHeld(p)) {
+            if (s.lessonIndex + 1 < TutorialArsenal.LESSONS.size()) { s.lessonIndex++; startLesson(s); }
+            else {
+                TutorialLoan.restore(p);
+                clearTargets(s);
+                openGate(s, TutorialCourse.Gate.RANGE);
+                say(s, "모든 무기군을 익혔어요. 원래 장비를 돌려드렸어요. 다음은 기동 훈련이에요.");
+                enter(s, Step.TRAVERSE);
+            }
+            return;
+        }
+        // Recover a lost/stowed loan without replacing any of the player's saved equipment.
+        if (!lessonWeaponHeld(s)) {
+            if (now - s.lessonStarted > 40 && now % 40 == 0) {
+                TutorialLoan.equip(p, TutorialArsenal.LESSONS.get(s.lessonIndex).weapon());
+                s.lessonInitialRounds = WeaponProfile.forEntry(TutorialArsenal.LESSONS.get(s.lessonIndex).weapon()).magazine();
+                s.lessonFired = false;
+            }
+            return;
+        }
+        var profile = WeaponProfile.forEntry(TutorialArsenal.LESSONS.get(s.lessonIndex).weapon());
+        var ammo = WeaponItems.magazine(p.getMainHandItem(), profile);
+        if (!profile.infiniteReserve() && ammo.total() == 0 && !WeaponRuntime.reloading(p)) {
+            // Only marked training gear is refilled. Finite ammunition remains finite outside this room.
+            if (profile.reserve() > 0) ammo.addReserve(profile.reserve());
+            else ammo.addLoaded(profile.magazine());
+            WeaponItems.save(p.getMainHandItem(), ammo);
+            p.containerMenu.broadcastChanges();
+            say(s, "연습 탄약을 보충했어요. Q로 재장전하고 다시 시도하세요.");
+        }
+        if (s.currentLine == null && s.lines.isEmpty()) s.currentLine = TutorialArsenal.LESSONS.get(s.lessonIndex).description();
+    }
+
     private static void render(Session s, int now) {
         var p = s.player;
         boolean gcb = ClientControls.gcb(p);
@@ -848,9 +936,23 @@ public final class Tutorial {
                 if (!s.flagA && !WeaponScreen.active(p)) { key = gcb ? "E" : "E · /메뉴"; action = "장비 창 열기"; }
                 else if (s.flagA && !WeaponScreen.active(p)) { key = "1"; action = "1번 무기 들기"; }
             }
-            case FIRE -> { objectives.add(new TutorialUi.Objective("가까운 표적 처치", s.count, TutorialCourse.NEAR_TARGETS.size())); key = "우클릭"; action = "사격"; }
-            case AIM -> { objectives.add(new TutorialUi.Objective("정조준으로 먼 표적 처치", s.count, TutorialCourse.FAR_TARGETS.size())); key = "좌클릭"; action = "정조준 켜기 · 끄기"; }
+            case FIRE -> { objectives.add(new TutorialUi.Objective("가까운 표적 처치", s.count, TutorialCourse.NEAR_TARGETS.size())); key = gcb ? "좌클릭" : "우클릭"; action = "사격"; }
+            case AIM -> { objectives.add(new TutorialUi.Objective("정조준으로 먼 표적 처치", s.count, TutorialCourse.FAR_TARGETS.size())); key = gcb ? "우클릭 홀드" : "좌클릭"; action = gcb ? "정조준" : "정조준 켜기 · 끄기"; }
             case RELOAD -> { objectives.add(new TutorialUi.Objective("재장전", s.flagB ? 1 : 0, 1)); key = "Q"; action = "재장전 (몇 발 쏜 뒤)"; }
+            case ARSENAL -> {
+                var lesson = TutorialArsenal.LESSONS.get(s.lessonIndex);
+                objectives.add(new TutorialUi.Objective("무기군 실습", s.lessonIndex + (s.lessonDoneAt >= 0 ? 1 : 0), TutorialArsenal.LESSONS.size()));
+                objectives.add(new TutorialUi.Objective(lesson.ammoLabel(), 0, 0));
+                objectives.add(new TutorialUi.Objective("대표 무기로 표적 처치", s.count, 1));
+                boolean sword = lesson.family().equals("sword");
+                key = sword || gcb ? "좌클릭" : "우클릭";
+                action = sword ? "가까이서 베기" : switch (lesson.family()) {
+                    case "bow" -> "당긴 뒤 놓아 발사";
+                    case "fusion_rifle", "linear_fusion_rifle" -> "누른 채 충전 후 발사";
+                    default -> "사격 · Q 재장전";
+                };
+                if (s.lessonDoneAt >= 0) { key = "마우스"; action = "버튼을 놓고 설명 듣기"; }
+            }
             case TRAVERSE -> {
                 objectives.add(new TutorialUi.Objective("질주", (int) Math.min(12, s.sprinted), 12));
                 objectives.add(new TutorialUi.Objective("공중 도약 · " + abilityName(p, AbilitySlot.JUMP), s.flagB ? 1 : 0, 1));
@@ -873,7 +975,7 @@ public final class Tutorial {
             case ASCEND -> objectives.add(new TutorialUi.Objective("빛의 문 통과", s.finishAt >= 0 ? 1 : 0, 1));
         }
         var toast = now < s.toastUntil ? s.toast : null;
-        TutorialUi.render(p, new TutorialUi.View(s.step.chapter, s.step.ordinal() + 1, Step.values().length, s.step.title,
+        TutorialUi.render(p, new TutorialUi.View(s.step.chapter, s.step.ordinal() + 1, Step.values().length, s.step == Step.ARSENAL ? TutorialArsenal.LESSONS.get(s.lessonIndex).title() : s.step.title,
                 objectives, key, action, s.currentLine, toast, s.choice, WeaponScreen.active(p)));
     }
 }

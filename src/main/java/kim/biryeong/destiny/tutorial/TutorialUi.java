@@ -48,9 +48,9 @@ final class TutorialUi {
         f.text("obj_title", bold(v.title(), WHITE), 300, top + 38, 26, 460, 30);
         for (int i = 0; i < rows; i++) {
             var o = v.objectives().get(i);
-            String box = o.done() ? "■ " : "□ ";
+            String box = o.goal() == 0 ? "" : o.done() ? "■ " : "□ ";
             String progress = o.goal() > 1 ? "  " + Math.min(o.count(), o.goal()) + "/" + o.goal() : "";
-            f.text("obj_" + i, c(box + o.text() + progress, o.done() ? DONE : WHITE), 300, top + 84 + i * 38, 21, 460, 30);
+            f.text("obj_" + i, c(box + o.text() + progress, o.goal() == 0 ? GREY : o.done() ? DONE : WHITE), 300, top + 84 + i * 38, 21, 460, 30);
         }
         if (!v.compact()) {
             // Prompts live under the tracker: the first-person weapon owns the lower-right and centre.

@@ -93,6 +93,17 @@ public final class WeaponAiming {
         if(!s.toggled) { releasedAim(p);s.movement.release(); }
         return true;
     }
+    /** Idempotent GCB hold. Reload pauses ADS; the live button token may resume it afterwards. */
+    public static boolean hold(ServerPlayer p, boolean held) {
+        if (!held) { releasedAim(p); return true; }
+        if (!eligible(p)) return false;
+        var s = SESSIONS.get(p.getUUID());
+        if (s != null && (s.owner != p || s.stack != p.getMainHandItem() || s.level != p.level())) { remove(s); s = null; }
+        if (s == null) { s = new Session(p); SESSIONS.put(p.getUUID(), s); }
+        if (!s.toggled) WeaponQuickdraw.aimInput(p, true);
+        s.toggled = true;
+        return true;
+    }
     /** True when the held item is an ADS weapon this system owns (so its punch is consumed). */
     public static boolean handles(ServerPlayer p) { return eligible(p); }
     /** Key-event toggle: one event per real press, so no punch-repeat debounce is needed. */

@@ -109,6 +109,10 @@ public final class WeaponScreen {
     }
     public static boolean toggle(ServerPlayer p) { if (active(p)) { close(p); return true; } return open(p); }
     public static boolean open(ServerPlayer p) {
+        if (kim.biryeong.destiny.tutorial.TutorialLoan.active(p)) {
+            p.sendOverlayMessage(Component.literal("무기군 실습 중입니다. 대표 무기로 표적을 처치하면 다음 무기를 드립니다."));
+            return false;
+        }
         if (active(p)) return true;
         if (!p.level().getServer().isSameThread() || !p.isAlive() || p.isRemoved() || p.hasDisconnected()
                 || p.isSpectator() || p.isSleeping() || p.isPassenger() || !p.onGround()

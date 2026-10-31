@@ -226,6 +226,7 @@ public final class WeaponRuntime {
      * already-paid bolts, firing cooldown and an in-progress real reload. The two-hand
      * carrier must observe a fresh press gap before it can acquire another lease. */
     public static void inputSettingsChanged(ServerPlayer player) {
+        GcbWeaponInput.cancel(player);
         State s = STATES.get(player.getUUID());
         if (s != null && s.owner == player) {
             detachRemote(s);
@@ -246,7 +247,7 @@ public final class WeaponRuntime {
                 owned && s.stack == player.getMainHandItem(), owned && s.holding,
                 owned ? s.heldUntil : -1, owned ? s.cycle.firingDeadline() : -1);
     }
-    private static boolean available(ServerPlayer player) {
+    static boolean available(ServerPlayer player) {
         return player.isAlive() && !player.isRemoved() && !player.isSpectator() && !player.hasDisconnected()
                 && !AbilityService.inSuper(player) && !kim.biryeong.destiny.ability.GrenadeThrow.active(player)
                 && !kim.biryeong.destiny.ability.ClassAbilityCast.active(player)
@@ -368,7 +369,7 @@ public final class WeaponRuntime {
         var p = WeaponProfile.forEntry(entry.get());
         if(entry.get().family().equals("sword"))return; // Heavy is press-only, never a held repeat.
         if(entry.get().family().equals("bow")) {
-            if(player.isUsingItem()&&player.getUseItem()==s.stack&&s.cycle.ready(now(player))
+            if((GcbWeaponInput.firing(player,s.stack)||(player.isUsingItem()&&player.getUseItem()==s.stack))&&s.cycle.ready(now(player))
                     && !s.cycle.charging()&&WeaponItems.magazine(s.stack,p).rounds()>0) {
                 if(s.cycle.startCharge(now(player)))s.acceptedBowDraw=WeaponArcherTempo.draw(player,entry.get(),p);
                 DestinySounds.weapon(player,entry.get(),"charge");
@@ -416,8 +417,18 @@ public final class WeaponRuntime {
         if (s.stack == player.getMainHandItem() && s.level == player.level() && available(player)) updateBow(player,s);
         else WeaponBowPresentation.clear(player,s.stack);
     }
+    /** Cancel trigger intent without firing a bow or canceling an already-paid burst/reload. */
+    public static void cancelTrigger(ServerPlayer player) {
+        GcbWeaponInput.cancelFire(player);
+        var s = STATES.get(player.getUUID());
+        if (s != null && s.owner == player) {
+            detachRemote(s); s.releaseHold(); s.reloadAllowsHeldInput = false;
+            WeaponBowPresentation.clear(player, s.stack);
+        }
+    }
     /** Crouch releases native consumption before the Guardian melee input, without firing a bow. */
     public static void cancelUseForSkill(ServerPlayer player) {
+        GcbWeaponInput.cancel(player);
         WeaponAiming.suspend(player);
         State s = STATES.get(player.getUUID());
         if (s != null && s.owner == player) { s.cancel();s.glaive.stop(); }
@@ -532,6 +543,7 @@ public final class WeaponRuntime {
         WeaponHolster.selecting(player,slot);
         WeaponHandling.selecting(player,slot);
         if(slot==player.getInventory().getSelectedSlot())return;
+        if (GcbWeaponInput.remapped(player)) cancelUseForSkill(player);
         WeaponSurrounded.stowing(player,player.getMainHandItem()); WeaponThreatDetector.stowing(player,player.getMainHandItem());
         WeaponFocusedFury.stowing(player,player.getMainHandItem());
         WeaponTapTheTrigger.changed(player,player.getMainHandItem()); WeaponZenMoment.changed(player,player.getMainHandItem());
@@ -551,6 +563,7 @@ public final class WeaponRuntime {
     }
     /** An accepted inventory mutation can stow/restore the exact object within one tick. */
     public static void inventoryStowing(ServerPlayer player,ItemStack previous) {
+        if (GcbWeaponInput.remapped(player)) cancelUseForSkill(player);
         WeaponBackupPlan.stowing(player,previous); WeaponCornered.stowing(player,previous);
         WeaponQuickdraw.changed(player,previous);
         WeaponSurrounded.stowing(player,previous); WeaponThreatDetector.stowing(player,previous);
@@ -583,6 +596,7 @@ public final class WeaponRuntime {
         if(s.cycle.reloading())s.cancel();
         // bind may retire an old pending session; check the exact new item again.
         if(!WeaponIzanagi.canStart(player)||!s.cycle.startExternalReload(now(player),WeaponIzanagi.RELOAD_TICKS))return false;
+        GcbWeaponInput.cancelFire(player);
         WeaponIzanagi.started(player);
         detachRemote(s);s.emptyReloadPending=false;s.reloadAllowsHeldInput=false;s.heartbeatNeedsFreshPress=true;
         s.releaseHold();player.stopUsingItem();WeaponAiming.suspend(player);
@@ -605,6 +619,7 @@ public final class WeaponRuntime {
         // fire/reload/refill a full bow, or leave an armed buffered draw behind.
         if(entry.get().family().equals("bow")&&s.holding
                 &&(s.cycle.charging()||s.cycle.reloading())) {
+            GcbWeaponInput.cancelFire(player);
             s.releaseHold(); player.stopUsingItem(); updateBow(player,s); return true;
         }
         return startReload(player,s,entry.get(),p,false);
@@ -627,6 +642,7 @@ public final class WeaponRuntime {
         plan=WeaponImpulseAmplifier.plan(player,entry,plan);
         plan=WeaponSympatheticArsenal.plan(player,entry,plan);
         if (!s.cycle.startReload(now(player), p, ammo, plan, ReloadCreditProfile.ammoTicks(entry,plan))) return false;
+        if (!shotCaused) GcbWeaponInput.cancelFire(player);
         s.clownReload=WeaponClownCartridge.acceptedReload(player);
         s.arsenalReload=WeaponSympatheticArsenal.acceptedReload(player);
         WeaponKillingTally.reloadStarted(player,s.stack);
@@ -640,12 +656,12 @@ public final class WeaponRuntime {
         // Keep the paid shot's source recovery through automatic empty-mag reload;
         // manual reload/skills still retire it. Ammo and reload timing are unchanged.
         WeaponAiming.suspend(player,shotCaused);
-        boolean liveHold=s.holding&&(WeaponModels.twoHanded(s.stack)?s.heldUntil>now(player)
-                :player.isUsingItem()&&player.getUseItem()==s.stack);
+        boolean liveHold=s.holding&&(GcbWeaponInput.firing(player,s.stack)||(WeaponModels.twoHanded(s.stack)?s.heldUntil>now(player)
+                :player.isUsingItem()&&player.getUseItem()==s.stack));
         // Keep an already-fired native semiauto consumption session alive until
         // its real release, so a held button cannot become a new trigger merely
         // because the server finished reloading. fired stays true throughout.
-        boolean nativeFiredHold=shotCaused&&!WeaponModels.twoHanded(s.stack)&&liveHold
+        boolean nativeFiredHold=shotCaused&&(GcbWeaponInput.remapped(player)||!WeaponModels.twoHanded(s.stack))&&liveHold
                 &&s.fired&&!entry.family().equals("bow");
         if (!(s.reloadAllowsHeldInput&&liveHold)&&!nativeFiredHold) {
             s.releaseHold(); player.stopUsingItem();
@@ -1116,6 +1132,7 @@ public final class WeaponRuntime {
         });
     }
     public static void tickPlayer(ServerPlayer player) {
+        GcbWeaponInput.tick(player);
         traceUse(player, "runtime.tick", -1);
         WeaponCrouchPresentation.update(player);
         WeaponKillClip.update(player);
@@ -1154,7 +1171,7 @@ public final class WeaponRuntime {
             kim.biryeong.destiny.fx.GlaiveShieldVfx.remove(player);
             return;
         }
-        boolean leaseInput = WeaponModels.twoHanded(s.stack);
+        boolean leaseInput = !GcbWeaponInput.remapped(player) && WeaponModels.twoHanded(s.stack);
         if (s.remoteShot!=null&&!WeaponItems.entry(s.stack).filter(s.remoteShot.entry::equals).isPresent()) detachRemote(s);
         if (leaseInput && s.heldUntil >= 0 && now(player) >= s.heldUntil) endHeldInput(s);
         var entry = WeaponItems.entry(s.stack).orElseThrow();
@@ -1238,7 +1255,9 @@ public final class WeaponRuntime {
             if(ammo.rounds()==0&&p.mode()!=WeaponProfile.Mode.MELEE)
                 startReload(player,s,entry,p,true);
         }
-        if (leaseInput) {
+        if (GcbWeaponInput.remapped(player)) {
+            if (GcbWeaponInput.firing(player,s.stack)) continueUse(player);
+        } else if (leaseInput) {
             if (s.heldUntil > now(player)) {
                 if (!s.holding && !s.cycle.reloading()) beginUse(player);
                 continueUse(player);
@@ -1248,6 +1267,13 @@ public final class WeaponRuntime {
             else if(entry.family().equals("bow"))continueUse(player);
         }
         updateBow(player,s);
+    }
+    /** Live trigger ownership for a safe tutorial handoff; never advances or renews input. */
+    public static boolean triggerHeld(ServerPlayer player) {
+        if (GcbWeaponInput.remapped(player)) return GcbWeaponInput.buttonsDown(player);
+        var s = STATES.get(player.getUUID());
+        return player.isUsingItem() || (s != null && s.owner == player && s.stack == player.getMainHandItem()
+                && (s.holding || s.heldUntil > now(player)));
     }
     /** Read-only fusion/LFR charge and paid-burst clock. Never binds a stack or advances combat.
      * A stopped two-hand heartbeat cannot appear as a live charge between gameplay ticks.
@@ -1266,8 +1292,8 @@ public final class WeaponRuntime {
         if (s.cycle.bursting()) return WeaponChargeState.bursting(1 + s.cycle.burstIndex(), profile.burst());
         if (!s.holding || s.fired || !s.cycle.charging()) return WeaponChargeState.idle();
         long tick = now(player);
-        boolean held = WeaponModels.twoHanded(s.stack) ? s.heldUntil > tick
-                : player.isUsingItem() && player.getUseItem() == s.stack;
+        boolean held = GcbWeaponInput.firing(player,s.stack) || (WeaponModels.twoHanded(s.stack) ? s.heldUntil > tick
+                : player.isUsingItem() && player.getUseItem() == s.stack);
         return held ? WeaponChargeState.charging(s.cycle.chargeElapsed(tick), profile.chargeTicks(), profile.burst())
                 : WeaponChargeState.idle();
     }
@@ -1279,7 +1305,7 @@ public final class WeaponRuntime {
         State s = STATES.get(player.getUUID());
         if (!available(player) || s == null || s.owner != player || s.level != player.level()
                 || s.stack != player.getMainHandItem() || !s.holding || s.acceptedBowDraw == null
-                || !player.isUsingItem() || player.getUseItem() != s.stack || s.cycle.reloading()
+                || (!GcbWeaponInput.firing(player,s.stack) && (!player.isUsingItem() || player.getUseItem() != s.stack)) || s.cycle.reloading()
                 || WeaponHandling.blocked(player)) return WeaponBowWindow.idle();
         var e = WeaponItems.entry(s.stack).filter(x -> x.family().equals("bow"));
         return e.map(entry -> WeaponBowWindow.state(entry, s.acceptedBowDraw.chargeTicks(),
@@ -1515,6 +1541,7 @@ public final class WeaponRuntime {
                 && s.stack == stack && s.cycle.reloading();
     }
     public static void cleanup(ServerPlayer owner) {
+        GcbWeaponInput.cleanup(owner);
         kim.biryeong.destiny.sound.ReloadAudio.stop(owner);
         WeaponCrouchPresentation.cleanup(owner);
         WeaponOutlaw.cleanup(owner);
@@ -1550,6 +1577,7 @@ public final class WeaponRuntime {
         if (owner.isUsingItem() && owner.getUseItem().is(WeaponCombatItem.INSTANCE)) owner.stopUsingItem();
     }
     public static void clearAll() {
+        GcbWeaponInput.clearAll();
         for (State s : List.copyOf(STATES.values())) cleanup(s.owner);
         WeaponCrouchPresentation.clearAll();
         for(var shot:SHOTS)if(shot.wave!=null)shot.wave.close();

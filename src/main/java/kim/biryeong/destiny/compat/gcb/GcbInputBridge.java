@@ -43,11 +43,12 @@ public final class GcbInputBridge {
 
     static void onKey(ServerPlayer player, boolean pushed, Key key) {
         ClientControls.gcb(player);
+        if (key == Key.KEY_ATTACK || key == Key.KEY_USE)
+            kim.biryeong.destiny.weapon.GcbWeaponInput.key(player, key == Key.KEY_ATTACK, pushed);
         if (pushed && key == Key.KEY_0) {
             kim.biryeong.destiny.inventory.WeaponScreen.toggle(player); return;
         }
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
-        if (pushed && key == Key.KEY_ATTACK) InputRouter.gcbAttack(player);
         if (!pushed || !Guardians.isGuardian(player)) {
             return;
         }

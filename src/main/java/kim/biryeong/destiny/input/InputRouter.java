@@ -120,19 +120,10 @@ public final class InputRouter {
 
     public static void onPunch(ServerPlayer player) {
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return;
-        // Only non-GCB players use the crouch/punch melee chord. GCB players may
-        // still toggle ordinary gun ADS while crouching; their melee ability is C.
+        if (!AbilityService.inSuper(player) && kim.biryeong.destiny.weapon.GcbWeaponInput.remapped(player)) return;
         boolean vanillaMelee = player.isShiftKeyDown() && Guardians.isGuardian(player) && !ClientControls.gcb(player);
-        // Vanilla clients drop left clicks for 10 ticks after a click into empty air (missTime),
-        // so GCB players toggle ADS from the real attack-key event instead (gcbAttack below).
-        boolean gcbKeyDriven = ClientControls.gcb(player) && Guardians.runtime(player).gcbAttackKey;
-        if (!AbilityService.inSuper(player) && !vanillaMelee && !gcbKeyDriven
-                && kim.biryeong.destiny.weapon.WeaponAiming.toggle(player)) {
-            Guardians.runtime(player).punchToggleTick = player.level().getServer().getTickCount();
-            return;
-        }
-        if (gcbKeyDriven && !AbilityService.inSuper(player) && !vanillaMelee
-                && kim.biryeong.destiny.weapon.WeaponAiming.handles(player)) return;
+        if (!AbilityService.inSuper(player) && !vanillaMelee
+                && kim.biryeong.destiny.weapon.WeaponAiming.toggle(player)) return;
         if (kim.biryeong.destiny.weapon.WeaponRuntime.onPunch(player)) return;
         if (!Guardians.isGuardian(player)) {
             return;
@@ -142,18 +133,6 @@ public final class InputRouter {
         } else if (vanillaMelee) {
             dispatch(player, GuardianAction.MELEE);
         }
-    }
-
-    /** GCB attack-key press. Not subject to the client's missTime click suppression. */
-    public static void gcbAttack(ServerPlayer player) {
-        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player) || AbilityService.inSuper(player)) return;
-        var runtime = Guardians.runtime(player);
-        boolean first = !runtime.gcbAttackKey;
-        runtime.gcbAttackKey = true;
-        // The very first press may already have toggled through the punch packet this/last tick.
-        if (first && player.level().getServer().getTickCount() - runtime.punchToggleTick <= 1) return;
-        boolean vanillaMelee = player.isShiftKeyDown() && Guardians.isGuardian(player) && !ClientControls.gcb(player);
-        if (!vanillaMelee) kim.biryeong.destiny.weapon.WeaponAiming.toggleKey(player);
     }
 
     public static boolean canAirJump(ServerPlayer player) {

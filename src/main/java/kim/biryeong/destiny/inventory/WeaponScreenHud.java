@@ -391,7 +391,7 @@ public final class WeaponScreenHud {
                 1440, 350, 26, WHITE, 596);
         if (hovered != null) {
             p.text("family_count", "선택 가능한 무기 " + hovered.count() + "종", 1440, 393, 20, GOLD);
-            p.wrapped("family_help", WeaponHelpText.family(hovered.id()),
+            p.wrapped("family_help", WeaponHelpText.family(hovered.id(), kim.biryeong.destiny.input.ClientControls.gcb(p.player)),
                     1440, 450, 20, WHITE, 596, 5, 29);
             String ammo = WeaponTestArmory.catalog(view.selectedSlot()).stream()
                     .filter(entry -> entry.family().equals(hovered.id())).findFirst()
