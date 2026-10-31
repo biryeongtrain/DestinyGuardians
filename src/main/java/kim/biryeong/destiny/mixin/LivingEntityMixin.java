@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import org.spongepowered.asm.mixin.Unique;
 import kim.biryeong.destiny.weapon.WeaponDamageMeasurement;
@@ -19,6 +20,15 @@ import net.minecraft.server.level.ServerPlayer;
 /** 약화(WEAKENED) 상태의 받는 피해 증가. */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
+    /** 26.3 floors fall power: native safe distance 3 + 6 means first damage at 10 blocks.
+     * Add to the native attribute so jump-boost and other safe-distance bonuses survive.
+     * Keep the normal damage multiplier, protections and world-rule checks downstream. */
+    @ModifyExpressionValue(method = "calculateFallPower", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/LivingEntity;getAttributeValue(Lnet/minecraft/core/Holder;)D"))
+    private double destiny$playerSafeFallDistance(double nativeDistance) {
+        return (Object)this instanceof ServerPlayer ? nativeDistance + 6.0 : nativeDistance;
+    }
+
     /** 26.3's five-argument/default damage paths delegate to this overload.
      * Cancel before needsSync/setDeltaMovement, not after a player velocity packet. */
     @Inject(method = "knockback(DDDLnet/minecraft/world/damagesource/DamageSource;FZ)V",
