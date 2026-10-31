@@ -1350,9 +1350,11 @@ public final class WeaponRuntime {
         }
         if(--shot.life<0)return false;
         if(shot.wave!=null) {
-            for(var contact:shot.wave.advance())
-                apply(owner,contact.target(),CrucibleDamage.base(shot.entry,contact.target(),shot.profile.damage())*shot.waveProfile.waveMultiplier(),false,
+            for(var contact:shot.wave.advance()) {
+                if (contact.target() instanceof ServerPlayer && shot.directContacts.contains(contact.target())) continue;
+                apply(owner,contact.target(),CrucibleDamage.wave(shot.entry,contact.target(),shot.profile.damage(),shot.waveProfile.waveMultiplier()),false,
                         contact.point(),AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,shot.precisionReturn,shot.demolitionist,shot.feedingFrenzy,shot.damageTraits);
+            }
             return shot.wave.alive();
         }
         if(shot.tracking!=null)shot.velocity=shot.tracking.steer(shot.position,shot.velocity);
@@ -1409,7 +1411,7 @@ public final class WeaponRuntime {
         if(hit instanceof EntityHitResult entity&&entity.getEntity() instanceof LivingEntity target) {
             if(!shot.directContacts.add(target)||shot.directContacts.size()>16)return false;
             if(shot.waveProfile.directMultiplier()>0)
-                apply(shot.owner,target,CrucibleDamage.base(shot.entry,target,shot.profile.damage())*shot.waveProfile.directMultiplier(),false,hit.getLocation(),
+                apply(shot.owner,target,CrucibleDamage.wave(shot.entry,target,shot.profile.damage(),shot.waveProfile.directMultiplier()),false,hit.getLocation(),
                         AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,shot.precisionReturn,shot.demolitionist,shot.feedingFrenzy,shot.damageTraits);
             if(++shot.bounces>6)return false;
             // Historical reports support pre-ground combatant ricochet; exact restitution and
@@ -1445,7 +1447,8 @@ public final class WeaponRuntime {
                 var wall = shot.level.clip(new ClipContext(center, aim, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, shot.owner));
                 if (wall.getType() != HitResult.Type.MISS && center.distanceToSqr(wall.getLocation()) + 0.001 < center.distanceToSqr(aim)) continue;
                 float falloff = (float)Math.max(0.3, 1 - center.distanceTo(aim) / p.blastRadius());
-                apply(shot.owner, target, CrucibleDamage.base(shot.entry,target,p.damage()) * falloff, false, aim, AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,
+                boolean direct = hit instanceof EntityHitResult entity && entity.getEntity() == target;
+                apply(shot.owner, target, CrucibleDamage.blast(shot.entry,target,p.damage(),direct,falloff), false, aim, AmmoGeneration.weapon(shot.entry),shot.perks,shot.reloadPerk,shot.rampage,
                         shot.precisionReturn,shot.demolitionist,shot.feedingFrenzy,shot.damageTraits);
             }
             Fx.ring(shot.level, center, p.blastRadius(), shot.breach==null?0xFFAF50:WeaponCharacteristics.of(shot.entry).damage().color(), 24);
