@@ -44,6 +44,7 @@ class RisingMissionTest {
         int rifles, shotguns, finishCalls, saves;
         boolean holding, finishOk = true, music;
         int musicCalls;
+        int voiceTicks = 20;
 
         FakeHost() {
             add(Zone.GATEWAY, "spawn.player", 0, 0);
@@ -87,7 +88,7 @@ class RisingMissionTest {
         @Override public boolean zoneReady(Zone z) { return ready.contains(z); }
         @Override public void prepareZone(Zone z) { }
         @Override public void place(Zone z, Marker anchor) { zone = z; pos = anchor.pos(); placed.add(z + ":" + anchor.id()); }
-        @Override public int voice(String id) { voices.add(id); return 20; }
+        @Override public int voice(String id) { voices.add(id); return voiceTicks; }
         @Override public Handle openingScan(Runnable done) { return presentation ? opening = new FakeHandle(done) : null; }
         @Override public Handle ghostScan(Vec3 target, int ticks, Runnable done) { return presentation ? scan = new FakeHandle(done) : null; }
         @Override public Handle departure(Vec3 p, float yaw, Runnable done) { return presentation ? departure = new FakeHandle(done) : null; }
@@ -168,7 +169,7 @@ class RisingMissionTest {
         assertEquals(0, host.rifles);
         assertEquals(0, host.spawner.live.size() - 1, "no hostile spawn before the rifle");
         host.moveTo(Zone.BREACH, "prop.rifle");
-        until(m, BREACH_FIGHT, 120);
+        until(m, BREACH_FIGHT, 180); // Includes queued approach lines and the complete rifle announcement.
         assertEquals(1, host.rifles);
         assertEquals(1, host.pickups.size(), "one rifle marker from BREACH_DARK through ARM_YOURSELF");
         assertTrue(host.pickups.getFirst().collected, "taking the rifle plays the pickup effect");
@@ -199,7 +200,8 @@ class RisingMissionTest {
         assertTrue(m.encounter().isPresent());
         for (int i = 0; i < 400 && m.stage() == DIVIDE_WALKER; i++) { if (i % 40 == 39) host.spawner.killAll(); m.tick(++now); }
         assertEquals(DOCK_13, m.stage());
-        assertTrue(host.voices.contains("80b75f7f"), "walker call-out");
+        for (int i=0;i<200 && !host.voices.contains("80b75f7f");i++) run(m,1);
+        assertTrue(host.voices.contains("80b75f7f"), "queued walker call-out survives a fast fixture kill");
 
         host.moveTo(Zone.DIVIDE, "exit.dock13");
         run(m, 3);
@@ -406,7 +408,7 @@ class RisingMissionTest {
         var m = fresh(host);
         m.begin(now);
         assertTrue(m.skip(ARM_YOURSELF));
-        run(m, 3);
+        run(m, 21); // Announcement has finished before measuring reach.
         assertEquals(List.of("rifle"), host.openPickups());
         Vec3 rifle = host.marker(Zone.BREACH, "prop.rifle").orElseThrow().pos();
         host.pos = rifle.add(3.05, 0, 0);
@@ -417,4 +419,37 @@ class RisingMissionTest {
         assertTrue(m.rifleGranted(), "2.5..3.0 m now collects");
         assertTrue(host.pickups.getLast().collected);
     }
+    @Test void rifleWaitsForItsOwnAnnouncementIncludingEarlierStoryBacklog() {
+        var host = new FakeHost();
+        host.presentation = false;
+        host.voiceTicks = 80; // Includes any waiting in the presentation's own voice queue.
+        var m = fresh(host);m.begin(now);m.skip(BREACH_DARK);run(m,1);
+        host.moveTo(Zone.BREACH,"prop.rifle");run(m,1);
+        assertEquals(ARM_YOURSELF,m.stage());
+        while(!host.voices.contains("80b75f50")) {
+            assertFalse(m.rifleGranted(),"Earlier narration cannot unlock the rifle");
+            assertEquals(RisingMission.Hint.WAIT,m.objective().hint());
+            assertTrue(now<300,"Announcement must eventually dispatch");run(m,1);
+        }
+        assertFalse(m.rifleGranted(),"Dispatching the line is not completing it");
+        run(m,79);assertFalse(m.rifleGranted(),"No collection one tick before the actual line end");
+        run(m,1);assertTrue(m.rifleGranted());assertEquals(1,host.rifles);
+        run(m,2);assertEquals(1,host.rifles,"No duplicate grant");
+    }
+
+    @Test void interruptedRifleAnnouncementReplaysBeforeReconnectCanCollect() {
+        var host=new FakeHost();var m=fresh(host);m.begin(now);m.skip(ARM_YOURSELF);run(m,1);
+        host.moveTo(Zone.BREACH,"prop.rifle");run(m,5);assertFalse(m.rifleGranted());
+        m.pause();run(m,100);m.resume(now,false);run(m,1);
+        assertEquals(2,host.voices.stream().filter("80b75f50"::equals).count());
+        run(m,19);assertFalse(m.rifleGranted());run(m,1);assertTrue(m.rifleGranted());
+    }
+
+    @Test void missingRifleMarkerAndVoiceUseBoundedFallbackWithoutBypassingTheGate() {
+        var host=new FakeHost();host.voiceTicks=0;
+        host.markers.get(Zone.BREACH).removeIf(m -> m.id().equals("prop.rifle") || m.id().equals("trigger.rifle"));
+        var m=fresh(host);m.begin(now);m.skip(ARM_YOURSELF);run(m,60);
+        assertFalse(m.rifleGranted());run(m,41);assertTrue(m.rifleGranted());
+    }
+
 }

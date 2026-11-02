@@ -110,6 +110,8 @@ public final class RisingMission {
     private RisingEncounters.Decor decor;
     private final Deque<Line> lines = new ArrayDeque<>();
     private int voiceUntil;
+    /** Set only when the rifle announcement is dispatched, including the presentation queue wait. */
+    private int riflePickupAt = -1;
     private int clock;
     private int stageStart;
     private boolean a, b, c, done;
@@ -222,6 +224,7 @@ public final class RisingMission {
         switch (stage) {
             case GHOST_SCAN, DEPARTURE -> enter(stage, false);
             case BREACH_DARK -> { if (b && !done) { b = false; } }
+            case ARM_YOURSELF -> { if (!rifle) { voiceUntil = now; enter(stage, false); } }
             case SHIP_DEFENSE -> shipScan();
             default -> { }
         }
@@ -247,7 +250,8 @@ public final class RisingMission {
             case GATEWAY -> new Objective("관문", "장벽으로 향하세요", 0, 1, Hint.MOVE, pos(Zone.GATEWAY, "exit.breach", "trigger.wall"));
             case BREACH_DARK -> new Objective("돌파구", "어둠 속을 나아가세요", 0, 1, Hint.MOVE, pos(Zone.BREACH, "trigger.rifle", "prop.rifle"));
             case ARM_YOURSELF -> !rifle
-                    ? new Objective("무장", "소총을 집으세요", 0, 1, Hint.GRAB, pos(Zone.BREACH, "prop.rifle", "trigger.rifle"))
+                    ? new Objective("무장", riflePickupReady() ? "소총을 집으세요" : "고스트의 안내를 들으세요", 0, 1,
+                            riflePickupReady() ? Hint.GRAB : Hint.WAIT, pos(Zone.BREACH, "prop.rifle", "trigger.rifle"))
                     : new Objective("무장", "소총을 손에 드세요", host.holdingRifle() ? 1 : 0, 1, Hint.EQUIP_MENU, null);
             case BREACH_FIGHT -> new Objective("돌파구", "몰락자를 처치하세요", run == null ? 0 : run.defeated(),
                     run == null ? 0 : run.total(), Hint.FIRE, nearestEnemy());
@@ -274,6 +278,7 @@ public final class RisingMission {
         closeHandle();
         lines.removeIf(l -> l.stage() != stage && (!l.story() || l.stage().ordinal() < stage.ordinal() - 1));
         stageStart = clock;
+        riflePickupAt = -1;
         a = b = c = done = false;
         at = -1;
         lostCueGiven = false;
@@ -346,6 +351,7 @@ public final class RisingMission {
             }
             case ARM_YOURSELF -> {
                 if (!rifle) {
+                    if (!riflePickupReady()) return;
                     var prop = first(Zone.BREACH, "prop.rifle", "trigger.rifle");
                     if (prop.isEmpty()) { missing("prop.rifle", age); if (age > MISSING_DATA_GRACE) grantRifleNow(); return; }
                     if (near(prop.get(), PICKUP_RADIUS)) grantRifleNow();
@@ -599,6 +605,8 @@ public final class RisingMission {
         if (h != null) h.close();
     }
 
+    private boolean riflePickupReady() { return riflePickupAt >= 0 && clock >= riflePickupAt; }
+
     private void say(String id) { lines.add(new Line(id, progress.stage(), true)); }
     private void bark(String id) { lines.add(new Line(id, progress.stage(), false)); }
     /** Urgent call-out: plays next, ahead of any story backlog. */
@@ -610,7 +618,9 @@ public final class RisingMission {
         while ((next = lines.poll()) != null && !next.story() && next.stage() != progress.stage()) { }
         if (next == null) return;
         int ticks = host.voice(next.id());
-        voiceUntil = now + (ticks > 0 ? ticks : 60) + 8;
+        int finishesAt = now + (ticks > 0 ? ticks : 60);
+        if (next.id().equals("80b75f50") && progress.stage() == Stage.ARM_YOURSELF) riflePickupAt = finishesAt;
+        voiceUntil = finishesAt + 8;
     }
 
     private void missing(String id, @SuppressWarnings("unused") int age) {
