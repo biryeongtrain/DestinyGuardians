@@ -21,7 +21,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-/** Personal MUSIC channel for hub and match transitions; no client mod required. */
+/** Personal jukebox/records channel for activity BGM; independent of the vanilla music slider. */
 public final class ActivityMusic {
     private static final Map<MusicSequence.Scene,List<MusicSequence.Track>> PLAYLISTS = load();
     private static final Map<UUID,Listener> LISTENERS = new HashMap<>();
@@ -85,7 +85,7 @@ public final class ActivityMusic {
             if (change.stop()) stop(listener);
             if (change.play() != null) play(listener, change.play());
             // These void-biome worlds otherwise schedule vanilla overworld/creative music.
-            // Only stop those built-in events, never the custom MUSIC channel or VOICE.
+            // Only stop those built-in events; activity BGM uses RECORDS.
             if (desired != MusicSequence.Scene.NONE && ready && server.getTickCount() % 20 == 0)
                 for (String vanilla : List.of("music.game", "music.creative", "music.under_water"))
                     CameraViews.send(player, new ClientboundStopSoundPacket(Identifier.withDefaultNamespace(vanilla), SoundSource.MUSIC));
@@ -95,7 +95,7 @@ public final class ActivityMusic {
         var p = listener.player;
         var sound = Identifier.fromNamespaceAndPath("destiny_music", track.event());
         listener.playback = MinigameLib.get(p.level().getServer()).music().playSound(
-                sound, track.seconds(), track.volume(), List.of(p), true);
+                sound, track.seconds(), track.volume(), List.of(p), true, SoundSource.RECORDS);
         listener.sounding = sound;
         if (TRACE) DestinyGuardians.LOGGER.info("[W262 music] player={} play={} scene={} api=minigame-lib", p.getScoreboardName(), sound, listener.sequence.scene());
     }
