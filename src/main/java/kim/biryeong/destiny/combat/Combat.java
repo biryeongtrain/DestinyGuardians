@@ -84,6 +84,7 @@ public final class Combat {
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.HEAVY) {
             amount *= (float) kim.biryeong.destiny.ability.warlock.WarlockExpandedSupers.outgoingDamageMultiplier(source);
         }
+        amount = PveDamageBalance.scale(amount, attribution.kind(), target instanceof Player);
         if (!Float.isFinite(amount) || amount <= 0) return false;
         float before=target.getHealth()+target.getAbsorptionAmount();
         target.damageCooldownTime = 0;
