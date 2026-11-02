@@ -101,7 +101,7 @@ public final class WeaponPerkSelection {
         if (expected == null || expected.getCount() != 1) return "장착한 전투 무기 한 개를 선택해 주세요.";
         var entry = WeaponItems.entry(expected);
         if (entry.isEmpty()) return "테스트 미리 보기가 아닌 장착 무기를 선택해 주세요.";
-        WeaponSlot slot = WeaponCharacteristics.of(entry.get()).slot();
+        WeaponSlot slot = kim.biryeong.destiny.weapon.WeaponLoadout.slot(p, expected, entry.get());
         if (p.getInventory().getItem(slot.hotbar()) != expected)
             return "장착 무기가 변경되었습니다. 장착 무기의 퍽을 다시 선택해 주세요.";
         if (!id.isEmpty() && (!WeaponPerks.choices(expected).contains(id) || !matches(id, group)))

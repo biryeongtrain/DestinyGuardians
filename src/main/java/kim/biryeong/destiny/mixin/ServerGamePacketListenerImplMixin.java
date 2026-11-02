@@ -69,6 +69,34 @@ public abstract class ServerGamePacketListenerImplMixin {
         }
     }
 
+    /** A packet-only rear camera can ray-pick its own body. Consume only that owned-camera
+     * self hit; vanilla still validates every other target (and ordinary self-attack packets). */
+    @Inject(method = "handleAttack", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
+            shift = At.Shift.AFTER), cancellable = true)
+    private void destiny$cameraSelfAttack(net.minecraft.network.protocol.game.ServerboundAttackPacket packet, CallbackInfo ci) {
+        if (packet.entityId() != player.getId()) return;
+        var runtime = kim.biryeong.destiny.guardian.Guardians.runtime(player);
+        if (!SuperCamera.active(player) && !(runtime.gcbClient && runtime.gcbThirdPerson)) return;
+        if (player.connection.hasClientLoaded() && player.isAlive() && !player.isSpectator()) {
+            player.resetLastActionTime();
+            InputRouter.onPunch(player);
+        }
+        ci.cancel();
+    }
+
+    /** JOIN can send displays before the client replaces its world. Resend full spawn + metadata
+     * after the client's load acknowledgement, including unchanged cached HUD elements. */
+    @Inject(method = "handleAcceptPlayerLoad", at = @At("TAIL"))
+    private void destiny$loadedHud(net.minecraft.network.protocol.game.ServerboundPlayerLoadedPacket packet, CallbackInfo ci) {
+        ServerPlayer loaded = player;
+        kim.biryeong.minigamelib.displayhud.DisplayHudManager.runLater(1, () -> {
+            if (!loaded.hasDisconnected() && loaded.connection.hasClientLoaded()
+                    && loaded.level().getServer().getPlayerList().getPlayer(loaded.getUUID()) == loaded)
+                kim.biryeong.minigamelib.displayhud.DisplayHudManager.resend(loaded);
+        });
+    }
+
     @Inject(method = "handlePunch", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
             shift = At.Shift.AFTER))

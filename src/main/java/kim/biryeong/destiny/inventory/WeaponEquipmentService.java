@@ -36,7 +36,7 @@ public final class WeaponEquipmentService {
         for (int index = 0; index < MAIN_SIZE; index++) {
             ItemStack stack = p.getInventory().getItem(index);
             var entry = live(stack);
-            if (entry.isPresent() && WeaponCharacteristics.of(entry.get()).slot() == slot)
+            if (entry.isPresent() && WeaponLoadout.slot(p, stack, entry.get()) == slot)
                 result.add(new Owned(index, stack, entry.get(), index == slot.hotbar()));
         }
         return List.copyOf(result);
@@ -56,21 +56,22 @@ public final class WeaponEquipmentService {
         var entry = live(expected);
         if (entry.isEmpty()) return "소유한 전투 무기 한 개를 선택해 주세요. 프리뷰는 사용할 수 없습니다.";
         var category = WeaponCharacteristics.of(entry.get());
-        int to = category.slot().hotbar();
+        var equipmentSlot = WeaponLoadout.slot(p, expected, entry.get());
+        int to = equipmentSlot.hotbar();
         ItemStack displaced = p.getInventory().getItem(to);
         if (from != to) {
             // A misplaced weapon in another equipment bucket cannot steal that bucket, even
             // when its own destination is empty. Storage/hotbar indices 3..35 can be swapped.
             if (from < 3) return "무기를 인벤토리 보관 칸으로 옮긴 뒤 장착해 주세요.";
             if (!displaced.isEmpty() && live(displaced)
-                    .filter(e -> WeaponCharacteristics.of(e).slot() == category.slot()).isEmpty())
+                    .filter(e -> WeaponLoadout.slot(p, displaced, e) == equipmentSlot).isEmpty())
                 return "대상 장비 슬롯을 먼저 비워 주세요. 기존 아이템은 덮어쓰지 않습니다.";
         }
         int exotics = category.exotic() ? 1 : 0;
         for (var slot : WeaponSlot.values()) {
             if (slot.hotbar() == to) continue;
             var other = live(p.getInventory().getItem(slot.hotbar()));
-            if (other.filter(e -> WeaponCharacteristics.of(e).slot() == slot
+            if (other.filter(e -> WeaponLoadout.slot(p, p.getInventory().getItem(slot.hotbar()), e) == slot
                     && WeaponCharacteristics.of(e).exotic()).isPresent()) exotics++;
         }
         if (exotics > 1) return "경이 무기는 한 개만 장착할 수 있습니다.";

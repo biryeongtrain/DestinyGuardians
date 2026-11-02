@@ -80,7 +80,7 @@ public final class ActivityMusic {
             if (old != null && old.player != player) { stop(old); LISTENERS.remove(player.getUUID()); }
             var listener = LISTENERS.computeIfAbsent(player.getUUID(), id -> new Listener(player));
             var desired = scene(TowerSpawnWorld.isTower(player.level()), CrucibleRuntime.participating(player), phase);
-            boolean ready = !player.hasDisconnected() && MusicPacks.ready(player);
+            boolean ready = !player.hasDisconnected() && player.connection.hasClientLoaded() && MusicPacks.ready(player);
             var change = listener.sequence.update(desired, PLAYLISTS.get(desired), ready, listener.playback == null || listener.playback.done(), now);
             if (change.stop()) stop(listener);
             if (change.play() != null) play(listener, change.play());

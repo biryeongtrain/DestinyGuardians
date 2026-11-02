@@ -28,6 +28,7 @@ public abstract class PlayerDamageMixin {
             loss=destiny$loss.finish(p.getHealth()+p.getAbsorptionAmount());
         }
         if (complete && loss>0) {
+            kim.biryeong.destiny.combat.GuardianRecovery.damaged(p, p.getHealth() < healthBefore);
             kim.biryeong.destiny.crucible.CrucibleHealth.damaged(p, p.getHealth() < healthBefore);
             kim.biryeong.destiny.weapon.WeaponUnrelenting.damaged(p,loss);
             kim.biryeong.destiny.weapon.WeaponPulseMonitor.damaged(p,loss);

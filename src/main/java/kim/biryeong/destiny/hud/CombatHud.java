@@ -227,7 +227,7 @@ public final class CombatHud {
 
     static void bar(ServerPlayer player, String id, float left, float y, float width, float height,
                             float z, int color, DisplayHud.HudAlignment align) {
-        width = Math.round(width * 2) / 2f;
+        if (!id.equals(HEALTH_ID)) width = Math.round(width * 2) / 2f;
         if (width <= 0.01f) { DisplayHud.removeHud(player, id); return; }
         sprite(player, id, "solid", left + width / 2, y, width, height, z, color, align);
     }
@@ -237,19 +237,21 @@ public final class CombatHud {
         // The native offhand model occupies the lower-left corner. Only affected left-aligned
         // HUDs request the existing DisplayHud above-hand pass; ordinary/centre HUDs keep their path.
         boolean aboveHand = align == DisplayHud.HudAlignment.LEFT && !player.getOffhandItem().isEmpty();
-        String key = image + ":" + color + ":" + Math.round(width * 10) + ":" + height + ":" + x + ":" + y + ":" + z + ":" + align + ":" + aboveHand;
+        String key = image + ":" + color + ":" + (id.equals(HEALTH_ID) ? Float.toString(width) : Math.round(width * 10)) + ":" + height + ":" + x + ":" + y + ":" + z + ":" + align + ":" + aboveHand;
         DisplayHud existing = DisplayHud.getHud(player, id);
         if (existing != null && key.equals(existing.getExtraData("state"))) return;
         ItemDisplayHud hud = existing instanceof ItemDisplayHud item ? item : new ItemDisplayHud();
+        // Recovery remains fractional and interpolates between server ticks. Damage is immediate.
+        int interpolation = id.equals(HEALTH_ID) && existing != null && width > hud.getScale().x ? 2 : 0;
         hud.updateWhenDataChanged(false);
         ItemStack stack = new ItemStack(Items.PAPER);
         stack.set(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath("destiny", "gui/hud/" + image));
         stack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(List.of(), List.of(), List.of(), List.of(color)));
         hud.setItem(stack);
         hud.setItemTransform(ItemDisplayContext.NONE);
-        hud.setScale(width, height, 1);
+        hud.setScale(width, height, 1, interpolation);
         hud.setAlignment(align);
-        hud.setLocation(x, y, z);
+        hud.setLocation(x, y, z, interpolation);
         hud.setViewRange(1000);
         hud.setExtraData("state", key);
         hud.setAboveHand(aboveHand);

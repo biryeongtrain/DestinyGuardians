@@ -80,6 +80,7 @@ public final class AbilityService {
     }
 
     public static void cleanup(ServerPlayer player) {
+        kim.biryeong.destiny.combat.GuardianRecovery.forget(player);
         kim.biryeong.destiny.combat.SupportOvershield.cleanup(player);
         GrenadeThrow.cleanup(player);
         ClassAbilityCast.cleanup(player);
@@ -128,6 +129,7 @@ public final class AbilityService {
     }
 
     public static void tickPlayer(ServerPlayer player) {
+        kim.biryeong.destiny.combat.GuardianRecovery.tick(player);
         kim.biryeong.destiny.combat.SupportOvershield.tick(player);
         if (player.isDeadOrDying() || player.isSpectator()) {
             if (Guardians.runtime(player).superSession != null || kim.biryeong.destiny.fx.PlayerAnimations.isPlaying(player)) {

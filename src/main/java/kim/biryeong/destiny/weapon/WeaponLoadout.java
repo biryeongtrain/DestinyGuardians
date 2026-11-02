@@ -27,11 +27,19 @@ public final class WeaponLoadout {
     /** OP fixture compatibility; does not alter inventory or firing cooldown. */
     public static void standalone(ServerPlayer p) { WeaponRuntime.cancelUseForSkill(p);p.setAttached(ENABLED,false); }
     public static boolean enabled(ServerPlayer p) { return p.getAttachedOrElse(ENABLED,false); }
+    public static WeaponSlot slot(ServerPlayer p, ItemStack stack, WeaponCatalog.Entry weapon) {
+        if (kim.biryeong.destiny.tutorial.TutorialLoan.active(p)
+                && kim.biryeong.destiny.tutorial.TutorialLoan.borrowed(p, stack)
+                && weapon.id().equals(kim.biryeong.destiny.campaign.RisingLoadout.RIFLE)
+                && WeaponSkins.of(stack).filter(s -> s.id().equals(kim.biryeong.destiny.campaign.RisingLoadout.RIFLE_SKIN)).isPresent())
+            return WeaponSlot.KINETIC;
+        return WeaponCharacteristics.of(weapon).slot();
+    }
     public static List<Equipped> equipped(ServerPlayer p) {
         List<Equipped> result=new ArrayList<>();
         for(var slot:WeaponSlot.values()) {
             ItemStack stack=p.getInventory().getItem(slot.hotbar());
-            WeaponItems.entry(stack).filter(e->WeaponCharacteristics.of(e).slot()==slot)
+            WeaponItems.entry(stack).filter(e->slot(p,stack,e)==slot)
                     .ifPresent(e->result.add(new Equipped(slot,stack,e)));
         }
         return List.copyOf(result);
@@ -58,11 +66,11 @@ public final class WeaponLoadout {
         if(!p.isAlive()||p.isRemoved()||p.isSpectator()||AbilityService.inSuper(p))return "현재 동작 중에는 장비를 변경할 수 없습니다.";
         ItemStack held=p.getMainHandItem();var entry=WeaponItems.entry(held);
         if(entry.isEmpty())return "소유한 전투 무기를 주 손에 들어 주세요. 프리뷰는 사용할 수 없습니다.";
-        int from=p.getInventory().getSelectedSlot();int to=WeaponCharacteristics.of(entry.get()).slot().hotbar();
+        int from=p.getInventory().getSelectedSlot();int to=slot(p,held,entry.get()).hotbar();
         ItemStack previous=p.getInventory().getItem(to);
         if(from!=to&&!previous.isEmpty()) {
             var previousEntry=WeaponItems.entry(previous);
-            if(previousEntry.isEmpty()||WeaponCharacteristics.of(previousEntry.get()).slot().hotbar()!=to||from<3)
+            if(previousEntry.isEmpty()||slot(p,previous,previousEntry.get()).hotbar()!=to||from<3)
                 return "대상 장비 슬롯을 먼저 비워 주세요. 기존 아이템은 덮어쓰지 않습니다.";
         }
         long exoticCount=equipped(p).stream().filter(e->e.slot().hotbar()!=to&&e.characteristics().exotic()).count();
