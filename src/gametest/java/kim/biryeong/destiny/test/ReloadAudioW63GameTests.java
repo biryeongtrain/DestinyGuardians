@@ -19,7 +19,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Display;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +39,13 @@ import java.util.List;
 public final class ReloadAudioW63GameTests {
     private static final String FLOOR = "destiny-test:floor";
     private static final String PREFIX = "weapon.reload_w63.";
-    private static final double EPS_SQR = 1.0e-10;
+    private static boolean atEye(ClientboundSoundPacket sound,ServerPlayer owner) {
+        var expected=DestinySounds.packet("weapon.shotgun.reload_insert",owner.getEyePosition(),SoundSource.PLAYERS,.8f,0);
+        return sound.getX()==expected.getX() && sound.getY()==expected.getY() && sound.getZ()==expected.getZ();
+    }
+
+    private static Identifier key(ClientboundSoundPacket p) { return p.getSound().value().location(); }
+    private static String base(String key) { return key.replaceFirst("\\.direct_[0-9]+$", ""); }
 
     private static void check(GameTestHelper h, boolean value, String message) {
         h.assertTrue(value, Component.literal(message));
@@ -92,8 +98,8 @@ public final class ReloadAudioW63GameTests {
         return queued.stream().filter(type::isInstance).map(type::cast).toList();
     }
 
-    private static List<ClientboundSoundEntityPacket> reloadSounds(List<Packet<?>> queued) {
-        return packets(queued, ClientboundSoundEntityPacket.class).stream()
+    private static List<ClientboundSoundPacket> reloadSounds(List<Packet<?>> queued) {
+        return packets(queued, ClientboundSoundPacket.class).stream()
                 .filter(p -> p.getSound().value().location().getNamespace().equals("destiny")
                         && (p.getSound().value().location().getPath().startsWith(PREFIX)
                         || p.getSound().value().location().getPath().startsWith("weapon.reload_w83.")
@@ -101,52 +107,43 @@ public final class ReloadAudioW63GameTests {
                         || java.util.Set.of("weapon.reload_w102.aishas_embrace.46", "weapon.reload_w102.blast_furnace.24",
                                 "weapon.reload_w102.blast_furnace.43", "weapon.reload_w102.chattering_bone.24",
                                 "weapon.reload_w102.chattering_bone.34", "weapon.reload_w102.retrofit_escapade.90")
-                                .contains(p.getSound().value().location().getPath()))).toList();
+                                .contains(base(p.getSound().value().location().getPath())))).toList();
     }
 
-    private static boolean removed(List<Packet<?>> queued, int id) {
-        return packets(queued, ClientboundRemoveEntitiesPacket.class).stream()
-                .anyMatch(p -> p.entityIds().contains(id));
+    private static boolean removed(List<Packet<?>> queued, Identifier id) {
+        return packets(queued, ClientboundStopSoundPacket.class).stream()
+                .anyMatch(p -> id.equals(p.getName()) && p.getSource()==SoundSource.PLAYERS);
     }
 
-    private static long removalCount(List<Packet<?>> queued, int id) {
-        return packets(queued, ClientboundRemoveEntitiesPacket.class).stream()
-                .filter(p -> p.entityIds().contains(id)).count();
+    private static long removalCount(List<Packet<?>> queued, Identifier id) {
+        return packets(queued, ClientboundStopSoundPacket.class).stream()
+                .filter(p -> id.equals(p.getName()) && p.getSource()==SoundSource.PLAYERS).count();
     }
 
     private static void noGlobalStop(GameTestHelper h, List<Packet<?>> queued) {
-        check(h, packets(queued, ClientboundStopSoundPacket.class).isEmpty(),
-                "Never silence another owner's same-event reload with an event-global stop");
+        check(h, packets(queued, ClientboundStopSoundPacket.class).stream().allMatch(p ->
+                        p.getName()!=null && p.getName().getPath().contains(".direct_") && p.getSource()==SoundSource.PLAYERS),
+                "Stops target only a reserved reload alias in PLAYERS, never a shared or category-wide sound");
     }
 
     private static void noAudio(GameTestHelper h, List<Packet<?>> queued) {
         check(h, packets(queued, ClientboundSoundEntityPacket.class).isEmpty()
-                        && packets(queued, ClientboundSoundPacket.class).isEmpty(),
+                        && packets(queued, ClientboundSoundPacket.class).isEmpty()
+                        && packets(queued, ClientboundStopSoundPacket.class).isEmpty(),
                 "Denied/query-only path queues no entity-bound or legacy sound");
         noGlobalStop(h, queued);
     }
 
-    private static ClientboundSoundEntityPacket started(GameTestHelper h, ServerPlayer owner,
+    private static ClientboundSoundPacket started(GameTestHelper h, ServerPlayer owner,
                                                          List<Packet<?>> queued) {
         var sounds = reloadSounds(queued);
         check(h, sounds.size() == 1, "Exactly one timed reload sound on the real connection");
         var sound = sounds.getFirst();
-        var spawns = packets(queued, ClientboundAddEntityPacket.class).stream()
-                .filter(p -> p.getId() == sound.getId()).toList();
-        check(h, spawns.size() == 1 && spawns.getFirst().getType() == EntityTypes.ITEM_DISPLAY,
-                "The sound refers to one client-only vanilla item-display emitter");
-        var spawn = spawns.getFirst();
-        check(h, queued.indexOf(spawn) < queued.indexOf(sound), "Emitter spawn is queued before its entity sound");
-        check(h, spawn.getId() != owner.getId() && owner.level().getEntity(spawn.getId()) == null,
-                "Emitter is separate from its owner and never inserted into ServerLevel");
-        check(h, new Vec3(spawn.getX(), spawn.getY(), spawn.getZ()).distanceToSqr(owner.getEyePosition()) < EPS_SQR,
-                "Emitter starts at its source's actual eye position");
-        // Reconstruct only the vanilla display's default/queued item data, like a client.
-        var display = new Display.ItemDisplay(EntityTypes.ITEM_DISPLAY, owner.level());
-        for (var data : packets(queued, ClientboundSetEntityDataPacket.class)) {
-            if (data.id() == sound.getId()) display.getEntityData().assignValues(data.packedItems());
-        }
-        check(h, display.getItemStack().isEmpty(), "Vanilla default plus any queued metadata keeps the emitter empty");
+        check(h, packets(queued,ClientboundSoundEntityPacket.class).isEmpty()
+                        && packets(queued,ClientboundAddEntityPacket.class).isEmpty(),
+                "Reload starts directly without an entity spawn dependency");
+        check(h, atEye(sound,owner),
+                "Direct sound starts at the quantized owner eye position");
         check(h, sound.getSound().kind() == Holder.Kind.DIRECT && sound.getPitch() == 1f
                         && sound.getVolume() == .8f && sound.getSource() == SoundSource.PLAYERS,
                 "Inline fixed-pitch reload event uses the authored player sound channel");
@@ -158,14 +155,14 @@ public final class ReloadAudioW63GameTests {
         return sound;
     }
 
-    private static ClientboundSoundEntityPacket start(GameTestHelper h, ServerPlayer p) {
+    private static ClientboundSoundPacket start(GameTestHelper h, ServerPlayer p) {
         TestPlayers.drain(p);
         check(h, WeaponRuntime.reload(p), "Real authoritative reload is accepted");
         return started(h, p, TestPlayers.outbound(p));
     }
 
     @GameTest(structure = FLOOR, maxTicks = 240, environment = "destiny-test:w90_isolated")
-    public void acceptedReloadSpawnsBeforeSoundAndPaysAmmoOnlyAtDeadlineThenRemovesEmitter(GameTestHelper h) {
+    public void acceptedDirectReloadPaysAmmoOnlyAtDeadlineThenStopsOwnedAlias(GameTestHelper h) {
         var p = player(h, 6.5);
         var gun = equip(p, "beloved", 1, 12);
         var before = ammo(gun);
@@ -179,8 +176,8 @@ public final class ReloadAudioW63GameTests {
         h.runAfterDelay(ticks - 1, () -> {
             WeaponRuntime.tickPlayer(p); queued.addAll(TestPlayers.outbound(p));
             check(h, WeaponRuntime.reloading(p) && ammo(gun).rounds() == before.rounds()
-                            && ammo(gun).reserve() == before.reserve() && !removed(queued, sound.getId()),
-                    "One tick before the actual deadline, ammo and emitter remain unchanged");
+                            && ammo(gun).reserve() == before.reserve() && !removed(queued, key(sound)),
+                    "One tick before the actual deadline, ammo and sound session remain unchanged");
         });
         h.runAfterDelay(ticks, () -> {
             WeaponRuntime.tickPlayer(p); queued.addAll(TestPlayers.outbound(p));
@@ -188,8 +185,8 @@ public final class ReloadAudioW63GameTests {
             check(h, !WeaponRuntime.reloading(p) && ammo(gun).rounds() == profile(gun).magazine()
                             && ammo(gun).reserve() == before.reserve() - moved && ammo(gun).total() == before.total(),
                     "Only real finishReload transfers exactly the missing finite rounds at its deadline");
-            check(h, removalCount(queued, sound.getId()) == 1 && reloadSounds(queued).isEmpty(),
-                    "Exact gameplay completion removes the emitter once, without replay");
+            check(h, removalCount(queued, key(sound)) == 1 && reloadSounds(queued).isEmpty(),
+                    "Exact gameplay completion removes the sound session once, without replay");
             noGlobalStop(h, queued);
             h.succeed();
         });
@@ -214,7 +211,7 @@ public final class ReloadAudioW63GameTests {
     }
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
-    public void fullMagazineAndFiniteNoReserveDenialsQueueNoSoundOrEmitter(GameTestHelper h) {
+    public void fullMagazineAndFiniteNoReserveDenialsQueueNoSoundOrEntity(GameTestHelper h) {
         var full = player(h, 3.5);
         int capacity = WeaponProfile.forEntry(WeaponCatalog.find("beloved").orElseThrow()).magazine();
         var a = equip(full, "beloved", capacity, 12);
@@ -226,7 +223,7 @@ public final class ReloadAudioW63GameTests {
             WeaponRuntime.tickPlayer(p);
             var queued = TestPlayers.outbound(p);
             noAudio(h, queued);
-            check(h, packets(queued, ClientboundAddEntityPacket.class).isEmpty(), "No emitter for a denied reload");
+            check(h, packets(queued, ClientboundAddEntityPacket.class).isEmpty(), "No entity spawn for a denied reload");
         }
         check(h, ItemStack.matches(a, savedA) && ItemStack.matches(b, savedB), "Denied reloads leave actual stacks unchanged");
         h.succeed();
@@ -241,13 +238,7 @@ public final class ReloadAudioW63GameTests {
             if (packet instanceof ClientboundSoundPacket p
                     && p.getX() == origin.getX() && p.getY() == origin.getY() && p.getZ() == origin.getZ()) {
                 String key=p.getSound().value().location().toString();
-                if(key.startsWith("destiny:weapon.shotgun.reload"))cues.add(key);
-            } else if (packet instanceof ClientboundSoundEntityPacket p
-                    && p.getSound().value().location().getPath().equals("weapon.shotgun.reload_finish")
-                    && packets(queued, ClientboundAddEntityPacket.class).stream().anyMatch(spawn ->
-                            spawn.getId()==p.getId() && new Vec3(spawn.getX(),spawn.getY(),spawn.getZ())
-                            .distanceToSqr(owner.getEyePosition())<EPS_SQR)) {
-                cues.add(p.getSound().value().location().toString());
+                if(key.startsWith("destiny:weapon.shotgun.reload"))cues.add(base(key));
             }
         }
         return cues;
@@ -329,14 +320,13 @@ public final class ReloadAudioW63GameTests {
             queued.addAll(TestPlayers.outbound(hearer));});
         h.runAfterDelay(f.firstReloadTicks()+1,() -> {
             check(h,!WeaponRuntime.reloading(a)&&!WeaponRuntime.reloading(b),"Last shell completed both real reloads");
-            var sounds=packets(queued,ClientboundSoundEntityPacket.class).stream()
-                    .filter(p -> p.getSound().value().location().getPath().equals("weapon.shotgun.reload_finish")).toList();
-            var spawns=packets(queued,ClientboundAddEntityPacket.class);
-            int idA=spawns.stream().filter(p -> new Vec3(p.getX(),p.getY(),p.getZ()).distanceToSqr(a.getEyePosition())<EPS_SQR)
-                    .map(ClientboundAddEntityPacket::getId).filter(id -> sounds.stream().anyMatch(s -> s.getId()==id)).findFirst().orElseThrow();
-            int idB=spawns.stream().filter(p -> new Vec3(p.getX(),p.getY(),p.getZ()).distanceToSqr(b.getEyePosition())<EPS_SQR)
-                    .map(ClientboundAddEntityPacket::getId).filter(id -> sounds.stream().anyMatch(s -> s.getId()==id)).findFirst().orElseThrow();
-            check(h,idA!=idB&&!removed(queued,idA)&&!removed(queued,idB),"Natural finish tail is not removed by the inactive reload flag");
+            var sounds=packets(queued,ClientboundSoundPacket.class).stream()
+                    .filter(p -> base(key(p).getPath()).equals("weapon.shotgun.reload_finish")).toList();
+            var idA=sounds.stream().filter(p -> atEye(p,a))
+                    .map(ReloadAudioW63GameTests::key).findFirst().orElseThrow();
+            var idB=sounds.stream().filter(p -> atEye(p,b))
+                    .map(ReloadAudioW63GameTests::key).findFirst().orElseThrow();
+            check(h,!idA.equals(idB)&&!removed(queued,idA)&&!removed(queued,idB),"Natural finish tail is not removed by the inactive reload flag");
             check(h,!WeaponRuntime.reload(b),"Full-magazine reload denial leaves B's tail alone");
             WeaponRuntime.tickPlayer(b);
             check(h,!removed(TestPlayers.outbound(hearer),idB),"Denied action does not retire the natural tail");
@@ -344,7 +334,7 @@ public final class ReloadAudioW63GameTests {
             WeaponRuntime.releaseUse(a,gunA);
             var cancelled=TestPlayers.outbound(hearer);
             check(h,removalCount(cancelled,idA)==1&&!removed(cancelled,idB),"Shot retires A's tail before its delayed clack, leaving B audible");
-            var removal=packets(cancelled,ClientboundRemoveEntitiesPacket.class).stream().filter(p -> p.entityIds().contains(idA)).findFirst().orElseThrow();
+            var removal=packets(cancelled,ClientboundStopSoundPacket.class).stream().filter(p -> idA.equals(p.getName())).findFirst().orElseThrow();
             var firing=packets(cancelled,ClientboundSoundPacket.class).stream().filter(p -> p.getSound().value().location().getPath().equals("weapon.shotgun.fire")).findFirst().orElseThrow();
             check(h,cancelled.indexOf(removal)<cancelled.indexOf(firing),"Tail retirement packet precedes the accepted fire sound");
             noGlobalStop(h,cancelled);
@@ -357,34 +347,35 @@ public final class ReloadAudioW63GameTests {
     }
 
     @GameTest(structure = FLOOR, maxTicks = 100, environment = "destiny-test:w90_isolated")
-    public void sameEventOwnersUseDistinctEmittersAndCancelOnlyOneWhileOtherContinues(GameTestHelper h) {
+    public void sameEventOwnersUseDistinctAliasesAndCancelOnlyOneWhileOtherContinues(GameTestHelper h) {
         var a = player(h, 3.5); var gunA = equip(a, "duke_mk_44", 8, 0);
         var b = player(h, 9.5); var gunB = equip(b, "duke_mk_44", 8, 0);
         var hearer = listener(h, new Vec3(3.5, 1, 6.5));
         var soundA = start(h, a); var soundB = start(h, b);
-        check(h, soundA.getId() != soundB.getId()
-                        && soundA.getSound().value().location().equals(soundB.getSound().value().location()),
-                "Same event across two owners has distinct client emitter identities");
+        check(h, !key(soundA).equals(key(soundB))
+                        && base(key(soundA).getPath()).equals(base(key(soundB).getPath())),
+                "Same event across two owners has distinct client sound aliases");
         var heard = TestPlayers.outbound(hearer);
-        check(h, reloadSounds(heard).stream().anyMatch(p -> p.getId() == soundA.getId())
-                        && reloadSounds(heard).stream().anyMatch(p -> p.getId() == soundB.getId()),
+        check(h, reloadSounds(heard).stream().anyMatch(p -> key(p).equals(key(soundA)))
+                        && reloadSounds(heard).stream().anyMatch(p -> key(p).equals(key(soundB))),
                 "One nearby spectator actually receives both same-key reloads");
         WeaponRuntime.cancelUseForSkill(a);
         var cancelled = TestPlayers.outbound(hearer);
-        check(h, removalCount(cancelled, soundA.getId()) == 1 && !removed(cancelled, soundB.getId())
+        check(h, removalCount(cancelled, key(soundA)) == 1 && !removed(cancelled, key(soundB))
                         && !WeaponRuntime.reloading(a) && WeaponRuntime.reloading(b),
                 "Cancelling owner A removes only A while B retains its actual reload");
         noGlobalStop(h, cancelled);
         b.setPos(b.position().add(1, 0, 0)); WeaponRuntime.tickPlayer(b);
         var following = TestPlayers.outbound(hearer);
-        check(h, packets(following, ClientboundTeleportEntityPacket.class).stream().anyMatch(p -> p.id() == soundB.getId())
-                        && !removed(following, soundB.getId()), "B's same-key emitter continues following after A's cancellation");
+        check(h, packets(following, ClientboundTeleportEntityPacket.class).isEmpty()
+                        && reloadSounds(following).isEmpty() && !removed(following, key(soundB)),
+                "Movement leaves B's one-shot positional sound playing without entity updates");
         noGlobalStop(h, following);
         h.runAfterDelay(profile(gunB).firstReloadTicks(), () -> {
             WeaponRuntime.tickPlayer(a); WeaponRuntime.tickPlayer(b);
             var finished = TestPlayers.outbound(hearer);
             check(h, ammo(gunA).rounds() == 8 && ammo(gunB).rounds() == 9 && !WeaponRuntime.reloading(b)
-                            && removed(finished, soundB.getId()) && !removed(finished, soundA.getId()),
+                            && removed(finished, key(soundB)),
                     "B alone completes; A's cancelled deadline never fills or removes B");
             noGlobalStop(h, finished); h.succeed();
         });
@@ -401,44 +392,46 @@ public final class ReloadAudioW63GameTests {
         WeaponRuntime.tickPlayer(p);
         var queued = TestPlayers.outbound(p);
         check(h, h.getLevel().getServer().getTickCount() == tick && p.getMainHandItem() == gun
-                        && !WeaponRuntime.reloading(p) && removalCount(queued, sound.getId()) == 1,
-                "Validated native packet handler observes same-tick stow/return and removes the captured emitter");
+                        && !WeaponRuntime.reloading(p) && removalCount(queued, key(sound)) == 1,
+                "Validated native packet handler observes same-tick stow/return and removes the captured sound session");
         noGlobalStop(h, queued);
         h.runAfterDelay(profile(gun).firstReloadTicks() + 1, () -> {
             WeaponRuntime.tickPlayer(p); var later = TestPlayers.outbound(p);
             check(h, ammo(gun).rounds() == 8 && !WeaponRuntime.reloading(p)
-                            && reloadSounds(later).isEmpty() && !removed(later, sound.getId()),
+                            && reloadSounds(later).isEmpty() && !removed(later, key(sound)),
                     "Returned stack never replays audio, receives a ghost refill or repeats removal");
             noGlobalStop(h, later); h.succeed();
         });
     }
 
     @GameTest(structure = FLOOR, maxTicks = 100, environment = "destiny-test:w90_isolated")
-    public void ownerCleanupAndDeadOwnerTickRemoveOnlyTheirCapturedEmitters(GameTestHelper h) {
+    public void ownerCleanupAndDeadOwnerTickStopOnlyTheirCapturedSounds(GameTestHelper h) {
         var a = player(h, 3.5); var gunA = equip(a, "duke_mk_44", 8, 0);
         var b = player(h, 9.5); var gunB = equip(b, "duke_mk_44", 8, 0);
         var hearer = listener(h, new Vec3(3.5, 1, 6.5));
         var soundA = start(h, a); var soundB = start(h, b); TestPlayers.drain(hearer);
         WeaponRuntime.cleanup(a);
         var cleanup = TestPlayers.outbound(hearer);
-        check(h, removed(cleanup, soundA.getId()) && !removed(cleanup, soundB.getId()) && WeaponRuntime.reloading(b),
-                "Owner cleanup removes only that owner's emitter");
+        check(h, removed(cleanup, key(soundA)) && !removed(cleanup, key(soundB)) && WeaponRuntime.reloading(b),
+                "Owner cleanup removes only that owner's sound session");
         noGlobalStop(h, cleanup);
         b.setHealth(0); WeaponRuntime.tickPlayer(b);
         var death = TestPlayers.outbound(hearer);
-        check(h, removed(death, soundB.getId()) && !removed(death, soundA.getId()) && !WeaponRuntime.reloading(b),
-                "Dead-owner validation retires B's emitter and gameplay reload");
+        check(h, removed(death, key(soundB)) && !removed(death, key(soundA)) && !WeaponRuntime.reloading(b),
+                "Dead-owner validation retires B's sound session and gameplay reload");
         noGlobalStop(h, death);
         WeaponRuntime.cleanup(a); WeaponRuntime.tickPlayer(b);
         var repeated = TestPlayers.outbound(hearer);
-        check(h, !removed(repeated, soundA.getId()) && !removed(repeated, soundB.getId()), "Repeated retirement is idempotent");
+        check(h, !removed(repeated, key(soundA)) && !removed(repeated, key(soundB)), "Repeated retirement is idempotent");
         noGlobalStop(h, repeated);
         h.runAfterDelay(profile(gunA).firstReloadTicks() + 1, () -> {
             WeaponRuntime.tickPlayer(a); WeaponRuntime.tickPlayer(b);
             check(h, ammo(gunA).rounds() == 8 && ammo(gunB).rounds() == 8, "Retired deadlines cannot fill either actual stack");
             var later = TestPlayers.outbound(hearer);
-            check(h, reloadSounds(later).stream().noneMatch(packet -> packet.getId() == soundA.getId() || packet.getId() == soundB.getId()),
-                    "Retired emitters never replay; unrelated parallel fixtures may still be audible");
+            check(h, reloadSounds(later).stream().noneMatch(packet ->
+                            (packet.getX()==soundA.getX() && packet.getY()==soundA.getY() && packet.getZ()==soundA.getZ())
+                            || (packet.getX()==soundB.getX() && packet.getY()==soundB.getY() && packet.getZ()==soundB.getZ())),
+                    "Retired sound sessions never replay; unrelated parallel fixtures may still be audible");
             noGlobalStop(h, later); h.succeed();
         });
     }
@@ -451,13 +444,13 @@ public final class ReloadAudioW63GameTests {
         Guardians.data(superOwner).setSuperEnergy(1);
         check(h, AbilityService.use(superOwner, AbilitySlot.SUPER) == AbilityService.Result.OK, "Real equipped charged super accepted");
         var superPackets = TestPlayers.outbound(superOwner);
-        check(h, removed(superPackets, superSound.getId()) && reloadSounds(superPackets).isEmpty()
+        check(h, removed(superPackets, key(superSound)) && reloadSounds(superPackets).isEmpty()
                         && !WeaponRuntime.reloading(superOwner) && ammo(superGun).rounds() == 8,
-                "Accepted super cancels its actual reload and removes its emitter without granting ammo");
+                "Accepted super cancels its actual reload and removes its sound session without granting ammo");
         noGlobalStop(h, superPackets);
         check(h, AbilityService.use(dodgeOwner, AbilitySlot.CLASS_ABILITY) == AbilityService.Result.OK, "Real equipped Marksman's Dodge accepted");
         var dodgePackets = TestPlayers.outbound(dodgeOwner);
-        check(h, removed(dodgePackets, dodgeSound.getId()) && reloadSounds(dodgePackets).isEmpty()
+        check(h, removed(dodgePackets, key(dodgeSound)) && reloadSounds(dodgePackets).isEmpty()
                         && !WeaponRuntime.reloading(dodgeOwner) && ammo(dodgeGun).rounds() == profile(dodgeGun).magazine(),
                 "Accepted dodge retires timed audio; only its existing gameplay effect fills the magazine");
         noGlobalStop(h, dodgePackets);
@@ -524,22 +517,22 @@ public final class ReloadAudioW63GameTests {
             fastPackets.addAll(TestPlayers.outbound(fast)); basePackets.addAll(TestPlayers.outbound(base));
         });
         h.runAfterDelay(32, () -> check(h, ammo(fastGun).rounds() == 9 && ammo(baseGun).rounds() == 8
-                        && !removed(fastPackets, fastSound.getId()) && !removed(basePackets, baseSound.getId()),
-                "Credit24 has occurred but neither full-duration emitter retires at32"));
+                        && !removed(fastPackets, key(fastSound)) && !removed(basePackets, key(baseSound)),
+                "Credit24 has occurred but neither full-duration sound session retires at32"));
         h.runAfterDelay(33, () -> {
             WeaponRuntime.tickPlayer(fast); WeaponRuntime.tickPlayer(base);
             fastPackets.addAll(TestPlayers.outbound(fast)); basePackets.addAll(TestPlayers.outbound(base));
             check(h, ammo(fastGun).rounds() == 9 && ammo(baseGun).rounds() == 8
                             && !WeaponRuntime.reloading(fast) && WeaponRuntime.reloading(base)
-                            && removed(fastPackets, fastSound.getId()) && !removed(basePackets, baseSound.getId()),
-                    "Only earned Outlaw reload completes and removes its timed emitter at tick 33");
+                            && removed(fastPackets, key(fastSound)) && !removed(basePackets, key(baseSound)),
+                    "Only earned Outlaw reload completes and removes its timed sound session at tick 33");
         });
-        h.runAfterDelay(58, () -> check(h, ammo(baseGun).rounds() == 9 && !removed(basePackets, baseSound.getId()),
-                "Base credit42 retains its full-duration emitter through tick58"));
+        h.runAfterDelay(58, () -> check(h, ammo(baseGun).rounds() == 9 && !removed(basePackets, key(baseSound)),
+                "Base credit42 retains its full-duration sound session through tick58"));
         h.runAfterDelay(59, () -> {
             WeaponRuntime.tickPlayer(base); basePackets.addAll(TestPlayers.outbound(base));
             check(h, ammo(baseGun).rounds() == 9 && !WeaponRuntime.reloading(base)
-                            && removalCount(fastPackets, fastSound.getId()) == 1 && removalCount(basePackets, baseSound.getId()) == 1
+                            && removalCount(fastPackets, key(fastSound)) == 1 && removalCount(basePackets, key(baseSound)) == 1
                             && ammo(fastGun).reserve() == 0 && ammo(baseGun).reserve() == 0,
                     "Base completes at 59; both primary reserves remain infinite without fabricated finite ammo");
             noGlobalStop(h, fastPackets); noGlobalStop(h, basePackets); h.succeed();
@@ -547,7 +540,7 @@ public final class ReloadAudioW63GameTests {
     }
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
-    public void movingSourceEyeQueuesOnlyEmitterTeleportsWithoutWorldEntityOrAmmoCost(GameTestHelper h) {
+    public void movingSourceDoesNotReplayOrTeleportDirectSound(GameTestHelper h) {
         var p = player(h, 6.5); var gun = equip(p, "duke_mk_44", 8, 0);
         var hearer = listener(h, new Vec3(3.5, 1, 6.5));
         var sound = start(h, p); TestPlayers.drain(hearer);
@@ -557,22 +550,20 @@ public final class ReloadAudioW63GameTests {
             WeaponRuntime.tickPlayer(p);
             for (var receiver : List.of(p, hearer)) {
                 var queued = TestPlayers.outbound(receiver);
-                var moves = packets(queued, ClientboundTeleportEntityPacket.class).stream()
-                        .filter(packet -> packet.id() == sound.getId()).toList();
-                check(h, moves.size() == 1 && moves.getFirst().change().position().distanceToSqr(p.getEyePosition()) < EPS_SQR
-                                && moves.getFirst().relatives().isEmpty(), "Emitter follows current source eye in absolute vanilla position packets");
-                check(h, reloadSounds(queued).isEmpty() && !removed(queued, sound.getId())
+                check(h, packets(queued,ClientboundTeleportEntityPacket.class).isEmpty(),
+                        "Movement never sends a synthetic entity teleport");
+                check(h, reloadSounds(queued).isEmpty() && !removed(queued, key(sound))
                                 && packets(queued, ClientboundPlayerPositionPacket.class).isEmpty(),
                         "Following neither replays audio, despawns early nor corrects a player body");
                 noGlobalStop(h, queued);
             }
-            check(h, p.level().getEntity(sound.getId()) == null && p.position().equals(position)
+            check(h, p.position().equals(position)
                             && ammo(gun).rounds() == saved.rounds() && ammo(gun).reserve() == saved.reserve(),
                     "Movement audio adds no world entity, player displacement or ammunition cost");
         }
         WeaponRuntime.tickPlayer(p);
         check(h, packets(TestPlayers.outbound(p), ClientboundTeleportEntityPacket.class).isEmpty(),
-                "Unchanged source position produces no redundant emitter teleport");
+                "Unchanged source position produces no redundant entity teleport");
         h.succeed();
     }
 
@@ -588,14 +579,14 @@ public final class ReloadAudioW63GameTests {
                     "Accepted catalog base phase selects its real duration: " + e.id());
             var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), h.getLevel().registryAccess());
             try {
-                ClientboundSoundEntityPacket.STREAM_CODEC.encode(buffer, packet);
-                var decoded = ClientboundSoundEntityPacket.STREAM_CODEC.decode(buffer);
+                ClientboundSoundPacket.STREAM_CODEC.encode(buffer, packet);
+                var decoded = ClientboundSoundPacket.STREAM_CODEC.decode(buffer);
                 check(h, decoded.getSound().kind() == Holder.Kind.DIRECT
                                 && decoded.getSound().value().location().equals(packet.getSound().value().location())
-                                && decoded.getId() == packet.getId() && decoded.getSource() == packet.getSource()
+                                && decoded.getX()==packet.getX() && decoded.getY()==packet.getY() && decoded.getZ()==packet.getZ() && decoded.getSource() == packet.getSource()
                                 && decoded.getVolume() == packet.getVolume() && decoded.getPitch() == 1f
                                 && decoded.getSeed() == packet.getSeed() && buffer.readableBytes() == 0,
-                        "Actual accepted inline entity-sound codec preserves event, emitter, channel, volume, pitch and seed: " + e.id());
+                        "Actual accepted inline positional codec preserves event, coordinates, channel, volume, pitch and seed: " + e.id());
             } finally { buffer.release(); }
             WeaponRuntime.cleanup(p);
             tested++;
@@ -614,23 +605,20 @@ public final class ReloadAudioW63GameTests {
         elsewhere.setServerLevel(otherLevel); elsewhere.setPos(p.position());
         TestPlayers.drain(near); TestPlayers.drain(elsewhere);
         var sound = start(h, p);
-        check(h, !h.getLevel().players().contains(p), "Unregistered source still receives its own emitter and audio");
+        check(h, !h.getLevel().players().contains(p), "Unregistered source still receives its own sound session and audio");
         var nearStart = TestPlayers.outbound(near);
         check(h, near.isSpectator() && reloadSounds(nearStart).size() == 1
-                        && reloadSounds(nearStart).getFirst().getId() == sound.getId(), "Nearby spectator receives this exact owner's emitter sound");
-        var nearSpawn = packets(nearStart, ClientboundAddEntityPacket.class).stream()
-                .filter(packet -> packet.getId() == sound.getId()).findFirst().orElseThrow();
-        check(h, nearStart.indexOf(nearSpawn) < nearStart.indexOf(reloadSounds(nearStart).getFirst()),
-                "Spectator also gets emitter before sound");
+                        && key(reloadSounds(nearStart).getFirst()).equals(key(sound)), "Nearby spectator receives this exact owner's sound session sound");
+        check(h, packets(nearStart,ClientboundAddEntityPacket.class).isEmpty(), "Spectator needs no entity spawn");
         for (var denied : List.of(elsewhere)) {
             var queued = TestPlayers.outbound(denied); noAudio(h, queued);
-            check(h, packets(queued, ClientboundAddEntityPacket.class).stream().noneMatch(packet -> packet.getId() == sound.getId()),
-                    "Cross-dimension connection receives no emitter spawn");
+            check(h, packets(queued, ClientboundAddEntityPacket.class).isEmpty(),
+                    "Cross-dimension connection receives no entity spawn");
         }
         WeaponRuntime.cancelUseForSkill(p);
-        check(h, removed(TestPlayers.outbound(near), sound.getId()), "Eligible spectator receives the matching emitter retirement");
-        check(h, !removed(TestPlayers.outbound(elsewhere), sound.getId()),
-                "Ineligible dimension never receives this emitter's removal");
+        check(h, removed(TestPlayers.outbound(near), key(sound)), "Eligible spectator receives the matching sound session retirement");
+        check(h, !removed(TestPlayers.outbound(elsewhere), key(sound)),
+                "Ineligible dimension never receives this sound session's removal");
         h.succeed();
     }
 
@@ -659,7 +647,7 @@ public final class ReloadAudioW63GameTests {
             }
             check(h, reloadSounds(queued).isEmpty() && packets(queued, ClientboundSoundEntityPacket.class).isEmpty()
                             && packets(queued, ClientboundAddEntityPacket.class).isEmpty(),
-                    "Never stretch a full-source timed emitter across a shell, pair insert or bow phase: " + id);
+                    "Never stretch a full-source timed sound session across a shell, pair insert or bow phase: " + id);
             noGlobalStop(h, queued);
             if (f.shellReload()) {
                 h.runAfterDelay(f.firstReloadTicks(), () -> {
@@ -685,4 +673,30 @@ public final class ReloadAudioW63GameTests {
         noAudio(h, TestPlayers.outbound(swordOwner)); noAudio(h, TestPlayers.outbound(hearer));
         h.runAfterDelay(80, h::succeed);
     }
+    @GameTest(structure = FLOOR, maxTicks = 40, environment = "destiny-test:w90_isolated")
+    public void saturatedAliasesPlayWithoutStoppingSharedBaseAndReleasedChannelIsReusable(GameTestHelper h) {
+        var owners=new ArrayList<ServerPlayer>();
+        var keys=new java.util.HashSet<Identifier>();
+        for(int i=0;i<33;i++) {
+            var p=player(h,6.5);var gun=equip(p,"izanagis_burden",0,20);owners.add(p);
+            check(h,ReloadAudio.startHoned(p,entry(gun),61),"Honed audio accepted");
+            var sounds=reloadSounds(TestPlayers.outbound(p));
+            check(h,sounds.size()==1,"Exactly one direct clip even at saturation");
+            keys.add(key(sounds.getFirst()));
+        }
+        check(h,keys.size()==33 && keys.stream().filter(k -> k.getPath().contains(".direct_")).count()==32,
+                "Thirty-two isolated channels plus one audible shared-base fallback");
+        ReloadAudio.stop(owners.getLast());
+        check(h,packets(TestPlayers.outbound(owners.getLast()),ClientboundStopSoundPacket.class).isEmpty(),
+                "Saturated fallback never cuts a shared base event");
+        var first=owners.getFirst();ReloadAudio.stop(first);
+        var stopped=packets(TestPlayers.outbound(first),ClientboundStopSoundPacket.class);
+        check(h,stopped.size()==1,"Reserved alias retires exactly once");
+        check(h,ReloadAudio.startHoned(first,entry(first.getMainHandItem()),61),"Released channel reusable");
+        check(h,key(reloadSounds(TestPlayers.outbound(first)).getFirst()).equals(stopped.getFirst().getName()),
+                "Reuse occurs only after the prior alias stop");
+        for(var p:owners)ReloadAudio.stop(p);
+        h.succeed();
+    }
+
 }

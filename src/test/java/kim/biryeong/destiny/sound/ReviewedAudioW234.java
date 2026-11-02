@@ -59,6 +59,19 @@ final class ReviewedAudioW234 {
         }
         merge(result, json("docs/qa/2026-10-30/w270/sounds-fragment.json"));
         merge(result, json("art/ghost/w280/sounds-fragment.json"));
+        // Direct reload channels reference the reviewed clips without changing audio bytes.
+        for(String event : Set.copyOf(result.keySet())) {
+            if(!(event.startsWith("weapon.reload_w63.") || event.startsWith("weapon.reload_w83.")
+                    || event.startsWith("weapon.reload_w84.") || event.startsWith("weapon.reload_w102.")
+                    || event.equals("weapon.shotgun.reload_finish")))continue;
+            for(int channel=0;channel<32;channel++) {
+                var reference=new JsonObject();reference.addProperty("name","destiny:"+event);reference.addProperty("type","event");
+                var sounds=new com.google.gson.JsonArray();sounds.add(reference);
+                var alias=new JsonObject();alias.add("sounds",sounds);
+                if(result.getAsJsonObject(event).has("subtitle"))alias.add("subtitle",result.getAsJsonObject(event).get("subtitle").deepCopy());
+                result.add(event+".direct_"+channel,alias);
+            }
+        }
         return result;
     }
     /** Validate the complete current index, then expose the historical layer to its old assertions. */
