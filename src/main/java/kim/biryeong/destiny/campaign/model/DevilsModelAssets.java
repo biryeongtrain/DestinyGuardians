@@ -9,7 +9,7 @@ import java.util.List;
 /** Installs the strike-owned models before BetterModel scans its model directory. */
 public final class DevilsModelAssets {
     public static final List<String> MODELS = List.of("dl_thrall", "dl_acolyte", "dl_knight", "dl_wizard",
-            "dl_servitor", "dl_sepiks", "dl_brig", "dl_marauder", "dl_skiff");
+            "dl_servitor", "dl_sepiks", "dl_brig", "dl_marauder");
     private DevilsModelAssets() { }
     static byte[] bundled(String name) throws IOException {
         if (!MODELS.contains(name)) throw new IllegalArgumentException("Not a Devils Lair model: " + name);
@@ -23,6 +23,11 @@ public final class DevilsModelAssets {
                 config.resolve("destiny/devils_lair/models"), name, bundled(name));
     }
     public static void prepare() {
+        try {
+            Path config = FabricLoader.getInstance().getConfigDir();
+            ModelAssetRetirement.retireOwned(config.resolve("bettermodel/models"),
+                    config.resolve("destiny/devils_lair/models"), "dl_skiff");
+        } catch (IOException e) { DestinyGuardians.LOGGER.warn("Cannot retire old strike skiff", e); }
         for (String name : MODELS) try {
             var outcome = install(FabricLoader.getInstance().getConfigDir(), name);
             if (outcome == RisingModelAssets.Outcome.KEPT_USER_COPY || outcome == RisingModelAssets.Outcome.SKIPPED_LINK)

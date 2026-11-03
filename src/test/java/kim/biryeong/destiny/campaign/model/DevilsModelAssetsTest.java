@@ -11,6 +11,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DevilsModelAssetsTest {
     @TempDir Path config;
+    @Test void retiredModelsAreArchivedOnlyWhileStillOwned() throws Exception {
+        Path models = config.resolve("bettermodel/models"), markers = config.resolve("destiny/devils_lair/models");
+        byte[] original = "owned model".getBytes(StandardCharsets.UTF_8);
+        RisingModelAssets.installOwned(models, markers, "dl_skiff", original);
+        assertTrue(ModelAssetRetirement.retireOwned(models, markers, "dl_skiff"));
+        assertFalse(Files.exists(models.resolve("dl_skiff.bbmodel")));
+        assertArrayEquals(original, Files.readAllBytes(markers.resolve("dl_skiff."
+                + RisingModelAssets.sha256(original) + ".retired.bbmodel")));
+        assertFalse(ModelAssetRetirement.retireOwned(models, markers, "dl_skiff"));
+        Files.writeString(models.resolve("dl_skiff.bbmodel"), "user edited model");
+        assertFalse(ModelAssetRetirement.retireOwned(models, markers, "dl_skiff"));
+        assertEquals("user edited model", Files.readString(models.resolve("dl_skiff.bbmodel")));
+        Files.delete(models.resolve("dl_skiff.bbmodel"));
+        Files.createSymbolicLink(models.resolve("dl_skiff.bbmodel"), markers.resolve("dl_skiff.sha256"));
+        assertFalse(ModelAssetRetirement.retireOwned(models, markers, "dl_skiff"));
+        assertTrue(Files.isSymbolicLink(models.resolve("dl_skiff.bbmodel")));
+        assertFalse(DevilsModelAssets.MODELS.contains("dl_skiff"));
+    }
     @Test void allStrikeAssetsInstallAndPreserveForeignCopies() throws Exception {
         for (String name : DevilsModelAssets.MODELS) {
             assertEquals(RisingModelAssets.Outcome.INSTALLED, DevilsModelAssets.install(config, name));
@@ -28,27 +46,12 @@ class DevilsModelAssetsTest {
         for (String name : DevilsModelAssets.MODELS) {
             var model = JsonParser.parseString(new String(DevilsModelAssets.bundled(name), StandardCharsets.UTF_8)).getAsJsonObject();
             assertFalse(model.getAsJsonArray("elements").isEmpty(), name);
-            assertEquals(name.equals("dl_skiff") ? 2 : 1, model.getAsJsonArray("textures").size(), name);
+            assertEquals(1, model.getAsJsonArray("textures").size(), name);
             var clips = new HashSet<String>();
             for (var entry : model.getAsJsonArray("animations")) {
                 var animation = entry.getAsJsonObject();
                 assertTrue(clips.add(animation.get("name").getAsString()), "Duplicate clip in " + name);
                 assertTrue(animation.get("length").getAsDouble() > 0, name);
-            }
-            if (name.equals("dl_skiff")) {
-                for (var value : model.getAsJsonArray("textures")) {
-                    var texture = value.getAsJsonObject();
-                    byte[] png = java.util.Base64.getDecoder().decode(texture.get("source").getAsString().split(",", 2)[1]);
-                    var image = javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(png));
-                    assertNotNull(image, "Embedded skiff PNG");
-                    assertTrue(image.getWidth() <= 1024 && image.getHeight() <= 1024, "Distant skiff texture budget");
-                    assertEquals(image.getWidth(), texture.get("width").getAsInt());
-                    assertEquals(image.getHeight(), texture.get("height").getAsInt());
-                }
-                assertEquals(12000, model.getAsJsonArray("elements").size());
-                assertEquals(java.util.Set.of("source_80a8a4e2", "source_80a8a51d", "source_80a8a51e",
-                        "source_80a8a51f", "source_80a8a520", "source_80a8a521"), clips);
-                continue; // An invulnerable presentation prop has no infantry attack/death aliases.
             }
             for (String clip : new String[]{"idle", "walk", "run", "shoot", "damage", "death", "spawn"})
                 assertTrue(clips.contains(clip), name + ": " + clip);
