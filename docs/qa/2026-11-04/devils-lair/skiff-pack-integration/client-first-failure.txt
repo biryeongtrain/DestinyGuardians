@@ -1,0 +1,50 @@
+WARNING: Output of vertex shader '_interface_variable_00' not read by fragment shader
+
+[04:36:59] [Render thread/INFO] (Minecraft) Info log when linking program containing VERTEX minecraft:core/text, FRAGMENT minecraft:core/text. Log output: WARNING: Output of vertex shader '_interface_variable_01' not read by fragment shader
+WARNING: Output of vertex shader '_interface_variable_00' not read by fragment shader
+
+[04:36:59] [Render thread/INFO] (Minecraft) Info log when linking program containing VERTEX minecraft:core/entity, FRAGMENT minecraft:core/entity. Log output: WARNING: Output of vertex shader '_interface_variable_01' not read by fragment shader
+WARNING: Output of vertex shader '_interface_variable_00' not read by fragment shader
+WARNING: Output of vertex shader '_interface_variable_04' not read by fragment shader
+
+[04:36:59] [Render thread/INFO] (Minecraft) Info log when linking program containing VERTEX minecraft:core/text, FRAGMENT minecraft:core/text. Log output: WARNING: Output of vertex shader '_interface_variable_01' not read by fragment shader
+WARNING: Output of vertex shader '_interface_variable_00' not read by fragment shader
+
+[04:36:59] [Render thread/INFO] (Minecraft) Caught error loading resourcepacks, removing all selected resourcepacks
+
+java.util.concurrent.CompletionException: net.minecraft.ReportedException: Stitching
+	at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(CompletableFuture.java:323)
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:359)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:364)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:670)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:531)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1794)
+	at knot//net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$prepareTasks$1(SimpleReloadInstance.java:51)
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.compute(ForkJoinTask.java:1750)
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.compute(ForkJoinTask.java:1742)
+	at java.base/java.util.concurrent.ForkJoinTask$InterruptibleTask.exec(ForkJoinTask.java:1659)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:511)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1450)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:2019)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+Caused by: net.minecraft.ReportedException: Stitching
+	at knot//net.minecraft.client.renderer.texture.SpriteLoader.stitch(SpriteLoader.java:90)
+	at knot//net.minecraft.client.renderer.texture.SpriteLoader.lambda$loadAndStitch$2(SpriteLoader.java:114)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:667)
+	... 10 more
+Caused by: net.minecraft.client.renderer.texture.StitcherException: Unable to fit: bettermodel:item/x - size: 1024x1024 - Maybe try a lower resolution resourcepack?
+	at knot//net.minecraft.client.renderer.texture.Stitcher.stitch(Stitcher.java:55)
+	at knot//net.minecraft.client.renderer.texture.SpriteLoader.stitch(SpriteLoader.java:84)
+	... 12 more
+[04:36:59] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, vanilla
+[04:36:59] [Worker-Main-2/ERROR] (Minecraft) Failed to load model destiny:models/first_person_framing_w205/dcb31f431211c584a4e19ae8.json
+
+java.lang.IllegalStateException: zip file closed
+	at java.base/java.util.zip.ZipFile.ensureOpen(ZipFile.java:826)
+	at java.base/java.util.zip.ZipFile.getInputStream(ZipFile.java:330)
+	at knot//net.minecraft.server.packs.resources.IoSupplier.lambda$create$1(IoSupplier.java:17)
+	at knot//net.minecraft.server.packs.resources.Resource.open(Resource.java:48)
+	at knot//net.minecraft.server.packs.resources.Resource.openAsReader(Resource.java:52)
+	at knot//net.minecraft.client.resources.model.ModelManager.lambda$loadBlockModels$2(ModelManager.java:155)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789)
+	at knot//net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$prepareTasks$1(SimpleReloadInstance.java:51)

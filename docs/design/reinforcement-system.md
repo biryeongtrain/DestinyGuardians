@@ -44,3 +44,13 @@ Minecraft 서버, 수송선 모델 의존성이 없다. 가변 payload는 호출
 
 수송선의 도착·퇴장 렌더러와 비행 경로는 이번 공통화에 포함하지 않았다.
 공통 모듈에 수송선 의존성을 넣지 않으므로 포탈·문·강하 연출에도 같은 전투 경로를 쓸 수 있다.
+
+## 대형 연출 모델의 팩 텍스처 배치
+
+공통 `compat.pack.PackAtlasRouting`은 `destiny/pack/atlas_routes.json`의 PNG SHA-256과
+생성 namespace/prefix로 텍스처를 찾는다. 생성된 sprite 이름을 고정하지 않는다.
+원본 픽셀·UV·모델을 변경하지 않고 원래 atlas 끝에 정확한 sprite filter,
+대상 atlas 끝에 single source를 추가하며 기존 source는 보존한다.
+현재 dl_skiff의 4096 hull / 1024 emission PNG를 items에서 blocks로 옮긴다.
+이 선택은 Minecraft 26.3의 모델 material lookup에 맞춘 것이며 임의의 target atlas가
+모든 렌더러에서 작동한다고 보장하지 않는다. 새 모델은 실제 생성 팩/클라이언트 로드를 검증한다.

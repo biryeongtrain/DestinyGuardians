@@ -1,0 +1,81 @@
+       466: getfield      #60                 // Field status:Leu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer;
+       469: ldc_w         #723                // String action:update_credits_end
+       472: invokeinterface #338,  2          // InterfaceMethod eu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer.accept:(Ljava/lang/String;)V
+       477: iconst_1
+       478: istore_3
+       479: aload_0
+       480: getfield      #60                 // Field status:Leu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer;
+       483: ldc_w         #725                // String action:merge_files_start
+       486: invokeinterface #338,  2          // InterfaceMethod eu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer.accept:(Ljava/lang/String;)V
+       491: aload_0
+       492: getfield      #33                 // Field atlasDefinitions:Ljava/util/Map;
+       495: invokeinterface #727,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+       500: invokeinterface #260,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+       505: astore        4
+       507: aload         4
+       509: invokeinterface #266,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       514: ifeq          591
+       517: aload         4
+       519: invokeinterface #272,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       524: checkcast     #571                // class java/util/Map$Entry
+       527: astore        5
+       529: new           #244                // class com/google/gson/JsonObject
+       532: dup
+       533: invokespecial #730                // Method com/google/gson/JsonObject."<init>":()V
+       536: astore        6
+       538: aload         6
+       540: ldc_w         #314                // String sources
+       543: aload         5
+       545: invokeinterface #576,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+       550: checkcast     #294                // class com/google/gson/JsonElement
+       553: invokevirtual #277                // Method com/google/gson/JsonObject.add:(Ljava/lang/String;Lcom/google/gson/JsonElement;)V
+       556: aload_0
+       557: getfield      #22                 // Field fileMap:Ljava/util/HashMap;
+       560: aload         5
+       562: invokeinterface #573,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+       567: checkcast     #95                 // class java/lang/String
+       570: aload         6
+       572: invokevirtual #731                // Method com/google/gson/JsonObject.toString:()Ljava/lang/String;
+       575: getstatic     #174                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+       578: invokevirtual #732                // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+       581: invokestatic  #736                // InterfaceMethod eu/pb4/polymer/resourcepack/api/PackResource.of:([B)Leu/pb4/polymer/resourcepack/api/PackResource;
+       584: invokevirtual #148                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       587: pop
+       588: goto          507
+       591: aload_0
+       592: getfield      #37                 // Field objectMergeDefinitions:Ljava/util/Map;
+       595: invokeinterface #727,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+
+--- pre-finish tasks run later ---
+       813: aload_1
+       814: invokestatic  #782                // Method java/lang/String.join:(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+       817: getstatic     #174                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+       820: invokevirtual #732                // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+       823: invokestatic  #736                // InterfaceMethod eu/pb4/polymer/resourcepack/api/PackResource.of:([B)Leu/pb4/polymer/resourcepack/api/PackResource;
+       826: invokevirtual #148                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       829: pop
+       830: aload_0
+       831: getfield      #60                 // Field status:Leu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer;
+       834: ldc_w         #786                // String action:pre_finish_task_start
+       837: invokeinterface #338,  2          // InterfaceMethod eu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer.accept:(Ljava/lang/String;)V
+       842: aload_0
+       843: getfield      #57                 // Field preFinishTask:Ljava/util/List;
+       846: invokeinterface #412,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       851: astore        4
+       853: aload         4
+       855: invokeinterface #266,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       860: ifeq          886
+       863: aload         4
+       865: invokeinterface #272,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       870: checkcast     #718                // class java/util/function/Consumer
+       873: astore        5
+       875: aload         5
+       877: aload_0
+       878: invokeinterface #720,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+       883: goto          853
+       886: aload_0
+       887: getfield      #60                 // Field status:Leu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer;
+       890: ldc_w         #788                // String action:pre_finish_task_end
+       893: invokeinterface #338,  2          // InterfaceMethod eu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer.accept:(Ljava/lang/String;)V
+       898: aload_0
+       899: getfield      #60                 // Field status:Leu/pb4/polymer/resourcepack/api/ResourcePackStatusConsumer;

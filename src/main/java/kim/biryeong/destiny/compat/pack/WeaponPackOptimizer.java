@@ -15,8 +15,10 @@ public final class WeaponPackOptimizer {
 
     public static synchronized void init() {
         if (initialized) return;
-        PolymerResourcePackUtils.RESOURCE_PACK_CREATION_EVENT.register(builder ->
-                builder.addPreFinishTask(WeaponPackOptimizer::compact));
+        PolymerResourcePackUtils.RESOURCE_PACK_CREATION_EVENT.register(builder -> {
+            PackAtlasRouting.prepare(builder);
+            builder.addPreFinishTask(WeaponPackOptimizer::compact);
+        });
         initialized = true;
     }
 
@@ -27,6 +29,7 @@ public final class WeaponPackOptimizer {
     static void compact(ResourcePackBuilder builder) {
         var files = new HashMap<String, PackResource>();
         builder.forEachResource(files::put);
+        PackAtlasRouting.apply(builder, files);
         kim.biryeong.destiny.weapon.WeaponSurfaceProjection.projectOutput(files);
         var active = WeaponPackRoots.active();
         if (kim.biryeong.destiny.weapon.ProfileWeaponView.enabled()) { ProfileArmAssets.compact(builder, files, active); return; }
