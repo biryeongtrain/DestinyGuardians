@@ -36,6 +36,15 @@ class DevilsModelAssetsTest {
                 assertTrue(animation.get("length").getAsDouble() > 0, name);
             }
             if (name.equals("dl_skiff")) {
+                for (var value : model.getAsJsonArray("textures")) {
+                    var texture = value.getAsJsonObject();
+                    byte[] png = java.util.Base64.getDecoder().decode(texture.get("source").getAsString().split(",", 2)[1]);
+                    var image = javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(png));
+                    assertNotNull(image, "Embedded skiff PNG");
+                    assertTrue(image.getWidth() <= 1024 && image.getHeight() <= 1024, "Distant skiff texture budget");
+                    assertEquals(image.getWidth(), texture.get("width").getAsInt());
+                    assertEquals(image.getHeight(), texture.get("height").getAsInt());
+                }
                 assertEquals(12000, model.getAsJsonArray("elements").size());
                 assertEquals(java.util.Set.of("source_80a8a4e2", "source_80a8a51d", "source_80a8a51e",
                         "source_80a8a51f", "source_80a8a520", "source_80a8a521"), clips);
