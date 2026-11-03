@@ -2,6 +2,12 @@
 
 @/Users/qf/.codex/RTK.md
 
+## 공용 코드 우선 — 사용자 지시 (2026-11-04)
+
+- 다른 공격전·던전·레이드 또는 시스템에서도 사용할 가능성이 있는 기능은 특정 활동 전용으로 만들지 않고 공용 코드셋으로 설계한다.
+- 증원 대기열·스폰 예산·경고·수명 관리 등 공통 동작은 공용 계층에 두고, 활동별 적 구성·좌표·수치·진행 조건·모델 선택은 설정 또는 어댑터로 연결한다.
+- 공용은 전역 mutable singleton을 뜻하지 않는다. 활동/encounter별 상태와 generation 소유권을 분리해 서로 다른 세션의 취소·재접속·초기화가 간섭하지 않게 한다.
+
 ## 현재 작업 범위 — 사용자 지시 (2026-10-27)
 
 - 사용자에게서 Windows 추출 결과를 받았다. `/Volumes/qf-ssd/DestinyGuardians-Super-Animation-VFX-2026-10-27/destiny-animation-return`과 `/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return`을 읽기 전용 원본으로 사용하여 W196부터 애니메이션 검증을 재개한다. 사용자가 부른 Animation-Export의 실제 전달 폴더명은 두 번째 Animation-Return이다. 기존 Windows handoff와 봉인 QA는 보존한다.
