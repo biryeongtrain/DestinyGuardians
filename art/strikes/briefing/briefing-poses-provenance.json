@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "source": "Crota's End raid landing cinematic cin_728_rai (user-selected roles pla03/pla01/pla06)",
+  "sourceRoot": "/Users/qf/Downloads/Destiny-Raid-Briefing-Poses-2026-11-04",
+  "sourceHashes": {
+    "Crota_Landing_Guardians.blend": "43eb542bd89b2e2f0dde3947e6c065bc1ec3482813ebf311aa88c12c3d0215fe",
+    "README.md": "1bc0d1750cd1dc4a51596a03d6609ce93937d5c41908a65608a64e09b5528f6d",
+    "rig.json": "6e37870a96c1d71212d1552de16f1f6fc5683ebd4305042a3e852b2fad5e5deb",
+    "manifest.csv": "ab42e720b5bb4bb43a11fde4f4d000d8785204f153df0cf296bf7a7bd131bc95",
+    "briefing/timeline.json": "e62b98bad1013720f8aa7864387e0d79e8fca4ce37f3ba8195baefc4e07e7828",
+    "poses/pla03.json": "dc53a698937baa3710594398b7d78ae055b66ad5dcf47ad49ebadb7053a3bc22",
+    "poses/pla01.json": "aeeec8323fbb4b5246964c5bfe482b89d5c97c71527ff3a305edd9fa24418b20",
+    "poses/pla06.json": "9d2135ec952030773768ef254f062bfa75b3ee8704f2f6a0ff92bec60e732c62"
+  },
+  "samplesSha256": "925f4d01ef58dd8ad695d24d9b47ded9bab34cf3f77dcb4c13c1397357bfd303",
+  "generatorSha256": "b84964eb33d76f94e00e9253c3be551c01cbb62fbf097937844f2d20542b6e69",
+  "helperHashes": {
+    "scripts/build_hunter_animation_h15.py": "3908d921f42d52ae84f880021a6e06d10316084aec8a309453a338abb24805c6",
+    "scripts/build_hunter_animation_h19.py": "483a796efdcab5dbf3fcc997ca5fc3118c4b693da6a3f47f520b5e06561af9ef",
+    "scripts/build_hunter_source_w197.py": "1b15db1776e59e026b627b1d15b6b6ef27c92392a46664bb34e9c08c43767ca0",
+    "scripts/animation/build_crucible_intro_w260.py": "31dc7ca056b3188e65606316ba941c39d9995ebcbb10e67a62a07f88865ba2ed",
+    "art/blockbench/animations/guardian_hunter_w199_r1.bbmodel": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+    "art/weapons/w197/hunter-source-motion.json": "590fa4c58d96f06d330fd1845e7c5669ba580a817447ffac12e2fca1755da93f"
+  },
+  "blenderVersion": "5.4.0 Alpha",
+  "maxRestMatrixDifference": 3.2782554626464844e-06,
+  "retarget": "W260 pipeline: source torso/pelvis rotations, geometric legs, elbow IK, transported bend planes, Euler unwrap; pelvis trajectory proportional to bind hip height and anchored at the final landing; runtime pins X/Z.",
+  "hold": "final pose duplicated at holdUntilSeconds; runtime ends the cast at phase exit",
+  "clips": [
+    {
+      "name": "h15_intro_brief_pla03",
+      "role": "pla03",
+      "sourceTag": "80B902FF",
+      "action": "pla03__80B902FF",
+      "sourceFrames": 266,
+      "revealSourceFrame": 141,
+      "revealDelaySeconds": 4.666666666666667,
+      "motionSeconds": 4.166666666666667,
+      "bakedFacingCorrectionDegrees": 70.90465239017004,
+      "holdUntilSeconds": 30.0,
+      "maxAdjacentEulerStepDegrees": 24.61604855444714,
+      "targetLowestSkinRange": [
+        -0.053074382939128084,
+        16.508180374644773
+      ],
+      "collinearRepairs": {}
+    },
+    {
+      "name": "h15_intro_brief_pla01",
+      "role": "pla01",
+      "sourceTag": "80B90307",
+      "action": "pla01__80B90307",
+      "sourceFrames": 266,
+      "revealSourceFrame": 1,
+      "revealDelaySeconds": 0.0,
+      "motionSeconds": 8.833333333333334,
+      "bakedFacingCorrectionDegrees": 112.51500370308823,
+      "holdUntilSeconds": 30.0,
+      "maxAdjacentEulerStepDegrees": 13.995143089014633,
+      "targetLowestSkinRange": [
+        -0.03872973261171811,
+        0.4545007658756366
+      ],
+      "collinearRepairs": {}
+    },
+    {
+      "name": "h15_intro_brief_pla06",
+      "role": "pla06",
+      "sourceTag": "80B9030A",
+      "action": "pla06__80B9030A",
+      "sourceFrames": 266,
+      "revealSourceFrame": 81,
+      "revealDelaySeconds": 2.6666666666666665,
+      "motionSeconds": 6.166666666666667,
+      "bakedFacingCorrectionDegrees": 34.74294382357759,
+      "holdUntilSeconds": 30.0,
+      "maxAdjacentEulerStepDegrees": 19.716652231187183,
+      "targetLowestSkinRange": [
+        -0.5705691131307019,
+        13.501231737427961
+      ],
+      "collinearRepairs": {
+        "695DAF09": 18
+      }
+    }
+  ],
+  "limitations": [
+    "rigid 16-group skin cannot reproduce fingers, wrists, ankles or cloth",
+    "formation, camera and voice sync are authored for the strike, not recovered from the raid",
+    "no frame-by-frame comparison against the original game"
+  ]
+}
