@@ -84,8 +84,9 @@ public final class GearHud {
         String icon = classIcon(v.guardianClass());
         if (icon != null) p.icon("guardian_emblem", icon, 960, 500, 420, 102, dim(classColor(v.guardianClass()), .16f));
         p.rect("guardian_floor", 960, 905, 460, 2, 103, LINE);
+        // Holds the weapon under the cursor (preview, as in Destiny), otherwise the equipped kinetic weapon.
         var kinetic = v.bucket(kim.biryeong.destiny.weapon.WeaponSlot.KINETIC);
-        var held = kinetic == null || kinetic.equipped() == null ? null : kinetic.equipped();
+        var held = v.tooltip() != null ? v.tooltip() : kinetic == null ? null : kinetic.equipped();
         PlayerFigure.draw(p, p.player(), "guardian", 960, 900, 640, 104, -34, PlayerFigure.Pose.STANDING,
                 held == null ? null : kim.biryeong.destiny.weapon.WeaponModels.create(held.entry()), held == null ? "" : held.entry().id());
     }
@@ -252,7 +253,7 @@ public final class GearHud {
         p.textLeft("tip_name", name, left + 24, top + 22, 28, WHITE, TIP_W - 48, 255);
         p.textLeft("tip_type", type, left + 24, top + 62, 20, 0xD9C9E3, TIP_W - 48, 255);
         var lines = HudPainter.wrap(flavour, 18, TIP_W - 48, 4);
-        String note = slot.armor() || slot == GearSlot.GHOST ? "외형 표시 전용 · 능력치는 아직 적용되지 않습니다." : "좌클릭 하위직업 화면";
+        String note = slot.armor() || slot == GearSlot.GHOST ? "외형 표시 전용 · 능력치 미적용" : "좌클릭 하위직업 화면";
         float h = 24 + lines.size() * 26 + 44;
         p.rect("tip_body", left + TIP_W / 2, top + 104 + h / 2, TIP_W, h, 120, PANEL);
         for (int i = 0; i < lines.size(); i++) p.textLeft("tip_flavour_" + i, lines.get(i), left + 24, top + 116 + i * 26, 18, MUTED, TIP_W - 48, 255);

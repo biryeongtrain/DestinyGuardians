@@ -63,7 +63,6 @@ public final class PlayerFigure {
         /** A relaxed, slightly open stance for character screens. */
         public static final Pose STANDING = pose(Map.of(
                 Limb.HEAD, new Vector3f(3, 8, 0),
-                Limb.CHEST, new Vector3f(0, 5, 0),
                 Limb.RIGHT_ARM, new Vector3f(-6, 0, 3),
                 Limb.RIGHT_FOREARM, new Vector3f(-30, 0, 0),
                 Limb.LEFT_ARM, new Vector3f(-4, 0, -5),
@@ -72,15 +71,33 @@ public final class PlayerFigure {
                 Limb.LEFT_LEG, new Vector3f(-4, -8, -3),
                 Limb.LEFT_FORELEG, new Vector3f(6, 0, 0)));
         private static Pose pose(Map<Limb, Vector3f> map) { return new Pose(new EnumMap<>(map)); }
+
+        /** Inhale (1) or exhale (0) of the idle breath: the chest lifts, head settles, arms ease out. */
+        public Pose breath(int phase) {
+            if (phase == 0) return this;
+            var map = new EnumMap<Limb, Vector3f>(Limb.class);
+            for (var limb : Limb.values()) map.put(limb, new Vector3f(of(limb)));
+            map.get(Limb.CHEST).add(-0.8f, 0, 0);
+            map.get(Limb.HEAD).add(2.2f, 0, 0);
+            map.get(Limb.RIGHT_ARM).add(0, 0, 1.4f);
+            map.get(Limb.LEFT_ARM).add(0, 0, -1.8f);
+            map.get(Limb.LEFT_FOREARM).add(-2.5f, 0, 0);
+            return new Pose(map);
+        }
     }
 
+    /** Ticks per half breath; the full idle breath takes twice this. */
+    public static final int BREATH = 30;
     /** Model height in blocks (steve top of head); the figure is scaled so this spans {@code height} canvas pixels. */
     static final float MODEL_HEIGHT = 30 / 16f;
     /**
-     * Wrist pitch of the held weapon after steve's right-item turn (X -90, Y 180) and a roll that puts the grip
-     * down into the fist; negative tips the barrel down. Tuned on the live screen with a forearm at -30.
+     * Held weapon on steve's right-item bone, in the weapon's FIXED display space: barrel forward with a slight
+     * downward tip, grip up into the fist. Tuned on the live screen (side and three-quarter views) with Ace of
+     * Spades, Duke Mk. 44 and Halfdan-D and a forearm at -30.
      */
-    static final float HELD_PITCH = -50;
+    static final Vector3f GRIP_TURN = new Vector3f(40, -90, 0);
+    /** Block units in the turned weapon space: moves the model forward so its grip, not its centre, sits in the hand. */
+    static final Vector3f GRIP_OFFSET = new Vector3f(0.3f, 0.07f, 0);
     /** Depth kept per block of model depth, as a fraction of the on-screen scale. */
     static final float DEPTH_FLATTEN = .04f;
 
@@ -123,6 +140,9 @@ public final class PlayerFigure {
         try { skin = skin(player); }
         catch (RuntimeException | LinkageError e) { return; }
         if (skin == null) return;
+        // Idle breath: a two-key loop blended by the client, so the server sends one pose every BREATH ticks.
+        int phase = (player.level().getServer().getTickCount() / BREATH) % 2;
+        pose = pose.breath(phase);
         float k = height / MODEL_HEIGHT * DisplayHudManager.unitX; // display units per block
         var root = new Matrix4f()
                 .translate(anchor(x, footY, depth))
@@ -144,15 +164,17 @@ public final class PlayerFigure {
             var placed = new Matrix4f(m).translate(item.position()).translate(item.offset()).scale(item.scale());
             ItemStack stack = ((ModItemStack) item.itemStack()).source();
             painter.model(key + "_" + limb.name().toLowerCase(java.util.Locale.ROOT), stack, skinKey,
-                    ItemDisplayContext.FIXED, new Transformation(placed));
+                    ItemDisplayContext.FIXED, new Transformation(placed), BREATH);
         }
         if (held != null && !held.isEmpty()) {
-            // steve's pri_right_item bone: (5.625, 10.875, 0) px on the right forearm, turned -90 degrees about X.
+            // steve's pri_right_item bone position: (5.625, 10.875, 0) px on the right forearm.
             var hand = new Matrix4f(bones.get(Limb.RIGHT_FOREARM))
-                    .translate(new Vector3f(-5.625f, 10.875f, 0).div(16).sub(Limb.RIGHT_FOREARM.pivot))
-                    .rotateX((float) Math.toRadians(-90)).rotateY((float) Math.PI)
-                    .rotateX((float) Math.toRadians(HELD_PITCH)).rotateZ((float) Math.PI);
-            painter.model(key + "_held", held, heldKey, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Transformation(hand));
+                    .translate(new Vector3f(-5.625f, 10.875f, 0).div(16).sub(Limb.RIGHT_FOREARM.pivot));
+            // FIXED context: every weapon model shares the same fixed display turn (Y 90, centred), unlike the
+            // third-person transforms that differ between one-hand, two-hand and legacy models.
+            hand.rotateXYZ((float) Math.toRadians(GRIP_TURN.x), (float) Math.toRadians(GRIP_TURN.y), (float) Math.toRadians(GRIP_TURN.z))
+                    .translate(GRIP_OFFSET);
+            painter.model(key + "_held", held, heldKey, ItemDisplayContext.FIXED, new Transformation(hand), BREATH);
         }
     }
 

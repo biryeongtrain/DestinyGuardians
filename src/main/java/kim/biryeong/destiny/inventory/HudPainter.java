@@ -126,16 +126,22 @@ public final class HudPainter {
      * {@link PlayerFigure#anchor}). {@code stackKey} identifies the stack so unchanged models send nothing.
      */
     public void model(String key, ItemStack stack, String stackKey, ItemDisplayContext context, Transformation transform) {
+        model(key, stack, stackKey, context, transform, 0);
+    }
+
+    /** As above; a changed transformation of an existing model blends over {@code blend} client ticks. */
+    public void model(String key, ItemStack stack, String stackKey, ItemDisplayContext context, Transformation transform, int blend) {
         String id = prefix + key;
         used.add(id);
         Model state = new Model(stackKey, context, transform);
         DisplayHud old = DisplayHud.getHud(player, id);
         if (old instanceof ItemDisplayHud && state.equals(old.getExtraData(STATE))) return;
         if (old != null && !(old instanceof ItemDisplayHud)) { old.remove(); old = null; }
+        // A new stack (different weapon or skin) snaps into place; only pose changes of the same model blend.
+        boolean sameStack = old != null && old.getExtraData(STATE) instanceof Model last && last.stackKey().equals(stackKey);
         ItemDisplayHud hud = old instanceof ItemDisplayHud item ? item : new ItemDisplayHud();
         hud.updateWhenDataChanged(false);
-        if (!(old != null && old.getExtraData(STATE) instanceof Model last && last.stackKey().equals(stackKey)))
-            hud.setItem(stack);
+        if (!sameStack) hud.setItem(stack);
         hud.setItemTransform(context);
         hud.setAlignment(DisplayHud.HudAlignment.CENTER);
         hud.setAboveHand(true);
@@ -144,7 +150,7 @@ public final class HudPainter {
         hud.setExtraData(STATE, state);
         // Spawning and setItem re-apply the location/scale helpers: the raw transformation goes last.
         if (old == null) hud.spawn(player, id);
-        hud.setTransformation(transform);
+        hud.setTransformation(transform, sameStack ? blend : 0);
         hud.update();
     }
 

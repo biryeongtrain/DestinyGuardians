@@ -321,6 +321,7 @@ public final class GearScreen {
             var v = p.getDeltaMovement(); p.setDeltaMovement(0, v.y, 0);
             if (now(s) >= s.repeatAt) { s.repeatAt = now(s) + 4; navigate(s); }
             if (now(s) % 10 == 0) refresh(s);
+            else if (server.getTickCount() % kim.biryeong.destiny.inventory.PlayerFigure.BREATH == 0) render(s); // idle breath key
             else if (now(s) - s.hoverSince <= TOOLTIP_DELAY + 1 || (s.stage == Stage.DETAIL && now(s) % 20 == 0)
                     || (s.messageUntil > 0 && now(s) >= s.messageUntil)) render(s);
         }
