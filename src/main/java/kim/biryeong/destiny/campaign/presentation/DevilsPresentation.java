@@ -40,6 +40,7 @@ import java.util.*;
 public final class DevilsPresentation implements DevilsLair.Presentation {
     public static final String INTRO_CLIP = "source_80e10752_sepix_intro";
     static final int CAMERA_TICKS = 80;
+    static final int CLIP_GRACE_TICKS = 20;
     private static final Map<UUID, View> LOCKS = new HashMap<>();
     private static final String HUD = "destiny:devils_presentation/";
     private final DevilsSession session;
@@ -102,7 +103,8 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
         if (tracker == null || tracker.isClosed() || tracker.renderer().animation(INTRO_CLIP).isEmpty()) {
             problem("Required source Sepiks intro clip unavailable: " + INTRO_CLIP); return;
         }
-        intro = new Intro(boss, tracker, generation);
+        int clipTicks = tracker.renderer().animation(INTRO_CLIP).map(a -> (int) Math.ceil(a.length() * 20)).orElse(0);
+        intro = new Intro(boss, tracker, generation, clipTicks);
         var run = intro;
         // Only PLAY_ONCE natural exhaustion invokes this callback in BetterModel3.5.1. stopAnimation
         // removes the iterator without invoking it; cancellation still invalidates our gate first.
@@ -166,6 +168,10 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
             } else if (!paused) {
                 run.age++;
                 if (run.age >= CAMERA_TICKS) releaseViews();
+                if (!run.gate.ended) {
+                    run.gate.clipElapsed(run.gate.generation, run.boss.getUUID(), run.age, run.clipTicks);
+                    if (run.gate.ended) problem("Sepiks intro callback missing (viewers=" + run.tracker.playerCount() + "); finished after clip length");
+                }
                 if (run.gate.consume(generation, run.boss.getUUID())) {
                     releaseViews(); intro = null;
                     session.introFinished(generation); // normal animation completion only, never camera duration
@@ -184,6 +190,11 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
         boolean started, ended, cancelled, consumed;
         IntroGate(long generation, UUID actor) { this.generation = generation; this.actor = actor; }
         void naturalEnd(long expected, UUID id) { if (started && !cancelled && expected == generation && actor.equals(id)) ended = true; }
+        /** BetterModel stops ticking a tracker with no viewers, so its play-once callback can be lost.
+         *  Once the authored clip length has fully elapsed the awakening is over for everyone. */
+        void clipElapsed(long expected, UUID id, int age, int clipTicks) {
+            if (clipTicks > 0 && age >= clipTicks + CLIP_GRACE_TICKS) naturalEnd(expected, id);
+        }
         boolean consume(long expected, UUID id) {
             if (!ended || cancelled || consumed || generation != expected || !actor.equals(id)) return false;
             consumed = true; return true;
@@ -191,9 +202,9 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
         void cancel() { cancelled = true; ended = false; }
     }
     private final class Intro {
-        final DevilsMob boss; final EntityTracker tracker; final IntroGate gate; int age;
-        Intro(DevilsMob boss, EntityTracker tracker, long generation) {
-            this.boss = boss; this.tracker = tracker; this.gate = new IntroGate(generation, boss.getUUID());
+        final DevilsMob boss; final EntityTracker tracker; final IntroGate gate; final int clipTicks; int age;
+        Intro(DevilsMob boss, EntityTracker tracker, long generation, int clipTicks) {
+            this.boss = boss; this.tracker = tracker; this.gate = new IntroGate(generation, boss.getUUID()); this.clipTicks = clipTicks;
         }
         void cancel() { gate.cancel(); if (!tracker.isClosed()) tracker.stopAnimation(INTRO_CLIP); }
     }
