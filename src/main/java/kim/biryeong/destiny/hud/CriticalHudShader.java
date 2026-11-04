@@ -20,9 +20,9 @@ public final class CriticalHudShader {
 
     static final String VERTEX_PATH = "assets/minecraft/shaders/core/item.vsh";
     static final String FRAGMENT_PATH = "assets/minecraft/shaders/core/item.fsh";
-    private static final String VERTEX_SHA = "62a807a1cebf32fa1dcbd8633d7380c648c5d79a16c87d4295115644c80d55bc";
+    private static final String VERTEX_SHA = "79c34c73d8a00ce16ac0ae84f0ae0b554bd58760532f520958dfb9a85af44f74";
     private static final String FRAGMENT_SHA = "fe75ae09610add034d2578dff26ad4e95e75625253d7f7275d076da15ecc92c4";
-    private static final String PATCHED_VERTEX_SHA = "d70487494707a61a682fe494a96fcdc317406e09bc228757b2b51d75ea989fa5";
+    private static final String PATCHED_VERTEX_SHA = "ba38368c958a83ceb790ba68c119eb596dd30d8b1cf0e7f9197932e8fc168641";
     private static final String PATCHED_FRAGMENT_SHA = "fcdc2561724112ad48b91ed69da646ee9433a0346d25c12ac1e2814cbe3a213c";
     private static final String MAIN = "void main() {\n";
     private static final String VERTEX_FLAG = "layout(location = 7) flat out int destinyCriticalHud;\n\n";

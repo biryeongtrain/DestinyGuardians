@@ -20,8 +20,6 @@ public final class GearHud {
             BACK = 0x0E1318, LEGENDARY = 0x522F65, EXOTIC = 0xCEAE33, UNCOMMON = 0x366F42, RARE = 0x5076A3,
             UP = 0x6FD08A, DOWN = 0xE0645A, GOLD = 0xE3C46B;
     static final float TIP_W = 520;
-    /** Client ticks a pointer move is blended over: one server tick plus slack for packet jitter. */
-    static final int CURSOR_GLIDE = 2;
 
     private GearHud() { }
 
@@ -42,7 +40,7 @@ public final class GearHud {
             case SUBCLASS, OPTIONS -> subclass(p, v);
         }
         footer(p, v);
-        cursor(p, v.cursorX(), v.cursorY());
+        cursor(p, v);
         p.finish();
     }
 
@@ -364,9 +362,9 @@ public final class GearHud {
         p.textFit("btn_" + k + "_label", label, b.x(), b.y() - 2, 20, WHITE, b.width() - 20);
     }
 
-    /** One textured pointer gliding between server ticks (see {@link HudPainter#glide}). */
-    private static void cursor(HudPainter p, float x, float y) {
-        p.glide("cursor", "gear_cursor", x, y, 30, 152, WHITE, CURSOR_GLIDE);
+    /** The mouse pointer: moved by the client every frame from the live view rotation (see HudPainter#pointer). */
+    private static void cursor(HudPainter p, GearView v) {
+        p.pointer("cursor", "gear_cursor", v.cursorX(), v.cursorY(), 30, 152, v.cursorYaw(), v.cursorPitch());
     }
 
     static int mix(int a, int b, float t) {

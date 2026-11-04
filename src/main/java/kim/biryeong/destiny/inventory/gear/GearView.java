@@ -9,6 +9,7 @@ import java.util.Map;
 
 /** Immutable frame of the gear screen handed to {@link GearHud}; also the status/test snapshot. */
 public record GearView(String playerName, GearLayout.Stage stage, GearSlot expanded, int focus, float cursorX, float cursorY,
+                       float cursorYaw, float cursorPitch,
                        Map<WeaponSlot, GearItems.Bucket> buckets, GearItems.Weapon tooltip, GearItems.Weapon compare,
                        GearItems.Weapon detail, float spin, String field, List<WeaponScreenView.CharacterField> fields,
                        List<WeaponScreenView.CharacterOption> options, String message, boolean armory,

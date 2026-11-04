@@ -132,7 +132,7 @@ public final class ProfileArmAssets {
             if(data==null)throw new IllegalStateException("Missing item shader");
             byte[] item=data.readAllBytes();
             try {String actual=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(item));
-                if(!actual.equals("d70487494707a61a682fe494a96fcdc317406e09bc228757b2b51d75ea989fa5"))throw new IllegalStateException("Incompatible item shader "+actual);
+                if(!actual.equals("ba38368c958a83ceb790ba68c119eb596dd30d8b1cf0e7f9197932e8fc168641"))throw new IllegalStateException("Incompatible item shader "+actual);
             }catch(java.security.NoSuchAlgorithmException e){throw new AssertionError(e);}
             String source=new String(item,StandardCharsets.UTF_8);int end=source.lastIndexOf('}');
             return PackResource.fromString(source.substring(0,end)+resource("main.item.vsh")+source.substring(end));
@@ -140,7 +140,7 @@ public final class ProfileArmAssets {
         for(String ext:List.of("vsh","fsh")) {
             String path="assets/minecraft/shaders/core/entity."+ext;
             byte[] bytes=pack.getDataOrSource(path);if(bytes==null)throw new IllegalStateException("Missing entity shader");
-            String expected=ext.equals("vsh")?"b500fe893570dce943575415fca52f0a7ea1644909b7a0f0a71fc0e4e9101db4":"b349430785b693e8635765b7804034e28c3e6ec0e91f21fb9c224b4e226a90fa";
+            String expected=ext.equals("vsh")?"cdb69b412e00d06aa5e76556331ce82e5c0695c5b6a8c0b14da7081fad2f6227":"b349430785b693e8635765b7804034e28c3e6ec0e91f21fb9c224b4e226a90fa";
             try {if(!HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(bytes)).equals(expected))throw new IllegalStateException("Incompatible entity shader "+path);}catch(java.security.NoSuchAlgorithmException e){throw new AssertionError(e);}
             String s=new String(bytes,StandardCharsets.UTF_8);s=s.replace("void main() {",resource("decl."+ext)+"\nvoid main() {");
             if(ext.equals("vsh")){int end=s.lastIndexOf('}');s=s.substring(0,end)+resource("main.vsh")+s.substring(end);}

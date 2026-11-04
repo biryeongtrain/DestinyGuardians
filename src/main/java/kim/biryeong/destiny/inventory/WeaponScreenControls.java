@@ -6,6 +6,9 @@ public final class WeaponScreenControls {
     private boolean primed;
     public float x() { return x; }
     public float y() { return y; }
+    /** View rotation the current position belongs to. */
+    public float yaw() { return yaw; }
+    public float pitch() { return pitch; }
     public void point(float x, float y) {
         if (!Float.isFinite(x) || !Float.isFinite(y)) return;
         this.x = Math.clamp(x, 24, 1896); this.y = Math.clamp(y, 24, 1056);

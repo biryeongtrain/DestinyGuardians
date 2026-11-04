@@ -135,7 +135,11 @@ public final class GearScreen {
             float yaw = packet.getYRot(p.getYRot()), pitch = packet.getXRot(p.getXRot());
             if (Float.isFinite(yaw) && Float.isFinite(pitch)) {
                 p.setYRot(yaw); p.setYHeadRot(yaw); p.setXRot(Math.clamp(pitch, -90, 90));
+                float lastYaw = s.controls.yaw(), lastPitch = s.controls.pitch();
                 if (s.controls.rotate(yaw, pitch)) { s.pointerDriven = true; s.lastActive = now(s); hover(s); render(s); }
+                // Clamped at an edge: the pointer stays, but its reference rotation must follow the view or the
+                // client would keep extrapolating it past the edge.
+                else if (lastYaw != s.controls.yaw() || lastPitch != s.controls.pitch()) render(s);
             }
         }
         if (packet.hasPosition()) {
@@ -345,7 +349,7 @@ public final class GearScreen {
         var compare = hovered != null && !hovered.equipped() && bucket != null ? bucket.equipped() : null;
         boolean tooltip = hovered != null && now(s) - s.hoverSince >= TOOLTIP_DELAY;
         s.view = new GearView(s.owner.getGameProfile().name(), s.stage, s.expanded, s.focus,
-                s.controls.x(), s.controls.y(), Map.copyOf(s.buckets), tooltip ? hovered : null, compare, s.detail,
+                s.controls.x(), s.controls.y(), s.controls.yaw(), s.controls.pitch(), Map.copyOf(s.buckets), tooltip ? hovered : null, compare, s.detail,
                 ((now(s) - s.openedAt) / 20) * 30f % 360, s.field, s.fields, s.options, s.message, armory(s.owner),
                 kim.biryeong.destiny.guardian.Guardians.data(s.owner).guardianClass(),
                 WeaponScreen.characterView(s.owner, s.field));

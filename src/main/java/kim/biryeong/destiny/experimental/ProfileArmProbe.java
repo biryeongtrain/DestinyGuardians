@@ -42,7 +42,7 @@ public final class ProfileArmProbe {
                     byte[] bytes=pack.getDataOrSource(path);
                     if(bytes==null) throw new IllegalStateException("Missing native shader "+path);
                     String input=new String(bytes,StandardCharsets.UTF_8);
-                    String expected=ext.equals("vsh") ? "b500fe893570dce943575415fca52f0a7ea1644909b7a0f0a71fc0e4e9101db4" : "b349430785b693e8635765b7804034e28c3e6ec0e91f21fb9c224b4e226a90fa";
+                    String expected=ext.equals("vsh") ? "cdb69b412e00d06aa5e76556331ce82e5c0695c5b6a8c0b14da7081fad2f6227" : "b349430785b693e8635765b7804034e28c3e6ec0e91f21fb9c224b4e226a90fa";
                     if(!sha256(bytes).equals(expected)) throw new IllegalStateException("Unsupported upstream arm shader "+path);
                     String declaration=resource("decl."+ext);
                     if(input.contains("destinyArmInfo")) throw new IllegalStateException("Duplicate arm probe shader");

@@ -90,6 +90,18 @@ public final class HudPainter {
         paint(key, new Box(x, y, size, size), depth, color, null, Identifier.parse("destiny:gui/hud/" + icon), false, 0, glide);
     }
 
+    /**
+     * A mouse pointer at ({@code x}, {@code y}), the position for view rotation ({@code yaw}, {@code pitch}). The
+     * client shader keeps moving it with the live view rotation every frame (DisplayHud pointer), so it tracks the
+     * mouse at frame rate with no server round trip; each server update only corrects clamping at the edges.
+     * The icon is drawn white.
+     */
+    public void pointer(String key, String icon, float x, float y, float size, float depth, float yaw, float pitch) {
+        paint(key, new Box(x, y, size, size), depth, DisplayHud.pointerTint(yaw, pitch), null,
+                Identifier.parse("destiny:gui/hud/" + icon), false, 0, 0);
+        if (DisplayHud.getHud(player, prefix + key) instanceof ItemDisplayHud hud) { hud.setPointer(true); hud.update(); }
+    }
+
     /** A non-square HUD image (box size in canvas pixels). */
     public void image(String key, String icon, float x, float y, float width, float height, float depth, int color) {
         paint(key, new Box(x, y, width, height), depth, color, null, Identifier.parse("destiny:gui/hud/" + icon), false, 0);
