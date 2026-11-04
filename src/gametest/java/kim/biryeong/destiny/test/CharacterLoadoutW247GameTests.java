@@ -107,7 +107,7 @@ public final class CharacterLoadoutW247GameTests {
         var stack=kim.biryeong.destiny.weapon.WeaponItems.create(kim.biryeong.destiny.weapon.WeaponCatalog.find("ammit_ar2").orElseThrow());
         inv.setItem(1,stack);inv.setSelectedSlot(1);
         double speed=p.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
-        check(h,kim.biryeong.destiny.inventory.WeaponScreen.open(p),"Menu opens for unassigned character");
+        check(h,kim.biryeong.destiny.inventory.WeaponScreen.openArmory(p),"Menu opens for unassigned character");
         kim.biryeong.destiny.inventory.WeaponScreen.move(p,new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Rot(
                 p.getYRot()+(600-view(p).cursorX())/15f,p.getXRot()+(230-view(p).cursorY())/15f,true,false));
         check(h,view(p).focus()==-1,"Blank canvas has no focused button");

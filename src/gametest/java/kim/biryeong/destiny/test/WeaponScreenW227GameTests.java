@@ -26,7 +26,7 @@ public final class WeaponScreenW227GameTests {
         TestCleanup.register(h, () -> { WeaponScreen.close(p); WeaponRuntime.cleanup(p); TestPlayers.remove(p); });
         double speed = p.getAttributeValue(Attributes.MOVEMENT_SPEED), jump = p.getAttributeValue(Attributes.JUMP_STRENGTH);
         int rounds = WeaponItems.magazine(gun, WeaponProfile.forEntry(entry)).rounds();
-        h.assertTrue(WeaponScreen.open(p), Component.literal("Equipment opens without a container screen"));
+        h.assertTrue(WeaponScreen.openArmory(p), Component.literal("Equipment opens without a container screen"));
         h.assertTrue(p.containerMenu == p.inventoryMenu && WeaponScreen.active(p), Component.literal("No SGUI or substitute inventory"));
         int menuSlot = java.util.stream.IntStream.range(0, p.inventoryMenu.slots.size())
                 .filter(i -> p.inventoryMenu.slots.get(i).container == p.getInventory()

@@ -46,7 +46,7 @@ public abstract class WeaponScreenInputMixin {
         switch (packet.getAction()) {
             case START_DESTROY_BLOCK -> WeaponScreen.click(player, false);
             case DROP_ITEM, DROP_ALL_ITEMS -> kim.biryeong.destiny.input.CancelledDropSync.restore(player, packet.getAction());
-            case SWAP_ITEM_WITH_OFFHAND -> WeaponScreen.close(player);
+            case SWAP_ITEM_WITH_OFFHAND -> { } // routed by InputRouter.onPlayerAction (runs first)
             default -> { }
         }
         ci.cancel();

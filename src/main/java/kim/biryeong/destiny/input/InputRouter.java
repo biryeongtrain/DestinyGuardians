@@ -67,7 +67,11 @@ public final class InputRouter {
 
     /** @return true 면 바닐라 처리를 취소한다. */
     public static boolean onPlayerAction(ServerPlayer player, ServerboundPlayerActionPacket.Action action) {
-        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) return true;
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) {
+            // This hook runs before the screen's own action mixin and cancels it: route F (detail view) here.
+            if (action == ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND) kim.biryeong.destiny.inventory.WeaponScreen.swapKey(player);
+            return true;
+        }
         if ((action == ServerboundPlayerActionPacket.Action.DROP_ITEM
                 || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
                 && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem()).isPresent()) {

@@ -70,34 +70,40 @@ public final class WeaponScreen {
 
     public static void init() {
         InventoryMenuRedirect.init();
+        kim.biryeong.destiny.inventory.gear.GearScreen.init();
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, environment) ->
                 dispatcher.register(Commands.literal("메뉴").executes(c -> toggle(c.getSource().getPlayerOrException()) ? 1 : 0)));
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, environment) ->
             dispatcher.register(Commands.literal("destiny").then(Commands.literal("inventory")
                 .executes(c -> open(c.getSource().getPlayerOrException()) ? 1 : 0)
-                .then(Commands.literal("test").executes(c -> open(c.getSource().getPlayerOrException()) ? 1 : 0))
+                .then(Commands.literal("test").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                    .executes(c -> openArmory(c.getSource().getPlayerOrException()) ? 1 : 0))
                 .then(Commands.literal("close").executes(c -> { close(c.getSource().getPlayerOrException()); return 1; }))
                 .then(Commands.literal("open").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .then(Commands.argument("player", EntityArgument.player()).executes(c -> open(EntityArgument.getPlayer(c, "player")) ? 1 : 0)))
                 .then(Commands.literal("status").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .then(Commands.argument("player", EntityArgument.player()).executes(c -> {
                         var p = EntityArgument.getPlayer(c, "player"); var s = current(p);
-                        c.getSource().sendSuccess(() -> Component.literal("EquipmentScreen " +
-                                (s == null ? "closed" : new Gson().toJson(s.view))), false); return 1;
+                        var gear = kim.biryeong.destiny.inventory.gear.GearScreen.snapshot(p);
+                        c.getSource().sendSuccess(() -> Component.literal(gear.map(kim.biryeong.destiny.inventory.gear.GearScreen::describe)
+                                .orElse("EquipmentScreen " + (s == null ? "closed" : new Gson().toJson(s.view)))), false); return 1;
                     }))))));
         ServerTickEvents.END_SERVER_TICK.register(WeaponScreen::tick);
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> close(handler.getPlayer()));
         ServerEntityLevelChangeEvents.AFTER_PLAYER_CHANGE_LEVEL.register((p, from, to) -> close(p));
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> { if (entity instanceof ServerPlayer p) close(p); });
         ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, base, taken, blocked) -> {
-            if (entity instanceof ServerPlayer p && taken > 0) close(p);
+            // Only the admin armory closes on damage; the gear screen stays open in combat (Destiny behaviour).
+            if (entity instanceof ServerPlayer p && taken > 0) { var s = current(p); if (s != null) retire(s); }
         });
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             for (var s : List.copyOf(OPEN.values())) if (s.level.getServer() == server) retire(s);
         });
     }
 
-    public static boolean active(ServerPlayer p) { return current(p) != null; }
+    /** True while either the gear screen or the admin test armory is open. */
+    public static boolean active(ServerPlayer p) { return current(p) != null || kim.biryeong.destiny.inventory.gear.GearScreen.active(p); }
+    public static boolean armoryActive(ServerPlayer p) { return current(p) != null; }
     /** Observation only: never opens, refreshes, renders or initializes guardian state. Server thread only. */
     public static Optional<WeaponScreenView> snapshot(ServerPlayer p) {
         var s = current(p);
@@ -108,7 +114,17 @@ public final class WeaponScreen {
         return s != null && s.owner == p && s.connection == p.connection ? s : null;
     }
     public static boolean toggle(ServerPlayer p) { if (active(p)) { close(p); return true; } return open(p); }
+    /** Players get the Destiny gear screen; the weapon wizard below is the admin test armory. */
     public static boolean open(ServerPlayer p) {
+        if (current(p) != null) return true;
+        return kim.biryeong.destiny.inventory.gear.GearScreen.open(p);
+    }
+    /** F while a menu is open: detail view in the gear screen, close for the armory. */
+    public static void swapKey(ServerPlayer p) {
+        if (kim.biryeong.destiny.inventory.gear.GearScreen.inspect(p)) return;
+        close(p);
+    }
+    public static boolean openArmory(ServerPlayer p) {
         if (kim.biryeong.destiny.tutorial.TutorialLoan.active(p)) {
             p.sendOverlayMessage(Component.literal("무기군 실습 중입니다. 대표 무기로 표적을 처치하면 다음 무기를 드립니다."));
             return false;
@@ -134,7 +150,10 @@ public final class WeaponScreen {
         var attr = p.getAttribute(type);
         if (attr != null) { attr.removeModifier(FREEZE); attr.addTransientModifier(new AttributeModifier(FREEZE, -1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)); }
     }
-    public static void close(ServerPlayer p) { var s = current(p); if (s != null) retire(s); }
+    public static void close(ServerPlayer p) {
+        kim.biryeong.destiny.inventory.gear.GearScreen.close(p);
+        var s = current(p); if (s != null) retire(s);
+    }
     private static void retire(Session s) {
         if (!OPEN.remove(s.owner.getUUID(), s)) return;
         WeaponScreenHud.remove(s.owner);
@@ -149,6 +168,7 @@ public final class WeaponScreen {
 
     /** Called only after packet thread validation. Suppress position claims, accept finite pointer rotation. */
     public static boolean move(ServerPlayer p, ServerboundMovePlayerPacket packet) {
+        if (kim.biryeong.destiny.inventory.gear.GearScreen.move(p, packet)) return true;
         var s = current(p); if (s == null) return false;
         if (packet.hasRotation()) {
             float yaw = packet.getYRot(p.getYRot()), pitch = packet.getXRot(p.getXRot());
@@ -169,6 +189,7 @@ public final class WeaponScreen {
         return true;
     }
     public static boolean input(ServerPlayer p, Input next) {
+        if (kim.biryeong.destiny.inventory.gear.GearScreen.input(p, next)) return true;
         var s = current(p); if (s == null) return false;
         Input old = s.input; s.input = next; touch(s);
         if (next.jump() && !old.jump()) { s.pointerDriven = false; click(p, false); }
@@ -185,6 +206,7 @@ public final class WeaponScreen {
         touch(s); render(s);
     }
     public static boolean click(ServerPlayer p, boolean back) {
+        if (kim.biryeong.destiny.inventory.gear.GearScreen.click(p, back)) return true;
         var s = current(p); if (s == null) return false;
         // Coalesce same-tick packet variants, while allowing a fresh click at the same screen position.
         int now = now(s); if (now - s.lastClick < 3) return true;
@@ -385,6 +407,51 @@ public final class WeaponScreen {
         s.stage = "CHARACTER"; s.page = 0;
         int index = Arrays.asList(CHARACTER_FIELDS).indexOf(s.characterField);
         focus(s, index == 6 ? WeaponScreenLayout.JUMP : WeaponScreenLayout.CLASS + Math.max(0, index));
+    }
+
+    /** Character fields for the gear screen's subclass view (shared validation with the armory tab). */
+    public static WeaponScreenView.CharacterView characterView(ServerPlayer p, String field) {
+        var view = characterFields(Guardians.data(p), field);
+        return view;
+    }
+    public static List<WeaponScreenView.CharacterOption> characterOptions(ServerPlayer p, String field) {
+        var data = Guardians.data(p);
+        return characterOptions(data, data.guardianClass(), CharacterLoadouts.subclass(data), field);
+    }
+    /** Applies one option through {@link CharacterLoadouts}; null on success, otherwise the reason. */
+    public static String applyCharacter(ServerPlayer p, String field, String optionId) {
+        try {
+            return switch (field) {
+                case "CLASS" -> CharacterLoadouts.selectClass(p, GuardianClass.valueOf(optionId));
+                case "SUBCLASS" -> CharacterLoadouts.selectSubclass(p, Element.valueOf(optionId));
+                default -> CharacterLoadouts.selectAbility(p, AbilitySlot.valueOf(field), Identifier.parse(optionId));
+            };
+        } catch (IllegalArgumentException e) { return "선택할 수 없는 항목입니다."; }
+    }
+    public static String fieldLabel(String field) { return fieldName(field); }
+
+    private static WeaponScreenView.CharacterView characterFields(GuardianData data, String selected) {
+        GuardianClass cls = data.guardianClass();
+        Element element = CharacterLoadouts.subclass(data);
+        List<WeaponScreenView.CharacterField> fields = new ArrayList<>();
+        for (String field : CHARACTER_FIELDS) {
+            List<WeaponScreenView.CharacterOption> options = characterOptions(data, cls, element, field);
+            boolean enabled = !options.isEmpty();
+            String reason = enabled ? "옵션을 선택하면 즉시 적용됩니다."
+                    : cls == GuardianClass.NONE ? "직업을 먼저 선택하세요."
+                    : element == null && !field.equals("SUBCLASS") ? "하위직업을 먼저 선택하세요."
+                    : "현재 직업·하위직업에 등록된 " + fieldName(field) + " 옵션이 없습니다.";
+            String value = switch (field) {
+                case "CLASS" -> className(cls);
+                case "SUBCLASS" -> elementName(element);
+                default -> data.loadout().map(l -> l.get(AbilitySlot.valueOf(field)))
+                        .flatMap(id -> id == null ? Optional.<Ability>empty() : AbilityRegistry.get(id))
+                        .map(Ability::displayName).orElse("미장착");
+            };
+            fields.add(new WeaponScreenView.CharacterField(field, fieldName(field), value, enabled, reason));
+        }
+        return new WeaponScreenView.CharacterView(cls.name(), className(cls),
+                element == null ? "" : element.name(), elementName(element), selected, fields, List.of());
     }
 
     private static void refreshCharacter(Session s) {
