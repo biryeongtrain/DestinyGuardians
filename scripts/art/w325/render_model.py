@@ -42,5 +42,5 @@ dirs = {'west': (1, 0, 0), 'east': (-1, 0, 0), 'top': (0, 0, -1), 'front': (0, 1
 sc.render.resolution_x, sc.render.resolution_y = 1200, 700
 for k in want:
     d_ = mathutils.Vector(dirs[k]).normalized(); co.location = c - d_ * 3
-    co.rotation_euler = d_.to_track_quat('-Z', 'Z' if k not in ('top',) else 'Y').to_euler(); cam.ortho_scale = ext
+    co.rotation_euler = d_.to_track_quat('-Z', 'Y').to_euler(); cam.ortho_scale = ext
     sc.render.filepath = f'{OUT}_{k}.png'; bpy.ops.render.render(write_still=True)
