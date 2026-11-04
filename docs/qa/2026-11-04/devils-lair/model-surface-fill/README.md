@@ -1,0 +1,3 @@
+# Thrall silhouette fill radius comparison
+
+Offline Blender comparison revisited 2026-11-04. Radius3 enlarges the stair-step/vertical striping across the face, shoulders and chest relative to the production baseline. Rejected: neither this candidate nor its model was integrated. Both offline images still show surface artifacts, so the baseline is not accepted as commercial quality. Actual Minecraft directional shading remains a separate hypothesis requiring a controlled generated-pack comparison; these emissive offline previews do not prove the native cause. Source Downloads assets remain unchanged.

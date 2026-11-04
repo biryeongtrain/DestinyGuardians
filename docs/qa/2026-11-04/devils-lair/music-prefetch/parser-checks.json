@@ -1,0 +1,18 @@
+[
+  {
+    "case": "valid source",
+    "ok": true
+  },
+  {
+    "case": "truncated",
+    "rejected": "RIFF size mismatch"
+  },
+  {
+    "case": "wrong codec",
+    "rejected": "Expected Wwise Opus WEM codec 0x3041"
+  },
+  {
+    "case": "inconsistent packet table",
+    "rejected": "Opus packet table does not cover the data chunk"
+  }
+]

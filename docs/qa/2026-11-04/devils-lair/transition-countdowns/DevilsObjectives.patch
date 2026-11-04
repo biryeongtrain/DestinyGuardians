@@ -1,0 +1,37 @@
+--- before/DevilsObjectives.java
++++ after/DevilsObjectives.java
+@@ -54,12 +54,33 @@
+                 null, null, hidden || state.phase() == DevilsDirector.Phase.CLOSED);
+     }
+ 
++    /** Remaining times come from the session clock; the HUD never advances encounter state. */
++    public static ObjectiveTracker.View countdown(ObjectiveTracker.View view, DevilsDirector.Phase phase,
++                                                   int gatherSeconds, int returnSeconds, boolean voicePlaying) {
++        String objective = view.objective();
++        boolean gathering = phase == DevilsDirector.Phase.RY_CLEAR || phase == DevilsDirector.Phase.RF_CLEAR
++                || phase == DevilsDirector.Phase.BL_CLEAR;
++        if (gathering && gatherSeconds >= 0) {
++            objective = gatherSeconds > 0 ? "화력팀 합류까지 " + gatherSeconds + "초" : "안전한 합류 지점을 준비하는 중입니다";
++        } else if (phase == DevilsDirector.Phase.COMPLETE && returnSeconds >= 0) {
++            objective = returnSeconds > 0 ? "공격전 완료 · 귀환까지 " + returnSeconds + "초"
++                    : voicePlaying ? "보고 종료 후 귀환합니다" : "귀환 준비 중입니다";
++        }
++        return new ObjectiveTracker.View(view.mission(), view.step(), objective, view.count(), view.goal(),
++                view.key(), view.action(), view.toastTitle(), view.toastSub(), view.hidden());
++    }
++
+     public static void render(ServerPlayer player, DevilsDirector.Snapshot state, boolean atDevice, boolean hidden) {
+         ObjectiveTracker.render(player, view(state, atDevice, hidden));
+     }
+     public static void render(ServerPlayer player, DevilsDirector.Snapshot state, boolean atDevice, boolean hidden,
+                               boolean atSupply, boolean supplyAvailable) {
+-        var v = view(state, atDevice, hidden);
++        render(player, state, atDevice, hidden, atSupply, supplyAvailable, -1, -1, false);
++    }
++    public static void render(ServerPlayer player, DevilsDirector.Snapshot state, boolean atDevice, boolean hidden,
++                              boolean atSupply, boolean supplyAvailable, int gatherSeconds, int returnSeconds,
++                              boolean voicePlaying) {
++        var v = countdown(view(state, atDevice, hidden), state.phase(), gatherSeconds, returnSeconds, voicePlaying);
+         if (atSupply) v = new ObjectiveTracker.View(v.mission(), v.step(), v.objective(), v.count(), v.goal(),
+                 supplyAvailable ? "웅크리기" : "보급", supplyAvailable ? "특수·중화기 탄약 보급" : "이 구역 보급 사용 완료",
+                 v.toastTitle(), v.toastSub(), v.hidden());

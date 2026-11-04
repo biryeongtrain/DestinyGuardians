@@ -21,7 +21,7 @@ import java.util.Map;
 
 /** Installs a versioned limb without ever opening an artist-owned installed model for writing. */
 public final class HunterModelAssets {
-    public static final String MODEL_NAME = "guardian_hunter_w273_r1";
+    public static final String MODEL_NAME = "guardian_hunter_briefing_r4";
     static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_w199.animation.json";
 
     private HunterModelAssets() { }
@@ -70,6 +70,17 @@ public final class HunterModelAssets {
                 JsonParser.parseReader(new InputStreamReader(source, StandardCharsets.UTF_8))
                         .getAsJsonObject().getAsJsonArray("animations")
                         .forEach(entry -> animations.add(inPlaceIntro(entry.getAsJsonObject().deepCopy())));
+            }
+            try (var source = HunterModelAssets.class.getResourceAsStream("/destiny/animation/briefing_crota_landing.animation.json")) {
+                if (source == null) throw new IOException("Briefing landing animations missing");
+                JsonParser.parseReader(new InputStreamReader(source, StandardCharsets.UTF_8))
+                        .getAsJsonObject().getAsJsonArray("animations")
+                        .forEach(entry -> animations.add(inPlaceIntro(entry.getAsJsonObject().deepCopy())));
+            }
+            try (var source = HunterModelAssets.class.getResourceAsStream("/destiny/animation/revive_combat.animation.json")) {
+                if (source == null) throw new IOException("Revive source animation missing");
+                JsonParser.parseReader(new InputStreamReader(source, StandardCharsets.UTF_8))
+                        .getAsJsonObject().getAsJsonArray("animations").forEach(animations::add);
             }
             JsonObject model = buildModel(
                     JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),animations);

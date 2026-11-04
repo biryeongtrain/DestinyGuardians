@@ -1,0 +1,222 @@
+Compiled from "BakedQuad.java"
+public final class net.minecraft.client.resources.model.geometry.BakedQuad$MaterialInfo extends java.lang.Record {
+  private final net.minecraft.client.renderer.texture.TextureAtlasSprite sprite;
+
+  private final net.minecraft.client.renderer.chunk.ChunkSectionLayer layer;
+
+  private final net.minecraft.client.renderer.rendertype.RenderType itemRenderType;
+
+  private final net.minecraft.client.renderer.rendertype.RenderType itemGlintRenderType;
+
+  private final net.minecraft.client.renderer.rendertype.RenderType itemGlintSpecialRenderType;
+
+  private final int tintIndex;
+
+  private final net.minecraft.core.Direction shadeDirectionOverride;
+
+  private final int lightEmission;
+
+  public net.minecraft.client.resources.model.geometry.BakedQuad$MaterialInfo(net.minecraft.client.renderer.texture.TextureAtlasSprite, net.minecraft.client.renderer.chunk.ChunkSectionLayer, net.minecraft.client.renderer.rendertype.RenderType, net.minecraft.client.renderer.rendertype.RenderType, net.minecraft.client.renderer.rendertype.RenderType, int, net.minecraft.core.Direction, int);
+    Code:
+         0: aload_0
+         1: invokespecial #3                  // Method java/lang/Record."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #9                  // Field sprite:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+         9: aload_0
+        10: aload_2
+        11: putfield      #15                 // Field layer:Lnet/minecraft/client/renderer/chunk/ChunkSectionLayer;
+        14: aload_0
+        15: aload_3
+        16: putfield      #19                 // Field itemRenderType:Lnet/minecraft/client/renderer/rendertype/RenderType;
+        19: aload_0
+        20: aload         4
+        22: putfield      #23                 // Field itemGlintRenderType:Lnet/minecraft/client/renderer/rendertype/RenderType;
+        25: aload_0
+        26: aload         5
+        28: putfield      #26                 // Field itemGlintSpecialRenderType:Lnet/minecraft/client/renderer/rendertype/RenderType;
+        31: aload_0
+        32: iload         6
+        34: putfield      #29                 // Field tintIndex:I
+        37: aload_0
+        38: aload         7
+        40: putfield      #33                 // Field shadeDirectionOverride:Lnet/minecraft/core/Direction;
+        43: aload_0
+        44: iload         8
+        46: putfield      #37                 // Field lightEmission:I
+        49: return
+
+  public static net.minecraft.client.resources.model.geometry.BakedQuad$MaterialInfo of(net.minecraft.client.resources.model.sprite.Material$Baked, com.mojang.blaze3d.platform.Transparency, int, net.minecraft.core.Direction, int);
+    Code:
+         0: aload_1
+         1: invokestatic  #40                 // Method net/minecraft/client/renderer/chunk/ChunkSectionLayer.byTransparency:(Lcom/mojang/blaze3d/platform/Transparency;)Lnet/minecraft/client/renderer/chunk/ChunkSectionLayer;
+         4: astore        5
+         6: aload_0
+         7: invokevirtual #46                 // Method net/minecraft/client/resources/model/sprite/Material$Baked.sprite:()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+        10: invokevirtual #51                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.atlasLocation:()Lnet/minecraft/resources/Identifier;
+        13: getstatic     #57                 // Field net/minecraft/client/renderer/texture/TextureAtlas.LOCATION_BLOCKS:Lnet/minecraft/resources/Identifier;
+        16: invokevirtual #63                 // Method net/minecraft/resources/Identifier.equals:(Ljava/lang/Object;)Z
+        19: ifeq          79
+        22: aload_1
+        23: invokevirtual #69                 // Method com/mojang/blaze3d/platform/Transparency.hasTranslucent:()Z
+        26: ifeq          35
+        29: invokestatic  #75                 // Method net/minecraft/client/renderer/Sheets.translucentBlockItemSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        32: goto          38
+        35: invokestatic  #81                 // Method net/minecraft/client/renderer/Sheets.cutoutBlockItemSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        38: astore        6
+        40: aload_1
+        41: invokevirtual #69                 // Method com/mojang/blaze3d/platform/Transparency.hasTranslucent:()Z
+        44: ifeq          53
+        47: invokestatic  #84                 // Method net/minecraft/client/renderer/Sheets.translucentBlockItemGlintSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        50: goto          56
+        53: invokestatic  #87                 // Method net/minecraft/client/renderer/Sheets.cutoutBlockItemGlintSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        56: astore        7
+        58: aload_1
+        59: invokevirtual #69                 // Method com/mojang/blaze3d/platform/Transparency.hasTranslucent:()Z
+        62: ifeq          71
+        65: invokestatic  #90                 // Method net/minecraft/client/renderer/Sheets.translucentBlockItemGlintSpecialSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        68: goto          74
+        71: invokestatic  #93                 // Method net/minecraft/client/renderer/Sheets.cutoutBlockItemGlintSpecialSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        74: astore        8
+        76: goto          133
+        79: aload_1
+        80: invokevirtual #69                 // Method com/mojang/blaze3d/platform/Transparency.hasTranslucent:()Z
+        83: ifeq          92
+        86: invokestatic  #96                 // Method net/minecraft/client/renderer/Sheets.translucentItemSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        89: goto          95
+        92: invokestatic  #99                 // Method net/minecraft/client/renderer/Sheets.cutoutItemSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        95: astore        6
+        97: aload_1
+        98: invokevirtual #69                 // Method com/mojang/blaze3d/platform/Transparency.hasTranslucent:()Z
+       101: ifeq          110
+       104: invokestatic  #102                // Method net/minecraft/client/renderer/Sheets.translucentItemGlintSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+       107: goto          113
+       110: invokestatic  #105                // Method net/minecraft/client/renderer/Sheets.cutoutItemGlintSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+       113: astore        7
+       115: aload_1
+       116: invokevirtual #69                 // Method com/mojang/blaze3d/platform/Transparency.hasTranslucent:()Z
+       119: ifeq          128
+       122: invokestatic  #108                // Method net/minecraft/client/renderer/Sheets.translucentItemGlintSpecialSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+       125: goto          131
+       128: invokestatic  #111                // Method net/minecraft/client/renderer/Sheets.cutoutItemGlintSpecialSheet:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+       131: astore        8
+       133: new           #10                 // class net/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo
+       136: dup
+       137: aload_0
+       138: invokevirtual #46                 // Method net/minecraft/client/resources/model/sprite/Material$Baked.sprite:()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+       141: aload         5
+       143: aload         6
+       145: aload         7
+       147: aload         8
+       149: iload_2
+       150: aload_3
+       151: iload         4
+       153: invokespecial #114                // Method "<init>":(Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lnet/minecraft/client/renderer/chunk/ChunkSectionLayer;Lnet/minecraft/client/renderer/rendertype/RenderType;Lnet/minecraft/client/renderer/rendertype/RenderType;Lnet/minecraft/client/renderer/rendertype/RenderType;ILnet/minecraft/core/Direction;I)V
+       156: areturn
+
+  public boolean isTinted();
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field tintIndex:I
+         4: iconst_m1
+         5: if_icmpeq     12
+         8: iconst_1
+         9: goto          13
+        12: iconst_0
+        13: ireturn
+
+  public int flags();
+    Code:
+         0: iconst_0
+         1: istore_1
+         2: iload_1
+         3: aload_0
+         4: getfield      #15                 // Field layer:Lnet/minecraft/client/renderer/chunk/ChunkSectionLayer;
+         7: invokevirtual #119                // Method net/minecraft/client/renderer/chunk/ChunkSectionLayer.translucent:()Z
+        10: ifeq          17
+        13: iconst_1
+        14: goto          18
+        17: iconst_0
+        18: ior
+        19: istore_1
+        20: iload_1
+        21: aload_0
+        22: getfield      #9                  // Field sprite:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+        25: invokevirtual #122                // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.contents:()Lnet/minecraft/client/renderer/texture/SpriteContents;
+        28: invokevirtual #126                // Method net/minecraft/client/renderer/texture/SpriteContents.isAnimated:()Z
+        31: ifeq          38
+        34: iconst_2
+        35: goto          39
+        38: iconst_0
+        39: ior
+        40: istore_1
+        41: iload_1
+        42: ireturn
+
+  public final java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokedynamic #131,  0            // InvokeDynamic #0:toString:(Lnet/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #135,  0            // InvokeDynamic #0:hashCode:(Lnet/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #139,  0            // InvokeDynamic #0:equals:(Lnet/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public net.minecraft.client.renderer.texture.TextureAtlasSprite sprite();
+    Code:
+         0: aload_0
+         1: getfield      #9                  // Field sprite:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+         4: areturn
+
+  public net.minecraft.client.renderer.chunk.ChunkSectionLayer layer();
+    Code:
+         0: aload_0
+         1: getfield      #15                 // Field layer:Lnet/minecraft/client/renderer/chunk/ChunkSectionLayer;
+         4: areturn
+
+  public net.minecraft.client.renderer.rendertype.RenderType itemRenderType();
+    Code:
+         0: aload_0
+         1: getfield      #19                 // Field itemRenderType:Lnet/minecraft/client/renderer/rendertype/RenderType;
+         4: areturn
+
+  public net.minecraft.client.renderer.rendertype.RenderType itemGlintRenderType();
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field itemGlintRenderType:Lnet/minecraft/client/renderer/rendertype/RenderType;
+         4: areturn
+
+  public net.minecraft.client.renderer.rendertype.RenderType itemGlintSpecialRenderType();
+    Code:
+         0: aload_0
+         1: getfield      #26                 // Field itemGlintSpecialRenderType:Lnet/minecraft/client/renderer/rendertype/RenderType;
+         4: areturn
+
+  public int tintIndex();
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field tintIndex:I
+         4: ireturn
+
+  public net.minecraft.core.Direction shadeDirectionOverride();
+    Code:
+         0: aload_0
+         1: getfield      #33                 // Field shadeDirectionOverride:Lnet/minecraft/core/Direction;
+         4: areturn
+
+  public int lightEmission();
+    Code:
+         0: aload_0
+         1: getfield      #37                 // Field lightEmission:I
+         4: ireturn
+}

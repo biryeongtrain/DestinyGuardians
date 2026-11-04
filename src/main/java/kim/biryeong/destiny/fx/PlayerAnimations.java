@@ -292,9 +292,15 @@ public final class PlayerAnimations {
                 float correction = IntroFacing.correctionRadians(clip.animation);
                 // BM cancels a parent's GLOBAL modifier for each child: repeat the same
                 // correction through the subtree. Root translation/entry path stays untouched.
-                tracker.getPipeline().addGlobalRotModifier(
+                if (correction != 0) tracker.getPipeline().addGlobalRotModifier(
                         BonePredicate.from(b -> b.name().rawName().equals("player_root")).children(true),
                         q -> q.rotationY(correction));
+            }
+            if (clip.animation.equals("h15_revive_combat")) {
+                float facing = player.getYRot();
+                tracker.rotation(() -> new ModelRotation(0, facing));
+                tracker.getPipeline().addGlobalRotModifier(BonePredicate.tag(BoneTags.PLAYER_HEAD).withChildren(),
+                        q -> q.identity());
             }
             if(sword) {
                 state.swordStack=player.getMainHandItem();
@@ -381,8 +387,10 @@ public final class PlayerAnimations {
                 .orElseThrow().length() * 20) + Modifiers.ONCE.start());
         Run run = new Run(animation, state.server.getTickCount(), ticks);
         state.run = run;
-        boolean ok = state.tracker.animate(animation, Modifiers.ONCE, () -> run.completed.set(true));
-        if (ok) ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation();
+        var modifier = Modifiers.ONCE;
+        boolean ok = state.tracker.animate(animation, modifier, () -> run.completed.set(true));
+        if (ok) ServerPoseSampling.withSmoothing(animation.equals("h15_revive_combat") ? 2 : 1,
+                () -> ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation());
         if (!ok) {
             state.run = null;
             if (state.loopRequest == null) discard(state);
@@ -407,7 +415,9 @@ public final class PlayerAnimations {
                 if (state.run != null && state.run.animation.startsWith("h15_intro_"))
                     kim.biryeong.minigamelib.cinematic.CameraViews.sending(() ->
                             ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
-                else ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick();
+                else ServerPoseSampling.withSmoothing(
+                        state.run != null && state.run.animation.equals("h15_revive_combat") ? 2 : 1,
+                        () -> ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
                 syncOwnerBody(state);
                 var position = state.owner.position();
                 double moved = position.subtract(state.previousPosition).horizontalDistanceSqr();
@@ -554,8 +564,9 @@ public final class PlayerAnimations {
 
     public static boolean ownerSeesLimb(ServerPlayer player) {
         var runtime = Guardians.runtime(player);
-        return kim.biryeong.destiny.camera.SuperCamera.active(player)
-                || kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(player)
+        return kim.biryeong.destiny.down.GuardianDown.materializing(player)
+                || kim.biryeong.destiny.camera.SuperCamera.active(player)
+                || introViewer(player)
                 || (runtime.gcbClient && runtime.gcbThirdPerson);
     }
 
@@ -565,7 +576,8 @@ public final class PlayerAnimations {
      * BM owns metadata/equipment projection and restores current values on hide/close.
      */
     private static void syncOwnerBody(Playback state) {
-        if (!kim.biryeong.destiny.camera.SuperCamera.active(state.owner) || !ownerSeesLimb(state.owner)) {
+        if ((!kim.biryeong.destiny.camera.SuperCamera.active(state.owner)
+                && !kim.biryeong.destiny.down.GuardianDown.materializing(state.owner)) || !ownerSeesLimb(state.owner)) {
             state.ownerBodyHidden = false;
             return;
         }
@@ -585,6 +597,12 @@ public final class PlayerAnimations {
         else tracker.hide(self);
     }
 
+    /** Any staged intro audience: the Crucible intro or a shared activity briefing cast. */
+    private static boolean introViewer(ServerPlayer player) {
+        return kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(player)
+                || kim.biryeong.destiny.activity.presentation.ActivityCast.viewing(player);
+    }
+
     public static boolean isPlaying(ServerPlayer player) {
         Playback state = ACTIVE.get(player.getUUID());
         return state != null && !state.tracker.isClosed();
@@ -601,7 +619,7 @@ public final class PlayerAnimations {
         if (!state.server.isSameThread()) throw new IllegalStateException("Intro audience requires server thread");
         if (!valid(state) || viewer.hasDisconnected() || viewer.isRemoved() || !viewer.isAlive()
                 || viewer.level() != state.level || state.server.getPlayerList().getPlayer(viewer.getUUID()) != viewer
-                || !kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(viewer)) return false;
+                || !introViewer(viewer)) return false;
         var tracker = state.tracker;
         var registry = tracker.registry();
         // Registry.spawn includes every tracker. Do not resend a foreign model.
@@ -611,7 +629,7 @@ public final class PlayerAnimations {
             tracker.getPipeline().viewFilter(candidate -> {
                 var player = state.server.getPlayerList().getPlayer(candidate.uuid());
                 return (player != null && player.level() == state.level
-                        && kim.biryeong.destiny.crucible.CrucibleRuntime.viewingIntro(player))
+                        && introViewer(player))
                         || !tracker.modifier().sightTrace()
                         || kr.toxicity.model.api.util.EntityUtil.canSee(candidate.eyeLocation(), tracker.location());
             });

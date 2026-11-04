@@ -40,8 +40,12 @@ public final class ProfileWeaponView {
     }
     private ProfileWeaponView(){}
     public static boolean enabled(){return !Boolean.getBoolean(LEGACY_PROPERTY);}
+    /** W300: owner-private cinematics hide the first-person view; it is rebuilt on the first tick after. */
+    public static volatile java.util.function.Predicate<ServerPlayer> suppressed=p->false;
     /** The vanilla rear camera is packet-only: ServerPlayer.getCamera() still returns the player.
      * Retire the owner-only HUD before switching views; never replace the gameplay inventory. */
+    /** Cinematic cameras filter ordinary packets: retire the owner view through the camera send scope. */
+    public static void hideForCinematic(ServerPlayer p){kim.biryeong.minigamelib.cinematic.CameraViews.sending(()->remove(p));}
     public static void hideForCamera(ServerPlayer p){
         if(kim.biryeong.destiny.camera.SuperCamera.active(p))remove(p);
     }
@@ -60,7 +64,7 @@ public final class ProfileWeaponView {
     private static void update(ServerPlayer p){
         var original=p.getMainHandItem();
         boolean throwing=kim.biryeong.destiny.ability.GrenadeThrow.active(p);
-        if(kim.biryeong.destiny.camera.SuperCamera.active(p)||kim.biryeong.destiny.ability.ClassAbilityCast.active(p)||kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||(!throwing&&WeaponModels.entry(original).isEmpty())
+        if(suppressed.test(p)||kim.biryeong.minigamelib.cinematic.CameraViews.get(p)!=null||kim.biryeong.destiny.camera.SuperCamera.active(p)||kim.biryeong.destiny.ability.ClassAbilityCast.active(p)||kim.biryeong.destiny.guardian.Guardians.runtime(p).gcbThirdPerson||!p.isAlive()||p.isSpectator()||p.hasDisconnected()||p.getCamera()!=p||(!throwing&&WeaponModels.entry(original).isEmpty())
                 ||kim.biryeong.destiny.fx.PlayerAnimations.ownsSwordHand(p,original)){remove(p);return;}
         if(throwing) {
             var session=ACTIVE.get(p.getUUID());

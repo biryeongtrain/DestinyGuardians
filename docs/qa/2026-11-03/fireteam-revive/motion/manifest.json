@@ -1,0 +1,127 @@
+{
+  "sourceRoot": "/Users/qf/Downloads/Destiny-Fireteam-Down-Revive-KO-2026-11-03/Destiny-Fireteam-Down-Revive-KO-2026-11-03/motions",
+  "sourceHashes": {
+    "Guardian_Revive_72bone.blend": "a97928e70bdadf5d88a5a3fb0683a169257348cab610c46ee8cbd6545c161b8f",
+    "Guardian_Revive_72bone.fbx": "b3a2e5bd4d982fbcc0b641ec309a8e2fa1b8978314c66c738e754bea52d3fce8",
+    "README.md": "6528eb6a1514e3f1e6999b741ccd9292238a961f9afc0e1d5c69acfbdcd40b47",
+    "samples_20tps/80A8AD85.json": "310915895dacf73393be6a1490b41a81dabb6adea8bd127d9bed7ce614fc203a",
+    "provenance/source-bones.json": "8065109c45a7a2d550c7e005c6fc94b4410716a6e0d83c3495caed7b9fff18e7",
+    "provenance/query-clip-links.json": "ae1ced30b05d7c70c0a3a030c859fa718a7c9f7594f3d101fdfd7d08e35632d4"
+  },
+  "generatorSha256": "c7806847cd8a4bfa41245f7ed7aea5f6403e1647ba6f9252eb26490aca1dff60",
+  "baselineHashes": {
+    "scripts/build_hunter_animation_h15.py": "3908d921f42d52ae84f880021a6e06d10316084aec8a309453a338abb24805c6",
+    "scripts/build_hunter_animation_h19.py": "483a796efdcab5dbf3fcc997ca5fc3118c4b693da6a3f47f520b5e06561af9ef",
+    "scripts/build_hunter_source_w197.py": "1b15db1776e59e026b627b1d15b6b6ef27c92392a46664bb34e9c08c43767ca0",
+    "scripts/animation/build_crucible_intro_w260.py": "31dc7ca056b3188e65606316ba941c39d9995ebcbb10e67a62a07f88865ba2ed",
+    "art/blockbench/animations/guardian_hunter_w199_r1.bbmodel": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+    "art/weapons/w197/hunter-source-motion.json": "590fa4c58d96f06d330fd1845e7c5669ba580a817447ffac12e2fca1755da93f"
+  },
+  "evaluation": {
+    "blenderVersion": "5.4.0 Alpha",
+    "sourceBlendOpenedDirectly": true,
+    "savedSourceBlend": false,
+    "autoexecDisabled": true,
+    "sourceUnchanged": true,
+    "actions": [
+      {
+        "name": "revive_combat__80A8AD85",
+        "range": [
+          1.0,
+          49.0
+        ]
+      },
+      {
+        "name": "revive_glaive_branch__80A8ABE1",
+        "range": [
+          1.0,
+          49.0
+        ]
+      },
+      {
+        "name": "revive_social_female__80A8A64C",
+        "range": [
+          1.0,
+          47.0
+        ]
+      },
+      {
+        "name": "revive_social_male__80A8A64D",
+        "range": [
+          1.0,
+          47.0
+        ]
+      },
+      {
+        "name": "revive_sword_branch__80A8A913",
+        "range": [
+          1.0,
+          49.0
+        ]
+      }
+    ]
+  },
+  "clip": {
+    "name": "h15_revive_combat",
+    "sourceTag": "80A8AD85",
+    "sourceFrames": 49,
+    "durationSeconds": 1.6,
+    "runtimeTicks": 32,
+    "sourceBones": 72,
+    "targetAnimatedBones": 16,
+    "targetGroups": 18,
+    "maxRestMatrixDifference": 3.2782554626464844e-06,
+    "maxAdjacentEulerStepDegrees": 39.883145625638065,
+    "airborneClearanceModelUnits": [
+      0.0,
+      7.551413880451984
+    ],
+    "collinearRepairs": {
+      "9F0FD28C": [],
+      "695DAF09": [],
+      "D1232BA2": [],
+      "17025F50": []
+    }
+  },
+  "retarget": {
+    "basis": [
+      [
+        0,
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        -1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "rotation": "Reuse W260 evaluated source/rest torso, limb directions and transported bend-plane IK; same rest rig verified numerically. Keep source timing.",
+    "translation": "X/Z fixed at actor anchor. Target lowest skin touches ground plus proportional source minimum ankle/toe clearance above final source floor; maintains airborne descent then proportion-adapted crouch. Runtime owns fixed actor yaw and no view pitch.",
+    "limitations": [
+      "16 animated rigid skin groups cannot reproduce 72 source bones",
+      "No independent clavicle, wrist skin, ankle, toes or finger deformation",
+      "No original-game A/B comparison",
+      "Generated static FK review is not Minecraft visual acceptance"
+    ]
+  },
+  "verification": {
+    "reproducible": true,
+    "nativeClient": false,
+    "audioListening": false
+  }
+}

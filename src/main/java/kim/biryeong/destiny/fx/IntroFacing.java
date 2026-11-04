@@ -14,6 +14,7 @@ final class IntroFacing {
             case "h15_intro_80b7bbcc", "h15_intro_80b7bbd0" -> 60.190;
             case "h15_intro_80b7bbd4" -> 50.603;
             case "h15_intro_80b7bbdb" -> 28.152;
+            // Briefing clips (h15_intro_brief_*) bake their camera-facing correction into the root; none here.
             default -> 0;
         };
         return (float) Math.toRadians(degrees);

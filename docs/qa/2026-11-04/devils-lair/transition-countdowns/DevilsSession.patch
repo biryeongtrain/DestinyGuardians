@@ -1,0 +1,28 @@
+--- before/DevilsSession.java
++++ after/DevilsSession.java
+@@ -164,10 +164,15 @@
+         if (now % 4 == 0) for (var p : players()) if (p.level() == level()) {
+             DevilsObjectives.render(p, director.snapshot(), atDevice(p), GuardianDown.active(p) || presentation.hidden(p),
+                     allows(p) && supplyStations.lookingAt(p, director.phase().zone()),
+-                    supplies.available(p.getUUID(), director.phase().zone()));
++                    supplies.available(p.getUUID(), director.phase().zone()),
++                    remainingSeconds(gatherAt, 300, now), remainingSeconds(completeAt, 600, now), voice.playing());
+ 
+         }
+         if (completeAt >= 0 && now - completeAt >= 600 && !voice.playing()) stop("공격전 완료");
++    }
++    static int remainingSeconds(long startedAt, int durationTicks, long now) {
++        if (startedAt < 0) return -1;
++        return (int) ((Math.max(0L, durationTicks - Math.max(0L, now - startedAt)) + 19) / 20);
+     }
+     private boolean ready(ServerPlayer p) { return p.connection.hasClientLoaded() && MusicPacks.ready(p); }
+     private boolean supported(ServerPlayer p, Vec3 at) {
+@@ -230,7 +235,7 @@
+     private void transition(long now) {
+         Zone next = switch (director.phase()) { case RY_CLEAR -> Zone.RF; case RF_CLEAR -> Zone.BL; case BL_CLEAR -> Zone.SP; default -> null; };
+         if (next == null) { gatherAt = -1; return; }
+-        var living = participants(); if (living.isEmpty()) return;
++        var living = participants(); if (living.isEmpty()) { gatherAt = -1; return; }
+         Zone zone = director.phase().zone();
+         String exit = zone == Zone.RY ? "RY.OUT" : zone.name() + ".EXIT";
+         var at = DevilsMaps.anchor(zone, exit, DevilsWorldBuild.origin(zone)).pos();

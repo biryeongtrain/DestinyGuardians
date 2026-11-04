@@ -1,0 +1,246 @@
+Compiled from "MaterialBaker.java"
+public class net.minecraft.client.resources.model.sprite.MaterialBaker {
+  private static final org.slf4j.Logger LOGGER;
+
+  private final net.minecraft.client.renderer.texture.SpriteLoader$Preparations blockAtlas;
+
+  private final net.minecraft.client.renderer.texture.SpriteLoader$Preparations itemAtlas;
+
+  private final net.minecraft.client.resources.model.sprite.Material$Baked missingSprite;
+
+  private final net.minecraft.client.resources.model.sprite.Material$Baked missingSpriteForceTranslucent;
+
+  private final com.google.common.collect.Multimap<java.lang.String, net.minecraft.resources.Identifier> missingSprites;
+
+  private final com.google.common.collect.Multimap<java.lang.String, java.lang.String> missingReferences;
+
+  private final java.util.Map<net.minecraft.client.resources.model.sprite.Material, net.minecraft.client.resources.model.sprite.Material$Baked> bakedMaterials;
+
+  private final java.util.function.Function<net.minecraft.client.resources.model.sprite.Material, net.minecraft.client.resources.model.sprite.Material$Baked> bakerFunction;
+
+  public net.minecraft.client.resources.model.sprite.MaterialBaker(net.minecraft.client.renderer.texture.SpriteLoader$Preparations, net.minecraft.client.renderer.texture.SpriteLoader$Preparations);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: invokestatic  #7                  // Method com/google/common/collect/HashMultimap.create:()Lcom/google/common/collect/HashMultimap;
+         8: invokestatic  #13                 // Method com/google/common/collect/Multimaps.synchronizedMultimap:(Lcom/google/common/collect/Multimap;)Lcom/google/common/collect/Multimap;
+        11: putfield      #19                 // Field missingSprites:Lcom/google/common/collect/Multimap;
+        14: aload_0
+        15: invokestatic  #7                  // Method com/google/common/collect/HashMultimap.create:()Lcom/google/common/collect/HashMultimap;
+        18: invokestatic  #13                 // Method com/google/common/collect/Multimaps.synchronizedMultimap:(Lcom/google/common/collect/Multimap;)Lcom/google/common/collect/Multimap;
+        21: putfield      #25                 // Field missingReferences:Lcom/google/common/collect/Multimap;
+        24: aload_0
+        25: new           #28                 // class java/util/concurrent/ConcurrentHashMap
+        28: dup
+        29: invokespecial #30                 // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+        32: putfield      #31                 // Field bakedMaterials:Ljava/util/Map;
+        35: aload_0
+        36: aload_0
+        37: invokedynamic #35,  0             // InvokeDynamic #0:apply:(Lnet/minecraft/client/resources/model/sprite/MaterialBaker;)Ljava/util/function/Function;
+        42: putfield      #39                 // Field bakerFunction:Ljava/util/function/Function;
+        45: aload_0
+        46: aload_1
+        47: putfield      #43                 // Field blockAtlas:Lnet/minecraft/client/renderer/texture/SpriteLoader$Preparations;
+        50: aload_0
+        51: aload_2
+        52: putfield      #47                 // Field itemAtlas:Lnet/minecraft/client/renderer/texture/SpriteLoader$Preparations;
+        55: aload_0
+        56: new           #50                 // class net/minecraft/client/resources/model/sprite/Material$Baked
+        59: dup
+        60: aload_1
+        61: invokevirtual #52                 // Method net/minecraft/client/renderer/texture/SpriteLoader$Preparations.missing:()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+        64: iconst_0
+        65: invokespecial #58                 // Method net/minecraft/client/resources/model/sprite/Material$Baked."<init>":(Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Z)V
+        68: putfield      #61                 // Field missingSprite:Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        71: aload_0
+        72: new           #50                 // class net/minecraft/client/resources/model/sprite/Material$Baked
+        75: dup
+        76: aload_1
+        77: invokevirtual #52                 // Method net/minecraft/client/renderer/texture/SpriteLoader$Preparations.missing:()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+        80: iconst_1
+        81: invokespecial #58                 // Method net/minecraft/client/resources/model/sprite/Material$Baked."<init>":(Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Z)V
+        84: putfield      #65                 // Field missingSpriteForceTranslucent:Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        87: return
+
+  private net.minecraft.client.resources.model.sprite.Material$Baked replacementForMissingMaterial(net.minecraft.client.resources.model.sprite.Material);
+    Code:
+         0: aload_1
+         1: invokevirtual #68                 // Method net/minecraft/client/resources/model/sprite/Material.forceTranslucent:()Z
+         4: ifeq          14
+         7: aload_0
+         8: getfield      #65                 // Field missingSpriteForceTranslucent:Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        11: goto          18
+        14: aload_0
+        15: getfield      #61                 // Field missingSprite:Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        18: areturn
+
+  public net.minecraft.client.resources.model.sprite.Material$Baked get(net.minecraft.client.resources.model.sprite.Material, net.minecraft.client.resources.model.ModelDebugName);
+    Code:
+         0: aload_1
+         1: invokevirtual #74                 // Method net/minecraft/client/resources/model/sprite/Material.sprite:()Lnet/minecraft/resources/Identifier;
+         4: invokestatic  #78                 // Method net/minecraft/client/renderer/texture/MissingTextureAtlasSprite.getLocation:()Lnet/minecraft/resources/Identifier;
+         7: invokevirtual #83                 // Method net/minecraft/resources/Identifier.equals:(Ljava/lang/Object;)Z
+        10: ifeq          19
+        13: aload_0
+        14: aload_1
+        15: invokevirtual #89                 // Method replacementForMissingMaterial:(Lnet/minecraft/client/resources/model/sprite/Material;)Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        18: areturn
+        19: aload_0
+        20: getfield      #31                 // Field bakedMaterials:Ljava/util/Map;
+        23: aload_1
+        24: aload_0
+        25: getfield      #39                 // Field bakerFunction:Ljava/util/function/Function;
+        28: invokeinterface #93,  3           // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+        33: checkcast     #50                 // class net/minecraft/client/resources/model/sprite/Material$Baked
+        36: astore_3
+        37: aload_3
+        38: ifnonnull     67
+        41: aload_0
+        42: getfield      #19                 // Field missingSprites:Lcom/google/common/collect/Multimap;
+        45: aload_2
+        46: invokeinterface #99,  1           // InterfaceMethod net/minecraft/client/resources/model/ModelDebugName.debugName:()Ljava/lang/String;
+        51: aload_1
+        52: invokevirtual #74                 // Method net/minecraft/client/resources/model/sprite/Material.sprite:()Lnet/minecraft/resources/Identifier;
+        55: invokeinterface #105,  3          // InterfaceMethod com/google/common/collect/Multimap.put:(Ljava/lang/Object;Ljava/lang/Object;)Z
+        60: pop
+        61: aload_0
+        62: aload_1
+        63: invokevirtual #89                 // Method replacementForMissingMaterial:(Lnet/minecraft/client/resources/model/sprite/Material;)Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        66: areturn
+        67: aload_3
+        68: areturn
+
+  private net.minecraft.client.resources.model.sprite.Material$Baked bake(net.minecraft.client.resources.model.sprite.Material);
+    Code:
+         0: aload_1
+         1: aload_0
+         2: getfield      #47                 // Field itemAtlas:Lnet/minecraft/client/renderer/texture/SpriteLoader$Preparations;
+         5: invokestatic  #111                // Method bakeForAtlas:(Lnet/minecraft/client/resources/model/sprite/Material;Lnet/minecraft/client/renderer/texture/SpriteLoader$Preparations;)Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+         8: astore_2
+         9: aload_2
+        10: ifnull        15
+        13: aload_2
+        14: areturn
+        15: aload_1
+        16: aload_0
+        17: getfield      #43                 // Field blockAtlas:Lnet/minecraft/client/renderer/texture/SpriteLoader$Preparations;
+        20: invokestatic  #111                // Method bakeForAtlas:(Lnet/minecraft/client/resources/model/sprite/Material;Lnet/minecraft/client/renderer/texture/SpriteLoader$Preparations;)Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        23: areturn
+
+  private static net.minecraft.client.resources.model.sprite.Material$Baked bakeForAtlas(net.minecraft.client.resources.model.sprite.Material, net.minecraft.client.renderer.texture.SpriteLoader$Preparations);
+    Code:
+         0: aload_1
+         1: aload_0
+         2: invokevirtual #74                 // Method net/minecraft/client/resources/model/sprite/Material.sprite:()Lnet/minecraft/resources/Identifier;
+         5: invokevirtual #115                // Method net/minecraft/client/renderer/texture/SpriteLoader$Preparations.getSprite:(Lnet/minecraft/resources/Identifier;)Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+         8: astore_2
+         9: aload_2
+        10: ifnull        26
+        13: new           #50                 // class net/minecraft/client/resources/model/sprite/Material$Baked
+        16: dup
+        17: aload_2
+        18: aload_0
+        19: invokevirtual #68                 // Method net/minecraft/client/resources/model/sprite/Material.forceTranslucent:()Z
+        22: invokespecial #58                 // Method net/minecraft/client/resources/model/sprite/Material$Baked."<init>":(Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Z)V
+        25: areturn
+        26: aconst_null
+        27: areturn
+
+  public net.minecraft.client.resources.model.sprite.Material$Baked resolveSlot(net.minecraft.client.resources.model.sprite.TextureSlots, java.lang.String, net.minecraft.client.resources.model.ModelDebugName);
+    Code:
+         0: aload_1
+         1: aload_2
+         2: invokevirtual #119                // Method net/minecraft/client/resources/model/sprite/TextureSlots.getMaterial:(Ljava/lang/String;)Lnet/minecraft/client/resources/model/sprite/Material;
+         5: astore        4
+         7: aload         4
+         9: ifnull        22
+        12: aload_0
+        13: aload         4
+        15: aload_3
+        16: invokevirtual #125                // Method get:(Lnet/minecraft/client/resources/model/sprite/Material;Lnet/minecraft/client/resources/model/ModelDebugName;)Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        19: goto          28
+        22: aload_0
+        23: aload_2
+        24: aload_3
+        25: invokevirtual #129                // Method reportMissingReference:(Ljava/lang/String;Lnet/minecraft/client/resources/model/ModelDebugName;)Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        28: areturn
+
+  public net.minecraft.client.resources.model.sprite.Material$Baked reportMissingReference(java.lang.String, net.minecraft.client.resources.model.ModelDebugName);
+    Code:
+         0: aload_0
+         1: getfield      #25                 // Field missingReferences:Lcom/google/common/collect/Multimap;
+         4: aload_2
+         5: invokeinterface #99,  1           // InterfaceMethod net/minecraft/client/resources/model/ModelDebugName.debugName:()Ljava/lang/String;
+        10: aload_1
+        11: invokeinterface #105,  3          // InterfaceMethod com/google/common/collect/Multimap.put:(Ljava/lang/Object;Ljava/lang/Object;)Z
+        16: pop
+        17: aload_0
+        18: getfield      #61                 // Field missingSprite:Lnet/minecraft/client/resources/model/sprite/Material$Baked;
+        21: areturn
+
+  public void logMissingTextures();
+    Code:
+         0: aload_0
+         1: getfield      #19                 // Field missingSprites:Lcom/google/common/collect/Multimap;
+         4: invokeinterface #133,  1          // InterfaceMethod com/google/common/collect/Multimap.asMap:()Ljava/util/Map;
+         9: invokedynamic #137,  0            // InvokeDynamic #1:accept:()Ljava/util/function/BiConsumer;
+        14: invokeinterface #141,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+        19: aload_0
+        20: getfield      #25                 // Field missingReferences:Lcom/google/common/collect/Multimap;
+        23: invokeinterface #133,  1          // InterfaceMethod com/google/common/collect/Multimap.asMap:()Ljava/util/Map;
+        28: invokedynamic #145,  0            // InvokeDynamic #2:accept:()Ljava/util/function/BiConsumer;
+        33: invokeinterface #141,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+        38: return
+
+  private static void lambda$logMissingTextures$2(java.lang.String, java.util.Collection);
+    Code:
+         0: getstatic     #146                // Field LOGGER:Lorg/slf4j/Logger;
+         3: ldc           #150                // String Missing texture references in model {}:\n{}
+         5: aload_0
+         6: aload_1
+         7: invokeinterface #152,  1          // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+        12: invokeinterface #158,  1          // InterfaceMethod java/util/stream/Stream.sorted:()Ljava/util/stream/Stream;
+        17: invokedynamic #163,  0            // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+        22: invokeinterface #166,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+        27: ldc           #170                // String \n
+        29: invokestatic  #172                // Method java/util/stream/Collectors.joining:(Ljava/lang/CharSequence;)Ljava/util/stream/Collector;
+        32: invokeinterface #178,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+        37: invokeinterface #182,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+        42: return
+
+  private static java.lang.String lambda$logMissingTextures$3(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokedynamic #188,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+         6: areturn
+
+  private static void lambda$logMissingTextures$0(java.lang.String, java.util.Collection);
+    Code:
+         0: getstatic     #146                // Field LOGGER:Lorg/slf4j/Logger;
+         3: ldc           #192                // String Missing textures in model {}:\n{}
+         5: aload_0
+         6: aload_1
+         7: invokeinterface #152,  1          // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+        12: invokeinterface #158,  1          // InterfaceMethod java/util/stream/Stream.sorted:()Ljava/util/stream/Stream;
+        17: invokedynamic #194,  0            // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+        22: invokeinterface #166,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+        27: ldc           #170                // String \n
+        29: invokestatic  #172                // Method java/util/stream/Collectors.joining:(Ljava/lang/CharSequence;)Ljava/util/stream/Collector;
+        32: invokeinterface #178,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+        37: invokeinterface #182,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+        42: return
+
+  private static java.lang.String lambda$logMissingTextures$1(net.minecraft.resources.Identifier);
+    Code:
+         0: aload_0
+         1: invokestatic  #195                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+         4: invokedynamic #188,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+         9: areturn
+
+  static {};
+    Code:
+         0: invokestatic  #201                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+         3: putstatic     #146                // Field LOGGER:Lorg/slf4j/Logger;
+         6: return
+}

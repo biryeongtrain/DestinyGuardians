@@ -51,6 +51,7 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
     private long generation, clock;
     private DevilsDirector.Phase phase = DevilsDirector.Phase.READY;
     private Intro intro;
+    private kim.biryeong.destiny.activity.presentation.ActivityCast briefing;
     private ModelTransport transport;
     private String transportPack;
     private boolean transportDropStarted;
@@ -74,15 +75,47 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
         incomingSlots.keySet().retainAll(pending);
         transportRiders.retainAll(pending);
         if (transport != null && transportRiders.isEmpty()) transport.delivered();
+        if (phase != DevilsDirector.Phase.BRIEFING) closeBriefing();
         if (phase == DevilsDirector.Phase.BRIEFING) {
             releaseViews();
+            if (briefing == null) beginBriefing();
             for (var p : session.players()) if (eligible(p)) addView(p, null);
+            if (briefing != null) for (var p : session.players()) if (eligible(p) && !briefing.start(p))
+                problem("Briefing camera refused for " + p.getScoreboardName());
         } else if (phase == DevilsDirector.Phase.SP_INTRO) {
             releaseViews(); beginIntro();
         } else {
             releaseViews();
             if (intro != null) { intro.cancel(); intro = null; }
         }
+    }
+    /** Raid-style landing poses while Zavala briefs; staged on the entrance seats facing the route. */
+    private void beginBriefing() {
+        var members = session.players().stream().filter(this::eligible).toList();
+        if (members.isEmpty()) return;
+        var entrance = DevilsMaps.anchor(DevilsPlan.Zone.RY, "RY.IN", DevilsWorldBuild.origin(DevilsPlan.Zone.RY));
+        var plan = kim.biryeong.destiny.activity.presentation.BriefingFormation.plan(session.level(), members, entrance.pos(), entrance.yaw());
+        if (plan.isEmpty()) { problem("Briefing formation does not fit the entrance; gameplay view kept"); return; }
+        try {
+            briefing = kim.biryeong.destiny.activity.presentation.ActivityCast.begin(session.level(), plan.get().placements(),
+                    plan.get().reveals(), plan.get().shots(), kim.biryeong.destiny.activity.presentation.BriefingFormation.LEAD_TICKS, 30 * 20, kim.biryeong.destiny.crucible.CrucibleIntro.cameraViews(),
+                    kim.biryeong.destiny.activity.presentation.ActivityCast.playerAnimations());
+            for (var actor : briefing.actorPlacements()) {
+                var p = actor.player(); var at = actor.position();
+                if (!p.teleportTo(session.level(), at.x, at.y, at.z, Set.of(), actor.yaw(), 0, false))
+                    throw new IllegalStateException("Briefing actor teleport refused");
+                p.setYHeadRot(actor.yaw()); p.yBodyRot = actor.yaw(); p.setDeltaMovement(Vec3.ZERO); p.resetFallDistance();
+                kim.biryeong.destiny.weapon.ProfileWeaponView.hideForCamera(p);
+            }
+            for (var p : members) kim.biryeong.destiny.activity.presentation.CinematicHands.stow(p);
+            DestinyGuardians.LOGGER.info("[DevilsPresentation {}] briefing cast: {} actors", session.id(), briefing.actorPlacements().size());
+        } catch (RuntimeException e) { closeBriefing(); problem("Briefing cast failed: " + e.getMessage()); }
+    }
+    private void closeBriefing() {
+        if (briefing == null) return;
+        var cast = briefing; briefing = null;
+        kim.biryeong.minigamelib.cinematic.CameraViews.sending(cast::close);
+        for (var p : session.players()) kim.biryeong.destiny.activity.presentation.CinematicHands.restore(p);
     }
     private boolean eligible(ServerPlayer p) { return !p.hasDisconnected() && p.isAlive() && p.level() == session.level()
             && p.connection.hasClientLoaded() && !GuardianDown.active(p) && !p.isSpectator(); }
@@ -160,6 +193,12 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
             if (!paused) view.tick();
         }
         views.values().removeIf(v -> v.closed);
+        if (briefing != null) {
+            var cast = briefing;
+            try { kim.biryeong.minigamelib.cinematic.CameraViews.sending(cast::tick); }
+            catch (RuntimeException e) { problem("Briefing cast tick failed: " + e.getMessage()); closeBriefing(); }
+            if (cast.closed() && briefing == cast) closeBriefing();
+        }
         if (intro != null) {
             var run = intro;
             if (run.boss.isRemoved() || !run.boss.isAlive() || run.tracker.isClosed()
@@ -401,10 +440,10 @@ public final class DevilsPresentation implements DevilsLair.Presentation {
         }
     }
     private void releaseViews(){for(var v:List.copyOf(views.values()))v.close();views.clear();}
-    @Override public void disconnected(ServerPlayer player){var v=views.remove(player.getUUID());if(v!=null)v.close();clearHud(player);}
+    @Override public void disconnected(ServerPlayer player){if(briefing!=null)briefing.cancel(player);kim.biryeong.destiny.activity.presentation.CinematicHands.restore(player);var v=views.remove(player.getUUID());if(v!=null)v.close();clearHud(player);}
     @Override public void cancelGeneration(long gen){
         if(gen!=generation)return;
-        if(intro!=null){intro.cancel();intro=null;}releaseViews();telegraphs.clear();
+        if(intro!=null){intro.cancel();intro=null;}closeBriefing();releaseViews();telegraphs.clear();
         if(transport!=null){transport.close();transport=null;}
         transportPack=null;transportRiders.clear();incomingSlots.clear();consideredTransports.clear();
         for(var p:List.copyOf(hudAudience.values()))clearHud(p);
