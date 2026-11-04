@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "weapon": "izanagis_burden",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      4.0
+    ],
+    "rotation": [
+      -1.0,
+      2.0,
+      0.0
+    ],
+    "scale": 0.98,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true
+  },
+  "contacts": {},
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w210-source/source-review.json",
+      "role": "original_blender_evaluation_report",
+      "observation": "Read the master-supplied separate original Blender 5.4.0 Alpha evaluation report; group sniper_rifle_ececad46, OBSlot, armature-object evaluated matrices. Reported sourceBlend SHA256 8ee0c5aaa3e75840b123bfa421f1a7269aa1331eea9f08470f044d18f9b5c659. Report allInputsUnchanged=true; hashes are reported provenance, not independently recomputed. Objects list contains only Armature: no source mesh or camera. This worker did not open the original blend independently."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sniper_rifle_ececad46.json",
+      "role": "evaluated_original61_and_shoulders",
+      "observation": "Read evaluated shoulder/elbow/wrist/weapon matrices, non-fallback group sniper_rifle_ececad46; idle 80A8A138, ADS 80A8A13F, ordinary reload 80A8A140, Honed candidate 80A8A14D. Both reloads have 61 original-evaluated poses across source frames 1..102, fps=30. Authored conversion x32: forearm approximately 8.14136 and upper arm approximately 8.7266 model units; no stretch. cameraExported=false."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sheets/sniper_rifle_ececad46-80A8A140-upper-chain.png",
+      "role": "viewed_ordinary_source_chain_sheet",
+      "observation": "Viewed actual six-stage XZ/YZ chain sheet at progress 0,.2,.4,.6,.8,1. Bent shoulder/elbow/wrist chains change through reload and return near the opening arrangement. Bones-only diagram; no mesh contact, camera, native visibility or gameplay acceptance can be established."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sheets/sniper_rifle_ececad46-80A8A14D-upper-chain.png",
+      "role": "viewed_honed_source_chain_sheet",
+      "observation": "Viewed actual six-stage XZ/YZ sheet separately. Retain this action as the distinct Honed candidate and preserve CMD6 branch routing; similar sampled chain silhouettes do not establish source-event exclusivity or actual Honed trigger semantics."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "retained_mesh_contacts",
+      "observation": "Read Izanagi entry: right [8,7.9,8], left [7.8,7.6,1.1], reload [7.5,6.85,6.92], magazine policy. These are authored contact estimates. Keep source rest palm calibration against this mesh; source has no mesh evidence justifying a replacement."
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/item/weapon/izanagis_burden.json",
+      "role": "long_forebody_mesh_support",
+      "observation": "Read actual 79-element model, display, and elements 23/25/26/53/77. Cube23 lower forebody spans Z -10.071918965..4.576518535 and underside Y 7.861099839; inherited left support [7.8,7.6,1.1] lies below this long forebody. Cube26 is magazine; cube53 is rotated grip. No new contact coordinates, geometry or UV edits."
+    },
+    {
+      "source": "scripts/rig_arms_w205.py",
+      "role": "master_owned_shared_parent_integration",
+      "observation": "Read sourceFullChain forearm basis, upper-arm reconstruction, source_weapon_display and source_palm_translations. Body and wrist displacement must use the same current/rest weapon basis; keep fixed rest mesh palm calibration. Full-chain path supersedes direction-only sourceViewRotation. Master imports original61+shoulders and gates upper-arm emission by profile."
+    },
+    {
+      "source": "scripts/generate_izanagi_presentation_w91.py",
+      "role": "retained_reload_routing",
+      "observation": "Read partition constants: magazine (26), bolt (25,77), body remainder; ordinary 80A8A140 and Honed 80A8A14D. Read build_first_person_hands_w201.py CMD6 ordinary 0..1, Honed 2..3, charged idle 4. Preserve scope and part routing; no generator run by this worker."
+    }
+  ],
+  "notes": [
+    "W210 pre-first-Vision candidate. Original blend evaluation was performed in the master-owned separate process; this worker inspected its report, evaluated matrices and both actual source-chain sheets. No native acceptance is claimed.",
+    "sourceFullChain=true requests original shoulder->elbow->wrist bends and normal segment lengths using the shared weapon-parent basis for body and wrist travel. sourceViewRotation is removed because direction-only bias is superseded by full-chain orientation.",
+    "Retain authored hip translation [-0.65,0.6,4], rotation [-1,2,0], scale .98 and existing ADS fade. These are calibration values, not a recovered source camera; the source has no camera or mesh.",
+    "keepMeshSupport=true and hideSupportAtRest=false retain visible support beneath the long forebody at rest/ADS. contacts={} inherits existing right/left palm and magazine handling calibration. Dynamic source wrist travel remains relative to that fixed rest mesh offset; do not pin the full animated chain to an unrelated reload target.",
+    "The x32 source-to-model conversion is authored. Preserve ordinary source forearm/upper-arm lengths; no length extension, arbitrary mesh/UV/timing/audio changes or scope/CMD6 changes.",
+    "Master owns source cache import, shared retargeting, 61-pose generation, builds and native Vision. Required remaining sequence: first Vision -> actual images/findings to this agent -> justified correction or documented no-change review -> integration -> second Vision. Initial candidate is not final."
+  ]
+}

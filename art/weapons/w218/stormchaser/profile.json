@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "weapon": "stormchaser",
+  "sourceAction": "80A8ADE1",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8ADE1",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.13,
+        0.22,
+        0.68,
+        0.75
+      ]
+    }
+  },
+  "sourceRig": {
+    "path": "art/weapons/w218/rigs/linear_fusion_rifle_d9d0adf4.json",
+    "group": "linear_fusion_rifle_d9d0adf4",
+    "action": "80A8ADE1",
+    "sourceBlendSha256": "55178575d1087e24fdc3d3e9ab2abd2e1d6451027834983ea05ef2f0dab92064",
+    "sourceMapSha256": "823158a98e6049d29930265f16f23f34f2cdadb5b259d1097ad8200d4841d84f",
+    "boneMapSha256": "8b1d8d79a80abc01b9e06527d9c70c185d90b53d708b85f209c763ac208e6746"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w218/source/source-review.json",
+      "sourceSha256": "f5a06a8373aa9ee1328f0d2b14c87dc187367edc7e28224f7bfa6287d64469d0",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read master Blender5.4.0 Alpha report: original source.blend action Armature|fp_80A8ADE1_reload_full|Base in OBSlot, frames1..96 at30fps,61 samples; prior-cache error0 and all inputs unchanged. Worker did not independently evaluate Blender."
+    },
+    {
+      "source": "art/weapons/w218/rigs/linear_fusion_rifle_d9d0adf4.json",
+      "sourceSha256": "718521c9996709031263f7680792d1bb8ab23987decfdc9d291a9f6704a1e955",
+      "role": "fresh_original_full_chain",
+      "observation": "Read exact fresh W218 evaluated matrices. Shared-family source only; ARMATURE only, no weapon-exclusive mesh/camera/finger IK. Preserve complete ordinary shoulder/elbow/wrist chains."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/source/sheets/linear_fusion_rifle_d9d0adf4-80A8ADE1-upper-chain.png",
+      "sourceSha256": "4a585fa3bbea3a941e3543fd3b50207007534c916210effdc451468c2bd7b1a6",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Viewed XZ/YZ full shoulder/elbow/wrist chain p=0,.2,.4,.6,.8,1. Motion supports shared-family reload arm evaluation, not weapon geometry/contact/camera reconstruction."
+    },
+    {
+      "source": "scripts/generate_reload_w188_stormchaser.py",
+      "sourceSha256": "ed7abe8aab16ffd2cecfd649126754852b0c537f6b4ac8e224667fa074c6058f",
+      "role": "inert_same_weapon_authored_source",
+      "observation": "Read inertly through AST, never imported/executed. Keep14 knots, pivot, battery anchor,89 fixed elements, six heel/crown elements80..85 and one same hidden stem. Rigid native/twohand transform algebra unchanged."
+    },
+    {
+      "source": "art/weapons/w188/stormchaser/storyboard.png",
+      "sourceSha256": "77c36e8c459c8a3a14bab9952687591ad7b2deaabdbfa4535bf99c63d83e4f94",
+      "role": "viewed_retained_actual_video_storyboard",
+      "observation": "Viewed retained actual Ehroar frames n26872..27000 and authored comparisons: steep lift, full grip-heel withdrawal, low exchange, stem-first insertion, neutral seat.75 and rapid lower. Video not reopened; silver shader only mechanism evidence."
+    },
+    {
+      "source": "art/weapons/w188/stormchaser/comparison.png",
+      "sourceSha256": "dcfc2cf29d342864b0d40b0ab4b5773a646179d7c532e68fc323cc6b87c63261",
+      "role": "viewed_retained_geometry_comparison",
+      "observation": "Viewed four canonical angles, fixed-camera sequence, whole battery detail and both FP hands/grips. Offline no-hands renders are not native fit evidence."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "retained_effective_framing",
+      "observation": "Shared loader profile() merges linear_fusion_rifle family with weapon overrides; none existed for Stormchaser. Retain translation[-.65,.6,0],rotation[-1,2,0],scale.98,rightWristRoll28,leftRotation[15,35,-35]."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_authored_mesh_contacts",
+      "observation": "Keep original right/left/reload positions and rotations; only explicit action/partHint/policy/gripWindow override added. Fade.68..75; attachment stays zero throughout.75..1 wrist recovery."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns shared loader/routing/bindings, generated assets, actual arm assembly/budgets and Vision.",
+    "Keep effective family framing and all mesh rest contacts; add ordinary fingerless shoulder/elbow/wrist chains. No recovered weapon mesh, camera or finger IK.",
+    "Explicit gripWindow[.13,.22,.68,.75] attaches during approach and fades through neutral seating; zero attachment at/after.75 prevents seated payload dragging during recovery.",
+    "All14 W188 knots and equal holds remain exact; six original heel solids plus unchanged hidden stem remain a rigid payload. No visibility, hide, or zero-scale phase existed in W188.",
+    "61 poses/60 intervals do not imply continuous native60fps. Runtime duration/ammo/charge/burst/audio remain unchanged.",
+    "Reload96+448 arm reserve=544; raw canonical245+448=693. Master measures every actual simultaneous route including ADS/inspect under1000.",
+    "Master FIRST actual images -> same-worker review/correction -> master SECOND required before acceptance."
+  ]
+}

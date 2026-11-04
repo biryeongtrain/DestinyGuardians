@@ -1,0 +1,223 @@
+{
+  "stage": "W83",
+  "authorization": "User-authorized supplied public Drive sound folder; no redistribution license inferred.",
+  "sourceRoot": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+  "sourcePins": [
+    {
+      "action": "fire",
+      "id": "18jgIUW_6gvSH4jTONC_aa-kg9UwmHfsy",
+      "originalName": "Fire_1.mp3",
+      "privatePath": "run/private-sources/w83/18jgIUW_6gvSH4jTONC_aa-kg9UwmHfsy.mp3",
+      "sourceUrl": "https://drive.google.com/uc?export=download&id=18jgIUW_6gvSH4jTONC_aa-kg9UwmHfsy",
+      "folder": "Ace of Spades",
+      "folderId": "1Xm2oCCYVLeaucs-mzbmUfm53GzLxjsui",
+      "sourceSha256": "a652664c3cac0c7045c980e839ae85b2c923a227f76956aabfb9555d04a97870",
+      "bytes": 97927,
+      "retrievedAt": "2026-10-24T16:13:06.932820+00:00"
+    },
+    {
+      "action": "reload",
+      "id": "13y7IfI51IKtc3DSFTgLdsEDxkfWNxpi7",
+      "originalName": "Reload_1.mp3",
+      "privatePath": "run/private-sources/w83/13y7IfI51IKtc3DSFTgLdsEDxkfWNxpi7.mp3",
+      "sourceUrl": "https://drive.google.com/uc?export=download&id=13y7IfI51IKtc3DSFTgLdsEDxkfWNxpi7",
+      "folder": "Ace of Spades",
+      "folderId": "1Xm2oCCYVLeaucs-mzbmUfm53GzLxjsui",
+      "sourceSha256": "daf5e2e482f7e9d402e75d6b5ed257f8206dc06eaa157d21445d4c3d42f20730",
+      "bytes": 102936,
+      "retrievedAt": "2026-10-24T16:13:08.832777+00:00"
+    }
+  ],
+  "ffmpegSha256": "6d175a4743ca50256e89a8cdd731100f9cee33bd79aeea46894d209410dc6617",
+  "events": {
+    "weapon.ace_of_spades.fire": {
+      "sounds": [
+        {
+          "name": "destiny:w83/ace_of_spades/fire",
+          "stream": false
+        }
+      ]
+    },
+    "weapon.ace_of_spades.reload": {
+      "sounds": [
+        {
+          "name": "destiny:w83/ace_of_spades/reload",
+          "stream": false
+        }
+      ]
+    },
+    "weapon.reload_w83.ace_of_spades.55": {
+      "sounds": [
+        {
+          "name": "destiny:w83/reload/ace_of_spades_55",
+          "stream": false
+        }
+      ]
+    },
+    "weapon.reload_w83.ace_of_spades.39": {
+      "sounds": [
+        {
+          "name": "destiny:w83/reload/ace_of_spades_39",
+          "stream": false
+        }
+      ]
+    }
+  },
+  "reloadAudio": [
+    {
+      "id": "ace_of_spades",
+      "ticks": 55,
+      "event": "weapon.reload_w83.ace_of_spades.55",
+      "sourceEvent": "weapon.ace_of_spades.reload",
+      "sourceSha256": "a6525ecae67b43906ca23d731c19d63297cda6e6600058ba163eb37d1f79a16b",
+      "asset": "assets/destiny/sounds/w83/reload/ace_of_spades_55.ogg"
+    },
+    {
+      "id": "ace_of_spades",
+      "ticks": 39,
+      "event": "weapon.reload_w83.ace_of_spades.39",
+      "sourceEvent": "weapon.ace_of_spades.reload",
+      "sourceSha256": "a6525ecae67b43906ca23d731c19d63297cda6e6600058ba163eb37d1f79a16b",
+      "asset": "assets/destiny/sounds/w83/reload/ace_of_spades_39.ogg"
+    }
+  ],
+  "records": [
+    {
+      "event": "weapon.ace_of_spades.fire",
+      "drive_id": "18jgIUW_6gvSH4jTONC_aa-kg9UwmHfsy",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Ace of Spades",
+      "source_folder_id": "1Xm2oCCYVLeaucs-mzbmUfm53GzLxjsui",
+      "source_sha256": "a652664c3cac0c7045c980e839ae85b2c923a227f76956aabfb9555d04a97870",
+      "limitations": [
+        "Named uploader Ace action, not independently acoustically identified; no Memento-specific variant attribution."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/18jgIUW_6gvSH4jTONC_aa-kg9UwmHfsy/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1Xm2oCCYVLeaucs-mzbmUfm53GzLxjsui",
+      "sound": "destiny:w83/ace_of_spades/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w83/ace_of_spades/fire.ogg",
+      "source_bytes": 97927,
+      "source_audio": {
+        "duration_seconds": 3.761656,
+        "sample_peak_dbfs": -8.3682,
+        "rms_dbfs": -31.9597,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 3.76165625,
+        "crop_end_seconds": 3.761656,
+        "trim_start_seconds": 0.03,
+        "trim_end_seconds": 2.73,
+        "silence_rms_threshold_dbfs": -54.6792,
+        "gain_db": 2.3682,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.7,
+        "sample_peak_dbfs": -6.7935,
+        "rms_dbfs": -28.2322,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 24304,
+        "sha256": "e0e3bc95709af0c9a86e2e7a5e3720b17d78230908bea9504840e16062686651"
+      }
+    },
+    {
+      "kind": "timed_reload",
+      "ticks": 55,
+      "atempo": 1.1636363636363638,
+      "metrics": {
+        "duration_seconds": 2.75,
+        "sample_peak_dbfs": -5.8553,
+        "rms_dbfs": -28.0768,
+        "clipped_samples": 0
+      },
+      "asset": "assets/destiny/sounds/w83/reload/ace_of_spades_55.ogg",
+      "sha256": "63fde34b884f985a4b7f73ab26d0ddfcc2752d3acd0f24a6787585a0bc488b72"
+    },
+    {
+      "kind": "timed_reload",
+      "ticks": 39,
+      "atempo": 1.6410256410256412,
+      "metrics": {
+        "duration_seconds": 1.95,
+        "sample_peak_dbfs": -7.6191,
+        "rms_dbfs": -28.3084,
+        "clipped_samples": 0
+      },
+      "asset": "assets/destiny/sounds/w83/reload/ace_of_spades_39.ogg",
+      "sha256": "e88090a16f3e82cd9d127b550ebdd34eab1de4d4b0bab628fd99cd5de2a01eb6"
+    },
+    {
+      "event": "weapon.ace_of_spades.reload",
+      "drive_id": "13y7IfI51IKtc3DSFTgLdsEDxkfWNxpi7",
+      "original_name": "Reload_1.mp3",
+      "source_folder": "Ace of Spades",
+      "source_folder_id": "1Xm2oCCYVLeaucs-mzbmUfm53GzLxjsui",
+      "source_sha256": "daf5e2e482f7e9d402e75d6b5ed257f8206dc06eaa157d21445d4c3d42f20730",
+      "limitations": [
+        "Named uploader Ace action, not independently acoustically identified; no Memento-specific variant attribution."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/13y7IfI51IKtc3DSFTgLdsEDxkfWNxpi7/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1Xm2oCCYVLeaucs-mzbmUfm53GzLxjsui",
+      "sound": "destiny:w83/ace_of_spades/reload",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w83/ace_of_spades/reload.ogg",
+      "source_bytes": 102936,
+      "source_audio": {
+        "duration_seconds": 3.970625,
+        "sample_peak_dbfs": -12.6081,
+        "rms_dbfs": -35.1648,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 3.970625,
+        "crop_end_seconds": 3.970625,
+        "trim_start_seconds": 0.01,
+        "trim_end_seconds": 3.21,
+        "silence_rms_threshold_dbfs": -58.0,
+        "gain_db": 6.6081,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 3.2,
+        "sample_peak_dbfs": -5.6909,
+        "rms_dbfs": -27.8356,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 37961,
+        "sha256": "a6525ecae67b43906ca23d731c19d63297cda6e6600058ba163eb37d1f79a16b"
+      }
+    }
+  ],
+  "limitations": [
+    "Uploader weapon/action names establish source selection, not acoustic listening or original balance timing.",
+    "Firefly uses existing supplied solar grenade impact surrogate; no exact Firefly or Memento proc recording inferred.",
+    "Reload atempo preserves pitch algorithmically; transients/time alignment remain approximation."
+  ],
+  "outputs": {
+    "src/main/resources/assets/destiny/sounds/w83/ace_of_spades/fire.ogg": "e0e3bc95709af0c9a86e2e7a5e3720b17d78230908bea9504840e16062686651",
+    "src/main/resources/assets/destiny/sounds/w83/ace_of_spades/reload.ogg": "a6525ecae67b43906ca23d731c19d63297cda6e6600058ba163eb37d1f79a16b",
+    "src/main/resources/assets/destiny/sounds/w83/reload/ace_of_spades_55.ogg": "63fde34b884f985a4b7f73ab26d0ddfcc2752d3acd0f24a6787585a0bc488b72",
+    "src/main/resources/assets/destiny/sounds/w83/reload/ace_of_spades_39.ogg": "e88090a16f3e82cd9d127b550ebdd34eab1de4d4b0bab628fd99cd5de2a01eb6"
+  }
+}

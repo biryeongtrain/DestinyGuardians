@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "work_item": "W74",
+  "research_scope": "Independent bounded research: normal-bow full-draw fatigue / forced auto-release and late-draw damage/accuracy progression, distinct from perfect draw.",
+  "researched_on": "2026-10-24",
+  "selected_weapons": [
+    {
+      "name": "Biting Winds",
+      "draw_time_ms": 667,
+      "provenance": "Existing exact selected configuration in W40/W46 pinned official definitions; not independently revalidated by fatigue worker.",
+      "forced_auto_release_from_full_draw_ms": null
+    },
+    {
+      "name": "Whispering Slab",
+      "draw_time_ms": 567,
+      "provenance": "Existing exact selected configuration in W40/W46 pinned official definitions; not independently revalidated by fatigue worker.",
+      "forced_auto_release_from_full_draw_ms": null
+    }
+  ],
+  "decision": {
+    "status": "insufficient_reliable_quantitative_evidence",
+    "exact_max_hold_duration_ms": null,
+    "post_perfect_draw_damage_curve": null,
+    "post_perfect_draw_accuracy_curve": null,
+    "stability_to_max_hold_formula": null,
+    "summary": "Do not implement an exact sourced fatigue timer or late-draw curve from this evidence. A historical firsthand 4-second report exists, but lacks sufficient measurement detail and selected-weapon coverage.",
+    "supported_qualitative_behavior": [
+      "Developer-indexed explanation associates exceeding perfect draw with declining damage and accuracy.",
+      "Community researcher explicitly distinguishes total hold until automatic firing from perfect draw."
+    ],
+    "main_handoff": "Proceed with separately sourced perfect-window classification/reticle feedback. Keep late/overdraw damage, accuracy progression and forced-release duration pending evidence; do not reinterpret perfect-window expiration as forced release.",
+    "no_invented_values": true
+  },
+  "method": {
+    "specific_queries": [
+      "site.bungie.net bows \"hold\" \"Stability\" \"draw\"",
+      "Destiny 2 bow maximum hold duration forced release stability tested seconds",
+      "Destiny 2 bow overdraw damage accuracy degradation testing",
+      "github d2foundry bow max hold duration stability source",
+      "Destiny 2 bow \"hold time\" \"seconds\" stability forced release testing"
+    ],
+    "query_count": 5,
+    "stop_reason": "Five targeted queries inspected, strongest firsthand leads followed, and two public source snapshots checked; no reliable exact curve/duration located.",
+    "excluded_generalizations": [
+      "Oathkeeper charge/infinite hold or bonus-damage timings",
+      "Leviathan's Breath",
+      "Enhanced Sneak Bow",
+      "Any perfect-draw duration reused as max hold",
+      "Any repeated-fire aim-assist degradation formula reused as bow overdraw"
+    ],
+    "not_performed": [
+      "Oracle calc_perfect_draw extraction",
+      "Game/app launches or control",
+      "Production/tests/generator/build/QA/docs edits",
+      "Commits"
+    ]
+  },
+  "sources": [
+    {
+      "id": "bungie-2022-lightweight",
+      "title": "Destiny 2 Update 6.2.0 / This Week at Bungie 8/11/2022",
+      "urls": [
+        "https://www.bungie.net/7/en/News/article/51707",
+        "https://www.bungie.net/7/en/News/article/51645"
+      ],
+      "published_dates": [
+        "2022-08-23",
+        "2022-08-11"
+      ],
+      "accessed_on": "2026-10-24",
+      "kind": "official_primary_search_index_excerpt",
+      "trust": "High for the qualitative developer statement; direct article passage not successfully retrieved.",
+      "findings": "Bungie's indexed explanation says damage and accuracy begin declining after the perfect-draw window; stability affects that window.",
+      "constraints": [
+        "No full-draw-to-forced-release duration, damage minimum, cone angle, or time progression supplied by the inspected excerpts.",
+        "51645 direct retrieval timed out twice; 51707 rendered page lacked the indexed bow passage. Do not describe this as full-text verification.",
+        "Perfect-window numeric extraction belongs to main and was not duplicated."
+      ],
+      "capture": "run/private-sources/w74/fatigue-bungie-excerpt.json"
+    },
+    {
+      "id": "susmitds-2020",
+      "title": "Feedback Thread for Bows and redundant stat Stability for the Upcoming Rework",
+      "author": "u/susmitds",
+      "urls": [
+        "https://www.reddit.com/r/DestinyTheGame/comments/gydgyj/",
+        "https://www.reddit.com/r/DestinyTheGame/comments/gydgyj/comment/ftaky7j/",
+        "https://www.reddit.com/r/DestinyTheGame/comments/gydgyj/comment/ftc3zob/"
+      ],
+      "thread_published_on": "2020-06-07",
+      "comment_published_on": null,
+      "accessed_on": "2026-10-24",
+      "kind": "community_primary_self_reported_experiment",
+      "trust": "Firsthand but low quantitative confidence; insufficient for implementation.",
+      "findings": "The author reports rechecking hold time on Hush at 46 stability and Subtle Calamity at 72 stability, then explicitly confirms hold time rather than draw time and reports exactly 4 seconds for both.",
+      "reported_duration_seconds": 4,
+      "accepted_duration_seconds": null,
+      "constraints": [
+        "No footage, frame counts, capture rate, repetition count, uncertainty estimate, or reproducible timing markers supplied in the inspected discussion.",
+        "The conversation defines hold time as holding at full draw before automatic release, but does not document measured start/end frames.",
+        "Neither selected bow is tested; this 2020 observation cannot establish timings for the requested old Biting Winds 667 ms or Whispering Slab 567 ms.",
+        "The claim that stability makes no hold-time difference conflicts with Farewell's later qualitative statement; do not combine into a formula.",
+        "Exact dates of the individual comments were not independently verified; thread date only."
+      ],
+      "capture": "run/private-sources/w74/fatigue-reddit-excerpts.json"
+    },
+    {
+      "id": "farewell-bows",
+      "title": "Farewell - A Parting Gift, Bows, Because Reasons",
+      "author": "Farewell",
+      "urls": [
+        "https://farewelld2.github.io/"
+      ],
+      "published_on": null,
+      "publication_context": "Author says updated heading into Lightfall / Season 19; exact date not established.",
+      "accessed_on": "2026-10-24",
+      "kind": "community_researcher_primary_authored_note",
+      "trust": "Useful qualitative account; explicitly unmeasured for these bow effects.",
+      "findings": "Separates total hold time until automatic firing from perfect draw. Attributes both to stability, but explicitly says these bow effects had not been measured.",
+      "constraints": [
+        "No duration endpoints, stability scaling formula, or post-window curve.",
+        "The page warns it will not track future patches.",
+        "The nearby numeric aim-assist degradation formulas concern repeated firing, not bow overdraw; they must not be reused as an overdraw curve."
+      ],
+      "capture": "run/private-sources/w74/fatigue-farewell-excerpt.json"
+    },
+    {
+      "id": "tenchu-2021",
+      "title": "Testing of Bow Mechanics, Draw Times, Reload/Nock Speed, Perfect Draws (etc)",
+      "author": "u/TenchuTheWolf",
+      "urls": [
+        "https://www.reddit.com/r/DestinyTheGame/comments/rahqhy/"
+      ],
+      "published_on": null,
+      "accessed_on": "2026-10-24",
+      "kind": "community_primary_experiment_out_of_scope_endpoint",
+      "trust": "Firsthand measurement, but of a different endpoint.",
+      "findings": "The inspected Biting Winds experiment measures time until losing perfect-draw damage, rather than time to forced release.",
+      "constraints": [
+        "Does not establish max hold or damage/accuracy progression after that endpoint.",
+        "No numeric perfect-window table or Oracle extraction reproduced."
+      ],
+      "capture": "run/private-sources/w74/fatigue-search-audit.json"
+    },
+    {
+      "id": "d2foundry-source-audit",
+      "title": "D2 Foundry public source audit for maximum hold math",
+      "urls": [
+        "https://github.com/d2foundry/oracle_engine/tree/dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+        "https://github.com/d2foundry/foundry/tree/11b597a2fd5badafbef08d67ea344ce3dae5344d"
+      ],
+      "accessed_on": "2026-10-24",
+      "kind": "primary_software_source_bounded_negative_search",
+      "trust": "Reproducible bounded negative result; not proof that no formula exists anywhere.",
+      "findings": "No target-term matches in the inspected textual sources. No max-hold math located.",
+      "constraints": [
+        "The foundry public main snapshot is from 2023; do not assume it represents the live frontend.",
+        "Only listed textual extensions searched. Bundled Wasm was not decompiled, and historical revisions/other repositories were not searched.",
+        "A term search cannot rule out an unnamed or differently encoded formula.",
+        "calc_perfect_draw source/window extraction was not performed."
+      ],
+      "capture": "run/private-sources/w74/fatigue-foundry-source-audit.json"
+    }
+  ],
+  "uncertainties": [
+    "Exact forced-release duration for each selected old roll.",
+    "Whether and how total hold time varies with stability, archetype, draw-time configuration, or sandbox era.",
+    "Damage multiplier as a function of time after perfect draw, including lower bound and forced-release damage.",
+    "Accuracy cone/trajectory progression and whether it is linear, staged, or otherwise.",
+    "Direct full-text confirmation of the official indexed qualitative passage."
+  ]
+}

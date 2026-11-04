@@ -1,0 +1,1503 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/d2foundry/oracle_engine",
+  "commit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+  "commitDate": "2026-05-20",
+  "source": "build_resources/weapon_formulas.json",
+  "sourceSha256": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+  "sourceHashes": {
+    "src/main/resources/destiny/weapons/w30.json": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+    "art/weapons/w40/definitions.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+    "src/main/resources/destiny/weapons/w40-characteristics.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+    "art/weapons/w40/provenance.json": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+    "art/weapons/w43/extraction.json": "a133082c322a07e81837d0409caf09596dfad4fd9889904d1bdae7acd471d9d5",
+    "art/weapons/w44/stat_calc.rs": "5662ee9dea9e59547d73f81cd7c02872046266acb7b24017d2d09c123f31e5c2",
+    "art/weapons/w44/build.rs": "85b2e35f1db47f55c58900020ebf44be0e409802beac395b4b4c538fad67a1bd",
+    "scripts/extract_aim_w44.py": "0c1160b2a846165dad7820fa1a085198a7a51650312d78fdabdbe4ff3b492ea6",
+    "art/weapons/w44/MIT-LICENSE": "50173139375c53459837abdeb7ad9f264eba4f0bc2bb2c676932991ce158778d",
+    "art/weapons/w44/UNLICENSE": "6b0382b16279f26ff69014300541967a356a666eb0b91b422f6862f6b7dad17e"
+  },
+  "officialManifest": {
+    "manifest": {
+      "version": "245114.26.10.13.2000-1-bnet.66137",
+      "path": "/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+    },
+    "cachedInventorySha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+    "source": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+    "policy": "Pinned Oct13 official manifest; exact W30 selected item hashes, not family/element guesses."
+  },
+  "runtimeSha256": "0d0a38469c28a74c1a77489d346184eccef347a604c0c0c455d1c7c2e1a80fc8",
+  "profileCount": 63,
+  "supportedCount": 57,
+  "formulaPolicy": {
+    "transitionTicks": "clamp(ceil((offset + vpp * clamp(Handling,0,100)) * 20),2,20)",
+    "zoom": "clamp(official Zoom / 10,1,6); visual magnification only",
+    "falloffScalar": "Historical Foundry family/frame mappings, independent of Zoom",
+    "corrections": "May 29 official High-Impact AR 1.6 and High-Impact/Legacy Pulse 1.7, as explicitly supplied in task; official article text could not be retrieved independently",
+    "stability": "Official Stability stat, 0..100 (not normalized)",
+    "recoilDirection": "Official RecoilDirection stat, 0..100; metadata, not a reconstructed pattern",
+    "kick": "clamp(familyBaseDegrees * (1 - 0.6 * Stability / 100),0.1,2); rounded to 6 decimals",
+    "bloomPerShot": "0.02 + 0.18 * (1 - Stability / 100) normalized bloom (0..1); rounded to 6 decimals",
+    "recoveryPerTick": "0.04 normalized bloom per Minecraft tick; local tuning",
+    "neutral": {
+      "transitionTicks": 2,
+      "zoom": 1.0,
+      "falloffScalar": 1.0,
+      "stability": 0.0,
+      "recoilDirection": 0,
+      "kick": 0.0,
+      "bloomPerShot": 0.0,
+      "recoveryPerTick": 0.0
+    }
+  },
+  "familyTuning": {
+    "hand_cannon": {
+      "oracleFamily": "Hand Cannon",
+      "defaultFalloffScalar": 1.5,
+      "baseKickDegrees": 1.5
+    },
+    "auto_rifle": {
+      "oracleFamily": "Auto Rifle",
+      "defaultFalloffScalar": 1.6,
+      "baseKickDegrees": 0.45
+    },
+    "submachine_gun": {
+      "oracleFamily": "Submachine Gun",
+      "defaultFalloffScalar": 1.4,
+      "baseKickDegrees": 0.3
+    },
+    "pulse_rifle": {
+      "oracleFamily": "Pulse Rifle",
+      "defaultFalloffScalar": 1.7,
+      "baseKickDegrees": 0.6
+    },
+    "scout_rifle": {
+      "oracleFamily": "Scout Rifle",
+      "defaultFalloffScalar": 2.0,
+      "baseKickDegrees": 0.8
+    },
+    "sidearm": {
+      "oracleFamily": "Sidearm",
+      "defaultFalloffScalar": 1.2,
+      "baseKickDegrees": 0.55
+    },
+    "sniper_rifle": {
+      "oracleFamily": "Sniper Rifle",
+      "defaultFalloffScalar": 4.5,
+      "baseKickDegrees": 1.6
+    },
+    "fusion_rifle": {
+      "oracleFamily": "Fusion Rifle",
+      "defaultFalloffScalar": 1.3,
+      "baseKickDegrees": 0.9
+    },
+    "linear_fusion_rifle": {
+      "oracleFamily": "Linear Fusion Rifle",
+      "defaultFalloffScalar": 2.5,
+      "baseKickDegrees": 1.25
+    },
+    "trace_rifle": {
+      "oracleFamily": "Trace Rifle",
+      "defaultFalloffScalar": 1.6,
+      "baseKickDegrees": 0.1
+    },
+    "machine_gun": {
+      "oracleFamily": "Machine Gun",
+      "defaultFalloffScalar": 1.6,
+      "baseKickDegrees": 0.65
+    },
+    "shotgun": {
+      "oracleFamily": "Shotgun",
+      "defaultFalloffScalar": 1.0,
+      "baseKickDegrees": 2.0
+    },
+    "bow": {
+      "oracleFamily": "Combat Bow",
+      "defaultFalloffScalar": 1.8,
+      "baseKickDegrees": 0.35
+    },
+    "grenade_launcher": {
+      "oracleFamily": "Grenade Launcher",
+      "defaultFalloffScalar": 1.0,
+      "baseKickDegrees": 1.25
+    },
+    "heavy_grenade_launcher": {
+      "oracleFamily": "Grenade Launcher",
+      "defaultFalloffScalar": 1.0,
+      "baseKickDegrees": 1.4
+    },
+    "rocket_launcher": {
+      "oracleFamily": "Rocket Launcher",
+      "defaultFalloffScalar": 1.0,
+      "baseKickDegrees": 2.0
+    }
+  },
+  "licenses": [
+    "MIT-LICENSE",
+    "UNLICENSE"
+  ],
+  "limitations": [
+    "Pinned community handling/range model, not a claim of current exact Destiny sandbox",
+    "Only selected-item base stats; no perk, armor, frame bonus, or animation modifiers",
+    "Kick, bloom, recovery and 20 Hz rounding/bounds are Minecraft tuning, not original recoil formulas",
+    "No deterministic recoil pattern, yaw direction or exact recoil claim; RecoilDirection is metadata only",
+    "Machine Gun falloff 1.6 is explicitly a community guess",
+    "Sword/glaive unsupported: six neutral entries; 57 supported ranged profiles",
+    "Data/API only; no runtime, input, HUD, camera, registration or build integration"
+  ],
+  "entries": [
+    {
+      "id": "duke_mk_44",
+      "family": "hand_cannon",
+      "frame": "aggressive",
+      "bungieHash": 2112909414,
+      "supported": true,
+      "officialStats": {
+        "handling": 30,
+        "stability": 29,
+        "zoom": 14,
+        "recoilDirection": 90
+      },
+      "oracleFamily": "Hand Cannon",
+      "category": "120 RPM",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.001666666667,
+        "offset": 0.3316666667
+      },
+      "adsSeconds": 0.28166666669,
+      "baseKickDegrees": 1.5
+    },
+    {
+      "id": "austringer",
+      "family": "hand_cannon",
+      "frame": "adaptive",
+      "bungieHash": 3055790362,
+      "supported": true,
+      "officialStats": {
+        "handling": 47,
+        "stability": 59,
+        "zoom": 14,
+        "recoilDirection": 95
+      },
+      "oracleFamily": "Hand Cannon",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.001666666667,
+        "offset": 0.3316666667
+      },
+      "adsSeconds": 0.253333333351,
+      "baseKickDegrees": 1.5
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "family": "hand_cannon",
+      "frame": "precision",
+      "bungieHash": 3037520408,
+      "supported": true,
+      "officialStats": {
+        "handling": 30,
+        "stability": 52,
+        "zoom": 14,
+        "recoilDirection": 84
+      },
+      "oracleFamily": "Hand Cannon",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.001666666667,
+        "offset": 0.3316666667
+      },
+      "adsSeconds": 0.28166666669,
+      "baseKickDegrees": 1.5
+    },
+    {
+      "id": "halfdan_d",
+      "family": "auto_rifle",
+      "frame": "high_impact",
+      "bungieHash": 3778520450,
+      "supported": true,
+      "officialStats": {
+        "handling": 39,
+        "stability": 20,
+        "zoom": 16,
+        "recoilDirection": 70
+      },
+      "falloffPolicy": "May 29 official correction supplied by task: 1.6, overrides pinned 1.7",
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "adsCurve": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      },
+      "adsSeconds": 0.316625,
+      "baseKickDegrees": 0.45
+    },
+    {
+      "id": "ammit_ar2",
+      "family": "auto_rifle",
+      "frame": "precision",
+      "bungieHash": 2119346509,
+      "supported": true,
+      "officialStats": {
+        "handling": 46,
+        "stability": 45,
+        "zoom": 15,
+        "recoilDirection": 71
+      },
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      },
+      "adsSeconds": 0.3035,
+      "baseKickDegrees": 0.45
+    },
+    {
+      "id": "gnawing_hunger",
+      "family": "auto_rifle",
+      "frame": "adaptive",
+      "bungieHash": 821154603,
+      "supported": true,
+      "officialStats": {
+        "handling": 63,
+        "stability": 43,
+        "zoom": 16,
+        "recoilDirection": 54
+      },
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      },
+      "adsSeconds": 0.271625,
+      "baseKickDegrees": 0.45
+    },
+    {
+      "id": "steelfeather_repeater",
+      "family": "auto_rifle",
+      "frame": "rapid_fire",
+      "bungieHash": 1251729046,
+      "supported": true,
+      "officialStats": {
+        "handling": 38,
+        "stability": 31,
+        "zoom": 16,
+        "recoilDirection": 57
+      },
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      },
+      "adsSeconds": 0.3185,
+      "baseKickDegrees": 0.45
+    },
+    {
+      "id": "cold_denial",
+      "family": "pulse_rifle",
+      "frame": "high_impact",
+      "bungieHash": 1216130969,
+      "supported": true,
+      "officialStats": {
+        "handling": 24,
+        "stability": 44,
+        "zoom": 14,
+        "recoilDirection": 73
+      },
+      "falloffPolicy": "May 29 official correction supplied by task: 1.7, overrides pinned 1.6",
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "adsCurve": {
+        "vpp": -0.00196208,
+        "offset": 0.4574687
+      },
+      "adsSeconds": 0.41037878,
+      "baseKickDegrees": 0.6
+    },
+    {
+      "id": "bygones",
+      "family": "pulse_rifle",
+      "frame": "adaptive",
+      "bungieHash": 2712244741,
+      "supported": true,
+      "officialStats": {
+        "handling": 46,
+        "stability": 55,
+        "zoom": 17,
+        "recoilDirection": 69
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.00196208,
+        "offset": 0.4574687
+      },
+      "adsSeconds": 0.36721302,
+      "baseKickDegrees": 0.6
+    },
+    {
+      "id": "chattering_bone",
+      "family": "pulse_rifle",
+      "frame": "lightweight",
+      "bungieHash": 568515759,
+      "supported": true,
+      "officialStats": {
+        "handling": 70,
+        "stability": 52,
+        "zoom": 17,
+        "recoilDirection": 57
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "adsCurve": {
+        "vpp": -0.00196208,
+        "offset": 0.4574687
+      },
+      "adsSeconds": 0.3201231,
+      "baseKickDegrees": 0.6
+    },
+    {
+      "id": "blast_furnace",
+      "family": "pulse_rifle",
+      "frame": "aggressive_burst",
+      "bungieHash": 3843477312,
+      "supported": true,
+      "officialStats": {
+        "handling": 24,
+        "stability": 64,
+        "zoom": 18,
+        "recoilDirection": 65
+      },
+      "falloffPolicy": "Pinned Foundry intrinsic 904 aggressive pulse exception",
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.00196208,
+        "offset": 0.4574687
+      },
+      "adsSeconds": 0.41037878,
+      "baseKickDegrees": 0.6
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "family": "pulse_rifle",
+      "frame": "rapid_fire",
+      "bungieHash": 1280933460,
+      "supported": true,
+      "officialStats": {
+        "handling": 21,
+        "stability": 39,
+        "zoom": 17,
+        "recoilDirection": 53
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.00196208,
+        "offset": 0.4574687
+      },
+      "adsSeconds": 0.41626502,
+      "baseKickDegrees": 0.6
+    },
+    {
+      "id": "frontier_justice",
+      "family": "scout_rifle",
+      "frame": "high_impact",
+      "bungieHash": 273396910,
+      "supported": true,
+      "officialStats": {
+        "handling": 24,
+        "stability": 18,
+        "zoom": 21,
+        "recoilDirection": 79
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "adsCurve": {
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      },
+      "adsSeconds": 0.37077895195599997,
+      "baseKickDegrees": 0.8
+    },
+    {
+      "id": "distant_relation",
+      "family": "scout_rifle",
+      "frame": "precision",
+      "bungieHash": 2034817450,
+      "supported": true,
+      "officialStats": {
+        "handling": 40,
+        "stability": 49,
+        "zoom": 20,
+        "recoilDirection": 58
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      },
+      "adsSeconds": 0.34368251866,
+      "baseKickDegrees": 0.8
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "family": "scout_rifle",
+      "frame": "lightweight",
+      "bungieHash": 2723241847,
+      "supported": true,
+      "officialStats": {
+        "handling": 63,
+        "stability": 32,
+        "zoom": 20,
+        "recoilDirection": 59
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "adsCurve": {
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      },
+      "adsSeconds": 0.304731395797,
+      "baseKickDegrees": 0.8
+    },
+    {
+      "id": "aishas_embrace",
+      "family": "scout_rifle",
+      "frame": "rapid_fire",
+      "bungieHash": 2638190703,
+      "supported": true,
+      "officialStats": {
+        "handling": 26,
+        "stability": 46,
+        "zoom": 20,
+        "recoilDirection": 55
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      },
+      "adsSeconds": 0.367391897794,
+      "baseKickDegrees": 0.8
+    },
+    {
+      "id": "long_arm",
+      "family": "scout_rifle",
+      "frame": "aggressive",
+      "bungieHash": 8293111,
+      "supported": true,
+      "officialStats": {
+        "handling": 53,
+        "stability": 25,
+        "zoom": 18,
+        "recoilDirection": 72
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "aggresive",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      },
+      "adsSeconds": 0.321666666607,
+      "baseKickDegrees": 0.8
+    },
+    {
+      "id": "antiope_d",
+      "family": "submachine_gun",
+      "frame": "precision",
+      "bungieHash": 566976653,
+      "supported": true,
+      "officialStats": {
+        "handling": 18,
+        "stability": 32,
+        "zoom": 13,
+        "recoilDirection": 90
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.001873200822,
+        "offset": 0.3581576422
+      },
+      "adsSeconds": 0.324440027404,
+      "baseKickDegrees": 0.3
+    },
+    {
+      "id": "bug_out_bag",
+      "family": "submachine_gun",
+      "frame": "adaptive",
+      "bungieHash": 2744715540,
+      "supported": true,
+      "officialStats": {
+        "handling": 47,
+        "stability": 39,
+        "zoom": 13,
+        "recoilDirection": 88
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.001873200822,
+        "offset": 0.3581576422
+      },
+      "adsSeconds": 0.270117203566,
+      "baseKickDegrees": 0.3
+    },
+    {
+      "id": "ikelos_smg_v1_0_1",
+      "family": "submachine_gun",
+      "frame": "aggressive",
+      "bungieHash": 1723472487,
+      "supported": true,
+      "officialStats": {
+        "handling": 70,
+        "stability": 25,
+        "zoom": 13,
+        "recoilDirection": 90
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.001873200822,
+        "offset": 0.3581576422
+      },
+      "adsSeconds": 0.22703358466,
+      "baseKickDegrees": 0.3
+    },
+    {
+      "id": "the_recluse",
+      "family": "submachine_gun",
+      "frame": "lightweight",
+      "bungieHash": 3354242550,
+      "supported": true,
+      "officialStats": {
+        "handling": 63,
+        "stability": 47,
+        "zoom": 13,
+        "recoilDirection": 100
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "adsCurve": {
+        "vpp": -0.001873200822,
+        "offset": 0.3581576422
+      },
+      "adsSeconds": 0.24014599041400003,
+      "baseKickDegrees": 0.3
+    },
+    {
+      "id": "allied_demand",
+      "family": "sidearm",
+      "frame": "adaptive",
+      "bungieHash": 1532276803,
+      "supported": true,
+      "officialStats": {
+        "handling": 48,
+        "stability": 67,
+        "zoom": 12,
+        "recoilDirection": 97
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      },
+      "adsSeconds": 0.23656868149999996,
+      "baseKickDegrees": 0.55
+    },
+    {
+      "id": "farewell",
+      "family": "sidearm",
+      "frame": "lightweight",
+      "bungieHash": 541188001,
+      "supported": true,
+      "officialStats": {
+        "handling": 64,
+        "stability": 40,
+        "zoom": 12,
+        "recoilDirection": 96
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "adsCurve": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      },
+      "adsSeconds": 0.20089835189999997,
+      "baseKickDegrees": 0.55
+    },
+    {
+      "id": "lonesome",
+      "family": "sidearm",
+      "frame": "precision",
+      "bungieHash": 2199171672,
+      "supported": true,
+      "officialStats": {
+        "handling": 33,
+        "stability": 42,
+        "zoom": 12,
+        "recoilDirection": 90
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      },
+      "adsSeconds": 0.27000961549999997,
+      "baseKickDegrees": 0.55
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "family": "sidearm",
+      "frame": "rapid_fire",
+      "bungieHash": 3751622019,
+      "supported": true,
+      "officialStats": {
+        "handling": 49,
+        "stability": 56,
+        "zoom": 12,
+        "recoilDirection": 98
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      },
+      "adsSeconds": 0.23433928589999997,
+      "baseKickDegrees": 0.55
+    },
+    {
+      "id": "high_albedo",
+      "family": "sidearm",
+      "frame": "adaptive_burst",
+      "bungieHash": 1197486957,
+      "supported": true,
+      "officialStats": {
+        "handling": 51,
+        "stability": 69,
+        "zoom": 12,
+        "recoilDirection": 99
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Adaptive_Burst",
+      "adsCurve": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      },
+      "adsSeconds": 0.22988049469999997,
+      "baseKickDegrees": 0.55
+    },
+    {
+      "id": "brass_attacks",
+      "family": "sidearm",
+      "frame": "heavy_burst",
+      "bungieHash": 2121785039,
+      "supported": true,
+      "officialStats": {
+        "handling": 36,
+        "stability": 38,
+        "zoom": 13,
+        "recoilDirection": 90
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Heavy_Burst",
+      "adsCurve": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      },
+      "adsSeconds": 0.26332142869999997,
+      "baseKickDegrees": 0.55
+    },
+    {
+      "id": "biting_winds",
+      "family": "bow",
+      "frame": "precision",
+      "bungieHash": 1621657423,
+      "supported": true,
+      "officialStats": {
+        "handling": 49,
+        "stability": 43,
+        "zoom": 18,
+        "recoilDirection": 63
+      },
+      "oracleFamily": "Combat Bow",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.001855658199,
+        "offset": 0.5293778291
+      },
+      "adsSeconds": 0.43845057734899995,
+      "baseKickDegrees": 0.35
+    },
+    {
+      "id": "whispering_slab",
+      "family": "bow",
+      "frame": "lightweight",
+      "bungieHash": 211938782,
+      "supported": true,
+      "officialStats": {
+        "handling": 65,
+        "stability": 53,
+        "zoom": 18,
+        "recoilDirection": 55
+      },
+      "oracleFamily": "Combat Bow",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "adsCurve": {
+        "vpp": -0.001855658199,
+        "offset": 0.5293778291
+      },
+      "adsSeconds": 0.408760046165,
+      "baseKickDegrees": 0.35
+    },
+    {
+      "id": "bite_of_the_fox",
+      "family": "sniper_rifle",
+      "frame": "aggressive",
+      "bungieHash": 1403800851,
+      "supported": true,
+      "officialStats": {
+        "handling": 25,
+        "stability": 20,
+        "zoom": 43,
+        "recoilDirection": 68
+      },
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.00194998437,
+        "offset": 0.5021325414
+      },
+      "adsSeconds": 0.45338293215,
+      "baseKickDegrees": 1.6
+    },
+    {
+      "id": "beloved",
+      "family": "sniper_rifle",
+      "frame": "adaptive",
+      "bungieHash": 3107853529,
+      "supported": true,
+      "officialStats": {
+        "handling": 47,
+        "stability": 46,
+        "zoom": 40,
+        "recoilDirection": 77
+      },
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.00194998437,
+        "offset": 0.5021325414
+      },
+      "adsSeconds": 0.41048327600999995,
+      "baseKickDegrees": 1.6
+    },
+    {
+      "id": "apostate",
+      "family": "sniper_rifle",
+      "frame": "rapid_fire",
+      "bungieHash": 2164448701,
+      "supported": true,
+      "officialStats": {
+        "handling": 65,
+        "stability": 41,
+        "zoom": 40,
+        "recoilDirection": 49
+      },
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.00194998437,
+        "offset": 0.5021325414
+      },
+      "adsSeconds": 0.37538355734999995,
+      "baseKickDegrees": 1.6
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "family": "shotgun",
+      "frame": "aggressive",
+      "bungieHash": 912150785,
+      "supported": true,
+      "officialStats": {
+        "handling": 31,
+        "stability": 29,
+        "zoom": 12,
+        "recoilDirection": 69
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      },
+      "adsSeconds": 0.37871457492,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "dust_rock_blues",
+      "family": "shotgun",
+      "frame": "precision",
+      "bungieHash": 636912560,
+      "supported": true,
+      "officialStats": {
+        "handling": 34,
+        "stability": 45,
+        "zoom": 12,
+        "recoilDirection": 64
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      },
+      "adsSeconds": 0.37170040488,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "first_in_last_out",
+      "family": "shotgun",
+      "frame": "pinpoint_slug",
+      "bungieHash": 3616586446,
+      "supported": true,
+      "officialStats": {
+        "handling": 60,
+        "stability": 40,
+        "zoom": 12,
+        "recoilDirection": 58
+      },
+      "oracleFamily": "Shotgun",
+      "category": "slug",
+      "subfamily": "Slug",
+      "adsCurve": {
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      },
+      "adsSeconds": 0.31091093119999996,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "family": "shotgun",
+      "frame": "lightweight",
+      "bungieHash": 2217366863,
+      "supported": true,
+      "officialStats": {
+        "handling": 68,
+        "stability": 39,
+        "zoom": 12,
+        "recoilDirection": 53
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "adsCurve": {
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      },
+      "adsSeconds": 0.29220647775999997,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "ikelos_sg_v1_0_1",
+      "family": "shotgun",
+      "frame": "rapid_fire",
+      "bungieHash": 1887808042,
+      "supported": true,
+      "officialStats": {
+        "handling": 44,
+        "stability": 32,
+        "zoom": 12,
+        "recoilDirection": 69
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      },
+      "adsSeconds": 0.34831983808,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "erentil_fr4",
+      "family": "fusion_rifle",
+      "frame": "high_impact",
+      "bungieHash": 2398848320,
+      "supported": true,
+      "officialStats": {
+        "handling": 18,
+        "stability": 22,
+        "zoom": 15,
+        "recoilDirection": 60
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "adsCurve": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      },
+      "adsSeconds": 0.380745672396,
+      "baseKickDegrees": 0.9
+    },
+    {
+      "id": "hollow_words",
+      "family": "fusion_rifle",
+      "frame": "precision",
+      "bungieHash": 607191995,
+      "supported": true,
+      "officialStats": {
+        "handling": 23,
+        "stability": 38,
+        "zoom": 18,
+        "recoilDirection": 75
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      },
+      "adsSeconds": 0.37227696400599997,
+      "baseKickDegrees": 0.9
+    },
+    {
+      "id": "dream_breaker",
+      "family": "fusion_rifle",
+      "frame": "adaptive",
+      "bungieHash": 2931957300,
+      "supported": true,
+      "officialStats": {
+        "handling": 27,
+        "stability": 36,
+        "zoom": 15,
+        "recoilDirection": 57
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      },
+      "adsSeconds": 0.365501997294,
+      "baseKickDegrees": 0.9
+    },
+    {
+      "id": "null_composure",
+      "family": "fusion_rifle",
+      "frame": "rapid_fire",
+      "bungieHash": 1644680957,
+      "supported": true,
+      "officialStats": {
+        "handling": 56,
+        "stability": 35,
+        "zoom": 16,
+        "recoilDirection": 55
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      },
+      "adsSeconds": 0.316383488632,
+      "baseKickDegrees": 0.9
+    },
+    {
+      "id": "coriolis_force",
+      "family": "fusion_rifle",
+      "frame": "aggressive",
+      "bungieHash": 3512349612,
+      "supported": true,
+      "officialStats": {
+        "handling": 26,
+        "stability": 37,
+        "zoom": 15,
+        "recoilDirection": 50
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "aggressive",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      },
+      "adsSeconds": 0.367195738972,
+      "baseKickDegrees": 0.9
+    },
+    {
+      "id": "line_in_the_sand",
+      "family": "linear_fusion_rifle",
+      "frame": "precision",
+      "bungieHash": 946443267,
+      "supported": true,
+      "officialStats": {
+        "handling": 26,
+        "stability": 42,
+        "zoom": 25,
+        "recoilDirection": 63
+      },
+      "oracleFamily": "Linear Fusion Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      },
+      "adsSeconds": 0.367195738972,
+      "baseKickDegrees": 1.25
+    },
+    {
+      "id": "stormchaser",
+      "family": "linear_fusion_rifle",
+      "frame": "adaptive_burst",
+      "bungieHash": 3652506829,
+      "supported": true,
+      "officialStats": {
+        "handling": 30,
+        "stability": 48,
+        "zoom": 25,
+        "recoilDirection": 80
+      },
+      "oracleFamily": "Linear Fusion Rifle",
+      "category": "default",
+      "subfamily": "Adaptive_Burst",
+      "adsCurve": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      },
+      "adsSeconds": 0.36042077226,
+      "baseKickDegrees": 1.25
+    },
+    {
+      "id": "retraced_path",
+      "family": "trace_rifle",
+      "frame": "adaptive",
+      "bungieHash": 548958835,
+      "supported": true,
+      "officialStats": {
+        "handling": 46,
+        "stability": 75,
+        "zoom": 16,
+        "recoilDirection": 94
+      },
+      "oracleFamily": "Trace Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      },
+      "adsSeconds": 0.3035,
+      "baseKickDegrees": 0.1
+    },
+    {
+      "id": "salvager_s_salvo",
+      "family": "grenade_launcher",
+      "frame": "lightweight",
+      "bungieHash": 2060863616,
+      "supported": true,
+      "officialStats": {
+        "handling": 70,
+        "stability": 26,
+        "zoom": 13,
+        "recoilDirection": 75
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Grenade Launcher",
+      "category": "special",
+      "subfamily": "Lightweight",
+      "adsCurve": {
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      },
+      "adsSeconds": 0.36924088,
+      "baseKickDegrees": 1.25
+    },
+    {
+      "id": "deafening_whisper",
+      "family": "grenade_launcher",
+      "frame": "wave",
+      "bungieHash": 981718087,
+      "supported": true,
+      "officialStats": {
+        "handling": 72,
+        "stability": 38,
+        "zoom": 13,
+        "recoilDirection": 81
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Grenade Launcher",
+      "category": "special",
+      "subfamily": "WaveFrame",
+      "adsCurve": {
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      },
+      "adsSeconds": 0.36549944,
+      "baseKickDegrees": 1.25
+    },
+    {
+      "id": "edge_transit",
+      "family": "heavy_grenade_launcher",
+      "frame": "adaptive",
+      "bungieHash": 218335759,
+      "supported": true,
+      "officialStats": {
+        "handling": 42,
+        "stability": 42,
+        "zoom": 13,
+        "recoilDirection": 70
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      },
+      "adsSeconds": 0.42162104,
+      "baseKickDegrees": 1.4
+    },
+    {
+      "id": "canis_major",
+      "family": "heavy_grenade_launcher",
+      "frame": "rapid_fire",
+      "bungieHash": 2066434718,
+      "supported": true,
+      "officialStats": {
+        "handling": 20,
+        "stability": 24,
+        "zoom": 13,
+        "recoilDirection": 69
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      },
+      "adsSeconds": 0.46277688,
+      "baseKickDegrees": 1.4
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "family": "heavy_grenade_launcher",
+      "frame": "compressed_wave",
+      "bungieHash": 1311684613,
+      "supported": true,
+      "officialStats": {
+        "handling": 42,
+        "stability": 40,
+        "zoom": 13,
+        "recoilDirection": 63
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "WaveFrame",
+      "adsCurve": {
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      },
+      "adsSeconds": 0.42162104,
+      "baseKickDegrees": 1.4
+    },
+    {
+      "id": "bad_omens",
+      "family": "rocket_launcher",
+      "frame": "aggressive",
+      "bungieHash": 991314988,
+      "supported": true,
+      "officialStats": {
+        "handling": 20,
+        "stability": 27,
+        "zoom": 20,
+        "recoilDirection": 76
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "adsCurve": {
+        "vpp": -0.002139258726,
+        "offset": 0.528984167
+      },
+      "adsSeconds": 0.48619899248,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "bellowing_giant",
+      "family": "rocket_launcher",
+      "frame": "adaptive",
+      "bungieHash": 2186258845,
+      "supported": true,
+      "officialStats": {
+        "handling": 44,
+        "stability": 49,
+        "zoom": 20,
+        "recoilDirection": 70
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.002139258726,
+        "offset": 0.528984167
+      },
+      "adsSeconds": 0.43485678305599995,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "code_duello",
+      "family": "rocket_launcher",
+      "frame": "high_impact",
+      "bungieHash": 2496242052,
+      "supported": true,
+      "officialStats": {
+        "handling": 69,
+        "stability": 58,
+        "zoom": 20,
+        "recoilDirection": 52
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "adsCurve": {
+        "vpp": -0.002139258726,
+        "offset": 0.528984167
+      },
+      "adsSeconds": 0.38137531490599996,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "pyroclastic_flow",
+      "family": "rocket_launcher",
+      "frame": "precision",
+      "bungieHash": 1289324202,
+      "supported": true,
+      "officialStats": {
+        "handling": 41,
+        "stability": 44,
+        "zoom": 20,
+        "recoilDirection": 63
+      },
+      "falloffPolicy": "Neutral explosive scalar 1; does not extend blast radius",
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Precision",
+      "adsCurve": {
+        "vpp": -0.002139258726,
+        "offset": 0.528984167
+      },
+      "adsSeconds": 0.44127455923399994,
+      "baseKickDegrees": 2.0
+    },
+    {
+      "id": "fixed_odds",
+      "family": "machine_gun",
+      "frame": "high_impact",
+      "bungieHash": 2194955522,
+      "supported": true,
+      "officialStats": {
+        "handling": 30,
+        "stability": 28,
+        "zoom": 16,
+        "recoilDirection": 66
+      },
+      "falloffPolicy": "1.6 is explicitly a community guess in pinned Foundry source",
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "adsCurve": {
+        "vpp": -0.001234477537,
+        "offset": 0.4574687027
+      },
+      "adsSeconds": 0.42043437659,
+      "baseKickDegrees": 0.65
+    },
+    {
+      "id": "hammerhead",
+      "family": "machine_gun",
+      "frame": "adaptive",
+      "bungieHash": 603242241,
+      "supported": true,
+      "officialStats": {
+        "handling": 50,
+        "stability": 60,
+        "zoom": 15,
+        "recoilDirection": 75
+      },
+      "falloffPolicy": "1.6 is explicitly a community guess in pinned Foundry source",
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "adsCurve": {
+        "vpp": -0.001234477537,
+        "offset": 0.4574687027
+      },
+      "adsSeconds": 0.39574482585000004,
+      "baseKickDegrees": 0.65
+    },
+    {
+      "id": "retrofit_escapade",
+      "family": "machine_gun",
+      "frame": "rapid_fire",
+      "bungieHash": 3103325054,
+      "supported": true,
+      "officialStats": {
+        "handling": 56,
+        "stability": 44,
+        "zoom": 16,
+        "recoilDirection": 55
+      },
+      "falloffPolicy": "1.6 is explicitly a community guess in pinned Foundry source",
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "adsCurve": {
+        "vpp": -0.001234477537,
+        "offset": 0.4574687027
+      },
+      "adsSeconds": 0.388337960628,
+      "baseKickDegrees": 0.65
+    },
+    {
+      "id": "abide_the_return",
+      "family": "sword",
+      "frame": "adaptive",
+      "bungieHash": 1644160541,
+      "supported": false,
+      "officialStats": {
+        "handling": null,
+        "stability": null,
+        "zoom": 0,
+        "recoilDirection": null
+      },
+      "policy": "Unsupported sword/glaive; neutral, no ADS/recoil tuning"
+    },
+    {
+      "id": "goldtusk",
+      "family": "sword",
+      "frame": "lightweight",
+      "bungieHash": 3371413057,
+      "supported": false,
+      "officialStats": {
+        "handling": null,
+        "stability": null,
+        "zoom": 0,
+        "recoilDirection": null
+      },
+      "policy": "Unsupported sword/glaive; neutral, no ADS/recoil tuning"
+    },
+    {
+      "id": "crown_splitter",
+      "family": "sword",
+      "frame": "aggressive",
+      "bungieHash": 2782325302,
+      "supported": false,
+      "officialStats": {
+        "handling": null,
+        "stability": 0,
+        "zoom": 0,
+        "recoilDirection": null
+      },
+      "policy": "Unsupported sword/glaive; neutral, no ADS/recoil tuning"
+    },
+    {
+      "id": "falling_guillotine",
+      "family": "sword",
+      "frame": "vortex",
+      "bungieHash": 614426548,
+      "supported": false,
+      "officialStats": {
+        "handling": null,
+        "stability": 0,
+        "zoom": 0,
+        "recoilDirection": null
+      },
+      "policy": "Unsupported sword/glaive; neutral, no ADS/recoil tuning"
+    },
+    {
+      "id": "temptation_s_hook",
+      "family": "sword",
+      "frame": "caster",
+      "bungieHash": 35794111,
+      "supported": false,
+      "officialStats": {
+        "handling": null,
+        "stability": 0,
+        "zoom": 0,
+        "recoilDirection": null
+      },
+      "policy": "Unsupported sword/glaive; neutral, no ADS/recoil tuning"
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "family": "glaive",
+      "frame": "adaptive",
+      "bungieHash": 254636484,
+      "supported": false,
+      "officialStats": {
+        "handling": 42,
+        "stability": null,
+        "zoom": null,
+        "recoilDirection": null
+      },
+      "policy": "Unsupported sword/glaive; neutral, no ADS/recoil tuning"
+    }
+  ]
+}

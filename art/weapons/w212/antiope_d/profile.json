@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "weapon": "antiope_d",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "keepMeshSupport": true,
+    "meshArmDirections": true,
+    "hideSupportAtRest": false,
+    "reloadCameraLower": 0,
+    "sourceWeaponRelative": true,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "partHint": "magazine",
+      "policy": "magazine",
+      "rigAction": "80A8A170",
+      "contact": [
+        6.5,
+        5.8,
+        8.68
+      ],
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.6,
+        0.7
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w212-source/source-review.json",
+      "observation": "Reviewed master evaluation of ORIGINAL source.blend in separate Blender 5.4.0 Alpha: submachine_gun_cdf8185c, only Armature object, action Armature|fp_80A8A170_reload_full|Base, OBSlot, original range 1..91 at 30 fps, 61 samples. Master reports allInputsUnchanged=true and maxExistingCacheJointAbsError=0. Worker did not independently reopen the blend."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/submachine_gun_cdf8185c.json",
+      "sourceSha256": "d09352a9bd907ed80efdf4a46f4436500c4ed354175538d4fcf7b832bec6043f",
+      "observation": "Read all 61 evaluated shoulder, elbow, wrist and weapon matrices. Source action is shared family evidence, not Antiope-D exclusive. Ordinary segment lengths at existing 32 model units/source unit are about 8.72669 upper / 8.14136 forearm. Keep these lengths; do not stretch. Armature_object matrices omit matrix_world; cameraExported=false."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/sheets/submachine_gun_cdf8185c-80A8A170-upper-chain.png",
+      "sourceSha256": "e04731565886e7c6bd52e3c860bfe1de156792f9bd815bb0553597ea334b9164",
+      "observation": "Viewed actual XZ/YZ shoulder-elbow-wrist sheet at p=0,.2,.4,.6,.8,1. Support chain has large mid-reload excursion and recovers by p=1. Bone-only evidence cannot establish mesh contact, camera framing or native visibility."
+    },
+    {
+      "source": "art/weapons/w123/antiope_d/comparison.png",
+      "observation": "Viewed source/default-paint and semantic side plus two obliques: pale/orange Hakke receiver, rear pistol grip containing narrow grip-fed magazine, distinct forward angled foregrip, open trigger guard/stock and iron sights. Preserve accepted 118 opaque solids and UVs."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "observation": "Audited actual Antiope-D semantic solids: fixed grip_core bounds [7.37,7.32,8.5]..[8.63,11.32,10.48], -6 degree X; foregrip_body [7.38,7.21,2.625]..[8.62,10.61,4.275], -27 degree X; magazine_core [7.63,3.63,7.8]..[8.37,8.16,9.55]. Inherit right [8,9.3,9.48], left [8,8.85,3.5] and reload [7.5,5.8,8.68]. Separate fixed pistol grip means right remains body-relative while left handles magazine."
+    },
+    {
+      "source": "scripts/generate_reload_w182_antiope_d.py",
+      "observation": "Read original KEYS, pivot, magazine anchor and rigid native/twohand algebra without running historical generator. Five magazine_core/front_spine/back_spine/floor/pull solids remain one part named magazine, matching reload.partHint. All other 113 solids, including charging_handle, stay body."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "observation": "FIRST candidate inherited the SMG family calibration. FIRST native sample15 shows handling below the viewport; shared framing adds reloadCameraLower=2.5 on top of evaluated source weapon travel. Override only this extra authored drop to 0; retain translation, rotation, scale, rightWristRoll, sourceFullChain and ordinary limb lengths."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/antiope_d-reload.png",
+      "sourceSha256": "377f1906c24baf136e874f7ed81628c4aaa8d3bba5a4ac88f521f487e64f58e9",
+      "observation": "Viewed actual FIRST samples01/05/10/15/19 sheet and corresponding full PNGs. Raised support hand and tiny magazine cap at sample10 do not prove wrong source FK; sample15 shows additional below-viewport handling. Capture ordinals are not normalized pose indices."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-antiope_d-reload-sample-08.png",
+      "sourceSha256": "0124776ecc571f9097341beb7f386957c07572bf458f23d1344386be57d8d0cb",
+      "observation": "Viewed actual raw PNG: magazine cap protrudes at the palm end, while most of the narrow magazine is obscured by the solid arm. Existing contact X7.5 is only 0.13 outside magazine_core X7.63. A one-unit outward side-flank contact X6.5 moves held magazine away from unmodified source palm rather than moving or attenuating the source hand."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-antiope_d-reload-sample-10.png",
+      "sourceSha256": "5d26c86309cf1af5831c1986944dc7f5ac8aeae29694f314c7e18dc35947fd4f",
+      "observation": "Viewed actual raw PNG: cap remains visible at raised palm near forward/top receiver. Read-only classic arm-envelope volume sampling at original source p=.40/.45/.50/.55/.60 gives old magazine overlap about 49-53 percent, new contact X6.5 about 8-11 percent. This is an offline clearance estimate, not post-change native acceptance."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-antiope_d-reload-sample-15.png",
+      "sourceSha256": "91ea5d6f430a28bc47f78808bfb545b2d6378233cffedf1ee6418e45d6159b3c",
+      "observation": "Viewed actual raw PNG: receiver is low and handling mostly outside viewport. Remove inherited extra reloadCameraLower 2.5; evaluated source body trajectory remains unchanged. At p=.70 source-driven body Y is -0.223 before this old offset and -2.723 after it; correction adds no invented source camera."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/antiope_d-review.png",
+      "sourceSha256": "37f9825c76f23d81a95eecf6ac27f1573fdcc944a5a89ed3234b76fd7f47768e",
+      "observation": "Viewed completed FIRST hip/ADS/reload review sheet and raw ADS samples09/10. Centered sight aperture is readable in those full-ADS PNGs; no new ADS framing/contact override is justified."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "observation": "Read CURRENT main shared code only. sourceFullChain overwrites palm translations using original wrist travel plus REST mesh contacts; reload.contact sets magazine offset through reload_target/part_shift. Therefore X6.5 changes magazine clearance, not original source FK. Default gripWindow .05/.20/.78/.98 keeps magazine following a hand already back on the forward support grip by source p=.70; override release/return to .60/.70, preserving original reach/attach .05/.20."
+    }
+  ],
+  "notes": [
+    "FIRST native screenshots received and inspected. Scoped correction candidate: reload.contact [6.5,5.8,8.68], reload.gripWindow [.05,.20,.60,.70], reloadCameraLower 0. SECOND native remains required before acceptance.",
+    "Side-flank reload contact moves the held magazine one canonical X unit away from the source palm at full attachment. It does not move REST left/right anchors or alter source wrist/forearm/upper-arm matrices and lengths.",
+    "Release begins at W182 authored seating p=.60 and ends when original source support hand is back on foregrip at p=.70. At source p=.70 old fully-attached policy moves a seated magazine about 5.20 units forward toward the foregrip; new attachment weight is zero. This is an authored mesh-handling envelope, not a recovered source magazine event.",
+    "Original source hand rises near rail during p=.45..60 and must remain there. Narrow magazine swallowed by the solid hand cannot establish a source-action error. No early .40 release, source attenuation, limb stretch, arm hiding or cropping is used.",
+    "Remove only the inherited extra 2.5-unit reload drop. Retain family translation/rotation/scale, rightWristRoll 28, sourceFullChain/sourceWeaponRelative/keepMeshSupport/meshArmDirections true and hideSupportAtRest false. Existing source-driven weapon dip remains.",
+    "Generator and all W182 keys/holds/paths remain unchanged. Full ADS/inspect precedence, endpoint/non-FP displays, accepted geometry/UV, combat/audio and gameplay duration remain preserved.",
+    "Source action is shared-family and bone-only; its magazine insertion/bolt events cannot be recovered from this evidence. W182 partial-reload reference and normalized shared action are a disclosed hybrid. Master SECOND review must check p=.55..70 reseating, source-hand release, exposed elbows, sight aperture and return. If magazine reseating still conflicts with the source hand, master owns phase-aware shared part attachment/seat policy; do not fix it by warping FK or arbitrary REST contact changes.",
+    "No dynamic QA input, source-cache/shared-code/main edit, full generation, Gradle, commit, stash, reset or push performed by this worker."
+  ]
+}

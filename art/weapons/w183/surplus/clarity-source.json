@@ -1,0 +1,98 @@
+{
+  "source": "https://github.com/Clarity-Destiny/Descriptions",
+  "cacheSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 3436462433,
+    "name": "Surplus",
+    "lastUpload": 1709252348445,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Grants Stat Bonuses depending on the number of Charged Abilities."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Stat Bonuses with 1|2|3+ Charged Abilities:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 5|15|25 Stability"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 5|25|60 Handling"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 10|25|60 Reload Speed"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ddcSha256": "7880b2029a7e7b8f97afb8f079ca48a585ec0765a94b6b3f983a47daf983ba30",
+  "ddcRow": [
+    "Surplus",
+    "",
+    "Grants Stat Bonuses based on the amount of Powered Ability Charges.x1 Ability Charges = +5 Stability, +5 Handling, and +10 Reload Speed.x2 Ability Charges = +15 Stability, +25 Handling, and +25 Reload Speed.x3 Ability Charges = +25 Stability, +60 Handling, and +60 Reload Speed.↑Stronger Effect.",
+    "",
+    "",
+    ""
+  ],
+  "enhancedExcludedHash": 2658083589,
+  "mechanics": {
+    "id": "surplus",
+    "hash": 3436462433,
+    "stabilityBonus": [
+      0,
+      5,
+      15,
+      25
+    ],
+    "reloadBonus": [
+      0,
+      10,
+      25,
+      60
+    ],
+    "handlingBonus": [
+      0,
+      5,
+      25,
+      60
+    ]
+  },
+  "policies": {
+    "abilities": "LIVE_REGISTERED_EQUIPPED_ENABLED_GRENADE_MELEE_CLASS_ABILITY_COOLDOWN_LE_ZERO_ONE_PER_SLOT_NO_SUPER_JUMP",
+    "identity": "READ_ONLY_EXISTING_GUARDIAN_DATA_NO_NONE_NO_SUPER_GENUINE_OWNED_EQUIPPED_STACK",
+    "timing": "SUM_STATS_CAP_0_100_RAW_CURVES_SCALE_THEN_CEIL_ONCE",
+    "handling": "NO_SURPLUS_SCALAR_STOW_AT100_FLOOR_BEFORE_COMPANION_SCALAR",
+    "ads": "NO_SURPLUS_SCALAR_SNAPSHOT_ENTRY_ONLY_PRIMARY_0_5_SPECIAL_0_8",
+    "reload": "NO_SURPLUS_SCALAR_BOW_NOCK_ONLY_CAP85_OTHERS100_ACCEPTED_PLAN_IMMUTABLE",
+    "combination": "EXACT_OFFICIAL_DISTINCT_SOCKET_PAIRS_ONLY",
+    "damageRangeAccuracy": "NO_SURPLUS_BONUS",
+    "historical": "D2FOUNDRY_ORACLE_DCD0C7D302B056FFBB532EDCB711D724A17CA8C1_NOT_CURRENT_SANDBOX_MEASUREMENT"
+  }
+}

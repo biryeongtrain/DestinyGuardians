@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "weapon": "austringer",
+  "framing": {
+    "translation": [
+      -0.85,
+      0.4,
+      0.85
+    ],
+    "rotation": [
+      -2,
+      0,
+      -1
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      -3
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "meshArmDirections": true,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8,
+        9.1,
+        7.75
+      ],
+      "rotation": [
+        -25,
+        0,
+        10
+      ]
+    },
+    "left": {
+      "position": [
+        7,
+        8.45,
+        8.15
+      ],
+      "rotation": [
+        -25,
+        0,
+        -30
+      ]
+    },
+    "reload": {
+      "rigAction": "80A8A53D",
+      "contact": [
+        6.85,
+        12.35,
+        4.8
+      ],
+      "rotation": [
+        -5.537566,
+        24.41753,
+        -106.800959
+      ],
+      "partHint": "moving",
+      "policy": "cylinder",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.6,
+        0.76
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w208-native/frames/w208-austringer-hip.png",
+      "observation": "Inspected saved native PNG: only firing arm visible; support missing. Latest human requires TWO visible hands in idle and ADS and overrides the older one-hand footage interpretation."
+    },
+    {
+      "source": "/private/tmp/destiny-w208-native/frames/w208-austringer-reload-sample-00.png",
+      "observation": "Inspected sole saved reload PNG: hands/contact are out of view. Sequence record reports control_epoch_changed; this does not verify the cylinder handling path."
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/weapon_surface_w123/austringer.json",
+      "observation": "Read actual Grip_palm/Grip_heel/Backstrap/guard and Cylinder_0/bands. Right center moves slightly down/back to [8,9.1,7.75]; left [7,8.45,8.15] cups its lower left underside, away from the cylinder/guard. Preserve all 126 solids and 756 face UVs."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "observation": "Compared Austringer with Ace skin-hand conventions: model-space palm center, Rx Ry Rz, block forearm extends along local -Y. Explicit outward/down/back approaches replace absolute source-camera directions; these are authored mesh contacts, not source IK."
+    },
+    {
+      "source": "scripts/generate_reload_w208_austringer.py",
+      "observation": "Cylinder opens +78 degrees about Z through progress .20..76. Reload local rotation = Rz(-78) * Rx(-25) * Rz(-30), giving down/left/back forearm direction while fully open. Neutral flank target [6.85,12.35,4.8] becomes [5.94462933,10.88803966,4.8] before body motion; apply the moving-part transform exactly once."
+    },
+    {
+      "source": "art/weapons/w123/austringer/comparison.png",
+      "observation": "Inspected existing default-paint reference and offline solid-model comparison; gold shroud, black cylinder/grip, purple insets retained."
+    },
+    {
+      "source": "art/weapons/w205/rigs/hand_cannon_e762ed5f.json",
+      "observation": "Read non-fallback Austringer rig, idle 80A8A575, ADS 80A8A579, reload 80A8A53D. Ordinary source forearm length is approximately 8.14136 model units. Source lengths are retained; exported rig orientation alone is not mesh IK and no camera is exported."
+    }
+  ],
+  "notes": [
+    "Latest human instruction supersedes old one-handed reference assumption: TWO visible hands in idle, ADS, and reload recovery. hideSupportAtRest must remain false.",
+    "meshArmDirections true preserves authored body-relative right/left and moving-target-relative reload rotations. keepMeshSupport true retains mesh anchors. Master owns the shared implementation and family-wide policy.",
+    "Palm centers use the shared skin-arm local [8,8,8] convention; forearms extend along local -Y. Right [-25,0,10] points the elbow down/right/back; left [-25,0,-30] points down/left/back and cups the firing hand. Native clearance is pending master.",
+    "Reload rotation compensates the authored +78-degree open cylinder, rather than copying a source bone or blindly removing the old -80-degree roll. At full opening, local -Y becomes [-0.5,-0.78488557,0.36599815] before body/carrier framing.",
+    "Shared reload envelope currently reaches by .20 and remains attached into the .76..90 flick (about 78.4 percent target weight at .84). Master must release cylinder contact before .76 and restore the two-hand cup during recovery; a constant profile rotation cannot fix that phase error.",
+    "Framing translation [-0.85,0.4,0.85], rotation [-2,0,-1], scale .98 remain unchanged. sourceViewRotation is legacy authored calibration, inactive for arm direction under meshArmDirections; no source IK/camera/finger fidelity is claimed.",
+    "Master must regenerate hand overlays and refresh profile input hashes/manifests. Existing motion test_10 asserts the superseded one-hand flag and needs a master-owned update. No native, CU/Vision, build, Gradle or runtime action was performed in this revision."
+  ]
+}

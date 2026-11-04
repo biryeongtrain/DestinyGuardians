@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "stage": "W220",
+  "weapon": "dimensional_hypotrochoid",
+  "sourceAction": "80A8A104",
+  "framing": {
+    "translation": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 1,
+    "rightWristRoll": 15,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.2,
+        9.05
+      ],
+      "rotation": [
+        -17.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        8.0,
+        7.9,
+        -2.7
+      ],
+      "rotation": [
+        -26.0,
+        0.0,
+        0.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        5.65,
+        10.1,
+        2.6
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -80.0
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "hand": "left",
+      "rigAction": "80A8A104",
+      "gripWindow": [
+        0.18,
+        0.24,
+        0.52,
+        0.64
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "heavy_grenade_launcher_796e9ebf",
+    "action": "80A8A104",
+    "sourceBlendSha256": "63a440ec13afda88944832b40da1ddcf5f207638c44bbeacc58ed30a4d740c36",
+    "sourceMapSha256": "27861376edd8023e13e9837d0b92104390460f4e706f1f96532ff50cf0075d15",
+    "boneMapSha256": "d4a917ed7a4d37bc716c10d25a9a24afef7b954fd64ecce9062e906d40a11c1f"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w220-source/source-review.json",
+      "sourceSha256": "2818e93c6e4e26032bdcf4f8bb618e90855f2f62a97f55e3f099ec5d0a9759d5",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated source.blend in separate headless Blender5.4 Alpha: ARMATURE only, heavy104 frames1..142,61 original full shoulder/elbow/wrist/weapon samples. Worker read this evaluation; did not open Blender independently."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-handling-evidence.json",
+      "sourceSha256": "7ff4a42b4d5ca4a4beb5f44248ec0bec7fc809b1edc3c77db7725aa22fa2eec9",
+      "role": "source_hand_selection",
+      "observation": "Shared heavy104: left weapon-local wrist excursion32.639773 model units versus right0.000450; LEFT loading hand, RIGHT carrier."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-selection-review.json",
+      "sourceSha256": "34b71aa6aa6eb975ce860c24c87e630d96c9cad32869229f0d7c10b48202e0fc",
+      "role": "source_class_action_selection",
+      "observation": "Generic heavy104 selected by master. No recovered per-weapon selector. Single136 and126 were considered for the other class, not this heavy GL."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/sheets/heavy_grenade_launcher_796e9ebf-80A8A104-upper-chain.png",
+      "sourceSha256": "b2b54e739cdc3e902be2e5c8faf675e1696b57f5edb3e21f510c560ffe0c46b6",
+      "role": "worker_viewed_actual_source_sheet",
+      "observation": "Viewed actual source upper-chain sheet at0,.2,.4,.6,.8,1. Bone projections provide arm motion evidence, not mesh contact/camera recovery."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "canonical_contacts_preserved",
+      "observation": "Right skeleton grip[8,8.2,9.05], left foregrip[8,7.9,-2.7], reload left drum flank[5.65,10.1,2.6] all preserved. Reload attachment ramps.18..24, fades.52..64; zero before.68 seating and.70..80 latch closure."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Read first_person_framing_w205.load/profile current effective heavy profile: translation[0,0,0],rotation[0,0,0],scale1,rightWristRoll15. Spatial framing unchanged; full source chain and visible support enabled."
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/weapon_surface_w123/dimensional_hypotrochoid.json",
+      "sourceSha256": "b3c13f6d9c1a24de4ddd9acf3f8288a980e551c9269d7529b70b4dd05da7b66f",
+      "role": "weapon_specific_geometry",
+      "observation": "Canonical92 and existing per-face UVs retained exactly. Whole12-solid lateral drum43..54 pivots at[8.026,10.16,2.6]. Left latch55..61 uses authored rear hinge[5.62,10.16,5.19]. Right latch62,grips63..74,optics78..91 and skeleton frame remain fixed."
+    }
+  ],
+  "notes": [
+    "Ready candidate for master FIRST feedback; not native accepted.",
+    "New weapon-specific authored whole-drum exchange and latch mechanics; shared class action104 is not recovered Dimensional Hypotrochoid mesh animation.",
+    "No authored body motion: master replays source weapon and full shoulder chain once. No wrist damping, limb stretch, support hiding or camera-offset workaround.",
+    "One rigid12-solid drum represents outgoing/incoming assemblies through an exchange hold; no duplicate drum, invented shaft or cosmetic round.",
+    "61poses60intervals, original gameplay timing, sound and ammo behavior unchanged. Master owns shared loader/runtime installation and FIRST/SECOND Vision."
+  ]
+}

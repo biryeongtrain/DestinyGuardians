@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "weapon": "patron_of_lost_causes",
+  "sourceAction": "80A8A345",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A345",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.5,
+        0.6
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "scout_rifle_98cec92a",
+    "action": "80A8A345",
+    "sourceBlendSha256": "be7c6bb31dc5734de8a82d93fb92c619e581fa2c7bd04951e59e884aebf49941",
+    "sourceMapSha256": "d97ed313c4bcec5414900a745b6657e578623348908b0ed91205f5e34f5d3315",
+    "boneMapSha256": "34cc654306ee835cf908f72fed910a3955868195289e1109178a45c237fcee40"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w216/source/source-review.json",
+      "sourceSha256": "3b5ec3c27772222c14730457fd1d9ff431c39802ae4df10bb7f286440aaf61d6",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read refreshed master headless Blender5.4.0 Alpha evaluation. ARMATURE only, OBSlot, actual Armature|fp_80A8A345_reload_full|Base, source1..105 at30fps,61 samples. Alternatives337/331 also evaluated. allInputsUnchanged=true and prior-cache joint error0. Worker did not run Blender."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/scout_rifle_98cec92a.json",
+      "sourceSha256": "83b850d2d8c60439aefd0f56eb9d6374e38fa237be81e8b5a5ae09e2f6a9c544",
+      "role": "fresh_source61_full_chain",
+      "observation": "Refreshed actual action metadata and original weapon/shoulder/elbow/wrist matrices, armature-object space, row-major column vectors. Left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. Preserve ordinary source limb lengths/axes and sourceFullChain; shared family does not establish exclusive weapon binding."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A345-upper-chain.png",
+      "sourceSha256": "d86f7568ed6de126a720fce6e2242d16fa0af8aa530d3a7d36d0d4e4c9319227",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed six XZ/YZ source-chain projections p=0,.2,.4,.6,.8,1 during preparation. Bone-only sheet supplies no mesh contact/camera/native acceptance."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A337-upper-chain.png",
+      "sourceSha256": "ef0114867cd884955dd29b0b089ed850894dcc42cd481ed2e3ee19c8356ccc20",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed six XZ/YZ source-chain projections p=0,.2,.4,.6,.8,1 during preparation. Bone-only sheet supplies no mesh contact/camera/native acceptance."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A331-upper-chain.png",
+      "sourceSha256": "67dc11cad4b713517efe290c63197132ab9bf34794628863c622cb73a4a3568d",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed six XZ/YZ source-chain projections p=0,.2,.4,.6,.8,1 during preparation. Bone-only sheet supplies no mesh contact/camera/native acceptance."
+    },
+    {
+      "source": "scripts/first_person_framing_w205.py",
+      "sourceSha256": "d51f0a92cfdd199f48eb2972d8c5ae540f23735b85a521d4104540cdd8d35746",
+      "role": "preserved_effective_framing",
+      "observation": "Executed read-only profile(load(),patron_of_lost_causes,scout_rifle) during preparation: translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]. Copy all effective fields; add required full-chain/visible-support flags only. No camera/arm compensation."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "preserved_mesh_contacts",
+      "observation": "Retain right rest[8,7.8,8.72]/[-26,0,0], left rest[7.8,8.9,.3]/[0,90,-85], reload target[7.2,6.85,12.14]/[-8,0,0]. No rest contact override."
+    },
+    {
+      "source": "scripts/generate_reload_w183_patron_of_lost_causes.py",
+      "sourceSha256": "d1d5341aa9d7de0d3056f48c07881406b5bebba87c089c58e68089653e484a62",
+      "role": "unchanged_patron_authored_path",
+      "observation": "AST-read literals and copied existing rigid algebra without executing/importing old heavy generator. Preserve11 knots, rear-magazine solids82/83, GRIP[8,7.65,8.8], anchor[8,8.25,12.14], withdrawal/hold/seat.60/recovery, all98 geometry/UV elements. SOURCE.md/manifest retain historical same-weapon gameplay provenance; footage not re-viewed this turn."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "role": "supported_attachment_release",
+      "observation": "Read supported gripWindow hook. [.05,.20,.50,.60] fades attachment during final insertion and ends at authored.60 seat, so later source wrist departure cannot drag seated magazine. Full-chain source directions take priority over meshArmDirections in master pipeline."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns shared integration/source61 binding/arms/build/generated assets/native and CU.",
+    "Preserve authored weapon motion, UV, geometry, spatial framing, rest contacts,39tick reload,15round magazine,200RPM, ammo and audio. No new bolt/slide mechanics.",
+    "546 reload and689 known canonical route estimates include448 classic arm surfaces; master must measure all composed routes under1000.",
+    "Required sequence: original blend evaluation ->61poses ->FIRST PNGs ->exact feedback to worker ->correction or justified nochange ->SECOND. Native acceptance pending."
+  ]
+}

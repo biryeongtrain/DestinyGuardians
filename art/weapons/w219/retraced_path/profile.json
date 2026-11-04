@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "stage": "W219",
+  "weapon": "retraced_path",
+  "sourceAction": "80A8A43C",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        9.1,
+        9.62
+      ],
+      "rotation": [
+        -9.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        7.8,
+        8.25,
+        -1.5
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        -85.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        7.25,
+        6.9,
+        4.0
+      ],
+      "rotation": [
+        13.0,
+        0.0,
+        0.0
+      ],
+      "partHint": "moving",
+      "policy": "magazine",
+      "rigAction": "80A8A43C",
+      "hand": "left",
+      "gripWindow": [
+        0.09,
+        0.23,
+        0.62,
+        0.7
+      ]
+    }
+  },
+  "sourceRig": {
+    "path": "art/weapons/w219/rigs/trace_rifle_1c48cd94.json",
+    "group": "trace_rifle_1c48cd94",
+    "action": "80A8A43C",
+    "sourceBlendSha256": "a5da0626bcfde6cb9a5c3decb694fd7e870ba7824067cab2c3dbe5191ccb5339",
+    "sourceMapSha256": "55ef839e0cb47e80c433b79e79733c3a5739c6ba474365cd3a363f63325236fc",
+    "boneMapSha256": "4b709c1d83bce0134c71bbd0dfc4c1b72bcf35af891614729d0661f90fa0ef9d"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w219/source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original source.blend in separate Blender5.4.0 Alpha background: only Armature, action80A8A43C/OBSlot, frames1..106 at30fps,61 samples, old joint error0, all source inputs unchanged. Worker read report; did not independently open Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sheets/trace_rifle_1c48cd94-80A8A43C-upper-chain.png",
+      "role": "viewed_original_chain_sheet",
+      "observation": "Worker viewed actual XZ/YZ shoulder/elbow/wrist sheet at p0,.2,.4,.6,.8,1. Large left support excursion then return; weapon-relative right wrist remains rigid. Bone projections establish no mesh or camera contact."
+    },
+    {
+      "source": "art/weapons/w170/retraced_path/storyboard.png",
+      "role": "viewed_same_weapon_reference",
+      "observation": "Worker viewed retained actual12-frame same-weapon gameplay storyboard and W170 comparison. Left underside access, raised side roll, below-frame replacement, base press and recovery. Hidden pack trajectory and authored contact coordinates remain estimates."
+    }
+  ],
+  "limitations": [
+    "Source ARMATURE only: no weapon mesh, source camera or finger IK; original full chain comes from master-owned W219 rig.",
+    "Exact W17010 knots, holds, four-element pack, fixed rails/discs/housing, UV and anchors retained. Only interpolation changes to C1 PCHIP.",
+    "61 poses/60 intervals are discrete samples; not a claim of continuous native60fps interpolation.",
+    "Left handling role rechecked: weapon-relative max wrist excursion left0.84365646 vs right0.000000573 armature units across61 source samples; existing contacts also explicitly identify LEFT handling.",
+    "Authored gripWindow .09..23 reach, .23..62 contact, .62..70 release during final insertion; zero hand-driven pack shift from the exact W170 seated knot .70 onward. FIRST review found the previous .76..84 fade kept the seated cell displaced by4.75 display units at .70. Contact/event timing remains authored.",
+    "Existing effective trace-rifle framing/contact coordinates retained. Ordinary fingerless player-skin full arms; no length stretch, axis damping or hidden support hacks.",
+    "Master owns dynamic shared loaders, original action/full-chain attachment, all generated resources, route/lifecycle, builds and native QA. FIRST images, same-worker review/correction or justified no-change, integration and SECOND remain pending."
+  ]
+}

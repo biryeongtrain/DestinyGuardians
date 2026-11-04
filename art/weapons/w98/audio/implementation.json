@@ -1,0 +1,558 @@
+{
+  "stage": "W98",
+  "wholeGoalAchieved": false,
+  "authorization": "User-provided public Drive audio folder; no redistribution license inferred.",
+  "sourceRoot": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+  "sourcePinsSha256": "9f609533f36c193e01a569f3cf6cda76b37571fc44bc3682aadf5c159893c66e",
+  "folderDiscoverySha256": "c2f23f05e25dc7f7994c103efe729759d905a6dce8e804a230f5a6befd0fe1cb",
+  "generatorSha256": "06df584abad9d58cd2e21ef58352de6b2b3101eab7ab15eaeb4e2e5967676fd9",
+  "helperSha256": "e3f1dd846b69dcb5a5cad685f310ffb9a6b6a7d1ab7fbc1d11851557bca6911e",
+  "ffmpegSha256": "6d175a4743ca50256e89a8cdd731100f9cee33bd79aeea46894d209410dc6617",
+  "events": {
+    "weapon.seventh_seraph_officer_revolver.fire": {
+      "subtitle": "subtitles.destiny.weapon.hand_cannon.fire",
+      "sounds": [
+        {
+          "name": "destiny:w33/weapon/hand_cannon/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        },
+        {
+          "name": "destiny:w98/seventh_seraph_officer_revolver/fire_2",
+          "stream": false,
+          "attenuation_distance": 32
+        },
+        {
+          "name": "destiny:w98/seventh_seraph_officer_revolver/fire_3",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.steelfeather_repeater.fire": {
+      "subtitle": "subtitles.destiny.weapon.auto_rifle.fire",
+      "sounds": [
+        {
+          "name": "destiny:w33/weapon/auto_rifle/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        },
+        {
+          "name": "destiny:w98/steelfeather_repeater/fire_2",
+          "stream": false,
+          "attenuation_distance": 32
+        },
+        {
+          "name": "destiny:w98/steelfeather_repeater/fire_3",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.the_recluse.fire": {
+      "subtitle": "subtitles.destiny.weapon.submachine_gun.fire",
+      "sounds": [
+        {
+          "name": "destiny:w33/weapon/submachine_gun/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        },
+        {
+          "name": "destiny:w98/the_recluse/fire_2",
+          "stream": false,
+          "attenuation_distance": 32
+        },
+        {
+          "name": "destiny:w98/the_recluse/fire_3",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    }
+  },
+  "policy": "Three equal default-weight named alternatives. Vanilla client chooses a clip for one unchanged emitted sound event; no added shots, pitch change, concatenation or looping in pack clips.",
+  "records": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "variant": 1,
+      "retainedSound": "destiny:w33/weapon/hand_cannon/fire",
+      "sha256": "4f3507053df36ad2e30a934b454a5777e08267a5a7bd0978f6fa99da8efcec03",
+      "output": {
+        "duration_seconds": 2.62,
+        "sample_peak_dbfs": -5.3906,
+        "rms_dbfs": -26.3773,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 23962,
+        "sha256": "4f3507053df36ad2e30a934b454a5777e08267a5a7bd0978f6fa99da8efcec03"
+      },
+      "transforms": "unchanged W33"
+    },
+    {
+      "event": "weapon.seventh_seraph_officer_revolver.fire",
+      "drive_id": "11OH0jBrFeBerVyKc06h_iYQdps69zw-Y",
+      "original_name": "Fire_2.wav",
+      "source_folder": "Seventh Seraph Officer Revolver",
+      "source_folder_id": "1nrnK-zGDIanwW7xKpBUqjjwQ33I_j-2l",
+      "source_sha256": "eaff185ba9002bdc2dec451a52708c273914ad713fbc9d45e1615d7e4effbb67",
+      "limitations": [
+        "Same named uploader weapon and Fire action; not independently audition verified. No inferred alternate attack."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/11OH0jBrFeBerVyKc06h_iYQdps69zw-Y/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1nrnK-zGDIanwW7xKpBUqjjwQ33I_j-2l",
+      "sound": "destiny:w98/seventh_seraph_officer_revolver/fire_2",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w98/seventh_seraph_officer_revolver/fire_2.ogg",
+      "source_bytes": 1319796,
+      "source_audio": {
+        "duration_seconds": 3.713188,
+        "sample_peak_dbfs": -7.7092,
+        "rms_dbfs": -29.92,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 3.7131875,
+        "crop_end_seconds": 3.713188,
+        "trim_start_seconds": 0.0,
+        "trim_end_seconds": 2.25,
+        "silence_rms_threshold_dbfs": -53.1988,
+        "gain_db": 1.7092,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.25,
+        "sample_peak_dbfs": -6.3328,
+        "rms_dbfs": -26.1008,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 21102,
+        "sha256": "2740b911d62e221bdd6880b81c9b0e1d60c9eeb525faaca49b8f102baaf087a3"
+      },
+      "id": "seventh_seraph_officer_revolver",
+      "variant": 2,
+      "conversionPolicyEvent": "weapon.hand_cannon.fire"
+    },
+    {
+      "event": "weapon.seventh_seraph_officer_revolver.fire",
+      "drive_id": "1LVvo7eOOl9z3D7Ma8CFZz2XqIBWk1fA1",
+      "original_name": "Fire_3.wav",
+      "source_folder": "Seventh Seraph Officer Revolver",
+      "source_folder_id": "1nrnK-zGDIanwW7xKpBUqjjwQ33I_j-2l",
+      "source_sha256": "3d3b54a5626d7d3887696e710275ea7ab68c73ae17aacc1765548bac6a7cfc05",
+      "limitations": [
+        "Same named uploader weapon and Fire action; not independently audition verified. No inferred alternate attack."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1LVvo7eOOl9z3D7Ma8CFZz2XqIBWk1fA1/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1nrnK-zGDIanwW7xKpBUqjjwQ33I_j-2l",
+      "sound": "destiny:w98/seventh_seraph_officer_revolver/fire_3",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w98/seventh_seraph_officer_revolver/fire_3.ogg",
+      "source_bytes": 1445380,
+      "source_audio": {
+        "duration_seconds": 4.069156,
+        "sample_peak_dbfs": -7.7315,
+        "rms_dbfs": -30.2772,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 4.06915625,
+        "crop_end_seconds": 4.069156,
+        "trim_start_seconds": 0.03,
+        "trim_end_seconds": 2.54,
+        "silence_rms_threshold_dbfs": -53.3497,
+        "gain_db": 1.7315,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.51,
+        "sample_peak_dbfs": -5.9514,
+        "rms_dbfs": -26.4763,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 23005,
+        "sha256": "2f663d31de4b48d2b2a4b67f05f0513d353aad914bb97b1ee5ce62b577a518f8"
+      },
+      "id": "seventh_seraph_officer_revolver",
+      "variant": 3,
+      "conversionPolicyEvent": "weapon.hand_cannon.fire"
+    },
+    {
+      "id": "steelfeather_repeater",
+      "variant": 1,
+      "retainedSound": "destiny:w33/weapon/auto_rifle/fire",
+      "sha256": "1e2cf1113b874d05dd93ee63d37e3f0c068452d3a85b57c3a38f65b8586516c3",
+      "output": {
+        "duration_seconds": 2.88,
+        "sample_peak_dbfs": -5.7904,
+        "rms_dbfs": -24.7507,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 25888,
+        "sha256": "1e2cf1113b874d05dd93ee63d37e3f0c068452d3a85b57c3a38f65b8586516c3"
+      },
+      "transforms": "unchanged W33"
+    },
+    {
+      "event": "weapon.steelfeather_repeater.fire",
+      "drive_id": "1sbF9OZirnkNdjgRjQzI3IGSU1n-GvthN",
+      "original_name": "Fire_2.wav",
+      "source_folder": "Steelfeather Repeater",
+      "source_folder_id": "1uebuIuIJZ2J5s5yiK99TC5RvGt70LfiM",
+      "source_sha256": "7de56a57ed2f35ca044ed9a322acf4c6c9e09e156cd8d59101ba5c819a7d2d5e",
+      "limitations": [
+        "Same named uploader weapon and Fire action; not independently audition verified. No inferred alternate attack."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1sbF9OZirnkNdjgRjQzI3IGSU1n-GvthN/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1uebuIuIJZ2J5s5yiK99TC5RvGt70LfiM",
+      "sound": "destiny:w98/steelfeather_repeater/fire_2",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w98/steelfeather_repeater/fire_2.ogg",
+      "source_bytes": 1400750,
+      "source_audio": {
+        "duration_seconds": 3.942656,
+        "sample_peak_dbfs": -13.1963,
+        "rms_dbfs": -33.1186,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 3.94265625,
+        "crop_end_seconds": 3.942656,
+        "trim_start_seconds": 0.03,
+        "trim_end_seconds": 2.82,
+        "silence_rms_threshold_dbfs": -54.0286,
+        "gain_db": 7.1963,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.79,
+        "sample_peak_dbfs": -5.3781,
+        "rms_dbfs": -24.4768,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 25347,
+        "sha256": "c7267cb18248132eb6bdce607df1196019f73c056afedb276910d22172a5ab88"
+      },
+      "id": "steelfeather_repeater",
+      "variant": 2,
+      "conversionPolicyEvent": "weapon.auto_rifle.fire"
+    },
+    {
+      "event": "weapon.steelfeather_repeater.fire",
+      "drive_id": "1YPKzyXNN8VULHx3az-LIj1vRxvEbn2m2",
+      "original_name": "Fire_3.wav",
+      "source_folder": "Steelfeather Repeater",
+      "source_folder_id": "1uebuIuIJZ2J5s5yiK99TC5RvGt70LfiM",
+      "source_sha256": "28d3b401f7aee71110ebd9289ffd776401c3514f46c6dbdbdc6f0b7e4b17e4a9",
+      "limitations": [
+        "Same named uploader weapon and Fire action; not independently audition verified. No inferred alternate attack."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1YPKzyXNN8VULHx3az-LIj1vRxvEbn2m2/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1uebuIuIJZ2J5s5yiK99TC5RvGt70LfiM",
+      "sound": "destiny:w98/steelfeather_repeater/fire_3",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w98/steelfeather_repeater/fire_3.ogg",
+      "source_bytes": 1391062,
+      "source_audio": {
+        "duration_seconds": 3.915188,
+        "sample_peak_dbfs": -13.0775,
+        "rms_dbfs": -33.21,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 3.9151875,
+        "crop_end_seconds": 3.915188,
+        "trim_start_seconds": 0.0,
+        "trim_end_seconds": 2.86,
+        "silence_rms_threshold_dbfs": -54.0715,
+        "gain_db": 7.0775,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.86,
+        "sample_peak_dbfs": -5.376,
+        "rms_dbfs": -24.7485,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 25554,
+        "sha256": "4fcd285822eb92d2e607f02300cd90f399e3575ed83d198c5839a1321f9f9e77"
+      },
+      "id": "steelfeather_repeater",
+      "variant": 3,
+      "conversionPolicyEvent": "weapon.auto_rifle.fire"
+    },
+    {
+      "id": "the_recluse",
+      "variant": 1,
+      "retainedSound": "destiny:w33/weapon/submachine_gun/fire",
+      "sha256": "521f3fb27c4d60dbba7995458e48777c221d32ff042eb7dc59389044a817767e",
+      "output": {
+        "duration_seconds": 3.0,
+        "sample_peak_dbfs": -5.6149,
+        "rms_dbfs": -28.6261,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 25975,
+        "sha256": "521f3fb27c4d60dbba7995458e48777c221d32ff042eb7dc59389044a817767e"
+      },
+      "transforms": "unchanged W33"
+    },
+    {
+      "event": "weapon.the_recluse.fire",
+      "drive_id": "1Bk9MjeDEo_tNd5SPchPUd2SFSzANNPZQ",
+      "original_name": "Fire_2.mp3",
+      "source_folder": "The Recluse",
+      "source_folder_id": "1cA-sz60bEIzxcYGQ9nUlJJX3E9AY4nS2",
+      "source_sha256": "38785ec1fbe0ffabd708fc1f7d87613075168e63f7436ab934e731d04f8184a1",
+      "limitations": [
+        "Same named uploader weapon and Fire action; not independently audition verified. No inferred alternate attack."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1Bk9MjeDEo_tNd5SPchPUd2SFSzANNPZQ/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1cA-sz60bEIzxcYGQ9nUlJJX3E9AY4nS2",
+      "sound": "destiny:w98/the_recluse/fire_2",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w98/the_recluse/fire_2.ogg",
+      "source_bytes": 106051,
+      "source_audio": {
+        "duration_seconds": 4.10125,
+        "sample_peak_dbfs": -11.6167,
+        "rms_dbfs": -35.409,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 4.10125,
+        "crop_end_seconds": 4.10125,
+        "trim_start_seconds": 0.07,
+        "trim_end_seconds": 2.06,
+        "silence_rms_threshold_dbfs": -53.6067,
+        "gain_db": 5.6167,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 1.99,
+        "sample_peak_dbfs": -6.0487,
+        "rms_dbfs": -26.6595,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 18703,
+        "sha256": "b146a7c4b26a33876f456421c57554f86314cff0304bf58ebc99ad5eac698e95"
+      },
+      "id": "the_recluse",
+      "variant": 2,
+      "conversionPolicyEvent": "weapon.submachine_gun.fire"
+    },
+    {
+      "event": "weapon.the_recluse.fire",
+      "drive_id": "1IEtFJGa54cMnSsePQGn0VHbiEWEK2Xdx",
+      "original_name": "Fire_3.mp3",
+      "source_folder": "The Recluse",
+      "source_folder_id": "1cA-sz60bEIzxcYGQ9nUlJJX3E9AY4nS2",
+      "source_sha256": "cd529048b52a80b57c6a7f372da9b9c51c005d270d2fcedbf42cee62b6f8ae23",
+      "limitations": [
+        "Same named uploader weapon and Fire action; not independently audition verified. No inferred alternate attack."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1IEtFJGa54cMnSsePQGn0VHbiEWEK2Xdx/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1cA-sz60bEIzxcYGQ9nUlJJX3E9AY4nS2",
+      "sound": "destiny:w98/the_recluse/fire_3",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w98/the_recluse/fire_3.ogg",
+      "source_bytes": 116082,
+      "source_audio": {
+        "duration_seconds": 4.519188,
+        "sample_peak_dbfs": -11.5899,
+        "rms_dbfs": -36.0509,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 4.5191875,
+        "crop_end_seconds": 4.519188,
+        "trim_start_seconds": 0.07,
+        "trim_end_seconds": 2.01,
+        "silence_rms_threshold_dbfs": -53.7887,
+        "gain_db": 5.5899,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 1.94,
+        "sample_peak_dbfs": -5.2904,
+        "rms_dbfs": -26.8315,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 16650,
+        "sha256": "fcb11df2f2aac31852fcfdbe11e48fc3d5435a4377351e1696e8a07cb0ff8d4e"
+      },
+      "id": "the_recluse",
+      "variant": 3,
+      "conversionPolicyEvent": "weapon.submachine_gun.fire"
+    }
+  ],
+  "auditions": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "order": [
+        1,
+        2,
+        3
+      ],
+      "silenceSecondsAfterEach": 1,
+      "rate": 32000,
+      "positions": [
+        {
+          "variant": 1,
+          "startSample": 0,
+          "samples": 83840,
+          "sound": "destiny:w33/weapon/hand_cannon/fire"
+        },
+        {
+          "variant": 2,
+          "startSample": 115840,
+          "samples": 72000,
+          "sound": "destiny:w98/seventh_seraph_officer_revolver/fire_2"
+        },
+        {
+          "variant": 3,
+          "startSample": 219840,
+          "samples": 80320,
+          "sound": "destiny:w98/seventh_seraph_officer_revolver/fire_3"
+        }
+      ]
+    },
+    {
+      "id": "steelfeather_repeater",
+      "order": [
+        1,
+        2,
+        3
+      ],
+      "silenceSecondsAfterEach": 1,
+      "rate": 32000,
+      "positions": [
+        {
+          "variant": 1,
+          "startSample": 0,
+          "samples": 92160,
+          "sound": "destiny:w33/weapon/auto_rifle/fire"
+        },
+        {
+          "variant": 2,
+          "startSample": 124160,
+          "samples": 89280,
+          "sound": "destiny:w98/steelfeather_repeater/fire_2"
+        },
+        {
+          "variant": 3,
+          "startSample": 245440,
+          "samples": 91520,
+          "sound": "destiny:w98/steelfeather_repeater/fire_3"
+        }
+      ]
+    },
+    {
+      "id": "the_recluse",
+      "order": [
+        1,
+        2,
+        3
+      ],
+      "silenceSecondsAfterEach": 1,
+      "rate": 32000,
+      "positions": [
+        {
+          "variant": 1,
+          "startSample": 0,
+          "samples": 96000,
+          "sound": "destiny:w33/weapon/submachine_gun/fire"
+        },
+        {
+          "variant": 2,
+          "startSample": 128000,
+          "samples": 63680,
+          "sound": "destiny:w98/the_recluse/fire_2"
+        },
+        {
+          "variant": 3,
+          "startSample": 223680,
+          "samples": 62080,
+          "sound": "destiny:w98/the_recluse/fire_3"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Filename/folder identity, not independent acoustic identification or runtime audio output proof.",
+    "Other catalog weapons keep their documented family representatives.",
+    "Dragonfly/Firefly surrogate and W97 HUD finding remain unresolved.",
+    "Audition WAV concatenates pack-derived clips with silence only for user review; never a runtime clip."
+  ],
+  "outputs": {
+    "src/main/resources/assets/destiny/sounds/w98/seventh_seraph_officer_revolver/fire_2.ogg": "2740b911d62e221bdd6880b81c9b0e1d60c9eeb525faaca49b8f102baaf087a3",
+    "src/main/resources/assets/destiny/sounds/w98/seventh_seraph_officer_revolver/fire_3.ogg": "2f663d31de4b48d2b2a4b67f05f0513d353aad914bb97b1ee5ce62b577a518f8",
+    "art/weapons/w98/audio/audition/seventh_seraph_officer_revolver_fire_123.wav": "979905cd92f9a8cc5391e7eb545dcd769ae92a844b97796aee79c900f4983a9c",
+    "src/main/resources/assets/destiny/sounds/w98/steelfeather_repeater/fire_2.ogg": "c7267cb18248132eb6bdce607df1196019f73c056afedb276910d22172a5ab88",
+    "src/main/resources/assets/destiny/sounds/w98/steelfeather_repeater/fire_3.ogg": "4fcd285822eb92d2e607f02300cd90f399e3575ed83d198c5839a1321f9f9e77",
+    "art/weapons/w98/audio/audition/steelfeather_repeater_fire_123.wav": "686f35f74c71c02e7b4a1ebcb37d85467d1be1408876dd89020ad76cd0c0914c",
+    "src/main/resources/assets/destiny/sounds/w98/the_recluse/fire_2.ogg": "b146a7c4b26a33876f456421c57554f86314cff0304bf58ebc99ad5eac698e95",
+    "src/main/resources/assets/destiny/sounds/w98/the_recluse/fire_3.ogg": "fcb11df2f2aac31852fcfdbe11e48fc3d5435a4377351e1696e8a07cb0ff8d4e",
+    "art/weapons/w98/audio/audition/the_recluse_fire_123.wav": "3706a92b06ca714e8989f21a0411ce0857dbb1860f3b09c2bdc47e92c5a82a91",
+    "art/weapons/w98/audio/event-definitions.json": "24286cb17935e0484f12095ebd8182a47511edc29b62f01c351c58a16e0ee0cd"
+  }
+}

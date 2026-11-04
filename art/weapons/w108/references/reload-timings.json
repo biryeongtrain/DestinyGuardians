@@ -1,0 +1,776 @@
+{
+  "stage": "W108",
+  "repository": "https://github.com/d2foundry/oracle_engine",
+  "commit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+  "commitDate": "2026-05-20",
+  "source": "build_resources/weapon_formulas.json",
+  "licenseSources": [
+    "art/weapons/w46/MIT-LICENSE",
+    "art/weapons/w46/UNLICENSE"
+  ],
+  "formula": {
+    "effectiveReloadStat": "min(100, baseReloadStat + tier.reloadBonus)",
+    "seconds": "(evpp * effectiveReloadStat^2 + vpp * effectiveReloadStat + offset) * tier.durationMultiplier",
+    "ticks": "ceil(seconds * 20), once after stat and scalar",
+    "curveClassification": "Same pinned historical W46 Oracle curve inputs used by W62",
+    "ammoPercent": "Source field retained in audit only; no independent ammo-transfer timing is claimed."
+  },
+  "entries": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "hash": 3037520408,
+      "family": "Hand Cannon",
+      "category": "default",
+      "subfamily": "Precision",
+      "curve": {
+        "evpp": 6.137590643e-05,
+        "vpp": -0.02385522011,
+        "offset": 3.600042253,
+        "ammo_percent": 0.71
+      },
+      "baseReloadStat": 49,
+      "baseSeconds": 2.5785000189484295,
+      "baseTicks": 52,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "steelfeather_repeater",
+      "hash": 1251729046,
+      "family": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "curve": {
+        "evpp": 8.55689e-05,
+        "vpp": -0.0242021,
+        "offset": 2.80673006666667
+      },
+      "baseReloadStat": 50,
+      "baseSeconds": 1.81054731666667,
+      "baseTicks": 37,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "cold_denial",
+      "hash": 1216130969,
+      "family": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "curve": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "baseReloadStat": 34,
+      "baseSeconds": 2.15996051146667,
+      "baseTicks": 44,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "blast_furnace",
+      "hash": 3843477312,
+      "family": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "curve": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "baseReloadStat": 36,
+      "baseSeconds": 2.12155202346667,
+      "baseTicks": 43,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "the_recluse",
+      "hash": 3354242550,
+      "family": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "curve": {
+        "evpp": 6.08642e-05,
+        "vpp": -0.0191345,
+        "offset": 2.62769
+      },
+      "baseReloadStat": 28,
+      "baseSeconds": 2.1396415328,
+      "baseTicks": 43,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "brass_attacks",
+      "hash": 2121785039,
+      "family": "Sidearm",
+      "category": "default",
+      "subfamily": "Heavy_Burst",
+      "curve": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "baseReloadStat": 27,
+      "baseSeconds": 1.8277522219,
+      "baseTicks": 37,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "hollow_words",
+      "hash": 607191995,
+      "family": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "curve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "baseReloadStat": 20,
+      "baseSeconds": 2.45707364,
+      "baseTicks": 50,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "null_composure",
+      "hash": 1644680957,
+      "family": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "curve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "baseReloadStat": 48,
+      "baseSeconds": 2.0196719423999996,
+      "baseTicks": 41,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "coriolis_force",
+      "hash": 3512349612,
+      "family": "Fusion Rifle",
+      "category": "aggressive",
+      "subfamily": "Aggressive",
+      "curve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "baseReloadStat": 34,
+      "baseSeconds": 2.2263132835999997,
+      "baseTicks": 45,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "retraced_path",
+      "hash": 548958835,
+      "family": "Trace Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "curve": {
+        "evpp": 5e-05,
+        "vpp": -0.0155,
+        "offset": 2.65
+      },
+      "baseReloadStat": 45,
+      "baseSeconds": 2.05375,
+      "baseTicks": 42,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "fixed_odds",
+      "hash": 2194955522,
+      "family": "Machine Gun",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "curve": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905,
+        "ammo_percent": 0.65
+      },
+      "baseReloadStat": 31,
+      "baseSeconds": 5.2609558311,
+      "baseTicks": 106,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "hammerhead",
+      "hash": 603242241,
+      "family": "Machine Gun",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "curve": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905,
+        "ammo_percent": 0.65
+      },
+      "baseReloadStat": 64,
+      "baseSeconds": 4.5355806696,
+      "baseTicks": 91,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    },
+    {
+      "id": "retrofit_escapade",
+      "hash": 3103325054,
+      "family": "Machine Gun",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "curve": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905,
+        "ammo_percent": 0.65
+      },
+      "baseReloadStat": 67,
+      "baseSeconds": 4.4794152639,
+      "baseTicks": 90,
+      "shellReload": false,
+      "firstDelayClassification": "HISTORICAL_W46_WHOLE_MAGAZINE_CURVE"
+    }
+  ],
+  "reloads": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "stacks": 1,
+      "firstTicks": 48,
+      "intervalTicks": 48,
+      "baseReloadStat": 49,
+      "effectiveReloadStat": 57
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "stacks": 2,
+      "firstTicks": 34,
+      "intervalTicks": 34,
+      "baseReloadStat": 49,
+      "effectiveReloadStat": 99
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "stacks": 3,
+      "firstTicks": 32,
+      "intervalTicks": 32,
+      "baseReloadStat": 49,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "stacks": 4,
+      "firstTicks": 31,
+      "intervalTicks": 31,
+      "baseReloadStat": 49,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "stacks": 5,
+      "firstTicks": 30,
+      "intervalTicks": 30,
+      "baseReloadStat": 49,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "steelfeather_repeater",
+      "stacks": 1,
+      "firstTicks": 33,
+      "intervalTicks": 33,
+      "baseReloadStat": 50,
+      "effectiveReloadStat": 58
+    },
+    {
+      "id": "steelfeather_repeater",
+      "stacks": 2,
+      "firstTicks": 23,
+      "intervalTicks": 23,
+      "baseReloadStat": 50,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "steelfeather_repeater",
+      "stacks": 3,
+      "firstTicks": 22,
+      "intervalTicks": 22,
+      "baseReloadStat": 50,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "steelfeather_repeater",
+      "stacks": 4,
+      "firstTicks": 21,
+      "intervalTicks": 21,
+      "baseReloadStat": 50,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "steelfeather_repeater",
+      "stacks": 5,
+      "firstTicks": 20,
+      "intervalTicks": 20,
+      "baseReloadStat": 50,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "cold_denial",
+      "stacks": 1,
+      "firstTicks": 40,
+      "intervalTicks": 40,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 42
+    },
+    {
+      "id": "cold_denial",
+      "stacks": 2,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 84
+    },
+    {
+      "id": "cold_denial",
+      "stacks": 3,
+      "firstTicks": 24,
+      "intervalTicks": 24,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 94
+    },
+    {
+      "id": "cold_denial",
+      "stacks": 4,
+      "firstTicks": 22,
+      "intervalTicks": 22,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "cold_denial",
+      "stacks": 5,
+      "firstTicks": 21,
+      "intervalTicks": 21,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "blast_furnace",
+      "stacks": 1,
+      "firstTicks": 39,
+      "intervalTicks": 39,
+      "baseReloadStat": 36,
+      "effectiveReloadStat": 44
+    },
+    {
+      "id": "blast_furnace",
+      "stacks": 2,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 36,
+      "effectiveReloadStat": 86
+    },
+    {
+      "id": "blast_furnace",
+      "stacks": 3,
+      "firstTicks": 23,
+      "intervalTicks": 23,
+      "baseReloadStat": 36,
+      "effectiveReloadStat": 96
+    },
+    {
+      "id": "blast_furnace",
+      "stacks": 4,
+      "firstTicks": 22,
+      "intervalTicks": 22,
+      "baseReloadStat": 36,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "blast_furnace",
+      "stacks": 5,
+      "firstTicks": 21,
+      "intervalTicks": 21,
+      "baseReloadStat": 36,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "the_recluse",
+      "stacks": 1,
+      "firstTicks": 40,
+      "intervalTicks": 40,
+      "baseReloadStat": 28,
+      "effectiveReloadStat": 36
+    },
+    {
+      "id": "the_recluse",
+      "stacks": 2,
+      "firstTicks": 28,
+      "intervalTicks": 28,
+      "baseReloadStat": 28,
+      "effectiveReloadStat": 78
+    },
+    {
+      "id": "the_recluse",
+      "stacks": 3,
+      "firstTicks": 25,
+      "intervalTicks": 25,
+      "baseReloadStat": 28,
+      "effectiveReloadStat": 88
+    },
+    {
+      "id": "the_recluse",
+      "stacks": 4,
+      "firstTicks": 23,
+      "intervalTicks": 23,
+      "baseReloadStat": 28,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "the_recluse",
+      "stacks": 5,
+      "firstTicks": 22,
+      "intervalTicks": 22,
+      "baseReloadStat": 28,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 1,
+      "firstTicks": 34,
+      "intervalTicks": 34,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 35
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 2,
+      "firstTicks": 24,
+      "intervalTicks": 24,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 77
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 3,
+      "firstTicks": 22,
+      "intervalTicks": 22,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 87
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 4,
+      "firstTicks": 20,
+      "intervalTicks": 20,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 5,
+      "firstTicks": 19,
+      "intervalTicks": 19,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "hollow_words",
+      "stacks": 1,
+      "firstTicks": 46,
+      "intervalTicks": 46,
+      "baseReloadStat": 20,
+      "effectiveReloadStat": 28
+    },
+    {
+      "id": "hollow_words",
+      "stacks": 2,
+      "firstTicks": 32,
+      "intervalTicks": 32,
+      "baseReloadStat": 20,
+      "effectiveReloadStat": 70
+    },
+    {
+      "id": "hollow_words",
+      "stacks": 3,
+      "firstTicks": 29,
+      "intervalTicks": 29,
+      "baseReloadStat": 20,
+      "effectiveReloadStat": 80
+    },
+    {
+      "id": "hollow_words",
+      "stacks": 4,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 20,
+      "effectiveReloadStat": 95
+    },
+    {
+      "id": "hollow_words",
+      "stacks": 5,
+      "firstTicks": 24,
+      "intervalTicks": 24,
+      "baseReloadStat": 20,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "null_composure",
+      "stacks": 1,
+      "firstTicks": 38,
+      "intervalTicks": 38,
+      "baseReloadStat": 48,
+      "effectiveReloadStat": 56
+    },
+    {
+      "id": "null_composure",
+      "stacks": 2,
+      "firstTicks": 27,
+      "intervalTicks": 27,
+      "baseReloadStat": 48,
+      "effectiveReloadStat": 98
+    },
+    {
+      "id": "null_composure",
+      "stacks": 3,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 48,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "null_composure",
+      "stacks": 4,
+      "firstTicks": 25,
+      "intervalTicks": 25,
+      "baseReloadStat": 48,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "null_composure",
+      "stacks": 5,
+      "firstTicks": 24,
+      "intervalTicks": 24,
+      "baseReloadStat": 48,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "coriolis_force",
+      "stacks": 1,
+      "firstTicks": 42,
+      "intervalTicks": 42,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 42
+    },
+    {
+      "id": "coriolis_force",
+      "stacks": 2,
+      "firstTicks": 29,
+      "intervalTicks": 29,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 84
+    },
+    {
+      "id": "coriolis_force",
+      "stacks": 3,
+      "firstTicks": 27,
+      "intervalTicks": 27,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 94
+    },
+    {
+      "id": "coriolis_force",
+      "stacks": 4,
+      "firstTicks": 25,
+      "intervalTicks": 25,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "coriolis_force",
+      "stacks": 5,
+      "firstTicks": 24,
+      "intervalTicks": 24,
+      "baseReloadStat": 34,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 1,
+      "firstTicks": 39,
+      "intervalTicks": 39,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 53
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 2,
+      "firstTicks": 30,
+      "intervalTicks": 30,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 95
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 3,
+      "firstTicks": 28,
+      "intervalTicks": 28,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 4,
+      "firstTicks": 27,
+      "intervalTicks": 27,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 5,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "fixed_odds",
+      "stacks": 1,
+      "firstTicks": 99,
+      "intervalTicks": 99,
+      "baseReloadStat": 31,
+      "effectiveReloadStat": 39
+    },
+    {
+      "id": "fixed_odds",
+      "stacks": 2,
+      "firstTicks": 77,
+      "intervalTicks": 77,
+      "baseReloadStat": 31,
+      "effectiveReloadStat": 81
+    },
+    {
+      "id": "fixed_odds",
+      "stacks": 3,
+      "firstTicks": 72,
+      "intervalTicks": 72,
+      "baseReloadStat": 31,
+      "effectiveReloadStat": 91
+    },
+    {
+      "id": "fixed_odds",
+      "stacks": 4,
+      "firstTicks": 67,
+      "intervalTicks": 67,
+      "baseReloadStat": 31,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "fixed_odds",
+      "stacks": 5,
+      "firstTicks": 64,
+      "intervalTicks": 64,
+      "baseReloadStat": 31,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "hammerhead",
+      "stacks": 1,
+      "firstTicks": 86,
+      "intervalTicks": 86,
+      "baseReloadStat": 64,
+      "effectiveReloadStat": 72
+    },
+    {
+      "id": "hammerhead",
+      "stacks": 2,
+      "firstTicks": 72,
+      "intervalTicks": 72,
+      "baseReloadStat": 64,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "hammerhead",
+      "stacks": 3,
+      "firstTicks": 70,
+      "intervalTicks": 70,
+      "baseReloadStat": 64,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "hammerhead",
+      "stacks": 4,
+      "firstTicks": 67,
+      "intervalTicks": 67,
+      "baseReloadStat": 64,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "hammerhead",
+      "stacks": 5,
+      "firstTicks": 64,
+      "intervalTicks": 64,
+      "baseReloadStat": 64,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "retrofit_escapade",
+      "stacks": 1,
+      "firstTicks": 85,
+      "intervalTicks": 85,
+      "baseReloadStat": 67,
+      "effectiveReloadStat": 75
+    },
+    {
+      "id": "retrofit_escapade",
+      "stacks": 2,
+      "firstTicks": 72,
+      "intervalTicks": 72,
+      "baseReloadStat": 67,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "retrofit_escapade",
+      "stacks": 3,
+      "firstTicks": 70,
+      "intervalTicks": 70,
+      "baseReloadStat": 67,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "retrofit_escapade",
+      "stacks": 4,
+      "firstTicks": 67,
+      "intervalTicks": 67,
+      "baseReloadStat": 67,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "retrofit_escapade",
+      "stacks": 5,
+      "firstTicks": 64,
+      "intervalTicks": 64,
+      "baseReloadStat": 67,
+      "effectiveReloadStat": 100
+    }
+  ],
+  "limitations": [
+    "Manifest proves exact selected optional traits and stats, not that any stack automatically selects a trait.",
+    "Clarity is community research. Its live-branch commit is pinned; this is not a new Destiny gameplay measurement.",
+    "The exact-base Clarity entry does not establish stow persistence, reload consumption, refresh scope or expiration mode.",
+    "Absolute reload durations inherit W46 historical community approximations, not a current sandbox certification.",
+    "Reload-start snapshot and tick quantization are local integration policies.",
+    "No enhanced, newer weapon copies, armor/magazine/masterwork modifiers or unproved combined-perk formulas.",
+    "All 13 selected supported weapons use whole-magazine timing; no first-shell measurement is inferred."
+  ]
+}

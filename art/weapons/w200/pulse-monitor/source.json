@@ -1,0 +1,2603 @@
+{
+  "stage": "W200",
+  "checked": "2026-10-27",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "sourcePins": {
+    "/tmp/destiny-weapons-w30/bungie-items.json": {
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "/tmp/destiny-weapons-w60/bungie-plugsets.json": {
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "/tmp/destiny-weapons-w60/manifest.json": {
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "/private/tmp/destiny-w190/ddc-perks.html": {
+      "sha256": "8b8109ecd80601965edcfc9559a784bd17cfc0e2e84419385ab68788fd376437",
+      "bytes": 761058
+    },
+    "src/main/resources/destiny/weapons/w30.json": {
+      "sha256": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+      "bytes": 13784
+    },
+    "src/main/resources/destiny/weapons/w40-characteristics.json": {
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "src/main/resources/destiny/weapons/w83-exotics.json": {
+      "sha256": "bab9f12b8ffb99422a31b927455391d9f292da67ffa226ad3ddc96b0b1283d56",
+      "bytes": 3027
+    },
+    "src/main/resources/destiny/weapons/w84-exotics.json": {
+      "sha256": "481a6353fb5d3fc040d71977da9c173c9e2fc8754050fe8bb237da5172837d6e",
+      "bytes": 2599
+    },
+    "art/weapons/w43/extraction.json": {
+      "sha256": "a133082c322a07e81837d0409caf09596dfad4fd9889904d1bdae7acd471d9d5",
+      "bytes": 10866
+    },
+    "art/weapons/w46/weapon_formulas.json": {
+      "sha256": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+      "bytes": 94651
+    },
+    "src/main/resources/destiny/weapons/w58-handling.json": {
+      "sha256": "4de7d346a93c822784fafa69b62ac66148d51cc11cf2da6706367682b414d3f1",
+      "bytes": 9597
+    },
+    "src/main/resources/destiny/weapons/w44-aim.json": {
+      "sha256": "0d0a38469c28a74c1a77489d346184eccef347a604c0c0c455d1c7c2e1a80fc8",
+      "bytes": 16991
+    },
+    "src/main/resources/destiny/weapons/w68-snapshot.json": {
+      "sha256": "7e824633be32953e6c75d3d856ce765223fbb1cbcc3b01affca3d83eb8fcb738",
+      "bytes": 10470
+    }
+  },
+  "generatorSHA256": "ad6c298ce2a23771bf043902455471f59529c82fa8381040fab0ceb391a22df3",
+  "resourceSHA256": "6f100ef5d7e0b9ba58f65202a58cf3dc13963dbed34b66770193d50d3b64c76d",
+  "manifestComponents": {
+    "DestinyInventoryItemDefinition": "/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+    "DestinyPlugSetDefinition": "/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+  },
+  "baseDefinition": {
+    "displayProperties": {
+      "description": "Automatically reloads the magazine and improves weapon handling when wounded—even when this weapon is stowed.",
+      "name": "Pulse Monitor",
+      "icon": "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png",
+      "iconHash": 2592049270,
+      "iconSequences": [
+        {
+          "frames": [
+            "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png"
+          ]
+        },
+        {
+          "frames": [
+            "/common/destiny2_content/icons/8821c5e2cfc2165abccb08c49f24ff6e.png"
+          ]
+        }
+      ],
+      "hasIcon": true
+    },
+    "tooltipNotifications": [
+      {
+        "displayString": "These trait columns can be enhanced once requirements have been met:\n\n• To upgrade left column traits, Tier 2 weapon enhancements are required.\n• To upgrade right column traits, Tier 3 weapon enhancements are required.",
+        "displayStyle": "ui_display_style_crafting"
+      }
+    ],
+    "backgroundColor": {
+      "colorHash": 0,
+      "red": 0,
+      "green": 0,
+      "blue": 0,
+      "alpha": 0
+    },
+    "isFeaturedItem": false,
+    "isHolofoil": false,
+    "isAdept": false,
+    "itemTypeDisplayName": "Trait",
+    "flavorText": "",
+    "uiItemDisplayStyle": "",
+    "itemTypeAndTierDisplayName": "Common Trait",
+    "displaySource": "",
+    "tooltipStyle": "build",
+    "action": {
+      "verbName": "Dismantle",
+      "verbDescription": "",
+      "isPositive": false,
+      "requiredCooldownSeconds": 0,
+      "requiredItems": [],
+      "progressionRewards": [],
+      "actionTypeLabel": "shard",
+      "rewardSheetHash": 0,
+      "rewardItemHash": 0,
+      "rewardSiteHash": 0,
+      "requiredCooldownHash": 0,
+      "deleteOnAction": true,
+      "consumeEntireStack": false,
+      "useOnAcquire": false
+    },
+    "inventory": {
+      "maxStackSize": 1,
+      "bucketTypeHash": 1469714392,
+      "recoveryBucketTypeHash": 215593132,
+      "tierTypeHash": 3340296461,
+      "isInstanceItem": false,
+      "nonTransferrableOriginal": false,
+      "tierTypeName": "Common",
+      "tierType": 2,
+      "expirationTooltip": "",
+      "expiredInActivityMessage": "",
+      "expiredInOrbitMessage": "",
+      "suppressExpirationWhenObjectivesComplete": true
+    },
+    "plug": {
+      "insertionRules": [],
+      "plugCategoryIdentifier": "frames",
+      "plugCategoryHash": 7906839,
+      "onActionRecreateSelf": false,
+      "actionRewardSiteHash": 0,
+      "actionRewardItemOverrideHash": 0,
+      "insertionMaterialRequirementHash": 0,
+      "previewItemOverrideHash": 0,
+      "enabledMaterialRequirementHash": 0,
+      "enabledRules": [],
+      "uiPlugLabel": "",
+      "plugStyle": 0,
+      "plugAvailability": 0,
+      "alternateUiPlugLabel": "",
+      "alternatePlugStyle": 0,
+      "isDummyPlug": false,
+      "parentItemOverride": {
+        "additionalEquipRequirementsDisplayStrings": []
+      },
+      "applyStatsToSocketOwnerItem": false
+    },
+    "acquireRewardSiteHash": 0,
+    "acquireUnlockHash": 0,
+    "investmentStats": [],
+    "perks": [
+      {
+        "requirementDisplayString": "",
+        "perkHash": 3046044845,
+        "perkVisibility": 0
+      }
+    ],
+    "allowActions": true,
+    "doesPostmasterPullHaveSideEffects": false,
+    "nonTransferrable": true,
+    "itemCategoryHashes": [
+      3708671066,
+      610365472,
+      59
+    ],
+    "specialItemType": 0,
+    "itemType": 19,
+    "itemSubType": 0,
+    "classType": 3,
+    "breakerType": 0,
+    "equippable": false,
+    "defaultDamageType": 0,
+    "isWrapper": false,
+    "hash": 972757866,
+    "index": 4336,
+    "redacted": false,
+    "blacklisted": false
+  },
+  "excludedDefinitions": [
+    {
+      "displayProperties": {
+        "description": "Automatically reloads the magazine and improves weapon handling when wounded—even when this weapon is stowed.",
+        "name": "Pulse Monitor",
+        "icon": "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png",
+        "iconHash": 2592049270,
+        "iconSequences": [
+          {
+            "frames": [
+              "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png"
+            ]
+          },
+          {
+            "frames": [
+              "/common/destiny2_content/icons/8821c5e2cfc2165abccb08c49f24ff6e.png"
+            ]
+          }
+        ],
+        "hasIcon": true
+      },
+      "tooltipNotifications": [],
+      "backgroundColor": {
+        "colorHash": 0,
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 0
+      },
+      "isFeaturedItem": false,
+      "isHolofoil": false,
+      "isAdept": false,
+      "itemTypeDisplayName": "Trait",
+      "flavorText": "",
+      "uiItemDisplayStyle": "",
+      "itemTypeAndTierDisplayName": "Common Trait",
+      "displaySource": "",
+      "tooltipStyle": "build",
+      "action": {
+        "verbName": "Dismantle",
+        "verbDescription": "",
+        "isPositive": false,
+        "requiredCooldownSeconds": 0,
+        "requiredItems": [],
+        "progressionRewards": [],
+        "actionTypeLabel": "shard",
+        "rewardSheetHash": 0,
+        "rewardItemHash": 0,
+        "rewardSiteHash": 0,
+        "requiredCooldownHash": 0,
+        "deleteOnAction": true,
+        "consumeEntireStack": false,
+        "useOnAcquire": false
+      },
+      "inventory": {
+        "maxStackSize": 1,
+        "bucketTypeHash": 1469714392,
+        "recoveryBucketTypeHash": 215593132,
+        "tierTypeHash": 3340296461,
+        "isInstanceItem": false,
+        "nonTransferrableOriginal": false,
+        "tierTypeName": "Common",
+        "tierType": 2,
+        "expirationTooltip": "",
+        "expiredInActivityMessage": "",
+        "expiredInOrbitMessage": "",
+        "suppressExpirationWhenObjectivesComplete": true
+      },
+      "plug": {
+        "insertionRules": [],
+        "plugCategoryIdentifier": "frames",
+        "plugCategoryHash": 7906839,
+        "onActionRecreateSelf": false,
+        "actionRewardSiteHash": 0,
+        "actionRewardItemOverrideHash": 0,
+        "insertionMaterialRequirementHash": 0,
+        "previewItemOverrideHash": 0,
+        "enabledMaterialRequirementHash": 0,
+        "enabledRules": [],
+        "uiPlugLabel": "",
+        "plugStyle": 0,
+        "plugAvailability": 0,
+        "alternateUiPlugLabel": "",
+        "alternatePlugStyle": 0,
+        "isDummyPlug": false,
+        "parentItemOverride": {
+          "additionalEquipRequirementsDisplayStrings": []
+        },
+        "applyStatsToSocketOwnerItem": false
+      },
+      "acquireRewardSiteHash": 0,
+      "acquireUnlockHash": 0,
+      "investmentStats": [],
+      "perks": [
+        {
+          "requirementDisplayString": "",
+          "perkHash": 3046044845,
+          "perkVisibility": 2
+        }
+      ],
+      "allowActions": true,
+      "doesPostmasterPullHaveSideEffects": false,
+      "nonTransferrable": true,
+      "itemCategoryHashes": [
+        59,
+        3708671066,
+        610365472
+      ],
+      "specialItemType": 0,
+      "itemType": 19,
+      "itemSubType": 0,
+      "classType": 3,
+      "breakerType": 0,
+      "equippable": false,
+      "defaultDamageType": 0,
+      "isWrapper": false,
+      "hash": 205890336,
+      "index": 7990,
+      "redacted": false,
+      "blacklisted": false
+    },
+    {
+      "displayProperties": {
+        "description": "Automatically reloads the magazine and improves weapon handling when lightly wounded—even when this weapon is stowed.",
+        "name": "Pulse Monitor",
+        "icon": "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png",
+        "iconHash": 2592049270,
+        "iconSequences": [
+          {
+            "frames": [
+              "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png"
+            ]
+          },
+          {
+            "frames": [
+              "/common/destiny2_content/icons/8821c5e2cfc2165abccb08c49f24ff6e.png"
+            ]
+          }
+        ],
+        "hasIcon": true
+      },
+      "tooltipNotifications": [
+        {
+          "displayString": "Reduces perk requirements to activate.",
+          "displayStyle": "ui_display_style_enhanced_perk"
+        }
+      ],
+      "backgroundColor": {
+        "colorHash": 0,
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 0
+      },
+      "isFeaturedItem": false,
+      "isHolofoil": false,
+      "isAdept": false,
+      "itemTypeDisplayName": "Enhanced Trait",
+      "flavorText": "",
+      "uiItemDisplayStyle": "",
+      "itemTypeAndTierDisplayName": "Uncommon Enhanced Trait",
+      "displaySource": "",
+      "tooltipStyle": "build",
+      "action": {
+        "verbName": "Dismantle",
+        "verbDescription": "",
+        "isPositive": false,
+        "requiredCooldownSeconds": 0,
+        "requiredItems": [],
+        "progressionRewards": [],
+        "actionTypeLabel": "shard",
+        "rewardSheetHash": 0,
+        "rewardItemHash": 0,
+        "rewardSiteHash": 0,
+        "requiredCooldownHash": 0,
+        "deleteOnAction": true,
+        "consumeEntireStack": false,
+        "useOnAcquire": false
+      },
+      "inventory": {
+        "maxStackSize": 1,
+        "bucketTypeHash": 1469714392,
+        "recoveryBucketTypeHash": 215593132,
+        "tierTypeHash": 2395677314,
+        "isInstanceItem": false,
+        "nonTransferrableOriginal": false,
+        "tierTypeName": "Uncommon",
+        "tierType": 3,
+        "expirationTooltip": "",
+        "expiredInActivityMessage": "",
+        "expiredInOrbitMessage": "",
+        "suppressExpirationWhenObjectivesComplete": true
+      },
+      "plug": {
+        "insertionRules": [],
+        "plugCategoryIdentifier": "frames",
+        "plugCategoryHash": 7906839,
+        "onActionRecreateSelf": false,
+        "actionRewardSiteHash": 0,
+        "actionRewardItemOverrideHash": 0,
+        "insertionMaterialRequirementHash": 0,
+        "previewItemOverrideHash": 0,
+        "enabledMaterialRequirementHash": 0,
+        "enabledRules": [],
+        "uiPlugLabel": "",
+        "plugStyle": 0,
+        "plugAvailability": 0,
+        "alternateUiPlugLabel": "",
+        "alternatePlugStyle": 0,
+        "isDummyPlug": false,
+        "parentItemOverride": {
+          "additionalEquipRequirementsDisplayStrings": []
+        },
+        "applyStatsToSocketOwnerItem": false
+      },
+      "acquireRewardSiteHash": 0,
+      "acquireUnlockHash": 0,
+      "investmentStats": [],
+      "perks": [
+        {
+          "requirementDisplayString": "",
+          "perkHash": 1090536201,
+          "perkVisibility": 2
+        }
+      ],
+      "allowActions": true,
+      "doesPostmasterPullHaveSideEffects": false,
+      "nonTransferrable": true,
+      "itemCategoryHashes": [
+        3708671066,
+        610365472,
+        59
+      ],
+      "specialItemType": 0,
+      "itemType": 19,
+      "itemSubType": 0,
+      "classType": 3,
+      "breakerType": 0,
+      "equippable": false,
+      "defaultDamageType": 0,
+      "isWrapper": false,
+      "hash": 1685378950,
+      "index": 4337,
+      "redacted": false,
+      "blacklisted": false
+    },
+    {
+      "displayProperties": {
+        "description": "Automatically reloads the magazine and improves weapon handling when lightly wounded—even when this weapon is stowed.",
+        "name": "Pulse Monitor",
+        "icon": "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png",
+        "iconHash": 2592049270,
+        "iconSequences": [
+          {
+            "frames": [
+              "/common/destiny2_content/icons/64642b7455e88ffde77be53ce7cb7c05.png"
+            ]
+          },
+          {
+            "frames": [
+              "/common/destiny2_content/icons/8821c5e2cfc2165abccb08c49f24ff6e.png"
+            ]
+          }
+        ],
+        "hasIcon": true
+      },
+      "tooltipNotifications": [
+        {
+          "displayString": "Enhanced traits have greater capabilities than traits found on randomly dropped weapons. Use Ascendant Alloys found in challenging activities to upgrade enhanced traits.",
+          "displayStyle": "ui_display_style_info"
+        }
+      ],
+      "backgroundColor": {
+        "colorHash": 0,
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 0
+      },
+      "isFeaturedItem": false,
+      "isHolofoil": false,
+      "isAdept": false,
+      "itemTypeDisplayName": "Enhanced Trait",
+      "flavorText": "",
+      "uiItemDisplayStyle": "",
+      "itemTypeAndTierDisplayName": "Uncommon Enhanced Trait",
+      "displaySource": "",
+      "tooltipStyle": "build",
+      "action": {
+        "verbName": "Dismantle",
+        "verbDescription": "",
+        "isPositive": false,
+        "requiredCooldownSeconds": 0,
+        "requiredItems": [],
+        "progressionRewards": [],
+        "actionTypeLabel": "shard",
+        "rewardSheetHash": 0,
+        "rewardItemHash": 0,
+        "rewardSiteHash": 0,
+        "requiredCooldownHash": 0,
+        "deleteOnAction": true,
+        "consumeEntireStack": false,
+        "useOnAcquire": false
+      },
+      "inventory": {
+        "maxStackSize": 1,
+        "bucketTypeHash": 1469714392,
+        "recoveryBucketTypeHash": 215593132,
+        "tierTypeHash": 2395677314,
+        "isInstanceItem": false,
+        "nonTransferrableOriginal": false,
+        "tierTypeName": "Uncommon",
+        "tierType": 3,
+        "expirationTooltip": "",
+        "expiredInActivityMessage": "",
+        "expiredInOrbitMessage": "",
+        "suppressExpirationWhenObjectivesComplete": true
+      },
+      "plug": {
+        "insertionRules": [],
+        "plugCategoryIdentifier": "frames",
+        "plugCategoryHash": 7906839,
+        "onActionRecreateSelf": false,
+        "actionRewardSiteHash": 0,
+        "actionRewardItemOverrideHash": 0,
+        "insertionMaterialRequirementHash": 0,
+        "previewItemOverrideHash": 0,
+        "enabledMaterialRequirementHash": 0,
+        "enabledRules": [],
+        "uiPlugLabel": "",
+        "plugStyle": 0,
+        "plugAvailability": 0,
+        "alternateUiPlugLabel": "",
+        "alternatePlugStyle": 0,
+        "isDummyPlug": false,
+        "parentItemOverride": {
+          "additionalEquipRequirementsDisplayStrings": []
+        },
+        "applyStatsToSocketOwnerItem": false
+      },
+      "acquireRewardSiteHash": 0,
+      "acquireUnlockHash": 0,
+      "investmentStats": [],
+      "perks": [
+        {
+          "requirementDisplayString": "",
+          "perkHash": 1090536201,
+          "perkVisibility": 2
+        }
+      ],
+      "allowActions": true,
+      "doesPostmasterPullHaveSideEffects": false,
+      "nonTransferrable": true,
+      "itemCategoryHashes": [
+        59,
+        3708671066,
+        610365472
+      ],
+      "specialItemType": 0,
+      "itemType": 19,
+      "itemSubType": 0,
+      "classType": 3,
+      "breakerType": 0,
+      "equippable": false,
+      "defaultDamageType": 0,
+      "isWrapper": false,
+      "hash": 320071920,
+      "index": 7991,
+      "redacted": false,
+      "blacklisted": false
+    }
+  ],
+  "excludedReissuedRolls": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "hash": 3037520408,
+      "socket": 3,
+      "perkHash": 205890336,
+      "plugSetHash": 903350103
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "hash": 2723241847,
+      "socket": 3,
+      "perkHash": 205890336,
+      "plugSetHash": 2564227946
+    },
+    {
+      "id": "dream_breaker",
+      "hash": 2931957300,
+      "socket": 3,
+      "perkHash": 205890336,
+      "plugSetHash": 3785896921
+    },
+    {
+      "id": "deafening_whisper",
+      "hash": 981718087,
+      "socket": 3,
+      "perkHash": 205890336,
+      "plugSetHash": 3110206796
+    },
+    {
+      "id": "pyroclastic_flow",
+      "hash": 1289324202,
+      "socket": 3,
+      "perkHash": 205890336,
+      "plugSetHash": 528513254
+    }
+  ],
+  "catalogScan": [
+    {
+      "id": "duke_mk_44",
+      "hash": 2112909414,
+      "matches": []
+    },
+    {
+      "id": "austringer",
+      "hash": 3055790362,
+      "matches": []
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "hash": 3037520408,
+      "matches": [
+        {
+          "id": "seventh_seraph_officer_revolver",
+          "hash": 3037520408,
+          "socket": 3,
+          "perkHash": 972757866,
+          "plugSetHash": 903350103
+        }
+      ]
+    },
+    {
+      "id": "halfdan_d",
+      "hash": 3778520450,
+      "matches": []
+    },
+    {
+      "id": "ammit_ar2",
+      "hash": 2119346509,
+      "matches": []
+    },
+    {
+      "id": "gnawing_hunger",
+      "hash": 821154603,
+      "matches": []
+    },
+    {
+      "id": "steelfeather_repeater",
+      "hash": 1251729046,
+      "matches": []
+    },
+    {
+      "id": "cold_denial",
+      "hash": 1216130969,
+      "matches": [
+        {
+          "id": "cold_denial",
+          "hash": 1216130969,
+          "socket": 3,
+          "perkHash": 972757866,
+          "plugSetHash": 330841869
+        }
+      ]
+    },
+    {
+      "id": "bygones",
+      "hash": 2712244741,
+      "matches": []
+    },
+    {
+      "id": "chattering_bone",
+      "hash": 568515759,
+      "matches": []
+    },
+    {
+      "id": "blast_furnace",
+      "hash": 3843477312,
+      "matches": []
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "hash": 1280933460,
+      "matches": []
+    },
+    {
+      "id": "frontier_justice",
+      "hash": 273396910,
+      "matches": []
+    },
+    {
+      "id": "distant_relation",
+      "hash": 2034817450,
+      "matches": []
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "hash": 2723241847,
+      "matches": []
+    },
+    {
+      "id": "aishas_embrace",
+      "hash": 2638190703,
+      "matches": []
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "matches": []
+    },
+    {
+      "id": "antiope_d",
+      "hash": 566976653,
+      "matches": []
+    },
+    {
+      "id": "bug_out_bag",
+      "hash": 2744715540,
+      "matches": []
+    },
+    {
+      "id": "ikelos_smg_v1_0_1",
+      "hash": 1723472487,
+      "matches": []
+    },
+    {
+      "id": "the_recluse",
+      "hash": 3354242550,
+      "matches": []
+    },
+    {
+      "id": "allied_demand",
+      "hash": 1532276803,
+      "matches": []
+    },
+    {
+      "id": "farewell",
+      "hash": 541188001,
+      "matches": []
+    },
+    {
+      "id": "lonesome",
+      "hash": 2199171672,
+      "matches": []
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "hash": 3751622019,
+      "matches": []
+    },
+    {
+      "id": "high_albedo",
+      "hash": 1197486957,
+      "matches": []
+    },
+    {
+      "id": "brass_attacks",
+      "hash": 2121785039,
+      "matches": []
+    },
+    {
+      "id": "biting_winds",
+      "hash": 1621657423,
+      "matches": []
+    },
+    {
+      "id": "whispering_slab",
+      "hash": 211938782,
+      "matches": []
+    },
+    {
+      "id": "bite_of_the_fox",
+      "hash": 1403800851,
+      "matches": []
+    },
+    {
+      "id": "beloved",
+      "hash": 3107853529,
+      "matches": []
+    },
+    {
+      "id": "apostate",
+      "hash": 2164448701,
+      "matches": []
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "hash": 912150785,
+      "matches": []
+    },
+    {
+      "id": "dust_rock_blues",
+      "hash": 636912560,
+      "matches": [
+        {
+          "id": "dust_rock_blues",
+          "hash": 636912560,
+          "socket": 3,
+          "perkHash": 972757866,
+          "plugSetHash": 3511609070
+        }
+      ]
+    },
+    {
+      "id": "first_in_last_out",
+      "hash": 3616586446,
+      "matches": [
+        {
+          "id": "first_in_last_out",
+          "hash": 3616586446,
+          "socket": 3,
+          "perkHash": 972757866,
+          "plugSetHash": 267999755
+        }
+      ]
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "hash": 2217366863,
+      "matches": [
+        {
+          "id": "parcel_of_stardust_fell_to_earth",
+          "hash": 2217366863,
+          "socket": 4,
+          "perkHash": 972757866,
+          "plugSetHash": 3424940310
+        }
+      ]
+    },
+    {
+      "id": "ikelos_sg_v1_0_1",
+      "hash": 1887808042,
+      "matches": []
+    },
+    {
+      "id": "erentil_fr4",
+      "hash": 2398848320,
+      "matches": []
+    },
+    {
+      "id": "hollow_words",
+      "hash": 607191995,
+      "matches": []
+    },
+    {
+      "id": "dream_breaker",
+      "hash": 2931957300,
+      "matches": [
+        {
+          "id": "dream_breaker",
+          "hash": 2931957300,
+          "socket": 3,
+          "perkHash": 972757866,
+          "plugSetHash": 3785896921
+        }
+      ]
+    },
+    {
+      "id": "null_composure",
+      "hash": 1644680957,
+      "matches": []
+    },
+    {
+      "id": "coriolis_force",
+      "hash": 3512349612,
+      "matches": [
+        {
+          "id": "coriolis_force",
+          "hash": 3512349612,
+          "socket": 3,
+          "perkHash": 972757866,
+          "plugSetHash": 2568674372
+        }
+      ]
+    },
+    {
+      "id": "line_in_the_sand",
+      "hash": 946443267,
+      "matches": []
+    },
+    {
+      "id": "stormchaser",
+      "hash": 3652506829,
+      "matches": []
+    },
+    {
+      "id": "retraced_path",
+      "hash": 548958835,
+      "matches": []
+    },
+    {
+      "id": "salvager_s_salvo",
+      "hash": 2060863616,
+      "matches": []
+    },
+    {
+      "id": "deafening_whisper",
+      "hash": 981718087,
+      "matches": []
+    },
+    {
+      "id": "edge_transit",
+      "hash": 218335759,
+      "matches": [
+        {
+          "id": "edge_transit",
+          "hash": 218335759,
+          "socket": 3,
+          "perkHash": 972757866,
+          "plugSetHash": 447678063
+        }
+      ]
+    },
+    {
+      "id": "canis_major",
+      "hash": 2066434718,
+      "matches": []
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "hash": 1311684613,
+      "matches": []
+    },
+    {
+      "id": "bad_omens",
+      "hash": 991314988,
+      "matches": []
+    },
+    {
+      "id": "bellowing_giant",
+      "hash": 2186258845,
+      "matches": []
+    },
+    {
+      "id": "code_duello",
+      "hash": 2496242052,
+      "matches": []
+    },
+    {
+      "id": "pyroclastic_flow",
+      "hash": 1289324202,
+      "matches": []
+    },
+    {
+      "id": "fixed_odds",
+      "hash": 2194955522,
+      "matches": []
+    },
+    {
+      "id": "hammerhead",
+      "hash": 603242241,
+      "matches": []
+    },
+    {
+      "id": "retrofit_escapade",
+      "hash": 3103325054,
+      "matches": []
+    },
+    {
+      "id": "abide_the_return",
+      "hash": 1644160541,
+      "matches": []
+    },
+    {
+      "id": "goldtusk",
+      "hash": 3371413057,
+      "matches": []
+    },
+    {
+      "id": "crown_splitter",
+      "hash": 2782325302,
+      "matches": []
+    },
+    {
+      "id": "falling_guillotine",
+      "hash": 614426548,
+      "matches": []
+    },
+    {
+      "id": "temptation_s_hook",
+      "hash": 35794111,
+      "matches": []
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "hash": 254636484,
+      "matches": []
+    },
+    {
+      "id": "ace_of_spades",
+      "hash": 347366834,
+      "matches": []
+    },
+    {
+      "id": "izanagis_burden",
+      "hash": 3211806999,
+      "matches": []
+    }
+  ],
+  "socketProofs": [
+    {
+      "roll": {
+        "id": "seventh_seraph_officer_revolver",
+        "hash": 3037520408,
+        "socket": 3,
+        "perkHash": 972757866,
+        "plugSetHash": 903350103
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804697,
+        "singleInitialItemHash": 280464955,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 280464955
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 903350103,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 280464955
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 205890336
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2010801679
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1354429876
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 4071163871
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 903350103,
+        "index": 744,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    },
+    {
+      "roll": {
+        "id": "cold_denial",
+        "hash": 1216130969,
+        "socket": 3,
+        "perkHash": 972757866,
+        "plugSetHash": 330841869
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804697,
+        "singleInitialItemHash": 2387244414,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 2387244414
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 330841869,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1631667848
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2779035018
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2387244414
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2450788523
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 4071163871
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 330841869,
+        "index": 809,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    },
+    {
+      "roll": {
+        "id": "dust_rock_blues",
+        "hash": 636912560,
+        "socket": 3,
+        "perkHash": 972757866,
+        "plugSetHash": 3511609070
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804697,
+        "singleInitialItemHash": 588594999,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 3161816588
+          },
+          {
+            "plugItemHash": 3300816228
+          },
+          {
+            "plugItemHash": 588594999
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 3511609070,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 3161816588
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 4071163871
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2869569095
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 588594999
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1015611457
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 3511609070,
+        "index": 418,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    },
+    {
+      "roll": {
+        "id": "first_in_last_out",
+        "hash": 3616586446,
+        "socket": 3,
+        "perkHash": 972757866,
+        "plugSetHash": 267999755
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804697,
+        "singleInitialItemHash": 972757866,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 972757866
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 267999755,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1168162263
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 3300816228
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1866048759
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 3161816588
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 267999755,
+        "index": 817,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    },
+    {
+      "roll": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "hash": 2217366863,
+        "socket": 4,
+        "perkHash": 972757866,
+        "plugSetHash": 3424940310
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804696,
+        "singleInitialItemHash": 3425386926,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 3425386926
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 3424940310,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 3425386926
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1168162263
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 588594999
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 3300816228
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 706527188
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 3424940310,
+        "index": 322,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    },
+    {
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 3,
+        "perkHash": 972757866,
+        "plugSetHash": 3785896921
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804697,
+        "singleInitialItemHash": 280464955,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 280464955
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 3785896921,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 280464955
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 3300816228
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 588594999
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 205890336
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 4071163871
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2846385770
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2946784966
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1570042021
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1645158859
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2039302152
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1556840489
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 957782887
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 3785896921,
+        "index": 646,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    },
+    {
+      "roll": {
+        "id": "coriolis_force",
+        "hash": 3512349612,
+        "socket": 3,
+        "perkHash": 972757866,
+        "plugSetHash": 2568674372
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804697,
+        "singleInitialItemHash": 2450788523,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 2450788523
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 2568674372,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2010801679
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 1645158859
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2450788523
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 588594999
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2779035018
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 2568674372,
+        "index": 853,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    },
+    {
+      "roll": {
+        "id": "edge_transit",
+        "hash": 218335759,
+        "socket": 3,
+        "perkHash": 972757866,
+        "plugSetHash": 447678063
+      },
+      "category": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804697,
+        "singleInitialItemHash": 3300816228,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 3300816228
+          },
+          {
+            "plugItemHash": 2869569095
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 447678063,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2846385770
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2869569095
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 3300816228
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 957782887
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 4071163871
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 972757866
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 447678063,
+        "index": 335,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 972757866
+      }
+    }
+  ],
+  "companionAudit": [
+    {
+      "perk": "threat_detector",
+      "roll": {
+        "id": "seventh_seraph_officer_revolver",
+        "hash": 3037520408,
+        "socket": 3,
+        "perkHash": 4071163871,
+        "plugSetHash": 903350103
+      },
+      "allowed": false
+    },
+    {
+      "perk": "threat_detector",
+      "roll": {
+        "id": "cold_denial",
+        "hash": 1216130969,
+        "socket": 3,
+        "perkHash": 4071163871,
+        "plugSetHash": 330841869
+      },
+      "allowed": false
+    },
+    {
+      "perk": "threat_detector",
+      "roll": {
+        "id": "dust_rock_blues",
+        "hash": 636912560,
+        "socket": 3,
+        "perkHash": 4071163871,
+        "plugSetHash": 3511609070
+      },
+      "allowed": false
+    },
+    {
+      "perk": "snapshot",
+      "roll": {
+        "id": "dust_rock_blues",
+        "hash": 636912560,
+        "socket": 4,
+        "perkHash": 957782887,
+        "plugSetHash": 1624251370
+      },
+      "allowed": true
+    },
+    {
+      "perk": "threat_detector",
+      "roll": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "hash": 2217366863,
+        "socket": 3,
+        "perkHash": 4071163871,
+        "plugSetHash": 2514419370
+      },
+      "allowed": true
+    },
+    {
+      "perk": "snapshot",
+      "roll": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "hash": 2217366863,
+        "socket": 3,
+        "perkHash": 957782887,
+        "plugSetHash": 2514419370
+      },
+      "allowed": true
+    },
+    {
+      "perk": "quickdraw",
+      "roll": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "hash": 2217366863,
+        "socket": 4,
+        "perkHash": 706527188,
+        "plugSetHash": 3424940310
+      },
+      "allowed": false
+    },
+    {
+      "perk": "threat_detector",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 3,
+        "perkHash": 4071163871,
+        "plugSetHash": 3785896921
+      },
+      "allowed": false
+    },
+    {
+      "perk": "snapshot",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 3,
+        "perkHash": 957782887,
+        "plugSetHash": 3785896921
+      },
+      "allowed": false
+    },
+    {
+      "perk": "quickdraw",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 4,
+        "perkHash": 706527188,
+        "plugSetHash": 1206254527
+      },
+      "allowed": true
+    },
+    {
+      "perk": "backup_plan",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 4,
+        "perkHash": 1600092898,
+        "plugSetHash": 1206254527
+      },
+      "allowed": true
+    },
+    {
+      "perk": "frenzy",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 4,
+        "perkHash": 4104185692,
+        "plugSetHash": 1206254527
+      },
+      "allowed": true
+    },
+    {
+      "perk": "snapshot",
+      "roll": {
+        "id": "edge_transit",
+        "hash": 218335759,
+        "socket": 3,
+        "perkHash": 957782887,
+        "plugSetHash": 447678063
+      },
+      "allowed": false
+    },
+    {
+      "perk": "threat_detector",
+      "roll": {
+        "id": "edge_transit",
+        "hash": 218335759,
+        "socket": 3,
+        "perkHash": 4071163871,
+        "plugSetHash": 447678063
+      },
+      "allowed": false
+    },
+    {
+      "perk": "quickdraw",
+      "roll": {
+        "id": "edge_transit",
+        "hash": 218335759,
+        "socket": 4,
+        "perkHash": 706527188,
+        "plugSetHash": 2535579724
+      },
+      "allowed": true
+    }
+  ],
+  "coSelections": [
+    {
+      "id": "dust_rock_blues",
+      "perk": "snapshot",
+      "roll": {
+        "id": "dust_rock_blues",
+        "hash": 636912560,
+        "socket": 4,
+        "perkHash": 957782887,
+        "plugSetHash": 1624251370
+      }
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "perk": "threat_detector",
+      "roll": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "hash": 2217366863,
+        "socket": 3,
+        "perkHash": 4071163871,
+        "plugSetHash": 2514419370
+      }
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "perk": "snapshot",
+      "roll": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "hash": 2217366863,
+        "socket": 3,
+        "perkHash": 957782887,
+        "plugSetHash": 2514419370
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "perk": "quickdraw",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 4,
+        "perkHash": 706527188,
+        "plugSetHash": 1206254527
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "perk": "backup_plan",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 4,
+        "perkHash": 1600092898,
+        "plugSetHash": 1206254527
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "perk": "frenzy",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 4,
+        "perkHash": 4104185692,
+        "plugSetHash": 1206254527
+      }
+    },
+    {
+      "id": "edge_transit",
+      "perk": "quickdraw",
+      "roll": {
+        "id": "edge_transit",
+        "hash": 218335759,
+        "socket": 4,
+        "perkHash": 706527188,
+        "plugSetHash": 2535579724
+      }
+    }
+  ],
+  "curveProofs": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "mapping": {
+        "id": "seventh_seraph_officer_revolver",
+        "family": "Hand Cannon",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": 0
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.002942857143,
+          "offset": 0.4782571429
+        },
+        "stow": {
+          "vpp": -0.002952380952,
+          "offset": 0.5133809524
+        },
+        "ads": {
+          "vpp": -0.001666666667,
+          "offset": 0.3316666667
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 30,
+        "readyTicks": 8,
+        "stowTicks": 9
+      },
+      "ads": {
+        "transitionTicks": 6,
+        "zoom": 1.4,
+        "falloffScalar": 1.5,
+        "stability": 52.0,
+        "recoilDirection": 84,
+        "kick": 1.032,
+        "bloomPerShot": 0.1064,
+        "recoveryPerTick": 0.04
+      }
+    },
+    {
+      "id": "cold_denial",
+      "mapping": {
+        "id": "cold_denial",
+        "family": "Pulse Rifle",
+        "category": "default",
+        "subfamily": "High-Impact",
+        "encodedPveCrit": 5
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.00312085,
+          "offset": 0.54370932
+        },
+        "stow": {
+          "vpp": -0.0035545,
+          "offset": 0.55005845
+        },
+        "ads": {
+          "vpp": -0.00196208,
+          "offset": 0.4574687
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 24,
+        "readyTicks": 10,
+        "stowTicks": 10
+      },
+      "ads": {
+        "transitionTicks": 9,
+        "zoom": 1.4,
+        "falloffScalar": 1.7,
+        "stability": 44.0,
+        "recoilDirection": 73,
+        "kick": 0.4416,
+        "bloomPerShot": 0.1208,
+        "recoveryPerTick": 0.04
+      }
+    },
+    {
+      "id": "dust_rock_blues",
+      "mapping": {
+        "id": "dust_rock_blues",
+        "family": "Shotgun",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": -20
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 34,
+        "readyTicks": 9,
+        "stowTicks": 10
+      },
+      "ads": {
+        "transitionTicks": 8,
+        "zoom": 1.2,
+        "falloffScalar": 1.0,
+        "stability": 45.0,
+        "recoilDirection": 64,
+        "kick": 1.46,
+        "bloomPerShot": 0.119,
+        "recoveryPerTick": 0.04
+      }
+    },
+    {
+      "id": "first_in_last_out",
+      "mapping": {
+        "id": "first_in_last_out",
+        "family": "Shotgun",
+        "category": "slug",
+        "subfamily": "Slug",
+        "encodedPveCrit": 13
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 60,
+        "readyTicks": 7,
+        "stowTicks": 8
+      },
+      "ads": {
+        "transitionTicks": 7,
+        "zoom": 1.2,
+        "falloffScalar": 1.2,
+        "stability": 40.0,
+        "recoilDirection": 58,
+        "kick": 1.52,
+        "bloomPerShot": 0.128,
+        "recoveryPerTick": 0.04
+      }
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "mapping": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "family": "Shotgun",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": -20
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 68,
+        "readyTicks": 7,
+        "stowTicks": 7
+      },
+      "ads": {
+        "transitionTicks": 6,
+        "zoom": 1.2,
+        "falloffScalar": 1.0,
+        "stability": 39.0,
+        "recoilDirection": 53,
+        "kick": 1.532,
+        "bloomPerShot": 0.1298,
+        "recoveryPerTick": 0.04
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "mapping": {
+        "id": "dream_breaker",
+        "family": "Fusion Rifle",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -25.5
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 27,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "ads": {
+        "transitionTicks": 8,
+        "zoom": 1.5,
+        "falloffScalar": 1.3,
+        "stability": 36.0,
+        "recoilDirection": 57,
+        "kick": 0.7056,
+        "bloomPerShot": 0.1352,
+        "recoveryPerTick": 0.04
+      }
+    },
+    {
+      "id": "coriolis_force",
+      "mapping": {
+        "id": "coriolis_force",
+        "family": "Fusion Rifle",
+        "category": "aggressive",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": -25.5
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 26,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "ads": {
+        "transitionTicks": 8,
+        "zoom": 1.5,
+        "falloffScalar": 1.3,
+        "stability": 37.0,
+        "recoilDirection": 50,
+        "kick": 0.7002,
+        "bloomPerShot": 0.1334,
+        "recoveryPerTick": 0.04
+      }
+    },
+    {
+      "id": "edge_transit",
+      "mapping": {
+        "id": "edge_transit",
+        "family": "Grenade Launcher",
+        "category": "heavy",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -25.5
+      },
+      "handling": {
+        "ready": {
+          "vpp": -0.00272791,
+          "offset": 0.55133684
+        },
+        "stow": {
+          "vpp": -0.00232786,
+          "offset": 0.48726765
+        },
+        "ads": {
+          "vpp": -0.00187072,
+          "offset": 0.50019128
+        }
+      },
+      "baseline": {
+        "supported": true,
+        "handling": 42,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "ads": {
+        "transitionTicks": 9,
+        "zoom": 1.3,
+        "falloffScalar": 1.0,
+        "stability": 42.0,
+        "recoilDirection": 70,
+        "kick": 1.0472,
+        "bloomPerShot": 0.1244,
+        "recoveryPerTick": 0.04
+      }
+    }
+  ],
+  "ddc": {
+    "row": 171,
+    "tab": "Weapon Perks",
+    "rawHTML": "<tr style=\"height: 89px\"><th id=\"1662574278R170\" style=\"height: 89px;\"><div style=\"line-height: 89px\">171</div></th><td class=\"s78\">Pulse Monitor</td><td class=\"s26\"><div style=\"width:70px;height:89px;\"><img src=\"https://docs.google.com/sheets-images-rt/AO43MLYbrbMchUe1dfo-Lqx23r29l77cRTUcI6UYSSu7GRaH4S5lIMvoTGMsJJtRtr1v62ZXgK83G83031Jx8STiJiwGAJfo8wt_aaBluNGqVLtWiTCltdEAATlwda7DP9vO8SfCTW-GJy9NT12c4S_RuLdoiHbsAzdGNH7F=w70-h89\" style=\"width:inherit;height:inherit;object-fit:scale-down;object-position:center center;pointer-events:none;\"/></div></td><td class=\"s16\" colspan=\"4\"><span style=\"font-weight:normal;font-style:italic;\">Upon reaching </span><span style=\"font-style:italic;color:#7cadff;\">30% </span><span style=\"font-style:italic;color:#ffd966;\">↑35%? </span><span style=\"font-style:italic;color:#7cadff;\">Shield HP</span><span style=\"font-style:italic;\">:<br></span>Refills Weapon. Grants +50 Handling, and 0.95x Ready/Stow Animation Duration Multiplier.<span style=\"font-style:italic;\"><br></span>Buff lasts until <span style=\"color:#7cadff;\">Shield HP</span> is <span style=\"color:#dd7e6b;\">restored </span>above <span style=\"color:#7cadff;\">30%</span> <span style=\"color:#ffd966;\">↑35%?</span>, then lingers for 1 second.<br><span style=\"font-weight:normal;font-style:italic;\">Buff can be activated while stowed, and persists through stow.</span></td></tr>",
+    "baseText": "171 Pulse Monitor Upon reaching 30% Shield HP : Refills Weapon. Grants +50 Handling, and 0.95x Ready/Stow Animation Duration Multiplier. Buff lasts until Shield HP is restored above 30% , then lingers for 1 second. Buff can be activated while stowed, and persists through stow.",
+    "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?gid=1662574278"
+  },
+  "policies": {
+    "nativeHealthConversion": "health/maxHealth<=.30; absorption excluded; no separate shields",
+    "episode": "one decision per observed low episode; initial low bind allowed; repeat low damage does not refill",
+    "reserves": "existing Primary infiniteReserve semantics; Special/Heavy conserve finite reserve/legacy overflow",
+    "timing": "20TPS local mapping; 20 ticks from first observed recovery; readers never extend",
+    "integration": "Master shared registry/runtime/lifecycle/damage/handling/ADS/HUD/GameTest registration"
+  }
+}

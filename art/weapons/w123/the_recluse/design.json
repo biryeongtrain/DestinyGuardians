@@ -1,0 +1,5997 @@
+{
+  "schema": "destiny.weapon-surface.w126.v1",
+  "id": "the_recluse",
+  "method": "authored semantic solid cuboids, rotated structural members and independent opaque face UV islands",
+  "frame": {
+    "mapping": [
+      "8 - source_y * scale",
+      "8 + source_z * scale",
+      "8 - source_x * scale"
+    ],
+    "scale": 32.58849594479781,
+    "anchor": [
+      8.0,
+      8.0,
+      8.0
+    ],
+    "source_bounds": [
+      [
+        6.907608059085483,
+        5.514096669089519,
+        -2.5808649310963325
+      ],
+      [
+        9.092390969701654,
+        14.598192922499933,
+        17.419135068903667
+      ]
+    ]
+  },
+  "magazine": {
+    "mesh": "Mesh_0007.rip",
+    "component": 1,
+    "coordinate_rebase": false,
+    "anchor": [
+      8,
+      8,
+      8
+    ]
+  },
+  "identity": [
+    "short stock and open lower frame",
+    "two grips and open trigger guard",
+    "octagonal open sight",
+    "long perforated muzzle and actual bore",
+    "default burgundy / white bird paint"
+  ],
+  "construction": {
+    "alpha_shells": 0,
+    "source_component_extrusion": false,
+    "solid_faces": 6,
+    "geometry": "semantic_geometry() contains deliberate receiver/stock/grip/sight/muzzle blocks",
+    "palette": {
+      "white": [
+        224,
+        226,
+        222
+      ],
+      "burgundy": [
+        124,
+        21,
+        37
+      ],
+      "rubber": [
+        29,
+        35,
+        40
+      ],
+      "steel": [
+        76,
+        85,
+        94
+      ],
+      "bore": [
+        10,
+        13,
+        17
+      ]
+    },
+    "uv": "independent face frames with 2px bleed; sides receive 1.28x density",
+    "detail": "W125 source-UV technique reused only for source seams/vents; no whole diffuse projection"
+  },
+  "parts": {
+    "body": [
+      {
+        "name": "receiver/main",
+        "from": [
+          7.35,
+          10.35,
+          4.0
+        ],
+        "to": [
+          8.65,
+          11.86,
+          16.22
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.105,
+            10.11
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "receiver/lower-keel",
+        "from": [
+          7.46,
+          10.05,
+          4.0
+        ],
+        "to": [
+          8.54,
+          10.42,
+          13.35
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            10.235,
+            8.675
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "receiver/rear-shoulder",
+        "from": [
+          7.36,
+          9.85,
+          13.7
+        ],
+        "to": [
+          8.64,
+          10.45,
+          16.25
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            10.149999999999999,
+            14.975
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "receiver/under-shoulder",
+        "from": [
+          7.41,
+          9.905000000000001,
+          11.187306716436508
+        ],
+        "to": [
+          8.59,
+          10.305,
+          13.61269328356349
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            10.105,
+            12.399999999999999
+          ],
+          "x": -171.70285503016314,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "receiver/top-seam",
+        "from": [
+          7.3,
+          11.86,
+          6.1
+        ],
+        "to": [
+          8.7,
+          12.0,
+          16.28
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.93,
+            11.190000000000001
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "power-rail/burgundy-core",
+        "from": [
+          7.45,
+          12.0,
+          8.35
+        ],
+        "to": [
+          8.55,
+          12.58,
+          16.35
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.29,
+            12.350000000000001
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "burgundy",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "power-rail/top-spine",
+        "from": [
+          7.52,
+          12.58,
+          8.5
+        ],
+        "to": [
+          8.48,
+          12.7,
+          16.35
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.64,
+            12.425
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "power-rail/bridge-9.0",
+        "from": [
+          7.32,
+          11.98,
+          9.0
+        ],
+        "to": [
+          8.68,
+          12.7,
+          9.2
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.34,
+            9.1
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "power-rail/bridge-12.5",
+        "from": [
+          7.32,
+          11.98,
+          12.5
+        ],
+        "to": [
+          8.68,
+          12.7,
+          12.7
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.34,
+            12.6
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "receiver/rear-top",
+        "from": [
+          7.36,
+          12.0,
+          13.0
+        ],
+        "to": [
+          8.64,
+          12.93,
+          16.5
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.465,
+            14.75
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "optic/hood-main",
+        "from": [
+          7.2,
+          11.88,
+          4.45
+        ],
+        "to": [
+          8.8,
+          13.04,
+          8.55
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.46,
+            6.5
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0003.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "optic/front-ramp",
+        "from": [
+          7.27,
+          12.345,
+          3.396601149765125
+        ],
+        "to": [
+          8.73,
+          12.935,
+          4.753398850234875
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.64,
+            4.075
+          ],
+          "x": -32.05014552672119,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0003.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "optic/front-cheek",
+        "from": [
+          7.25,
+          11.94,
+          3.64
+        ],
+        "to": [
+          8.75,
+          12.54,
+          4.74
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.239999999999998,
+            4.19
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0003.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "optic/lower-lip",
+        "from": [
+          7.16,
+          11.72,
+          3.44
+        ],
+        "to": [
+          8.84,
+          11.94,
+          6.8
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.83,
+            5.12
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0005.rip",
+        "source_component": 2,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "optic/rear-ramp",
+        "from": [
+          7.35,
+          12.72,
+          8.411365756010774
+        ],
+        "to": [
+          8.65,
+          12.94,
+          9.288634243989225
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.83,
+            8.85
+          ],
+          "x": 24.22774531795412,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0002.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "optic/crown",
+        "from": [
+          7.42,
+          13.04,
+          4.85
+        ],
+        "to": [
+          8.58,
+          13.3,
+          7.65
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            13.17,
+            6.25
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0003.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "optic/left-lock",
+        "from": [
+          7.0,
+          10.67,
+          5.12
+        ],
+        "to": [
+          7.39,
+          11.92,
+          6.7
+        ],
+        "rotation": {
+          "origin": [
+            7.195,
+            11.295,
+            5.91
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0003.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "optic/right-lock",
+        "from": [
+          8.61,
+          10.67,
+          5.12
+        ],
+        "to": [
+          9.0,
+          11.92,
+          6.7
+        ],
+        "rotation": {
+          "origin": [
+            8.805,
+            11.295,
+            5.91
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0003.rip",
+        "source_component": 2,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "stock/pad",
+        "from": [
+          7.32,
+          6.75,
+          16.48
+        ],
+        "to": [
+          8.68,
+          12.9,
+          17.3
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.825,
+            16.89
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0012.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "stock/painted-spine",
+        "from": [
+          7.36,
+          7.05,
+          15.9
+        ],
+        "to": [
+          8.64,
+          12.78,
+          16.51
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.915,
+            16.205000000000002
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "stock/bird-field",
+        "from": [
+          7.34,
+          9.45,
+          13.95
+        ],
+        "to": [
+          8.66,
+          12.18,
+          16.28
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            10.815,
+            15.115
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "stock/bird-body",
+        "from": [
+          7.37,
+          8.25,
+          14.85
+        ],
+        "to": [
+          8.63,
+          9.65,
+          16.25
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            8.95,
+            15.55
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "stock/bird-shoulder",
+        "from": [
+          7.365,
+          9.5,
+          13.390542387567747
+        ],
+        "to": [
+          8.635,
+          10.45,
+          16.10945761243225
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.975,
+            14.75
+          ],
+          "x": -147.77124256490146,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "stock/lower-brace",
+        "from": [
+          7.53,
+          6.875000000000001,
+          4.968273325624267
+        ],
+        "to": [
+          8.47,
+          7.325,
+          16.031726674375733
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            7.1000000000000005,
+            10.5
+          ],
+          "x": -12.528807709151511,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "stock/heel-brace",
+        "from": [
+          7.53,
+          7.71,
+          15.501833367360828
+        ],
+        "to": [
+          8.47,
+          8.19,
+          16.318166632639173
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            7.949999999999999,
+            15.91
+          ],
+          "x": 59.03624346792642,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": true
+      },
+      {
+        "name": "stock/front-heel",
+        "from": [
+          7.5,
+          5.56,
+          4.0
+        ],
+        "to": [
+          8.5,
+          6.13,
+          5.9
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            5.845,
+            4.95
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0004.rip",
+        "source_component": 2,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "foregrip/core",
+        "from": [
+          7.325,
+          7.484999999999999,
+          1.7487297913952706
+        ],
+        "to": [
+          8.675,
+          8.915,
+          6.00127020860473
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            8.2,
+            3.875
+          ],
+          "x": -111.3760774516092,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0007.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "foregrip/backstrap",
+        "from": [
+          7.4399999999999995,
+          7.800000000000001,
+          2.781512378871688
+        ],
+        "to": [
+          8.56,
+          8.23,
+          6.598487621128311
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            8.015,
+            4.6899999999999995
+          ],
+          "x": -108.00773054695232,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0007.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "foregrip/white-beavertail",
+        "from": [
+          7.29,
+          10.080000000000002,
+          1.913657076001655
+        ],
+        "to": [
+          8.71,
+          10.370000000000001,
+          4.856342923998346
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            10.225000000000001,
+            3.3850000000000007
+          ],
+          "x": 167.23888483746998,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "trigger/upper",
+        "from": [
+          7.84,
+          9.645,
+          6.98199854227715
+        ],
+        "to": [
+          8.16,
+          9.805,
+          7.66800145772285
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.725,
+            7.325
+          ],
+          "x": 120.67728002179642,
+          "y": 0,
+          "z": 0
+        },
+        "material": "burgundy",
+        "source_mesh": "Mesh_0000.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "trigger/hook",
+        "from": [
+          7.84,
+          9.095,
+          6.9865125652649676
+        ],
+        "to": [
+          8.16,
+          9.245,
+          7.563487434735033
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.17,
+            7.275
+          ],
+          "x": 64.32318431816176,
+          "y": 0,
+          "z": 0
+        },
+        "material": "burgundy",
+        "source_mesh": "Mesh_0000.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "trigger-guard/front",
+        "from": [
+          7.66,
+          9.145,
+          5.167804835989386
+        ],
+        "to": [
+          8.34,
+          9.335,
+          6.582195164010614
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.24,
+            5.875
+          ],
+          "x": 77.33937707974124,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "trigger-guard/bottom",
+        "from": [
+          7.66,
+          8.43,
+          6.029658533660799
+        ],
+        "to": [
+          8.34,
+          8.620000000000001,
+          7.860341466339202
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            8.525,
+            6.945
+          ],
+          "x": 1.5650690855922849,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "trigger-guard/rear",
+        "from": [
+          7.66,
+          9.045,
+          7.403243027372455
+        ],
+        "to": [
+          8.34,
+          9.235000000000001,
+          8.756756972627546
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.14,
+            8.08
+          ],
+          "x": -71.02959219151343,
+          "y": 0,
+          "z": 0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-0",
+        "from": [
+          7.045,
+          13.72,
+          7.36
+        ],
+        "to": [
+          7.875,
+          13.81,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            7.46,
+            13.765,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 90.0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-1",
+        "from": [
+          7.373979638946997,
+          14.31,
+          7.36
+        ],
+        "to": [
+          7.816020361053004,
+          14.4,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            7.595000000000001,
+            14.355,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 52.35237935989229
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-2",
+        "from": [
+          7.73,
+          14.485,
+          7.36
+        ],
+        "to": [
+          8.27,
+          14.575,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            14.53,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0.0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-3",
+        "from": [
+          8.183979638946996,
+          14.31,
+          7.36
+        ],
+        "to": [
+          8.626020361053003,
+          14.4,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            8.405,
+            14.355,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": -52.352379359892375
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-4",
+        "from": [
+          8.125,
+          13.72,
+          7.36
+        ],
+        "to": [
+          8.954999999999998,
+          13.81,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            8.54,
+            13.765,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": -90.0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-5",
+        "from": [
+          8.239706136340736,
+          13.195,
+          7.36
+        ],
+        "to": [
+          8.580293863659264,
+          13.285,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            8.41,
+            13.24,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": -139.7636416907263
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-6",
+        "from": [
+          7.720000000000001,
+          13.085,
+          7.36
+        ],
+        "to": [
+          8.28,
+          13.175,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            13.13,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 180.0
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/hoop-7",
+        "from": [
+          7.419706136340737,
+          13.195,
+          7.36
+        ],
+        "to": [
+          7.760293863659263,
+          13.285,
+          7.54
+        ],
+        "rotation": {
+          "origin": [
+            7.59,
+            13.24,
+            7.45
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 139.7636416907263
+        },
+        "material": "white",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/foot-7.47",
+        "from": [
+          7.47,
+          12.93,
+          7.15
+        ],
+        "to": [
+          7.63,
+          13.34,
+          7.77
+        ],
+        "rotation": {
+          "origin": [
+            7.55,
+            13.135,
+            7.46
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "sight/foot-8.37",
+        "from": [
+          8.37,
+          12.93,
+          7.15
+        ],
+        "to": [
+          8.53,
+          13.34,
+          7.77
+        ],
+        "rotation": {
+          "origin": [
+            8.45,
+            13.135,
+            7.46
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0011.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "barrel/shaft-0",
+        "from": [
+          7.46,
+          11.132,
+          0.35
+        ],
+        "to": [
+          8.54,
+          11.888,
+          4.25
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.51,
+            2.3
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "barrel/shaft-1",
+        "from": [
+          7.622,
+          10.969999999999999,
+          0.35
+        ],
+        "to": [
+          8.378,
+          12.05,
+          4.25
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.51,
+            2.3
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "barrel/collar-0",
+        "from": [
+          7.36,
+          11.062,
+          2.6
+        ],
+        "to": [
+          8.64,
+          11.958,
+          3.45
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.51,
+            3.0250000000000004
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "barrel/collar-1",
+        "from": [
+          7.552,
+          10.87,
+          2.6
+        ],
+        "to": [
+          8.448,
+          12.15,
+          3.45
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.51,
+            3.0250000000000004
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/shroud-0",
+        "from": [
+          7.36,
+          11.062,
+          -2.34
+        ],
+        "to": [
+          8.64,
+          11.958,
+          0.7
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.51,
+            -0.82
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/shroud-1",
+        "from": [
+          7.552,
+          10.87,
+          -2.34
+        ],
+        "to": [
+          8.448,
+          12.15,
+          0.7
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.51,
+            -0.82
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-0",
+        "from": [
+          8.25541735690587,
+          11.603995384829846,
+          -2.58
+        ],
+        "to": [
+          8.705417356905869,
+          11.813995384829846,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            8.48041735690587,
+            11.708995384829846,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 112.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-1",
+        "from": [
+          7.973995384829847,
+          11.885417356905869,
+          -2.58
+        ],
+        "to": [
+          8.423995384829846,
+          12.09541735690587,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            8.198995384829846,
+            11.99041735690587,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 157.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-2",
+        "from": [
+          7.576004615170154,
+          11.885417356905869,
+          -2.58
+        ],
+        "to": [
+          8.026004615170153,
+          12.09541735690587,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            7.801004615170154,
+            11.99041735690587,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 202.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-3",
+        "from": [
+          7.294582643094131,
+          11.603995384829846,
+          -2.58
+        ],
+        "to": [
+          7.74458264309413,
+          11.813995384829846,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            7.519582643094131,
+            11.708995384829846,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 247.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-4",
+        "from": [
+          7.294582643094131,
+          11.206004615170153,
+          -2.58
+        ],
+        "to": [
+          7.74458264309413,
+          11.416004615170154,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            7.519582643094131,
+            11.311004615170154,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 292.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-5",
+        "from": [
+          7.576004615170154,
+          10.92458264309413,
+          -2.58
+        ],
+        "to": [
+          8.026004615170153,
+          11.13458264309413,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            7.801004615170154,
+            11.02958264309413,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 337.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-6",
+        "from": [
+          7.973995384829847,
+          10.92458264309413,
+          -2.58
+        ],
+        "to": [
+          8.423995384829846,
+          11.13458264309413,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            8.198995384829846,
+            11.02958264309413,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 382.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/crown-7",
+        "from": [
+          8.25541735690587,
+          11.206004615170153,
+          -2.58
+        ],
+        "to": [
+          8.705417356905869,
+          11.416004615170154,
+          -2.12
+        ],
+        "rotation": {
+          "origin": [
+            8.48041735690587,
+            11.311004615170154,
+            -2.35
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 427.5
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/bore-recess",
+        "from": [
+          7.59,
+          11.1,
+          -2.1
+        ],
+        "to": [
+          8.41,
+          11.92,
+          -2.04
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.51,
+            -2.0700000000000003
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "bore",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 1,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/top-vent-0",
+        "from": [
+          7.7,
+          12.11,
+          -1.6384032966784157
+        ],
+        "to": [
+          8.3,
+          12.21,
+          -1.2015967033215842
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.16,
+            -1.42
+          ],
+          "x": -15.945395900922986,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/top-vent-1",
+        "from": [
+          7.7,
+          12.11,
+          -0.7284032966784157
+        ],
+        "to": [
+          8.3,
+          12.21,
+          -0.2915967033215843
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.16,
+            -0.51
+          ],
+          "x": -15.945395900922982,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "muzzle/top-vent-2",
+        "from": [
+          7.7,
+          12.11,
+          0.17159670332158433
+        ],
+        "to": [
+          8.3,
+          12.21,
+          0.6084032966784156
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.16,
+            0.39
+          ],
+          "x": -15.945395900922982,
+          "y": 0,
+          "z": 0
+        },
+        "material": "steel",
+        "source_mesh": "Mesh_0006.rip",
+        "source_component": 0,
+        "part": "body",
+        "kind": "semantic_solid",
+        "artwork": false
+      }
+    ],
+    "magazine": [
+      {
+        "name": "magazine/core",
+        "from": [
+          7.4399999999999995,
+          7.4350000000000005,
+          7.366891263531872
+        ],
+        "to": [
+          8.56,
+          8.755,
+          10.273108736468128
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            8.095,
+            8.82
+          ],
+          "x": -71.12863909831285,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0007.rip",
+        "source_component": 1,
+        "part": "magazine",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "magazine/front-round",
+        "from": [
+          7.575,
+          7.800000000000001,
+          6.9722825228666565
+        ],
+        "to": [
+          8.425,
+          8.23,
+          9.587717477133346
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            8.015,
+            8.280000000000001
+          ],
+          "x": -70.80299989454417,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0007.rip",
+        "source_component": 1,
+        "part": "magazine",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "magazine/feed-neck",
+        "from": [
+          7.55,
+          9.35,
+          8.76
+        ],
+        "to": [
+          8.45,
+          9.86,
+          9.61
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.605,
+            9.184999999999999
+          ],
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0007.rip",
+        "source_component": 1,
+        "part": "magazine",
+        "kind": "semantic_solid",
+        "artwork": false
+      },
+      {
+        "name": "magazine/floorplate",
+        "from": [
+          7.4,
+          6.390000000000001,
+          7.73934034811249
+        ],
+        "to": [
+          8.6,
+          6.640000000000001,
+          8.99065965188751
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            6.515000000000001,
+            8.365
+          ],
+          "x": -10.591527747971353,
+          "y": 0,
+          "z": 0
+        },
+        "material": "rubber",
+        "source_mesh": "Mesh_0007.rip",
+        "source_component": 1,
+        "part": "magazine",
+        "kind": "semantic_solid",
+        "artwork": false
+      }
+    ]
+  },
+  "uv_layout": {
+    "resolution": 1024,
+    "density": 26,
+    "padding": 2,
+    "used_pixels": 487640,
+    "fill": 0.465,
+    "islands": [
+      {
+        "element": "receiver/main",
+        "face": "down",
+        "pixels": [
+          2,
+          2,
+          36,
+          320
+        ]
+      },
+      {
+        "element": "receiver/main",
+        "face": "up",
+        "pixels": [
+          40,
+          2,
+          74,
+          320
+        ]
+      },
+      {
+        "element": "stock/lower-brace",
+        "face": "down",
+        "pixels": [
+          78,
+          2,
+          103,
+          290
+        ]
+      },
+      {
+        "element": "stock/lower-brace",
+        "face": "up",
+        "pixels": [
+          107,
+          2,
+          132,
+          290
+        ]
+      },
+      {
+        "element": "receiver/top-seam",
+        "face": "down",
+        "pixels": [
+          136,
+          2,
+          173,
+          267
+        ]
+      },
+      {
+        "element": "receiver/top-seam",
+        "face": "up",
+        "pixels": [
+          177,
+          2,
+          214,
+          267
+        ]
+      },
+      {
+        "element": "receiver/lower-keel",
+        "face": "down",
+        "pixels": [
+          218,
+          2,
+          247,
+          246
+        ]
+      },
+      {
+        "element": "receiver/lower-keel",
+        "face": "up",
+        "pixels": [
+          251,
+          2,
+          280,
+          246
+        ]
+      },
+      {
+        "element": "power-rail/burgundy-core",
+        "face": "down",
+        "pixels": [
+          284,
+          2,
+          313,
+          211
+        ]
+      },
+      {
+        "element": "power-rail/burgundy-core",
+        "face": "up",
+        "pixels": [
+          317,
+          2,
+          346,
+          211
+        ]
+      },
+      {
+        "element": "power-rail/top-spine",
+        "face": "down",
+        "pixels": [
+          350,
+          2,
+          375,
+          207
+        ]
+      },
+      {
+        "element": "power-rail/top-spine",
+        "face": "up",
+        "pixels": [
+          379,
+          2,
+          404,
+          207
+        ]
+      },
+      {
+        "element": "stock/painted-spine",
+        "face": "east",
+        "pixels": [
+          408,
+          2,
+          429,
+          193
+        ]
+      },
+      {
+        "element": "stock/painted-spine",
+        "face": "west",
+        "pixels": [
+          433,
+          2,
+          454,
+          193
+        ]
+      },
+      {
+        "element": "stock/pad",
+        "face": "north",
+        "pixels": [
+          458,
+          2,
+          494,
+          162
+        ]
+      },
+      {
+        "element": "stock/pad",
+        "face": "south",
+        "pixels": [
+          498,
+          2,
+          534,
+          162
+        ]
+      },
+      {
+        "element": "stock/pad",
+        "face": "east",
+        "pixels": [
+          538,
+          2,
+          560,
+          162
+        ]
+      },
+      {
+        "element": "stock/pad",
+        "face": "west",
+        "pixels": [
+          564,
+          2,
+          586,
+          162
+        ]
+      },
+      {
+        "element": "stock/painted-spine",
+        "face": "north",
+        "pixels": [
+          590,
+          2,
+          624,
+          151
+        ]
+      },
+      {
+        "element": "stock/painted-spine",
+        "face": "south",
+        "pixels": [
+          628,
+          2,
+          662,
+          151
+        ]
+      },
+      {
+        "element": "foregrip/core",
+        "face": "down",
+        "pixels": [
+          666,
+          2,
+          702,
+          113
+        ]
+      },
+      {
+        "element": "foregrip/core",
+        "face": "up",
+        "pixels": [
+          706,
+          2,
+          742,
+          113
+        ]
+      },
+      {
+        "element": "optic/hood-main",
+        "face": "down",
+        "pixels": [
+          746,
+          2,
+          788,
+          109
+        ]
+      },
+      {
+        "element": "optic/hood-main",
+        "face": "up",
+        "pixels": [
+          792,
+          2,
+          834,
+          109
+        ]
+      },
+      {
+        "element": "barrel/shaft-0",
+        "face": "down",
+        "pixels": [
+          838,
+          2,
+          867,
+          104
+        ]
+      },
+      {
+        "element": "barrel/shaft-0",
+        "face": "up",
+        "pixels": [
+          871,
+          2,
+          900,
+          104
+        ]
+      },
+      {
+        "element": "barrel/shaft-1",
+        "face": "down",
+        "pixels": [
+          904,
+          2,
+          924,
+          104
+        ]
+      },
+      {
+        "element": "barrel/shaft-1",
+        "face": "up",
+        "pixels": [
+          928,
+          2,
+          948,
+          104
+        ]
+      },
+      {
+        "element": "foregrip/backstrap",
+        "face": "down",
+        "pixels": [
+          952,
+          2,
+          982,
+          102
+        ]
+      },
+      {
+        "element": "foregrip/backstrap",
+        "face": "up",
+        "pixels": [
+          986,
+          2,
+          1016,
+          102
+        ]
+      },
+      {
+        "element": "stock/bird-field",
+        "face": "east",
+        "pixels": [
+          2,
+          324,
+          80,
+          415
+        ]
+      },
+      {
+        "element": "stock/bird-field",
+        "face": "west",
+        "pixels": [
+          84,
+          324,
+          162,
+          415
+        ]
+      },
+      {
+        "element": "receiver/rear-top",
+        "face": "down",
+        "pixels": [
+          166,
+          324,
+          200,
+          415
+        ]
+      },
+      {
+        "element": "receiver/rear-top",
+        "face": "up",
+        "pixels": [
+          204,
+          324,
+          238,
+          415
+        ]
+      },
+      {
+        "element": "optic/lower-lip",
+        "face": "down",
+        "pixels": [
+          242,
+          324,
+          286,
+          412
+        ]
+      },
+      {
+        "element": "optic/lower-lip",
+        "face": "up",
+        "pixels": [
+          290,
+          324,
+          334,
+          412
+        ]
+      },
+      {
+        "element": "muzzle/shroud-0",
+        "face": "down",
+        "pixels": [
+          338,
+          324,
+          372,
+          404
+        ]
+      },
+      {
+        "element": "muzzle/shroud-0",
+        "face": "up",
+        "pixels": [
+          376,
+          324,
+          410,
+          404
+        ]
+      },
+      {
+        "element": "muzzle/shroud-1",
+        "face": "down",
+        "pixels": [
+          414,
+          324,
+          438,
+          404
+        ]
+      },
+      {
+        "element": "muzzle/shroud-1",
+        "face": "up",
+        "pixels": [
+          442,
+          324,
+          466,
+          404
+        ]
+      },
+      {
+        "element": "foregrip/white-beavertail",
+        "face": "down",
+        "pixels": [
+          470,
+          324,
+          507,
+          401
+        ]
+      },
+      {
+        "element": "foregrip/white-beavertail",
+        "face": "up",
+        "pixels": [
+          511,
+          324,
+          548,
+          401
+        ]
+      },
+      {
+        "element": "magazine/core",
+        "face": "down",
+        "pixels": [
+          552,
+          324,
+          582,
+          400
+        ]
+      },
+      {
+        "element": "magazine/core",
+        "face": "up",
+        "pixels": [
+          586,
+          324,
+          616,
+          400
+        ]
+      },
+      {
+        "element": "optic/crown",
+        "face": "down",
+        "pixels": [
+          620,
+          324,
+          651,
+          397
+        ]
+      },
+      {
+        "element": "optic/crown",
+        "face": "up",
+        "pixels": [
+          655,
+          324,
+          686,
+          397
+        ]
+      },
+      {
+        "element": "stock/bird-field",
+        "face": "north",
+        "pixels": [
+          690,
+          324,
+          725,
+          395
+        ]
+      },
+      {
+        "element": "stock/bird-field",
+        "face": "south",
+        "pixels": [
+          729,
+          324,
+          764,
+          395
+        ]
+      },
+      {
+        "element": "stock/bird-shoulder",
+        "face": "down",
+        "pixels": [
+          768,
+          324,
+          802,
+          395
+        ]
+      },
+      {
+        "element": "stock/bird-shoulder",
+        "face": "up",
+        "pixels": [
+          806,
+          324,
+          840,
+          395
+        ]
+      },
+      {
+        "element": "magazine/front-round",
+        "face": "down",
+        "pixels": [
+          844,
+          324,
+          867,
+          393
+        ]
+      },
+      {
+        "element": "magazine/front-round",
+        "face": "up",
+        "pixels": [
+          871,
+          324,
+          894,
+          393
+        ]
+      },
+      {
+        "element": "receiver/rear-shoulder",
+        "face": "down",
+        "pixels": [
+          898,
+          324,
+          932,
+          391
+        ]
+      },
+      {
+        "element": "receiver/rear-shoulder",
+        "face": "up",
+        "pixels": [
+          936,
+          324,
+          970,
+          391
+        ]
+      },
+      {
+        "element": "receiver/under-shoulder",
+        "face": "down",
+        "pixels": [
+          974,
+          324,
+          1005,
+          388
+        ]
+      },
+      {
+        "element": "receiver/under-shoulder",
+        "face": "up",
+        "pixels": [
+          2,
+          419,
+          33,
+          483
+        ]
+      },
+      {
+        "element": "stock/bird-field",
+        "face": "down",
+        "pixels": [
+          37,
+          419,
+          72,
+          480
+        ]
+      },
+      {
+        "element": "stock/bird-field",
+        "face": "up",
+        "pixels": [
+          76,
+          419,
+          111,
+          480
+        ]
+      },
+      {
+        "element": "receiver/main",
+        "face": "east",
+        "pixels": [
+          115,
+          419,
+          522,
+          470
+        ]
+      },
+      {
+        "element": "receiver/main",
+        "face": "west",
+        "pixels": [
+          526,
+          419,
+          933,
+          470
+        ]
+      },
+      {
+        "element": "stock/front-heel",
+        "face": "down",
+        "pixels": [
+          937,
+          419,
+          963,
+          469
+        ]
+      },
+      {
+        "element": "stock/front-heel",
+        "face": "up",
+        "pixels": [
+          967,
+          419,
+          993,
+          469
+        ]
+      },
+      {
+        "element": "trigger-guard/bottom",
+        "face": "down",
+        "pixels": [
+          997,
+          419,
+          1015,
+          467
+        ]
+      },
+      {
+        "element": "trigger-guard/bottom",
+        "face": "up",
+        "pixels": [
+          2,
+          487,
+          20,
+          535
+        ]
+      },
+      {
+        "element": "stock/bird-body",
+        "face": "east",
+        "pixels": [
+          24,
+          487,
+          71,
+          534
+        ]
+      },
+      {
+        "element": "stock/bird-body",
+        "face": "west",
+        "pixels": [
+          75,
+          487,
+          122,
+          534
+        ]
+      },
+      {
+        "element": "optic/left-lock",
+        "face": "down",
+        "pixels": [
+          126,
+          487,
+          137,
+          529
+        ]
+      },
+      {
+        "element": "optic/left-lock",
+        "face": "up",
+        "pixels": [
+          141,
+          487,
+          152,
+          529
+        ]
+      },
+      {
+        "element": "optic/right-lock",
+        "face": "down",
+        "pixels": [
+          156,
+          487,
+          167,
+          529
+        ]
+      },
+      {
+        "element": "optic/right-lock",
+        "face": "up",
+        "pixels": [
+          171,
+          487,
+          182,
+          529
+        ]
+      },
+      {
+        "element": "receiver/main",
+        "face": "north",
+        "pixels": [
+          186,
+          487,
+          220,
+          527
+        ]
+      },
+      {
+        "element": "receiver/main",
+        "face": "south",
+        "pixels": [
+          224,
+          487,
+          258,
+          527
+        ]
+      },
+      {
+        "element": "optic/hood-main",
+        "face": "east",
+        "pixels": [
+          262,
+          487,
+          399,
+          526
+        ]
+      },
+      {
+        "element": "optic/hood-main",
+        "face": "west",
+        "pixels": [
+          403,
+          487,
+          540,
+          526
+        ]
+      },
+      {
+        "element": "foregrip/core",
+        "face": "east",
+        "pixels": [
+          544,
+          487,
+          655,
+          525
+        ]
+      },
+      {
+        "element": "foregrip/core",
+        "face": "west",
+        "pixels": [
+          659,
+          487,
+          770,
+          525
+        ]
+      },
+      {
+        "element": "foregrip/core",
+        "face": "north",
+        "pixels": [
+          774,
+          487,
+          810,
+          525
+        ]
+      },
+      {
+        "element": "foregrip/core",
+        "face": "south",
+        "pixels": [
+          814,
+          487,
+          850,
+          525
+        ]
+      },
+      {
+        "element": "stock/bird-body",
+        "face": "down",
+        "pixels": [
+          854,
+          487,
+          887,
+          524
+        ]
+      },
+      {
+        "element": "stock/bird-body",
+        "face": "north",
+        "pixels": [
+          891,
+          487,
+          924,
+          524
+        ]
+      },
+      {
+        "element": "stock/bird-body",
+        "face": "south",
+        "pixels": [
+          928,
+          487,
+          961,
+          524
+        ]
+      },
+      {
+        "element": "stock/bird-body",
+        "face": "up",
+        "pixels": [
+          965,
+          487,
+          998,
+          524
+        ]
+      },
+      {
+        "element": "trigger-guard/front",
+        "face": "down",
+        "pixels": [
+          1002,
+          487,
+          1020,
+          524
+        ]
+      },
+      {
+        "element": "trigger-guard/front",
+        "face": "up",
+        "pixels": [
+          2,
+          539,
+          20,
+          576
+        ]
+      },
+      {
+        "element": "optic/front-ramp",
+        "face": "down",
+        "pixels": [
+          24,
+          539,
+          62,
+          575
+        ]
+      },
+      {
+        "element": "optic/front-ramp",
+        "face": "up",
+        "pixels": [
+          66,
+          539,
+          104,
+          575
+        ]
+      },
+      {
+        "element": "trigger-guard/rear",
+        "face": "down",
+        "pixels": [
+          108,
+          539,
+          126,
+          575
+        ]
+      },
+      {
+        "element": "trigger-guard/rear",
+        "face": "up",
+        "pixels": [
+          130,
+          539,
+          148,
+          575
+        ]
+      },
+      {
+        "element": "magazine/core",
+        "face": "east",
+        "pixels": [
+          152,
+          539,
+          228,
+          574
+        ]
+      },
+      {
+        "element": "magazine/core",
+        "face": "west",
+        "pixels": [
+          232,
+          539,
+          308,
+          574
+        ]
+      },
+      {
+        "element": "magazine/core",
+        "face": "north",
+        "pixels": [
+          312,
+          539,
+          342,
+          574
+        ]
+      },
+      {
+        "element": "magazine/core",
+        "face": "south",
+        "pixels": [
+          346,
+          539,
+          376,
+          574
+        ]
+      },
+      {
+        "element": "muzzle/shroud-1",
+        "face": "east",
+        "pixels": [
+          380,
+          539,
+          460,
+          573
+        ]
+      },
+      {
+        "element": "muzzle/shroud-1",
+        "face": "west",
+        "pixels": [
+          464,
+          539,
+          544,
+          573
+        ]
+      },
+      {
+        "element": "barrel/collar-1",
+        "face": "north",
+        "pixels": [
+          548,
+          539,
+          572,
+          573
+        ]
+      },
+      {
+        "element": "barrel/collar-1",
+        "face": "south",
+        "pixels": [
+          576,
+          539,
+          600,
+          573
+        ]
+      },
+      {
+        "element": "muzzle/shroud-1",
+        "face": "north",
+        "pixels": [
+          604,
+          539,
+          628,
+          573
+        ]
+      },
+      {
+        "element": "muzzle/shroud-1",
+        "face": "south",
+        "pixels": [
+          632,
+          539,
+          656,
+          573
+        ]
+      },
+      {
+        "element": "barrel/collar-1",
+        "face": "east",
+        "pixels": [
+          660,
+          539,
+          683,
+          573
+        ]
+      },
+      {
+        "element": "barrel/collar-1",
+        "face": "west",
+        "pixels": [
+          687,
+          539,
+          710,
+          573
+        ]
+      },
+      {
+        "element": "optic/left-lock",
+        "face": "east",
+        "pixels": [
+          714,
+          539,
+          756,
+          572
+        ]
+      },
+      {
+        "element": "optic/left-lock",
+        "face": "west",
+        "pixels": [
+          760,
+          539,
+          802,
+          572
+        ]
+      },
+      {
+        "element": "optic/right-lock",
+        "face": "east",
+        "pixels": [
+          806,
+          539,
+          848,
+          572
+        ]
+      },
+      {
+        "element": "optic/right-lock",
+        "face": "west",
+        "pixels": [
+          852,
+          539,
+          894,
+          572
+        ]
+      },
+      {
+        "element": "magazine/floorplate",
+        "face": "down",
+        "pixels": [
+          898,
+          539,
+          930,
+          572
+        ]
+      },
+      {
+        "element": "magazine/floorplate",
+        "face": "up",
+        "pixels": [
+          934,
+          539,
+          966,
+          572
+        ]
+      },
+      {
+        "element": "optic/left-lock",
+        "face": "north",
+        "pixels": [
+          970,
+          539,
+          981,
+          572
+        ]
+      },
+      {
+        "element": "optic/left-lock",
+        "face": "south",
+        "pixels": [
+          985,
+          539,
+          996,
+          572
+        ]
+      },
+      {
+        "element": "optic/right-lock",
+        "face": "north",
+        "pixels": [
+          1000,
+          539,
+          1011,
+          572
+        ]
+      },
+      {
+        "element": "optic/right-lock",
+        "face": "south",
+        "pixels": [
+          2,
+          580,
+          13,
+          613
+        ]
+      },
+      {
+        "element": "stock/bird-shoulder",
+        "face": "east",
+        "pixels": [
+          17,
+          580,
+          108,
+          612
+        ]
+      },
+      {
+        "element": "stock/bird-shoulder",
+        "face": "west",
+        "pixels": [
+          112,
+          580,
+          203,
+          612
+        ]
+      },
+      {
+        "element": "receiver/rear-top",
+        "face": "east",
+        "pixels": [
+          207,
+          580,
+          324,
+          611
+        ]
+      },
+      {
+        "element": "receiver/rear-top",
+        "face": "west",
+        "pixels": [
+          328,
+          580,
+          445,
+          611
+        ]
+      },
+      {
+        "element": "optic/hood-main",
+        "face": "north",
+        "pixels": [
+          449,
+          580,
+          491,
+          611
+        ]
+      },
+      {
+        "element": "optic/hood-main",
+        "face": "south",
+        "pixels": [
+          495,
+          580,
+          537,
+          611
+        ]
+      },
+      {
+        "element": "barrel/shaft-1",
+        "face": "east",
+        "pixels": [
+          541,
+          580,
+          643,
+          609
+        ]
+      },
+      {
+        "element": "barrel/shaft-1",
+        "face": "west",
+        "pixels": [
+          647,
+          580,
+          749,
+          609
+        ]
+      },
+      {
+        "element": "optic/front-cheek",
+        "face": "down",
+        "pixels": [
+          753,
+          580,
+          792,
+          609
+        ]
+      },
+      {
+        "element": "optic/front-cheek",
+        "face": "up",
+        "pixels": [
+          796,
+          580,
+          835,
+          609
+        ]
+      },
+      {
+        "element": "barrel/shaft-1",
+        "face": "north",
+        "pixels": [
+          839,
+          580,
+          859,
+          609
+        ]
+      },
+      {
+        "element": "barrel/shaft-1",
+        "face": "south",
+        "pixels": [
+          863,
+          580,
+          883,
+          609
+        ]
+      },
+      {
+        "element": "receiver/rear-top",
+        "face": "north",
+        "pixels": [
+          887,
+          580,
+          921,
+          605
+        ]
+      },
+      {
+        "element": "receiver/rear-top",
+        "face": "south",
+        "pixels": [
+          925,
+          580,
+          959,
+          605
+        ]
+      },
+      {
+        "element": "stock/bird-shoulder",
+        "face": "north",
+        "pixels": [
+          963,
+          580,
+          997,
+          605
+        ]
+      },
+      {
+        "element": "stock/bird-shoulder",
+        "face": "south",
+        "pixels": [
+          2,
+          617,
+          36,
+          642
+        ]
+      },
+      {
+        "element": "muzzle/shroud-0",
+        "face": "east",
+        "pixels": [
+          40,
+          617,
+          120,
+          641
+        ]
+      },
+      {
+        "element": "muzzle/shroud-0",
+        "face": "west",
+        "pixels": [
+          124,
+          617,
+          204,
+          641
+        ]
+      },
+      {
+        "element": "barrel/collar-0",
+        "face": "north",
+        "pixels": [
+          208,
+          617,
+          242,
+          641
+        ]
+      },
+      {
+        "element": "barrel/collar-0",
+        "face": "south",
+        "pixels": [
+          246,
+          617,
+          280,
+          641
+        ]
+      },
+      {
+        "element": "muzzle/shroud-0",
+        "face": "north",
+        "pixels": [
+          284,
+          617,
+          318,
+          641
+        ]
+      },
+      {
+        "element": "muzzle/shroud-0",
+        "face": "south",
+        "pixels": [
+          322,
+          617,
+          356,
+          641
+        ]
+      },
+      {
+        "element": "barrel/collar-0",
+        "face": "east",
+        "pixels": [
+          360,
+          617,
+          383,
+          641
+        ]
+      },
+      {
+        "element": "barrel/collar-0",
+        "face": "west",
+        "pixels": [
+          387,
+          617,
+          410,
+          641
+        ]
+      },
+      {
+        "element": "barrel/collar-0",
+        "face": "down",
+        "pixels": [
+          414,
+          617,
+          448,
+          640
+        ]
+      },
+      {
+        "element": "barrel/collar-0",
+        "face": "up",
+        "pixels": [
+          452,
+          617,
+          486,
+          640
+        ]
+      },
+      {
+        "element": "optic/rear-ramp",
+        "face": "down",
+        "pixels": [
+          490,
+          617,
+          524,
+          640
+        ]
+      },
+      {
+        "element": "optic/rear-ramp",
+        "face": "up",
+        "pixels": [
+          528,
+          617,
+          562,
+          640
+        ]
+      },
+      {
+        "element": "barrel/collar-1",
+        "face": "down",
+        "pixels": [
+          566,
+          617,
+          590,
+          640
+        ]
+      },
+      {
+        "element": "barrel/collar-1",
+        "face": "up",
+        "pixels": [
+          594,
+          617,
+          618,
+          640
+        ]
+      },
+      {
+        "element": "magazine/feed-neck",
+        "face": "down",
+        "pixels": [
+          622,
+          617,
+          646,
+          640
+        ]
+      },
+      {
+        "element": "magazine/feed-neck",
+        "face": "up",
+        "pixels": [
+          650,
+          617,
+          674,
+          640
+        ]
+      },
+      {
+        "element": "stock/pad",
+        "face": "down",
+        "pixels": [
+          678,
+          617,
+          714,
+          639
+        ]
+      },
+      {
+        "element": "stock/pad",
+        "face": "up",
+        "pixels": [
+          718,
+          617,
+          754,
+          639
+        ]
+      },
+      {
+        "element": "stock/heel-brace",
+        "face": "down",
+        "pixels": [
+          758,
+          617,
+          783,
+          639
+        ]
+      },
+      {
+        "element": "stock/heel-brace",
+        "face": "up",
+        "pixels": [
+          787,
+          617,
+          812,
+          639
+        ]
+      },
+      {
+        "element": "muzzle/bore-recess",
+        "face": "north",
+        "pixels": [
+          816,
+          617,
+          838,
+          639
+        ]
+      },
+      {
+        "element": "muzzle/bore-recess",
+        "face": "south",
+        "pixels": [
+          842,
+          617,
+          864,
+          639
+        ]
+      },
+      {
+        "element": "muzzle/bore-recess",
+        "face": "east",
+        "pixels": [
+          868,
+          617,
+          871,
+          639
+        ]
+      },
+      {
+        "element": "muzzle/bore-recess",
+        "face": "west",
+        "pixels": [
+          875,
+          617,
+          878,
+          639
+        ]
+      },
+      {
+        "element": "power-rail/burgundy-core",
+        "face": "east",
+        "pixels": [
+          2,
+          646,
+          269,
+          666
+        ]
+      },
+      {
+        "element": "power-rail/burgundy-core",
+        "face": "west",
+        "pixels": [
+          273,
+          646,
+          540,
+          666
+        ]
+      },
+      {
+        "element": "barrel/shaft-0",
+        "face": "east",
+        "pixels": [
+          544,
+          646,
+          646,
+          666
+        ]
+      },
+      {
+        "element": "barrel/shaft-0",
+        "face": "west",
+        "pixels": [
+          650,
+          646,
+          752,
+          666
+        ]
+      },
+      {
+        "element": "receiver/rear-shoulder",
+        "face": "east",
+        "pixels": [
+          756,
+          646,
+          841,
+          666
+        ]
+      },
+      {
+        "element": "receiver/rear-shoulder",
+        "face": "west",
+        "pixels": [
+          845,
+          646,
+          930,
+          666
+        ]
+      },
+      {
+        "element": "barrel/shaft-0",
+        "face": "north",
+        "pixels": [
+          934,
+          646,
+          963,
+          666
+        ]
+      },
+      {
+        "element": "barrel/shaft-0",
+        "face": "south",
+        "pixels": [
+          967,
+          646,
+          996,
+          666
+        ]
+      },
+      {
+        "element": "power-rail/bridge-12.5",
+        "face": "north",
+        "pixels": [
+          2,
+          670,
+          38,
+          689
+        ]
+      },
+      {
+        "element": "power-rail/bridge-12.5",
+        "face": "south",
+        "pixels": [
+          42,
+          670,
+          78,
+          689
+        ]
+      },
+      {
+        "element": "power-rail/bridge-9.0",
+        "face": "north",
+        "pixels": [
+          82,
+          670,
+          118,
+          689
+        ]
+      },
+      {
+        "element": "power-rail/bridge-9.0",
+        "face": "south",
+        "pixels": [
+          122,
+          670,
+          158,
+          689
+        ]
+      },
+      {
+        "element": "power-rail/bridge-12.5",
+        "face": "east",
+        "pixels": [
+          162,
+          670,
+          168,
+          689
+        ]
+      },
+      {
+        "element": "power-rail/bridge-12.5",
+        "face": "west",
+        "pixels": [
+          172,
+          670,
+          178,
+          689
+        ]
+      },
+      {
+        "element": "power-rail/bridge-9.0",
+        "face": "east",
+        "pixels": [
+          182,
+          670,
+          188,
+          689
+        ]
+      },
+      {
+        "element": "power-rail/bridge-9.0",
+        "face": "west",
+        "pixels": [
+          192,
+          670,
+          198,
+          689
+        ]
+      },
+      {
+        "element": "trigger/upper",
+        "face": "down",
+        "pixels": [
+          202,
+          670,
+          211,
+          688
+        ]
+      },
+      {
+        "element": "trigger/upper",
+        "face": "up",
+        "pixels": [
+          215,
+          670,
+          224,
+          688
+        ]
+      },
+      {
+        "element": "sight/foot-7.47",
+        "face": "down",
+        "pixels": [
+          228,
+          670,
+          233,
+          687
+        ]
+      },
+      {
+        "element": "sight/foot-7.47",
+        "face": "up",
+        "pixels": [
+          237,
+          670,
+          242,
+          687
+        ]
+      },
+      {
+        "element": "sight/foot-8.37",
+        "face": "down",
+        "pixels": [
+          246,
+          670,
+          251,
+          687
+        ]
+      },
+      {
+        "element": "sight/foot-8.37",
+        "face": "up",
+        "pixels": [
+          255,
+          670,
+          260,
+          687
+        ]
+      },
+      {
+        "element": "optic/front-cheek",
+        "face": "north",
+        "pixels": [
+          264,
+          670,
+          303,
+          686
+        ]
+      },
+      {
+        "element": "optic/front-cheek",
+        "face": "south",
+        "pixels": [
+          307,
+          670,
+          346,
+          686
+        ]
+      },
+      {
+        "element": "optic/front-ramp",
+        "face": "north",
+        "pixels": [
+          350,
+          670,
+          388,
+          686
+        ]
+      },
+      {
+        "element": "optic/front-ramp",
+        "face": "south",
+        "pixels": [
+          392,
+          670,
+          430,
+          686
+        ]
+      },
+      {
+        "element": "optic/front-ramp",
+        "face": "east",
+        "pixels": [
+          434,
+          670,
+          470,
+          686
+        ]
+      },
+      {
+        "element": "optic/front-ramp",
+        "face": "west",
+        "pixels": [
+          474,
+          670,
+          510,
+          686
+        ]
+      },
+      {
+        "element": "receiver/rear-shoulder",
+        "face": "north",
+        "pixels": [
+          514,
+          670,
+          548,
+          686
+        ]
+      },
+      {
+        "element": "receiver/rear-shoulder",
+        "face": "south",
+        "pixels": [
+          552,
+          670,
+          586,
+          686
+        ]
+      },
+      {
+        "element": "stock/painted-spine",
+        "face": "down",
+        "pixels": [
+          590,
+          670,
+          624,
+          686
+        ]
+      },
+      {
+        "element": "stock/painted-spine",
+        "face": "up",
+        "pixels": [
+          628,
+          670,
+          662,
+          686
+        ]
+      },
+      {
+        "element": "optic/front-cheek",
+        "face": "east",
+        "pixels": [
+          666,
+          670,
+          695,
+          686
+        ]
+      },
+      {
+        "element": "optic/front-cheek",
+        "face": "west",
+        "pixels": [
+          699,
+          670,
+          728,
+          686
+        ]
+      },
+      {
+        "element": "power-rail/burgundy-core",
+        "face": "north",
+        "pixels": [
+          732,
+          670,
+          761,
+          686
+        ]
+      },
+      {
+        "element": "power-rail/burgundy-core",
+        "face": "south",
+        "pixels": [
+          765,
+          670,
+          794,
+          686
+        ]
+      },
+      {
+        "element": "stock/heel-brace",
+        "face": "east",
+        "pixels": [
+          798,
+          670,
+          826,
+          686
+        ]
+      },
+      {
+        "element": "stock/heel-brace",
+        "face": "west",
+        "pixels": [
+          830,
+          670,
+          858,
+          686
+        ]
+      },
+      {
+        "element": "trigger/hook",
+        "face": "down",
+        "pixels": [
+          862,
+          670,
+          871,
+          686
+        ]
+      },
+      {
+        "element": "trigger/hook",
+        "face": "up",
+        "pixels": [
+          875,
+          670,
+          884,
+          686
+        ]
+      },
+      {
+        "element": "stock/lower-brace",
+        "face": "east",
+        "pixels": [
+          2,
+          693,
+          371,
+          708
+        ]
+      },
+      {
+        "element": "stock/lower-brace",
+        "face": "west",
+        "pixels": [
+          375,
+          693,
+          744,
+          708
+        ]
+      },
+      {
+        "element": "stock/front-heel",
+        "face": "east",
+        "pixels": [
+          748,
+          693,
+          798,
+          708
+        ]
+      },
+      {
+        "element": "stock/front-heel",
+        "face": "west",
+        "pixels": [
+          802,
+          693,
+          852,
+          708
+        ]
+      },
+      {
+        "element": "stock/front-heel",
+        "face": "north",
+        "pixels": [
+          856,
+          693,
+          882,
+          708
+        ]
+      },
+      {
+        "element": "stock/front-heel",
+        "face": "south",
+        "pixels": [
+          886,
+          693,
+          912,
+          708
+        ]
+      },
+      {
+        "element": "receiver/under-shoulder",
+        "face": "east",
+        "pixels": [
+          916,
+          693,
+          997,
+          707
+        ]
+      },
+      {
+        "element": "receiver/under-shoulder",
+        "face": "west",
+        "pixels": [
+          2,
+          712,
+          83,
+          726
+        ]
+      },
+      {
+        "element": "magazine/feed-neck",
+        "face": "north",
+        "pixels": [
+          87,
+          712,
+          111,
+          726
+        ]
+      },
+      {
+        "element": "magazine/feed-neck",
+        "face": "south",
+        "pixels": [
+          115,
+          712,
+          139,
+          726
+        ]
+      },
+      {
+        "element": "magazine/feed-neck",
+        "face": "east",
+        "pixels": [
+          143,
+          712,
+          166,
+          726
+        ]
+      },
+      {
+        "element": "magazine/feed-neck",
+        "face": "west",
+        "pixels": [
+          170,
+          712,
+          193,
+          726
+        ]
+      },
+      {
+        "element": "receiver/lower-keel",
+        "face": "east",
+        "pixels": [
+          197,
+          712,
+          509,
+          725
+        ]
+      },
+      {
+        "element": "receiver/lower-keel",
+        "face": "west",
+        "pixels": [
+          513,
+          712,
+          825,
+          725
+        ]
+      },
+      {
+        "element": "stock/heel-brace",
+        "face": "north",
+        "pixels": [
+          829,
+          712,
+          854,
+          725
+        ]
+      },
+      {
+        "element": "stock/heel-brace",
+        "face": "south",
+        "pixels": [
+          858,
+          712,
+          883,
+          725
+        ]
+      },
+      {
+        "element": "foregrip/backstrap",
+        "face": "east",
+        "pixels": [
+          887,
+          712,
+          987,
+          724
+        ]
+      },
+      {
+        "element": "foregrip/backstrap",
+        "face": "west",
+        "pixels": [
+          2,
+          730,
+          102,
+          742
+        ]
+      },
+      {
+        "element": "magazine/front-round",
+        "face": "east",
+        "pixels": [
+          106,
+          730,
+          175,
+          742
+        ]
+      },
+      {
+        "element": "magazine/front-round",
+        "face": "west",
+        "pixels": [
+          179,
+          730,
+          248,
+          742
+        ]
+      },
+      {
+        "element": "foregrip/backstrap",
+        "face": "north",
+        "pixels": [
+          252,
+          730,
+          282,
+          742
+        ]
+      },
+      {
+        "element": "foregrip/backstrap",
+        "face": "south",
+        "pixels": [
+          286,
+          730,
+          316,
+          742
+        ]
+      },
+      {
+        "element": "stock/lower-brace",
+        "face": "north",
+        "pixels": [
+          320,
+          730,
+          345,
+          742
+        ]
+      },
+      {
+        "element": "stock/lower-brace",
+        "face": "south",
+        "pixels": [
+          349,
+          730,
+          374,
+          742
+        ]
+      },
+      {
+        "element": "magazine/front-round",
+        "face": "north",
+        "pixels": [
+          378,
+          730,
+          401,
+          742
+        ]
+      },
+      {
+        "element": "magazine/front-round",
+        "face": "south",
+        "pixels": [
+          405,
+          730,
+          428,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-0",
+        "face": "down",
+        "pixels": [
+          432,
+          730,
+          448,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-0",
+        "face": "up",
+        "pixels": [
+          452,
+          730,
+          468,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-1",
+        "face": "down",
+        "pixels": [
+          472,
+          730,
+          488,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-1",
+        "face": "up",
+        "pixels": [
+          492,
+          730,
+          508,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-2",
+        "face": "down",
+        "pixels": [
+          512,
+          730,
+          528,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-2",
+        "face": "up",
+        "pixels": [
+          532,
+          730,
+          548,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-0",
+        "face": "down",
+        "pixels": [
+          552,
+          730,
+          564,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-0",
+        "face": "up",
+        "pixels": [
+          568,
+          730,
+          580,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-1",
+        "face": "down",
+        "pixels": [
+          584,
+          730,
+          596,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-1",
+        "face": "up",
+        "pixels": [
+          600,
+          730,
+          612,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-2",
+        "face": "down",
+        "pixels": [
+          616,
+          730,
+          628,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-2",
+        "face": "up",
+        "pixels": [
+          632,
+          730,
+          644,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-3",
+        "face": "down",
+        "pixels": [
+          648,
+          730,
+          660,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-3",
+        "face": "up",
+        "pixels": [
+          664,
+          730,
+          676,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-4",
+        "face": "down",
+        "pixels": [
+          680,
+          730,
+          692,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-4",
+        "face": "up",
+        "pixels": [
+          696,
+          730,
+          708,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-5",
+        "face": "down",
+        "pixels": [
+          712,
+          730,
+          724,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-5",
+        "face": "up",
+        "pixels": [
+          728,
+          730,
+          740,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-6",
+        "face": "down",
+        "pixels": [
+          744,
+          730,
+          756,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-6",
+        "face": "up",
+        "pixels": [
+          760,
+          730,
+          772,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-7",
+        "face": "down",
+        "pixels": [
+          776,
+          730,
+          788,
+          742
+        ]
+      },
+      {
+        "element": "muzzle/crown-7",
+        "face": "up",
+        "pixels": [
+          792,
+          730,
+          804,
+          742
+        ]
+      },
+      {
+        "element": "receiver/under-shoulder",
+        "face": "north",
+        "pixels": [
+          808,
+          730,
+          839,
+          741
+        ]
+      },
+      {
+        "element": "receiver/under-shoulder",
+        "face": "south",
+        "pixels": [
+          843,
+          730,
+          874,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-7.47",
+        "face": "east",
+        "pixels": [
+          878,
+          730,
+          895,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-7.47",
+        "face": "west",
+        "pixels": [
+          899,
+          730,
+          916,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-8.37",
+        "face": "east",
+        "pixels": [
+          920,
+          730,
+          937,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-8.37",
+        "face": "west",
+        "pixels": [
+          941,
+          730,
+          958,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-7.47",
+        "face": "north",
+        "pixels": [
+          962,
+          730,
+          967,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-7.47",
+        "face": "south",
+        "pixels": [
+          971,
+          730,
+          976,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-8.37",
+        "face": "north",
+        "pixels": [
+          980,
+          730,
+          985,
+          741
+        ]
+      },
+      {
+        "element": "sight/foot-8.37",
+        "face": "south",
+        "pixels": [
+          989,
+          730,
+          994,
+          741
+        ]
+      },
+      {
+        "element": "receiver/lower-keel",
+        "face": "north",
+        "pixels": [
+          2,
+          746,
+          31,
+          756
+        ]
+      },
+      {
+        "element": "receiver/lower-keel",
+        "face": "south",
+        "pixels": [
+          35,
+          746,
+          64,
+          756
+        ]
+      },
+      {
+        "element": "foregrip/white-beavertail",
+        "face": "east",
+        "pixels": [
+          68,
+          746,
+          145,
+          754
+        ]
+      },
+      {
+        "element": "foregrip/white-beavertail",
+        "face": "west",
+        "pixels": [
+          149,
+          746,
+          226,
+          754
+        ]
+      },
+      {
+        "element": "foregrip/white-beavertail",
+        "face": "north",
+        "pixels": [
+          230,
+          746,
+          267,
+          754
+        ]
+      },
+      {
+        "element": "foregrip/white-beavertail",
+        "face": "south",
+        "pixels": [
+          271,
+          746,
+          308,
+          754
+        ]
+      },
+      {
+        "element": "optic/rear-ramp",
+        "face": "east",
+        "pixels": [
+          312,
+          746,
+          342,
+          754
+        ]
+      },
+      {
+        "element": "optic/rear-ramp",
+        "face": "west",
+        "pixels": [
+          346,
+          746,
+          376,
+          754
+        ]
+      },
+      {
+        "element": "optic/crown",
+        "face": "east",
+        "pixels": [
+          380,
+          746,
+          453,
+          753
+        ]
+      },
+      {
+        "element": "optic/crown",
+        "face": "west",
+        "pixels": [
+          457,
+          746,
+          530,
+          753
+        ]
+      },
+      {
+        "element": "magazine/floorplate",
+        "face": "east",
+        "pixels": [
+          534,
+          746,
+          567,
+          753
+        ]
+      },
+      {
+        "element": "magazine/floorplate",
+        "face": "west",
+        "pixels": [
+          571,
+          746,
+          604,
+          753
+        ]
+      },
+      {
+        "element": "magazine/floorplate",
+        "face": "north",
+        "pixels": [
+          608,
+          746,
+          640,
+          753
+        ]
+      },
+      {
+        "element": "magazine/floorplate",
+        "face": "south",
+        "pixels": [
+          644,
+          746,
+          676,
+          753
+        ]
+      },
+      {
+        "element": "optic/crown",
+        "face": "north",
+        "pixels": [
+          680,
+          746,
+          711,
+          753
+        ]
+      },
+      {
+        "element": "optic/crown",
+        "face": "south",
+        "pixels": [
+          715,
+          746,
+          746,
+          753
+        ]
+      },
+      {
+        "element": "optic/lower-lip",
+        "face": "east",
+        "pixels": [
+          750,
+          746,
+          838,
+          752
+        ]
+      },
+      {
+        "element": "optic/lower-lip",
+        "face": "west",
+        "pixels": [
+          842,
+          746,
+          930,
+          752
+        ]
+      },
+      {
+        "element": "optic/lower-lip",
+        "face": "north",
+        "pixels": [
+          934,
+          746,
+          978,
+          752
+        ]
+      },
+      {
+        "element": "optic/lower-lip",
+        "face": "south",
+        "pixels": [
+          2,
+          760,
+          46,
+          766
+        ]
+      },
+      {
+        "element": "power-rail/bridge-12.5",
+        "face": "down",
+        "pixels": [
+          50,
+          760,
+          86,
+          766
+        ]
+      },
+      {
+        "element": "power-rail/bridge-12.5",
+        "face": "up",
+        "pixels": [
+          90,
+          760,
+          126,
+          766
+        ]
+      },
+      {
+        "element": "power-rail/bridge-9.0",
+        "face": "down",
+        "pixels": [
+          130,
+          760,
+          166,
+          766
+        ]
+      },
+      {
+        "element": "power-rail/bridge-9.0",
+        "face": "up",
+        "pixels": [
+          170,
+          760,
+          206,
+          766
+        ]
+      },
+      {
+        "element": "optic/rear-ramp",
+        "face": "north",
+        "pixels": [
+          210,
+          760,
+          244,
+          766
+        ]
+      },
+      {
+        "element": "optic/rear-ramp",
+        "face": "south",
+        "pixels": [
+          248,
+          760,
+          282,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-0",
+        "face": "east",
+        "pixels": [
+          286,
+          760,
+          298,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-0",
+        "face": "north",
+        "pixels": [
+          302,
+          760,
+          314,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-0",
+        "face": "south",
+        "pixels": [
+          318,
+          760,
+          330,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-0",
+        "face": "west",
+        "pixels": [
+          334,
+          760,
+          346,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-1",
+        "face": "east",
+        "pixels": [
+          350,
+          760,
+          362,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-1",
+        "face": "north",
+        "pixels": [
+          366,
+          760,
+          378,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-1",
+        "face": "south",
+        "pixels": [
+          382,
+          760,
+          394,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-1",
+        "face": "west",
+        "pixels": [
+          398,
+          760,
+          410,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-2",
+        "face": "east",
+        "pixels": [
+          414,
+          760,
+          426,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-2",
+        "face": "north",
+        "pixels": [
+          430,
+          760,
+          442,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-2",
+        "face": "south",
+        "pixels": [
+          446,
+          760,
+          458,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-2",
+        "face": "west",
+        "pixels": [
+          462,
+          760,
+          474,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-3",
+        "face": "east",
+        "pixels": [
+          478,
+          760,
+          490,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-3",
+        "face": "north",
+        "pixels": [
+          494,
+          760,
+          506,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-3",
+        "face": "south",
+        "pixels": [
+          510,
+          760,
+          522,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-3",
+        "face": "west",
+        "pixels": [
+          526,
+          760,
+          538,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-4",
+        "face": "east",
+        "pixels": [
+          542,
+          760,
+          554,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-4",
+        "face": "north",
+        "pixels": [
+          558,
+          760,
+          570,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-4",
+        "face": "south",
+        "pixels": [
+          574,
+          760,
+          586,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-4",
+        "face": "west",
+        "pixels": [
+          590,
+          760,
+          602,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-5",
+        "face": "east",
+        "pixels": [
+          606,
+          760,
+          618,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-5",
+        "face": "north",
+        "pixels": [
+          622,
+          760,
+          634,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-5",
+        "face": "south",
+        "pixels": [
+          638,
+          760,
+          650,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-5",
+        "face": "west",
+        "pixels": [
+          654,
+          760,
+          666,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-6",
+        "face": "east",
+        "pixels": [
+          670,
+          760,
+          682,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-6",
+        "face": "north",
+        "pixels": [
+          686,
+          760,
+          698,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-6",
+        "face": "south",
+        "pixels": [
+          702,
+          760,
+          714,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-6",
+        "face": "west",
+        "pixels": [
+          718,
+          760,
+          730,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-7",
+        "face": "east",
+        "pixels": [
+          734,
+          760,
+          746,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-7",
+        "face": "north",
+        "pixels": [
+          750,
+          760,
+          762,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-7",
+        "face": "south",
+        "pixels": [
+          766,
+          760,
+          778,
+          766
+        ]
+      },
+      {
+        "element": "muzzle/crown-7",
+        "face": "west",
+        "pixels": [
+          782,
+          760,
+          794,
+          766
+        ]
+      },
+      {
+        "element": "trigger-guard/bottom",
+        "face": "east",
+        "pixels": [
+          798,
+          760,
+          846,
+          765
+        ]
+      },
+      {
+        "element": "trigger-guard/bottom",
+        "face": "west",
+        "pixels": [
+          850,
+          760,
+          898,
+          765
+        ]
+      },
+      {
+        "element": "trigger-guard/front",
+        "face": "east",
+        "pixels": [
+          902,
+          760,
+          939,
+          765
+        ]
+      },
+      {
+        "element": "trigger-guard/front",
+        "face": "west",
+        "pixels": [
+          943,
+          760,
+          980,
+          765
+        ]
+      },
+      {
+        "element": "trigger-guard/rear",
+        "face": "east",
+        "pixels": [
+          984,
+          760,
+          1020,
+          765
+        ]
+      },
+      {
+        "element": "trigger-guard/rear",
+        "face": "west",
+        "pixels": [
+          2,
+          770,
+          38,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-0",
+        "face": "down",
+        "pixels": [
+          42,
+          770,
+          64,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-0",
+        "face": "up",
+        "pixels": [
+          68,
+          770,
+          90,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-4",
+        "face": "down",
+        "pixels": [
+          94,
+          770,
+          116,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-4",
+        "face": "up",
+        "pixels": [
+          120,
+          770,
+          142,
+          775
+        ]
+      },
+      {
+        "element": "trigger-guard/bottom",
+        "face": "north",
+        "pixels": [
+          146,
+          770,
+          164,
+          775
+        ]
+      },
+      {
+        "element": "trigger-guard/bottom",
+        "face": "south",
+        "pixels": [
+          168,
+          770,
+          186,
+          775
+        ]
+      },
+      {
+        "element": "trigger-guard/front",
+        "face": "north",
+        "pixels": [
+          190,
+          770,
+          208,
+          775
+        ]
+      },
+      {
+        "element": "trigger-guard/front",
+        "face": "south",
+        "pixels": [
+          212,
+          770,
+          230,
+          775
+        ]
+      },
+      {
+        "element": "trigger-guard/rear",
+        "face": "north",
+        "pixels": [
+          234,
+          770,
+          252,
+          775
+        ]
+      },
+      {
+        "element": "trigger-guard/rear",
+        "face": "south",
+        "pixels": [
+          256,
+          770,
+          274,
+          775
+        ]
+      },
+      {
+        "element": "trigger/upper",
+        "face": "east",
+        "pixels": [
+          278,
+          770,
+          296,
+          775
+        ]
+      },
+      {
+        "element": "trigger/upper",
+        "face": "west",
+        "pixels": [
+          300,
+          770,
+          318,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-2",
+        "face": "down",
+        "pixels": [
+          322,
+          770,
+          337,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-2",
+        "face": "up",
+        "pixels": [
+          341,
+          770,
+          356,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-6",
+        "face": "down",
+        "pixels": [
+          360,
+          770,
+          375,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-6",
+        "face": "up",
+        "pixels": [
+          379,
+          770,
+          394,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-1",
+        "face": "down",
+        "pixels": [
+          398,
+          770,
+          410,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-1",
+        "face": "up",
+        "pixels": [
+          414,
+          770,
+          426,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-3",
+        "face": "down",
+        "pixels": [
+          430,
+          770,
+          442,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-3",
+        "face": "up",
+        "pixels": [
+          446,
+          770,
+          458,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-5",
+        "face": "down",
+        "pixels": [
+          462,
+          770,
+          471,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-5",
+        "face": "up",
+        "pixels": [
+          475,
+          770,
+          484,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-7",
+        "face": "down",
+        "pixels": [
+          488,
+          770,
+          497,
+          775
+        ]
+      },
+      {
+        "element": "sight/hoop-7",
+        "face": "up",
+        "pixels": [
+          501,
+          770,
+          510,
+          775
+        ]
+      },
+      {
+        "element": "trigger/upper",
+        "face": "north",
+        "pixels": [
+          514,
+          770,
+          523,
+          775
+        ]
+      },
+      {
+        "element": "trigger/upper",
+        "face": "south",
+        "pixels": [
+          527,
+          770,
+          536,
+          775
+        ]
+      },
+      {
+        "element": "receiver/top-seam",
+        "face": "east",
+        "pixels": [
+          540,
+          770,
+          805,
+          774
+        ]
+      },
+      {
+        "element": "receiver/top-seam",
+        "face": "west",
+        "pixels": [
+          2,
+          779,
+          267,
+          783
+        ]
+      },
+      {
+        "element": "power-rail/top-spine",
+        "face": "east",
+        "pixels": [
+          271,
+          779,
+          476,
+          783
+        ]
+      },
+      {
+        "element": "power-rail/top-spine",
+        "face": "west",
+        "pixels": [
+          480,
+          779,
+          685,
+          783
+        ]
+      },
+      {
+        "element": "receiver/top-seam",
+        "face": "north",
+        "pixels": [
+          689,
+          779,
+          726,
+          783
+        ]
+      },
+      {
+        "element": "receiver/top-seam",
+        "face": "south",
+        "pixels": [
+          730,
+          779,
+          767,
+          783
+        ]
+      },
+      {
+        "element": "power-rail/top-spine",
+        "face": "north",
+        "pixels": [
+          771,
+          779,
+          796,
+          783
+        ]
+      },
+      {
+        "element": "power-rail/top-spine",
+        "face": "south",
+        "pixels": [
+          800,
+          779,
+          825,
+          783
+        ]
+      },
+      {
+        "element": "trigger/hook",
+        "face": "east",
+        "pixels": [
+          829,
+          779,
+          845,
+          783
+        ]
+      },
+      {
+        "element": "trigger/hook",
+        "face": "west",
+        "pixels": [
+          849,
+          779,
+          865,
+          783
+        ]
+      },
+      {
+        "element": "trigger/hook",
+        "face": "north",
+        "pixels": [
+          869,
+          779,
+          878,
+          783
+        ]
+      },
+      {
+        "element": "trigger/hook",
+        "face": "south",
+        "pixels": [
+          882,
+          779,
+          891,
+          783
+        ]
+      },
+      {
+        "element": "muzzle/bore-recess",
+        "face": "down",
+        "pixels": [
+          895,
+          779,
+          917,
+          782
+        ]
+      },
+      {
+        "element": "muzzle/bore-recess",
+        "face": "up",
+        "pixels": [
+          921,
+          779,
+          943,
+          782
+        ]
+      },
+      {
+        "element": "sight/hoop-0",
+        "face": "north",
+        "pixels": [
+          947,
+          779,
+          969,
+          782
+        ]
+      },
+      {
+        "element": "sight/hoop-0",
+        "face": "south",
+        "pixels": [
+          973,
+          779,
+          995,
+          782
+        ]
+      },
+      {
+        "element": "sight/hoop-4",
+        "face": "north",
+        "pixels": [
+          999,
+          779,
+          1021,
+          782
+        ]
+      },
+      {
+        "element": "sight/hoop-4",
+        "face": "south",
+        "pixels": [
+          2,
+          787,
+          24,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-0",
+        "face": "north",
+        "pixels": [
+          28,
+          787,
+          44,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-0",
+        "face": "south",
+        "pixels": [
+          48,
+          787,
+          64,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-1",
+        "face": "north",
+        "pixels": [
+          68,
+          787,
+          84,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-1",
+        "face": "south",
+        "pixels": [
+          88,
+          787,
+          104,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-2",
+        "face": "north",
+        "pixels": [
+          108,
+          787,
+          124,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-2",
+        "face": "south",
+        "pixels": [
+          128,
+          787,
+          144,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-2",
+        "face": "north",
+        "pixels": [
+          148,
+          787,
+          163,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-2",
+        "face": "south",
+        "pixels": [
+          167,
+          787,
+          182,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-6",
+        "face": "north",
+        "pixels": [
+          186,
+          787,
+          201,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-6",
+        "face": "south",
+        "pixels": [
+          205,
+          787,
+          220,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-0",
+        "face": "east",
+        "pixels": [
+          224,
+          787,
+          236,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-0",
+        "face": "west",
+        "pixels": [
+          240,
+          787,
+          252,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-1",
+        "face": "east",
+        "pixels": [
+          256,
+          787,
+          268,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-1",
+        "face": "west",
+        "pixels": [
+          272,
+          787,
+          284,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-2",
+        "face": "east",
+        "pixels": [
+          288,
+          787,
+          300,
+          790
+        ]
+      },
+      {
+        "element": "muzzle/top-vent-2",
+        "face": "west",
+        "pixels": [
+          304,
+          787,
+          316,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-1",
+        "face": "north",
+        "pixels": [
+          320,
+          787,
+          332,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-1",
+        "face": "south",
+        "pixels": [
+          336,
+          787,
+          348,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-3",
+        "face": "north",
+        "pixels": [
+          352,
+          787,
+          364,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-3",
+        "face": "south",
+        "pixels": [
+          368,
+          787,
+          380,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-5",
+        "face": "north",
+        "pixels": [
+          384,
+          787,
+          393,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-5",
+        "face": "south",
+        "pixels": [
+          397,
+          787,
+          406,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-7",
+        "face": "north",
+        "pixels": [
+          410,
+          787,
+          419,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-7",
+        "face": "south",
+        "pixels": [
+          423,
+          787,
+          432,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-0",
+        "face": "east",
+        "pixels": [
+          436,
+          787,
+          441,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-0",
+        "face": "west",
+        "pixels": [
+          445,
+          787,
+          450,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-1",
+        "face": "east",
+        "pixels": [
+          454,
+          787,
+          459,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-1",
+        "face": "west",
+        "pixels": [
+          463,
+          787,
+          468,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-2",
+        "face": "east",
+        "pixels": [
+          472,
+          787,
+          477,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-2",
+        "face": "west",
+        "pixels": [
+          481,
+          787,
+          486,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-3",
+        "face": "east",
+        "pixels": [
+          490,
+          787,
+          495,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-3",
+        "face": "west",
+        "pixels": [
+          499,
+          787,
+          504,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-4",
+        "face": "east",
+        "pixels": [
+          508,
+          787,
+          513,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-4",
+        "face": "west",
+        "pixels": [
+          517,
+          787,
+          522,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-5",
+        "face": "east",
+        "pixels": [
+          526,
+          787,
+          531,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-5",
+        "face": "west",
+        "pixels": [
+          535,
+          787,
+          540,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-6",
+        "face": "east",
+        "pixels": [
+          544,
+          787,
+          549,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-6",
+        "face": "west",
+        "pixels": [
+          553,
+          787,
+          558,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-7",
+        "face": "east",
+        "pixels": [
+          562,
+          787,
+          567,
+          790
+        ]
+      },
+      {
+        "element": "sight/hoop-7",
+        "face": "west",
+        "pixels": [
+          571,
+          787,
+          576,
+          790
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "reference": "/tmp/destiny-weapons-w31/references/the_recluse.jpg",
+    "reference_sha256": "44ef69b3df3816d5a9c0eb116489be97cbc4ab34894c9c3b56524ba70d264374",
+    "archive_sha256": "e0d378d31f58e758e3bcedc612fc5d2f81a469882d38668636479f6d6416efd4",
+    "source_files": {
+      "Recluse.blend": "339c2d974367257a1ffa238504538111e2a7ac5010e47cf50e2bd06ef5ee2813",
+      "Recluse.fbx": "b764f062cba05a31c4e647a661a13f79bf11ef8838b6845e0998e25ab16e6b68"
+    },
+    "canonical_sha256": "b338c341d40234e39356ca70f47594e5d625c6521f102ea417a06956d33f73ae",
+    "paint_atlas": "src/main/resources/assets/destiny/textures/item/weapon/w30/the_recluse.png",
+    "paint_atlas_sha256": "f3aad8fd07a4af6d7a368f02baf5ea695f15f7a6bedb4b41ed4af6c12ae357a3",
+    "source_uv_materials": {
+      "RecluseBarrel_Diffuse.dds": "25deb97621eef9c5d3c763912cf65c3014e719314672335a82d27c9e4741dae0",
+      "RecluseBarrel_Gstack.dds": "8859b97982dd8c0d5522ed58708f5b3377960ae4c26d4df9ed964819883e52cb",
+      "RecluseBarrel_Normal.dds": "344eb94e53e2c89a1c694ec87c17a4c0b3afb50e8518423963604159c65f208f",
+      "RecluseStock_Diffuse.dds": "429c2414d98194d8cceb3b181f2cc49bc87db82d4aee901c90c91d281d2616bb",
+      "RecluseStock_Gstack.dds": "b1ca5b4d296c66e95e0c8ec1405bc1169e6ab2d30b0e1d996e0176f50fb76cb7",
+      "RecluseStock_Normal.dds": "ff088bf94ab836e24bb6b9e7db6f6f1b53ab2cf4342eb887ca29b64cbded7b10"
+    }
+  },
+  "limitations": [
+    "Offline renderer approximates diffuse lighting, not original Bungie shader or native client.",
+    "Bird masks retain W31 coarse painted boundaries; higher atlas density does not invent missing bird detail.",
+    "Curved source bevels are simplified into broad functional solids; live ADS/hand clearance remains master QA.",
+    "Magazine remains the established lower-cartridge proxy, semantically unlabelled in source; no anchor rebase."
+  ]
+}

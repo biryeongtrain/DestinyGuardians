@@ -1,0 +1,94 @@
+{
+  "stage": "W173",
+  "repository": "https://github.com/Database-Clarity/Live-Clarity-Database",
+  "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+  "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+  "sourceSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 11612903,
+    "name": "Adrenaline Junkie",
+    "lastUpload": 1723480728683,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Weapon Kills grant 1 Stack of Adrenaline Junkie for 4.5 seconds. Grenade Kills grant all 5 Stacks instantly even if the weapon is stowed."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Adrenaline Junkie benefits:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 20 Handling"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 6.7%|13.3%|20%|26.6%|33.3% increased damage at 1|2|3|4|5 Stacks"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 2422968039,
+  "mechanics": {
+    "id": "adrenaline_junkie",
+    "hash": 11612903,
+    "durationTicks": 90,
+    "maxStacks": 5,
+    "weaponKillStacks": 1,
+    "grenadeKillStacks": 5,
+    "grenadeKillsWorkStowed": true,
+    "handlingBonus": 20,
+    "damageMultipliers": [
+      1.067,
+      1.133,
+      1.2,
+      1.266,
+      1.333
+    ]
+  },
+  "durationMultiplier": 1.0,
+  "sourceDurationMultiplier": "NO_DURATION_SCALAR_SPECIFIED_NEUTRAL_1",
+  "policies": {
+    "statCap": 100,
+    "durationMultiplier": 1.0,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "adsBounds": "CLAMP_TICKS_2_20_W44",
+    "glaiveAds": "W44_UNSUPPORTED_NEUTRAL_2_TICKS_ZERO_ORACLE_CURVE",
+    "swordHandling": "UNSUPPORTED_NO_OFFICIAL_HANDLING_STAT_OR_ORACLE_CURVE_NULL_TIMINGS_DAMAGE_ELIGIBLE",
+    "handlingBounds": "W58_NO_EXTRA_TICK_CLAMP_STOW_AT_100_FLOOR",
+    "reload": "NO_BONUS_NO_RELOAD_CURVE_OR_TIMING_OVERRIDE",
+    "sourceDamageAttribution": "MASTER_OWNED_LOCAL_POLICY",
+    "cycleIntegration": "MASTER_OWNED_LOCAL_POLICY",
+    "snapshotComposition": "W68_ENTRY_SCALAR_AFTER_AJ_HANDLING20_BEFORE_SINGLE_CEIL_CLAMP1_20_EXACT_INTERSECTION_EMPTY"
+  },
+  "limitations": [
+    "Bungie Oct13 manifest and Oracle May20 curves are separate pinned snapshots. Community timings are historical approximations, not exact official animation measurements.",
+    "Clarity weapon kill +1, grenade kill instantly5 even stowed, 4.5s duration, handling+20 and stack damage are source mechanics. Runtime attribution, refresh, lifecycle and cycle integration are master-owned.",
+    "Only handling is modified. No reload stat bonus, reload curve or timing override is introduced.",
+    "Stat clamp0..100; stow-at100 floor; W44 ADS2..20ticks; no extra ready/stow clamp; ceil seconds*20 once.",
+    "Goldtusk remains among all5 damage-eligible rolls, but official Handling stat and Oracle sword curve are absent. Timing is explicitly unsupported with null ticks and no curve; consumers retain their sword baseline.",
+    "Nezarec glaive ADS is unsupported by W44; exact zero Oracle curve maps to existing neutral2ticks. Ready/stow have measured curves.",
+    "No selected AJ roll has official base Snapshot membership. Empty intersection is pinned; Snapshot requests fail closed. Future approved pairs must apply official W68 scalar to raw baseHandling+20 ADS seconds before one ceil, never to rounded ticks. W68 historical Special .75 vs selected .8 conflict remains unresolved.",
+    "Combined perks, armor, masterworks, combat runtime, native Vision and final gates are master-owned. Enhanced AJ is excluded."
+  ]
+}

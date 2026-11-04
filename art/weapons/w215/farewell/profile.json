@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "weapon": "farewell",
+  "sourceAction": "80A8ADE2",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8ADE2",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.6,
+        0.72
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "sidearm_4cbe9231",
+    "action": "80A8ADE2",
+    "sourceBlendSha256": "164514cfdbb9d7a6f3c5ba7276204ccd2a3d5f64d0ceaf216a467d2b6556d796",
+    "sourceMapSha256": "f27809f18b4b0e8aae7cc9850c48a199d5450b3d3a0983514a0d9e51bd6cc1f4",
+    "boneMapSha256": "83e632846c984262cb10bdc6cbdcd1d83357c1c76226a8a4ebebb73afa4710e1"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w215-source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "sourceSha256": "c283ec4f4b0e39bce3eeabc27c8f459a84a905b89b95012d46fcafc4cc1de535",
+      "observation": "Read fresh master headless Blender5.4.0 Alpha evaluation FIRST: Armature only, OBSlot Armature|fp_80A8ADE2_reload_full|Base, source frames1..67 at30fps,61 samples; prior-cache joint error0 and allInputsUnchanged=true. Worker reviewed master evidence, did not open/evaluate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/sidearm_4cbe9231.json",
+      "role": "evaluated_source61_full_chain",
+      "sourceSha256": "dba69d30d92a9946a8e4bc8b43650286cca7c40a4da92c7d743e977d73edbc09",
+      "observation": "Read all61 original armature-object weapon/shoulder/elbow/wrist matrices, row-major column vectors. Left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. Source limbs at32 units: left upper8.726689..8.726693, forearm8.141361..8.141367; right upper8.726569..8.726579, forearm8.141358..8.141366. Preserve ordinary lengths and unattenuated FK."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/sheets/sidearm_4cbe9231-80A8ADE2-upper-chain.png",
+      "role": "viewed_bone_only_source_sheet",
+      "sourceSha256": "dfce89c54f21264b22f485046d25e84d8c8e0cf1edfeb2bf10cd656544767de9",
+      "observation": "Viewed actual six-pose XZ/YZ upper-chain image p=0,.2,.4,.6,.8,1 before porting. Arms travel through exchange/recovery and return exactly at1. Bone-only projections do not establish mesh contact, camera or native visibility."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w205/first-person-framing.json",
+      "role": "preserved_actual_effective_framing",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "observation": "Read first_person_framing_w205 and called profile(load(),farewell,sidearm): translation[-1,.25,0], rotation[-1,0,0], scale.98, rightWristRoll27, hideSupportAtRest=true. Retain actual spatial/wrist values; change only required sourceFullChain/keepMeshSupport true and hideSupportAtRest false. No new camera/arm fit keys."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/contacts.json",
+      "role": "retained_mesh_contacts",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "observation": "Keep effective right rest[8,9.3,8.18]/[-14,0,0], left rest[7.22,8.9,8.45]/[-14,0,-20], reload contact[7.2,7.02,8.83]/[-14,0,0]. REST offsets accompany original FK; reload target locates the handled payload, not a replacement wrist offset."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/generate_reload_w184_farewell.py",
+      "role": "preserved_authored_part_path",
+      "sourceSha256": "f15effc6b015b7a260c810c7238013f77598d5b859e18feabc9d661eb0900cfa",
+      "observation": "Read and AST-extracted constants/functions without executing W184. Preserve exact12 knots, GRIP[8,9.305,8.175], MAGAZINE_ANCHOR[8,7.05,8.83], heel/loop split and three shaft solids/UV. Historical True Vanguard2VaZGMrEfjQ n1456..1524 observations remain W184 evidence; worker did not re-view footage."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/build_first_person_hands_w201.py",
+      "role": "proposed_attachment_release",
+      "sourceSha256": "9843a23f049cf264fbf851cedac35c300b5c4c0c7727385051e5cc13d36b2de1",
+      "observation": "Read existing gripWindow/magazine part-shift hook. Candidate[.05,.20,.60,.72] attaches by authored withdrawal, fades through final insertion and releases at exact.72 seat, before.72..86 wrist roll. Source weapon-local left wrist is[-.02407,.13654,.11038] at.60,[-.03611,.03674,.19049] at.70 and[-.37267,.21429,.18638] at.80. Release avoids dragging a seated magazine after later wrist departure; not recovered contact or IK."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST draft. sourceAction records requested provenance; supported runtime selector is contacts.reload.rigAction. Master owns W215 profile loader, fresh61 rig copy/action whitelist,60-grid runtime and arm overlay/materialization.",
+    "Preserve authored holds/part path and gameplay/audio/ammo/timing. C1 weighted harmonic PCHIP replaces per-key stops only; no limb stretch/damping/length smoothing, hidden support, new camera lift/lower/depth or rest-contact edits.",
+    "Farewell uses supported magazine policy. Hinged Duke cylinder remains cylinder policy under its separate owner; no shared contact changes are made here.",
+    "Candidate566=106body+12payload+448classic arm surfaces; canonical endpoint estimate563. Master must measure every composed route including ADS/inspect under1000.",
+    "FIRST PNG/phase feedback -> worker review/correction -> master SECOND. Both pending; no native visual/contact/audio/performance acceptance."
+  ]
+}

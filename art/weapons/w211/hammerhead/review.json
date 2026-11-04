@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "weapon": "hammerhead",
+  "stage": "W211",
+  "status": "worker_reviewed_pending_Vision2",
+  "ownedFiles": [
+    "art/weapons/w206/hammerhead/profile.json",
+    "art/weapons/w211/hammerhead/review.json"
+  ],
+  "profileBeforeSha256": "56faba546d381b7eac615373ffe46a4f5182293a429cbe86a2813e1a2a181fa4",
+  "changes": {
+    "framing.sourceFullChain": true,
+    "contacts.reload.rigAction": "80A8A005",
+    "contactPositionsAndRotations": "Inherited W201 values unchanged; reload override only selects action",
+    "sourceWeaponRelative": "Omitted: sourceFullChain branch takes precedence",
+    "preserved": "Existing framing, keepMeshSupport, visible support, geometry/UV, ADS matrices, timing/ammo/audio and third-person assets"
+  },
+  "sourceReview": {
+    "report": "docs/qa/2026-10-28/w211/source/source-review.json",
+    "group": "machine_gun_e5b72131",
+    "inspection": "Worker read master-owned headless Blender evaluation report and evaluated joint archive, and viewed original skeleton sheet. Worker did not open/evaluate Blender or use the live user scene.",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/machine_gun_e5b72131/blender/source.blend",
+    "sourceInputSha256": {
+      "sourceBlend": "11feeead0a96d1f0555ef6b168b42ee2698306688030bff4d4b92f563418a924",
+      "sourceMap": "ee437999e565a7708313a3944c4098493914b7c2797da0dba161e6b71a8b8695",
+      "boneMap": "e152c9875efa62bfde0d0dbaa94b26d7b2e5727cc9d1686eb6053dc6f68b488e",
+      "cache": "99095777746f0fb89144f36668e231a0e094afb8b06a15a3c8138d4a1598d67f"
+    },
+    "blenderVersion": "5.4.0 Alpha",
+    "objects": [
+      {
+        "name": "Armature",
+        "type": "ARMATURE"
+      }
+    ],
+    "cameraExported": false,
+    "space": "armature_object",
+    "matrixConvention": "row-major, column vectors; evaluated pose.bones.matrix, no matrix_world application",
+    "allInputsUnchangedReportedByMaster": true,
+    "reloadAction": {
+      "action": "Armature|fp_80A8A005_reload_full|Base",
+      "slot": "OBSlot",
+      "sourceNames": [
+        "reload_full",
+        "reload_empty"
+      ],
+      "sourceFrameRange": [
+        1.0,
+        180.0
+      ],
+      "priorSamples": 21,
+      "samples": 61,
+      "maxExistingCacheJointAbsError": 0.0
+    },
+    "selectionScope": "Audited reload_full/reload_empty group action, not proven weapon-exclusive motion",
+    "idle": "80A8A00D",
+    "ads": "80A8A00E",
+    "jointArchive": "art/weapons/w205/rigs/machine_gun_e5b72131.json",
+    "sheet": "docs/qa/2026-10-28/w211/source/sheets/machine_gun_e5b72131-80A8A005-upper-chain.png",
+    "sheetObservation": "Viewed six XZ/YZ skeleton samples at p=0,.2,.4,.6,.8,1; substantial handling-arm excursion and near-return at end. Bones only establish neither remodeled drum/feed contact nor native visibility.",
+    "directionPolicy": "Retain current source X-forward/Z-up to canonical -Z-forward/Y-up conversion and full-chain weapon-relative axes. Do not apply matrix_world again or introduce contact direction bias.",
+    "lengthsAtAuthored32UnitConversion": {
+      "leftForearm": 8.141366,
+      "rightForearm": 8.141364,
+      "leftUpperArm": 8.72669,
+      "rightUpperArm": 8.726573
+    },
+    "cameraLimitation": "Conversion and retained hip framing are authored calibration; source contains no mesh/camera."
+  },
+  "contactPolicy": {
+    "right": [
+      8,
+      8.5,
+      7.98
+    ],
+    "left": [
+      7.8,
+      9.75,
+      -3.8
+    ],
+    "reload": [
+      4.4,
+      8.4,
+      3.9
+    ],
+    "reloadRotation": [
+      0,
+      0,
+      -80
+    ],
+    "partHint": "magazine",
+    "policy": "magazine",
+    "implementationReviewed": [
+      "scripts/rig_arms_w205.py",
+      "scripts/build_first_person_hands_w201.py",
+      "art/weapons/w208/gnawing_hunger/profile.json",
+      "art/weapons/w208/first_in_last_out/profile.json"
+    ],
+    "handling": "Full-chain wrist travel and body share source weapon parent; detached drum/belt assembly follows handling palm through existing grip/release envelope. Keep cover separate; do not move contact onto cover or charging handle.",
+    "shellAdaptation": "Not applicable to Hammerhead magazine policy; do not add shotgun shell fitting/hold flags."
+  },
+  "adjacentPoseAudit": {
+    "path": "/private/tmp/destiny-w211-source/adjacent-pose-review.json",
+    "sha256": "4d722ae5741c9acae9fb902fd6ca2963a56e75eb3900cfcc60959ab28994690f",
+    "sourceOnly": true,
+    "continuous60fpsClaim": false,
+    "result": {
+      "group": "machine_gun_e5b72131",
+      "action": "80A8A005",
+      "poses": 61,
+      "maxAdjacentJointRotationDeg": 99.5435,
+      "maxAdjacentJointTravelModelUnits": 13.1656
+    },
+    "disposition": "Preserve evaluated original source poses. Fast adjacent changes are native-review risks; no arbitrary resmoothing or invented timing."
+  },
+  "budget": {
+    "limitAssembledElements": 1000,
+    "observedExistingFullWeaponElements": 163,
+    "assembledAfterGeneration": null,
+    "status": "Master reports generated maximum assembled elements below1000 and targeted gates passed; exact count not supplied to worker.",
+    "masterReportedWithinLimit": true
+  },
+  "risks": [
+    "Upper-arm or sleeve intrusion into hip/ADS sight",
+    "Detached drum/belt depth, palm attachment and release at feed/receiver",
+    "Fast source adjacent-pose movement and recovery to canonical rest",
+    "Source skeleton has no exact remodeled mesh contact or recovered camera"
+  ],
+  "validation": {
+    "worker": "Read actual master Vision1 sheets and listed raw PNGs, sequence capture brackets, oracle timeline and current part/contact routing; no worker generation/build/runtime/CU/Vision input or source smoothing.",
+    "masterGeneration": "Master reports 61-pose generation and targeted gates passed; assembled elements below1000.",
+    "vision1": "Completed by master; worker inspected supplied actual PNG/source evidence. See vision1WorkerReview for sampled findings and limitations.",
+    "workerCorrection": "Evidence-based no-change after first-Vision review; existing profile retained byte-for-byte.",
+    "vision2": "Pending master integration of review against current candidate hash and same-scenario second actual Vision.",
+    "nativeAccepted": false
+  },
+  "profileCandidateSha256": "1a1a19ccacd563ef92bfe988b4ad2da185af71a02926dd5fcfd8753436f03eff",
+  "vision1WorkerReview": {
+    "decision": "evidence-based no-change",
+    "profileChanged": false,
+    "profileCandidateSha256": "1a1a19ccacd563ef92bfe988b4ad2da185af71a02926dd5fcfd8753436f03eff",
+    "mainCandidateSha256AtReview": "1a1a19ccacd563ef92bfe988b4ad2da185af71a02926dd5fcfd8753436f03eff",
+    "actualImagesViewed": [
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/screenshots/hammerhead-review.png",
+        "sha256": "159eb8449a2a5e7807fb87b65e7917be60848d09195c153c283cdc0d9052899c"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/screenshots/hammerhead-reload.png",
+        "sha256": "bab4d7e3b13dac2f416c6ed0c8b729d3d6071766fb14f2d294d60a9e5b36d13d"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-06.png",
+        "sha256": "ca7f030f1ce46c0b468e59673c51a834a69c8c4a120fb61a012f863a86a93b7a"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-08.png",
+        "sha256": "045cdcb8c66da5fc1bb7573544b398dcc27ef46deb0895752f3302fbbc39a20d"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-10.png",
+        "sha256": "95c8bbf089dd8e0ce4fd675ce1831aa87b0bd35a95a00932b5f22dc53b67616a"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-11.png",
+        "sha256": "9236ca0b789454e5b3716a96f4775869945ed41282fa34bc373b2585774cac53"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-12.png",
+        "sha256": "931a01d219f96a809353ac74f930663b2a1da45e3ff0b5ff60971b4bc82dd2bc"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-13.png",
+        "sha256": "dd31503df99d57abdcb4caebfa410792007a22e9096e4a183593dbdb74c9219b"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-14.png",
+        "sha256": "6284907223e60832504a4c9c7f2ba9c772d59f00bb85408ceaf027f37a2af6ff"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-15.png",
+        "sha256": "0ed6bea6ece4d6d1b96d894a5e293324843212090f33b97848628b73bf4430bf"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-16.png",
+        "sha256": "1618811f72bf09b8281406cd93418fb0a49ea4e6f1fa007905e2842ff7be6470"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-17.png",
+        "sha256": "8d50fb4ffca9c943a4a2ec65053454a8dd77ca851bba4f77abe15daf1f9551f3"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-18.png",
+        "sha256": "3dc8271c08b798892256734125a812166f065845b20bbda5cf719c22e2441b2d"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-19.png",
+        "sha256": "6eb244792a805c3c58ce31fee51c3b1da7db420f020b514f43d3050afd905139"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-20.png",
+        "sha256": "db8df3e592ddac1902bdb747a7b122d4f53a96755627d6be09f5889e2aa3e892"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-22.png",
+        "sha256": "d468159273407a44bf0455f30a90d127065f19324196322d2ee9c2a6c3fa40c1"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-reload-sample-25.png",
+        "sha256": "16086811af7046faef169bbb5e04872a5bb29c3ea4f554573546b0ac0c0da247"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-hip.png",
+        "sha256": "42095805b8fddbd3e2f4334dcc6181d9c5d8cc6674a3547d4a4048a0ce609d21"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-ads-sample-06.png",
+        "sha256": "495f1ca5d3af53c4744c0d85e07dfe843d8c224f18feebadfb7a0143dd75f7cb"
+      },
+      {
+        "path": "docs/qa/2026-10-28/w211/vision1/frames/w211-hammerhead-after-reload.png",
+        "sha256": "61cee7280aeafea25ca449a10fa110d787e5da3a68b968ccf171e10f9cd0a740"
+      }
+    ],
+    "metadataRead": [
+      "docs/qa/2026-10-28/w211/vision1/sequences/w211-hammerhead-reload.json",
+      "docs/qa/2026-10-28/w211/vision1/sequences/w211-hammerhead-ads.json",
+      "docs/qa/2026-10-28/w211/vision1/oracles/w211-hammerhead-reload-timeline.json",
+      "docs/qa/2026-10-28/w211/vision1/oracles/w211-hammerhead-reload-finished.json",
+      "docs/qa/2026-10-28/w211/vision1/screenshots/selected-frames.json"
+    ],
+    "captureBrackets": [
+      {
+        "file": "w211-hammerhead-reload-sample-06.png",
+        "beforeClientTick": 1285,
+        "afterClientTick": 1287
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-08.png",
+        "beforeClientTick": 1291,
+        "afterClientTick": 1293
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-10.png",
+        "beforeClientTick": 1300,
+        "afterClientTick": 1302
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-11.png",
+        "beforeClientTick": 1303,
+        "afterClientTick": 1305
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-12.png",
+        "beforeClientTick": 1307,
+        "afterClientTick": 1309
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-13.png",
+        "beforeClientTick": 1310,
+        "afterClientTick": 1312
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-14.png",
+        "beforeClientTick": 1313,
+        "afterClientTick": 1315
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-15.png",
+        "beforeClientTick": 1317,
+        "afterClientTick": 1319
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-16.png",
+        "beforeClientTick": 1320,
+        "afterClientTick": 1322
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-17.png",
+        "beforeClientTick": 1323,
+        "afterClientTick": 1325
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-18.png",
+        "beforeClientTick": 1327,
+        "afterClientTick": 1330
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-19.png",
+        "beforeClientTick": 1331,
+        "afterClientTick": 1333
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-20.png",
+        "beforeClientTick": 1334,
+        "afterClientTick": 1336
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-22.png",
+        "beforeClientTick": 1341,
+        "afterClientTick": 1343
+      },
+      {
+        "file": "w211-hammerhead-reload-sample-25.png",
+        "beforeClientTick": 1351,
+        "afterClientTick": 1353
+      }
+    ],
+    "findings": [
+      {
+        "scope": "hip/full ADS/return",
+        "observation": "Raw hip and after-reload PNGs show support skin arm and a cropped trigger-side arm. ADS sample06 has a clear sight aperture without an upper arm crossing it. After-reload framing visibly returns to the hip arrangement."
+      },
+      {
+        "scope": "reload06/08",
+        "observation": "Lid is open and visibly hinged to receiver. Handling hand is outside the crop at06 and beside drum at08; exact off-crop contact is unverified."
+      },
+      {
+        "scope": "reload10/11/12/13/14/15/16/17",
+        "observation": "Twin drum and belt/feed assembly accompany the handling palm through the visible excursion. No visible palm-to-drum gap requiring a contact offset appears in these inspected frames. Lid remains hinged to receiver while magazine rises; projected overlap at13/14 does not establish attachment to lid."
+      },
+      {
+        "scope": "reload18/19/20/22/25",
+        "observation": "Drum returns beside receiver at18; handling hand is visibly withdrawn at19, consistent with release rather than a detached hand/belt defect. Recovery/closure continues at20/22. At25 lid is closed and support hand returns underneath; exact canonical return is established by separate after-reload PNG and oracle, not sample25 alone."
+      }
+    ],
+    "sourceCrossCheck": {
+      "files": [
+        "scripts/generate_reload_w207_hammerhead.py",
+        "scripts/build_first_person_hands_w201.py"
+      ],
+      "observation": "Read current generator PARTS body/magazine/cover and 61-pose construction. Feed offset applies only to magazine; cover receives hinge rotation. Hands generator chooses magazine via inherited partHint, shifts only moving_key for magazine policy, and leaves cover on its authored hinge. Visual distinction agrees with this source routing.",
+      "originalSource": "Master evaluated all four original Blender sources before 61-pose generation, as reported. Worker source inspection remains report/matrices/sheet; no personal Blender evaluation claim.",
+      "resmoothing": "None; fast evaluated original poses retained."
+    },
+    "oracleObservation": "Reload timeline advances through normalized samples, then canonical weapon with reloading=false and ammo57/93; finished oracle confirms the same. This is state evidence, not exact screenshot synchronization.",
+    "masterReportedValidation": "Targeted gates passed and maximum assembled elements below1000. Worker did not rerun generation/build/gates or infer an exact element count.",
+    "limitations": [
+      "Only listed raw PNGs were viewed; this is sampled visual review, not all-frame continuous verification.",
+      "Some hands and moving parts leave crop during source excursion; neither off-crop contact nor all exact contact depths are verified.",
+      "Capture before/after client ticks bracket screenshots; capture indices are not source pose indices and server oracle timestamps are not exact render synchronization.",
+      "No recovered original mesh/camera, finger contact IK, continuous60fps proof, or final Vision2 acceptance."
+    ],
+    "reasonForNoChange": "Visible drum/palm coupling, independent hinged cover, clear full ADS aperture and restored hip arrangement support retaining accepted contact coordinates and sourceFullChain candidate. No image-backed correction warrants numeric tuning.",
+    "vision2Focus": [
+      "Repeat visible drum/palm travel and cover hinge independence",
+      "Observe release/seating then closed-lid canonical return",
+      "Confirm hip both arms and full ADS aperture stay clear; preserve off-crop and contact-depth limitations"
+    ]
+  }
+}

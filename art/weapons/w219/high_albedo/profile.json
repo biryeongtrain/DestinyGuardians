@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "stage": "W219",
+  "weapon": "high_albedo",
+  "sourceAction": "80A8ADE2",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.75,
+        7.82
+      ],
+      "rotation": [
+        -17.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        7.2,
+        8.32,
+        8.1
+      ],
+      "rotation": [
+        -17.0,
+        0.0,
+        -20.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        7.15,
+        5.98,
+        8.67
+      ],
+      "rotation": [
+        -17.0,
+        0.0,
+        0.0
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "rigAction": "80A8ADE2",
+      "hand": "left",
+      "gripWindow": [
+        0.18,
+        0.25,
+        0.5,
+        0.6
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "sidearm_80771a27",
+    "action": "80A8ADE2",
+    "sourceBlendSha256": "29da093f34c158d1ef7f6f482d903f05429b79ab8d058ad33a7613adbceae34b",
+    "sourceMapSha256": "5963964a0e0b44daa09e3c30c6b8b2e9329d7b3c32f1a29604ab85748ac21cb8",
+    "boneMapSha256": "83e632846c984262cb10bdc6cbdcd1d83357c1c76226a8a4ebebb73afa4710e1"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w219-source/source-review.json",
+      "sourceSha256": "99b7a8001a2a09a88d9232c4e5945cb25d0f7d7cd5460380595406d947309138",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read master Blender5.4.0 Alpha evaluation: ARMATURE only, OBSlot action Armature|fp_80A8ADE2_reload_full|Base, frames1..67 at30fps,61 samples, old joint error0, allInputsUnchanged=true. Worker did not independently open/evaluate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sidearm_80771a27.json",
+      "sourceSha256": "6ca00fdb81e18a84ebd38f621b774865a335d1908a0df5fd92d0ddd2296b8913",
+      "role": "fresh_original_source61",
+      "observation": "Read W219 original full shoulder/elbow/wrist/weapon matrices. Left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA. Left wrist has large motion relative to weapon; right wrist stays near carrier grip. Explicit loading hand left, consistent with actual High Albedo storyboard. No source retiming."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sheets/sidearm_80771a27-80A8ADE2-upper-chain.png",
+      "sourceSha256": "dfce89c54f21264b22f485046d25e84d8c8e0cf1edfeb2bf10cd656544767de9",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Viewed six actual XZ/YZ source-chain projections at0,.2,.4,.6,.8,1. Left chain traverses exchange/rear sweep; right remains carrier. Bone-only evidence cannot establish mesh contact or camera framing."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w183/high_albedo/storyboard.png",
+      "sourceSha256": "fda336e6562a38297151d7a8675c07dfdf9c91096c98cf6e7be03508ad446b22",
+      "role": "viewed_retained_actual_footage_storyboard",
+      "observation": "Viewed actual retained High Albedo frames240,1956..2052 above offline W183 poses. Frame1998 exposes ribbed long shaft; frame2004 insertion; frame2016 support has released; frame2040 upper/rear sweep occludes mechanism. No independently visible bolt stroke. Did not re-open video."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w183/high_albedo/SOURCE.md",
+      "sourceSha256": "b10724011e072589dd945259097ac2e92d2ec1f15a1071d72823cd5000446d33",
+      "role": "authored_motion_provenance",
+      "observation": "Read original W183 source/authorship notes. Preserve every12 authored knots, geometry/UVs, lower magazine path, original -17deg baseplate anchor and later inward roll/rear sweep. W219 changes only interpolation density and profile binding."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Read current effective sidearm profile using first_person_framing_w205.load/profile: translation[-1,.25,0],rotation[-1,0,0],scale.98,rightWristRoll27,hideSupportAtRest=true. Preserve spatial offsets; require sourceFullChain/keepMeshSupport=true and hideSupportAtRest=false. No length stretch, axis damping or hiding workaround."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "authored_mesh_contacts_preserved",
+      "observation": "Preserve right[8,8.75,7.82]/[-17,0,0], left[7.2,8.32,8.1]/[-17,0,-20], reload[7.15,5.98,8.67]/[-17,0,0]. Contacts are authored estimates, not recovered finger IK. Grip window ramps.18..25 to exchange, fades.50..60 during insertion, zero after.60 seat so later upper/rear sweep cannot drag magazine."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns W219 shared loaders, source rig installation, materialized resources, runtime60grid, Java clocks/lifecycle and CU/Vision.",
+    "Original mesh/camera/finger IK absent; ordinary full player-skin arms only. No stretching, axis attenuation, support hiding or new camera offset.",
+    "61 sampled poses/60 intervals are not proof of continuous native60fps interpolation.",
+    "Required sequence: master original Blender ->61poses ->FIRST PNGs ->same-worker corrections or justified no-change ->SECOND. Native acceptance pending."
+  ]
+}

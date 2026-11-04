@@ -1,0 +1,157 @@
+Compiled from "ItemQuads.java"
+public final class net.minecraft.client.resources.model.geometry.ItemQuads extends java.lang.Record {
+  private final java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad> all;
+
+  private final java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad> solid;
+
+  private final java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad> translucent;
+
+  public static final net.minecraft.client.resources.model.geometry.ItemQuads EMPTY;
+
+  public net.minecraft.client.resources.model.geometry.ItemQuads(java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad>, java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad>, java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad>);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #7                  // Field all:Ljava/util/List;
+         9: aload_0
+        10: aload_2
+        11: putfield      #13                 // Field solid:Ljava/util/List;
+        14: aload_0
+        15: aload_3
+        16: putfield      #16                 // Field translucent:Ljava/util/List;
+        19: return
+
+  public static net.minecraft.client.resources.model.geometry.ItemQuads split(java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad>);
+    Code:
+         0: aload_0
+         1: invokeinterface #19,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+         6: ifeq          13
+         9: getstatic     #25                 // Field EMPTY:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+        12: areturn
+        13: new           #29                 // class java/util/ArrayList
+        16: dup
+        17: invokespecial #31                 // Method java/util/ArrayList."<init>":()V
+        20: astore_1
+        21: new           #29                 // class java/util/ArrayList
+        24: dup
+        25: invokespecial #31                 // Method java/util/ArrayList."<init>":()V
+        28: astore_2
+        29: aload_0
+        30: invokeinterface #32,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        35: astore_3
+        36: aload_3
+        37: invokeinterface #36,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        42: ifeq          94
+        45: aload_3
+        46: invokeinterface #41,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        51: checkcast     #45                 // class net/minecraft/client/resources/model/geometry/BakedQuad
+        54: astore        4
+        56: aload         4
+        58: invokevirtual #47                 // Method net/minecraft/client/resources/model/geometry/BakedQuad.materialInfo:()Lnet/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo;
+        61: invokevirtual #51                 // Method net/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo.itemRenderType:()Lnet/minecraft/client/renderer/rendertype/RenderType;
+        64: invokevirtual #57                 // Method net/minecraft/client/renderer/rendertype/RenderType.hasBlending:()Z
+        67: ifeq          82
+        70: aload_2
+        71: aload         4
+        73: invokeinterface #62,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        78: pop
+        79: goto          91
+        82: aload_1
+        83: aload         4
+        85: invokeinterface #62,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        90: pop
+        91: goto          36
+        94: aload_2
+        95: invokeinterface #19,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+       100: ifeq          121
+       103: aload_0
+       104: invokestatic  #66                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+       107: astore_3
+       108: new           #8                  // class net/minecraft/client/resources/model/geometry/ItemQuads
+       111: dup
+       112: aload_3
+       113: aload_3
+       114: invokestatic  #70                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       117: invokespecial #74                 // Method "<init>":(Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+       120: areturn
+       121: aload_1
+       122: invokeinterface #19,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+       127: ifeq          148
+       130: aload_0
+       131: invokestatic  #66                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+       134: astore_3
+       135: new           #8                  // class net/minecraft/client/resources/model/geometry/ItemQuads
+       138: dup
+       139: aload_3
+       140: invokestatic  #70                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       143: aload_3
+       144: invokespecial #74                 // Method "<init>":(Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+       147: areturn
+       148: new           #8                  // class net/minecraft/client/resources/model/geometry/ItemQuads
+       151: dup
+       152: aload_0
+       153: invokestatic  #66                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+       156: aload_1
+       157: invokestatic  #66                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+       160: aload_2
+       161: invokestatic  #66                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+       164: invokespecial #74                 // Method "<init>":(Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+       167: areturn
+
+  public boolean isEmpty();
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field all:Ljava/util/List;
+         4: invokeinterface #19,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+         9: ireturn
+
+  public final java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokedynamic #77,  0             // InvokeDynamic #0:toString:(Lnet/minecraft/client/resources/model/geometry/ItemQuads;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #81,  0             // InvokeDynamic #0:hashCode:(Lnet/minecraft/client/resources/model/geometry/ItemQuads;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #85,  0             // InvokeDynamic #0:equals:(Lnet/minecraft/client/resources/model/geometry/ItemQuads;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad> all();
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field all:Ljava/util/List;
+         4: areturn
+
+  public java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad> solid();
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field solid:Ljava/util/List;
+         4: areturn
+
+  public java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad> translucent();
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field translucent:Ljava/util/List;
+         4: areturn
+
+  static {};
+    Code:
+         0: new           #8                  // class net/minecraft/client/resources/model/geometry/ItemQuads
+         3: dup
+         4: invokestatic  #70                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+         7: invokestatic  #70                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        10: invokestatic  #70                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        13: invokespecial #74                 // Method "<init>":(Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+        16: putstatic     #25                 // Field EMPTY:Lnet/minecraft/client/resources/model/geometry/ItemQuads;
+        19: return
+}

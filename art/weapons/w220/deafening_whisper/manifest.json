@@ -1,0 +1,1575 @@
+{
+  "schemaVersion": 1,
+  "stage": "W220",
+  "weapon": "deafening_whisper",
+  "revision": 2,
+  "generator": "scripts/generate_reload_w220_deafening_whisper.py",
+  "itemModel": "destiny:weapon_reload_w220_deafening_whisper/deafening_whisper",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "thresholdEncoding": "exact float32(i/60)",
+  "curve": "C1 weighted harmonic PCHIP; zero endpoint/hold/extremum tangents",
+  "keyframes": [
+    [
+      0.0,
+      0.0,
+      [
+        0.0,
+        0.0,
+        5.2
+      ]
+    ],
+    [
+      0.1,
+      0.0,
+      [
+        0.0,
+        0.0,
+        5.2
+      ]
+    ],
+    [
+      0.25,
+      -52.0,
+      [
+        0.0,
+        0.0,
+        5.2
+      ]
+    ],
+    [
+      0.28,
+      -52.0,
+      [
+        -1.2,
+        0.6,
+        4.8
+      ]
+    ],
+    [
+      0.34,
+      -52.0,
+      [
+        -0.7,
+        0.35,
+        3.6
+      ]
+    ],
+    [
+      0.4,
+      -52.0,
+      [
+        -0.15,
+        0.1,
+        1.8
+      ]
+    ],
+    [
+      0.46,
+      -52.0,
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      0.5,
+      -52.0,
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      0.68,
+      0.0,
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      0.84,
+      0.0,
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      1.0,
+      0.0,
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ]
+  ],
+  "hingePivot": [
+    8.0,
+    11.34,
+    8.95
+  ],
+  "roundCenter": [
+    8.0,
+    12.94,
+    8.18
+  ],
+  "gripWindow": [
+    0.27,
+    0.3,
+    0.38,
+    0.46
+  ],
+  "roundSeatedProgress": 0.46,
+  "roundVisibleSamples": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
+  ],
+  "roundContact": [
+    5.5,
+    13.5,
+    8.5
+  ],
+  "roundContactCalibration": "Virtual palm anchor accounts for W204 classic box width/depth2.4 and Y9 hand cap beyond internal Y8 palm origin. FIRST exposed case/forearm embedding. Cosmetic round only shifts outward while attached; source arms and zero-weight seat unchanged.",
+  "normalizedPhases": {
+    "unlock": [
+      0,
+      0.1
+    ],
+    "open": [
+      0.1,
+      0.25
+    ],
+    "openDwell": [
+      0.25,
+      0.5
+    ],
+    "roundApproachAndInsert": [
+      0.28,
+      0.46
+    ],
+    "handClear": [
+      0.46,
+      0.5
+    ],
+    "close": [
+      0.5,
+      0.68
+    ],
+    "recover": [
+      0.68,
+      1
+    ]
+  },
+  "partitionIndices": {
+    "body": [
+      16,
+      17,
+      18,
+      19,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      56,
+      57,
+      58,
+      59,
+      87
+    ],
+    "barrel": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      53,
+      54,
+      55,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86
+    ]
+  },
+  "semanticGroups": {
+    "barrel_and_muzzle": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "fixed_breech": [
+      16,
+      17,
+      18,
+      19
+    ],
+    "sleeves_divider_and_rails": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "fixed_receiver_and_stock": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "hinged_foregrip": [
+      53,
+      54,
+      55
+    ],
+    "fixed_pistol_grip_and_trigger": [
+      56,
+      57,
+      58,
+      59
+    ],
+    "hinged_laser_and_cables": [
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "hinged_counter_and_wrap_latch": [
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77
+    ],
+    "hinged_open_sight": [
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86
+    ],
+    "fixed_rear_indicator": [
+      87
+    ]
+  },
+  "movingIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    53,
+    54,
+    55,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86
+  ],
+  "movingNames": [
+    "barrel_0",
+    "barrel_1",
+    "barrel_2",
+    "barrel_3",
+    "barrel_4",
+    "barrel_5",
+    "barrel_6",
+    "barrel_7",
+    "muzzle_lip_0",
+    "muzzle_lip_1",
+    "muzzle_lip_2",
+    "muzzle_lip_3",
+    "muzzle_lip_4",
+    "muzzle_lip_5",
+    "muzzle_lip_6",
+    "muzzle_lip_7",
+    "front_mesh_wrap_0",
+    "front_mesh_wrap_1",
+    "front_mesh_wrap_2",
+    "front_mesh_wrap_3",
+    "front_mesh_wrap_4",
+    "front_mesh_wrap_5",
+    "front_mesh_wrap_6",
+    "front_mesh_wrap_7",
+    "rear_mesh_wrap_0",
+    "rear_mesh_wrap_1",
+    "rear_mesh_wrap_2",
+    "rear_mesh_wrap_3",
+    "rear_mesh_wrap_4",
+    "rear_mesh_wrap_5",
+    "rear_mesh_wrap_6",
+    "rear_mesh_wrap_7",
+    "wrap_divider_0",
+    "wrap_divider_1",
+    "wrap_divider_2",
+    "wrap_divider_3",
+    "wrap_divider_4",
+    "wrap_divider_5",
+    "wrap_divider_6",
+    "wrap_divider_7",
+    "top_sight_rail",
+    "rear_top_plate",
+    "front_grip_socket",
+    "front_grip",
+    "front_grip_heel",
+    "laser_housing_0",
+    "laser_housing_1",
+    "laser_housing_2",
+    "laser_housing_3",
+    "laser_tip_0",
+    "laser_tip_1",
+    "laser_tip_2",
+    "laser_tip_3",
+    "laser_mount",
+    "laser_cable_a",
+    "laser_cable_b",
+    "counter_housing",
+    "counter_recess",
+    "counter_rail_-1",
+    "wrap_side_rail_-1",
+    "counter_rail_1",
+    "wrap_side_rail_1",
+    "left_wrap_latch",
+    "sight_plinth",
+    "sight_upright_-1",
+    "sight_upright_1",
+    "sight_top",
+    "sight_bottom",
+    "sight_pin",
+    "sight_pin_tip",
+    "sight_wheel_base",
+    "sight_wheel"
+  ],
+  "fixedNames": [
+    "breech_0",
+    "breech_1",
+    "breech_2",
+    "breech_3",
+    "lower_receiver",
+    "rear_lower_lip",
+    "stock_upper_rail_-1",
+    "stock_upper_rail_1",
+    "stock_butt",
+    "stock_butt_inlay",
+    "stock_neck",
+    "pistol_grip",
+    "pistol_grip_heel",
+    "trigger",
+    "trigger_socket",
+    "rear_indicator"
+  ],
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/deafening_whisper.json",
+  "sourceGeometryFileSha256": "c2adb4ac6bd74c082cf060aca94a532bc0ce0499ee8a2eee1e023abcd1d15d22",
+  "sourceElements": 88,
+  "partElements": {
+    "body": 16,
+    "barrel": 72,
+    "round": 6
+  },
+  "bodyElements": 16,
+  "barrelElements": 72,
+  "roundElements": 6,
+  "weaponElements": 94,
+  "addedElements": 6,
+  "triangleAdapterElements": 0,
+  "canonicalModelElements": {
+    "destiny:weapon/grenade_launcher/deafening_whisper": 237,
+    "destiny:weapon/grenade_launcher/deafening_whisper_ads": 237,
+    "destiny:weapon/grenade_launcher/deafening_whisper_ads_twohand": 237,
+    "destiny:weapon/grenade_launcher/deafening_whisper_inspect": 237,
+    "destiny:weapon/grenade_launcher/deafening_whisper_inspect_twohand": 237,
+    "destiny:weapon/grenade_launcher/deafening_whisper_twohand": 237
+  },
+  "canonicalWeaponElements": 237,
+  "ordinaryArmElementReserve": 448,
+  "candidateReloadWithArmsEstimate": 542,
+  "maxAssembledElements": 685,
+  "elementLimit": 1000,
+  "assembledBudgetVerified": false,
+  "budgetBasis": "Maximum parent-resolved canonical alternative or active16+72+6, plus448 ordinary arm elements; master measures materialized routes.",
+  "sourceElementsAndUVSha256": "5a5d1a2bca73fe4bdc0ad68067a770f7053068fd36cc725cbeafabb698131455",
+  "partElementsAndUVSha256": {
+    "body": "e611f073d03f49ff5f331c1dcc4f3fc738211433d85c0a18d3858bd00947fac4",
+    "barrel": "a7c68483539b38c5cadaa1ae3d2b849e69220e8c2c2d42e025ee75cc864eccc8",
+    "round": "28d44c5455799cbf747bc22d24f5c51d08aba644d03df66d6487cc287f487a4e"
+  },
+  "canonicalGeometryAndUVPreserved": true,
+  "newTexture": false,
+  "reloadOnlyGeometry": {
+    "elements": [
+      {
+        "name": "cosmetic_round_case_0",
+        "from": [
+          7.28,
+          12.524307806183469,
+          6.8
+        ],
+        "to": [
+          8.72,
+          13.35569219381653,
+          9.4
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.94,
+            8.18
+          ],
+          "axis": "z",
+          "angle": 0
+        },
+        "faces": {
+          "north": {
+            "uv": [
+              5.125,
+              6.5625,
+              5.5,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "south": {
+            "uv": [
+              5.5625,
+              6.5625,
+              5.9375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "west": {
+            "uv": [
+              4.671875,
+              6.5625,
+              5.0625,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "east": {
+            "uv": [
+              4.21875,
+              6.5625,
+              4.609375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "up": {
+            "uv": [
+              4.28125,
+              5.453125,
+              4.65625,
+              5.84375
+            ],
+            "texture": "#0"
+          },
+          "down": {
+            "uv": [
+              3.84375,
+              5.453125,
+              4.21875,
+              5.84375
+            ],
+            "texture": "#0"
+          }
+        }
+      },
+      {
+        "name": "cosmetic_round_case_60",
+        "from": [
+          7.28,
+          12.524307806183469,
+          6.8
+        ],
+        "to": [
+          8.72,
+          13.35569219381653,
+          9.4
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.94,
+            8.18
+          ],
+          "axis": "z",
+          "angle": 60
+        },
+        "faces": {
+          "north": {
+            "uv": [
+              5.125,
+              6.5625,
+              5.5,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "south": {
+            "uv": [
+              5.5625,
+              6.5625,
+              5.9375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "west": {
+            "uv": [
+              4.671875,
+              6.5625,
+              5.0625,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "east": {
+            "uv": [
+              4.21875,
+              6.5625,
+              4.609375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "up": {
+            "uv": [
+              4.28125,
+              5.453125,
+              4.65625,
+              5.84375
+            ],
+            "texture": "#0"
+          },
+          "down": {
+            "uv": [
+              3.84375,
+              5.453125,
+              4.21875,
+              5.84375
+            ],
+            "texture": "#0"
+          }
+        }
+      },
+      {
+        "name": "cosmetic_round_case_120",
+        "from": [
+          7.28,
+          12.524307806183469,
+          6.8
+        ],
+        "to": [
+          8.72,
+          13.35569219381653,
+          9.4
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.94,
+            8.18
+          ],
+          "axis": "z",
+          "angle": 120
+        },
+        "faces": {
+          "north": {
+            "uv": [
+              5.125,
+              6.5625,
+              5.5,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "south": {
+            "uv": [
+              5.5625,
+              6.5625,
+              5.9375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "west": {
+            "uv": [
+              4.671875,
+              6.5625,
+              5.0625,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "east": {
+            "uv": [
+              4.21875,
+              6.5625,
+              4.609375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "up": {
+            "uv": [
+              4.28125,
+              5.453125,
+              4.65625,
+              5.84375
+            ],
+            "texture": "#0"
+          },
+          "down": {
+            "uv": [
+              3.84375,
+              5.453125,
+              4.21875,
+              5.84375
+            ],
+            "texture": "#0"
+          }
+        }
+      },
+      {
+        "name": "cosmetic_round_rim_0",
+        "from": [
+          7.21,
+          12.483893287340194,
+          9.4
+        ],
+        "to": [
+          8.79,
+          13.396106712659805,
+          9.56
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.94,
+            8.18
+          ],
+          "axis": "z",
+          "angle": 0
+        },
+        "faces": {
+          "north": {
+            "uv": [
+              5.125,
+              6.5625,
+              5.5,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "south": {
+            "uv": [
+              5.5625,
+              6.5625,
+              5.9375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "west": {
+            "uv": [
+              4.671875,
+              6.5625,
+              5.0625,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "east": {
+            "uv": [
+              4.21875,
+              6.5625,
+              4.609375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "up": {
+            "uv": [
+              4.28125,
+              5.453125,
+              4.65625,
+              5.84375
+            ],
+            "texture": "#0"
+          },
+          "down": {
+            "uv": [
+              3.84375,
+              5.453125,
+              4.21875,
+              5.84375
+            ],
+            "texture": "#0"
+          }
+        }
+      },
+      {
+        "name": "cosmetic_round_rim_60",
+        "from": [
+          7.21,
+          12.483893287340194,
+          9.4
+        ],
+        "to": [
+          8.79,
+          13.396106712659805,
+          9.56
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.94,
+            8.18
+          ],
+          "axis": "z",
+          "angle": 60
+        },
+        "faces": {
+          "north": {
+            "uv": [
+              5.125,
+              6.5625,
+              5.5,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "south": {
+            "uv": [
+              5.5625,
+              6.5625,
+              5.9375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "west": {
+            "uv": [
+              4.671875,
+              6.5625,
+              5.0625,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "east": {
+            "uv": [
+              4.21875,
+              6.5625,
+              4.609375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "up": {
+            "uv": [
+              4.28125,
+              5.453125,
+              4.65625,
+              5.84375
+            ],
+            "texture": "#0"
+          },
+          "down": {
+            "uv": [
+              3.84375,
+              5.453125,
+              4.21875,
+              5.84375
+            ],
+            "texture": "#0"
+          }
+        }
+      },
+      {
+        "name": "cosmetic_round_rim_120",
+        "from": [
+          7.21,
+          12.483893287340194,
+          9.4
+        ],
+        "to": [
+          8.79,
+          13.396106712659805,
+          9.56
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.94,
+            8.18
+          ],
+          "axis": "z",
+          "angle": 120
+        },
+        "faces": {
+          "north": {
+            "uv": [
+              5.125,
+              6.5625,
+              5.5,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "south": {
+            "uv": [
+              5.5625,
+              6.5625,
+              5.9375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "west": {
+            "uv": [
+              4.671875,
+              6.5625,
+              5.0625,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "east": {
+            "uv": [
+              4.21875,
+              6.5625,
+              4.609375,
+              6.671875
+            ],
+            "texture": "#0"
+          },
+          "up": {
+            "uv": [
+              4.28125,
+              5.453125,
+              4.65625,
+              5.84375
+            ],
+            "texture": "#0"
+          },
+          "down": {
+            "uv": [
+              3.84375,
+              5.453125,
+              4.21875,
+              5.84375
+            ],
+            "texture": "#0"
+          }
+        }
+      }
+    ],
+    "UVSource": "Canonical front_grip_socket53 faces"
+  },
+  "hipEndpoints": [
+    0,
+    60
+  ],
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "fallback": "Exact canonical graph at0/1,negative inactive,overshoot and nonFP; canonical ADS/inspect precedence.",
+  "rigAction": "80A8A136",
+  "sourceAction": "80A8A136",
+  "rigActionName": "Armature|fp_80A8A136_reload_full|Base",
+  "sourceGroup": "grenade_launcher_83c75a3c",
+  "sourceRigPath": "art/weapons/w220/rigs/grenade_launcher_83c75a3c.json",
+  "sourceActionSourceRange": [
+    1,
+    89
+  ],
+  "sourceRigSamples": 61,
+  "sourceFullChain": true,
+  "sourceCameraRecovered": false,
+  "hand": "left",
+  "partHint": "round",
+  "policy": "magazine",
+  "motionAuthorship": "New weapon-specific lower-front-breech hinge and52deg break, open dwell and short incoming case path. Fixed receiver/breech/stock. Barrel is gun-attached throughout; only six-solid cosmetic round may follow left palm during bounded insertion. No authored body transform duplicates source weapon replay.",
+  "sourceReviewEvidence": [
+    {
+      "source": "/private/tmp/destiny-w220-source/source-review.json",
+      "sourceSha256": "2818e93c6e4e26032bdcf4f8bb618e90855f2f62a97f55e3f099ec5d0a9759d5",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original ARMATURE in separate headless Blender5.4 Alpha, OBSlot action136 frames1..89 at30fps,61 samples; existing joints match. Worker read this report and did not independently evaluate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-handling-evidence.json",
+      "sourceSha256": "7ff4a42b4d5ca4a4beb5f44248ec0bec7fc809b1edc3c77db7725aa22fa2eec9",
+      "role": "source_hand_selection",
+      "observation": "Left wrist moves21.1924 weapon-local model units; right0.000222. LEFT loads; RIGHT carries. No camera or mesh contact recovered."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-selection-review.json",
+      "sourceSha256": "34b71aa6aa6eb975ce860c24c87e630d96c9cad32869229f0d7c10b48202e0fc",
+      "role": "class_action_selection",
+      "observation": "Master inspected136 and126.136 is an explicit shared single-GL class selection, not a recovered Deafening Whisper selector."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/sheets/grenade_launcher_83c75a3c-80A8A136-upper-chain.png",
+      "sourceSha256": "b432b2dde2c6193a24712ac6c12d9741d53b1d894a30e130c7f9e6d02de7d61d",
+      "role": "viewed_actual_source_sheet",
+      "observation": "Worker viewed all six XZ/YZ chain projections. Left reach and recovery differ from right carrier; bone-only views do not prove payload or hinge contact."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/grenade_launcher_83c75a3c.json",
+      "sourceSha256": "9305687b5bc98b4ae4b80b030769405b22d66554b314aacc11ee70b9334cc04e",
+      "role": "fresh_original_source61",
+      "observation": "Read full shoulder/elbow/wrist/weapon evaluated source matrices. Preserve source chain and source weapon replay without damping, stretch, palm fitting, support hiding or extra camera offsets."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "idle_grips_preserved",
+      "observation": "Right[8,9.32,7.63],left[8,9.65,-3.04] and existing rotations preserved. Initial round contact[7.25,12.94,9.0] mistook the case surface for the internal palm origin; FIRST correction uses virtual palm anchor[5.5,13.5,8.5] accounting for actual W204 forearm volume. Round-only window.27..30/.38..46, seat.46 and closure.50..68 unchanged."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Used current first_person_framing_w205.load/profile for grenade_launcher. Retain translation[-.65,.6,0],rotation[-1,2,0],scale.98,rightWristRoll28,leftRotation[15,35,-35]; enable full source chain and mesh support. No camera offset added."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/art/weapons/w123/deafening_whisper/design.json",
+      "sourceSha256": "936d2c01ecf1be9129971fccd5e5cf8672d79574d8226521850d410d081ef0c4",
+      "role": "weapon_specific_geometry",
+      "observation": "Canonical W14988 semantic solids and face UV retained. Own hinge[8,11.34,8.95] at lower receiver/front fixed breech; barrel tube/sleeves/divider/top plates/foregrip/laser cables/counter/latch/sight remain one rigid fore-end. Breech plugs and rear indicator remain receiver-attached.52deg opening and six-solid cartridge dimensions are authored calibration, not recovered mechanics."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/scripts/skin_arm_models_w204.py",
+      "sourceSha256": "5ee8a0d196b144e67c510cb3a9f8e34a81b21254298aca8721c75f55097c1d2b",
+      "role": "actual_fingerless_hand_geometry",
+      "observation": "Read current common_model/pixel_layout/_adapt and checked main/worktree identical. Palm origin[8,8,8], classic X/Z6.8..9.2, slim X7.1..8.9,Z6.8..9.2, forearmY1.5..9.0. Source original rest forearm length8.141365 model units gives builder Y scale1.252518. Internal origin is not an outer gripping surface."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/build_first_person_hands_w201.py",
+      "sourceSha256": "2402d236ff662a22bd15481f7a98f1cb113e79ca59e04a3962441bf05ed3df10",
+      "role": "current_builder_contact_semantics",
+      "observation": "Read current display_at, source-palm translation override, and round-only attached_translation_shift path. At full weight, configured round contact is aligned to internal source palm origin. Move only cosmetic round virtual anchor, never source wrist/limb."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w220/vision1/frames/w220-deafening_whisper-reload-sample-04.png",
+      "sourceSha256": "ef92d47959969980ce554853777ca416b9271209cd87fc466b7e58b2fb177ad1",
+      "role": "FIRST_native_raw04_viewed",
+      "observation": "Viewed raw03..12, both weapon sheets and post recovery.04/05 hand is exposed but case hard to distinguish; actual box-volume check confirmed old contact put24..28 of48 case/rim box corners inside classic forearm during full attachment. This does not certify native round seating."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w220/vision1/frames/w220-deafening_whisper-reload-sample-05.png",
+      "sourceSha256": "d636703e92d580d5449399bce0a1be9f7ddf3df05f2a57c668219e18b14630d4",
+      "role": "FIRST_native_raw05_viewed",
+      "observation": "05/06/07 hand/body hide chamber detail. No exposed breech displacement observed. Concrete correction is palm-volume contact placement only, no enlarged case, new camera offset, visibility extension or mechanism change."
+    }
+  ],
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "packFiles": 370,
+  "totalReturnedFiles": 371,
+  "staticParts": 3,
+  "parentDisplayChildren": 366,
+  "limitations": [
+    "FIRST feedback addressed by concrete cosmetic round virtual-palm contact correction. Master owns integration, shared loaders, source rig, full hand materialization and SECOND native review.",
+    "ARMATURE-only class source136 has no weapon mesh, camera or finger IK. Hinge52deg, phase knots, hidden cartridge shape and contact are authored estimates; not per-weapon recovered mechanics.",
+    "Canonical88 geometry and UV preserved; fixed16 plus hinged72 plus cosmetic round6 only at samples17..28 gives94 weapon elements.448 ordinary arm reserve gives542; master must measure final route including all materialized arms.",
+    "Round-only magazine policy and window unchanged: release by.46 before closure.50..68. Corrected virtual palm anchor[5.5,13.5,8.5] removes full-attachment classic-forearm embedding in bounded OBB checks; source wrist and limb unchanged. Native case exposure, hand-to-chamber transition and hidden seating still require SECOND review.",
+    "61 poses/60 intervals do not establish continuous native60fps interpolation or native acceptance.",
+    "Sequence: master original Blender(done) ->61poses(done) ->FIRST PNGs(viewed) ->same-worker contact correction(done) ->master SECOND(pending). Frame captures are bracketed, not exact progress. Hidden native seating is not certified."
+  ],
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/deafening_whisper.json": "c2adb4ac6bd74c082cf060aca94a532bc0ce0499ee8a2eee1e023abcd1d15d22",
+    "src/main/resources/assets/destiny/models/weapon/grenade_launcher/deafening_whisper_twohand.json": "2479a2a49389a9d3ea95b01b70d9dacee756a931354c619080123b07368813b3",
+    "src/main/resources/assets/destiny/items/weapon/deafening_whisper.json": "e8202388ff0d27266961c31834b8005b3d09ea089e0d0790b0c426c477a37c2c",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/deafening_whisper.png": "b88e65d2d5809d629a020ff89e30233f03585ac87ce8eda9c136fbecbdaa5e2e",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+    "art/weapons/w123/deafening_whisper/design.json": "936d2c01ecf1be9129971fccd5e5cf8672d79574d8226521850d410d081ef0c4",
+    "scripts/first_person_framing_w205.py": "6033344341b3e89a67da0413a79e96994a0e34b068c5c10f1fedff9f6206b31a",
+    "scripts/reload_hand_w218.py": "3c1e08eaa2c363e2e90f72a8093a55fcd7648e777ccb46bcbcafeb6de016bdd6",
+    "scripts/rig_arms_w205.py": "16a24fba9344d3770745e4d2667bbd038d45ab497bd3737e3997231e84b2a2fd",
+    "scripts/build_first_person_hands_w201.py": "2402d236ff662a22bd15481f7a98f1cb113e79ca59e04a3962441bf05ed3df10",
+    "scripts/skin_arm_models_w204.py": "5ee8a0d196b144e67c510cb3a9f8e34a81b21254298aca8721c75f55097c1d2b",
+    "src/main/resources/destiny/weapons/w46-timing.json": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+    "src/main/resources/destiny/sounds/w63-reload.json": "e89b09c8d1402239fa65873b5e96fc7f55d1b3107b753aab8c8d5474bcbb750b",
+    "scripts/generate_reload_w220_deafening_whisper.py": "f867094f48cbc3f7f2a3400b46a0b09b7d0de4b541cd8941903213b2496c6751",
+    "art/weapons/w220/deafening_whisper/profile.json": "d948c1cf3fe3aac1462b57835174e7e7b9d0116255a927e45ef79819585e5978",
+    "art/weapons/w220/rigs/grenade_launcher_83c75a3c.json": "9305687b5bc98b4ae4b80b030769405b22d66554b314aacc11ee70b9334cc04e",
+    "src/main/resources/assets/destiny/models/weapon/grenade_launcher/deafening_whisper_ads_twohand.json": "d97ab2ed6cc6bb397b0b353015f420855b32fcec5e3a88a9190190f918263d49",
+    "src/main/resources/assets/destiny/models/weapon/grenade_launcher/deafening_whisper_ads.json": "90ba916a5f30a64612706fe7c11e11e0a648185cdbaf1f8e44263c9de220a853",
+    "src/main/resources/assets/destiny/models/weapon/grenade_launcher/deafening_whisper.json": "43eb5e6647bb878ee9c5722021a64f45ddc79573407d1d891306ee1cffa345e6",
+    "src/main/resources/assets/destiny/models/weapon/grenade_launcher/deafening_whisper_inspect_twohand.json": "0471ab3639747a85a9b18249fa38947a31a7dc4a1893cf9670e02d8769d15edd",
+    "src/main/resources/assets/destiny/models/weapon/grenade_launcher/deafening_whisper_inspect.json": "ea26cde9746bac27ebe88eac456888cfc85cc7e0d1f5beae86c2a886e54eceac"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_body.json": "8539e0435b94ad337dd27ddcd44c7a163fbc6c68b5a9b840697ed94e9693e01b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_barrel.json": "6a415399ca5445821a4bb8583aca71d77da37d3dfd73668e77019c54fbd7d1e6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_round.json": "883192f48572ca8fe5f347997aab3563666398d3d90873b37124fb8a25fce6a9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_00_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_00_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_00_barrel_native.json": "117349b01c4fbb0fd4d936a86cda4db0587261f42e88eba27c52236e60fb6f13",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_00_barrel_twohand.json": "051cb187eb2061a745e53201a3500e16be5571c7ef11612ed4e0a724f8457333",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_00_round_native.json": "7c58fa11bf5d4efec7794830a61cce3bd9eb1ce5e29b75223e56ae90a411182f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_00_round_twohand.json": "96bc998f0263f0a7d5168024f79e98caf58421d11027fdac6fe1cd0fa2ac5f3e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_01_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_01_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_01_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_01_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_01_round_native.json": "ee3c526b7991daa9a352dc8fe859600ee61ea64042045c5b036e7db7523d6fb3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_01_round_twohand.json": "0cffd0642d92fe86817f91e7163c45d686aaebece075cbf9b8a71779ab769978",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_02_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_02_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_02_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_02_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_02_round_native.json": "ee3c526b7991daa9a352dc8fe859600ee61ea64042045c5b036e7db7523d6fb3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_02_round_twohand.json": "0cffd0642d92fe86817f91e7163c45d686aaebece075cbf9b8a71779ab769978",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_03_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_03_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_03_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_03_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_03_round_native.json": "ee3c526b7991daa9a352dc8fe859600ee61ea64042045c5b036e7db7523d6fb3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_03_round_twohand.json": "0cffd0642d92fe86817f91e7163c45d686aaebece075cbf9b8a71779ab769978",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_04_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_04_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_04_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_04_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_04_round_native.json": "ee3c526b7991daa9a352dc8fe859600ee61ea64042045c5b036e7db7523d6fb3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_04_round_twohand.json": "0cffd0642d92fe86817f91e7163c45d686aaebece075cbf9b8a71779ab769978",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_05_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_05_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_05_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_05_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_05_round_native.json": "ee3c526b7991daa9a352dc8fe859600ee61ea64042045c5b036e7db7523d6fb3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_05_round_twohand.json": "0cffd0642d92fe86817f91e7163c45d686aaebece075cbf9b8a71779ab769978",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_06_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_06_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_06_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_06_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_06_round_native.json": "ee3c526b7991daa9a352dc8fe859600ee61ea64042045c5b036e7db7523d6fb3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_06_round_twohand.json": "0cffd0642d92fe86817f91e7163c45d686aaebece075cbf9b8a71779ab769978",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_07_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_07_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_07_barrel_native.json": "650e5ec7ce80fb45a59667cac59b9dc76ff2571aa9fe175d19e01202d2762d67",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_07_barrel_twohand.json": "0788f486ca03034fc0122822cfb3dbe0396e8bb8b29ec4524caa0eb975334757",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_07_round_native.json": "c5dbeca50e30ef480c476414c708ef84fad970996852e794450bf4b8d8617d03",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_07_round_twohand.json": "c33fa3e16de2ac04166b3ecd2105749628f924acd575823379f718e5b1ef64ff",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_08_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_08_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_08_barrel_native.json": "160822bdd6661101a13199df1b8a6cd36bbc2e7530d7204a3c203cbddf465f97",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_08_barrel_twohand.json": "b8576869ee8216bcf8cfec4b739d48e46fe793fc979fd04f5592be1649b7386c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_08_round_native.json": "ee959b71bec7f435d31e3f5d5213cf5e9e8e21b785a6faadf80d04df62665765",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_08_round_twohand.json": "501220f4424e8e773e58d1a5f71f16716d17e4a77b1b55719bb17c045ca56143",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_09_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_09_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_09_barrel_native.json": "274bb7019928396ce037dfd19beb508c58e147db03eb81fcc4eb5cf3f8bf13d6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_09_barrel_twohand.json": "2482591f89cddda491c00376c224689f3520ef815eda5728e00f0b661920b4dc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_09_round_native.json": "74bb6193af3d45f46e37976deb652c259b005e752b2801148ed715fe0a20d03f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_09_round_twohand.json": "126b59ac4d2985ab896584c465c49b9089f9985d4a7b1db2ce5fc36675c05b03",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_10_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_10_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_10_barrel_native.json": "4e478ce40d8af42d5c7b93ffa573850a124e68b7b4c3e2094c983f40bfb49a61",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_10_barrel_twohand.json": "aaa6f2c2b0fe63e4c830d2f43f81d7c1c92ea26398de1c77a3b0977cebe6ddaf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_10_round_native.json": "f7994c1b502091f0cdb2914f5b192b09bc552e30fcbc04db3b2135bce68a0b48",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_10_round_twohand.json": "03c94f9222917fe56e0c4ebac3f43e4241a6b7890074fa98592e97a4248917bc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_11_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_11_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_11_barrel_native.json": "878df4c6ba71851624f69710a97826ede94d9669d5ab89304ed95d3a0d56c66d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_11_barrel_twohand.json": "8b7eacbcde9927014c57d0ac2528142f89bc53817ab7f7ef6496aa0bf47869b0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_11_round_native.json": "dd88103d2baf0873c28a221365761d9c9004af4711805a615c516564b1e1cc97",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_11_round_twohand.json": "cc6e6f77b06a31c7ccbc462117ba9d52a5a585cb7416e0079e6eb3ebf2e2f9ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_12_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_12_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_12_barrel_native.json": "d00aabd322bb81db683ee86d25a4f02c6aa0b6a95c846cf97abcd2d0e33081a1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_12_barrel_twohand.json": "6874cb2c0df3100a0ab419d84c6cb8159be3eb1b7b978c0e1c1a40093692fefc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_12_round_native.json": "bc83e2ee7ce9cdd89e73bb06605de480295a62357a395299ceac7f4e276e64e7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_12_round_twohand.json": "a27a224ad5cd9dd1d678d617bbac587983e9313d6af9319732d13a8845983b0e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_13_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_13_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_13_barrel_native.json": "95175da8a582d6b4050b6a01178aa64b68a4cde59f056dbdc71ab718d7aa20ac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_13_barrel_twohand.json": "51b3e499ff59ec1b472135dbc135f9c5e7860fd791c66768e95174a3423c1f3d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_13_round_native.json": "df56a407410de6d8d11c04874b80c6d152fd82663bef1208ac850915c9427b1a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_13_round_twohand.json": "c212221aa9a1f63f67df5704f6d76142acc42588e61d77ca23a0eb6ae2ec5461",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_14_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_14_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_14_barrel_native.json": "1c2fb2af0a05d7356ba6233837c8c33c07ef6a51e44c5b28e954ca7217d1fa5e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_14_barrel_twohand.json": "c571c1d47a51fa9408e78dadd27f780d6b635362814f9755447180d386b9e92b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_14_round_native.json": "98bef5de107c232e8279b37929d4fef1aa95d02df23a6dbad117ba6e43eb4d3c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_14_round_twohand.json": "dbfa1e8eaf3b5607fbba0c75cb6e97af0822817519d4de7b465fd4538405f5bd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_15_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_15_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_15_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_15_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_15_round_native.json": "33448bd812ed15088cb3c6ad39b6207d6c702658c5ee7a25635a9b7329137114",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_15_round_twohand.json": "1b79fce0c36bc40193637ceea384f94aaee0794ffe98d3f960042889d57c7c9c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_16_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_16_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_16_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_16_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_16_round_native.json": "ed872927b5d84f237444af7712f9e692a7ab0d74cec020b3d7bec47448086466",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_16_round_twohand.json": "64f0c7cbb3785e7a9879c6daa45ec317f23e19fd7842f00d3ba81cfef56ca8d0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_17_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_17_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_17_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_17_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_17_round_native.json": "c79c13690248ebaedd171647bd7e34b3151171a0e55cfe9be2f7e89d8458d5ef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_17_round_twohand.json": "b9282f2216b420fcdb63993eadfb79eda9801be3d9f4714b38c584e99b3d9ec4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_18_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_18_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_18_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_18_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_18_round_native.json": "c5ab84957da943da11cb304e286762c05a058df2c228486d6c9e62def67055c5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_18_round_twohand.json": "56fdd46ee7cad3e2f9ea1ba148ccff49735cf9917de84d8fec29a538ee2456ad",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_19_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_19_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_19_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_19_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_19_round_native.json": "e2ccd94577ad93d8a019529ab4bc5a764b0fa2a89f0cd37b3fbf5f0bfc78532c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_19_round_twohand.json": "9e75c2c845abde6555d4caf78cae54e9186417b5f5133e49c6b91e2878a2e03b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_20_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_20_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_20_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_20_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_20_round_native.json": "00410f89d89ac11731235b629ed4d8106b026c701001eaa9ff160d995d6fa522",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_20_round_twohand.json": "afc4a264538cb15e33a95a5cf844c34a40c9632c0a603d17e5f66e1ccfdb19c4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_21_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_21_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_21_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_21_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_21_round_native.json": "de388da9fede2355a12b4d78cd08593fd980c20938fc8bd168fa3932f749b806",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_21_round_twohand.json": "591160470a8678fcbf68cd4576cb92743ee824f8c969cbc82a9ebface2f555f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_22_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_22_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_22_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_22_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_22_round_native.json": "696917e0b1a65ca39e5f8beb1f020da60f41bc1e84062841a5538c5f91bc6df6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_22_round_twohand.json": "3659a40c63424c0bc1e211d06c3a13741b4012104d88c8ae64d70b0a1a1ca3b4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_23_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_23_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_23_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_23_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_23_round_native.json": "7d8e8d4b08b0d0cbc44e51c81a5681b19e648c08d0e19d27f9975dae09525465",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_23_round_twohand.json": "faf7aa14510af2c8905c48d02d2fe4fadcdb3f6d3cab11eb8cf84aa37f1d0b74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_24_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_24_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_24_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_24_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_24_round_native.json": "a42bb8b3a5f9952c1a7f34920acbb66794652103edf937dfa33a1fa0e55e5d16",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_24_round_twohand.json": "428954bed5c9c95061b7a2a1e77d18484cfc1ee1a342cbcf4865cbc1416f78b2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_25_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_25_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_25_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_25_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_25_round_native.json": "de871a0b34ff4fa5a42d61bda75efc5571cd22965ade4fb4463eb423c568c348",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_25_round_twohand.json": "faa494d66b1463a1ff70980c4149005eace2041c726eef4714df6fd848943d74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_26_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_26_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_26_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_26_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_26_round_native.json": "dd91afd6bf73527569f9eccf3a3be4426bb9785b10d396095a771785b052f4f8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_26_round_twohand.json": "1d8846cbf9e0670f257989094e79939665fe9163ea3917968945c79c833fb497",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_27_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_27_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_27_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_27_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_27_round_native.json": "d2b52d42ecc0641e3bfe2c725e7fb96596e83126d4792a9eb36a477a18055fc0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_27_round_twohand.json": "ca66e7f55723f7a274f93fae2b919ece61683e9f2f1fad14be82f30f7059f451",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_28_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_28_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_28_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_28_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_28_round_native.json": "61f0a5ca9f71c39266017f4db5fc863a1e9389d33762ef1952b9526fdcee1361",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_28_round_twohand.json": "2bd6046e8fdf026bafb8a6fcb9159106f81a2113d193f3d5c3bb1bd00c8c5a4b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_29_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_29_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_29_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_29_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_29_round_native.json": "61f0a5ca9f71c39266017f4db5fc863a1e9389d33762ef1952b9526fdcee1361",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_29_round_twohand.json": "2bd6046e8fdf026bafb8a6fcb9159106f81a2113d193f3d5c3bb1bd00c8c5a4b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_30_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_30_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_30_barrel_native.json": "89b3d65337e5ccb157269aa8b334621d67b1c22d88272fffcffbf512a6425172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_30_barrel_twohand.json": "a5c205f4501cb6563e7d33bcada67e6cb459c702287ae568502a91e4f33a3ce7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_30_round_native.json": "61f0a5ca9f71c39266017f4db5fc863a1e9389d33762ef1952b9526fdcee1361",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_30_round_twohand.json": "2bd6046e8fdf026bafb8a6fcb9159106f81a2113d193f3d5c3bb1bd00c8c5a4b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_31_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_31_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_31_barrel_native.json": "3bceba13bac37a2566383b6aa900b4cd6acab6fbb2314f2747645f3422fe9925",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_31_barrel_twohand.json": "17a453e97282626bd4cafbbefa81a0b6e9fb04305f0cf9482b757103e34238cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_31_round_native.json": "74ec0ba2f91b5ad61760ba86c2060c580850fa649e6f283c641d30f0aa3926dc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_31_round_twohand.json": "4e3814147c6bae61c4f5556f582eb9f6c48472ebf07023a8bf53f6cc45319cc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_32_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_32_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_32_barrel_native.json": "f6a086d3a1da26aac009162ded4624e60a96ba36f1928ef4ac34a3f213fbc72a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_32_barrel_twohand.json": "d1fa4cfefe207de03c4872be33511d62e1fe3d16772b07b0d737c74d8689cad1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_32_round_native.json": "97c548be7a38dddbf5f34972e3d873b198dbd1d173e4c68c5332c17e9b661a4f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_32_round_twohand.json": "d3ad6688fa602108855dea55b6f866d3ba9b131540838299d06762825e10b38e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_33_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_33_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_33_barrel_native.json": "af8a1ea8b51170a51f5a1ac9eea2ab8f7b3bb431483ebdfdb1cb1a8ade37c97c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_33_barrel_twohand.json": "b461e4340890cf76c7d9892d84eb4a7bec6cdd8972494a25dc567d90fb9d6f5d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_33_round_native.json": "19c54727da31857a4573d5c510f03a3a79639cae1e37e6009456545521556a1f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_33_round_twohand.json": "6dc32029c70ba6fe7e26786cabfbad29ebd056b18b08352d867865dd8cf161af",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_34_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_34_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_34_barrel_native.json": "698e2cef26a1ea24c763536d32cdaedbc44721830e1f4c9fc536ba91a657e97e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_34_barrel_twohand.json": "82d9260731520648c69cbffcaa3e05dabe066e1afe177f2ff761bdc35b525065",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_34_round_native.json": "cef1d1cc54d02fe1a7b13b4fe1b2bff1e546fc1d790d0c40c7f99ce5ba1c2411",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_34_round_twohand.json": "8ee8fe4cd3afb10ed7ff0467ef9fd229abbe008aaacbd0ba7c0a213aa789335e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_35_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_35_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_35_barrel_native.json": "5bab09dd7d57a66573379d32cc8546947ebf6ce915010c306bba96a2d6229064",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_35_barrel_twohand.json": "31dae20a668a2a474b9e41bccb943cacbde931a92fff3a34275cccb1686c5c1f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_35_round_native.json": "73b13619d3be9317f74190368ceb8df57552996a836a4bc4d634779bcc6e3475",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_35_round_twohand.json": "26e38bf6141628cc27a8226623f44847616e4f7a81f429869a4e38cb92cd68ed",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_36_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_36_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_36_barrel_native.json": "4e478ce40d8af42d5c7b93ffa573850a124e68b7b4c3e2094c983f40bfb49a61",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_36_barrel_twohand.json": "aaa6f2c2b0fe63e4c830d2f43f81d7c1c92ea26398de1c77a3b0977cebe6ddaf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_36_round_native.json": "2e9c8964a4a570d7eadfa2dac237bba61be9ce11b65d8cb7857d41a86e350244",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_36_round_twohand.json": "1a175fcc1bee53027dfe86f5e6cb639293a0c3a57e5ed360119dd0ee49939bda",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_37_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_37_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_37_barrel_native.json": "47ae5fa2fa0a1910250535ee149665f89b9c6c7dd797488db52e95ac97218c40",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_37_barrel_twohand.json": "80749702d0a500c3a7ead07e620ce50f30f9ed57e5b60152f1e4c6e4b3f1e927",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_37_round_native.json": "cdd5a1869793196d7733c9789d808ef37076b9edd890bb9f374d356cc8f2ca78",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_37_round_twohand.json": "db773ae83b9e302997f3ae71ea01b779e194f0e366b058c18bdc2f4fd2a92707",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_38_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_38_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_38_barrel_native.json": "b2a9fa2d03413666b7decee6e754587ed4066420c072cce56b60b839ae19ece3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_38_barrel_twohand.json": "e8f648970543c2def655c6853d77698056b61bdda34b96066485eb2c0827fcbf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_38_round_native.json": "2f980e9d953e7464d6bec19b706f65e820cab3cb7b2fdf1a6f37031ec7b373db",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_38_round_twohand.json": "f5e5a74495857e8023672d600a5e26a5eb406292b89ee1b647e54d1906315e47",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_39_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_39_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_39_barrel_native.json": "2b032e9790126a749cacaa9b8194ac5aeaa74db1d77df2c4d22978dfe3fc0240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_39_barrel_twohand.json": "da49b1b9bb3e2b1220bfc87f7c5697ebd77278c457d14017123616979f2727f9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_39_round_native.json": "bb2656859ddfed336532d51db3758c2ec1463f3e14b1158c89dd7fe1e12efc90",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_39_round_twohand.json": "9daa63302b0485b492a1cb4aafcaa33fe92bb4f8837785b544ee4a9f75a00d48",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_40_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_40_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_40_barrel_native.json": "2064f2f2e93e888502f9f13733957549b822eb1a75cfeb0ea21313e69e207d9b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_40_barrel_twohand.json": "9d95a6dfa720ac09a13ebf6aad57dbaad9e92db01439443ebad50251bb63a1db",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_40_round_native.json": "2ffa08e1bebeef83c2fbe0f4555f60c6d6793ae80e978dd6e19508b047510817",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_40_round_twohand.json": "d601a90b380b37cd5aa8ebf497907b2d33e07d3b3aaccd5597adf5b25631aa87",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_41_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_41_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_41_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_41_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_41_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_41_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_42_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_42_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_42_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_42_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_42_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_42_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_43_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_43_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_43_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_43_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_43_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_43_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_44_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_44_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_44_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_44_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_44_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_44_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_45_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_45_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_45_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_45_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_45_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_45_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_46_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_46_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_46_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_46_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_46_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_46_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_47_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_47_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_47_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_47_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_47_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_47_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_48_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_48_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_48_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_48_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_48_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_48_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_49_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_49_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_49_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_49_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_49_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_49_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_50_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_50_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_50_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_50_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_50_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_50_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_51_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_51_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_51_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_51_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_51_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_51_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_52_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_52_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_52_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_52_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_52_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_52_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_53_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_53_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_53_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_53_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_53_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_53_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_54_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_54_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_54_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_54_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_54_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_54_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_55_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_55_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_55_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_55_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_55_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_55_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_56_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_56_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_56_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_56_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_56_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_56_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_57_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_57_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_57_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_57_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_57_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_57_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_58_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_58_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_58_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_58_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_58_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_58_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_59_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_59_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_59_barrel_native.json": "ac0aa5183baa316e6939c955ed443dfcf0f2b50b3510a07b4761bbd702981768",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_59_barrel_twohand.json": "90b78cb86d1c9554c59d8594a612f191205770a7c30244d8c912471f507eed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_59_round_native.json": "13bd12fad65e0091d5e45a948c6babadcba97dbd351141050c9ef79fe2094240",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_59_round_twohand.json": "002b80102788d81cfb97593669bb2dd4866cdcee4690e0344b2b710e2e91d796",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_60_body_native.json": "29ffb48cba3dfc173ae5747b4ed30e74c79fa192d3c1862a2b9ff7d74f2552c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_60_body_twohand.json": "aaa0d4a98031625d970231653afadd098d1179bb2052719a10d45e11ef6b1b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_60_barrel_native.json": "117349b01c4fbb0fd4d936a86cda4db0587261f42e88eba27c52236e60fb6f13",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_60_barrel_twohand.json": "051cb187eb2061a745e53201a3500e16be5571c7ef11612ed4e0a724f8457333",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_60_round_native.json": "7c58fa11bf5d4efec7794830a61cce3bd9eb1ce5e29b75223e56ae90a411182f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w220_deafening_whisper/deafening_whisper_60_round_twohand.json": "96bc998f0263f0a7d5168024f79e98caf58421d11027fdac6fe1cd0fa2ac5f3e",
+    "src/main/resources/assets/destiny/items/weapon_reload_w220_deafening_whisper/deafening_whisper.json": "74fe7503ad084c53239855e9acd66de307182c54ce3a384dff1affd2ee933673"
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "stage": "W171",
+  "weapon": "aishas_embrace",
+  "url": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+  "title": "Destiny 2: Aisha's Embrace is a solo players DREAM! (Trials Scout Review)",
+  "channel": "CoolGuy",
+  "uploadDate": "20220315",
+  "selectedSeconds": [
+    84.6,
+    86.4
+  ],
+  "inspectedActualFrames": true,
+  "authoredApproximation": true,
+  "referenceConfidence": "High weapon identity and visible raised/rolled rear-magazine removal/replacement/recovery order; moderate exact contact; low numerical angles, distances, physical pivot and hidden travel.",
+  "sourceVideo": {
+    "privateCachePath": "/private/tmp/w171-aisha-reference.mp4",
+    "sha256": "8cf2e54929b3d0752b3b498f284c6a67833b967ce9bba2636f890e8faeb48ffd",
+    "sourceDimensions": [
+      1280,
+      720
+    ],
+    "identityEvidence": "Inspected actual video inventory at 325s names Aishas Embrace and shows matching long forebody, underbarrel module, curved open stock and rear curved magazine. Selected gameplay itself includes named AISHAS EMBRACE overlay and matching gold/black rifle, optic and stock. No arbitrary weapon substitution.",
+    "secondaryInspectedWindow": [
+      320,
+      330
+    ]
+  },
+  "extraction": {
+    "tool": "yt-dlp 2026.10.21 format 298; imageio ffmpeg 7.1",
+    "commandTemplate": "rtk proxy <ffmpeg> -loglevel error -ss <sourceSeconds> -i /private/tmp/w171-aisha-reference.mp4 -frames:v 1 -y <ownedReference.png>",
+    "timestampMeaning": "Absolute source seconds; first decoded frame at/after seek. Not extracted event times.",
+    "processing": "Full unmodified 1280x720 video PNG. Source contains review overlays; no crop, mirror, repaint or authored replacement."
+  },
+  "mechanism": {
+    "layout": "Rear underslung curved detachable magazine behind trigger/grip; fixed palm block, stock, guard and receiver stay attached",
+    "visible": "Screen-left support hand lowers magazine, brings replacement from below and then sweeps across receiver as rifle unrolls.",
+    "unresolved": "Exact hidden extraction/reinsertion track and control contact are hand-occluded. Handedness is observed in this video only; both Minecraft FP contexts still require master native QA."
+  },
+  "observations": [
+    {
+      "sourceSeconds": [
+        84.6,
+        84.92
+      ],
+      "fact": "ADS exit followed by strong raise and side roll exposes rear magazine."
+    },
+    {
+      "sourceSeconds": [
+        85.08,
+        85.24
+      ],
+      "fact": "Magazine drops down and partly outside frame; palm/stock housing remains attached."
+    },
+    {
+      "sourceSeconds": [
+        85.4,
+        85.56
+      ],
+      "fact": "Replacement magazine rises from below and seats; HUD increases 11 to 17."
+    },
+    {
+      "sourceSeconds": [
+        85.72,
+        86.04
+      ],
+      "fact": "Support arm crosses receiver/action, but exact control contact is occluded; no separate bolt/latch animation claimed."
+    },
+    {
+      "sourceSeconds": [
+        86.2,
+        86.4
+      ],
+      "fact": "Weapon lowers to forward ADS. Product uses exact current HIP endpoints to preserve reload contract."
+    }
+  ],
+  "sampleType": {
+    "partialReload": true,
+    "ammoBefore": 11,
+    "ammoAfter": 17,
+    "normalBaseStatCertified": false,
+    "perkSpeedCertified": false,
+    "reserveReadingCertified": false
+  },
+  "pendingReferenceSlots": [],
+  "limitations": [
+    "Downward/forward source-local magazine travel, angles, pivot motion and normalized timing are authored guesses; partly occluded video is not animation/bone extraction.",
+    "W142 clean semantic geometry, UV, default paint and all source anchors preserved; source video shader/lighting is not a repaint reference.",
+    "No real hands, hand IK, original bones, extracted animation or independently moving charging handle claimed.",
+    "Combat partial reload with Tunnel Vision/Multikill Clip review overlays; no base duration, ammo-credit timing or perk-speed certification.",
+    "Reference starts and ends ADS; generated endpoints deliberately remain exact HIP. Native handedness/framing/clearance, ADS transitions, cancellation and performance await master."
+  ],
+  "frames": [
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-00.png",
+      "timestampSeconds": 84.6,
+      "sha256": "099436c58f07839c273475dbfbdfcd2f37215af7e988624743f9e7ff11a70c0d",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "ADS before reload, HUD 11",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-01.png",
+      "timestampSeconds": 84.76,
+      "sha256": "6963c9cbf43dad5c06a512ab765f56fa07626457c2c3a88391f9bf537ad0dacd",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "ADS released and rifle starts rising",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-02.png",
+      "timestampSeconds": 84.92,
+      "sha256": "050095dd387cbf0cebc58fca407d9b09ad16ac296848b9aae9c07a65fcc581e5",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Raised rolled rifle; support hand around rear underside",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-03.png",
+      "timestampSeconds": 85.08,
+      "sha256": "87155306600c40ce5b601a747f89ea92a9d93714c753d785674e630c9c4f8777",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Magazine dropping below fixed grip/stock; travel partly occluded",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-04.png",
+      "timestampSeconds": 85.24,
+      "sha256": "b996db3822f1e347154cd7bd87a4380fb566975ac46e7a091e8bfcad146b05fa",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Rear magazine absent below fixed palm/stock housing",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-05.png",
+      "timestampSeconds": 85.4,
+      "sha256": "4e3916b3e709f1d675194165fd909893c6ccbc0a09f2e1726f56d5e913438fa7",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Replacement magazine visibly rises from below in support hand",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-06.png",
+      "timestampSeconds": 85.56,
+      "sha256": "b4a1350d34e827238cc415f3c2ab96696d68953138b85523c8efcbc1b5b45473",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Magazine seated; HUD now 17; rifle begins unrolling",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-07.png",
+      "timestampSeconds": 85.72,
+      "sha256": "f31569aee9ff12b269432dab840365977e9c11e994bc010a7ddbd88676a7e787",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Support forearm sweeps across action; exact control contact occluded",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-08.png",
+      "timestampSeconds": 85.88,
+      "sha256": "c614b34725bdb9ac28b2ffd7c90264f0253e82c3115a376bd0fcf09607562b70",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Hand releases toward underside; rifle still elevated",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-09.png",
+      "timestampSeconds": 86.04,
+      "sha256": "b6a6513b6233fb521a5710d0f949f55d554f599aeffe6371278f8527daf7cc3a",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Support hand withdrawing from receiver area",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-10.png",
+      "timestampSeconds": 86.2,
+      "sha256": "8ada0a17bd8ae08f7e8c47fa8c68364c5d481ebf35c0d194bfe85ba5f144dcbc",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Rifle lowers toward forward presentation",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    },
+    {
+      "path": "art/weapons/w171/aishas_embrace/reference-11.png",
+      "timestampSeconds": 86.4,
+      "sha256": "084e0c108c94950cabb5dd864e1e8fa8f8a506e8865faa014c87daf5ed13a1ea",
+      "sourceURL": "https://www.youtube.com/watch?v=ytb7f7nyrl8",
+      "observation": "Forward ADS resumes; authored product endpoint instead uses exact HIP",
+      "confidence": "Directly inspected visible video frame; numeric pose and hidden path authored"
+    }
+  ]
+}

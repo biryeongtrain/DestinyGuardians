@@ -1,0 +1,603 @@
+{
+  "schemaVersion": 1,
+  "stage": "W212",
+  "weapon": "bygones",
+  "generator": "scripts/generate_reload_w212_bygones.py",
+  "generatorSha256": "5567b64438a56a51f38703471c2b584574543f99d1ef35708550033c280e8331",
+  "itemModel": "destiny:weapon_reload_w212_bygones/bygones",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "thresholdEncoding": "float32(i/60), matching runtime float quantization",
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "curve": "C1 shape-preserving cubic Hermite; weighted harmonic knot tangents, zero at endpoints/holds/extrema",
+  "keyframes": [
+    [
+      0.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.065,
+      [
+        46,
+        8,
+        -16
+      ],
+      [
+        0.18,
+        0.08,
+        -0.12
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.13,
+      [
+        78,
+        14,
+        -32
+      ],
+      [
+        0.35,
+        0.12,
+        -0.25
+      ],
+      [
+        0,
+        -0.15,
+        -0.029
+      ]
+    ],
+    [
+      0.22,
+      [
+        80,
+        14,
+        -34
+      ],
+      [
+        0.38,
+        0.1,
+        -0.28
+      ],
+      [
+        -0.25,
+        -3.8,
+        -0.739
+      ]
+    ],
+    [
+      0.3,
+      [
+        80,
+        14,
+        -34
+      ],
+      [
+        0.38,
+        0.1,
+        -0.28
+      ],
+      [
+        -1.15,
+        -6.0,
+        -1.166
+      ]
+    ],
+    [
+      0.48,
+      [
+        80,
+        14,
+        -34
+      ],
+      [
+        0.38,
+        0.1,
+        -0.28
+      ],
+      [
+        -1.15,
+        -6.0,
+        -1.166
+      ]
+    ],
+    [
+      0.57,
+      [
+        80,
+        14,
+        -34
+      ],
+      [
+        0.38,
+        0.1,
+        -0.28
+      ],
+      [
+        -0.45,
+        -3.9,
+        -0.758
+      ]
+    ],
+    [
+      0.68,
+      [
+        79,
+        14,
+        -33
+      ],
+      [
+        0.36,
+        0.1,
+        -0.26
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.74,
+      [
+        81,
+        14,
+        -34
+      ],
+      [
+        0.36,
+        0.19,
+        -0.27
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.8,
+      [
+        73,
+        12,
+        -28
+      ],
+      [
+        0.3,
+        0.06,
+        -0.22
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.89,
+      [
+        31,
+        5,
+        -10
+      ],
+      [
+        0.12,
+        -0.05,
+        -0.08
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      1.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "gripPivot": [
+    8,
+    8.61,
+    8.43
+  ],
+  "authoredTimingSource": "scripts/generate_reload_w168_bygones.py",
+  "normalizedPhases": {
+    "raise": [
+      0,
+      0.13
+    ],
+    "withdraw": [
+      0.13,
+      0.3
+    ],
+    "exchange": [
+      0.3,
+      0.48
+    ],
+    "insert": [
+      0.48,
+      0.68
+    ],
+    "basePress": [
+      0.68,
+      0.8
+    ],
+    "recover": [
+      0.8,
+      1
+    ]
+  },
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/bygones.json",
+  "sourceGeometryFileSha256": "501fee4fd8f4e23de98df29011ab2a5fd8757907de077aaea5488fb3e01ba3bb",
+  "sourceElements": 129,
+  "partElements": {
+    "body": 124,
+    "moving": 5
+  },
+  "sourceCubes": 129,
+  "partCubes": {
+    "body": 124,
+    "moving": 5
+  },
+  "maxAssembledElements": 129,
+  "elementLimit": 1000,
+  "movingIndices": [
+    106,
+    107,
+    108,
+    109,
+    110
+  ],
+  "movingNames": [
+    "magazine",
+    "magazine_shoulder_-1",
+    "magazine_shoulder_1",
+    "magazine_front_spine",
+    "magazine_floorplate"
+  ],
+  "fixedMagwellIndices": [
+    82,
+    98,
+    99
+  ],
+  "fixedMagwellNames": [
+    "receiver_keel",
+    "stock_belly_join",
+    "stock_toe"
+  ],
+  "partitionRationale": "Five rear magazine solids 106..110 detach as moving; receiver_keel 82, stock_belly_join 98 and stock_toe 99 remain body. No explicit magazine_socket solid exists.",
+  "sourceElementsAndUVSha256": "82b60a5fcf86de9702128e29f4e17ea6ce03416137362c94f32e78ba4554c1de",
+  "partElementsAndUVSha256": {
+    "body": "709a9e57c3d6128bbeb67079353cee445ac2a9c319c6947b9d8609ca52cde3e2",
+    "moving": "6a96c36c2cbdbaf9712792baabd700d9ea33b961a5d315607967d73a474b75d0"
+  },
+  "geometryAndUVUnchanged": true,
+  "geometryAndUVPreserved": true,
+  "hipEndpoints": [
+    0,
+    60
+  ],
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "fallback": "Exact canonical graph for negative progress and non-FP; ADS/inspect precede dense dispatch.",
+  "rigAction": "80A8A36A",
+  "partHint": "moving",
+  "sourceGroup": "pulse_rifle_b4d01502",
+  "sourceFullChain": true,
+  "sourceActionWeaponExclusive": false,
+  "sourceCameraRecovered": false,
+  "motionAuthorship": "Exact W168 authored part keys/holds with W208 PCHIP; source-chain replay/rig cache and native QA are master-owned.",
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "assets": 247,
+  "packFiles": 247,
+  "limitations": [
+    "Original source is bone-only, without mesh/camera; action is shared family evidence.",
+    "61 poses remove /20 bank quantization; server-paced state updates are not proof of 60fps interpolation.",
+    "Part motion remains authored; no recovered magazine path or finger IK is claimed.",
+    "Master integration, first Vision feedback, warranted correction and second Vision remain pending."
+  ],
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/bygones.json": "501fee4fd8f4e23de98df29011ab2a5fd8757907de077aaea5488fb3e01ba3bb",
+    "src/main/resources/assets/destiny/models/weapon/pulse_rifle/bygones_twohand.json": "0b7f1c61937ac55db907bd70482d83ef1e392bfbf78f5ea04e96da5e11afa696",
+    "src/main/resources/assets/destiny/items/weapon/bygones.json": "4886e2e2b2570cf2aaeebb77fd64fbc65a7c270042c715937d7b485688e5a32a",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/bygones.png": "459ab8537f3765e0f606305f532d472092fb7d9acf9d1abfd7c785adf6b9ad69",
+    "art/weapons/w123/bygones/design.json": "4f6b29f068174f416e11491eebc79f2b881d0425b01f65386ba5470345d9067c",
+    "art/weapons/w123/bygones/manifest.json": "276b1ff2dabcc2c573e20acdab8541c527d4f8fa610458b3fc01470bdb698c3c",
+    "scripts/generate_reload_w168_bygones.py": "c3e2faf51405c0683d84e9960e258a21edbb749c6b4e6bfce1ecc9cb595a9f71",
+    "scripts/generate_reload_w208_the_recluse.py": "b632d3d51ac1f13274b76d876847db0714a520e95b9d3eafc8b5f02f7aec00b4",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+    "art/weapons/w205/rigs/pulse_rifle_b4d01502.json": "7048f5c3143a9298879df84268225bd961563b4a6f3d5bc9bd69254d2d99ef16",
+    "art/weapons/w212/bygones/profile.json": "3cbcc4de67905dfdcbabe35b41b2e08e28ace989028bb157875017649c4fc97b"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_body.json": "3b4fee38f08826eff89127b67d59bd3bba0b2c01dafa5e72d7cb049a0cc78643",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_moving.json": "753837039487e756b07b18dadc1e0950bb7fa97e818c765b8ad38fda1efbd812",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_00_body_native.json": "1ecbd685db65ee8a3658f5a3e025f7bcf662199948ba55363f79ce0bc12a4ee8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_00_body_twohand.json": "b1e5288cc640636ab00c9b37a5b210892d769cbb60ca9fa2073c19fdc72fc289",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_00_moving_native.json": "e06ce8fcab232ee7acb527210acaccbbfcce12e79ff7eee5b2375e430de7368a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_00_moving_twohand.json": "98ea846b5eb5ea34ed83bc258633cae2cd48f69e05d3971b2aacd515c9ae871c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_01_body_native.json": "86130c39496ba51834636355adf9ebba0c13293c67b28c47e93dcb90de70a1a0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_01_body_twohand.json": "f9e203d3c61742964f6c156288e5f9d9b8f13aa1baadac0a9fa50dbe4fbea049",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_01_moving_native.json": "83ef8dbf9f16b988cdb03d69f7a4f58bd9ff7e866d0f440ef206ea8d422af1aa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_01_moving_twohand.json": "aa446a5d52cdce55c760c031677831e0c87a6ec7f452ce05043cfed2d930b2b0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_02_body_native.json": "6b84ceb552394e7122b0a837812501171d74c03d15984bc47b3547a391ecf9b2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_02_body_twohand.json": "0001c4edd090218f206993c43381757b4c0a193914ebfc1b8fc752a006b5d858",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_02_moving_native.json": "125e28d18eec8aac78bfb01a74dce7379229cd4c22cd802e4ea3ae78066de0d2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_02_moving_twohand.json": "e3a64cee7a30f068f0184a309259d4c3d0fa3dc9279b530b8f5db129ddb28c0b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_03_body_native.json": "65d17ece0e9f4ddbd4c93b6caee3a12f71034c3ae387fc7e38cc8068e6b6e720",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_03_body_twohand.json": "50bf17e92f0b5661ebf3981ae16abec891f52295273c557f9a05a3ec08c15c82",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_03_moving_native.json": "41012e071fbac70b5488c9a111deb89cad4dafeb4ae1eaf7ea85cfe9113e778d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_03_moving_twohand.json": "b075dd94769704fa45ba46b12f1875b68648110d9513583535d2dff3e2b0a21d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_04_body_native.json": "9ee11a82bc13b7bcff63d5e27042c0043dfc3b2f9dfca80e32aee1310dd900ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_04_body_twohand.json": "7f70753fa5285b4ef73477efdc8f00fe2c637e0ccca17e97ca1759eb8b84801d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_04_moving_native.json": "8e5ed3ac616e1f993340f7f55fa5298bbb93f95518a5ea2b3fc7dc5483ce9aec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_04_moving_twohand.json": "04a222b2f1840b6ae5273545f985e3f8532657ef51ae4914619835c8532a497d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_05_body_native.json": "d9a5a6978fe9be092f6e0e42056a381e047407ae43098f928573d91b1f29d3fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_05_body_twohand.json": "e99c7ae35e58a4126a574ec312c4952da806e01d5b4861ed80cad204917e4ca2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_05_moving_native.json": "78d44a822af10a4651a53a9fba66ea4c4a7e96532287c65f3e00a0c4b9fd3442",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_05_moving_twohand.json": "57dd6bd78179b1fcb917c7bffccb9984cbdae631eeb6162a0a61f30256d1da80",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_06_body_native.json": "6512bc504b45b1dd212dd87d38671e337aff4f7daadbd7dcb414959a7f3c38e8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_06_body_twohand.json": "43944deb299088c9d2d5b19ffeb4071a24779241eecb404a5b8206c93a5c3e0d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_06_moving_native.json": "642af302d8e0e54ef57a0d5437dc53d3864a07b0377423fc6a1323492f487d59",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_06_moving_twohand.json": "518a9229bbcddb31c8d7e4afb88511514af4e601515771dc53f33ca38fd110b6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_07_body_native.json": "0b9c07512701d14a25314ff71aa8ca282e7a3e449f91e738256177befef7dd65",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_07_body_twohand.json": "2d94c0cb14e506c2be3e21e4f14d47dfaee528ccfffa6d58e96d74003fb45c0c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_07_moving_native.json": "35f7f37f517c5faee24c1c7943e377662f8b014463d4407ea2634eb48c58b232",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_07_moving_twohand.json": "41b83035d5dae6faed4694f2607ffeb615dea9e02c87e98f43b5bcf029b605eb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_08_body_native.json": "8ad60e9b9197bc9b46de0eb12e6f529f44308db01d0a12b40fa2179b7b8ccf7e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_08_body_twohand.json": "1ff9dee47fa08385c037eb83b7fbd1c504b748a7bdc3ce5b18d1c275150ecbab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_08_moving_native.json": "0541c469d7738ec4df7a789338732a03fa0df0f0f3c8afeb209e122bdc7d5a46",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_08_moving_twohand.json": "0c72385d250d8d54b3594f13c08f91d302b43b53a631939dbba87c958caabd82",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_09_body_native.json": "9a83ff1400bb1c858f8476ba5dc893e0cbb5d7f6776e06a9945f98679665caac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_09_body_twohand.json": "1671d74bde00416f1073ccfca7eb02ca0be385dc7cc4ab5a75895719900f75b7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_09_moving_native.json": "1decf11602a21ba61c4d7a36526c3af4300dba98bcf98bc19de180771c38d639",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_09_moving_twohand.json": "ae2e83e42bd94d5a3f02e89c4ad656322795a1b8fbf6bf33003e8a34ecab9026",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_10_body_native.json": "f912c22d4c3b546228c1a1ef34fa0a00d70b14d544bc8d0441d4379b18b4e87d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_10_body_twohand.json": "23e57bc711f82912eebaff9ba6ca5076cce89070cc7dae0ebb36470079186f7a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_10_moving_native.json": "d1673a28ebc3aa0a3393fd0c36d9e5e2787ee56badbc80a5d91edeab20b72447",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_10_moving_twohand.json": "224b177c63cd6da4757199832f45482a137d83cf66be3bbbb31c4dd91ce479af",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_11_body_native.json": "3607f0422944ef9bf64a8ad3c472d1654cc5124df4938e9b884b4fe9bd7f2215",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_11_body_twohand.json": "dd7a37a55e98cf505366bb9244b7356c08217a33b87e39e30d4220b3dab63296",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_11_moving_native.json": "da2593360cb3b9c322604061935183ae9de8b6353c192442778794ff8c1fab8f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_11_moving_twohand.json": "6fef15d0f360c8d38f4f078b7f34f7bab832f896e4f47101eb99107d3ebb7a8c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_12_body_native.json": "cc8ec77300e87ea211726ca5bac24b5c9667bc8cb1f8fcbb83ff0dcc7e6e15d0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_12_body_twohand.json": "e8e140e100f7d730620368396d65b3aedb6c5d3f80eb9636f74b3101bc6b6b52",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_12_moving_native.json": "8ed3ab2a0c9b7761dc912ade584ee1887b3c94456614cff679bb456a8a413d71",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_12_moving_twohand.json": "e0d617558eedfc047e18865217388f5dee14606bd8393d9a1b785fadc83642c8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_13_body_native.json": "7b77d62da0f770fe63aaccb696b7ef01393add0710c1e12a59b40e9db9745f50",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_13_body_twohand.json": "65cfe6010d8fccc85dfc9b8138fc2efeff859abe22cf75f2868f147b29506d9c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_13_moving_native.json": "3224c75623b3dedbbf5895c3a59847924db6df6163ca56007d59864c6d6143c5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_13_moving_twohand.json": "a494c368ce298b653f3f29ad9c6ecd688f69c87c94fdef8c7753df4877fd54f8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_14_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_14_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_14_moving_native.json": "c43f5906e8abb9787b13bec03b75a8be1610d5c07a7a685fcec1280678f34dae",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_14_moving_twohand.json": "d7114846f51b23086d2b472afbed6f8019bebd12769ee0b8c3dbc950e31e6771",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_15_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_15_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_15_moving_native.json": "9db311556138d71b19f1d6bfaf51ca93af718c3ad04cb59f30c2302ea8af098a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_15_moving_twohand.json": "991a978592f347972f9b29480eca9c8c03f06a760ce6db8cbde5b8db06d328cc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_16_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_16_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_16_moving_native.json": "6e9a82d243094bb5481b62cee8928e6dfa852c6649424ec3d45db818a1ff1cb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_16_moving_twohand.json": "d6c974e09545f6d0667c1905c1784f95d8fcf73cc88163ad4d3f71372565b0a0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_17_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_17_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_17_moving_native.json": "95c197eaa725cad12eb9a659dc8de6116531df98ec81147fc79410b010fcc4c5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_17_moving_twohand.json": "5747b2b6b40dc75e34da8fd880d621a2daec44e6b0a98229ca4059d0b5e8de21",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_18_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_18_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_18_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_18_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_19_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_19_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_19_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_19_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_20_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_20_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_20_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_20_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_21_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_21_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_21_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_21_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_22_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_22_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_22_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_22_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_23_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_23_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_23_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_23_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_24_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_24_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_24_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_24_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_25_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_25_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_25_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_25_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_26_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_26_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_26_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_26_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_27_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_27_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_27_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_27_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_28_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_28_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_28_moving_native.json": "3f1e08a2028e7e15fe9838c444c925568214a229996c0cfebe304df36fdf320f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_28_moving_twohand.json": "26bd10814f717d7bf5e4763163eed23c4ce3f6f51e7d8525d02194aa80a19d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_29_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_29_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_29_moving_native.json": "4358d6bf2a013afa8360b99367fbc12a2d0d8a93945a2217e7b211cb88efe2a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_29_moving_twohand.json": "eb7a990aae9f619a64d3cb9dd56cc21a0aa71cbd8ad2858f3e3964b7994d5d53",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_30_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_30_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_30_moving_native.json": "13926bfaeaa23812e60bf9e0392d95d3eff05c5ff78fb20729656dede75eb8a0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_30_moving_twohand.json": "08b879ae6b834c9b38897ccb39ced6b0226d37b392d92b38e417f22bdf852a79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_31_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_31_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_31_moving_native.json": "f75ef9183cdb6fa051ef68ee5763586aa3d0a652c2662a1f690a96d12a9e65b5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_31_moving_twohand.json": "6e69f87e737e347f8b68f47782c3ec95328db91c2343f0ee23b2b9bb2a570579",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_32_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_32_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_32_moving_native.json": "1b35c1ecff7c8b2ddac4ffedf863d06051aab74a71c2d57dd9dc7e7ba4d55224",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_32_moving_twohand.json": "b02c3ffe8509fde556e88c6b30373281318bcb20c51ab844f6666a66ba68df88",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_33_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_33_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_33_moving_native.json": "8a32deba78ac9e8b59bca768d0cff3f94f5291d299467a6ad0bab1ddb61c8b4a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_33_moving_twohand.json": "306c4a06bd3a6ee3d2f972220328379735e5555aeaede1f3f0e6630d06a42968",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_34_body_native.json": "d27cdb5bd71773db3b80943760bbc0d788c80fe6346aec4e5f2aef0ee0404295",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_34_body_twohand.json": "c5dd2642490f851fb9e1f6804b657a5b11dc490bb1d0f71d915cbfa4e7116d62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_34_moving_native.json": "593037671bff5dca8db6027a3efe1707f25568019f4ea20e42fe8aa46d24e36a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_34_moving_twohand.json": "bd2a853eca9f4f461139af7ab03c1f1c6b51eb6d09481a82048bd08e5dc1b791",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_35_body_native.json": "88fde181d413d1e2a78334d24e44b50a2c46f1fa0be369a7e66ffd19bfc12638",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_35_body_twohand.json": "07db9af5c214e0b3740e70f98ca7c033fa5ed6302229d1aa439cfa1f24a7aac0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_35_moving_native.json": "c24c290850d638226e1f15f0fb6e9e19ee572e87f3bd1755d20468002cf5361b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_35_moving_twohand.json": "6796cbb0dbc783bef1a3f32bb0382f28ec25cc34a77a72692461a68e5b969754",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_36_body_native.json": "dc7c984bb597d3c9bc0e3ee7453860f9c42e5e26faa6d67c6fbcf18570b1746f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_36_body_twohand.json": "d3338337dd5bfe14e7b07df7ec97de13ed9762dd0a84f35d679364b97c382f10",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_36_moving_native.json": "711dd2580a6c741b09c4d397c5504285bfc19086be6f853a9dc0bef3a83d33e2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_36_moving_twohand.json": "6b7ad7b5f5dad3f4f0906c040cad5a2edd60231801bfa1738d44181072a0a75b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_37_body_native.json": "cc4535e1c060d9308d36280d2d6e738cf68eab3e2d4a654d20bd81398d8006a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_37_body_twohand.json": "29525cd176f2933ce90f9f8675d2e44e2902b7035b443f6fec14a92b3b866b02",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_37_moving_native.json": "9c5e348dc73b22d96ae9ceb41d3ead0c0baa9d2368218503439ced9de3c8eb58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_37_moving_twohand.json": "73f2054edf4c6c0b98ed600c5d756bcc5b16aacc9ffda9abf2e48e9549015c98",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_38_body_native.json": "ba9b23ca5c17c91210e492b15950aa1571c201df6eec4994a063c3c449dc1927",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_38_body_twohand.json": "9100421ffc43f2658d325b2ee72144f9e309dd6ca8f9f562616bf6aa047fb84f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_38_moving_native.json": "cf7df2b475844db8b39a0df5677337e4ad1ba2019b0ad05835e5f57a087168e8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_38_moving_twohand.json": "3440a4b786b764f15eec28f06bd650cae155d178cf37b0a04a0e09214b79ab0c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_39_body_native.json": "d726b9eb6a4528713af295c6550c66f91eb2cf3a2c85d6968b56eeaae6cbfe7e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_39_body_twohand.json": "7e45885a62bfab0aac5dafd72c478da4a48df3e02029161171a68155e7413048",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_39_moving_native.json": "b0a22676c77defdc1a2445835bab3e4ef54b10634ec43511ae8fe37dd8c42a88",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_39_moving_twohand.json": "5ab879d01e647fd6052d9e850585aeac0eb4dec6fd4991eff78e4778b9f555b8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_40_body_native.json": "ab0798952ee1a50e1ada6c38990bbe23187165a53e232bcfb18f3afe43da2651",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_40_body_twohand.json": "cbc3b4cd75ef30d3c69c0d974df4aae6ab9cbae3065fba7bc9b0ee81d67c4bf1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_40_moving_native.json": "8f9606ac9a8375cf00ad439112274b83f818f8e3d3e0e78b45b0a733228d2354",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_40_moving_twohand.json": "33afccbbc49b30c5c8a2ef76cc3f0d11b81a5646c1fdc82b5ca3d75989d84767",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_41_body_native.json": "2f4d1eeeb016957eda9c90c4b01b089c030126903575f88478cc0bba44b8c85e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_41_body_twohand.json": "4e39ef675e2300cf183a5878f56e666c84d2f3968b3b9f8ca856d7d832d387eb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_41_moving_native.json": "fa8289ff39c599d76d52d625880a3ce914af284833e7946148d29108fa035213",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_41_moving_twohand.json": "c83963f0d705cb939dd7f45a11bdfefcfd90dd1c9e77ab7687b7d871f122a191",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_42_body_native.json": "790eab406fa30a27d4b287ecbcccfb1230dd8f5d5217f1a542ab3f2485916bd9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_42_body_twohand.json": "c7054bd2dd7bdcbef0948c85dae668effc792572204a234c8621f05b3005f9c4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_42_moving_native.json": "312892a71c81d72639d86effa8e0ad54efeec4cb87c71f83ad156adaa182930d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_42_moving_twohand.json": "e9b4f5f40924dd790d174fd3e25ddecbf6f593c342258fdb63ce1d5126021a89",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_43_body_native.json": "f0d1728d005d254a5044f3934acdc13c9af6fe46cfd376d7231d7ec8e77ab227",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_43_body_twohand.json": "3674636e28b99922fb85cac8cb2529794d27dcadaaab42e6db860ec26d49c874",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_43_moving_native.json": "7ec02e38fc5767a7a8818b0018d798cbcd73b51533a1394e1bd496ac8edbc6c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_43_moving_twohand.json": "441ba8512d59dfc356e56ee96d150b34136998f21f083dd41b805b0642a9f7ce",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_44_body_native.json": "ce1d1400c08149175cf21599243ed477bc74fc643080b824268c29e580a5ee92",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_44_body_twohand.json": "3a657a606f81da07b07597452f73fdafc4da6b6c09ca00cc651e768c52c24709",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_44_moving_native.json": "d3ce06b0ffd524170d543caabcf8d96b73d270a9380369442b64948585252bd0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_44_moving_twohand.json": "6785af4fa61694d2537a6fc95febb84a50315a09b98c0fb8013b6190ee64c59f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_45_body_native.json": "83fa680b008fe13772be48c49282815f2176be86a83136cd46bd8fc3fb308643",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_45_body_twohand.json": "63b1035a0124769114a889f85ead2cc4f7e0211b96bfd44e6584bbf26be5219d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_45_moving_native.json": "fef8aa7d9767f528eb57cb6cd2479426fdcd3dcec47f09c2578edaef850b232c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_45_moving_twohand.json": "346de1896a89a48eb4177a2165a49697ba308440009413770c9253f3c065ddab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_46_body_native.json": "3759de971d6001e1b2e60dcb1e7278b186f8e1a7e0d932bf5df73f62b0edd375",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_46_body_twohand.json": "b4b2e90f69a715a4ce5d213125149b3b0601f90d427b7bcec85e1bd10659ea34",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_46_moving_native.json": "18043e1fe3088ebab32c7eae5517156855fff0a0399c9c8da2993084fc88b503",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_46_moving_twohand.json": "857c38e9fcd6dce709f2ec22f2ee7624162d4328a742de71d8518fdd2778073f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_47_body_native.json": "480f5a4e3a6001259384a8539f485d07bd8298761d88004b24b139a541746b02",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_47_body_twohand.json": "27acc074de2775c89ed35419d146d6a0d6766ae6dd10d83c8d8dc845f36b1451",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_47_moving_native.json": "1c11f79fc050be1fc5e22135ed6a9ba828fa48e3fc2b2439bece796b058049fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_47_moving_twohand.json": "aa495fdb8b610e9bd824ac57b240911de26a7cbfd058d3c294149af1defae5e2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_48_body_native.json": "dd2a21ffb4ccb57976d667ece064851e51fd2be9a6029632e64db03ca26ec596",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_48_body_twohand.json": "51faa59c49c27e1bb05806e0823e96dd2bce6a227e3e772f7806c96db7f767c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_48_moving_native.json": "c78527cdf1288c986e2f72dd9813630b1b70cc55987425997d27b96d7fbad95b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_48_moving_twohand.json": "e6fa08b9e431ec03f7527cc96f4957b02d7a803b1c1ecc1c3f754a82775aa783",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_49_body_native.json": "a4a2bafa1a93036d32ca4e5807a9b1fe373b44096c5f890d0103561ba2d9fc58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_49_body_twohand.json": "bf48565afd6d47a62f66df319a8ea3bd6e0557e3fbdb54029b51512384a9d4fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_49_moving_native.json": "5d9ae14f3aae7f26f7425fb2b6884eafceeef4d55a756431a2f83e73c6bd386a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_49_moving_twohand.json": "90cf0c919ed0188c321fb390ed6d8a91301db71ca45467cf71eda077356baf8a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_50_body_native.json": "2c37a583052e2c8edfd1e6d7675f3ef6785bed7546b1465f4dd60b2ca3f78fa6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_50_body_twohand.json": "59d78abe567c2932bfeae6a4debc8d061aa02f4a674ab8cae3cae7e53c4c8ff7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_50_moving_native.json": "b7b3a3d6b53b16f6df691cd598007325dcf5eb286da25ccd9babc3a2e12c539f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_50_moving_twohand.json": "8f147f99e41ec6d3e13d7ba1a7d53cc6a0c34ad896ac065655a682002ae275c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_51_body_native.json": "8de2e89e0cf32b6791628e88e0734fd946686e25c2a468ebe68e8fedf5ed8c7f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_51_body_twohand.json": "03babb0e16f1c1a4ad2d6056c69c49b0bb3e6d798328b2954a9528ee5655427a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_51_moving_native.json": "e5c843a427710e028e0c7b1c41464d5ffd99d5ebd5c870f705ac5a7e307c30fa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_51_moving_twohand.json": "1ac22f518379291985c6b670259686c45ed8ffddeeef3405845fb08901aff1fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_52_body_native.json": "3e5e73539727c5e77112f64f346a21b38f7b22d2c9f68027d310ea50c8fef19e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_52_body_twohand.json": "71eb56a7d3c3a6fea5258eea894d25125286ea0986a9e7b7dd4fba903a2d31d2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_52_moving_native.json": "1d213e50c08c6805813cbb67f387c0884364952a600dc125f61fea38646df930",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_52_moving_twohand.json": "33f525af9d71ad4fc5a05640650c61932f32ad2809e3f4ef4d8c774cc1e0e43b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_53_body_native.json": "ed5309847fa5063d7ae87194dbeec0426a90f5764a28c3764389b9d873dfaece",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_53_body_twohand.json": "040ebd12c49a929fed2ccbb7611d4daa494248559f2875cc3023fc68b56253e8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_53_moving_native.json": "1af2f880a1917871c36bd9fdf7ddffba82a5f49209063c54e12d4afaf38a3e10",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_53_moving_twohand.json": "81a879f20153ead1478c23369acc03fda47a97cabb8754177181348238d8ba89",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_54_body_native.json": "337b54a969f25f4b98a2dbe775282a2e650f81ce7e65e924c8003019f68003e9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_54_body_twohand.json": "24f67e4af43007a14180ffa369d0e0e0aedd90aeaa0ebfd29bfa636fa4bcb51c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_54_moving_native.json": "1e7ba8c2eb34117b2d4ba1f4183bb10a321a37c0cd797122adadbe051c3047ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_54_moving_twohand.json": "6338e1c4ade0d8213441567a59e4b45e248e6f652bbc0dce155ed09289084913",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_55_body_native.json": "29b667254752533c0ac1706668f2736b38b62ad2be572830f47d62d4dfa721bd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_55_body_twohand.json": "d79910f4710a13f42bba10a6fdc3d999db998142fe85bc6eb9fed6e168d99097",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_55_moving_native.json": "2d1c34b87491d3327feef5ba16556835124e22ad1f70a2f8d337434826ca9b82",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_55_moving_twohand.json": "b9c5b5bdbfea6982a55b0635ea126f171bdfcda2fb4cb855883f441ca4ac39e8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_56_body_native.json": "795b934c4a45c5d708a42ce6a780e9618fdaa2874fdf035a956665ea0269cbea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_56_body_twohand.json": "bcfe9459a4232f32e18376180ccc8988bb4b7649f946af6e181670f22aa02a59",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_56_moving_native.json": "48499aacd15958065f6555232552ea48c94b422139e91c3d11024112264414f6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_56_moving_twohand.json": "95a5ab0c5457b5befcf78072dd8005c86231d379d704345d183342f66c4eaee3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_57_body_native.json": "54e677ead67efa3cba4bd7868e9ccb220c21102e783572d9523d65b900ed3af8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_57_body_twohand.json": "090346472fe28e4b942d2bd53d91a48c82d135b9dbfb60f4de39b09212b5cd18",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_57_moving_native.json": "15093ea3ba2ed9cdf97da7783d0e5e8d24028b74e29f4fee5222ce4bce3399f7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_57_moving_twohand.json": "aff05db06c05abe5e1fdd61fdb4730ef428e7b37be6854e7c1d105e02976a29b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_58_body_native.json": "bad6d6a3bea069a7b0f67e757d83742e2e38f42a3ba85f8291b144c67059823a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_58_body_twohand.json": "309805dc6806e44f5348fb13bfb1101cd4f93aa9a7304e3c78b3f1dccc895896",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_58_moving_native.json": "2b1268305ec37625752a7924a9a084a763dbb3b8804d8c29a73df9f30b4f1bf8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_58_moving_twohand.json": "26fa8cdf591e44497fa22dac387ae3c89d7ba2db974a8011841fe941ff536639",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_59_body_native.json": "5a73335d7e2afaf6e87bb4c42a406418bf36cc868b815581425ed19afd116b30",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_59_body_twohand.json": "6d83cbde8850c39b323466146bc549d6535137d1b7792d141a37c544a0d62a0d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_59_moving_native.json": "14ab735ae24c691d16610408a19a4dfe921812d1d69a7d787042abb30a1df35b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_59_moving_twohand.json": "c2881c2e38416db1f398bde4c9b8b3c1ec6f22762b8aed9e38c374fb57e32633",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_60_body_native.json": "1ecbd685db65ee8a3658f5a3e025f7bcf662199948ba55363f79ce0bc12a4ee8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_60_body_twohand.json": "b1e5288cc640636ab00c9b37a5b210892d769cbb60ca9fa2073c19fdc72fc289",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_60_moving_native.json": "e06ce8fcab232ee7acb527210acaccbbfcce12e79ff7eee5b2375e430de7368a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bygones/bygones_60_moving_twohand.json": "98ea846b5eb5ea34ed83bc258633cae2cd48f69e05d3971b2aacd515c9ae871c",
+    "src/main/resources/assets/destiny/items/weapon_reload_w212_bygones/bygones.json": "531941638b323103a84af24f11846b9dfb2175b36a38a2d822ca5c6338fa1e83"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "stage": "W104",
+  "offlineVerification": {
+    "stage": "W104",
+    "status": "VERIFY_PASS",
+    "selected": 63,
+    "optionalTrait": 2,
+    "intrinsic": 1,
+    "outputs": [
+      "src/main/resources/destiny/weapons/w104-tracking.json",
+      "art/weapons/w104/references/mechanics.json",
+      "art/weapons/w104/references/socket-pools.json",
+      "art/weapons/w104/references/provenance.json"
+    ],
+    "negativeFixtures": [
+      {
+        "fixture": "randomized-canRoll-false",
+        "status": "REJECTED",
+        "reason": "Expected exact two randomized base Tracking Module sockets"
+      },
+      {
+        "fixture": "fake-randomized-pool",
+        "status": "REJECTED",
+        "reason": "Unsupported tracking availability proof"
+      },
+      {
+        "fixture": "same-name-wrong-intrinsic-hash",
+        "status": "REJECTED",
+        "reason": "Selected rocket frame mismatch"
+      },
+      {
+        "fixture": "base-definition-enhanced-type",
+        "status": "REJECTED",
+        "reason": "Exact tracking definition mismatch: 3977735242"
+      },
+      {
+        "fixture": "curated-pool-not-randomized",
+        "status": "REJECTED",
+        "reason": "Unsupported tracking availability proof"
+      }
+    ]
+  },
+  "deterministicDisjointReproduction": {
+    "src/main/resources/destiny/weapons/w104-tracking.json": {
+      "sha256": "c4ecf3805a1cc7c6529565f899cc45efbb811bf07c743558a40c76aadd3e789e",
+      "bytes": 1884,
+      "disjoint1ByteIdentical": true,
+      "disjoint2ByteIdentical": true
+    },
+    "art/weapons/w104/references/mechanics.json": {
+      "sha256": "4cd9ff65a9f97fc9d9cd78e5845dc4e944bb7a6be623a75395944b985f639f01",
+      "bytes": 5665,
+      "disjoint1ByteIdentical": true,
+      "disjoint2ByteIdentical": true
+    },
+    "art/weapons/w104/references/socket-pools.json": {
+      "sha256": "ec62c9481faea655883c3bccb175e972d0dcc2bfc9c851b24efabfcfba6f3ab6",
+      "bytes": 158382,
+      "disjoint1ByteIdentical": true,
+      "disjoint2ByteIdentical": true
+    },
+    "art/weapons/w104/references/provenance.json": {
+      "sha256": "fc8b23f4988e7c76471955cc906ee0d0c1a01577c06a8a11523cb251e3019d16",
+      "bytes": 5395,
+      "disjoint1ByteIdentical": true,
+      "disjoint2ByteIdentical": true
+    }
+  },
+  "queriesUsed": 8,
+  "nativeAccepted": false,
+  "buildsPerformed": false,
+  "runtimePerformed": false,
+  "sharedProductionEdits": false,
+  "childAgentWork": false
+}

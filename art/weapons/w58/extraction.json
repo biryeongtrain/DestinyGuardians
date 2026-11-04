@@ -1,0 +1,1644 @@
+{
+  "schemaVersion": 1,
+  "profileCount": 63,
+  "supportedCount": 58,
+  "unsupportedCount": 5,
+  "officialManifest": {
+    "manifest": {
+      "version": "245114.26.10.13.2000-1-bnet.66137",
+      "path": "/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+    },
+    "cachedInventorySha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+    "source": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+    "policy": "Pinned Oct13 official manifest; exact W30 selected item hashes, not family/element guesses."
+  },
+  "officialStatSource": "https://www.bungie.net/common/destiny2_content/json/en/DestinyStatDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "statHashes": {
+    "handling": "943549884"
+  },
+  "statDefinition": {
+    "displayProperties": {
+      "description": "The speed with which the weapon can be readied and aimed.",
+      "name": "Handling",
+      "iconHash": 0,
+      "hasIcon": false
+    },
+    "aggregationType": 2,
+    "hasComputedBlock": false,
+    "statCategory": 1,
+    "interpolate": false,
+    "hash": 943549884,
+    "index": 28,
+    "redacted": false,
+    "blacklisted": false
+  },
+  "repository": "https://github.com/d2foundry/oracle_engine",
+  "commit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+  "commitDate": "2026-05-20",
+  "source": "build_resources/weapon_formulas.json",
+  "sourceUrl": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/build_resources/weapon_formulas.json",
+  "sourceSha256": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+  "categoryMapping": "art/weapons/w43/extraction.json",
+  "solverSources": [
+    "art/weapons/w46/stat_calc.rs",
+    "art/weapons/w46/rs_types.rs",
+    "art/weapons/w46/d2_enums.rs",
+    "art/weapons/w46/build.rs"
+  ],
+  "inputHashPolicy": "Fixed PINS constants; fail closed on drift; never refresh from generated metadata",
+  "sourceHashes": {
+    "src/main/resources/destiny/weapons/w30.json": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+    "art/weapons/w40/definitions.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+    "src/main/resources/destiny/weapons/w40-characteristics.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+    "art/weapons/w40/provenance.json": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+    "art/weapons/w43/extraction.json": "a133082c322a07e81837d0409caf09596dfad4fd9889904d1bdae7acd471d9d5",
+    "art/weapons/w46/weapon_formulas.json": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+    "art/weapons/w46/stat_calc.rs": "5662ee9dea9e59547d73f81cd7c02872046266acb7b24017d2d09c123f31e5c2",
+    "art/weapons/w46/rs_types.rs": "faa476e6589d2362cf9ee8dd948410adfa7fa8507e8809f3cd10bb13ebba9b90",
+    "art/weapons/w46/d2_enums.rs": "db791f6c709e7007f8fab3fddc46ab34a0f78b9958fd9a0f897ad27f133baa4a",
+    "art/weapons/w46/build.rs": "85b2e35f1db47f55c58900020ebf44be0e409802beac395b4b4c538fad67a1bd",
+    "art/weapons/w46/stat-definitions.json": "e7959edc50506f902e548b5c9a7d55b119e1e14d0268d046259f13a4bd38b8fe",
+    "art/weapons/w46/official-item-evidence.json": "030bb98e997df7c3c89bc23db75c5990234f762c5a41f075cd95fa7a7ba4ba2c",
+    "art/weapons/w46/MIT-LICENSE": "50173139375c53459837abdeb7ad9f264eba4f0bc2bb2c676932991ce158778d",
+    "art/weapons/w46/UNLICENSE": "6b0382b16279f26ff69014300541967a356a666eb0b91b422f6862f6b7dad17e",
+    "scripts/extract_handling_w58.py": "177981eb79edd79bb2c4c1e80618183ac2156ddfe5106e93fa70d69786b9b934"
+  },
+  "runtimeSha256": "4de7d346a93c822784fafa69b62ac66148d51cc11cf2da6706367682b414d3f1",
+  "units": {
+    "handling": "dimensionless official base stat",
+    "curves": "seconds",
+    "ticks": "20 Hz Minecraft ticks",
+    "frameConversion": "none; handling coefficients are already seconds"
+  },
+  "policies": {
+    "official": "Exact W40 selected Bungie base stats, equal to W40 runtime and W46 selected official evidence",
+    "curve": "Historical community approximation; q(x)=evpp*x*x+vpp*x+offset; missing evpp=0 per build.rs serde default",
+    "stat": "x=clamp(official Handling,0,100), as StatQuadraticFormula::solve_at_i; selected stats already in range",
+    "modifiers": "Neutral base evaluation only: stat/draw/stow adds=0, draw/stow scales=1; no perks or armor",
+    "ready": "ceil(q_ready(x)*20)",
+    "stow": "ceil(max(q_stow(x),q_stow(100))*20); Oracle source floor retained",
+    "tickBounds": "No additional minimum/maximum tick clamp; reject nonpositive/nonfinite source durations",
+    "unsupported": "Five swords: supported=false; handling, readyTicks and stowTicks explicitly null",
+    "order": "Exactly W30 selected catalog order; no clock, network, full inventory or environment-dependent input"
+  },
+  "limitations": [
+    "Official base manifest Oct13 2026 and community formula commit May20 2026 are distinct snapshots; no current exact balance claim",
+    "Timings are historical community approximations, not official Bungie animation durations",
+    "No perks, armor, subclass, masterwork, socket roll, exotic or other animation modifiers",
+    "Glaive supports ready/stow only; its zero ADS curve does not make switching unsupported",
+    "No sword handling is invented; unsupported runtime behavior belongs to the consumer",
+    "20 Hz ceiling is the Minecraft adaptation; unrounded source curves and seconds are retained"
+  ],
+  "entries": [
+    {
+      "id": "duke_mk_44",
+      "bungieHash": 2112909414,
+      "family": "hand_cannon",
+      "catalogName": "Duke Mk. 44",
+      "officialName": "Duke Mk. 44",
+      "officialHandling": 30,
+      "supported": true,
+      "oracleFamily": "Hand Cannon",
+      "category": "120 RPM",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.002942857143,
+        "offset": 0.4782571429
+      },
+      "stowCurve": {
+        "vpp": -0.002952380952,
+        "offset": 0.5133809524
+      },
+      "handlingStatUsed": 30,
+      "readySeconds": 0.38997142861,
+      "stowRawSeconds": 0.42480952384000004,
+      "stowFloorSeconds": 0.21814285720000004,
+      "stowSeconds": 0.42480952384000004
+    },
+    {
+      "id": "austringer",
+      "bungieHash": 3055790362,
+      "family": "hand_cannon",
+      "catalogName": "Austringer",
+      "officialName": "Austringer",
+      "officialHandling": 47,
+      "supported": true,
+      "oracleFamily": "Hand Cannon",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.002942857143,
+        "offset": 0.4782571429
+      },
+      "stowCurve": {
+        "vpp": -0.002952380952,
+        "offset": 0.5133809524
+      },
+      "handlingStatUsed": 47,
+      "readySeconds": 0.33994285717899997,
+      "stowRawSeconds": 0.374619047656,
+      "stowFloorSeconds": 0.21814285720000004,
+      "stowSeconds": 0.374619047656
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "bungieHash": 3037520408,
+      "family": "hand_cannon",
+      "catalogName": "Seventh Seraph Officer Revolver",
+      "officialName": "Seventh Seraph Officer Revolver",
+      "officialHandling": 30,
+      "supported": true,
+      "oracleFamily": "Hand Cannon",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.002942857143,
+        "offset": 0.4782571429
+      },
+      "stowCurve": {
+        "vpp": -0.002952380952,
+        "offset": 0.5133809524
+      },
+      "handlingStatUsed": 30,
+      "readySeconds": 0.38997142861,
+      "stowRawSeconds": 0.42480952384000004,
+      "stowFloorSeconds": 0.21814285720000004,
+      "stowSeconds": 0.42480952384000004
+    },
+    {
+      "id": "halfdan_d",
+      "bungieHash": 3778520450,
+      "family": "auto_rifle",
+      "catalogName": "Halfdan-D",
+      "officialName": "Halfdan-D",
+      "officialHandling": 39,
+      "supported": true,
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "readyCurve": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stowCurve": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "handlingStatUsed": 39,
+      "readySeconds": 0.41091199,
+      "stowRawSeconds": 0.37945818000000003,
+      "stowFloorSeconds": 0.21571222000000007,
+      "stowSeconds": 0.37945818000000003
+    },
+    {
+      "id": "ammit_ar2",
+      "bungieHash": 2119346509,
+      "family": "auto_rifle",
+      "catalogName": "Ammit AR2",
+      "officialName": "Ammit AR2",
+      "officialHandling": 46,
+      "supported": true,
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stowCurve": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "handlingStatUsed": 46,
+      "readySeconds": 0.39135833,
+      "stowRawSeconds": 0.36066766000000006,
+      "stowFloorSeconds": 0.21571222000000007,
+      "stowSeconds": 0.36066766000000006
+    },
+    {
+      "id": "gnawing_hunger",
+      "bungieHash": 821154603,
+      "family": "auto_rifle",
+      "catalogName": "Gnawing Hunger",
+      "officialName": "Gnawing Hunger",
+      "officialHandling": 63,
+      "supported": true,
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stowCurve": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "handlingStatUsed": 63,
+      "readySeconds": 0.34387087,
+      "stowRawSeconds": 0.31503354000000006,
+      "stowFloorSeconds": 0.21571222000000007,
+      "stowSeconds": 0.31503354000000006
+    },
+    {
+      "id": "steelfeather_repeater",
+      "bungieHash": 1251729046,
+      "family": "auto_rifle",
+      "catalogName": "Steelfeather Repeater",
+      "officialName": "Steelfeather Repeater",
+      "officialHandling": 38,
+      "supported": true,
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stowCurve": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "handlingStatUsed": 38,
+      "readySeconds": 0.41370536999999996,
+      "stowRawSeconds": 0.38214254000000003,
+      "stowFloorSeconds": 0.21571222000000007,
+      "stowSeconds": 0.38214254000000003
+    },
+    {
+      "id": "cold_denial",
+      "bungieHash": 1216130969,
+      "family": "pulse_rifle",
+      "catalogName": "Cold Denial",
+      "officialName": "Cold Denial",
+      "officialHandling": 24,
+      "supported": true,
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "readyCurve": {
+        "vpp": -0.00312085,
+        "offset": 0.54370932
+      },
+      "stowCurve": {
+        "vpp": -0.0035545,
+        "offset": 0.55005845
+      },
+      "handlingStatUsed": 24,
+      "readySeconds": 0.4688089200000001,
+      "stowRawSeconds": 0.46475045,
+      "stowFloorSeconds": 0.19460845,
+      "stowSeconds": 0.46475045
+    },
+    {
+      "id": "bygones",
+      "bungieHash": 2712244741,
+      "family": "pulse_rifle",
+      "catalogName": "Bygones",
+      "officialName": "Bygones",
+      "officialHandling": 46,
+      "supported": true,
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.00312085,
+        "offset": 0.54370932
+      },
+      "stowCurve": {
+        "vpp": -0.0035545,
+        "offset": 0.55005845
+      },
+      "handlingStatUsed": 46,
+      "readySeconds": 0.40015022000000006,
+      "stowRawSeconds": 0.38655145,
+      "stowFloorSeconds": 0.19460845,
+      "stowSeconds": 0.38655145
+    },
+    {
+      "id": "chattering_bone",
+      "bungieHash": 568515759,
+      "family": "pulse_rifle",
+      "catalogName": "Chattering Bone",
+      "officialName": "Chattering Bone",
+      "officialHandling": 70,
+      "supported": true,
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "readyCurve": {
+        "vpp": -0.00312085,
+        "offset": 0.54370932
+      },
+      "stowCurve": {
+        "vpp": -0.0035545,
+        "offset": 0.55005845
+      },
+      "handlingStatUsed": 70,
+      "readySeconds": 0.32524982,
+      "stowRawSeconds": 0.30124344999999997,
+      "stowFloorSeconds": 0.19460845,
+      "stowSeconds": 0.30124344999999997
+    },
+    {
+      "id": "blast_furnace",
+      "bungieHash": 3843477312,
+      "family": "pulse_rifle",
+      "catalogName": "Blast Furnace",
+      "officialName": "Blast Furnace",
+      "officialHandling": 24,
+      "supported": true,
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.00312085,
+        "offset": 0.54370932
+      },
+      "stowCurve": {
+        "vpp": -0.0035545,
+        "offset": 0.55005845
+      },
+      "handlingStatUsed": 24,
+      "readySeconds": 0.4688089200000001,
+      "stowRawSeconds": 0.46475045,
+      "stowFloorSeconds": 0.19460845,
+      "stowSeconds": 0.46475045
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "bungieHash": 1280933460,
+      "family": "pulse_rifle",
+      "catalogName": "Claws of the Wolf",
+      "officialName": "Claws of the Wolf",
+      "officialHandling": 21,
+      "supported": true,
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.00312085,
+        "offset": 0.54370932
+      },
+      "stowCurve": {
+        "vpp": -0.0035545,
+        "offset": 0.55005845
+      },
+      "handlingStatUsed": 21,
+      "readySeconds": 0.47817147000000004,
+      "stowRawSeconds": 0.47541395,
+      "stowFloorSeconds": 0.19460845,
+      "stowSeconds": 0.47541395
+    },
+    {
+      "id": "frontier_justice",
+      "bungieHash": 273396910,
+      "family": "scout_rifle",
+      "catalogName": "Frontier Justice",
+      "officialName": "Frontier Justice",
+      "officialHandling": 24,
+      "supported": true,
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "readyCurve": {
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stowCurve": {
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "handlingStatUsed": 24,
+      "readySeconds": 0.47208102156,
+      "stowRawSeconds": 0.45662857722399997,
+      "stowFloorSeconds": 0.23309621259999996,
+      "stowSeconds": 0.45662857722399997
+    },
+    {
+      "id": "distant_relation",
+      "bungieHash": 2034817450,
+      "family": "scout_rifle",
+      "catalogName": "Distant Relation",
+      "officialName": "Distant Relation",
+      "officialHandling": 40,
+      "supported": true,
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stowCurve": {
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "handlingStatUsed": 40,
+      "readySeconds": 0.4264271246,
+      "stowRawSeconds": 0.40956913203999995,
+      "stowFloorSeconds": 0.23309621259999996,
+      "stowSeconds": 0.40956913203999995
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "bungieHash": 2723241847,
+      "family": "scout_rifle",
+      "catalogName": "Patron of Lost Causes",
+      "officialName": "Patron of Lost Causes",
+      "officialHandling": 63,
+      "supported": true,
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "readyCurve": {
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stowCurve": {
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "handlingStatUsed": 63,
+      "readySeconds": 0.36079964771999995,
+      "stowRawSeconds": 0.34192117958799995,
+      "stowFloorSeconds": 0.23309621259999996,
+      "stowSeconds": 0.34192117958799995
+    },
+    {
+      "id": "aishas_embrace",
+      "bungieHash": 2638190703,
+      "family": "scout_rifle",
+      "catalogName": "Aisha's Embrace",
+      "officialName": "Aisha's Embrace",
+      "officialHandling": 26,
+      "supported": true,
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stowCurve": {
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "handlingStatUsed": 26,
+      "readySeconds": 0.46637428443999995,
+      "stowRawSeconds": 0.450746146576,
+      "stowFloorSeconds": 0.23309621259999996,
+      "stowSeconds": 0.450746146576
+    },
+    {
+      "id": "long_arm",
+      "bungieHash": 8293111,
+      "family": "scout_rifle",
+      "catalogName": "Long Arm",
+      "officialName": "Long Arm",
+      "officialHandling": 53,
+      "supported": true,
+      "oracleFamily": "Scout Rifle",
+      "category": "aggresive",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stowCurve": {
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "handlingStatUsed": 53,
+      "readySeconds": 0.38933333332,
+      "stowRawSeconds": 0.37133333282799996,
+      "stowFloorSeconds": 0.23309621259999996,
+      "stowSeconds": 0.37133333282799996
+    },
+    {
+      "id": "antiope_d",
+      "bungieHash": 566976653,
+      "family": "submachine_gun",
+      "catalogName": "Antiope-D",
+      "officialName": "Antiope-D",
+      "officialHandling": 18,
+      "supported": true,
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.002376970528,
+        "offset": 0.4710178204
+      },
+      "stowCurve": {
+        "vpp": -0.002547978067,
+        "offset": 0.4481295408
+      },
+      "handlingStatUsed": 18,
+      "readySeconds": 0.428232350896,
+      "stowRawSeconds": 0.40226593559400003,
+      "stowFloorSeconds": 0.19333173409999999,
+      "stowSeconds": 0.40226593559400003
+    },
+    {
+      "id": "bug_out_bag",
+      "bungieHash": 2744715540,
+      "family": "submachine_gun",
+      "catalogName": "Bug-Out Bag",
+      "officialName": "Bug-Out Bag",
+      "officialHandling": 47,
+      "supported": true,
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.002376970528,
+        "offset": 0.4710178204
+      },
+      "stowCurve": {
+        "vpp": -0.002547978067,
+        "offset": 0.4481295408
+      },
+      "handlingStatUsed": 47,
+      "readySeconds": 0.359300205584,
+      "stowRawSeconds": 0.32837457165100004,
+      "stowFloorSeconds": 0.19333173409999999,
+      "stowSeconds": 0.32837457165100004
+    },
+    {
+      "id": "ikelos_smg_v1_0_1",
+      "bungieHash": 1723472487,
+      "family": "submachine_gun",
+      "catalogName": "IKELOS_SMG_v1.0.1",
+      "officialName": "IKELOS_SMG_v1.0.1",
+      "officialHandling": 70,
+      "supported": true,
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.002376970528,
+        "offset": 0.4710178204
+      },
+      "stowCurve": {
+        "vpp": -0.002547978067,
+        "offset": 0.4481295408
+      },
+      "handlingStatUsed": 70,
+      "readySeconds": 0.30462988343999997,
+      "stowRawSeconds": 0.26977107611,
+      "stowFloorSeconds": 0.19333173409999999,
+      "stowSeconds": 0.26977107611
+    },
+    {
+      "id": "the_recluse",
+      "bungieHash": 3354242550,
+      "family": "submachine_gun",
+      "catalogName": "The Recluse",
+      "officialName": "The Recluse",
+      "officialHandling": 63,
+      "supported": true,
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "readyCurve": {
+        "vpp": -0.002376970528,
+        "offset": 0.4710178204
+      },
+      "stowCurve": {
+        "vpp": -0.002547978067,
+        "offset": 0.4481295408
+      },
+      "handlingStatUsed": 63,
+      "readySeconds": 0.32126867713600005,
+      "stowRawSeconds": 0.287606922579,
+      "stowFloorSeconds": 0.19333173409999999,
+      "stowSeconds": 0.287606922579
+    },
+    {
+      "id": "allied_demand",
+      "bungieHash": 1532276803,
+      "family": "sidearm",
+      "catalogName": "Allied Demand",
+      "officialName": "Allied Demand",
+      "officialHandling": 48,
+      "supported": true,
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stowCurve": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "handlingStatUsed": 48,
+      "readySeconds": 0.29653296708,
+      "stowRawSeconds": 0.33508241736,
+      "stowFloorSeconds": 0.2323681314,
+      "stowSeconds": 0.33508241736
+    },
+    {
+      "id": "farewell",
+      "bungieHash": 541188001,
+      "family": "sidearm",
+      "catalogName": "Farewell",
+      "officialName": "Farewell",
+      "officialHandling": 64,
+      "supported": true,
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "readyCurve": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stowCurve": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "handlingStatUsed": 64,
+      "readySeconds": 0.25429120884,
+      "stowRawSeconds": 0.30347802168000004,
+      "stowFloorSeconds": 0.2323681314,
+      "stowSeconds": 0.30347802168000004
+    },
+    {
+      "id": "lonesome",
+      "bungieHash": 2199171672,
+      "family": "sidearm",
+      "catalogName": "Lonesome",
+      "officialName": "Lonesome",
+      "officialHandling": 33,
+      "supported": true,
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stowCurve": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "handlingStatUsed": 33,
+      "readySeconds": 0.33613461543,
+      "stowRawSeconds": 0.36471153831,
+      "stowFloorSeconds": 0.2323681314,
+      "stowSeconds": 0.36471153831
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "bungieHash": 3751622019,
+      "family": "sidearm",
+      "catalogName": "Dead Man Walking XX7463",
+      "officialName": "Dead Man Walking XX7463",
+      "officialHandling": 49,
+      "supported": true,
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stowCurve": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "handlingStatUsed": 49,
+      "readySeconds": 0.29389285718999997,
+      "stowRawSeconds": 0.33310714263,
+      "stowFloorSeconds": 0.2323681314,
+      "stowSeconds": 0.33310714263
+    },
+    {
+      "id": "high_albedo",
+      "bungieHash": 1197486957,
+      "family": "sidearm",
+      "catalogName": "High Albedo",
+      "officialName": "High Albedo",
+      "officialHandling": 51,
+      "supported": true,
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Adaptive_Burst",
+      "readyCurve": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stowCurve": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "handlingStatUsed": 51,
+      "readySeconds": 0.28861263741,
+      "stowRawSeconds": 0.32915659317,
+      "stowFloorSeconds": 0.2323681314,
+      "stowSeconds": 0.32915659317
+    },
+    {
+      "id": "brass_attacks",
+      "bungieHash": 2121785039,
+      "family": "sidearm",
+      "catalogName": "Brass Attacks",
+      "officialName": "Brass Attacks",
+      "officialHandling": 36,
+      "supported": true,
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Heavy_Burst",
+      "readyCurve": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stowCurve": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "handlingStatUsed": 36,
+      "readySeconds": 0.32821428576,
+      "stowRawSeconds": 0.35878571412000004,
+      "stowFloorSeconds": 0.2323681314,
+      "stowSeconds": 0.35878571412000004
+    },
+    {
+      "id": "biting_winds",
+      "bungieHash": 1621657423,
+      "family": "bow",
+      "catalogName": "Biting Winds",
+      "officialName": "Biting Winds",
+      "officialHandling": 49,
+      "supported": true,
+      "oracleFamily": "Combat Bow",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.002909930716,
+        "offset": 0.7364549654
+      },
+      "stowCurve": {
+        "vpp": -0.00179330254,
+        "offset": 0.5396466513
+      },
+      "handlingStatUsed": 49,
+      "readySeconds": 0.593868360316,
+      "stowRawSeconds": 0.45177482684,
+      "stowFloorSeconds": 0.3603163973,
+      "stowSeconds": 0.45177482684
+    },
+    {
+      "id": "whispering_slab",
+      "bungieHash": 211938782,
+      "family": "bow",
+      "catalogName": "Whispering Slab",
+      "officialName": "Whispering Slab",
+      "officialHandling": 65,
+      "supported": true,
+      "oracleFamily": "Combat Bow",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "readyCurve": {
+        "vpp": -0.002909930716,
+        "offset": 0.7364549654
+      },
+      "stowCurve": {
+        "vpp": -0.00179330254,
+        "offset": 0.5396466513
+      },
+      "handlingStatUsed": 65,
+      "readySeconds": 0.54730946886,
+      "stowRawSeconds": 0.4230819862,
+      "stowFloorSeconds": 0.3603163973,
+      "stowSeconds": 0.4230819862
+    },
+    {
+      "id": "bite_of_the_fox",
+      "bungieHash": 1403800851,
+      "family": "sniper_rifle",
+      "catalogName": "Bite of the Fox",
+      "officialName": "Bite of the Fox",
+      "officialHandling": 25,
+      "supported": true,
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.002623944983,
+        "offset": 0.5079465458
+      },
+      "stowCurve": {
+        "vpp": -0.002083932479,
+        "offset": 0.4392525789
+      },
+      "handlingStatUsed": 25,
+      "readySeconds": 0.442347921225,
+      "stowRawSeconds": 0.38715426692500005,
+      "stowFloorSeconds": 0.23085933100000003,
+      "stowSeconds": 0.38715426692500005
+    },
+    {
+      "id": "beloved",
+      "bungieHash": 3107853529,
+      "family": "sniper_rifle",
+      "catalogName": "Beloved",
+      "officialName": "Beloved",
+      "officialHandling": 47,
+      "supported": true,
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.002623944983,
+        "offset": 0.5079465458
+      },
+      "stowCurve": {
+        "vpp": -0.002083932479,
+        "offset": 0.4392525789
+      },
+      "handlingStatUsed": 47,
+      "readySeconds": 0.38462113159899997,
+      "stowRawSeconds": 0.341307752387,
+      "stowFloorSeconds": 0.23085933100000003,
+      "stowSeconds": 0.341307752387
+    },
+    {
+      "id": "apostate",
+      "bungieHash": 2164448701,
+      "family": "sniper_rifle",
+      "catalogName": "Apostate",
+      "officialName": "Apostate",
+      "officialHandling": 65,
+      "supported": true,
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.002623944983,
+        "offset": 0.5079465458
+      },
+      "stowCurve": {
+        "vpp": -0.002083932479,
+        "offset": 0.4392525789
+      },
+      "handlingStatUsed": 65,
+      "readySeconds": 0.33739012190499995,
+      "stowRawSeconds": 0.30379696776500004,
+      "stowFloorSeconds": 0.23085933100000003,
+      "stowSeconds": 0.30379696776500004
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "bungieHash": 912150785,
+      "family": "shotgun",
+      "catalogName": "Mindbender's Ambition (Adept)",
+      "officialName": "Mindbender's Ambition (Adept)",
+      "officialHandling": 31,
+      "supported": true,
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stowCurve": {
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "handlingStatUsed": 31,
+      "readySeconds": 0.43746558700899996,
+      "stowRawSeconds": 0.46608502019199993,
+      "stowFloorSeconds": 0.23226720639999993,
+      "stowSeconds": 0.46608502019199993
+    },
+    {
+      "id": "dust_rock_blues",
+      "bungieHash": 636912560,
+      "family": "shotgun",
+      "catalogName": "Dust Rock Blues",
+      "officialName": "Dust Rock Blues",
+      "officialHandling": 34,
+      "supported": true,
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stowCurve": {
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "handlingStatUsed": 34,
+      "readySeconds": 0.427651821826,
+      "stowRawSeconds": 0.45591902828799996,
+      "stowFloorSeconds": 0.23226720639999993,
+      "stowSeconds": 0.45591902828799996
+    },
+    {
+      "id": "first_in_last_out",
+      "bungieHash": 3616586446,
+      "family": "shotgun",
+      "catalogName": "First In, Last Out",
+      "officialName": "First In, Last Out",
+      "officialHandling": 60,
+      "supported": true,
+      "oracleFamily": "Shotgun",
+      "category": "slug",
+      "subfamily": "Slug",
+      "readyCurve": {
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stowCurve": {
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "handlingStatUsed": 60,
+      "readySeconds": 0.34259919023999996,
+      "stowRawSeconds": 0.36781376511999997,
+      "stowFloorSeconds": 0.23226720639999993,
+      "stowSeconds": 0.36781376511999997
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "bungieHash": 2217366863,
+      "family": "shotgun",
+      "catalogName": "Parcel of Stardust (Fell to Earth)",
+      "officialName": "Parcel of Stardust",
+      "officialHandling": 68,
+      "supported": true,
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "readyCurve": {
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stowCurve": {
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "handlingStatUsed": 68,
+      "readySeconds": 0.316429149752,
+      "stowRawSeconds": 0.34070445337599997,
+      "stowFloorSeconds": 0.23226720639999993,
+      "stowSeconds": 0.34070445337599997
+    },
+    {
+      "id": "ikelos_sg_v1_0_1",
+      "bungieHash": 1887808042,
+      "family": "shotgun",
+      "catalogName": "IKELOS_SG_v1.0.1",
+      "officialName": "IKELOS_SG_v1.0.1",
+      "officialHandling": 44,
+      "supported": true,
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stowCurve": {
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "handlingStatUsed": 44,
+      "readySeconds": 0.394939271216,
+      "stowRawSeconds": 0.42203238860799996,
+      "stowFloorSeconds": 0.23226720639999993,
+      "stowSeconds": 0.42203238860799996
+    },
+    {
+      "id": "erentil_fr4",
+      "bungieHash": 2398848320,
+      "family": "fusion_rifle",
+      "catalogName": "Erentil FR4",
+      "officialName": "Erentil FR4",
+      "officialHandling": 18,
+      "supported": true,
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "readyCurve": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stowCurve": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "handlingStatUsed": 18,
+      "readySeconds": 0.472996005362,
+      "stowRawSeconds": 0.393027962666,
+      "stowFloorSeconds": 0.158219707,
+      "stowSeconds": 0.393027962666
+    },
+    {
+      "id": "hollow_words",
+      "bungieHash": 607191995,
+      "family": "fusion_rifle",
+      "catalogName": "Hollow Words",
+      "officialName": "Hollow Words",
+      "officialHandling": 23,
+      "supported": true,
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stowCurve": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "handlingStatUsed": 23,
+      "readySeconds": 0.465755659157,
+      "stowRawSeconds": 0.378710386101,
+      "stowFloorSeconds": 0.158219707,
+      "stowSeconds": 0.378710386101
+    },
+    {
+      "id": "dream_breaker",
+      "bungieHash": 2931957300,
+      "family": "fusion_rifle",
+      "catalogName": "Dream Breaker",
+      "officialName": "Dream Breaker",
+      "officialHandling": 27,
+      "supported": true,
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stowCurve": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "handlingStatUsed": 27,
+      "readySeconds": 0.459963382193,
+      "stowRawSeconds": 0.367256324849,
+      "stowFloorSeconds": 0.158219707,
+      "stowSeconds": 0.367256324849
+    },
+    {
+      "id": "null_composure",
+      "bungieHash": 1644680957,
+      "family": "fusion_rifle",
+      "catalogName": "Null Composure",
+      "officialName": "Null Composure",
+      "officialHandling": 56,
+      "supported": true,
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stowCurve": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "handlingStatUsed": 56,
+      "readySeconds": 0.417969374204,
+      "stowRawSeconds": 0.284214380772,
+      "stowFloorSeconds": 0.158219707,
+      "stowSeconds": 0.284214380772
+    },
+    {
+      "id": "coriolis_force",
+      "bungieHash": 3512349612,
+      "family": "fusion_rifle",
+      "catalogName": "Coriolis Force",
+      "officialName": "Coriolis Force",
+      "officialHandling": 26,
+      "supported": true,
+      "oracleFamily": "Fusion Rifle",
+      "category": "aggressive",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stowCurve": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "handlingStatUsed": 26,
+      "readySeconds": 0.461411451434,
+      "stowRawSeconds": 0.370119840162,
+      "stowFloorSeconds": 0.158219707,
+      "stowSeconds": 0.370119840162
+    },
+    {
+      "id": "line_in_the_sand",
+      "bungieHash": 946443267,
+      "family": "linear_fusion_rifle",
+      "catalogName": "Line in the Sand",
+      "officialName": "Line in the Sand",
+      "officialHandling": 26,
+      "supported": true,
+      "oracleFamily": "Linear Fusion Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stowCurve": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "handlingStatUsed": 26,
+      "readySeconds": 0.461411451434,
+      "stowRawSeconds": 0.370119840162,
+      "stowFloorSeconds": 0.158219707,
+      "stowSeconds": 0.370119840162
+    },
+    {
+      "id": "stormchaser",
+      "bungieHash": 3652506829,
+      "family": "linear_fusion_rifle",
+      "catalogName": "Stormchaser",
+      "officialName": "Stormchaser",
+      "officialHandling": 30,
+      "supported": true,
+      "oracleFamily": "Linear Fusion Rifle",
+      "category": "default",
+      "subfamily": "Adaptive_Burst",
+      "readyCurve": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stowCurve": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "handlingStatUsed": 30,
+      "readySeconds": 0.45561917447,
+      "stowRawSeconds": 0.35866577891,
+      "stowFloorSeconds": 0.158219707,
+      "stowSeconds": 0.35866577891
+    },
+    {
+      "id": "retraced_path",
+      "bungieHash": 548958835,
+      "family": "trace_rifle",
+      "catalogName": "Retraced Path",
+      "officialName": "Retraced Path",
+      "officialHandling": 46,
+      "supported": true,
+      "oracleFamily": "Trace Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stowCurve": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "handlingStatUsed": 46,
+      "readySeconds": 0.39135833,
+      "stowRawSeconds": 0.36066766000000006,
+      "stowFloorSeconds": 0.21571222000000007,
+      "stowSeconds": 0.36066766000000006
+    },
+    {
+      "id": "salvager_s_salvo",
+      "bungieHash": 2060863616,
+      "family": "grenade_launcher",
+      "catalogName": "Salvager's Salvo",
+      "officialName": "Salvager's Salvo",
+      "officialHandling": 70,
+      "supported": true,
+      "oracleFamily": "Grenade Launcher",
+      "category": "special",
+      "subfamily": "Lightweight",
+      "readyCurve": {
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stowCurve": {
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "handlingStatUsed": 70,
+      "readySeconds": 0.36038314000000005,
+      "stowRawSeconds": 0.32431745,
+      "stowFloorSeconds": 0.25448165,
+      "stowSeconds": 0.32431745
+    },
+    {
+      "id": "deafening_whisper",
+      "bungieHash": 981718087,
+      "family": "grenade_launcher",
+      "catalogName": "Deafening Whisper",
+      "officialName": "Deafening Whisper",
+      "officialHandling": 72,
+      "supported": true,
+      "oracleFamily": "Grenade Launcher",
+      "category": "special",
+      "subfamily": "WaveFrame",
+      "readyCurve": {
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stowCurve": {
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "handlingStatUsed": 72,
+      "readySeconds": 0.35492732000000005,
+      "stowRawSeconds": 0.31966173,
+      "stowFloorSeconds": 0.25448165,
+      "stowSeconds": 0.31966173
+    },
+    {
+      "id": "edge_transit",
+      "bungieHash": 218335759,
+      "family": "heavy_grenade_launcher",
+      "catalogName": "Edge Transit",
+      "officialName": "Edge Transit",
+      "officialHandling": 42,
+      "supported": true,
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stowCurve": {
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "handlingStatUsed": 42,
+      "readySeconds": 0.43676462000000005,
+      "stowRawSeconds": 0.38949753,
+      "stowFloorSeconds": 0.25448165,
+      "stowSeconds": 0.38949753
+    },
+    {
+      "id": "canis_major",
+      "bungieHash": 2066434718,
+      "family": "heavy_grenade_launcher",
+      "catalogName": "Canis Major",
+      "officialName": "Canis Major",
+      "officialHandling": 20,
+      "supported": true,
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stowCurve": {
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "handlingStatUsed": 20,
+      "readySeconds": 0.49677864000000005,
+      "stowRawSeconds": 0.44071045,
+      "stowFloorSeconds": 0.25448165,
+      "stowSeconds": 0.44071045
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "bungieHash": 1311684613,
+      "family": "heavy_grenade_launcher",
+      "catalogName": "Dimensional Hypotrochoid",
+      "officialName": "Dimensional Hypotrochoid",
+      "officialHandling": 42,
+      "supported": true,
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "WaveFrame",
+      "readyCurve": {
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stowCurve": {
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "handlingStatUsed": 42,
+      "readySeconds": 0.43676462000000005,
+      "stowRawSeconds": 0.38949753,
+      "stowFloorSeconds": 0.25448165,
+      "stowSeconds": 0.38949753
+    },
+    {
+      "id": "bad_omens",
+      "bungieHash": 991314988,
+      "family": "rocket_launcher",
+      "catalogName": "Bad Omens",
+      "officialName": "Bad Omens",
+      "officialHandling": 20,
+      "supported": true,
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "readyCurve": {
+        "vpp": -0.003998740554,
+        "offset": 0.6635944584
+      },
+      "stowCurve": {
+        "vpp": -0.003296509536,
+        "offset": 0.5463332134
+      },
+      "handlingStatUsed": 20,
+      "readySeconds": 0.5836196473199999,
+      "stowRawSeconds": 0.48040302267999996,
+      "stowFloorSeconds": 0.21668225979999994,
+      "stowSeconds": 0.48040302267999996
+    },
+    {
+      "id": "bellowing_giant",
+      "bungieHash": 2186258845,
+      "family": "rocket_launcher",
+      "catalogName": "Bellowing Giant",
+      "officialName": "Bellowing Giant",
+      "officialHandling": 44,
+      "supported": true,
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.003998740554,
+        "offset": 0.6635944584
+      },
+      "stowCurve": {
+        "vpp": -0.003296509536,
+        "offset": 0.5463332134
+      },
+      "handlingStatUsed": 44,
+      "readySeconds": 0.48764987402399995,
+      "stowRawSeconds": 0.40128679381599996,
+      "stowFloorSeconds": 0.21668225979999994,
+      "stowSeconds": 0.40128679381599996
+    },
+    {
+      "id": "code_duello",
+      "bungieHash": 2496242052,
+      "family": "rocket_launcher",
+      "catalogName": "Code Duello",
+      "officialName": "Code Duello",
+      "officialHandling": 69,
+      "supported": true,
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "readyCurve": {
+        "vpp": -0.003998740554,
+        "offset": 0.6635944584
+      },
+      "stowCurve": {
+        "vpp": -0.003296509536,
+        "offset": 0.5463332134
+      },
+      "handlingStatUsed": 69,
+      "readySeconds": 0.38768136017399996,
+      "stowRawSeconds": 0.318874055416,
+      "stowFloorSeconds": 0.21668225979999994,
+      "stowSeconds": 0.318874055416
+    },
+    {
+      "id": "pyroclastic_flow",
+      "bungieHash": 1289324202,
+      "family": "rocket_launcher",
+      "catalogName": "Pyroclastic Flow",
+      "officialName": "Pyroclastic Flow",
+      "officialHandling": 41,
+      "supported": true,
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Precision",
+      "readyCurve": {
+        "vpp": -0.003998740554,
+        "offset": 0.6635944584
+      },
+      "stowCurve": {
+        "vpp": -0.003296509536,
+        "offset": 0.5463332134
+      },
+      "handlingStatUsed": 41,
+      "readySeconds": 0.49964609568599994,
+      "stowRawSeconds": 0.41117632242399993,
+      "stowFloorSeconds": 0.21668225979999994,
+      "stowSeconds": 0.41117632242399993
+    },
+    {
+      "id": "fixed_odds",
+      "bungieHash": 2194955522,
+      "family": "machine_gun",
+      "catalogName": "Fixed Odds",
+      "officialName": "Fixed Odds",
+      "officialHandling": 30,
+      "supported": true,
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "readyCurve": {
+        "vpp": -0.002391721353,
+        "offset": 0.4950499748
+      },
+      "stowCurve": {
+        "vpp": -0.002041393236,
+        "offset": 0.4547501262
+      },
+      "handlingStatUsed": 30,
+      "readySeconds": 0.42329833421,
+      "stowRawSeconds": 0.39350832912,
+      "stowFloorSeconds": 0.25061080259999996,
+      "stowSeconds": 0.39350832912
+    },
+    {
+      "id": "hammerhead",
+      "bungieHash": 603242241,
+      "family": "machine_gun",
+      "catalogName": "Hammerhead",
+      "officialName": "Hammerhead",
+      "officialHandling": 50,
+      "supported": true,
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.002391721353,
+        "offset": 0.4950499748
+      },
+      "stowCurve": {
+        "vpp": -0.002041393236,
+        "offset": 0.4547501262
+      },
+      "handlingStatUsed": 50,
+      "readySeconds": 0.37546390715,
+      "stowRawSeconds": 0.3526804644,
+      "stowFloorSeconds": 0.25061080259999996,
+      "stowSeconds": 0.3526804644
+    },
+    {
+      "id": "retrofit_escapade",
+      "bungieHash": 3103325054,
+      "family": "machine_gun",
+      "catalogName": "Retrofit Escapade",
+      "officialName": "Retrofit Escapade",
+      "officialHandling": 56,
+      "supported": true,
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "readyCurve": {
+        "vpp": -0.002391721353,
+        "offset": 0.4950499748
+      },
+      "stowCurve": {
+        "vpp": -0.002041393236,
+        "offset": 0.4547501262
+      },
+      "handlingStatUsed": 56,
+      "readySeconds": 0.36111357903200003,
+      "stowRawSeconds": 0.340432104984,
+      "stowFloorSeconds": 0.25061080259999996,
+      "stowSeconds": 0.340432104984
+    },
+    {
+      "id": "abide_the_return",
+      "bungieHash": 1644160541,
+      "family": "sword",
+      "catalogName": "Abide the Return",
+      "officialName": "Abide the Return",
+      "officialHandling": null,
+      "supported": false,
+      "oracleFamily": null,
+      "category": null,
+      "subfamily": null,
+      "readyCurve": null,
+      "stowCurve": null,
+      "handlingStatUsed": null,
+      "readySeconds": null,
+      "stowRawSeconds": null,
+      "stowFloorSeconds": null,
+      "stowSeconds": null,
+      "unsupportedReason": "No pinned Oracle sword handling curves or official Handling stat; no inferred timings"
+    },
+    {
+      "id": "goldtusk",
+      "bungieHash": 3371413057,
+      "family": "sword",
+      "catalogName": "Goldtusk",
+      "officialName": "Goldtusk",
+      "officialHandling": null,
+      "supported": false,
+      "oracleFamily": null,
+      "category": null,
+      "subfamily": null,
+      "readyCurve": null,
+      "stowCurve": null,
+      "handlingStatUsed": null,
+      "readySeconds": null,
+      "stowRawSeconds": null,
+      "stowFloorSeconds": null,
+      "stowSeconds": null,
+      "unsupportedReason": "No pinned Oracle sword handling curves or official Handling stat; no inferred timings"
+    },
+    {
+      "id": "crown_splitter",
+      "bungieHash": 2782325302,
+      "family": "sword",
+      "catalogName": "Crown-Splitter",
+      "officialName": "Crown-Splitter",
+      "officialHandling": null,
+      "supported": false,
+      "oracleFamily": null,
+      "category": null,
+      "subfamily": null,
+      "readyCurve": null,
+      "stowCurve": null,
+      "handlingStatUsed": null,
+      "readySeconds": null,
+      "stowRawSeconds": null,
+      "stowFloorSeconds": null,
+      "stowSeconds": null,
+      "unsupportedReason": "No pinned Oracle sword handling curves or official Handling stat; no inferred timings"
+    },
+    {
+      "id": "falling_guillotine",
+      "bungieHash": 614426548,
+      "family": "sword",
+      "catalogName": "Falling Guillotine",
+      "officialName": "Falling Guillotine",
+      "officialHandling": null,
+      "supported": false,
+      "oracleFamily": null,
+      "category": null,
+      "subfamily": null,
+      "readyCurve": null,
+      "stowCurve": null,
+      "handlingStatUsed": null,
+      "readySeconds": null,
+      "stowRawSeconds": null,
+      "stowFloorSeconds": null,
+      "stowSeconds": null,
+      "unsupportedReason": "No pinned Oracle sword handling curves or official Handling stat; no inferred timings"
+    },
+    {
+      "id": "temptation_s_hook",
+      "bungieHash": 35794111,
+      "family": "sword",
+      "catalogName": "Temptation's Hook",
+      "officialName": "Temptation's Hook",
+      "officialHandling": null,
+      "supported": false,
+      "oracleFamily": null,
+      "category": null,
+      "subfamily": null,
+      "readyCurve": null,
+      "stowCurve": null,
+      "handlingStatUsed": null,
+      "readySeconds": null,
+      "stowRawSeconds": null,
+      "stowFloorSeconds": null,
+      "stowSeconds": null,
+      "unsupportedReason": "No pinned Oracle sword handling curves or official Handling stat; no inferred timings"
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "bungieHash": 254636484,
+      "family": "glaive",
+      "catalogName": "Nezarec's Whisper",
+      "officialName": "Nezarec's Whisper",
+      "officialHandling": 42,
+      "supported": true,
+      "oracleFamily": "Glaive",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "readyCurve": {
+        "vpp": -0.002139219,
+        "offset": 0.42369
+      },
+      "stowCurve": {
+        "vpp": -0.002827674,
+        "offset": 0.5147
+      },
+      "handlingStatUsed": 42,
+      "readySeconds": 0.333842802,
+      "stowRawSeconds": 0.39593769200000006,
+      "stowFloorSeconds": 0.23193260000000004,
+      "stowSeconds": 0.39593769200000006
+    }
+  ]
+}

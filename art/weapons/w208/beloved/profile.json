@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "weapon": "beloved",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      1.0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A140",
+      "contact": [
+        7.55,
+        7.5,
+        5.25
+      ],
+      "partHint": "magazine",
+      "policy": "magazine"
+    }
+  },
+  "evidence": [
+    {
+      "source": "art/weapons/w123/beloved/comparison.png",
+      "role": "inspected_art_reference",
+      "observation": "Viewed actual offline side/front/rear oblique sheet. Long gold/purple forebody, black stock/receiver and underside magazine remain unchanged; this sheet supplies no first-person camera measurement."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "retained_mesh_palm_calibration",
+      "observation": "Read Beloved mesh anchors and design provenance. Retain inherited right [8,8.4,8.32], left [7.8,8.98,0.2], rotations, and magazine-side contact [7.55,7.5,5.25]. No mesh evidence supports moving the rest palms."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/source-review.json",
+      "role": "original_blender_evaluation_report",
+      "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sniper_rifle_f22b9e87/blender/source.blend",
+      "sourceBlendSha256": "7e0a3bb5d8794b31d9c404dfb5fd6ecbb2f94b0de09dc4697e2313c039f95995",
+      "observation": "Read master-supplied report from a separate original Blender 5.4.0 Alpha process: Armature only, no mesh/camera. Action 80A8A140, OBSlot, source frames 1..102 at 30fps, 61 evaluated samples; existing 21-sample joint agreement reported as zero maximum error. Worker inspected this report and matrices, did not open or evaluate source.blend independently."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sniper_rifle_f22b9e87.json",
+      "role": "evaluated_original61_full_chain",
+      "observation": "Read original61 shoulder/elbow/wrist/weapon matrices; verified 61 uniform normalized samples across frames 1..102, shoulder availability, and exact endpoint matrix equality. Cache action name has Base.001 suffix while evaluation report records Base; selection uses audited tag 80A8A140. Ordinary forearm about 8.14136 model units and upper arm about 8.7266 at authored 32 units per source unit."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sheets/sniper_rifle_f22b9e87-80A8A140-upper-chain.png",
+      "role": "viewed_source_chain_sheet",
+      "observation": "Viewed actual six-pose XZ/YZ sheet at progress 0,.2,.4,.6,.8,1: shoulder/elbow/wrist bends change and return to the initial silhouette. Bones only; no source mesh, recovered camera, magazine contact or native gameplay proof."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sniper_rifle_f22b9e87/source-map.json",
+      "role": "shared_sniper_selection_limit",
+      "observation": "Read non-fallback source map: representative bite_of_the_fox, shared Beloved/Bite of the Fox selector 8D2C38F; reload 140/14D/150 all carry reload_full/reload_empty labels. Retain candidate 80A8A140; no exact Beloved action selector recovered. Enable full chain only in Beloved profile, never the shared cache or Bite of the Fox profile."
+    }
+  ],
+  "notes": [
+    "W210 candidate applied in assigned worktree after explicit master READY. Pending master integration, first Vision, actual review returned to worker, any warranted correction, and second Vision. Not final; no native acceptance is claimed.",
+    "sourceFullChain=true opts Beloved into evaluated original shoulder/elbow/wrist motion. Master imports original61 and shoulders and gates upper-arm emission by this profile; the shared sniper cache must not opt Bite of the Fox into full chain.",
+    "Retain existing authored rest framing translation [-0.65,0.6,1], rotation [-1,2,0], scale 0.98 and identity sourceViewRotation. No camera/FOV recovered; 32 model units per source unit is authored retarget calibration, not recovered physical scale.",
+    "keepMeshSupport=true and hideSupportAtRest=false retain both mesh rest palm anchors. Source wrist travel is measured relative to weapon 4A0810C4 and rest pose; weapon body and wrists must share one weapon parent, with ordinary segment lengths and no independent hand displacement or arm stretching.",
+    "Retain contacts.reload.rigAction=80A8A140, partHint=magazine, policy=magazine and inherited contact [7.55,7.5,5.25]. Keep authored magazine/contact/release path; master must preserve contact while source body and wrist translations share the parent. Bones-only source does not establish an original magazine path.",
+    "Mesh, face UVs, textures, gameplay duration, ammo, audio and normalized authored part timing remain unchanged. Source61 sampling does not establish vanilla 60fps interpolation or native clearance.",
+    "Pending first and second master Vision: both grips/classic-slim hip, ADS/scope clearance, magazine extraction/reseat contact, upper-arm continuity and recovery. Full ADS/scope/inspect retain existing routing."
+  ]
+}

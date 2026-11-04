@@ -1,0 +1,1334 @@
+{
+  "stage": "W102",
+  "schemaVersion": 1,
+  "counts": {
+    "baseEvents": 10,
+    "timedEvents": 6,
+    "oggAssets": 16,
+    "auditionWav": 6
+  },
+  "generatorSha256": "afe54d8ff6ad8c1b197ae4c91f6fbe923091dbd61710f7d11cfd67e718e1de47",
+  "inputPins": {
+    "source-pins.json": "6f7387393467c23171c19236b3fce65915e430b1758fc1e0d73a69f85649471f",
+    "folder-discovery.json": "c784105fd9d39a03ad8e599642963647de2e018333917cb4664e89211c010fef",
+    "event-contract.json": "a6f30fefa104485399e8b42e0be46ee3efa895fe1965ac6acce0af424eefb43f",
+    "preserved-audio.json": "45f4bffbe2cd3915b5b068c517522254692d8f3895283a25cfebce04efaa7b7c"
+  },
+  "helperSha256": "e3f1dd846b69dcb5a5cad685f310ffb9a6b6a7d1ab7fbc1d11851557bca6911e",
+  "timingHelperSha256": "e7ecfb853a9325d75713496984447870d64fca797217e4b9cbeddf76c9d28ed8",
+  "ffmpegSha256": "6d175a4743ca50256e89a8cdd731100f9cee33bd79aeea46894d209410dc6617",
+  "basePolicy": "Pinned W33 helper using named event IDs; mono 32000 Hz Vorbis q4/bitexact, envelope trim, fire cap 3s, RMS -21/peak -6 target/boost <=12dB; decoded peak <=-1dBFS.",
+  "timedPolicy": "Pinned W63 atempo factorization, pitch preserved, apad/atrim to ticks*1600; threads=1, bitexact; EOS exact, decoded <=target and within 1024 samples; decoded peak <=-1dBFS.",
+  "writePolicy": "Allowlisted W102 art/cache/assets/new profile only; private temporary rendering. Shared sounds.json is read-independent and never published.",
+  "events": {
+    "weapon.blast_furnace.fire": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.fire",
+      "sounds": [
+        {
+          "name": "destiny:w102/blast_furnace/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.blast_furnace.reload": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/blast_furnace/reload",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.chattering_bone.fire": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.fire",
+      "sounds": [
+        {
+          "name": "destiny:w102/chattering_bone/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.chattering_bone.reload": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/chattering_bone/reload",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.aishas_embrace.fire": {
+      "subtitle": "subtitles.destiny.weapon.scout_rifle.fire",
+      "sounds": [
+        {
+          "name": "destiny:w102/aishas_embrace/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.aishas_embrace.reload": {
+      "subtitle": "subtitles.destiny.weapon.scout_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/aishas_embrace/reload",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.long_arm.fire": {
+      "subtitle": "subtitles.destiny.weapon.scout_rifle.fire",
+      "sounds": [
+        {
+          "name": "destiny:w102/long_arm/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.whispering_slab.fire": {
+      "subtitle": "subtitles.destiny.weapon.bow.fire",
+      "sounds": [
+        {
+          "name": "destiny:w102/whispering_slab/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.retrofit_escapade.fire": {
+      "subtitle": "subtitles.destiny.weapon.machine_gun.fire",
+      "sounds": [
+        {
+          "name": "destiny:w102/retrofit_escapade/fire",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.retrofit_escapade.reload": {
+      "subtitle": "subtitles.destiny.weapon.machine_gun.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/retrofit_escapade/reload",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.reload_w102.aishas_embrace.46": {
+      "subtitle": "subtitles.destiny.weapon.scout_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/aishas_embrace/reload_46",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.reload_w102.blast_furnace.24": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/blast_furnace/reload_24",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.reload_w102.blast_furnace.43": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/blast_furnace/reload_43",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.reload_w102.chattering_bone.24": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/chattering_bone/reload_24",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.reload_w102.chattering_bone.34": {
+      "subtitle": "subtitles.destiny.weapon.pulse_rifle.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/chattering_bone/reload_34",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    },
+    "weapon.reload_w102.retrofit_escapade.90": {
+      "subtitle": "subtitles.destiny.weapon.machine_gun.reload",
+      "sounds": [
+        {
+          "name": "destiny:w102/retrofit_escapade/reload_90",
+          "stream": false,
+          "attenuation_distance": 32
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "event": "weapon.blast_furnace.fire",
+      "drive_id": "1tEqq1X5Uo59EnCOMTgb3LtPyUBDcp9Im",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Blast Furnace",
+      "source_folder_id": "1_lzX2VeWtM9APWox0nRDqCbiHoEx65rE",
+      "source_sha256": "34fc6eb60618ca8a1eea4c6de2a2879c294a0741c12ab1a9d6cb935a267e8a8d",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1tEqq1X5Uo59EnCOMTgb3LtPyUBDcp9Im/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1_lzX2VeWtM9APWox0nRDqCbiHoEx65rE",
+      "sound": "destiny:w102/blast_furnace/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/blast_furnace/fire.ogg",
+      "source_bytes": 107319,
+      "source_audio": {
+        "duration_seconds": 4.1535,
+        "sample_peak_dbfs": -9.3025,
+        "rms_dbfs": -29.6564,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 4.1535,
+        "crop_end_seconds": 4.1535,
+        "trim_start_seconds": 0.08,
+        "trim_end_seconds": 2.75,
+        "silence_rms_threshold_dbfs": -53.534,
+        "gain_db": 3.3025,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.67,
+        "sample_peak_dbfs": -5.7828,
+        "rms_dbfs": -24.4819,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 24640,
+        "sha256": "69970062c99823eb6ba51970813c1245e1b7991686f6328fc6442b52dc2630e2"
+      },
+      "id": "blast_furnace",
+      "family": "pulse_rifle",
+      "action": "fire",
+      "actualPayloadSha256": "34fc6eb60618ca8a1eea4c6de2a2879c294a0741c12ab1a9d6cb935a267e8a8d",
+      "conversionPolicyEvent": "weapon.blast_furnace.fire"
+    },
+    {
+      "event": "weapon.blast_furnace.reload",
+      "drive_id": "1peMhfJX85VJtXnzIhzuQmBN7MfDoKj-R",
+      "original_name": "Reload_1.mp3",
+      "source_folder": "Blast Furnace",
+      "source_folder_id": "1_lzX2VeWtM9APWox0nRDqCbiHoEx65rE",
+      "source_sha256": "3d785814085b4945ae38c126c7da4144ba17622fd1cb9140175936bfa5278baf",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1peMhfJX85VJtXnzIhzuQmBN7MfDoKj-R/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1_lzX2VeWtM9APWox0nRDqCbiHoEx65rE",
+      "sound": "destiny:w102/blast_furnace/reload",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/blast_furnace/reload.ogg",
+      "source_bytes": 80402,
+      "source_audio": {
+        "duration_seconds": 3.030219,
+        "sample_peak_dbfs": -11.4101,
+        "rms_dbfs": -32.4825,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 3.03021875,
+        "crop_end_seconds": 3.030219,
+        "trim_start_seconds": 0.04,
+        "trim_end_seconds": 2.56,
+        "silence_rms_threshold_dbfs": -58.0,
+        "gain_db": 5.4101,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.52,
+        "sample_peak_dbfs": -6.4248,
+        "rms_dbfs": -26.3539,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 26422,
+        "sha256": "47f5af2232d3f367b7dfcb0673dc60715cf5db0032b7918e8bf8bdfb018b13c9"
+      },
+      "id": "blast_furnace",
+      "family": "pulse_rifle",
+      "action": "reload",
+      "actualPayloadSha256": "3d785814085b4945ae38c126c7da4144ba17622fd1cb9140175936bfa5278baf",
+      "conversionPolicyEvent": "weapon.blast_furnace.reload"
+    },
+    {
+      "event": "weapon.chattering_bone.fire",
+      "drive_id": "1-X4w_iHBKxroRVlrjVi_EAx_chb4cHDJ",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Chattering Bone",
+      "source_folder_id": "1ZJiFDuXrgh8QBqaSfSNpEOyTCMBmeiSr",
+      "source_sha256": "a8328639260f8b033a75721864082f160c7227ec0084f98c11333a5d443591d2",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1-X4w_iHBKxroRVlrjVi_EAx_chb4cHDJ/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1ZJiFDuXrgh8QBqaSfSNpEOyTCMBmeiSr",
+      "sound": "destiny:w102/chattering_bone/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/chattering_bone/fire.ogg",
+      "source_bytes": 104190,
+      "source_audio": {
+        "duration_seconds": 4.022875,
+        "sample_peak_dbfs": -6.4279,
+        "rms_dbfs": -30.4906,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 4.022875,
+        "crop_end_seconds": 4.022875,
+        "trim_start_seconds": 0.05,
+        "trim_end_seconds": 3.03,
+        "silence_rms_threshold_dbfs": -53.2933,
+        "gain_db": 0.4279,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.98,
+        "sample_peak_dbfs": -5.9561,
+        "rms_dbfs": -28.7804,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 26478,
+        "sha256": "97951f4286b2d45995878d12c19588a9c84443beeb07f53e55500cc2f2bda547"
+      },
+      "id": "chattering_bone",
+      "family": "pulse_rifle",
+      "action": "fire",
+      "actualPayloadSha256": "a8328639260f8b033a75721864082f160c7227ec0084f98c11333a5d443591d2",
+      "conversionPolicyEvent": "weapon.chattering_bone.fire"
+    },
+    {
+      "event": "weapon.chattering_bone.reload",
+      "drive_id": "1DYvTv12wNvSwoyHzBnOUYZ6r2LoJ_6du",
+      "original_name": "Reload_1.mp3",
+      "source_folder": "Chattering Bone",
+      "source_folder_id": "1ZJiFDuXrgh8QBqaSfSNpEOyTCMBmeiSr",
+      "source_sha256": "48f6c156e5c90d398be2640dcb22231afa0a5e06d2d9420bcf9dfd5be1875f44",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1DYvTv12wNvSwoyHzBnOUYZ6r2LoJ_6du/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1ZJiFDuXrgh8QBqaSfSNpEOyTCMBmeiSr",
+      "sound": "destiny:w102/chattering_bone/reload",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/chattering_bone/reload.ogg",
+      "source_bytes": 75394,
+      "source_audio": {
+        "duration_seconds": 2.82125,
+        "sample_peak_dbfs": -14.8598,
+        "rms_dbfs": -36.5047,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 2.82125,
+        "crop_end_seconds": 2.82125,
+        "trim_start_seconds": 0.08,
+        "trim_end_seconds": 2.21,
+        "silence_rms_threshold_dbfs": -58.0,
+        "gain_db": 8.8598,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.13,
+        "sample_peak_dbfs": -5.896,
+        "rms_dbfs": -26.5998,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 24540,
+        "sha256": "e46ad3840e44bb13afe57b87707ba671ca61502ded6e34076a33d611827a6fcd"
+      },
+      "id": "chattering_bone",
+      "family": "pulse_rifle",
+      "action": "reload",
+      "actualPayloadSha256": "48f6c156e5c90d398be2640dcb22231afa0a5e06d2d9420bcf9dfd5be1875f44",
+      "conversionPolicyEvent": "weapon.chattering_bone.reload"
+    },
+    {
+      "event": "weapon.aishas_embrace.fire",
+      "drive_id": "18ogeCxQCYRvtRLe5LWziYbctGopN62sG",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Aishas Embrace",
+      "source_folder_id": "1cxZNF8D46mAb-iBWbJwxmqYzOu4NGl2g",
+      "source_sha256": "0649f2b3bee1e17d1baf2ec52dc0cd64464216a46c275270371ec73b8206fbc6",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/18ogeCxQCYRvtRLe5LWziYbctGopN62sG/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1cxZNF8D46mAb-iBWbJwxmqYzOu4NGl2g",
+      "sound": "destiny:w102/aishas_embrace/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/aishas_embrace/fire.ogg",
+      "source_bytes": 101060,
+      "source_audio": {
+        "duration_seconds": 3.89225,
+        "sample_peak_dbfs": -2.724,
+        "rms_dbfs": -24.7601,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 3.89225,
+        "crop_end_seconds": 3.89225,
+        "trim_start_seconds": 0.06,
+        "trim_end_seconds": 2.76,
+        "silence_rms_threshold_dbfs": -46.1227,
+        "gain_db": -3.276,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.7,
+        "sample_peak_dbfs": -6.2518,
+        "rms_dbfs": -26.518,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 24233,
+        "sha256": "ee6376618af3382c45f5873755a4ad512bbed4142474c094d69372aa68f736de"
+      },
+      "id": "aishas_embrace",
+      "family": "scout_rifle",
+      "action": "fire",
+      "actualPayloadSha256": "0649f2b3bee1e17d1baf2ec52dc0cd64464216a46c275270371ec73b8206fbc6",
+      "conversionPolicyEvent": "weapon.aishas_embrace.fire"
+    },
+    {
+      "event": "weapon.aishas_embrace.reload",
+      "drive_id": "1Ay45wGx86ZNrTUi6O0E3QIUCW5BHrKFa",
+      "original_name": "Reload_1.mp3",
+      "source_folder": "Aishas Embrace",
+      "source_folder_id": "1cxZNF8D46mAb-iBWbJwxmqYzOu4NGl2g",
+      "source_sha256": "b49840534aa288d428f759cddb01958dd776b0c8fbf689ea8526b474c22374f3",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1Ay45wGx86ZNrTUi6O0E3QIUCW5BHrKFa/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1cxZNF8D46mAb-iBWbJwxmqYzOu4NGl2g",
+      "sound": "destiny:w102/aishas_embrace/reload",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/aishas_embrace/reload.ogg",
+      "source_bytes": 72264,
+      "source_audio": {
+        "duration_seconds": 2.690625,
+        "sample_peak_dbfs": -8.0897,
+        "rms_dbfs": -30.0445,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 2.690625,
+        "crop_end_seconds": 2.690625,
+        "trim_start_seconds": 0.15,
+        "trim_end_seconds": 1.82,
+        "silence_rms_threshold_dbfs": -55.6528,
+        "gain_db": 2.0897,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 1.67,
+        "sample_peak_dbfs": -6.7376,
+        "rms_dbfs": -26.0773,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 21679,
+        "sha256": "950b46dc325f949e8ddedddcb4356fa36a54cab77e8d99641f619b1f6e474c9a"
+      },
+      "id": "aishas_embrace",
+      "family": "scout_rifle",
+      "action": "reload",
+      "actualPayloadSha256": "b49840534aa288d428f759cddb01958dd776b0c8fbf689ea8526b474c22374f3",
+      "conversionPolicyEvent": "weapon.aishas_embrace.reload"
+    },
+    {
+      "event": "weapon.long_arm.fire",
+      "drive_id": "1TXx6af6I4LxMm6hYKIJ5Aad4KOv3c38f",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Long Arm",
+      "source_folder_id": "1_1pwacAXcVs6wJm7U9OuscnGbrGg9K7p",
+      "source_sha256": "3d5c9ebf6fbc27fc133cf1af803a7eaf1fb97c142edb7aad9a0b66123a00456d",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1TXx6af6I4LxMm6hYKIJ5Aad4KOv3c38f/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1_1pwacAXcVs6wJm7U9OuscnGbrGg9K7p",
+      "sound": "destiny:w102/long_arm/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/long_arm/fire.ogg",
+      "source_bytes": 106694,
+      "source_audio": {
+        "duration_seconds": 4.127375,
+        "sample_peak_dbfs": -8.0421,
+        "rms_dbfs": -30.3501,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 4.127375,
+        "crop_end_seconds": 4.127375,
+        "trim_start_seconds": 0.09,
+        "trim_end_seconds": 2.79,
+        "silence_rms_threshold_dbfs": -49.388,
+        "gain_db": 2.0421,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 2.7,
+        "sample_peak_dbfs": -6.0937,
+        "rms_dbfs": -26.4987,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 25392,
+        "sha256": "d492414c175045959cbb3273259dc91afcfe0184990c69a24d95863f9a99a589"
+      },
+      "id": "long_arm",
+      "family": "scout_rifle",
+      "action": "fire",
+      "actualPayloadSha256": "3d5c9ebf6fbc27fc133cf1af803a7eaf1fb97c142edb7aad9a0b66123a00456d",
+      "conversionPolicyEvent": "weapon.long_arm.fire"
+    },
+    {
+      "event": "weapon.whispering_slab.fire",
+      "drive_id": "1nFo6nvNuOMBVVGseh2v5n-kiCBjQ9_dF",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Whispering Slab",
+      "source_folder_id": "1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "source_sha256": "dd418a0de4689952f6cd77f9c3ce49ff0b9d95c105d53cd3aa954c3dd492748f",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1nFo6nvNuOMBVVGseh2v5n-kiCBjQ9_dF/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "sound": "destiny:w102/whispering_slab/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/whispering_slab/fire.ogg",
+      "source_bytes": 42842,
+      "source_audio": {
+        "duration_seconds": 1.462875,
+        "sample_peak_dbfs": -1.6222,
+        "rms_dbfs": -21.3211,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 1.462875,
+        "crop_end_seconds": 1.462875,
+        "trim_start_seconds": 0.04,
+        "trim_end_seconds": 0.92,
+        "silence_rms_threshold_dbfs": -47.8943,
+        "gain_db": -4.3778,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 0.876,
+        "sample_peak_dbfs": -6.5355,
+        "rms_dbfs": -23.5214,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 11323,
+        "sha256": "369beaa3cf3a3fd3c367a435f3d4d08cf30ca653729f64af04ee4b0c969abc2e"
+      },
+      "id": "whispering_slab",
+      "family": "bow",
+      "action": "fire",
+      "actualPayloadSha256": "dd418a0de4689952f6cd77f9c3ce49ff0b9d95c105d53cd3aa954c3dd492748f",
+      "conversionPolicyEvent": "weapon.whispering_slab.fire"
+    },
+    {
+      "event": "weapon.retrofit_escapade.fire",
+      "drive_id": "1cTrlAKqj2j6tASojKlE_gVNJH7ymOTed",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Retrofit Escapade",
+      "source_folder_id": "1bAwsxY_CNiiiFKC8zzyZlt7UyAav4erF",
+      "source_sha256": "d09d3423b8d7dd8507098a97461ec7a22984dc2fa10e6067595b2f0e8b5cae79",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1cTrlAKqj2j6tASojKlE_gVNJH7ymOTed/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1bAwsxY_CNiiiFKC8zzyZlt7UyAav4erF",
+      "sound": "destiny:w102/retrofit_escapade/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/retrofit_escapade/fire.ogg",
+      "source_bytes": 176806,
+      "source_audio": {
+        "duration_seconds": 7.053063,
+        "sample_peak_dbfs": -16.0465,
+        "rms_dbfs": -35.7385,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 7.0530625,
+        "crop_end_seconds": 7.053063,
+        "trim_start_seconds": 0.12,
+        "trim_end_seconds": 3.12,
+        "silence_rms_threshold_dbfs": -58.0,
+        "gain_db": 10.0465,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 3.0,
+        "sample_peak_dbfs": -5.7439,
+        "rms_dbfs": -22.134,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 26720,
+        "sha256": "35f4dd1fcb4ae702602e89c9f46e383f161f604fd47669cbe22c43f6f74f4d0e"
+      },
+      "id": "retrofit_escapade",
+      "family": "machine_gun",
+      "action": "fire",
+      "actualPayloadSha256": "d09d3423b8d7dd8507098a97461ec7a22984dc2fa10e6067595b2f0e8b5cae79",
+      "conversionPolicyEvent": "weapon.retrofit_escapade.fire"
+    },
+    {
+      "event": "weapon.retrofit_escapade.reload",
+      "drive_id": "1UtJqWcVtJ5s2dSgvBBzVzxIvauxTqAfB",
+      "original_name": "Reload_1.mp3",
+      "source_folder": "Retrofit Escapade",
+      "source_folder_id": "1bAwsxY_CNiiiFKC8zzyZlt7UyAav4erF",
+      "source_sha256": "31191b410564eb7d6bf71044c209423abdd312d8f60de124291f9d78dca36063",
+      "limitations": [
+        "Uploader identity labels only; no playback, listening, runtime output or redistribution-license verification."
+      ],
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1UtJqWcVtJ5s2dSgvBBzVzxIvauxTqAfB/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1bAwsxY_CNiiiFKC8zzyZlt7UyAav4erF",
+      "sound": "destiny:w102/retrofit_escapade/reload",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w102/retrofit_escapade/reload.ogg",
+      "source_bytes": 143002,
+      "source_audio": {
+        "duration_seconds": 5.642469,
+        "sample_peak_dbfs": -9.0662,
+        "rms_dbfs": -28.8266,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 5.64246875,
+        "crop_end_seconds": 5.642469,
+        "trim_start_seconds": 0.17,
+        "trim_end_seconds": 4.76,
+        "silence_rms_threshold_dbfs": -55.646,
+        "gain_db": 3.0662,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 4.59,
+        "sample_peak_dbfs": -5.3254,
+        "rms_dbfs": -24.9997,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 45311,
+        "sha256": "5beed4495fbd3030c71b357d1bc10194e5dce7f587bbba04361ffb5330ed34e0"
+      },
+      "id": "retrofit_escapade",
+      "family": "machine_gun",
+      "action": "reload",
+      "actualPayloadSha256": "31191b410564eb7d6bf71044c209423abdd312d8f60de124291f9d78dca36063",
+      "conversionPolicyEvent": "weapon.retrofit_escapade.reload"
+    }
+  ],
+  "timedRecords": [
+    {
+      "id": "aishas_embrace",
+      "ticks": 46,
+      "event": "weapon.reload_w102.aishas_embrace.46",
+      "sourceEvent": "weapon.aishas_embrace.reload",
+      "sourceSha256": "950b46dc325f949e8ddedddcb4356fa36a54cab77e8d99641f619b1f6e474c9a",
+      "asset": "assets/destiny/sounds/w102/aishas_embrace/reload_46.ogg",
+      "replaces": {
+        "id": "aishas_embrace",
+        "ticks": 46,
+        "event": "weapon.reload_w63.weapon.scout_rifle.reload.46",
+        "sourceEvent": "weapon.scout_rifle.reload",
+        "sourceSha256": "4707d8af418d641b9e7fbd01a02f88875e8263e5e42148d5aa548ddfeaea888b",
+        "asset": "assets/destiny/sounds/w63/reload/weapon_scout_rifle_reload_46.ogg"
+      },
+      "targetSamples": 73600,
+      "filters": [
+        "atempo=0.726086956521739",
+        "apad=whole_len=73600",
+        "atrim=end_sample=73600"
+      ],
+      "sourceMetrics": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 53440,
+        "granuleSeconds": 1.67,
+        "bytes": 21679,
+        "sha256": "950b46dc325f949e8ddedddcb4356fa36a54cab77e8d99641f619b1f6e474c9a",
+        "decodedSamples": 53440,
+        "decodedSeconds": 1.67,
+        "samplePeakDbfs": -6.737617,
+        "rmsDbfs": -26.077326,
+        "clippedSamples": 0
+      },
+      "output": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 73600,
+        "granuleSeconds": 2.3,
+        "bytes": 27294,
+        "sha256": "04f91a81c018e6627d1994517c03fc2a62aa40f1ad056b659aa593079a077d07",
+        "decodedSamples": 73600,
+        "decodedSeconds": 2.3,
+        "samplePeakDbfs": -5.834271,
+        "rmsDbfs": -26.627436,
+        "clippedSamples": 0
+      }
+    },
+    {
+      "id": "blast_furnace",
+      "ticks": 24,
+      "event": "weapon.reload_w102.blast_furnace.24",
+      "sourceEvent": "weapon.blast_furnace.reload",
+      "sourceSha256": "47f5af2232d3f367b7dfcb0673dc60715cf5db0032b7918e8bf8bdfb018b13c9",
+      "asset": "assets/destiny/sounds/w102/blast_furnace/reload_24.ogg",
+      "replaces": {
+        "id": "blast_furnace",
+        "ticks": 24,
+        "event": "weapon.reload_w63.weapon.pulse_rifle.reload.24",
+        "sourceEvent": "weapon.pulse_rifle.reload",
+        "sourceSha256": "fee911f264eb8f30137b94318536555ee84df0864bca00e140ef06257e936d60",
+        "asset": "assets/destiny/sounds/w63/reload/weapon_pulse_rifle_reload_24.ogg"
+      },
+      "targetSamples": 38400,
+      "filters": [
+        "atempo=2",
+        "atempo=1.05",
+        "apad=whole_len=38400",
+        "atrim=end_sample=38400"
+      ],
+      "sourceMetrics": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 80640,
+        "granuleSeconds": 2.52,
+        "bytes": 26422,
+        "sha256": "47f5af2232d3f367b7dfcb0673dc60715cf5db0032b7918e8bf8bdfb018b13c9",
+        "decodedSamples": 80640,
+        "decodedSeconds": 2.52,
+        "samplePeakDbfs": -6.424829,
+        "rmsDbfs": -26.353914,
+        "clippedSamples": 0
+      },
+      "output": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 38400,
+        "granuleSeconds": 1.2,
+        "bytes": 14393,
+        "sha256": "9dfb927db0cb90108012a34848e13a5eae60b09f43e18b553eccbf9d9867011d",
+        "decodedSamples": 38400,
+        "decodedSeconds": 1.2,
+        "samplePeakDbfs": -7.694234,
+        "rmsDbfs": -26.766203,
+        "clippedSamples": 0
+      }
+    },
+    {
+      "id": "blast_furnace",
+      "ticks": 43,
+      "event": "weapon.reload_w102.blast_furnace.43",
+      "sourceEvent": "weapon.blast_furnace.reload",
+      "sourceSha256": "47f5af2232d3f367b7dfcb0673dc60715cf5db0032b7918e8bf8bdfb018b13c9",
+      "asset": "assets/destiny/sounds/w102/blast_furnace/reload_43.ogg",
+      "replaces": {
+        "id": "blast_furnace",
+        "ticks": 43,
+        "event": "weapon.reload_w63.weapon.pulse_rifle.reload.43",
+        "sourceEvent": "weapon.pulse_rifle.reload",
+        "sourceSha256": "fee911f264eb8f30137b94318536555ee84df0864bca00e140ef06257e936d60",
+        "asset": "assets/destiny/sounds/w63/reload/weapon_pulse_rifle_reload_43.ogg"
+      },
+      "targetSamples": 68800,
+      "filters": [
+        "atempo=1.17209302325581",
+        "apad=whole_len=68800",
+        "atrim=end_sample=68800"
+      ],
+      "sourceMetrics": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 80640,
+        "granuleSeconds": 2.52,
+        "bytes": 26422,
+        "sha256": "47f5af2232d3f367b7dfcb0673dc60715cf5db0032b7918e8bf8bdfb018b13c9",
+        "decodedSamples": 80640,
+        "decodedSeconds": 2.52,
+        "samplePeakDbfs": -6.424829,
+        "rmsDbfs": -26.353914,
+        "clippedSamples": 0
+      },
+      "output": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 68800,
+        "granuleSeconds": 2.15,
+        "bytes": 23071,
+        "sha256": "5c43ab6449c41127d2d638cabf6f3010ce2dd8ff2227d42715b0889770fc66e4",
+        "decodedSamples": 68800,
+        "decodedSeconds": 2.15,
+        "samplePeakDbfs": -6.813894,
+        "rmsDbfs": -26.601386,
+        "clippedSamples": 0
+      }
+    },
+    {
+      "id": "chattering_bone",
+      "ticks": 24,
+      "event": "weapon.reload_w102.chattering_bone.24",
+      "sourceEvent": "weapon.chattering_bone.reload",
+      "sourceSha256": "e46ad3840e44bb13afe57b87707ba671ca61502ded6e34076a33d611827a6fcd",
+      "asset": "assets/destiny/sounds/w102/chattering_bone/reload_24.ogg",
+      "replaces": {
+        "id": "chattering_bone",
+        "ticks": 24,
+        "event": "weapon.reload_w63.weapon.pulse_rifle.reload.24",
+        "sourceEvent": "weapon.pulse_rifle.reload",
+        "sourceSha256": "fee911f264eb8f30137b94318536555ee84df0864bca00e140ef06257e936d60",
+        "asset": "assets/destiny/sounds/w63/reload/weapon_pulse_rifle_reload_24.ogg"
+      },
+      "targetSamples": 38400,
+      "filters": [
+        "atempo=1.775",
+        "apad=whole_len=38400",
+        "atrim=end_sample=38400"
+      ],
+      "sourceMetrics": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 68160,
+        "granuleSeconds": 2.13,
+        "bytes": 24540,
+        "sha256": "e46ad3840e44bb13afe57b87707ba671ca61502ded6e34076a33d611827a6fcd",
+        "decodedSamples": 68160,
+        "decodedSeconds": 2.13,
+        "samplePeakDbfs": -5.895979,
+        "rmsDbfs": -26.599789,
+        "clippedSamples": 0
+      },
+      "output": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 38400,
+        "granuleSeconds": 1.2,
+        "bytes": 15351,
+        "sha256": "a9b8d0713b53ef3b6bf508ec75ac952cad1258044f03c64f55e42c564b261352",
+        "decodedSamples": 38400,
+        "decodedSeconds": 1.2,
+        "samplePeakDbfs": -8.667903,
+        "rmsDbfs": -28.170577,
+        "clippedSamples": 0
+      }
+    },
+    {
+      "id": "chattering_bone",
+      "ticks": 34,
+      "event": "weapon.reload_w102.chattering_bone.34",
+      "sourceEvent": "weapon.chattering_bone.reload",
+      "sourceSha256": "e46ad3840e44bb13afe57b87707ba671ca61502ded6e34076a33d611827a6fcd",
+      "asset": "assets/destiny/sounds/w102/chattering_bone/reload_34.ogg",
+      "replaces": {
+        "id": "chattering_bone",
+        "ticks": 34,
+        "event": "weapon.reload_w63.weapon.pulse_rifle.reload.34",
+        "sourceEvent": "weapon.pulse_rifle.reload",
+        "sourceSha256": "fee911f264eb8f30137b94318536555ee84df0864bca00e140ef06257e936d60",
+        "asset": "assets/destiny/sounds/w63/reload/weapon_pulse_rifle_reload_34.ogg"
+      },
+      "targetSamples": 54400,
+      "filters": [
+        "atempo=1.25294117647059",
+        "apad=whole_len=54400",
+        "atrim=end_sample=54400"
+      ],
+      "sourceMetrics": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 68160,
+        "granuleSeconds": 2.13,
+        "bytes": 24540,
+        "sha256": "e46ad3840e44bb13afe57b87707ba671ca61502ded6e34076a33d611827a6fcd",
+        "decodedSamples": 68160,
+        "decodedSeconds": 2.13,
+        "samplePeakDbfs": -5.895979,
+        "rmsDbfs": -26.599789,
+        "clippedSamples": 0
+      },
+      "output": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 54400,
+        "granuleSeconds": 1.7,
+        "bytes": 20201,
+        "sha256": "930fd23637eb6c05a4cc942874fbdb72f48493269315023fa8e07125ea6b66fa",
+        "decodedSamples": 54400,
+        "decodedSeconds": 1.7,
+        "samplePeakDbfs": -5.291129,
+        "rmsDbfs": -26.627718,
+        "clippedSamples": 0
+      }
+    },
+    {
+      "id": "retrofit_escapade",
+      "ticks": 90,
+      "event": "weapon.reload_w102.retrofit_escapade.90",
+      "sourceEvent": "weapon.retrofit_escapade.reload",
+      "sourceSha256": "5beed4495fbd3030c71b357d1bc10194e5dce7f587bbba04361ffb5330ed34e0",
+      "asset": "assets/destiny/sounds/w102/retrofit_escapade/reload_90.ogg",
+      "replaces": {
+        "id": "retrofit_escapade",
+        "ticks": 90,
+        "event": "weapon.reload_w63.weapon.machine_gun.reload.90",
+        "sourceEvent": "weapon.machine_gun.reload",
+        "sourceSha256": "d5e08f382d2539e25414302afd9b2d44533ad7ef613a1896600b9462957515cd",
+        "asset": "assets/destiny/sounds/w63/reload/weapon_machine_gun_reload_90.ogg"
+      },
+      "targetSamples": 144000,
+      "filters": [
+        "atempo=1.02",
+        "apad=whole_len=144000",
+        "atrim=end_sample=144000"
+      ],
+      "sourceMetrics": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 146880,
+        "granuleSeconds": 4.59,
+        "bytes": 45311,
+        "sha256": "5beed4495fbd3030c71b357d1bc10194e5dce7f587bbba04361ffb5330ed34e0",
+        "decodedSamples": 146880,
+        "decodedSeconds": 4.59,
+        "samplePeakDbfs": -5.325376,
+        "rmsDbfs": -24.999655,
+        "clippedSamples": 0
+      },
+      "output": {
+        "codec": "vorbis",
+        "channels": 1,
+        "sampleRateHz": 32000,
+        "granuleSamples": 144000,
+        "granuleSeconds": 4.5,
+        "bytes": 43809,
+        "sha256": "daa9ba859bad67469138f25195e08778f395084b8e392c21465ecf3e50bfcb69",
+        "decodedSamples": 144000,
+        "decodedSeconds": 4.5,
+        "samplePeakDbfs": -5.383551,
+        "rmsDbfs": -25.04956,
+        "clippedSamples": 0
+      }
+    }
+  ],
+  "auditions": [
+    {
+      "id": "blast_furnace",
+      "path": "art/weapons/w102/audio/audition/blast_furnace.wav",
+      "labelsPath": "art/weapons/w102/audio/audition/blast_furnace.labels.json",
+      "rate": 32000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "silenceBetweenActionsSamples": 32000,
+      "positions": [
+        {
+          "action": "fire",
+          "label": "FIRE",
+          "startSample": 0,
+          "samples": 85440,
+          "startSeconds": 0.0
+        },
+        {
+          "action": "reload",
+          "label": "RELOAD",
+          "startSample": 117440,
+          "samples": 80640,
+          "startSeconds": 3.67
+        }
+      ],
+      "listened": false
+    },
+    {
+      "id": "chattering_bone",
+      "path": "art/weapons/w102/audio/audition/chattering_bone.wav",
+      "labelsPath": "art/weapons/w102/audio/audition/chattering_bone.labels.json",
+      "rate": 32000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "silenceBetweenActionsSamples": 32000,
+      "positions": [
+        {
+          "action": "fire",
+          "label": "FIRE",
+          "startSample": 0,
+          "samples": 95360,
+          "startSeconds": 0.0
+        },
+        {
+          "action": "reload",
+          "label": "RELOAD",
+          "startSample": 127360,
+          "samples": 68160,
+          "startSeconds": 3.98
+        }
+      ],
+      "listened": false
+    },
+    {
+      "id": "aishas_embrace",
+      "path": "art/weapons/w102/audio/audition/aishas_embrace.wav",
+      "labelsPath": "art/weapons/w102/audio/audition/aishas_embrace.labels.json",
+      "rate": 32000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "silenceBetweenActionsSamples": 32000,
+      "positions": [
+        {
+          "action": "fire",
+          "label": "FIRE",
+          "startSample": 0,
+          "samples": 86400,
+          "startSeconds": 0.0
+        },
+        {
+          "action": "reload",
+          "label": "RELOAD",
+          "startSample": 118400,
+          "samples": 53440,
+          "startSeconds": 3.7
+        }
+      ],
+      "listened": false
+    },
+    {
+      "id": "long_arm",
+      "path": "art/weapons/w102/audio/audition/long_arm.wav",
+      "labelsPath": "art/weapons/w102/audio/audition/long_arm.labels.json",
+      "rate": 32000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "silenceBetweenActionsSamples": 0,
+      "positions": [
+        {
+          "action": "fire",
+          "label": "FIRE",
+          "startSample": 0,
+          "samples": 86400,
+          "startSeconds": 0.0
+        }
+      ],
+      "listened": false
+    },
+    {
+      "id": "whispering_slab",
+      "path": "art/weapons/w102/audio/audition/whispering_slab.wav",
+      "labelsPath": "art/weapons/w102/audio/audition/whispering_slab.labels.json",
+      "rate": 32000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "silenceBetweenActionsSamples": 0,
+      "positions": [
+        {
+          "action": "fire",
+          "label": "FIRE",
+          "startSample": 0,
+          "samples": 28032,
+          "startSeconds": 0.0
+        }
+      ],
+      "listened": false
+    },
+    {
+      "id": "retrofit_escapade",
+      "path": "art/weapons/w102/audio/audition/retrofit_escapade.wav",
+      "labelsPath": "art/weapons/w102/audio/audition/retrofit_escapade.labels.json",
+      "rate": 32000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "silenceBetweenActionsSamples": 32000,
+      "positions": [
+        {
+          "action": "fire",
+          "label": "FIRE",
+          "startSample": 0,
+          "samples": 96000,
+          "startSeconds": 0.0
+        },
+        {
+          "action": "reload",
+          "label": "RELOAD",
+          "startSample": 128000,
+          "samples": 146880,
+          "startSeconds": 4.0
+        }
+      ],
+      "listened": false
+    }
+  ],
+  "omissions": [
+    {
+      "id": "long_arm",
+      "action": "reload",
+      "reason": "Named Reload_1 exists but whole reload must not represent incremental insertion."
+    },
+    {
+      "id": "whispering_slab",
+      "action": "reload",
+      "reason": "No named Reload_1; Draw files are not reloads."
+    }
+  ],
+  "limitations": [
+    "Exact uploader folder and Fire_1/Reload_1 labels establish selection, not independent acoustic identification.",
+    "No playback, actual listening, game-session synchronization or client acoustic-output acceptance is claimed.",
+    "Public Drive fetching was authorized; no redistribution license is inferred.",
+    "Pulse Fire_1 may contain the uploader's native burst; it is not claimed to be a per-projectile isolated recording.",
+    "Whole Long Arm Reload_1 is deliberately excluded: incremental insertion cannot use a full-magazine clip.",
+    "Whispering Slab has no named Reload_1; Draw is never relabeled as reload.",
+    "Timed clips retain existing W63 ticks, which are authored approximations; atempo may change transients.",
+    "Audition WAVs are review-only concatenations, not runtime clips; RIFF cue labels and JSON give action/sample positions.",
+    "Master must integrate the definition fragment and finite timed overlay; this generator never edits shared definitions or runtime code."
+  ],
+  "runtimeAudioAccepted": false,
+  "outputs": {
+    "src/main/resources/assets/destiny/sounds/w102/blast_furnace/fire.ogg": {
+      "sha256": "69970062c99823eb6ba51970813c1245e1b7991686f6328fc6442b52dc2630e2",
+      "bytes": 24640
+    },
+    "src/main/resources/assets/destiny/sounds/w102/blast_furnace/reload.ogg": {
+      "sha256": "47f5af2232d3f367b7dfcb0673dc60715cf5db0032b7918e8bf8bdfb018b13c9",
+      "bytes": 26422
+    },
+    "src/main/resources/assets/destiny/sounds/w102/chattering_bone/fire.ogg": {
+      "sha256": "97951f4286b2d45995878d12c19588a9c84443beeb07f53e55500cc2f2bda547",
+      "bytes": 26478
+    },
+    "src/main/resources/assets/destiny/sounds/w102/chattering_bone/reload.ogg": {
+      "sha256": "e46ad3840e44bb13afe57b87707ba671ca61502ded6e34076a33d611827a6fcd",
+      "bytes": 24540
+    },
+    "src/main/resources/assets/destiny/sounds/w102/aishas_embrace/fire.ogg": {
+      "sha256": "ee6376618af3382c45f5873755a4ad512bbed4142474c094d69372aa68f736de",
+      "bytes": 24233
+    },
+    "src/main/resources/assets/destiny/sounds/w102/aishas_embrace/reload.ogg": {
+      "sha256": "950b46dc325f949e8ddedddcb4356fa36a54cab77e8d99641f619b1f6e474c9a",
+      "bytes": 21679
+    },
+    "src/main/resources/assets/destiny/sounds/w102/long_arm/fire.ogg": {
+      "sha256": "d492414c175045959cbb3273259dc91afcfe0184990c69a24d95863f9a99a589",
+      "bytes": 25392
+    },
+    "src/main/resources/assets/destiny/sounds/w102/whispering_slab/fire.ogg": {
+      "sha256": "369beaa3cf3a3fd3c367a435f3d4d08cf30ca653729f64af04ee4b0c969abc2e",
+      "bytes": 11323
+    },
+    "src/main/resources/assets/destiny/sounds/w102/retrofit_escapade/fire.ogg": {
+      "sha256": "35f4dd1fcb4ae702602e89c9f46e383f161f604fd47669cbe22c43f6f74f4d0e",
+      "bytes": 26720
+    },
+    "src/main/resources/assets/destiny/sounds/w102/retrofit_escapade/reload.ogg": {
+      "sha256": "5beed4495fbd3030c71b357d1bc10194e5dce7f587bbba04361ffb5330ed34e0",
+      "bytes": 45311
+    },
+    "src/main/resources/assets/destiny/sounds/w102/aishas_embrace/reload_46.ogg": {
+      "sha256": "04f91a81c018e6627d1994517c03fc2a62aa40f1ad056b659aa593079a077d07",
+      "bytes": 27294
+    },
+    "src/main/resources/assets/destiny/sounds/w102/blast_furnace/reload_24.ogg": {
+      "sha256": "9dfb927db0cb90108012a34848e13a5eae60b09f43e18b553eccbf9d9867011d",
+      "bytes": 14393
+    },
+    "src/main/resources/assets/destiny/sounds/w102/blast_furnace/reload_43.ogg": {
+      "sha256": "5c43ab6449c41127d2d638cabf6f3010ce2dd8ff2227d42715b0889770fc66e4",
+      "bytes": 23071
+    },
+    "src/main/resources/assets/destiny/sounds/w102/chattering_bone/reload_24.ogg": {
+      "sha256": "a9b8d0713b53ef3b6bf508ec75ac952cad1258044f03c64f55e42c564b261352",
+      "bytes": 15351
+    },
+    "src/main/resources/assets/destiny/sounds/w102/chattering_bone/reload_34.ogg": {
+      "sha256": "930fd23637eb6c05a4cc942874fbdb72f48493269315023fa8e07125ea6b66fa",
+      "bytes": 20201
+    },
+    "src/main/resources/assets/destiny/sounds/w102/retrofit_escapade/reload_90.ogg": {
+      "sha256": "daa9ba859bad67469138f25195e08778f395084b8e392c21465ecf3e50bfcb69",
+      "bytes": 43809
+    },
+    "art/weapons/w102/audio/timed-profile.json": {
+      "sha256": "e81f377d607c7c6e1518dff9115b5386919f4ba54082df434467e9c56d49f746",
+      "bytes": 2051
+    },
+    "src/main/resources/destiny/sounds/w102-reload.json": {
+      "sha256": "e81f377d607c7c6e1518dff9115b5386919f4ba54082df434467e9c56d49f746",
+      "bytes": 2051
+    },
+    "art/weapons/w102/audio/audition/blast_furnace.wav": {
+      "sha256": "bbe5ed28f07faca8e72667b60b6f1b984a49eae28397a6b1db8af7bf576659ac",
+      "bytes": 396314
+    },
+    "art/weapons/w102/audio/audition/blast_furnace.labels.json": {
+      "sha256": "64539b9eb2ed40b19c8895620c6a4e250269746fe3260b86c4e81e9e6e492b95",
+      "bytes": 418
+    },
+    "art/weapons/w102/audio/audition/chattering_bone.wav": {
+      "sha256": "ca88c3b7961d9629a4241d87189ca5c0313c8527f7dd3fee17b451571ee630fa",
+      "bytes": 391194
+    },
+    "art/weapons/w102/audio/audition/chattering_bone.labels.json": {
+      "sha256": "ed2a78b61640ca7588716b731b92d5d7aea369e62be7e63760af1744c9f6dff4",
+      "bytes": 418
+    },
+    "art/weapons/w102/audio/audition/aishas_embrace.wav": {
+      "sha256": "2c151f19cb4bccd9be35cb582a9810be9955ac6e3b7e073afc92ad557297be4f",
+      "bytes": 343834
+    },
+    "art/weapons/w102/audio/audition/aishas_embrace.labels.json": {
+      "sha256": "5b30ac02c462175515067a28ffeb6f636d2306c6a08d6dc563709f74f650c704",
+      "bytes": 417
+    },
+    "art/weapons/w102/audio/audition/long_arm.wav": {
+      "sha256": "bcc15e552a12b3521ca27d7713583f4d8764b75399f15ccf98e340ad478c799f",
+      "bytes": 172910
+    },
+    "art/weapons/w102/audio/audition/long_arm.labels.json": {
+      "sha256": "aa80c8ecebf69f2d6d4aa4e10a68c6470e00b1bf82d70fbcc30718323a8a11f6",
+      "bytes": 270
+    },
+    "art/weapons/w102/audio/audition/whispering_slab.wav": {
+      "sha256": "4f79d806d378e1b1be75369cea7a93f4680f65ac3013faba615930845a520fe2",
+      "bytes": 56174
+    },
+    "art/weapons/w102/audio/audition/whispering_slab.labels.json": {
+      "sha256": "e70660267b75d3feb2a369b932ccb4fb1f5d9eca9abf32d552fa7af7e19ecb73",
+      "bytes": 270
+    },
+    "art/weapons/w102/audio/audition/retrofit_escapade.wav": {
+      "sha256": "f7dac3634bbea119df802cf1f4d2d2637d147cd3b871b0ea87229d38a580f125",
+      "bytes": 549914
+    },
+    "art/weapons/w102/audio/audition/retrofit_escapade.labels.json": {
+      "sha256": "f8ff6c5a70e939a59f3320f4c8249c44eb98691275bd93956bc9d7ea01b99df1",
+      "bytes": 418
+    },
+    "art/weapons/w102/audio/event-definitions.json": {
+      "sha256": "a9d70a0f9f9c1793ea18444d1988c85b6f75dbb7e1083abfdccf3ec53516fee9",
+      "bytes": 4129
+    }
+  }
+}

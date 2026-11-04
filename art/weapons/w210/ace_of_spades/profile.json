@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "weapon": "ace_of_spades",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "hideSupportAtRest": false,
+    "keepMeshSupport": true,
+    "meshArmDirections": true,
+    "reloadCameraLower": 1.5,
+    "sourceWeaponRelative": true,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A567"
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w210-source/source-review.json",
+      "observation": "Read the master-supplied separate original Blender 5.4.0 Alpha evaluation report: hand_cannon_f163a4c8, Armature only, action 80A8A567 reload_full/reload_empty, OBSlot, frame 1..127 at 30 fps. The report records allInputsUnchanged=true and exact agreement at prior cache samples. This worker reviewed that report and evaluated matrices; did not independently reopen source.blend."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/hand_cannon_f163a4c8.json",
+      "observation": "Read actual 61 original-action poses including shoulders D1232BA2/17025F50, elbows 897A1504/A3781DCD, wrists 8C83CB67/DE9D6BEA and weapon 4A0810C4. Row-major column-vector armature_object matrices, without matrix_world applied. Neither source mesh nor source camera is present. SourceBlend digest is provenance copied from the report, not independently recomputed."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sheets/hand_cannon_f163a4c8-80A8A567-upper-chain.png",
+      "observation": "Viewed the actual source shoulder/elbow/wrist XZ and YZ sheet at progress 0,.2,.4,.6,.8,1. Both limbs articulate, including large free support-hand excursion through .2..6 and return by 1. A bone-only sheet cannot establish native silhouette, visible elbow exposure, mesh contact or ADS clearance."
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/item/weapon/ace_of_spades.json",
+      "observation": "Read actual canonical 87-element model, first-person displays and grip element82 (X rotation -22.5 degrees). No new mesh evidence justifies moving current right [8,8.05,7.98] or left cup [7.3,7.65,8.25] palm anchors. Retain both rest calibrations."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "observation": "Copy current hand_cannon framing: translation [-1,.25,0], rotation [-1,0,0], scale .98; retain existing wrist roll, reloadCameraLower and support settings. sourceFullChain=true is the explicit new behavior; no camera recovery is claimed."
+    },
+    {
+      "source": "scripts/rig_arms_w205.py",
+      "observation": "Read source_weapon_display, source_palm_translations, apply and upper_arm_displays. Body and wrist travel must share the source weapon-parent frame. Keep authored 32 model units/source unit and ordinary segment lengths. Master owns source61 import, shared retargeting and upper-arm gating."
+    },
+    {
+      "source": "scripts/generate_ace_reload_w157.py",
+      "observation": "Read existing source-driven 61-pose body route and disclosed authored cylinder/yoke/extractor/cartridge hybrid. Cylinder hinge stays attached to gun; policy=cylinder must not enter detached-magazine hand-follow logic. No source semantic mesh binding for cylinder is established."
+    }
+  ],
+  "notes": [
+    "Initial source-grounded candidate applied after master READY; pending master integration, first actual native Vision review, worker correction response and second native Vision. No native acceptance is claimed.",
+    "Retain sourceFullChain=true, keepMeshSupport=true and hideSupportAtRest=false. Two visible hands at rest/ADS and cup contact are native review requirements.",
+    "Existing right/left rest contact positions and rotations are inherited unchanged from art/weapons/w201/contacts.json. Explicit reload.rigAction=80A8A567 selects original Ace action without changing gameplay duration or audio.",
+    "Master must gate emitted upper arms by profile, prioritizing the source right/firing upper arm during reload to cover its exposed open elbow. Exact profile gate field is pending master integration contract; this candidate does not invent an unsupported gate key.",
+    "Original61 reload sampling is not proof of client-side continuous 60fps interpolation. Source bones provide no source hand mesh, fingers or recovered camera.",
+    "No mesh, UV, timing, audio, generated asset, runtime or shared-file changes are part of this profile."
+  ]
+}

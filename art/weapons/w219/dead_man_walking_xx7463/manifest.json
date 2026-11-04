@@ -1,0 +1,554 @@
+{
+  "schemaVersion": 1,
+  "stage": "W219",
+  "weapon": "dead_man_walking_xx7463",
+  "generator": "scripts/generate_reload_w219_dead_man_walking_xx7463.py",
+  "generatorSha256": "af5ecc288729debd4e79b56fdc000b314a3753b13323b7c555637f6599ea05d3",
+  "itemModel": "destiny:weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "thresholdEncoding": "exact float32(i/60); exact1 canonical entry also handles overshoot",
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "hipEndpoints": [
+    0,
+    60
+  ],
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/dead_man_walking_xx7463.json",
+  "sourceElements": 100,
+  "partElements": {
+    "body": 97,
+    "magazine": 4
+  },
+  "bodyElements": 97,
+  "movingElements": 4,
+  "magazineElements": 4,
+  "weaponElements": 101,
+  "canonicalWeaponElements": 223,
+  "selectedSurfaceElements": 100,
+  "addedElements": 1,
+  "triangleAdapterElements": 0,
+  "ordinaryArmElementReserve": 448,
+  "maxAssembledElements": 671,
+  "elementLimit": 1000,
+  "assembledBudgetVerified": false,
+  "measuredAllRouteElements": null,
+  "budgetBasis": "Simultaneous body+whole magazine+448 classic arm surfaces; raw canonical and reload are alternatives, never summed. Master measures final composed ADS/inspect routes.",
+  "movingNames": [
+    "heel_core",
+    "heel_roundover_-1",
+    "heel_roundover_1"
+  ],
+  "movingIndices": [
+    57,
+    58,
+    59
+  ],
+  "geometryPolicy": "Keep all canonical solids/UVs intact; fixed grip, straps, panels, latch and haunch. Move all three heel/baseplate solids plus one authored recessed shaft.",
+  "reloadOnlyGeometry": {
+    "elements": [
+      {
+        "name": "authored_internal_magazine_shaft",
+        "from": [
+          7.45,
+          7.0,
+          6.35
+        ],
+        "to": [
+          8.55,
+          11.2,
+          7.55
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            9.43,
+            6.9
+          ],
+          "axis": "x",
+          "angle": -23.168387153497488
+        },
+        "faces": {
+          "north": {
+            "uv": [
+              11.9375,
+              0.03125,
+              12.03125,
+              1.421875
+            ],
+            "texture": "#0"
+          },
+          "south": {
+            "uv": [
+              12.09375,
+              0.03125,
+              12.1875,
+              1.421875
+            ],
+            "texture": "#0"
+          },
+          "west": {
+            "uv": [
+              12.703125,
+              0.03125,
+              12.78125,
+              1.421875
+            ],
+            "texture": "#0"
+          },
+          "east": {
+            "uv": [
+              12.5625,
+              0.03125,
+              12.640625,
+              1.421875
+            ],
+            "texture": "#0"
+          },
+          "up": {
+            "uv": [
+              14.46875,
+              8.1875,
+              14.5625,
+              8.265625
+            ],
+            "texture": "#0"
+          },
+          "down": {
+            "uv": [
+              14.3125,
+              8.1875,
+              14.40625,
+              8.265625
+            ],
+            "texture": "#0"
+          }
+        }
+      }
+    ],
+    "authored": true
+  },
+  "magazineAnchor": [
+    8.0,
+    6.96,
+    7.75
+  ],
+  "keyframes": [
+    [
+      0.0,
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.1,
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.18,
+      [
+        0,
+        -1.0,
+        0.42
+      ]
+    ],
+    [
+      0.25,
+      [
+        0,
+        -5.2,
+        2.2
+      ]
+    ],
+    [
+      0.32,
+      [
+        0,
+        -9.5,
+        4.0
+      ]
+    ],
+    [
+      0.37,
+      [
+        0,
+        -9.5,
+        4.0
+      ]
+    ],
+    [
+      0.45,
+      [
+        0,
+        -5.2,
+        2.2
+      ]
+    ],
+    [
+      0.5,
+      [
+        0,
+        -0.7,
+        0.29
+      ]
+    ],
+    [
+      0.53,
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      1.0,
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "gripWindow": [
+    0.08,
+    0.15,
+    0.46,
+    0.53
+  ],
+  "magazineSeatedProgress": 0.53,
+  "partHint": "magazine",
+  "policy": "magazine",
+  "reloadHand": "left",
+  "sourceAction": "80A8A560",
+  "rigAction": "80A8A560",
+  "rigActionName": "Armature|fp_80A8A560_reload_full|Base",
+  "sourceGroup": "sidearm_60848ee7",
+  "sourceRigPath": "art/weapons/w219/rigs/sidearm_60848ee7.json",
+  "sourceRigSamples": 61,
+  "sourceActionSourceRange": [
+    1.0,
+    67.0
+  ],
+  "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sidearm_60848ee7/blender/source.blend",
+  "sourceFullChain": true,
+  "sourceCameraRecovered": false,
+  "fingerIKRecovered": false,
+  "originalSourceSha256": {
+    "sourceBlendSha256": "6ea0285714171688d79cbad7435169bb974736668e6ef58ed4142731840cdefd",
+    "sourceMapSha256": "6fe0ab02d6a8cbead9344c18466f6ed0309c75ceff19f854dc9f30394deab4dd",
+    "boneMapSha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d"
+  },
+  "motionAuthorship": "Original own weapon-bone replay with shared source-parent basis/32 scale and .1 endpoint rest crossfade. Authored C1 withdrawal/reseat in source-timed envelope; shared builder attaches magazine to LEFT source palm and releases by.53. No other-weapon trajectory.",
+  "sharedIntegration": "Master W219 rig/action/profile loading required. source_weapon_display replaces baked body from ready and retains child-relative offsets; never multiply source body twice. Preserve source shoulders/elbows/wrists, ordinary fingerless full arms and no axis/length/visibility compensation.",
+  "sourceReviewEvidence": [
+    {
+      "source": "/private/tmp/destiny-w219-source/source-review.json",
+      "sourceSha256": "99b7a8001a2a09a88d9232c4e5945cb25d0f7d7cd5460380595406d947309138",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read master Blender5.4.0 Alpha report: ARMATURE only; OBSlot, reload_full/reload_empty 80A8A560, frames1..67 at30fps,61 samples, prior joint error0; source inputs unchanged. Worker did not independently open Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sheets/sidearm_60848ee7-80A8A560-upper-chain.png",
+      "sourceSha256": "ec1348a1ac4ddb0ea04b52fe7d14ef7c7d04e52485453762a14330a44beea834",
+      "role": "viewed_actual_source_chain_sheet",
+      "observation": "Worker viewed actual six XZ/YZ shoulder-elbow-wrist projections. No weapon mesh/camera/finger IK. Left wrist exchange excursion and return precede later upward action."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sidearm_60848ee7.json",
+      "sourceSha256": "1365b500756a638b2d9a1bd1c34036b7dec18b30ec2f5735a57e47315f2351de",
+      "role": "read_fresh_source61",
+      "observation": "Original weapon4A0810C4; LEFT D1232BA2->897A1504->8C83CB67 handling; RIGHT17025F50->A3781DCD->DE9D6BEA remains near grip. No other weapon trajectory is used."
+    }
+  ],
+  "canonicalGeometryAndUVPreserved": true,
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "staticParts": 2,
+  "parentDisplayChildren": 244,
+  "packFiles": 247,
+  "totalReturnedFiles": 248,
+  "limitations": [
+    "Master evaluated original Blender; worker reviewed report, fresh61 matrices and actual bone-only sheet, not independent Blender evaluation.",
+    "ARMATURE only; magazine construction, contacts, exchange and.53 seat/release are authored. No recovered weapon mesh/camera/finger IK.",
+    "FIRST actual native PNG feedback and same-worker review/correction or justified nochange pending; SECOND native acceptance pending.",
+    "61 poses/60 intervals do not establish vanilla continuous60fps interpolation."
+  ],
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/dead_man_walking_xx7463.json": "1d4fd181a57d86103acd237a2e61d91c0ccc879fd25023c95993d0103dbd4f2d",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/dead_man_walking_xx7463.json": "703b70280d0cbe4b5bfe50547589aeaa4f2f69bb2cbdecf33b1f1d174af70c57",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/dead_man_walking_xx7463_twohand.json": "9f579169bab36d88c88d0ddcfb0fad8ca844d400981d87e37759397a57ab99f9",
+    "src/main/resources/assets/destiny/items/weapon/dead_man_walking_xx7463.json": "ea4ee5f05922b76d56786206d47ee40be7d16aa38d7c3f12717e7de839b6d61e",
+    "art/weapons/w123/dead_man_walking_xx7463/design.json": "5122012a19ed627e09f946b431694be816121e3aae787c6eb93fb84c86b33a1f",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/dead_man_walking_xx7463.png": "1d82ef568cb547ecec7afc6ddffb55abdf95ea45aaf2457b0c9bb2252acda3c3",
+    "src/main/resources/destiny/weapons/w46-timing.json": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+    "src/main/resources/destiny/sounds/w63-reload.json": "e89b09c8d1402239fa65873b5e96fc7f55d1b3107b753aab8c8d5474bcbb750b",
+    "art/weapons/w219/dead_man_walking_xx7463/profile.json": "aed6d30d120e7584b4804fe6e10732f621374e3ae428e15db45bfb1fa12db07e",
+    "art/weapons/w219/rigs/sidearm_60848ee7.json": "1365b500756a638b2d9a1bd1c34036b7dec18b30ec2f5735a57e47315f2351de",
+    "scripts/generate_reload_w219_dead_man_walking_xx7463.py": "af5ecc288729debd4e79b56fdc000b314a3753b13323b7c555637f6599ea05d3"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_body.json": "ec0d80bbba9266db141bad70c1dfbcc1534fb31005efbca289e93e7edeb65249",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_magazine.json": "4447336ab6bfb3f28d24d9d911de2d2144c633c2aa3f137b96551c0bbbd104f9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_00_body_native.json": "52346ddabb783b519ca69ec00f4373c40ee0622c32b1e3f9fe5249c16efe61a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_00_body_twohand.json": "1e60c335a268ef7eee50699642ded46a9199c3ac7c48281fd567e7055fe6d62b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_00_magazine_native.json": "c4b0c26ee1635bff8300fc2c0098a13fb1b208bd49e337878bbc88afeba05e24",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_00_magazine_twohand.json": "eb0ee157c6e573063b6db58fc5b92ffd62d4d8ce8103feabf39909ab056c2e83",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_01_body_native.json": "a2f394c9d4ad8bce0e3f98f04905b9701d14fe1f7f265d1fa4805204d706fd4c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_01_body_twohand.json": "cb5d941c6a3f04f26c2fbf0c833a7142bde96cc261e28c8fa5e0ec8cff8362e6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_01_magazine_native.json": "7632947d3e9d53b932f6ee529c95bced2a0cc73bcdaded6afb1d1eedafa462a7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_01_magazine_twohand.json": "25a9f589f7ded05904fff3c1cb91ed1d77b9fbe58c717eb2c80933da3f981572",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_02_body_native.json": "f5833cfb5fdee85b486380c0dd9d1d388b5362ede6239c14a4560b92fa589823",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_02_body_twohand.json": "0b3f656760ea7afdb30b70d6e2f005845bfaf76ff47dd9e406bfb739e58fd785",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_02_magazine_native.json": "66170d9544ee132c3ae6c142990a1126b429e5fc7e43d1df17b156cd51655782",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_02_magazine_twohand.json": "046c7960cbb5df275fc1801c827eb8c1082cf59b230e1ed94dbffc139f785740",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_03_body_native.json": "7f9eebfb5b898029c913b0bea0332d8cb61030ed1f2f4fb30c22caff63a9ecbc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_03_body_twohand.json": "dceff0298a61153a72e0b1a72dc3b13e2e47c5198336756dc30a4f8213c24766",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_03_magazine_native.json": "879821e3aa3dd7b28039ec1db7eaa3c3cc55e722927b29048c76684fc13df34e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_03_magazine_twohand.json": "6ca21f657847923d6005d3c691d1e83b974deda3b57d6b466bec268e7055b92d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_04_body_native.json": "d4d2ebd89aad6cdbfb2404efbdb5de7ef7fee9cf0594e779a8586ea6d4179eda",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_04_body_twohand.json": "0fcb639b308adb22986b23082c2130a84140e6d526fff11137980f823b1a8d58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_04_magazine_native.json": "ce429ee2b4588f2c1eab3dfdd022576420037e8c0692c998f3b1776597fb60f4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_04_magazine_twohand.json": "cfedc49b88e045ad2f111ecf5b45c33600189ac5d5cb1cbcfd53473b9cee54de",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_05_body_native.json": "70d7c22487291a053b987b3926145979c9f0e6124849fd0619b1c078250b079a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_05_body_twohand.json": "f82575dcdb821a755985cbdc078a5bf31337c0b184731b753b2f97819470689d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_05_magazine_native.json": "7e47c5ab9487355716a1369c3ad117096b14e6aa8fa1488fe2d5674a460a048d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_05_magazine_twohand.json": "23307b5721ae6924159e2002805567be497efb20714bc98aa0836cb2b0d1d776",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_06_body_native.json": "3a33215abeb258290ba43b14fd6a25b40731e85d95eaa5ba970f71bb0bc62e2f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_06_body_twohand.json": "689b6db34b4db445eecc4e16741789bdc18511b32b64190e2f2b481cd1fe33ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_06_magazine_native.json": "f097942f592b63405dd2002ab6b6fb64c2f2805f9b2368cc4173be454b20db56",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_06_magazine_twohand.json": "2076339fdc539d4fcb0f57f70a82468c1a9850e223a71ca9484f8ec125d2a085",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_07_body_native.json": "891b784af60ecccc6972dc10281f7a1f258c462fabe406ee0f4867e7cad15831",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_07_body_twohand.json": "ba3bf1648d74ff8346b7831abbd90f2b1b38ac0e1f628c4a620c6a0254007f69",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_07_magazine_native.json": "2c6b73d273f6a7c9f96030273176ee46be652b828f84cff49e74df3ed4b0690f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_07_magazine_twohand.json": "f92755a25b480cc0cd3cc01789bfc0c7b1f18da3429e24c4f882bba832dc4cb1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_08_body_native.json": "65bacdd42f11b91d989db0e8d736a538d6ff231d10eed6fbc21affcae301b074",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_08_body_twohand.json": "31c1d03a67addae33ec5cdbbb6c3e0f921f38ca7db4df70940cbe473a4ca7d64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_08_magazine_native.json": "bf20aca9d9a165c0758d27d0c96bd7ce8bf5901fd6fb60ded954fd9a29d6f7fb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_08_magazine_twohand.json": "1b9b69992d8ddf9d6690cd6c3ea9cbcee54ea73e41fc4c1d60a2b4aa0f5c6b57",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_09_body_native.json": "93c15c1c461d53efbf5377fbb94ffa3be7b825d20dbf2c88be80c8d4e9dbdfac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_09_body_twohand.json": "1cbd2481e6809c3f20cbc0a26cf57d5a8d56ff853bbf56c33bf2d68b12bd95e0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_09_magazine_native.json": "dc2e72b163b8075534c7055b38fd405d3039a14d3bf0113ae8eacc480f1a91e1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_09_magazine_twohand.json": "b7d24b04ee85cba6232b7ec238be62d077ae7e19272230853400d21b9caaa5fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_10_body_native.json": "3a29eeddd3a64ec83aa87b4e136e2f4c4214158052a4a042d8611b2c19ceed56",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_10_body_twohand.json": "35494644f2fc6775e595a50a68d139fc18aabab04673c736e83b6d2e79a25c01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_10_magazine_native.json": "714cb5cfab34c2bd83e2b71c324421f20aa9c5abc819f5b4c88e5a3e56daf0f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_10_magazine_twohand.json": "658566d4e043d91dda0b6a53efa14b5b09a58feb1d760b16b91a14d282f0836a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_11_body_native.json": "7f3e69bfc7304cdc77261f31b308fdbeaf14f8420fd374c3c64711ffce74f063",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_11_body_twohand.json": "139b0b97f4ecaf6f548e4ca24d8e48d2ec7c5ba3a49c7d9196593ee31ef58333",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_11_magazine_native.json": "44e103530e87af6aff7eba395cccf4811f63cad5556efa1201a65f483ea196fa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_11_magazine_twohand.json": "802eeb7c65daf5a6e2f555c8dd86f06fd297204f14f8fb7e35c12c6d27edd3c0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_12_body_native.json": "c18848ec7145a6a22ba2db84124f2f6b5d5a3e3eca078a8bf28e8487b13195a3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_12_body_twohand.json": "4af65f4a47c48b3a5fa8830e6cd51e3a6a073d1eadc23569bacc8016b9a8c58c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_12_magazine_native.json": "9479da757f75312c3f9f3aca61907c0d9f4722f7ff5c619592b8e64d608d35c3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_12_magazine_twohand.json": "e47fd805c1711d659fa9ff782d11a1f0226c9ab480abb1f27efd67dc9fc2cef8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_13_body_native.json": "004afa9896e19119373395410829464d22a600caa562cadae8749c0397d192cc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_13_body_twohand.json": "ee8e4a27fe05ea572af59b71ab614b216ef21299bed4588f839c24567891a9c9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_13_magazine_native.json": "9b5b7c41d68ce1715dea3c7c38d8b32af59327db6157012be5657b1511c6ded7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_13_magazine_twohand.json": "f4a6aaa066e45beb0acd84e16fa5032c3942c4b5d4807684df9e60596bc4f73f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_14_body_native.json": "8bda1ef79d24cd64c0b1f4944b0c5acaaff89173a05e906cb3220909a42aea6e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_14_body_twohand.json": "f8c7f573efce9a0cfa329478e312ef78afca4f831c9cffe0e1eb86bb9a67d395",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_14_magazine_native.json": "d7fce88cbba49d330ae3bc6ea80217eab579c80b782e1114054214267b186293",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_14_magazine_twohand.json": "7fb867260e6d3313fb1fe84ab1110068dc141f98efd570eba1bdf1dd95a88265",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_15_body_native.json": "59d02b0e9d0262cc1a91cfb801627d319c0dfa3bbc4bfb15ece354622f1052cb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_15_body_twohand.json": "4ee9614579e184d2a15e528f71458b9d19c1628d5c6a954ed5b7dc1c73a92052",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_15_magazine_native.json": "4d8a88e31fa9d54a34601056fc976123e7646714b0df9357925c49506041074a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_15_magazine_twohand.json": "2243644995f17f8f6eb10de42c068f73dff460d76961f4654b167abaab478c5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_16_body_native.json": "e2625fdd51ad430bb66a271d776125223bd6a616857f2c6222ee75b086accf57",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_16_body_twohand.json": "94c6e31079cbe398e08489b882264036a54355b4fef171d8101b3c61ee3f13e5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_16_magazine_native.json": "0675320cc64468354ed3f20f0f70b37b58f0bad0983d623c0776b4fbedebee1a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_16_magazine_twohand.json": "54725a67e077b51673423e822cd187db3ce13aa7c86d8bb2dd3e872d3c4a2944",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_17_body_native.json": "b46c643713940ff2dabb8d5de88cc24ee5e8553f99e7de175be007b283e9c09d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_17_body_twohand.json": "70f2ddeb51c2bf0c02da1689269398ed8a333fee67f0f283c671d4c971c8c05f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_17_magazine_native.json": "52b7680fbc915326eaafa3b241d89265f305c3b47c0b83ce94301d7954b96ab5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_17_magazine_twohand.json": "b7a0d85323f2aea77dfbd9d1a1846e58adb82865dc7c9820f6b812f1877ea8f6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_18_body_native.json": "6be81dba7a526c609eb978e9a21c5acf32286ff05650a3e304c055ed042fb07b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_18_body_twohand.json": "d713beca2f97ff4307a7ed0561d00c3ccad7d31faa86b2807e11410f1b9e976b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_18_magazine_native.json": "12a1288dc1a75333a86517ee4aa5dd3bf7c0d86dba4cbc114a86b5e42bdb4a51",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_18_magazine_twohand.json": "76e926420856029aafc28c1d9411ed1187c8f56c925b781e7ca06b844759d26b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_19_body_native.json": "1921003ce19e682fd8e9afaccdd1d513992ff40ef51e899f8d5c7e616ce0608f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_19_body_twohand.json": "b29a0141a63387eae15d0ac22363a8a3b0e06c9e8e3136d394d0da4fe59dfede",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_19_magazine_native.json": "ff0eeeb1140a84922862d59d612110cc799da5550983497ebf8f79689df7db2c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_19_magazine_twohand.json": "b0283a0ee2028746cc4f4ce6cba5b4998917672c5d0e22b649c5c85735b06659",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_20_body_native.json": "8a78ac279da43ec30b39a7792ab93aa5a62a02287f3b8e7636c47e7539563c04",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_20_body_twohand.json": "0de1104cf411a08e46f9808281293071ce99603efb08e6fd513bffce9035e661",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_20_magazine_native.json": "99499927e19acc108be1a2ac62f9e4d0c8f055032a16945a573df74f72f6ac2d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_20_magazine_twohand.json": "3593c53beca41147fb141c2f5d3af6fd4f7c54c685937ec5b2ab703ef00d0f8c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_21_body_native.json": "116cadffa969b33ab5da884cea4334a1d0220bbd6ef11b82deab9c00c4a53e76",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_21_body_twohand.json": "54dfadd13a7f8938c22b8c70073f41c13ea9539ec933666150f2abe77e76dfc8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_21_magazine_native.json": "0b2a45da6e9e79592445ed3e1f2aed8357f727433a3c7559dfc9396227a7ccd0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_21_magazine_twohand.json": "f2f94fb759668c883f0954c441b218990cbe4d6201f83051e64dc3929689aa47",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_22_body_native.json": "a83e0476952e282760c65e072c553b7ecda3ef6679d144db69f9202221a56d6a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_22_body_twohand.json": "46b80d2da36d9a356abac49b82f52b7f74667b60e5b8bfa6bc64afbd9d68512e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_22_magazine_native.json": "41cbc74a05212d6d749e68e656bcb2f2283e0b3fc4951c8efc9ef1a442d35ee1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_22_magazine_twohand.json": "85de83a3451036f55d8f35659b535ceb80475a344d8460b150e8b3a6b7c51eba",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_23_body_native.json": "6b4d5ca02d8cf17110600100b02342b7696ecf9afa1fd265ec395ac540343e57",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_23_body_twohand.json": "5f3c2a358f8f3bef5c33725e3664ad3fddd6b7a6ea2af72c06cbc397a45fe1ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_23_magazine_native.json": "afa537b61ad8358bf4cbad3209d5cd3ab06ff3a7c3c9169f8350eac146d0f215",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_23_magazine_twohand.json": "88a269f6ba55ec9cde1d760fe5353818888cc9c2792bef1431575021a52b7441",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_24_body_native.json": "b51858e98db6e42dd3a8d501255511535af0028ad269c74aa0f59eee86f410e0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_24_body_twohand.json": "086bc49002ecffa39acabbd4c4723b9bc1cddddb1c960aaebb67364a6522b1c9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_24_magazine_native.json": "e39db8db001900f3a64d32f4fb2722ca0fc5e4bd4f884378f30fd14b2fbb9c4a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_24_magazine_twohand.json": "6dd23f40851f163fa9be4d03c018d7d8beb8e720c0975625bb3c5b9da73993d0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_25_body_native.json": "0428203d196ca778a803a49453b1e03f49947ca812fa212574b747f6e6968bc5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_25_body_twohand.json": "84828f1928be7df2eb8203c13ccfb3d20bc7f5b5f7f249e4d32a6d5b1a35d940",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_25_magazine_native.json": "ff776314ceeae34cf0b526e5d95438d129fd52a0c54d35713ba0fa8f2fd95e66",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_25_magazine_twohand.json": "1382031d83d529737a7ab8b5c86c94cdd710b95a68ab3d159029d62c4eea0fdb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_26_body_native.json": "a84af4395af1c25431a4b8ac488e67ec08d876ce5bfcf9399724ee2bf9b0f7ba",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_26_body_twohand.json": "b10a70a76cbae43636aca567601234a21844a3300f64bac2df43990b308dfc2b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_26_magazine_native.json": "8f711d2b8e868be2c3076c3b9e6f8cb9b23055bc4fd555d811a73c6846d73345",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_26_magazine_twohand.json": "9df0b7ca412d5ca3a499422fbb9739e29720ff12c9d07e8f00913b1cbcb5cabe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_27_body_native.json": "a767338d7dc11edd3036d7f5d6effe9d70428ff05334ef395a841f09f40b0ae1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_27_body_twohand.json": "1a4ff46715c78249afc56ef8bf14486779d06419ede8d92b63fb2111ca95de34",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_27_magazine_native.json": "0c16119dc985c1d3941c108f85efa189a572c110f56b6ad08d24e5702cd17bc5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_27_magazine_twohand.json": "71943b1b3b44a0efd9c7c5bc3fd2c74796b4bbaf7dee825528b619a527878c9e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_28_body_native.json": "15ea805ad4f164aea4d2b6e74b0f2009baceb3e2b301ae2ce409ef33966fbf33",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_28_body_twohand.json": "5ce7e2e35f1728750b026f028b5dc828c38ed346e59f9d2957bf61f132e36cf3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_28_magazine_native.json": "202802affb623c023cbdce8342a425560dcb9aaf3aefc9f81380aa661be272a6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_28_magazine_twohand.json": "2d7d19983cca48ce4e6521a4ae4bd544786152abfff5c45399437247a889a1ec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_29_body_native.json": "998e1c5a3f08b58aee4646ea011dd6c24ac4ff011b79fd67aedbb727cf0d16ac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_29_body_twohand.json": "a4ff4dca993569b2d003d40d2fcaec6e848cc10fc713528daa1a977e45029e6c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_29_magazine_native.json": "c7d2fbde735b599be4813bfbf467ddbe7eefa1313b48799178e0a3cc576853a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_29_magazine_twohand.json": "50fa800793e04fa7b5c335a2b6e4cfb9262bb86f8bcb83d92a9a5c3976bcc15e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_30_body_native.json": "dd16d5426d495e63c09e58bb97e1e774ba17a9ec922d3abdfd3b10f98c92215a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_30_body_twohand.json": "2cbc3515db8842feb768692fdab7b5058cd50f52a5220a6dd8990c541cab46ea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_30_magazine_native.json": "eb498dfc2a77a17c4b07193af2d2770f4ae031e664edc15f20806dfcabed3a6f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_30_magazine_twohand.json": "d3ae4dcb085c5392dcc0b9eb3fb26d776f59fec56bdda59b9cb68bcb516d38e6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_31_body_native.json": "3453700ae84a238bd4c879fb0ee5e027c26f5f1ab2570a3b85c35c16d869a5ec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_31_body_twohand.json": "42e58896ceebfbe789b149f92e6891366a753cf8aae3f49e97a6ad21a178418a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_31_magazine_native.json": "889de06f43398239a7fe199404848a65d6c79e3dbf417dad460b72edd5db2e54",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_31_magazine_twohand.json": "0b9a3e4774c28052e20bbcdcec0d8d79be520d55647a45cb73bbcc33d18c6169",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_32_body_native.json": "d913269be91291e10bfc21278edd00d6f8e2aaa7a7521a7dde3d7492c345683c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_32_body_twohand.json": "32b239a89c1cd3ad42c5b8021a7c3ab6bcfe0a49a14d7b1545c882b7bc4f38fb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_32_magazine_native.json": "ce1fbbf9aad482bfef66bba3acde2b9dfd1b6f8a26515d48e58a8a64a222b59e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_32_magazine_twohand.json": "857dee72ca0b15066a12fe7620fba3f0284846a01a7bfbac92791e4a6147799d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_33_body_native.json": "ab79ba8d25a395612d862d7ac454bdea6e3d6e5e7dd0b0ef075a2797f05066e7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_33_body_twohand.json": "2882da6c91c180b8343e5d85dbaef6c33e6f84cd3f5e0216a11d3e820d6fe591",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_33_magazine_native.json": "889f5d4e5f846313bbffc15775e78dcd2af8f63950f2a458e1516160fdd7815e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_33_magazine_twohand.json": "c6fe95839754c74e9306f33e4bc33b843ef119badca38310dc6ad8cd9bc297ec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_34_body_native.json": "c768ed8dcdad42fe8a0d11b909199ca59099909b1931ad1c5223bdda6883b0c5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_34_body_twohand.json": "f721733e8ae833c117157bafb2647aa643f817efad772363a20c955420f1bda4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_34_magazine_native.json": "96b23e40ad5950425c37afed056e5e339511501adf8e2bb7a9e0401d71c5df18",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_34_magazine_twohand.json": "5ab9254c0aa1b70e8a3824dba0fbcb2058a9814a0d35ce4b16b73f16a2be0378",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_35_body_native.json": "51d564a1e7d540183b3fae683a33b862ba66d16f7ff89b912c1ef3481e3327a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_35_body_twohand.json": "90e0c9f945b8e0314538fac5f73df9b073c74035296ef30cef0743213eac2f1e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_35_magazine_native.json": "b60d2c039f2ada5daf82c62ea74676bb6352041b0b296b77dcfed229f1f317e5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_35_magazine_twohand.json": "0786e77d8e632f7efff971ffd0895c9d3bc6bec89ac4418342a608972eaaf420",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_36_body_native.json": "151806ecbec38b8a767e7e07d31963934ccf00a9a09a86cc5e87640ec5268962",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_36_body_twohand.json": "e6dc124d48b5324335059701ea7127f30641e46a906ca33243f50b08e6414d63",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_36_magazine_native.json": "a5ca4293252e9ef5bebf52dc2370415fcb991a4cf20ee62ea9237ad429628972",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_36_magazine_twohand.json": "2269426c2a3c4ba663e35367b8e2f17b1fbc258f42bb04b20cc71470e4605fc2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_37_body_native.json": "e7d98b73a97ad21cff0ddab6681f3dbc09ac0de79b40cdb676ba3b87ca6a6c79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_37_body_twohand.json": "13cf9aa56a23a8816ef6998281570eed52ccc448cfe2ba45ffc73ecbef29309b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_37_magazine_native.json": "55aae761c86335764d1a0ba9d3d3589d103bec28537850cd67c142f352af49e4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_37_magazine_twohand.json": "170277a3b785f7d345f0667f7ac8e82b2a60964884e71e58b6c92ebd45734c12",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_38_body_native.json": "aa5fbd4fbea24a620756b538e8ad0b91ff31c02e6eb2250964deb9aa70d9def6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_38_body_twohand.json": "f0fd3692281d71902f733bce72968356b9d03123c554e26db14b3ad2b582da7b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_38_magazine_native.json": "336dec95620cf949f47c137df691181d886d4692fc11fe237b5e450bd49c5594",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_38_magazine_twohand.json": "722e72b51af039d88888f510e1d9831cce076355e4cfe60a6b8e9afd19e588e2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_39_body_native.json": "e7365d4feceea4eadb5563730c44c2963333a871b4a8cb56db0981eb44dca973",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_39_body_twohand.json": "683d77f3a79f76c8c1c3581100505a4e17ac0f63cec2d734d12425ae64c6ee25",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_39_magazine_native.json": "22dc677268890701f28177da085131e069809c3643c2743ecd5c53b2b7a24489",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_39_magazine_twohand.json": "1ee1195ea20b9e3fe47c0c09d9de3ffbc064972966303a8753504d1ff740bca0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_40_body_native.json": "30d836239e2bfb6beed257a6d21b5b32c1d347dabf4ec26774d307cfb8e4e7ca",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_40_body_twohand.json": "c7adb529780aa38dd2b50eb38657053d9823254c932ff53ff4f7c37739335adc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_40_magazine_native.json": "3a2273719dd795ded1c9a702777437b7454cdca1f073b24798b8977c2a50893a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_40_magazine_twohand.json": "f31e44f28f3355f27a2d99c43d8c149046f17945beb96fa0f60afd71597c56a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_41_body_native.json": "c3f72fc04bfccd58818e5423a1b636cbf5c3ce5b95aba1bdcf8c54a0903e4a06",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_41_body_twohand.json": "2d4e987afbef954f6a8680ccdf2d683bb362fd0f5cb6486923c3cffc0636279c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_41_magazine_native.json": "3754647a53a9f04edd9c9a34fb5015252f9ea5423cc5aab044b7e72d4b7d2677",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_41_magazine_twohand.json": "b38b2cfff962c17d4c062daf8ca3dbb77583e8dc86c0b1a2ed44310f9e0cefab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_42_body_native.json": "6f95a9e7f5179fd72ce2bb2ef95ede4412a218cf3e2435909f1bcbfa16696f63",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_42_body_twohand.json": "3bc2b343602839635f9cd9cd8461609df8549b61e9105c4a484158f35bb227e6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_42_magazine_native.json": "c3393d06a487804b62a94700f0c88a0131f62196cbd0ad0006395b90eab10ddc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_42_magazine_twohand.json": "d49ebe8a5789fbc206f177cdbfb355e2ecac770b49c5e8b99f313702ad2e0262",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_43_body_native.json": "d143fa548b13b510edadc69216190cc1019701d32711f8047d04ad39c26b1205",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_43_body_twohand.json": "4f0729931ae6b6e8f169db805ad2da21a724fe7a6e70a09a900988b76b5ca4ec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_43_magazine_native.json": "4622ac9e4d06a33e2cb8e005f7f6f823a60e239c6bb382a6f9f8ead5374a237c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_43_magazine_twohand.json": "ea2861cc4a72382276ed24ef61752e4ecd9c6fe1e5f88e9208cb6cd7387459ca",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_44_body_native.json": "1884394754d2ef1277ecb722241eea9673b94d9cde9e05e0f2c9c24cdc42721e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_44_body_twohand.json": "93f68157bd3dde0b5c4b4d8942a86c714394d7d8bf5718801e7050ac36aafcc4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_44_magazine_native.json": "409fd6af7591261451c38f7ed0b7032553eb1a69b4e8eff021c3cc21d2796464",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_44_magazine_twohand.json": "7944b2af0a03e0fb7c7062b8883889adf7cebfb3f95a78e8c8264659328482ef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_45_body_native.json": "e16be1e3761a7eff055370f422eadc0cc4d46cb565da43af338617f695c6768f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_45_body_twohand.json": "d6a9d9a57d3bfca00fcf5911e014ca7532450d3386d1fdce89e55cae37f665c3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_45_magazine_native.json": "769d53d37a78dc311a66a67d30d0528ab7a4b55a9db647824a4611cd6d247ef2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_45_magazine_twohand.json": "042308c24dcb04ab9648405dd379c04abd27c9c17efef5e5ed548fa85e0c5598",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_46_body_native.json": "c308b3d50c89fe8d540f51d533afd41fab7b9d24317308a65ec7047cbc1b79f6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_46_body_twohand.json": "60c5b73c3e0c4f009a9768e7428ff648aed8b9af834ad06a1585b4a0301332fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_46_magazine_native.json": "3a932fdb28469acee15b84b424283238e97654c576803bca85fe90c18fe6a3a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_46_magazine_twohand.json": "86aa400a47d14073ef046c01d92094daada82bc4a9e30b3f13c998d2dd34292c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_47_body_native.json": "5d61def6e40813d2169ce7f2412e938df9a77a09b112bb574cdc763b6f3df161",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_47_body_twohand.json": "42b75e5858aaa4d412ce57610a6fa0eb2b091bf85cc209be99217b540abea2dc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_47_magazine_native.json": "1ceb6a82c0438f5156e32158617912617302e86da8816ded87bc227b69dad68b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_47_magazine_twohand.json": "cfa2d77d576775692c6cff8811824e16263053bef79a74a630033f130eea1274",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_48_body_native.json": "9b1b02c027583d1cc9e69fc6ff3bbbff0256540ebecdc53aac7dd496a65dc61b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_48_body_twohand.json": "7df504236d94363fed5f5618ab0dcb6b2c64324bcd63121b3f6663c38e775678",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_48_magazine_native.json": "a010358695ec5dd184207f754a850a373966ea9230fb3568501b0dc0dcf9ed24",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_48_magazine_twohand.json": "010f75fa41bc2a5b0ef8ae88623174c2291fef545fffe14eea9c9200b3a3c0d8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_49_body_native.json": "5e176e32afc5fdd70ffbc8f61d344f54a9176d968e489251d874bd83d8a18c46",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_49_body_twohand.json": "2fcc8577ecbe75b027a87c3570a3ea9fa0638b329b862e828927342a6bf3f947",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_49_magazine_native.json": "f7dd3b5d1b229c5a9e96f04f2251ff53f9356ea618d8d9b2dcf3da1f80491fc7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_49_magazine_twohand.json": "5c6ad70d542cea013815e88c219b6527892e3e077ab451282a8d0e1745b3f05a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_50_body_native.json": "e381479430e31896462ccbfdea320682dd6cb73bac10286eea33e158e8c3fe8d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_50_body_twohand.json": "8e059e4441be39306b530651af44ef9361c7014bd258b6bb66eb3024348e8d37",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_50_magazine_native.json": "731e9d3d2859909995e316f5a090cf3437419dd2177d2d85aefd77da0476c26c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_50_magazine_twohand.json": "bea41a60a03f19555b97939303c4eae4a308bf7a479c71392b314821f64e5008",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_51_body_native.json": "262c3df463e90b9d23f577609c83536d3e5cce09d56dc21c2e073cc40eea414b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_51_body_twohand.json": "fda018e3efbb08fd240fd30c1debd4acda678011887961f682f4373391d868e0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_51_magazine_native.json": "79cb10e0e2dbc032cf517ca35a8f6ebf9881be451c1e4e73834f4625e12ee25e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_51_magazine_twohand.json": "51b23d1d806f78f2112730ab0acd677f75b7e57cdb204ca5f187086d08f181be",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_52_body_native.json": "8b51bc9919eed40c06737e6c2414aaa0a3e60ed1db6a81727cc8dd9e4cd22e98",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_52_body_twohand.json": "614f439604b5b4c6a24041b0cdae7cbc0cb06fd785ddc1858167968e58acbc02",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_52_magazine_native.json": "80d32d214d8bed6bd70503deaefa1c31a14fa4cfed1f8d3aa5d591d54009a0fd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_52_magazine_twohand.json": "69f70f2ca2f48efd0bd51e5c943a572b0b5b11e922a4665c0648c075f6c890ac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_53_body_native.json": "ab4471c887a07311c9dd8507afd9ad0e107f5573e0bec4e21387bf2446986e38",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_53_body_twohand.json": "e123a762df91b1d8cd2b99cb71877dd8139d26f4274769202983511629bc8139",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_53_magazine_native.json": "ab5d0348513f493164945048facf8f0d2c1e4d72c078161fc27b8f83d8be5fb4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_53_magazine_twohand.json": "e40fe87eb3379f5f101bbc21f478e0df71efe26dd9f22e5cfc15891532f0f024",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_54_body_native.json": "81cab52d21d7ec458b2577ab72d15609d843ac104c37e2538e0e1d8faa0794eb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_54_body_twohand.json": "348c3957406481f5a7a01f272989dadc2dd27ce6ff12fd25b6eaf6bb66bbee70",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_54_magazine_native.json": "6c5e61c7c378b1520b77609cec0fbb3f15fc9e4bd41a643e8190c530f7050cca",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_54_magazine_twohand.json": "6b4f00dc6de9d09ff89b07d85ff3b89c3a56c08d71359e28d69fe331dda97400",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_55_body_native.json": "de40f055f590f794bd40cf4d451e4c3af1aac56bf2713ba9ffe6bd5009a03086",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_55_body_twohand.json": "b7c93ffad140da7a49e72b612add694bf5c463a653e19ca7807f18ca5f230f3d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_55_magazine_native.json": "d46b6c75a890ccc06340c96a2a8a7f0c7fe8e91bd18227c112a905d011ca86ac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_55_magazine_twohand.json": "219eb05aa0cdd93d002c39e17ba599818e50cc5c780307d3a133545b8f7add02",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_56_body_native.json": "777c4063df89f39624c1697f3845755b75bd0d3c2b145a3c97a6a6ab3311185b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_56_body_twohand.json": "32343960e0dda83866bbf62c4d446bd109d77ccc324ef14fac08dcd7180f7526",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_56_magazine_native.json": "f2ae2f7905c83ec3a6dc10741452bb5939fac2f78ff14312f47cc9925cff3641",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_56_magazine_twohand.json": "22c6e40fb6027765eb8b60add1b28a515e14bc8bf747672ed7ec0503b0971d3d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_57_body_native.json": "142bb9732f42ad4eb40baf2d5460a898d059dc7db28eed222303d8dc5aa0afc1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_57_body_twohand.json": "0e8fba70423ace4f2706c7e80cfaf24a60927d9357562c3a1e3681a2ebe430e0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_57_magazine_native.json": "6d2229059ff1d65b85158f4162e4727193d175c0175d0e91bcf320d08ab1d292",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_57_magazine_twohand.json": "9db5a59c175d8770fafecc3fbf6c9f7f5b4bbe2e46847c75216b366ff8873459",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_58_body_native.json": "0e7a628ca3f62dba63f59757d599f980fa48c26e717993303ec4a47d513c8253",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_58_body_twohand.json": "0493834a813fde0fd472f54f9c2000ea6504ccbcb41cd5fd63edc79bfd5a2769",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_58_magazine_native.json": "c2b8254675ff7e4466f575b8a1c6fe438fa379bde537e8cf8091ce1c0afba971",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_58_magazine_twohand.json": "c26b4e6c1cbb971d6803533139068142b5da8d814f9e93d3b1a6eb853af0812e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_59_body_native.json": "907387140b08c4d26ce2d2d3b614276894568f5274dfb9c3a4a107339e2fd27b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_59_body_twohand.json": "c308a9881df2c337e08464336620613eff3a74025da0aa8660d7425b8466f192",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_59_magazine_native.json": "7e3441878bfb11abe175da23c2d1ca19e1c91e843e075e346ba0b5be843da467",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_59_magazine_twohand.json": "09e597d7de6c67aa62c16d41677334a62a6c5c422978afa1e7dab18e01defc91",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_60_body_native.json": "52346ddabb783b519ca69ec00f4373c40ee0622c32b1e3f9fe5249c16efe61a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_60_body_twohand.json": "1e60c335a268ef7eee50699642ded46a9199c3ac7c48281fd567e7055fe6d62b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_60_magazine_native.json": "c4b0c26ee1635bff8300fc2c0098a13fb1b208bd49e337878bbc88afeba05e24",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463_60_magazine_twohand.json": "eb0ee157c6e573063b6db58fc5b92ffd62d4d8ce8103feabf39909ab056c2e83",
+    "src/main/resources/assets/destiny/items/weapon_reload_w219_dead_man_walking_xx7463/dead_man_walking_xx7463.json": "8129190e8efd9f843f2385270d2c37264aff65bf6d0859063962c432c00dcf97"
+  }
+}

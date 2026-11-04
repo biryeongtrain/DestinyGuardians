@@ -1,0 +1,86 @@
+{
+  "stage": "W173",
+  "label": "ADRENALINE JUNKIE",
+  "size": [
+    118,
+    24
+  ],
+  "font_family": "Arial Narrow Bold",
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "font_size_px": 22,
+  "horizontal_scale": 0.582010582010582,
+  "alpha_bounds_px": [
+    1,
+    1,
+    116,
+    23
+  ],
+  "pillow_version": "12.3.0",
+  "freetype_version": "2.14.3",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "provenance": "Original generated system-font label, not an official Destiny sprite; no ripped asset or bundled font; W171 font, cap height and coverage method",
+  "runtime_contract": {
+    "icon_id": "destiny:gui/hud/perk_adrenaline_junkie_w173",
+    "layout": "COUNT_TIMER",
+    "valid_stacks": [
+      1,
+      5
+    ],
+    "valid_ticks": [
+      1,
+      90
+    ],
+    "seconds": "ceil(ticks / 20): 0:01..0:05 for ticks 1..90; absent for inconsistent or out-of-bounds stacks/ticks",
+    "activation": "Observed live stacks and remaining ticks only; no manufactured activation or counter",
+    "priority": "Appended seventeenth kind after the unchanged sixteen-kind prefix, including FRENZY",
+    "max_rows": 4,
+    "node_suffixes": [
+      "marker",
+      "label",
+      "x",
+      "count",
+      "minutes",
+      "colon",
+      "tens",
+      "ones"
+    ],
+    "marker": "Green buff 0x8DE2AF; gold remains Memento Mori / Honed Edge only",
+    "visibility": "Held weapon; hidden rows use current remaining ticks on promotion",
+    "layout_limits": "COUNT_TIMER renderer: label center 184, width 118, height 24; marker right 113, label left 125, label right 243; x left 252, count left 266, timer left 287; 12/9/4/11-unit gaps; 32-unit row pitch; no native validation claim",
+    "native_validation": "Pending master isolated native/Vision queue below; offline preview is not gameplay evidence",
+    "native_queue": [
+      "Observe actual weapon kills x1 through x5 and qualifying grenade kill x5; compare HUD count to live adapter state",
+      "Capture live ticks 90/81 as 0:05, 80 as 0:04, 21 as 0:02, 20/1 as 0:01, then 0 with all eight nodes absent",
+      "Keep four older perks visible while AJ decays offscreen; expire one older row and capture AJ in slot four at its current count/ticks",
+      "Check count/tick zero mismatch and invalid 6-stack or 91-tick injected diagnostics remain absent rather than clamp",
+      "Verify held-weapon switch, expiry, death and disconnect reconciliation removes marker/label/x/count/minutes/colon/tens/ones; no stale suffix nodes",
+      "Read full 118x24 ADRENALINE JUNKIE at native HUD scale with x5 and 0:05, 32-unit row pitch, green marker; Mori/Honed markers stay gold"
+    ],
+    "integration": "Master owns WeaponPerkHud live adapter; pass actual stacks and remaining ticks as twenty-second and twenty-third Snapshot arguments"
+  },
+  "source_facts": [
+    "W171 pinned font, 22px cap-size input, BASIC engine, 4x supersampling",
+    "WeaponPerkHud noncompact slot is 118x24 and marker is green unless Mori/Honed"
+  ],
+  "local_choices": [
+    "Condense full authored label into the COUNT_TIMER slot at 22px; 1..5 stack and 1..90 tick bounds from W173 task contract"
+  ],
+  "pack_bytes": 12360,
+  "pack_byte_budget": 16384,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_adrenaline_junkie_w173.png": "bf3295e04539bb48c5ea6daea12cdf1f0272512715065f5201f1def91796204a",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_adrenaline_junkie_w173.json": "e749ecf12a99f256bf2590f6bd6fba1e60038a2f15074b4f84189cec47a8f20f",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_adrenaline_junkie_w173.json": "6be62d8a6c146a64926d4697ea4dad0df833239ea91ab0ad4c2f420585dee2da"
+  },
+  "source_files": {
+    "art/hud/w173/adrenaline-junkie.svg": "8e8ff81d6c239a64a8c3c1b343fdebfc691de00eeecc6a182cb3d46909d2eb3b"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_adrenaline_junkie_w173.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_adrenaline_junkie_w173.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_adrenaline_junkie_w173.json",
+    "art/hud/w173/adrenaline-junkie.svg",
+    "art/hud/w173/manifest.json"
+  ]
+}

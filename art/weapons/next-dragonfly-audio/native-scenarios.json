@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "taskId": "N3",
+  "candidatePin": null,
+  "status": "planned_unrun",
+  "result": null,
+  "sourceGate": "not_run_source_unknown",
+  "integrationGate": "not_integrated",
+  "centralOwner": "topmaster",
+  "dependencies": [
+    "Accepted identifiable dedicated sources",
+    "CLEANUP",
+    "SPAWN",
+    "Central serial JUnit/asset audit -> related GameTest -> full regression/build",
+    "Fixed source/JAR/pack/client cache pins"
+  ],
+  "nonVisionGatePlan": {
+    "status": "unrun",
+    "checks": [
+      "Original/output source hashes and declared transformations",
+      "Ogg decode/mono/peak/clipped samples and event references after assets exist",
+      "DragonflyW77Test",
+      "WeaponDragonflyW77GameTests",
+      "SoundW33GameTests",
+      "Preserve existing exact-victim, damage, ammo, radius, cover, attribution and nonrecursive assertions"
+    ]
+  },
+  "scenarios": [
+    {
+      "taskId": "N3",
+      "scenarioId": "N3-solar-detonation",
+      "candidatePin": null,
+      "capability": {
+        "status": "unverified_unrun",
+        "rule": "Topmaster inspects advertised native capabilities before input. Unsupported slot selection, Q or Ctrl+Q remains not_run_capability; never substitute server commands as native input success."
+      },
+      "fixtureId": "shared-dragonfly",
+      "setup": {
+        "owner": "topmaster",
+        "element": "solar",
+        "weaponId": "distant_relation",
+        "weaponHash": 2034817450,
+        "perkHash": 2848615171,
+        "socket": 4,
+        "loadoutPreparation": "Server fixture may prepare exact original stack, selected perk and finite paid ammunition. Fixture commands are preparation only. Record source/JAR/server pack/client cached pack pins before any run.",
+        "environment": "Spawn-disabled fixed arena; record every corridor entity UUID/species/position/AABB, team, cover, HP/absorption, original loadout/stack, owned observers/reservations/projectiles/HUD/session. Exact primary victim plus open neighbor inside radius, covered neighbor, and neighbor outside radius. Unexpected corridor entity is a preserved failure/diagnostic.",
+        "controls": [
+          "precision final blow with Dragonfly selected",
+          "precision nonlethal hit",
+          "body final blow",
+          "same weapon without Dragonfly",
+          "wall-blocked and out-of-range neighbors",
+          "secondary explosion causing a neighbor death must not recursively dispatch"
+        ]
+      },
+      "inputSteps": [
+        "Only after source identity acceptance, runtime integration, central serial gates and fixed candidate: acquire input lease.",
+        "With verified advertised capabilities, apply bounded native aim/ADS/use for a paid precision final blow; retain receipt and exact server victim evidence.",
+        "Run nonlethal/body/no-perk and obstruction/radius controls serially with teardown and fixture recreation between cases. Preserve original target/damage/ammo assertions.",
+        "Finally release; verify input and server state neutrality before continuing."
+      ],
+      "serverOracle": [
+        "Exact victim/paid ammunition/positive HP or absorption reduction and actual final blow; one dedicated element event at corpse bounding-box center only for selected-perk precision kill.",
+        "Record actual event key, single dispatch, actual recipients/dimension/distance and open-neighbor HP; covered/outside neighbors unchanged.",
+        "No Dragonfly dispatch for body, nonlethal or no-perk controls; no recursive dispatch on secondary damage.",
+        "Existing radius/falloff/cover/attribution semantics remain as specified by W77; cosmetic failure must not cancel damage."
+      ],
+      "framePlan": [
+        "Fresh actual PNG for each element and control: before/impact/restored, bracketed by native and server state.",
+        "Record shader/FOV and source/JAR/pack pins. Bracketed states are not exact tick/frame synchronization; never reuse another candidate PNG."
+      ],
+      "audioClaim": "청감 미검증. No capture or listening performed in this research. Server event/packet/receipt/OpenAL/PNG cannot establish audible Dragonfly identity or mix. A later explicit actual audio capture/listening review must separately establish identity, timing and spatial mix.",
+      "cleanup": "Topmaster owns the single QA server/profile/world/client. Acquire the scenario input lease, bound every sequence, and finally release that lease. Verify lease/heldKeys/pendingSteps/nativeInput neutral plus server use/ADS/camera/session restoration. Track and idempotently clean only run-owned target UUIDs, observers, teams, reservations, projectiles and HUD/session state on success/failure/timeout/cancel. Restore original state; confirm teardown before next scenario. Never delete unexpected entities to make a test pass, release physical user keys wholesale, or close another owner process. If release is only ACKed without neutral-state confirmation, fail/unknown and stop subsequent inputs.",
+      "result": null,
+      "executionStatus": "planned_unrun",
+      "skipReasons": [
+        "not_run_source_unknown",
+        "not_integrated"
+      ]
+    },
+    {
+      "taskId": "N3",
+      "scenarioId": "N3-arc-detonation",
+      "candidatePin": null,
+      "capability": {
+        "status": "unverified_unrun",
+        "rule": "Topmaster inspects advertised native capabilities before input. Unsupported slot selection, Q or Ctrl+Q remains not_run_capability; never substitute server commands as native input success."
+      },
+      "fixtureId": "shared-dragonfly",
+      "setup": {
+        "owner": "topmaster",
+        "element": "arc",
+        "weaponId": "long_arm",
+        "weaponHash": 8293111,
+        "perkHash": 2848615171,
+        "socket": 4,
+        "loadoutPreparation": "Server fixture may prepare exact original stack, selected perk and finite paid ammunition. Fixture commands are preparation only. Record source/JAR/server pack/client cached pack pins before any run.",
+        "environment": "Spawn-disabled fixed arena; record every corridor entity UUID/species/position/AABB, team, cover, HP/absorption, original loadout/stack, owned observers/reservations/projectiles/HUD/session. Exact primary victim plus open neighbor inside radius, covered neighbor, and neighbor outside radius. Unexpected corridor entity is a preserved failure/diagnostic.",
+        "controls": [
+          "precision final blow with Dragonfly selected",
+          "precision nonlethal hit",
+          "body final blow",
+          "same weapon without Dragonfly",
+          "wall-blocked and out-of-range neighbors",
+          "secondary explosion causing a neighbor death must not recursively dispatch"
+        ]
+      },
+      "inputSteps": [
+        "Only after source identity acceptance, runtime integration, central serial gates and fixed candidate: acquire input lease.",
+        "With verified advertised capabilities, apply bounded native aim/ADS/use for a paid precision final blow; retain receipt and exact server victim evidence.",
+        "Run nonlethal/body/no-perk and obstruction/radius controls serially with teardown and fixture recreation between cases. Preserve original target/damage/ammo assertions.",
+        "Finally release; verify input and server state neutrality before continuing."
+      ],
+      "serverOracle": [
+        "Exact victim/paid ammunition/positive HP or absorption reduction and actual final blow; one dedicated element event at corpse bounding-box center only for selected-perk precision kill.",
+        "Record actual event key, single dispatch, actual recipients/dimension/distance and open-neighbor HP; covered/outside neighbors unchanged.",
+        "No Dragonfly dispatch for body, nonlethal or no-perk controls; no recursive dispatch on secondary damage.",
+        "Existing radius/falloff/cover/attribution semantics remain as specified by W77; cosmetic failure must not cancel damage."
+      ],
+      "framePlan": [
+        "Fresh actual PNG for each element and control: before/impact/restored, bracketed by native and server state.",
+        "Record shader/FOV and source/JAR/pack pins. Bracketed states are not exact tick/frame synchronization; never reuse another candidate PNG."
+      ],
+      "audioClaim": "청감 미검증. No capture or listening performed in this research. Server event/packet/receipt/OpenAL/PNG cannot establish audible Dragonfly identity or mix. A later explicit actual audio capture/listening review must separately establish identity, timing and spatial mix.",
+      "cleanup": "Topmaster owns the single QA server/profile/world/client. Acquire the scenario input lease, bound every sequence, and finally release that lease. Verify lease/heldKeys/pendingSteps/nativeInput neutral plus server use/ADS/camera/session restoration. Track and idempotently clean only run-owned target UUIDs, observers, teams, reservations, projectiles and HUD/session state on success/failure/timeout/cancel. Restore original state; confirm teardown before next scenario. Never delete unexpected entities to make a test pass, release physical user keys wholesale, or close another owner process. If release is only ACKed without neutral-state confirmation, fail/unknown and stop subsequent inputs.",
+      "result": null,
+      "executionStatus": "planned_unrun",
+      "skipReasons": [
+        "not_run_source_unknown",
+        "not_integrated"
+      ]
+    },
+    {
+      "taskId": "N3",
+      "scenarioId": "N3-void-detonation",
+      "candidatePin": null,
+      "capability": {
+        "status": "unverified_unrun",
+        "rule": "Topmaster inspects advertised native capabilities before input. Unsupported slot selection, Q or Ctrl+Q remains not_run_capability; never substitute server commands as native input success."
+      },
+      "fixtureId": "shared-dragonfly",
+      "setup": {
+        "owner": "topmaster",
+        "element": "void",
+        "weaponId": "brass_attacks",
+        "weaponHash": 2121785039,
+        "perkHash": 2848615171,
+        "socket": 4,
+        "loadoutPreparation": "Server fixture may prepare exact original stack, selected perk and finite paid ammunition. Fixture commands are preparation only. Record source/JAR/server pack/client cached pack pins before any run.",
+        "environment": "Spawn-disabled fixed arena; record every corridor entity UUID/species/position/AABB, team, cover, HP/absorption, original loadout/stack, owned observers/reservations/projectiles/HUD/session. Exact primary victim plus open neighbor inside radius, covered neighbor, and neighbor outside radius. Unexpected corridor entity is a preserved failure/diagnostic.",
+        "controls": [
+          "precision final blow with Dragonfly selected",
+          "precision nonlethal hit",
+          "body final blow",
+          "same weapon without Dragonfly",
+          "wall-blocked and out-of-range neighbors",
+          "secondary explosion causing a neighbor death must not recursively dispatch"
+        ]
+      },
+      "inputSteps": [
+        "Only after source identity acceptance, runtime integration, central serial gates and fixed candidate: acquire input lease.",
+        "With verified advertised capabilities, apply bounded native aim/ADS/use for a paid precision final blow; retain receipt and exact server victim evidence.",
+        "Run nonlethal/body/no-perk and obstruction/radius controls serially with teardown and fixture recreation between cases. Preserve original target/damage/ammo assertions.",
+        "Finally release; verify input and server state neutrality before continuing."
+      ],
+      "serverOracle": [
+        "Exact victim/paid ammunition/positive HP or absorption reduction and actual final blow; one dedicated element event at corpse bounding-box center only for selected-perk precision kill.",
+        "Record actual event key, single dispatch, actual recipients/dimension/distance and open-neighbor HP; covered/outside neighbors unchanged.",
+        "No Dragonfly dispatch for body, nonlethal or no-perk controls; no recursive dispatch on secondary damage.",
+        "Existing radius/falloff/cover/attribution semantics remain as specified by W77; cosmetic failure must not cancel damage."
+      ],
+      "framePlan": [
+        "Fresh actual PNG for each element and control: before/impact/restored, bracketed by native and server state.",
+        "Record shader/FOV and source/JAR/pack pins. Bracketed states are not exact tick/frame synchronization; never reuse another candidate PNG."
+      ],
+      "audioClaim": "청감 미검증. No capture or listening performed in this research. Server event/packet/receipt/OpenAL/PNG cannot establish audible Dragonfly identity or mix. A later explicit actual audio capture/listening review must separately establish identity, timing and spatial mix.",
+      "cleanup": "Topmaster owns the single QA server/profile/world/client. Acquire the scenario input lease, bound every sequence, and finally release that lease. Verify lease/heldKeys/pendingSteps/nativeInput neutral plus server use/ADS/camera/session restoration. Track and idempotently clean only run-owned target UUIDs, observers, teams, reservations, projectiles and HUD/session state on success/failure/timeout/cancel. Restore original state; confirm teardown before next scenario. Never delete unexpected entities to make a test pass, release physical user keys wholesale, or close another owner process. If release is only ACKed without neutral-state confirmation, fail/unknown and stop subsequent inputs.",
+      "result": null,
+      "executionStatus": "planned_unrun",
+      "skipReasons": [
+        "not_run_source_unknown",
+        "not_integrated"
+      ]
+    }
+  ]
+}

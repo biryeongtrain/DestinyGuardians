@@ -1,0 +1,83 @@
+{
+  "stage": "W170",
+  "repository": "https://github.com/Database-Clarity/Live-Clarity-Database",
+  "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+  "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+  "sourceSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 1428297954,
+    "name": "Perpetual Motion",
+    "lastUpload": 1729372904933,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "While moving at a minimum of 2 meters per second:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Grants a Stack of 'Perpetual Motion' after 2 seconds and a second Stack after 10 seconds."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Each Stack provides 10 Stability, 10 Handling, and 10 Reload Speed. All Stacks are removed if movement speed is below 2 m/s for 0.5 seconds."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Works and can activate while stowed."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 2014892510,
+  "physicalBonusesPerStack": {
+    "stability": 10,
+    "handling": 10,
+    "reload": 10
+  },
+  "durationMultiplier": 1.0,
+  "sourceDurationMultiplier": "NO_DURATION_SCALAR_SPECIFIED_NEUTRAL_1",
+  "policies": {
+    "statCap": 100,
+    "durationMultiplier": 1.0,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "adsBounds": "CLAMP_TICKS_2_20_W44",
+    "handlingBounds": "W58_NO_EXTRA_TICK_CLAMP_STOW_AT_100_FLOOR",
+    "sourceMovementSampling": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "sourceDiscontinuities": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "sourceBriefPauseProgress": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "sourceCombinedPerks": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "stabilityIntegration": "MINECRAFT_CURVE_MASTER_OWNED_LOCAL_POLICY"
+  },
+  "limitations": [
+    "Official Bungie Oct13 snapshot and historical Oracle May20 curves are separate snapshots; timings are community approximations, not current exact official animation measurements.",
+    "Clarity establishes physical bonuses, threshold, stack times, removal grace and stowed activation only. Movement sampling, discontinuities and brief-pause progress are unknown and master-owned local policies.",
+    "Stat cap100, scalar1; source stow-at100 floor; W44 ADS2..20tick bounds; W58 ready/stow no extra tick clamp; ceil once at20Hz is local adaptation.",
+    "Combined perks/armor/masterworks, Minecraft stability mapping and native gameplay lifecycle are outside this profile. Enhanced Perpetual Motion is excluded.",
+    "No native game, input, HUD, DCC or full gate validation performed by this bounded profile generator."
+  ]
+}

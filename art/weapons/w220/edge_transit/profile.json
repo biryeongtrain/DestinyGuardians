@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "stage": "W220",
+  "weapon": "edge_transit",
+  "sourceAction": "80A8A104",
+  "framing": {
+    "translation": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 1,
+    "rightWristRoll": 15,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.4,
+        8.73
+      ],
+      "rotation": [
+        -28.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        8.0,
+        7.95,
+        -2.35
+      ],
+      "rotation": [
+        -21.0,
+        0.0,
+        0.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        5.8,
+        10.1,
+        3.1
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -80.0
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "rigAction": "80A8A104",
+      "hand": "left",
+      "gripWindow": [
+        0.12,
+        0.2,
+        0.64,
+        0.72
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "heavy_grenade_launcher_796e9ebf",
+    "sourceBlendSha256": "63a440ec13afda88944832b40da1ddcf5f207638c44bbeacc58ed30a4d740c36",
+    "sourceMapSha256": "27861376edd8023e13e9837d0b92104390460f4e706f1f96532ff50cf0075d15",
+    "boneMapSha256": "d4a917ed7a4d37bc716c10d25a9a24afef7b954fd64ecce9062e906d40a11c1f",
+    "action": "80A8A104"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w220-source/source-review.json",
+      "sourceSha256": "2818e93c6e4e26032bdcf4f8bb618e90855f2f62a97f55e3f099ec5d0a9759d5",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read master Blender5.4.0 Alpha evaluation of original read-only source.blend: ARMATURE only; OBSlot action Armature|fp_80A8A104_reload_full|Base, frames1..142,30fps,61 samples, old cache joint error0, allInputsUnchanged=true. Worker did not independently open/evaluate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-handling-evidence.json",
+      "sourceSha256": "7ff4a42b4d5ca4a4beb5f44248ec0bec7fc809b1edc3c77db7725aa22fa2eec9",
+      "role": "source_hand_selection",
+      "observation": "Weapon-local maximum wrist delta32: LEFT32.63977327179959, RIGHT0.0004504622613956923. LEFT handles drum; RIGHT carries. This is source motion evidence, not recovered mesh contact."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-selection-review.json",
+      "sourceSha256": "34b71aa6aa6eb975ce860c24c87e630d96c9cad32869229f0d7c10b48202e0fc",
+      "role": "master_action_selection",
+      "observation": "Heavy104 explicitly selected; both single136 and126 also inspected by master. No per-weapon recovered selector claimed."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/heavy_grenade_launcher_796e9ebf.json",
+      "sourceSha256": "dae229a0c87f9cb191afbd75767e50c4a0abee9ca718e298802b840e0206ad51",
+      "role": "fresh_original_source61",
+      "observation": "Read original61 shoulder/elbow/wrist/weapon matrices. Preserve complete left D1232BA2->897A1504->8C83CB67 and right17025F50->A3781DCD->DE9D6BEA chains. No source timeline change."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/sheets/heavy_grenade_launcher_796e9ebf-80A8A104-upper-chain.png",
+      "sourceSha256": "b2b54e739cdc3e902be2e5c8faf675e1696b57f5edb3e21f510c560ffe0c46b6",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Viewed actual six XZ/YZ chain projections at0,.2,.4,.6,.8,1; broad left excursion, right carrier. No mesh/camera/finger IK exists; this sheet cannot establish native contact or visibility."
+    },
+    {
+      "source": "art/weapons/w180/edge_transit/storyboard.png",
+      "sourceSha256": "f2fef4742ce4902c37103d11e53d7b5bbff9b502cd3186dc2f5ed4cadf45efda",
+      "role": "viewed_retained_actual_footage_storyboard",
+      "observation": "Viewed retained actual frames180,228..372 paired with offline poses. Actual clip: muzzle up, whole drum out, empty frame, incoming drum, seated at mapped.74, final hand action, recovery. Exact extraction path, cradle38deg and lug travel are authored, hand-occluded adaptations."
+    },
+    {
+      "source": "art/weapons/w180/edge_transit/SOURCE.md",
+      "sourceSha256": "5b300d7767419385926a7b0c77bb1764eda18b9b52b0d0f9378736b2590eda4c",
+      "role": "authored_motion_provenance",
+      "observation": "Read W180 original evidence/authorship notes. Retain all12 keys, empty-frame hold.42..52, algebra GRIP(8,8.8,8.5), DRUM_ANCHOR(8.53,10.22,3.11), HINGE(8.53,9.67,.85), all28 drum solids, four cradle/latch solids, charging_lug95 and canonical UVs."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Evaluated current first_person_framing_w205.load/profile for edge_transit/heavy_grenade_launcher: default translation[0,0,0],rotation[0,0,0],scale1,rightWristRoll15. Preserve spatial values; require sourceFullChain/keepMeshSupport=true,hideSupportAtRest=false. No new camera offset, source damping or limb stretch."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "authored_mesh_contacts_preserved",
+      "observation": "Preserve idle right[8,8.4,8.73]/[-28,0,0], left[8,7.95,-2.35]/[-21,0,0]; reload left drum flank[5.8,10.1,3.1]/[0,0,-80]. Ramps.12..20 before extraction; fades.64..72 during reseat, fully released before.74 seat. Drum remains seated for.81 closure and.89..94 lug action."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns W220 shared loader registration, rig installation, materialized outputs, runtime60grid, Java clocks/lifecycle and CU/Vision.",
+    "W180 authored carrier algebra is preserved. Master source_weapon_display replaces that carrier with source weapon motion; relative drum/cradle/lug transforms remain. Do not apply a second independent source-body replay.",
+    "Original mesh/camera/finger IK absent; full source player-skin chains, authored mesh contacts. No source attenuation, stretched limbs or hidden support.",
+    "61 sampled poses/60 intervals do not establish continuous native60fps interpolation.",
+    "Required sequence: master original Blender ->61poses ->FIRST PNGs ->same-worker correction or justified no-change ->SECOND. Native acceptance pending."
+  ]
+}

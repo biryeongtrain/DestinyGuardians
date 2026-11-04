@@ -1,0 +1,67 @@
+{
+  "stage": "W60",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "manifestEndpoint": "https://www.bungie.net/Platform/Destiny2/Manifest/",
+  "manifestCapture": "Byte-for-byte copy of W57 manifest-current.json; matching version and both component URLs verified offline.",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourceHashes": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "patch": {
+      "path": "/tmp/destiny-weapons-w60/destiny_update_8_1_0-response.json",
+      "sha256": "bce48fc2ba681344f67e608001d46895197679f7d89cbba6ee51d79b1b48ba1d",
+      "bytes": 37180
+    },
+    "preview": {
+      "path": "/tmp/destiny-weapons-w60/twid_10_03_2024-response.json",
+      "sha256": "42291604f5aa02398e2106765c835c8140f4978b65384875241c8169467ef20b",
+      "bytes": 64973
+    },
+    "baseMeasurement": {
+      "path": "/tmp/destiny-weapons-w60/lightgg-search-evidence.json",
+      "sha256": "b09a8536e9a1ba4f73e5abaa4f9c395033e37be036f7114e301da7abb0c3241d",
+      "bytes": 14059
+    },
+    "enhancedMeasurement": {
+      "path": "/tmp/destiny-weapons-w60/lightgg-enhanced-search-evidence.json",
+      "sha256": "d8cfe851931713dff03ec11f8555cd65ce4f667b8e293e383447964767016e85",
+      "bytes": 13429
+    }
+  },
+  "generator": "scripts/extract_holster_w60.py",
+  "generatorSha256": "94f46644cbd3199dc06f168156598157e9bde06fb6a60c78abddcd12e8fbf5b6",
+  "articleRetrieval": {
+    "deliveryEndpoint": "https://cdn.contentstack.io/v3/content_types/news_article/entries",
+    "environment": "live",
+    "locale": "en-us",
+    "selector": "Exact url.hosted_url; limit=2; count=1",
+    "credentialsOrigin": "Official Bungie /Platform/Settings/ ContentStack parameters, reused privately from W57; never published."
+  },
+  "measurementRetrieval": "Pinned raw web-search tool responses; quotes checked offline, not hashes of direct light.gg HTTP bodies.",
+  "reproduce": "rtk proxy python3 scripts/extract_holster_w60.py --verify",
+  "privateSources": "Full inventory, plug sets, manifest and article/search responses remain outside the repository under /tmp. --verify requires every pinned source and never downloads or repairs files."
+}

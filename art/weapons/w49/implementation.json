@@ -1,0 +1,32 @@
+{
+  "stage": "W49",
+  "sourceHashes": {
+    "src/main/java/kim/biryeong/destiny/weapon/WeaponRuntime.java": "2f4e8502b6fdfce5b4a74004de818116b42df7dcebc1a2e588913f2d9a0a4430",
+    "src/main/java/kim/biryeong/destiny/weapon/WeaponCycle.java": "7713009fd4fba80c9bfa8341e6cc1696538a2ec25ecf51f8261a9395cd0c20fc",
+    "src/main/java/kim/biryeong/destiny/weapon/WeaponBowDraw.java": "182fae2f15281cb15fb5950696b13b06bd0f0a4e7c2802650465d4e8c36be2ee",
+    "src/main/java/kim/biryeong/destiny/weapon/WeaponItems.java": "795648b8532cbe06a46dc739252892606aebaf3e760806d4669e1f15e1b51a54",
+    "src/main/resources/destiny/weapons/w46-timing.json": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+    "src/main/resources/destiny/sounds/w33.json": "7bd79392bc81e821a1ec1b4d3154986e3cd9c09362cef9fe1c1bcfc0befe333b",
+    "art/weapons/w49/README-empty-reload-references.md": "8a6076affa0abada8234c61bc9639fa7f3e9bfc4b47140cd5abbfbdb1374df51",
+    "art/weapons/w49/empty-reload-references.json": "f7858d6dcd1f272bb13afbd4b7504b83ee1a6c088374015d521683126c128170"
+  },
+  "authoredPartialDraw": {
+    "progress": "elapsed active draw / base chargeTicks, clamped by returning exact base at full draw",
+    "damage": "base * (0.35 + 0.65 * progress)",
+    "speed": "base * (0.25 + 0.75 * progress)",
+    "gravity": "base * (3 - 2 * progress)",
+    "classification": "AUTHORED_MINECRAFT_TUNING_NOT_EXTRACTED_DESTINY_CURVE",
+    "overdrawAndPerfectDrawImplemented": false
+  },
+  "timing": "Successful last ranged shot queues reload after burst drain; start same/next server callback, not an original-game latency measurement.",
+  "sound": {
+    "existingGenericReloadRouteUsed": true,
+    "bowChargeMapped": false,
+    "bowReloadMapped": false,
+    "note": "Existing custom lookup is a no-op when unmapped; no new exact bow draw/nock recording imported."
+  },
+  "rendering": {
+    "newBowStringOrNockAnimation": false,
+    "hud": "Existing server-side ammo/nock deadline projection; no new glyph geometry."
+  }
+}

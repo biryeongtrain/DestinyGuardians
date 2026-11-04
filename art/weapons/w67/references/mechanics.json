@@ -1,0 +1,88 @@
+{
+  "stage": "W67",
+  "ticksPerSecond": 20,
+  "baseWindowSeconds": 2,
+  "windowTicks": 40,
+  "windowMeaning": "Maximum elapsed time between successive qualifying precision hits; not a deadline for the entire group of three or four.",
+  "perks": [
+    {
+      "id": "triple_tap",
+      "baseHash": 3400784728,
+      "enhancedHashExcluded": 573122728,
+      "hits": 3,
+      "returnRounds": 1,
+      "officialDescriptionSupports": "Precision impacts quickly repeated can refill the magazine; the official description specifies the returned round count.",
+      "secondaryMeasurements": {
+        "url": "https://www.light.gg/db/items/3400784728/triple-tap/?_=879",
+        "publisher": "light.gg",
+        "primary": false,
+        "section": "Community Research",
+        "exactPerkHash": 3400784728,
+        "privateCapture": "research2.json",
+        "lastUpdatedReported": "2024-07-30",
+        "hits": 3,
+        "returnRounds": 1,
+        "secondsBetweenPrecisionHits": 2,
+        "persistsThroughStow": true,
+        "consumesReserves": false,
+        "maximumMagazine": "base capacity",
+        "retrieval": "Pinned search capture bound to this exact base URL and its own community section. Community documentation, not a fresh gameplay measurement or Bungie assertion."
+      }
+    },
+    {
+      "id": "fourth_times_the_charm",
+      "baseHash": 1354429876,
+      "enhancedHashExcluded": 848860060,
+      "hits": 4,
+      "returnRounds": 2,
+      "officialDescriptionSupports": "Precision impacts quickly repeated can refill the magazine; the official description specifies the returned round count.",
+      "secondaryMeasurements": {
+        "url": "https://www.light.gg/db/items/1354429876/fourth-times-the-charm/?_=935",
+        "publisher": "light.gg",
+        "primary": false,
+        "section": "Community Research",
+        "exactPerkHash": 1354429876,
+        "privateCapture": "research1.json",
+        "lastUpdatedReported": "2024-07-30",
+        "hits": 4,
+        "returnRounds": 2,
+        "secondsBetweenPrecisionHits": 2,
+        "persistsThroughStow": true,
+        "consumesReserves": false,
+        "maximumMagazine": "base capacity",
+        "retrieval": "Pinned search capture bound to this exact base URL and its own community section. Community documentation, not a fresh gameplay measurement or Bungie assertion."
+      }
+    }
+  ],
+  "sourceAudit": {
+    "official": "Pinned Bungie inventory and plug sets establish exact hashes, official descriptions and eligible selected rolls. They do not establish numeric hit thresholds, timing, reserve generation, magazine cap, stow persistence or reset rules.",
+    "measuredSecondary": "Each exact-base light.gg section independently states its hit threshold, two-second inter-hit interval, return count, ammunition generation, base-cap limit and stow persistence.",
+    "reloadReset": "Unresolved: neither consumed exact-base section states whether reload resets accumulated hits or its timer.",
+    "bodyOrMissReset": "Unresolved: neither consumed exact-base section explicitly states whether a body hit or miss resets accumulated hits. Nonprecision hits do not satisfy the precision requirement.",
+    "unresolved": [
+      "Reload reset semantics",
+      "Body-hit/miss reset semantics",
+      "Exact equality at the interval boundary and event ordering",
+      "In-flight projectile attribution, multihit grouping and ownership/copy identity",
+      "Independent live confirmation of the captured community measurements"
+    ],
+    "excludedEvidence": "research3.json is not consumed. Adjacent Focused Fury reload/stow reset statements and Jade Rabbit/Cranial Spike body-shot discussions cannot establish Triple Tap or Fourth Time's the Charm behavior. Enhanced and catalyst search sections do not supply base eligibility."
+  },
+  "projectIntegrationPolicy": {
+    "verifiedDestinyInternals": false,
+    "timing": "Expire accumulated progress when now minus the last qualifying precision-hit tick is at least 40, before crediting the new hit. A qualifying hit restarts the interval; the entire hit group may span more than 40 ticks.",
+    "nonprecision": "A body hit or miss neither advances the hit count nor updates the precision-hit clock. No additional body/miss reset is introduced without evidence.",
+    "reload": "Do not add an explicit reload reset or reload notifier without evidence. Elapsed-time expiration still applies during reloading.",
+    "stow": "Keep accumulated progress while stowed; stowing grants no additional time.",
+    "ammunition": "Generate the appropriate returned rounds into the actual magazine without deducting reserves; limit the result to the weapon's base magazine capacity.",
+    "hud": "Existing HUD reflects the actual returned magazine ammunition. No separate precision-perk countdown row is introduced.",
+    "boundary": "These are the main implementation's supplied integration rules. Equality, body/miss handling, reload handling and HUD decisions are project policy, not proof of Destiny internals. This sidecar implements no runtime API or behavior."
+  },
+  "limitations": [
+    "No live Destiny test, tick-level certification or later-patch audit.",
+    "A pool entry grants optional eligibility; it does not activate the perk on every copy.",
+    "Aisha's Embrace has both base perks in different sockets; each perk retains its own eligibility row.",
+    "Only the exact pinned selected weapon hashes qualify; no same-name reissue inference.",
+    "No enhanced or exotic catalyst support is inferred from shared mechanics text."
+  ]
+}

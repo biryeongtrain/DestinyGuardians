@@ -1,0 +1,195 @@
+{
+  "stage": "W199",
+  "font_family": "Arial Narrow Bold",
+  "font_size_px": 22,
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "pillow_version": "12.3.0",
+  "freetype_version": "2.14.3",
+  "provenance": "Original generated system-font coverage matching W183; no official Destiny sprite, ripped asset or bundled font",
+  "max_rows": 4,
+  "labels": [
+    {
+      "key": "killing_tally",
+      "label": "KILLING TALLY",
+      "icon_id": "destiny:gui/hud/perk_killing_tally_w199",
+      "layout": "COUNT",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        116,
+        23
+      ],
+      "horizontal_scale": 0.8133086876155268,
+      "valid_count": [
+        1,
+        3
+      ],
+      "valid_ticks": null,
+      "timer": "None; no invented timer",
+      "visibility": "Actual held source observer only"
+    },
+    {
+      "key": "whirlwind_blade",
+      "label": "WHIRLWIND BLADE",
+      "icon_id": "destiny:gui/hud/perk_whirlwind_blade_w199",
+      "layout": "DECIMAL_COUNT_TIMER",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        1,
+        1,
+        116,
+        22
+      ],
+      "horizontal_scale": 0.632183908045977,
+      "valid_count": [
+        1,
+        10
+      ],
+      "valid_ticks": [
+        1,
+        70
+      ],
+      "timer": "Observed remaining ticks only",
+      "visibility": "Actual held source observer only"
+    },
+    {
+      "key": "en_garde",
+      "label": "EN GARDE",
+      "icon_id": "destiny:gui/hud/perk_en_garde_w199",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        3,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.9,
+      "valid_count": null,
+      "valid_ticks": [
+        1,
+        30
+      ],
+      "timer": "Observed remaining ticks only",
+      "visibility": "Actual held source observer only"
+    },
+    {
+      "key": "assassins_blade",
+      "label": "ASSASSIN'S BLADE",
+      "icon_id": "destiny:gui/hud/perk_assassins_blade_w199",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        1,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.49072753209700426,
+      "valid_count": null,
+      "valid_ticks": [
+        1,
+        100
+      ],
+      "timer": "Observed remaining ticks only",
+      "visibility": "Owned source aggregate persists ordinary stow"
+    },
+    {
+      "key": "dynamic_sway",
+      "label": "DYNAMIC SWAY",
+      "icon_id": "destiny:gui/hud/perk_dynamic_sway_w199",
+      "layout": "DECIMAL_COUNT",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        116,
+        23
+      ],
+      "horizontal_scale": 0.7678883071553229,
+      "valid_count": [
+        1,
+        10
+      ],
+      "valid_ticks": null,
+      "timer": "None; no invented timer",
+      "visibility": "Actual held source observer only"
+    }
+  ],
+  "priority": "Existing kind order preserved; four new damage kinds after Swashbuckler, Dynamic Sway after Surplus",
+  "count_10": "Existing ammo_digit_1 and ammo_digit_0, optional count_tens node; no ammo_digit_10",
+  "observers": [
+    "WeaponKillingTally.stacks",
+    "WeaponWhirlwindBlade.stacks+remaining",
+    "WeaponEnGarde.remaining",
+    "WeaponAssassinsBlade.remaining",
+    "WeaponDynamicSway.stacks"
+  ],
+  "native_validation": "Pending master central Gradle/Vision; offline generation is not native QA",
+  "pack_bytes": 57148,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_killing_tally_w199.png": "198c492b2556cbf3bb40218e2637a28d498a2ff332b3c1b4676677472dc0c368",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_killing_tally_w199.json": "c3ba62f4081d0fd6334bfceec6506b812cf5d02eb4fe1d303cf6019d90cf975b",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_killing_tally_w199.json": "d154997ea80858ba23686a62a085b1f0bb874931dccadd21dada93583b28d378",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_whirlwind_blade_w199.png": "db24ca163b90eb039404a285f22de82b3a3d5c0424c1373c8e70d228846a9b2e",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_whirlwind_blade_w199.json": "d8c7892d316e7b1008ad67f4c0f7346dfdd82731682e92d9edb8a8a032752456",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_whirlwind_blade_w199.json": "c4709b76fa72292d76196d1d979c29b5131fc6b64b6af4c0f5de4dde8227ffff",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_en_garde_w199.png": "9e81b36b446c7a3e3382f57b38145de98b0bdf4d2d33b65056988cb9ce6a7760",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_en_garde_w199.json": "6cc36a5fa997baba825177f856b748a8dd20c4a42904a9e55cb0c781f277b897",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_en_garde_w199.json": "a485cdcf78ad8d9a594c1327ac026265bfe482f61f8eeb71c7ed52dae249071b",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_assassins_blade_w199.png": "f13d06b7df66d52ab2ca17aa9c94ee8d1dcc255a93db5e0ed037f1a442f96bf8",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_assassins_blade_w199.json": "6d8c512c927b0d654281a35f3ee8f33fc08eea91261b3357f20aaf302569b253",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_assassins_blade_w199.json": "bbad42fa885623c1ba9e93d4f962567608c439edfaccdfcbe6bfec8c4e0160e9",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_dynamic_sway_w199.png": "0de3deefc24b342d86f6ba581b9c60d9848f2b19a806e54de6feeacf91153b9b",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_dynamic_sway_w199.json": "a1eb318bc2c5e21b341dd48b967bb2383a56938140f986525e97eb79612951d3",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_dynamic_sway_w199.json": "1899dd4fca0ba54d4e252a50cf45fb29253f1e156b6c5ef40ec319e27fc3640f"
+  },
+  "source_files": {
+    "art/hud/w199/perk_killing_tally_w199.svg": "ed808c5af32d1f7bd25536d8c72bbaa942d688a45e094509acf9b89e9e90ddb9",
+    "art/hud/w199/perk_whirlwind_blade_w199.svg": "1a37f8d7034ac6764df9a6b52a80875a9fdd729324b9d6e37f407f16f9cb30fe",
+    "art/hud/w199/perk_en_garde_w199.svg": "2c6a62ee19817661fbb842207cf896a80e20d90837d79fa68ec54fa8c2d4a3ef",
+    "art/hud/w199/perk_assassins_blade_w199.svg": "8fa7009e3d73e34d6ee144a331d238e7996cc71fba498dd6d7d765e1bd3462a7",
+    "art/hud/w199/perk_dynamic_sway_w199.svg": "264bbb496c43bf8ba841c544ebfa959a7f35ce46238470e00872b533378bf999"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_killing_tally_w199.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_killing_tally_w199.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_killing_tally_w199.json",
+    "art/hud/w199/perk_killing_tally_w199.svg",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_whirlwind_blade_w199.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_whirlwind_blade_w199.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_whirlwind_blade_w199.json",
+    "art/hud/w199/perk_whirlwind_blade_w199.svg",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_en_garde_w199.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_en_garde_w199.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_en_garde_w199.json",
+    "art/hud/w199/perk_en_garde_w199.svg",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_assassins_blade_w199.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_assassins_blade_w199.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_assassins_blade_w199.json",
+    "art/hud/w199/perk_assassins_blade_w199.svg",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_dynamic_sway_w199.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_dynamic_sway_w199.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_dynamic_sway_w199.json",
+    "art/hud/w199/perk_dynamic_sway_w199.svg",
+    "art/hud/w199/manifest.json"
+  ]
+}

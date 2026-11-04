@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "weapon": "bite_of_the_fox",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A140",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.16,
+        0.4,
+        0.46
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "sniper_rifle_f22b9e87",
+    "action": "80A8A140",
+    "sourceBlendSha256": "7e0a3bb5d8794b31d9c404dfb5fd6ecbb2f94b0de09dc4697e2313c039f95995",
+    "sourceMapSha256": "7b099c06a92fe3c5f9120e8717e28184854fb85d2dc2db37a943066f6f2b1048",
+    "boneMapSha256": "e8822bec7855e7c7e12b2fd0391dfb3ba6d01420140fb6a1badf9e39fa4113b1",
+    "weaponExclusive": false
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w214-source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "sourceSha256": "7878a8ba396eb14eacf27cd0842d960e8e807e2d9d0bf4c0f5866e1f508ed0b7",
+      "observation": "Master background Blender5.4.0 Alpha evaluation, OBSlot Armature|fp_80A8A140_reload_full|Base, frames1..102 at30fps,61 samples, old-cache max error0 and allInputsUnchanged true. ARMATURE only. Worker read this record; did not open/evaluate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/sniper_rifle_f22b9e87.json",
+      "role": "evaluated_source61_full_chain",
+      "sourceSha256": "4c8a86ce6a66978bd62abaa8ee049c52053a3bfbeddda1f74e07310925153249",
+      "observation": "Read original61 weapon/shoulder/elbow/wrist matrices; row-major column vectors, armature object space. Endpoint matrix delta0. Left upper8.726686..8.726693 / forearm8.141361..8.141367; right upper8.726568..8.726575 / forearm8.141359..8.141365 at32 model units/source unit. Preserve original FK and ordinary lengths."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/sheets/sniper_rifle_f22b9e87-80A8A140-upper-chain.png",
+      "role": "viewed_bone_only_source_sheet",
+      "sourceSha256": "b6f9e9cc8b183949864747fe823d11a2923fb40ab2ecea456b9239e35c1f3894",
+      "observation": "Viewed six XZ/YZ projections p=0,.2,.4,.6,.8,1 before generation. Source chain changes throughout reload and returns exactly. No mesh, camera, contact or native gameplay inferred from bone-only projections."
+    },
+    {
+      "source": "art/weapons/w123/bite_of_the_fox/comparison.png",
+      "role": "viewed_semantic_mesh_sheet",
+      "sourceSha256": "da6fc5051fa5a9664235a6384a16ce5939988b9e043e539d2e77a02159a8b05e",
+      "observation": "Viewed actual W134 side/front/rear oblique comparison: burgundy scope housing, brass details, open brake, lower blade and skeleton stock. Preserve all112 semantic cuboids and face UV. CPU art only, no native acceptance."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "retained_mesh_contacts",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "observation": "Actual framing.contacts keeps right rest[8,8.05,8.34]/[-17,0,0], left rest[7.8,8.62,-1.8]/[0,90,-85], reload[7.55,8.25,4.88]/[0,0,0]. Small magazine lies ahead of trigger; partHint magazine matches51..53. REST offsets plus source FK locate palms; reload contact locates held magazine, not source wrist."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "role": "preserved_actual_framing_profile",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "observation": "Called current first_person_framing_w205.profile(load(),bite_of_the_fox,sniper_rifle). Copied ALL returned settings: translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]; add only required full-chain/support flags."
+    },
+    {
+      "source": "scripts/generate_reload_w177_bite_of_the_fox.py",
+      "role": "audited_authored_motion",
+      "sourceSha256": "450f5e87f649585755f8d4138df2ef212257c29d7ba2bcf8eae94fdd0feb3d76",
+      "observation": "AST-read literal KEYS/MOVING/NAMES/GRIP/MAG_ANCHOR/PINS; ported rigid display algebra without old generator execution. Magazine offset returns exactly0 atp=.46 and holds through1; later .54..80 receiver gesture remains. Candidate gripWindow[.05,.16,.40,.46] reaches by authored withdrawal, fades across final insertion, releases by seat. Source right wrist leaves grip after.40 and returns near.90; no late magazine drag or arm damping."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/sniper_rifle_f22b9e87.json",
+      "role": "shared_family_action_limit",
+      "sourceSha256": "4c8a86ce6a66978bd62abaa8ee049c52053a3bfbeddda1f74e07310925153249",
+      "observation": "Evaluated metadata maps Bite of the Fox and Beloved; reload variants150/14D/140 are shared sniper-family evidence. Explicit140 follows assignment, not a weapon-exclusive source selector. No source SSD read."
+    }
+  ],
+  "notes": [
+    "Candidate before FIRST Vision. Master owns source61+shoulder copying, RELOAD_ACTIONS, W214 loader/runtime60grid/test expansion and arm/upper-arm overlay.",
+    "Retain every W177 authored knot, hold and separation. C1 weighted harmonic PCHIP with61 poses; no per-key smoothstops, retiming, limb stretch, source attenuation or hidden support.",
+    "GripWindow is a proposed attachment-only correction for p=.46 seat, not native-verified contact. Original full-chain FK and rest/reload contacts remain unchanged.",
+    "112 split weapon +448 estimated classic arm surfaces=560; known canonical223+448=671. Estimates only. Master must measure every composed route including ADS/inspect and arms under1000.",
+    "FIRST master PNG feedback -> worker image-backed correction/review -> master SECOND. No FIRST/native/audio/performance acceptance claimed."
+  ]
+}

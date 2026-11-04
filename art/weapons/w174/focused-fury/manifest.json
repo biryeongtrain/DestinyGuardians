@@ -1,0 +1,110 @@
+{
+  "stage": "W174",
+  "selectedCount": 65,
+  "supportedCount": 3,
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourcePins": {
+    "scripts/build_adrenaline_junkie_profile_w173.py": {
+      "path": "scripts/build_adrenaline_junkie_profile_w173.py",
+      "sha256": "93901fb9c6ca467fbe23a2e87f7fc3d494895aded53de2fccd3de893f2c2e45d",
+      "bytes": 30272
+    },
+    "src/main/resources/destiny/weapons/w30.json": {
+      "path": "src/main/resources/destiny/weapons/w30.json",
+      "sha256": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+      "bytes": 13784
+    },
+    "src/main/resources/destiny/weapons/w40-characteristics.json": {
+      "path": "src/main/resources/destiny/weapons/w40-characteristics.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "src/main/resources/destiny/weapons/w46-timing.json": {
+      "path": "src/main/resources/destiny/weapons/w46-timing.json",
+      "sha256": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+      "bytes": 29734
+    },
+    "src/main/resources/destiny/weapons/w83-exotics.json": {
+      "path": "src/main/resources/destiny/weapons/w83-exotics.json",
+      "sha256": "bab9f12b8ffb99422a31b927455391d9f292da67ffa226ad3ddc96b0b1283d56",
+      "bytes": 3027
+    },
+    "src/main/resources/destiny/weapons/w84-exotics.json": {
+      "path": "src/main/resources/destiny/weapons/w84-exotics.json",
+      "sha256": "481a6353fb5d3fc040d71977da9c173c9e2fc8754050fe8bb237da5172837d6e",
+      "bytes": 2599
+    },
+    "art/weapons/w40/provenance.json": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "clarity": {
+      "path": "/private/tmp/w167-clarity.json",
+      "sha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+      "bytes": 2091445
+    }
+  },
+  "generator": "scripts/build_focused_fury_profile_w174.py",
+  "generatorSha256": "16af0279de7274a1912f247fe275413bcc98c748b59fe5eab3a5ae9c0505a7ab",
+  "outputSha256": {
+    "src/main/resources/destiny/weapons/w174-focused-fury.json": "bf8604f8758cf698b3d4307d682db54a98ba8afd0631855b8d253d53ca02d60c",
+    "art/weapons/w174/focused-fury/official-sockets.json": "1765ca7e0ccdc1770c3dd2dc5a0d75f961cf5e06cd356f2bd4c08b6f05299c31",
+    "art/weapons/w174/focused-fury/clarity-source.json": "95a84a7c8ac1af5eb2cebdfe042ca93b39d70ee11629adbe0419ba995d4ca3f4"
+  },
+  "reproduce": "rtk proxy python3 scripts/build_focused_fury_profile_w174.py --verify --self-test",
+  "eligibleIds": [
+    "aishas_embrace",
+    "retraced_path",
+    "fixed_odds"
+  ],
+  "magazineAudit": [
+    {
+      "id": "aishas_embrace",
+      "officialBaseMagazine": 17,
+      "selectedW40Magazine": 17,
+      "currentW46ProfileMagazine": 17,
+      "threshold": 6,
+      "discrepancy": false
+    },
+    {
+      "id": "retraced_path",
+      "officialBaseMagazine": 94,
+      "selectedW40Magazine": 94,
+      "currentW46ProfileMagazine": 94,
+      "threshold": 33,
+      "discrepancy": false
+    },
+    {
+      "id": "fixed_odds",
+      "officialBaseMagazine": 44,
+      "selectedW40Magazine": 44,
+      "currentW46ProfileMagazine": 44,
+      "threshold": 16,
+      "discrepancy": false
+    }
+  ],
+  "limitations": [
+    "Official membership/base magazines and Clarity mechanics have separate pinned provenance. Enhanced Focused Fury is excluded.",
+    "All three current W46 profile magazines match official base capacity. Threshold uses ceil(35*base/100); never current ammo or overflow. Drift fails verification rather than silently changing thresholds.",
+    "Exact refresh/counter consumption/deadline and lifecycle rules are local policy; historical refresh reports do not constitute current authoritative measurements. See clarity-source.json.",
+    "Registry/cycle/combat integration, combined selections, paid-token attribution, shared gate and native scenarios are master-owned; this worker makes no native QA claims."
+  ]
+}

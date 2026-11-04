@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "stage": "W53",
+  "authoredOn": "2026-10-24",
+  "model": "guardian_sword_w53",
+  "baseline": "art/blockbench/animations/guardian_hunter_h26_r2.bbmodel",
+  "inheritedAnimationCount": 21,
+  "totalAnimationCount": 29,
+  "runtimeExportCount": 8,
+  "authoredNotD2Measured": true,
+  "clips": [
+    {
+      "name": "h15_sword_light_1",
+      "lengthSeconds": 0.45,
+      "authoredContactOrReleaseSeconds": 0.15,
+      "rootYRangeModelUnits": [
+        0.3958,
+        0.4091
+      ],
+      "maxSampledFloorErrorModelUnits": 0.00066,
+      "visualIntention": "right-to-left horizontal cut",
+      "authoredSlashIntervalSeconds": [
+        0.1,
+        0.2
+      ]
+    },
+    {
+      "name": "h15_sword_light_2",
+      "lengthSeconds": 0.5,
+      "authoredContactOrReleaseSeconds": 0.2,
+      "rootYRangeModelUnits": [
+        0.3958,
+        0.4091
+      ],
+      "maxSampledFloorErrorModelUnits": 0.00066,
+      "visualIntention": "left-to-right horizontal cut",
+      "authoredSlashIntervalSeconds": [
+        0.15,
+        0.25
+      ]
+    },
+    {
+      "name": "h15_sword_light_3",
+      "lengthSeconds": 0.55,
+      "authoredContactOrReleaseSeconds": 0.2,
+      "rootYRangeModelUnits": [
+        0.3928,
+        0.4091
+      ],
+      "maxSampledFloorErrorModelUnits": 0.00112,
+      "visualIntention": "broad right-to-left low finisher",
+      "authoredSlashIntervalSeconds": [
+        0.15,
+        0.25
+      ]
+    },
+    {
+      "name": "h15_sword_uppercut",
+      "lengthSeconds": 0.85,
+      "authoredContactOrReleaseSeconds": 0.35,
+      "rootYRangeModelUnits": [
+        0.3604,
+        0.4091
+      ],
+      "maxSampledFloorErrorModelUnits": 0.0007,
+      "visualIntention": "low-to-high uppercut",
+      "authoredSlashIntervalSeconds": [
+        0.25,
+        0.45
+      ]
+    },
+    {
+      "name": "h15_sword_dash",
+      "lengthSeconds": 0.75,
+      "authoredContactOrReleaseSeconds": 0.25,
+      "rootYRangeModelUnits": [
+        0.3958,
+        0.4092
+      ],
+      "maxSampledFloorErrorModelUnits": 0.00018,
+      "visualIntention": "forward drive silhouette; stationary root",
+      "authoredSlashIntervalSeconds": [
+        0.15,
+        0.3
+      ]
+    },
+    {
+      "name": "h15_sword_slam",
+      "lengthSeconds": 0.95,
+      "authoredContactOrReleaseSeconds": 0.4,
+      "rootYRangeModelUnits": [
+        0.3701,
+        0.4092
+      ],
+      "maxSampledFloorErrorModelUnits": 0.0012,
+      "visualIntention": "overhead-to-low slam; no jump",
+      "authoredSlashIntervalSeconds": [
+        0.3,
+        0.45
+      ]
+    },
+    {
+      "name": "h15_sword_vortex",
+      "lengthSeconds": 1.05,
+      "authoredContactOrReleaseSeconds": 0.45,
+      "rootYRangeModelUnits": [
+        0.3958,
+        0.4091
+      ],
+      "maxSampledFloorErrorModelUnits": 0.00066,
+      "visualIntention": "one visual yaw turn; no gameplay facing change",
+      "authoredSlashIntervalSeconds": [
+        0.2,
+        0.75
+      ]
+    },
+    {
+      "name": "h15_sword_caster",
+      "lengthSeconds": 0.8,
+      "authoredContactOrReleaseSeconds": 0.3,
+      "rootYRangeModelUnits": [
+        0.3958,
+        0.4091
+      ],
+      "maxSampledFloorErrorModelUnits": 0.00018,
+      "visualIntention": "blade sweep/release silhouette; no projectile asset",
+      "authoredSlashIntervalSeconds": [
+        0.2,
+        0.4
+      ]
+    }
+  ],
+  "rootPolicy": "No X/Z translation. Floor-fit Y only. Vortex visual yaw 0..360 only; no entity/camera motion.",
+  "heldItemPolicy": "Unchanged right equipment pivot, native sword/display mapping and UV; explicit item scale 1.",
+  "inputSha256": {
+    "art/blockbench/animations/guardian_hunter_h26_r2.bbmodel": "47f058bcc8f768ef310a4d7e49a9b4aa6ce05fa3e769224809097afcd2a3a7c9",
+    "scripts/build_hunter_animation_h15.py": "3908d921f42d52ae84f880021a6e06d10316084aec8a309453a338abb24805c6",
+    "scripts/build_hunter_animation_h19.py": "483a796efdcab5dbf3fcc997ca5fc3118c4b693da6a3f47f520b5e06561af9ef",
+    "scripts/build_hunter_animation_h20.py": "8d8dde7a49b54af3a31c3c78c1182c2851784277b75a8510a301fcdf95c79428",
+    "art/weapons/w51/references/official-manifest.json": "15e159014db61a2838559fbc9ca581f7ec98e605ea0e0df216bdb94fbbb55eba",
+    "art/weapons/w52/references/videos.json": "8536cbb4c75da9324fc5cd4b08877d7e1ae58c9dd51e1a4981087b647aef2b5a",
+    "art/weapons/w52/references/mechanics.json": "d910a9dfc46413116554f4d8621ba57ccf35e17e72b36abf67d3b1b86a6c7492",
+    "art/weapons/w52/references/light-contact.jpg": "d2e70012effb80c800da9a412e65d0519572424490fbce3c04399ee3ea624241",
+    "art/weapons/w52/references/heavy-contact.jpg": "e36b208be67fe9a812d344b8d61e8eafb1fe5c93b6f98dc71c1ab093cd489e5f",
+    "art/weapons/w52/references/aerial-contact.jpg": "84e5d567bb1f3316ffc74e2af88fdf33e622f02594022c23770011c9a93af4e0",
+    "art/weapons/w52/references/aggressive-heavy-contact.jpg": "940978070d28df70582797784ea11a2263d2885aae496440115956a81ceafccc",
+    "src/main/resources/assets/destiny/models/weapon/sword/abide_the_return.json": "8f6f9593d9a8dbd84022d4fe726152f799b71a55ae253e3f636e0bc5f46534c8",
+    "src/main/resources/assets/destiny/models/weapon/sword/goldtusk.json": "ca9d5e0f093983cf833417408fef8cb6a70a130fbb442938cb1b5a8d3be980f0",
+    "src/main/resources/assets/destiny/models/weapon/sword/crown_splitter.json": "50c519fa916a61e749ed7c72c29cf9fc4f173e93d8bbeaad98ad330dabfc3cdf",
+    "src/main/resources/assets/destiny/models/weapon/sword/falling_guillotine.json": "324e1e54a8b6b70ab91be37286a4c172a42abdb9fe8716b9d6a76e721ba931b6",
+    "src/main/resources/assets/destiny/models/weapon/sword/temptation_s_hook.json": "f5c48f76395c7b969fbb6867d75fd3b0bf038e1f1d6a73992d91e94a01b92277"
+  },
+  "outputSha256": {
+    "scripts/build_sword_animation_w53.py": "6f96b1f1bb7b276b11b733b0186c07959402e57dd53dd5d02f7ade0b53f5a0ae",
+    "art/blockbench/animations/guardian_sword_w53.bbmodel": "41ff15db10994f1871ccb8ccb49a5aa9ba962aba2515381cdf77cf771fb77f3f",
+    "src/main/resources/destiny/animation/sword_w53.animation.json": "78c6a81b019cc659ea99f048c44de8f01d77b48d1cb3fe482121fc5f4234cd45",
+    "art/weapons/w53/animation-notes.md": "d4b6993115188f25e5eeed4b838226f84b021a2c8f66d495364e3092a307009f"
+  },
+  "validation": {
+    "nativeClientVerified": false,
+    "appOrBuildRun": false,
+    "rawRigFieldsPreserved": true,
+    "rawInheritedClipsPreserved": true,
+    "floorSampleRateHz": 200,
+    "floorFitKeyRateHz": 40,
+    "deterministicGeneration": "two independent byte comparisons in --verify"
+  }
+}

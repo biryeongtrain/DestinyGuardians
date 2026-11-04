@@ -1,0 +1,89 @@
+{
+  "stage": "W202",
+  "font_family": "Arial Narrow Bold",
+  "font_size_px": 22,
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "padding_px": 4,
+  "pillow_version": "12.3.0",
+  "freetype_version": "2.14.3",
+  "provenance": "Original generated system-font labels; no official sprite, ripped asset or bundled font",
+  "recipe": "W200 raster_label: 0.9 horizontal scale capped to padded width, centered LANCZOS coverage; W108 canonical RGBA8 PNG",
+  "recipe_sources": {
+    "scripts/build_perk_hud_w200.py": "0c13f90a1a33b53d22dfc546c06959cb359643f14f63dfd350923c85012c41ec",
+    "scripts/build_feeding_frenzy_hud_w108.py": "e0cf8b7460579a70bbbccf70e1ae0c054ba83730ba5f527165b53e2f824e4d1d"
+  },
+  "max_rows": 4,
+  "labels": [
+    {
+      "key": "headseeker",
+      "label": "HEADSEEKER",
+      "icon_id": "destiny:gui/hud/perk_headseeker_w202",
+      "layout": "FLAG",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        116,
+        23
+      ],
+      "horizontal_scale": 0.88,
+      "valid_ticks": [
+        1,
+        11
+      ],
+      "observer": "WeaponHeadseeker.remaining",
+      "visibility": "Actual held-source positive ticks; hide immediately on expiry or source loss",
+      "timer": "None; short window uses label and marker only"
+    },
+    {
+      "key": "steady_hands",
+      "label": "STEADY HANDS",
+      "icon_id": "destiny:gui/hud/perk_steady_hands_w202",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.6056338028169014,
+      "valid_ticks": [
+        1,
+        170
+      ],
+      "observer": "WeaponSteadyHands.remaining",
+      "visibility": "Actual aggregate positive ticks including stowed sources; additional kills reset to 130 ticks",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    }
+  ],
+  "priority": "Legacy ordinals preserved; Headseeker after Assassins Blade before Outlaw; Steady Hands after Feeding Frenzy",
+  "source_policy": "Server-runtime observations only; no equipment inference or gameplay values authored by HUD",
+  "native_validation": "Pending master pack/model parser, server and native QA; generation is offline evidence",
+  "pack_bytes": 22392,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_headseeker_w202.png": "10c422b90ada356e9ffe6afc2d3c5b83985b8f22f2f7d34a9e3e9eb8fbd39ce4",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_headseeker_w202.json": "febb995d0f61b38228387ab28e26bfc9235c3bb3f4c6d1ad3763f723abb402df",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_headseeker_w202.json": "1f93a1627a4d70c5ab3e08dc57f5bf5ee9ed1e04a3759524eba73299b8ad403b",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_steady_hands_w202.png": "666d07326b14ee2dd4aab74179fd6634cc0c517294116ed72764a1c3a79dc9dc",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_steady_hands_w202.json": "d344457b6ae495c1d6ea748a83e08cc6e24d0c375ff004bf2fbdd7b1fdeacc74",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_steady_hands_w202.json": "cc581fb8f3d1a5bc6f17845573f17056c1d5afaf0e2a1ac959c64d52728673ed"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_headseeker_w202.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_headseeker_w202.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_headseeker_w202.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_steady_hands_w202.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_steady_hands_w202.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_steady_hands_w202.json",
+    "art/weapons/w202/hud/source.json"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "weapon": "bug_out_bag",
+  "framing": {
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "reloadCameraLower": 0
+  },
+  "contacts": {
+    "reload": {
+      "partHint": "moving",
+      "rigAction": "80A8A170",
+      "contact": [
+        6.0,
+        6.1,
+        7.57
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w212-source/source-review.json",
+      "sourceSha256": "a30b83e9b4babbfefe70e09ad3be2b36488b945e29b6b865656e2bce45966db5",
+      "observation": "Master evaluated the ORIGINAL source.blend: Armature only, no mesh/camera; shared SMG family action Armature|fp_80A8A170_reload_full|Base, OBSlot, source frames 1..91 at 30 FPS, 61 samples, prior shared-frame joint error 0, all inputs unchanged. Worker reviewed this provenance; no new Blender evaluation claimed."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/submachine_gun_cdf8185c.json",
+      "sourceSha256": "d09352a9bd907ed80efdf4a46f4436500c4ed354175538d4fcf7b832bec6043f",
+      "observation": "Read original-evaluated shoulder/elbow/wrist matrices at 61 reload samples; action also applies to Antiope-D and other mapped SMGs, not weapon-exclusive. Ordinary source segment lengths remain unchanged; no arm scaling overrides."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/sheets/submachine_gun_cdf8185c-80A8A170-upper-chain.png",
+      "sourceSha256": "e04731565886e7c6bd52e3c860bfe1de156792f9bd815bb0553597ea334b9164",
+      "observation": "Inspected via view_image: XZ/YZ source shoulder-elbow-wrist chain at p=0,.2,.4,.6,.8,1. Mid-reload bends and extended positions support full-chain transport. Bone-only sheet supplies no weapon mesh, recovered camera, palm clearance or native acceptance."
+    },
+    {
+      "source": "art/weapons/w123/bug_out_bag/design.json",
+      "sourceSha256": "acc8cc135e9ecebf6e1d76d1eb32884babd901d2fc6cf5768f1725426a76a1e1",
+      "observation": "Current 100-element semantic design has separate rear grip_core at origin [8,9.12,7.42], diagonal front support at [8,9.765,2.28], and magazine indices 63..66 below grip. Existing right [8,9.08,7.43], left [8,9.65,2.45] and reload [7.55,6.1,7.57] correspond to those distinct parts; retain these authored estimates for FIRST Vision."
+    },
+    {
+      "source": "art/weapons/w123/bug_out_bag/comparison.png",
+      "observation": "Inspected raw-source/semantic side and oblique sheet via view_image: bronze shield/cage, woven cheek, rear black firing grip, diagonal support and lower magazine are distinct. No mesh/UV edits or newly invented right/left contacts."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "observation": "Existing reload partHint moving already agrees with W166 semantic partition and W212 moving filenames. Profile adds audited rigAction only and keeps this partHint explicit; right/left/contact/rotation inherit existing authored values."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "observation": "Inherit current SMG presentation: translation [-.65,.6,0], rotation [-1,2,0], scale .98, rightWristRoll 28, meshArmDirections/sourceWeaponRelative true and reloadCameraLower 2.5. No new camera or framing numbers introduced."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/bug_out_bag-review.png",
+      "observation": "FIRST actual native review inspected via view_image: hip grip roles are separated and ADS sight aperture is clear. Preserve existing ready framing and full ADS; no right/left rest-contact changes."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/bug_out_bag-reload.png",
+      "observation": "FIRST actual native reload sheet inspected via view_image: sample00 is severely below screen; sample11 return is low. Override inherited reloadCameraLower 2.5 to 0, removing an extra downward presentation shift while preserving source body/arm FK. Entry source dip can remain and requires SECOND Vision."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-bug_out_bag-reload-sample-08.png",
+      "observation": "Inspected raw00/07/08/09/10/11 via view_image. Raw08 shows separated left palm with only a small sliver near its top; raw10 shows palm crossing during source return. Raw08 time is around source progress .50..55, before .78 release, so it is not scheduled release. Read-only current source61 retarget calculation at p=32/60 places magazine bounds in left-arm local X[6.73084,9.66366], Y[7.66012,8.87110], Z[6.81565,9.45548], mostly within the 2.4-wide solid hand below cap Y9. Palm occlusion is supported; no source-action error or recovered near-plane assertion."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "observation": "Read-only main shared-code audit: sourceFullChain palms follow original wrist travel plus REST mesh offsets; reload.contact sets reload_target and magazine part_shift. New left-flank contact [6.0,6.1,7.57] moves only held magazine relative to unchanged source palm. At p=32/60 its magazine Y bounds become [8.86050,10.07148], protruding beyond hand cap Y9 with some contact overlap. Ordinary FK lengths/rotations, rest contacts, hold/release envelope and generator stay unchanged."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/oracles/w212-bug_out_bag-reload-timeline.json",
+      "observation": "Read server timeline: dense normalized reload values include .06666667/.2/.36666667/.55/.68333334/.8333333, reloadDuration38; canonical model and progress -1 return with ammo36. File wall times only bracket raw08 near p=.50..55; no exact render/server tick lock claimed. Master reports all12 native sequences, neutral cleanup and JUnit13 passed; no listening or 60fps certification."
+    }
+  ],
+  "notes": [
+    "SECOND candidate after FIRST native sheets and raw frames were received and inspected. Native acceptance remains pending master SECOND Vision.",
+    "Framing correction: reloadCameraLower 0 removes inherited SMG 2.5 downward reload offset only. Ready/ADS family translation/rotation/scale and source FK remain unchanged. Early source dip may remain; inspect raw entry on SECOND Vision.",
+    "Left-flank reload contact [6.0,6.1,7.57] replaces [7.55,6.1,7.57] to expose the narrow magazine outside the solid hand cap. This fits the moving part to the unmodified source palm; it does not move/stretch that palm or suppress source FK. No right/left rest override or release-window change.",
+    "sourceFullChain true; keepMeshSupport true; hideSupportAtRest false. Preserve ordinary original source lengths, source rotations and all duration/combat/audio behavior.",
+    "Master main already has the reviewed SMG61 cache, W212 loader/actions/runtime and FIRST QA. This private seed retains the old21 cache; integrate the owned profile/review into main and regenerate there.",
+    "W166 generator bytes, authored keys/holds and accepted mesh/UV remain unchanged. Bone-only shared family action does not establish original magazine IK or camera."
+  ]
+}

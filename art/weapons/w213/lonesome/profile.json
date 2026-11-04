@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "weapon": "lonesome",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A560",
+      "partHint": "moving",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.6,
+        0.75
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w213-source/source-review.json",
+      "sha256": "cc9ef72c7c7e85936f3cf9bc1ad521a46cfac15c48e891412b1cc15685066d7f",
+      "observation": "Read master original source.blend evaluation in Blender5.4.0 Alpha: ARMATURE ONLY, no mesh/camera; 80A8A560, OBSlot, frames1..67 at30fps,61 evaluated samples, prior-cache max joint error0 and unchanged inputs. Worker did not operate Blender.",
+      "sourceBlendSha256": "16335951a2bd664aa4aba5ad9373de56be318d24f1795e3dd655fd5f1b172fb7",
+      "sourceMapSha256": "f7b016566e08ee86072a18b2d1bce2a53904e0227f574bc0332cd0bd2dd96ab0",
+      "boneMapSha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d"
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/sidearm_c0461d9d.json",
+      "sha256": "b3861168ca6c726d902996a06634cbf978f36a82a8ad8a73d2b7b43be1ce0a8d",
+      "observation": "Read original evaluated shoulder/elbow/wrist/weapon matrices in armature-object space, row-major/column vectors. Shared Allied Demand/Lonesome family, not a weapon-exclusive selector. Upper arms approximately8.72669/8.72657 and forearms8.14136 units at32-unit conversion."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/sheets/sidearm_c0461d9d-80A8A560-upper-chain.png",
+      "sha256": "ec1348a1ac4ddb0ea04b52fe7d14ef7c7d04e52485453762a14330a44beea834",
+      "observation": "Viewed actual six-panel XZ/YZ source chain at p=0,.2,.4,.6,.8,1 before61-generation. Both chains move during handling and return at1; no absent mesh contact or camera acceptance inferred."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sidearm_c0461d9d/source-map.json",
+      "sha256": "f7b016566e08ee86072a18b2d1bce2a53904e0227f574bc0332cd0bd2dd96ab0",
+      "observation": "Read group sidearm_c0461d9d, selector3EB02F1A shared by Allied Demand and Lonesome; reload_full/empty map80A8A560."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sidearm_c0461d9d/bone-map.json",
+      "sha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d",
+      "observation": "Read mapped upperarm/elbow/wrist/weapon parent chains; ordinary original lengths retained."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/screenshots/lonesome-review.png",
+      "sha256": "d81d7b82917799da9c930bcb0a7ea2400db2cf0e839f9e6a5b2feefdc071e4f2",
+      "observation": "Viewed FIRST actual hip/ADS/reload sheet: hip contact and centered irons clear; no rest contact/framing correction warranted."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/screenshots/lonesome-reload.png",
+      "sha256": "6d7bb33fb4a273130b394cefc288ef723f9c93e678dd4543c78572a2c9af9eaf",
+      "observation": "Viewed FIRST actual samples01/05/09/12/16 sheet and full raw01,05,09,10,11,12,13,14,15,16. Detached magazine in left palm05 approaches receiver09, then remains with left hand above/front of pistol in11..13 despite authored seating at.75. Ready silhouette recovers by16; its HUD still shows0, not yet ammo-complete."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/oracles/w213-lonesome-reload-timeline.json",
+      "sha256": "6cbc12be494c5603caeaae5bf2797c25bd226cba86f5f99982ce6e568f3e45c3",
+      "observation": "Read16 server presentation records. Active ticks1056/1062/1068/1074/1080/1086 use60grid indices3/12/22/31/41/50; duration38. Canonical inactive floats[0,-1], ammo12/0 from1092. Sparse server timeline does not identify an exact source frame for each capture."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/sequences/w213-lonesome-reload.json",
+      "sha256": "38b01ad034772869e673f2ba556a15493a5f3fdd7d7721ceaef0a5a3fd6c7e1f",
+      "observation": "Read capture brackets/observations: raw09 client588,11 client592..593,12 client594..595,13 client597,16 client604; ordinal12 is not source frame12. Observations place594 near wall1793137246448ms between server grid41 and50 records. Late source hand handling is valid; continuing magazine attachment is the mismatch."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/native-validation.json",
+      "sha256": "e5dbafb2f51fe7b20b69a5df66584120eecab47eab915646ccc2f259049207cb",
+      "observation": "Master FIRST12 native sequences passed; Lonesome fire5/reload40/ADS19 captures, all released/neutral, final ammo12/0. Read validation; this is not SECOND acceptance or continuous60fps certification."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "sha256": "9843a23f049cf264fbf851cedac35c300b5c4c0c7727385051e5cc13d36b2de1",
+      "observation": "Read existing shared magazine attachment hook only. Default gripWindow[.05,.20,.78,.98] weights moving part shift toward source palm. sourceFullChain restores palm translation and rotation from original FK; per-profile gripWindow safely changes only part attachment. No shared code change or generator execution."
+    }
+  ],
+  "notes": [
+    "Preserve W201 rest right[8,9.45,8.8], left[7.18,9.02,9.1] and reload.contact[7.2,6.45,9.25], rotations and magazine policy; current source evidence does not justify fit changes.",
+    "Preserve sidearm-family framing; explicit visible rest support follows user requirement. No new cameraDepth/sourceViewRotation, limb length override, stretch, attenuation or masking.",
+    "Current source_palm_translations uses REST mesh offset plus original FK. Treat reload.contact as held moving-part contact relative to palm; do not pull the full source chain toward authored heel travel.",
+    "Master owns original61 shoulder cache, shared loader/action whitelist/runtime60grid and ordinary fingerless player-skin full arms. Candidate returns only weapon bank/item/art manifest mapping.",
+    "FIRST image-backed correction: gripWindow[.05,.20,.60,.75] retains original reach/full attachment through.60 and fades magazine-to-palm shift to0 by authored seat.75, before late source rack/return. Ordinary source FK, limb lengths, rest/reload contacts, framing and W164 authored bank remain unchanged. SECOND Vision pending master."
+  ]
+}

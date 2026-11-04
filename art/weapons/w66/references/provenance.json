@@ -1,0 +1,90 @@
+{
+  "stage": "W66",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourceHashes": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "/private/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/private/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/private/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "research1.json": {
+      "path": "/private/tmp/destiny-weapons-w66/research1.json",
+      "sha256": "0c625014aaf5b3066622274e289c07115e612ab429a2ba217fad3853e9ff30fa",
+      "bytes": 26649
+    },
+    "research2.json": {
+      "path": "/private/tmp/destiny-weapons-w66/research2.json",
+      "sha256": "a2e2c1964d0436ec6b7c9cb405c38ae39adfff9540390c1967fc76fda762266e",
+      "bytes": 29362
+    },
+    "research3.json": {
+      "path": "/private/tmp/destiny-weapons-w66/research3.json",
+      "sha256": "0de7595629a87a4c4071f9c5f27f265e2231c240464f259f33a2d005f6e55c2e",
+      "bytes": 33055
+    },
+    "research4.json": {
+      "path": "/private/tmp/destiny-weapons-w66/research4.json",
+      "sha256": "2524c9732272fcebbb1e35c2bc4384f83dbd15091d44292e65302d7ea8b11347",
+      "bytes": 32447
+    }
+  },
+  "generator": "scripts/extract_rampage_w66.py",
+  "generatorSha256": "d4bc9d9506b47b2e2670d6e966f6d3b02102aecdf5139bb3a9ce5014cad3be43",
+  "runtimeSha256": "d03a2518629ce36aac140837f92950083c1a546c14f6cd5ff3310cac1f08f6e0",
+  "outputHashes": {
+    "src/main/resources/destiny/weapons/w66-rampage.json": "d03a2518629ce36aac140837f92950083c1a546c14f6cd5ff3310cac1f08f6e0",
+    "art/weapons/w66/references/socket-pools.json": "a3e3509948723ae07563678f69db76b73cd3eef2cae4c79be31376cb4c794456",
+    "art/weapons/w66/references/mechanics.json": "0966dd3ecd912c6de00d0db0863398445cccfec230f5f4c402344738655729a5",
+    "art/weapons/w66/reference-notes.md": "4a87d0ebb9742151916c6b74004c775553723cc0934987c5b9499c173cf31915"
+  },
+  "retrievedAtDate": "2026-10-24",
+  "officialBodyDirectCorroboration": {
+    "retrievedAtDate": "2026-10-24",
+    "status": 200,
+    "deliveryEndpoint": "https://cdn.contentstack.io/v3/content_types/news_article/entries",
+    "selector": {
+      "environment": "live",
+      "locale": "en-us",
+      "url.hosted_url": "/destiny_update_9_5_0",
+      "limit": 2,
+      "include_count": true,
+      "matchedEntries": 1
+    },
+    "deliveryUid": "bltbbe8d25b9e84adce",
+    "bodyField": "html_content",
+    "title": "Destiny 2 Update 9.5.0",
+    "publishedAt": "2025-12-02T15:00:00.000Z",
+    "responseBytes": 45303,
+    "responseSha256": "ce1a531942faac0cc9550ffb16bf0a7f40bc0645782d4a9795e8aa81142e2bc5",
+    "confirmed": "Exact article identity, absolute date and the Rampage change quoted in mechanics.json.",
+    "credentialsOrigin": "Official Bungie /Platform/Settings/ ContentStack parameters; never emitted.",
+    "offlineBoundary": "Supplemental authoring observation only. The response was read in memory and not retained on disk; --verify does not revalidate this response hash. Reproducible evidence instead comes from SHA-pinned research2/research3. No network is used by this extractor."
+  },
+  "sourceBoundary": "Official data proves roll eligibility. Bungie proves one-stack decay. Exact-base light.gg supplies numeric community measurements. D2 Arsenal alone explicitly supports stow persistence and kill refresh; runtime identity and shot snapshots are authored policy.",
+  "privateSources": "Full inventory, plug sets, manifest and four raw web captures remain outside the repository. Public proof contains no full article/search dumps, forum posts presented as official, or credentials.",
+  "reproduce": "rtk proxy python3 scripts/extract_rampage_w66.py --verify",
+  "disjointReproduce": "rtk proxy python3 scripts/extract_rampage_w66.py --output-root /tmp/destiny-weapons-w66/reproduced",
+  "verification": "Offline SHA pins for every consumed source; missing/changed inputs fail closed. --verify compares all five generated outputs byte-for-byte, including Markdown, and performs no writes or network IO. Supplemental live CMS observation is explicitly outside offline revalidation."
+}

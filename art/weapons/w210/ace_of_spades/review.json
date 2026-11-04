@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "stage": "W210",
+  "weapon": "ace_of_spades",
+  "status": "first_actual_vision_reviewed_no_runtime_change_awaiting_second_vision",
+  "assignedWorktree": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w210-ace_of_spades",
+  "exclusiveWriteSet": [
+    "art/weapons/w210/ace_of_spades/profile.json",
+    "art/weapons/w210/ace_of_spades/review.json"
+  ],
+  "worktreeModified": true,
+  "inspectedPaths": [
+    "/Users/qf/IdeaProjects/DestinyGuardians/AGENTS.md",
+    "/Users/qf/.codex/RTK.md",
+    "/Users/qf/.codex/skills/minecraft-weapon-art-design/SKILL.md",
+    "/Users/qf/.codex/skills/minecraft-weapon-art-design/references/ace-izanagi-study.md",
+    "/private/tmp/destiny-w210-source/source-review.json",
+    "/private/tmp/destiny-w210-source/hand_cannon_f163a4c8.json",
+    "/private/tmp/destiny-w210-source/sheets/hand_cannon_f163a4c8-80A8A567-upper-chain.png",
+    "/private/tmp/destiny-w210-source/export.py",
+    "/private/tmp/destiny-w210-source/render.py",
+    "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/contacts.json",
+    "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w205/first-person-framing.json",
+    "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w208/austringer/profile.json",
+    "/Users/qf/IdeaProjects/DestinyGuardians/scripts/build_first_person_hands_w201.py",
+    "/Users/qf/IdeaProjects/DestinyGuardians/scripts/first_person_framing_w205.py",
+    "/Users/qf/IdeaProjects/DestinyGuardians/scripts/rig_arms_w205.py",
+    "/Users/qf/IdeaProjects/DestinyGuardians/scripts/generate_ace_reload_w157.py",
+    "/Users/qf/IdeaProjects/DestinyGuardians/src/main/resources/assets/destiny/models/item/weapon/ace_of_spades.json",
+    "/private/tmp/destiny-w210-pass1-native/screenshots/ace_of_spades-review.png",
+    "/private/tmp/destiny-w210-pass1-native/screenshots/ace_of_spades-reload.png",
+    "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-hip.png",
+    "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-04.png",
+    "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-08.png",
+    "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-11.png",
+    "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-15.png",
+    "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-ads-sample-06.png"
+  ],
+  "sourceEvaluation": {
+    "origin": "master-supplied original Blender evaluation, reviewed by this worker",
+    "report": "/private/tmp/destiny-w210-source/source-review.json",
+    "originalBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/hand_cannon_f163a4c8/blender/source.blend",
+    "sourceGroup": "hand_cannon_f163a4c8",
+    "sourceBlendSha256FromReport": "5e5546fa07c34efdc8b57eef94772f36c03ca7e1823c84c291889b99a8001277",
+    "blenderVersion": "5.4.0 Alpha",
+    "action": "80A8A567",
+    "actionNameFromReport": "Armature|fp_80A8A567_reload_full|Base",
+    "evaluatedActionNameInExport": "Armature|fp_80A8A567_reload_full|Base.001",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1.0,
+      127.0
+    ],
+    "sourceFps": 30,
+    "sampleCount": 61,
+    "sourceEvaluationAllInputsUnchanged": true,
+    "maxPriorCacheJointAbsError": 0.0,
+    "cameraPresent": false,
+    "meshPresent": false,
+    "matrixSpace": "armature_object",
+    "matrixWorldApplied": false,
+    "lengthMeasurements": {
+      "right": {
+        "forearm": {
+          "minimumModelUnits": 8.141359124410911,
+          "maximumModelUnits": 8.141365969779626,
+          "sourceUnitsToModelUnits": 32,
+          "conversionStatus": "authored presentation calibration"
+        },
+        "upperArm": {
+          "minimumModelUnits": 8.726568027086486,
+          "maximumModelUnits": 8.726575364475298,
+          "sourceUnitsToModelUnits": 32,
+          "conversionStatus": "authored presentation calibration"
+        }
+      },
+      "left": {
+        "forearm": {
+          "minimumModelUnits": 8.14136169210679,
+          "maximumModelUnits": 8.141367469880157,
+          "sourceUnitsToModelUnits": 32,
+          "conversionStatus": "authored presentation calibration"
+        },
+        "upperArm": {
+          "minimumModelUnits": 8.726687238437476,
+          "maximumModelUnits": 8.726694444825972,
+          "sourceUnitsToModelUnits": 32,
+          "conversionStatus": "authored presentation calibration"
+        }
+      }
+    }
+  },
+  "candidateChanges": {
+    "framingBase": "current hand_cannon family",
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "restPalmCalibration": "inherited unchanged",
+    "reloadAction": "80A8A567",
+    "reloadPolicy": "inherited cylinder; remain on weapon hinge",
+    "upperArmEmission": "First actual native PNGs show continuous firing arm into lower screen during raised cylinder phases; master owns shared emission gating, no worker runtime change justified."
+  },
+  "checks": {
+    "profileParsing": "passed: strict JSON, schema/weapon, exact inherited framing plus sourceFullChain and preserved rest palms",
+    "sourceSelection": "passed: group/action/non-fallback, original source-map reload tag, 61 finite shoulder/elbow/wrist/weapon matrices and original normalized source range",
+    "sourceSheetViewed": true,
+    "appliedProfileParsing": "passed: strict JSON parsing and Ace schema/weapon/source flags/action checks; no build, generation or scan",
+    "firstActualVisionImagesViewed": true,
+    "reviewOnlyJsonParsing": "passed: strict JSON parse, weapon/schema, no-runtime-change decision, second Vision pending and finalAcceptance=false"
+  },
+  "workflow": {
+    "originalBlendEvaluation": "supplied report inspected; not independently rerun by worker",
+    "original61": "supplied evaluated export inspected; import owned by master",
+    "firstVision": "master supplied actual native first-pass PNGs; worker viewed two sheets and six full-resolution source PNGs",
+    "actualReviewSentToWorker": "received master findings and actual first-pass PNG paths; independently viewed referenced images",
+    "workerCorrections": "review response complete: no justified runtime/profile correction in inspected frames; preserve profile byte-for-byte",
+    "secondVision": "awaiting_master_same_scenario_second_pass",
+    "finalAcceptance": false,
+    "candidateApplied": "applied after master READY to exclusive worktree profile/review paths only"
+  },
+  "nativeReviewTargets": [
+    "Both hands visible in hip, ADS and recovery; preserved cup contact without fingers",
+    "Source wrist/body share a single weapon parent; no doubled source motion",
+    "Reload right/firing elbow covered by normal-length source upper arm without detached seam",
+    "Free left hand follows actual source wrist excursion; cylinder remains hinged on gun",
+    "ADS sight line and source return; no arm stretch, rotation flips or visible tick holds"
+  ],
+  "limitations": [
+    "Source evidence contains only an Armature, no recovered camera or weapon/hand mesh.",
+    "Worker viewed supplied actual native PNGs; did not run Minecraft, native input, runtime/build, CU/Vision, generation or broad tests. Scenario completion is reported by master.",
+    "Bracketed stills support no confirmed blocking defect in inspected views; they do not establish every pose, continuous interpolation or hidden ADS palm contacts.",
+    "Second native Vision remains mandatory and pending; no second acceptance or final completion is claimed."
+  ],
+  "readyReceived": true,
+  "firstActualVisionReview": {
+    "evidenceOrigin": "Native images produced by master; worker inspected saved PNGs only and did not operate Minecraft/CU/Vision.",
+    "masterReportedScenario": "Native fire/reload/ADS completed. Master found no confirmed blocking Ace defect in bracketed frames.",
+    "imagesViewed": [
+      "/private/tmp/destiny-w210-pass1-native/screenshots/ace_of_spades-review.png",
+      "/private/tmp/destiny-w210-pass1-native/screenshots/ace_of_spades-reload.png",
+      "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-hip.png",
+      "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-04.png",
+      "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-08.png",
+      "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-11.png",
+      "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-reload-sample-15.png",
+      "/private/tmp/destiny-w210-pass1-native/frames/w210-ace_of_spades-ads-sample-06.png"
+    ],
+    "observations": [
+      {
+        "images": [
+          "w210-ace_of_spades-hip.png",
+          "w210-ace_of_spades-reload-sample-15.png"
+        ],
+        "finding": "Firing hand and cupped support overlap below the grip at ready/recovery; no clearly detached cup or cylinder penetration is visible. Preserve current rest palm calibration."
+      },
+      {
+        "images": [
+          "w210-ace_of_spades-reload-sample-04.png",
+          "w210-ace_of_spades-reload-sample-08.png"
+        ],
+        "finding": "Raised gun retains its cylinder at the weapon side. Firing palm remains below the grip/cylinder and the arm continues toward/beyond the lower screen edge; no isolated open forearm end or clear palm crossing through cylinder is visible in these views."
+      },
+      {
+        "images": [
+          "w210-ace_of_spades-reload-sample-04.png",
+          "w210-ace_of_spades-reload-sample-08.png",
+          "w210-ace_of_spades-reload-sample-11.png"
+        ],
+        "finding": "Handling hand is low/offscreen in middle samples, then visible separately approaching the grip in sample11 before cupped recovery in sample15. This is consistent with the inspected source wrist excursion; no explicit visibility flag change is justified."
+      },
+      {
+        "images": [
+          "w210-ace_of_spades-ads-sample-06.png",
+          "ace_of_spades-review.png"
+        ],
+        "finding": "ADS weapon/sight is centered and the central sight line is free of arm occlusion. Weapon and lower image boundary occlude most hand detail; both individual palm contacts cannot be independently resolved in this ADS still."
+      }
+    ],
+    "decision": "no_runtime_change",
+    "rationale": "No confirmed blocking palm/cylinder clearance defect in the actual bracketed images; changing calibrated anchors or source motion would lack observed evidence.",
+    "profileChanged": false,
+    "profileSha256": "53e65ab865a84c13c985107e12ffca93e3ba14f6332643448a16e2f62cf6597d",
+    "remainingSecondPassChecks": [
+      "Repeat master fire/reload/ADS scenario and verify cup recovery and hinged cylinder clearance.",
+      "Check intermediate contact and elbow seam during motion; bracketed stills do not prove every interpolated pose or continuous 60fps motion.",
+      "ADS sight clearance is visible; confirm hand visibility/contact using additional view evidence if required because the centered weapon occludes most palms."
+    ],
+    "secondVisionAccepted": false
+  }
+}

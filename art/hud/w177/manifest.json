@@ -1,0 +1,76 @@
+{
+  "stage": "W177",
+  "label": "HEATING UP",
+  "size": [
+    118,
+    24
+  ],
+  "font_family": "Arial Narrow Bold",
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "font_size_px": 22,
+  "horizontal_scale": 0.9009009009009009,
+  "alpha_bounds_px": [
+    10,
+    1,
+    111,
+    23
+  ],
+  "pillow_version": "12.3.0",
+  "freetype_version": "2.14.3",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "provenance": "Original generated system-font label, not an official Destiny sprite; no ripped asset or bundled font; W171 font, cap height and coverage method",
+  "runtime_contract": {
+    "icon_id": "destiny:gui/hud/perk_heating_up_w177",
+    "layout": "COUNT_TIMER",
+    "valid_stacks": [
+      1,
+      2
+    ],
+    "valid_ticks": [
+      1,
+      110
+    ],
+    "max_rows": 4,
+    "seconds": "ceil(ticks/20):1..6, actual remaining only",
+    "node_suffixes": [
+      "marker",
+      "label",
+      "x",
+      "count",
+      "minutes",
+      "colon",
+      "tens",
+      "ones"
+    ],
+    "priority": "Twentieth kind after unchanged nineteen-kind prefix",
+    "visibility": "Held weapon only; stowed clock continues, no fake countdown",
+    "marker": "Green0x8DE2AF; Mori/Honed retain gold",
+    "native_validation": "Pending; generated offline label is not a world PNG",
+    "integration": "Actual WeaponHeatingUp.stacks/remaining; Snapshot args26/27"
+  },
+  "source_facts": [
+    "W171 pinned font, 22px cap-size input, BASIC engine, 4x supersampling",
+    "WeaponPerkHud noncompact slot is 118x24 and marker is green unless Mori/Honed"
+  ],
+  "local_choices": [
+    "Condense full authored label into the COUNT_TIMER slot at 22px; 1..2 stack and 1..110 tick bounds from W177 task contract"
+  ],
+  "pack_bytes": 12346,
+  "pack_byte_budget": 16384,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_heating_up_w177.png": "7ec6ba3c0e60677ad40fcda95cfb04c60bb7644b451da035f8f0f6c1c22b6352",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_heating_up_w177.json": "f4201c8ba7849e2c6f1e940dd8eb7f106b4db0d27d3dcd37e257011b2d9f1005",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_heating_up_w177.json": "c6abdd8791639b2a26bc9469693e695dd528dc1fd21ef162c5ab23fe87202469"
+  },
+  "source_files": {
+    "art/hud/w177/heating-up.svg": "2e1e9a2b1af960ae15724cbfea92fb46fa7b818699c450ec1c85f5ea7341246b"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_heating_up_w177.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_heating_up_w177.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_heating_up_w177.json",
+    "art/hud/w177/heating-up.svg",
+    "art/hud/w177/manifest.json"
+  ]
+}

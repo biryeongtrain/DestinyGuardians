@@ -1,0 +1,41 @@
+# W153 sidearms / heavy: physical ADS sight bodies
+
+Six isolated ADS-only full bodies derived from each actual `weapon_surface_w123/<id>.json`, plus anchor/provenance data. Canonical HIP, third-person, reload, source models/textures, shared generators, wrappers and Java remain inputs only. This worktree is the dirty-seeded linked CoW worker; main is read-only. No game, server, Gradle, CU/Vision or DCC session was used.
+
+The six actual default photos at `/tmp/destiny-weapons-w31/references/<id>.jpg` were opened with `view_image`, and checked against the W31 photo SHA-256 and the corresponding W123 manifest raw-input photo hash. Each W123 `design.json`, `manifest.json` and `review.md` was read for original sight construction, source frame, full-only reload policy and prior FBX/Blender provenance. Their hashes and original rip hashes are recorded per manifest row. These are oblique default photos; they do not establish an exact extracted first-person reticle or hidden rear microprofile. The Ace/Izanagi skill/reference informed continuous volumes, actual apertures, face UVs and preservation of meaningful geometry rather than generic replacement optics.
+
+| ID | Original physical sight retained | Eye relief (m) | Emitted body / assembled | Broad aperture clear |
+| --- | --- | ---: | ---: | ---: |
+| dead_man_walking_xx7463 | SUROS floor, two rear ears, original front base/blade | 0.60 | 102 / 102 | 90.25% |
+| high_albedo | blue rear blade, sloping carry bridge, orange cruciform front brace | 0.56 | 102 / 102 | 77.10% |
+| brass_attacks | stepped brass rail web, crown and foot, both stations | 0.52 | 113 / 113 | 68.03% |
+| edge_transit | original low box roof/ears and three recessed range bars | 0.32 | 98 / 98 | 74.60% |
+| fixed_odds | two gold inclined triangular peep legs/base and front ears | 0.44 | 155 / 155 | 65.31% |
+| retrofit_escapade | eight original hood staves, eight teal ocular rim staves, three top-loop pieces | 0.36 | 121 / 121 | 62.13% |
+
+All outputs are cubes; zero triangle adapters, maximum 155 assembled emitted elements, ceiling 1,000. Every source already includes its seated magazine/drum/belt. They are retained exactly once, including High Albedo's magazine base, Brass Attacks' grip magazine, Edge Transit's offset drum, and both machine-gun belts. There is no companion model, magazine split, or extra spare representation; W151 numeric companion/assembly counts are present with companion count 0. No companion schema extension is needed. Existing full-only generic reload and source pivots are not changed.
+
+Each body adds two small solids at a weapon-specific original sight station: a narrow physical stem using an original sight metal donor's exact face UV records, and a pale terminal cap using the existing W148 `sights.png` atlas's opaque pale patch. The cap is a physical aiming aid, not an invented scope or a recovered Destiny shader reticle. The old donor itself stays present. Original non-sight elements, all other sight elements, UVs, rotations and element order survive by deep value equality. Original texture mappings survive; only the additional `sight` slot references an existing read-only atlas. Inherited full-model display transforms are omitted from these reusable body resources because master owns display wrappers.
+
+- **dead_man_walking_xx7463:** center `[8,16.02,7.58]` sits inside the actual SUROS rear ears. Extend the short original front blade toward this line; the floor and separated ears remain readable. No filled replacement frame or optics deletion.
+- **high_albedo:** center `[8,14.56,9.02]` looks just above the blue rear blade toward a small pin attached to the actual orange brace. The carry bridge remains below the ray. The rear blade is an intentionally visible lower reference; no notch, tube or reflex is fabricated.
+- **brass_attacks:** center `[8,17.09,9.10]` follows the top of the original stepped brass crown, with a low pin on the forward crown. This is an open rail iron arrangement, not a roofed aperture. The pale shroud, copper bore and all keyhole/rail geometry remain unchanged.
+- **edge_transit:** center `[8,13.13,9.26]` is inside the real protected low box. Put the pin on its forward range bar, below center. Short 0.32m seating keeps the actual roof, ears and bottom rim readable over the stock rather than placing a convenient anchor behind it. All stock and receiver solids survive.
+- **fixed_odds:** center `[8,12.82,4.42]` is within the inclined gold triangular peep. Add a narrow post between the real front ears. Its physical tip is visible through the triangle rather than replacing this distinctive arch with a rectangle. The black open stock, belt and box stay unchanged.
+- **retrofit_escapade:** center `[8,13.52,6.70]` is at the actual tube mouth. Remove only `objective_lens` and `ocular_lens` from this ADS copy: each original opaque plate independently crosses the center ray and blocks the opening. Preserve the original hood, ocular rim, top loop, saddle and their UVs. A slim floor-mounted pin appears within the tube. The 0.36m eye lies ahead of the butt; it is far enough from the tube to retain useful aperture area despite the long hood. Hardware probes use each rim stave's inner lip; the bottom 0.045 units naturally overlap the unchanged saddle as a mounting joint. No stock, receiver, wrap, fork or other obstruction was trimmed.
+
+Offline evidence: `/private/tmp/w153-sidearms-heavy-preview.png` contains the six textured rear oblique views and perspective views from each actual manifest eye plus enlarged aperture detail. All emitted elements are projected, with both legacy axis/angle and 26.3 Euler rotations respected. This inspection image is temporary evidence outside the owned repository delta. Perspective UV interpolation and lighting are approximate; it is not a native screenshot or a game framing guarantee.
+
+The targeted test suite covers the exact six source contracts, deterministic seven-output `generate() -> Path:bytes`, generated byte parity, nonwriting successful and stale `--verify`, strict finite native JSON schema, exact original geometry/UV retention, whole-assembly counts and magazine uniqueness, photo/design/manifest/review/rip/texture hashes, opaque bright tip pixels, visible tip, visible original rear hardware and inverse local rotation/segment math. Clearance checks include all source and emitted solids from actual eye through and beyond the muzzle. A 21×21 perspective grid must keep at least 60% of an original-sized aperture rectangle clear, and a contiguous upper `.16 × .07` model-unit aiming window must be fully open. A synthetic foreground stock wall with a tiny center hole must fail broad-aperture, hardware and tip visibility checks even though its center ray remains clear. Restoring either original opaque lens must block Retrofit's center. These are useful offline geometric checks, not native acceptance or performance certification.
+
+Validation commands (run in this worker):
+
+```
+rtk proxy python3 -B scripts/generate_sight_bodies_w153_sidearms_heavy.py
+rtk proxy python3 -B scripts/generate_sight_bodies_w153_sidearms_heavy.py --verify
+rtk proxy python3 -B scripts/qa/test_sight_bodies_w153_sidearms_heavy.py
+```
+
+Result: **18/18 targeted Python tests passed** (7.242s); the generator verified all seven outputs byte-for-byte with `--verify`. The deliberate stale-output negative test exits 1 without repairing files.
+
+Master followups: integrate the six manifest rows into shared18 ADS21frame wrappers and Java admission, preserving the exact per-weapon eye relief and anchors. Run the final actual 26.3 native parser/pack checks. Inspect stable ADS and transitions across all 21 frames: sight centering, visible pin, full original sight/inner rim, unobstructed background around the aim, and foreground stock clearance (particularly Edge Transit and Retrofit). Confirm native HIP/third-person/generic reload return, magazines/belts seated once, no missing textures and no changed source appearance. Observe 10–20 simultaneous displayed weapons briefly for obvious breakage/stutter. No native parser, pack load, ADS/HIP/reload, gameplay, audio or performance success is claimed by this batch. Main integration and native input remain with master.

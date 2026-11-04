@@ -1,0 +1,117 @@
+{
+  "stage": "W108",
+  "baseHash": 2779035018,
+  "enhancedHashExcluded": 1171147302,
+  "officialTrigger": {
+    "description": "Each rapid kill with this weapon progressively increases reload speed for a short time.",
+    "primary": true,
+    "source": "Pinned official DestinyInventoryItemDefinition",
+    "requiresPrecision": false,
+    "requiresReloadToActivate": false
+  },
+  "communitySource": {
+    "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+    "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+    "commitDate": "2026-10-08T21:35:34Z",
+    "entryLastUploadEpochMillis": 1766867819246,
+    "primary": false,
+    "localExcerpt": "art/weapons/w108/references/clarity-source.json",
+    "text": "Weapon Kills grant 1 Stack of Feeding Frenzy for 3.5 seconds, increasing the Reload Speed of the weapon. Maximum of 5 Stacks.\nBonuses at 1|2|3|4|5 Stacks:\n• 8|50|60|75|100 Reload Speed\n• 2.5%|10%|13%|16%|20% decreased Reload Animation Duration"
+  },
+  "durationSeconds": 3.5,
+  "durationTicks": 70,
+  "maxStacks": 5,
+  "tiers": [
+    {
+      "stacks": 1,
+      "reloadBonus": 8,
+      "durationMultiplier": 0.975
+    },
+    {
+      "stacks": 2,
+      "reloadBonus": 50,
+      "durationMultiplier": 0.9
+    },
+    {
+      "stacks": 3,
+      "reloadBonus": 60,
+      "durationMultiplier": 0.87
+    },
+    {
+      "stacks": 4,
+      "reloadBonus": 75,
+      "durationMultiplier": 0.84
+    },
+    {
+      "stacks": 5,
+      "reloadBonus": 100,
+      "durationMultiplier": 0.8
+    }
+  ],
+  "policies": {
+    "stowPersistence": "UNKNOWN",
+    "reloadConsumption": "UNKNOWN",
+    "killRefreshAllStacks": "UNKNOWN",
+    "expirationAllOrOneStack": "UNKNOWN",
+    "reloadSnapshot": "AT_RELOAD_START_LOCAL_POLICY",
+    "statCap": 100,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "shellFirstDelay": "PRESERVE_EXISTING_DISTINCT_FIRST_DELAY_IF_PRESENT",
+    "combinedOutlaw": "NO_DISTINCT_SELECTED_SOCKET_PAIR"
+  },
+  "unknownLifecycle": {
+    "stowPersistence": null,
+    "reloadConsumption": null,
+    "killRefreshAllStacks": null,
+    "expirationAllOrOneStack": null,
+    "reason": "Not specified in the pinned base Clarity entry or official description; master must label any implementation choice local policy."
+  },
+  "reloadFormula": {
+    "effectiveReloadStat": "min(100, baseReloadStat + tier.reloadBonus)",
+    "seconds": "(evpp * effectiveReloadStat^2 + vpp * effectiveReloadStat + offset) * tier.durationMultiplier",
+    "ticks": "ceil(seconds * 20), once after stat and scalar",
+    "curveClassification": "Same pinned historical W46 Oracle curve inputs used by W62",
+    "ammoPercent": "Source field retained in audit only; no independent ammo-transfer timing is claimed."
+  },
+  "outlawOverlap": [
+    {
+      "id": "blast_furnace",
+      "hash": 3843477312,
+      "feedingFrenzySocket": 3,
+      "outlawSocket": 3,
+      "sameSocketExclusive": true,
+      "feedingFrenzyPlugSetHash": 1976101165,
+      "outlawPlugSetHash": 1976101165
+    }
+  ],
+  "distinctSocketCompositionProven": false,
+  "secondaryPerkOverlaps": {
+    "dragonfly": [
+      {
+        "id": "brass_attacks",
+        "hash": 2121785039,
+        "feedingFrenzySocket": 3,
+        "otherSocket": 4,
+        "otherPerkHash": 2848615171,
+        "otherPlugSetHash": 3403850295,
+        "simultaneousSelectionPossible": true
+      }
+    ],
+    "payload": []
+  },
+  "dragonflySecondaryKillFeedingFrenzyCredit": {
+    "verifiedDestinyBehavior": false,
+    "sourceProven": null,
+    "localPolicy": "Master credits confirmed Dragonfly secondary weapon final blows using original paid source token; unrelated ability kills do not qualify.",
+    "boundary": "Pinned exact-base Clarity entry says Weapon Kills, but does not explicitly establish Dragonfly secondary-kill proc attribution."
+  },
+  "limitations": [
+    "Manifest proves exact selected optional traits and stats, not that any stack automatically selects a trait.",
+    "Clarity is community research. Its live-branch commit is pinned; this is not a new Destiny gameplay measurement.",
+    "The exact-base Clarity entry does not establish stow persistence, reload consumption, refresh scope or expiration mode.",
+    "Absolute reload durations inherit W46 historical community approximations, not a current sandbox certification.",
+    "Reload-start snapshot and tick quantization are local integration policies.",
+    "No enhanced, newer weapon copies, armor/magazine/masterwork modifiers or unproved combined-perk formulas.",
+    "All 13 selected supported weapons use whole-magazine timing; no first-shell measurement is inferred."
+  ]
+}

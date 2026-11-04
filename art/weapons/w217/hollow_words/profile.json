@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "weapon": "hollow_words",
+  "sourceAction": "80A8ADD3",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8ADD3",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.18,
+        0.58,
+        0.64
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "fusion_rifle_04669cdb",
+    "action": "80A8ADD3",
+    "sourceBlendSha256": "cdf955feedf818492dd395a2866beb19ed11bb35944544c05c3cd4eb00eeee36",
+    "sourceMapSha256": "27b7520526de9abf593e208b6f0b52f70c83e2a4a6ddaada7bcd3dc40eac9ad2",
+    "boneMapSha256": "a439c489fb5ab1de893beb8cfe682958641d1c2682059f849932a25db27d3fd4"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w217/source/source-review.json",
+      "sourceSha256": "d8edb0d97be1b4cc1446363216ac271fb6bbb1a91f3b52f1fa0b3dc48388fd6a",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original Blender5.4.0 Alpha. ARMATURE only,OBSlot,Armature|fp_80A8ADD3_reload_full|Base range1..100 at30fps,61 uniformly evaluated poses. allInputsUnchanged=true; prior matrix error0. Worker read fresh report; did not independently evaluate Blender."
+    },
+    {
+      "source": "art/weapons/w205/rigs/fusion_rifle_04669cdb.json",
+      "sourceSha256": "747749cea16ee1bec34df57fbb7fb8b6c7bb32e6dd1dfef6188991a0d2e4d76a",
+      "role": "fresh_evaluated_shared_source61",
+      "observation": "Shared fusion group includes Hollow Words; no recovered weapon-exclusive animation/mesh/camera. w217Source61 original shoulder->elbow->wrist matrices,row-major/column vectors in armature_object space. Fresh bytes supplied separately by master; worker baseline retains old rig."
+    },
+    {
+      "source": "/private/tmp/destiny-w217-source/sheets/fusion_rifle_04669cdb-80A8ADD3-upper-chain.png",
+      "sourceSha256": "51406b16e3bce588b382a4fa975ad9f4c1f4a51673f9620863c60328f2e2c2f3",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Actually viewed XZ/YZ projections at0,.2,.4,.6,.8,1. Left chain reaches downward/away during handling and returns near bent rest at1; right chain remains folded. Bone projections do not establish weapon mesh contacts or native camera."
+    },
+    {
+      "source": "scripts/generate_reload_w185_hollow_words.py",
+      "sourceSha256": "c48e870328e097cecd568f9097181e4730cf9cd49f9a24ae560c78d45333dec1",
+      "role": "preserved_authored_motion",
+      "observation": "AST-read literals without import or generator execution. Preserve12 Hollow Words keys: lift.18,withdraw.26..38,low exchange.38..48,incoming.48..58,seat.64,wristRoll.72,rapidLower.88,recover1. Same fixed grip and rigid whole cell path."
+    },
+    {
+      "source": "art/weapons/w185/hollow_words/SOURCE.md",
+      "sourceSha256": "edef99aecf9ae34c5cc11e088c1399a2168019fbf1cac02844c08abeeb91fb03",
+      "role": "authored_geometry_and_footage_provenance",
+      "observation": "Read W185 SOURCE/manifest: Ironworker Gaming ozOSAOr5T4c,continuous frames11204..11348/186.733333..189.133333s. Keep95 body+under_grip_cell53+one existing insert=97; reused six cell faces/UV. Exact hidden insert proportions and hand clearance remain authored/unverified."
+    },
+    {
+      "source": "art/weapons/w185/hollow_words/storyboard.png",
+      "sourceSha256": "5eb4eb0649a73ad8888aa7744e6cfc535f6a6d4f8333bd6da55b99226052eca9",
+      "role": "viewed_retained_same_weapon_storyboard",
+      "observation": "Viewed original reference thumbnails and authored offline comparison panels. Reference shows right-edge steep lift,open fixed triangular grip,underside low/offscreen exchange,palm seat and rapid lowering. No original video reopened and no native gameplay claim."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "retained_effective_framing",
+      "observation": "No prior Hollow Words profile override. Preserve fusion translation[-.65,.6,0],rotation[-1,2,0],scale.98,rightWristRoll28,leftRotation[15,35,-35]. Add only required full-chain/support flags."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_rest_contacts_and_seat_release",
+      "observation": "Keep right[8,7.2,2.55]/[22,0,0],left[7.8,9.05,-4.6]/[0,90,-85],reload[7.3,4.35,3.7]/[22,0,0]. Override only reload rigAction/partHint/policy/gripWindow. Attach.05..18 and release.58..64 by same-weapon authored seat."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns shared binding/runtime/materialization/build/Vision and actual all-route element measurement.",
+    "Keep W185 same-weapon geometry/UV,12 authored keys, holds, anchors, body/cell split and exact endpoints. PCHIP changes interpolation only.",
+    "Full original shoulder-elbow-wrist chains, ordinary arm lengths/axes and fingerless skin. Retain effective framing and every rest contact.",
+    "Only under_grip_cell53 plus existing narrow insert moves; fixed grip/heel/brace/receiver/triggerguard stays on body even where lower cell overlaps.",
+    "Cell seats at.64; gripWindow release.58..64 prevents late wrist motion dragging seated cell. Neutral offset holds.64..1.",
+    "97 weapon+448arm reserve=545; raw native238+448=686. Estimates only; master measures every composed route <=1000.",
+    "Preserve capacity6,reload50ticks,charge800ms/16ticks,burst7/sharedBurstAmmo=true,cadence13ticks,ammo and audio.",
+    "Required after candidate: master FIRST actual PNGs -> SAME worker correction or justified nochange -> master SECOND. Native acceptance pending."
+  ]
+}

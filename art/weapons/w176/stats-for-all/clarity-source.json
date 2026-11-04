@@ -1,0 +1,188 @@
+{
+  "stage": "W176",
+  "repository": "https://github.com/Database-Clarity/Live-Clarity-Database",
+  "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+  "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+  "sourceSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 1583705720,
+    "name": "Stats for All",
+    "lastUpload": 1723480728683,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Upon damaging 3 Separate Enemies within 3 seconds of each, for 10 seconds:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 35 Handling and Reload Speed"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 10 Stability and Range"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 5% increased Damage Falloff Distance"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 0.95x Reload Duration Multiplier"
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Buff duration cannot be refreshed."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 1409206216,
+  "enhancedExcluded": {
+    "hash": 1409206216,
+    "name": "Stats for All",
+    "lastUpload": 1709252348445,
+    "type": "Weapon Trait Enhanced",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Upon damaging 3 Separate Enemies within 3 seconds of each, for "
+            },
+            {
+              "text": "🡅",
+              "classNames": [
+                "enhancedArrow"
+              ]
+            },
+            {
+              "text": "11 seconds:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 35 Handling and Reload Speed"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 10 Stability and Range"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 5% increased Damage Falloff Distance"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 0.95x Reload Duration Multiplier"
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Buff duration cannot be refreshed."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "🡅",
+              "classNames": [
+                "enhancedArrow"
+              ]
+            },
+            {
+              "text": " Buff duration is increased by 1 second."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "verifiedMechanics": {
+    "id": "stats_for_all",
+    "hash": 1583705720,
+    "hitWindowTicks": 60,
+    "durationTicks": 200,
+    "handlingBonus": 35,
+    "reloadBonus": 35,
+    "stabilityBonus": 10,
+    "rangeBonus": 10,
+    "falloffScalar": 1.05,
+    "reloadScalar": 0.95,
+    "refresh": false
+  },
+  "localPolicies": {
+    "statCap": 100,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "bonusInputs": "TOTALS_INCLUDE_SFA_DO_NOT_ADD_35_AGAIN",
+    "reloadScalarInput": "TOTAL_PRODUCT_INCLUDES_SFA_0_95_ONCE",
+    "handling": "W58_STOW_AT100_FLOOR_NO_EXTRA_CLAMP",
+    "ads": "W44_CLAMP_2_20_NO_COMPATIBLE_SNAPSHOT_ON_THESE_FOUR",
+    "ballistics": "W43_HIP_RANGE_PLUS10_CAP100_THEN_1_05_BOTH_ENDPOINTS_MASTER_ADS_AFTER",
+    "explosive": "RANGE_INDEPENDENT_SENTINEL_NEUTRAL_NO_TRAVEL_OR_BLAST_INVENTION",
+    "collection": "NEW_DISTINCT_TARGET_RENEWS60_DUPLICATE_NO_EXTEND_NO_COLLECTION_WHILE_ACTIVE",
+    "expiry": "INCLUSIVE_DEADLINE_EXPIRED_QUERIES_PURE",
+    "stowReload": "LOCAL_PRESERVE_DEADLINES_TIME_CONTINUES_NOT_SOURCE_PROVEN",
+    "lifecycle": "MASTER_IDENTITY_SESSIONS_ATTRIBUTION_LOCAL_POLICY"
+  },
+  "limitations": [
+    "Bungie manifest 245114.26.10.13.2000-1-bnet.66137 establishes exact base legendary randomized trait sockets; base1583705720 accepted; enhanced1409206216 excluded.",
+    "Clarity at pinned039cfbc establishes distinct3 hits,3s per new target,10s nonrefresh,+35handling/reload,+10stability/range,1.05falloff,.95reload. Exact tick boundaries, duplicate handling, no collection while active and clock rejection are local discrete policy.",
+    "Stow/reload preserve local cycle deadlines with time continuing; this is NOT proven by pinned SFA text. Master identity sessions own lifecycle and cleanup.",
+    "Oracle May20 2026 curves are historical community estimates, separate from Bungie Oct13 membership. Reproduces all four existing W46/W58/W44 baselines; not current official animation measurements.",
+    "Bonus arguments are TOTALS including SFA; clamp base+total to0..100 before raw curves, apply total reload scalar product once, then ceil20 once. No automatic+35 or extra .95. Combined stat/bonus behavior is local composition, not measured joint Destiny behavior.",
+    "W43 hip: active+10Range cap100, then1.05 to both endpoints; floor/precision unchanged. Master applies W44ADS distance scalar afterward. Dimensional has no Range stat and a999/999.9 sentinel: return neutral sentinel; no projectile distance or blast radius invention.",
+    "No compatible Snapshot among selected4; snapshotEntering=true fails explicitly rather than inventing a Heavy scalar or unsupported joint effect. false covers ordinary entry and exit.",
+    "SFA+Frenzy Retrofit and SFA+AJ Ammit exact distinct sockets proven; activating shot ordering, combined runtime, stability consumption, shared registry/gate and all native/CU remain master-owned. No native/runtime was launched by this worker."
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "stage": "W154",
+  "feature": "w154-machine-gun-feed",
+  "weapons": [
+    {
+      "id": "hammerhead",
+      "assembled_elements": 163,
+      "part_counts": {
+        "body": 70,
+        "magazine": 79,
+        "cover": 14
+      },
+      "nonbelt_specs_sha256": "d845848928be6f76ba9e52f6008c9593893e2f4f2c49a9a6600833b831964fe7",
+      "feed": {
+        "revision": "W154",
+        "travel_plane": "XY",
+        "muzzle_axis": [
+          0,
+          0,
+          -1
+        ],
+        "case_axis": [
+          0,
+          0,
+          1
+        ],
+        "tip_axis": [
+          0,
+          0,
+          -1
+        ],
+        "path_xy": [
+          [
+            8.4,
+            12.32
+          ],
+          [
+            8.98,
+            12.29
+          ],
+          [
+            9.47,
+            12.02
+          ],
+          [
+            9.8,
+            11.6
+          ],
+          [
+            10.0,
+            11.13
+          ],
+          [
+            10.08,
+            10.65
+          ],
+          [
+            10.06,
+            10.17
+          ],
+          [
+            9.98,
+            9.62
+          ]
+        ],
+        "link_z": 4.26,
+        "rounds": 8,
+        "representation": "rigid linked cartridges",
+        "generator": "scripts/fix_belt_feed_w154.py",
+        "generator_sha256": "eec39f7dfc0071b249a10f33ce7084c450fb8db95f0468a6b523b2f1e0dcf406"
+      }
+    },
+    {
+      "id": "fixed_odds",
+      "assembled_elements": 153,
+      "part_counts": {
+        "full": 153
+      },
+      "nonbelt_specs_sha256": "533205e12595838ebb4e8ff1ab066e50d34513e5e5d85a1f61a4c4a6284f14b4",
+      "feed": {
+        "revision": "W154",
+        "travel_plane": "XY",
+        "muzzle_axis": [
+          0,
+          0,
+          -1
+        ],
+        "case_axis": [
+          0,
+          0,
+          1
+        ],
+        "tip_axis": [
+          0,
+          0,
+          -1
+        ],
+        "path_xy": [
+          [
+            8.42,
+            11.45
+          ],
+          [
+            8.98,
+            11.42
+          ],
+          [
+            9.42,
+            11.18
+          ],
+          [
+            9.7,
+            10.79
+          ],
+          [
+            9.86,
+            10.34
+          ],
+          [
+            9.92,
+            9.87
+          ],
+          [
+            9.94,
+            9.4
+          ]
+        ],
+        "link_z": 4.77,
+        "rounds": 7,
+        "representation": "rigid linked cartridges",
+        "generator": "scripts/fix_belt_feed_w154.py",
+        "generator_sha256": "eec39f7dfc0071b249a10f33ce7084c450fb8db95f0468a6b523b2f1e0dcf406"
+      }
+    },
+    {
+      "id": "retrofit_escapade",
+      "assembled_elements": 134,
+      "part_counts": {
+        "full": 134
+      },
+      "nonbelt_specs_sha256": "f9b6699058212947e795fb644eabf1c513d7f0bd68a1a38d4b26eaef5d4db8da",
+      "feed": {
+        "revision": "W154",
+        "travel_plane": "XY",
+        "muzzle_axis": [
+          0,
+          0,
+          -1
+        ],
+        "case_axis": [
+          0,
+          0,
+          1
+        ],
+        "tip_axis": [
+          0,
+          0,
+          -1
+        ],
+        "path_xy": [
+          [
+            7.26,
+            12.14
+          ],
+          [
+            6.78,
+            12.13
+          ],
+          [
+            6.32,
+            11.94
+          ],
+          [
+            5.99,
+            11.59
+          ],
+          [
+            5.79,
+            11.16
+          ],
+          [
+            5.7,
+            10.69
+          ],
+          [
+            5.72,
+            10.22
+          ]
+        ],
+        "link_z": 4.4,
+        "rounds": 7,
+        "representation": "rigid linked cartridges",
+        "generator": "scripts/fix_belt_feed_w154.py",
+        "generator_sha256": "eec39f7dfc0071b249a10f33ce7084c450fb8db95f0468a6b523b2f1e0dcf406"
+      }
+    }
+  ],
+  "generator": "scripts/fix_belt_feed_w154.py",
+  "generator_sha256": "eec39f7dfc0071b249a10f33ce7084c450fb8db95f0468a6b523b2f1e0dcf406",
+  "targeted_test": "scripts/tests/test_belt_feed_w154.py",
+  "native_accepted": false,
+  "w114_reload": "Pinned original geometry and 126 sampled wrappers preserved byte-for-byte; existing W123 substitution supplies corrected splits.",
+  "master_derivation": [
+    "shared surface pack manifest",
+    "W151 pulse/ADS",
+    "W153 MG bodies/ADS"
+  ],
+  "limitations": [
+    "Offline CPU review only; native HIP/ADS, sideview and representative reload pending master.",
+    "Atlas repacked; original nonbelt geometry/material/motif specs preserved.",
+    "Rigid belt, simplified solid tips; no dynamic deformation or native performance claim.",
+    "Historical test suites were not all run or claimed passing."
+  ],
+  "output_sha256": {
+    "art/weapons/w123/fixed_odds/comparison.png": "bc554c0add36752345ff9f6507079a05cf90505c5706cc09dbda35d485d28692",
+    "art/weapons/w123/fixed_odds/design.json": "9a22e950b2bb700f1061766faf1d531d2bc1733d969aaf44ce75b33fb422e0da",
+    "art/weapons/w123/fixed_odds/inspection.bbmodel": "e9b44c3ef0ded34e731703cf3d7301e22a03f15dfd38c50880864441cc0bdd8c",
+    "art/weapons/w123/fixed_odds/manifest.json": "6f337b245bb3e037a8ba0cfd95e0f29ed0133e7a0b7e3c11341a2cc6755bc199",
+    "art/weapons/w123/fixed_odds/review.md": "290c0e5f807e08312caee8bd584f567396464df5967789e253fbfe4cb711be5b",
+    "art/weapons/w123/hammerhead/comparison.png": "7a4470534ae502cba9540ec00c05592b131792258048b7754c5f53e24efbd5c5",
+    "art/weapons/w123/hammerhead/design.json": "d3dc61af99855e2e9e62cf23a5cd93cba5ae59f3d5c904524c9905d3b4f12edf",
+    "art/weapons/w123/hammerhead/inspection.bbmodel": "4cb3d6b98c39aa5eba9c4997865f275806832fc9acc907296c332545e29a1f1b",
+    "art/weapons/w123/hammerhead/manifest.json": "79d710673b41d441d6714434d0a899a64d8aea45d00fc4fa3cc52d264c3fd93b",
+    "art/weapons/w123/hammerhead/review.md": "56460d328a3c63d0c8d1b148b2f3a3a0c6df3809059b4ba65ec93bb3226d2c54",
+    "art/weapons/w123/retrofit_escapade/comparison.png": "225615adb3e1dc11da9da7e31db409da9e2c68bef8964c5286cec7b305c635bf",
+    "art/weapons/w123/retrofit_escapade/design.json": "4133de9acbf925e81d84b95a493134c670794aa6e93953d2460b322810dbfdbd",
+    "art/weapons/w123/retrofit_escapade/inspection.bbmodel": "6eaf7c8db66871b46087df9ee72a952faa1f842988e85f68486c0eb0352927b5",
+    "art/weapons/w123/retrofit_escapade/manifest.json": "ec9e7952b2e137780f2865a412ff1abfa9b71aef48e1031e605e1cde7e698b12",
+    "art/weapons/w123/retrofit_escapade/review.md": "a2586c06b84bc58d1c74bb7e7ab4f791d249767e6d8c2d8cfd1a18aef3083cc6",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/fixed_odds.json": "593ade9e46dae518f28588890ce6e5f8a6b343113b419515c5b47f608b431761",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/hammerhead.json": "77bf5d1b9d9ac4b1034a2332dbce818e7ae215fc94c09041a6e4eb19d9f38555",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/hammerhead_body.json": "e7326f52499020baf6254261851361203336c02035148b07f6f366764d3dd8cf",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/hammerhead_cover.json": "6b319f4c799a6b197055342dba0f87cf4e66959cffc427b64ac62ab5feff32c0",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/hammerhead_magazine.json": "992cd16a82cd2c3ebc3afb9425b765d1dfcfce6111e67443e392c6cacb47caec",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/retrofit_escapade.json": "d7cc409964d15f6e7ed52298d944fb468c3d47e1f1c5f70ee9981977cbe0daba",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/fixed_odds.png": "a4f5a08c0e74e565f8174505e361b7409ad35e3129e00cd8d514411a0fdfd769",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/hammerhead.png": "406aa0f295746323d42c2fa63e76fc4b25466e413e0ebb954c219a2da0ce1b9c",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/retrofit_escapade.png": "cb6c3cc93635c979139c5b7eb30125577d8a680c1c4df5acb0a65c4f39e517aa"
+  }
+}

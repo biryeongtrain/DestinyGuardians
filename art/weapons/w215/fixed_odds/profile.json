@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "weapon": "fixed_odds",
+  "sourceAction": "80A8A005",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A005",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.08,
+        0.2,
+        0.6,
+        0.68
+      ]
+    }
+  },
+  "sourceProvenance": {
+    "reviewPath": "/private/tmp/destiny-w215-source/source-review.json",
+    "reviewSha256": "c283ec4f4b0e39bce3eeabc27c8f459a84a905b89b95012d46fcafc4cc1de535",
+    "blenderVersion": "5.4.0 Alpha",
+    "exporterSha256": "d2d61f30a95d55ec72d41d24ffb205e9946cbb1e4854010b8dd2751641ff2774",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/machine_gun_82e319a0/blender/source.blend",
+    "sourceBlendSha256": "fbb03ecdd5b93c1fff302526f584c6bba74998fffe83a8e0eb1ebe0a1fdba2ae",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/machine_gun_82e319a0/source-map.json",
+    "sourceMapSha256": "ecf2f775aaf8d656412cdd4521248c8821ef315886305d66a7aa4bd38f83246c",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/machine_gun_82e319a0/bone-map.json",
+    "boneMapSha256": "e152c9875efa62bfde0d0dbaa94b26d7b2e5727cc9d1686eb6053dc6f68b488e",
+    "evaluatedRigPath": "/private/tmp/destiny-w215-source/machine_gun_82e319a0.json",
+    "evaluatedRigSha256": "5a96c9a8b74dd28135dac84e96ee18cd735cd691692c8f39e5845f115b18f3da",
+    "chainSheetPath": "/private/tmp/destiny-w215-source/sheets/machine_gun_82e319a0-80A8A005-upper-chain.png",
+    "chainSheetSha256": "10e81cc69489bd3df15377d7571e11c216ac89ea384dd51f8d75a82796b27dfb",
+    "rigAction": "80A8A005",
+    "action": "Armature|fp_80A8A005_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1.0,
+      180.0
+    ],
+    "sceneFps": 30,
+    "evaluatedSamples": 61,
+    "existingCacheJointAbsError": 0.0,
+    "masterReportedInputsUnchanged": true,
+    "objects": [
+      "ARMATURE"
+    ],
+    "fallback": true,
+    "sourceActionWeaponExclusive": false,
+    "sourceCameraRecovered": false,
+    "sourceMeshRecovered": false,
+    "alternateEvaluatedAction": "80A8A032",
+    "alternateSourceFrameRange": [
+      1.0,
+      105.0
+    ],
+    "alternateEvaluatedSamples": 61,
+    "matrixSpace": "armature_object; row-major, column vectors; evaluated pose.bones.matrix, no matrix_world application",
+    "evaluationOwner": "Master headless original Blender evaluation. Worker read report/full-chain61 matrices and viewed bone-only PNG; worker did not run Blender."
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w215-source/source-review.json",
+      "sourceSha256": "c283ec4f4b0e39bce3eeabc27c8f459a84a905b89b95012d46fcafc4cc1de535",
+      "role": "master_original_blender_evaluation",
+      "observation": "Fresh original source.blend evaluated in master headless Blender5.4.0 Alpha before this draft: ARMATURE only, OBSlot, selected005 frames1..180 at30fps,61 samples, old-cache joint error0, all inputs unchanged. Alternate032 frames1..105 also evaluated at61 samples. Worker did not open Blender or touch SSD."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/machine_gun_82e319a0.json",
+      "sourceSha256": "5a96c9a8b74dd28135dac84e96ee18cd735cd691692c8f39e5845f115b18f3da",
+      "role": "evaluated_source61_full_chain",
+      "observation": "Read all61 finite matrices for weapon4A0810C4, shouldersD1232BA2/17025F50, elbows897A1504/A3781DCD, wrists8C83CB67/DE9D6BEA. At32 units/source unit: left upper8.726687..8.726693, forearm8.141362..8.141367; right upper8.726569..8.726575, forearm8.141360..8.141365. Preserve lengths and full FK, including late wrist travel after box seats."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/sheets/machine_gun_82e319a0-80A8A005-upper-chain.png",
+      "sourceSha256": "10e81cc69489bd3df15377d7571e11c216ac89ea384dd51f8d75a82796b27dfb",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed actual selected005 XZ/YZ chain projections atp0,.2,.4,.6,.8,1 before drafting. Chain bends and near-return are visible; no mesh/camera/contact/native claim follows from these bone-only images."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "accepted_actual_effective_framing",
+      "observation": "Read current framing/rig_arms/build_first_person_hands and called profile(load(),fixed_odds,machine_gun): translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]. No current weapon override. Preserve all returned settings; no new camera or limb calibration."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_mesh_contacts_and_supported_policy",
+      "observation": "Current merged mesh contacts retain right grip, underside support and right-mounted ammo-box-front target. Supported reload.rigAction selects action; partHint=magazine chooses the coherent box/belt leaf; policy=magazine permits only that leaf to receive weighted source-palm shift. A hinged cylinder would require cylinder policy; no Duke or shared file is edited."
+    },
+    {
+      "source": "scripts/generate_reload_w179_fixed_odds.py",
+      "sourceSha256": "f74b669b25c3235ff3e88edfc36663a27460a4e8ca146106d1de36206829863a",
+      "role": "audited_fixed_odds_authored_motion",
+      "observation": "Statically read original constants and pure rigid functions without importing/executing W179. Preserve all13 authored knots: cover-103deg at.20..74, box clear hold.40..48, return seat.68, cover closed.82, independent handle1.1 at.89 and0 by.94. Replace per-key smoothstops with W214 shared C1 weighted-harmonic PCHIP only."
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/weapon_surface_w123/fixed_odds.json",
+      "sourceSha256": "593ade9e46dae518f28588890ce6e5f8a6b343113b419515c5b47f608b431761",
+      "role": "canonical_semantic_geometry_and_uv",
+      "observation": "153 existing semantic cuboids. Partition disjoint104body/39box-belt/10cover; preserve every face, material and UV record plus endpoint transforms. Original item graph native fallback is a distinct existing221-element representation, preserved exactly at endpoints and inactive/ADS/inspect/non-FP."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns fresh61 rig/shoulder binding, Fixed Odds action whitelist, W215 profile loading, runtime grid60, route integration and all generated outputs.",
+    "Retain the complete actual effective machine_gun framing and inherited mesh contacts. Add only full-chain/support flags plus explicit reload action/part policy/window. sourceAction is provenance metadata; reload.rigAction is the supported runtime selector.",
+    "Preserve right rest [8,8.75,8.28]/[-29,0,0], left rest [7.8,9.05,-2]/[0,90,-85], reload [10.6,8.9,3]/[0,0,-80]. REST source offsets and the right-mounted box handling target have distinct roles.",
+    "Fixed Odds gripWindow [.08,.20,.60,.68]: reach during cover opening, attach by box departure .20, keep extraction and clear hold, release across final insertion .60..68, zero at box/belt seat .68. Cover remains raised until .74 and seats .82; charging peaks .89 and releases .94. Never copy Retrofit seating/window .50.",
+    "Magazine policy moves all five box solids + seven complete linked rounds (28 solids) + six feed connectors together. Cover/sight10 hinges separately; charging shaft/knob remain body-local. No isolated belt, duplicate feed, shrink-to-hide or new UV/geometry.",
+    "153 reload weapon elements (104body/39box-belt/10cover) + estimated448 ordinary arm elements =601; canonical fallback221+448=669. Master must measure final composed skin/overlay routes against1000.",
+    "Machine-gun fallback family evidence; selected005 and evaluated alternate032 do not establish exact Fixed Odds weapon assignment, recovered hand mesh/camera or finger IK.",
+    "Keep ordinary source limb lengths and full shoulder/elbow/wrist motion. No stretch, FK attenuation, arm hiding, source-view bias, extra camera lift/lower/depth or geometric smoothing. Existing accepted framing only.",
+    "61 sampled poses with C1 authored interpolation do not prove continuous60fps playback. FIRST PNG feedback must return for worker correction/review; final acceptance requires master SECOND."
+  ]
+}

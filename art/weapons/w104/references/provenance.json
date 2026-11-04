@@ -1,0 +1,94 @@
+{
+  "stage": "W104",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "manifestEndpoint": "https://www.bungie.net/Platform/Destiny2/Manifest/",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "cacheFormat": "Pinned matching official JSON components, not a guessed SQLite schema.",
+  "sourcePins": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "catalog": {
+      "path": "src/main/resources/destiny/weapons/w30.json",
+      "sha256": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+      "bytes": 13784
+    },
+    "inventory": {
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "research1": {
+      "path": "run/private-sources/w104/research1.json",
+      "sha256": "9c2b781e15d52f49569c7562c94ce5e9ca560937a63e89c8db80c19beb5f66ba",
+      "bytes": 30783
+    },
+    "research2": {
+      "path": "run/private-sources/w104/research2.json",
+      "sha256": "625a7b8e479870fa19679984d461e07d044c96931c4118a5239b752f76c9a50b",
+      "bytes": 31255
+    },
+    "research3": {
+      "path": "run/private-sources/w104/research3.json",
+      "sha256": "d41439d4a24a9581098742bb8a8e68bf3e620b175a3d79565827a1422654b3be",
+      "bytes": 32143
+    },
+    "research4": {
+      "path": "run/private-sources/w104/research4.json",
+      "sha256": "8001fa59a2eaace187281d33ca603e197fa234b24f95f4c0edeaea2636e571f4",
+      "bytes": 33733
+    }
+  },
+  "generator": "scripts/extract_tracking_w104.py",
+  "generatorSha256": "4cb194f73765b74a73183f155dc9088062e11f5c7688fcd553eabce7132ca455",
+  "toolchain": {
+    "minimumPython": "3.10",
+    "dependencies": "standard library only",
+    "generatorVersion": 1,
+    "byteOrder": "Selected catalog order; UTF-8 JSON indent=2 newline"
+  },
+  "research": {
+    "targetedQueries": 8,
+    "queryBound": 8,
+    "childToolsAvailable": false,
+    "childWorkClaimed": false,
+    "directClarityRepositoryAttempt": "https://api.github.com/repos/Database-Clarity/Descriptions/contents returned 404; no data adopted.",
+    "sourcesAreUntrustedData": true,
+    "primaryMeasuredNumericsFound": false,
+    "midflightLosLossRuleFound": false
+  },
+  "reproduce": "rtk proxy python3 scripts/extract_tracking_w104.py --verify --self-test",
+  "reproduceElsewhere": "rtk proxy python3 scripts/extract_tracking_w104.py --output-root /tmp/w104-repro",
+  "limitations": [
+    "Exact source identity/socket eligibility is established only for the pinned official manifest, not all live or future weapon editions.",
+    "Pyroclastic Flow intrinsic tracking is automatic eligibility for this exact weapon hash; ADS target locking is still required. Automatic eligibility does not mean hip-fire auto-acquisition.",
+    "Tracking Module is optional selected base trait on two exact selected hashes. Source initialItemHash is not a local default-equipped claim.",
+    "All 63 selected hashes and all referenced randomized/reusable pools plus direct socket choices were scanned before deriving eligibility; no family exclusion or name-only inference.",
+    "Enhanced Tracking Module and other precision intrinsics, including same-name nonrocket items, are not supported by this profile.",
+    "Primary descriptions prove aimed/ADS locking but not acquire time, cone, range, turn rate, grace time, shot snapshot, continued ADS, reacquisition, or post-launch stow/trait-edit behavior.",
+    "Midflight LOS-loss cancellation is not proven. Ordinary projectile collision with a wall is distinct from cancelling guidance merely because the target becomes occluded.",
+    "A secondary light.gg community entry reports one second of aim-loss persistence and diminished PvP effectiveness, but no primary measurement protocol was inspected. These are reported evidence, not adopted exact numeric runtime rules.",
+    "One-second prelaunch aim grace must not be confused with a one-second lifetime or homing expiry for an already-fired rocket.",
+    "Any author-selected timing/cone/range/turning/ownership/LOS policies belong to separately labelled local Minecraft tuning, not source-exact D2 values.",
+    "No source found establishes equivalence of precision intrinsic and base Tracking Module quantitative guidance; do not claim identical measured tuning.",
+    "No native rendering, audio/listening, gameplay, multiplayer, or performance acceptance is performed by this source extractor."
+  ]
+}

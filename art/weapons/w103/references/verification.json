@@ -1,0 +1,70 @@
+{
+  "stage": "W103",
+  "status": "PASS",
+  "offlineVerify": "PASS",
+  "disjointReproduction": "BYTE_IDENTICAL",
+  "noWriteExtractionMtimeCheck": "PASS",
+  "generated": [
+    {
+      "path": "src/main/resources/destiny/weapons/w103-demolitionist.json",
+      "sha256": "b7aa18096002f5a9a66892027c6fb57295e3a09864ff52a1f889d6f732c10905",
+      "bytes": 2774
+    },
+    {
+      "path": "art/weapons/w103/references/mechanics.json",
+      "sha256": "02278c0c6e53f44a3b43d2a6a3954890bb5e1a8498fcf2cafe058c4cb78fe6ae",
+      "bytes": 4460
+    },
+    {
+      "path": "art/weapons/w103/references/socket-pools.json",
+      "sha256": "4aa26b3f7fc4baa7aec9a603f23a8c2de38d712a54273778429d60465e3a86ff",
+      "bytes": 94188
+    },
+    {
+      "path": "art/weapons/w103/references/provenance.json",
+      "sha256": "8188bd3ce1c88abd5b27815ade884743eb36f961fd1b90bf15e9bfe8ecf85d41",
+      "bytes": 6119
+    }
+  ],
+  "mutationFixtures": [
+    {
+      "fixture": "changed-source-byte",
+      "repinnedForSemanticTest": false,
+      "status": "REJECTED",
+      "reason": "Source SHA256 mismatch: selected"
+    },
+    {
+      "fixture": "salvo-curated-option-removed",
+      "repinnedForSemanticTest": true,
+      "status": "REJECTED",
+      "reason": "Exact 11 selected socket contracts changed"
+    },
+    {
+      "fixture": "bow-rollability-disabled",
+      "repinnedForSemanticTest": true,
+      "status": "REJECTED",
+      "reason": "Exact 11 selected socket contracts changed"
+    },
+    {
+      "fixture": "salvo-curated-proof-mode-changed",
+      "repinnedForSemanticTest": true,
+      "status": "REJECTED",
+      "reason": "Salvo curated two-choice reusable socket proof changed"
+    },
+    {
+      "fixture": "trace-randomized-pool-fake",
+      "repinnedForSemanticTest": true,
+      "status": "REJECTED",
+      "reason": "Fake pool cannot prove randomized availability"
+    }
+  ],
+  "initialFailure": {
+    "command": "rtk proxy python3 scripts/extract_demolitionist_w103.py",
+    "status": "FAILED",
+    "reason": "Evidence block did not include date because find viewport omitted header. Repaired by independently verifying date from already pinned research2 same exact official URL; numeric block assertion retained."
+  },
+  "builds": 0,
+  "runtime": 0,
+  "CU": 0,
+  "childToolsAvailable": false
+}

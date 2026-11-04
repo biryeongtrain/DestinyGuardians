@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "stage": "W220",
+  "weapon": "canis_major",
+  "sourceAction": "80A8A104",
+  "sourceRig": {
+    "group": "heavy_grenade_launcher_796e9ebf",
+    "sourceBlendSha256": "63a440ec13afda88944832b40da1ddcf5f207638c44bbeacc58ed30a4d740c36",
+    "sourceMapSha256": "27861376edd8023e13e9837d0b92104390460f4e706f1f96532ff50cf0075d15",
+    "boneMapSha256": "d4a917ed7a4d37bc716c10d25a9a24afef7b954fd64ecce9062e906d40a11c1f",
+    "action": "80A8A104"
+  },
+  "framing": {
+    "translation": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 1,
+    "rightWristRoll": 15,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.65,
+        7.8
+      ],
+      "rotation": [
+        -30.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        8.0,
+        8.6,
+        -3.25
+      ],
+      "rotation": [
+        -31.0,
+        0.0,
+        0.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        5.45,
+        10.05,
+        1.8
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -80.0
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "hand": "left",
+      "rigAction": "80A8A104",
+      "gripWindow": [
+        0.2,
+        0.25,
+        0.5,
+        0.58
+      ]
+    }
+  },
+  "evidence": {
+    "sourceReview": "/private/tmp/destiny-w220-source/source-review.json",
+    "sourceHandling": "/private/tmp/destiny-w220-source/source-handling-evidence.json",
+    "sourceSelection": "/private/tmp/destiny-w220-source/source-selection-review.json",
+    "viewedSourceSheet": "/private/tmp/destiny-w220-source/sheets/heavy_grenade_launcher_796e9ebf-80A8A104-upper-chain.png",
+    "geometry": "src/main/resources/assets/destiny/models/weapon_surface_w123/canis_major.json",
+    "geometryDesign": "art/weapons/w123/canis_major/design.json",
+    "review": "art/weapons/w220/canis_major/review.md"
+  },
+  "limitations": [
+    "Master evaluated original Blender; worker read that evidence and viewed the source chain sheet. No independent worker Blender evaluation.",
+    "Class action104 is an original carrier/arm chain, not recovered Canis drum/cradle/latch motion. Authored mechanism and mesh contacts require FIRST and SECOND native review.",
+    "Unmodified source left wrist drives detached drum translation only within bounded attachment; release ends at .58 before authored seat at .62. No source retiming, limb stretching, damping or support hiding."
+  ]
+}

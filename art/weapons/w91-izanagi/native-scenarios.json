@@ -1,0 +1,314 @@
+{
+  "schema": 1,
+  "taskId": "W91-N1",
+  "status": "planned_unrun",
+  "candidatePin": null,
+  "brokeredChild": {
+    "id": "01a16f6c-0581-7bb1-854d-9a16eba61b7f",
+    "name": "Turing",
+    "logicalParent": "W91-N1-L1",
+    "spawnedBy": "topmaster",
+    "review": "accepted",
+    "closed": false,
+    "closeRequested": true,
+    "closeOwner": "topmaster; native tool unavailable to L1"
+  },
+  "scenarios": [
+    {
+      "taskId": "W91-N1-normal-reload",
+      "candidatePin": null,
+      "status": "planned_unrun",
+      "capability": {
+        "native": "vision-native-input-v1",
+        "nativeQ": false,
+        "nativeCtrlQ": false,
+        "nativeSlotSelection": false,
+        "fixtureCommandsAreNativeInput": false
+      },
+      "audioClaim": {
+        "newAudio": false,
+        "listeningVerified": false,
+        "capture": null,
+        "note": "Existing W84 events only; packet/event logs do not establish audible playback."
+      },
+      "cleanup": {
+        "owner": "topmaster integrated W90 fixture",
+        "required": [
+          "Release only task-owned input lease in finally; verify ACK and actual neutral heldKeys/pendingSteps/nativeInput.",
+          "Stop server use/ADS and call production owner cleanup; verify no live W91 presentation or reload pending.",
+          "Remove only tracked fixture entities, HUD/session resources and restore previous loadout.",
+          "Confirm teardown before subsequent scenario."
+        ]
+      },
+      "result": null,
+      "fixtureId": "w91-n1-normal-fixture-planned",
+      "setup": {
+        "type": "server_fixture_not_native_input",
+        "steps": [
+          "Use the one parent-owned isolated server/client/world, spawn-disabled arena and tracked observer. Record UUID/dimension/position/AABB, loadout and no unexpected corridor entities.",
+          "Equip canonical Izanagi at1 loaded/5 reserve/0 overflow, no saved charge; record original pose/grip/float vector.",
+          "Invoke existing actual ordinary reload fixture path for owner. This substitutes setup for unsupported native Q and is labelled as such."
+        ]
+      },
+      "inputSteps": [
+        {
+          "kind": "native_supported_only",
+          "action": "Acquire bounded camera/input lease; observe first-person reload without Q or slot synthesis; finally release."
+        }
+      ],
+      "serverOracle": [
+        "Bracket read-only weapon-presentation-status before, during and after the actual61-tick transaction.",
+        "Actual pending normal mode, charge0 and ammo1/5 until commit; final4/2 charge0, no active completed cue.",
+        "Status brackets identify server state, not exact framebuffer render ticks."
+      ],
+      "framePlan": {
+        "capture": [
+          "neutral_before",
+          "normal_early",
+          "normal_mid",
+          "normal_late",
+          "neutral_after"
+        ],
+        "source": "fresh framebuffer PNG only",
+        "timingClaim": "Locally authored animation sampled from existing normalized61-tick cycle; no measured D2 clip/hand IK."
+      },
+      "executionDisposition": "await_integrated_candidate"
+    },
+    {
+      "taskId": "W91-N1-honed-funded-shot",
+      "candidatePin": null,
+      "status": "planned_unrun",
+      "capability": {
+        "native": "vision-native-input-v1",
+        "nativeQ": false,
+        "nativeCtrlQ": false,
+        "nativeSlotSelection": false,
+        "fixtureCommandsAreNativeInput": false
+      },
+      "audioClaim": {
+        "newAudio": false,
+        "listeningVerified": false,
+        "capture": null,
+        "note": "Existing W84 events only; packet/event logs do not establish audible playback."
+      },
+      "cleanup": {
+        "owner": "topmaster integrated W90 fixture",
+        "required": [
+          "Release only task-owned input lease in finally; verify ACK and actual neutral heldKeys/pendingSteps/nativeInput.",
+          "Stop server use/ADS and call production owner cleanup; verify no live W91 presentation or reload pending.",
+          "Remove only tracked fixture entities, HUD/session resources and restore previous loadout.",
+          "Confirm teardown before subsequent scenario."
+        ]
+      },
+      "result": null,
+      "fixtureId": "w91-n1-honed-fixture-planned",
+      "setup": {
+        "type": "server_fixture_not_native_input",
+        "steps": [
+          "Record same isolated observer/loadout/camera/FOV/pack pin; canonical Izanagi1/5/0, no charge.",
+          "Use parent OP weapon-honed-reload <player>; command must call actual WeaponRuntime.reloadHoned, not grant a charge tag.",
+          "Record command fixture receipt separately from native input receipts. Aim at a recorded empty floor corridor for the later paid miss."
+        ]
+      },
+      "inputSteps": [
+        {
+          "kind": "native_supported_only",
+          "action": "Acquire lease, observe pending Honed frames; after server-funded commit use supported primary-fire input once; release all owned input in finally."
+        }
+      ],
+      "serverOracle": [
+        "Actual honing true with original1/5 charge0 through tick60.",
+        "Actual full61 commit gives1/2 charge4, honing false, slot6 in[4,4.001), active IDLE cue.",
+        "Real emission debits the one loaded projectile and saved charge becomes0; completed cue disappears immediately.",
+        "No victim is expected for floor miss; corridor query must confirm no unexpected enemy before firing."
+      ],
+      "framePlan": {
+        "capture": [
+          "honed_early",
+          "honed_mid",
+          "honed_late_no_charged_cue",
+          "funded_barrel_cue",
+          "paid_shot_cue_removed"
+        ],
+        "source": "fresh framebuffer PNG only",
+        "timingClaim": "Server oracle brackets do not claim exact render/server synchronization."
+      },
+      "executionDisposition": "await_integrated_candidate"
+    },
+    {
+      "taskId": "W91-N1-charged-ads-scope",
+      "candidatePin": null,
+      "status": "planned_unrun",
+      "capability": {
+        "native": "vision-native-input-v1",
+        "nativeQ": false,
+        "nativeCtrlQ": false,
+        "nativeSlotSelection": false,
+        "fixtureCommandsAreNativeInput": false
+      },
+      "audioClaim": {
+        "newAudio": false,
+        "listeningVerified": false,
+        "capture": null,
+        "note": "Existing W84 events only; packet/event logs do not establish audible playback."
+      },
+      "cleanup": {
+        "owner": "topmaster integrated W90 fixture",
+        "required": [
+          "Release only task-owned input lease in finally; verify ACK and actual neutral heldKeys/pendingSteps/nativeInput.",
+          "Stop server use/ADS and call production owner cleanup; verify no live W91 presentation or reload pending.",
+          "Remove only tracked fixture entities, HUD/session resources and restore previous loadout.",
+          "Confirm teardown before subsequent scenario."
+        ]
+      },
+      "result": null,
+      "fixtureId": "w91-n1-charged-ads-fixture-planned",
+      "setup": {
+        "type": "server_fixture_not_native_input",
+        "steps": [
+          "Prepare completed x2 via actual2-cartridge Honed transaction; never forge saved charge.",
+          "Record original grip flag0/pose string0/ADSfloat3, right/left-handed settings and original 3D lens fallback."
+        ]
+      },
+      "inputSteps": [
+        {
+          "kind": "native_supported_only",
+          "action": "Acquire lease; use supported crouch/ADS input through full existing9-tick transition and release, without firing; finally verify neutral."
+        }
+      ],
+      "serverOracle": [
+        "Saved charge2 and one loaded projectile stay unchanged.",
+        "slot6 remains charged, float3 tracks actual ADS; router selects W91 while its wrapper retains original scope/lens sight line.",
+        "Verify no new full-screen/W45 scope route is attributed to Izanagi."
+      ],
+      "framePlan": {
+        "capture": [
+          "charged_hip",
+          "ads_transition",
+          "ads_full_lens",
+          "ads_release"
+        ],
+        "variants": [
+          "both grip flags via labelled fixture changes",
+          "both first-person hands via labelled fixture configuration"
+        ],
+        "source": "fresh framebuffer PNGs; inspect clipping/lens/barrel alignment, not offline render evidence"
+      },
+      "executionDisposition": "await_integrated_candidate"
+    },
+    {
+      "taskId": "W91-N1-cancel-stow-owner-level",
+      "candidatePin": null,
+      "status": "planned_unrun",
+      "capability": {
+        "native": "vision-native-input-v1",
+        "nativeQ": false,
+        "nativeCtrlQ": false,
+        "nativeSlotSelection": false,
+        "fixtureCommandsAreNativeInput": false
+      },
+      "audioClaim": {
+        "newAudio": false,
+        "listeningVerified": false,
+        "capture": null,
+        "note": "Existing W84 events only; packet/event logs do not establish audible playback."
+      },
+      "cleanup": {
+        "owner": "topmaster integrated W90 fixture",
+        "required": [
+          "Release only task-owned input lease in finally; verify ACK and actual neutral heldKeys/pendingSteps/nativeInput.",
+          "Stop server use/ADS and call production owner cleanup; verify no live W91 presentation or reload pending.",
+          "Remove only tracked fixture entities, HUD/session resources and restore previous loadout.",
+          "Confirm teardown before subsequent scenario."
+        ]
+      },
+      "result": null,
+      "fixtureId": "w91-n1-lifecycle-fixture-planned",
+      "setup": {
+        "type": "server_fixture_not_native_input",
+        "steps": [
+          "Use bounded, separately labelled fixture cases to cancel skill/stow/replace exact stack/change owner/change level during actual pending Honed.",
+          "Native v1 cannot synthesize slot input; use actual packet/runtime fixtures and disclose that distinction.",
+          "Use a separate actual completed charge to test preservation across stow and recreation on return."
+        ]
+      },
+      "inputSteps": [
+        {
+          "kind": "fixture_only_unsupported_native_slot",
+          "action": "Do not claim a native hotbar/Q receipt. Capture frames only around the labelled fixture actions and read-only state brackets."
+        }
+      ],
+      "serverOracle": [
+        "Cancelled pending never funds at its old deadline; owner/level/stack identities and exact ammo remain unchanged.",
+        "Late donor cleanup cannot restore recipient slot6; concurrent unrelated floats/flags/strings/colors remain unchanged.",
+        "Completed gameplay charge survives stow while live cosmetic binding clears; owner cleanup clears even an old held idle binding without combat state."
+      ],
+      "framePlan": {
+        "capture": [
+          "pending_before_cancel",
+          "neutral_after_cancel",
+          "charged_before_stow",
+          "stowed",
+          "charged_after_return"
+        ],
+        "source": "fresh framebuffer, with fixture/state evidence separately labelled"
+      },
+      "executionDisposition": "not_run_capability_for_native_slot; fixture_visual_plan_unrun"
+    },
+    {
+      "taskId": "W91-N1-native-q-slot-coverage",
+      "candidatePin": null,
+      "status": "planned_unrun",
+      "capability": {
+        "native": "vision-native-input-v1",
+        "nativeQ": false,
+        "nativeCtrlQ": false,
+        "nativeSlotSelection": false,
+        "fixtureCommandsAreNativeInput": false
+      },
+      "audioClaim": {
+        "newAudio": false,
+        "listeningVerified": false,
+        "capture": null,
+        "note": "Existing W84 events only; packet/event logs do not establish audible playback."
+      },
+      "cleanup": {
+        "owner": "topmaster integrated W90 fixture",
+        "required": [
+          "Release only task-owned input lease in finally; verify ACK and actual neutral heldKeys/pendingSteps/nativeInput.",
+          "Stop server use/ADS and call production owner cleanup; verify no live W91 presentation or reload pending.",
+          "Remove only tracked fixture entities, HUD/session resources and restore previous loadout.",
+          "Confirm teardown before subsequent scenario."
+        ]
+      },
+      "result": null,
+      "fixtureId": "w91-n1-no-fixture-substitution",
+      "setup": {
+        "type": "none",
+        "steps": [
+          "No command or packet fixture can establish native Q/CtrlQ/hotbar support."
+        ]
+      },
+      "inputSteps": [
+        {
+          "kind": "unsupported",
+          "actions": [
+            "native Q",
+            "native Ctrl+Q",
+            "native hotbar slot input"
+          ],
+          "action": "Leave unrun until a declared native capability actually exists; never substitute OS keys or app control."
+        }
+      ],
+      "serverOracle": [
+        "Packet GameTests cover production packet handling only; native input result remains unverified."
+      ],
+      "framePlan": {
+        "capture": [],
+        "source": null,
+        "note": "No screenshots can substitute for an unsupported input receipt."
+      },
+      "executionDisposition": "not_run_capability"
+    }
+  ]
+}

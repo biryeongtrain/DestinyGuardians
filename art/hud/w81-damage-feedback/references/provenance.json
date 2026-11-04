@@ -1,0 +1,114 @@
+{
+  "stage": "W81 reference research only",
+  "retrievedOrReusedUtc": "2026-10-24T14:54:04.378059+00:00",
+  "sources": [
+    {
+      "id": "ammit",
+      "url": "https://www.youtube.com/watch?v=w3CYQprLoc0",
+      "title": "This is BETTER Than Most Exotic Autos and Its FREE | Destiny 2 (Season of Plunder)",
+      "uploader": "xHOUNDISHx",
+      "uploadDate": "2022-09-01",
+      "acquisition": "Reused existing W69 private 0..65 s video; no new download. Existing W69 provenance hash matched actual clip.",
+      "reusedClipPath": "/tmp/destiny-w69-reference/w3CYQprLoc0-first65.mp4",
+      "clipBytes": 20461847,
+      "clipSha256": "5ff1616273e86023c753260dd2fbacfd7e4f01fb464b472e11c00d5d5e9f961e",
+      "priorProvenance": "art/weapons/w69/references/gameplay-provenance.json",
+      "priorProvenanceSha256": "c4c2f0e4b65167a502c403e3be67b761ca664a77c0118402e63c7f262edf2daf",
+      "format": "298; 1280x720; 60fps; video only (prior provenance)",
+      "requestedSourceSeconds": [
+        19.5,
+        19.7,
+        20.0
+      ]
+    },
+    {
+      "id": "ep",
+      "url": "https://www.youtube.com/watch?v=2cqBmDC_z_4",
+      "title": "Taraxippos (Gutshot Straight + Explosive Payload) Damage Test",
+      "uploader": "Seven_11",
+      "uploadDate": "2023-05-07",
+      "acquisition": "Downloaded entire short 21 s public creator gameplay, format 243, 640x360, 30fps, video only. No long video downloaded.",
+      "retainedClip": "ep-taraxippos.webm",
+      "clipBytes": 844633,
+      "clipSha256": "32b2954bb13e23f639fb1695feedeee9596aeec36047ac9a997ea6b63997f762",
+      "metadata": "ep-source-metadata.json",
+      "requestedSourceSeconds": [
+        3.0,
+        3.4,
+        10.0,
+        15.0,
+        15.4,
+        16.0
+      ]
+    }
+  ],
+  "extraction": {
+    "tool": "imageio-ffmpeg 0.6.0 bundled ffmpeg 7.1",
+    "commandShape": "ffmpeg -v error -i INPUT -ss SECONDS -frames:v 1 -q:v 2 OUTPUT.jpg (EP); Ammit decoded through image2pipe MJPEG and saved JPEG quality 93",
+    "timestamps": "Filename seconds are requested source-video seek positions. Decode from start with output-side -ss; no fast input seek. Exact decoded PTS and action onsets were not independently measured.",
+    "images": "Full uncropped decoded gameplay frames at source resolution, recompressed JPEG. Contact sheets only resize and add filenames outside image area. No synthetic/redrawn gameplay.",
+    "visualInspection": "Actually inspected contact sheets and selected raw frames using view_image.",
+    "runtimeAssets": false
+  },
+  "limits": [
+    "Historical 2022/2023 creator recordings, not October 2026 sandbox certification or Bungie renderer source.",
+    "No exact number lifetime, rise velocity, pixel gap, collision algorithm, damage timing, or server tick calibration.",
+    "EP footage also has Gutshot Straight and Unstoppable Shot; damage values are not base EP coefficients.",
+    "Camera recoil and target motion confound upward screen motion. Independent float-up trajectory is unmeasured.",
+    "Observed overlap means strict nonoverlap is a local readability policy, not a proven Destiny invariant."
+  ],
+  "files": {
+    "ammit-19.500s.jpg": {
+      "bytes": 125832,
+      "sha256": "c5ab54ec9f6e979ba8b61a17bc7265168e2c33e48393c33d452eaf496084a6f9"
+    },
+    "ammit-19.700s.jpg": {
+      "bytes": 121314,
+      "sha256": "e7140bc309463575ad245e1c6a76a1463ca67377a752f31a369a7f57b1cc7ea6"
+    },
+    "ammit-20.000s.jpg": {
+      "bytes": 126053,
+      "sha256": "2c89f79a8a4b6b5044df0c5c267bf93d74b06e9b45b2b30035bd45194de99bc6"
+    },
+    "ammit-sequence.jpg": {
+      "bytes": 171907,
+      "sha256": "94f29a54f1b7e042bd63a7d612ab14540366fdbce07c4d57803ed6eeadf8a8ff"
+    },
+    "ep-03.000s.jpg": {
+      "bytes": 33240,
+      "sha256": "7bd00bac40e4156c5801ce5e72471815dd41041018fe43cce2eae5f21242653f"
+    },
+    "ep-03.400s.jpg": {
+      "bytes": 32499,
+      "sha256": "64a819e6a9a00740170a296aca5c513f5152d909ac707cabd4c9e7e0ad1c9c2d"
+    },
+    "ep-10.000s.jpg": {
+      "bytes": 48828,
+      "sha256": "e8a537a5128c4c93d087168a0e2da28299a889cdfa42b7aa9ee303f823e8560f"
+    },
+    "ep-15.000s.jpg": {
+      "bytes": 30637,
+      "sha256": "67df95df33eb127d4b20f0d207b74d5b96b0072288ece1a1869d740c3577df25"
+    },
+    "ep-15.400s.jpg": {
+      "bytes": 32104,
+      "sha256": "e32094f25279ffc8dc9e98d2ead8038628b2b0e301b2d1daf15aec7539f31ce3"
+    },
+    "ep-16.000s.jpg": {
+      "bytes": 30940,
+      "sha256": "250607eda1cd9fd18fbc20a448b17a00dfc0ce2d0250c43058964afde07a097c"
+    },
+    "ep-sequence.jpg": {
+      "bytes": 233869,
+      "sha256": "1cd0003cdb36acebc1411af1c04b3c9c20425688e8520a1f229931c3d1fcd940"
+    },
+    "ep-source-metadata.json": {
+      "bytes": 440,
+      "sha256": "ea6a7d46f1374a79dbe1227a614c337cb6b95f66b132dbcf8965e86001672fd6"
+    },
+    "ep-taraxippos.webm": {
+      "bytes": 844633,
+      "sha256": "32b2954bb13e23f639fb1695feedeee9596aeec36047ac9a997ea6b63997f762"
+    }
+  }
+}

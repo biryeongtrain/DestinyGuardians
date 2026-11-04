@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "stage": "W219",
+  "weapon": "frontier_justice",
+  "sourceAction": "80A8A345",
+  "sourceRig": {
+    "path": "art/weapons/w219/rigs/scout_rifle_a3826f40.json",
+    "group": "scout_rifle_a3826f40",
+    "action": "80A8A345",
+    "sourceBlendSha256": "1903c0183ed2e2dd081620f442396fcfb3e2b831e5a09a9b696b70288fe8afd3",
+    "sourceMapSha256": "1beb2b45ff18cc12ecfd70d417e3cc7dc295490b9a6c145e43fb860d58781e4c",
+    "boneMapSha256": "34cc654306ee835cf908f72fed910a3955868195289e1109178a45c237fcee40"
+  },
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.4,
+        7.8
+      ],
+      "rotation": [
+        -29.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        7.8,
+        9.22,
+        -0.8
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        -85.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        7.45,
+        7.45,
+        12.4
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "rigAction": "80A8A345",
+      "hand": "left",
+      "gripWindow": [
+        0.04,
+        0.1,
+        0.4,
+        0.48
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "role": "master_original_blender_evaluation",
+      "path": "/private/tmp/destiny-w219-source/source-review.json",
+      "observation": "Master evaluated read-only original source.blend in separate Blender5.4.0 Alpha, OBSlot action Armature|fp_80A8A345_reload_full|Base, frames1..105 at30fps. Source group scout_rifle_a3826f40. ARMATURE object only; allInputsUnchanged=true and prior cache joint error0. Worker read report and fresh data; did not independently open Blender."
+    },
+    {
+      "role": "viewed_bone_only_source_sheet",
+      "path": "/private/tmp/destiny-w219-source/sheets/scout_rifle_a3826f40-80A8A345-upper-chain.png",
+      "observation": "Worker viewed actual XZ/YZ full-chain sheet at p0,.2,.4,.6,.8,1. Large early handling-side excursion and later recovery; no weapon mesh, camera framing or actual part contact is established by these bone-only views."
+    },
+    {
+      "role": "evaluated_source61_full_chain",
+      "path": "art/weapons/w219/rigs/scout_rifle_a3826f40.json",
+      "observation": "Fresh61 uniformly evaluated samples across1..105, with weapon and both shoulder/elbow/wrist matrices. Original body and ordinary fingerless full skin arms replay through master shared builder, no source motion double-baked into owned carrier."
+    },
+    {
+      "role": "shared_family_action_limit",
+      "observation": "Source includes Frontier Justice but has three reload_full/reload_empty variants80A8A345,80A8A337,80A8A331. Master selected80A8A345 after actual source-chain review; no unique weapon-specific selector, mesh, camera or finger IK claimed."
+    },
+    {
+      "role": "reload_hand_source_recheck",
+      "observation": "Explicit LEFT. In sampled weapon-relative coordinates at p.20/.30/.40 the right wrist remains approximately[-.0857,-.0637,.0201]; LEFT travels[-.6490,.3309,-.0612],[-.6008,.2941,-.3122],[-.1699,.0228,-.1547]. This is the large handling excursion; RIGHT maintains grip. Hand inference uses original matrix roles, not mirrored screen position."
+    },
+    {
+      "role": "authored_contact_and_part",
+      "path": "art/weapons/w123/frontier_justice/design.json",
+      "observation": "W138 semantic magazine group exactly source indices123..125 magazine/magazine_floor/magazine_rear_bevel. All141 existing elements and face UVs preserved. Fixed charging_handle126; no separate actuation evidence. Retain rest right[8,8.4,7.8]/[-29,0,0], left[7.8,9.22,-.8]/[0,90,-85], reload[7.45,7.45,12.4]/[0,0,0]."
+    },
+    {
+      "role": "authored_grip_window",
+      "observation": "Authored rigid withdrawal.10..20, hold.20..32, approach/reseat.32..48. gripWindow[.04,.10,.40,.48] approaches before withdrawal, full attachment during early source handling, releases during final insertion and reaches zero at authored seat.48; later source receiver/recovery motion cannot drag seated magazine. Timings, dimensions and contact are calibration, not recovered mesh events. FIRST must inspect held magazine and seat/release."
+    },
+    {
+      "role": "effective_framing",
+      "observation": "Current effective scout translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28 and leftRotation[15,35,-35] preserved. sourceFullChain=true, keepMeshSupport=true, hideSupportAtRest=false. No stretch, axis damping, hidden support or new camera offsets."
+    }
+  ],
+  "nativeReview": {
+    "firstVision": "pending",
+    "sameWorkerImageReview": "pending",
+    "secondVision": "pending",
+    "nativeAccepted": false
+  }
+}

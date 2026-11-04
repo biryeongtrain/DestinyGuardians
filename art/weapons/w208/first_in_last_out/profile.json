@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "weapon": "first_in_last_out",
+  "framing": {
+    "translation": [
+      -0.75,
+      0.55,
+      0.5
+    ],
+    "rotation": [
+      -1.25,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "contact": [
+        8.0,
+        9.96,
+        4.65
+      ],
+      "partHint": "shell",
+      "policy": "shell",
+      "rigAction": "80A8A3F1",
+      "sourcePalmContactFit": true,
+      "sourceShellPoseHold": true
+    }
+  },
+  "evidence": [
+    {
+      "source": "art/weapons/w123/first_in_last_out/design.json",
+      "observation": "Retain W201 right [8,8.82,8.55] on grip_core and left [7.8,9.2,-2.5] beneath foreend_belly Y9.45. No contact stretch or forearm length adjustment."
+    },
+    {
+      "source": "art/weapons/w123/first_in_last_out/comparison.png",
+      "observation": "Viewed photo and remodeled side/obliques: long teal-white SUROS shroud, silver sleeve, dark lower fore-end, real bores and open stock preserved. Current 97-body geometry/UV remains exact."
+    },
+    {
+      "source": "art/weapons/w178/first_in_last_out/reference-01.png",
+      "url": "https://www.youtube.com/watch?v=5IZfs2bjrYY&t=26",
+      "observation": "Viewed exact-weapon 26.4s PNG: lower-right hip shroud, hand underneath and forearm entering bottom. Broad framing/contact evidence only; no recovered FOV or source camera."
+    },
+    {
+      "source": "art/weapons/w178/first_in_last_out/reference-06.png",
+      "observation": "Viewed 27.6667s PNG: held canted receiver during underside insertion; hand largely occludes cartridge. Preserve W178 lift/held event timing; shell trajectory remains authored."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/source-review.json",
+      "observation": "Inspected master-owned separate background Blender 5.4.0 Alpha evaluation report and exporter. shotgun_2eb0529e source.blend contains Armature only; action Armature|fp_80A8A3F1_reload_full|Base, OBSlot, source frames 1..101, 61 evaluated samples with original shoulder->elbow->wrist; preexisting cache sample max matrix absolute error 0.0. This agent read the evaluated report/matrices and viewed the sheet; did not open or evaluate a new Blender process."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/shotgun_2eb0529e.json",
+      "observation": "Non-fallback binding explicitly includes first_in_last_out; idle 80A8A3C2, ADS 80A8A3C5, full/empty reload 80A8A3F1. Inspected evaluated armature-object matrices, row-major/column vectors, including weapon 4A0810C4 and original shoulders D1232BA2 / 17025F50. Full reload is generic shotgun motion, not an extracted shell-event track. No source mesh or camera. Conversion 32 model units per source unit and canonical basis are authored; do not apply matrixWorld again."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sheets/shotgun_2eb0529e-80A8A3F1-upper-chain.png",
+      "observation": "Actually viewed six poses p=0,.2,.4,.6,.8,1 in paired XZ/YZ projections. Elbows/shoulders bend through the action and end near the opening chain. Bones-only sheet provides no mesh contact, source camera, or native acceptance."
+    },
+    {
+      "source": "scripts/generate_insert_w208_first_in_last_out.py",
+      "observation": "Inspected current 61-pose initial/loop/return banks. Shell neutral contact [8,9.96,4.65]; visibility initial [.40,.87), loop [.15,.80), return hidden; hidden HOME recycle stays continuous. Preserve these authored lifecycle boundaries and inherited reload rotation [0,0,-80]."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "observation": "Initial worker inspection identified sourceFullChain overriding shell contact; first-pass main now implements explicit shell sourcePalmContactFit and gates upper arms by sourceFullChain. Read-only reinspection after first actual Vision confirms source_weapon_display still runs unconditionally for a full-chain reload. No sourceWeaponMotion flag support was found at that call; master implementation required."
+    },
+    {
+      "source": "Master preliminary implementation direction in this chat",
+      "observation": "Master accepted generic-shell contact fitting for first candidate and is adding contacts.reload.sourcePalmContactFit=true support, gated by sourceFullChain and shell policy. Current handling weight blends left source palm translation to composed shell reload_target before upper-arm attachment. This is implementation direction, not actual first-Vision feedback or native acceptance."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-pass1-native/screenshots/first_in_last_out-review.png",
+      "observation": "Actually viewed first actual Vision sheet: hip shows distinct support/trigger arms; ADS sight aperture is clear in the supplied frame. Reload frame shows hands at the weapon. This establishes only the pictured poses, not continuous shell contact or second-pass acceptance."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-pass1-native/screenshots/first_in_last_out-reload.png",
+      "observation": "Actually viewed labeled samples 01/08/15/21/28. Samples 21 and 28 show the weapon extending far left, nearly horizontal. Sample 21 is loop-wobble evidence when combined with approximate phase report. Sample 28 cannot be confidently assigned to the same loop because its matched observation reports canonical model, empty floats and reloading=false."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-pass1-native/filo-phase-review.json",
+      "observation": "Read capture/phase observations: capture21 clientTick2389, server tick3134, CMD4=2.4 -> loop p=.4; capture28 clientTick2413, server tick3165 reports canonical weapon, floats=[], reloading=false. Capture indices approximate, so retain these as matched observations rather than exact PNG/render synchronization."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/shotgun_2eb0529e.json",
+      "observation": "Read-only source-matrix comparison: current loop mapping p=.4 selects generic full-reload source p=.621352549/frame63.1352549; weapon rotation relative to idle is ~90.861 degrees. Loop p=.5 reaches source p=.65/frame66 and ~97.8427 degrees. Authored W208 body at p=.4 remains [18.010794,-8.011480,-42.030613] degrees, near its held insertion pose. These are armature-derived rotation magnitudes, not native screen-angle measurements."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-pass2-native/screenshots/first_in_last_out-reload.png",
+      "observation": "Actually viewed second actual Vision sheet labeled samples00/09/18/26/35. Body avoids the earlier far-left horizontal turn, but samples09 and26 visibly raise the full-source arms/sleeves into the upper-right screen. Body-only sourceWeaponMotion=false candidate is rejected; it separates authored body motion from generic source limb excursion."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-pass2-native/screenshots/first_in_last_out-review.png",
+      "observation": "Actually viewed second hip/ADS/reload sheet. Hip hands remain distinct and ADS aperture remains clear in pictured frames; the reload frame alone does not establish continuous contact or upper-arm clearance. Second pass is not accepted because reload sequence samples09/26 show raised upper arms."
+    }
+  ],
+  "notes": [
+    "W210 second actual Vision reviewed: sourceWeaponMotion=false candidate rejected for upper arms rising into upper-right during insert. Corrected candidate restores sourceWeaponMotion=true and adds contacts.reload.sourceShellPoseHold=true. Pending master shared implementation, regeneration and further actual Vision; not final.",
+    "Retain inherited right palm [8,8.82,8.55], left palm [7.8,9.2,-2.5], reload rotation [0,0,-80], current framing translation/rotation/.98 scale and ordinary source segment lengths. No mesh, UV, gameplay duration, audio or camera-depth change; no limb stretching or support hiding.",
+    "Keep sourceFullChain=true, keepMeshSupport=true and hideSupportAtRest=false. Master imports original61 plus original shoulders and gates full chain/upper arms by profile, not shared shotgun-cache membership.",
+    "contacts.reload.sourceShellPoseHold=true is a FILO-only shell-policy opt-in in master-owned rig.joints. Initial: source_p=.35*smooth(p/.36), weight=smooth(p/.1). Loop: source_p=.35, weight=1, without .35..65 excursion. Return: source_p=.35, weight=1-smooth(p), blending held source pose directly to current rest. Non-opted weapons retain previous sampling.",
+    "Keep sourceWeaponMotion=true so source weapon AND full shoulder/elbow/wrist chain consume the same held/blended joint sample. Source body and wrist translations share one weapon parent, with framing applied once. Do not freeze only the body, hold only an arm, or replay the generic source return sweep. The x32 conversion remains authored.",
+    "This is calibrated source pose hold at source progress .35/frame36 of generic full-reload 80A8A3F1, not an extracted per-shell animation/event track or exact original full-reload replay. Holding the generic source sample is intentional authored phase calibration; original evaluated matrices and ordinary lengths remain the basis.",
+    "Keep contacts.reload.sourcePalmContactFit=true. After composing source weapon/body and shell, blend the left source palm toward shell reload_target using existing reload_grip_weight before upper-arm attachment. This handling constraint is authored and changes source wrist travel; preserve source bend and lengths.",
+    "Preserve gameplay timing, 61-pose phase banks, shell relative movement, pickup/seat visibility and hidden HOME recycle. Initial end, loop start/end and return start use the same source .35/weight1; return ends at rest/weight0. Existing source/part/display composition carries the shell lifecycle without independent body/arm phase remapping.",
+    "Master must integrate this correction against changed main, implement only the explicit FILO shell opt-in, regenerate and inspect actual Vision for upper-arm clearance, loop stability, shell contact and initial/loop/return/canonical seams. Partial/interrupt and hip/ADS remain required review scenarios. Worker changes only profile/review and does not export, generate or access runtime."
+  ]
+}

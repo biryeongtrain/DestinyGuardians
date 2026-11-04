@@ -1,0 +1,138 @@
+Compiled from "Material.java"
+public final class net.minecraft.client.resources.model.sprite.Material extends java.lang.Record {
+  private final net.minecraft.resources.Identifier sprite;
+
+  private final boolean forceTranslucent;
+
+  private static final com.mojang.serialization.Codec<net.minecraft.client.resources.model.sprite.Material> SIMPLE_CODEC;
+
+  private static final com.mojang.serialization.Codec<net.minecraft.client.resources.model.sprite.Material> FULL_CODEC;
+
+  public static final com.mojang.serialization.Codec<net.minecraft.client.resources.model.sprite.Material> CODEC;
+
+  public net.minecraft.client.resources.model.sprite.Material(net.minecraft.resources.Identifier);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iconst_0
+         3: invokespecial #17                 // Method "<init>":(Lnet/minecraft/resources/Identifier;Z)V
+         6: return
+
+  public net.minecraft.client.resources.model.sprite.Material(net.minecraft.resources.Identifier, boolean);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #7                  // Field sprite:Lnet/minecraft/resources/Identifier;
+         9: aload_0
+        10: iload_2
+        11: putfield      #13                 // Field forceTranslucent:Z
+        14: return
+
+  public net.minecraft.client.resources.model.sprite.Material withSuffix(java.lang.String);
+    Code:
+         0: new           #8                  // class net/minecraft/client/resources/model/sprite/Material
+         3: dup
+         4: aload_0
+         5: getfield      #7                  // Field sprite:Lnet/minecraft/resources/Identifier;
+         8: aload_1
+         9: invokevirtual #20                 // Method net/minecraft/resources/Identifier.withSuffix:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+        12: aload_0
+        13: getfield      #13                 // Field forceTranslucent:Z
+        16: invokespecial #17                 // Method "<init>":(Lnet/minecraft/resources/Identifier;Z)V
+        19: areturn
+
+  public net.minecraft.client.resources.model.sprite.Material withForceTranslucent(boolean);
+    Code:
+         0: new           #8                  // class net/minecraft/client/resources/model/sprite/Material
+         3: dup
+         4: aload_0
+         5: getfield      #7                  // Field sprite:Lnet/minecraft/resources/Identifier;
+         8: iload_1
+         9: invokespecial #17                 // Method "<init>":(Lnet/minecraft/resources/Identifier;Z)V
+        12: areturn
+
+  public final java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokedynamic #26,  0             // InvokeDynamic #0:toString:(Lnet/minecraft/client/resources/model/sprite/Material;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #30,  0             // InvokeDynamic #0:hashCode:(Lnet/minecraft/client/resources/model/sprite/Material;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #34,  0             // InvokeDynamic #0:equals:(Lnet/minecraft/client/resources/model/sprite/Material;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public net.minecraft.resources.Identifier sprite();
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field sprite:Lnet/minecraft/resources/Identifier;
+         4: areturn
+
+  public boolean forceTranslucent();
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field forceTranslucent:Z
+         4: ireturn
+
+  private static com.mojang.datafixers.util.Either lambda$static$1(net.minecraft.client.resources.model.sprite.Material);
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field forceTranslucent:Z
+         4: ifeq          14
+         7: aload_0
+         8: invokestatic  #38                 // Method com/mojang/datafixers/util/Either.right:(Ljava/lang/Object;)Lcom/mojang/datafixers/util/Either;
+        11: goto          18
+        14: aload_0
+        15: invokestatic  #44                 // Method com/mojang/datafixers/util/Either.left:(Ljava/lang/Object;)Lcom/mojang/datafixers/util/Either;
+        18: areturn
+
+  private static com.mojang.datafixers.kinds.App lambda$static$0(com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+    Code:
+         0: aload_0
+         1: getstatic     #47                 // Field net/minecraft/resources/Identifier.CODEC:Lcom/mojang/serialization/Codec;
+         4: ldc           #51                 // String sprite
+         6: invokeinterface #52,  2           // InterfaceMethod com/mojang/serialization/Codec.fieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+        11: invokedynamic #58,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        16: invokevirtual #62                 // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+        19: getstatic     #68                 // Field com/mojang/serialization/Codec.BOOL:Lcom/mojang/serialization/codecs/PrimitiveCodec;
+        22: ldc           #72                 // String force_translucent
+        24: iconst_0
+        25: invokestatic  #74                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+        28: invokeinterface #80,  3           // InterfaceMethod com/mojang/serialization/codecs/PrimitiveCodec.optionalFieldOf:(Ljava/lang/String;Ljava/lang/Object;)Lcom/mojang/serialization/MapCodec;
+        33: invokedynamic #86,  0             // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+        38: invokevirtual #62                 // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+        41: invokevirtual #87                 // Method com/mojang/serialization/codecs/RecordCodecBuilder$Instance.group:(Lcom/mojang/datafixers/kinds/App;Lcom/mojang/datafixers/kinds/App;)Lcom/mojang/datafixers/Products$P2;
+        44: aload_0
+        45: invokedynamic #93,  0             // InvokeDynamic #3:apply:()Ljava/util/function/BiFunction;
+        50: invokevirtual #96                 // Method com/mojang/datafixers/Products$P2.apply:(Lcom/mojang/datafixers/kinds/Applicative;Ljava/util/function/BiFunction;)Lcom/mojang/datafixers/kinds/App;
+        53: areturn
+
+  static {};
+    Code:
+         0: getstatic     #47                 // Field net/minecraft/resources/Identifier.CODEC:Lcom/mojang/serialization/Codec;
+         3: invokedynamic #101,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+         8: invokedynamic #58,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        13: invokeinterface #102,  3          // InterfaceMethod com/mojang/serialization/Codec.xmap:(Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+        18: putstatic     #106                // Field SIMPLE_CODEC:Lcom/mojang/serialization/Codec;
+        21: invokedynamic #109,  0            // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+        26: invokestatic  #110                // Method com/mojang/serialization/codecs/RecordCodecBuilder.create:(Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+        29: putstatic     #116                // Field FULL_CODEC:Lcom/mojang/serialization/Codec;
+        32: getstatic     #106                // Field SIMPLE_CODEC:Lcom/mojang/serialization/Codec;
+        35: getstatic     #116                // Field FULL_CODEC:Lcom/mojang/serialization/Codec;
+        38: invokestatic  #119                // InterfaceMethod com/mojang/serialization/Codec.either:(Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+        41: invokedynamic #123,  0            // InvokeDynamic #6:apply:()Ljava/util/function/Function;
+        46: invokedynamic #124,  0            // InvokeDynamic #7:apply:()Ljava/util/function/Function;
+        51: invokeinterface #102,  3          // InterfaceMethod com/mojang/serialization/Codec.xmap:(Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+        56: putstatic     #125                // Field CODEC:Lcom/mojang/serialization/Codec;
+        59: return
+}

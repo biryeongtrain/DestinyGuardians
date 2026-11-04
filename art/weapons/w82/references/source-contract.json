@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "completedUtc": "2026-10-24T15:36:14.120135+00:00",
+  "selected": {
+    "id": "salvager_s_salvo",
+    "bungieHash": 2060863616,
+    "intrinsicHash": 474269988,
+    "ammo": "SPECIAL",
+    "slot": "ENERGY",
+    "damage": "ARC"
+  },
+  "sourced": [
+    {
+      "mechanic": "fire_then_release_for_remote_detonation",
+      "authority": "Pinned official full item/intrinsic",
+      "evidence": [
+        "bungie-2060863616.json",
+        "bungie-474269988.json",
+        "official-provenance.json"
+      ]
+    },
+    {
+      "mechanic": "character_impact_detonates_even_while_trigger_held",
+      "authority": "Historical Bungie preview plus later exact Salvo community corroboration",
+      "evidence": [
+        "bungie-50040-text.txt",
+        "community-salvo-comments.json"
+      ],
+      "limitations": "Not a fresh current-sandbox measurement; shipped patch note was not independently retrieved; no numeric near-muzzle boundary measured."
+    },
+    {
+      "mechanic": "qualitative_remote_arming_restriction",
+      "authority": "Historical exact Salvo community testimony",
+      "evidence": [
+        "community-salvo-comments.json"
+      ],
+      "limitations": "Single arming comment; no numeric threshold or early-release state transition established."
+    },
+    {
+      "mechanic": "world_bounce_capability",
+      "authority": "Exact Salvo community discussion",
+      "evidence": [
+        "community-salvo-comments.json"
+      ],
+      "limitations": "No restitution, world-contact arming bypass, bounce cap or world-impact-after-early-release rule verified."
+    }
+  ],
+  "externallyVerifiedNumbers": {
+    "armingSeconds": null,
+    "armingTicks": null,
+    "armingDistanceMeters": null,
+    "earlyReleaseQueued": null,
+    "worldRestitution": null,
+    "bounceCap": null,
+    "safetyLifetimeSeconds": null,
+    "safetyExpiryExplodes": null,
+    "maxRangeMeters": null
+  },
+  "parentReportedLocalPolicy": {
+    "source": "Direct parent/user messages during this research task; implementation not inspected or tested here",
+    "carrier": "TWO_HAND preserved, user accepted",
+    "inferredReleaseLagMaxTicks": 6,
+    "inferredReleaseLagApproxMaxSeconds": 0.3,
+    "armTicks": 10,
+    "armSecondsAt20Hz": 0.5,
+    "earlyRelease": "consumed/notqueued",
+    "blockReflection": 0.65,
+    "cap": 16,
+    "capMeaning": "Parent-owned; not independently inspected",
+    "lifetime": 100,
+    "lifetimeUnits": "Parent-owned; if 20 Hz ticks this is 5s, not sourced Destiny fuse",
+    "range": 48,
+    "rangeUnits": "Parent-owned; no external unit conversion asserted",
+    "fallbackBlast": true,
+    "nativeGrip": "Earlier candidate; not selected",
+    "contradictionReview": "No inspected authoritative contradiction, but neither exact arming value nor consumed/notqueued behavior was verified."
+  },
+  "visualEvidence": {
+    "file": "salvo-storyboard-index.json",
+    "role": "Illustration/identity only; real storyboard pixels do not establish input or arming timing"
+  },
+  "notPerformed": [
+    "implementation edits",
+    "test authoring or execution",
+    "game builds or runtimes",
+    "app configuration edits",
+    "commit or push"
+  ]
+}

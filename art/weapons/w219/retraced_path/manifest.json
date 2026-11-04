@@ -1,0 +1,663 @@
+{
+  "schemaVersion": 1,
+  "stage": "W219",
+  "weapon": "retraced_path",
+  "generator": "scripts/generate_reload_w219_retraced_path.py",
+  "generatorSha256": "8d28629578c745cd355d017844ed6f820c1d494b9df2b83ac10f9a6952631a5f",
+  "itemModel": "destiny:weapon_reload_w219_retraced_path/retraced_path",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "thresholdEncoding": "exact float32(i/60), matching master runtime grid60",
+  "curve": "C1 weighted harmonic PCHIP; shared knot derivatives; zero endpoint/hold/extremum tangents",
+  "keyframes": [
+    [
+      0.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.09,
+      [
+        -7,
+        -3,
+        4
+      ],
+      [
+        -0.08,
+        -0.12,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.23,
+      [
+        39,
+        -10,
+        23
+      ],
+      [
+        -0.18,
+        0.12,
+        -0.2
+      ],
+      [
+        0,
+        -0.35,
+        0.080555556
+      ]
+    ],
+    [
+      0.35,
+      [
+        40,
+        -10,
+        24
+      ],
+      [
+        -0.18,
+        0.12,
+        -0.2
+      ],
+      [
+        0,
+        -4.5,
+        1.035714286
+      ]
+    ],
+    [
+      0.51,
+      [
+        39,
+        -10,
+        24
+      ],
+      [
+        -0.18,
+        0.1,
+        -0.2
+      ],
+      [
+        0,
+        -4.5,
+        1.035714286
+      ]
+    ],
+    [
+      0.62,
+      [
+        37,
+        -10,
+        23
+      ],
+      [
+        -0.17,
+        0.1,
+        -0.2
+      ],
+      [
+        0,
+        -2.5,
+        0.575396825
+      ]
+    ],
+    [
+      0.7,
+      [
+        39,
+        -10,
+        24
+      ],
+      [
+        -0.18,
+        0.15,
+        -0.2
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.76,
+      [
+        43,
+        -10,
+        25
+      ],
+      [
+        -0.18,
+        0.25,
+        -0.2
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.84,
+      [
+        34,
+        -8,
+        20
+      ],
+      [
+        -0.12,
+        0.08,
+        -0.14
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      1.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "gripPivot": [
+    8,
+    9.145,
+    9.61
+  ],
+  "packInsertionAnchor": [
+    8,
+    9.12,
+    3.55
+  ],
+  "gripWindow": [
+    0.09,
+    0.23,
+    0.62,
+    0.7
+  ],
+  "hand": "left",
+  "authoredTimingSource": "scripts/generate_reload_w170_retraced_path.py",
+  "normalizedPhases": {
+    "dip": [
+      0,
+      0.09
+    ],
+    "raiseRollAccess": [
+      0.09,
+      0.23
+    ],
+    "withdrawGuess": [
+      0.23,
+      0.35
+    ],
+    "occludedExchangeGuess": [
+      0.35,
+      0.51
+    ],
+    "insertGuess": [
+      0.51,
+      0.7
+    ],
+    "basePress": [
+      0.7,
+      0.84
+    ],
+    "recover": [
+      0.84,
+      1
+    ]
+  },
+  "reference": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+  "referenceConfidence": "High for weapon identity and dip/raise/side-hold/press/recover order; moderate for pack replacement interpretation; low for full extraction path, physical pivot, distances and numeric angles.",
+  "referencePolicy": "Worker viewed retained W170 actual gameplay storyboard/comparison; master evaluated original blend and worker viewed fresh source-chain PNG. Original video was not reopened.",
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/retraced_path.json",
+  "sourceGeometryFileSha256": "74e3b6a7589f09a3763a0f5258dad5fb74feb880a5392751579fbc17480446a8",
+  "sourceElements": 99,
+  "partElements": {
+    "body": 95,
+    "moving": 4
+  },
+  "bodyElements": 95,
+  "movingElements": 4,
+  "weaponElements": 99,
+  "canonicalWeaponElements": 222,
+  "maxWeaponRouteElements": 222,
+  "addedElements": 0,
+  "triangleAdapterElements": 0,
+  "ordinaryArmElementReserve": 448,
+  "candidateReloadWithArmsEstimate": 547,
+  "candidateKnownCanonicalWithArmsEstimate": 670,
+  "maxAssembledElements": 670,
+  "elementLimit": 1000,
+  "assembledBudgetVerified": false,
+  "weaponRouteBudgetMeasured": true,
+  "budgetBasis": "Maximum current canonical graph or reload assembly plus448 for4 classic player-skin arm surfaces; full and split alternatives are not summed. Master must check final composed routes.",
+  "movingIndices": [
+    78,
+    79,
+    80,
+    81
+  ],
+  "movingNames": [
+    "magazine_well",
+    "magazine_foot",
+    "magazine_blue_edge_-1",
+    "magazine_blue_edge_1"
+  ],
+  "fixedHousingIndices": [
+    17,
+    19,
+    21,
+    22,
+    25,
+    26,
+    33,
+    35,
+    37,
+    38,
+    41,
+    42,
+    49,
+    74,
+    75
+  ],
+  "fixedHousingNames": [
+    "upper_rail_-1",
+    "lower_rail_-1",
+    "upper_broad_casing_-1",
+    "lower_broad_casing_-1",
+    "sweeping_receiver_-1",
+    "sweeping_receiver_lower_-1",
+    "upper_rail_1",
+    "lower_rail_1",
+    "upper_broad_casing_1",
+    "lower_broad_casing_1",
+    "sweeping_receiver_1",
+    "sweeping_receiver_lower_1",
+    "receiver_solid",
+    "rear_action",
+    "upper_action_spine"
+  ],
+  "partitionRationale": "W150 semantic magazine group 78..81: complete tilted underslung black charge-pack, silver foot and blue edges. Historical magazine_well name describes this authored pack solid, not a separate fixed socket. Fixed receiver_solid, sweeping receiver shell, rails, rear action, spine and ALL 24 circular power-disc solids remain body. Selection informed by clean design group and visible gameplay underside; exact original animation bone/component segmentation unknown.",
+  "payloadPolicy": "Unchanged complete4-element tilted underslung pack, constant scale, visible in every reload pose. Fixed rails/receiver/discs remain body. No fusion geometry or motion borrowed.",
+  "payloadHiddenInterval": null,
+  "sourceElementsAndUVSha256": "46ae8c1635dfef2893275292e5ebb493a2a4b4612794687367527cad2ff28e37",
+  "partElementsAndUVSha256": {
+    "body": "a1ac45a7cb18bcb50dfb9a9ba56d394e11b61b924f66120d8ccc98bb3c84590b",
+    "moving": "9bca535af4ab55aff9f41f71473f9845fff001b0f755513cabdc7db99c87d2fe"
+  },
+  "geometryAndUVPreserved": true,
+  "canonicalGeometryAndUVPreserved": true,
+  "hipEndpoints": [
+    0,
+    60
+  ],
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "fallback": "Exact canonical graph at0/1, overshoot, negative inactive and non-FP; canonical ADS/inspect precede reload; native/twohand flags retained.",
+  "rigPath": "art/weapons/w219/rigs/trace_rifle_1c48cd94.json",
+  "sourceReviewPath": "docs/qa/2026-10-28/w219/source/source-review.json",
+  "rigAction": "80A8A43C",
+  "sourceAction": "80A8A43C",
+  "rigActionName": "Armature|fp_80A8A43C_reload_full|Base",
+  "sourceGroup": "trace_rifle_1c48cd94",
+  "sourceActionSourceRange": [
+    1.0,
+    106.0
+  ],
+  "sourceRigSamples": 61,
+  "sourceFullChain": true,
+  "sourceCameraRecovered": false,
+  "sourceWeaponMeshRecovered": false,
+  "sourceFingerIKRecovered": false,
+  "partHint": "moving",
+  "policy": "magazine",
+  "originalBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/trace_rifle_1c48cd94/blender/source.blend",
+  "originalBlendSha256": "a5da0626bcfde6cb9a5c3decb694fd7e870ba7824067cab2c3dbe5191ccb5339",
+  "sourceReviewEvidence": [
+    {
+      "source": "docs/qa/2026-10-28/w219/source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original source.blend in separate Blender5.4.0 Alpha background: only Armature, action80A8A43C/OBSlot, frames1..106 at30fps,61 samples, old joint error0, all source inputs unchanged. Worker read report; did not independently open Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sheets/trace_rifle_1c48cd94-80A8A43C-upper-chain.png",
+      "role": "viewed_original_chain_sheet",
+      "observation": "Worker viewed actual XZ/YZ shoulder/elbow/wrist sheet at p0,.2,.4,.6,.8,1. Large left support excursion then return; weapon-relative right wrist remains rigid. Bone projections establish no mesh or camera contact."
+    },
+    {
+      "source": "art/weapons/w170/retraced_path/storyboard.png",
+      "role": "viewed_same_weapon_reference",
+      "observation": "Worker viewed retained actual12-frame same-weapon gameplay storyboard and W170 comparison. Left underside access, raised side roll, below-frame replacement, base press and recovery. Hidden pack trajectory and authored contact coordinates remain estimates."
+    }
+  ],
+  "motionAuthorship": "Exact10 W170 Retraced Path keys/holds/anchors/rigid transforms and complete pack. Only dense C1 interpolation changes. Master loads original trace-rifle action and ordinary shoulder/elbow/wrist full chain without length stretch or axis damping.",
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "timingPolicy": "Normalized presentation only; existing ammo, cadence, reload clocks, speed effects and sounds untouched. Source frame span is not a gameplay reload duration override.",
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "firstVisionReviewed": false,
+  "secondVisionVerified": false,
+  "packFiles": 247,
+  "totalReturnedFiles": 248,
+  "staticParts": 2,
+  "parentDisplayChildren": 244,
+  "limitations": [
+    "Source ARMATURE only: no weapon mesh, source camera or finger IK; original full chain comes from master-owned W219 rig.",
+    "Exact W17010 knots, holds, four-element pack, fixed rails/discs/housing, UV and anchors retained. Only interpolation changes to C1 PCHIP.",
+    "61 poses/60 intervals are discrete samples; not a claim of continuous native60fps interpolation.",
+    "Left handling role rechecked: weapon-relative max wrist excursion left0.84365646 vs right0.000000573 armature units across61 source samples; existing contacts also explicitly identify LEFT handling.",
+    "Authored gripWindow .09..23 reach, .23..62 contact, .62..70 release during final insertion; zero hand-driven pack shift from the exact W170 seated knot .70 onward. FIRST review found the previous .76..84 fade kept the seated cell displaced by4.75 display units at .70. Contact/event timing remains authored.",
+    "Existing effective trace-rifle framing/contact coordinates retained. Ordinary fingerless player-skin full arms; no length stretch, axis damping or hidden support hacks.",
+    "Master owns dynamic shared loaders, original action/full-chain attachment, all generated resources, route/lifecycle, builds and native QA. FIRST images, same-worker review/correction or justified no-change, integration and SECOND remain pending."
+  ],
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/retraced_path.json": "74e3b6a7589f09a3763a0f5258dad5fb74feb880a5392751579fbc17480446a8",
+    "src/main/resources/assets/destiny/models/weapon/trace_rifle/retraced_path.json": "06207f9900a181f0bdf6f2d5be60583a0e47fce0e58cb95ddf688ee390a50cbf",
+    "src/main/resources/assets/destiny/models/weapon/trace_rifle/retraced_path_twohand.json": "8dc7e74e05adec00122a40a2e3e39eab3cff5ee76bb9fd8b25749a4a5a1dcf12",
+    "src/main/resources/assets/destiny/items/weapon/retraced_path.json": "0af2935af04d6ca96f137ba36cb1a7569c4868d907802549aca48fca4f4d7792",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/retraced_path.png": "9b33e5d40d54a9d9c935ad96070590f913a047093af2f65499e8759d444772da",
+    "scripts/generate_reload_w170_retraced_path.py": "a59f992515d0da1558abc05559f207a21de851dc7d0c65f6f2d2dc686480abe5",
+    "art/weapons/w170/retraced_path/manifest.json": "5e3087be1e75ac8c5ffc6e0ea4bfed6d714cbeea22ea0d9ceec4e5a885a6d7ac",
+    "art/weapons/w170/retraced_path/motion-reference.json": "56334f9bdd6ce28d3fc3440994fddc4c381ce578dadbdfd2e5883d2c6d21f922",
+    "art/weapons/w123/retraced_path/design.json": "303fbdeebae19477c710aa03313279a5ccf9ebc801a5e0be564d25d81a237364",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+    "scripts/generate_reload_w219_retraced_path.py": "8d28629578c745cd355d017844ed6f820c1d494b9df2b83ac10f9a6952631a5f",
+    "art/weapons/w219/retraced_path/profile.json": "5f3d147780fd5aea6ca509b05bbb82b93fd6b16cfa03b01942e66c58b0dadf9b",
+    "art/weapons/w219/rigs/trace_rifle_1c48cd94.json": "2f3e9e1b54d726b05e579f84c09c27c49eb4be536f375475638cb52100fc9cfe",
+    "docs/qa/2026-10-28/w219/source/source-review.json": "99b7a8001a2a09a88d9232c4e5945cb25d0f7d7cd5460380595406d947309138",
+    "src/main/resources/assets/destiny/models/weapon/trace_rifle/retraced_path_ads_twohand.json": "34cdb6f6329e94a20642733c1192988892cee71cb313c64a5509e2910a1d550b",
+    "src/main/resources/assets/destiny/models/weapon/trace_rifle/retraced_path_ads.json": "7bde0230e28aad9f8e749b5b11b3bfc6ed9d15aae3ab3bdc52170936fa9c84e8",
+    "src/main/resources/assets/destiny/models/weapon/trace_rifle/retraced_path_inspect_twohand.json": "a1ae6ee99c2fbc6b8a14010d7e3da1e0ea275f3ce911af44fbaac6e713ec6ef3",
+    "src/main/resources/assets/destiny/models/weapon/trace_rifle/retraced_path_inspect.json": "086f19e37550d41f170dedd0ed2f52129bcf7b603b47db2244ca75cd30fc63b7"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_body.json": "596975e9e4937fac8fb33329adcf617b17cdf9d7742f57a3af1341ed7e645b47",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_moving.json": "91c4723ba4bc588409a578c1b32ac478046ed75a3a4c1a6fe4c12866770e716e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_00_body_native.json": "887a7dca606cc8e586683cc2c34e8ed85666da8d6a1a5e86451fc7e2309808d5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_00_body_twohand.json": "3cf5cf51e81f95b6e0112cf6bd8c8048afb37af6dfe580d6417615cb1c68a589",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_00_moving_native.json": "970fcecdbbeb0024fced1349805f38d2d5ec5a41caf28c6d40dd166713278434",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_00_moving_twohand.json": "8c16ce762cfdc95a6cb6939685d1c9e2a913a9a0fecd99e3bf4d414dab3a14e8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_01_body_native.json": "949c4627236e35ad384322506a186d531e9030dad4025b59c04ced69ee7ddfef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_01_body_twohand.json": "1b21972efbcb1ae1eecc947b7c9814b8fde6ffe7caa34430bfa026598bce6c73",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_01_moving_native.json": "2ffab9ca9290e7e4654aeff0560a570163b8b1fbb2adf1a949ae5643878a69f5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_01_moving_twohand.json": "46dac406e8842dd8c3c72bd04a3ec4ce5415d9adda019f6e88332202ce8b9822",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_02_body_native.json": "02dfa07b7636f1cc62fb168029ed5efefd13bf1f0313c0c97879d842adffef5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_02_body_twohand.json": "d3911e8482e70d01d56665bc67696fbb7879c4ddff571b58f663c1364d01d335",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_02_moving_native.json": "6d34dd90dd63a70fcd04650ac6020315f2de55c30f3ff1dde96bbe44b5e66670",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_02_moving_twohand.json": "80682702cd3e1e3d3d2a5cdfe8545999317e5f60042d4726938043f7fa35ae2a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_03_body_native.json": "35a9b92c785a0c996b52f49e2cb54ac83feba5c00875bdb41f1a584fec816c99",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_03_body_twohand.json": "43f39b8873a14c658fb2253307e4295b1a6ae1c4faa131fbc268cd79bce04e61",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_03_moving_native.json": "eb17a49e4d391f0842df2c08cb5f8e93f43ac80c5195b123cc2d088b82e5986e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_03_moving_twohand.json": "cdcb31604ab7e5b588c3b8c61aed331e431d416ba2a2aa7021ca294aef67e6d3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_04_body_native.json": "9ba782632a097bc94786e68fb372bc27813b5ab7da30e8f8e319c9e99d1a6812",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_04_body_twohand.json": "ecd15c35de75e220feed830d9172f4f12e5317154157b405cd69a24f5a897f09",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_04_moving_native.json": "f4d5ae7722e02b7e37605608b5f4eb15cdc440a6fd31d33378c22c1a829fa8be",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_04_moving_twohand.json": "cfc3dbd2e6dffe63579ebca0ad71d40e3a8f0900bc8a282453051ec9b62f6dcb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_05_body_native.json": "5cc2ba2fa360f4050fcd301bfbeafa401ef4a12c6664c1d4f770e33ad14fd5d3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_05_body_twohand.json": "2d0e9e2b7116aacb887ae380e1258c6be2ef560da6fa2f2aed93442b71b68eb0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_05_moving_native.json": "3dab10178b67fb29baba8c45c37e72bbca3ea8c54ebd6b67fa69bcd363364926",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_05_moving_twohand.json": "fa85b674f2ba9f86a26bb1ab704e1ef46c57e01bbca487f9e6a3e45a76d1d919",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_06_body_native.json": "416c32d860e3d71d57a04848ce040f9cce02f6f6b8d6b1d14c07066dd9e828ae",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_06_body_twohand.json": "2c56e10e2a51996ce84b36b393922d66c6c017e3139b8a6d7c2382b9d738c9c3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_06_moving_native.json": "2ad9c4683bd8ab51653430f7fdfe186cdd53ddecb9aa28c0fe424df5d4d5a622",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_06_moving_twohand.json": "7e57d654cc44377a8ee16bdfc4c7d11afb650a2027c00f144c0d2e13725fefa2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_07_body_native.json": "83a1fdeb39e483a29534f5fe6ca54b8b3cce1f384996a677d7361346a9b1d8c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_07_body_twohand.json": "c08ce4960dce198f9d3780ebb42ce7a440849d546c15edb19d1ab0aaca4c07d6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_07_moving_native.json": "4009db0cc954768e2f4cd44825b63148629ad44cbde3560a8e5e884a6d913f1f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_07_moving_twohand.json": "b5a2ab89f1ac40d1bf5cab309eb674602fc7161f2e190902cd08587e8578c464",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_08_body_native.json": "a32351183b517e9268f4d60bf4cf98f27a9a34df5506d34f36fea339439da3de",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_08_body_twohand.json": "9f61b9693d65efd24ad9d5569702f094d2ca37430d6aebfbe4f6fe4b7ccc8613",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_08_moving_native.json": "9100005ee048812ef3e9d2fe3e083729b7df43ead1eae26d700d66ae0394cd90",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_08_moving_twohand.json": "43ed97a662aa6b04d1b119795011b78e093f607a904da08887326994ed32f9ac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_09_body_native.json": "9d7d9b524c077ef87665dce86ec3be4f997b9e84c9614fb025c8ab1ffcbdfbfd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_09_body_twohand.json": "894a32404831f5215cf9d8ffa00b6e517ef82fbc4f19a797d5258939754d7953",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_09_moving_native.json": "172a577632b010a022def45539e1b8dcb295ce0fef1fd3ada0607ef97482efb8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_09_moving_twohand.json": "58f6d6e6d1d191bd3f95e208c0e3bd99b853790ebcdcf9d970d26c8b45ef22d5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_10_body_native.json": "4a52cd968d5bf74984b63d56873b588085db2b4c26e22924f16490b8c0df3ad4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_10_body_twohand.json": "582f4e0c9cca997048b3b6cc5a7fbf7cc4155de5eba3b7b8d2c960b3dc95c719",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_10_moving_native.json": "8091349d32ee55d7211781aa38140fb6a8f2c6a85eec2616838b0b2ba0a121c4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_10_moving_twohand.json": "0e6bb553d79586face565e096ba7f2659563167dcfb12d4c7b1b75ca7f4ce05d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_11_body_native.json": "7199e28927e142ca42af9ccf87833b966ac57e1f4b7c316066530e44f9c5ecc8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_11_body_twohand.json": "ed6cda0b4cf300ba8498dbe4d966ebc5b2561cea69246738c847aef37a07cc85",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_11_moving_native.json": "ce50d18bc9724a042df3ed3e132ecf651c3b5af5b77712bcb3cd716bfedbd735",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_11_moving_twohand.json": "60ae089cfeb0cdcc90b2b2999e99f950fb86049b5632c03ba80a23fa677de9f0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_12_body_native.json": "9ef7d5b9a670e573d8dfebc679ac1dbc7633ae3e20075fdc7f5bd0724ba6256c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_12_body_twohand.json": "96056c45b39d48d49ca7ca9b36fc536f8442eb068b062ee2e709a783e359bcfe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_12_moving_native.json": "13140b22f43f1c17a538a63ffbfbe5c71b82e6b6ea026b250cac342a7e99e13b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_12_moving_twohand.json": "a1eca1782817f4399af75664e78e6c51cb15a7b9373342984d01cd19e149b038",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_13_body_native.json": "bd058654757708b816b28868a8eb072b94e96336dbddb66f54f3a432b1a96212",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_13_body_twohand.json": "dbcaf73a2ccb916230c61a892f70e3b61bd813a19282083abd78d1f6080983c9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_13_moving_native.json": "09381497afbe92c8ef74e5a5b95f14597807ac71cb236f5f4593b9fb19527a2d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_13_moving_twohand.json": "d5a333d2af9b3cf4f723634a10179dd0b39ccd4dd6db4cea2cf4e280096e86bd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_14_body_native.json": "5e0b1c2c0d3d2760fc748b4d0109e95625337765ff935ad7814ceafec063ff7c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_14_body_twohand.json": "5190da1f10aac38a108b7d86b5b7dd7975c19d1c17a7f8188cac4eb43628380a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_14_moving_native.json": "98bf012a3bda932050b2a05ae1663d6a941b917f4681c1cbb7bfe8a3ea217f8c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_14_moving_twohand.json": "3748d3af46da2ba55314277fe9a67b93848dc49601206554392c2800e20fbb3b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_15_body_native.json": "ec2a1adb7f42c0a0c70f24c151b240692cf58c312cb6132439ba94461b130682",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_15_body_twohand.json": "05e7b434567350fef82759d06c45fd16c217e3f3910afed5fa55db0b9ac0e147",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_15_moving_native.json": "97e2408c54bfb3f79a2d58a18d5905af48ae41d3ac397f7fa330eaddc1c8e5e9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_15_moving_twohand.json": "750536efa497a9f5919ee4b494fb135776d3469620fcd4105dae7b0a31b7c6ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_16_body_native.json": "1dec8899cdf4a1bb0a7951fd8af88e866118ae9201456dac98bc9c8861f1ebd1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_16_body_twohand.json": "25d7966e2412bc937105b98a06b94e4df1f05805859a3e0c8f1cf79dd9a01104",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_16_moving_native.json": "8ffc2c8096a9d387854f29b45f48e0c1cf2ea54d3d369ce28de6d02f1ae88a87",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_16_moving_twohand.json": "129d221f1a02f94a2d320d71013f8773bb5a411793f00fc14c7feef5083a77a0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_17_body_native.json": "c8be55996e0246dfef78b02e41171d418401338893a01eaec64bf8614c0b5434",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_17_body_twohand.json": "f6b1ee5e499dc622882df9b5e879e390c71a27b8244cd50c06757a487b454a9e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_17_moving_native.json": "b0d17f2c14734f7834dcb120ef50f12cd9ab65001d7959db38f97ca3573f0dd4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_17_moving_twohand.json": "5c53cbc6ac3b7e2735597454a6407ba161f0fc3e46a92c63171f10a04e940f65",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_18_body_native.json": "917cc5ab6882c2db0145fe7b8203610449158af84da3ddecb4dd722fef524b53",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_18_body_twohand.json": "48e09176f2de6f1189147b5eb0b0d709f4c3c547001e5e5f768a05b2d0ed1cde",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_18_moving_native.json": "57a87391770ef1e8a21ca328984eaf7f4a7b23f475fa21b62c7846f3ddbed138",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_18_moving_twohand.json": "443b7a949c9634c977c0c3f9f5943af1baa1c2e552193ead6025168aa5a32681",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_19_body_native.json": "47dab0b4902091f35822bb9203b229919c7a1b0d1f6f2768543c4cebcc7d4099",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_19_body_twohand.json": "e4699fa01e960264d6bc75a21f2b5058f9468ef903a0f8d2dddf761c7175bff9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_19_moving_native.json": "b24e247c9cd74b310ae27ade27295d735aa6a9674655e5c9c03e266c30ec505e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_19_moving_twohand.json": "b8fa83d19a561458ae1aa257580e0ea2d1daa70cf4da2d36a4a2525207411911",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_20_body_native.json": "85eb552e8a7577ab59c9320e1e5c7f6ed2a3bf4b7e7133b4e3400e545473daa2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_20_body_twohand.json": "0b8eb399e4126b1d47ee26bd71343ab27eff7899c3dd7658a4d040c9924d0022",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_20_moving_native.json": "b693ae0d6ef4f44e925fa35ac6462357919842a36c60b4b4f30189d5e18a4c6e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_20_moving_twohand.json": "b320c50f7cb74eaffc346f6662c3e5296b5b54de188fae582a1d5b9f7b4e8686",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_21_body_native.json": "e46321daad24b5ac450d98823cf5e3e20f21bf6e5334d8333b794a064f011dc4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_21_body_twohand.json": "8ee90a99d261a44a6131bf4bee192e31e1cc3d25e214b3987222ee69be16c235",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_21_moving_native.json": "bde59ed538d2cb9bac806a16abb7a4ab92d2a6ae0cc95388911c97e8df2b28dc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_21_moving_twohand.json": "9811321fb6c6a725aec52c2d6f3598955626d2aa9238e753218ba3502a727b79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_22_body_native.json": "f610a353bed5c1a0d158bc4b70b1edd47fb8727188d5877d496ec301e3fafcb7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_22_body_twohand.json": "ca9ad1da597b0eca4debfc0ecf8ae2951f635763bfeab5fa8ca5e84cb792d51c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_22_moving_native.json": "11b56b5937e125250eaf694de6f4154112047f833ac3d0b43b7499bc06c323dd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_22_moving_twohand.json": "3554bf6df0f7d25cf2108d66488f4f7f44e5bf4ec5c0c9bfa46a33399a76ccad",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_23_body_native.json": "282db2e8d7398426b11d7f08b88f79284ceecff8a9ca1dc1da61f1b6eb10922c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_23_body_twohand.json": "048ba1830bc937009c59fbb1f3c3d7e9edb0bded360cc4b3e9d73c2afbfe9591",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_23_moving_native.json": "616010c582d3a12bb46630f89ecd9fde36e5011850c76f94ea867b52f5e59ba6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_23_moving_twohand.json": "3a4d19874a53e9311fd6b5a2b2bad32ed3ea411176ef6896d7c35178f0273805",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_24_body_native.json": "66a3ccbaecc5a0fa20b49086ebf6651f2635799504d6a1132500dd3be016beba",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_24_body_twohand.json": "2f3e8850e3e47183051974f38b1424213a1777c7832f74cff6db3aa3da3d08ed",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_24_moving_native.json": "07561c0728ba1a756457950e2756c6d7fe2ca8e4e893b2129595ae3c46a63f0a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_24_moving_twohand.json": "2b50d8ef78366e69360411390a40e2551d32801fe8f1e9959e1810943a4de463",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_25_body_native.json": "351cbe4edd1a212f9dcd66e4cbda3769f5eb8ac3a8cce1d256cae11cff6ec93a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_25_body_twohand.json": "d09aa8f9c1e53ce28bb51857a80fea167e08e13fe3eeee9734b8dee938112497",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_25_moving_native.json": "49945ee864a8867c8a6a6ab259ffe2d41feec6cb9b890b33eb49406058c64c60",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_25_moving_twohand.json": "a17a4a338ea2000c04ec3d614e20dcc36124bafcb7905f37c6ba7a004eb0597f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_26_body_native.json": "c255527151dec5f6a6511c60120e282d235b97261de80daf6840125349e593f6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_26_body_twohand.json": "3c5bbc8701878f264d3742a69c63b3d15fdae7ace64e4219618ffd18baf24d6b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_26_moving_native.json": "e19133826ba46101dd981de47f866e5abca0302b3114424a7f4e9701773217c8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_26_moving_twohand.json": "3b4bc65ab0c076304a20392dc79e334ec8689f6b6a9a875683f06294146d4d59",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_27_body_native.json": "d7e9065110ede48c024076412bcbe4dc88639e15a347eb53f9630e7bdc581089",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_27_body_twohand.json": "9f21dcb2d27e287f67927052455ab00f315f0ef81ae4c0f23b376af79ecb3365",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_27_moving_native.json": "2ce94bfc2831d5c695dfdf05c20213e852987679cb8f6b3e3324a505204408e6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_27_moving_twohand.json": "a45c2ce6de2e349871d9670bdee59fc1e356221c376db705981afcde637ad9a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_28_body_native.json": "5a650222cf1c43e77ca8192183ec8164a47eff8e0714a317cde3f4deb2f0cdfd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_28_body_twohand.json": "c6210f50058c1db6c8fd358af1506a977cfa01ca30a25717845ce226e33dce72",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_28_moving_native.json": "4b268cdabb0240cd89775242786cb2d29e7dd28c2aa8c839c6eec97717a6e3af",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_28_moving_twohand.json": "78a19825c8ec6f5d805cb896a7ead8f9687767c2d2a284ef6a591b7d511b6231",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_29_body_native.json": "436e470fc58b485d519c51365e662038ad90c01207b1c94a7737be8a458bc603",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_29_body_twohand.json": "dd2620bf1b5f74a232996b53d5a8d541344b3a075b50d5fc6fc5092ca28dc941",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_29_moving_native.json": "b4fd5a120575c0497319f4003cce6f8ced7eb9ef249506db5bbbb3c490725ad4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_29_moving_twohand.json": "bd1a59bc3885d96dd504e4a7ebdaa3a8ba102045972dd19a98f1fc48c5d9ff54",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_30_body_native.json": "7b8441838c5a26ac5e0332d2b11baa5b9abb276ba3ae3a3f65ae52323f9be35e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_30_body_twohand.json": "99db375ada53bb9cea6fb3d74bf7e21d5491e07b193fac887df60898bc4c68c7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_30_moving_native.json": "7e9312ce1ca3931e70f27998efee7afd75bb4a20bbac5ab5df114c8c7dc96376",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_30_moving_twohand.json": "59d9461b26c56829cbd3564e152ae15b2e44079f4f4c5cc3fe950ab537f12da9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_31_body_native.json": "e8de37c41c6f06fc5921eea76e8ad126b99996e3204f789d276c9031be7cee57",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_31_body_twohand.json": "ee7af8f53ef8e45167e2e993222cc1fb0962745f04b17bd00497ede5aa727621",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_31_moving_native.json": "8a98b878813e12d699358c42961e15ff041da73ee2de3d8714ae48ece2a65732",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_31_moving_twohand.json": "3099359015f58a3f512e6f2bde71dcb5ce9ab5f0ced35ece07b973ed56bec3e4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_32_body_native.json": "c6c66ac2a18f9fb68426efa976002dcdb082102e48df0df9a03dc47603de8d23",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_32_body_twohand.json": "cd83ee7116799aca12cf646352bcd0f624b5fab2b9f3460664e42d7e833784d4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_32_moving_native.json": "ed4b3035db8318e77241833fb543a1ea65f7e3e69578f4ee143997ce6dd3d7a3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_32_moving_twohand.json": "22e862b9a4a1a84c63d084f5f4c637a66c7d7837df96d489a3e13a7d90f90924",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_33_body_native.json": "da626d5ccc0507f5e193cfc733da43b154069a768d1c57f0080122533d5273c3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_33_body_twohand.json": "80cf3b4d7a59863dae74bdaa06fc1737b0c5f90bae31a6b83eaec0745052f39b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_33_moving_native.json": "4453d375c38e7c82fa461acb6c3d9ef8a7a7ff7f1f5a7486b640404bf97db116",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_33_moving_twohand.json": "e62e4397f4069b31e256b111c11eb642fe28ebb3c2f7f9e8a60d6b8d07898109",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_34_body_native.json": "4e318d9c31c3db63eeb6c542ef0b3ee4556a022dfb767d57c7c2855516242b3a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_34_body_twohand.json": "c65be5600c820b291c5c6672e3a058a556362eb0891ffe87e65e48c376c8d614",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_34_moving_native.json": "08d0b194e14e94032435ca280cca615585056d928ece36aea005e09e3e3e62ba",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_34_moving_twohand.json": "15ee36e653644b97993962e36cf97d483c0d30acab01442483cbebb44980f09f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_35_body_native.json": "76c0a69a3b3a3a98e3b3e0e5d4e6693b949b2d01d33629f7a0a87c8cbe0ef310",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_35_body_twohand.json": "012f0697dcf4d049f030c6df0767ca56100476c52fb252c6d60067f5e4aa7f74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_35_moving_native.json": "eb941396133595c343c02d35c3f63fd80a7c8755f76acc782319214171b88e7e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_35_moving_twohand.json": "a4883f0ce7e391cc69fa7a2e2324078fca81465245f3ccf69331edcd15e62f27",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_36_body_native.json": "4c511e4ea69e07782a6a4b14e8fcbf1db5bc0146c6b8fc15f86a24f12a10809d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_36_body_twohand.json": "1d09f8f7fafd431434f218767b4e2bf2c45c1aec998f8c5fe069128fff72acf2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_36_moving_native.json": "f38b21981d6cb628d130fa23bdd2df940a98580134a20d3c682dbab83a61a7ad",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_36_moving_twohand.json": "fa4ee419470f4d3fa69e87a12640e172a26b4890b9a846fc96e8fa8c55877c43",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_37_body_native.json": "29b9ba1206fad4c7349821736645cd94d351c8b8f1079e31e15ff3966f6059d3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_37_body_twohand.json": "4cc41c9b072c207f2763aaa14e0e7c2cf62ddf541648386e8c75b7d86194826f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_37_moving_native.json": "11ca6af6366d77a8e7e9cb9f06ae255c65e2ecc8d4d515f2d534bb2d968dcab5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_37_moving_twohand.json": "9a3b0f92d78151e545ab2eb8ad6f143cabdd087613b951df4848ff8f66ca9e71",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_38_body_native.json": "7252dc80c3ed31351dc8ee16f2efdc06e8a8b3c20b85ffd1015ae5f36cd4f6fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_38_body_twohand.json": "0b9ed3e53de8e4fe34a00e119b12121912e7b6ae6d6839ee5370857cb0404c4f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_38_moving_native.json": "a25da4492334d146ecf690b41f61da563ff1b05633ab28e9718150e19f23dc42",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_38_moving_twohand.json": "0ec3f7d9a966a389985f1ee134d6b376851e8a857d1172c036ac60459ee22f9d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_39_body_native.json": "d5d8dc8cf82d988bb2d0b8ef81bc8774bec55ab306dfde855495b21fd21e262a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_39_body_twohand.json": "4eadfc9ce6b86c54bb429fe2d6762feca488424ccd3ecea30e7c191e076914e5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_39_moving_native.json": "97339b9b9b43f5ab0144fe9b6f664cd81f1b916de8f0308f8655707e80ea0930",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_39_moving_twohand.json": "c870705990e3f1837b70dbd64d9c88936d5634d371ef401d887900e8f8e5f36f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_40_body_native.json": "dfc881d2a0f19b1ed834168923f0f90ad75537085794bf0b99fb394ecbf13c9d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_40_body_twohand.json": "80116dbb4b2b05b23011774b051a1d7e022385a1c277adb1c5bdb3ce37ee6a86",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_40_moving_native.json": "600f0ff1f39f12ba6a1ebb91ca0cc68728e2b8d5f94231e1089d26ad75c254c0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_40_moving_twohand.json": "02929d4fbc955fe6fd2ab175877ddd0954fcb97b7e429211ff99d2883d6e1e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_41_body_native.json": "ae487aaa375fd6546d0720e01b2b9428bfd2e6575f5955b6f5e2b3a9e603257b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_41_body_twohand.json": "3dce3d632d1a8eaf928cf4c869020ac7fd3bb99555c0e6a17993a3ab17fa2872",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_41_moving_native.json": "96fd734287c653773ce3d428f958146cb66b277111e7a5c732216fb019b9e30d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_41_moving_twohand.json": "d6fe421b5414686ef37846a4c418717ff78917dede0b5c17106d0a36525aaab9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_42_body_native.json": "9e284e1f2f7245cd2363b6ffed5d6e8302b73f0d5fd9b3c2272062ba3480db31",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_42_body_twohand.json": "81beff2382b8e81a7477e3780237f95628ae6c102aede697944e16ae18a5f923",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_42_moving_native.json": "b2e2b0bb84654c13545fcc729f0cc918def451f026f775633f61ae87f4793f24",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_42_moving_twohand.json": "3ef5d582289f9cf0bc7212f673b0e52851958ab7729f35fab2a98f757d470d69",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_43_body_native.json": "ba7f5cb8d8cdb2ad9092b6834adafb94e3f8083c77dbee8b7a07720a8b0b9aa2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_43_body_twohand.json": "d993a1f6420bf20b7717e3b3f076773ab6656d046847a5c821c0a4a25fc39f9e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_43_moving_native.json": "e4eaf3e9b1c69fce70bda41a29d11147f0dd98c1940a8376e228e956a31d03fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_43_moving_twohand.json": "7070a4c4f8732d719561e0d1b180e305f0e38762cc6976dca2728854b49af095",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_44_body_native.json": "a83db648c91e3c9432132b03b5d21ce24183987d2546809a670404d157d0a321",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_44_body_twohand.json": "8e539c8480d13cada2e960d445bb9c712aded94730bc7f21bb466c6d05394ec8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_44_moving_native.json": "306b3e2ef243825cbee1d9917b63a59f25ab56a479de7825d20c4290fe367730",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_44_moving_twohand.json": "1daba88ba897c662a2623b9ed2c9636a23db49123f3b6585a5b404a20c9fb7b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_45_body_native.json": "66786b90b6dfcdd44dbd5ce3364db1ecf3fef276cd17076da7b5c34cbb9632bb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_45_body_twohand.json": "04bffe61b31b3a2968b467b6c454e5cdbbeaef917d4024933962fae44145d97e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_45_moving_native.json": "0847abf1f15f1b08f18682b21358b259fc06334559688388f26dd059d7990f37",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_45_moving_twohand.json": "3f3601397a9327382d948b709c72b63196ce4072e7aff96c5732348b8e86af87",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_46_body_native.json": "f446111fdefdb6a6d0d496d3ca8632479fc36a79b4f93607bf3c965d3eb6e6c7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_46_body_twohand.json": "deec381b7409f4bc6e27a42b1e76114cb83491443f48d298590d531393c55b6d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_46_moving_native.json": "6aff10eab67a6118092334b4d420e04c4e9c09a205c9b7e854b6b934135c9aa1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_46_moving_twohand.json": "80f504cf9d9ab2a59705134d14222f34b0dc00f845aff98becbd7137d3940047",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_47_body_native.json": "fd992ea103d0eaf030d2cbae58060fb3b7c5db06e104793f31d48e2c62b3a04e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_47_body_twohand.json": "9eff978d849b4b996e660bb07fee7f1f31d6ee9327757ff753478bae934b8897",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_47_moving_native.json": "248d95ccdae7f61048168c2f1d79c2287073c5a21c039dd85aa83829e32b6580",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_47_moving_twohand.json": "cefd2f55c615fd31f4a928d9aa5b9100beee24a90b9ba1b9d73579bc3d8c188d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_48_body_native.json": "5e5302e7d0d198d1e8b241c10b336f5c4ccf7235441d0467374dca4884bc3b19",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_48_body_twohand.json": "b9046527b3370ac0c0b387b92a16ed89727bdaade10d37599da4690954494a11",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_48_moving_native.json": "186a03a7c483012aa224951f94d5747cccb54a0aadaacda07b784450a1f25186",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_48_moving_twohand.json": "5d0aba35b40961f091737a22c8c149f6abcbed48e84604fbf1cb0fd23a924573",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_49_body_native.json": "96b0a8c38a82162eb06bc8afd5273227d6aa9968c1fb03bfeb566a71a30f9fdb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_49_body_twohand.json": "9821b744134f6f038990693a9a1f4fe4e1cacb6b164a0258415beca8881be646",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_49_moving_native.json": "28de93d0cd4ccb2ac17f1d75c458afdd74978fa270cc6ff16f774e95895f7ab8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_49_moving_twohand.json": "935e5b742bc75d5c871454981957ca39e4d3bee66eb617c9c461cc88c9986265",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_50_body_native.json": "a35897d2f3200e7643f25fb78fd0910038b3ec657a6ae6fd5f3267cdda76f2f9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_50_body_twohand.json": "8adc047e535830e7fd45272aba7ce881745d850ac4b1cff89ee40ab318c78d95",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_50_moving_native.json": "8979c32adfd02659066e09e97a20aed01f6f5696db46de07fddf81ecafde2b79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_50_moving_twohand.json": "58d7ae9ad5c067243f8f192202501db148b796494d48e4c452b416bf945888b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_51_body_native.json": "8c2663861d5a5037303f291d7190609b324fcfb8e41b7b1d70126a323c618fcc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_51_body_twohand.json": "c934c86f5520104b9dd1f7ec3e1ce9da7ae6982463983b17e3ef83b4a2b6d0ae",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_51_moving_native.json": "9ecc5af829f8f94e53a7b83fa29b07734f6470a3b52b0f45e8e8077a40800732",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_51_moving_twohand.json": "f249d596fe9974293fd26873e79773129cff94d7722fd32d8513b3d27d7779de",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_52_body_native.json": "ad87d0bf3ca9a4198d4b2a091096353d56035e273e3c71a93c8b8be7bfdee095",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_52_body_twohand.json": "243a9e1be50b1e75dc5c1ae3fc46bc7e6707a728e09f04a1b99a509a52085fe0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_52_moving_native.json": "77cd983542bafe4ef31761ab670ddb7898894dc24c23564b4d9bcc5a45e81538",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_52_moving_twohand.json": "3f93c88490c25bee48d846ddc82b76dafdac046fc54d42be9c353537fbeac222",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_53_body_native.json": "a1111909aaa8ee1a4f758a1fd40dc26fd0ddbbd5d540119bee2651e797c0d2d0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_53_body_twohand.json": "ae9d6845f4fe10d4f6478a71053f7f7a24d2ead7abc3e495582a8b80af062a84",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_53_moving_native.json": "d5aee27fe98eecdb67c191253997955712096ebad294c7cfc1e52327c8c2d859",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_53_moving_twohand.json": "cf905c243dd4939eb120b7a51331d10bd4e31bc8e346f468b94976e3e8b8e8bc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_54_body_native.json": "2b7d3eb2bb7c472d7ac0bb722b177ddbe42c6a03057b9bd467383cb6182a0b60",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_54_body_twohand.json": "d331ca8c8e3ab5f13ecc53112fcb218f89bf95665f93f5d2e0e48b633133b041",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_54_moving_native.json": "3b76c2a2db3e184df45f9bb6bed32c03b8acf45b9f4daa4c55849c7e3c9a57bb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_54_moving_twohand.json": "8de2bf0ba97474046bc638fa478cea31c3af12b7d159b096c2b1cd98b3e1067a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_55_body_native.json": "7b87cf959cbc1ddb307e550e7b2f3666d5e4fc4f21ee9bcad41f94868e2b3c17",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_55_body_twohand.json": "f12f516e865efe49eb023be96c864293b624a44c247d1a00783988bbb829b5df",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_55_moving_native.json": "08355719eee3afe188f82c1fe87d663336d763fba3c665d181ff28495420297b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_55_moving_twohand.json": "3652f3c1bb1d9650b94db62f1656e6702233f5a85bb66868ef4d5af6308efbed",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_56_body_native.json": "7fe71fac00706201806257c012b980bb798263f262d290c926f13ef478d56f03",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_56_body_twohand.json": "86eac6a826acdf5bbfc4a8c4a0cb5110faf6c22e2b1db8f13d02c6803a62eabe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_56_moving_native.json": "26e09aa1cc1645012edd5bec2b026f3183f8362184c7ffa13b193ec2bbb3ca0b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_56_moving_twohand.json": "66229747f9ef49d660a37c9c0502ec2d2cea9358f7377fd44a5e146dc40d50a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_57_body_native.json": "bb3288b649ad3dba2c8be685204051daf8b3af861fc3d17edab73c47d4bf3b7c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_57_body_twohand.json": "0d4fcd73c2e4996f172d06a7779a00bacbe72a514f23c03bdf11820aa9ecf573",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_57_moving_native.json": "22ba678de22ad2db7acc6ff941c009507812b200f4a8a16b931d08c134426e7d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_57_moving_twohand.json": "f5955da3720d1fa2fbb8f2a32a2bebb2b5f901b0cc9dde07ee1732860ca5e31a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_58_body_native.json": "a23e08945ca9ced0af5d83bab230c3dbc5dd05461f91b593f5f43203413a6d9f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_58_body_twohand.json": "bf405e465c47a23eb5fab39369bace54772d2d31dda61a394200bd6829e2c058",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_58_moving_native.json": "7349374d3ddbdc44244068dae8047dcfb9917dcf7811501249c9577f2111240e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_58_moving_twohand.json": "e68a091dfad342c31a237959c953a295f2dc2162106741354a6dadf6b54e3eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_59_body_native.json": "da4ecc51e17fe8d550d732b98952215c574c2d8d70114ffb500be15aa69dd9e2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_59_body_twohand.json": "9490672d19642a9b3f177d6dbe879827db16afb9f31bde99a31681112fd8e37a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_59_moving_native.json": "d8495ceb9db9152081ea30f35eabd99385902e11f3e09277a05e5fd1b8f1feb1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_59_moving_twohand.json": "86642af246fa387f5f4102bc494155ca14394f62f59a1c4fff946ba363a61844",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_60_body_native.json": "887a7dca606cc8e586683cc2c34e8ed85666da8d6a1a5e86451fc7e2309808d5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_60_body_twohand.json": "3cf5cf51e81f95b6e0112cf6bd8c8048afb37af6dfe580d6417615cb1c68a589",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_60_moving_native.json": "970fcecdbbeb0024fced1349805f38d2d5ec5a41caf28c6d40dd166713278434",
+    "src/main/resources/assets/destiny/models/weapon_reload_w219_retraced_path/retraced_path_60_moving_twohand.json": "8c16ce762cfdc95a6cb6939685d1c9e2a913a9a0fecd99e3bf4d414dab3a14e8",
+    "src/main/resources/assets/destiny/items/weapon_reload_w219_retraced_path/retraced_path.json": "3c24033af0e4fc2abdfc31d307ef1d18e35d7e3514240d0a64444cdbc923e34d"
+  }
+}

@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "stage": "W211",
+  "weapon": "ammit_ar2",
+  "status": "worker_reviewed_pending_Vision2",
+  "worktree": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w211-ammit_ar2",
+  "ownedFiles": [
+    "art/weapons/w206/ammit_ar2/profile.json",
+    "art/weapons/w211/ammit_ar2/review.json"
+  ],
+  "change": {
+    "path": "framing.sourceFullChain",
+    "before": "absent",
+    "after": true,
+    "profileBeforeSha256": "3beb34054aa9dabbf3aed0a94739545169723afd99cf88af5d6bb3200354163a",
+    "profileAfterSha256": "b941a5b2db214af3bca8ead6066ae45165a1b0f1d58cb8c8eb02821d88808cc0",
+    "rationale": "Opt this weapon into evaluated shoulder-elbow-wrist replay and common source weapon-parent motion through the existing master-owned full-chain implementation. sourceFullChain takes precedence over sourceWeaponRelative; no inert sourceWeaponRelative flag is added."
+  },
+  "sourceReview": {
+    "evaluationOwner": "master separate headless Blender process; worker read report/matrices and viewed source sheet, did not personally open/evaluate source.blend or access live Blender",
+    "report": "docs/qa/2026-10-28/w211/source/source-review.json",
+    "reportSha256": "6f8cea0ca5ef45c806e04a805afb0a84397ab404cacda052ed5a47a53eee339d",
+    "group": "auto_rifle_943c13a2",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/blender/source.blend",
+    "sourceBlendSha256": "85d557ad5b5ba5f1148653f1f6ee8a99bad69172143c16c8c1161b9c04d9fe02",
+    "blenderVersion": "5.4.0 Alpha",
+    "allInputsUnchangedReported": true,
+    "space": "armature_object",
+    "matrixConvention": "row-major, column vectors; evaluated pose.bones.matrix, no matrix_world application",
+    "reloadAction": "80A8A395",
+    "reloadActionAudit": {
+      "action": "Armature|fp_80A8A395_reload_full|Base",
+      "slot": "OBSlot",
+      "sourceNames": [
+        "reload_full",
+        "reload_empty"
+      ],
+      "sourceFrameRange": [
+        1.0,
+        105.0
+      ],
+      "priorSamples": 61,
+      "samples": 61,
+      "maxExistingCacheJointAbsError": 0.0
+    },
+    "actionSelectionLimitation": "Shared auto-rifle action audited for use; source maps do not prove a weapon-exclusive AMMIT variant. No recovered source mesh or camera.",
+    "sheet": "docs/qa/2026-10-28/w211/source/sheets/auto_rifle_943c13a2-80A8A395-upper-chain.png",
+    "sheetObservation": "Worker actually viewed six paired XZ/YZ projections p=0,.2,.4,.6,.8,1. Support chain makes a pronounced handling excursion at .4/.6 and returns near its opening pose at 1. Bone-only evidence does not establish mesh contact or native visibility.",
+    "canonicalBasis": "Source X-forward/Z-up to canonical -Z-forward/Y-up via existing C; do not apply matrix_world again.",
+    "ordinarySegmentLengthsAtAuthored32Conversion": {
+      "leftUpper": 8.726690579014422,
+      "leftForearm": 8.14136449775015,
+      "rightUpper": 8.726571077578603,
+      "rightForearm": 8.141362551709813
+    },
+    "adjacentPoseAudit": {
+      "path": "/private/tmp/destiny-w211-source/adjacent-pose-review.json",
+      "sha256": "4d722ae5741c9acae9fb902fd6ca2963a56e75eb3900cfcc60959ab28994690f",
+      "row": {
+        "group": "auto_rifle_943c13a2",
+        "action": "80A8A395",
+        "poses": 61,
+        "maxAdjacentJointRotationDeg": 77.14567,
+        "maxAdjacentJointTravelModelUnits": 8.91099
+      },
+      "policy": "Preserve evaluated original fast changes. No arbitrary resmoothing without native findings; 61 poses do not establish continuous native 60fps."
+    }
+  },
+  "preserved": {
+    "framingAndExistingContacts": "All preexisting profile values preserved; keepMeshSupport=true and hideSupportAtRest=false.",
+    "rightContact": [
+      8,
+      8.95,
+      8.3
+    ],
+    "leftContact": [
+      7.8,
+      8.72,
+      -3.8
+    ],
+    "reloadContact": [
+      7.4,
+      6.85,
+      2.68
+    ],
+    "reloadRotation": [
+      -16,
+      0,
+      0
+    ],
+    "reloadPolicy": "magazine",
+    "rigAction": "80A8A395",
+    "geometryUvAdsTimingAmmoAudioThirdPerson": "No changes. Preserve accepted 126-element canonical gun and existing W207 61-pose bank, W69 normalized knots and .48..64 handling plateau.",
+    "limbPolicy": "Normal fingerless player-skin source segment lengths; no arm extension or support hiding."
+  },
+  "implementationReview": [
+    "Read scripts/rig_arms_w205.py: full chain uses source forearm longitudinal axes relative to the common weapon bone; shoulder bend and ordinary segment lengths supply upper-arm attachment.",
+    "Read scripts/build_first_person_hands_w201.py: full-chain reload composes body and parts through source_weapon_display; source_palm_translations carries source wrist travel with fixed rest-space mesh offsets. Magazine policy transports the detached magazine toward the source handling hand under the existing grip/release envelope.",
+    "Retain authored rest/handling contacts. No sourcePalmContactFit or shell-specific pose-hold policy for this magazine weapon.",
+    "Accepted W208 Gnawing Hunger/FILO profiles were read as implementation/provenance examples; inherited sourceViewRotation remains stored, while full-chain orientation takes precedence over that legacy calibration."
+  ],
+  "verification": {
+    "workerPerformed": [
+      "Read master source evidence and scripts; viewed original-chain sheet.",
+      "Confirmed evaluated source395 frames match expanded cache during read-only proposal review.",
+      "Parsed profile/review JSON and confirmed only sourceFullChain changes profile semantics.",
+      "Actually viewed Vision1 review/reload sheets and 15 selected raw handling/late-return PNGs; parsed all40 capture brackets and source sample matrices; documented no-change."
+    ],
+    "masterPending": [
+      "Integrate updated worker review; profile remains byte-identical.",
+      "Second actual Vision: hip/ADS, magazine extraction/reseat and late return/canonical seam; retain capture-depth/bracketing limitations.",
+      "Record final acceptance or exact remaining failure after second Vision; no final acceptance claimed by this worker."
+    ],
+    "nativeAcceptance": false,
+    "generationBuildRuntimeCuVisionCommitsByWorker": false,
+    "masterCompletedReported": [
+      "Candidate integrated with unchanged profile SHA-256;647 maximum assembled elements and targeted tests pass.",
+      "First actual Vision performed; findings returned to worker for this documented no-change review."
+    ]
+  },
+  "expectedRisks": [
+    "Source upper-arm/forearm directions may intrude into hip/ADS sightline despite preserved accepted gun matrices.",
+    "Support palm may intersect the lower blue beam; inspect actual PNG before adjusting contacts.",
+    "Detached-magazine hand contact, port reseat and grip/release transitions require native observation.",
+    "Evaluated source has fast adjacent poses; native smoothness/return cannot be inferred from sample count.",
+    "No recovered original camera or source mesh; exact original contact depth remains unverified."
+  ],
+  "vision1WorkerReview": {
+    "profileChanged": false,
+    "profileSha256": "b941a5b2db214af3bca8ead6066ae45165a1b0f1d58cb8c8eb02821d88808cc0",
+    "decision": "Documented no-change after inspecting actual first-native-Vision PNGs, raw handling/late-return samples, capture brackets, and evaluated source matrices. No concrete profile defect justifies altering good poses or inherited contacts.",
+    "masterReported": {
+      "integratedProfileSha256": "b941a5b2db214af3bca8ead6066ae45165a1b0f1d58cb8c8eb02821d88808cc0",
+      "maxAssembledElements": 647,
+      "elementLimit": 1000,
+      "targetedTests": "pass; reported by master, not rerun by worker"
+    },
+    "evidenceSha256": {
+      "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/screenshots/ammit_ar2-review.png": "fe33d591c564f25c78ad9ce0a7061e2ee149706e235c052d6e12f8a9b1bc8c16",
+      "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/screenshots/ammit_ar2-reload.png": "273a0d11a3574966b729e4ec3128c89af70d4d85b48bb2b40503a9f0250ea1df",
+      "/private/tmp/destiny-w211-pass1-native/sequences/w211-ammit_ar2-reload.json": "62eea9365e2454db5e404c6809ca34bfe967f0cfba52380b8658f8c540e0fcff",
+      "/private/tmp/destiny-w211-pass1-native/frames/w211-ammit_ar2-after-reload.json": "89f0c939743406686714ed6f5a8fc73ff4164da2b10caac4f10e94a19f07ed65"
+    },
+    "rawFramesActuallyViewed": [
+      {
+        "file": "w211-ammit_ar2-reload-sample-05.png",
+        "beforeClientTick": 704,
+        "afterClientTick": 705,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-06.png",
+        "beforeClientTick": 707,
+        "afterClientTick": 707,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-08.png",
+        "beforeClientTick": 711,
+        "afterClientTick": 712,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-10.png",
+        "beforeClientTick": 716,
+        "afterClientTick": 716,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-12.png",
+        "beforeClientTick": 720,
+        "afterClientTick": 721,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-13.png",
+        "beforeClientTick": 723,
+        "afterClientTick": 723,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-15.png",
+        "beforeClientTick": 728,
+        "afterClientTick": 728,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-16.png",
+        "beforeClientTick": 730,
+        "afterClientTick": 730,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-17.png",
+        "beforeClientTick": 732,
+        "afterClientTick": 733,
+        "beforeModel": "destiny:weapon_hands_w201/weapon_reload_w207_ammit_ar2/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-18.png",
+        "beforeClientTick": 735,
+        "afterClientTick": 735,
+        "beforeModel": "destiny:weapon_hands_w201/weapon/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-20.png",
+        "beforeClientTick": 739,
+        "afterClientTick": 740,
+        "beforeModel": "destiny:weapon_hands_w201/weapon/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-24.png",
+        "beforeClientTick": 749,
+        "afterClientTick": 750,
+        "beforeModel": "destiny:weapon_hands_w201/weapon/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-28.png",
+        "beforeClientTick": 758,
+        "afterClientTick": 759,
+        "beforeModel": "destiny:weapon_hands_w201/weapon/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-32.png",
+        "beforeClientTick": 767,
+        "afterClientTick": 767,
+        "beforeModel": "destiny:weapon_hands_w201/weapon/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon/ammit_ar2"
+      },
+      {
+        "file": "w211-ammit_ar2-reload-sample-39.png",
+        "beforeClientTick": 782,
+        "afterClientTick": 783,
+        "beforeModel": "destiny:weapon_hands_w201/weapon/ammit_ar2",
+        "afterModel": "destiny:weapon_hands_w201/weapon/ammit_ar2"
+      }
+    ],
+    "findings": [
+      {
+        "area": "hip",
+        "observation": "Review PNG and canonical raw samples20/24/28/32/39 show two distinct skin arms at lower fore-end support and trigger grip. No detached rest palm or upper arm covering the aiming center is evident in these poses."
+      },
+      {
+        "area": "ADS",
+        "observation": "Actual review PNG full-ADS panel has an open sight aperture and no upper-arm intrusion into it. This still frame does not establish every intermediate ADS pose or both classic/slim variants."
+      },
+      {
+        "area": "extraction",
+        "observation": "Raw samples05/06/08 show the raised/canted gun and trigger arm; the handling hand and detached magazine are partly or wholly below the viewport. No exact palm depth or continuous extraction-contact pass can be inferred."
+      },
+      {
+        "area": "handling and reseat",
+        "observation": "Raw sample10 shows the left handling arm raised beside the magazine/underside receiver. Samples12/13/15 show the magazine alongside the lower-left handling forearm and receiver during lowering/return; significant parts lie at or below the bottom edge. The visible reach supports the master handling observation, but precise port seating and palm penetration depth remain unverified."
+      },
+      {
+        "area": "late return",
+        "observation": "Raw samples16/17 show the gun lowering/straightening and support recovering toward the fore-end. Capture17 brackets client ticks732..733, with reload model before and canonical model after; it cannot be assigned a unique normalized reload pose. Sample18 and later raw samples20/24/28/32/39 show the canonical hip pose, support and trigger contact, seated magazine and HUD33. No persistent late-return displacement or raised-arm defect is evident; a seamless transition between captures is not certified."
+      },
+      {
+        "area": "source comparison",
+        "observation": "Re-read original-evaluated 80A8A395 source matrices at p=0,.2,.4,.6,.8,1: left wrist departs downward at .4, reaches back toward receiver at .6, then returns at1. These directions agree broadly with the pictured handling/lowering sequence. Camera and mesh contact remain authored; no frame-exact source/native registration is claimed."
+      }
+    ],
+    "sequenceEvidence": {
+      "returncode": 0,
+      "monitorError": null,
+      "captured": true,
+      "captureCount": 40,
+      "reloadToCanonicalBracket": "sample17, client ticks732..733; sample18 ticks735..735 canonical",
+      "afterReloadBracket": "separate after-reload JSON ticks792..793 canonical; inspected JSON, not its separate PNG"
+    },
+    "pendingLimitations": [
+      "Detached magazine and handling palm leave the lower viewport; exact extraction/reseat palm depth and continuous port contact are not established.",
+      "Capture brackets surround screenshots and do not synchronize an exact normalized animation pose. Sample17 spans the reload-to-canonical switch.",
+      "Vision2 should revisit the late-return/canonical seam and magazine release/reseat; current stills do not prove sub-tick continuity or native60fps motion.",
+      "No recovered source camera/mesh or weapon-exclusive395 selector. Preserve audited original fast source changes without speculative resmoothing.",
+      "Worker observed the supplied hip/ADS frames; full classic/slim coverage, intermediate ADS clearance and final native acceptance remain master verification scope."
+    ]
+  }
+}

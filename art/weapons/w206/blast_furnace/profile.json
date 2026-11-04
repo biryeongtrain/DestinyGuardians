@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "weapon": "blast_furnace",
+  "framing": {
+    "translation": [
+      -0.85,
+      0.35,
+      6.0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      12,
+      0,
+      0
+    ],
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A36A"
+    }
+  },
+  "evidence": [
+    {
+      "path": "art/weapons/w205/rigs/pulse_rifle_b4d01502.json",
+      "observation": "Explicit blast_furnace binding, fallback=false; idle 80A8A422 and ADS 80A8A330 provide evaluated elbow/wrist direction, twist and ordinary forearm length. cameraExported=false."
+    },
+    {
+      "path": "art/weapons/w201/contacts.json",
+      "observation": "Retain right Grip_core [8,8.4,8.27], left Lower_foregrip [7.8,9.45,-0.5] and rear Magazine_core reload [7.4,8,11.78]."
+    },
+    {
+      "path": "art/weapons/w123/blast_furnace/comparison.png",
+      "observation": "Viewed actual PNG: long Black Armory receiver, red barrel/breech, open stock, rear bullpup magazine and lower foregrip remain the mesh authority."
+    },
+    {
+      "path": "art/weapons/w114/blast_furnace/reference-00.png",
+      "url": "https://www.youtube.com/watch?v=SRNv0YDgYBM&t=38",
+      "observation": "Viewed ADS at 38.70s; centered optic remains open above the stock. BRAVE reissue/shader differs from authored Black Armory mesh."
+    },
+    {
+      "path": "art/weapons/w114/blast_furnace/reference-09.png",
+      "url": "https://www.youtube.com/watch?v=SRNv0YDgYBM&t=40",
+      "observation": "Viewed reload at 40.05s: broad magazine in left palm below/behind the trigger grip. Reference informs handling, not idle camera or exact FK."
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-26/w152/native/frames/w152-blast-ads-sample-13.png",
+      "observation": "Viewed historical full-ADS PNG: restored upper optic and red front tip clear the foreground stock. Preserve W152 sight geometry/eye placement."
+    },
+    {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-26/w152/native/frames/blast-hip-after.png",
+      "observation": "Viewed historical hip PNG: long receiver extends to the right/bottom edge. This predates skin arms and cannot verify W206 arm continuity."
+    },
+    {
+      "path": "scripts/rig_arms_w205.py",
+      "observation": "Existing source wrist separation overwrites remodeled non-bow support contact at idle/ADS; keepMeshSupport must retain mesh contact without replacing source arm direction/length."
+    },
+    {
+      "path": "scripts/first_person_framing_w205.py",
+      "observation": "Hip translation/rotation/scale fade to identity in ADS; sourceViewRotation calibrates arm direction only. cameraDepth deliberately omitted."
+    },
+    {
+      "path": "docs/qa/2026-10-28/w211/source/source-review.json",
+      "observation": "W211 master-owned headless Blender 5.4.0 Alpha evaluated original pulse_rifle_b4d01502 source.blend, Armature only, no camera/mesh. Selected shared-family 80A8A36A has 61 evaluated shoulder/elbow/wrist/weapon samples over original frames 1..105; it is an audited action selection, not an exact weapon-exclusive clip. Worker read report, source matrices and six-pose sheet."
+    }
+  ],
+  "notes": [
+    "Authored calibration, not recovered camera data; no source camera was exported.",
+    "Hip Z +6 model units brings weapon, moving parts and palms toward the camera together. X -0.85 and Y +0.35 keep the long fore-end inward without lifting the broad rear stock as much as family Y +0.6.",
+    "W211 sourceFullChain=true supersedes inherited sourceViewRotation, rightWristRoll and leftRotation arm-direction biases with evaluated weapon-relative forearm axes. Retain inherited values without adding the inert sourceWeaponRelative flag; normal source lengths and source shoulder/elbow bend remain authoritative.",
+    "keepMeshSupport retains accepted rest-palm contacts. Full-chain reload transports source weapon and wrist motion through one weapon parent; the existing magazine policy carries the detached magazine with the left source handling palm during the inherited grip/release envelope. Contacts and envelope remain unchanged.",
+    "Preserve accepted full-ADS weapon matrices, W152 optic/stock fix, third-person, weapon geometry, texture, audio and combat.",
+    "Native hip, ADS transition, full ADS, reload and classic/slim skin clearance remain pending consolidated master QA.",
+    "W207 explicit reload direction calibration 80A8A36A from shared family source. Source maps do not identify a unique weapon variant; moving-magazine mesh contacts remain authoritative. Not an exact recovered weapon/camera match.",
+    "W211 candidate uses master-evaluated original61 pulse_rifle_b4d01502 action 80A8A36A, frames 1..105, OBSlot. Source sheets and matrices were inspected by this worker; no personal Blender evaluation or native acceptance is claimed. Fast adjacent changes are preserved pending master first Vision, worker correction or documented no-change, and master second Vision."
+  ]
+}

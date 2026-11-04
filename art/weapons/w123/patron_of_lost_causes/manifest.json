@@ -1,0 +1,89 @@
+{
+  "stage": "W130",
+  "id": "patron_of_lost_causes",
+  "assembled_elements": 98,
+  "counts": {
+    "full": 98
+  },
+  "opaque_cuboids": 98,
+  "emitted_faces": 588,
+  "alpha_contour_elements": 0,
+  "triangle_adapter_elements": 0,
+  "max_assembled_elements": 1000,
+  "source_triangles": 29158,
+  "canonical_elements": 241,
+  "semantic_groups": {
+    "barrel": 11,
+    "muzzle": 9,
+    "shroud": 6,
+    "internal_tube": 3,
+    "forearm": 8,
+    "receiver": 10,
+    "scope": 22,
+    "stock": 9,
+    "grip": 4,
+    "magazine": 2,
+    "guard": 5,
+    "hook": 9
+  },
+  "actual_bounds": [
+    [
+      7.255,
+      5.342491,
+      -8.93233
+    ],
+    [
+      9.495,
+      13.292829,
+      16.128479
+    ]
+  ],
+  "anchor": [
+    8.0,
+    8.0,
+    8.0
+  ],
+  "scale": 23.684066163425207,
+  "canonical_display_exact": true,
+  "full_only": true,
+  "native_accepted": false,
+  "texture_size": [
+    1024,
+    1024
+  ],
+  "face_islands": 588,
+  "comparison_reference": "Unchanged canonical W30 full + existing texture; actual default photo; all renders CPU only",
+  "generator_sha256": "b1a04fee5e85264dd126c61c19d8c632e21783a1a92dc4ff74c26942a35d9d3f",
+  "input_sha256": {
+    "art/blockbench/weapons/w30/patron_of_lost_causes.bbmodel": "f6d74de9e14b98304e11fad7f25831b80e6a1d9cf442c2c0f7ed360b556ae66b",
+    "src/main/resources/assets/destiny/models/weapon/scout_rifle/patron_of_lost_causes.json": "d1086431cad2a610031c46f4c6990c3ae9680b605a44990b3cd9adf428bfdae8",
+    "art/weapons/w31/references.json": "acdcf48cc947d2dd7f195497bfef346c9de330405a4f4378f8bdaf859ffe5df3",
+    "src/main/resources/assets/destiny/textures/item/weapon/w30/patron_of_lost_causes.png": "92a9cfd68df09e0b44d9c36dd8c8f0388a2de183c26db3262bb4190115b8197d",
+    "scripts/generate_surface_w123_beloved.py": "760430343541ffb1f490a3c8b2aa8089527805d84b881763951d7df2b220a0c8"
+  },
+  "raw_input_sha256": {
+    "/tmp/destiny-weapons-w30/raw/patron_of_lost_causes/extracted/Patron of Lost Causes/Patron of Lost Causes.fbx": "6570396ca90743a677b1c82f81409ab2f6903302c42be9a05aa6ee96729b8bd6",
+    "/tmp/destiny-weapons-w30/raw/patron_of_lost_causes/extracted/Patron of Lost Causes/46a6eb80_Diffuse.png": "deef212edb346a9664fbf6b63706e84505e5ea25a0083d46c2c4ce0946d4778f",
+    "/tmp/destiny-weapons-w31/references/patron_of_lost_causes.jpg": "b1c9fea350e996789524e696854159f1e4a32bebe42389efe34cc03f50a43873"
+  },
+  "output_sha256": {
+    "art/weapons/w123/patron_of_lost_causes/comparison.png": "0f68aad07e2cdfe1240d71d29b0bcb7a4311a6fccff1174a2d07cb05d4559ff0",
+    "art/weapons/w123/patron_of_lost_causes/design.json": "475998a6e1f295dd1566bec508556e131e49a10ad39394a6d2498d68aa8ee034",
+    "art/weapons/w123/patron_of_lost_causes/inspection.bbmodel": "6bc5798442926e3c12d93a2468d9c7bf6ec9eebb3ae8e9ef0ac75a7c591dbca9",
+    "art/weapons/w123/patron_of_lost_causes/review.md": "f72cbf30df60face523c4068b8dec4ec173c74927cd7cf619a0d7d6b5e73bba5",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/patron_of_lost_causes.json": "e0afa39e288ca3fee279ea49237ae5233ea7747775b601f67fec2b94b3d5609e",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/patron_of_lost_causes.png": "c2fde451365efd21ab1c3940695eff5a254fae8ea3188c31b8af69e1d42ac0d8"
+  },
+  "validation": {
+    "targeted_test": "scripts/qa/test_surface_w123_patron_of_lost_causes.py",
+    "determinism": "generator --verify",
+    "native": "pending master",
+    "gameplay": "pending master",
+    "performance": "not measured"
+  },
+  "limitations": [
+    "Faceted tube cross sections and hook; shallow vents, fasteners and ribs are UV paint.",
+    "Default photo guides opaque albedo; no dynamic metal/PBR/glass recreation.",
+    "Full only; native substitution, parser, first/third person, ADS, generic reload, audio and 10-20 displays pending master."
+  ]
+}

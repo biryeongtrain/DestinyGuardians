@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "stage": "W220",
+  "weapon": "deafening_whisper",
+  "sourceAction": "80A8A136",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        9.32,
+        7.63
+      ],
+      "rotation": [
+        -28.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        8.0,
+        9.65,
+        -3.04
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        5.5,
+        13.5,
+        8.5
+      ],
+      "rotation": [
+        0,
+        0,
+        -80
+      ],
+      "partHint": "round",
+      "policy": "magazine",
+      "rigAction": "80A8A136",
+      "hand": "left",
+      "gripWindow": [
+        0.27,
+        0.3,
+        0.38,
+        0.46
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "grenade_launcher_83c75a3c",
+    "action": "80A8A136",
+    "sourceBlendSha256": "7f4de5315e6d6fe3dd47bc0effc9cd25c51cdd634c1a37ee2903eb51f51b98e3",
+    "sourceMapSha256": "4d5b83154e6b568e7077c417625cf0811050d518b303e019a4519e658eaca866",
+    "boneMapSha256": "65bc0b7155e47ac6b8834c39252f373908e0270af2be841f403f6d876600cc23"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w220-source/source-review.json",
+      "sourceSha256": "2818e93c6e4e26032bdcf4f8bb618e90855f2f62a97f55e3f099ec5d0a9759d5",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original ARMATURE in separate headless Blender5.4 Alpha, OBSlot action136 frames1..89 at30fps,61 samples; existing joints match. Worker read this report and did not independently evaluate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-handling-evidence.json",
+      "sourceSha256": "7ff4a42b4d5ca4a4beb5f44248ec0bec7fc809b1edc3c77db7725aa22fa2eec9",
+      "role": "source_hand_selection",
+      "observation": "Left wrist moves21.1924 weapon-local model units; right0.000222. LEFT loads; RIGHT carries. No camera or mesh contact recovered."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/source-selection-review.json",
+      "sourceSha256": "34b71aa6aa6eb975ce860c24c87e630d96c9cad32869229f0d7c10b48202e0fc",
+      "role": "class_action_selection",
+      "observation": "Master inspected136 and126.136 is an explicit shared single-GL class selection, not a recovered Deafening Whisper selector."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/sheets/grenade_launcher_83c75a3c-80A8A136-upper-chain.png",
+      "sourceSha256": "b432b2dde2c6193a24712ac6c12d9741d53b1d894a30e130c7f9e6d02de7d61d",
+      "role": "viewed_actual_source_sheet",
+      "observation": "Worker viewed all six XZ/YZ chain projections. Left reach and recovery differ from right carrier; bone-only views do not prove payload or hinge contact."
+    },
+    {
+      "source": "/private/tmp/destiny-w220-source/grenade_launcher_83c75a3c.json",
+      "sourceSha256": "9305687b5bc98b4ae4b80b030769405b22d66554b314aacc11ee70b9334cc04e",
+      "role": "fresh_original_source61",
+      "observation": "Read full shoulder/elbow/wrist/weapon evaluated source matrices. Preserve source chain and source weapon replay without damping, stretch, palm fitting, support hiding or extra camera offsets."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "idle_grips_preserved",
+      "observation": "Right[8,9.32,7.63],left[8,9.65,-3.04] and existing rotations preserved. Initial round contact[7.25,12.94,9.0] mistook the case surface for the internal palm origin; FIRST correction uses virtual palm anchor[5.5,13.5,8.5] accounting for actual W204 forearm volume. Round-only window.27..30/.38..46, seat.46 and closure.50..68 unchanged."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Used current first_person_framing_w205.load/profile for grenade_launcher. Retain translation[-.65,.6,0],rotation[-1,2,0],scale.98,rightWristRoll28,leftRotation[15,35,-35]; enable full source chain and mesh support. No camera offset added."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/art/weapons/w123/deafening_whisper/design.json",
+      "sourceSha256": "936d2c01ecf1be9129971fccd5e5cf8672d79574d8226521850d410d081ef0c4",
+      "role": "weapon_specific_geometry",
+      "observation": "Canonical W14988 semantic solids and face UV retained. Own hinge[8,11.34,8.95] at lower receiver/front fixed breech; barrel tube/sleeves/divider/top plates/foregrip/laser cables/counter/latch/sight remain one rigid fore-end. Breech plugs and rear indicator remain receiver-attached.52deg opening and six-solid cartridge dimensions are authored calibration, not recovered mechanics."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w220-deafening_whisper/scripts/skin_arm_models_w204.py",
+      "sourceSha256": "5ee8a0d196b144e67c510cb3a9f8e34a81b21254298aca8721c75f55097c1d2b",
+      "role": "actual_fingerless_hand_geometry",
+      "observation": "Read current common_model/pixel_layout/_adapt and checked main/worktree identical. Palm origin[8,8,8], classic X/Z6.8..9.2, slim X7.1..8.9,Z6.8..9.2, forearmY1.5..9.0. Source original rest forearm length8.141365 model units gives builder Y scale1.252518. Internal origin is not an outer gripping surface."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/build_first_person_hands_w201.py",
+      "sourceSha256": "2402d236ff662a22bd15481f7a98f1cb113e79ca59e04a3962441bf05ed3df10",
+      "role": "current_builder_contact_semantics",
+      "observation": "Read current display_at, source-palm translation override, and round-only attached_translation_shift path. At full weight, configured round contact is aligned to internal source palm origin. Move only cosmetic round virtual anchor, never source wrist/limb."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w220/vision1/frames/w220-deafening_whisper-reload-sample-04.png",
+      "sourceSha256": "ef92d47959969980ce554853777ca416b9271209cd87fc466b7e58b2fb177ad1",
+      "role": "FIRST_native_raw04_viewed",
+      "observation": "Viewed raw03..12, both weapon sheets and post recovery.04/05 hand is exposed but case hard to distinguish; actual box-volume check confirmed old contact put24..28 of48 case/rim box corners inside classic forearm during full attachment. This does not certify native round seating."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w220/vision1/frames/w220-deafening_whisper-reload-sample-05.png",
+      "sourceSha256": "d636703e92d580d5449399bce0a1be9f7ddf3df05f2a57c668219e18b14630d4",
+      "role": "FIRST_native_raw05_viewed",
+      "observation": "05/06/07 hand/body hide chamber detail. No exposed breech displacement observed. Concrete correction is palm-volume contact placement only, no enlarged case, new camera offset, visibility extension or mechanism change."
+    }
+  ],
+  "notes": [
+    "FIRST feedback addressed by concrete cosmetic round virtual-palm contact correction. Master owns integration, shared loaders, source rig, full hand materialization and SECOND native review.",
+    "ARMATURE-only class source136 has no weapon mesh, camera or finger IK. Hinge52deg, phase knots, hidden cartridge shape and contact are authored estimates; not per-weapon recovered mechanics.",
+    "Canonical88 geometry and UV preserved; fixed16 plus hinged72 plus cosmetic round6 only at samples17..28 gives94 weapon elements.448 ordinary arm reserve gives542; master must measure final route including all materialized arms.",
+    "Round-only magazine policy and window unchanged: release by.46 before closure.50..68. Corrected virtual palm anchor[5.5,13.5,8.5] removes full-attachment classic-forearm embedding in bounded OBB checks; source wrist and limb unchanged. Native case exposure, hand-to-chamber transition and hidden seating still require SECOND review.",
+    "61 poses/60 intervals do not establish continuous native60fps interpolation or native acceptance.",
+    "Sequence: master original Blender(done) ->61poses(done) ->FIRST PNGs(viewed) ->same-worker contact correction(done) ->master SECOND(pending). Frame captures are bracketed, not exact progress. Hidden native seating is not certified."
+  ]
+}

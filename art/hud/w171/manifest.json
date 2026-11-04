@@ -1,0 +1,72 @@
+{
+  "stage": "W171",
+  "label": "TAP THE TRIGGER",
+  "size": [
+    94,
+    24
+  ],
+  "font_family": "Arial Narrow Bold",
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "font_size_px": 22,
+  "horizontal_scale": 0.524390243902439,
+  "alpha_bounds_px": [
+    2,
+    1,
+    92,
+    23
+  ],
+  "pillow_version": "12.3.0",
+  "freetype_version": "2.14.3",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "provenance": "Original generated system-font label, not an official Destiny sprite; no ripped asset or bundled font; W170 font, cap height and coverage method",
+  "runtime_contract": {
+    "icon_id": "destiny:gui/hud/perk_tap_the_trigger_w171",
+    "layout": "TIMER",
+    "valid_ticks": [
+      1,
+      12
+    ],
+    "seconds": "ceil(ticks / 20): 0:01 throughout ticks 1..12; absent at 0",
+    "activation": "Observed live remaining ticks only; no manufactured activation or counter",
+    "priority": "Reload/utility, after existing fourteen kinds, including PERPETUAL_MOTION",
+    "max_rows": 4,
+    "node_suffixes": [
+      "marker",
+      "label",
+      "minutes",
+      "colon",
+      "tens",
+      "ones"
+    ],
+    "marker": "Green utility 0x8DE2AF; gold remains Memento Mori / Honed Edge only",
+    "visibility": "Held weapon; hidden rows use current remaining ticks on promotion",
+    "layout_limits": "Existing TIMER renderer: label center 168, width 94, height 24; marker right 113, label left 121, label right 215, timer left 227; 8/12-unit gaps; 32-unit row pitch; no native validation claim",
+    "native_validation": "Pending master Vision: short timer, expiry, cap promotion, cleanup, readability",
+    "integration": "Master owns WeaponPerkHud live adapter; pass actual ticks as twentieth Snapshot argument"
+  },
+  "source_facts": [
+    "W170 pinned font, 22px cap-size input, BASIC engine, 4x supersampling",
+    "WeaponPerkHud TIMER slot is 94x24 and marker is green unless Mori/Honed"
+  ],
+  "local_choices": [
+    "Condense full authored label into existing TIMER slot; 12-tick bound from W171 task contract"
+  ],
+  "pack_bytes": 10052,
+  "pack_byte_budget": 16384,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_tap_the_trigger_w171.png": "acabbf26a7369eaf2579e5b1a2215d53341cc41033f378d232a8eefd30ad990a",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_tap_the_trigger_w171.json": "f089ca033cc597c49c89ba4d95f05782d41a5f93648218c4d52b574289e5e079",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_tap_the_trigger_w171.json": "b3fec62017c3f7b08a964f84c8c3a2ee053816f1eb82bb36f3794810ca9a47c9"
+  },
+  "source_files": {
+    "art/hud/w171/tap-the-trigger.svg": "5cbb45e6656ea3220a1d54880c8a34dd2be988efaba9bf2d2742eb6afb354c83"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_tap_the_trigger_w171.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_tap_the_trigger_w171.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_tap_the_trigger_w171.json",
+    "art/hud/w171/tap-the-trigger.svg",
+    "art/hud/w171/manifest.json"
+  ]
+}

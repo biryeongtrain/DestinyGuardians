@@ -1,0 +1,500 @@
+{
+  "schemaVersion": 1,
+  "stage": "W212",
+  "weapon": "bug_out_bag",
+  "generator": "scripts/generate_reload_w212_bug_out_bag.py",
+  "generatorSha256": "0967d6d435f5e6c8d500db450dc3d0acc8271d4ccd1d262d83abfff74452c31f",
+  "itemModel": "destiny:weapon_reload_w212_bug_out_bag/bug_out_bag",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "thresholdEncoding": "float32(i/60), matching runtime float quantization",
+  "curve": "C1 shape-preserving cubic Hermite; weighted harmonic knot tangents; zero endpoint/hold/extremum tangents",
+  "keyframes": [
+    [
+      0.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.1,
+      [
+        28,
+        -5,
+        -8
+      ],
+      [
+        0.1,
+        0.25,
+        -0.2
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.2,
+      [
+        64,
+        -10,
+        -16
+      ],
+      [
+        0.2,
+        0.6,
+        -0.45
+      ],
+      [
+        -0.12,
+        -0.85,
+        0.04
+      ]
+    ],
+    [
+      0.34,
+      [
+        57,
+        -13,
+        -19
+      ],
+      [
+        0.15,
+        0.5,
+        -0.4
+      ],
+      [
+        -0.65,
+        -5.2,
+        0.2
+      ]
+    ],
+    [
+      0.46,
+      [
+        57,
+        -13,
+        -19
+      ],
+      [
+        0.15,
+        0.5,
+        -0.4
+      ],
+      [
+        -0.65,
+        -5.2,
+        0.2
+      ]
+    ],
+    [
+      0.6,
+      [
+        61,
+        -11,
+        -17
+      ],
+      [
+        0.15,
+        0.65,
+        -0.45
+      ],
+      [
+        -0.12,
+        -1.5,
+        0.06
+      ]
+    ],
+    [
+      0.66,
+      [
+        64,
+        -9,
+        -15
+      ],
+      [
+        0.12,
+        0.7,
+        -0.5
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.78,
+      [
+        39,
+        -5,
+        -9
+      ],
+      [
+        0.05,
+        0.3,
+        -0.3
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      1.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "gripPivot": [
+    8,
+    9.12,
+    7.42
+  ],
+  "partition": {
+    "body": {
+      "elements": 96
+    },
+    "moving": {
+      "elements": 4,
+      "indices": [
+        63,
+        64,
+        65,
+        66
+      ],
+      "names": [
+        "magazine_core",
+        "magazine_front_spine",
+        "magazine_rear_spine",
+        "magazine_base"
+      ]
+    }
+  },
+  "sourceElements": 100,
+  "partCubes": {
+    "body": 96,
+    "moving": 4
+  },
+  "maxAssembledElements": 100,
+  "geometryAndUVUnchanged": true,
+  "geometryAndUVPreserved": true,
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "adsInspectPrecedencePreserved": true,
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "rigAction": "80A8A170",
+  "partHint": "moving",
+  "sourceRigGroup": "submachine_gun_cdf8185c",
+  "sourceRigSamples": 61,
+  "sourceBlendSha256": "474d2fb3e1b97e605ed54998e6a08311a0cba7f44e826f0b98f44076302caba6",
+  "authoredTimingSource": "scripts/generate_reload_w166_bug_out_bag.py",
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "sourceCameraRecovered": false,
+  "rotationConvention": "W166 JOML Rx Ry Rz; R_idle * R_body; rigid local magazine displacement; accepted twohand carrier compensation",
+  "assets": 247,
+  "limitations": [
+    "W166 weapon/body/magazine motion is authored reference-informed approximation, not recovered weapon-exclusive IK.",
+    "Shared family 80A8A170 source is bone-only: no source mesh or camera.",
+    "61 pose bank does not establish continuous 60fps; server update cadence is unchanged.",
+    "Master owns W212 loader/runtime routing, source61 cache materialization, hand retargeting and FIRST/SECOND native Vision.",
+    "Candidate only; no native contact, arm-length, ADS visibility or final acceptance claim."
+  ],
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/bug_out_bag.json": "05f6cb931363d08f0a247c115473fcf6ae44040d0f5183904fd44950e7aad8b0",
+    "src/main/resources/assets/destiny/models/weapon/submachine_gun/bug_out_bag_twohand.json": "742ed41457b510261351b17e96732238e020d4f33cdf5623cb7978371f4915e8",
+    "src/main/resources/assets/destiny/items/weapon/bug_out_bag.json": "5d840dec14ddff709dac0d264538b7a22041bcbdc8352756c317da5ff2c07fa6",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/bug_out_bag.png": "c0f46021099770f7a71cc65a7397c85e3afbc477154469fe7235023ddef09017",
+    "art/weapons/w123/bug_out_bag/design.json": "acc8cc135e9ecebf6e1d76d1eb32884babd901d2fc6cf5768f1725426a76a1e1",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/rigs/submachine_gun_cdf8185c.json": "d09352a9bd907ed80efdf4a46f4436500c4ed354175538d4fcf7b832bec6043f",
+    "art/weapons/w212/bug_out_bag/profile.json": "13482b9ca58516c7e1b90db3e2ec18a2537a2d1cb64fe6918488d3a8c5526289",
+    "scripts/generate_reload_w166_bug_out_bag.py": "482497a87e254e6c68860a8d52198a2736b6a91b1f9ed1ae3210d87864350379",
+    "scripts/generate_reload_w212_bug_out_bag.py": "0967d6d435f5e6c8d500db450dc3d0acc8271d4ccd1d262d83abfff74452c31f",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_body.json": "19fd43ea1becc33610ee6db5ebed7c66e1b036177746292983754d000eef2c7f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_moving.json": "5ad508fbf00b4540cb70317e4780fd1b7ca16e75a10b134ee9ec6ba9899cda0d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_00_body_native.json": "37469d7343a09ebe33ff27ee8204abaf3243b1e5e041c914b21f8ac715dc3c86",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_00_body_twohand.json": "1c84c7b04f9da48327f8f09f839afea1c71fe209272955975257685aa719f5f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_00_moving_native.json": "80844e07928b284865faaab7e78ff6dc97989a99ad5c35c1033fc913aeb2f464",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_00_moving_twohand.json": "71ce30559b82894d8ff35bf0c11164ef951edd1ed9eb4c54d65a2beabe4b2bbc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_01_body_native.json": "ed312cb372dd22e5c67578af15f2e41921da62650665bafdb5626d2da5c7371e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_01_body_twohand.json": "1e43970f4b2ce4ee0a7cf20309e850edb32167c4e7cce0c6f6f2a4875e7ee9c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_01_moving_native.json": "85eb21d2c386a168877066773288c884dde9e6b14332d25caa586543e536218d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_01_moving_twohand.json": "f9799bdf970f94bee12e6ebd0554b45b3af13400cd6e2d7b914299e1e403f46e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_02_body_native.json": "a7613d42df5512a471460286a01901c1a46cc8ce0ac19120956c452ad1650d6c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_02_body_twohand.json": "6548e207cce7e183dbf45f3ae512f7fdf7c39ddcc45c820817e58cdb1c5e5e88",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_02_moving_native.json": "1d8cb8e5399fe23a601cdb45b1734470f9d12ce00f6c497ec11f443e73c7d7cb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_02_moving_twohand.json": "4fce53a51874b6565cce3c9876d56358d17d8d2e3f99b003cd45b95e8f2ed15b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_03_body_native.json": "e414aff6abd6ed908c4f8b094cc70f3dcded6aa7101b9fce6680b044c1c8ca4f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_03_body_twohand.json": "d1b77e9a816fe4e24a0912e97a1b548b8873db5bd43517ddc0e3f07f15ff41a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_03_moving_native.json": "c300bc3750d81495861f1732f8a9fa9b690d7f0779271c5624b1e9809bd596bd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_03_moving_twohand.json": "d127a6480563f5aa6935420d97681d3e74ffe6cbbd620a0429436f4d8cd55bfd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_04_body_native.json": "9cc52e82a65691b8d5033f93ed3a09bdeb94bd7a9ea7adce8efd6ce31788960b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_04_body_twohand.json": "7f50ee8da3d4ab6872d31b42892c7ccc52eb232a749ec141d3b7c7905fe9618b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_04_moving_native.json": "033576ff5fa56c0fc145ef306f9689bbf28b315a32a7d884e9493dee513e77c2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_04_moving_twohand.json": "7e179fad7878ea960e2677e6c6cf4c968797a72c848575aa179b9dff46bdddfa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_05_body_native.json": "fffaea81b5fc2c483674f4132166d062b45bc8e0690532aa79f869325f242582",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_05_body_twohand.json": "49d58f8e7324dab428cd5423e666fd0db630b55a525c8d3fb673fe22865ef37a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_05_moving_native.json": "8b2aca7e569ea243d7ca2f601c6d64804962449b29c97ac1c5b58f55bde190bc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_05_moving_twohand.json": "aa3d2343e29f712d1b17fbe19458ebce7c4536eeee9483ffac3ca2a5aff61669",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_06_body_native.json": "52d81d70479db5a60c1588632123513cda0b9c766559b0701818bf43a4af4d5f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_06_body_twohand.json": "09b124c515a7aca3dea3563abd465314c58a2f6773968dd8190db819bc47e198",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_06_moving_native.json": "cac7b195caf50ad4765cf02ff953558ea27af5f513158ff0dceef0f04a1ae2d9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_06_moving_twohand.json": "e5eafbde3c90ff5db2dfa1ac141547a222f3b6cf479eb0e99880a7c9cae30238",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_07_body_native.json": "ef7ac440befd0e43a094da3f78556907f57b1ee3f31fb6091ba27489141b6986",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_07_body_twohand.json": "1e6283544350bb48c5b07c770fc6695ced6d6e47c7161fc4671f7506eb3950b8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_07_moving_native.json": "e8292922691784c562204093fd8963886e89cb99716b76f9e94b114604876892",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_07_moving_twohand.json": "4ae1660fd310a3a50be53c3e4a961c0d97733ffe00fbbfbfda65ce2de6624f1d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_08_body_native.json": "f5f1d87d7e8f977aecfd0b3dac0e853a6fee1c0bcede97c2e2794408f963c3ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_08_body_twohand.json": "e61ab2829448c804ae379ba8ef802c672ec8baa0a61dd3736540a5afe46f6576",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_08_moving_native.json": "f2ef9a5c32aae92a8d0a60382a5b39a1e77f5b0d1ea01d6f59822f520388ab87",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_08_moving_twohand.json": "51fe6d8fad4a267f44aec45190ff2f1110e36e36fb69aedebf84ab07e61d5744",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_09_body_native.json": "8f0556985801b9e898ca65fec5b4793825d4427cfeca2a460dfa4ac0a2854625",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_09_body_twohand.json": "92690370eed80f8624f124efe3f064a17abd054a4eaa5a4e6dfaad64a5c7d0cb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_09_moving_native.json": "a7d42aff4fefbe55e866cae5f37aceb98c128428453fec51b31a7fec87b11a5b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_09_moving_twohand.json": "8be8e6bebbe7f852e5d7cb1820f60e5c563a98ecc484aa615b26502e2ae21aca",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_10_body_native.json": "7ccb5b54becba09c16ec7711726f07dccfd977671352890ec5dc6a9722a6cd97",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_10_body_twohand.json": "15548f5155ce0f5384253b81b94994ba4214dce831fe50223ed55f9489bb303b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_10_moving_native.json": "95524216ee26739cf9cfa4739c37bf85e1a9982f171aa19ed2827bbc1d463f91",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_10_moving_twohand.json": "b791811c93533616fb238aa406fc511fc209c43155be7c115958eb0d03c6f822",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_11_body_native.json": "12e450ce0da709a714b86b4cd3fce32202d1eb8f06cb913e6ef30f091e9a5df0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_11_body_twohand.json": "2177ff326a031ed92032c65456ffc8b7b11fabe09e3486b47135f141fc74641f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_11_moving_native.json": "240e8b757bb81352074f1fb863126ee370c41d4d8613416d82c68f5fb3009216",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_11_moving_twohand.json": "ee0a9da1dbcd83d29fc8eb23acf9b2264648124161cc503cd5c7688a8e7cf25d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_12_body_native.json": "59715423d34adc68b558320e1095532d3d9684ddf7e002ac52eaea4e5a34fb66",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_12_body_twohand.json": "9cf8d54b5a438698d231b460415b8add3dd9b2d8862e2b64d420963a854d7bca",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_12_moving_native.json": "1530e7cf9dbca624908fee45be8128671f53605cead2341b832cff8f004ac125",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_12_moving_twohand.json": "e60f0aabbfc17afb208a995988aaf7518704e1d7a2087b37f2869a06c6691aac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_13_body_native.json": "dc06951d2794683580341f2e9b1c29e9d4a0e566770bc4f00309396f0cc6b37e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_13_body_twohand.json": "1fd02b85a50a39b69432821bcff34465868f5e29e51a5933270287792692243e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_13_moving_native.json": "96d967b2d0c7e8654d73f25d9a43b1789c04badfa155f769a49bf9f26a871f77",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_13_moving_twohand.json": "b25655efb4c06e4f2f7ca33f9e6edc86dc07200d91b899eb6c2540cc2389e22c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_14_body_native.json": "caa7f2c8c0177fade9c4b85e8f38bde88f32b8348e0fc6ad7133d4eb190985ad",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_14_body_twohand.json": "5948c368ac3309c0839ec395fc7fb89fba70bea8e66dda76a9ec5a2e23ff286a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_14_moving_native.json": "706cf5e9e78133b8be5630959a82e0f3f17848c01fd65e01d13ea444bccde25f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_14_moving_twohand.json": "46825dcadf94bd4060b5078df7690ed969238f1af0219f8b5b332bfce2290807",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_15_body_native.json": "6d3fa97e20363f7c4e89e147cea8778d7de5fc80f35b23253167290b93cfbf6f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_15_body_twohand.json": "ee1ee658b6ba204b75103e04abbabefeb09b73d886693bee46ff69f855030ad1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_15_moving_native.json": "5257739b10aa1c8d5dba6a891ddeee2da6bf79c4cbceea86557bd2cfad06e533",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_15_moving_twohand.json": "a87f3e1de267a92501f6f911e848e8b783abcb85380e7f67b3b02ebe9225bfde",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_16_body_native.json": "fbe618f1ca56ecce947494f8c849a7d0952e41eaf92c5a1ed7913d246b189151",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_16_body_twohand.json": "01975767d2d06f856cb1518c6fe16ec318be3649703f996fd48b8a5cae3f808c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_16_moving_native.json": "16f579044a3e19cfa5e34cce3e11b085aa6c54dd31f0853245f9c55a9a0a76d4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_16_moving_twohand.json": "561bfb3f0c5354f2d4117bb692c6b43785d12583e80e3f375b216dfe44486ee7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_17_body_native.json": "9e8d6739168cc21b16c11b06de0b6f4b029da06356f3a2b170f5e7c84d925357",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_17_body_twohand.json": "4950e99097d4b62666af8f8cf979b1aad2ccb7a570b40ef4c5201872ec059fce",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_17_moving_native.json": "1d5390b1e94afe24b02b9e48df77743794475f0b30c9299298aa81607e29e4a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_17_moving_twohand.json": "10f9e64c06b3eca60ed648e171cfd9b6754a052f013dbae843b62a25e1be9b76",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_18_body_native.json": "61edea54b29b95c691a058f499a23a0d4ee2a5bc78f31f5daf8e00cf97f5b816",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_18_body_twohand.json": "20950687b2c2f838a4d271870c27e63fa882fccde6f826127287d28f78d2f0a7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_18_moving_native.json": "68b2f0b002a84462da0e1a9cace9eacf1641a14158bdea72f320a381c2b3f93d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_18_moving_twohand.json": "6e98e1c54ef4937ccba8b76f77137d2392246cbf505d8ba014d76fd226d2fe86",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_19_body_native.json": "25fbd8e72eef7f4c6ad9df8b4a5caec2ff35abadfaa6a4916ca9b0d925d78cb5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_19_body_twohand.json": "1ed725b8188ff8016ff83eccaa7951deac3f33e687a1c08a62ab5d5195f909a6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_19_moving_native.json": "88b5f2bf6f689769455fe945315515a291d7b9158ee35d80ed31fd4f929ac02c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_19_moving_twohand.json": "3adf2287738d68538d8b1898844028c4cdbe5473218f735a4cb39fba7c4e8603",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_20_body_native.json": "0fedd19ef56adf9b58c6d9ff54c284f6280f282224f888904afc96bee12b8b40",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_20_body_twohand.json": "e6ee0a0dc6019727f60515e195e88121185d8a686462f7e7282e406f6f85df4b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_20_moving_native.json": "443d8b056e55cd5fbe093f6d089cc7ed04e93463ba6f5ac5ae916e35fb861170",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_20_moving_twohand.json": "34159864d8a6a93f9e3da6eca2c185bb1a26898e6e0567aaf6bd6e02bcba2c52",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_21_body_native.json": "fe1dd8904375251d8bb962def0677e1f08f7a4fa369b6dcb668c76eda9c2e8cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_21_body_twohand.json": "bcf2ff9c3376fab7eccd8810a20fc29663e229301310b3251445bdc883348b01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_21_moving_native.json": "6101ac6a4378a9071ea73433d5cfbe21884ab5194d5db07ee0de4cef22d22200",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_21_moving_twohand.json": "8398afb71f785cee1afb64faa02b2bc725b3ecd108023fd608051a371b32d5f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_22_body_native.json": "fe1dd8904375251d8bb962def0677e1f08f7a4fa369b6dcb668c76eda9c2e8cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_22_body_twohand.json": "bcf2ff9c3376fab7eccd8810a20fc29663e229301310b3251445bdc883348b01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_22_moving_native.json": "6101ac6a4378a9071ea73433d5cfbe21884ab5194d5db07ee0de4cef22d22200",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_22_moving_twohand.json": "8398afb71f785cee1afb64faa02b2bc725b3ecd108023fd608051a371b32d5f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_23_body_native.json": "fe1dd8904375251d8bb962def0677e1f08f7a4fa369b6dcb668c76eda9c2e8cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_23_body_twohand.json": "bcf2ff9c3376fab7eccd8810a20fc29663e229301310b3251445bdc883348b01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_23_moving_native.json": "6101ac6a4378a9071ea73433d5cfbe21884ab5194d5db07ee0de4cef22d22200",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_23_moving_twohand.json": "8398afb71f785cee1afb64faa02b2bc725b3ecd108023fd608051a371b32d5f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_24_body_native.json": "fe1dd8904375251d8bb962def0677e1f08f7a4fa369b6dcb668c76eda9c2e8cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_24_body_twohand.json": "bcf2ff9c3376fab7eccd8810a20fc29663e229301310b3251445bdc883348b01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_24_moving_native.json": "6101ac6a4378a9071ea73433d5cfbe21884ab5194d5db07ee0de4cef22d22200",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_24_moving_twohand.json": "8398afb71f785cee1afb64faa02b2bc725b3ecd108023fd608051a371b32d5f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_25_body_native.json": "fe1dd8904375251d8bb962def0677e1f08f7a4fa369b6dcb668c76eda9c2e8cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_25_body_twohand.json": "bcf2ff9c3376fab7eccd8810a20fc29663e229301310b3251445bdc883348b01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_25_moving_native.json": "6101ac6a4378a9071ea73433d5cfbe21884ab5194d5db07ee0de4cef22d22200",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_25_moving_twohand.json": "8398afb71f785cee1afb64faa02b2bc725b3ecd108023fd608051a371b32d5f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_26_body_native.json": "fe1dd8904375251d8bb962def0677e1f08f7a4fa369b6dcb668c76eda9c2e8cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_26_body_twohand.json": "bcf2ff9c3376fab7eccd8810a20fc29663e229301310b3251445bdc883348b01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_26_moving_native.json": "6101ac6a4378a9071ea73433d5cfbe21884ab5194d5db07ee0de4cef22d22200",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_26_moving_twohand.json": "8398afb71f785cee1afb64faa02b2bc725b3ecd108023fd608051a371b32d5f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_27_body_native.json": "fe1dd8904375251d8bb962def0677e1f08f7a4fa369b6dcb668c76eda9c2e8cd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_27_body_twohand.json": "bcf2ff9c3376fab7eccd8810a20fc29663e229301310b3251445bdc883348b01",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_27_moving_native.json": "6101ac6a4378a9071ea73433d5cfbe21884ab5194d5db07ee0de4cef22d22200",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_27_moving_twohand.json": "8398afb71f785cee1afb64faa02b2bc725b3ecd108023fd608051a371b32d5f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_28_body_native.json": "93f6718eb8495c2d6fc372ae556e45a295b8c8d1c5da40af1c5d1a49113b41d8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_28_body_twohand.json": "9b79c3858d063d43a1126780238c98716341aea08e88eb8186e6d18ee453127b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_28_moving_native.json": "ae43a7a1a1f316d29e6cf9500f033d7d776bce420f8f766820f4958778ad9c5c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_28_moving_twohand.json": "7bfee16d3daf64747bcc6a86ce37f37043da94bb2f7d7886727803096de50737",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_29_body_native.json": "5059993fe77b2a89baaaf207c1df67241aeb2eb91d23e0cc4d7edf78aaf6ca95",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_29_body_twohand.json": "c5a71dc72643c711579ea2c5a3ab8a9465c6e7074f6e5aed0c3b35c1d032a4e7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_29_moving_native.json": "68721a9bd130c99226624b916345c9af4468d90da4f62ba9f203a7ca34ea30a0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_29_moving_twohand.json": "9d530d7b2ff72f82e6a0f928e2cc72ba09d0b02510a99742136d632caa0f6b63",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_30_body_native.json": "bc35bcb5e8bfd988d1fbe3d6cecb48a0358311791480a672a011948912b9e7e9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_30_body_twohand.json": "536a0fdc4dc0e5d9ed3e6ba4d87ebf829f5145a9e1d639e528ac878194664dd3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_30_moving_native.json": "854b699735db29c8a66bb1fc28aa0fa84cd1c7cc569b72aea494c188015f75b9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_30_moving_twohand.json": "88e0a203793b2364da9fb2c69ac77511ddb7ace5330ebc3600b32cab4e29c984",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_31_body_native.json": "7b46a6f17919ccc4d7ea83ba42d11cf86035594ce4cb9a64e30b7c8719a4e4fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_31_body_twohand.json": "880538f42bc9dac829bc5e746f2d240ae05f14eaaf4845396cda27c867ba4ed4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_31_moving_native.json": "945fdf80fb6312674768bb194f4f5a9433a13f82d859f5ed3105af5d96a5eaf2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_31_moving_twohand.json": "cb3581813bd91d7f2efe7e06ec62c35c4e32ed5420a8663cdcee39b28f86b3e7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_32_body_native.json": "a5cb618e8fc6a223a3928513043c82771dbfc926bc4b1bf2a58f8cc528df4a99",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_32_body_twohand.json": "e8a4923bba8bba1a0cd609d91164135e3872e1506f279aa28c0d8c98840359f9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_32_moving_native.json": "5f699085caa3526d07060d1daa698f409b0c5df86bf5ac2bfccebfbef1456736",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_32_moving_twohand.json": "558b1eba79f01f8dd7e6fee40ae48e49bb482a6740c6215c636ff3c7688f9846",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_33_body_native.json": "b17a1b6c044aeee7d01b8ec17dd82e20b14dfce101e88c74c4d0afac931c9731",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_33_body_twohand.json": "696b7500fb61c66e71bc93a63f4a289b78133cf7a6c5e5b14b97827261bfa762",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_33_moving_native.json": "aa1324e548d56072f90532877abe401ffb368c5f65afe3799046a5a0fb01ac5d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_33_moving_twohand.json": "d4e59214b02ec04ecc40ba80ead827e57fed46a4662b873e35d5d4f37988459f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_34_body_native.json": "8565fcd4cf0ec0925e1fab86f814b5c3bf81a213c5f6cfc2f6ad930a5b6edec4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_34_body_twohand.json": "5fb02c2d52095e0c459a9055e9986fc99193a18f2b58883e0b3d1d521728e3fd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_34_moving_native.json": "528d6ec312705076147b760952d8aed055dba959ecd269a7ff5a5d264d1da3f5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_34_moving_twohand.json": "17c7fd5fd5a2b4b9a7853cd94283fba43ae86f28ba3c8b96844e316e1a268ed9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_35_body_native.json": "556f7bf1dda54938013e2f82e3f19c00e6e4702e07361345198005738d4f09f4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_35_body_twohand.json": "207c8e195aa8036b9333073ece6d67721034b6badf740bb3b5ba04617351fc9d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_35_moving_native.json": "79cfb1b11dec498917cc6d544b2619bac90aac8dbd6b2967e076dd8ecb81a39c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_35_moving_twohand.json": "af1e6fd8f5f777e0c5e579fede0ea1a7ba87d570126380cb91a2b4630372e9d9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_36_body_native.json": "4a7083954874888299036cf99ff9401ee52ef12990f4d77ffcaa9bdbeebb0af1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_36_body_twohand.json": "8c57388455aa85c2097df6fbcc1ef043036013b29ef2fde760494006b20590fa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_36_moving_native.json": "5086b9df2a49fb19521b11ab55685fa47ea393a530a6238b9199d85199298eba",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_36_moving_twohand.json": "ec374cc596089aa8b4b7f50198bb92921abda66d1c4d860fbb797a0422a92117",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_37_body_native.json": "2687713d629247104293e26caf6acad06b8740cef2f44f3f4338bfac77fe3cbe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_37_body_twohand.json": "7394b62c04f6f328202b51c101434fe20c4fed558374024098be73f5cf96c1f5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_37_moving_native.json": "4a6c16f9e013bf6daf8293e7c69e67a50bd0b20d7cbdf5aee1552fc922564f79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_37_moving_twohand.json": "fdfd7a8ab789cd693b3c2919eb25b958337f5300689ee01d2b60d0bea213fe17",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_38_body_native.json": "0965919bfda673a256b0236a91c39057b36fed1c8e94197e483f09e8a373a07e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_38_body_twohand.json": "5dc84cce5f2c2a5a8688c947e1eb36c1878bee3c699b52b8a971bbb6d606a3ea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_38_moving_native.json": "3b129bedfdfe5b9e3c3f24dc691f335539b2c6fd597bac7c0105652428025e68",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_38_moving_twohand.json": "e196bce0965ce19cc70d14a24ba68566bdf827ead19de215a9dc36c30b043d04",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_39_body_native.json": "d774bd97d35742db6a70fb487e034267139bc93a5a77e126d820f95239b44b33",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_39_body_twohand.json": "4b371bdd5a8ad6004541f31f7ffe9fde03cd4ea47576d4394bc41894774ebf16",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_39_moving_native.json": "b893b07a42baeef8d2e50bf019466ae4854cd1595ced7e73f9d980d40cfa7aec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_39_moving_twohand.json": "bbe976cabdf051b1108c25d9522f703449bc78cbcda47d57909e4fbadaf9e6d8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_40_body_native.json": "a54433ae87e640e42ca44efa4e57d7d192ca911051d4114b394b2aa44686cc2f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_40_body_twohand.json": "290b7ec4379ee0e2b8c64f65677e33e7cdea2fa36bf963fb8675ed61dd3d2165",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_40_moving_native.json": "855949d28d16076d1c0b12a1e3b84b5e5aeead00cef0a8e177d48de2253d8b5e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_40_moving_twohand.json": "7c87766c90255a52147dba3df9efdf98409ea5c3c373c52553acc6871361fb91",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_41_body_native.json": "5b1035d8d0ef6c3c37a1c187033e4271868a35df741bc23828f1cc5f03c15533",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_41_body_twohand.json": "16d51ef339484dc4e1696b769edbd881441f4258f4aef25a69881097d47e714e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_41_moving_native.json": "1d6aa39f36bc70f5688d70d043c6084a6b4c1c88485ca45cf0c23690ba7af157",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_41_moving_twohand.json": "d9389bbb447a215f2470f519e85176828d11fc4a83e7250978098a812b90fddd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_42_body_native.json": "d8c2f86d885fa39de3165b9a75c82757fe4c75c326121abf1961510d1f9bfea3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_42_body_twohand.json": "ae12d573afc480a6a39856704fcd8b01c022cff28cb8ce8547161770c5174b9c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_42_moving_native.json": "61b196585359e32a37637506dfd1711553dba8f4d111981c6c4f38aa491836d4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_42_moving_twohand.json": "75ac46e577c80f10d4cc6f62145b52e10ec8f3be15dc31be100c7883a003e757",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_43_body_native.json": "5b9ae776c9de588944dc2f176e3fe6934889cfba2a1cf2d9fbd7b08bf46adf98",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_43_body_twohand.json": "4d628012b92d86282089a9dca91fcaa06b009dc0591cd37a69fc5d6a7d3c5da5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_43_moving_native.json": "b5dbf26e7ae49c42dd9ec96bc513d47686d24935b0dfa1f177303344ebd5774f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_43_moving_twohand.json": "744d262df746cc654c941bd8ad08001a19f1ec189634b65d3b4d22dbd0dee2b1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_44_body_native.json": "64d4206af75514f4a18084a3a1931c5fc1a32970c9d0cd659b9efc210662c290",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_44_body_twohand.json": "46df988fd979bc85402c1e84a2d3f5e77b3dde67995adbe5abffa5e0a7c72384",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_44_moving_native.json": "a221d98758b963b47ce2c81e19671039395cffd881263913ea1e1e0484a6a96d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_44_moving_twohand.json": "c8072f5682f7f60680ed37866d4254253fc241f55c2fe30234e5ecdc8356eb0e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_45_body_native.json": "4402342c7409f6fc661ec1e4f6b3801f8c3f0d9a4b205598f28d5a77b6d35158",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_45_body_twohand.json": "69b186f09ea2679b8396a5a4a3463f6113fb86adb134bda7a95d28488c7b26a6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_45_moving_native.json": "aba56b73dda16ab4a0cb9923c00f6a23bc617ba6a4277307435f2620b912d659",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_45_moving_twohand.json": "4f1c814cf4d0a890f1dca5c87a9de5d8c5189b258038f49a9c86d97c56a3716e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_46_body_native.json": "610669720424e9ed6495c7d6448a62142d2156ffe90bafcce5e41d8b3f25a76f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_46_body_twohand.json": "323e87a639427dcc2201332f39ec03da220ca790013be5486add30fd5b23b278",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_46_moving_native.json": "14ffd6b77572427c0d2b209a107be368978a6dbe24ac566ebc38c17c978cea59",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_46_moving_twohand.json": "48b8dbfaaa935d6b85374314a8c3de7b28ac1efb5bf1ecc9b55bb013149cbdef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_47_body_native.json": "56d820c7be1ad6424c81de7f2a741d7031a0f66d4730aa3078fa865b4b7e05a9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_47_body_twohand.json": "f22c4fd906aca50f87d01b1ea3abec721d66062a89dcf2a2e6fd5991a1276986",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_47_moving_native.json": "7d2954e8a4ed905458c8d016fe758f0ccf0452eb42d7dfd3005a86ebadfd1983",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_47_moving_twohand.json": "ca5a6fa864926697843e47ba663c4a0045d19661b74b055af1f253191cb762a1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_48_body_native.json": "fbb6184f2503c12bdd1ca51673a92798bc738f871f8a6be9ab93443a4fcfbc9f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_48_body_twohand.json": "b26eea35e316e5354d6818ca461d24a777203a5a06afe4eae4256c7302c97e6d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_48_moving_native.json": "ed40db5c2796bfedfa9e820bbe112b6a18f90a896728f09e23a6d0348a8fd779",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_48_moving_twohand.json": "ee074fac24ee1d50bf95b8154ad7799179e700ed0c40e96b6b35026974bf0ac7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_49_body_native.json": "cafb97016b1c43ef6af477e784c8fc294f37e483bca48789e749af7e4849b210",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_49_body_twohand.json": "00e170aef52c7301ebe0a22bd50f369b50dd0c660425ada6ef9b106c039224cf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_49_moving_native.json": "377c89d789cf4daa56e6bb411ec9d1657e3ef018fb96b45142d34d3ec1f06852",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_49_moving_twohand.json": "46240e489f86b37972ad5a03e1c4e1653fd403f5f76760ab8991c0184601b1c9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_50_body_native.json": "3c4063b5b98c8531967c001c541feb9a249dc5caa12bd27016e5a64c8f101c00",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_50_body_twohand.json": "fbc2c95ea12cde0a7fd733a6f65380a85b7e346e5314d7ccdf86596f5ffb1247",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_50_moving_native.json": "fc0e3d4bced2f90dc571f3a11f39588e4e6bc204be66aa436a12a5f376dd8187",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_50_moving_twohand.json": "cc4802af50b951b8e143c606899e3169128876d04f12261a1923ef850bc32ca9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_51_body_native.json": "dbe405c1d7252d313b930a8a40cf25434a7db315241f90db66ae4b689b4d03dd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_51_body_twohand.json": "8c048047190dbce17f4fe6766d8f4f15ff4b2343af72bdaa4fce257239e69269",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_51_moving_native.json": "27f3d42f078a20f5b3ad165fab310dd8428f5707dc72c3e3ae3a1e4d1d16c9b1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_51_moving_twohand.json": "6bd9623ca40e10c369a4158aa367117be05bf8f1816a1a93a2f0db65688e2a52",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_52_body_native.json": "64176992eed0b7d32b9f1755a65d80b195c2817c158667c24b518c9cc89714f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_52_body_twohand.json": "3fc7951f26800ab5bf76d70ad701de0d55cf230d06f9ce6284b66b76543eeb3b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_52_moving_native.json": "11971220253cbba607df44e7748eebe898bb9a4fec5d1716e67f5bc075c24091",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_52_moving_twohand.json": "ec33af29e285aadfeacebc4ec125e96822e1ff7f989ede2bdfda0542dd953f79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_53_body_native.json": "f8c156ed3f2e811189cc58679876c0a92cef863d3d8b6e38920c7ccc4dc73e87",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_53_body_twohand.json": "a07c6296e34ce39b73a4cfc74bbcc25df45930999e85c5f990af4a247f5847a7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_53_moving_native.json": "494d0056dd9f5b7a49bd0b8bf4544cf8809f026c034faa4090dcdf6ed09904a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_53_moving_twohand.json": "785db1134d5053a24f4c7682391280310c62def34586129022926eb0a1e152dd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_54_body_native.json": "035af95611b5ab72766a2801e989c71f1a31a0010adb22367c502413612211f8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_54_body_twohand.json": "63540b417f63261b24ecc1cd015c3ee742116fd953d62dfa70d1b141c58bdbbc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_54_moving_native.json": "bce28ac17cfa8d86c242dae3b3fcb7b2e7fd32b40afcb72bd22e82d4d6043c6a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_54_moving_twohand.json": "da6148b183db3f19489ed66e6dbb9adc3a249ae6b10a935ca629b77a2f7ef62f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_55_body_native.json": "63f131efb7b28bba4e4fb0f78f79e9a4c8cc5499a961bfc50af400828084b338",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_55_body_twohand.json": "330a34debb7b8b871b3afdef3974903971e6d3e01aab9237836275f080af40d3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_55_moving_native.json": "7a785565e5fbb911d9490bed7a2f3657b7c8499ab48d87a32f5c64253db67655",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_55_moving_twohand.json": "092f7b8d351f220f88f3f6f27e6ef93c07d0177e132b6c12a13558c33217ba84",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_56_body_native.json": "11bd90f78e8df66d0a19727cbfb49996debe9bbb707209f42dc949a114665ae0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_56_body_twohand.json": "af4ac46b504aa72d8cd8310145d7f3ca4c2d0937c0e3b96de6ea2e53a098aa17",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_56_moving_native.json": "0bdabf9a6d17372f1d6d593859a6511edff09cbe738d09db3d2bea80a53d8950",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_56_moving_twohand.json": "29c85f970cfc20c489941c90dd63f423089f04389bc55668d1128646ee121ae9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_57_body_native.json": "17b96bec3e2e7ada39dc2ad425f485c17a8691b5116cc57c17c61afc24e3b423",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_57_body_twohand.json": "9576d45be810f70f627d9e83eb20cae2f35e9caebfc9f3f49fbbd7e5a20f6c79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_57_moving_native.json": "72de9519ca44b2086c91adc9fc9c14a2821b8b94bfb0028e1fd5f7bd1cd8920e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_57_moving_twohand.json": "bc39aa65195db24623355f8fea7fc64bfe7f6099fe61a27e02da5bbdc9f179a6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_58_body_native.json": "559268c0af7871d4609a41f4b39e1cc175ab132fbb1aa5c6dc41e3e691b8ca37",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_58_body_twohand.json": "1176ae48e89b5fd39d3d617bbbcdc571d8e190e72976d0cc6d12719143e164da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_58_moving_native.json": "b34307b9a698c5480784675eca1011294d095b4b127875d4fdbfe104f559c8ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_58_moving_twohand.json": "0ffbac75fba6b29a8094f735036a470ff6b80d16ee929dd31ab6f07143730f6b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_59_body_native.json": "bf8540ea8cfcd66c4bcbcc754b045cf4debd3e2b1c7ca6b6ca496842e6ff8bd5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_59_body_twohand.json": "6c78f29acdf13261ed564763f918d151a4fca0e24bb8d63633c2b7d509601c4d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_59_moving_native.json": "ce42b47b342039b055ad5fa20d0d2170bdbd390cfb89a677ef28cef45761f8d6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_59_moving_twohand.json": "924908ed6e9e7296a39fd03ba66b7f4a320ec5b3e813c52a72f496c168139bd1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_60_body_native.json": "37469d7343a09ebe33ff27ee8204abaf3243b1e5e041c914b21f8ac715dc3c86",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_60_body_twohand.json": "1c84c7b04f9da48327f8f09f839afea1c71fe209272955975257685aa719f5f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_60_moving_native.json": "80844e07928b284865faaab7e78ff6dc97989a99ad5c35c1033fc913aeb2f464",
+    "src/main/resources/assets/destiny/models/weapon_reload_w212_bug_out_bag/bug_out_bag_60_moving_twohand.json": "71ce30559b82894d8ff35bf0c11164ef951edd1ed9eb4c54d65a2beabe4b2bbc",
+    "src/main/resources/assets/destiny/items/weapon_reload_w212_bug_out_bag/bug_out_bag.json": "d419cf8c204217bb76bb580d1b2b832dc4e6dfabde4f82fd1e737c8c2cd3d83e"
+  }
+}

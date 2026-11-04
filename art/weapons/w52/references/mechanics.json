@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-24",
+  "scope": "Research only; no animation implementation, input design, runtime edits, build, or game tests.",
+  "officialMatrix": [
+    {
+      "id": "abide_the_return",
+      "bungieHash": 1644160541,
+      "frame": "adaptive",
+      "intrinsicSocketIndex": 0,
+      "socketTypeHash": 3956125808,
+      "intrinsicHash": 4172267910,
+      "intrinsicDescription": "[Heavy Attack]  : Launch a heavy uppercut attack.\nHeavy attacks are stronger with full energy.",
+      "groundLight": {
+        "loop": true,
+        "cleaveMultipleTargets": true,
+        "status": "OFFICIAL_2020_SHIPPED",
+        "sourceIds": [
+          "s2020preview",
+          "s2020ship"
+        ]
+      },
+      "airLight": {
+        "status": "UNVERIFIED_PER_FRAME",
+        "sourceIds": [],
+        "loop": null,
+        "cleaveShape": null,
+        "notes": "Ground loop language is not proof of infinite aerial combos."
+      },
+      "heavyShape": "uppercut",
+      "groundHeavy": {
+        "status": "EXPLICIT_GROUND_UPPERCUT_2019",
+        "sourceIds": [
+          "s2019"
+        ],
+        "notes": "Generic intrinsic wording alone is not a complete ground/air state machine."
+      },
+      "airHeavy": {
+        "status": "UNVERIFIED",
+        "notes": "No retrieved official source specifies the adaptive aerial-heavy shape or activation restriction.",
+        "sourceIds": [],
+        "exactShapeVerified": false
+      },
+      "targetLunge": {
+        "status": "UNVERIFIED_BASELINE_PER_FRAME",
+        "distance": null,
+        "sourceIds": []
+      }
+    },
+    {
+      "id": "goldtusk",
+      "bungieHash": 3371413057,
+      "frame": "lightweight",
+      "intrinsicSocketIndex": 0,
+      "socketTypeHash": 3956125808,
+      "intrinsicHash": 1713206376,
+      "intrinsicDescription": "[Heavy Attack]  : Launch a heavy dash attack.\nHeavy attacks are stronger with full energy.",
+      "groundLight": {
+        "loop": true,
+        "cleaveMultipleTargets": true,
+        "status": "OFFICIAL_2020_SHIPPED",
+        "sourceIds": [
+          "s2020preview",
+          "s2020ship"
+        ]
+      },
+      "airLight": {
+        "status": "LATER_AIR_ATTACK_EXISTENCE_POSITIVE",
+        "sourceIds": [
+          "s2019",
+          "s2025air"
+        ],
+        "loop": null,
+        "cleaveShape": null,
+        "notes": "Ground loop language is not proof of infinite aerial combos."
+      },
+      "heavyShape": "dash",
+      "groundHeavy": {
+        "status": "EXPLICIT_GROUND_DASH_2019",
+        "sourceIds": [
+          "s2019"
+        ],
+        "notes": "Generic intrinsic wording alone is not a complete ground/air state machine."
+      },
+      "airHeavy": {
+        "status": "HISTORICAL_POSITIVE",
+        "notes": "2019 official patch explicitly tunes aerial dash damage. 2025 airborne zero-ammo fix does not distinguish light from heavy.",
+        "sourceIds": [
+          "s2019",
+          "s2025air"
+        ],
+        "exactShapeVerified": false
+      },
+      "targetLunge": {
+        "status": "UNVERIFIED_BASELINE_PER_FRAME",
+        "distance": null,
+        "sourceIds": []
+      }
+    },
+    {
+      "id": "crown_splitter",
+      "bungieHash": 2782325302,
+      "frame": "aggressive",
+      "intrinsicSocketIndex": 0,
+      "socketTypeHash": 3956125808,
+      "intrinsicHash": 836583820,
+      "intrinsicDescription": "[Heavy Attack]  : Launch a heavy slam attack.\nHeavy attacks are stronger with full energy.",
+      "groundLight": {
+        "loop": true,
+        "cleaveMultipleTargets": true,
+        "status": "OFFICIAL_2020_SHIPPED",
+        "sourceIds": [
+          "s2020preview",
+          "s2020ship"
+        ]
+      },
+      "airLight": {
+        "status": "HISTORICAL_LUNGE_EXPLICIT",
+        "sourceIds": [
+          "s2019"
+        ],
+        "loop": null,
+        "cleaveShape": null,
+        "notes": "Ground loop language is not proof of infinite aerial combos."
+      },
+      "heavyShape": "slam",
+      "groundHeavy": {
+        "status": "INTRINSIC_SHAPE_ONLY_NO_GROUND_QUALIFIER",
+        "sourceIds": [],
+        "notes": "Generic intrinsic wording alone is not a complete ground/air state machine."
+      },
+      "airHeavy": {
+        "status": "OFFICIAL_2023_POSITIVE",
+        "notes": "2023-10-17 airborne-heavy fix confirms availability and removes erroneous full-energy requirement; recharge delay must start.",
+        "sourceIds": [
+          "s2023air"
+        ],
+        "exactShapeVerified": false
+      },
+      "targetLunge": {
+        "status": "AERIAL_LIGHT_EXPLICIT_2019",
+        "distance": null,
+        "sourceIds": [
+          "s2019"
+        ]
+      }
+    },
+    {
+      "id": "falling_guillotine",
+      "bungieHash": 614426548,
+      "frame": "vortex",
+      "intrinsicSocketIndex": 0,
+      "socketTypeHash": 3956125808,
+      "intrinsicHash": 263649945,
+      "intrinsicDescription": "[Heavy Attack]  : Launch a heavy spin attack.\nHeavy attacks are stronger with full energy.",
+      "groundLight": {
+        "loop": true,
+        "cleaveMultipleTargets": true,
+        "status": "OFFICIAL_2020_SHIPPED",
+        "sourceIds": [
+          "s2020preview",
+          "s2020ship"
+        ]
+      },
+      "airLight": {
+        "status": "UNVERIFIED_PER_FRAME",
+        "sourceIds": [],
+        "loop": null,
+        "cleaveShape": null,
+        "notes": "Ground loop language is not proof of infinite aerial combos."
+      },
+      "heavyShape": "spin",
+      "groundHeavy": {
+        "status": "INTRINSIC_SHAPE_ONLY_NO_GROUND_QUALIFIER",
+        "sourceIds": [],
+        "notes": "Generic intrinsic wording alone is not a complete ground/air state machine."
+      },
+      "airHeavy": {
+        "status": "UNVERIFIED",
+        "notes": "Intrinsic spin text does not establish aerial spin behavior or a grounded-only restriction.",
+        "sourceIds": [],
+        "exactShapeVerified": false
+      },
+      "targetLunge": {
+        "status": "UNVERIFIED_BASELINE_PER_FRAME",
+        "distance": null,
+        "sourceIds": []
+      }
+    },
+    {
+      "id": "temptation_s_hook",
+      "bungieHash": 35794111,
+      "frame": "caster",
+      "intrinsicSocketIndex": 0,
+      "socketTypeHash": 3956125808,
+      "intrinsicHash": 183772609,
+      "intrinsicDescription": "[Heavy Attack]  : Launch a heavy projectile attack.\nHeavy attacks are stronger with full energy.",
+      "groundLight": {
+        "loop": true,
+        "cleaveMultipleTargets": true,
+        "status": "OFFICIAL_2020_SHIPPED",
+        "sourceIds": [
+          "s2020preview",
+          "s2020ship"
+        ]
+      },
+      "airLight": {
+        "status": "UNVERIFIED_PER_FRAME",
+        "sourceIds": [],
+        "loop": null,
+        "cleaveShape": null,
+        "notes": "Ground loop language is not proof of infinite aerial combos."
+      },
+      "heavyShape": "projectile",
+      "groundHeavy": {
+        "status": "INTRINSIC_SHAPE_ONLY_NO_GROUND_QUALIFIER",
+        "sourceIds": [],
+        "notes": "Generic intrinsic wording alone is not a complete ground/air state machine."
+      },
+      "airHeavy": {
+        "status": "UNVERIFIED",
+        "notes": "Projectile intrinsic does not establish whether aerial projectile activation is allowed or prohibited.",
+        "sourceIds": [],
+        "exactShapeVerified": false
+      },
+      "targetLunge": {
+        "status": "UNVERIFIED_BASELINE_PER_FRAME",
+        "distance": null,
+        "sourceIds": []
+      }
+    }
+  ],
+  "criticalRules": [
+    {
+      "claim": "All selected sword subtypes support light cleave and looping ground light combos.",
+      "status": "OFFICIAL_DATED_RULE_2020",
+      "sources": [
+        "s2020preview",
+        "s2020ship"
+      ]
+    },
+    {
+      "claim": "Aggressive airborne heavy is supported; full energy was an erroneous gate fixed in October 2023 and recharge delay must start.",
+      "status": "OFFICIAL_DATED_RULE_2023",
+      "sources": [
+        "s2023air"
+      ]
+    },
+    {
+      "claim": "2019 aggressive aerial-light target lunge and lightweight ground/aerial dash are positive historical evidence, not calibrated current constants.",
+      "status": "HISTORICAL_OFFICIAL",
+      "sources": [
+        "s2019"
+      ]
+    },
+    {
+      "claim": "Do not apply the 2020 general aerial-energy exception universally: preview explicitly admits sword-specific exceptions, and aggressive later starts recharge delay.",
+      "status": "ERA_AND_FRAME_BOUNDARY",
+      "sources": [
+        "s2020preview",
+        "s2023air"
+      ]
+    },
+    {
+      "claim": "No verified grounded-only prohibition for caster or vortex was found in these sources.",
+      "status": "RESEARCH_GAP_NOT_PROOF_OF_PERMISSION",
+      "sources": []
+    },
+    {
+      "claim": "Eager Edge/Valiant Charge special lunge and search-angle changes are perk-specific and cannot calibrate the five baseline frames.",
+      "status": "PERK_SCOPE_BOUNDARY",
+      "sources": [
+        "s2021perk",
+        "s2025perk"
+      ]
+    }
+  ],
+  "preserveW51": {
+    "nonzeroEnergyPoweredHeavy": true,
+    "vortexHeavyAmmo": 4,
+    "sourceIds": [
+      "s2023",
+      "s2026vortex"
+    ],
+    "linearEnergyDamageCurveVerified": false
+  },
+  "authoredUnknowns": [
+    "Exact target acquisition range, search cone and lunge displacement/speed/caps.",
+    "Cleave arc, volume, vertical tolerance, target cap, falloff and per-target damage.",
+    "Light/air combo sequence length and reset conditions; damage-event count per current frame.",
+    "Attack startup/contact/recovery, cancel windows, gravity/momentum and air-action limits.",
+    "Per-frame aerial heavy shape, energy exceptions and grounded-only prohibitions except positive claims listed in the matrix."
+  ],
+  "visualEvidence": "videos.json",
+  "evidenceBoundary": "A still can show pose, orientation, terrain-relative displacement or visible effects. It cannot reveal unshown input, grounded server flag, hitbox, damage arc, or exact travel in world units."
+}

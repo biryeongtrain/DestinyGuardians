@@ -1,0 +1,70 @@
+{
+  "stage": "W181",
+  "generator": "scripts/build_vorpal_profile_w181.py",
+  "generatorSha256": "c6b4c24c7dc47e2294ca39b0ee213e3d5b99c5c7eacce551c3e1f6b8942772e4",
+  "sourcePins": {
+    "src/main/resources/destiny/weapons/w30.json": {
+      "sha256": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+      "bytes": 13784
+    },
+    "src/main/resources/destiny/weapons/w40-characteristics.json": {
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "src/main/resources/destiny/weapons/w83-exotics.json": {
+      "sha256": "bab9f12b8ffb99422a31b927455391d9f292da67ffa226ad3ddc96b0b1283d56",
+      "bytes": 3027
+    },
+    "src/main/resources/destiny/weapons/w84-exotics.json": {
+      "sha256": "481a6353fb5d3fc040d71977da9c173c9e2fc8754050fe8bb237da5172837d6e",
+      "bytes": 2599
+    },
+    "inventory": {
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "clarity": {
+      "sha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+      "bytes": 2091445
+    }
+  },
+  "version": "245114.26.10.13.2000-1-bnet.66137",
+  "outputs": {
+    "src/main/resources/destiny/weapons/w181-vorpal.json": "221b1ba84382272dbc679684a9885e9cee8399ef98714a76f113bdbdd930d76e",
+    "art/weapons/w181/vorpal/official-sockets.json": "31deb89713f6db27aeb93d3759efe244f37ef1cc7a74314a92e81567e0ea01aa",
+    "art/weapons/w181/vorpal/clarity-source.json": "e6510044bd7ed96f75b37d3ac0c3d50980bc7c1ce4e39f36bf2582c9987af860"
+  },
+  "nativePending": [
+    "Master registry: explicit base selection, new/default/enhanced/corrupt socket inert; UI exact16 only.",
+    "Paid PRIMARY/SPECIAL/HEAVY 1.20/1.15/1.10 versus native WitherBoss and EnderDragon.",
+    "Ordinary/high-HP/named mob inert; destiny_boss/destiny_vehicle Mob tagged at impact eligible; untag removes bonus.",
+    "Tagged Player/ArmorStand/nonmob, dead/removed target inert; no PvP or nonliving vehicle damage expansion.",
+    "Direct and splash evaluate each target independently with one paid source token, including mixed target AoE.",
+    "Paid projectile/beam/wave/sword source snapshot survives stow and edit; new unselected/invalid/super source inert.",
+    "Source current held/equipped genuine stack only; preview/wrong slot/dead/disconnected/spectator/super rejected.",
+    "Glaive projectile eligible; glaive melee and abilities inert; paid sword contacts eligible; no free attack capture.",
+    "No countdown HUD, timer, stacks, bonus stat, ammo/cadence changes, or fresh source credit from target checks."
+  ],
+  "policies": {
+    "capture": "PAID_EMISSION_ONLY_CURRENT_SELECTED_GENUINE_HELD_EQUIPPED_VALID_ALIVE_NOT_SUPER",
+    "snapshot": "IMMUTABLE_SOURCE_ENTRY_EXACT_ROLL_SCALAR_SURVIVE_STOW_EDIT_NO_FRESH_CREDIT",
+    "target": "AT_IMPACT_LIVE_WITHERBOSS_ENDERDRAGON_OR_MOB_TAG_DESTINY_BOSS_DESTINY_VEHICLE",
+    "excluded": "PLAYER_ARMORSTAND_DEAD_REMOVED_SPECTATOR_NONMOB_HP_NAME_HEURISTICS",
+    "damage": "MASTER_DIRECT_SPLASH_EACH_TARGET_INDEPENDENT_PAID_SWORD_ALLOWED_GLAIVE_MELEE_ABILITIES_INERT",
+    "hud": "TARGET_CONDITIONAL_PASSIVE_NO_COUNTDOWN_STACK_SESSION_TIMER"
+  },
+  "limitations": [
+    "Pinned official manifest version above; no claim of an unpinned later live refresh.",
+    "Original Clarity includes minibosses and players in Super. Local destiny_boss is the explicit mob classification; no HP/name inference.",
+    "Project damage excludes players, so PvP bonuses are not implemented. Nonliving vehicles are out of scope.",
+    "Master owns shared perk selection/registration, runtime damage wiring and native actualGT."
+  ]
+}

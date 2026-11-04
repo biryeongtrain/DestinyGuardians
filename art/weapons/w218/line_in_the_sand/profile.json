@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "weapon": "line_in_the_sand",
+  "sourceAction": "80A8ADD3",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8ADD3",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.1,
+        0.2,
+        0.8,
+        0.84
+      ]
+    }
+  },
+  "sourceRig": {
+    "path": "art/weapons/w218/rigs/fusion_rifle_04669cdb.json",
+    "group": "fusion_rifle_04669cdb",
+    "action": "80A8ADD3",
+    "sourceBlendSha256": "cdf955feedf818492dd395a2866beb19ed11bb35944544c05c3cd4eb00eeee36",
+    "sourceMapSha256": "27b7520526de9abf593e208b6f0b52f70c83e2a4a6ddaada7bcd3dc40eac9ad2",
+    "boneMapSha256": "a439c489fb5ab1de893beb8cfe682958641d1c2682059f849932a25db27d3fd4"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w218/source/source-review.json",
+      "sourceSha256": "f5a06a8373aa9ee1328f0d2b14c87dc187367edc7e28224f7bfa6287d64469d0",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original Blender5.4.0 Alpha background: ARMATURE only, OBSlot, reload_full frames1..100 at30fps,61 evaluated samples; existing joint error0; inputs unchanged. Worker read report and fresh rig, not independent Blender execution."
+    },
+    {
+      "source": "art/weapons/w218/rigs/fusion_rifle_04669cdb.json",
+      "sourceSha256": "f2ecda5b6b4595443f313fda97f2536856bd85d7cbb47fa3544f0e5ab5d35929",
+      "role": "fresh_original_full_chain",
+      "observation": "Shared fusion family includes Line in the Sand; original weapon and both shoulder/elbow/wrist matrices retained without arm length/axis attenuation. Not exclusive weapon mesh, source camera or finger IK."
+    },
+    {
+      "source": "/private/tmp/destiny-w218-source/sheets/fusion_rifle_04669cdb-80A8ADD3-upper-chain.png",
+      "role": "viewed_original_chain_sheet",
+      "observation": "Worker viewed actual fresh sheet at p0,.2,.4,.6,.8,1; bone-only XZ/YZ projections. Source arms move through exchange and wrist recovery; native framing/contact remains master QA.",
+      "sourceSha256": "51406b16e3bce588b382a4fa975ad9f4c1f4a51673f9620863c60328f2e2c2f3"
+    },
+    {
+      "source": "art/weapons/w188/line_in_the_sand/storyboard.png",
+      "sourceSha256": "862b59c9c176fdcc752d59f8fe0ea1c3e019c0cba807cb8ed25fcda3c4ad9142",
+      "role": "viewed_same_weapon_reference",
+      "observation": "Worker viewed retained16-frame actual footage/storyboard and comparison. Steep rise, whole underside battery withdrawal, below-frame exchange, upward insertion, seat and lowering. Existing silver/gold/black geometry and UV retained; mint shader and perk capacity9 not copied."
+    }
+  ],
+  "limitations": [
+    "Source ARMATURE only; no exclusive weapon mesh/camera/finger IK or concealed contact dimensions recovered.",
+    "61 poses/60 intervals are discrete return samples, not native continuous60fps proof.",
+    "W18813 knots, holds, pivots and rigid display math remain authored from same-weapon footage; C1 interpolation alone changes.",
+    "Existing rest/reload contact positions and rotations retained; reload handling fades .80..84 and stays released after the neutral seat .84.",
+    "Effective family framing is unchanged; full-chain source arms and mesh support retained at rest. No new camera fit or arm compensation.",
+    "Master all-route budget measurement, FIRST native images, same-worker feedback and SECOND remain required."
+  ]
+}

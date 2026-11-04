@@ -1,0 +1,125 @@
+{
+  "source": "https://github.com/Clarity-Destiny/Descriptions",
+  "cacheSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 3511092054,
+    "name": "Elemental Capacitor",
+    "lastUpload": 1738687242983,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Grants Passive Bonuses based on the element of your selected Super's element:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• "
+            },
+            {
+              "classNames": [
+                "solar"
+              ]
+            },
+            {
+              "text": "Solar: 50 Reload Speed"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• "
+            },
+            {
+              "classNames": [
+                "arc"
+              ]
+            },
+            {
+              "text": "Arc: 50 Handling"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• "
+            },
+            {
+              "classNames": [
+                "void"
+              ]
+            },
+            {
+              "text": "Void: 20 Stability"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• "
+            },
+            {
+              "classNames": [
+                "strand"
+              ]
+            },
+            {
+              "text": "Strand: 20 Airborne Effectiveness"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• "
+            },
+            {
+              "classNames": [
+                "stasis"
+              ]
+            },
+            {
+              "text": "Stasis: 20 Recoil Direction & 20% decreased ADS Movement Speed Penalty"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ddcSha256": "7880b2029a7e7b8f97afb8f079ca48a585ec0765a94b6b3f983a47daf983ba30",
+  "ddcRow": [
+    "Elemental Capacitor",
+    "",
+    "Passively grants Stat Bonuses depending on the element of the equipped Super Ability.Solar: +50 ↑+55 Reload Speed.Arc: +50 ↑+55 Handling.Void: +20 ↑+25 Stability. Stasis: +20 ↑+25 Recoil Direction and 20% Decreased ADS Movement Speed Penalty.Strand: +20 ↑+25 Airborne Effectiveness.",
+    "",
+    "",
+    ""
+  ],
+  "enhancedExcludedHash": 711234314,
+  "mechanics": {
+    "id": "elemental_capacitor",
+    "hash": 3511092054,
+    "solarReloadBonus": 50,
+    "arcHandlingBonus": 50,
+    "voidStabilityBonus": 20
+  },
+  "policies": {
+    "selector": "EXISTING_ATTACHMENT_ACTIVE_CLASS_EXACT_REGISTERED_EQUIPPED_SUPER_ID_SLOT_CLASS_ELEMENT",
+    "invalid": "KINETIC_NEUTRAL_NO_DATA_OR_RUNTIME_CREATION_NO_ENERGY_COOLDOWN_LAST_ABILITY_OR_WEAPON_ELEMENT",
+    "identity": "ALIVE_CONNECTED_NONSPECTATOR_NONSUPER_GENUINE_OWNED_EQUIPPED_STACK_HELD_EXCEPT_INCOMING_OUTGOING_HANDLING",
+    "timing": "SUM_STATS_CAP_0_100_RAW_CURVES_SCALE_THEN_CEIL_ONCE",
+    "handling": "ARC_NO_SCALAR_STOW_AT100_FLOOR_NO_SNAPSHOT_PAIR",
+    "reload": "SOLAR_NO_SCALAR_EXACT_DISTINCT_FF_RAPIDHIT_ONLY_ACCEPTED_PLAN_IMMUTABLE",
+    "missingElements": "STASIS_STRAND_ABSENT_NOT_SIMULATED_NOT_IMPLEMENTED",
+    "combination": "EXACT_OFFICIAL_DISTINCT_SOCKET_PAIRS_ONLY",
+    "historical": "D2FOUNDRY_ORACLE_DCD0C7D302B056FFBB532EDCB711D724A17CA8C1_NOT_CURRENT_SANDBOX_MEASUREMENT"
+  }
+}

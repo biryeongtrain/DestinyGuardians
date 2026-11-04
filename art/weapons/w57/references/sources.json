@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "task": "W57",
+  "researchDate": "2026-10-24",
+  "scope": "Bounded primary-source evidence: two exact Bungie patch articles and one pinned inventory definition. No exhaustive intervening-patch audit or live-game validation.",
+  "textNormalization": "Python HTMLParser(convert_charrefs=True): collect handle_data chunks, join with spaces, then collapse Unicode whitespace. Match case-sensitive substrings after the named heading, within 300 normalized characters.",
+  "retrieval": {
+    "pageResult": "Canonical article URLs returned HTTP 200 JavaScript shells; their hashes are not article-body evidence.",
+    "cmsPatternSource": {
+      "path": "art/weapons/w51/references/sources.json",
+      "sha256": "d656090c7fa25bca20c85bb0b016455de896eef6079c9800118e07d3fa35701a"
+    },
+    "settings": {
+      "path": "run/private-sources/w57/settings.json",
+      "sha256": "ccf94e1bc261c88146729fd851294c6e0ab14a8a5586126da3bb8104c4e81efe"
+    },
+    "settingsRetrievalRecord": {
+      "path": "run/private-sources/w57/settings-retrieval.json",
+      "sha256": "1b2d8b88305c514ff4d7bde8c6ec8e386b3bafaff85dbab0017195ce270431e8"
+    },
+    "recipe": "GET Bungie /Platform/Settings/. Read Response.systems.ContentStack.parameters.ApiKey and parse EnvPlusDeliveryToken as {environment}{deliveryToken}; use api_key and access_token request headers in memory. GET the two recorded CMS requestUrl values (exact url.hosted_url, locale=en-us, environment=live, limit=2, include_count=true); require one matching entry each. Preserve raw response bytes before parsing. Do not execute response text. Do not publish delivery headers/tokens.",
+    "maximumArticleResponseBytes": 5242880
+  },
+  "sources": [
+    {
+      "id": "bungie_9_1_5",
+      "publisher": "Bungie",
+      "primary": true,
+      "url": "https://www.bungie.net/7/en/News/Article/destiny_update_9_1_5",
+      "title": "Destiny 2 Update 9.1.5",
+      "publishedAt": "2025-10-07T16:00:00.000Z",
+      "updatedAt": "2025-10-07T17:30:10.727Z",
+      "retrievedAt": "2026-10-24T02:55:23.277344+00:00",
+      "delivery": "Bungie.net ContentStack CMS",
+      "environment": "live",
+      "locale": "en-us",
+      "deliveryUid": "blt6edd996233902713",
+      "hostedUrl": "/destiny_update_9_1_5",
+      "requestUrl": "https://cdn.contentstack.io/v3/content_types/news_article/entries?environment=live&locale=en-us&query=%7B%22url.hosted_url%22%3A%22%2Fdestiny_update_9_1_5%22%7D&limit=2&include_count=true",
+      "response": {
+        "path": "run/private-sources/w57/destiny_update_9_1_5-response.json",
+        "sha256": "e0e7a01c5007af1f78c9dedd2f873c29f086a1174d93b39f94e48e60cdd2d683"
+      },
+      "retrievalRecord": {
+        "path": "run/private-sources/w57/destiny_update_9_1_5-retrieval.json",
+        "sha256": "5b8f4d09816a44f50a32b3ba0bafaa4ff72672336d5495900b4a369abec1feb1"
+      },
+      "article": {
+        "path": "run/private-sources/w57/destiny_update_9_1_5-article.json",
+        "sha256": "61463ff897c3b51396a29747bd2132a12199d8f30e2d8a7464ef155c3552f7ce"
+      },
+      "articleCanonicalSha256": "a967d2ed8eb0aecb2918cba0e0524d863bf92e13c8e51c2c104f2f1afda977f1",
+      "pageShell": {
+        "path": "run/private-sources/w57/update-9-1-5-page.html",
+        "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14"
+      },
+      "pageRetrievalRecord": {
+        "path": "run/private-sources/w57/update-9-1-5-page-retrieval.json",
+        "sha256": "0da53ee7279b334543c0888ebb81b516d365ce6501adceab3720fa67e84bc3f1"
+      },
+      "bodyField": "html_content",
+      "sectionHeading": "Marksman's Dodge",
+      "evidenceSubstrings": [
+        "Now picks up nearby ammo bricks on activation.",
+        "Now reloads all weapons on activation."
+      ],
+      "evidenceWindowCharacters": 300,
+      "quotedWordsIncludingHeading": 16,
+      "supports": [
+        "nearby_ammo_on_activation",
+        "all_weapons_reload_on_activation"
+      ]
+    },
+    {
+      "id": "bungie_9_5_0",
+      "publisher": "Bungie",
+      "primary": true,
+      "url": "https://www.bungie.net/7/en/News/Article/destiny_update_9_5_0",
+      "title": "Destiny 2 Update 9.5.0",
+      "publishedAt": "2025-12-02T15:00:00.000Z",
+      "updatedAt": "2025-12-03T01:43:12.696Z",
+      "retrievedAt": "2026-10-24T02:55:23.012501+00:00",
+      "delivery": "Bungie.net ContentStack CMS",
+      "environment": "live",
+      "locale": "en-us",
+      "deliveryUid": "bltbbe8d25b9e84adce",
+      "hostedUrl": "/destiny_update_9_5_0",
+      "requestUrl": "https://cdn.contentstack.io/v3/content_types/news_article/entries?environment=live&locale=en-us&query=%7B%22url.hosted_url%22%3A%22%2Fdestiny_update_9_5_0%22%7D&limit=2&include_count=true",
+      "response": {
+        "path": "run/private-sources/w57/destiny_update_9_5_0-response.json",
+        "sha256": "ce1a531942faac0cc9550ffb16bf0a7f40bc0645782d4a9795e8aa81142e2bc5"
+      },
+      "retrievalRecord": {
+        "path": "run/private-sources/w57/destiny_update_9_5_0-retrieval.json",
+        "sha256": "877de3a15df5c4d3511976706de4aa75f4d274c205102383b12d3fc9399c3344"
+      },
+      "article": {
+        "path": "run/private-sources/w57/destiny_update_9_5_0-article.json",
+        "sha256": "91a80ac1e7264fbe42fe32c0f3ac01c0c28ca18051ddb3890a9500e4256dccf1"
+      },
+      "articleCanonicalSha256": "c8b2cf8684b8f7b8ca185d33b9ef9a8fa053d6c3e353c48011ec9d5e58b14262",
+      "pageShell": {
+        "path": "run/private-sources/w57/update-9-5-0-page.html",
+        "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14"
+      },
+      "pageRetrievalRecord": {
+        "path": "run/private-sources/w57/update-9-5-0-page-retrieval.json",
+        "sha256": "6295d91f4f04f779670f6cfa55bb917d679236688b4d25001f258232c4544e4f"
+      },
+      "bodyField": "html_content",
+      "sectionHeading": "Marksman’s Dodge",
+      "evidenceSubstrings": [
+        "Increased ammo pickup radius from 10 meters to 15 meters."
+      ],
+      "evidenceWindowCharacters": 300,
+      "quotedWordsIncludingHeading": 12,
+      "supports": [
+        "pickup_radius_15m"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "all_weapons_reload_on_activation",
+      "paraphrase": "Activating Marksman's Dodge reloads all weapons, including stowed equipped weapons.",
+      "sourceIds": [
+        "bungie_9_1_5",
+        "definition_426473316"
+      ],
+      "boundary": "The article/definition say all weapons; this does not prove any particular reserve transfer algorithm or local runtime implementation."
+    },
+    {
+      "id": "nearby_ammo_on_activation",
+      "paraphrase": "Activating the dodge collects nearby ammunition.",
+      "sourceIds": [
+        "bungie_9_1_5",
+        "definition_426473316"
+      ]
+    },
+    {
+      "id": "pickup_radius_15m",
+      "paraphrase": "Update 9.5.0 increases the ammo pickup radius from 10m to 15m.",
+      "sourceIds": [
+        "bungie_9_5_0"
+      ],
+      "previousRadiusMeters": 10,
+      "radiusMeters": 15
+    }
+  ],
+  "unprovenGameplay": [
+    {
+      "id": "through_wall_magnet",
+      "finding": "Through-wall magnet behavior and line-of-sight/collision rules are not established by these sources."
+    },
+    {
+      "id": "pickup_reload_order",
+      "finding": "Exact pickup/reload ordering within activation is not established."
+    },
+    {
+      "id": "animation_timing",
+      "finding": "Real Destiny 2 animation duration, frame timing and effect timing are not measured."
+    },
+    {
+      "id": "weapon_perk_proc",
+      "finding": "Weapon-perk proc implementation is not established or claimed; no reload-trigger perk implementation was inspected."
+    },
+    {
+      "id": "air_dodge_restrictions",
+      "finding": "Air/ground eligibility and other dodge restrictions are outside this task."
+    },
+    {
+      "id": "personal_ammo_policy",
+      "finding": "Personal pickup ownership, eligibility, teammate interaction and brick consumption are local implementation policy, not independently established here."
+    }
+  ],
+  "optionalHistoricalArticle": {
+    "url": "https://www.bungie.net/7/en/News/article/47127",
+    "included": false,
+    "reason": "Optional historical 2.0 context omitted. Exact official Content API request returned HTTP 500 during acquisition; no historical reload-trigger or perk claim is made."
+  }
+}

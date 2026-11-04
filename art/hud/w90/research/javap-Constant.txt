@@ -1,0 +1,75 @@
+Compiled from "Constant.java"
+public final class net.minecraft.client.color.item.Constant extends java.lang.Record implements net.minecraft.client.color.item.ItemTintSource {
+  private final int value;
+
+  public static final com.mojang.serialization.MapCodec<net.minecraft.client.color.item.Constant> MAP_CODEC;
+
+  public net.minecraft.client.color.item.Constant(int);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: iload_1
+         5: invokestatic  #7                  // Method net/minecraft/util/ARGB.opaque:(I)I
+         8: istore_1
+         9: aload_0
+        10: iload_1
+        11: putfield      #13                 // Field value:I
+        14: return
+
+  public int calculate(net.minecraft.world.item.ItemStack, net.minecraft.client.multiplayer.ClientLevel, net.minecraft.world.entity.LivingEntity);
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field value:I
+         4: ireturn
+
+  public com.mojang.serialization.MapCodec<net.minecraft.client.color.item.Constant> type();
+    Code:
+         0: getstatic     #19                 // Field MAP_CODEC:Lcom/mojang/serialization/MapCodec;
+         3: areturn
+
+  public final java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokedynamic #23,  0             // InvokeDynamic #0:toString:(Lnet/minecraft/client/color/item/Constant;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #27,  0             // InvokeDynamic #0:hashCode:(Lnet/minecraft/client/color/item/Constant;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #31,  0             // InvokeDynamic #0:equals:(Lnet/minecraft/client/color/item/Constant;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public int value();
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field value:I
+         4: ireturn
+
+  private static com.mojang.datafixers.kinds.App lambda$static$0(com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+    Code:
+         0: aload_0
+         1: getstatic     #35                 // Field net/minecraft/util/ExtraCodecs.RGB_COLOR_CODEC:Lcom/mojang/serialization/Codec;
+         4: ldc           #41                 // String value
+         6: invokeinterface #42,  2           // InterfaceMethod com/mojang/serialization/Codec.fieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+        11: invokedynamic #48,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        16: invokevirtual #52                 // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+        19: invokevirtual #58                 // Method com/mojang/serialization/codecs/RecordCodecBuilder$Instance.group:(Lcom/mojang/datafixers/kinds/App;)Lcom/mojang/datafixers/Products$P1;
+        22: aload_0
+        23: invokedynamic #64,  0             // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+        28: invokevirtual #65                 // Method com/mojang/datafixers/Products$P1.apply:(Lcom/mojang/datafixers/kinds/Applicative;Ljava/util/function/Function;)Lcom/mojang/datafixers/kinds/App;
+        31: areturn
+
+  static {};
+    Code:
+         0: invokedynamic #70,  0             // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+         5: invokestatic  #71                 // Method com/mojang/serialization/codecs/RecordCodecBuilder.mapCodec:(Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
+         8: putstatic     #19                 // Field MAP_CODEC:Lcom/mojang/serialization/MapCodec;
+        11: return
+}

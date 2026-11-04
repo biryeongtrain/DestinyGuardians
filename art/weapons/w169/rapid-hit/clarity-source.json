@@ -1,0 +1,139 @@
+{
+  "stage": "W169",
+  "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+  "sourceFileSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+  "entries": {
+    "247725512": {
+      "hash": 247725512,
+      "name": "Rapid Hit",
+      "lastUpload": 1723480728683,
+      "type": "Weapon Trait",
+      "uploadedBy": "Stardust",
+      "descriptions": {
+        "en": [
+          {
+            "linesContent": [
+              {
+                "text": "\"Buffed Hits\" grant 1 Stack of Rapid Hit for 2 seconds. Maximum of 5 Stacks."
+              }
+            ]
+          },
+          {
+            "classNames": [
+              "spacer"
+            ]
+          },
+          {
+            "linesContent": [
+              {
+                "text": "\"Buffed Hits\" refer to any \"Yellow Number\" Hits such as Precision Hits or Hits against debuffed targets."
+              }
+            ]
+          },
+          {
+            "classNames": [
+              "spacer"
+            ]
+          },
+          {
+            "linesContent": [
+              {
+                "text": "Benefits at 1|2|3|4|5 Stacks:"
+              }
+            ]
+          },
+          {
+            "linesContent": [
+              {
+                "text": "• 2|12|14|18|25 Stability"
+              }
+            ]
+          },
+          {
+            "linesContent": [
+              {
+                "text": "• 5|30|35|42|60 Reload Speed"
+              }
+            ]
+          },
+          {
+            "linesContent": [
+              {
+                "text": "• 0.99x|0.96x|0.95x|0.945x|0.92x Reload Duration Multiplier"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "communitySource": {
+    "primary": false,
+    "text": "\"Buffed Hits\" grant 1 Stack of Rapid Hit for 2 seconds. Maximum of 5 Stacks.\n\"Buffed Hits\" refer to any \"Yellow Number\" Hits such as Precision Hits or Hits against debuffed targets.\nBenefits at 1|2|3|4|5 Stacks:\n• 2|12|14|18|25 Stability\n• 5|30|35|42|60 Reload Speed\n• 0.99x|0.96x|0.95x|0.945x|0.92x Reload Duration Multiplier"
+  },
+  "officialTrigger": {
+    "primary": true,
+    "hash": 247725512,
+    "description": "Rapid precision hits temporarily increase stability and reload speed."
+  },
+  "trigger": "PRECISION_OR_DEBUFFED_TARGET_YELLOW_HIT",
+  "tiers": [
+    {
+      "stacks": 1,
+      "stabilityBonus": 2,
+      "reloadBonus": 5,
+      "durationMultiplier": 0.99
+    },
+    {
+      "stacks": 2,
+      "stabilityBonus": 12,
+      "reloadBonus": 30,
+      "durationMultiplier": 0.96
+    },
+    {
+      "stacks": 3,
+      "stabilityBonus": 14,
+      "reloadBonus": 35,
+      "durationMultiplier": 0.95
+    },
+    {
+      "stacks": 4,
+      "stabilityBonus": 18,
+      "reloadBonus": 42,
+      "durationMultiplier": 0.945
+    },
+    {
+      "stacks": 5,
+      "stabilityBonus": 25,
+      "reloadBonus": 60,
+      "durationMultiplier": 0.92
+    }
+  ],
+  "policies": {
+    "sourceRefreshScope": "UNKNOWN",
+    "sourceExpirationMode": "UNKNOWN",
+    "sourceStowPersistence": "UNKNOWN",
+    "sourceReloadConsumption": "UNKNOWN",
+    "sourceReloadSnapshot": "UNKNOWN",
+    "sourceCombinedReloadPerks": "UNKNOWN",
+    "hitRefresh": "WHOLE_WINDOW_40_TICKS_LOCAL_POLICY",
+    "expiration": "READ_ONLY_EXPIRE_LOCAL_POLICY",
+    "stowPersistence": "SAME_IDENTITY_CLOCK_CONTINUES_LOCAL_POLICY",
+    "reloadSnapshot": "AT_RELOAD_START_NONCONSUMING_NO_REFRESH_LOCAL_POLICY",
+    "weakenedBodyHits": "SOURCE_WEAKENED_AT_ACTUAL_IMPACT_LOCAL_MAPPING",
+    "stabilityIntegration": "MINECRAFT_CURVE_MASTER_OWNED_LOCAL_POLICY",
+    "statCap": 100,
+    "bowStatCap": 85,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "bowTiming": "HISTORICAL_W46_NOCK_ONLY_DRAW_UNCHANGED",
+    "longArmTiming": "SOURCE_INSERT_UNKNOWN_LOCAL_BASE_PHASE_RATIO"
+  },
+  "limitations": [
+    "Official item/plug-set snapshot Oct13 and historical community W46 curves are independently sourced; no current sandbox exactness claim.",
+    "Biting Winds uses historical nock curve with reload stat clamped at85; draw duration is unchanged, no magazine or full bow-cycle duration invented.",
+    "Long Arm curve plans are historical reference only. Source insert timings remain unknown. Runtime applies unrounded curve ratio separately to existing local20tick first/13tick interval with ceil once each, preserving2roundinsert; this is explicitly LOCAL approximation.",
+    "Lifecycle choices and Minecraft stability mapping are local master-owned policies; Clarity does not establish them.",
+    "Cross-socket eligibility establishes available combinations only; combined Outlaw/Rapid Hit reload math is not source-proven here."
+  ]
+}

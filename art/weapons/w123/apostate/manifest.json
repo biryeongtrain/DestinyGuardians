@@ -1,0 +1,105 @@
+{
+  "id": "apostate",
+  "revision": "W138",
+  "counts": {
+    "full": 114
+  },
+  "assembled_elements": 114,
+  "opaque_cuboids": 114,
+  "max_assembled_elements": 1000,
+  "emitted_faces": 684,
+  "triangle_adapter_elements": 0,
+  "alpha_elements": 0,
+  "alpha_body_plates": 0,
+  "full_only": true,
+  "texture_size": [
+    1024,
+    1024
+  ],
+  "groups": {
+    "receiver": 9,
+    "stock": 11,
+    "grip": 4,
+    "trigger": 4,
+    "magazine": 5,
+    "foreend": 7,
+    "braces": 12,
+    "bindings": 8,
+    "barrel": 3,
+    "muzzle": 17,
+    "optic": 18,
+    "thorns": 16
+  },
+  "canonical_display_exact": true,
+  "actual_bounds": [
+    [
+      7.13,
+      6.7707,
+      -15.491597
+    ],
+    [
+      9.1,
+      12.6939058,
+      13.508402
+    ]
+  ],
+  "source_bounds": [
+    [
+      6.865193172784256,
+      6.770700239434984,
+      -15.491597373136194
+    ],
+    [
+      9.07078938175546,
+      12.750220262638528,
+      13.508402626863809
+    ]
+  ],
+  "source_triangles": 37378,
+  "source_scale": 17.24631120450977,
+  "source_anchor": [
+    8.0,
+    8.0,
+    8.0
+  ],
+  "baseline_provenance": {
+    "name": "w138-apostate",
+    "baseline_sha256": "61d9f956c2c0b096efad4a646a84d6f7b308429d08ab2245e1e621419bc89f2f",
+    "head": "bfd4b4573fd8651bf1ea850bf829622ccce5c3c2",
+    "owned_paths_initially_absent": true
+  },
+  "generator_sha256": "903f995123df89a3e381bd690592689d645aa97d4c15012078901a8fb4385b20",
+  "input_sha256": {
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/apostate.json": "b5a2400a8cbe5d281783dd5f4850ac6d3f5847aa84db16b029288ec9c0b63923",
+    "art/blockbench/weapons/w30/apostate.bbmodel": "0a85c3c61fe2a6e36968bce050743d7be466a791b597591a8f0ee261dc8135a7",
+    "scripts/generate_surface_w123_beloved.py": "760430343541ffb1f490a3c8b2aa8089527805d84b881763951d7df2b220a0c8",
+    "docs/qa/2026-10-26/w138/batch.json": "10c2efbc235aa3d581b344a420ad6a2ab3d9b0f356ae73bd06184fbe6abc8a5e",
+    "src/main/resources/assets/destiny/textures/item/weapon/w30/apostate.png": "a29752acff53fbc8fd8c7a1206e43e89abf41f6742a24ab3cd5456964d9afc4b"
+  },
+  "raw_input_sha256": {
+    "/tmp/destiny-weapons-w30/raw/apostate/extracted/Apostate/Apostate.fbx": "6037a4abd73ffcd6714e5d05df7c769a0595c4088fe98d079c0089bd424402f4",
+    "/tmp/destiny-weapons-w30/raw/apostate/extracted/Apostate/Sight_Diffuse.dds": "2b2579bba88202fb8b6d510fdfcce022524b169df663c4503b0781b205e59197",
+    "/tmp/destiny-weapons-w30/raw/apostate/extracted/Apostate/Barrel_Diffuse.dds": "3ed9abcef99aebebb8a872857dae8dca0927ca3f94b82761780faf5becccfe00",
+    "/tmp/destiny-weapons-w30/raw/apostate/extracted/Apostate/990cce80.PNG": "5324ddb0a0411c4946ba1a6b1eced67cc7a7674d1487c367ae14757de6861b23",
+    "/tmp/destiny-weapons-w31/references/apostate.jpg": "2d3b46999dfbb09e5e1dfa5a72aba45992f82e9f632964761820db23260499e7"
+  },
+  "output_sha256": {
+    "art/weapons/w123/apostate/comparison.png": "41c17c50d1172d5200409f7a2445ff1e60c0a8d2801e727c6bbea32bd934c7f9",
+    "art/weapons/w123/apostate/design.json": "8cb6bbfa951b819346817357e86052b57f6385aac4470362f42fefacf925d622",
+    "art/weapons/w123/apostate/inspection.bbmodel": "97d876ddc7736cf144ab68dbfff0c77d2625bd25c1ee1390f6983e32f3e14b2d",
+    "art/weapons/w123/apostate/review.md": "1545e6237b4e42dd0b9d3722da6505c3746e8c2b179b6775567e0f5db84169a4",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/apostate.json": "846daf98a5efa055722fcac68d6020636aa1ed3f8c428c4870ada7eee8bd4f99",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/apostate.png": "aa888e15fe0f9e4cb0a858971fade9cb60689fec40acb1fcfdead6cc6bd59b9e"
+  },
+  "native_accepted": false,
+  "validation": {
+    "cpu": "targeted test + deterministic --verify required",
+    "native": "pending master"
+  },
+  "limitations": [
+    "CPU inspection only; native parser/pack loading and live first/third-person, ADS, reload, audio, 10-20 display checks pending master.",
+    "Angular semantic reinterpretation; organic curves, tiny barbs and cloth folds are simplified.",
+    "Authored default colors and static relief; no source shader, PBR, emissive lighting or exact dye reconstruction.",
+    "Single appearance photograph limits reverse-side paint evidence; reverse UV faces are independently allocated."
+  ]
+}

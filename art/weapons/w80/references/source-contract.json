@@ -1,0 +1,98 @@
+{
+  "stage": "W80",
+  "scope": "Base EP 3038247973 only; exact five official-eligibility rows. Research contract, not a production resource.",
+  "capturedAtUtc": "2026-10-24T14:21:00.555843+00:00",
+  "verified": {
+    "basePerkHash": 3038247973,
+    "eligible": [
+      {
+        "id": "distant_relation",
+        "itemHash": 2034817450,
+        "socketIndex": 4,
+        "plugSetHash": 3824767299
+      },
+      {
+        "id": "patron_of_lost_causes",
+        "itemHash": 2723241847,
+        "socketIndex": 4,
+        "plugSetHash": 120674550
+      },
+      {
+        "id": "long_arm",
+        "itemHash": 8293111,
+        "socketIndex": 4,
+        "plugSetHash": 619833418
+      },
+      {
+        "id": "bite_of_the_fox",
+        "itemHash": 1403800851,
+        "socketIndex": 4,
+        "plugSetHash": 2442672691
+      },
+      {
+        "id": "apostate",
+        "itemHash": 2164448701,
+        "socketIndex": 4,
+        "plugSetHash": 2826016044
+      }
+    ],
+    "damageSymbols": {
+      "B": "Original full nonprecision direct-hit damage before shot-distance falloff, for the applicable weapon and target.",
+      "M": "Original precision multiplier; M=1 for a body hit.",
+      "F": "Existing shot-distance impact damage multiplier; its EP-specific application is not independently verified here."
+    },
+    "explosiveConversionFractionOfBody": 0.5,
+    "compensatedImpactPrecisionMultiplier": "(M - 0.5) / 0.5",
+    "impactBeforeShotDistanceFalloff": "B*M - 0.5*B",
+    "explosionPveBeforeAnySplashAttenuation": "0.5*B*1.3",
+    "totalPveInRange": "B*M + 0.15*B",
+    "precisionRelativePveGain": "0.15/M",
+    "explosionCanPrecisionHit": false,
+    "radiusMeters": 3,
+    "trigger": "On projectile impact/contact; AoE damages enemies near impact, not merely near the in-flight shot.",
+    "damageExample": {
+      "B": 100,
+      "M": 2,
+      "directPrecisionImpact": 150,
+      "pveExplosion": 65,
+      "inRangePrecisionTotal": 215,
+      "directBodyImpact": 50,
+      "inRangeBodyTotal": 115
+    },
+    "sources": [
+      "ddc-explosive-payload.json",
+      "ddc-mode-legend.json",
+      "clarity-explosive-payload.json",
+      "official-eligibility.json"
+    ],
+    "baseReloadBonus": "No sourced reload bonus for base EP. DDC arrow +5 reload belongs to excluded enhanced EP 64866129."
+  },
+  "notEstablishedByInspectedSources": {
+    "noShotDistanceFalloffForExplosion": "Provisional parent policy; neither inspected DDC EP row nor current original Clarity EP record explicitly mentions it. Do not attribute this clause to DDC.",
+    "explosionRadialDamageFalloff": "Unknown. 3m maximum radius is not proof of uniform damage or linear radial attenuation.",
+    "geometry": "Sphere/LOS/nearest-AABB-point/boundary inclusion are local choices.",
+    "friendlyFireSelfDamageProtection": "Enemies-only DDC wording supports hostile selection; precise friend/PvP/protected/self edge cases and native contact through a denied target are not established.",
+    "engineOrdering": "Native callback/event order, impact transaction ordering and exact immunity behavior not measured.",
+    "staggerTiers": "Qualitative increased PvE stagger only. No numeric tier, poise damage, duration, threshold, guaranteed interrupt, immunity bypass or Champion stun supplied."
+  },
+  "requestedLocalContract": {
+    "singleShotCost": true,
+    "positiveOriginalWeaponOwnerAndShotToken": true,
+    "conversionNotAdditiveFullImpact": true,
+    "singleHitscan": true,
+    "transactionOrder": [
+      "compensated direct impact",
+      "nonprecision explosion"
+    ],
+    "explosionCannotActivate": [
+      "precision refunds",
+      "Outlaw",
+      "Dragonfly"
+    ],
+    "weaponFinalBlowTokenRouting": "Allow ordinary weapon-kill credit through positive original shot ownership, subject to legal socket coexistence and existing target protections.",
+    "noLegalSelectedEpPlusRampageOrKillClip": true,
+    "worldContact": "Parent must resolve actual native contact point for nearby blast, independently of whether a direct target took damage; Minecraft callback wiring is local.",
+    "parentReportedLocalGeometry": "Parent reports .25 radial policy, nearest-AABB-point distance, LOS and cap. No Destiny measurement inferred."
+  },
+  "historicalBoundary": "Bungie March/April 2024 Crucible hand-cannon changes are historical and separately cached. They do not supply current selected scout/sniper precision constants or a new EP split."
+}

@@ -1,0 +1,118 @@
+{
+  "stage": "W84",
+  "formulaSource": "art/weapons/w46/weapon_formulas.json",
+  "formulaSha256": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+  "researchSource": "art/weapons/w84/data/extraction.json",
+  "researchSha256": "a40040127ce3eda56d6adaf9b31565149367be1b7d322b09676ed187d2268b44",
+  "runtimeSha256": "481a6353fb5d3fc040d71977da9c173c9e2fc8754050fe8bb237da5172837d6e",
+  "derived": {
+    "catalog": {
+      "id": "izanagis_burden",
+      "family": "sniper_rifle",
+      "frame": "exotic",
+      "name": "Izanagi's Burden",
+      "source_frame_label": "Honed Edge",
+      "item_model": "destiny:weapon/izanagis_burden"
+    },
+    "characteristics": {
+      "id": "izanagis_burden",
+      "bungieHash": 3211806999,
+      "slot": "KINETIC",
+      "ammo": "SPECIAL",
+      "damage": "KINETIC",
+      "exotic": true,
+      "stats": {
+        "1480404414": 0,
+        "1935470627": 0,
+        "1885944937": 0,
+        "3555269338": 45,
+        "4284893193": 90,
+        "4043523819": 70,
+        "1240592695": 58,
+        "155624089": 56,
+        "3871231066": 4,
+        "4188031367": 40,
+        "1931675084": 60,
+        "943549884": 47,
+        "1345609583": 62,
+        "2715839340": 83,
+        "3209419233": 0,
+        "2714457168": 6
+      }
+    },
+    "timing": {
+      "id": "izanagis_burden",
+      "timing": {
+        "supported": true,
+        "magazine": 4,
+        "rpm": 90,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "cadenceTicks": 13.333333333333,
+        "burstSpacingTicks": 0.0,
+        "burstSize": 1,
+        "sharedBurstAmmo": false,
+        "chargeTicks": null,
+        "drawTicks": null,
+        "reloadTicks": 61,
+        "shellReload": false,
+        "reloadPerRoundTicks": null,
+        "reloadInitialTicks": null
+      }
+    },
+    "ballistics": {
+      "id": "izanagis_burden",
+      "offsetStart": 999.0,
+      "vppStart": 0.0,
+      "offsetEnd": 999.9,
+      "vppEnd": 0.0,
+      "floor": 0.999,
+      "precision": 2.5
+    },
+    "aim": {
+      "id": "izanagis_burden",
+      "profile": {
+        "transitionTicks": 9,
+        "zoom": 4.5,
+        "falloffScalar": 4.5,
+        "stability": 56.0,
+        "recoilDirection": 83,
+        "kick": 1.0624,
+        "bloomPerShot": 0.0992,
+        "recoveryPerTick": 0.04
+      }
+    },
+    "handling": {
+      "id": "izanagis_burden",
+      "profile": {
+        "supported": true,
+        "handling": 47,
+        "readyTicks": 8,
+        "stowTicks": 7
+      }
+    },
+    "aimMovement": {
+      "id": "izanagis_burden",
+      "scalar": 0.75,
+      "rule": "ordinary"
+    },
+    "reloadCredit": [],
+    "reloadAudio": [
+      {
+        "id": "izanagis_burden",
+        "ticks": 61,
+        "event": "weapon.reload_w84.izanagis_burden.61",
+        "sourceEvent": "weapon.izanagis_burden.reload",
+        "sourceSha256": "7b3048b172e5ee25694f3232b3a156b0e86fcb2d554c628216203960f8e82de1",
+        "asset": "assets/destiny/sounds/w84/reload/izanagis_burden_61.ogg"
+      }
+    ]
+  },
+  "policy": [
+    "Official fixed plug stats; historical curves ceil20Hz; timing not independently measured.",
+    "Normal/Honed reload61ticks; Honed ignores reload modifiers, full-ready commit; exact original duration/commit unknown.",
+    "Minecraft base damage16HP and base precision2.5 retained; Honed community same-hit-type multipliers separate; no catalyst.",
+    "No Distractions flinch, unspecified range increase and Barrier behavior deferred, not silently fabricated.",
+    "W70 three-dimensional scope-lens/reticle fallback, not an invented exact full-screen scope."
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "stage": "W174",
+  "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+  "repository": "https://github.com/Database-Clarity/Live-Clarity-Database",
+  "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+  "sourceSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 2896038713,
+    "name": "Focused Fury",
+    "lastUpload": 1783446631691,
+    "type": "Weapon Trait",
+    "uploadedBy": "Hawkmoona",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Scoring 35% of the Base Magazine Capacity as Precision Hits grants 25% increased damage for 11 seconds."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Stowing or Reloading the weapon resets the Precision Hit counter. The buff remains active while stowed."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Does not buff the Splash/Explosive damage elements of other perks."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 2402480669,
+  "enhancedExcluded": {
+    "hash": 2402480669,
+    "name": "Focused Fury",
+    "lastUpload": 1709248561849,
+    "type": "Weapon Trait Enhanced",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Scoring 35% of the Base Magazine Capacity as Precision Hits grants 25% increased damage for "
+            },
+            {
+              "text": "🡅",
+              "classNames": [
+                "enhancedArrow"
+              ]
+            },
+            {
+              "text": "12 seconds."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Stowing or Reloading the weapon resets the Precision Hit counter. The buff remains active while stowed."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Does not buff the Splash/Explosive damage elements of other perks."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "🡅",
+              "classNames": [
+                "enhancedArrow"
+              ]
+            },
+            {
+              "text": " Buff Duration is increased by 1 second."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "verifiedSourceMechanics": {
+    "precisionFraction": 0.35,
+    "baseMagazine": true,
+    "durationSeconds": 11,
+    "damageMultiplier": 1.25,
+    "resetProgressOnReload": true,
+    "resetProgressOnStow": true,
+    "buffRemainsWhileStowed": true,
+    "otherPerkSplashBuffed": false
+  },
+  "externalResearch": [
+    {
+      "url": "https://www.bungie.net/7/en/News/Article/destiny_update_9_7_0",
+      "date": "2026-06-09",
+      "kind": "OFFICIAL_PATCH_NOTES",
+      "checked": "2026-10-27",
+      "finding": "Focused Fury now uses a 0.35 magazine fraction and 1.25 damage multiplier. The nearby pause-on-stow change belongs to All-Star, not Focused Fury.",
+      "scope": "Does not establish threshold counter consumption or refresh cadence."
+    },
+    {
+      "url": "https://www.light.gg/db/items/2896038713/focused-fury/?_=584",
+      "kind": "CURRENT_COMMUNITY_RESEARCH",
+      "checked": "2026-10-27",
+      "finding": "Indexed community research corroborates pinned Clarity values and stowed persistence; it does not add explicit refresh-counter semantics.",
+      "access": "Search index accessible; direct canonical URL returned HTTP402."
+    },
+    {
+      "url": "https://www.reddit.com/r/DestinyTheGame/comments/teeeah/focused_fury_transverse_steps/",
+      "date": "2022-03-15",
+      "kind": "HISTORICAL_COMMUNITY_REPORT",
+      "checked": "2026-10-27",
+      "finding": "A commenter describes another complete precision-hit quota renewing the timer, with reload and swap clearing progress while retaining an active weapon-specific buff.",
+      "scope": "Historical corroboration only, not authoritative current measurements; its old numerical tuning is superseded."
+    }
+  ],
+  "localPolicies": {
+    "counter": "Consume each threshold: counter becomes zero; each next full threshold refreshes a 220-tick deadline. No refresh from every single hit.",
+    "stowReload": "Clear partial counter while retaining the original deadline; time continues while stowed. Do not pause or extend on stow/reload.",
+    "nonPrecision": "Misses/body hits do not increment or clear progress; no same-target or inter-hit timeout requirement. Pinned sources list only reload/stow resets; additional reset boundaries are master policy.",
+    "ammo": "Use immutable official base magazine, not current rounds, overflow or perk-refilled ammunition. Current W46 values equal all three official base values.",
+    "damage": "Master applies the buff only to paid direct weapon damage; separate payload splash tokenNONE and Dragonfly generic damage stay unchanged.",
+    "orderingLifecycle": "Master owns threshold-causing shot ordering, token deduplication, expiry edge, cancellation, selection changes, death/logout/session cleanup and combinations."
+  },
+  "unresolved": [
+    "No current authoritative source located that explicitly specifies counter consumption on activation, repeated-threshold refresh or stow timer progression. Those precise implementation rules remain local policy with historical corroboration.",
+    "No Destiny client measurement or native Minecraft runtime QA was performed by this worker."
+  ]
+}

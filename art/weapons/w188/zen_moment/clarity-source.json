@@ -1,0 +1,132 @@
+{
+  "clarityUrl": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/live/descriptions/clarity.json",
+  "ddcUrl": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?gid=1662574278",
+  "clarityWholeFileSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "ddcWholeFileSha256": "a1cc8780ec2dbed7e89c05bd260085eebba2732994d72cdc379d8aa5f19da6f9",
+  "baseEntry": {
+    "hash": 2387244414,
+    "name": "Zen Moment",
+    "lastUpload": 1719594243302,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Weapon Hits grant 1 Stack of the perk for 1 second up to the maximum of 5? Stacks."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Benefits granted per Stack:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• Grants ?% Flinch Resistance"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• Reduces Visual Weapon Shake by 15%"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• Reduces Reticle Bounce by 15%"
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Stacks gained per Weapon Hit by weapon type:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• Hand Cannons, Scout Rifles: 2?"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• Pulse Rifles, Sidearms: 1.5"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• Other Weapons: 1"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ddcRow": [
+    "250",
+    "Zen Moment",
+    "",
+    "On Hit: Grants ?% Flinch Resist, -15?% Visual Weapon Shake and -15?% Reticle Bounce per stack for 1 second, up to 5? stacks. Has no effect on actual recoil/camera movement, despite the in-game perk description. Pulse Rifles and Sidearms grant 1.5x as many stacks per hit, only needing ? hits to be at maximum effect. Hand Cannons and Scout Rifles grant 2x as many stacks per hit, only needing ? hits to be at maximum effect. ↑Passively grants +5 Stability."
+  ],
+  "authoredPolicy": {
+    "id": "zen_moment",
+    "hash": 2387244414,
+    "durationTicks": 20,
+    "unitsPerStack": 2,
+    "maxStackUnits": 10,
+    "hitUnits": {
+      "hand_cannon": 4,
+      "scout_rifle": 4,
+      "pulse_rifle": 3,
+      "sidearm": 3,
+      "other": 2
+    },
+    "flinchReductionPerStack": 0.1,
+    "flinchMapping": "authored_linear_10_percent_per_stack_max_50_percent",
+    "capPolicy": "authored_five_stack_cap_current_sources_tentative",
+    "expiryPolicy": "authored_refresh_all_on_each_confirmed_positive_weapon_hit",
+    "originalCapVerified": false,
+    "originalFlinchMappingVerified": false,
+    "originalExpiryAggregationVerified": false,
+    "visualShakeImplemented": false,
+    "stabilityBonus": 0,
+    "accuracyScalar": 1.0,
+    "actualRecoilScalar": 1.0,
+    "hudProcRow": false
+  },
+  "originalCapVerified": false,
+  "originalFlinchMappingVerified": false,
+  "originalExpiryAggregationVerified": false,
+  "findings": [
+    "Current live Clarity and DDC fetched independently on 2026-10-27; both leave cap and flinch numeric strength uncertain.",
+    "DDC confirms family weights, and explicitly no actual recoil/camera effect. Clarity still marks HC/scout weight tentative.",
+    "DDC gold up-arrow +5 stability belongs to enhanced; base grants no stability stat.",
+    "No proc HUD row established by these sources; hidden gameplay state with debug queries only.",
+    "Visual shake and reticle bounce have no separate current renderer and remain unimplemented; never substitute aim displacement."
+  ]
+}

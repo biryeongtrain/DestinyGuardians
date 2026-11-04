@@ -1,0 +1,89 @@
+{
+  "stage": "W103",
+  "officialDescription": {
+    "hash": 3523296417,
+    "name": "Demolitionist",
+    "itemTypeDisplayName": "Trait",
+    "description": "Kills with this weapon generate grenade energy. Activating your grenade ability reloads this weapon from reserves."
+  },
+  "baseEnergyPercent": 10,
+  "exceptionEnergyPercent": 20,
+  "exceptionOfficialWeaponTypes": [
+    "Fusion Rifle",
+    "Glaive",
+    "Shotgun",
+    "Sniper Rifle"
+  ],
+  "exceptionFamilies": [
+    "sniper_rifle",
+    "shotgun",
+    "glaive",
+    "fusion_rifle"
+  ],
+  "reloadCooldownSeconds": 3,
+  "ticksPerSecond": 20,
+  "reloadCooldownTicks": 60,
+  "reloadFromReserves": true,
+  "reloadSemantics": "On accepted grenade activation refill only available magazine space from existing reserves; no ammunition is created. Capacity/reserve arithmetic is the local conservation interpretation of the official description.",
+  "reloadCooldownScope": {
+    "proven": false,
+    "scope": null,
+    "policy": "Master must explicitly label any owner-wide or per-instance choice as a local policy, not source-proven."
+  },
+  "numericSource": {
+    "url": "https://www.light.gg/db/items/3523296417/demolitionist/?_=707",
+    "publisher": "light.gg / Clarity Community Research",
+    "primary": false,
+    "updatedAt": "2024-12-17",
+    "retrieval": "Pinned URL-bound search result, not successful direct HTTP body",
+    "summary": "10 percent baseline per qualifying weapon kill; sniper, shotgun, glaive and fusion rifle exception 20 percent; grenade activation refills magazine and has a 3-second refill cooldown.",
+    "specialAmmoPolicy": "Not all Special-ammo weapons get 20 percent. Selected trace Retraced Path and GL Salvager's Salvo use the general 10-percent baseline; selected shotgun/glaive use 20 percent."
+  },
+  "historicalAndCurrentQualifiers": [
+    {
+      "url": "https://www.bungie.net/7/en/News/Article/update-7-3-0-patch-notes",
+      "publisher": "Bungie",
+      "primary": true,
+      "date": "2023-11-28",
+      "summary": "Update 7.3.0 introduced passive-cooldown-tier scaling of percentage chunk energy; slowest grenades receive half the baseline. This is not a present-day complete ability/stat formula."
+    },
+    {
+      "url": "https://origin-static01.bungie.net/7/en/News/Article/twid_06_05_2025",
+      "publisher": "Bungie",
+      "primary": true,
+      "date": "2025-06-05",
+      "summary": "Armor 3.0 preview additionally ties chunk and recharge gains to stat investment; 70 stat matched then-live gains. No current curve is inferred from this historical preview."
+    },
+    {
+      "url": "https://www.d2clarity.com/blog/destiny-science-6/chunk-energy-scalars-breakdown-12",
+      "publisher": "Clarity",
+      "primary": false,
+      "date": "2024-12-21",
+      "summary": "Explains ability-specific penalties and Vortex as historical 0.5 scalar example, but now explicitly warns portions are outdated; not adopted as current per-Hunter numeric data."
+    },
+    {
+      "url": "https://github.com/Database-Clarity/Character-Stats",
+      "publisher": "Clarity",
+      "primary": false,
+      "summary": "Fetched README says severely outdated and instructs not to use; update.json schema 1.9. No scalar data was adopted."
+    }
+  ],
+  "unimplementedEnergyModifiers": {
+    "abilityTierScalar": null,
+    "grenadeStatScalar": null
+  },
+  "enhanced": {
+    "hash": 1906147653,
+    "implemented": false
+  },
+  "limitations": [
+    "All fractions/percentages are BASE perk chunks, not exact current final received energy.",
+    "Ability tier and Armor 3.0 grenade-stat scaling are not encoded; never infer scalars from authored Minecraft cooldowns.",
+    "A local flat percent of the existing Minecraft cooldown is a staged adaptation, not measured live Destiny 2 energy.",
+    "The 3-second reload-effect cooldown is supported, but owner-wide versus per-weapon/per-instance scope is not proven by these sources.",
+    "The selected weapon must actually have the base trait selected; pool availability is not a default-equipped claim.",
+    "Salvo proves a fixed curated selectable option, not its initial equipped perk and not a randomized pool.",
+    "Manifest and secondary research snapshot may lag current live balance; no enhanced perk is supported.",
+    "Glaive melee is not assumed to be a qualifying weapon final blow. Projectile kills are the verified intended integration scope; current melee-specific numeric behavior remains unverified."
+  ]
+}

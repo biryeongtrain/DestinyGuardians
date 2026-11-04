@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "weapon": "ammit_ar2",
+  "framing": {
+    "translation": [
+      -0.75,
+      1.2,
+      3.25
+    ],
+    "rotation": [
+      -5,
+      1,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      -8
+    ],
+    "leftPalmLower": 0.5,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A395"
+    }
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-27/w205/screenshots/w205-ammit-hip.png",
+      "observation": "Viewed actual 1708x960 PNG: left cuff terminates around y920 inside viewport; forward support palm and near-upright forearm need camera-ward assembly placement, without lengthening."
+    },
+    {
+      "source": "/private/tmp/w205-reference-view/ammit-46s.png",
+      "url": "https://www.youtube.com/watch?v=w3CYQprLoc0&t=46",
+      "observation": "Viewed cached gameplay PNG: support forearm approaches lower fore-end diagonally from bottom; use broad composition, not exact camera/FOV or the different tall optic as a replacement geometry target."
+    },
+    {
+      "source": "art/weapons/w205/rigs/auto_rifle_943c13a2.json",
+      "observation": "Exact non-fallback auto-rifle rig includes ammit_ar2; idle 80A8A422 and ADS 80A8A330 supply elbow/wrist directions and ordinary forearm length. Source has no recovered camera."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "observation": "Retain right grip [8,8.95,8.3], lower-beam support [7.8,8.72,-3.8], and magazine reload [7.4,6.85,2.68]. Mesh contact is preferable to copying source wrist separation on the remodeled gun."
+    },
+    {
+      "source": "art/weapons/w69/references/ammit-reload-contact.jpg",
+      "observation": "Viewed actual reload contact sheet: left hand leaves fore-end for magazine/receiver, then returns; preserve existing W69 moving-magazine path and W201 reach/release policy."
+    },
+    {
+      "source": "docs/qa/2026-10-27/w205/screenshots/w205-ammit-reload-sheet.png",
+      "observation": "Viewed W205 native sheet: preserve extraction/reseat sequence while master checks closer camera framing and support recovery."
+    }
+  ],
+  "notes": [
+    "Authored presentation calibration, not a recovered Destiny camera. Positive hip Z moves the gun and both skin-arm contact frames toward the camera; unchanged exact-rig forearm lengths remain in use.",
+    "Hip translation/rotation/scale fade to identity at full ADS. No cameraDepth, arm-extension, geometry, third-person, audio or combat changes.",
+    "keepMeshSupport requires the master-owned W206 loader/rig change: retain mesh left contact at idle/ADS while preserving source directions/lengths and existing moving-part reload contact.",
+    "sourceViewRotation is only a small clockwise rig direction/twist calibration; it changes neither source joint distances nor weapon ADS matrices.",
+    "leftPalmLower clears the solid fingerless palm below the lower blue beam; contacts remain inherited. Native classic/slim skin, hip/ADS transition, scope passage and reload checks remain pending master integration.",
+    "W207 explicit reload direction calibration 80A8A395 from shared family source. Source maps do not identify a unique weapon variant; moving-magazine mesh contacts remain authoritative. Not an exact recovered weapon/camera match."
+  ]
+}

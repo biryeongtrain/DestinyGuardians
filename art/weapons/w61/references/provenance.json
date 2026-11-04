@@ -1,0 +1,67 @@
+{
+  "stage": "W61",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "manifestEndpoint": "https://www.bungie.net/Platform/Destiny2/Manifest/",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourceHashes": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "patch": {
+      "path": "/tmp/destiny-weapons-w61/destiny2_update_630-response.json",
+      "sha256": "793955bf6392b2789f687f65b1c8c79540f3789b249e39b3351b73ffe7e6dc2a",
+      "bytes": 35285
+    },
+    "measurements": {
+      "path": "/tmp/destiny-weapons-w61/exact-search.json",
+      "sha256": "f993ba340690284679c197bf90703e22165ce5ac9e04a46a6ef998379f1e9e2c",
+      "bytes": 28185
+    },
+    "dodgeResearch": {
+      "path": "/tmp/destiny-weapons-w61/reload-search.json",
+      "sha256": "25c8d9ee5e485fce22881a79f13835507f4c2cd0422aa1b1b4e93895452198e2",
+      "bytes": 32683
+    },
+    "reloadResearch": {
+      "path": "/tmp/destiny-weapons-w61/edge-search.json",
+      "sha256": "acde9bc1fb1ff36f45d0bbb438c2294deff9d4e2f85dad49ed44d5e87d2440ff",
+      "bytes": 30285
+    }
+  },
+  "generator": "scripts/extract_kill_clip_w61.py",
+  "generatorSha256": "ae68e1ec133b32047f6e68e9cb1098a2bbf681081ac9798173e8c5d5538d29da",
+  "articleRetrieval": {
+    "deliveryEndpoint": "https://cdn.contentstack.io/v3/content_types/news_article/entries",
+    "environment": "live",
+    "locale": "en-us",
+    "selector": "url.hosted_url=/destiny2_update_630; limit=2; count=1",
+    "credentialsOrigin": "Official Bungie Settings cached privately for W57; no headers or credentials published."
+  },
+  "communityRetrieval": "Pinned raw web tool responses retrieved 2026-10-24. Each asserted mechanic is matched within one URL-bound result block. These are search captures, not direct light.gg HTTP bodies.",
+  "sourceBoundary": "Official inventory and plug sets establish membership. Official 6.3.0 establishes 25 percent and refresh. Community measurements establish 3.6-second completion window, 5-second base duration, stow removal and reload classification. Unsettled edge cases remain labeled policies or unresolved.",
+  "reproduce": "rtk proxy python3 scripts/extract_kill_clip_w61.py --verify",
+  "privateSources": "Full official documents and search captures are outside the repository under /tmp. Verification requires these pinned files, performs no network IO, never updates pins and writes nothing."
+}

@@ -1,0 +1,3145 @@
+{
+  "stage": "W202",
+  "checked": "2026-10-27",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "sourcePins": {
+    "/tmp/destiny-weapons-w30/bungie-items.json": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+    "/tmp/destiny-weapons-w60/bungie-plugsets.json": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+    "/tmp/destiny-weapons-w60/manifest.json": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+    "/private/tmp/destiny-w190/ddc-perks.html": "8b8109ecd80601965edcfc9559a784bd17cfc0e2e84419385ab68788fd376437",
+    "src/main/resources/destiny/weapons/w30.json": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+    "src/main/resources/destiny/weapons/w40-characteristics.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+    "src/main/resources/destiny/weapons/w58-handling.json": "4de7d346a93c822784fafa69b62ac66148d51cc11cf2da6706367682b414d3f1",
+    "src/main/resources/destiny/weapons/w44-aim.json": "0d0a38469c28a74c1a77489d346184eccef347a604c0c0c455d1c7c2e1a80fc8",
+    "src/main/resources/destiny/weapons/w68-snapshot.json": "7e824633be32953e6c75d3d856ce765223fbb1cbcc3b01affca3d83eb8fcb738",
+    "src/main/resources/destiny/weapons/w83-exotics.json": "bab9f12b8ffb99422a31b927455391d9f292da67ffa226ad3ddc96b0b1283d56",
+    "src/main/resources/destiny/weapons/w84-exotics.json": "481a6353fb5d3fc040d71977da9c173c9e2fc8754050fe8bb237da5172837d6e",
+    "art/weapons/w43/extraction.json": "a133082c322a07e81837d0409caf09596dfad4fd9889904d1bdae7acd471d9d5",
+    "art/weapons/w46/weapon_formulas.json": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+    "art/weapons/w46/stat_calc.rs": "5662ee9dea9e59547d73f81cd7c02872046266acb7b24017d2d09c123f31e5c2",
+    "art/weapons/w46/rs_types.rs": "faa476e6589d2362cf9ee8dd948410adfa7fa8507e8809f3cd10bb13ebba9b90",
+    "scripts/extract_handling_w58.py": "177981eb79edd79bb2c4c1e80618183ac2156ddfe5106e93fa70d69786b9b934",
+    "art/weapons/w83/data/extraction.json": "1178d315202d0d78341c85f5e9aa8e765dc503ddfca8fba9c157f163ab717e90",
+    "art/weapons/w84/data/runtime-extraction.json": "ccdaeb23dbadae9ef393ae7e2aa232c037c8e22278478c0844a1ec51e2599d59",
+    "scripts/extract_izanagi_w84.py": "8b122f323af80faed33670c63188e5d9ac961ab3ff69cf7c710786ccc5400d39",
+    "src/main/java/kim/biryeong/destiny/weapon/WeaponExotics.java": "8bc75359ace0e885e10e1b95811b6bb43e3a242cc720e7ce6427b763e3b2a4a7"
+  },
+  "generatorSHA256": "fbd26647b871d988000b75e298343b24b930fb0ed5734cb45088977e361bf5fb",
+  "resourceSHA256": "95c6c89dc5c8490ccc5561753a2ef7d2eb8a3c474c07078c79d55f34e7cd1417",
+  "baseDefinition": {
+    "displayProperties": {
+      "description": "Kills provide improved handling for all weapons for a short duration.",
+      "name": "Steady Hands",
+      "icon": "/common/destiny2_content/icons/ed60dd27f28737cbfc77bf41c3784c01.png",
+      "iconHash": 509074078,
+      "iconSequences": [
+        {
+          "frames": [
+            "/common/destiny2_content/icons/ed60dd27f28737cbfc77bf41c3784c01.png"
+          ]
+        },
+        {
+          "frames": [
+            "/common/destiny2_content/icons/e3d452404bca7a768b4942e14f00fd17.png"
+          ]
+        }
+      ],
+      "hasIcon": true
+    },
+    "tooltipNotifications": [
+      {
+        "displayString": "These trait columns can be enhanced once requirements have been met:\n\n• To upgrade left column traits, Tier 2 weapon enhancements are required.\n• To upgrade right column traits, Tier 3 weapon enhancements are required.",
+        "displayStyle": "ui_display_style_crafting"
+      }
+    ],
+    "backgroundColor": {
+      "colorHash": 0,
+      "red": 0,
+      "green": 0,
+      "blue": 0,
+      "alpha": 0
+    },
+    "isFeaturedItem": false,
+    "isHolofoil": false,
+    "isAdept": false,
+    "itemTypeDisplayName": "Trait",
+    "flavorText": "",
+    "uiItemDisplayStyle": "",
+    "itemTypeAndTierDisplayName": "Common Trait",
+    "displaySource": "",
+    "tooltipStyle": "build",
+    "action": {
+      "verbName": "Dismantle",
+      "verbDescription": "",
+      "isPositive": false,
+      "requiredCooldownSeconds": 0,
+      "requiredItems": [],
+      "progressionRewards": [],
+      "actionTypeLabel": "shard",
+      "rewardSheetHash": 0,
+      "rewardItemHash": 0,
+      "rewardSiteHash": 0,
+      "requiredCooldownHash": 0,
+      "deleteOnAction": true,
+      "consumeEntireStack": false,
+      "useOnAcquire": false
+    },
+    "inventory": {
+      "maxStackSize": 1,
+      "bucketTypeHash": 1469714392,
+      "recoveryBucketTypeHash": 215593132,
+      "tierTypeHash": 3340296461,
+      "isInstanceItem": false,
+      "nonTransferrableOriginal": false,
+      "tierTypeName": "Common",
+      "tierType": 2,
+      "expirationTooltip": "",
+      "expiredInActivityMessage": "",
+      "expiredInOrbitMessage": "",
+      "suppressExpirationWhenObjectivesComplete": true
+    },
+    "plug": {
+      "insertionRules": [],
+      "plugCategoryIdentifier": "frames",
+      "plugCategoryHash": 7906839,
+      "onActionRecreateSelf": false,
+      "actionRewardSiteHash": 0,
+      "actionRewardItemOverrideHash": 0,
+      "insertionMaterialRequirementHash": 0,
+      "previewItemOverrideHash": 0,
+      "enabledMaterialRequirementHash": 0,
+      "enabledRules": [],
+      "uiPlugLabel": "",
+      "plugStyle": 0,
+      "plugAvailability": 0,
+      "alternateUiPlugLabel": "",
+      "alternatePlugStyle": 0,
+      "isDummyPlug": false,
+      "parentItemOverride": {
+        "additionalEquipRequirementsDisplayStrings": []
+      },
+      "applyStatsToSocketOwnerItem": false
+    },
+    "acquireRewardSiteHash": 0,
+    "acquireUnlockHash": 0,
+    "investmentStats": [],
+    "perks": [
+      {
+        "requirementDisplayString": "",
+        "perkHash": 93883218,
+        "perkVisibility": 0
+      }
+    ],
+    "allowActions": true,
+    "doesPostmasterPullHaveSideEffects": false,
+    "nonTransferrable": true,
+    "itemCategoryHashes": [
+      59,
+      3708671066,
+      610365472
+    ],
+    "specialItemType": 0,
+    "itemType": 19,
+    "itemSubType": 0,
+    "classType": 3,
+    "breakerType": 0,
+    "equippable": false,
+    "defaultDamageType": 0,
+    "isWrapper": false,
+    "hash": 509074078,
+    "index": 11845,
+    "redacted": false,
+    "blacklisted": false
+  },
+  "socketProofs": [
+    {
+      "roll": {
+        "id": "mindbender_s_ambition_adept",
+        "hash": 912150785,
+        "socket": 4,
+        "perkHash": 509074078,
+        "plugSetHash": 4054654930
+      },
+      "traitCategory": {
+        "socketCategoryHash": 4241085061,
+        "socketIndexes": [
+          1,
+          2,
+          3,
+          4,
+          8,
+          9
+        ]
+      },
+      "socketEntry": {
+        "socketTypeHash": 1215804696,
+        "singleInitialItemHash": 509074078,
+        "reusablePlugItems": [
+          {
+            "plugItemHash": 509074078
+          }
+        ],
+        "preventInitializationOnVendorPurchase": false,
+        "preventInitializationWhenVersioning": false,
+        "hidePerksInItemTooltip": false,
+        "plugSources": 2,
+        "randomizedPlugSetHash": 4054654930,
+        "overridesUiAppearance": false,
+        "defaultVisible": true
+      },
+      "plugSet": {
+        "displayProperties": {
+          "description": "",
+          "name": "",
+          "iconHash": 0,
+          "hasIcon": false
+        },
+        "reusablePlugItems": [
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 509074078
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 4082225868
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2679249093
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 744594675
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 2451262963
+          },
+          {
+            "craftingRequirements": {
+              "unlockRequirements": [],
+              "materialRequirementHashes": []
+            },
+            "weight": 0.0,
+            "alternateWeight": 0.0,
+            "currentlyCanRoll": true,
+            "plugItemHash": 4293542123
+          }
+        ],
+        "isFakePlugSet": false,
+        "hash": 4054654930,
+        "index": 1429,
+        "redacted": false,
+        "blacklisted": false
+      },
+      "matchingPlug": {
+        "craftingRequirements": {
+          "unlockRequirements": [],
+          "materialRequirementHashes": []
+        },
+        "weight": 0.0,
+        "alternateWeight": 0.0,
+        "currentlyCanRoll": true,
+        "plugItemHash": 509074078
+      }
+    }
+  ],
+  "catalogScan": [
+    {
+      "id": "duke_mk_44",
+      "hash": 2112909414,
+      "matches": []
+    },
+    {
+      "id": "austringer",
+      "hash": 3055790362,
+      "matches": []
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "hash": 3037520408,
+      "matches": []
+    },
+    {
+      "id": "halfdan_d",
+      "hash": 3778520450,
+      "matches": []
+    },
+    {
+      "id": "ammit_ar2",
+      "hash": 2119346509,
+      "matches": []
+    },
+    {
+      "id": "gnawing_hunger",
+      "hash": 821154603,
+      "matches": []
+    },
+    {
+      "id": "steelfeather_repeater",
+      "hash": 1251729046,
+      "matches": []
+    },
+    {
+      "id": "cold_denial",
+      "hash": 1216130969,
+      "matches": []
+    },
+    {
+      "id": "bygones",
+      "hash": 2712244741,
+      "matches": []
+    },
+    {
+      "id": "chattering_bone",
+      "hash": 568515759,
+      "matches": []
+    },
+    {
+      "id": "blast_furnace",
+      "hash": 3843477312,
+      "matches": []
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "hash": 1280933460,
+      "matches": []
+    },
+    {
+      "id": "frontier_justice",
+      "hash": 273396910,
+      "matches": []
+    },
+    {
+      "id": "distant_relation",
+      "hash": 2034817450,
+      "matches": []
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "hash": 2723241847,
+      "matches": []
+    },
+    {
+      "id": "aishas_embrace",
+      "hash": 2638190703,
+      "matches": []
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "matches": []
+    },
+    {
+      "id": "antiope_d",
+      "hash": 566976653,
+      "matches": []
+    },
+    {
+      "id": "bug_out_bag",
+      "hash": 2744715540,
+      "matches": []
+    },
+    {
+      "id": "ikelos_smg_v1_0_1",
+      "hash": 1723472487,
+      "matches": []
+    },
+    {
+      "id": "the_recluse",
+      "hash": 3354242550,
+      "matches": []
+    },
+    {
+      "id": "allied_demand",
+      "hash": 1532276803,
+      "matches": []
+    },
+    {
+      "id": "farewell",
+      "hash": 541188001,
+      "matches": []
+    },
+    {
+      "id": "lonesome",
+      "hash": 2199171672,
+      "matches": []
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "hash": 3751622019,
+      "matches": []
+    },
+    {
+      "id": "high_albedo",
+      "hash": 1197486957,
+      "matches": []
+    },
+    {
+      "id": "brass_attacks",
+      "hash": 2121785039,
+      "matches": []
+    },
+    {
+      "id": "biting_winds",
+      "hash": 1621657423,
+      "matches": []
+    },
+    {
+      "id": "whispering_slab",
+      "hash": 211938782,
+      "matches": []
+    },
+    {
+      "id": "bite_of_the_fox",
+      "hash": 1403800851,
+      "matches": []
+    },
+    {
+      "id": "beloved",
+      "hash": 3107853529,
+      "matches": []
+    },
+    {
+      "id": "apostate",
+      "hash": 2164448701,
+      "matches": []
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "hash": 912150785,
+      "matches": [
+        {
+          "id": "mindbender_s_ambition_adept",
+          "hash": 912150785,
+          "socket": 4,
+          "perkHash": 509074078,
+          "plugSetHash": 4054654930
+        }
+      ]
+    },
+    {
+      "id": "dust_rock_blues",
+      "hash": 636912560,
+      "matches": []
+    },
+    {
+      "id": "first_in_last_out",
+      "hash": 3616586446,
+      "matches": []
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "hash": 2217366863,
+      "matches": []
+    },
+    {
+      "id": "ikelos_sg_v1_0_1",
+      "hash": 1887808042,
+      "matches": []
+    },
+    {
+      "id": "erentil_fr4",
+      "hash": 2398848320,
+      "matches": []
+    },
+    {
+      "id": "hollow_words",
+      "hash": 607191995,
+      "matches": []
+    },
+    {
+      "id": "dream_breaker",
+      "hash": 2931957300,
+      "matches": []
+    },
+    {
+      "id": "null_composure",
+      "hash": 1644680957,
+      "matches": []
+    },
+    {
+      "id": "coriolis_force",
+      "hash": 3512349612,
+      "matches": []
+    },
+    {
+      "id": "line_in_the_sand",
+      "hash": 946443267,
+      "matches": []
+    },
+    {
+      "id": "stormchaser",
+      "hash": 3652506829,
+      "matches": []
+    },
+    {
+      "id": "retraced_path",
+      "hash": 548958835,
+      "matches": []
+    },
+    {
+      "id": "salvager_s_salvo",
+      "hash": 2060863616,
+      "matches": []
+    },
+    {
+      "id": "deafening_whisper",
+      "hash": 981718087,
+      "matches": []
+    },
+    {
+      "id": "edge_transit",
+      "hash": 218335759,
+      "matches": []
+    },
+    {
+      "id": "canis_major",
+      "hash": 2066434718,
+      "matches": []
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "hash": 1311684613,
+      "matches": []
+    },
+    {
+      "id": "bad_omens",
+      "hash": 991314988,
+      "matches": []
+    },
+    {
+      "id": "bellowing_giant",
+      "hash": 2186258845,
+      "matches": []
+    },
+    {
+      "id": "code_duello",
+      "hash": 2496242052,
+      "matches": []
+    },
+    {
+      "id": "pyroclastic_flow",
+      "hash": 1289324202,
+      "matches": []
+    },
+    {
+      "id": "fixed_odds",
+      "hash": 2194955522,
+      "matches": []
+    },
+    {
+      "id": "hammerhead",
+      "hash": 603242241,
+      "matches": []
+    },
+    {
+      "id": "retrofit_escapade",
+      "hash": 3103325054,
+      "matches": []
+    },
+    {
+      "id": "abide_the_return",
+      "hash": 1644160541,
+      "matches": []
+    },
+    {
+      "id": "goldtusk",
+      "hash": 3371413057,
+      "matches": []
+    },
+    {
+      "id": "crown_splitter",
+      "hash": 2782325302,
+      "matches": []
+    },
+    {
+      "id": "falling_guillotine",
+      "hash": 614426548,
+      "matches": []
+    },
+    {
+      "id": "temptation_s_hook",
+      "hash": 35794111,
+      "matches": []
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "hash": 254636484,
+      "matches": []
+    }
+  ],
+  "curveProofs": [
+    {
+      "id": "duke_mk_44",
+      "mapping": {
+        "id": "duke_mk_44",
+        "family": "Hand Cannon",
+        "category": "120 RPM",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": 5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 30,
+        "readyTicks": 8,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.4,
+        "falloffScalar": 1.5,
+        "stability": 29.0,
+        "recoilDirection": 90,
+        "kick": 1.239,
+        "bloomPerShot": 0.1478,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002942857143,
+          "offset": 0.4782571429
+        },
+        "stow": {
+          "vpp": -0.002952380952,
+          "offset": 0.5133809524
+        },
+        "ads": {
+          "vpp": -0.001666666667,
+          "offset": 0.3316666667
+        }
+      }
+    },
+    {
+      "id": "austringer",
+      "mapping": {
+        "id": "austringer",
+        "family": "Hand Cannon",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": 0
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 47,
+        "readyTicks": 7,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.4,
+        "falloffScalar": 1.5,
+        "stability": 59.0,
+        "recoilDirection": 95,
+        "kick": 0.969,
+        "bloomPerShot": 0.0938,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002942857143,
+          "offset": 0.4782571429
+        },
+        "stow": {
+          "vpp": -0.002952380952,
+          "offset": 0.5133809524
+        },
+        "ads": {
+          "vpp": -0.001666666667,
+          "offset": 0.3316666667
+        }
+      }
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "mapping": {
+        "id": "seventh_seraph_officer_revolver",
+        "family": "Hand Cannon",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": 0
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 30,
+        "readyTicks": 8,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.4,
+        "falloffScalar": 1.5,
+        "stability": 52.0,
+        "recoilDirection": 84,
+        "kick": 1.032,
+        "bloomPerShot": 0.1064,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002942857143,
+          "offset": 0.4782571429
+        },
+        "stow": {
+          "vpp": -0.002952380952,
+          "offset": 0.5133809524
+        },
+        "ads": {
+          "vpp": -0.001666666667,
+          "offset": 0.3316666667
+        }
+      }
+    },
+    {
+      "id": "halfdan_d",
+      "mapping": {
+        "id": "halfdan_d",
+        "family": "Auto Rifle",
+        "category": "default",
+        "subfamily": "High-Impact",
+        "encodedPveCrit": 5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 39,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.6,
+        "falloffScalar": 1.6,
+        "stability": 20.0,
+        "recoilDirection": 70,
+        "kick": 0.396,
+        "bloomPerShot": 0.164,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00279338,
+          "offset": 0.51985381
+        },
+        "stow": {
+          "vpp": -0.00268436,
+          "offset": 0.48414822
+        },
+        "ads": {
+          "vpp": -0.001875,
+          "offset": 0.38975
+        }
+      }
+    },
+    {
+      "id": "ammit_ar2",
+      "mapping": {
+        "id": "ammit_ar2",
+        "family": "Auto Rifle",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": 3
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 46,
+        "readyTicks": 8,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.5,
+        "falloffScalar": 1.6,
+        "stability": 45.0,
+        "recoilDirection": 71,
+        "kick": 0.3285,
+        "bloomPerShot": 0.119,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00279338,
+          "offset": 0.51985381
+        },
+        "stow": {
+          "vpp": -0.00268436,
+          "offset": 0.48414822
+        },
+        "ads": {
+          "vpp": -0.001875,
+          "offset": 0.38975
+        }
+      }
+    },
+    {
+      "id": "gnawing_hunger",
+      "mapping": {
+        "id": "gnawing_hunger",
+        "family": "Auto Rifle",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": 3
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 63,
+        "readyTicks": 7,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.6,
+        "falloffScalar": 1.6,
+        "stability": 43.0,
+        "recoilDirection": 54,
+        "kick": 0.3339,
+        "bloomPerShot": 0.1226,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00279338,
+          "offset": 0.51985381
+        },
+        "stow": {
+          "vpp": -0.00268436,
+          "offset": 0.48414822
+        },
+        "ads": {
+          "vpp": -0.001875,
+          "offset": 0.38975
+        }
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "mapping": {
+        "id": "steelfeather_repeater",
+        "family": "Auto Rifle",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": 0
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 38,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.6,
+        "falloffScalar": 1.6,
+        "stability": 31.0,
+        "recoilDirection": 57,
+        "kick": 0.3663,
+        "bloomPerShot": 0.1442,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00279338,
+          "offset": 0.51985381
+        },
+        "stow": {
+          "vpp": -0.00268436,
+          "offset": 0.48414822
+        },
+        "ads": {
+          "vpp": -0.001875,
+          "offset": 0.38975
+        }
+      }
+    },
+    {
+      "id": "cold_denial",
+      "mapping": {
+        "id": "cold_denial",
+        "family": "Pulse Rifle",
+        "category": "default",
+        "subfamily": "High-Impact",
+        "encodedPveCrit": 5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 24,
+        "readyTicks": 10,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.4,
+        "falloffScalar": 1.7,
+        "stability": 44.0,
+        "recoilDirection": 73,
+        "kick": 0.4416,
+        "bloomPerShot": 0.1208,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00312085,
+          "offset": 0.54370932
+        },
+        "stow": {
+          "vpp": -0.0035545,
+          "offset": 0.55005845
+        },
+        "ads": {
+          "vpp": -0.00196208,
+          "offset": 0.4574687
+        }
+      }
+    },
+    {
+      "id": "bygones",
+      "mapping": {
+        "id": "bygones",
+        "family": "Pulse Rifle",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": 8
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 46,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.7,
+        "falloffScalar": 1.7,
+        "stability": 55.0,
+        "recoilDirection": 69,
+        "kick": 0.402,
+        "bloomPerShot": 0.101,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00312085,
+          "offset": 0.54370932
+        },
+        "stow": {
+          "vpp": -0.0035545,
+          "offset": 0.55005845
+        },
+        "ads": {
+          "vpp": -0.00196208,
+          "offset": 0.4574687
+        }
+      }
+    },
+    {
+      "id": "chattering_bone",
+      "mapping": {
+        "id": "chattering_bone",
+        "family": "Pulse Rifle",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": 8
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 70,
+        "readyTicks": 7,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.7,
+        "falloffScalar": 1.7,
+        "stability": 52.0,
+        "recoilDirection": 57,
+        "kick": 0.4128,
+        "bloomPerShot": 0.1064,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00312085,
+          "offset": 0.54370932
+        },
+        "stow": {
+          "vpp": -0.0035545,
+          "offset": 0.55005845
+        },
+        "ads": {
+          "vpp": -0.00196208,
+          "offset": 0.4574687
+        }
+      }
+    },
+    {
+      "id": "blast_furnace",
+      "mapping": {
+        "id": "blast_furnace",
+        "family": "Pulse Rifle",
+        "category": "default",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": 10
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 24,
+        "readyTicks": 10,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.8,
+        "falloffScalar": 1.8,
+        "stability": 64.0,
+        "recoilDirection": 65,
+        "kick": 0.3696,
+        "bloomPerShot": 0.0848,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00312085,
+          "offset": 0.54370932
+        },
+        "stow": {
+          "vpp": -0.0035545,
+          "offset": 0.55005845
+        },
+        "ads": {
+          "vpp": -0.00196208,
+          "offset": 0.4574687
+        }
+      }
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "mapping": {
+        "id": "claws_of_the_wolf",
+        "family": "Pulse Rifle",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": 10
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 21,
+        "readyTicks": 10,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.7,
+        "falloffScalar": 1.7,
+        "stability": 39.0,
+        "recoilDirection": 53,
+        "kick": 0.4596,
+        "bloomPerShot": 0.1298,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00312085,
+          "offset": 0.54370932
+        },
+        "stow": {
+          "vpp": -0.0035545,
+          "offset": 0.55005845
+        },
+        "ads": {
+          "vpp": -0.00196208,
+          "offset": 0.4574687
+        }
+      }
+    },
+    {
+      "id": "frontier_justice",
+      "mapping": {
+        "id": "frontier_justice",
+        "family": "Scout Rifle",
+        "category": "default",
+        "subfamily": "High-Impact",
+        "encodedPveCrit": 13
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 24,
+        "readyTicks": 10,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 2.1,
+        "falloffScalar": 2.0,
+        "stability": 18.0,
+        "recoilDirection": 79,
+        "kick": 0.7136,
+        "bloomPerShot": 0.1676,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00285336856,
+          "offset": 0.540561867
+        },
+        "stow": {
+          "vpp": -0.002941215324,
+          "offset": 0.527217745
+        },
+        "ads": {
+          "vpp": -0.001693527081,
+          "offset": 0.4114236019
+        }
+      }
+    },
+    {
+      "id": "distant_relation",
+      "mapping": {
+        "id": "distant_relation",
+        "family": "Scout Rifle",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": 5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 40,
+        "readyTicks": 9,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 2.0,
+        "falloffScalar": 2.0,
+        "stability": 49.0,
+        "recoilDirection": 58,
+        "kick": 0.5648,
+        "bloomPerShot": 0.1118,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00285336856,
+          "offset": 0.540561867
+        },
+        "stow": {
+          "vpp": -0.002941215324,
+          "offset": 0.527217745
+        },
+        "ads": {
+          "vpp": -0.001693527081,
+          "offset": 0.4114236019
+        }
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "mapping": {
+        "id": "patron_of_lost_causes",
+        "family": "Scout Rifle",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": 13
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 63,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 2.0,
+        "falloffScalar": 2.0,
+        "stability": 32.0,
+        "recoilDirection": 59,
+        "kick": 0.6464,
+        "bloomPerShot": 0.1424,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00285336856,
+          "offset": 0.540561867
+        },
+        "stow": {
+          "vpp": -0.002941215324,
+          "offset": 0.527217745
+        },
+        "ads": {
+          "vpp": -0.001693527081,
+          "offset": 0.4114236019
+        }
+      }
+    },
+    {
+      "id": "aishas_embrace",
+      "mapping": {
+        "id": "aishas_embrace",
+        "family": "Scout Rifle",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": 10
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 26,
+        "readyTicks": 10,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 2.0,
+        "falloffScalar": 2.0,
+        "stability": 46.0,
+        "recoilDirection": 55,
+        "kick": 0.5792,
+        "bloomPerShot": 0.1172,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00285336856,
+          "offset": 0.540561867
+        },
+        "stow": {
+          "vpp": -0.002941215324,
+          "offset": 0.527217745
+        },
+        "ads": {
+          "vpp": -0.001693527081,
+          "offset": 0.4114236019
+        }
+      }
+    },
+    {
+      "id": "long_arm",
+      "mapping": {
+        "id": "long_arm",
+        "family": "Scout Rifle",
+        "category": "aggresive",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": -1
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 53,
+        "readyTicks": 8,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.8,
+        "falloffScalar": 2.0,
+        "stability": 25.0,
+        "recoilDirection": 72,
+        "kick": 0.68,
+        "bloomPerShot": 0.155,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00285336856,
+          "offset": 0.540561867
+        },
+        "stow": {
+          "vpp": -0.002941215324,
+          "offset": 0.527217745
+        },
+        "ads": {
+          "vpp": -0.001693527081,
+          "offset": 0.4114236019
+        }
+      }
+    },
+    {
+      "id": "antiope_d",
+      "mapping": {
+        "id": "antiope_d",
+        "family": "Submachine Gun",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": -5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 18,
+        "readyTicks": 9,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.3,
+        "falloffScalar": 1.4,
+        "stability": 32.0,
+        "recoilDirection": 90,
+        "kick": 0.2424,
+        "bloomPerShot": 0.1424,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002376970528,
+          "offset": 0.4710178204
+        },
+        "stow": {
+          "vpp": -0.002547978067,
+          "offset": 0.4481295408
+        },
+        "ads": {
+          "vpp": -0.001873200822,
+          "offset": 0.3581576422
+        }
+      }
+    },
+    {
+      "id": "bug_out_bag",
+      "mapping": {
+        "id": "bug_out_bag",
+        "family": "Submachine Gun",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": 0
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 47,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.3,
+        "falloffScalar": 1.4,
+        "stability": 39.0,
+        "recoilDirection": 88,
+        "kick": 0.2298,
+        "bloomPerShot": 0.1298,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002376970528,
+          "offset": 0.4710178204
+        },
+        "stow": {
+          "vpp": -0.002547978067,
+          "offset": 0.4481295408
+        },
+        "ads": {
+          "vpp": -0.001873200822,
+          "offset": 0.3581576422
+        }
+      }
+    },
+    {
+      "id": "ikelos_smg_v1_0_1",
+      "mapping": {
+        "id": "ikelos_smg_v1_0_1",
+        "family": "Submachine Gun",
+        "category": "default",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": 0
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 70,
+        "readyTicks": 7,
+        "stowTicks": 6
+      },
+      "aimBaseline": {
+        "transitionTicks": 5,
+        "zoom": 1.3,
+        "falloffScalar": 1.4,
+        "stability": 25.0,
+        "recoilDirection": 90,
+        "kick": 0.255,
+        "bloomPerShot": 0.155,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002376970528,
+          "offset": 0.4710178204
+        },
+        "stow": {
+          "vpp": -0.002547978067,
+          "offset": 0.4481295408
+        },
+        "ads": {
+          "vpp": -0.001873200822,
+          "offset": 0.3581576422
+        }
+      }
+    },
+    {
+      "id": "the_recluse",
+      "mapping": {
+        "id": "the_recluse",
+        "family": "Submachine Gun",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": 8
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 63,
+        "readyTicks": 7,
+        "stowTicks": 6
+      },
+      "aimBaseline": {
+        "transitionTicks": 5,
+        "zoom": 1.3,
+        "falloffScalar": 1.4,
+        "stability": 47.0,
+        "recoilDirection": 100,
+        "kick": 0.2154,
+        "bloomPerShot": 0.1154,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002376970528,
+          "offset": 0.4710178204
+        },
+        "stow": {
+          "vpp": -0.002547978067,
+          "offset": 0.4481295408
+        },
+        "ads": {
+          "vpp": -0.001873200822,
+          "offset": 0.3581576422
+        }
+      }
+    },
+    {
+      "id": "allied_demand",
+      "mapping": {
+        "id": "allied_demand",
+        "family": "Sidearm",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 48,
+        "readyTicks": 6,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 5,
+        "zoom": 1.2,
+        "falloffScalar": 1.2,
+        "stability": 67.0,
+        "recoilDirection": 97,
+        "kick": 0.3289,
+        "bloomPerShot": 0.0794,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00264010989,
+          "offset": 0.4232582418
+        },
+        "stow": {
+          "vpp": -0.00197527473,
+          "offset": 0.4298956044
+        },
+        "ads": {
+          "vpp": -0.0022293956,
+          "offset": 0.3435796703
+        }
+      }
+    },
+    {
+      "id": "farewell",
+      "mapping": {
+        "id": "farewell",
+        "family": "Sidearm",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": -5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 64,
+        "readyTicks": 6,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 5,
+        "zoom": 1.2,
+        "falloffScalar": 1.2,
+        "stability": 40.0,
+        "recoilDirection": 96,
+        "kick": 0.418,
+        "bloomPerShot": 0.128,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00264010989,
+          "offset": 0.4232582418
+        },
+        "stow": {
+          "vpp": -0.00197527473,
+          "offset": 0.4298956044
+        },
+        "ads": {
+          "vpp": -0.0022293956,
+          "offset": 0.3435796703
+        }
+      }
+    },
+    {
+      "id": "lonesome",
+      "mapping": {
+        "id": "lonesome",
+        "family": "Sidearm",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": -5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 33,
+        "readyTicks": 7,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.2,
+        "falloffScalar": 1.2,
+        "stability": 42.0,
+        "recoilDirection": 90,
+        "kick": 0.4114,
+        "bloomPerShot": 0.1244,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00264010989,
+          "offset": 0.4232582418
+        },
+        "stow": {
+          "vpp": -0.00197527473,
+          "offset": 0.4298956044
+        },
+        "ads": {
+          "vpp": -0.0022293956,
+          "offset": 0.3435796703
+        }
+      }
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "mapping": {
+        "id": "dead_man_walking_xx7463",
+        "family": "Sidearm",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": -5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 49,
+        "readyTicks": 6,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 5,
+        "zoom": 1.2,
+        "falloffScalar": 1.2,
+        "stability": 56.0,
+        "recoilDirection": 98,
+        "kick": 0.3652,
+        "bloomPerShot": 0.0992,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00264010989,
+          "offset": 0.4232582418
+        },
+        "stow": {
+          "vpp": -0.00197527473,
+          "offset": 0.4298956044
+        },
+        "ads": {
+          "vpp": -0.0022293956,
+          "offset": 0.3435796703
+        }
+      }
+    },
+    {
+      "id": "high_albedo",
+      "mapping": {
+        "id": "high_albedo",
+        "family": "Sidearm",
+        "category": "default",
+        "subfamily": "Adaptive_Burst",
+        "encodedPveCrit": 5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 51,
+        "readyTicks": 6,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 5,
+        "zoom": 1.2,
+        "falloffScalar": 1.2,
+        "stability": 69.0,
+        "recoilDirection": 99,
+        "kick": 0.3223,
+        "bloomPerShot": 0.0758,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00264010989,
+          "offset": 0.4232582418
+        },
+        "stow": {
+          "vpp": -0.00197527473,
+          "offset": 0.4298956044
+        },
+        "ads": {
+          "vpp": -0.0022293956,
+          "offset": 0.3435796703
+        }
+      }
+    },
+    {
+      "id": "brass_attacks",
+      "mapping": {
+        "id": "brass_attacks",
+        "family": "Sidearm",
+        "category": "default",
+        "subfamily": "Heavy_Burst",
+        "encodedPveCrit": -5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 36,
+        "readyTicks": 7,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.3,
+        "falloffScalar": 1.2,
+        "stability": 38.0,
+        "recoilDirection": 90,
+        "kick": 0.4246,
+        "bloomPerShot": 0.1316,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00264010989,
+          "offset": 0.4232582418
+        },
+        "stow": {
+          "vpp": -0.00197527473,
+          "offset": 0.4298956044
+        },
+        "ads": {
+          "vpp": -0.0022293956,
+          "offset": 0.3435796703
+        }
+      }
+    },
+    {
+      "id": "biting_winds",
+      "mapping": {
+        "id": "biting_winds",
+        "family": "Combat Bow",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": 0
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 49,
+        "readyTicks": 12,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.8,
+        "falloffScalar": 1.8,
+        "stability": 43.0,
+        "recoilDirection": 63,
+        "kick": 0.2597,
+        "bloomPerShot": 0.1226,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002909930716,
+          "offset": 0.7364549654
+        },
+        "stow": {
+          "vpp": -0.00179330254,
+          "offset": 0.5396466513
+        },
+        "ads": {
+          "vpp": -0.001855658199,
+          "offset": 0.5293778291
+        }
+      }
+    },
+    {
+      "id": "whispering_slab",
+      "mapping": {
+        "id": "whispering_slab",
+        "family": "Combat Bow",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": 5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 65,
+        "readyTicks": 11,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.8,
+        "falloffScalar": 1.8,
+        "stability": 53.0,
+        "recoilDirection": 55,
+        "kick": 0.2387,
+        "bloomPerShot": 0.1046,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002909930716,
+          "offset": 0.7364549654
+        },
+        "stow": {
+          "vpp": -0.00179330254,
+          "offset": 0.5396466513
+        },
+        "ads": {
+          "vpp": -0.001855658199,
+          "offset": 0.5293778291
+        }
+      }
+    },
+    {
+      "id": "bite_of_the_fox",
+      "mapping": {
+        "id": "bite_of_the_fox",
+        "family": "Sniper Rifle",
+        "category": "default",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": 102
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 25,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 10,
+        "zoom": 4.3,
+        "falloffScalar": 4.5,
+        "stability": 20.0,
+        "recoilDirection": 68,
+        "kick": 1.408,
+        "bloomPerShot": 0.164,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002623944983,
+          "offset": 0.5079465458
+        },
+        "stow": {
+          "vpp": -0.002083932479,
+          "offset": 0.4392525789
+        },
+        "ads": {
+          "vpp": -0.00194998437,
+          "offset": 0.5021325414
+        }
+      }
+    },
+    {
+      "id": "beloved",
+      "mapping": {
+        "id": "beloved",
+        "family": "Sniper Rifle",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": 89
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 47,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 4.0,
+        "falloffScalar": 4.5,
+        "stability": 46.0,
+        "recoilDirection": 77,
+        "kick": 1.1584,
+        "bloomPerShot": 0.1172,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002623944983,
+          "offset": 0.5079465458
+        },
+        "stow": {
+          "vpp": -0.002083932479,
+          "offset": 0.4392525789
+        },
+        "ads": {
+          "vpp": -0.00194998437,
+          "offset": 0.5021325414
+        }
+      }
+    },
+    {
+      "id": "apostate",
+      "mapping": {
+        "id": "apostate",
+        "family": "Sniper Rifle",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": 99
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 65,
+        "readyTicks": 7,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 4.0,
+        "falloffScalar": 4.5,
+        "stability": 41.0,
+        "recoilDirection": 49,
+        "kick": 1.2064,
+        "bloomPerShot": 0.1262,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002623944983,
+          "offset": 0.5079465458
+        },
+        "stow": {
+          "vpp": -0.002083932479,
+          "offset": 0.4392525789
+        },
+        "ads": {
+          "vpp": -0.00194998437,
+          "offset": 0.5021325414
+        }
+      }
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "mapping": {
+        "id": "mindbender_s_ambition_adept",
+        "family": "Shotgun",
+        "category": "default",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": -20
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 31,
+        "readyTicks": 9,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.2,
+        "falloffScalar": 1.0,
+        "stability": 29.0,
+        "recoilDirection": 69,
+        "kick": 1.652,
+        "bloomPerShot": 0.1478,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      }
+    },
+    {
+      "id": "dust_rock_blues",
+      "mapping": {
+        "id": "dust_rock_blues",
+        "family": "Shotgun",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": -20
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 34,
+        "readyTicks": 9,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.2,
+        "falloffScalar": 1.0,
+        "stability": 45.0,
+        "recoilDirection": 64,
+        "kick": 1.46,
+        "bloomPerShot": 0.119,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      }
+    },
+    {
+      "id": "first_in_last_out",
+      "mapping": {
+        "id": "first_in_last_out",
+        "family": "Shotgun",
+        "category": "slug",
+        "subfamily": "Slug",
+        "encodedPveCrit": 13
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 60,
+        "readyTicks": 7,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.2,
+        "falloffScalar": 1.2,
+        "stability": 40.0,
+        "recoilDirection": 58,
+        "kick": 1.52,
+        "bloomPerShot": 0.128,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      }
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "mapping": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "family": "Shotgun",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": -20
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 68,
+        "readyTicks": 7,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 6,
+        "zoom": 1.2,
+        "falloffScalar": 1.0,
+        "stability": 39.0,
+        "recoilDirection": 53,
+        "kick": 1.532,
+        "bloomPerShot": 0.1298,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      }
+    },
+    {
+      "id": "ikelos_sg_v1_0_1",
+      "mapping": {
+        "id": "ikelos_sg_v1_0_1",
+        "family": "Shotgun",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": -20
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 44,
+        "readyTicks": 8,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.2,
+        "falloffScalar": 1.0,
+        "stability": 32.0,
+        "recoilDirection": 69,
+        "kick": 1.616,
+        "bloomPerShot": 0.1424,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003271255061,
+          "offset": 0.5388744939
+        },
+        "stow": {
+          "vpp": -0.003388663968,
+          "offset": 0.5711336032
+        },
+        "ads": {
+          "vpp": -0.00233805668,
+          "offset": 0.451194332
+        }
+      }
+    },
+    {
+      "id": "erentil_fr4",
+      "mapping": {
+        "id": "erentil_fr4",
+        "family": "Fusion Rifle",
+        "category": "default",
+        "subfamily": "High-Impact",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 18,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.5,
+        "falloffScalar": 1.3,
+        "stability": 22.0,
+        "recoilDirection": 60,
+        "kick": 0.7812,
+        "bloomPerShot": 0.1604,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      }
+    },
+    {
+      "id": "hollow_words",
+      "mapping": {
+        "id": "hollow_words",
+        "family": "Fusion Rifle",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 23,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.8,
+        "falloffScalar": 1.3,
+        "stability": 38.0,
+        "recoilDirection": 75,
+        "kick": 0.6948,
+        "bloomPerShot": 0.1316,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "mapping": {
+        "id": "dream_breaker",
+        "family": "Fusion Rifle",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 27,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.5,
+        "falloffScalar": 1.3,
+        "stability": 36.0,
+        "recoilDirection": 57,
+        "kick": 0.7056,
+        "bloomPerShot": 0.1352,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      }
+    },
+    {
+      "id": "null_composure",
+      "mapping": {
+        "id": "null_composure",
+        "family": "Fusion Rifle",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 56,
+        "readyTicks": 9,
+        "stowTicks": 6
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.6,
+        "falloffScalar": 1.3,
+        "stability": 35.0,
+        "recoilDirection": 55,
+        "kick": 0.711,
+        "bloomPerShot": 0.137,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      }
+    },
+    {
+      "id": "coriolis_force",
+      "mapping": {
+        "id": "coriolis_force",
+        "family": "Fusion Rifle",
+        "category": "aggressive",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 26,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.5,
+        "falloffScalar": 1.3,
+        "stability": 37.0,
+        "recoilDirection": 50,
+        "kick": 0.7002,
+        "bloomPerShot": 0.1334,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      }
+    },
+    {
+      "id": "line_in_the_sand",
+      "mapping": {
+        "id": "line_in_the_sand",
+        "family": "Linear Fusion Rifle",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": 99
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 26,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 2.5,
+        "falloffScalar": 2.5,
+        "stability": 42.0,
+        "recoilDirection": 63,
+        "kick": 0.935,
+        "bloomPerShot": 0.1244,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      }
+    },
+    {
+      "id": "stormchaser",
+      "mapping": {
+        "id": "stormchaser",
+        "family": "Linear Fusion Rifle",
+        "category": "default",
+        "subfamily": "Adaptive_Burst",
+        "encodedPveCrit": 99
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 30,
+        "readyTicks": 10,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 2.5,
+        "falloffScalar": 2.5,
+        "stability": 48.0,
+        "recoilDirection": 80,
+        "kick": 0.89,
+        "bloomPerShot": 0.1136,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.001448069241,
+          "offset": 0.4990612517
+        },
+        "stow": {
+          "vpp": -0.002863515313,
+          "offset": 0.4445712383
+        },
+        "ads": {
+          "vpp": -0.001693741678,
+          "offset": 0.4112330226
+        }
+      }
+    },
+    {
+      "id": "retraced_path",
+      "mapping": {
+        "id": "retraced_path",
+        "family": "Trace Rifle",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -8
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 46,
+        "readyTicks": 8,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 7,
+        "zoom": 1.6,
+        "falloffScalar": 1.6,
+        "stability": 75.0,
+        "recoilDirection": 94,
+        "kick": 0.1,
+        "bloomPerShot": 0.065,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00279338,
+          "offset": 0.51985381
+        },
+        "stow": {
+          "vpp": -0.00268436,
+          "offset": 0.48414822
+        },
+        "ads": {
+          "vpp": -0.001875,
+          "offset": 0.38975
+        }
+      }
+    },
+    {
+      "id": "salvager_s_salvo",
+      "mapping": {
+        "id": "salvager_s_salvo",
+        "family": "Grenade Launcher",
+        "category": "special",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 70,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.3,
+        "falloffScalar": 1.0,
+        "stability": 26.0,
+        "recoilDirection": 75,
+        "kick": 1.055,
+        "bloomPerShot": 0.1532,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00272791,
+          "offset": 0.55133684
+        },
+        "stow": {
+          "vpp": -0.00232786,
+          "offset": 0.48726765
+        },
+        "ads": {
+          "vpp": -0.00187072,
+          "offset": 0.50019128
+        }
+      }
+    },
+    {
+      "id": "deafening_whisper",
+      "mapping": {
+        "id": "deafening_whisper",
+        "family": "Grenade Launcher",
+        "category": "special",
+        "subfamily": "WaveFrame",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 72,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.3,
+        "falloffScalar": 1.0,
+        "stability": 38.0,
+        "recoilDirection": 81,
+        "kick": 0.965,
+        "bloomPerShot": 0.1316,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00272791,
+          "offset": 0.55133684
+        },
+        "stow": {
+          "vpp": -0.00232786,
+          "offset": 0.48726765
+        },
+        "ads": {
+          "vpp": -0.00187072,
+          "offset": 0.50019128
+        }
+      }
+    },
+    {
+      "id": "edge_transit",
+      "mapping": {
+        "id": "edge_transit",
+        "family": "Grenade Launcher",
+        "category": "heavy",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 42,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.3,
+        "falloffScalar": 1.0,
+        "stability": 42.0,
+        "recoilDirection": 70,
+        "kick": 1.0472,
+        "bloomPerShot": 0.1244,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00272791,
+          "offset": 0.55133684
+        },
+        "stow": {
+          "vpp": -0.00232786,
+          "offset": 0.48726765
+        },
+        "ads": {
+          "vpp": -0.00187072,
+          "offset": 0.50019128
+        }
+      }
+    },
+    {
+      "id": "canis_major",
+      "mapping": {
+        "id": "canis_major",
+        "family": "Grenade Launcher",
+        "category": "heavy",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 20,
+        "readyTicks": 10,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 10,
+        "zoom": 1.3,
+        "falloffScalar": 1.0,
+        "stability": 24.0,
+        "recoilDirection": 69,
+        "kick": 1.1984,
+        "bloomPerShot": 0.1568,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00272791,
+          "offset": 0.55133684
+        },
+        "stow": {
+          "vpp": -0.00232786,
+          "offset": 0.48726765
+        },
+        "ads": {
+          "vpp": -0.00187072,
+          "offset": 0.50019128
+        }
+      }
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "mapping": {
+        "id": "dimensional_hypotrochoid",
+        "family": "Grenade Launcher",
+        "category": "heavy",
+        "subfamily": "WaveFrame",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 42,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.3,
+        "falloffScalar": 1.0,
+        "stability": 40.0,
+        "recoilDirection": 63,
+        "kick": 1.064,
+        "bloomPerShot": 0.128,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.00272791,
+          "offset": 0.55133684
+        },
+        "stow": {
+          "vpp": -0.00232786,
+          "offset": 0.48726765
+        },
+        "ads": {
+          "vpp": -0.00187072,
+          "offset": 0.50019128
+        }
+      }
+    },
+    {
+      "id": "bad_omens",
+      "mapping": {
+        "id": "bad_omens",
+        "family": "Rocket Launcher",
+        "category": "default",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 20,
+        "readyTicks": 12,
+        "stowTicks": 10
+      },
+      "aimBaseline": {
+        "transitionTicks": 10,
+        "zoom": 2.0,
+        "falloffScalar": 1.0,
+        "stability": 27.0,
+        "recoilDirection": 76,
+        "kick": 1.676,
+        "bloomPerShot": 0.1514,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003998740554,
+          "offset": 0.6635944584
+        },
+        "stow": {
+          "vpp": -0.003296509536,
+          "offset": 0.5463332134
+        },
+        "ads": {
+          "vpp": -0.002139258726,
+          "offset": 0.528984167
+        }
+      }
+    },
+    {
+      "id": "bellowing_giant",
+      "mapping": {
+        "id": "bellowing_giant",
+        "family": "Rocket Launcher",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 44,
+        "readyTicks": 10,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 2.0,
+        "falloffScalar": 1.0,
+        "stability": 49.0,
+        "recoilDirection": 70,
+        "kick": 1.412,
+        "bloomPerShot": 0.1118,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003998740554,
+          "offset": 0.6635944584
+        },
+        "stow": {
+          "vpp": -0.003296509536,
+          "offset": 0.5463332134
+        },
+        "ads": {
+          "vpp": -0.002139258726,
+          "offset": 0.528984167
+        }
+      }
+    },
+    {
+      "id": "code_duello",
+      "mapping": {
+        "id": "code_duello",
+        "family": "Rocket Launcher",
+        "category": "default",
+        "subfamily": "High-Impact",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 69,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 2.0,
+        "falloffScalar": 1.0,
+        "stability": 58.0,
+        "recoilDirection": 52,
+        "kick": 1.304,
+        "bloomPerShot": 0.0956,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003998740554,
+          "offset": 0.6635944584
+        },
+        "stow": {
+          "vpp": -0.003296509536,
+          "offset": 0.5463332134
+        },
+        "ads": {
+          "vpp": -0.002139258726,
+          "offset": 0.528984167
+        }
+      }
+    },
+    {
+      "id": "pyroclastic_flow",
+      "mapping": {
+        "id": "pyroclastic_flow",
+        "family": "Rocket Launcher",
+        "category": "default",
+        "subfamily": "Precision",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 41,
+        "readyTicks": 10,
+        "stowTicks": 9
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 2.0,
+        "falloffScalar": 1.0,
+        "stability": 44.0,
+        "recoilDirection": 63,
+        "kick": 1.472,
+        "bloomPerShot": 0.1208,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.003998740554,
+          "offset": 0.6635944584
+        },
+        "stow": {
+          "vpp": -0.003296509536,
+          "offset": 0.5463332134
+        },
+        "ads": {
+          "vpp": -0.002139258726,
+          "offset": 0.528984167
+        }
+      }
+    },
+    {
+      "id": "fixed_odds",
+      "mapping": {
+        "id": "fixed_odds",
+        "family": "Machine Gun",
+        "category": "default",
+        "subfamily": "High-Impact",
+        "encodedPveCrit": -2
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 30,
+        "readyTicks": 9,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 1.6,
+        "falloffScalar": 1.6,
+        "stability": 28.0,
+        "recoilDirection": 66,
+        "kick": 0.5408,
+        "bloomPerShot": 0.1496,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002391721353,
+          "offset": 0.4950499748
+        },
+        "stow": {
+          "vpp": -0.002041393236,
+          "offset": 0.4547501262
+        },
+        "ads": {
+          "vpp": -0.001234477537,
+          "offset": 0.4574687027
+        }
+      }
+    },
+    {
+      "id": "hammerhead",
+      "mapping": {
+        "id": "hammerhead",
+        "family": "Machine Gun",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 50,
+        "readyTicks": 8,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.5,
+        "falloffScalar": 1.6,
+        "stability": 60.0,
+        "recoilDirection": 75,
+        "kick": 0.416,
+        "bloomPerShot": 0.092,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002391721353,
+          "offset": 0.4950499748
+        },
+        "stow": {
+          "vpp": -0.002041393236,
+          "offset": 0.4547501262
+        },
+        "ads": {
+          "vpp": -0.001234477537,
+          "offset": 0.4574687027
+        }
+      }
+    },
+    {
+      "id": "retrofit_escapade",
+      "mapping": {
+        "id": "retrofit_escapade",
+        "family": "Machine Gun",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": -10
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 56,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 8,
+        "zoom": 1.6,
+        "falloffScalar": 1.6,
+        "stability": 44.0,
+        "recoilDirection": 55,
+        "kick": 0.4784,
+        "bloomPerShot": 0.1208,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002391721353,
+          "offset": 0.4950499748
+        },
+        "stow": {
+          "vpp": -0.002041393236,
+          "offset": 0.4547501262
+        },
+        "ads": {
+          "vpp": -0.001234477537,
+          "offset": 0.4574687027
+        }
+      }
+    },
+    {
+      "id": "abide_the_return",
+      "mapping": {
+        "id": "abide_the_return",
+        "policy": "Minecraft melee/no precision; no Oracle sword data"
+      },
+      "handlingBaseline": {
+        "supported": false,
+        "handling": null,
+        "readyTicks": null,
+        "stowTicks": null
+      },
+      "aimBaseline": {
+        "transitionTicks": 2,
+        "zoom": 1.0,
+        "falloffScalar": 1.0,
+        "stability": 0.0,
+        "recoilDirection": 0,
+        "kick": 0.0,
+        "bloomPerShot": 0.0,
+        "recoveryPerTick": 0.0
+      },
+      "unsupportedReason": "No pinned sword curves; preserve existing unsupported timing"
+    },
+    {
+      "id": "goldtusk",
+      "mapping": {
+        "id": "goldtusk",
+        "policy": "Minecraft melee/no precision; no Oracle sword data"
+      },
+      "handlingBaseline": {
+        "supported": false,
+        "handling": null,
+        "readyTicks": null,
+        "stowTicks": null
+      },
+      "aimBaseline": {
+        "transitionTicks": 2,
+        "zoom": 1.0,
+        "falloffScalar": 1.0,
+        "stability": 0.0,
+        "recoilDirection": 0,
+        "kick": 0.0,
+        "bloomPerShot": 0.0,
+        "recoveryPerTick": 0.0
+      },
+      "unsupportedReason": "No pinned sword curves; preserve existing unsupported timing"
+    },
+    {
+      "id": "crown_splitter",
+      "mapping": {
+        "id": "crown_splitter",
+        "policy": "Minecraft melee/no precision; no Oracle sword data"
+      },
+      "handlingBaseline": {
+        "supported": false,
+        "handling": null,
+        "readyTicks": null,
+        "stowTicks": null
+      },
+      "aimBaseline": {
+        "transitionTicks": 2,
+        "zoom": 1.0,
+        "falloffScalar": 1.0,
+        "stability": 0.0,
+        "recoilDirection": 0,
+        "kick": 0.0,
+        "bloomPerShot": 0.0,
+        "recoveryPerTick": 0.0
+      },
+      "unsupportedReason": "No pinned sword curves; preserve existing unsupported timing"
+    },
+    {
+      "id": "falling_guillotine",
+      "mapping": {
+        "id": "falling_guillotine",
+        "policy": "Minecraft melee/no precision; no Oracle sword data"
+      },
+      "handlingBaseline": {
+        "supported": false,
+        "handling": null,
+        "readyTicks": null,
+        "stowTicks": null
+      },
+      "aimBaseline": {
+        "transitionTicks": 2,
+        "zoom": 1.0,
+        "falloffScalar": 1.0,
+        "stability": 0.0,
+        "recoilDirection": 0,
+        "kick": 0.0,
+        "bloomPerShot": 0.0,
+        "recoveryPerTick": 0.0
+      },
+      "unsupportedReason": "No pinned sword curves; preserve existing unsupported timing"
+    },
+    {
+      "id": "temptation_s_hook",
+      "mapping": {
+        "id": "temptation_s_hook",
+        "policy": "Minecraft melee/no precision; no Oracle sword data"
+      },
+      "handlingBaseline": {
+        "supported": false,
+        "handling": null,
+        "readyTicks": null,
+        "stowTicks": null
+      },
+      "aimBaseline": {
+        "transitionTicks": 2,
+        "zoom": 1.0,
+        "falloffScalar": 1.0,
+        "stability": 0.0,
+        "recoilDirection": 0,
+        "kick": 0.0,
+        "bloomPerShot": 0.0,
+        "recoveryPerTick": 0.0
+      },
+      "unsupportedReason": "No pinned sword curves; preserve existing unsupported timing"
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "mapping": {
+        "id": "nezarec_s_whisper",
+        "family": "Glaive",
+        "category": "default",
+        "subfamily": "Adaptive",
+        "encodedPveCrit": -25.5
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 42,
+        "readyTicks": 7,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 2,
+        "zoom": 1.0,
+        "falloffScalar": 1.0,
+        "stability": 0.0,
+        "recoilDirection": 0,
+        "kick": 0.0,
+        "bloomPerShot": 0.0,
+        "recoveryPerTick": 0.0
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002139219,
+          "offset": 0.42369
+        },
+        "stow": {
+          "vpp": -0.002827674,
+          "offset": 0.5147
+        },
+        "ads": {
+          "vpp": -0.0,
+          "offset": 0.0
+        }
+      }
+    },
+    {
+      "id": "ace_of_spades",
+      "mapping": {
+        "id": "ace_of_spades",
+        "family": "Hand Cannon",
+        "category": "default",
+        "source": "w83-exotics.json"
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 50,
+        "readyTicks": 7,
+        "stowTicks": 8
+      },
+      "aimBaseline": {
+        "transitionTicks": 5,
+        "zoom": 1.4,
+        "falloffScalar": 1.5,
+        "stability": 50.0,
+        "recoilDirection": 100,
+        "kick": 1.05,
+        "bloomPerShot": 0.11,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002942857143,
+          "offset": 0.4782571429
+        },
+        "stow": {
+          "vpp": -0.002952380952,
+          "offset": 0.5133809524
+        },
+        "ads": {
+          "vpp": -0.001666666667,
+          "offset": 0.3316666667
+        }
+      }
+    },
+    {
+      "id": "izanagis_burden",
+      "mapping": {
+        "id": "izanagis_burden",
+        "family": "Sniper Rifle",
+        "category": "default",
+        "source": "w84-exotics.json"
+      },
+      "handlingBaseline": {
+        "supported": true,
+        "handling": 47,
+        "readyTicks": 8,
+        "stowTicks": 7
+      },
+      "aimBaseline": {
+        "transitionTicks": 9,
+        "zoom": 4.5,
+        "falloffScalar": 4.5,
+        "stability": 56.0,
+        "recoilDirection": 83,
+        "kick": 1.0624,
+        "bloomPerShot": 0.0992,
+        "recoveryPerTick": 0.04
+      },
+      "rawHandling": {
+        "ready": {
+          "vpp": -0.002623944983,
+          "offset": 0.5079465458
+        },
+        "stow": {
+          "vpp": -0.002083932479,
+          "offset": 0.4392525789
+        },
+        "ads": {
+          "vpp": -0.00194998437,
+          "offset": 0.5021325414
+        }
+      }
+    }
+  ],
+  "ddc": {
+    "tab": "Weapon Perks",
+    "row": 208,
+    "rowID": "1662574278R207",
+    "rawHTML": "<tr style=\"height: 89px\"><th id=\"1662574278R207\" style=\"height: 89px;\"><div style=\"line-height: 89px\">208</div></th><td class=\"s17\">Steady Hands</td><td class=\"s21\"><div style=\"width:70px;height:89px;\"><img src=\"https://lh3.googleusercontent.com/docsubipk/AP9E6xWI91DCKuk7ZxUFtycgLZzZpjb_xgV7uX3VZxKjea_2BaAU2y1SGC8a-XbypG_EPOmTlMXVbGT0s06KqTGTvnLU_vsO6mgpBwAFxXhC055JiuPhyI4pMyo9nTw1aWVO-iY82SEDUA5eUM7PPBZ2KwLmZUolKGhWrUsLJQ=s89-w70-h89\" style=\"width:inherit;height:inherit;object-fit:scale-down;object-position:center center;pointer-events:none;\"/></div></td><td class=\"s19\" colspan=\"4\"><span style=\"font-weight:normal;font-style:italic;\">On </span><span style=\"font-style:italic;\">Weapon Kill</span><span style=\"font-weight:normal;font-style:italic;\">:<br></span>+100<span style=\"font-style:italic;\"> </span>Handling and 0.825x Handling Duration Multiplier for all equipped weapons for 8.5 <span style=\"color:#ffd966;\">↑9.5</span> seconds.<br>Additional Weapon Kills refresh the buff duration to 6.5 seconds.<br><span style=\"font-weight:normal;font-style:italic;\">Buff remains active while stowed.</span></td></tr>",
+    "baseText": "208 Steady Hands On Weapon Kill : +100 Handling and 0.825x Handling Duration Multiplier for all equipped weapons for 8.5 seconds. Additional Weapon Kills refresh the buff duration to 6.5 seconds. Buff remains active while stowed.",
+    "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?gid=1662574278"
+  },
+  "policies": {
+    "enhanced": "9.5 seconds excluded; no PvE/PvP split stated",
+    "units": "20TPS local adaptation: 8.5s=170ticks, refresh6.5s=130ticks",
+    "refresh": "Source weapon paid final blows only; while active replace expiry with now+130, even when shorter; after expiry start170",
+    "lifecycle": "Original equipped count-one stack/owner/world/data/runtime/class/loadout/entry/selected exact tuple; ordinary stow retained",
+    "timing": "Raw Handling100; .825 ready/stow only, TD .9/.81, active Pulse .95, ready-only active Quickdraw .95, one ceil",
+    "ads": "Raw Handling100; no Steady/TD/Pulse/QD time scalar; exact Snapshot entry only .5 primary/.8 special",
+    "incoming": "Master selecting hook caches legitimate TD sample before incoming duration; no scans from getters"
+  },
+  "limitations": [
+    "W46 Oracle May20 historical community curves and Oct13 official base stats are distinct snapshots; no current exact D2 duration claim.",
+    "W83/W84 additive exotic resources loaded by current WeaponExotics include Ace and Izanagi; no separate w121 file exists in this baseline.",
+    "Five sword curves remain unsupported; glaive ready/stow supported but ADS unsupported.",
+    "No armor/unknown exotic animation scalar or invented D2 current curve; existing positive raw stat contributors are redundant at100."
+  ]
+}

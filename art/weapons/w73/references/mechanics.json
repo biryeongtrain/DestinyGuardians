@@ -1,0 +1,77 @@
+{
+  "stage": "W73",
+  "baseHash": 201365942,
+  "enhancedHashExcluded": 3523746922,
+  "officialIdentity": [
+    {
+      "hash": 201365942,
+      "name": "Archer's Tempo",
+      "description": "Draw time decreases after every precision hit.",
+      "itemTypeDisplayName": "Trait",
+      "disposition": "exact base"
+    },
+    {
+      "hash": 3523746922,
+      "name": "Archer's Tempo",
+      "description": "Draw time substantially decreases after every precision hit for a longer duration.",
+      "itemTypeDisplayName": "Enhanced Trait",
+      "disposition": "excluded enhanced"
+    }
+  ],
+  "localizedName": {
+    "name": "Archer's Tempo",
+    "locale": "en",
+    "reason": "No pinned official Korean inventory component was available in the inspected local source caches; no community translation is promoted to an official localized name."
+  },
+  "officialPrimary": {
+    "url": "https://www.bungie.net/7/en/News/article/51380",
+    "publisher": "Bungie",
+    "primary": true,
+    "title": "Destiny 2 Update 4.1.0",
+    "standardDrawScalar": 0.75,
+    "context": "The Leviathan's Breath catalyst discussion distinguishes the standard perk from the exotic-only 0.5625 scalar. Only the standard scalar is used.",
+    "privateCapture": "research1.json",
+    "captureLines": [
+      309,
+      310,
+      311
+    ],
+    "scope": "Historical official scalar statement; not a current live gameplay measurement."
+  },
+  "communitySecondary": {
+    "url": "https://www.light.gg/db/items/201365942/archers-tempo/",
+    "capturedUrl": "https://www.light.gg/db/items/201365942/archers-tempo/?_=727",
+    "publisher": "light.gg",
+    "primary": false,
+    "section": "Community Research",
+    "lastUpdatedReported": "2024-07-16",
+    "trigger": "precision hit",
+    "drawTimeReductionPercent": 25,
+    "durationSeconds": 3,
+    "removedOnStow": true,
+    "privateCapture": "research1.json",
+    "retrieval": "Search tool returned a bounded exact-base English section with API ID 201365942. Direct opens returned 402/unavailable; this is search-captured community research, not fresh measurement."
+  },
+  "serverPolicy": {
+    "durationTicks": 60,
+    "drawScalar": 0.75,
+    "ticksPerSecond": 20,
+    "duration": "Quantize the community 3 seconds to 60 server ticks.",
+    "draw": "ceil(raw W46 drawMillis * 0.75 / 50); only a selected eligible exact base roll may activate the candidate timing.",
+    "trigger": "Successful precision-hit event; no kill requirement is supplied by the sources.",
+    "refresh": "Use one nonstacking 60-tick window refreshed on qualifying hits; deadline representation and event ordering are project policy, not source-verified details.",
+    "stow": "Clear on stow per community research; runtime integration belongs to the main worker."
+  },
+  "unknowns": {
+    "midDrawRescaling": "Neither captured source establishes whether an in-progress draw is rescaled when the buff starts or expires. Any snapshot-at-draw-start or dynamic rescaling decision must be labeled project policy.",
+    "refreshAndStacking": "The captured text does not precisely document stacking, hit-refresh ordering, death/disconnect cleanup, or server-tick expiry ordering."
+  },
+  "sourceBoundary": "Official manifest identity/socket pools establish exact selected roll eligibility and the precision-hit description. Bungie 4.1.0 establishes standard 0.75 separately from Leviathan's catalyst. The bounded exact-base light.gg section supplies 3s and stow removal. W46 supplies raw official draw milliseconds. 20-TPS quantization and runtime ordering are project choices.",
+  "limitations": [
+    "No native application, Gradle, production Java or tests were run or changed by this source/data worker.",
+    "No claim of current Destiny measurement or official confirmation of the community duration/stow behavior.",
+    "An optional eligible roll does not activate the perk on every weapon copy.",
+    "No enhanced mechanics or Leviathan catalyst scalar is supported.",
+    "The privately fetched official HTML is only a JavaScript shell; mechanics use the pinned web-tool capture of the official article instead."
+  ]
+}

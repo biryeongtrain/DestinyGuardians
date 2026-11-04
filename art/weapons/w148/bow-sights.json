@@ -1,0 +1,976 @@
+{
+  "stage": "W148",
+  "baselineSha256": "a04af75a85bc645741663ef5ee25b53abb6c1310b7fc018398f5600b7b575a3e",
+  "generator": "scripts/generate_bow_sights_w148.py",
+  "generatorSha256": "add4f1389d079abcb13cea63a439a67b3277955a33b9097b59b3c77749b8913b",
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/biting_winds_body_hip.json": "bd29dd9cf6778d1e57c3097871797d16390d94cb636ed30fcc2b60c372007ca5",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/whispering_slab_body_hip.json": "52e3bceccc2ccaa17eeb0fa9933e28702777e338b31e14ff1d2ac4794f6233af",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/biting_winds.json": "e40ebb431b1ffa765faca806b42018f0d3ee63582ad3339c4d98304fc452f860",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/whispering_slab.json": "18284e41754af64fffce0c326d72acf6c9a3c31f81951be8cca38e21c4eddd1d",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/biting_winds.png": "4cb177110761d0f9168950db584046923b0daecbf9d733c644a1d4907dd75553",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/whispering_slab.png": "700fc65bd8a9443225135d18c8658d777c4be39cb41cd6f4ee6bc1c1f28e16ca",
+    "art/weapons/w123/biting_winds/design.json": "23f70e5d5df94f51b68cc83b5cc12bceb23450d96f761c8cfa7e1476dbf98fda",
+    "art/weapons/w123/whispering_slab/design.json": "7b91360fd734465ef78d089dacde658c9824fd41d04e5317839b24dc276b2808",
+    "art/weapons/w50/manifest.json": "aaf0e0c4a18ddab37f134f7d9aabbf01c7c0383b0806194328a5e6c2c33c82a2"
+  },
+  "bows": [
+    {
+      "id": "biting_winds",
+      "model": "destiny:weapon_sight_w148/biting_winds_body",
+      "bodyModelPath": "src/main/resources/assets/destiny/models/weapon_sight_w148/biting_winds_body.json",
+      "sourceBodyModelPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/biting_winds_body_hip.json",
+      "sourceInputSha256": "bd29dd9cf6778d1e57c3097871797d16390d94cb636ed30fcc2b60c372007ca5",
+      "sightCenter": [
+        6.2,
+        11.85,
+        5.55
+      ],
+      "forwardPoint": [
+        6.2,
+        11.85,
+        3.55
+      ],
+      "forwardAxis": [
+        0,
+        0,
+        -1
+      ],
+      "aperturePlane": "XY",
+      "eyeSide": "+Z",
+      "sightDepth": 0.46,
+      "pinTop": [
+        6.2,
+        11.78,
+        5.76
+      ],
+      "pinTopBelowAxis": 0.07,
+      "clearCenterCorridorRadius": 0.04,
+      "apertureHalfWidth": 0.5700000000000001,
+      "apertureHalfHeight": 0.81,
+      "removedNames": [
+        "sight_vertical",
+        "sight_crown",
+        "sight_heel",
+        "sight_front_post"
+      ],
+      "addedNames": [
+        "w148_sight_frame_0",
+        "w148_sight_frame_1",
+        "w148_sight_frame_2",
+        "w148_sight_frame_3",
+        "w148_sight_frame_4",
+        "w148_sight_frame_5",
+        "w148_sight_frame_6",
+        "w148_sight_frame_7",
+        "w148_sight_mount_bridge",
+        "w148_sight_pin_stem",
+        "w148_sight_pin_tip"
+      ],
+      "retainedBodyElements": 99,
+      "bodyElements": 110,
+      "maxRetainedW50MovingElements": 23,
+      "maxAssembledElements": 133,
+      "elementLimit": 1000,
+      "mountAnchorName": "sight_mount",
+      "paletteUV": {
+        "blue": [
+          3.361328125,
+          0.048828125,
+          3.373046875,
+          0.060546875
+        ],
+        "black": [
+          2.736328125,
+          0.048828125,
+          2.748046875,
+          0.060546875
+        ],
+        "steel": [
+          0.048828125,
+          0.048828125,
+          0.060546875,
+          0.060546875
+        ],
+        "yellow": [
+          0.111328125,
+          4.439453125,
+          0.123046875,
+          4.451171875
+        ]
+      },
+      "designIntent": "Angular blue open sight beside the red riser; replaces the tall occluding blades. Original mount, adjustment drum and draw counter retained.",
+      "nativeFrame": {
+        "source_objects": [
+          "Biting-Winds.00.003",
+          "Biting-Winds.00.004",
+          "Biting-Winds.00.005",
+          "Biting-Winds.01.001",
+          "Biting-Winds.03.001",
+          "Biting-Winds.04.003",
+          "Biting-Winds.04.004",
+          "Biting-Winds.04.005"
+        ],
+        "excluded_objects": [
+          "Biting-Winds.02.003",
+          "Biting-Winds.02.004",
+          "Biting-Winds.02.005"
+        ],
+        "source_triangles": 23528,
+        "textured_triangles": 23528,
+        "source_bounds": [
+          [
+            -0.05751996859908104,
+            -0.7352039813995361,
+            -0.5183690190315247
+          ],
+          [
+            0.03351505473256111,
+            0.22027501463890076,
+            0.6634010076522827
+          ]
+        ],
+        "model_bounds": [
+          [
+            6.734509126303771,
+            -3.4045831172748855,
+            -8.175146673865001
+          ],
+          [
+            8.737361249118681,
+            22.59541688272511,
+            12.84624779042883
+          ]
+        ],
+        "source_axis": {
+          "length": 1,
+          "thin": 0,
+          "muzzle_sign": -1
+        },
+        "scale": 22.000896462875446,
+        "anchor": [
+          8.0,
+          8.0,
+          8.0
+        ],
+        "source_files": {
+          "Biting Winds.blend": "ae0c8100b1fc6616f4bc4ef55ca3467d137742aaca3001e20d638c9fc655ddbe"
+        },
+        "grid": [
+          8,
+          64,
+          52
+        ],
+        "occupied_cells": 2694,
+        "resolution": 64,
+        "method": "source_conservative_volume_cuboids_v2",
+        "cube_count": 250,
+        "texture_sha256": "7d82bb7dd39dc31595b040772d11c452a3c3cf53ef807920835f2217534dfe53"
+      },
+      "referenceInputSha256": {
+        "/tmp/destiny-weapons-w30/raw/biting_winds/extracted/Biting Winds.blend": "ae0c8100b1fc6616f4bc4ef55ca3467d137742aaca3001e20d638c9fc655ddbe",
+        "/tmp/destiny-weapons-w31/references/biting_winds.jpg": "fc205a8ec3ab068b55faf23054c2446f0e04e356b629b0109fe400fee331251f"
+      },
+      "retainedDynamicAndGraphSha256": {
+        "src/main/resources/assets/destiny/items/weapon_bow_w50/biting_winds.json": "c53e016c32c23f5f2a786401c4555e410bcb3425e640ad9171e37bce9cd68cbe",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_body_ads.json": "5ec92c02f3d09baf532b604942dcb7c0726e35c91c5e864ecd86e5bfe90db112",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_body_hip.json": "ce081b7a7b21f54d277631531478956bd5c9340ec985a7f25e685ab796898c35",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_body_inspect.json": "1dfc97d438c4fc6fbd92e37ff318385ba33bd81a25d12b1bd271609c442a602c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_00_ads.json": "37e8c2b907d15d99174309274bccf59dc1576e468dd548c55c48a64aba58dfd5",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_00_hip.json": "83803f014af371b7c4408b6c306afcf9b902ac4bc98bce263c2e1e550920845e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_00_inspect.json": "fc4b91fb2bd913f0f9548d031c4d76a07d7122b96437d687bec9bae194dfd898",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_01_ads.json": "bf5ab9756de2a936eb1c15426612a0b7e7bdcf069c82686c4a66a20117ae219b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_01_hip.json": "5311f079ad5aa423969bef5951ed9e90e9c2d5c449da65b8610a3fc031e54661",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_01_inspect.json": "ce9ef49ca2c07e5117a498deec040ce9b16be51f0c1e9e8c0d9106a4ce8fef69",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_02_ads.json": "991cd7ca7b11f83816346d82f5feb3c4277eb2a7f2791e6313af8477f4e0ca85",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_02_hip.json": "b0c1112ac6f51d1e59ccfffb9b090643acea6c217fa14219a3b41578ca4324b6",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_02_inspect.json": "d756bb16decebe309cbf0d9bd6bcc90ece435d72b8c85adab728d0c1bd093e1a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_03_ads.json": "875ff783195d5e32720e9ac790cb5765477984c73b7d3e1ddfa439353fa05e19",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_03_hip.json": "059d763cebdb937a9e55fdd105b9db93cdabb107d5d1a818f9d6a0106fd67959",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_03_inspect.json": "538f6ce7c5dbcbbb739e6fcefe3140247b2ede9e45e1602e4a29d1af14f2e9f2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_04_ads.json": "c3a1dfa87fab4e8490f7e5fed8c127dcc6a8f10d3f530160e19e2d66cabf1ee4",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_04_hip.json": "6dae8a62050de6ac73a814664ab12b231de86b50e51c4e3436b6d282eb24d230",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_04_inspect.json": "c1df3bba3ea8a005318ce721fb02c486d60cfb4998669eba43582e500c32ece6",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_05_ads.json": "adc63e1442f31e5c1a9d748fb57acfd9abb915ddd3886c1ff2519978dd16e091",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_05_hip.json": "428e0e52c93e6b3761119fd3c90aff17538bb6dc3a39b96fd182e1ee3e2ff814",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_05_inspect.json": "24f83cc7999cb73a70851fc0a79cacdcfafc78485c0ac7559a32f9835538e76b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_06_ads.json": "9216d9829bd9d7ecdfab42774b0940128a59be70ff6e51a629b9f7fabfbdb883",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_06_hip.json": "e424c59604f5d4e9189f14b1c58de39014bbe76f33052ba1daf5ebb41a7a6f04",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_06_inspect.json": "c4b2abf9d2d59582b8b02d79a37293f4998d0977fc4b34f9d364236e62d1f8a8",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_07_ads.json": "9a5c3550863b6f483cfe06fcc23b6ff75d460d5d1eca34589807539151efd42d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_07_hip.json": "f33368b887471dbed5de1fcf566a445798cd4daad5e63f1299830b19c0122676",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_07_inspect.json": "3890a16fde2704ab8dc9b8f6ca32a7910cc5f080c1ece46734cf076c711ec6dc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_08_ads.json": "5437c85721d1335fc91592e2d5016e4766b58f67c2d658fbc2a82f6673b018ad",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_08_hip.json": "809a25675fa5adecd5213d60e40427cfebedad0b6f77a17b6c38a8df18521f18",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_08_inspect.json": "d7efdb3d6895771de772b8d79edb39e056f9c3d0aa12f88d705dac83df66c509",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_09_ads.json": "2c412d050d4fec8001743008deb7416f2a822b6af73939c0cb4504c5679a0290",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_09_hip.json": "7e287e237f77022df5acf4bb1f0ed6202f2f2b6ca4f05d65b1afff9833f4a61d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_09_inspect.json": "1be7cc9952034ceff700ae2c1a640c9ceeea0a72bdf78208f5710a71ca8ccc03",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_10_ads.json": "48fb4e2f588362e0b641e0c8e2092c8de17e8face1fc0a3ce10cc8da0fa8761f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_10_hip.json": "86990fd38e4348a66d9d36fdf3c4a09e3fd47618faa112a2f9d81170dbb4773f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_10_inspect.json": "33cb9ffac4b93e9ec4b2e1150474f85386e6fbffadc3bebed27d291886858d77",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_11_ads.json": "97244d5b2c0403959737c320776e12b3230bee538d8e4bf6c1517480d83b7cbb",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_11_hip.json": "ccfdf80be7b22a5e089a1705910945fd37f8b683e3f0efac1aa756b38ce1d98f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_11_inspect.json": "1fb5a3ecbb796b8c5bb2cb3a84add84baba2bd85f8162c9d071e424db522935c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_12_ads.json": "5eee7ed7b29e8bf268ac1046b9130e631eaf7cf74847c5235b6bde47becf5f98",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_12_hip.json": "433b4a7b34e400cc16e7f2d8490e309f549c36221f6dc4fc644785b5e1eb64b5",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_12_inspect.json": "92d1128a311b9bedad4601f0f84da6c6589e118bf7d65e4ac7bdc0fbc5548d1e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_13_ads.json": "dcb8e08dcbf919b09ae99c12b20e1b1476ff5834f52cde3b67886c8242ecbd9f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_13_hip.json": "7129ea39187208cec7d5b5a40add392bb47c5d7f431e7280dd31c86d08e1f762",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_13_inspect.json": "3c73379779d7cc02308c2eaefd594037a070cfa8c0ac3006e7be1257f1900471",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_14_ads.json": "548c45202246608dcac95742d50d401edba4883f3bad15bbcfb7a6d3c8b9caa0",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_14_hip.json": "df591f79d141d7907860bf76787a8ca1fdd1c8f03f30ef0d2c9ad3558a9024d1",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_14_inspect.json": "972a9b4f148b72dafbc1c71339da2cc43e42503c35567b05ff94afa2aca57010",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_15_ads.json": "fc0e8a8301f76759be3535376960388bc0fda26088fac021f4228f1e7e55555f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_15_hip.json": "148d32cc66cbd1564491d8b388505d780bb8ff5823d3a07d14737bd86f062753",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_15_inspect.json": "3fc6edffe589e2c34d413201e12a4e8aea8b30fa16dc067fa7280e54bf8c80a2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_16_ads.json": "2112b7df66b9111b9807cb99e385fae757b558f77cb04c04561d81e9a085057e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_16_hip.json": "75fdfa47f39af38bffaf724f0dbad76f132d86b0649eb69bd9e4d525abb0120e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_16_inspect.json": "30d41983bc555e0ffd036896687ba8610f33b1cb2c3a16ebf4bb130bded36916",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_17_ads.json": "2b3d13072751ec515f5bebd66dfe8ea6a97c4b83f4573cdfc8de812172f9d79e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_17_hip.json": "220c4504d6226b54122de3c9ca3dbd2a06345aae9b4b8c0a96801af42e6bb5c0",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_17_inspect.json": "7459716e5524b5660892dd123aba96ffb551e8bbea0a4a30f40d66f362dd8a80",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_18_ads.json": "2de6f04ed828a12b94d8cf7cbebfe7d47768ee6d60e8e9be256894425448d3e4",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_18_hip.json": "00f6bc390c37f2f1c735cae517f7c9321219a55859a46f671f3553bc334812cb",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_18_inspect.json": "81cc89b04b7b84e04cd2929848e6bec1f6cb366ffa029e431014aba7cc00c8ae",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_19_ads.json": "d146f5eebc513aae13c32ea9c14ce6dc50aa89828a8fbb63ffede920816d800b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_19_hip.json": "30da3c59b472b2aca4961db75364a74f8cba6d4f6051a332eb37cde9bcbe0110",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_19_inspect.json": "6c0f25c44364bf71e341eedcf6c8a37d2bfabe26014225afc9fd5b455413b058",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_20_ads.json": "aae2c22716b3e33a7fc76dd49cc4084956e7f775ace4c467f925c0074b82c123",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_20_hip.json": "fd4670cec5686b3eeffd9411b96605d41297246a08994aa38cb90dd46adf9104",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_20_inspect.json": "830a0d70c6d8b5368492255f48ecdaf872bb8c52f8062e5a531fbd590c5548eb",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_empty_ads.json": "a2580b3826fe10bce487372f434f1ada605302f7ec6df5d1d07bf24b337cab1f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_empty_hip.json": "c52b7a149145099dda1d428e96f7d922add34f7229dd2cc81f53d3069eaf92fc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_empty_inspect.json": "5e1822a2389f600c6c5640e8319c9e0639a062843933ab0885e15328cd4622b5",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_loaded_ads.json": "d3e1fb8f307e0cf4281b2eacc3ac9385564a633bb75f071b6d2226abd6ea9cbb",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_loaded_hip.json": "83803f014af371b7c4408b6c306afcf9b902ac4bc98bce263c2e1e550920845e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_loaded_inspect.json": "83a9b795ffafec98b6d0b2fa38f111527bfdeb9dc32211afa08228fc5fc8a3d2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_00_ads.json": "97089ffd41c0f43cdfe8c8e0864db200651e912fff6732a47bc1f1d9f606a753",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_00_hip.json": "c52b7a149145099dda1d428e96f7d922add34f7229dd2cc81f53d3069eaf92fc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_00_inspect.json": "43dd32cdb7c6bc411dbed53b64b816f9ce803f9efcf1ec6fae119a52924e46c0",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_01_ads.json": "f37c32b5c81bd52bbd4d7fc2d5472875c9f4046944a267b1302339b161eb469d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_01_hip.json": "c52b7a149145099dda1d428e96f7d922add34f7229dd2cc81f53d3069eaf92fc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_01_inspect.json": "69abb87b37485d22ec318597a7ce4fa0a48345da1e59a2e00080485698465877",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_02_ads.json": "df6158fd457fbcdb4ece14b13bf3503bc5ffe9d93c92f519db9fe45c947911e3",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_02_hip.json": "c52b7a149145099dda1d428e96f7d922add34f7229dd2cc81f53d3069eaf92fc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_02_inspect.json": "0e578fb8b6a8b7e8a2a49bcc6271666fd3544c76a4420bd56c1ab92eb038aefc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_03_ads.json": "37e2ec7ea698d84349e606f98857e4dc07a1b9d13033b8789b93a4d3e66de520",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_03_hip.json": "c52b7a149145099dda1d428e96f7d922add34f7229dd2cc81f53d3069eaf92fc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_03_inspect.json": "2ab5b80449fd8f0610435b0a324a6495e4f6bc17958a4e34b92859ed3691bf60",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_04_ads.json": "e9d3e08cc4c9c4314bde8bc50738e9e44a1101d4fd21204d571472fc0ccb9f41",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_04_hip.json": "c52b7a149145099dda1d428e96f7d922add34f7229dd2cc81f53d3069eaf92fc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_04_inspect.json": "d41de72ad0b03c0910083bef6580246fd4b0791dc3861ff37f2f5fcf4e62b8c7",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_05_ads.json": "26acc7a933997f5a242df243a0c19a3aaaf428337ddd82bf58e518a876c6af16",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_05_hip.json": "c52b7a149145099dda1d428e96f7d922add34f7229dd2cc81f53d3069eaf92fc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_05_inspect.json": "b10cc96d7a7e67547b1c8bcc32b3f0603c17dc25fb17efa34c494a9e652266dd",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_06_ads.json": "fa559ec6eb4def4affa732746bab0cecdba161ff0679fb4ca1f12f965b9044a2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_06_hip.json": "81186f8cb8338de98e5a91938ef33244d16210486d733a9ad7efa71e0a85cbd2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_06_inspect.json": "0b635477e5a72d34d602cbc857f1fa600a90966e710cf02673a1db933b74ac6f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_07_ads.json": "7634de58894cbb487b7fca4e525d668000043071763b331d8e3c9483044e63f2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_07_hip.json": "5f980b77f5b457231c3eb0b4be5eaf029218c4de45dcd706367f8f7eb6e9ea4a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_07_inspect.json": "bdf767986d47336b3539369409799c5277a3f0baf7d3d2c5b624c2e75308e975",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_08_ads.json": "f6f43ae549230e71ee3bd2e7798a539d64bbc111d12d8aac011f98890c9939aa",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_08_hip.json": "e910e15ecdf47f9da864a83e1abb71c6598eab71f4c8b37b1fe4510c409cbe13",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_08_inspect.json": "8103de279dca185e6195975276088129a6cec9add07f4bd58fbdad68389eae97",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_09_ads.json": "65e26ec8b4a9748bf818663872cfa828a3fa572ee101c57388eabc90ecf354e4",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_09_hip.json": "db885067c3f111cee4ac384b557a6b2941f4d08e9bdd49313afbdf4fd6fb0c4d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_09_inspect.json": "dfc360fedf000bac66c6050ec92eab39cf65d920a2b6063ede7985295038a6d0",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_10_ads.json": "1802c70b3fa9570c45f4699e60e4ff3138c5dd0f68f4cda8b5f75802131d4725",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_10_hip.json": "0ada951647f99c5c1db480795eaac5787658e2cc6651ec1d4cf7a5dfbf1e834b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_10_inspect.json": "dd142dd1dc22e94cf3c47ac2f08f1f94d0922d5ab2c156f53b2eb3a7c7e2c401",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_11_ads.json": "26a95ad3a515380c4861e705bc316b236c98ea351b178e30ec56e23deed944da",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_11_hip.json": "465abb39d12eaaac0aad4a56e677093109ca456505542183c4fed83253b039be",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_11_inspect.json": "c7231e4651c7fb1c85fd62913bcf1dddf4133dbadca2e7bc425efc5986ff5fed",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_12_ads.json": "e71028c92f6a7212905ca48e7aea25de318c063508755bf6e8d79ca7493105e8",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_12_hip.json": "5ba6ce7544bd647c9263ad950fdc3c47a65622438fcc9115f42a4b5664151431",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_12_inspect.json": "381bfec1f7be7069fd5573d3afab86c7b23af58fe11a73b2b06e792313cf3ba7",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_13_ads.json": "1edb52c3016c20c52f3687d4e1b20bcca8ff55e2969554dbab66f6458a122cd2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_13_hip.json": "ff412c973c6b179792e19041c0d003a895a375e3a9f52f006cd8beba90d7cdf3",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_13_inspect.json": "d46fa0865ff5c03ad509c3f44c18af02afeb28b3ca71951d0d3b73950ddf0619",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_14_ads.json": "2ae1431266c8b92bbc409156cc90cfadac6cb08c48abc8ded69c5c299b94d6dd",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_14_hip.json": "557f2738599a825f4ed7606dd25ebfcd25dcfc430e54d2d63daf8b5f502c9125",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_14_inspect.json": "dc8577741b61406b3f3ddd839b97e7a7102ef187c3c246eab60bc078c8699d38",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_15_ads.json": "2fc6d26aa8e8c37baa6fe82b9aac7da7c628eb4e5243f71042aab106164fd553",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_15_hip.json": "dc39e47029a303a99dfeb955a31cf019d9f435ca0ff0b231d0af15d9bf8a82c6",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_15_inspect.json": "152908cf03e9dfd6b7c80bca29e49457ccd56a8a26b8c20d317c597af111343f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_16_ads.json": "674b66d436bc5939574c5db3551ede3c9e0a63becddd9632a553c528fb01a778",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_16_hip.json": "83803f014af371b7c4408b6c306afcf9b902ac4bc98bce263c2e1e550920845e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_16_inspect.json": "af8e49a9d55d204218f291198c609a1fc52891baa06342870549d4a3d030473f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_17_ads.json": "e5ed869d801032f172400c4c9586d1f0721e27eb444db4445915afc2c04fbe28",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_17_hip.json": "83803f014af371b7c4408b6c306afcf9b902ac4bc98bce263c2e1e550920845e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_17_inspect.json": "21e4a92dd7a0de112509557be16b7333319ab1b2191b0a78323ae84eb01abab5",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_18_ads.json": "e72573a8063bac07a71a08c5559d3ba33b6374b10b2bfc1bf38573238841c624",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_18_hip.json": "83803f014af371b7c4408b6c306afcf9b902ac4bc98bce263c2e1e550920845e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_18_inspect.json": "bec28f1fcb900a9c8e188b0050f6ac87e3c8e542480a56e18b153db6432802df",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_19_ads.json": "780544bc31f89b8e0ae2c641669dfed1575aff8fa139cdd10b5ba0cfd8375b9d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_19_hip.json": "83803f014af371b7c4408b6c306afcf9b902ac4bc98bce263c2e1e550920845e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_19_inspect.json": "6c791bb804b7f9b08eafec493bbcc3dfa7aac783e85007fb8da622f68c5d984a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_20_ads.json": "1dc2be411369ef724a29ecc8ae2801bc3365a4f23e7ddb89e174064f5f33a357",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_20_hip.json": "83803f014af371b7c4408b6c306afcf9b902ac4bc98bce263c2e1e550920845e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_20_inspect.json": "c829144e1feab00873af4d6250fe93874ec6e333a837fb8a58dbc625d669c467"
+      },
+      "retainedMovingStates": [
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_00_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_01_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_02_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_03_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_04_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_05_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_06_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_07_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_08_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_09_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_10_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_11_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_12_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_13_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_14_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_15_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_16_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_17_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_18_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_19_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_draw_20_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_empty_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_loaded_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_00_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_01_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_02_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_03_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_04_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_05_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_06_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_07_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_08_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_09_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_10_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_11_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_12_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_13_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_14_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_15_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_16_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_17_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_18_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_19_hip.json",
+          "elements": 23
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/biting_winds_nock_20_hip.json",
+          "elements": 23
+        }
+      ],
+      "outputSha256": "6346db92736a3bf4328e3d2c8e0037460efba77e402a2dcd086f0ba436f3010b",
+      "displayIncluded": false
+    },
+    {
+      "id": "whispering_slab",
+      "model": "destiny:weapon_sight_w148/whispering_slab_body",
+      "bodyModelPath": "src/main/resources/assets/destiny/models/weapon_sight_w148/whispering_slab_body.json",
+      "sourceBodyModelPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/whispering_slab_body_hip.json",
+      "sourceInputSha256": "52e3bceccc2ccaa17eeb0fa9933e28702777e338b31e14ff1d2ac4794f6233af",
+      "sightCenter": [
+        6.8,
+        18.8958083,
+        2.349
+      ],
+      "forwardPoint": [
+        6.8,
+        18.8958083,
+        0.349
+      ],
+      "forwardAxis": [
+        0,
+        0,
+        -1
+      ],
+      "aperturePlane": "XY",
+      "eyeSide": "+Z",
+      "sightDepth": 0.42,
+      "pinTop": [
+        6.8,
+        18.8258083,
+        2.559
+      ],
+      "pinTopBelowAxis": 0.07,
+      "clearCenterCorridorRadius": 0.04,
+      "apertureHalfWidth": 0.52,
+      "apertureHalfHeight": 0.52,
+      "removedNames": [
+        "sight_ring_0",
+        "sight_ring_1",
+        "sight_ring_2",
+        "sight_ring_3",
+        "sight_ring_4",
+        "sight_ring_5",
+        "sight_ring_6",
+        "sight_ring_7"
+      ],
+      "addedNames": [
+        "w148_sight_frame_0",
+        "w148_sight_frame_1",
+        "w148_sight_frame_2",
+        "w148_sight_frame_3",
+        "w148_sight_frame_4",
+        "w148_sight_frame_5",
+        "w148_sight_frame_6",
+        "w148_sight_frame_7",
+        "w148_sight_mount_bridge",
+        "w148_sight_pin_stem",
+        "w148_sight_pin_tip"
+      ],
+      "retainedBodyElements": 75,
+      "bodyElements": 86,
+      "maxRetainedW50MovingElements": 13,
+      "maxAssembledElements": 99,
+      "elementLimit": 1000,
+      "mountAnchorName": "sight_side_foot",
+      "paletteUV": {
+        "black": [
+          7.767578125,
+          0.173828125,
+          7.779296875,
+          0.185546875
+        ],
+        "steel": [
+          11.111328125,
+          0.095703125,
+          11.123046875,
+          0.107421875
+        ],
+        "brass": [
+          2.455078125,
+          6.861328125,
+          2.466796875,
+          6.873046875
+        ]
+      },
+      "designIntent": "Black ring with brass eye-facing rim and pin. New center is +0.4178435 X from the old optic to clear the retained string; original cage, side foot, teal inlay and riser retained.",
+      "nativeFrame": {
+        "source_objects": [
+          "Whispering-Slab.02.000",
+          "Whispering-Slab.09.000",
+          "Whispering-Slab.01.000",
+          "Whispering-Slab.06.002",
+          "Whispering-Slab.06.001",
+          "Whispering-Slab.06.003",
+          "Whispering-Slab.06.004",
+          "Whispering-Slab.06.005",
+          "Whispering-Slab.06.006",
+          "Whispering-Slab.06.007"
+        ],
+        "excluded_objects": [
+          "Whispering-Slab.08.000"
+        ],
+        "source_triangles": 28726,
+        "textured_triangles": 28726,
+        "source_bounds": [
+          [
+            -0.15881139039993286,
+            -0.796778678894043,
+            -0.2576441168785095
+          ],
+          [
+            -0.06693138927221298,
+            -0.04391266405582428,
+            1.356285810470581
+          ]
+        ],
+        "model_bounds": [
+          [
+            5.441588955983752,
+            3.8494189088840667,
+            -4.835901547021889
+          ],
+          [
+            6.921752368805829,
+            29.849418908884065,
+            7.292578168293376
+          ]
+        ],
+        "source_axis": {
+          "length": 1,
+          "thin": 0,
+          "muzzle_sign": -1
+        },
+        "scale": 16.109745261806673,
+        "anchor": [
+          8.0,
+          8.0,
+          8.0
+        ],
+        "source_files": {
+          "Whispering Slab.blend": "6fc9aa827ab4f5afc456b1d30f54d9930e2295ef098eeb30afd267c8553257ef",
+          "Whispering Slab.fbx": "c435e4ee7161d2a470e07ab85e8cd54b76cddf76df31c12511b7dbf5b024e71d"
+        },
+        "grid": [
+          8,
+          112,
+          53
+        ],
+        "occupied_cells": 4446,
+        "resolution": 112,
+        "method": "source_projected_volume_cuboids_v1",
+        "cube_count": 200,
+        "texture_sha256": "e3ba1a407db10380a8b2abc72ee33af9288df956fca4f027177ad9aa04115c03"
+      },
+      "referenceInputSha256": {
+        "/tmp/destiny-weapons-w30/raw/whispering_slab/extracted/Whispering Slab.blend": "6fc9aa827ab4f5afc456b1d30f54d9930e2295ef098eeb30afd267c8553257ef",
+        "/tmp/destiny-weapons-w30/raw/whispering_slab/extracted/Whispering Slab.fbx": "c435e4ee7161d2a470e07ab85e8cd54b76cddf76df31c12511b7dbf5b024e71d",
+        "/tmp/destiny-weapons-w31/references/whispering_slab.jpg": "fc907d40f6be2f61bcf817cfac6142cd484a1d512167c0f3868e8a16d2069b3a"
+      },
+      "retainedDynamicAndGraphSha256": {
+        "src/main/resources/assets/destiny/items/weapon_bow_w50/whispering_slab.json": "0411247377c97d311b0d60b85089e4495c7049f87738d00745e8b572fd9e002b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_body_ads.json": "a0ecccc9863f6b85496358bba5fa84796c30dafd319c84ac5d348566deb6e350",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_body_hip.json": "3ca18cffe3366a567f9b9604f86c6e49e83bdfab485e12fa1f97bd52466ec742",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_body_inspect.json": "6e14c39c561d6fcd76f038b9b74d79366edff6adf19b73029acfc2ef01a25b7a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_00_ads.json": "14bab5731472c14151c46ec7be3731932fa554dc0f083ac0ff95f1028ad86026",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_00_hip.json": "f9b6faca5aa78542fdcce560b2b6a255b7e4cb6b319cd3c47624bddb6655884c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_00_inspect.json": "f91b3f28f5a1269e5b886259186b93a9f3d4c3b99fe2fc24c4c412783081d769",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_01_ads.json": "b03fc48c3921331d67d467e3f59dbf68716eeef372f11420a4c9d4912d5c32ab",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_01_hip.json": "4fa80ed65d7c62101577a0e0047ff529316dd00fa9d54ad541580b6fb35d2464",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_01_inspect.json": "a55291f4e1e4d9f39a332be28cd951c7ba8e28e5fcc2087b1091d3773fe91a22",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_02_ads.json": "359c73fcb927a3c1997e50c74dd2e14386498b26bfab745e430e005e65c7a8e6",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_02_hip.json": "5424c4a48bda312de4da4265ec8d58e713fe849fcefb312e89c2efada97b0278",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_02_inspect.json": "c987009afd4dbe68fb03f6a85ea86ee2d59785bbc2324ad4b6d14154db67fb85",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_03_ads.json": "2223c2594b38fe9300165936c4da785cdf2efbb08de49dfc9b8c891f5359c519",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_03_hip.json": "e38eebff04692aa9463cd8af10bd023fc078b9d62e4dd9afce5361d5576c3057",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_03_inspect.json": "30e4edba090affc7a3cd1f1638c91240d11277646f8d3ee3e9d0e535dc096053",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_04_ads.json": "46abee77beeafa6c96853a9e21a1c3e7f9f3db19484406839dbb9a8ca50e56e6",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_04_hip.json": "564425bd531d67ff54a6e68ef17b0f9a1a9627e29e4cf127f4b248a3b7edddfb",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_04_inspect.json": "9587f26ac0a45a5081974118a744cf04282e8d13126ad2d41665745f92fdad72",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_05_ads.json": "7428c1b3dd9fdfce46c145b90c96ccf862a0e06915197fe60d3539b0429bf5bd",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_05_hip.json": "d2b477daac4039cd97b47b7b0bd7d943f9778c537bcdf10e8611b529e2c13c9d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_05_inspect.json": "575cb23892f620b9d30ecb159efb1c9d1b07b129bedf84e3814632d75a4c2d50",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_06_ads.json": "af7e1ef96eb7cd422d7d653c9afc1fef6b99f8c3876cbd82065e1d1dd38eca3f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_06_hip.json": "0bd26a1c4033351dcd173830e7602cbd60ed8af0ef6debdee819bfc66778859f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_06_inspect.json": "ec71436c18fd88835bd76c068b31c85a935024d60a6da827b850ed7b6c427cb0",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_07_ads.json": "b1f18e5f9651c6f1691f8753a09474d6ebe8cfbd235bc9bd0b9872bbbd08a4ac",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_07_hip.json": "1747c6ac0b304d1de4012127d36900ee8af82a9436ad8f9e63969679db89cc77",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_07_inspect.json": "25e8a520d6f82e08210062ed3d24c4ae248b39e1abca994000b2de5ee62e2491",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_08_ads.json": "0447d36adb3f23b5d1b71379c34f0e0415e53e49e7b8a1e0bb40f8a1256c799c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_08_hip.json": "7a3f0d190004eb7606564c6a7c11a9920df60495a63bd1a37c0e96c63c1e087d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_08_inspect.json": "063b7983b50d6e204a9d12a6ea70587ced718437611147ff6e39902fb58a8d65",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_09_ads.json": "8aaf7bd1e09973b4d4a7a5097d64436212ffb4269f3908dd4d36ecbb00eb8d47",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_09_hip.json": "989e762c36f0a103e461ba6aff95d57dff67c434c6331e270cb097bd818b22bd",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_09_inspect.json": "4d79a99f5e1b72aff71316991219b032afe0d234c2ed9a785b322b20050eb648",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_10_ads.json": "b3be1c88bae18568aaf672c1e0c1b9b55ded3dca3dc587acfdb29b70579b88ea",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_10_hip.json": "ff74ec4426421ac15f7fd9aa97d37882caeb3f6e654eab75b4998abdc06506ab",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_10_inspect.json": "55782203f08e5401f5441dcf51cf51b5e89a61d50d59187d1e20fbb0631717a6",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_11_ads.json": "f01cb65cffd7ad73b8a91fea44a0ab5799f42aa4412ba64ca9ad14bf8b5c46d5",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_11_hip.json": "38bb14aeb2da8ca603ed859dee38f29179c32f7a3f007c1a770ade03364286f3",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_11_inspect.json": "c31f78023c065a8049f9c1fdf5c0cf09abeeedc441b2284437da1d8ece84e72b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_12_ads.json": "ae0502579abb1d633252c719dbe4166924f2a2fa8faf3fa0cb1de8663cb61c71",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_12_hip.json": "3274e2f95270849b764fc9a6d9fea5af2fbcad5534e1f901a9cd93cd9d1f2e20",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_12_inspect.json": "5f2aa80cf895b7545d198be63bf171b03d64f318880ebdd29fe1848375d4000a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_13_ads.json": "8431fb237e47b9c361e6f69115beaf6d7c9205402cde5999de2e3fce98f4a422",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_13_hip.json": "d5a47a52de0329319c5ecef9f556bea0dc053a85414b20aa1e8e64bcf9424387",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_13_inspect.json": "f88ecfe512761c8d8f5df7e64be5d1cd3a5e3e210984af01d05e4dbe4a79210a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_14_ads.json": "e54ac1ee62eb9314ddc17601976e0ad60b71bd2df26437e65b69c54a88309c72",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_14_hip.json": "56f65f5b02c6ac983bdb125b47017fb62c74920cb7ffd51f19cf02b60935f23e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_14_inspect.json": "c59211b1781b365564e6602958171debfbcef51c4e69898a00aeca42bbdc98c5",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_15_ads.json": "24b4565248a6beb085d3e0df5a2f845c021f4756109209a0de27da9d94ba3e59",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_15_hip.json": "b8133795379f126feccd1043f3f71439066fe78cdccdc27dabd90618d242c666",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_15_inspect.json": "d6a060662665d9e5c47b23e196dd1febd28e08796db2b86685092b9909f2f6cc",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_16_ads.json": "6d2fec38aa7e01cb78b91b314bba25e7561957c1ce5017a365c84a73acdc8b38",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_16_hip.json": "6b037583934ed0c72060917e9088b4e3d888fad6c27750b37a6d72dd3a70977e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_16_inspect.json": "0bd606ce47e69ab540193fd70901767a583fb2e0d891a8e39b6a825bddb1f759",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_17_ads.json": "e18956d5fee48ae1505408e59e9cbcda9ee4b7a3c6f330a714ff5bf3ba2312c7",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_17_hip.json": "9c11f1e5e83ab626f7c7a9bd3be79d5a2967f80f0155634515c921101089d089",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_17_inspect.json": "5f113d9a4a4533c573249fb05ac1acf745b84c92d92cc2a3d6ee4c949bf61d83",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_18_ads.json": "a3c122d4113433269bf30d32f73c9ad60ca6f68d6b5570362983d837d6f7e06d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_18_hip.json": "06eefae1ab907e92a72052eab6672d796ba481192a12878c8f619b7069ab929e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_18_inspect.json": "95cc5e4da676a6be2a8c68952030b8be669633984a31e6fcdad293e8835af7b4",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_19_ads.json": "aaa6223748fa67dbf2edf499dceb04e1eeca50990930c68fec6bd6e242f833b3",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_19_hip.json": "eae2aff89d7b5185efa310b7f297751b31884224c74de4cfbceffcca6084c3ee",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_19_inspect.json": "cf607049a1fc312172087c9bb1c8a857f39738c9c22caa0c7087094767dc8129",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_20_ads.json": "f8aa540cd8e6cfcf471719da6ae498bcc0ec4141215b5f829e42d6a46b048f2b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_20_hip.json": "2f478653e3380584cd4aa032145650086a9aeb1194d07fad6c87830f2b3a3054",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_20_inspect.json": "afb7c7ab195465909d2f8746ce8db3cdc04af4a9568d4bf1032527d28c9c66ea",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_empty_ads.json": "5a996ea1cdbdc03388a18f853dfec96b3389a394eec57230a3524279e4fc5779",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_empty_hip.json": "0f0b91de9d5fadf61433dbea98e4471e737bfdb5fd6e908ac89b8998074a7a5d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_empty_inspect.json": "1d8ac6e915d3de8ce09921bc5325b10f3b14bc7e58bfdeb6838f974455ba6b29",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_loaded_ads.json": "80fa497cd9f6f3840afa4c90f8a4325ae4b7744be5d91ac2d277b6ffb94dd906",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_loaded_hip.json": "f9b6faca5aa78542fdcce560b2b6a255b7e4cb6b319cd3c47624bddb6655884c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_loaded_inspect.json": "84c0991c7e15b03fd6dfa4f2bb8596d610a24271b53fe7c2679a3376afd39411",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_00_ads.json": "04ff2e68f897b778985d3d7fcea35d27d7dc690548591ae31c1ed724eedd0231",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_00_hip.json": "0f0b91de9d5fadf61433dbea98e4471e737bfdb5fd6e908ac89b8998074a7a5d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_00_inspect.json": "3b99f2f8858ef8313c00dc1ae6357f0cbbae87257d0bbd76a383e92e5c1c3734",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_01_ads.json": "f001b30c4431baedc4629594b0dcdc5a157306e25ae4acc93c597a05c3765519",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_01_hip.json": "0f0b91de9d5fadf61433dbea98e4471e737bfdb5fd6e908ac89b8998074a7a5d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_01_inspect.json": "af07bdf7ee9262fbe012f851240efd6153241675444836c09185222dea61003a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_02_ads.json": "7d4bc3c153a207ffecee9140e61041500256a6050600b5c1c0720cffea1a0c90",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_02_hip.json": "0f0b91de9d5fadf61433dbea98e4471e737bfdb5fd6e908ac89b8998074a7a5d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_02_inspect.json": "a98379568be0c9b1c4396e9d9676f0d34b47ecc845107936ff99cd8d8f0dd518",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_03_ads.json": "cd0b56a5dc79b033f3b22995c9191860c580a0e507466a868fd76a5c56822be4",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_03_hip.json": "0f0b91de9d5fadf61433dbea98e4471e737bfdb5fd6e908ac89b8998074a7a5d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_03_inspect.json": "f8b4db5d063ce95505123117f41e608b235ca49a6ba96085e2a2eb2575af55a0",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_04_ads.json": "88a1bdc6da0e8268c3cd7b54f0eb33bbfbda1b3a725066adb8c8fcb6487b299e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_04_hip.json": "0f0b91de9d5fadf61433dbea98e4471e737bfdb5fd6e908ac89b8998074a7a5d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_04_inspect.json": "0f5bf07b66d697b14b5d475cc0bc5a959343aaeca7e09de506f3cdbd06980c01",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_05_ads.json": "0ca9b45bbf75ebd5c6da7bbc082e689322760b20dfb6ca209184ac348c39b5ed",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_05_hip.json": "0f0b91de9d5fadf61433dbea98e4471e737bfdb5fd6e908ac89b8998074a7a5d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_05_inspect.json": "17d85eedd5685efab445ad6db016b2d52e1e3755ebafbc7f5a967b514a952b87",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_06_ads.json": "75c87f5aa4ec81898fc08ab3a013344794b440823a03247c841a7284279e1e01",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_06_hip.json": "b388df68fa64fc62494a754f4191ccd003509f52a7287e554f8398254c958ac9",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_06_inspect.json": "e09d3a8eb9c31d06071c15d1cecb6b94641f278e73c1d52605b1b4cbee8da77d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_07_ads.json": "eea2bee37e82776edf5a20f0abe10fbb4b6cf1e5caed1cdeccfaa899d2066b2e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_07_hip.json": "cf7fd1aee69e9fa0c523ce9b7e77d181f8185fcd92bf3574f692d4e926fe122f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_07_inspect.json": "8d1bfc7d4cade73cbe0a6d7b92411ada2984a0a473ebf5c6f11c068ef614c385",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_08_ads.json": "7280c78e99abba1047b8ec6e9e946529410867b42eb18ca05ae7db093f5be006",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_08_hip.json": "4ec46fa51e4cdd08fc65a1e2fa89b5eb170f513c872d9aa2c4f177ddbd871846",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_08_inspect.json": "aac1bbcdd3416e1e326757da22f8aa3765a47f5bf10747ee58010e0382b6215c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_09_ads.json": "d9c3d75c01016c1664c811ae6933d71866595f88dccf8a54398124beef107cf2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_09_hip.json": "9801ceba756057998f33d0d56e4f94f8c38b7328b75c3480b31d8de34c39bcb0",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_09_inspect.json": "24983764c5b98b05b98c1156148084cb416b2fc0e4da4730d3f52d109f4bb6ae",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_10_ads.json": "d8c72f635460ed695f88e5856bd8bfd40dca3c0eca310e7f8525d1bedf5e3639",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_10_hip.json": "30ecf1894a94988a6d8a5634a6df3ca79f359d41ca40030d3bc1019456143df1",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_10_inspect.json": "9ecc0554f081be9863eb156bd1ca0b497a704acb673a328836940bef50e0ed15",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_11_ads.json": "bd23115baaca0d8bc22f6f027188264f456293a2f04e5da88906b08a55ae49ee",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_11_hip.json": "fb4c69aacca0088110f8a4a363c3c26c89b53a38a9ba620dce854f84a7e816b1",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_11_inspect.json": "fc4b090018ac28e9bcc6d8f97d4957accde30d4b169cfed2200ea86690632948",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_12_ads.json": "8f1d870c307068fc6bdd1e28dcfb1e326782f03c0fb01b66b3ccf8f64ea615c8",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_12_hip.json": "21f4f8c991c1e05dffaeb9daaa04d1d7b00c7887f6bfa1d19e92a68143d4434a",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_12_inspect.json": "ee017de76b9dec4218d5731ae1b6d1def9405c3ca3171b2233f3e068230abb70",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_13_ads.json": "672254932dfcc0c92131b5f666f5114a4dc48d144b2753455f0df9059b5f7836",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_13_hip.json": "93a2e8ce92c50954f24f71e9ebacfa22c21755082fdacae50d2fc909cc8fcace",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_13_inspect.json": "b31769a0935a84e6b073e63b4ce32cb89a68e7155b9e1857d682c1116be62ef7",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_14_ads.json": "03b9ab42af70fd7dd42ec6db9da85ec0c6c69e93921b62b93e343b0636c8b528",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_14_hip.json": "42302f65736e71383da2426cfff85cb9f4bf97f306fb4ca76e8bb7867deb5deb",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_14_inspect.json": "74dd300ae24ec02e8b469b6a246c9a31feaa5e7cf2c6ddef0e2950aef6b52ac5",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_15_ads.json": "7a732b4bce7f124f71c4506c3bf51cc22b960eea1558b843c9f3751257c37c34",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_15_hip.json": "888eea01aa2c107afa9c76c2c00730d1323084a0c1680512c306c547cc98e63f",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_15_inspect.json": "43bb6b470a843c061bfe0097249368fa66490b32762d692a02e5cf165980113d",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_16_ads.json": "2b61dbb7632d021e1c98f308ce0a0f181c36c27d7f6d1d30489e644e989c05c6",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_16_hip.json": "f9b6faca5aa78542fdcce560b2b6a255b7e4cb6b319cd3c47624bddb6655884c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_16_inspect.json": "f7d9555d9f0def7c3041d7abb8d7b7c177626fe78808f162dad04b919e158bb3",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_17_ads.json": "d9d9b1f634be068164269e2de30fc83acc263fe6123fbca23851aa7acfd001cd",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_17_hip.json": "f9b6faca5aa78542fdcce560b2b6a255b7e4cb6b319cd3c47624bddb6655884c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_17_inspect.json": "5b921a1c1e2c6a5e8ea68675a9c7936214c2d826bb703d6451a3a12cccfa134b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_18_ads.json": "34e79df64e85edac497353a5b4cc6951a58a64c1b86021bf41e9625c6205dbc2",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_18_hip.json": "f9b6faca5aa78542fdcce560b2b6a255b7e4cb6b319cd3c47624bddb6655884c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_18_inspect.json": "400210de7ab2e55823a5141710dd9ef4ad42de34d27d67bb0743d214e5fc566b",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_19_ads.json": "b1d00157ceb86d7b3e9f4e23ac4996382434dc10ef397ece202cab30bd85866e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_19_hip.json": "f9b6faca5aa78542fdcce560b2b6a255b7e4cb6b319cd3c47624bddb6655884c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_19_inspect.json": "974dcc5506763efe81c738515a9598e9fe7c5242d43b3eb4db14b247e272030e",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_20_ads.json": "6e6ca8fe9229ecab30592310963e7b2c364c0579a67f44ee21ce1dc2c739d986",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_20_hip.json": "f9b6faca5aa78542fdcce560b2b6a255b7e4cb6b319cd3c47624bddb6655884c",
+        "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_20_inspect.json": "f0c0cb52f622f17439df4e89867019f04988cfed3f0654c1bb7fee07108ca6a1"
+      },
+      "retainedMovingStates": [
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_00_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_01_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_02_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_03_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_04_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_05_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_06_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_07_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_08_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_09_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_10_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_11_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_12_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_13_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_14_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_15_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_16_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_17_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_18_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_19_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_draw_20_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_empty_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_loaded_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_00_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_01_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_02_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_03_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_04_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_05_hip.json",
+          "elements": 2
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_06_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_07_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_08_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_09_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_10_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_11_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_12_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_13_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_14_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_15_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_16_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_17_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_18_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_19_hip.json",
+          "elements": 13
+        },
+        {
+          "path": "src/main/resources/assets/destiny/models/weapon_bow_w50/whispering_slab_nock_20_hip.json",
+          "elements": 13
+        }
+      ],
+      "outputSha256": "bfb41ff949ed7d519fe49b5644ef3c6efb3b25cdd2dd681044888e7cce04b2f3",
+      "displayIncluded": false
+    }
+  ],
+  "policy": "ADS-only full rigid geometry. Preserve every retained element/face/UV/rotation and native origin; master supplies display and sampled graphs. Real open apertures and small lower pins; no optical card or screenspace crosshair.",
+  "nativeAccepted": false,
+  "limitations": [
+    "Disk geometry and targeted Python checks only; native parser, eye alignment, both hands, draw/nock visibility, pixel readability and display load acceptance belong to master.",
+    "Fixed palette UV samples reuse the current default-dye atlas; no optical shader, emissive pin or original PBR.",
+    "Pin top is 0.07 native units below the clear center ray. Aperture center is the endpoint alignment anchor, not the body bounding box."
+  ]
+}

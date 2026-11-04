@@ -1,0 +1,499 @@
+{
+  "schema": 1,
+  "stage": "W161",
+  "weapon": "ammit_ar2",
+  "generator": "scripts/generate_ammit_crouch_w161.py",
+  "status": "product graphs generated; server transport integration and native acceptance pending",
+  "contract": {
+    "condition": "minecraft:custom_model_data",
+    "booleanIndex": 1,
+    "serverSource": "actual live combat Ammit server entity isCrouching()",
+    "gripBooleanIndex": 0,
+    "lifecycle": "Main updates/clears transient flag; item snapshots preserve it",
+    "standingRelease": "flag[1]=false selects original pose immediately, independent of ADS progress/key state"
+  },
+  "basis": "art/weapons/w160/ammit-pose.json",
+  "rationale": [
+    "26.3 HumanoidModel adds +0.4 radians to both arm pitches after crossbow posing; use Rx(degrees(0.1+0.4)).",
+    "All three canonical twohand bases have identical third-person transforms.",
+    "Translation = oldTranslation + oldRotation*(scale*(grip-8)) - newRotation*(scale*(grip-8)); anchor backstrap [8,8.885,8.355].",
+    "Use only thirdperson_righthand/lefthand display-context cases and item CMD boolean flag[1].",
+    "W160 lingering ADS standing-release hazard is gated by server crouch state, independent of the selected pose string.",
+    "Inherited parent preserves all elements, UVs, textures and other display contexts; no new emitted elements.",
+    "Art skill and Ace/Izanagi study reviewed; existing Ammit identity and geometry retained."
+  ],
+  "bases": {
+    "hip": {
+      "parent": "destiny:weapon/auto_rifle/ammit_ar2_twohand",
+      "oldThirdperson": {
+        "thirdperson_righthand": {
+          "rotation": [
+            5.729578,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -2,
+            2
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        "thirdperson_lefthand": {
+          "rotation": [
+            5.729578,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -2,
+            2
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      },
+      "newThirdperson": {
+        "thirdperson_righthand": {
+          "rotation": [
+            28.64789,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -1.837142,
+            1.792719
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        "thirdperson_lefthand": {
+          "rotation": [
+            28.64789,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -1.837142,
+            1.792719
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      }
+    },
+    "ads": {
+      "parent": "destiny:weapon/auto_rifle/ammit_ar2_ads_twohand",
+      "oldThirdperson": {
+        "thirdperson_righthand": {
+          "rotation": [
+            5.729578,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -2,
+            2
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        "thirdperson_lefthand": {
+          "rotation": [
+            5.729578,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -2,
+            2
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      },
+      "newThirdperson": {
+        "thirdperson_righthand": {
+          "rotation": [
+            28.64789,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -1.837142,
+            1.792719
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        "thirdperson_lefthand": {
+          "rotation": [
+            28.64789,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -1.837142,
+            1.792719
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      }
+    },
+    "inspect": {
+      "parent": "destiny:weapon/auto_rifle/ammit_ar2_inspect_twohand",
+      "oldThirdperson": {
+        "thirdperson_righthand": {
+          "rotation": [
+            5.729578,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -2,
+            2
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        "thirdperson_lefthand": {
+          "rotation": [
+            5.729578,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -2,
+            2
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      },
+      "newThirdperson": {
+        "thirdperson_righthand": {
+          "rotation": [
+            28.64789,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -1.837142,
+            1.792719
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        "thirdperson_lefthand": {
+          "rotation": [
+            28.64789,
+            -17.188734,
+            0
+          ],
+          "translation": [
+            0,
+            -1.837142,
+            1.792719
+          ],
+          "scale": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      }
+    }
+  },
+  "graphs": {
+    "src/main/resources/assets/destiny/items/weapon_swap_w113/the_recluse_to_ammit_ar2.json": {
+      "beforeSha256": "2114da6f617a9b85abed53c7bbf3e4b1831fd2a7880b8e1b3446ea357299d3ca",
+      "afterSha256": "75c2a1b8e64a1b1f4889ca6f281b4e080c9fa18190c2e67e704e91e0664a83a9",
+      "restoredSourceSha256": "2114da6f617a9b85abed53c7bbf3e4b1831fd2a7880b8e1b3446ea357299d3ca",
+      "firstpersonBefore": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "11503716949c728690d9b95c7a414eb8780f72698db89a1e0381d40ccaa51b3b"
+        }
+      ],
+      "firstpersonAfter": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "11503716949c728690d9b95c7a414eb8780f72698db89a1e0381d40ccaa51b3b"
+        }
+      ],
+      "animatedEntriesBefore": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "1fbc65a5e04118ebcea11fa8375dab80e07637ba5957a6dc0cb23256bd14de6f"
+        }
+      ],
+      "animatedEntriesAfter": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "1fbc65a5e04118ebcea11fa8375dab80e07637ba5957a6dc0cb23256bd14de6f"
+        }
+      ],
+      "thirdpersonWrappers": 3
+    },
+    "src/main/resources/assets/destiny/items/weapon_swap_w113/beloved_to_ammit_ar2.json": {
+      "beforeSha256": "dc5cd86fed3422d876f5a61f267d7bf2e0c6236ecb5017cd63bd658f4fdf0284",
+      "afterSha256": "40e30cf728877585a57be9f6fbb221a25e12cefda3b2ef89c0b21f133acd5ded",
+      "restoredSourceSha256": "dc5cd86fed3422d876f5a61f267d7bf2e0c6236ecb5017cd63bd658f4fdf0284",
+      "firstpersonBefore": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "38b3b9bf611d67e3e651e3a36550b0fbb151dc0a81e79a1d965be69c28c6ac5e"
+        }
+      ],
+      "firstpersonAfter": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "38b3b9bf611d67e3e651e3a36550b0fbb151dc0a81e79a1d965be69c28c6ac5e"
+        }
+      ],
+      "animatedEntriesBefore": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "a0aa01faa4cc0800487a3627f6a4b0bc9655676847dd19549db73dc0086c0680"
+        }
+      ],
+      "animatedEntriesAfter": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "a0aa01faa4cc0800487a3627f6a4b0bc9655676847dd19549db73dc0086c0680"
+        }
+      ],
+      "thirdpersonWrappers": 3
+    },
+    "src/main/resources/assets/destiny/items/weapon_swap_w113/austringer_to_ammit_ar2.json": {
+      "beforeSha256": "e95f74f767b2ebf63bd1aab8de54d6965430247a3cb2e89a928fb3bcc6853523",
+      "afterSha256": "58ade33470e27a68c94ebca761b3611a8f3932e74a1a049beb508e55e611ec62",
+      "restoredSourceSha256": "e95f74f767b2ebf63bd1aab8de54d6965430247a3cb2e89a928fb3bcc6853523",
+      "firstpersonBefore": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "53cf45193dbeb3651b6e9e5af02f1f71b7c0fba28c162c6c6edd4a89987f7269"
+        }
+      ],
+      "firstpersonAfter": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "53cf45193dbeb3651b6e9e5af02f1f71b7c0fba28c162c6c6edd4a89987f7269"
+        }
+      ],
+      "animatedEntriesBefore": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "90ea14bdfc1b6e10127e4c6a55c01a91fc37f60f4d19a5be1630b8c2107364aa"
+        }
+      ],
+      "animatedEntriesAfter": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "90ea14bdfc1b6e10127e4c6a55c01a91fc37f60f4d19a5be1630b8c2107364aa"
+        }
+      ],
+      "thirdpersonWrappers": 3
+    },
+    "src/main/resources/assets/destiny/items/weapon_sight_w151/ammit_ar2.json": {
+      "beforeSha256": "cef53065c2a86a8bb6b71ad66580d49d53e6c0f02aed5f90ae638b91dd87abff",
+      "afterSha256": "c87ff3d0f776e001d63a534a0b2736d27ea7b3226db8236577a5aeb3af45d481",
+      "restoredSourceSha256": "cef53065c2a86a8bb6b71ad66580d49d53e6c0f02aed5f90ae638b91dd87abff",
+      "firstpersonBefore": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "710b69ac24213168327b7c62384bca01d439def6ef1330669a3a3b3411a9b3ff"
+        }
+      ],
+      "firstpersonAfter": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "710b69ac24213168327b7c62384bca01d439def6ef1330669a3a3b3411a9b3ff"
+        }
+      ],
+      "animatedEntriesBefore": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "d6e1e50324c1bccfdd08bb18385f6bebfb8e5ccc97fd6e4fe7333ef565a9e28d"
+        }
+      ],
+      "animatedEntriesAfter": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "d6e1e50324c1bccfdd08bb18385f6bebfb8e5ccc97fd6e4fe7333ef565a9e28d"
+        }
+      ],
+      "thirdpersonWrappers": 3
+    },
+    "src/main/resources/assets/destiny/items/weapon/ammit_ar2.json": {
+      "beforeSha256": "e029d018bbb12dba3a5b941afa36e2d408a6b93c387d64bcef3ebb4f7dad43a4",
+      "afterSha256": "23ce230fa6f8c94a12d6b7e912445f144aaccea988ab755c319788a0499e38fe",
+      "restoredSourceSha256": "e029d018bbb12dba3a5b941afa36e2d408a6b93c387d64bcef3ebb4f7dad43a4",
+      "firstpersonBefore": [],
+      "firstpersonAfter": [],
+      "animatedEntriesBefore": [],
+      "animatedEntriesAfter": [],
+      "thirdpersonWrappers": 3
+    },
+    "src/main/resources/assets/destiny/items/weapon_reload_w69/ammit_ar2.json": {
+      "beforeSha256": "cb09f44be0f8c139827eb99b183e28a73d938a32099d550664b6fdf853e202f8",
+      "afterSha256": "46d89f5891b4e1904e8abf76b104cd30272c340d3ccddc3891456bb5714c7220",
+      "restoredSourceSha256": "cb09f44be0f8c139827eb99b183e28a73d938a32099d550664b6fdf853e202f8",
+      "firstpersonBefore": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "cfa22447eb43e60b36e4674b0b3201abdbf9caff551d64708a458021debefb4a"
+        }
+      ],
+      "firstpersonAfter": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "cfa22447eb43e60b36e4674b0b3201abdbf9caff551d64708a458021debefb4a"
+        }
+      ],
+      "animatedEntriesBefore": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "43416f2dad0bced1f2613fa8d8220d26fc6e1172deed4d8fee6ad59c3e408bb1"
+        }
+      ],
+      "animatedEntriesAfter": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "43416f2dad0bced1f2613fa8d8220d26fc6e1172deed4d8fee6ad59c3e408bb1"
+        }
+      ],
+      "thirdpersonWrappers": 3
+    },
+    "src/main/resources/assets/destiny/items/weapon_aim_w70/ammit_ar2.json": {
+      "beforeSha256": "67e383e83ee437165aac45fc51dd585b93df444457fd9d6cc9c4abaffdc0264c",
+      "afterSha256": "ee23447c8e1c3921f7c377fe816d14ae129b3177ba0db1454e351c8625090859",
+      "restoredSourceSha256": "67e383e83ee437165aac45fc51dd585b93df444457fd9d6cc9c4abaffdc0264c",
+      "firstpersonBefore": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "b18a1b00969458d8f885ca6f250634d9c506973ba0098979a0663f8f0dac8752"
+        }
+      ],
+      "firstpersonAfter": [
+        {
+          "path": "/model/cases/0",
+          "sha256": "b18a1b00969458d8f885ca6f250634d9c506973ba0098979a0663f8f0dac8752"
+        }
+      ],
+      "animatedEntriesBefore": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "f968c0c7b4406ef66201817f6a7ce3e2f276ab907e9da1528ae573832c8993d2"
+        }
+      ],
+      "animatedEntriesAfter": [
+        {
+          "path": "/model/cases/0/model/entries",
+          "sha256": "f968c0c7b4406ef66201817f6a7ce3e2f276ab907e9da1528ae573832c8993d2"
+        }
+      ],
+      "thirdpersonWrappers": 3
+    }
+  },
+  "preservedSources": {
+    "src/main/resources/assets/destiny/models/weapon/auto_rifle/ammit_ar2_twohand.json": {
+      "beforeSha256": "0c71893a4c065d17d0f6b3d936cd6410e29b9f2182cf5845e62228abc41c2c2b",
+      "afterSha256": "0c71893a4c065d17d0f6b3d936cd6410e29b9f2182cf5845e62228abc41c2c2b"
+    },
+    "src/main/resources/assets/destiny/models/weapon/auto_rifle/ammit_ar2.json": {
+      "beforeSha256": "b531f95f712e369098043ebb73a91065130bf7f6dcaeac185ad550d9d9f3ebf9",
+      "afterSha256": "b531f95f712e369098043ebb73a91065130bf7f6dcaeac185ad550d9d9f3ebf9"
+    },
+    "src/main/resources/assets/destiny/models/weapon/auto_rifle/ammit_ar2_ads_twohand.json": {
+      "beforeSha256": "b23f42ef2f015454a39329200324d140934fc4e21efbc5cf9bf3da1456c922ec",
+      "afterSha256": "b23f42ef2f015454a39329200324d140934fc4e21efbc5cf9bf3da1456c922ec"
+    },
+    "src/main/resources/assets/destiny/models/weapon/auto_rifle/ammit_ar2_ads.json": {
+      "beforeSha256": "b2d1b7f8e9e7af4d59bb4e30307a551d7d8818c671fda48adcd839de563c066c",
+      "afterSha256": "b2d1b7f8e9e7af4d59bb4e30307a551d7d8818c671fda48adcd839de563c066c"
+    },
+    "src/main/resources/assets/destiny/models/weapon/auto_rifle/ammit_ar2_inspect_twohand.json": {
+      "beforeSha256": "49d6c77385ce93aba412e58dc7bae128841878480516d6f99dc04ca28e4e9e98",
+      "afterSha256": "49d6c77385ce93aba412e58dc7bae128841878480516d6f99dc04ca28e4e9e98"
+    },
+    "src/main/resources/assets/destiny/models/weapon/auto_rifle/ammit_ar2_inspect.json": {
+      "beforeSha256": "97ad6a7443da2e6ec36e4f3031892f4cad2fd593c85a5a64e1ed356685e76e2b",
+      "afterSha256": "97ad6a7443da2e6ec36e4f3031892f4cad2fd593c85a5a64e1ed356685e76e2b"
+    },
+    "art/weapons/w160/ammit-pose.json": {
+      "beforeSha256": "e767f9834e6be7befe11c579374313e159b6d04da6bad43048358b02615feb91",
+      "afterSha256": "e767f9834e6be7befe11c579374313e159b6d04da6bad43048358b02615feb91"
+    },
+    "scripts/fix_ammit_pose_w160.py": {
+      "beforeSha256": "1fe07832bf185593901c40a9f9d482fa3dd327392838b8651900f1c0a085ae50",
+      "afterSha256": "1fe07832bf185593901c40a9f9d482fa3dd327392838b8651900f1c0a085ae50"
+    }
+  },
+  "generatedModels": {
+    "src/main/resources/assets/destiny/models/weapon_pose_w161/ammit_ar2_hip.json": "6fe26205dfcade2c7495489abb9baab43a894009252a31ffd362f2e9195917e3",
+    "src/main/resources/assets/destiny/models/weapon_pose_w161/ammit_ar2_ads.json": "0362156bf7afb321d3379242e1d5175ae55d6fa50ad2ae71ac43bb2761196563",
+    "src/main/resources/assets/destiny/models/weapon_pose_w161/ammit_ar2_inspect.json": "625a5c4edf76009c1b74e3fb2f3136054daa9730c4abfc732d36549dc21edb87"
+  },
+  "native": {
+    "status": "pending; unavailable this turn",
+    "operations": 0,
+    "visualAcceptance": false,
+    "required": [
+      "front and side standing HIP",
+      "crouched HIP/ADS/inspect",
+      "fire and standing release with lingering ADS",
+      "right/left hand backstrap, stock and support-hand contact",
+      "representative first-person ADS/reload/swap preservation"
+    ]
+  },
+  "centralJUnit": {
+    "class": "AmmitCrouchModelsW161Test",
+    "status": "pending main central codec run"
+  }
+}

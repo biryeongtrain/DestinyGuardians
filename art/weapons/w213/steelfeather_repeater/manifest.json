@@ -1,0 +1,604 @@
+{
+  "schemaVersion": 1,
+  "stage": "W213",
+  "weapon": "steelfeather_repeater",
+  "generator": "scripts/generate_reload_w213_steelfeather_repeater.py",
+  "generatorSha256": "386e3ca5450a930ebd995451c5dc910c0f3f96043e2ac50abb7affb8998f0355",
+  "itemModel": "destiny:weapon_reload_w213_steelfeather_repeater/steelfeather_repeater",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "thresholdEncoding": "float32(i/60), matching master runtime grid60",
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "curve": "C1 shape-preserving cubic Hermite; weighted harmonic knot tangents, zero at endpoints/holds/extrema",
+  "keyframes": [
+    [
+      0.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.1,
+      [
+        18,
+        -5,
+        -15
+      ],
+      [
+        -0.15,
+        0.35,
+        -0.15
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.2,
+      [
+        36,
+        -11,
+        -30
+      ],
+      [
+        -0.35,
+        0.85,
+        -0.45
+      ],
+      [
+        0,
+        -0.25,
+        0
+      ]
+    ],
+    [
+      0.3,
+      [
+        29,
+        -9,
+        -23
+      ],
+      [
+        -0.4,
+        0.65,
+        -0.5
+      ],
+      [
+        -0.45,
+        -3.9,
+        0.1
+      ]
+    ],
+    [
+      0.4,
+      [
+        28,
+        -9,
+        -22
+      ],
+      [
+        -0.4,
+        0.65,
+        -0.5
+      ],
+      [
+        -0.65,
+        -6.1,
+        0.2
+      ]
+    ],
+    [
+      0.55,
+      [
+        28,
+        -9,
+        -22
+      ],
+      [
+        -0.4,
+        0.65,
+        -0.5
+      ],
+      [
+        -0.65,
+        -6.1,
+        0.2
+      ]
+    ],
+    [
+      0.66,
+      [
+        29,
+        -9,
+        -23
+      ],
+      [
+        -0.4,
+        0.7,
+        -0.5
+      ],
+      [
+        -0.25,
+        -2.7,
+        0.1
+      ]
+    ],
+    [
+      0.74,
+      [
+        36,
+        -11,
+        -29
+      ],
+      [
+        -0.3,
+        1.0,
+        -0.55
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.82,
+      [
+        30,
+        -8,
+        -23
+      ],
+      [
+        -0.2,
+        0.65,
+        -0.35
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      1.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "gripPivot": [
+    8,
+    8.31,
+    8.195
+  ],
+  "authoredTimingSource": "scripts/generate_reload_w166_steelfeather_repeater.py",
+  "normalizedPhases": {
+    "raise": [
+      0,
+      0.2
+    ],
+    "withdraw": [
+      0.2,
+      0.4
+    ],
+    "exchange": [
+      0.4,
+      0.55
+    ],
+    "insert": [
+      0.55,
+      0.74
+    ],
+    "basePress": [
+      0.74,
+      0.82
+    ],
+    "recover": [
+      0.82,
+      1
+    ]
+  },
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/steelfeather_repeater.json",
+  "sourceGeometryFileSha256": "436102933704423c0b27f72da5400c520f8e00c2b715fca2f63f2127d2f1124f",
+  "sourceElements": 89,
+  "partElements": {
+    "body": 85,
+    "moving": 4
+  },
+  "sourceCubes": 89,
+  "partCubes": {
+    "body": 85,
+    "moving": 4
+  },
+  "maxAssembledElements": 89,
+  "elementLimit": 1000,
+  "ordinaryArmSegmentReserve": 112,
+  "ordinaryArmSegments": 4,
+  "ordinaryArmElementReserve": 448,
+  "maxAssembledWithOrdinaryArms": 537,
+  "armBudgetBasis": "Shared master hands builder upper bound: four ordinary fingerless player-skin segments, <=112 emitted elements each; final materialized count is master-owned.",
+  "movingIndices": [
+    45,
+    46,
+    47,
+    48
+  ],
+  "movingNames": [
+    "magazine_core",
+    "magazine_side_bevel_-1",
+    "magazine_side_bevel_1",
+    "magazine_floor"
+  ],
+  "fixedMagwellIndices": [
+    49,
+    50
+  ],
+  "fixedMagwellNames": [
+    "magwell",
+    "magwell_gold_trim"
+  ],
+  "partitionRationale": "Only magazine core, two bevels and floor (45..48) detach; magwell and gold trim (49..50) remain body despite sharing the design magazine group.",
+  "sourceElementsAndUVSha256": "4a63394bf5488453884f3233a5daa38e8d470320be30959c5593c0475a457110",
+  "partElementsAndUVSha256": {
+    "body": "372bceb5f3e7506fdc886d723c5ebc0caf9cfc7bb20123415f5e0664ca528afc",
+    "moving": "c514464d9fbcc76474134109720025f3f9c700c6c1a60a6f2f1f3f043179f127"
+  },
+  "geometryAndUVUnchanged": true,
+  "geometryAndUVPreserved": true,
+  "hipEndpoints": [
+    0,
+    60
+  ],
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "fallback": "Exact canonical graph for negative progress and non-FP; ADS/inspect precede reload dispatch.",
+  "rigAction": "80A8A395",
+  "partHint": "moving",
+  "sourceGroup": "auto_rifle_943c13a2",
+  "sourceFullChain": true,
+  "sourceActionWeaponExclusive": false,
+  "sourceCameraRecovered": false,
+  "sourceProvenance": {
+    "reviewPath": "/private/tmp/destiny-w213-source/source-review.json",
+    "reviewSha256": "cc9ef72c7c7e85936f3cf9bc1ad521a46cfac15c48e891412b1cc15685066d7f",
+    "blenderVersion": "5.4.0 Alpha",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/blender/source.blend",
+    "sourceBlendSha256": "85d557ad5b5ba5f1148653f1f6ee8a99bad69172143c16c8c1161b9c04d9fe02",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/source-map.json",
+    "sourceMapSha256": "aafe9e2ed8a4074ca216557bb31fa2869032f7a6fda2d0ea0dbd5a4b2d9281b9",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/bone-map.json",
+    "boneMapSha256": "4b709c1d83bce0134c71bbd0dfc4c1b72bcf35af891614729d0661f90fa0ef9d",
+    "evaluatedRigPath": "/private/tmp/destiny-w213-source/auto_rifle_943c13a2.json",
+    "evaluatedRigSha256": "f698e2e974a2f4a586857d8cd509f19da1603457c5c4cb5617651510288c1113",
+    "chainSheetPath": "/private/tmp/destiny-w213-source/sheets/auto_rifle_943c13a2-80A8A395-upper-chain.png",
+    "chainSheetSha256": "38d49d16466d5e15498ce2832f30eb80f45c7cdc393b7db2ca9871f12b28e0d3",
+    "rigAction": "80A8A395",
+    "action": "Armature|fp_80A8A395_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1,
+      105
+    ],
+    "sceneFps": 30,
+    "evaluatedSamples": 61,
+    "existingCacheJointAbsError": 0.0,
+    "masterReportedInputsUnchanged": true,
+    "objects": [
+      "ARMATURE"
+    ],
+    "sourceCameraRecovered": false,
+    "sourceActionWeaponExclusive": false,
+    "sharedSelector": "61CCE0D7",
+    "matrixSpace": "armature_object; row-major, column vectors; matrix_world not applied",
+    "evaluationOwner": "master headless Blender; worker read report, rig, maps and viewed actual PNG"
+  },
+  "motionAuthorship": "Exact W166 authored part keys/holds with local W212 weighted-harmonic PCHIP; original61 source FK replay, rest mesh offsets and shared weapon parent are master-owned.",
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "assets": 247,
+  "packFiles": 247,
+  "generatedFiles": 248,
+  "limitations": [
+    "Original source is shared-family ARMATURE only, without mesh/camera; 395 is an audited candidate, not a weapon-exclusive selector.",
+    "61 poses remove /20 bank quantization; server-paced state updates do not prove 60fps interpolation.",
+    "Part motion remains authored; no recovered magazine path or physical finger IK is claimed.",
+    "Master imports source61 and shoulders, loads this profile/action, routes runtime60 and materializes normal-length skin arms and outputs.",
+    "FIRST Vision, image-backed worker correction or documented no-change, and SECOND Vision remain pending."
+  ],
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/steelfeather_repeater.json": "436102933704423c0b27f72da5400c520f8e00c2b715fca2f63f2127d2f1124f",
+    "src/main/resources/assets/destiny/models/weapon/auto_rifle/steelfeather_repeater_twohand.json": "1af091876f626fcd982a50531cf5987bd17b147edeed01f8c858edb58cbe1111",
+    "src/main/resources/assets/destiny/items/weapon/steelfeather_repeater.json": "114470ec315ae6444e548217f67768ad10f140bab2061f948b7dc213c9e1aa4b",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/steelfeather_repeater.png": "7c2c125d8003f07f0448d3880fdb088c226992da86238d0f7184a71c6715a256",
+    "art/weapons/w123/steelfeather_repeater/design.json": "a07ce813ed2acdbb73d5ad57059c92aa67bf93ebb0dca1301943bb05c965c64f",
+    "art/weapons/w123/steelfeather_repeater/manifest.json": "b8f004e3928d741876eab51ee6365494b5a675088925d46e43f93cd09172a5bf",
+    "scripts/generate_reload_w166_steelfeather_repeater.py": "76a58377fd547dcf0595e67770e412e44195489ac1f4e351dce0bc05dfe801ee",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+    "art/weapons/w205/rigs/auto_rifle_943c13a2.json": "f698e2e974a2f4a586857d8cd509f19da1603457c5c4cb5617651510288c1113",
+    "scripts/generate_reload_w213_steelfeather_repeater.py": "386e3ca5450a930ebd995451c5dc910c0f3f96043e2ac50abb7affb8998f0355",
+    "art/weapons/w213/steelfeather_repeater/profile.json": "744bc81ebe0f0d021eb8fac1a24ecea400fc5cf21a7771066bf5e6a82d4d8348"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_body.json": "bef484bebdf311becd39df7df30f95154594f119cf1e1a76227e055862cfd995",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_moving.json": "495ada4026e921433fa8a448b828d47d1d563f3de26a161a505d2398da8edf37",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_00_body_native.json": "2100fffbb7d41b4e88447ebcaf8997c21a166aee542ff7316010139d0626679b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_00_body_twohand.json": "7f26c4d3998dbb2f02d82664b9d124b11d66d425ea1e92ba29408434ca50da65",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_00_moving_native.json": "db9eecc7a005bca0a5c6b44f2a91c919604fd5f1e9971fecb73ce0464b114335",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_00_moving_twohand.json": "b09f9d84a4858681b87f0740caed158946582fe09896712c17650f6c0166bf97",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_01_body_native.json": "3e777ca3afc702e40fb5937b04ead60f50a5db2ca7823d4a27b9b3751ae8ca35",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_01_body_twohand.json": "ded8cb1dff194a335592fe693fa3e3d25a1a93f1a1a69016bc6c7fe8b6cc2fbf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_01_moving_native.json": "b0f6a4b713badd8313895db55e3f6ef676422ea5ff4be48c4745dcc6f909806d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_01_moving_twohand.json": "b0076fb04ab299b0d5d07f7a618725203afd4e5194b08ffa951c6053e204d970",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_02_body_native.json": "96ae99c538513759391f82976b1b000a4f661ec86e339fd8bd5f240c268cdd7c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_02_body_twohand.json": "0b6d617d602d4afd147c484514248ba49d63625fa76d28cd524f2d8a33ab99b8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_02_moving_native.json": "54b763bd529bf39580c32f2869e5e66054ba4302b5b4008ced4c3d80552c68ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_02_moving_twohand.json": "8793d1ea86ba55d259f2ca924e880470ca7b38e27d35580e8171793c3494c1a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_03_body_native.json": "4ffc14c8ec85cdc8c0e8632e590478c8d3b5bb96eda57c101e727371af3c48c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_03_body_twohand.json": "c2a29a706ce10d66fe160a0a64e2fe43fe0658d4b449a9127ac6c17f86bfbd3e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_03_moving_native.json": "4c423fa09bcb74539858641a3fe41b55677096ccd4ab09ddbc0bc48d4f0bcfb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_03_moving_twohand.json": "e58625f659e7fbaae66e216935ac3846ea04b720210de506e8d7cdd391faac64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_04_body_native.json": "4a4913645d92dc9e4b6420b86a4c5790eeea1f0547ce949c6d9facb9e1916b40",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_04_body_twohand.json": "dd3c03ada3908bdf21ea0dcd5274d4e9dbdaab713ede42023fa986f3ba62cbbb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_04_moving_native.json": "9b2410ea315577291c55bfeed3c7b6cd500e05915507f10d23e21aa02b7d71ec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_04_moving_twohand.json": "e1953faa44e41a58e97167d4be0ca497e05d31ebd880f2126f764f99d9bfc70d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_05_body_native.json": "fe16f0b16f7345571bda5173dc92df40b3e2dd9a39e5657fb22576fa07a8e91b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_05_body_twohand.json": "4b341f8474b5cbe44422a810e828a69044ddc95a87bc434c420a4bec598d1853",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_05_moving_native.json": "761da6e149bfb44cd495181894f6572e89628199a6451602bb4d22cc00a4f88d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_05_moving_twohand.json": "af222ea19219a3407bc3e322e663b052e4574b305f2027ee6d5986b3fdfeb4f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_06_body_native.json": "1c88c44e8120685c6c55361008f5b05e64324aa43e9d6c4f7bcb568dfd86be38",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_06_body_twohand.json": "a961d6d5a4bfba30657719fa073dbaef61cb049ef15247f8fb30ff54e81b0e95",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_06_moving_native.json": "199d42e38b62200e8ace2fc9161d59cde4036fd6459bdabe6efb852d6b69e0a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_06_moving_twohand.json": "a991bd244805692987db6099ad662c66e0299c01582434dd93ab0a357a0c2b41",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_07_body_native.json": "383e6ff9c3d710342a1a265bd148ad8d591c3057b2acb32179b0337ff2d6e8e9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_07_body_twohand.json": "d7feef4034522608323d3f5f08bbce47cf92ba3aeeaf124a6c70f43c239d4a45",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_07_moving_native.json": "d25a60c85df82dc9dee92e32c99c32bedba478c71da7414eba440f1fef21723d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_07_moving_twohand.json": "3ba0fa8ca9f7b5bcc09a7418e4a0d0c16705a92e63b7fc4a82572e54ceff48a9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_08_body_native.json": "c6a73d1ce86af889c58bce93567197264d22f9491bb10d825c54732606ce6aa5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_08_body_twohand.json": "39139bc79ac1296e2d6016ba83fbf8ecaf4b546200e74fa7bbca9a051575e289",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_08_moving_native.json": "8e5f9cc5404f4aba8a8dabcbca4a0d48ff44a32718f64be0f3b5b0ee0d0cdbd3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_08_moving_twohand.json": "87a53e140762422ca1ee1acd5ba0e6c35f4c55f3cf8350d5289a43d8e1652232",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_09_body_native.json": "76a39a28502ea3b0dce3f58f93a392535769b63e6232920a421944a967012239",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_09_body_twohand.json": "889ccb5ad0ab2693fb479451e4941bd2970f6a15e441bc138795c46a57c75f62",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_09_moving_native.json": "5336c3ff385004a7778b75712ca05ff3c039ba24b29175f3d2df2a94c2e77a9b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_09_moving_twohand.json": "396fba260fa765afe4a6354f52737206bd7c23d0a6780a12f1782f84e1bcffb5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_10_body_native.json": "69ecbd8ee6a9ed5d3e2e105ff2b6e5841afa6a368520a321e3d9a18e98366e3a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_10_body_twohand.json": "5a8bc1eda6ac28426d85d6698e9562c4cd3eaf347649e20ec7954108d6d4561d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_10_moving_native.json": "ef7b35383966414ab986295899d61e5ca927b85ba334274daf10023dc1d4e396",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_10_moving_twohand.json": "ab4e5be6ad8a01754ef3c1d4d9c01017f30a802a624520254c8e2b654434c7ac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_11_body_native.json": "ab464665e6b52adda827de55415f4788f78a50a0ada5c7c36da1c1d19c25fe2d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_11_body_twohand.json": "c5ab46db79c649214fea39726f7e40d7f658f6382b79e10760b303ae56a01cb1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_11_moving_native.json": "c2abccc996504500df9b0adc2138448c950a314d0c1dc11b6257aafe56f33e64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_11_moving_twohand.json": "a85d0fbe912a77048171153752ce087aa82b0ef0261fbb6cb61ebbce394f9e99",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_12_body_native.json": "8a526e88c618e4a0f5bedfb49944d70d77c17e222cacaf4608606b5fe4de4e7b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_12_body_twohand.json": "69953d60291ec3f91e916c901d59231c05d7a70cf2f0f7e1202069663208b8c4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_12_moving_native.json": "1cf8fcf7a7b760dc6e5fc7ea7b3ad642fbcb703d0ba9b48144476c3c2bb69560",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_12_moving_twohand.json": "4718b7eb0c549cf159cd6ef8921a38588b4bc814f3bbd171a27643b0b8812f4b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_13_body_native.json": "f2f4dbc2321cdc9412e8c6924da62ad1e0f834ab71276165193a01dee6b98ddc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_13_body_twohand.json": "54a3c0321a6695c2b40818accb64f395dcb6f6956502b479fc05a9c97dace04b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_13_moving_native.json": "a8bf39f1cb5aa0fa22873afc6da6023b1083e9837e4686ead62e36a788889bef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_13_moving_twohand.json": "a948e39886465efb6f0abe6ae03596e80b7d0cb5b0c4fb2a64d6dd5158e085f8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_14_body_native.json": "3069695f51b90feba068b5896230c945418f2077d96b33e27c6ba16e12d54ed6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_14_body_twohand.json": "f4aa95464fda555d6d6216df3af64d2705821403645c9f69ccbfd4cfd8bd90dc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_14_moving_native.json": "6a486e1043cb58e57b2283b7111d7e18aade6458409847b088fafd0ce504427f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_14_moving_twohand.json": "d5000eda0ba7f2f06b42c7509d273b43b44e2d6698d0dc3c0a451b86f0d9d6c4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_15_body_native.json": "e198b5f6c731b488b62efe5d208b133d4693a5b2abb07f32c0ee0c687aba53ea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_15_body_twohand.json": "07b6085875cc108c9264758978e7a13130dd99f0273f2dab8012461a6c2206a8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_15_moving_native.json": "41a396e97405d7b2b3d317c008a0fde40a3f327610752e07baaa3026423d14cf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_15_moving_twohand.json": "62d656d15b7e097c3642745a4390044bb7774a2e2997fc2cf63301de227042f0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_16_body_native.json": "b590831c35933e36e05eebd7c8aa36d8689f03c4b04e8a1d2cbf4c79470222bc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_16_body_twohand.json": "08443ce96757577157aa510b814acad3f53438bbb63786dace2c25436fc1034a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_16_moving_native.json": "00211086a8913788047b8ce419452ed5c43893b5567ffd43404141ad056c98dc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_16_moving_twohand.json": "78b56517cd3c9d73861fafe35e02e753028c647660750ec0edfcb78b83f88544",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_17_body_native.json": "e46539338b83214b391d7c8fa562f9a81364eef366e9e0620c91e236c7ccbf4b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_17_body_twohand.json": "1341293d27e10518527f56fa3a2a205b00229f0048f78280e48087f08e717d6b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_17_moving_native.json": "7cde633abdab3d55dde4ffe2f8d30ae00ebd6635f205ccb5798fb435bcebe08a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_17_moving_twohand.json": "590a730a5101d938a32f568daa7470078ee2c324f4223e3bf4bd26c69bb4ac38",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_18_body_native.json": "1580c949fcf935033359abe41005ca08d9fb2319f8619e29846681aefbadf74f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_18_body_twohand.json": "4d1c98ceaa577715bcc5bd1cfe82b585953befadd6d94576f85d8248077bafa5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_18_moving_native.json": "f9f253216fb5b21f57c80b8ab077521ea2bb40d60b935a8f8cca1e73907e77b9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_18_moving_twohand.json": "5e6d53a448b05a871b34af30d9030862ce42c6ac836bfea3c55016a69c9d49b0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_19_body_native.json": "7410fb49484a2c02202749306af1f7c4cc83ffaec9545c297f43b40e305e5742",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_19_body_twohand.json": "091086e4eaa5c22e4dc8f844f5fecb9aaa5c43bdbd42774d13e0ea135cd1ceb2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_19_moving_native.json": "7dc25a0dfb754cdcbe9108d4be9d44b669f6e1128b96db62729fde09a5400336",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_19_moving_twohand.json": "9aec5361674ac5265e9123a182838d067389dc83d350f17c6d65372ccd206a61",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_20_body_native.json": "5fea070cefbaeac38a54495e16b66503278afa5dd0ee7a5a51b474265da17b35",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_20_body_twohand.json": "093e7a3b9697346ddbdda70858e4dfba8bfd0ed416e4daba32662d8d68b97b1e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_20_moving_native.json": "fd80c8fa7abc811f2b249e6f4fc65de0b3e278a789db98e672a24b057d2d95b9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_20_moving_twohand.json": "07daa98b899efb20a24e11fc57e4cb103b7feb1618403a274953603c8358fbb2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_21_body_native.json": "25fecd2d056851522f94bd7fd90c2cb687437b65b4a676a10f7f560e7f89ea58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_21_body_twohand.json": "df2c8e94199dab3a6302313daf39f4b26df4738bbe2d98827434238a4cad2f4e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_21_moving_native.json": "c9e2c235e547c2fd253619a997d0ed463ff4b6c9e711a9ece82fc6f1d71dc7b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_21_moving_twohand.json": "469e0608ad4031352d400648b50e65bef3cff262a9a266c278b10002092d0d52",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_22_body_native.json": "e3505b24157fbc7a5b43230241f336f1ae51948391baa0c86ce8662114f99d1e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_22_body_twohand.json": "045d7f8455eb6f3cacc902e2e401462ad36189d7faa14bc9321eee51b34fd8fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_22_moving_native.json": "9b7552f4d89f0aba17a3e46fa9724ce831be49b1052f20753cb75f50e64b456d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_22_moving_twohand.json": "213685b74f7221b3254a5e91e01ff7a63e6579f840b68620b0438eb23a04edc7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_23_body_native.json": "7e9f05d63231fa6c94f119e23a36bec96d564e3449502e333dd1c19332d7bada",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_23_body_twohand.json": "390fe7dce5205f2588c0eaf4c5fc882181ede3ad13b764a432bffada1728e56f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_23_moving_native.json": "b2524918e3a3674e406bfc7c30e7d961cc0addb57981caea205867404cb6d4bf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_23_moving_twohand.json": "ca245e0dd6cae547410002b2fabd8aa68759db7ebf66858324707eac9b8c2b10",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_24_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_24_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_24_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_24_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_25_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_25_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_25_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_25_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_26_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_26_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_26_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_26_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_27_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_27_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_27_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_27_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_28_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_28_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_28_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_28_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_29_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_29_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_29_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_29_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_30_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_30_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_30_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_30_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_31_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_31_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_31_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_31_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_32_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_32_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_32_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_32_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_33_body_native.json": "4a95c9cb9ab8e553fc88b528ad77efe0c21ecd02c59a2248e8f516a964fe2e5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_33_body_twohand.json": "968d3fdf08e6923ec295132be0331f46bf14850a9fc1bc60f6ad4aa362b5a2a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_33_moving_native.json": "d71ff40a2c17b9e42bc973607c796b36230fab2538b64b88671ab7344a321dc6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_33_moving_twohand.json": "5d09b2c7f59fa8aca64b04d7c7039c4be51f88062d5f4e07a08e32c3914f08da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_34_body_native.json": "1ded82ef0f5b0ef00c67159c8e3ece115eee06147e65d52fa603ad77fbc4f01a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_34_body_twohand.json": "db0510de4c9f7944ee98894f0d410589e89e5a3508c22642a2604f96649bd3bb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_34_moving_native.json": "939bf8d3564631164afbed1cf678251180bfca9b4b7c6550090ae92f3897a9c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_34_moving_twohand.json": "7e58e11b60bfb927d2dfea0e9c9eef45c74a2071057b0724961100f457071540",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_35_body_native.json": "9003ace27579fb002c3db1e7ceea89b564f383e0d3fffcfcefb2f64a3cfbcbb1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_35_body_twohand.json": "c0d657b9b70d5aff3e6261dc4c8274335ee3e002627e65885eff0197e8534172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_35_moving_native.json": "e6a652feda50bff6c135d6b75445d2eac40806f6251d87ce1d0f08b8e28b0ccb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_35_moving_twohand.json": "23e5f4a6497e67b22af82b1757b79e985cf73b8539f626338a2aff46df4f017e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_36_body_native.json": "3ac4084c8093f37265ec21e9adbaa476d6ed8142405b0d1bf5d0037b904f23c2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_36_body_twohand.json": "88db0f207dc97cda0846dbdfcf14bff267b32f674cd57ab86fd4fc0e81b1d4d8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_36_moving_native.json": "eb48939273935c5007ea93d73191c3a96ef32aa99481234665a31120b8590643",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_36_moving_twohand.json": "64e40d301d5635c99664c0526d02715670ace6faa24e0de29418b45ffbf88055",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_37_body_native.json": "903b2dc6c6e7a0ccc4c7d14f3434dc8933cdcdfb4d9e3818f3a481b7d41ba32b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_37_body_twohand.json": "ae8cacbd1d9b692fbb1834eccce3e0dd0f762935c6f6651740f084df4b6f2af3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_37_moving_native.json": "7ff744fff6e4f5b21da0477edaee2d2220a476847e8269e1bc61053ecf0f9b25",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_37_moving_twohand.json": "82fbe5c92e93d96de91640d5546604a8d75c15f2c3021b57087e3a3cc5fc6c09",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_38_body_native.json": "b9fe672cdfb15c0aff75345159ddb8f0be997011b2bd8be6bde30a73e729b4d9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_38_body_twohand.json": "318f4dc85a9234d8c7f5b2522c5e13736b1186dca968c61e6335094da97cc886",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_38_moving_native.json": "b24ee7f8cd9e82e808922883be63d882cb4934b65ebd47decfb8e1d412c0cc61",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_38_moving_twohand.json": "fdac96ecb824d3a6afd08f2af5fbedeff2c3c3412a7391d3d5403048a6961643",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_39_body_native.json": "0a4fcc8b745091c803b5c77303c6be810fe3c02997ef9d431f0d3e8f5fe07d3a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_39_body_twohand.json": "67b36ff6dca78d0958b84402c610354cd58a9e3ce24b840fc39ee17c16fef0c9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_39_moving_native.json": "9570fb3f09585c473dda59343e567fe6a20a16dc0a8a198f0660f23d2ced2aca",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_39_moving_twohand.json": "366492a5e07a8b2e7646ecf7cb5dd4eeabfc2c127f209d2c62f230e92182c15d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_40_body_native.json": "bde031efbd21cb4720487a5b86bddd132dfea2ae389ed6a2d478b41c7991a981",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_40_body_twohand.json": "6d9ccaed4a4a71d46858832832dc66467c5ea2af15549ec646c3d0e2fb20e331",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_40_moving_native.json": "63dfc13220bd1c6b81fcc3487e4a30a4006940c2a8dc726da232019eb8e29a56",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_40_moving_twohand.json": "218fe271b18a1afdcea2905f25cf44044660ce831a34919d35e7250c34b28522",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_41_body_native.json": "782977714282a1e1b4116c3091171d674ceca753f29e724c311305b089911540",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_41_body_twohand.json": "afbd6bffb68d9d265e24efe4c3ff18fdf50745dd0e0057f4ffc67fe8754506b8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_41_moving_native.json": "ebe71d3a85c990504af581c95c041a5d83e1a8df6c5353a9699bdd32fa8217e8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_41_moving_twohand.json": "c23e34a5bdd5cdc9577e7d62515b43e9938638ddd1e67863772e331ed9347e98",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_42_body_native.json": "e0426fa73ce16dcb20f7c60c43b10e640292597c90529d0e12ff0e61267fee49",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_42_body_twohand.json": "0189f51f8ee90c82d0ee3e83babf0d93b9ff4757aee874368c5825f4a2970bdd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_42_moving_native.json": "05c68d9e3ce933e5d44b031fae541fea6941d56f06877cadd4030059d296e5e8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_42_moving_twohand.json": "951c06c123de8b6ac8a25e63d8f1a9182844ffc970f9cf49dc9485762f9a4b94",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_43_body_native.json": "329a0711aafb7d93e71b702726073e67ba8f1b910b520302ef261280f3f6c892",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_43_body_twohand.json": "173264004ec4ad4d774fc3941c34e299ca3e66ebdc16b20d9937204f404c2860",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_43_moving_native.json": "47c9649e9e9320cb9731dde8564d530814ae5919583755fb45a6f1a8acadd167",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_43_moving_twohand.json": "706cead04be2cf1f9352ece36beadc71ad04f36a010ed02fbbd940724b0c17ea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_44_body_native.json": "da378d7c288bd92021896f6911e3824aa57fdfa11b7c3fb439b2494179989d1f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_44_body_twohand.json": "d2fa14e202805e80f35fc598af4930b2d86bace0e3e2e61be78a6f6a9cac08ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_44_moving_native.json": "8807ec14629bf7b3e8db51e02c144b101172f6c8b86277f0623fca93ac9fa475",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_44_moving_twohand.json": "ab2a344bb41a59ebaf16f62decdefa3c5ff6fc92d0f10db07f461e262a574172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_45_body_native.json": "c38579d1cefcb59c63abddbb578b535cb878764881db018693e252b967dbc6af",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_45_body_twohand.json": "f5d80d96876a2f60d3acd3cbf54d7f581175972792658eaea2f11ecb10d45e7b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_45_moving_native.json": "413ecfd6026716864137bf87362fb74209c29f41ff4aea4c4e298ea9dccda4ca",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_45_moving_twohand.json": "ff3455cb2eb7009a361a11563a7db15ac952bfea20f017e488f770e3089d156d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_46_body_native.json": "7ad63547974bb6dccc1ef464773b37ae51b0cf8d0f7b2952412dc576a022f40f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_46_body_twohand.json": "563c836da6e53a146fddccfba7a0cc519bb3d2f25f9480f4439525e32f07647c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_46_moving_native.json": "12d7bcf8632984b2e848d0e0221b72717d9857d92334e2a128ea2b10907e0a42",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_46_moving_twohand.json": "06b6985198dce9de1c09165cf3480b1c5aaca6e85da162b6cfb592ce59fbdb31",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_47_body_native.json": "22f9f901f51f24ebc3498373f9f5f403d49757b4f672fe38dadb4197f19c8928",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_47_body_twohand.json": "03abddd048fc39ef8202deb06015a4ef1e44e4864c4a32d2f3b151ef78579d6a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_47_moving_native.json": "2e4d599a1c26f72117c8fcde8b8ed2c144f7aabb8315d76eeff268b7f09c0e6d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_47_moving_twohand.json": "5248f96af04b4137544de77b3704121c72d36e13c9f5d799ecf4c03e0a8f5edf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_48_body_native.json": "d4017962d04772f49710fb7ae8909504c8c7c2ac85045cc52dba0228d766246e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_48_body_twohand.json": "0b90b47beb7caa83e8430f0a834a06598b6d02d1b6e63477152bd7c34c7f99b9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_48_moving_native.json": "6a4d2345661ee3aee00c89f8494d42b54389c496a198073fd9c7ad4e168f1fd6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_48_moving_twohand.json": "bb470de1d288f45dff897b9897a733e8b88771ce8521d00196ec501e72c6f51e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_49_body_native.json": "26caff6c17c7783b9f49df6211721c0d50dd465f6a47497cdb771509b72ab5a1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_49_body_twohand.json": "f6a635f62bae72d41b0c6b57f4aa1f17713bc75be34feeaf51e4bd7df876f017",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_49_moving_native.json": "4cc133fb013e2a8bafe9f3b636ca8034ebd506cd9449cff83facfd406ae459f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_49_moving_twohand.json": "65cf21cd38f2da0d8139fb17777368d1e1122070463d103eff99589afa082d3b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_50_body_native.json": "82ba999f7a13a4ffdfab1d9230992f316bc4f165774702f874cfa40148080c82",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_50_body_twohand.json": "bca4adb998eabab44da05ec933232d650045b23caa24633ee068b685c74624e1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_50_moving_native.json": "343b3964960be1ed043da1532333208431230db6f60d4aa62f7491770a19834b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_50_moving_twohand.json": "7c07e0e1c24e280f77c8a555dfc49db40855d4198139c09b5ab55b0d13035b66",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_51_body_native.json": "f9284208b743c5ae9ed2d0e764674696fdebb74380df03fee4349f3a1b832205",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_51_body_twohand.json": "58edd3fbe169ccd117a3daac073783b9d62d506c1c66c17a83944716c6fa8eab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_51_moving_native.json": "c2c84c7492f9426a03cf0752e0ae09928598ec493f0974396409375d559d1b8a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_51_moving_twohand.json": "f9e96b4494b16d1260917eb38a1533b1a10226433750afdbdf1bab6e2f56802f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_52_body_native.json": "9f2835f06e28d6eaff9c9ffc8f768fe50303f16ba4fed95d96ea6035b8830a5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_52_body_twohand.json": "a86bd9d03083c817c16f97f232b71fc51aba0af7eef08383c702fe3b0b2e140e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_52_moving_native.json": "f0c147ae1605c549b3646a01c5827adb3e4cf83e2e68680712ca21833f3015da",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_52_moving_twohand.json": "d1afee1ef4c1b0b7f7672dc0362143f0a00e0b5d4bc93592d1bf094b151f0f0d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_53_body_native.json": "c778d1eb2fdbb59a5af2db1bcecc08af715b8574d14230503172fda33dc6bbdc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_53_body_twohand.json": "3eb53220c0145b3f69d668b8c97ce5794aebaacb204213404c06e484a5487439",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_53_moving_native.json": "8443b663240a714c25e8eb52aad9369494d32ac31643c058dc2e7e8cb12aa518",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_53_moving_twohand.json": "c34fb6f9b2bb9512d2e92878f03149b0d97d9740e986e6cf2310c9f707362b64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_54_body_native.json": "a70e9e35d82ebd0c5e781ee05a82295619058e2124b90874877861f714739d5e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_54_body_twohand.json": "1001b1b6196c7cbfc216c664c83bcdb397befa1ffddade2834f88ed0d2ef4461",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_54_moving_native.json": "24376809df19e0e5b59e7d31d7b4928e4e13d361ef24453f94b0260648d23b7d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_54_moving_twohand.json": "3c2e051531c48b8b35efce3695328fe2afe500af352dad8b3e17c1786e7462a9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_55_body_native.json": "7364dd70c391a82d77b02bd2ef9a2a1461ee58a1f6bfd8075bd2fa9c2e324780",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_55_body_twohand.json": "814a257c8df76f915392b9e53fe1dea99e3107cf4a9ad52dea1b0799c04d7aaa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_55_moving_native.json": "8cbad241b7c04f1fd9e26b26a204af8553c47401557922bc7df762d67dc14edb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_55_moving_twohand.json": "faa5aa82e2c676a10a4336c2dda155ca06273a294de196a047cfa8f50efa39e4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_56_body_native.json": "2b8c743882ab374b6ab59d4efd207892d5efea87a5bb468b40206ab7f50e1188",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_56_body_twohand.json": "97eb7b513b6e778e62b205b1ac60ce4ce3f160982bbfa80bfbfea9643af0c9c0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_56_moving_native.json": "4e73685126248ed844fa905c1f85775220f39b8fd766e39f2543d25db8cf3551",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_56_moving_twohand.json": "a95dc0edc8049dd50a201c27505f9a8eb24d0f8bd4e7592ddea17a9bb100c729",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_57_body_native.json": "d92c71d599aa68f72773aea5cf5d29446787f53cb7418355b2262c08933f2486",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_57_body_twohand.json": "879fb5b1fcaa568b51b2d2b261f57dc2c5e024307db96305c63d4b315f3be68a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_57_moving_native.json": "3c9172744df8b1e35ab5bd845f10a6c183e91b1574a3c0eb3e798b721710568e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_57_moving_twohand.json": "20042c1bc25ec4503d27f2e003192deb1a436a39f56f90d312ac78f405d6b51b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_58_body_native.json": "d51a4636c3e76725d1dfea80ccb70a16a8f41c71feeba5108b74665908de8195",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_58_body_twohand.json": "cf6feb051b345be6469c44478790e52662427b9b5fbbb014963625c0573087f0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_58_moving_native.json": "a738d74d46aaa16ec1283cb05af5dfb1cf9f67174db0e0f73eecc35b32408f64",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_58_moving_twohand.json": "b95d224ae719f5ea132340dcc796b8ab9d60a18f1b656049e97b239bbf3e1bf3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_59_body_native.json": "8f2117e1408be0c358fad75917a4736e1ac1b3127d4c06975e6a1a5fb039688e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_59_body_twohand.json": "09afe8b4c19775b18dbbc8695d991405d525f7bc1d215552e4286e2753919172",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_59_moving_native.json": "06bb6e7b8438fb8418c9251632e19429e2db9a5bb62df525903839220e17b6b4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_59_moving_twohand.json": "3eb223871ee56f9ed3498348e8546ad12fda2315f06de79c0f46375f55d62541",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_60_body_native.json": "2100fffbb7d41b4e88447ebcaf8997c21a166aee542ff7316010139d0626679b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_60_body_twohand.json": "7f26c4d3998dbb2f02d82664b9d124b11d66d425ea1e92ba29408434ca50da65",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_60_moving_native.json": "db9eecc7a005bca0a5c6b44f2a91c919604fd5f1e9971fecb73ce0464b114335",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater_60_moving_twohand.json": "b09f9d84a4858681b87f0740caed158946582fe09896712c17650f6c0166bf97",
+    "src/main/resources/assets/destiny/items/weapon_reload_w213_steelfeather_repeater/steelfeather_repeater.json": "085a081b9891069c68707a5c9a612d5626e12b7c513ab14f539ca2b520c527cd"
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "source": "https://github.com/Clarity-Destiny/Descriptions",
+  "cacheSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 2213355989,
+    "name": "High-Impact Reserves",
+    "lastUpload": 1743183422022,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Increases damage by "
+            },
+            {
+              "text": "12.1%",
+              "classNames": [
+                "pve"
+              ]
+            },
+            {
+              "text": " "
+            },
+            {
+              "text": "[3%]",
+              "classNames": [
+                "pvp"
+              ]
+            },
+            {
+              "text": " to "
+            },
+            {
+              "text": "25.6%",
+              "classNames": [
+                "pve"
+              ]
+            },
+            {
+              "text": " "
+            },
+            {
+              "text": "[6%]",
+              "classNames": [
+                "pvp"
+              ]
+            },
+            {
+              "text": " as the Magazine drops from 50% of its base capacity to empty."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "The buff in PVE ranges between 10.3% and 22.9% instead on Fusion Rifles and Aggressive Frame Linear Fusion Rifles."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Does not buff the Splash/Explosive damage elements of other perks."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 2002547233,
+  "pveIncreases": {
+    "normal": [
+      "12.1%",
+      "25.6%"
+    ],
+    "fusionAndAggressiveLfr": [
+      "10.3%",
+      "22.9%"
+    ]
+  },
+  "discreteMapping": {
+    "status": "MEASURED_2019_40ROUND_QUANTIZED_ENDPOINT_NORMALIZATION_W182_NOT_CURRENT_EXACT_FORMULA",
+    "basis": "All measured2019 body-shot rungs retained, projected conservatively to canonical integer magazines; Clarity endpoints normalize old display damage rounding. This is a documented local adaptation, not current exact Destiny behavior.",
+    "referenceDamageByRoundsAfter0Through20": [
+      595,
+      595,
+      595,
+      595,
+      595,
+      582,
+      570,
+      568,
+      556,
+      555,
+      544,
+      543,
+      542,
+      541,
+      531,
+      531,
+      531,
+      531,
+      531,
+      530,
+      530
+    ],
+    "integerRule": "Require1<=roundsBefore<=canonicalBaseCapacity. after=roundsBefore-1. Above half after:1.0. Otherwise referenceAfter=ceil(40*after/capacity), integer arithmetic. Look up measured damage at that index; no interpolation between measured rungs.",
+    "scalarRule": "minimumMultiplier+(measuredDamage-530)*(maximumMultiplier-minimumMultiplier)/65. Normal1.121..1.256; fusion1.103..1.229. Rescales measured DAMAGE differences, not equal rank increments.",
+    "oddCapacity": "After-shot coordinate means first paid affected shot has roundsBefore=floor(capacity/2)+1, for odd and even capacities. This is explicitly an adaptation from the dated40-round test.",
+    "lastCartridge": "roundsBefore1 is a paid cartridge with after0 and maximum. Input0 has no payable cartridge: profile throws; capture returnsNONE.",
+    "ambiguity": "No retrieved current primary source establishes general integer formula. Dated40-round maximum plateau starts10% AFTER shot (12.5% BEFORE), whereas current Compendium says7.5% and cached Clarity only says empty. Small-mag observations differ. Projection, coordinate convention and endpoint normalization are authored adaptations of measured data, not resolved current fidelity."
+  },
+  "additionalResearch": [
+    {
+      "url": "https://www.bungie.net/en/Forums/Post/254403883",
+      "author": "JadeRabbitEmperor",
+      "date": "2019-11-18",
+      "baselineDamage": 473,
+      "magazine": 40,
+      "shotDamageGroups": [
+        [
+          1,
+          19,
+          473
+        ],
+        [
+          20,
+          21,
+          530
+        ],
+        [
+          22,
+          26,
+          531
+        ],
+        [
+          27,
+          27,
+          541
+        ],
+        [
+          28,
+          28,
+          542
+        ],
+        [
+          29,
+          29,
+          543
+        ],
+        [
+          30,
+          30,
+          544
+        ],
+        [
+          31,
+          31,
+          555
+        ],
+        [
+          32,
+          32,
+          556
+        ],
+        [
+          33,
+          33,
+          568
+        ],
+        [
+          34,
+          34,
+          570
+        ],
+        [
+          35,
+          35,
+          582
+        ],
+        [
+          36,
+          40,
+          595
+        ]
+      ],
+      "finding": "Dated firsthand body-shot observations, all12 nonneutral damage values preserved. Small-mag tests differ; not a current general formula."
+    },
+    {
+      "url": "https://www.reddit.com/r/DestinyTheGame/comments/lpc5a9/",
+      "author": "YeezyReddit",
+      "date": "2021-02-21",
+      "finding": "Firsthand Palindrome10 test reports plateaus and15/23 percent intermediates. Does not validate a universal mapping; no raw Reddit cache shipped."
+    },
+    {
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit#gid=1662574278",
+      "sheet": "Weapon Perks",
+      "row": 119,
+      "retrievedAt": "2026-10-26T19:58:37Z",
+      "finding": "Current retrieved row adds maximum effect at7.5% magazine, below50% base threshold; exact normal PvE endpoints12.1/25.6. No intermediate formula or integer rounding supplied."
+    },
+    {
+      "url": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/src/perks/year_1_perks.rs",
+      "commit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+      "commitDate": "2026-05-20T00:04:31Z",
+      "finding": "Rejected as validation: HIR guard curr_mag<=curr_mag/2 cannot activate at positive ammo; includes no reduced fusion endpoints. Do not copy its apparent linear interpolation as exact mechanics."
+    },
+    {
+      "url": "https://github.com/katzerax/Destiny2DPSGraphPY/blob/70252413562c66df886a7fffe79f67d8b48f1711/backend/perks.py",
+      "finding": "Rejected as fidelity source: linear approximation uses1.125/1.255 despite docstring12.1/25.6 and obsolete enhanced75%."
+    }
+  ],
+  "currentCompendiumRow": [
+    "High-Impact Reserves",
+    "",
+    "As Magazine decreases below 50% ↑55%, down to maximum effect at 7.5% Magazine:\n12.1% [3%] to 25.6% [6%] Increased direct damage. \nDoes not increase the damage of Explosive Damage Perks.",
+    "",
+    "",
+    ""
+  ],
+  "researchPins": {
+    "compendium": {
+      "sha256": "7880b2029a7e7b8f97afb8f079ca48a585ec0765a94b6b3f983a47daf983ba30",
+      "bytes": 137692
+    },
+    "measurements": {
+      "sha256": "59d8d8a5c3edb6929a3e5b4146dcc1f82242b5b7a8f0379afcf0f5d8cb59835a",
+      "bytes": 488516
+    }
+  },
+  "mechanics": {
+    "id": "high_impact_reserves",
+    "hash": 2213355989,
+    "normalMinimum": 1.121,
+    "normalMaximum": 1.256,
+    "fusionMinimum": 1.103,
+    "fusionMaximum": 1.229,
+    "mapping": "MEASURED_2019_40ROUND_QUANTIZED_ENDPOINT_NORMALIZATION_W182_NOT_CURRENT_EXACT_FORMULA",
+    "damageSource": "art/weapons/w182/high_impact_reserves/clarity-source.json"
+  }
+}

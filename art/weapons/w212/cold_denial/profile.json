@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "weapon": "cold_denial",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A36A",
+      "partHint": "moving"
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w212-source/source-review.json",
+      "observation": "Read master-provided Blender 5.4.0 Alpha evaluation of ORIGINAL pulse_rifle_b4d01502 source.blend. Armature only; no mesh or camera. Action Armature|fp_80A8A36A_reload_full|Base, OBSlot, source frames 1..105 at scene 30 fps, 61 evaluated samples. Reported maxExistingCacheJointAbsError 0.0 and allInputsUnchanged true. Worker did not evaluate Blender itself.",
+      "sourceBlendSha256": "042a9965b8f02a7e7bfda10914e2711b31e2add9417884d8b277e11ab9668f4d",
+      "sourceMapSha256": "73251b2726fbb4f652eb14baf6fe0e3552a9351c1515271684525f4b95bdcb74",
+      "boneMapSha256": "411b794dbe4c8791b9bc1c82bc1ef6833aeb71d308aaa08aab7aa0a205635547",
+      "sha256": "a30b83e9b4babbfefe70e09ad3be2b36488b945e29b6b865656e2bce45966db5"
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/pulse_rifle_b4d01502.json",
+      "observation": "Read evaluated shoulder/elbow/wrist/weapon matrices and checked all 61 normalized progress samples. Armature-object, row-major/column-vector space; no matrix_world applied. Shared family covers Cold Denial, Bygones and other pulses: selected 80A8A36A is not a weapon-exclusive clip. At inherited 32-unit conversion, source upper arms are about 8.7266 and forearms 8.14136 model units; no stretching.",
+      "sha256": "7048f5c3143a9298879df84268225bd961563b4a6f3d5bc9bd69254d2d99ef16"
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/sheets/pulse_rifle_b4d01502-80A8A36A-upper-chain.png",
+      "observation": "Viewed actual XZ/YZ source-bone sheet at p=0,.2,.4,.6,.8,1 with view_image. Chains change substantially during handling and return at 1. Source contains no mesh/camera, so this does not establish native framing or hand-to-mesh contact.",
+      "sha256": "be5cc8f75b3b1517f4b21eb50ca19400c9998a95404de62996eb72839fbb9549"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/weapon_surface_w123/cold_denial.json",
+      "observation": "Read current W138 semantic 100-element mesh, including rotated grip_core 82, lower_handguard 24, fixed magazine_socket 89 and rear detachable magazine 90..94. Existing W201 right [8,8.62,8.35], left [7.8,9.42,-1.2], reload [7.3,8.1,12.15] correspond to firing grip, handguard underside and magazine left flank. No new right/left contact override is justified before native evidence."
+    },
+    {
+      "source": "art/weapons/w123/cold_denial/comparison.png",
+      "observation": "Viewed actual source/semantic side, front/rear oblique and detail sheet. Retain teal receiver, bronze conduits, open twin bores/reflex/trigger guard and bright opaque rear magazine; preserve all solids, textures and UVs. Offline art comparison is not native acceptance."
+    },
+    {
+      "source": "art/weapons/w167/cold_denial/storyboard.png",
+      "observation": "Viewed actual cached video frames 4.600..6.000s from j1jKsnDD6Ss plus authored samples. Near-upright rear bullpup magazine exchange and recovery; hands obscure some travel. Existing W167 authored keys/holds remain an approximation rather than recovered source transforms."
+    },
+    {
+      "source": "scripts/generate_reload_w167_cold_denial.py",
+      "observation": "Read original keys, rigid grip-pivot algebra and 95+5 partition. Ported only standard-library constants/algebra into W212; did not import or execute this historical Pillow/NumPy generator."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "observation": "Preserve current pulse-family translation [-0.65,0.6,0], rotation [-1,2,0], scale .98, rightWristRoll 28 and leftRotation [15,35,-35]. These are authored existing calibration, not source camera recovery."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/cold_denial-review.png",
+      "sha256": "b291193944f58423c07ba73bcaaf17793992336efd6c5dc6a029dfe904cff607",
+      "observation": "Viewed actual FIRST native hip/ADS/reload sheet with view_image. Both hip contact regions are visible and the centered ADS aperture is clear. Raised reload crops the muzzle at top while keeping the firing grip, rear magazine and handling region visible; no framing/contact correction is warranted by this sheet."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/cold_denial-reload.png",
+      "sha256": "2a14bfbd6b338a128db29d805955eb3e6b3b8837a80cde3d73daf202c3be1a02",
+      "observation": "Viewed actual FIRST native reload sheet and full raw samples 07,09,27. Sample07 shows detached rear magazine beside the left palm; sample09 shows it approaching the rear socket; sample27 restores hip with HUD28. Compared with original61 upper-chain sheet and semantic grip82/handguard24/socket89/moving90..94. These capture ordinals are not source-frame/progress identifiers. Retain ordinary source lengths and existing contacts; still images do not certify every frame or 60fps."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/oracles/w212-cold_denial-reload-timeline.json",
+      "sha256": "3e2e2e63bdd0d5412014855d7da4a5a4706d6b0b5eca62dd3db06edd91b11e8a",
+      "observation": "Read Cold Denial server timeline: 18 presentation records, eight active reload snapshots at float32 grid60 indices0,8,16,24,32,40,50,57; reloadDuration44 throughout; final canonical model and floats[0,-1], reloading=false, ammo28/0 from tick2096 onward. This is sparse server-state corroboration, not 60fps/listening certification."
+    }
+  ],
+  "notes": [
+    "W212 FIRST native feedback reviewed by this worker: evidence-based no-change to generator, framing and contacts. Hip/centered ADS and rear-magazine handling remain readable; raised muzzle crop is documented. Return unchanged behavior for master SECOND Vision; final native acceptance remains pending.",
+    "Only opt Cold Denial into sourceFullChain, retain mesh support and keep the support hand visible at rest. No cameraDepth, sourceViewRotation or limb-length override is introduced.",
+    "contacts.reload inherits the W201 contact, rotation and magazine policy, adding audited rigAction 80A8A36A and preserving partHint moving to match W212 part names.",
+    "Use ordinary original shoulder-elbow-wrist lengths. Mesh support calibration and source-chain replay belong to the shared master implementation; no arm extension or source-motion attenuation is requested.",
+    "W212 weapon/magazine bank retains exact W167 authored knots and holds with C1 weighted-harmonic PCHIP between knots. Original source hand action is separate evidence, not proof that authored weapon motion reproduces extracted motion.",
+    "Preserve complete accepted native/twohand endpoints, negative-progress fallback, non-FP, ADS/inspect precedence, geometry/UV, 3P, combat, ammunition, duration and audio. Master owns loader/runtime/rig cache/hands/materialization/tests/native QA."
+  ]
+}

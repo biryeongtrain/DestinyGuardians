@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "weapon": "bygones",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A36A",
+      "partHint": "moving",
+      "policy": "magazine"
+    }
+  },
+  "evidence": [
+    {
+      "source": "art/weapons/w123/bygones/comparison.png",
+      "role": "viewed_semantic_mesh_sheet",
+      "observation": "Viewed actual W134 side/front/rear oblique sheet: walnut firing grip ahead of rear box magazine, long forewood support, green receiver, open trigger bow and optic channel. Existing 129 opaque cuboids and face UV remain unchanged. This is offline art, not native or recovered camera evidence."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "retained_mesh_contacts",
+      "observation": "Read Bygones geometry evidence: walnut_grip origin [8,8.61,8.43], rotation X -25; forewood_core bounds [7.4,9.43,-4.93]..[8.6,10.64,1]; magazine origin [8,7.9,12.2], rotation X 11. Retain right [8,8.55,8.45], left [7.8,9.12,-1.9], reload [7.35,7.65,12.2], and inherited rotations. Rear magazine is five moving solids, so existing partHint moving is correct. FIRST native hip/ADS and rear handling views support retaining these mesh anchors; no new rest-palm override is warranted."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "role": "preserved_pulse_family_framing",
+      "observation": "Retain pulse_rifle translation [-0.65,0.6,0], rotation [-1,2,0], scale 0.98, inherited rightWristRoll 28 and leftRotation [15,35,-35]. No source camera, view rotation, FOV, depth offset or limb-length adjustment is invented."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "sourceSha256": "a30b83e9b4babbfefe70e09ad3be2b36488b945e29b6b865656e2bce45966db5",
+      "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/pulse_rifle_b4d01502/blender/source.blend",
+      "sourceBlendSha256": "042a9965b8f02a7e7bfda10914e2711b31e2add9417884d8b277e11ab9668f4d",
+      "sourceMapSha256": "73251b2726fbb4f652eb14baf6fe0e3552a9351c1515271684525f4b95bdcb74",
+      "boneMapSha256": "411b794dbe4c8791b9bc1c82bc1ef6833aeb71d308aaa08aab7aa0a205635547",
+      "observation": "Read master's evaluated ORIGINAL Blender 5.4.0 Alpha report: only Armature, no mesh/camera; OBSlot action Armature|fp_80A8A36A_reload_full|Base, frames 1..105 at 30fps, 61 samples and existing-cache joint error 0. Report says allInputsUnchanged true. Worker read report/matrices and source sheet, did not independently evaluate the .blend."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/pulse_rifle_b4d01502.json",
+      "role": "evaluated_source61_full_chain",
+      "sourceSha256": "7048f5c3143a9298879df84268225bd961563b4a6f3d5bc9bd69254d2d99ef16",
+      "observation": "Read all61 uniform normalized samples and shoulder/elbow/wrist/weapon matrices. Supplied cache and evaluation report both name Armature|fp_80A8A36A_reload_full|Base; audited action tag remains 80A8A36A. The prior Base.001 note was a worker documentation error, corrected on FIRST review. Start/end matrix max absolute delta is 0.000012844815501011908, not exact equality. At authored 32 model units per source unit, ordinary forearms are about 8.14136 and upper arms about 8.7266; preserve original lengths without stretching."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-source/sheets/pulse_rifle_b4d01502-80A8A36A-upper-chain.png",
+      "role": "viewed_bone_only_source_sheet",
+      "sourceSha256": "be5cc8f75b3b1517f4b21eb50ca19400c9998a95404de62996eb72839fbb9549",
+      "observation": "Viewed actual six-pose XZ/YZ source chains at p=0,.2,.4,.6,.8,1. Elbow/wrist posture changes strongly during the exchange and returns close to idle. Bone-only projections supply no mesh contact or original camera measurement."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/pulse_rifle_b4d01502/source-map.json",
+      "role": "shared_family_action_limit",
+      "observation": "Read non-fallback source map: representative cold_denial, selector 7B4E9613 shared by Bygones, Cold Denial, Chattering Bone, Blast Furnace and Claws of the Wolf. Tags 366,368,36A carry reload_full/reload_empty labels. Keep candidate 80A8A36A; no weapon-exclusive Bygones selector is established."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/bygones-review.png",
+      "sourceSha256": "bba67ad1be29ff867d47fbc5ea91c1c4439d58f892f86e07288b0d8a9ca21f3c",
+      "role": "first_native_review",
+      "observation": "Worker viewed actual FIRST native hip/ADS/reload review sheet with view_image. Hip leaves the central view open; ADS optic aperture is centered and unobstructed. Raised reload carries muzzle past top edge but receiver, stock and rear handling region remain visible. No framing/contact correction is warranted from this sheet; SECOND Vision still pending."
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/screenshots/bygones-reload.png",
+      "sourceSha256": "f0b2bdac728a5d7ffaec916afe39d75c39b0947e736d6849493a19a9dece4990",
+      "role": "first_native_reload",
+      "observation": "Worker viewed actual FIRST native sheet and separately raw samples03/05/08/10. Sample03 shows rear moving magazine alongside left palm; sample05 keeps stock/rear region in frame while left handling geometry is partly occluded; sample08 shows visible left palm with detached rear magazine during release/return; sample10 restores lowered ready/hip orientation. These selected stills do not prove continuous hand/part contact. Retain sourceFullChain, ordinary lengths, family framing and exact W168 part keys.",
+      "rawFrames": [
+        {
+          "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-bygones-reload-sample-03.png",
+          "sourceSha256": "dd957ad056590c2a46ea4ffcf5626a3d77e71c85363e074b3947dfa52066a26e",
+          "role": "viewed_raw_native_frame",
+          "observation": "Viewed with view_image at native resolution."
+        },
+        {
+          "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-bygones-reload-sample-05.png",
+          "sourceSha256": "31ab15e8d25b0a592f2d0644af01075a81525b0911411f314d589f1aec8a5c18",
+          "role": "viewed_raw_native_frame",
+          "observation": "Viewed with view_image at native resolution."
+        },
+        {
+          "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-bygones-reload-sample-08.png",
+          "sourceSha256": "8d76d6628c1828da48bc1eef005763dd8529e4d6bab0fb3cf5fc73e1403c57af",
+          "role": "viewed_raw_native_frame",
+          "observation": "Viewed with view_image at native resolution."
+        },
+        {
+          "source": "/private/tmp/destiny-w212-pass1-native/frames/w212-bygones-reload-sample-10.png",
+          "sourceSha256": "c0d1afccf0239915f7b3aa023489a4546ec3c3a983e907bc1fe8ae7da2de02ec",
+          "role": "viewed_raw_native_frame",
+          "observation": "Viewed with view_image at native resolution."
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/destiny-w212-pass1-native/oracles/w212-bygones-reload-timeline.json",
+      "sourceSha256": "cbde82bdc519683c8ed22819b87fcdf70a3f4e35016c83f9da98c2a64c94be20",
+      "role": "first_native_server_timeline",
+      "observation": "Worker parsed18 presentation rows. Active ticks2348..2384 use destiny:weapon_reload_w212_bygones/bygones with progress 0,.15,.3,.45,.6,.76666665,.9166667, consistent with float32 grid60; reloadDuration remains39. Tick2391 returns canonical weapon/bygones, progress -1, reloading=false and ammo38/0. This server evidence establishes sampled state/return only; no listening or60fps certification."
+    }
+  ],
+  "notes": [
+    "FIRST native reviewed: evidence-based no product change. Master owns W212 loader, original61 cache import, source-chain retargeting, hands generation, output materialization, tests and SECOND native QA.",
+    "sourceFullChain true opts Bygones into original shoulder/elbow/wrist replay only. keepMeshSupport true and hideSupportAtRest false preserve mesh support at rest. Weapon and wrists must share the same parent; ordinary source lengths must not stretch.",
+    "Retain exact W168 authored part keys/holds and rigid grip-pivot composition. W212 only replaces per-key smoothstop with W208 shape-preserving Hermite and emits 61 samples; this is not a recovered source magazine path.",
+    "Contacts reload retains moving, policy magazine and inherited [7.35,7.65,12.2] / [11,0,0]. During handling follow the five actual rear magazine solids; fixed receiver_keel, stock_belly_join and stock_toe stay body. Right firing grip stays body-relative.",
+    "Full ADS and inspect precede the dense reload dispatch. Canonical endpoints, negative progress fallback, non-FP, twohand/native display, geometry, UV, combat, audio and gameplay duration remain preserved.",
+    "Worker received and inspected actual FIRST Vision sheets, raw samples03/05/08/10 and server timeline against source61: no generator, framing, contact or limb-length correction warranted. SECOND Vision remains master-owned and pending before final native acceptance. Master reports all12 native sequences and13 JUnit tests passed with neutral cleanup; worker did not independently run those suites. No listening, recovered source camera, physical finger IK or60fps certification is claimed."
+  ]
+}

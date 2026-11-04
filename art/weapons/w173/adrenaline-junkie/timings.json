@@ -1,0 +1,299 @@
+{
+  "stage": "W173",
+  "repository": "https://github.com/d2foundry/oracle_engine",
+  "commit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+  "commitDate": "2026-05-20",
+  "source": "build_resources/weapon_formulas.json",
+  "licenseSources": [
+    "art/weapons/w46/MIT-LICENSE",
+    "art/weapons/w46/UNLICENSE"
+  ],
+  "formula": "q(x)=evpp*x*x+vpp*x+offset; x=clamp(baseHandling+20,0,100); scalar1; ceil20*q once; stow=max(q(x),q(100)); ADS clamp2..20ticks; glaive W44 neutral2",
+  "entries": [
+    {
+      "id": "ammit_ar2",
+      "hash": 2119346509,
+      "family": "Auto Rifle",
+      "category": "default",
+      "curves": {
+        "ready": {
+          "vpp": -0.00279338,
+          "offset": 0.51985381
+        },
+        "stow": {
+          "vpp": -0.00268436,
+          "offset": 0.48414822
+        },
+        "ads": {
+          "vpp": -0.001875,
+          "offset": 0.38975
+        }
+      },
+      "baseHandlingStat": 46,
+      "baseline": {
+        "effectiveHandlingStat": 46,
+        "seconds": {
+          "ready": 0.39135833,
+          "stow": 0.36066766000000006,
+          "ads": 0.3035
+        },
+        "readyTicks": 8,
+        "stowTicks": 8,
+        "adsTicks": 7
+      },
+      "modified": {
+        "id": "ammit_ar2",
+        "supported": true,
+        "readyTicks": 7,
+        "stowTicks": 7,
+        "adsTicks": 6,
+        "adsSupported": true,
+        "effectiveHandlingStat": 66,
+        "seconds": {
+          "ready": 0.33549072999999996,
+          "stow": 0.30698046,
+          "ads": 0.266
+        }
+      },
+      "unsupportedEvidence": []
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "family": "Scout Rifle",
+      "category": "aggresive",
+      "curves": {
+        "ready": {
+          "vpp": -0.00285336856,
+          "offset": 0.540561867
+        },
+        "stow": {
+          "vpp": -0.002941215324,
+          "offset": 0.527217745
+        },
+        "ads": {
+          "vpp": -0.001693527081,
+          "offset": 0.4114236019
+        }
+      },
+      "baseHandlingStat": 53,
+      "baseline": {
+        "effectiveHandlingStat": 53,
+        "seconds": {
+          "ready": 0.38933333332,
+          "stow": 0.37133333282799996,
+          "ads": 0.321666666607
+        },
+        "readyTicks": 8,
+        "stowTicks": 8,
+        "adsTicks": 7
+      },
+      "modified": {
+        "id": "long_arm",
+        "supported": true,
+        "readyTicks": 7,
+        "stowTicks": 7,
+        "adsTicks": 6,
+        "adsSupported": true,
+        "effectiveHandlingStat": 73,
+        "seconds": {
+          "ready": 0.3322659621199999,
+          "stow": 0.31250902634799993,
+          "ads": 0.287796124987
+        }
+      },
+      "unsupportedEvidence": []
+    },
+    {
+      "id": "farewell",
+      "hash": 541188001,
+      "family": "Sidearm",
+      "category": "default",
+      "curves": {
+        "ready": {
+          "vpp": -0.00264010989,
+          "offset": 0.4232582418
+        },
+        "stow": {
+          "vpp": -0.00197527473,
+          "offset": 0.4298956044
+        },
+        "ads": {
+          "vpp": -0.0022293956,
+          "offset": 0.3435796703
+        }
+      },
+      "baseHandlingStat": 64,
+      "baseline": {
+        "effectiveHandlingStat": 64,
+        "seconds": {
+          "ready": 0.25429120884,
+          "stow": 0.30347802168000004,
+          "ads": 0.20089835189999997
+        },
+        "readyTicks": 6,
+        "stowTicks": 7,
+        "adsTicks": 5
+      },
+      "modified": {
+        "id": "farewell",
+        "supported": true,
+        "readyTicks": 5,
+        "stowTicks": 6,
+        "adsTicks": 4,
+        "adsSupported": true,
+        "effectiveHandlingStat": 84,
+        "seconds": {
+          "ready": 0.20148901103999997,
+          "stow": 0.26397252708,
+          "ads": 0.15631043989999996
+        }
+      },
+      "unsupportedEvidence": []
+    },
+    {
+      "id": "goldtusk",
+      "hash": 3371413057,
+      "family": "sword",
+      "category": null,
+      "curves": null,
+      "baseHandlingStat": null,
+      "baseline": null,
+      "modified": {
+        "id": "goldtusk",
+        "supported": false,
+        "readyTicks": null,
+        "stowTicks": null,
+        "adsTicks": null,
+        "adsSupported": false
+      },
+      "unsupportedEvidence": [
+        "Goldtusk remains damage eligible. Official item has no Handling stat; W43 no Oracle sword data; W58 unsupported. No timing override."
+      ]
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "hash": 254636484,
+      "family": "Glaive",
+      "category": "default",
+      "curves": {
+        "ready": {
+          "vpp": -0.002139219,
+          "offset": 0.42369
+        },
+        "stow": {
+          "vpp": -0.002827674,
+          "offset": 0.5147
+        },
+        "ads": {
+          "vpp": -0.0,
+          "offset": 0.0
+        }
+      },
+      "baseHandlingStat": 42,
+      "baseline": {
+        "effectiveHandlingStat": 42,
+        "seconds": {
+          "ready": 0.333842802,
+          "stow": 0.39593769200000006,
+          "ads": 0.0
+        },
+        "readyTicks": 7,
+        "stowTicks": 8,
+        "adsTicks": 2
+      },
+      "modified": {
+        "id": "nezarec_s_whisper",
+        "supported": true,
+        "readyTicks": 6,
+        "stowTicks": 7,
+        "adsTicks": 2,
+        "adsSupported": false,
+        "effectiveHandlingStat": 62,
+        "seconds": {
+          "ready": 0.291058422,
+          "stow": 0.339384212,
+          "ads": 0.0
+        }
+      },
+      "unsupportedEvidence": [
+        "W44 excludes glaive ADS; zero Oracle ADS curve; retain neutral2ticks. Ready/stow supported."
+      ]
+    }
+  ],
+  "timings": [
+    {
+      "id": "ammit_ar2",
+      "supported": true,
+      "readyTicks": 7,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "adsSupported": true
+    },
+    {
+      "id": "long_arm",
+      "supported": true,
+      "readyTicks": 7,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "adsSupported": true
+    },
+    {
+      "id": "farewell",
+      "supported": true,
+      "readyTicks": 5,
+      "stowTicks": 6,
+      "adsTicks": 4,
+      "adsSupported": true
+    },
+    {
+      "id": "goldtusk",
+      "supported": false,
+      "readyTicks": null,
+      "stowTicks": null,
+      "adsTicks": null,
+      "adsSupported": false
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "supported": true,
+      "readyTicks": 6,
+      "stowTicks": 7,
+      "adsTicks": 2,
+      "adsSupported": false
+    }
+  ],
+  "snapshotADS": [],
+  "snapshotPolicy": {
+    "choice": "Measured-modern",
+    "primaryScalar": 0.5,
+    "specialScalar": 0.8,
+    "explanation": "Explicit supplied server choice follows the exact-base 2024 measurement despite the unresolved historical 2022 official conflict. This is not a claim that Bungie verified 0.8.",
+    "entry": "clamp(ceil(adsSeconds * ammoScalar * 20),1,20), only with a supported exact-base roll selected",
+    "exit": "Unchanged W44 baseTicks; entry-only speed is supplied project policy, not proven Destiny exit behavior.",
+    "unselected": "Keep each W44 base timing unchanged.",
+    "heavy": "No measured scalar. Official Heavy rolls remain references only; runtime selectable rolls exclude them and timing rows preserve snapshotTicks=baseTicks.",
+    "neutral": "Preserve six W44 two-tick neutral rows in reference evidence only; omit them from runtime timings."
+  },
+  "snapshotHistoricalConflict": {
+    "urls": [
+      "https://www.bungie.net/7/en/News/article/51319",
+      "https://www.bungie.net/7/en/News/article/51380",
+      "https://www.bungie.net/7/en/News/Article/51250?hidenav=true"
+    ],
+    "year": 2022,
+    "primaryDurationScalar": 0.5,
+    "specialDurationScalar": 0.75,
+    "status": "Unresolved. Historical official Special duration differs from the captured 2024 community measurement; no intervening patch explanation or independent current confirmation is established."
+  },
+  "limitations": [
+    "Bungie Oct13 manifest and Oracle May20 curves are separate pinned snapshots. Community timings are historical approximations, not exact official animation measurements.",
+    "Clarity weapon kill +1, grenade kill instantly5 even stowed, 4.5s duration, handling+20 and stack damage are source mechanics. Runtime attribution, refresh, lifecycle and cycle integration are master-owned.",
+    "Only handling is modified. No reload stat bonus, reload curve or timing override is introduced.",
+    "Stat clamp0..100; stow-at100 floor; W44 ADS2..20ticks; no extra ready/stow clamp; ceil seconds*20 once.",
+    "Goldtusk remains among all5 damage-eligible rolls, but official Handling stat and Oracle sword curve are absent. Timing is explicitly unsupported with null ticks and no curve; consumers retain their sword baseline.",
+    "Nezarec glaive ADS is unsupported by W44; exact zero Oracle curve maps to existing neutral2ticks. Ready/stow have measured curves.",
+    "No selected AJ roll has official base Snapshot membership. Empty intersection is pinned; Snapshot requests fail closed. Future approved pairs must apply official W68 scalar to raw baseHandling+20 ADS seconds before one ceil, never to rounded ticks. W68 historical Special .75 vs selected .8 conflict remains unresolved.",
+    "Combined perks, armor, masterworks, combat runtime, native Vision and final gates are master-owned. Enhanced AJ is excluded."
+  ]
+}

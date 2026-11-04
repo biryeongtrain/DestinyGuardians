@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "weapon": "dream_breaker",
+  "sourceAction": "80A8ADD3",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8ADD3",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.78,
+        0.84
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "fusion_rifle_04669cdb",
+    "action": "80A8ADD3",
+    "sourceBlendSha256": "cdf955feedf818492dd395a2866beb19ed11bb35944544c05c3cd4eb00eeee36",
+    "sourceMapSha256": "27b7520526de9abf593e208b6f0b52f70c83e2a4a6ddaada7bcd3dc40eac9ad2",
+    "boneMapSha256": "a439c489fb5ab1de893beb8cfe682958641d1c2682059f849932a25db27d3fd4"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w217/source/source-review.json",
+      "sourceSha256": "d8edb0d97be1b4cc1446363216ac271fb6bbb1a91f3b52f1fa0b3dc48388fd6a",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master Blender5.4.0 Alpha read-only evaluation: shared fusion ARMATURE only, OBSlot, actual ADD3 reload_full/reload_empty action frames1..100 at30fps,61 evaluated samples, prior matrix error0 and allInputsUnchanged true. Worker read report; no independent Blender evaluation claimed."
+    },
+    {
+      "source": "art/weapons/w205/rigs/fusion_rifle_04669cdb.json",
+      "sourceSha256": "747749cea16ee1bec34df57fbb7fb8b6c7bb32e6dd1dfef6188991a0d2e4d76a",
+      "role": "fresh_evaluated_source61",
+      "observation": "Shared fusion source, not weapon-exclusive. Row-major matrices/column vectors in armature_object space. Preserve original shoulder-elbow-wrist axes, ordinary lengths and full-chain flags. Fresh w217Source61 export will be installed by master; worker baseline remains old."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w217/source/sheets/fusion_rifle_04669cdb-80A8ADD3-upper-chain.png",
+      "sourceSha256": "51406b16e3bce588b382a4fa975ad9f4c1f4a51673f9620863c60328f2e2c2f3",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Actually viewed XZ/YZ projections at0,.2,.4,.6,.8,1. Early left reach/extension, folding during insertion and return; both shoulder/elbow/wrist chains remain distinct. Bone sheet establishes no mesh contact or native camera."
+    },
+    {
+      "source": "scripts/generate_reload_w178_dream_breaker.py",
+      "sourceSha256": "2b280f470ee2fbcc00fc6f906550cd65a0f1d4c37b16156261dcf90441cf739c",
+      "role": "preserved_authored_motion",
+      "observation": "AST-read literal KEYS/GRIP/MAG_ANCHOR/CELL_NAMES/PINS without executing old generator. Preserve all11 knots, steep muzzle presentation, cell hold.43..54, approach.54..78, seat.84 and authored hip recovery. Copy rigid display algebra and original182+4 partition exactly."
+    },
+    {
+      "source": "art/weapons/w178/dream_breaker/motion-reference.json",
+      "sourceSha256": "14c6fe8545212e5b41308a06d08df152be04306665c88b18cfe0b44cff45772c",
+      "role": "same_weapon_provenance",
+      "observation": "DFP10u8PCK4B2c128.10..129.85s, identity frame32s. Read archived provenance and viewed storyboard actual/reference pairs; no video reopening. Exact cell travel/latch/pivot and final hip return remain authored due hand occlusion/ability transition."
+    },
+    {
+      "source": "art/weapons/w178/dream_breaker/storyboard.png",
+      "sourceSha256": "489a6087369ad7dd8e15ba4354cd7dd8897c170ef25af458441fa65528cfbe62",
+      "role": "viewed_archived_same_weapon_storyboard",
+      "observation": "Actually viewed archived nameplate+11 reload-reference and authored-pose pairs. Long ivory casing, blue rope, lattice grip and underside cell retained; this is legacy evidence, not fresh native W217 validation."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "retained_effective_framing",
+      "observation": "Fusion effective translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28 and leftRotation[15,35,-35] retained. No existing Dream Breaker weapon override. Add only full-chain/support flags."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_contacts_and_authored_seat_release",
+      "observation": "Keep right[8,8.05,9.1]/[-26,0,0], left[7.8,10.08,-4.4]/[0,90,-85], reload[7.15,7.3,3.57]/[0,0,0]. Explicit magazine policy/actionADD3 and gripWindow[.05,.20,.78,.84] release fully at W178 authored seat. No receiver/grip/triggerguard relocation."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns shared source/profile binding, runtime grid60, ordinary-length fingerless full-chain arms, materialization and all-route measurements.",
+    "W178182body+4cell solids/UV,11keys/hold/anchors preserved. Lower cell overlap is not grounds to move fixed grip/receiver/triggerguard.",
+    "448arm reserve gives634 reload/695known native estimate; actual composed route maximum remains master-owned.",
+    "Keep magazine6/reload46ticks/charge667ms/burst7/cadence13ticks/ammo/audio exact.",
+    "Required sequence: original Blender evaluation ->61poses ->master FIRST ->same-worker correction or justified nochange ->master SECOND. No final native acceptance before SECOND."
+  ]
+}

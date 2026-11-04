@@ -1,0 +1,108 @@
+{
+  "stage": "W104",
+  "definitions": [
+    {
+      "hash": 3977735242,
+      "name": "Tracking Module",
+      "itemType": 19,
+      "itemTypeDisplayName": "Trait",
+      "description": "Adds tracking capability to rockets. Locks onto targets when aiming down sights.",
+      "plugCategoryHash": 7906839,
+      "plugCategoryIdentifier": "frames"
+    },
+    {
+      "hash": 406461158,
+      "name": "Tracking Module",
+      "itemType": 19,
+      "itemTypeDisplayName": "Enhanced Trait",
+      "description": "Adds tracking capability to rockets. Locks onto targets when aiming down sights. Increases blast radius.",
+      "plugCategoryHash": 7906839,
+      "plugCategoryIdentifier": "frames"
+    },
+    {
+      "hash": 3419274965,
+      "name": "Precision Frame",
+      "itemType": 19,
+      "itemTypeDisplayName": "Intrinsic",
+      "description": "This weapon fires small auto-tracking rockets. Rockets lock onto targets when aimed.",
+      "plugCategoryHash": 1744546145,
+      "plugCategoryIdentifier": "intrinsics"
+    }
+  ],
+  "primarySourceFacts": {
+    "requiresAim": true,
+    "requiresAimSource": "Official intrinsic/trait descriptions",
+    "continuousAimAfterLaunchRequired": null,
+    "unknownSourceRules": {
+      "acquireSeconds": null,
+      "acquireTicks": null,
+      "acquireConeDegrees": null,
+      "acquireRangeMetres": null,
+      "turnDegreesPerSecond": null,
+      "turnDegreesPerTick": null,
+      "releaseAimGraceSeconds": null,
+      "releaseAimGraceTicks": null,
+      "breakTrackingOnMidflightLineOfSightLoss": null,
+      "midflightLossConeDegrees": null,
+      "midflightLossTimeoutSeconds": null,
+      "reacquireAfterDeadOrInvalidTarget": null,
+      "lockSnapshotAtLaunch": null,
+      "trackingPersistsAfterWeaponStow": null,
+      "trackingPersistsAfterTraitEdit": null,
+      "precisionAndModuleUseIdenticalTuning": null,
+      "pvpTrackingMultiplier": null
+    }
+  },
+  "primaryEvidence": [
+    {
+      "kind": "officialManifest",
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "definitionHash": 3419274965,
+      "summary": "Exact Pyroclastic Flow initial Precision Frame intrinsic establishes aimed locking and auto-tracking rockets."
+    },
+    {
+      "kind": "officialManifest",
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "definitionHash": 3977735242,
+      "summary": "Base Tracking Module establishes target locking while aiming down sights."
+    },
+    {
+      "kind": "officialBungieItemPage",
+      "url": "https://www.bungie.net/en/Explore/Detail/DestinyInventoryItemDefinition/991314988",
+      "retrieval": "Pinned search excerpt; corroborates official manifest description, not numeric measurement."
+    }
+  ],
+  "secondaryReportedEvidence": [
+    {
+      "url": "https://www.light.gg/db/ja/items/3977735242/%E8%BF%BD%E8%B7%A1%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB/",
+      "publisher": "light.gg / Clarity Community Research",
+      "primary": false,
+      "updatedAt": "2024-02-29",
+      "retrieval": "Pinned URL-bound search excerpt; direct English/localized HTTP fetch failed 402.",
+      "reportedAimLossPersistenceSeconds": 1,
+      "reportedDiminishedPvpEffectiveness": true,
+      "adoptedAsExactRuntimeRule": false,
+      "measurementProtocolInspected": false,
+      "summary": "Aimed enemy is reported as fired rocket target; aim-loss persistence is not in-flight homing duration. No tested lock acquisition time or angular guidance value is supplied."
+    }
+  ],
+  "localPolicy": {
+    "ownedBy": "Master integration, not this source profile",
+    "exactDestinyNumericsClaimed": false,
+    "authoredParameters": null
+  },
+  "limitations": [
+    "Exact source identity/socket eligibility is established only for the pinned official manifest, not all live or future weapon editions.",
+    "Pyroclastic Flow intrinsic tracking is automatic eligibility for this exact weapon hash; ADS target locking is still required. Automatic eligibility does not mean hip-fire auto-acquisition.",
+    "Tracking Module is optional selected base trait on two exact selected hashes. Source initialItemHash is not a local default-equipped claim.",
+    "All 63 selected hashes and all referenced randomized/reusable pools plus direct socket choices were scanned before deriving eligibility; no family exclusion or name-only inference.",
+    "Enhanced Tracking Module and other precision intrinsics, including same-name nonrocket items, are not supported by this profile.",
+    "Primary descriptions prove aimed/ADS locking but not acquire time, cone, range, turn rate, grace time, shot snapshot, continued ADS, reacquisition, or post-launch stow/trait-edit behavior.",
+    "Midflight LOS-loss cancellation is not proven. Ordinary projectile collision with a wall is distinct from cancelling guidance merely because the target becomes occluded.",
+    "A secondary light.gg community entry reports one second of aim-loss persistence and diminished PvP effectiveness, but no primary measurement protocol was inspected. These are reported evidence, not adopted exact numeric runtime rules.",
+    "One-second prelaunch aim grace must not be confused with a one-second lifetime or homing expiry for an already-fired rocket.",
+    "Any author-selected timing/cone/range/turning/ownership/LOS policies belong to separately labelled local Minecraft tuning, not source-exact D2 values.",
+    "No source found establishes equivalence of precision intrinsic and base Tracking Module quantitative guidance; do not claim identical measured tuning.",
+    "No native rendering, audio/listening, gameplay, multiplayer, or performance acceptance is performed by this source extractor."
+  ]
+}

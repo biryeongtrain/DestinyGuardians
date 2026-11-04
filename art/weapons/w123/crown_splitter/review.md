@@ -1,0 +1,9 @@
+# Crown-Splitter W136
+
+78 authored solid cuboids, 468 opaque faces; no triangle adapter. Broad continuous steel shoulders, solid central web under a physically recessed fuller, bright cutting edges, flared heel and converging point. Stepped feather guards have real depth and gaps between terminal fingers; navy leather grip has pale crossing bindings at both ends. Shallow flutes, restrained steel scoring and small edge bites are per-face UV. No source island/voxel construction or alpha silhouette skins. The 1024 atlas assigns every face a continuous rectangle with two-pixel extruded gutters.
+
+The actual default-paint photograph is `/tmp/destiny-weapons-w31/references/crown_splitter.jpg`. Raw albedo is explicitly labeled undyed in comparison.png. Photo informs steel/bevel value contrast, dark blue leather and pale grip wraps. This is a cuboid interpretation: point/bevel curvature and fine surface wear are simplified; opaque static materials do not reproduce PBR reflections.
+
+Read-only W30 metadata and inert FBX evidence: both objects, 4240 source triangles; FBX rotation [-90,0,0], scale100, translation[0,10,0] centimeters. Verified mapping `anchor + scale * [raw.X, raw.Z + 0.1, raw.Y]` matches all six W30 bounds within2e-6. Copying the untranslated mapping from another sword would shift this weapon by1.8285109194 units. W30 scale18.28510919435076 and hand anchor[8,4.9901939311001655,8] retained; blade points +Y. Catalogue confirms sword / aggressive frame. Canonical display is byte-equivalent as JSON data. Full-only candidate, existing generic handling; no new moving parts or combat/audio/timing edits.
+
+Comparison contains the actual default photo plus same-camera side and oblique views of raw FBX, canonical148 and final model. Offline CPU/BB inspection is evidence for geometry and paint only. Native pack loading, held first/third person, swing, guard and10-20 displays remain pending master. User unsaved DCC work was untouched.

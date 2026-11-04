@@ -1,0 +1,862 @@
+{
+  "curves": [
+    {
+      "id": "steelfeather_repeater",
+      "baseReloadStat": 50,
+      "baseHandlingStat": 38,
+      "shellReload": false,
+      "reloadStatCap": 100,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 8.55689e-05,
+        "vpp": -0.0242021,
+        "offset": 2.80673006666667
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001875,
+        "offset": 0.38975
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "baseReloadStat": 53,
+      "baseHandlingStat": 63,
+      "shellReload": false,
+      "reloadStatCap": 100,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      }
+    }
+  ],
+  "curveAudit": [
+    {
+      "id": "steelfeather_repeater",
+      "mapping": {
+        "id": "steelfeather_repeater",
+        "family": "Auto Rifle",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": 0
+      },
+      "baseline": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 37
+      },
+      "timing": {
+        "supported": true,
+        "magazine": 49,
+        "rpm": 720,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "cadenceTicks": 1.666666666667,
+        "burstSpacingTicks": 0.0,
+        "burstSize": 1,
+        "sharedBurstAmmo": false,
+        "chargeTicks": null,
+        "drawTicks": null,
+        "reloadTicks": 37,
+        "shellReload": false,
+        "reloadPerRoundTicks": null,
+        "reloadInitialTicks": null
+      },
+      "elements": {
+        "KINETIC": {
+          "readyTicks": 9,
+          "stowTicks": 8,
+          "adsTicks": 7,
+          "reloadTicks": 37
+        },
+        "SOLAR": {
+          "readyTicks": 9,
+          "stowTicks": 8,
+          "adsTicks": 7,
+          "reloadTicks": 25
+        },
+        "ARC": {
+          "readyTicks": 6,
+          "stowTicks": 5,
+          "adsTicks": 5,
+          "reloadTicks": 37
+        },
+        "VOID": {
+          "readyTicks": 9,
+          "stowTicks": 8,
+          "adsTicks": 7,
+          "reloadTicks": 37
+        }
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "mapping": {
+        "id": "patron_of_lost_causes",
+        "family": "Scout Rifle",
+        "category": "default",
+        "subfamily": "Lightweight",
+        "encodedPveCrit": 13
+      },
+      "baseline": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 39
+      },
+      "timing": {
+        "supported": true,
+        "magazine": 15,
+        "rpm": 200,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "cadenceTicks": 6.0,
+        "burstSpacingTicks": 0.0,
+        "burstSize": 1,
+        "sharedBurstAmmo": false,
+        "chargeTicks": null,
+        "drawTicks": null,
+        "reloadTicks": 39,
+        "shellReload": false,
+        "reloadPerRoundTicks": null,
+        "reloadInitialTicks": null
+      },
+      "elements": {
+        "KINETIC": {
+          "readyTicks": 8,
+          "stowTicks": 7,
+          "adsTicks": 7,
+          "reloadTicks": 39
+        },
+        "SOLAR": {
+          "readyTicks": 8,
+          "stowTicks": 7,
+          "adsTicks": 7,
+          "reloadTicks": 28
+        },
+        "ARC": {
+          "readyTicks": 6,
+          "stowTicks": 5,
+          "adsTicks": 5,
+          "reloadTicks": 39
+        },
+        "VOID": {
+          "readyTicks": 8,
+          "stowTicks": 7,
+          "adsTicks": 7,
+          "reloadTicks": 39
+        }
+      }
+    }
+  ],
+  "pairCases": [
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "KINETIC",
+      "companionStacks": 1,
+      "handlingBonus": 0,
+      "reloadBonus": 8,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.975,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 33
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "KINETIC",
+      "companionStacks": 2,
+      "handlingBonus": 0,
+      "reloadBonus": 50,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.9,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 23
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "KINETIC",
+      "companionStacks": 3,
+      "handlingBonus": 0,
+      "reloadBonus": 60,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.87,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 22
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "KINETIC",
+      "companionStacks": 4,
+      "handlingBonus": 0,
+      "reloadBonus": 75,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.84,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 21
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "KINETIC",
+      "companionStacks": 5,
+      "handlingBonus": 0,
+      "reloadBonus": 100,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.8,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 20
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "SOLAR",
+      "companionStacks": 1,
+      "handlingBonus": 0,
+      "reloadBonus": 58,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.975,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 25
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "SOLAR",
+      "companionStacks": 2,
+      "handlingBonus": 0,
+      "reloadBonus": 100,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.9,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 23
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "SOLAR",
+      "companionStacks": 3,
+      "handlingBonus": 0,
+      "reloadBonus": 110,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.87,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 22
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "SOLAR",
+      "companionStacks": 4,
+      "handlingBonus": 0,
+      "reloadBonus": 125,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.84,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 21
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "SOLAR",
+      "companionStacks": 5,
+      "handlingBonus": 0,
+      "reloadBonus": 150,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.8,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 20
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "ARC",
+      "companionStacks": 1,
+      "handlingBonus": 50,
+      "reloadBonus": 8,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.975,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 33
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "ARC",
+      "companionStacks": 2,
+      "handlingBonus": 50,
+      "reloadBonus": 50,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.9,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 23
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "ARC",
+      "companionStacks": 3,
+      "handlingBonus": 50,
+      "reloadBonus": 60,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.87,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 22
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "ARC",
+      "companionStacks": 4,
+      "handlingBonus": 50,
+      "reloadBonus": 75,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.84,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 21
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "ARC",
+      "companionStacks": 5,
+      "handlingBonus": 50,
+      "reloadBonus": 100,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.8,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 20
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "VOID",
+      "companionStacks": 1,
+      "handlingBonus": 0,
+      "reloadBonus": 8,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.975,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 33
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "VOID",
+      "companionStacks": 2,
+      "handlingBonus": 0,
+      "reloadBonus": 50,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.9,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 23
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "VOID",
+      "companionStacks": 3,
+      "handlingBonus": 0,
+      "reloadBonus": 60,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.87,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 22
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "VOID",
+      "companionStacks": 4,
+      "handlingBonus": 0,
+      "reloadBonus": 75,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.84,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 21
+      }
+    },
+    {
+      "id": "steelfeather_repeater",
+      "perk": "feeding_frenzy",
+      "element": "VOID",
+      "companionStacks": 5,
+      "handlingBonus": 0,
+      "reloadBonus": 100,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.8,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 9,
+        "stowTicks": 8,
+        "adsTicks": 7,
+        "reloadTicks": 20
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "KINETIC",
+      "companionStacks": 1,
+      "handlingBonus": 0,
+      "reloadBonus": 5,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.99,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 37
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "KINETIC",
+      "companionStacks": 2,
+      "handlingBonus": 0,
+      "reloadBonus": 30,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.96,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 30
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "KINETIC",
+      "companionStacks": 3,
+      "handlingBonus": 0,
+      "reloadBonus": 35,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.95,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 29
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "KINETIC",
+      "companionStacks": 4,
+      "handlingBonus": 0,
+      "reloadBonus": 42,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.945,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 27
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "KINETIC",
+      "companionStacks": 5,
+      "handlingBonus": 0,
+      "reloadBonus": 60,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.92,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 26
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "SOLAR",
+      "companionStacks": 1,
+      "handlingBonus": 0,
+      "reloadBonus": 55,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.99,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 28
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "SOLAR",
+      "companionStacks": 2,
+      "handlingBonus": 0,
+      "reloadBonus": 80,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.96,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 27
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "SOLAR",
+      "companionStacks": 3,
+      "handlingBonus": 0,
+      "reloadBonus": 85,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.95,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 27
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "SOLAR",
+      "companionStacks": 4,
+      "handlingBonus": 0,
+      "reloadBonus": 92,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.945,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 27
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "SOLAR",
+      "companionStacks": 5,
+      "handlingBonus": 0,
+      "reloadBonus": 110,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.92,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 26
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "ARC",
+      "companionStacks": 1,
+      "handlingBonus": 50,
+      "reloadBonus": 5,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.99,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 37
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "ARC",
+      "companionStacks": 2,
+      "handlingBonus": 50,
+      "reloadBonus": 30,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.96,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 30
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "ARC",
+      "companionStacks": 3,
+      "handlingBonus": 50,
+      "reloadBonus": 35,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.95,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 29
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "ARC",
+      "companionStacks": 4,
+      "handlingBonus": 50,
+      "reloadBonus": 42,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.945,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 27
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "ARC",
+      "companionStacks": 5,
+      "handlingBonus": 50,
+      "reloadBonus": 60,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.92,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 6,
+        "stowTicks": 5,
+        "adsTicks": 5,
+        "reloadTicks": 26
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "VOID",
+      "companionStacks": 1,
+      "handlingBonus": 0,
+      "reloadBonus": 5,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.99,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 37
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "VOID",
+      "companionStacks": 2,
+      "handlingBonus": 0,
+      "reloadBonus": 30,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.96,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 30
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "VOID",
+      "companionStacks": 3,
+      "handlingBonus": 0,
+      "reloadBonus": 35,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.95,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 29
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "VOID",
+      "companionStacks": 4,
+      "handlingBonus": 0,
+      "reloadBonus": 42,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.945,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 27
+      }
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "perk": "rapid_hit",
+      "element": "VOID",
+      "companionStacks": 5,
+      "handlingBonus": 0,
+      "reloadBonus": 60,
+      "handlingScalar": 1.0,
+      "reloadScalar": 0.92,
+      "snapshotEntering": false,
+      "expected": {
+        "readyTicks": 8,
+        "stowTicks": 7,
+        "adsTicks": 7,
+        "reloadTicks": 26
+      }
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "stage": "W170",
+  "weapon": "retraced_path",
+  "url": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+  "title": "RETRACED PATH (Destiny 2) Our First Legendary Trace Rifle!",
+  "channel": "Ironworker Gaming",
+  "uploadDate": "20211211",
+  "selectedSeconds": [
+    247.15,
+    248.85
+  ],
+  "inspectedActualFrames": true,
+  "authoredApproximation": true,
+  "referenceConfidence": "High for weapon identity and dip/raise/side-hold/press/recover order; moderate for pack replacement interpretation; low for full extraction path, physical pivot, distances and numeric angles.",
+  "sourceVideo": {
+    "privateCachePath": "/private/tmp/w170-retraced-reference.mp4",
+    "sha256": "ec90b345d6ce72bcf5094fb8f80639ece697b139354d7790ddbdd2efd4665c82",
+    "sourceDimensions": [
+      1280,
+      720
+    ],
+    "identityEvidence": "Title identifies Retraced Path; inspected source 20..28s named inventory and matching sweeping rails, side disc, underslung box, scope and open stock; 247.15..248.85s continuous Dares reload.",
+    "secondaryInspectedWindow": [
+      7.25,
+      8.65
+    ]
+  },
+  "extraction": {
+    "tool": "yt-dlp 2026.10.21 format 298; imageio ffmpeg 7.1",
+    "commandTemplate": "rtk proxy <ffmpeg> -loglevel error -ss <absoluteSourceSeconds> -i /private/tmp/w170-retraced-reference.mp4 -frames:v 1 -y <ownedReference.png>",
+    "timestampMeaning": "Absolute source-video seek seconds; first decoded frame at/after seek, not extracted animation event timing.",
+    "processing": "Full unmodified 1280x720 PNG; no crop, recolor, mirror or compositing. Only storyboard thumbnails resized."
+  },
+  "mechanism": {
+    "layout": "Underslung charge-pack/magazine underneath fixed receiver; circular side power disc and rails remain fixed",
+    "visible": "Left hand accesses underside as weapon rolls muzzle up; underside open hold, replacement edge from below, base press and recovery.",
+    "unresolved": "Full removed pack trajectory is hand-occluded and below screen. No original bones or socket separation extracted. Omolon-style battery interpretation is not a verified manufacturer claim."
+  },
+  "observations": [
+    {
+      "sourceSeconds": [
+        247.15,
+        247.3
+      ],
+      "fact": "Weapon dips before upward side roll; ammo HUD 32."
+    },
+    {
+      "sourceSeconds": [
+        247.45,
+        247.6
+      ],
+      "fact": "Support hand contacts underside as receiver/disc/rails rise together."
+    },
+    {
+      "sourceSeconds": [
+        247.75,
+        248.05
+      ],
+      "fact": "Underside open hold; removed pack travel is occluded or below frame. Circular disc stays on receiver."
+    },
+    {
+      "sourceSeconds": [
+        248.2,
+        248.5
+      ],
+      "fact": "Replacement edge rises from below; base press and hand release. Ammo HUD is 94 by 248.35."
+    },
+    {
+      "sourceSeconds": [
+        248.65,
+        248.85
+      ],
+      "fact": "Weapon lowers and returns to forward HIP."
+    }
+  ],
+  "sampleType": {
+    "partialReload": true,
+    "ammoBefore": 32,
+    "ammoAfter": 94,
+    "normalBaseStatCertified": false,
+    "perkSpeedCertified": false,
+    "reserveReadingCertified": false
+  },
+  "pendingReferenceSlots": [],
+  "limitations": [
+    "Downward withdrawal and insertion distances/axis, body angles and normalized timing are authored guesses where the pack is hand-occluded or below screen; not extracted animation or bones.",
+    "Existing clean W150 default paint/UV/geometry preserved; gameplay has lighting/buffs that are not texture reference.",
+    "No support-hand geometry, IK, original grip skeleton, detachable power-disc motion or secondary latch/bolt claim.",
+    "Partial reload in combat with buffs; no base duration, perk-speed or ammo-credit timing certification.",
+    "Actual Minecraft client, native framing, handedness, clearances, ADS, cancellation and performance remain master QA; offline renders and codec acceptance do not prove native visual success."
+  ],
+  "frames": [
+    {
+      "path": "art/weapons/w170/retraced_path/reference-00.png",
+      "timestampSeconds": 247.15,
+      "sha256": "1928c05acfb1aea67fe1a1a88be2ff9c508739b4e32049c7c179c59ce6da473d",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "HIP before side presentation",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-01.png",
+      "timestampSeconds": 247.3,
+      "sha256": "8d6dd4fe35a73680defaa2bc329536b0c46f3aabebfd2c291fdc49d1a93984c6",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "dip before raise",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-02.png",
+      "timestampSeconds": 247.45,
+      "sha256": "cc7e5275de06564f4a31f43ce14af3ddf0b53282da49381d791f25af085ef700",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "underside access begins; hand touches pack",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-03.png",
+      "timestampSeconds": 247.6,
+      "sha256": "f0ebc93a4291e819804f304c077792deb43c3e98fb16ac6e60bdd5a4d79991e5",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "raised side pose; pack contact obscured",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-04.png",
+      "timestampSeconds": 247.75,
+      "sha256": "96459a1e59a671a75509e8b9391a538bb62fd6f89cab4f9ad1258159572b5a7f",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "underside looks open; pack path below frame",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-05.png",
+      "timestampSeconds": 247.9,
+      "sha256": "7a6632a49673e54c3c82cc775c63a3a16db8d815fd89fb40db11208cf1c66217",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "open underside hold; discs stay on body",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-06.png",
+      "timestampSeconds": 248.05,
+      "sha256": "d4ad61a26d2a1b4370488773565146c1be281f21a1ea532c32868434c8a4526d",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "open underside hold; hand below frame",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-07.png",
+      "timestampSeconds": 248.2,
+      "sha256": "8286f9655b15e322472178be54ae421b3526ff07cd7141901dcca56c830d6e38",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "replacement edge enters from lower screen",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-08.png",
+      "timestampSeconds": 248.35,
+      "sha256": "e8509f56ec42f5e60724a665acd00562fe7919160e0bff708b9fbe9cd110d804",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "pack/base hand press; HUD has credited ammo",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-09.png",
+      "timestampSeconds": 248.5,
+      "sha256": "85fe45712d2b4d78411a6ba772dade1d71b27c763be5a7a9ab7a20fd5a00da4c",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "support hand releases under pack",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-10.png",
+      "timestampSeconds": 248.65,
+      "sha256": "019771fc6b56b579a584f7ce0033610df1f8df802d123197cc0b2b0c43530caf",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "weapon lowers toward HIP",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w170/retraced_path/reference-11.png",
+      "timestampSeconds": 248.85,
+      "sha256": "f75b4440bc944408b962c96d6589048d2406367f98d4d72a59d834cc75feac7c",
+      "sourceURL": "https://www.youtube.com/watch?v=Y8qyeBBXBgA",
+      "observation": "forward HIP recovered",
+      "confidence": "Directly inspected visible pose; hidden pack mechanics unresolved"
+    }
+  ]
+}

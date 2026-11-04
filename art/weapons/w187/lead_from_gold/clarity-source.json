@@ -1,0 +1,86 @@
+{
+  "clarityUrl": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/live/descriptions/clarity.json",
+  "ddcUrl": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?gid=1662574278",
+  "clarityWholeFileSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "ddcWholeFileSha256": "6bd6dd4534aac0490e77cb4d94caba9f3de23e75a498fbf22c763c7013d95044",
+  "baseEntry": {
+    "hash": 1556840489,
+    "name": "Lead from Gold",
+    "lastUpload": 1723480728683,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "classNames": [
+                "heavy"
+              ]
+            },
+            {
+              "text": "Heavy Ammo Pickups grants 25% of your maximum "
+            },
+            {
+              "classNames": [
+                "special"
+              ]
+            },
+            {
+              "text": "Special Ammo Reserves even while the weapon is stowed."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Equipping two "
+            },
+            {
+              "classNames": [
+                "special"
+              ]
+            },
+            {
+              "text": "Special Weapons halves the amount of ammo granted."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ddcRow": [
+    "138",
+    "Lead from Gold",
+    "",
+    "On Heavy Ammo Brick Pickup: Grants 25% ↑35% of Special Ammo Reserves. Equipping two Special Weapons halves the amount of ammo granted to each to 12.5% ↑17.5%. Buff can be activated while stowed ↑Increases the amount of Special Ammo received to 35%."
+  ],
+  "authoredPolicy": {
+    "id": "lead_from_gold",
+    "hash": 1556840489,
+    "reserveFraction": 0.25,
+    "doubleSpecialFraction": 0.125,
+    "worksStowed": true,
+    "trigger": "accepted_real_heavy_pickup_transaction",
+    "reserveBasis": "authored_WeaponProfile.reserve_capacity_excluding_magazine_and_overflow",
+    "integerPolicy": "authored_single_ceiling_after_division_by_4_or_8",
+    "originalRoundingVerified": false
+  },
+  "originalReserveBasisVerified": false,
+  "originalIntegerRoundingVerified": false,
+  "research": [
+    {
+      "url": "https://www.bungie.net/7/en/News/Article/51645",
+      "finding": "Official 2022 developer note confirms splitting pickups between two equipped Special weapons; no numeric integer algorithm."
+    },
+    {
+      "url": "https://www.scribd.com/document/866079149/drfgdfgdgfdfgfdghyrtetryyrt",
+      "finding": "Unattributed mirror of an older test guide suggests total magazine+reserve and ceiling, explicitly estimated. Not accepted as current primary evidence."
+    }
+  ]
+}

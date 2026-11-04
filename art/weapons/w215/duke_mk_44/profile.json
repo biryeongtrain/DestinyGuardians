@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "weapon": "duke_mk_44",
+  "sourceAction": "80A8A53D",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "hideSupportAtRest": false,
+    "keepMeshSupport": true,
+    "meshArmDirections": true,
+    "reloadCameraLower": 1.5,
+    "sourceWeaponRelative": true,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A53D",
+      "partHint": "moving",
+      "policy": "cylinder",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.7,
+        0.82
+      ]
+    }
+  },
+  "sourceProvenance": {
+    "reviewPath": "/private/tmp/destiny-w215-source/source-review.json",
+    "reviewSha256": "c283ec4f4b0e39bce3eeabc27c8f459a84a905b89b95012d46fcafc4cc1de535",
+    "blenderVersion": "5.4.0 Alpha",
+    "exporterSha256": "d2d61f30a95d55ec72d41d24ffb205e9946cbb1e4854010b8dd2751641ff2774",
+    "evaluatedRigPath": "/private/tmp/destiny-w215-source/hand_cannon_cedb29ae.json",
+    "evaluatedRigSha256": "e7b4ad33449be30d3bfbb3ed66cc2033158b3ff7762dbe291d38729bee3894c6",
+    "chainSheetPath": "/private/tmp/destiny-w215-source/sheets/hand_cannon_cedb29ae-80A8A53D-upper-chain.png",
+    "chainSheetSha256": "fb63f78d3db1256186173a221e92547b6766bc2e92a37035ea94b209872bec34",
+    "sourceAction": "80A8A53D",
+    "rigAction": "80A8A53D",
+    "action": "Armature|fp_80A8A53D_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1.0,
+      127.0
+    ],
+    "sceneFps": 30,
+    "evaluatedSamples": 61,
+    "existingCacheJointAbsError": 0.0,
+    "masterReportedInputsUnchanged": true,
+    "objects": [
+      "ARMATURE"
+    ],
+    "sourceCameraRecovered": false,
+    "sourceActionWeaponExclusive": false,
+    "matrixSpace": "armature_object; row-major, column vectors; matrix_world not applied",
+    "evaluationOwner": "Master headless Blender; worker read report and fresh61 matrices and viewed PNG. Worker did not operate DCC, native client, Vision or SSD.",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/hand_cannon_cedb29ae/blender/source.blend",
+    "sourceBlendSha256": "bde226ffa88f30cbcc60a3d1b4c36548f01fe3808e6e8c848cad36e43d93f04d",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/hand_cannon_cedb29ae/source-map.json",
+    "sourceMapSha256": "07be6361137240830dc90e2b4fd2d1c130ba4769685361abf5f20eec4f7312ec",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/hand_cannon_cedb29ae/bone-map.json",
+    "boneMapSha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w215-source/source-review.json",
+      "sourceSha256": "c283ec4f4b0e39bce3eeabc27c8f459a84a905b89b95012d46fcafc4cc1de535",
+      "role": "master_original_blender_evaluation",
+      "observation": "Fresh original.blend evaluation: ARMATURE only; OBSlot80A8A53D reload_full/reload_empty, frames1..127 at30fps,61 uniform samples. Shared prior cache samples match with max abs error0; unchanged original inputs reported by master."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/hand_cannon_cedb29ae.json",
+      "sourceSha256": "e7b4ad33449be30d3bfbb3ed66cc2033158b3ff7762dbe291d38729bee3894c6",
+      "role": "evaluated_source61_full_chain",
+      "observation": "Read actual weapon and both shoulder/elbow/wrist matrices. At inherited32-unit conversion, forearms8.14136, upper left8.72669/right8.72657 with only exported float drift. No mesh, camera, finger articulation or cylinder track is established."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/sheets/hand_cannon_cedb29ae-80A8A53D-upper-chain.png",
+      "sourceSha256": "fb63f78d3db1256186173a221e92547b6766bc2e92a37035ea94b209872bec34",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed source XZ/YZ six-pose sheet p0,.2,.4,.6,.8,1 before authoring. Left arm extends away during early open hold and returns through handling; bone projections alone cannot establish palm/cylinder contact or native visibility."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "actual_effective_framing",
+      "observation": "Inherited actual hand_cannon effective profile, no existing Duke override: translation[-1,.25,0],rotation[-1,0,0],scale.98,rightWristRoll27,keepMeshSupport true,meshArmDirections true,reloadCameraLower1.5,sourceWeaponRelative true,hideSupportAtRest false. Add full-chain flag only; no new camera or limb adjustment."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "preserved_mesh_contacts",
+      "observation": "Preserve right[8,9.4,7.92]/[-21,0,0],left[7.3,9.02,8.18]/[-21,0,-20],reload.contact[6.75,12.6,4.65]/[0,0,-80]. Set exact emitted moving hint; supported cylinder policy keeps attached hinge assembly gun-parented."
+    },
+    {
+      "source": "scripts/generate_reload_w169_duke_mk_44.py",
+      "sourceSha256": "26e857b3a0e0530fc902a00e46b7e39a27b58efae4fb15d083b8cf90866b7264",
+      "role": "audited_authored_motion",
+      "observation": "Preserve147 W127 elements/UV as78body+69cylinder/chambers/spindle/yoke. Preserve grip[8,9.525,7.875],hinge[8,10.2,5.17],all10 scalar keys,80deg open hold.24..82,closure.82..92. Replace per-key smoothstep with W214 weighted harmonic PCHIP; fresh61 body replaces old127 dataset dependency using prior body calibration."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "sourceSha256": "9843a23f049cf264fbf851cedac35c300b5c4c0c7727385051e5cc13d36b2de1",
+      "role": "candidate_attachment_release",
+      "observation": "Actual supported reload.rigAction/partHint/policy/gripWindow keys. Candidate[.05,.20,.70,.82] retains reach, releases across authored loader-contact hold, zero before cylinder closure. Full-chain source_palm_translations overrides blended palm translations; policy cylinder deliberately skips magazine-only part_shift. This envelope is not a recovered IK event or a claim of runtime source-palm correction."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate. Master owns fresh61 cache binding, profile loader, runtime60 route, arm materialization and all native/Vision checks. sourceAction is provenance metadata; reload.rigAction is the consumed runtime selector.",
+    "Ordinary fingerless player-skin forearms and upper arms keep source lengths and shoulder bend. Rest palm mesh offsets are not reload contact offsets. No arm stretch, source-length smoothing, hidden support or new camera adjustment.",
+    "Duke hinged cylinder must not use magazine policy. Full-chain source palms retain travel independently of the attached cylinder; gripWindow is a legacy attachment envelope, not source-hand IK.",
+    "Static budget: reload147+four112-surface arms=595; unchanged raw canonical fallback232+448=680. Master must measure every materialized route, including arms, against1000.",
+    "Pure stdlib generate(root) returns248 absolute Path->bytes outputs:247pack+manifest, without writing. No generated outputs, builds or tests run by worker.",
+    "FIRST screenshots feedback and worker review/correction, then SECOND remain pending. No final acceptance, recovered camera, source cylinder trajectory or60fps certification claimed."
+  ]
+}

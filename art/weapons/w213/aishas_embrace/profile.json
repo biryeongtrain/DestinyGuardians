@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "weapon": "aishas_embrace",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A345",
+      "partHint": "moving",
+      "policy": "magazine"
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w213-source/source-review.json",
+      "sourceSha256": "cc9ef72c7c7e85936f3cf9bc1ad521a46cfac15c48e891412b1cc15685066d7f",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read master original Blender 5.4.0 Alpha evaluation: Armature only, no mesh/camera; OBSlot Armature|fp_80A8A345_reload_full|Base, frames 1..105 at30fps,61 samples, prior-cache joint error0 and allInputsUnchanged true. Worker did not independently open/evaluate Blender.",
+      "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/scout_rifle_98cec92a/blender/source.blend",
+      "sourceBlendSha256": "be7c6bb31dc5734de8a82d93fb92c619e581fa2c7bd04951e59e884aebf49941",
+      "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/scout_rifle_98cec92a/source-map.json",
+      "sourceMapSha256": "d97ed313c4bcec5414900a745b6657e578623348908b0ed91205f5e34f5d3315",
+      "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/scout_rifle_98cec92a/bone-map.json",
+      "boneMapSha256": "34cc654306ee835cf908f72fed910a3955868195289e1109178a45c237fcee40",
+      "cache": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w205/rigs/scout_rifle_98cec92a.json",
+      "cacheSha256": "80f6131bec814664c71508a600f20c8d3da7f4fcd7daaa1e2e49b735f496b0d8"
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/scout_rifle_98cec92a.json",
+      "sourceSha256": "ad88cd1411ff7e55c15c8adeb0e7b5d91da0e0bf1217047d9a4d16fd72fb42cf",
+      "role": "read_evaluated_source61",
+      "observation": "Read original shoulder/elbow/wrist/weapon matrices; ordinary upper arms about8.7266 model units and forearms8.14136 at32 units/source unit. Preserve FK and lengths. Master owns source61 import and upper-arm retarget."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/sheets/scout_rifle_98cec92a-80A8A345-upper-chain.png",
+      "sourceSha256": "d86f7568ed6de126a720fce6e2242d16fa0af8aa530d3a7d36d0d4e4c9319227",
+      "role": "viewed_actual_source_chain",
+      "observation": "Viewed actual six-pose XZ/YZ chain sheet at p0,.2,.4,.6,.8,1. Support chain reaches down/forward during exchange and returns close to initial posture. Bone-only projection is not native contact or camera evidence."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/scout_rifle_98cec92a/source-map.json",
+      "sourceSha256": "d97ed313c4bcec5414900a745b6657e578623348908b0ed91205f5e34f5d3315",
+      "role": "read_shared_family_map",
+      "observation": "Non-fallback distant_relation representative; selector5A3CDF51 shared with Patron of Lost Causes and Aishas Embrace variants. Reload tags345/337/331 evaluated by master; retain345 initially. No weapon-exclusive selector claimed."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/scout_rifle_98cec92a/bone-map.json",
+      "sourceSha256": "34cc654306ee835cf908f72fed910a3955868195289e1109178a45c237fcee40",
+      "role": "read_bone_map",
+      "observation": "Read mapped shoulder D1232BA2/17025F50, elbow897A1504/A3781DCD, wrist8C83CB67/DE9D6BEA, weapon4A0810C4 and original parents."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "preserved_rest_mesh_contacts",
+      "observation": "Keep right[8,8.8,10.42]/rotation[-24,0,0], left[7.8,9.48,.2]/rotation[0,90,-85], reload[7.35,6.7,10.8]/rotation[27,0,0]. Magazine curve/feed/lower/floor are the moving part; grip and palm_block stay fixed. source_palm_translations uses REST mesh offsets plus original FK; reload.contact offsets held part relative to animated palm, not a rest palm override."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "preserved_scout_family_framing",
+      "observation": "Retain translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]. No native evidence currently warrants correction."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate only. FIRST native screenshots unavailable; await exact master image-backed feedback, then warranted worker correction and SECOND Vision before final acceptance.",
+    "Pure stdlib generator returns absolute paths/bytes only. Master materializes new namespace, imports source61 and handles explicit action whitelist/runtime60grid/shared loader/ordinary fingerless player-skin arms.",
+    "Retain exact W171 authored knots/holds, W14292 solids and UV, semantic88+4 partition, native/twohand endpoints, negative and non-FP fallback, ADS/inspect precedence. Magazine extraction remains authored.",
+    "Do not stretch, attenuate or hide arms to mask fit. Weapon92 leaves908 simultaneous output elements for master-owned arms; combined count requires master validation. No physical/client/Vision/Blender-UI input performed by worker."
+  ]
+}

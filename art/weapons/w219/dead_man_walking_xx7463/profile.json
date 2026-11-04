@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "stage": "W219",
+  "weapon": "dead_man_walking_xx7463",
+  "sourceAction": "80A8A560",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true,
+    "keepMeshSupport": true
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        9.55,
+        6.85
+      ],
+      "rotation": [
+        -23.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        7.05,
+        9.1,
+        7.18
+      ],
+      "rotation": [
+        -23.0,
+        0.0,
+        -20.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        6.95,
+        7.0,
+        7.75
+      ],
+      "rotation": [
+        -6.0,
+        0.0,
+        0.0
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "rigAction": "80A8A560",
+      "hand": "left",
+      "gripWindow": [
+        0.08,
+        0.15,
+        0.46,
+        0.53
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "sidearm_60848ee7",
+    "action": "80A8A560",
+    "sourceBlendSha256": "6ea0285714171688d79cbad7435169bb974736668e6ef58ed4142731840cdefd",
+    "sourceMapSha256": "6fe0ab02d6a8cbead9344c18466f6ed0309c75ceff19f854dc9f30394deab4dd",
+    "boneMapSha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w219-source/source-review.json",
+      "sourceSha256": "99b7a8001a2a09a88d9232c4e5945cb25d0f7d7cd5460380595406d947309138",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read master Blender5.4.0 Alpha report: ARMATURE only; OBSlot, reload_full/reload_empty 80A8A560, frames1..67 at30fps,61 samples, prior joint error0; source inputs unchanged. Worker did not independently open Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sheets/sidearm_60848ee7-80A8A560-upper-chain.png",
+      "sourceSha256": "ec1348a1ac4ddb0ea04b52fe7d14ef7c7d04e52485453762a14330a44beea834",
+      "role": "viewed_actual_source_chain_sheet",
+      "observation": "Worker viewed actual six XZ/YZ shoulder-elbow-wrist projections. No weapon mesh/camera/finger IK. Left wrist exchange excursion and return precede later upward action."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sidearm_60848ee7.json",
+      "sourceSha256": "1365b500756a638b2d9a1bd1c34036b7dec18b30ec2f5735a57e47315f2351de",
+      "role": "read_fresh_source61",
+      "observation": "Original weapon4A0810C4; LEFT D1232BA2->897A1504->8C83CB67 handling; RIGHT17025F50->A3781DCD->DE9D6BEA remains near grip. No other weapon trajectory is used."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate; master owns source-loader binding, shared ordinary full-chain skin arms, generated outputs, runtime routing and both native passes.",
+    "No changes to ammunition, cadence, reload clocks or sound. Source ARMATURE only; magazine geometry, contact and event window are authored."
+  ]
+}

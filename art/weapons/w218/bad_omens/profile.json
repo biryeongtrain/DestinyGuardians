@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "weapon": "bad_omens",
+  "sourceAction": "80A8A1F5",
+  "framing": {
+    "translation": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 1,
+    "rightWristRoll": 15,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A1F5",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.2,
+        0.25,
+        0.58,
+        0.64
+      ],
+      "hand": "right"
+    }
+  },
+  "sourceRig": {
+    "group": "rocket_launcher_ba250bec",
+    "action": "80A8A1F5",
+    "path": "art/weapons/w218/rigs/rocket_launcher_ba250bec.json",
+    "sha256": "78d7101c57cc3a3a3d88e0dc957cbdb4982160e21ec7e11a9630e3bee5958e3d",
+    "sourceBlendSha256": "814231f6f74533c758ea4527263b5b7df6e633e06d6755da60ae3b2616c53124",
+    "sourceMapSha256": "996e8d38b351230180852056488d6a9ed57819e1df192c1cc38ae67e3081effb",
+    "boneMapSha256": "bef1f40549f3d698efc439d17bf5c5f07ea443c55811c29705d5f9ec4b7c5259"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w218/source/source-review.json",
+      "sourceSha256": "f5a06a8373aa9ee1328f0d2b14c87dc187367edc7e28224f7bfa6287d64469d0",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original Blender5.4.0 Alpha read-only: ARMATURE only, OBSlot Armature|fp_80A8A1F5_reload_full|Base frames1..133 at30fps,61 samples, prior-cache error0, allInputsUnchanged=true. Worker read report; did not independently evaluate Blender."
+    },
+    {
+      "source": "art/weapons/w218/rigs/rocket_launcher_ba250bec.json",
+      "sourceSha256": "78d7101c57cc3a3a3d88e0dc957cbdb4982160e21ec7e11a9630e3bee5958e3d",
+      "role": "fresh_normalized_source61",
+      "observation": "Fresh w218Source61 weapon/shoulder/elbow/wrist matrices, shared rocket family including Bad Omens/Bellowing Giant/Code Duello. Ordinary fingerless arms; no weapon-exclusive mesh, camera or finger IK."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/source/sheets/rocket_launcher_ba250bec-80A8A1F5-upper-chain.png",
+      "sourceSha256": "14d6837253489e03a4b4802e05435eabbe893a3b44c8e135444cbc92a904d680",
+      "role": "viewed_bone_only_upper_chain_sheet",
+      "observation": "Viewed actual XZ/YZ projections at p=0,.2,.4,.6,.8,1. FIRST source diagnosis identifies RIGHT wrist as handling hand and LEFT as stabilizer; p.4 weapon-relative delta32 left[1.046,.895,3.717] vs right[-4.725,6.838,-13.176]. Shared family ARMATURE has no mesh/camera/contact recovery."
+    },
+    {
+      "source": "scripts/generate_reload_w177_bad_omens.py",
+      "sourceSha256": "5efcd84c8c4c00a717d1a31cbc38331dde32e83f8b8021c856c4979f9bcd43d6",
+      "role": "inert_same_weapon_motion_source",
+      "observation": "Read inert AST,11 exact W177 keys, GRIP/MAG_ANCHOR and rigid display algebra; no import/execution or render dependencies. Preserve two lifts, rear-mouth presentation, axial insert, seat.64 and return."
+    },
+    {
+      "source": "art/weapons/w177/bad_omens/storyboard.png",
+      "sourceSha256": "0d5d212890854ee8f160154672df8facac9e97194fe694e0f7199c2dc98c6ab1",
+      "role": "viewed_retained_actual_gameplay_storyboard",
+      "observation": "Viewed12 actual Mudcat fLyWxsBImP8 gameplay frame panels28.8..31.4s and paired offline authored poses. Partly occluded rocket dimensions/path remain authored. Source video not reopened."
+    },
+    {
+      "source": "art/weapons/w177/bad_omens/comparison.png",
+      "sourceSha256": "068702d66e45fbf945a4b50a584eb2652fdffc7d2e9ef675ae5b933f0922ae42",
+      "role": "viewed_retained_offline_comparison",
+      "observation": "Viewed endpoint/loading obliques and isolated rocket. Existing117 body solids/face UV plus12 connected reload-only rocket solids remain unchanged; no removable tube cap or body split invented."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Shared loader profile() uses default when rocket_launcher family absent: translation[0,0,0],rotation[0,0,0],scale1,rightWristRoll15. No per-weapon profile exists. Preserve all current effective values and add full-chain/support flags."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "mesh_contacts_and_authored_seat_release",
+      "observation": "Keep existing right/left rest and reload contact position/rotation. Explicit magazine policy follows incoming rocket during handling; gripWindow[.20,.25,.58,.64] releases at neutral seat.64 so original wrist recovery cannot drag seated payload. Visibility zero through.20/reveal to.25/full to.66/hide to.72 remains normalized. FIRST correction explicitly selects hand=right; original mesh contact position/rotation and seat window remain unchanged. No original geometry evidence justifies a contact offset change."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/screenshots/bad_omens-reload.png",
+      "sourceSha256": "45b95968d044a522ed635efea49b25e96990c734fd10708cafa2885591abb006",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Viewed FIRST native sheet: raised launcher, visibly empty separated right hand, return toward tube. Actual rocket in handling hand is not established."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/screenshots/bad_omens-review.png",
+      "sourceSha256": "dd37f7a04ab65fe620acb5072fb5576f9a4b3645b025c46d0cf874bc1def6be7",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Viewed FIRST hip/ADS/reload sheet: hip and centered optic are visible; reload shows right hand separated with no round. Runtime pass is not visual acceptance."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/first-post-reload-review.png",
+      "sourceSha256": "66ac853208a47161327067955b7fdc9699a09b793dca28d71aa40134cb17afcb",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Viewed actual shared post-reload sheet; Bad Omens panel has returned hip pose, both arms and loaded1/6 HUD. Does not establish during-reload contact."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-05.png",
+      "sourceSha256": "006872e101c99465e11c61b61df209530a95ac8ae561448ca818726f7a938daa",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Raised tube and separated empty right hand; no readable rocket grasp."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-09.png",
+      "sourceSha256": "ef07d248c7a07cafecc316ae6102720e5f3d4640e7fb4573c43b711e88198848",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Clear empty right hand away from launcher while left stabilizes body; confirms wrong-hand payload binding symptom."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-10.png",
+      "sourceSha256": "8ac078720079f3438c21dd7b4378ace95c5ddd3e494d26bbc040ad513d0be4ec",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Right hand approaches tube; no distinct payload can be identified with that hand."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-12.png",
+      "sourceSha256": "71f4bfd77faa21dfb079cdbb40e5e53fce6ff1a2a2090303b1ea4941aaee5048",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Right hand lies alongside steep tube during return gesture; no established round seating contact."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-13.png",
+      "sourceSha256": "951bdaedf58528e460516bdd2ccde2436985e77dacb881af4b78f41c9ee3c605",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Right hand separates again alongside tube; this wrong-hand first pass cannot validate rocket grasp/reseat."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-14.png",
+      "sourceSha256": "971316ed72f58b58cd1a91f1da4e54914edffc2cccf74433ad53d4ea4a7bcfdd",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Tube lowers across view with right hand leaving lower edge; late recovery cannot repair missing handling payload."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-15.png",
+      "sourceSha256": "81a19c2ea9a87a2a437e87bc66bce75e9ca23ec9fb95029eb1223a260769b0a0",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Left sleeve and arm cross toward fore-end during recovery; no visible handled rocket."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-16.png",
+      "sourceSha256": "56a12dfa413da138b9992bfdf022e791eb2d71df85584caaac0ce50b4306db76",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Weapon nearly back at shoulder, left arm returning along fore-end; this is recovery, not evidence of rocket grasp."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-18.png",
+      "sourceSha256": "d0996fa7d323101bf7fcc9e1fddb9deb588d54b2a16480615cef73da165dbe5f",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Recovered hip pose and HUD1/6. Return/ammo evidence only; earlier empty handling hand remains a visual defect."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bad_omens-reload-sample-01.png",
+      "sourceSha256": "8fc2d30c6d7ef1cbfd32cc948384ec55aa30cb685c69a4efe6386e4836943666",
+      "role": "viewed_FIRST_native_png",
+      "observation": "Initial raised-from-hip movement with lower launcher/arms visible. Payload is not yet established in handling hand; compare later09 empty-hand defect and18 loaded return."
+    }
+  ],
+  "notes": [
+    "FIRST actual PNGs reviewed by same worker; right-hand binding correction returned. Master owns shared builder hand selection, integration/materialization/runtime and SECOND native review.",
+    "Geometry/UV and all11 authored knots/holds/anchors/display math preserved; only motion interpolation becomes C1 weighted harmonic PCHIP. Visibility retains original linear scale envelope about payload anchor.",
+    "Reload129+448 reserve=577; raw canonical253+448=701. Master reports FIRST measured all-route Bad Omens maximum701 and native/runtime pass. SECOND visual acceptance pending.",
+    "Native/twohand and canonical ADS/inspect/nonFP/inactive/endpoints retained; gameplay timing/ammo/audio unchanged.",
+    "Original source is shared-family ARMATURE only. No extracted Bad Omens mesh animation, camera, fingers or IK claim; no continuous60fps claim.",
+    "Required sequence: original Blender ->61pose product ->master FIRST Vision ->same worker actual-image review/correction or justified nochange ->master SECOND."
+  ],
+  "firstVisionFeedback": {
+    "status": "correction_returned_SECOND_pending",
+    "defect": "Shared builder followed left hand; original80A8A1F5 handling hand is right.",
+    "correction": "contacts.reload.hand=right; selected hand must carry incoming rocket",
+    "sourceTimingChanged": false,
+    "meshContactChanged": false,
+    "gripWindowChanged": false,
+    "requiredSECOND": "Actual round/canister visibly accompanies RIGHT hand during approach/handling/reseat; release by.64 before recovery. Hip/ADS/recovered and loaded HUD alone are insufficient.",
+    "masterReported": {
+      "nativeSequences": 15,
+      "nativeRuntimePassed": true,
+      "badOmensMaximumElements": 701,
+      "visualAccepted": false
+    }
+  }
+}

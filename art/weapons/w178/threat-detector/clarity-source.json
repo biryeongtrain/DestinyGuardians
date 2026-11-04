@@ -1,0 +1,102 @@
+{
+  "source": "https://github.com/Clarity-Destiny/Descriptions",
+  "cacheSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 4071163871,
+    "name": "Threat Detector",
+    "lastUpload": 1723480728683,
+    "type": "Weapon Trait",
+    "uploadedBy": "Stardust",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Grants 1|2 Stacks while within 15 meters of 1|2+ enemies."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Bonuses at 1|2 Stacks:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 15|40 Stability"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 18|60 Reload Speed"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 25|100 Handling"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 0.9x|0.81x Handling Animation Duration Multiplier"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 494941759,
+  "mechanics": {
+    "id": "threat_detector",
+    "hash": 4071163871,
+    "radius": 15.0,
+    "stabilityBonus": [
+      0,
+      15,
+      40
+    ],
+    "reloadBonus": [
+      0,
+      18,
+      60
+    ],
+    "handlingBonus": [
+      0,
+      25,
+      100
+    ],
+    "handlingScalar": [
+      1.0,
+      0.9,
+      0.81
+    ]
+  },
+  "policies": {
+    "radius": "LOCAL_INCLUSIVE_FINITE_EUCLIDEAN_FOOTPOINT_SPHERE_ONE_BLOCK_PER_METRE",
+    "enemies": "LOCAL_PROJECT_COMBAT_ENEMY_MOB_OR_ENEMY_EXCLUDE_PLAYERS_ARMORSTANDS_ALLIES_TAMED_DEAD_REMOVED_SPECTATORS",
+    "visibility": "NO_WALL_TEST_SOURCE_UNSPECIFIED",
+    "activation": "HELD_EXACT_ORIGINAL_LAST_UPDATE_SAMPLE_NO_LINGER_NO_TIMER_RESCAN_SAME_TICK",
+    "identity": "OWNER_LEVEL_GUARDIAN_DATA_RUNTIME_CLASS_CANONICAL_ENTRY_EXACT_ROLL_STACK_IDENTITY",
+    "timing": "SUM_STATS_CAP_0_100_RAW_CURVES_SCALE_THEN_CEIL_ONCE",
+    "handling": "READY_AND_STOW_ONLY_SCALAR_STOW_AT100_FLOOR_BEFORE_SCALAR",
+    "ads": "NO_THREAT_SCALAR_SNAPSHOT_ENTRY_ONLY_PRIMARY_0_5_SPECIAL_0_8",
+    "reload": "NO_THREAT_SCALAR_PRESERVE_DISTINCT_SHELL_PHASES_ACCEPTED_PLAN_IMMUTABLE",
+    "combination": "LOCAL_SUM_COMPATIBLE_STATS_MULTIPLY_SOURCED_SCALARS_BEFORE_QUANTIZATION",
+    "damageRange": "UNCHANGED",
+    "historical": "D2FOUNDRY_ORACLE_DCD0C7D302B056FFBB532EDCB711D724A17CA8C1_NOT_CURRENT_SANDBOX_MEASUREMENT"
+  }
+}

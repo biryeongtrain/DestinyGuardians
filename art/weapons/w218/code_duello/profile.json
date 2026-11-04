@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "stage": "W218",
+  "weapon": "code_duello",
+  "sourceAction": "80A8A1F5",
+  "framing": {
+    "translation": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 1,
+    "rightWristRoll": 15,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A1F5",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.08,
+        0.18,
+        0.6,
+        0.68
+      ],
+      "hand": "right"
+    }
+  },
+  "sourceRig": {
+    "group": "rocket_launcher_ba250bec",
+    "action": "80A8A1F5",
+    "sourceBlendSha256": "814231f6f74533c758ea4527263b5b7df6e633e06d6755da60ae3b2616c53124",
+    "sourceMapSha256": "996e8d38b351230180852056488d6a9ed57819e1df192c1cc38ae67e3081effb",
+    "boneMapSha256": "bef1f40549f3d698efc439d17bf5c5f07ea443c55811c29705d5f9ec4b7c5259"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w218/source/source-review.json",
+      "sourceSha256": "f5a06a8373aa9ee1328f0d2b14c87dc187367edc7e28224f7bfa6287d64469d0",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original Blender 5.4.0 Alpha read-only: ARMATURE only; OBSlot Armature|fp_80A8A1F5_reload_full|Base, frames1..133 at30fps,61 samples, prior-cache joint error0; allInputsUnchanged=true. Worker read report; did not independently run Blender."
+    },
+    {
+      "source": "art/weapons/w218/rigs/rocket_launcher_ba250bec.json",
+      "sourceSha256": "78d7101c57cc3a3a3d88e0dc957cbdb4982160e21ec7e11a9630e3bee5958e3d",
+      "role": "fresh_normalized_source61",
+      "observation": "Fresh source shoulder/elbow/wrist/weapon matrices; shared rocket-launcher family includes Code Duello. No weapon-exclusive mesh/camera/finger IK claim, no arm length or axis attenuation."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/source/sheets/rocket_launcher_ba250bec-80A8A1F5-upper-chain.png",
+      "sourceSha256": "14d6837253489e03a4b4802e05435eabbe893a3b44c8e135444cbc92a904d680",
+      "role": "viewed_bone_only_upper_chain_sheet",
+      "observation": "Viewed actual XZ/YZ projections at p=0,.2,.4,.6,.8,1: support chain changes approach during extraction/insertion and recovers at end. Bone-only evidence provides no recovered mesh contacts/camera."
+    },
+    {
+      "source": "scripts/generate_reload_w187_code_duello.py",
+      "sourceSha256": "567251c91eafb8c4d048468f72aa57cc0e68a56748552039ac31066f4c2c725b",
+      "role": "same_weapon_authored_motion",
+      "observation": "Read legacy AST inertly, source document and manifest; viewed retained actual-gameplay storyboard and offline comparison. Preserve14 W187 r2 keys including framing correction, whole56-solid canister plus2 connectors, anchors, uniform scales and rigid native/twohand display algebra."
+    },
+    {
+      "source": "art/weapons/w187/code_duello/comparison.png",
+      "sourceSha256": "19f9d4fad7d1407a1b01413cac02c631f5715b6f6f0da5fed8769e32f0584864",
+      "role": "viewed_retained_comparison",
+      "observation": "Viewed retained W187 r2 canonical/part/grip and framing-comparison panels. Offline orthographic/no-hands renders establish part boundaries and authored shift only; no native camera/contact acceptance."
+    },
+    {
+      "source": "art/weapons/w187/code_duello/storyboard.png",
+      "sourceSha256": "a92fcbc9023fec2734513c766e7092e60370212a8e31c4e90afb83bf41f9a833",
+      "role": "viewed_retained_storyboard",
+      "observation": "Viewed retained actual Marcusbgaming Code Duello frames above independent offline renders. Whole ribbed canister extraction, empty socket, connector-first seat and release. Blue video shader is mechanism evidence; W123 teal/gold UV remains unchanged. Original video not reopened."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "No rocket_launcher family or existing Code Duello profile; shared loader resolves default translation[0,0,0],rotation[0,0,0],scale1,rightWristRoll15. Preserve it and add required full-chain/support booleans."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "mesh_rest_and_seat_release",
+      "observation": "Keep right/left rest and reload mesh contact/rotation. Explicit magazine action80A8A1F5; attach .08..18, release .60..68 by first neutral seat.68; zero through seating overtravel.74, neutral settle.80 and wrist recovery. No seated canister wrist dragging."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/screenshots/code_duello-reload.png",
+      "sourceSha256": "fc861572eadd875982b1f800c57192f4caa028fc7bfe48f20c5f78ad24364fda",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed FIRST native reload sheet: raised/extracted canister visible; sample09 empty right hand is visibly detached, so hand ownership is wrong."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/screenshots/code_duello-review.png",
+      "sourceSha256": "6cf2a4999851c4d34a88890a4a05bd73c7af13d805062a47fcbcedcb95f3d387",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed FIRST hip/ADS/reload sheet. Native model/paint intact and ADS aperture visible; this does not accept contact or corrected second-pass visuals."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-01.png",
+      "sourceSha256": "406cb088bd688a4c0088faf0917f7e1b9391678474428a0eb3973188d001bebb",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw01: early/near-ready weapon with left stabilizer below; empty magazine HUD0/6."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-05.png",
+      "sourceSha256": "e4b7fa9cd6ca0f74ce7cfb34c2f82cbd08ef552cb83ec468a46a72209eeee9bb",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw05: raised ribbed canister and right palm adjacent; alone insufficient to establish tracking through withdrawal."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-09.png",
+      "sourceSha256": "3193675112bd3e25ba54c7858f97308ce10e3e4c1085727a5fd7d189a958f8c2",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw09: canister withdrawn above socket while right hand is empty, far screen-right. Direct evidence of wrong-hand attachment."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-10.png",
+      "sourceSha256": "a648e8fc48f33c55d62772ed93f535cb7e573c9123b7d295f6dfac924ba67f34",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw10: long canister remains separate from right palm during transition; merely keeping payload visible does not establish grasp."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-12.png",
+      "sourceSha256": "4af186f73502c9912a76bddf0067724211ad0802d3f162d0958d8833425aa3dd",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw12: returning canister approaches rear socket and right palm is close; full interval contact still unproven."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-13.png",
+      "sourceSha256": "2698308d18e8c6c84505263e4f8a47a03507b42b2b08e0d49efc2d99fbde24ef",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw13: connector/canister remains aligned over socket; right palm beside it, with unresolved handling ownership."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-14.png",
+      "sourceSha256": "e1d201c7f489404f8f13591b2f2ba359d4f94f60e3ec2713f07606e368dd28d3",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw14: nearly seated canister with right palm alongside; require SECOND actual round/canister contact, not incidental silhouette overlap."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-15.png",
+      "sourceSha256": "939939f7da140c0addf584948c17000a845a2f5bea2a0462cf1c432d65ed140f",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw15: launcher lowering, right hand separates from canister. Preserve neutral-seat release to prevent wrist recovery dragging seated geometry."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-16.png",
+      "sourceSha256": "6544fd5eba37b522b0c0c09b6648fc320830debd965aaeea0180daa44a50c73b",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw16: late lowering/return, left forearm overlaps upper weapon. Flag residual support-arm/sight clearance for SECOND."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-code_duello-reload-sample-18.png",
+      "sourceSha256": "eb7a72bc6cea528eae38b3e70c0cdc7e3a66add6dce017f3c640e917f8e6dbc8",
+      "role": "viewed_FIRST_native_feedback",
+      "observation": "Viewed raw18: late recovery has left forearm crossing the top/front of launcher. Do not conflate this transient view with post-reload idle clearance."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/first-post-reload-review.png",
+      "sourceSha256": "66ac853208a47161327067955b7fdc9699a09b793dca28d71aa40134cb17afcb",
+      "role": "viewed_FIRST_post_reload",
+      "observation": "Viewed actual post-reload sheet: Code Duello HUD1/6, hip support below body and gun returned. Runtime result does not certify corrected handling contact."
+    },
+    {
+      "source": "art/weapons/w218/rigs/rocket_launcher_ba250bec.json",
+      "sourceSha256": "78d7101c57cc3a3a3d88e0dc957cbdb4982160e21ec7e11a9630e3bee5958e3d",
+      "role": "FIRST_original_hand_role_recheck",
+      "observation": "Recomputed weapon-local wrist displacement at32units relative idle80A8A19D: reload80A8A1F5 p=.4 LEFT[1.046,.895,3.717], RIGHT[-4.725,6.838,-13.176]. RIGHT extracts/reseats; LEFT stabilizes. Keep contact[7,12,7.5]/rotation[90,0,0] and window[.08,.18,.60,.68]; release by authored first neutral seat.68 before original right-wrist recovery. No source retiming."
+    }
+  ],
+  "notes": [
+    "FIRST native15/15 and runtime budget checks passed, but image review found wrong handling-hand binding. Worker now selects original RIGHT handling hand; master owns shared selected-hand blending/attachment and SECOND.",
+    "Fingerless ordinary player-skin arms follow original full chain; no recovered weapon mesh/camera/IK.",
+    "W187 exchange has no explicit visibility or zero-scale phase; retain visible rigid canister at all normalized times, including offscreen exchange.",
+    "Reload219+448 arm reserve=667; raw canonical151+448=599. Master measures actual all-route assembly including selected W123 canonical217, ADS/inspect under1000.",
+    "Canonical native/twohand, ADS/inspect, endpoints/inactive/nonFP and67tick reload/1rocket/15RPM/ammo/audio unchanged.",
+    "FIRST actual sheets/raw PNGs viewed by this same worker; right-hand correction returned. SECOND must show actual ribbed canister with right hand through handling/reseat, released by neutral seat; no visual acceptance yet."
+  ]
+}

@@ -1,0 +1,443 @@
+{
+  "stage": "W91",
+  "generator": "scripts/generate_swap_presentation_w91.py",
+  "sourceHead": "bfd4b4573fd8651bf1ea850bf829622ccce5c3c2",
+  "initialDirtyStatusSha256": "e7b410a633f0600ebe4e921d341835beea0308e6452df9ada31f1a3bfd7dd207",
+  "initialDirtyStatusEncoding": "git status --porcelain=v1 -z bytes; initial observation, not a commit",
+  "consumedSourceSetSha256": "68f9e5fee9a785ce48bce7ad173ee1974a4d9edc38642dde3584de2163d9741a",
+  "selectorFloatIndex": 5,
+  "carrierFlagIndex": 0,
+  "phaseRanges": {
+    "STOW": [
+      0,
+      1
+    ],
+    "READY": [
+      2,
+      3
+    ]
+  },
+  "samplesPerPhase": 21,
+  "step": 0.05,
+  "helperOffset": 0,
+  "pairs": [
+    {
+      "pair": "austringer_to_beloved",
+      "itemModel": "destiny:weapon_swap_w91/austringer_to_beloved",
+      "outgoing": "austringer",
+      "incoming": "beloved",
+      "samplesPerPhase": 21,
+      "phases": [
+        "STOW",
+        "READY"
+      ],
+      "carriers": [
+        "native",
+        "twohand"
+      ]
+    },
+    {
+      "pair": "beloved_to_austringer",
+      "itemModel": "destiny:weapon_swap_w91/beloved_to_austringer",
+      "outgoing": "beloved",
+      "incoming": "austringer",
+      "samplesPerPhase": 21,
+      "phases": [
+        "STOW",
+        "READY"
+      ],
+      "carriers": [
+        "native",
+        "twohand"
+      ]
+    }
+  ],
+  "modelChildren": 168,
+  "itemDefinitions": 2,
+  "sourceGeometry": {
+    "austringer": {
+      "cubes": 255,
+      "model": "destiny:weapon/hand_cannon/austringer",
+      "catalogSource": {
+        "id": "1oPpAAS_YIce29AOoRg77TdpZvaGWDKlp",
+        "name": "Austringer.7z Compressed archive",
+        "season": "Season 7 - Opulence Shared folder"
+      }
+    },
+    "beloved": {
+      "cubes": 253,
+      "model": "destiny:weapon/sniper_rifle/beloved",
+      "catalogSource": {
+        "id": "1y0zYkT8_ooPLbhvADweXNoIBB09v8li-",
+        "name": "Beloved.rar Compressed archive",
+        "season": "Season 7 - Opulence Shared folder"
+      }
+    }
+  },
+  "exactHipEndpoints": true,
+  "sourceGeometryUvTexturesUnchanged": true,
+  "otherContexts": "Exact incoming item graph; each child preserves its source carrier variant.",
+  "currentCarrierCompensation": true,
+  "phaseTimingOwner": "Existing WeaponHandling only",
+  "authoredDisplayPoses": true,
+  "measuredSourceFrames": false,
+  "handIK": false,
+  "nativeGameplayVerified": false,
+  "nativeCodecVerified": false,
+  "visualPreviewVerified": false,
+  "keyframes": {
+    "stow": [
+      [
+        0,
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      [
+        0.2,
+        [
+          8,
+          -3,
+          -5
+        ],
+        [
+          0.3,
+          -1.8,
+          0.3
+        ]
+      ],
+      [
+        0.55,
+        [
+          34,
+          -11,
+          -18
+        ],
+        [
+          1.2,
+          -9,
+          1.8
+        ]
+      ],
+      [
+        1,
+        [
+          62,
+          -18,
+          -30
+        ],
+        [
+          2,
+          -20,
+          4
+        ]
+      ]
+    ],
+    "ready": [
+      [
+        0,
+        [
+          55,
+          18,
+          24
+        ],
+        [
+          1,
+          -20,
+          4
+        ]
+      ],
+      [
+        0.45,
+        [
+          22,
+          8,
+          10
+        ],
+        [
+          0.4,
+          -7,
+          1.8
+        ]
+      ],
+      [
+        0.8,
+        [
+          -3,
+          -1,
+          -1.5
+        ],
+        [
+          -0.1,
+          0.45,
+          -0.15
+        ]
+      ],
+      [
+        0.9,
+        [
+          -1,
+          -0.3,
+          -0.5
+        ],
+        [
+          -0.03,
+          0.12,
+          -0.04
+        ]
+      ],
+      [
+        1,
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  "inputSha256": {
+    "art/blockbench/weapons/w30/austringer.bbmodel": "3918a1d03f0ea850735dc563834018459aac9b9a44cc5d78bd7680e1b753f2c9",
+    "art/blockbench/weapons/w30/beloved.bbmodel": "26e07a4ad7035b94bb99d9ab2cba89f2ae9e39a9e2e3a35b3d7faf6ec9146a63",
+    "art/weapons/w30/catalog.json": "3e9377cce928958a89208ce69f34210fe7e17ae17afd1f4959bb418b1ed120f5",
+    "scripts/build_weapons_w30.py": "e087fca588231486505691e97b5c2b581382c1055c76d64300dbc24118bf1d83",
+    "scripts/generate_aim_models_w70.py": "92fa1e45d7ac4271c26c0853e3aff8b0920d32943cad3c1fa765d194dfae646d",
+    "scripts/generate_reload_models_w69.py": "ac4b51364886b790a9a60fd01b53a9247249a9f592584f9865f4136de286cb4c",
+    "scripts/generate_swap_presentation_w91.py": "8b1cf5c66eef4a995cf5d9ca66535b07ed0fd118925ef2d43b45537fd2b8e2eb",
+    "src/main/resources/assets/destiny/items/weapon/austringer.json": "40cd203770a787fa03b7483277a69c815dfe1bebd37f5d79523d272cef7e2204",
+    "src/main/resources/assets/destiny/items/weapon/beloved.json": "f94299f5ba4d9790f83ead34eb6a40d823c2c74fa69201ef3afc205b93d4d70c",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer.json": "386c940d7e18bda739d7d7e77664c27db7e2e5d964fb79e0a6d32e8bc3ba0312",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_ads.json": "adc3b2c92cd35f96bfd9d4663d40269145caf1e8bd2130622bc76e17bd5c4ec0",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_ads_twohand.json": "a16c9bb7b95a38aa78d8583e5f33da99017b2f1e0029c89bac546929a29e9151",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_inspect.json": "f31efaf82b55137ccdd10a8751e2eeb2a601a2de35771d814b37b5ddf14ef27d",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_inspect_twohand.json": "9455422ecbe467d0afe2a05bee0c120ad22f0e7f6d678289f2fad04148f0b11d",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_twohand.json": "2592c7c31f32556f94ba1eb01c7aab87bab8c6f7a19b4d85bb8cb49da4471b5e",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved.json": "9c404f594392862390288a35c0aa0aa1943e5e5b6cdb3b36e843b8bf45a70bee",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_ads.json": "b0625dc6b1e965600202a372bc444ec4a2845acc89abaaf06057e43226c48ddc",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_ads_twohand.json": "cd08113225705e89b4baff43baecc528928a5e6e2b709311bfb128c5a74bf5f0",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_inspect.json": "8bc4fbaf521a1f36d7365832cf69bc2bcad70619bb5d784a0e3bf1c069997ca4",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_inspect_twohand.json": "5cf784059adff5b40838b698059acb7b62c15c5848b800dd4a5cc38544112604",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_twohand.json": "882ab4d5b05cccf3d995cd65010c7f83121b51ff4e4a73d0139b3fdb8a91e893",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/austringer_00_native.json": "6eb2d59cdb3bf147b2696c27a3eff2fd2f4d66002e8384066bbc4c8eaef9a6ec",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/austringer_00_twohand.json": "cad91c216684010b189ce172387c30c8a57e5ee7fe6bad3eccc29678ca005430",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/beloved_00_native.json": "c2545385d67f50833da937ff10c78762fba64620be6474ca74f0b1f30b8bdc14",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/beloved_00_twohand.json": "2e0250c3645c85c3417437ff15ad60d5ff62d219c4c96eb6945b5d72a8c1ac53",
+    "src/main/resources/assets/destiny/textures/item/weapon/w30/austringer.png": "805bc5fdf20d84b94340a5469c54ced5cd723fb7e7c45634309554e81183b0b0",
+    "src/main/resources/assets/destiny/textures/item/weapon/w30/beloved.png": "d2cf627f10f11100f6ba11c9e5464f259109ffc4273ec7fa61b82d1b1a5bfb7c"
+  },
+  "originalSha256": {
+    "art/blockbench/weapons/w30/austringer.bbmodel": "3918a1d03f0ea850735dc563834018459aac9b9a44cc5d78bd7680e1b753f2c9",
+    "art/blockbench/weapons/w30/beloved.bbmodel": "26e07a4ad7035b94bb99d9ab2cba89f2ae9e39a9e2e3a35b3d7faf6ec9146a63",
+    "art/weapons/w30/catalog.json": "3e9377cce928958a89208ce69f34210fe7e17ae17afd1f4959bb418b1ed120f5",
+    "scripts/build_weapons_w30.py": "e087fca588231486505691e97b5c2b581382c1055c76d64300dbc24118bf1d83",
+    "scripts/generate_aim_models_w70.py": "92fa1e45d7ac4271c26c0853e3aff8b0920d32943cad3c1fa765d194dfae646d",
+    "scripts/generate_reload_models_w69.py": "ac4b51364886b790a9a60fd01b53a9247249a9f592584f9865f4136de286cb4c",
+    "src/main/resources/assets/destiny/items/weapon/austringer.json": "40cd203770a787fa03b7483277a69c815dfe1bebd37f5d79523d272cef7e2204",
+    "src/main/resources/assets/destiny/items/weapon/beloved.json": "f94299f5ba4d9790f83ead34eb6a40d823c2c74fa69201ef3afc205b93d4d70c",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer.json": "386c940d7e18bda739d7d7e77664c27db7e2e5d964fb79e0a6d32e8bc3ba0312",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_ads.json": "adc3b2c92cd35f96bfd9d4663d40269145caf1e8bd2130622bc76e17bd5c4ec0",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_ads_twohand.json": "a16c9bb7b95a38aa78d8583e5f33da99017b2f1e0029c89bac546929a29e9151",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_inspect.json": "f31efaf82b55137ccdd10a8751e2eeb2a601a2de35771d814b37b5ddf14ef27d",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_inspect_twohand.json": "9455422ecbe467d0afe2a05bee0c120ad22f0e7f6d678289f2fad04148f0b11d",
+    "src/main/resources/assets/destiny/models/weapon/hand_cannon/austringer_twohand.json": "2592c7c31f32556f94ba1eb01c7aab87bab8c6f7a19b4d85bb8cb49da4471b5e",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved.json": "9c404f594392862390288a35c0aa0aa1943e5e5b6cdb3b36e843b8bf45a70bee",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_ads.json": "b0625dc6b1e965600202a372bc444ec4a2845acc89abaaf06057e43226c48ddc",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_ads_twohand.json": "cd08113225705e89b4baff43baecc528928a5e6e2b709311bfb128c5a74bf5f0",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_inspect.json": "8bc4fbaf521a1f36d7365832cf69bc2bcad70619bb5d784a0e3bf1c069997ca4",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_inspect_twohand.json": "5cf784059adff5b40838b698059acb7b62c15c5848b800dd4a5cc38544112604",
+    "src/main/resources/assets/destiny/models/weapon/sniper_rifle/beloved_twohand.json": "882ab4d5b05cccf3d995cd65010c7f83121b51ff4e4a73d0139b3fdb8a91e893",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/austringer_00_native.json": "6eb2d59cdb3bf147b2696c27a3eff2fd2f4d66002e8384066bbc4c8eaef9a6ec",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/austringer_00_twohand.json": "cad91c216684010b189ce172387c30c8a57e5ee7fe6bad3eccc29678ca005430",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/beloved_00_native.json": "c2545385d67f50833da937ff10c78762fba64620be6474ca74f0b1f30b8bdc14",
+    "src/main/resources/assets/destiny/models/weapon_aim_w70/beloved_00_twohand.json": "2e0250c3645c85c3417437ff15ad60d5ff62d219c4c96eb6945b5d72a8c1ac53",
+    "src/main/resources/assets/destiny/textures/item/weapon/w30/austringer.png": "805bc5fdf20d84b94340a5469c54ced5cd723fb7e7c45634309554e81183b0b0",
+    "src/main/resources/assets/destiny/textures/item/weapon/w30/beloved.png": "d2cf627f10f11100f6ba11c9e5464f259109ffc4273ec7fa61b82d1b1a5bfb7c"
+  },
+  "outputSha256": {
+    "art/weapons/w91-swap/asset-authoring-notes.md": "c386ce164d9cf7a3981ed07d81893114c517977f72a9ad9bb0613ed17a90f8a1",
+    "art/weapons/w91-swap/asset-samples.json": "83031b88e87f48220d8607db8da8be232bcf1e1469a61ce600387d0dce1b25b8",
+    "src/main/resources/assets/destiny/items/weapon_swap_w91/austringer_to_beloved.json": "bec0c15eb81ce86743d19b656de3639e359f8c7de7357ac451d26f8298437248",
+    "src/main/resources/assets/destiny/items/weapon_swap_w91/beloved_to_austringer.json": "4dd610d573a8d3f4157d0feb70f70ad8476581b0a688bfff28e98a90b12fe9f7",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_00_native.json": "6d535a1aa048078de83f95e8ac48969d628cbefb4f03628aeb4ddf4d1e0a6f66",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_00_twohand.json": "fdbe4224e0a1bb5e3bfeee22827b92f3f1117da1445aceba99846525b19d5c85",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_01_native.json": "eb2c92682f9b032ebd89aef84ed1477f9a333cdf2c55db6b641383c1d4bec5e8",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_01_twohand.json": "1494e6517bfee3c0f7f0b29d942d77d35a6e518497888bd9bcd3ee17aaeb5d09",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_02_native.json": "567fcd15927838ba254d5e5f7666345f144da86bb2ffb619978756749cf1f1bd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_02_twohand.json": "433cc69d1955f00689687f7ee6be7c24cd6f1c2d1a7b6ec228cde5cd2b7c7aaa",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_03_native.json": "0f94466969d6dfd90a7131c9d42c6651e53cdb1e92bf931458108c417341830a",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_03_twohand.json": "907bbefca4229a82c031a3001878d1dc40dbd73aabbcc306b432c86f22ffd3f4",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_04_native.json": "a5701120361a1a05bce6950f8b5463368522f69dd7c5df3ea7bedd0b49c9f608",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_04_twohand.json": "d63f90a11a2087db94b37747a408fb78a3c2095c8efaa307fc5f3980d10d71ea",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_05_native.json": "11334050f4ec336084ba67c763e3af053d18c7bcf4306d3f13d541f5cd28d850",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_05_twohand.json": "af160a660c84ade4588943635aa63dca1af888e194bd1064b135d60aefe547bc",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_06_native.json": "8fdab937636eb24da59a13da5c481fdd61a850ba41bb1dd94b2bdc1724d58413",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_06_twohand.json": "42a825d84136460499238c6ccf12ec4dcf0c1bab6a1965e2e90a987d6cb682d6",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_07_native.json": "baeed5445f38e12a5cfc28a64baddd13dbed92c41df41b41195b2ec9fdb50c0c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_07_twohand.json": "31c40fd60f4fd2ef67fe789c60acbfcd18ed6b81dc570ef058648501f35a341f",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_08_native.json": "f9477a11b004fd43b9677d8ecadd1c529997da849d6291a24749fba46b9634a0",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_08_twohand.json": "e72181d938d889089da578c716426b8f48d06f82fc5c6f20a74568a71fa4d46e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_09_native.json": "8354af822ae3ed15f8b1e1a6d88aebdf6862b118ef2a7e674c79af19e2bd5ffe",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_09_twohand.json": "b39fbf62e267b64f78ed2ea5574b22c567c34f9f50c4e3f5e08dc4c5f9a6d932",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_10_native.json": "44e24a17c39571c2b09eac92e0f87cc1d08bacc465da7d1d27323a0ead860fee",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_10_twohand.json": "f566f40cf9ea1534e7c5f184c00d2d128a89d6fe354521a7244bfec11a88ca1f",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_11_native.json": "248d5fdbc194256302b25a2b906e9ca3083fac9627be59184f4b1bd7b154919f",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_11_twohand.json": "3edd91d887e7781e76029c8ca9bd868580f0d55baaadbc6c69834be23dbe32ac",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_12_native.json": "0b1fbda7c7dc1605b50004ebaef687057c59da9839f790259debb5e408f7cc1a",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_12_twohand.json": "6c7529ae943764817a7a755e75779509ac85c612d71bea0555c93c7ad3646bb1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_13_native.json": "57f90eace0ed51c71be247bdba25c8fe69d710fc5bbbe827782178154b742293",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_13_twohand.json": "56337cedb7a443ad7b8b8ae332912b94dd2b1badd6710af7628af60ae8fa5f0d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_14_native.json": "d54c2d41e064a36ff8dd8917fa99994d1379cf80157cfb78cf01314c2b7d34c3",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_14_twohand.json": "1fcc81ce4928899f07ef876aa36b9400e17b66f8020d0c334fcb223b5a031799",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_15_native.json": "acdd6ce7fb97b28af71fb2f4f8ad8b079a58491b2f0753dc187a2f038ce3c5ac",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_15_twohand.json": "6477e928347af6010032715c1c784aebc4627460ce4fffb8e7fc29b3b0e78661",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_16_native.json": "7be4f0efc821aeded83a5fe033c8c0e67cadbf93173530beb27d3e91d0bd4c6c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_16_twohand.json": "2a7775473171087ab1acc8520e20f4f691e17b85bc09cda259e09dae242a7962",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_17_native.json": "9d07f919fd91e86a35662ee1e18850aa2dd10a651fd2fd6e75441e261aa58cc8",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_17_twohand.json": "cb661a9eea590d1711bd55029f33527afd2ad159d02ddc0763e5ae6d1b409d35",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_18_native.json": "619e640062d8edc26b7b91305fa6fcd6daa3c28549ac41d8e019c1b0ce673771",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_18_twohand.json": "718898ac2b21d2aae0a8dd995dafe616bae9df05ad56bfbebbeac9dc7871d4ff",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_19_native.json": "4b6f8675225f25f52d2598f1825bf2d96ee2a7544b3b372080ebdbb15f8a21e0",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_19_twohand.json": "e95fd82d8d9a05b1915f7eeb4956265e1c610715b5a2c12b864ce370a1a6f3ef",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_20_native.json": "7b00e5082fa979e8cacfb303f3530eaa0692d3a19eaea32a85fe3c605f222be5",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_ready_20_twohand.json": "882ab4d5b05cccf3d995cd65010c7f83121b51ff4e4a73d0139b3fdb8a91e893",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_00_native.json": "34599739e9c6c3d5fa4422006056027efd6b8f84dd8ea9c851bf7a78f6fdcf8c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_00_twohand.json": "2592c7c31f32556f94ba1eb01c7aab87bab8c6f7a19b4d85bb8cb49da4471b5e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_01_native.json": "95b3eafbeb1c6519dfe4b490ac1f3ffd21046b44d2722b7fcb73cce230efa32d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_01_twohand.json": "8f6aa605a6d13d4b97c9dd8134d0bf21fe41285a11a0dd55d83aa5b6edc6effd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_02_native.json": "d862c8aff434ad0bd21df2ae4514682bd2001201c006e136da40a7fc349e7246",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_02_twohand.json": "de660b0d5778aeaa572dc65f9156f172819582fdb19d979084a8952570e8c7da",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_03_native.json": "e135192c7f2a8216efa1d3d9d1f1fa29d8136f84889602e3d809c9cb4757875a",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_03_twohand.json": "759645ae4e6309e72dcdbe05add9a43fbd87a2defbde7558a0f05ddcf1fee2e8",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_04_native.json": "d7c0fa725215af4b20e6b8541ae0133392c3a9867cc18d4537c965f0d1740114",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_04_twohand.json": "a40bb3efd77144c6fcb0680c2eab89a07c642c7ee71c1084288aedbbc0093a3f",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_05_native.json": "95977fac9fd1c9bdf4555db38536f23b0ed2abf05c7d862f2131a8e2e470a48c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_05_twohand.json": "1f0634d1fa16a1c9cb20f1383425574a5fb4ca72e5d475caa144c994685b7454",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_06_native.json": "d826f2b575e61a60a32805864a7548202adfa675bd3e84e39961911e9616ed57",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_06_twohand.json": "3be18f1606c710df1a503dd3dd8657552ad3a87a16c05267c292fc43980e2525",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_07_native.json": "b96662044e77407c61e890e523e7f72ab742bbe11c6e5c9456750f21ae784182",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_07_twohand.json": "daec25885f129e76a7428cb631d689be0dddb8ab5a571794bfe4e5a69a3beeaa",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_08_native.json": "bb36830344058431f5d5ce73b8d51f5aabeee11bf2b4a87a91cf9be6a9f3054b",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_08_twohand.json": "df7f19188545382c07f48969b0dfdb38ee8564ca9d94464cb8f5e58b1ff444f6",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_09_native.json": "b85152a8441470de5cc84c8d9001f61ae5d30889f436a8e7052cfc87cf94c72c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_09_twohand.json": "46bdf6f53dbbc44dfd2cf45e0872cefa4b3e7eada93dacc88ccb00f1de49973b",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_10_native.json": "3a1b77a70848731a1a527900fb6d5f318884b97632af5767d2fa93ea0fa90583",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_10_twohand.json": "efeb9d9c0e097ebcc57869733ad2e9f55a05ea020faf9830b2adae23cff2dd9d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_11_native.json": "49723fa28e2b940723e401018af076dac2eb0563cd514ba50358c11cea376ead",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_11_twohand.json": "4a684b472ab8c851d0bc87149ebb34682c15e0f7166d71c24b3045d0605b23fd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_12_native.json": "f96079946a4e5cb1d59f7e630c2bc762ab1f35b0b72c47a5cec7aec69302a71e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_12_twohand.json": "996d52c04893d054c8380d5817e49f3649141074fa53989211dd5f61553e69c9",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_13_native.json": "56fa9155f0de5471901f7b6626d58f52272b8e04977864efcbdd0a71b7a1a0b6",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_13_twohand.json": "60089967a4a98c9b237919aa1709b6ac492de94609d3a22d01279008af1badf4",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_14_native.json": "d8c62609064937aef70975ff68bd7fd7058b081c9754d8b81e04d20027ef5b56",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_14_twohand.json": "5c12657f7525a2d631c53f2403a196c9581efdeba31f9a6c81505acf693f035e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_15_native.json": "2ef4c6012ec2bd7abe6511d886e60362b01a708d7cb48dd5592bd3fa39886a62",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_15_twohand.json": "bbe8fd840049faf5b62ff46f75a25bf1eedda9762efb9ffdb932772863c85ad3",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_16_native.json": "67b3343b3acaab186c99b304b78bfc14f118f8b589d29092d63e956c4446dd47",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_16_twohand.json": "9b04ca6958bf6216379a059b079dfce16eeb82043f8dac0077791ed019c95a1e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_17_native.json": "987e1c9d450f01b0a9f8f2587b7d2edbc0ca80a32f12530ca3dcbdb1c1ad9c5d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_17_twohand.json": "377091bbf1187c2c45c9be7fc184937937add0155fb7b5d6bbfe30882aa0f930",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_18_native.json": "4bb1e5e4685be73a467503b393e3cf60e6ccb61d88ed762ff4b6d005afb5d476",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_18_twohand.json": "0e5c8181abc556e817f1ef02627855d9ec0cf6c4f78e45446d9521ac3e6b0462",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_19_native.json": "f27784c72db8f43a566ee79ee473457d7776a80e45b49650df70159c19919cf1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_19_twohand.json": "7de9c42f88399d00fe185fcdb8c9541edc61db640624d3bceef7409bc6cf9eb8",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_20_native.json": "01283ffb68c3263d2c83f49d6826a27e7cb668f8bb00f8c4223b6ef83a0c8fcf",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/austringer_to_beloved_stow_20_twohand.json": "cbc3f287240e8ddd8acbfe28f31ed17aee56019ff6e7afd07571d19f9b43e664",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_00_native.json": "f53aaa7083c7f7e0e29c818f3c49062764304856dd4faaa0e7043c1a672eb96c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_00_twohand.json": "b90184fb87f82a230e1320c1d516146d3cd1400cc3a1e300f99db27fc4150859",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_01_native.json": "72f33af767e6eb10b114e4114e42352ccfc9b0116192fd0bd7b19d8217754d5a",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_01_twohand.json": "d3d8588b1b5190240f88ed8d59444955f6a21c82917c594306ec80945e2360c7",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_02_native.json": "f00d93e551fe68295b8695b1f658c1f8bbcbab10d4ab61c445cdd38e8be64ff2",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_02_twohand.json": "49f490d4db0c4c32afcca68c4abb663da8ec8f9e1b00651ef07835d1cfe77ef7",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_03_native.json": "9540282b27cab8762ed3b2d7344ded0cfc8e5d91936b4bd62ebd24964a325552",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_03_twohand.json": "9356a7b379cc4dcc8b1c9d5e70b2fc051b9379459e15e3db9dfee536668eb1a4",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_04_native.json": "4fe099cb9596bf28d9c55ebb458baaed1018d1615a8afdfc372bda2f60a958e3",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_04_twohand.json": "3162b7a742ea0fba5eb9193f98d23e845ec2a799bdddd7797808cde568b40f7d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_05_native.json": "0adeda81256c1ab8e9ea52133f8090ed03bc711eea80a5440c324bb3b2c10f51",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_05_twohand.json": "f84df5f3fdd4e958e9594a416aced6a614b770c821f7ced1e231c7f78aeee033",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_06_native.json": "bb56e8da5b1d99c5056576518ac43d87546ff56ea090a98b9865f6366ccd66dc",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_06_twohand.json": "839217359203e19aad5d3b43dc204b8b8b2cdaecd4a1e398003ecaa5e9dcbdb3",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_07_native.json": "2a52de7ac32347a5b66b2ba3bd5d1bd46b773e5da21fa8bdf91af7138e0c78dd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_07_twohand.json": "e8d55a82282a1f623f621929e8f8f625984a02c4603d337259e686ba8e90ff9b",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_08_native.json": "a840cddeb04ee3389fc3a3adf9ce30ed0aafe9d2d228ba66328f5d6d0d236e08",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_08_twohand.json": "2650dc5f9585144e66f4e87556189d16190286476f806d8111d476c99ee7a467",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_09_native.json": "eeb61b1e1952228fe084a9223c49e5c9310ce4a4098161584f5227deee229374",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_09_twohand.json": "4df13ddc58abbac70addbea59c2ee7b7ddb63559188625a541686228ca3150e1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_10_native.json": "75b11cbc32c1c35511b2639597d9f45d0b77ba886a2494e302e7c5976c8e98e7",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_10_twohand.json": "ee776eff408a0e54438d05981844b5595456f91213426fe5df9c425bd8617c24",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_11_native.json": "5b0a1ff038d9b0d88b14129a649c836bc9b50a945075749f103cf70a250ae05c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_11_twohand.json": "30e094578ee848e8ad3e2b4a6291a0dbef203febdfd82779bb0a89acb47629e5",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_12_native.json": "ac8fc9c96f581eca69c483520c3c43095550aac1047eedb7db96bd78c557fb93",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_12_twohand.json": "3ddb186c961a019b1da4e272737d89e0d5944fa31f2ebf5dd529a37e8d800010",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_13_native.json": "a3d18abe77ade7f03bd9b1d9308f999f8119c202291e6df431f6fd5abc687d55",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_13_twohand.json": "cd4005e27bbcfecbdefd63c05c1ba85bcc815c3491bc0f3655f8dcb80b4ff276",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_14_native.json": "7cf4e8cd1c998167c6723708fa370f5adf264b53682f7ea2db2195684d256029",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_14_twohand.json": "db7c5e9d49c51ce267f7f12d78a4a2743fc16b87a5b702878dc8d58ba8bd55fd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_15_native.json": "5b3c7d87034f9d79069b66c628a6e751b060919cbcb4c9cacce9fb7c2642670d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_15_twohand.json": "1475c3df8f8db899fafa7c83f7fd02411918320159649ee2c7077f0e4de6c616",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_16_native.json": "176975daf25fd16774f087777370bab631bc4dbc63994f30cd144ac553ec3be1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_16_twohand.json": "5364f10ef90e6d63ae693d47da3cc521bb61108e1184957b43eda6c5733f052c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_17_native.json": "2773dffb97007949581f17e0503e25ed0d206c41d081b948d76a29f9c3766f99",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_17_twohand.json": "b6162c4447cf7c2c82f097240c997affa680ae18c38a4595cb1e497bbab3001e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_18_native.json": "0d53a391025e7adcacf2c37b96dbfe7c7b8a5f39226872f8e7416fc8a72fa83e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_18_twohand.json": "95fcc3c125c6e4274ef63b3a88d1273df6da165e6ce956b3787431f0f069df7d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_19_native.json": "f54db634dd49303760a22c1771b66b39f5a3c54131106f6c27175fa52b405134",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_19_twohand.json": "7526cce847ff0380053d040c4edb37a6b121d8afa1f67ee234fa3b19ce5718c8",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_20_native.json": "34599739e9c6c3d5fa4422006056027efd6b8f84dd8ea9c851bf7a78f6fdcf8c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_ready_20_twohand.json": "2592c7c31f32556f94ba1eb01c7aab87bab8c6f7a19b4d85bb8cb49da4471b5e",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_00_native.json": "7b00e5082fa979e8cacfb303f3530eaa0692d3a19eaea32a85fe3c605f222be5",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_00_twohand.json": "882ab4d5b05cccf3d995cd65010c7f83121b51ff4e4a73d0139b3fdb8a91e893",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_01_native.json": "fade0a620b46166c2dad8482a94d112ff57aba473bd909c238f1f16a361a9ead",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_01_twohand.json": "0d40b920860e57d69f667fbf97aa16e2d820cec3c4821e3cf97d0e4f31c2a485",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_02_native.json": "db9abc17957631f52aca6e8af315f3cb205a5c55c2b7d76b7fa197f742ca0af0",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_02_twohand.json": "254397d56a568669477e38c4df93bc72f4f8f2dc20cf53dfa2994f0bba01555d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_03_native.json": "d29bdde8049a2ea16292ac55c2ea13893fb43ea0c49b5558fbc41ae630e290a2",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_03_twohand.json": "1d4883000a25fa8fe193bb5ccd1e68972fefd865428dade9e655203736681b48",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_04_native.json": "c822c1c085cf4b807fbefe7b7fc963d67934ad4cd291f21c4562829eb48ae6e9",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_04_twohand.json": "fe22664105f5026f2672300a4db77b17ed55f907348278100b9276990e2a1bf1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_05_native.json": "838603ef8c6b38dd3a6d22d5be28d8a501842f4c292bb7509fb095b2e2e354a4",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_05_twohand.json": "568870f392cd4d6cda10b865b466b3e17567dad9ce8c6a46b405b4c7180ec8dd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_06_native.json": "a7eb5cda344ad5b402173bdac40d5431f0d191f8d216e2ed24fb19902d549c0c",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_06_twohand.json": "f01eb31259163b96605a06ef54d360b2e33f9bb210fb6a1873f587a804779358",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_07_native.json": "4de4592729ca3a28a9565264a98756e5701f05363d1e5d0a680620d04143cc13",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_07_twohand.json": "7ff48adbd49f1195d1edfb003866cc76afda9d5290c0fcb12e30b1a0c38a0475",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_08_native.json": "3e92d856d12b9cc29f827dd49a4f310b1dc7d086ac76d4a58ca41802d53f41f8",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_08_twohand.json": "926aaf407cdda138d10d77b4a43167203bf0f74ffb3f6c4ad58d6ff471703fef",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_09_native.json": "ab10af62201c1e47aac0ac779441a56a6d490eabc89dd4926e51831b3d3048cc",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_09_twohand.json": "37130a60a1c7a29a33e96718534a97ee8add5cc3a06494300f86ab96cb9309b7",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_10_native.json": "8add351466a29234fdfc0ba0608a02a7f3d03322a275c3cda6388788b7d39752",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_10_twohand.json": "44ef27d563c6d52c129c8716d7289ec49e9c707c135fbac2c6100ae572feadf1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_11_native.json": "b8035b8bcdfc8fa8b01177eb307ff24cde5b7351a1af28cebdf1c2d0a8e112b0",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_11_twohand.json": "481b36689a2773c6245251d36c3b8396e9a236bfb22166afd5c69703aa8c9b73",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_12_native.json": "36d4dff87940df642d99629a56be4a6005521c2de1901613fec1cfc5360f70ad",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_12_twohand.json": "d291dfd500eb4603a5e6a0df9adcd276dd09c2778eaa4e7aea98434d76af4e35",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_13_native.json": "377744042d9c8ef3aecad367643ca1803d6456339ba029318b711d98fa27b5d1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_13_twohand.json": "bc8ae8f1551abdfe05a33e9d7d06af18128199d4cc6746b0e0e44e9b883c6a55",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_14_native.json": "6bd409a5e684ace0f49572a77abf037a74a070ca27bb6250fc0d968d47c950cd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_14_twohand.json": "0182bbc4d41f0dacd41336ba9ac7fe1075a538bb7b0f2406826964a253520422",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_15_native.json": "98cef47c378c6472a1da5d2bfb61838b2553dc55811451a1e679b0c4fdebaa3d",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_15_twohand.json": "60eb54a29c1854f797e3249569085ff0083d9e80f98780b3fd103e4953bd245a",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_16_native.json": "e0c41690eece2050192bb870d5e1927dda9b5719d8e5ce20182a91f91584c6d1",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_16_twohand.json": "b966f8b885a39fa005850be2b5c618e202a029b7a41d936ea73dce4c46c05ff9",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_17_native.json": "5faf93c8efb59589843c019c42f8458b4cd744017c9eb3bef59c428f736f6361",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_17_twohand.json": "4b390682d6c61822e5e5b0b035bdbd139f3f763d2b24e1cb42c27eef8438600f",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_18_native.json": "523060b755ee83eb580fc5e3a8335a843fbb68e671cb7575dd45c626e2ecb58f",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_18_twohand.json": "66a3ea370fb32558d275091c38b0f3757c734bcf42166881fc7eb94bddd14fbd",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_19_native.json": "5bb6f4f88530b4d9a211d7dd5439762bc87700dbbafcc650f3ead5ab9ae31bc0",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_19_twohand.json": "d17e59f29109e3ed68f3c6a7c5c218b5fa875d9903ee658e158e4592f98fb262",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_20_native.json": "c6a3af691b487efbad35dad6dcbb1ec0a3ecaa5ace5b0200957f8939de528294",
+    "src/main/resources/assets/destiny/models/item/weapon_swap_w91/beloved_to_austringer_stow_20_twohand.json": "def6bf737d5f3b8a2d3b4b978ef3ec30f452697cc24ee56f62e2f1d15522e5f7"
+  },
+  "outputHashNote": "Manifest excludes its own hash; all other generated outputs are covered."
+}

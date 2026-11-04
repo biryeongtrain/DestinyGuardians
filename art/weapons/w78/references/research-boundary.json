@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-24",
+  "localTimezone": "Asia/Seoul",
+  "queryBudgetUsed": 15,
+  "searchBatches": 5,
+  "queryStrings": [
+    "site.bungie.net \"Wave Frame\" \"Compressed\"",
+    "site.bungie.net \"Wave Frame\" \"wave\" \"length\"",
+    "site.bungie.net \"Wave Frame\" \"slope\"",
+    "site.bungie.net \"Wave Frame\" \"speed\"",
+    "site.bungie.net \"Compressed Wave\" \"damage\"",
+    "site.bungie.net \"Wave Frame\" \"direct\"",
+    "\"wave\" \"grenade launchers\" \"slope\" Bungie",
+    "\"wave frame\" \"propagation\" Bungie",
+    "\"wave frame\" \"velocity\" \"wave\" test",
+    "Destiny 2 heavy wave frame grenade launchers wave damage 2025 buff [domain bungie.net]",
+    "Destiny 2 wave frame grenade launcher terrain collision slope changes [domain bungie.net]",
+    "Destiny 2 wave frame grenade launchers velocity wave speed testing [domain reddit.com]",
+    "Destiny 2 wave frame grenade launcher speed width length direct hit compendium",
+    "site.bungie.net \"Wave\" \"Grenade\" \"2026\" \"length\"",
+    "site.bungie.net \"Wave\" \"Compressed\" \"2025\""
+  ],
+  "retrievalMethod": "External search reader with targeted open/find on source URLs; existing local caches read directly. Search-result timestamps are not treated as publication dates.",
+  "externalResponseStorage": "Summaries only; no full raw external article/query payloads or copyrighted large text copied. External raw response SHA-256 unavailable because the reader supplied rendered/indexed text, not origin bytes. Existing cache byte hashes are recorded separately.",
+  "currentness": "Pinned manifest version is 245114.26.10.13.2000-1-bnet.66137. Research performed 2026-10-24; official sources through Update 9.7.0 were examined, not an exhaustive patch audit to the research date. No later geometry change was established in this bounded search. Manifest identity is not proof that every 2024 tuning number is still exact in the live sandbox.",
+  "notVerified": {
+    "heavyWaveLengthMeters": null,
+    "heavyWaveWidthMeters": null,
+    "specialWaveWidthMeters": null,
+    "waveHeightMeters": null,
+    "wavePropagationSpeedMetersPerSecond": null,
+    "projectileSpeedMetersPerSecond": null,
+    "maximumSlopeDegrees": null,
+    "bounceRestitution": null,
+    "entityImpactDamage": null,
+    "initialExplosionRadiusMeters": null,
+    "damageSplitImpactExplosionWave": null,
+    "currentPerWaveHitCount": null
+  },
+  "authoredTerrainPolicyFromParent": {
+    "groundTrigger": "Floor UP creates ground wave; Minecraft adaptation of ground contact.",
+    "flightWallResponse": "Lateral wall bounce during grenade flight; authored terrain adaptation with historical community support only.",
+    "waveTerrain": "Wave lanes stop at walls/gaps and support half slabs; authored collision/support policy.",
+    "radialBurst": "Do not invent a radial enemy-damage burst from these sources.",
+    "heavyLength": "An implementation choice must be labeled authored; neither 15 m nor 22 m is established for heavy.",
+    "entityCollision": "Current bounce-versus-detonate details unverified. Keep entity impact separate from a ground-triggered wave; the historical community account describes a bounce before ground contact, not an immediate entity-hit wave."
+  },
+  "scope": "Research only. No builds, clients, runtime edits, commits, reverts or pushes. Only new W78 reference-notes.md and references/*.json written."
+}

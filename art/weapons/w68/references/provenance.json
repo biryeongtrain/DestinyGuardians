@@ -1,0 +1,63 @@
+{
+  "stage": "W68",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourceHashes": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "/private/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/private/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/private/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "research1.json": {
+      "path": "/private/tmp/destiny-weapons-w68/research1.json",
+      "sha256": "e54640c12c6c1ecd8ccf5d66b18f2517d5d220f1f888310cfcecdcbd036422c1",
+      "bytes": 31371
+    },
+    "w44Extraction": {
+      "path": "art/weapons/w44/extraction.json",
+      "sha256": "6a82eb21264ffab1e897cf9b0a74ad0cef0c252b129438f2938d82414a7da9fc",
+      "bytes": 40783
+    },
+    "w44Runtime": {
+      "path": "src/main/resources/destiny/weapons/w44-aim.json",
+      "sha256": "0d0a38469c28a74c1a77489d346184eccef347a604c0c0c455d1c7c2e1a80fc8",
+      "bytes": 16991
+    }
+  },
+  "generator": "scripts/extract_snapshot_w68.py",
+  "generatorSha256": "13b265aca2db03f4e3e417a5911ffb36292c6b74b1475fa193223187471fa4a2",
+  "runtimeSha256": "7e824633be32953e6c75d3d856ce765223fbb1cbcc3b01affca3d83eb8fcb738",
+  "outputHashes": {
+    "src/main/resources/destiny/weapons/w68-snapshot.json": "7e824633be32953e6c75d3d856ce765223fbb1cbcc3b01affca3d83eb8fcb738",
+    "art/weapons/w68/references/socket-pools.json": "247ecad2a51eb0189610070b4be2620008a0c2ae22dac604db8e7c8ee4c1d1cd",
+    "art/weapons/w68/references/timings.json": "93e754f8623cb7d044d06850ff8167b80fb903d49611a35688a4f28d0fc643c0",
+    "art/weapons/w68/references/mechanics.json": "eee2abee2a74e55f785fcc1fcc923e3159c95604165ed53ad915c57f570f8245",
+    "art/weapons/w68/reference-notes.md": "f3b80bba598e1428f3ee944dc4d876b4ac27b99f6a55e1861c63e57764b52a89"
+  },
+  "capturedAtDate": "2026-10-24",
+  "privateSources": "Raw manifest, inventory, plug sets and research capture remain in private /tmp caches; only bounded paraphrased findings and selected socket proof are published.",
+  "sourceBoundary": "Bungie inventory/plug sets prove exact identity, official faster-ADS description, ammo enum and selected roll eligibility. W44 is the pinned community-derived base-stat ADS model. Only the exact-base light.gg section supplies the chosen numeric duration reductions. Enhanced/mirror/catalyst sections do not establish base mechanics or eligibility.",
+  "reproduce": "rtk proxy python3 scripts/extract_snapshot_w68.py --verify",
+  "verification": "All eight consumed inputs have literal SHA256 pins. Byte-exact read-only comparison covers all six outputs including Markdown. Missing/changed sources fail before writes; verify does not write, create directories, fetch, repair caches or access the network. Provenance records generator and five other output hashes, excluding its own hash."
+}

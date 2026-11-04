@@ -1,0 +1,1 @@
+W79 visual reference evidence. See ../reference-notes.md for URLs and timecodes. Original clips and extracted JPEG frames preserve Bungie/artist watermarks. Contact sheets sample clips at 0.25 second intervals. Clip clocks describe the presentation, not measured gameplay mechanics.

@@ -1,0 +1,33 @@
+{
+  "stage": "W75",
+  "researchDate": "2026-10-24",
+  "primary": "Destiny Data Compendium, directly exported public Game Mechanics / Weapon Perks tabs",
+  "sourceUrls": {
+    "mechanics": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out:csv&sheet=Game%20Mechanics",
+    "perks": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/gviz/tq?tqx=out:csv&sheet=Weapon%20Perks"
+  },
+  "cacheSha256": {
+    "ddc-game-mechanics.csv": "95129add2022471a2dbfa049d6d920cef26e2c751f187f62c3a8dc851f48a2a8",
+    "ddc-weapon-perks.csv": "7880b2029a7e7b8f97afb8f079ca48a585ec0765a94b6b3f983a47daf983ba30"
+  },
+  "ordinaryAdsScalar": 0.75,
+  "sidearmAdsScalar": 0.85,
+  "precisionHandCannonPenaltyReduction": 0.1,
+  "derivedPrecisionHandCannonScalar": 0.775,
+  "precisionMath": "1 - (1 - 0.75) * (1 - 0.10); inference from relative penalty reduction, not new original-game measurement",
+  "officialPrecisionCorroboration": "https://www.bungie.net/7/en/News/Article/twid-12-12-24",
+  "officialScope": "2024-12-12 announced intrinsic precision HC ten-percent penalty reduction for Jan2025; directly exported current community table corroborates presence",
+  "notImplemented": [
+    "absolute Destiny meters/second",
+    "Hunter base Mobility",
+    "strafe directional0.85",
+    "heavy weapon ready0.85",
+    "Lightweight mobility/sprint",
+    "Moving Target or other movement perks",
+    "exact original acceleration",
+    "ordinary airborne ADS steering scalar: vanilla Player.getFlyingSpeed uses fixed acceleration",
+    "client FOV effect-setting compensation for MOVEMENT_SPEED",
+    "full neutralization when foreign sneak reduction brings effective pre-ADS input below0.3"
+  ],
+  "adapter": "Paired native attributes: neutralize default Shift sneak input0.3 to1 via SNEAKING_SPEED; apply sourced ratio on MOVEMENT_SPEED. This avoids vanilla diagonal square-normalization saturating a sneak-only .75 ratio to full speed. Preserve foreign modifiers/base; ordinary Minecraft physics remain."
+}

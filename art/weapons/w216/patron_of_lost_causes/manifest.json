@@ -1,0 +1,953 @@
+{
+  "schemaVersion": 1,
+  "stage": "W216",
+  "weapon": "patron_of_lost_causes",
+  "generator": "scripts/generate_reload_w216_patron_of_lost_causes.py",
+  "generatorSha256": "169e48aef7136038dbcd91439e744558356492a1db5a9607cd721ae5c89a3e2e",
+  "itemModel": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "thresholdEncoding": "float32(i/60), matching runtime grid60",
+  "curve": "C1 shape-preserving Hermite; W215 weighted harmonic PCHIP; zero endpoints/holds/extrema",
+  "keyframes": [
+    [
+      0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.08,
+      [
+        3,
+        -1,
+        -2
+      ],
+      [
+        0.02,
+        -0.03,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.2,
+      [
+        72,
+        -14,
+        -10
+      ],
+      [
+        0.35,
+        0.05,
+        0.15
+      ],
+      [
+        0,
+        -4.8,
+        0.675
+      ]
+    ],
+    [
+      0.3,
+      [
+        82,
+        -17,
+        -13
+      ],
+      [
+        0.55,
+        0.1,
+        0.25
+      ],
+      [
+        -0.25,
+        -5.8,
+        0.815
+      ]
+    ],
+    [
+      0.42,
+      [
+        78,
+        -16,
+        -11
+      ],
+      [
+        0.55,
+        0.1,
+        0.25
+      ],
+      [
+        -0.25,
+        -5.8,
+        0.815
+      ]
+    ],
+    [
+      0.5,
+      [
+        70,
+        -13,
+        -8
+      ],
+      [
+        0.4,
+        0.05,
+        0.2
+      ],
+      [
+        -0.12,
+        -2.9,
+        0.4075
+      ]
+    ],
+    [
+      0.6,
+      [
+        73,
+        -12,
+        -7
+      ],
+      [
+        0.35,
+        0.12,
+        0.15
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.7,
+      [
+        25,
+        -4,
+        -3
+      ],
+      [
+        0.15,
+        -0.05,
+        0.05
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.8,
+      [
+        -4,
+        1,
+        1
+      ],
+      [
+        0.02,
+        -0.15,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.9,
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        -0.03,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      1,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "gripPivot": [
+    8.0,
+    7.65,
+    8.8
+  ],
+  "magazineAnchor": [
+    8.0,
+    8.25,
+    12.14
+  ],
+  "authoredTimingSource": "scripts/generate_reload_w183_patron_of_lost_causes.py",
+  "normalizedPhases": {
+    "supportReach": [
+      0,
+      0.08
+    ],
+    "steepLiftAndRearWithdraw": [
+      0.08,
+      0.3
+    ],
+    "verticalExchangeHold": [
+      0.3,
+      0.42
+    ],
+    "rearReplacementAndSeat": [
+      0.42,
+      0.6
+    ],
+    "rapidLower": [
+      0.6,
+      0.7
+    ],
+    "settlingDip": [
+      0.7,
+      0.8
+    ],
+    "hipRecovery": [
+      0.8,
+      1
+    ]
+  },
+  "magazineSeatedProgress": 0.6,
+  "reloadGripWindow": [
+    0.05,
+    0.2,
+    0.5,
+    0.6
+  ],
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/patron_of_lost_causes.json",
+  "sourceGeometryFileSha256": "e0afa39e288ca3fee279ea49237ae5233ea7747775b601f67fec2b94b3d5609e",
+  "sourceRevision": "W130 semantic 98-solid Patron model, canonical weapon_surface_w123",
+  "sourceElements": 98,
+  "partElements": {
+    "body": 96,
+    "magazine": 2
+  },
+  "bodyElements": 96,
+  "movingElements": 2,
+  "weaponElements": 98,
+  "canonicalWeaponElements": 241,
+  "maxAssembledWeaponElements": 241,
+  "ordinaryArmElementReserve": 448,
+  "elementLimit": 1000,
+  "candidateReloadWithArmsEstimate": 546,
+  "candidateKnownCanonicalWithArmsEstimate": 689,
+  "integratedAllRouteMaximumMeasured": false,
+  "budgetBasis": "98 reload solids +448 estimated arm surfaces=546; canonical241+448=689. Master measures all routes including ADS/inspect and arms under1000.",
+  "partitionIndices": {
+    "body": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97
+    ],
+    "magazine": [
+      82,
+      83
+    ]
+  },
+  "magazineNames": [
+    "magazine_body",
+    "magazine_floor"
+  ],
+  "partitionRationale": "Canonical indices82 magazine_body and83 magazine_floor form the broad rear bullpup magazine behind pistol grip, under rear action. Move both as ONE rigid part. All96 other elements, including open triangular stock, pistol grip, scope, gold tubes, forward hook and exposed bolt/handle, stay body. Every canonical field/rotation/UV appears exactly once.",
+  "addedElements": 0,
+  "triangleAdapterElements": 0,
+  "sourceElementsAndUVSha256": "89126435e9ced8a35c4103d69b2aa4b9fdc99b6441a8a988045072a174081f84",
+  "partElementsAndUVSha256": {
+    "body": "6059aab31936c241a12345c4b2cbd21ceb4e7c09e75e4d2ad692e1cd3ecb9b19",
+    "magazine": "7aae4b9216f24098c0e350b32f0ad154556cdf1d6caa5787c8ceda2ee9e6266c"
+  },
+  "geometryAndUVPreserved": true,
+  "hipEndpoints": [
+    0,
+    60
+  ],
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "adsInspectPrecedencePreserved": true,
+  "nonFirstPersonGraphExact": true,
+  "fallback": "Exact canonical graph for inactive negative progress, endpoints, overshoot, non-FP and ADS/inspect; native/twohand flags retained.",
+  "sourceGroup": "scout_rifle_98cec92a",
+  "sourceAction": "80A8A345",
+  "rigAction": "80A8A345",
+  "rigActionName": "Armature|fp_80A8A345_reload_full|Base",
+  "sourceActionSourceRange": [
+    1.0,
+    105.0
+  ],
+  "sourceFullChain": true,
+  "sourceRigSamples": 61,
+  "source61Provenance": {
+    "exporterSha256": "54b2f8673aaf75b97a388077ecad683eef2441a73f313194e52ce9b6cd514a38",
+    "blenderVersion": "5.4.0 Alpha",
+    "shoulders": "evaluated original Blender shoulder->elbow->wrist",
+    "reloadSamples": 61,
+    "timing": "uniform normalized samples, original source range; gameplay duration unchanged",
+    "cameraExported": false
+  },
+  "sourceCameraRecovered": false,
+  "partHint": "magazine",
+  "policy": "magazine",
+  "sourceEvidence": [
+    {
+      "source": "docs/qa/2026-10-28/w216/source/source-review.json",
+      "sourceSha256": "3b5ec3c27772222c14730457fd1d9ff431c39802ae4df10bb7f286440aaf61d6",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read refreshed master headless Blender5.4.0 Alpha evaluation. ARMATURE only, OBSlot, actual Armature|fp_80A8A345_reload_full|Base, source1..105 at30fps,61 samples. Alternatives337/331 also evaluated. allInputsUnchanged=true and prior-cache joint error0. Worker did not run Blender."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/scout_rifle_98cec92a.json",
+      "sourceSha256": "83b850d2d8c60439aefd0f56eb9d6374e38fa237be81e8b5a5ae09e2f6a9c544",
+      "role": "fresh_source61_full_chain",
+      "observation": "Refreshed actual action metadata and original weapon/shoulder/elbow/wrist matrices, armature-object space, row-major column vectors. Left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. Preserve ordinary source limb lengths/axes and sourceFullChain; shared family does not establish exclusive weapon binding."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A345-upper-chain.png",
+      "sourceSha256": "d86f7568ed6de126a720fce6e2242d16fa0af8aa530d3a7d36d0d4e4c9319227",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed six XZ/YZ source-chain projections p=0,.2,.4,.6,.8,1 during preparation. Bone-only sheet supplies no mesh contact/camera/native acceptance."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A337-upper-chain.png",
+      "sourceSha256": "ef0114867cd884955dd29b0b089ed850894dcc42cd481ed2e3ee19c8356ccc20",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed six XZ/YZ source-chain projections p=0,.2,.4,.6,.8,1 during preparation. Bone-only sheet supplies no mesh contact/camera/native acceptance."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A331-upper-chain.png",
+      "sourceSha256": "67dc11cad4b713517efe290c63197132ab9bf34794628863c622cb73a4a3568d",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed six XZ/YZ source-chain projections p=0,.2,.4,.6,.8,1 during preparation. Bone-only sheet supplies no mesh contact/camera/native acceptance."
+    },
+    {
+      "source": "scripts/first_person_framing_w205.py",
+      "sourceSha256": "d51f0a92cfdd199f48eb2972d8c5ae540f23735b85a521d4104540cdd8d35746",
+      "role": "preserved_effective_framing",
+      "observation": "Executed read-only profile(load(),patron_of_lost_causes,scout_rifle) during preparation: translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]. Copy all effective fields; add required full-chain/visible-support flags only. No camera/arm compensation."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "preserved_mesh_contacts",
+      "observation": "Retain right rest[8,7.8,8.72]/[-26,0,0], left rest[7.8,8.9,.3]/[0,90,-85], reload target[7.2,6.85,12.14]/[-8,0,0]. No rest contact override."
+    },
+    {
+      "source": "scripts/generate_reload_w183_patron_of_lost_causes.py",
+      "sourceSha256": "d1d5341aa9d7de0d3056f48c07881406b5bebba87c089c58e68089653e484a62",
+      "role": "unchanged_patron_authored_path",
+      "observation": "AST-read literals and copied existing rigid algebra without executing/importing old heavy generator. Preserve11 knots, rear-magazine solids82/83, GRIP[8,7.65,8.8], anchor[8,8.25,12.14], withdrawal/hold/seat.60/recovery, all98 geometry/UV elements. SOURCE.md/manifest retain historical same-weapon gameplay provenance; footage not re-viewed this turn."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "role": "supported_attachment_release",
+      "observation": "Read supported gripWindow hook. [.05,.20,.50,.60] fades attachment during final insertion and ends at authored.60 seat, so later source wrist departure cannot drag seated magazine. Full-chain source directions take priority over meshArmDirections in master pipeline."
+    }
+  ],
+  "reference": {
+    "url": "https://www.youtube.com/watch?v=SLB49l1oUmA",
+    "creator": "TheGamesEntertainer",
+    "title": "Destiny 2 Season of Dawn Unlock Fast Rifle Reload Mod Use on New Scout Patron of Lost Causes",
+    "published": "2019-12-20",
+    "fpsNumerator": 60000,
+    "fpsDenominator": 1001,
+    "timeBase": "1/60000",
+    "frameDurationPts": 1001,
+    "dimensions": [
+      1280,
+      720
+    ],
+    "selectedSeconds": [
+      211.7115,
+      212.7125
+    ],
+    "identitySeconds": 18.018,
+    "inspectedActualFrames": true,
+    "frames": [
+      {
+        "file": "reference-01.png",
+        "sha256": "e796c5d1ac1531212e6d2e73e74e0486b882879d4ea2098c1e8b4fe11a41d189",
+        "timestampSeconds": 18.018,
+        "sourceFrameIndex": 1080,
+        "pts": 1081080,
+        "nearestAuthoredProgress": 0,
+        "observation": "Inventory PATRON OF LOST CAUSES nameplate, long silver casing, narrow optic, gold barrel/internal tube, black open triangular stock and forward underside hook. Identity only."
+      },
+      {
+        "file": "reference-02.png",
+        "sha256": "6a90b084fb64e7d1df3a1b61b726a8a5877248c4947105948e9b8e84fc0cf29e",
+        "timestampSeconds": 211.5113,
+        "sourceFrameIndex": 12678,
+        "pts": 12690678,
+        "nearestAuthoredProgress": 0,
+        "observation": "Empty HUD0 after firing; receiver near hip before reload."
+      },
+      {
+        "file": "reference-03.png",
+        "sha256": "f08b499bb3740524fb1985d8a6424d033b6e4f9f44593f5c15be535c96cc19d3",
+        "timestampSeconds": 211.6114,
+        "sourceFrameIndex": 12684,
+        "pts": 12696684,
+        "nearestAuthoredProgress": 0,
+        "observation": "Empty HUD0, support hand still forward; pre-lift."
+      },
+      {
+        "file": "reference-04.png",
+        "sha256": "22cb1aa4115079ae7b9a47a85589b40398a3b7271903170162a5b4f64e63b7bf",
+        "timestampSeconds": 211.7115,
+        "sourceFrameIndex": 12690,
+        "pts": 12702690,
+        "nearestAuthoredProgress": 0,
+        "observation": "Reload onset: support hand leaves forward contact toward rear magazine."
+      },
+      {
+        "file": "reference-05.png",
+        "sha256": "280d208459f5373b9a9a798631e00b943c7b9147cc07a83922465108fd13abb3",
+        "timestampSeconds": 211.8116,
+        "sourceFrameIndex": 12696,
+        "pts": 12708696,
+        "nearestAuthoredProgress": 0.1,
+        "observation": "Support hand reaches toward bullpup rear underside as receiver begins rising."
+      },
+      {
+        "file": "reference-06.png",
+        "sha256": "ff8276c766e9e76124f4e9c7f0e9e2ac91e9829347f2671da9c68d0d2ab0966c",
+        "timestampSeconds": 211.9117,
+        "sourceFrameIndex": 12702,
+        "pts": 12714702,
+        "nearestAuthoredProgress": 0.2,
+        "observation": "Steep muzzle-up lift at right edge; rear stock and rear magazine region presented."
+      },
+      {
+        "file": "reference-07.png",
+        "sha256": "4cd5b608f6e445c847bd602180541dddfb34bf439444b112acded9123447538e",
+        "timestampSeconds": 212.0118,
+        "sourceFrameIndex": 12708,
+        "pts": 12720708,
+        "nearestAuthoredProgress": 0.3,
+        "observation": "Near-vertical receiver hold; hand/screen edge occludes outgoing magazine exchange."
+      },
+      {
+        "file": "reference-08.png",
+        "sha256": "dbf8402c564b9f13c06e1039f7308704472f2214027ff586ec3307b472fd8313",
+        "timestampSeconds": 212.1119,
+        "sourceFrameIndex": 12714,
+        "pts": 12726714,
+        "nearestAuthoredProgress": 0.4,
+        "observation": "Steep hold continues; support hand returning beneath rear magazine socket."
+      },
+      {
+        "file": "reference-09.png",
+        "sha256": "ea40db67c0b6f7fc290b63c2a9e03d9c1b9461659d5bb7921c311310ce24b0d7",
+        "timestampSeconds": 212.212,
+        "sourceFrameIndex": 12720,
+        "pts": 12732720,
+        "nearestAuthoredProgress": 0.5,
+        "observation": "Replacement approach at rear underside; hand partly covers magazine body."
+      },
+      {
+        "file": "reference-10.png",
+        "sha256": "545e8d5a75e2fb57a4ed9406ed84615dc795b082a9343fc31ef56bdf6364fc10",
+        "timestampSeconds": 212.3121,
+        "sourceFrameIndex": 12726,
+        "pts": 12738726,
+        "nearestAuthoredProgress": 0.6,
+        "observation": "Magazine seated: HUD15/reserve94; support hand begins opening under stock."
+      },
+      {
+        "file": "reference-11.png",
+        "sha256": "ee9ddaf9c06ac74b1f5c48ed6e6710340d640cc8502b0c5b80233d36886149e0",
+        "timestampSeconds": 212.4122,
+        "sourceFrameIndex": 12732,
+        "pts": 12744732,
+        "nearestAuthoredProgress": 0.7,
+        "observation": "Receiver lowers sharply; support hand moves forward along body. No isolated bolt stroke measurable."
+      },
+      {
+        "file": "reference-12.png",
+        "sha256": "f1f0a56cae76a3fce5ced77a208347eea1cf0669ec0576a7e50b290ee4c2f6ef",
+        "timestampSeconds": 212.5123,
+        "sourceFrameIndex": 12738,
+        "pts": 12750738,
+        "nearestAuthoredProgress": 0.8,
+        "observation": "Receiver near hip; support palm continues forward recovery."
+      },
+      {
+        "file": "reference-13.png",
+        "sha256": "9dc1e95c2f098480b509d1c0ac7e5204eea6aba1c4bbba105f59715c6b6261d6",
+        "timestampSeconds": 212.6124,
+        "sourceFrameIndex": 12744,
+        "pts": 12756744,
+        "nearestAuthoredProgress": 0.9,
+        "observation": "Small low overshoot after rapid lowering; magazine seated."
+      },
+      {
+        "file": "reference-14.png",
+        "sha256": "97c41c456b1b5a505deed980ce859964631792b946cde22e0432ad3b3a7d6daf",
+        "timestampSeconds": 212.7125,
+        "sourceFrameIndex": 12750,
+        "pts": 12762750,
+        "nearestAuthoredProgress": 1,
+        "observation": "Hip recovery with open support fingers leaving sight line."
+      },
+      {
+        "file": "reference-15.png",
+        "sha256": "aefbdf5c0d094476e01dfdd245c379f3250db7d8734d2543b68bdfbcf12c0a41",
+        "timestampSeconds": 212.8126,
+        "sourceFrameIndex": 12756,
+        "pts": 12768756,
+        "nearestAuthoredProgress": 1,
+        "observation": "Ready hip silhouette recovered, complete magazine seated."
+      },
+      {
+        "file": "reference-16.png",
+        "sha256": "9f9024473ee720b4e63f92581145b647b1e351503477a741149930d87f563532",
+        "timestampSeconds": 212.9127,
+        "sourceFrameIndex": 12762,
+        "pts": 12774762,
+        "nearestAuthoredProgress": 1,
+        "observation": "Post-reload ready hip; same scope and receiver."
+      }
+    ],
+    "sourceVideoSha256": "9787ea62b2df878e8f83cd80e2fc8532611d9b97f3fe72d9a114f79fba33629e",
+    "sourceMetadataSha256": "945823edc26d8e03ccf4d2cc1f289dab8e9324da8a87456a61519d18b1d6d0a4",
+    "timeBasis": "Exact sequential decoded select(n), PTS=n*1001 with time_base1/60000 and frame_rate60000/1001 confirmed by showinfo; no seek approximation.",
+    "chargingObservation": "Empty reload: steep lift, rear magazine exchange, quick lower and open support-hand recovery. No separately measurable bolt/charging stroke; exposed_bolt, charging_stem and charging_knob stay fixed.",
+    "limitations": [
+      "Source gameplay is backlit and dark; retain canonical silver/gold default dye and original local scope, never transfer gameplay lighting/shader.",
+      "Source enhanced rifle-loader/perks make observed timing faster; normalized sequence only, local15round/200RPM/39tick timing unchanged.",
+      "Exact hidden magazine exchange, grip pivot, translation and angles authored; one intact rear magazine proxies outgoing/incoming.",
+      "No extracted animation/bones, hand IK, new third-person reload, native pixels, audio/listening or performance claim."
+    ]
+  },
+  "motionAuthorship": "W183 Patron knots, holds, steep lift, rear-magazine path and rigid carrier preserved; only interpolation becomes W215 C1 weighted-harmonic PCHIP. Original shared scout-family FK drives master-owned ordinary arms; no weapon-exclusive mesh trajectory or finger IK recovered.",
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "timingPolicy": "Normalized visuals only; unchanged39tick reload,15round capacity,200RPM, ammo lifecycle and audio.",
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "packFiles": 247,
+  "totalReturnedFiles": 248,
+  "staticParts": 2,
+  "parentDisplayChildren": 244,
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/patron_of_lost_causes.json": "e0afa39e288ca3fee279ea49237ae5233ea7747775b601f67fec2b94b3d5609e",
+    "src/main/resources/assets/destiny/models/weapon/scout_rifle/patron_of_lost_causes.json": "d1086431cad2a610031c46f4c6990c3ae9680b605a44990b3cd9adf428bfdae8",
+    "src/main/resources/assets/destiny/models/weapon/scout_rifle/patron_of_lost_causes_twohand.json": "bfb7d23f17b16b5d483318d57b6b651a1dd3fd273f6de7336e0fa12ac137205c",
+    "src/main/resources/assets/destiny/items/weapon/patron_of_lost_causes.json": "cfcc2f992c8119ac461d9f1baf943a5e0d38edf23e4c6b1f0f6a58e832cdd900",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/patron_of_lost_causes.png": "c2fde451365efd21ab1c3940695eff5a254fae8ea3188c31b8af69e1d42ac0d8",
+    "art/weapons/w216/patron_of_lost_causes/profile.json": "500400de05215a62ef3e0e1487546d037e89ce4d92091335953882362d6f89d7",
+    "scripts/generate_reload_w216_patron_of_lost_causes.py": "169e48aef7136038dbcd91439e744558356492a1db5a9607cd721ae5c89a3e2e",
+    "scripts/generate_reload_w183_patron_of_lost_causes.py": "d1d5341aa9d7de0d3056f48c07881406b5bebba87c089c58e68089653e484a62",
+    "art/weapons/w183/patron_of_lost_causes/manifest.json": "7d4702947c0644cdcbfa60fba0950b03076bf83914cf7cefed1eecf66e4521eb",
+    "art/weapons/w183/patron_of_lost_causes/SOURCE.md": "c30c4afaaab70450c0c43a0af10151fc0fc92b968750c9da5ddf955ea1d956b5",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+    "art/weapons/w205/rigs/scout_rifle_98cec92a.json": "83b850d2d8c60439aefd0f56eb9d6374e38fa237be81e8b5a5ae09e2f6a9c544",
+    "src/main/resources/destiny/weapons/w46-timing.json": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+    "src/main/resources/destiny/sounds/w63-reload.json": "e89b09c8d1402239fa65873b5e96fc7f55d1b3107b753aab8c8d5474bcbb750b",
+    "src/main/resources/assets/destiny/items/weapon_aim_w70/patron_of_lost_causes.json": "7ddfdd4b14a76cd956bc459df795e130a012a8212f079d1c65f8e600ef12841d",
+    "src/main/resources/assets/destiny/items/weapon_sight_w153/patron_of_lost_causes.json": "581f32398c3bef161f566edb543f3711ae35c9e1979b58dca565dd78556be0da",
+    "src/main/resources/assets/destiny/models/weapon/scout_rifle/patron_of_lost_causes_ads.json": "dd79a321166e00ba61041285bde6ceb9ea5275777fc59479cb61b2260cdd289b",
+    "src/main/resources/assets/destiny/models/weapon/scout_rifle/patron_of_lost_causes_ads_twohand.json": "b6c25873acac25023ca96b9906926660473122ff02f3db47e15ac1b3b22cea5f",
+    "src/main/resources/assets/destiny/models/weapon/scout_rifle/patron_of_lost_causes_inspect.json": "e4acc2572ab9d9bca32651518e07c5cde85d454008921ac76e576c0206e10c0d",
+    "src/main/resources/assets/destiny/models/weapon/scout_rifle/patron_of_lost_causes_inspect_twohand.json": "c667780295c146b87706f1dae23da46e39d0cda5c621e042bee8336b07dab331"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_body.json": "a48ed189b0a78e562b8ea90e51a617d09ddec28b98360772d061d73dfb4a49f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_magazine.json": "2360e81c95e7ec56c8ada3d7191a76b4e5d2918432761df6733edd2b867df3b0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_00_body_native.json": "8cc82e40b64e20d1c6b407776c185e824c881de1505eb99afe8ae799c18853aa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_00_body_twohand.json": "c1d25fd4cf38689c10da86b9a494654abe672ad29522a842d8928c7171210875",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_00_magazine_native.json": "0108f5d97b7567310f96fb7bf4eea7082f4215f254a02d7a6d3a75f6c51cd6f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_00_magazine_twohand.json": "3c5ebaaacee2512fdb7c46e29291a3996c164217657a7cf8992d2d936e5fd48b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_body_native.json": "a4cf29b40618c31d8fc736439b4096a2c6b1cde8ae3be6b8c0230e6d4ed4afa0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_body_twohand.json": "cdcf1cbe2eb8a554ed6bfd131f982247edd8941214e0bcba70fede1deb8a3ff4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_magazine_native.json": "f3ba76f86d45bdbc7b0fd91cbabd002b543ef4a811a7666ef9efe99e6035c0d0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_magazine_twohand.json": "fdacec69745d844192079df766588d82a624186e04989231c4ae2670ca1bd832",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_body_native.json": "0aab243e832cdcf3db75c524fb997b81dd43abb7d87292662b31a678e0c8cb41",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_body_twohand.json": "29c8a3eb747ba4877f34cb719bb9083a15b59750dd79fbe50d06f8c002362452",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_magazine_native.json": "8ef78209991bfb5b69b4c828f1dd85d3dad4d56305854f07e73333f23e284c6e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_magazine_twohand.json": "16174e32a60b6d456d3e18665f712c9727adba3fd122ee96839728125bf607b6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_body_native.json": "cc0d6fff64746d8fffb12d7161fde509a9b4b880a2157c3af5d9f398990b7739",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_body_twohand.json": "6dc9c4e7d903b371bb08478fc78c2f1972d2c8eb4e9e18d74433d3b38abbf1d9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_magazine_native.json": "68a22d3d2b7e4dac949ccf761cb11f66e64d595c526a5418475ffb07fef85190",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_magazine_twohand.json": "f76e9b50d2852938a5d1c4fe9d41943f72d22696ecc8cc54911255e699e84c8f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_body_native.json": "65ec2121484e8b2c470ead83a08772e9ebfcb8751acdb307ac10f609f55b1f08",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_body_twohand.json": "f0a09efa5604f7f0b2c9312b72eae1e713a9981df0b4748c219de7b0886ba9d4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_magazine_native.json": "b42006e4e7ab32698ce120660ca2a883f7b4cb05c5d56e7119207a028c1c382c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_magazine_twohand.json": "ad5c3edf0d44263bb404be2f509492ffda5ea366945b837dabd3ef330e5bb4b9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_body_native.json": "c74e5282d6882385f9daa56b82e9e1f4c1d1198f4dd6b06f5b49500b04e0b0f6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_body_twohand.json": "1598351af125d93053bd22e1cf1535b7599578752d22f1bf95b30457f015d246",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_magazine_native.json": "6eabf86df30b25b67ed1e2168c4d1f59430dc3302b1bf0622eb2b5f0efd63e44",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_magazine_twohand.json": "230846d4ecaa9892b8577047883475d13aabbd7fb46f60901a206f27472f6454",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_body_native.json": "6566c0ab1165ab9502550bc98b577feb203f7ea813e00f9da3665c15d6ba2afc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_body_twohand.json": "926ec93e4d88fca662d1cd3e9d8810fc0a97466b9b5f3512070aeda51fc5a256",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_magazine_native.json": "a2948dca02c779984b37f1e1d3beb2599481026ae2a6513eface31a2215cd852",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_magazine_twohand.json": "24de57e7a25902929c60b1579aab801794a2a32c4d3186608aac9605e136f229",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_body_native.json": "0bc790e6f37108d7ee6171717946fbb695c2eabda0818ec972708856fb4bb133",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_body_twohand.json": "a4aa50ab7118664d8962578d79e082795bce69d74a22f37e8502d4d11e21309d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_magazine_native.json": "fc6f607e4ade90efe42b084085e34b89d9e3bc46b5969bd47435abcbb72c1891",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_magazine_twohand.json": "dfda50079a342220304aab01a373f6ff14cd0a40cd4a830bb6464d3492c6aadb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_body_native.json": "a4eb069a1d3783db76f37ec77e52153464aee50b7199e39488075330dc84fdc4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_body_twohand.json": "f6cf835779cea578bf52ea82503a8ae91b2ca472173514d0a5e3cf87d9e8221a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_magazine_native.json": "1305608a76f33fdf4a43aa14ed49830a1fe8514f3ffde756358332caf4e78f19",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_magazine_twohand.json": "985dfad127448068236f1023b05d21138d3cdfbcd34ff05251678761181ae14e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_body_native.json": "529cd4be70df7a58c64bfcd95bfcd141eeaf4c2abab52682b04e1cc7d21a0cc5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_body_twohand.json": "d0b544c12e565f17713860aa627589bd9acde9988c019ae1393f0593a84b5364",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_magazine_native.json": "2afb1c3d9a9042dab7eb0ed27ee66dd669d9e9c64ad5d910fffd0ac3046f6c3f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_magazine_twohand.json": "09fdbc64422d63218f223d609f1c996d329ab7b458b0dc19108b3e3fa5a3680a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_body_native.json": "412e21a67fb8e0a445238241517013609a607f704ed0e063cdcc84e79bbbd0ac",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_body_twohand.json": "74b17a9d568f5cab25c65f5a974a3e4a4721f4486beb67cbf050ced138875e1f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_magazine_native.json": "8c26aad7d06ec97099bb442ea6916af318203935978523a84bb6b40f48b1200c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_magazine_twohand.json": "682fc12fbb2e139ddf93f0dbd62210fe9d4637d72f6ad30cdecafe2bff47a9f8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_body_native.json": "058b4007cd9d4e36c6ea7af3de86f615a359570742512a33ec3609367b52353b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_body_twohand.json": "dd637b4261dd3fe27937dcdd71e7f00b268cb9b87012c2a287760b80f7a0f4fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_magazine_native.json": "ac889bd9501970e457f114792fe10cb0f7b268a897a005cafb70c440f36d301f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_magazine_twohand.json": "eb012cf702c92ded3963f625fd3283f27909fd8e546df4433b36cb4adf0047d9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_body_native.json": "753892b2cb18d5ebad787889e9d56ae677a2b66fe411f7cbff060b5688c1cf9a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_body_twohand.json": "dfe163c147108b5e3777ae00eb580e1af2d5aa74b7046ca1f73377d9b22737a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_magazine_native.json": "6046c5f1dc417a8fa35b6f6c18e7541bd1672e8a7d06f5efc2ecd845bce49979",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_magazine_twohand.json": "1d5443d0cdfeb6f0b60f03a0322dd4f9e67fc66ee629111a7f2b32b953ed3a6a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_body_native.json": "2d820c316c2bb0f46ee8ab9f6fd7d6e2639686ca65d4379c521054b19f93bc71",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_body_twohand.json": "d58d94088c7aa117fae3d5960edc7585f3334048a48957cb72ebc95290083832",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_magazine_native.json": "1bc95a78b7bee036a256c96702513714b5cba76f6dbc2d66c069d3b06794c76b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_magazine_twohand.json": "a30d8f8b57ed59755125b45ad454bbface72d68bbcb6864bc539c4639f23afa2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_body_native.json": "835da1b30010d4ea9632dfdce4965880b1778ef64ed28a32634fbe5023489043",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_body_twohand.json": "b8171dfe5d01a856703d13eb3cf550abcff6e8756e4593a42812026cf50a8750",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_magazine_native.json": "cc43aea25d576c7c2ba6aeaeff256a7868b5e5b13035d8989865283c43cae57b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_magazine_twohand.json": "74f981c2564c8a466fb98d45df63d81054dae983b3a5ee87ac90e3a9f99a8693",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_body_native.json": "981c51ecb2ee1f828f1d96041380172b3a78c9028456e0a8ee0c5d3c7ba0fec1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_body_twohand.json": "634dc31ad587296c975863ecbd992e5c654409356302bcaea7362bc3b355b4e6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_magazine_native.json": "b35b1b626ec736e1687d6a06c2458a8f77fc9d6cb3f5558f9c5c7413114bbc77",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_magazine_twohand.json": "3ce0a2dc17a397e65c9888d9645e4db17e80a3b3b6da0ed79e12bd719b59ed32",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_body_native.json": "84877c075e5cc66b665b28d8f8ee284fdf231bebe47e9ca728a9d3a0211727d9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_body_twohand.json": "35f1dce29808498e19517d0fd36caf4a12f06045cbd41f67369c88c22ea01b5e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_magazine_native.json": "610401f4771f7d25eeded04a15ea38ad2d023a14301c9058cd39f40923a12b77",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_magazine_twohand.json": "33af99e593eae8115bca4a8cc16821984b85b9a1e02c1ef4d1a777d2ff2ef637",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_body_native.json": "d46720a6b3b0533cda4635dd962bc4fc5d19e6c40c527db868560f58838ab6f6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_body_twohand.json": "0eb0d85d3e80df60fbeb86ba6b2c9c9bc7e78f655440d7a011ba0b9ec9bf40fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_magazine_native.json": "e220fb20a657c490a72b75dac33dca46a8f49533044cbd825401fd9c0709dfad",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_magazine_twohand.json": "f3bd04dc26626868cb125e6da981d4b96a1485225a0be93f61d0f290efac1b0d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_body_native.json": "f07f53ae436641d6e93d2c8911733f2cb871e1034ef5974f30f009c42b3a4730",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_body_twohand.json": "de0d04b5223c664bb20a5f99c1075dec873a19202e9568d84a16e4b2602aac88",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_magazine_native.json": "bba8a937c9857329df1c88aebf36327eacac411ec3614795032cb62db7bb9a2d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_magazine_twohand.json": "8c45ad81582ea72a24ea0145bc0bde496592c93136d36f2534e8eaa8ba1d2686",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_body_native.json": "87fc3be45e1eb8dae4db3d101f5c45f03604b6fd0a14ff143008d7a7735410b5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_body_twohand.json": "df13ce1dc3e7264f17bdef9ab4a38000791f0b74efead3156ac40dde70410182",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_magazine_native.json": "ca9fdb9438b2e4a447a97042da5b83441155cc1964b2b33874e8bbbc962f41f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_magazine_twohand.json": "33fd125a1e153a539673df95c1d0b27f61a9ec0cf5d86932399fef73ae4af6a0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_body_native.json": "31321b53a423a2ed0c4a5aa069dd23f6b73bc7c3f7743f24d7ec1d6fe7aa1f07",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_body_twohand.json": "3875a55aa212324a52f33436d2ea10bcf4464477b28ce8a51d186d0520f76894",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_magazine_native.json": "2ab4440dee741e045aac0d163ef0e418642617be73698d7c58bb864ad683004b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_magazine_twohand.json": "1fd67b24fe283a229384bec8c561e6ef4b6f9e5a3e4d7d77dca566859d467807",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_body_native.json": "212b19db7087b9f5241ad755a98dade37456ef6c8786d7acb2e7524e866cc151",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_body_twohand.json": "23de40c1a939ee1f3b5cc7d0d94e76638a567c4448f6f1a0a3a2f00bc9ab440b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_magazine_native.json": "d40874a8838840f89aea78ff518146c04850fd65150d5598e3a820f16eacabc3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_magazine_twohand.json": "b6de875f5b41d6c3ccf2ccd74ef3d9c66a2bf5ac4f687c69d81696b0e3c6fa98",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_body_native.json": "619c044b612957a8e0ae7c0c9da148b6704d62f744b74a6500493eb3dfbe5677",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_body_twohand.json": "689793a766886f71dec277a9ce814ef917f63df663383d55119dd9f8540a435e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_magazine_native.json": "aed666c1b9d1f05697a2de598f304c69a1657e445dd1c63b8fd5358ab4e41058",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_magazine_twohand.json": "dcdc5d5db21515d600f50a95a797541b6d4948355b4fd3f306c6dd5aeb8f185f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_body_native.json": "a3621c5f752ba7f600083fc9e30d4045b8dcfa1e0d3c712a2a37c5174243275b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_body_twohand.json": "b7449544d33cdf8f14be98b9ee6401d5ac23bb5ab625545b4b72f4d46b1546f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_magazine_native.json": "1da35d5f457065d5193ae0a5b840cae793182c8f74960dffd365420b80da975d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_magazine_twohand.json": "2b9c894b9078b125aa267208c33496b79f493aa2fe6978a2b30f64efb75a6e87",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_body_native.json": "7a13da04c7a12c6d80c7c586e2a079e40c24e8e1f56d96d4198a35e9fdcf26ec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_body_twohand.json": "8407db736229eee598e554437a6c2577bd4f8caae62df3c0c2a1aac6349b813b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_magazine_native.json": "3b6414f9049cb55159767cb82afbc50dd0071cc28b917c53283fc92a49715070",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_magazine_twohand.json": "4fc0a8ddba14ccce0001118eb7838dae3caa326729d3e8142851cd865572128e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_body_native.json": "77ff0bf5f9d893356ab11751a5fdb472071f870b4026b8203ec32f3675dafade",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_body_twohand.json": "89735190407a322833191842a4204696fe454671bff58309ab82e7cf2193a844",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_magazine_native.json": "12a2c435873665b2ee82c23277cffbb9bbaed3e5165b5b165716e6f86737d599",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_magazine_twohand.json": "2593577deb4c31cb42f47699ac302d5806cb1c5fa4d69168e3e088a40e9d524f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_body_native.json": "4234dbb2da39f200820dc31a3677f5a03fd332f91ab2936fa3c9dbc14902c287",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_body_twohand.json": "01a4255b90c012f1a64992db06d4cae460927e0d0f98795a3e1421a7149b4be0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_magazine_native.json": "8bc4c0017b65c0f0c375e88c2f8ceb9bf352c056b8837ba06839c69da5d3ea22",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_magazine_twohand.json": "3292ea5fc9e13137d25640b17ae9d6f348a4eacacb418391ee206d7dbfc91b3d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_body_native.json": "2340f2c2b691777c926e6b926c0352b3ee0824fc8b5c67d275351af6774dda04",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_body_twohand.json": "a5245878a54238d9059bdcee064c02441c641e140b767eca40b33a8f9a483048",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_magazine_native.json": "fd030d2bdd60c762a6dff9bc96c602a1aed9fb338574bc0d10069cc1730f5daa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_magazine_twohand.json": "0a861a978323a069ea9ac722c61386108348b2e8bb01369cb37dea18c6f393d8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_body_native.json": "3b487c59fde928098749322185c36de5aba9e3c1c810a03d2a59865333f1d8ea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_body_twohand.json": "466d4131a93d3aae5c757ab3f1a9579c702cfec0f7ade81b9710f3702ebe6341",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_magazine_native.json": "c65c0136cf90c213deded913581532aa061bfb09020230760021eebcaf36efbd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_magazine_twohand.json": "c6135a6b86f2bc6d974490d49d4cc212c9f19a721bf6850dbea6907246baec61",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_body_native.json": "3bea4810ec3595dc6e0fa45a72bea4588c036fcf1fd683733517e732bb2a92d2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_body_twohand.json": "774bd8e7c215a11c2bf040ac35f0950f7bfcac8f86e5fe3f33ab12331bdd609e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_magazine_native.json": "def1bdfb1d25d927352d56cfb3909df4d4065fc89259cf664c17abe3206bafd0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_magazine_twohand.json": "5a9864ba20f1932e266e53af8bd317c232547d8872ffc1d470efb3c11064489b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_body_native.json": "0ff66839a22ff897277d0fa6c6ee715d9a34a5083c37154a635ffc528199b0f7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_body_twohand.json": "2d58118e03be925e0f383ceef0f6ad300ee725a0cec053339b4b54a77d16b391",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_magazine_native.json": "14de2978659894e24f53683d712bd6072fb3b54f48ddba0a884264589f984070",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_magazine_twohand.json": "2a43ffd12bb36ab7f2439696d54453033aaa09f271027665c1fd7cad15fa7b2e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_body_native.json": "ecea4be6b0dcb099aeb394dddbaadde6d2c3263eacf59630b027fd8677e500a5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_body_twohand.json": "4508dc6cc2f8fc5634e3b0c1343a93a431e3cf63639ef865ea8e25696e99a483",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_magazine_native.json": "506026fcbd25b8c6857389e68324b17df824555c9a8eacf5b659795c624b1e4c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_magazine_twohand.json": "566b1053d635a6994212914a83455719ce8ae7633c9b2718569fc70aab3cee76",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_body_native.json": "b9ca446b241180828db3836b71c6db40d75eb382b2ecaa796262886ae7484929",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_body_twohand.json": "410df4ef760ee96854363bf1ae0eba11f2fe20c70e222d5a2ad4cf86c121cdb0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_magazine_native.json": "891a12ca49b2c5879118b8774d49b034a7b3625140ec962ac3c34f2fc24a0b86",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_magazine_twohand.json": "03c3e9511922300406bfa025fc62ae47f2aa439d8e1e7067aef191dc34767415",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_body_native.json": "f867b4407838206012ae1652d7e89e3bca2220ad833576381f992af3fbb700c8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_body_twohand.json": "f402e637ccbd462efdf437150eda6a89e9240328bffa9f2f73a66ff8b4228f0d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_magazine_native.json": "ea2132a795bbe2c5831c18d4f1706e5463e8823a5a1599d824d52b9353fab7c3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_magazine_twohand.json": "3910fce7fb96a4839c7f176ca8208c7de32654cdddd204d8d78c90151e5cc95f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_body_native.json": "ddcd32ed6445bf854d0842b486d8112ae0f7158db8819e3b257ab98a6908c6eb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_body_twohand.json": "78d15c2592d5e9ed36b373d8616cab46aee320a9c46860b27aa43f01194abe80",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_magazine_native.json": "cd4c7a8c801444bd4149eca74e0be95f05e474832f8db3311a37801a9f220e1f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_magazine_twohand.json": "b7efe59290cb99dbd0f7d3044e99a01a20da912830fca08f80398ac4cca9f2b4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_body_native.json": "f5a5490e5d2dad7ac718b7def8734a04b886d111df8ca881284e4be74e9bc1d4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_body_twohand.json": "1134d48e2d94b4a97d1345812ebcf71aafcca1bf123ed41033d2670cb99d3b94",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_magazine_native.json": "f1e5663e74b6808ceb118c1e57054388e6a81b14ab94fd0addce1949c8916197",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_magazine_twohand.json": "5ab2389c8409ddb32561013a8f937c9e820d8afd4fb6c32541169732793f871c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_body_native.json": "f5b0948269b99b963c39d9f02a1adbba9f3c04be26ef03af951bca42268c5742",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_body_twohand.json": "2502b0a3d6f31023f38f16a6850a91d85452922a18fca7e971b21591544f90d6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_magazine_native.json": "f7e015e43b563ed92361abc52d7a19542ecfe57d570476bd28ca461becfbff42",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_magazine_twohand.json": "4364574de116cbdac38e06076bf4d5c163512906e7eb8547d200484733737f3e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_body_native.json": "d9f6f31d98b1b90e30baa76e3faa905d10b9504782d47061e8ddfcf9b350150e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_body_twohand.json": "28fb3f9f7b5231a84ad7c7ba451898bcdba3018db9d3c84dc79d7610bde48d22",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_magazine_native.json": "3c58708ab4ac9e633354ab23d978d2c9a82431527479a46e5e1d721fbfbba2c3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_magazine_twohand.json": "565ebb5ba5d9fb113bb104e66f1d15d8ae07b1f6539db876184b01cf12356d69",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_body_native.json": "07872dfacd9514c7b265b2f5f1af758bae445e7c17e0eabc0f7e8cac11556311",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_body_twohand.json": "3113d3f25541b90a8a61df792e546dee03cd4292109e911ff04973024460e559",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_magazine_native.json": "26453d14f120418746fa4688a111cdadcebaadef7151805f060c15bad5faa6d0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_magazine_twohand.json": "d5f05d7d4f8eb2b47aff81409d9f0dd7f8d1246ac9e0b2fa5e3123abbb387886",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_body_native.json": "f85d3cc9e15bd52958101333668389e0f0eee8f3b58894b2f6811f98a6b80b54",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_body_twohand.json": "4e11ead6c0877dd6ed0379d0c02037c0ee91a35b2dad9ad0fbcd5ec39bc8218f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_magazine_native.json": "8d5fc528d39f50bb71f40204a62f8642297ba0c5221199495bd67101b82e7d5c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_magazine_twohand.json": "d994c28b82fec66e55fe5686f34c13e170c6f2c6774380edef269ce9f8b79d2f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_body_native.json": "d381b6aefcd9ec881db700b4ca0ffac1fd5ae2db7949677114eff159247274fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_body_twohand.json": "0afe5145c155347828bc70a91f5b484613b0c12026e7b95bc538565afb867b19",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_magazine_native.json": "40e8e4ac4a9e30a2572cc346e93fc18e4fd97089bd6b544cda3af1ee079434e5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_magazine_twohand.json": "d53d8785c51936e655527ce3e56fed8a2b9ceecca2fcb89826691380c0637d45",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_body_native.json": "d9518be476ea3f753ce2a8ccd07bd58348dceb972006f2da482ffbb5b05fa9ce",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_body_twohand.json": "5428dc19f1ab182c4d28fbab773330846eb07e482fe4a6790c39c9b8dab342c5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_magazine_native.json": "34d215f86cbda6e036a4dba7c470d159c67e6518f424a7c520cfd26beb152492",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_magazine_twohand.json": "14ea3df02fb2818d65e8d2022d88b82836be186d04a2271839c3715ac05ce37f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_body_native.json": "e375fc5cc714d0af6c644f0acccfe152489bf69071edc57e97d559f52e62298e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_body_twohand.json": "40e01e69e1573fde139b64921f7e4933fd74e84446f5071972fd1d1eddd8f43d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_magazine_native.json": "3a778b7a5227f0bd5e5e2682ec25ca54ed3effb06053d0c330528e062ad33798",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_magazine_twohand.json": "6dc8cc67fc95dc2c3734ae83ed00fa977fe7e01dca2e46d58607d5129583e3a1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_body_native.json": "db40d2b3eea0eacf2f29ecc2f2067d04c3ec706182e82ee288f9c25c725a7cd0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_body_twohand.json": "cb72af7e3da24719f1db7ad0a992c9d2019ca1a479402a4e193af1e6c0f635f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_magazine_native.json": "516765bccc3ae3a5e4a07906165118b66810fc50909fc1c23522f3d065e121a3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_magazine_twohand.json": "9e3ebe98ddb3163a267e3630ac56fdf16ee52cd0678e5867f4887ae3ad816f06",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_body_native.json": "fe8afc9ef9640efcb9ba23aca0f09ae7de38ec8e304d7e40549a8e4d44ce3d5e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_body_twohand.json": "b8a683aa23f4a8899f7a2eb62ac9cf5c8cc8fd9056fe53c58d9820f3381c10f9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_magazine_native.json": "c9b133d908dc34224acc6945344d51598863353705361358020986b8f67b6366",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_magazine_twohand.json": "928ee696ca9d594674dde16bfe96dcb49e64bfd8ce596598682a39a00b0e0c15",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_body_native.json": "196d2cbf3a9a690d8adb8f775d3c0de369c5492a3b76c9a9ec5deb1594b4e349",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_body_twohand.json": "ae0e3f340a1362438498c403a36991dff4bd30369b2e4da921eb4c2ebdd08f90",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_magazine_native.json": "439dbdb991ac7ae736e545ba04a3fae31de007cb7697720fc2954c3047d57db8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_magazine_twohand.json": "12b39c582006241157326ce5341db6fd06f8722d722f16f5e79826bb72118ae7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_body_native.json": "4b0fc0bd88cf78b4a669541239860e389bdf517bf6f82881674544ccec3fb5d9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_body_twohand.json": "2fd16f84727da7486c8b025c5f1573b420e7f536439314575b01910fb4e8d3f6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_magazine_native.json": "68d47093921099361b82210649e320d3c05afd894076aa9f806de987b9c047a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_magazine_twohand.json": "d65183c0bd1694601c84defa12bf07568df54838be48546f0b804c5102ae3df0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_body_native.json": "3d37667935f573dabc0f52775af4510b85936207e0d20d84b9942429b6a1884f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_body_twohand.json": "82968487943f812ef8a5f314546db5d0810d457fa6afa65957d198e50c774755",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_magazine_native.json": "7c8f8608ce6f05328dd916f561c16d01edecb949b2e3e9b6f64d9889322e30c2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_magazine_twohand.json": "83ce111c8ebf5ac4a756588f1ca81abcdd1bce68f70cabf5caccf0f3eac116ce",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_body_native.json": "04ac7805ccef95e3c84761d51975d4395ba6257e77633874c335d2c52e3a8167",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_body_twohand.json": "2adbd37bbb30f3ba78a9f52aece15577cd6de8e9c53b7641866cbb5592dcfe77",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_magazine_native.json": "ac0084fcc13828b34ba2936573a4c190d06e29a040f6538fa75ee3033b51f5ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_magazine_twohand.json": "e3ee8aba5bb0b03d8c91a7fd36f38ec97e59030d12472aa6c5530b37673a9c74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_body_native.json": "00b850e645186a78e76c052a654fa049b71ba9990667d4a2eecc5ce390141a4f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_body_twohand.json": "db1acbff68e3c45fd676660e34bcd7207fb0928fccfa0dc3b22d58df65412df9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_magazine_native.json": "d2f1974a6397e0b0b5a2f3447ee4519b48eaf94358c744d3fb1edc55f4d4b74d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_magazine_twohand.json": "e613490a4fa20f651a0139fccb115a4ca5a61b6cf135184808139cb7d916c3a2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_body_native.json": "da4c6a0e21d94fbc118d277f4ef9bd10d562ad0ddc8bccab3b7c81f250f42594",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_body_twohand.json": "e050da3c6b27b17225bfb44d988656d31b16b38028046a5b749283da61092b2e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_magazine_native.json": "8fc51f0c2f17e1c3b9f7cd43b9e15b70d44f19ec95e858faccfd75424ef99eae",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_magazine_twohand.json": "de8452bb288dfd92d26fc0b354e1d73bbde2f4f3df417034038717a92aa7f913",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_body_native.json": "016f42e3cad34a685b37909f5eb32734564f906f3e76a810e4d894d251847e9a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_body_twohand.json": "172c6357e7426d601f40669367d1a8d01d74a80a77e9b5dd08ae3e2f4911298b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_magazine_native.json": "32233948ae611e7715c0a31efb71bb5fbe96f14ca23b4d6598d30f36b4b3394a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_magazine_twohand.json": "aa489adc129e5b5d84f826dacf3342afd3bfa83f8011110c42202423a51d45aa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_body_native.json": "ff37aa1ce0dcbb1aedc7d7a7739dc85770ed5d15027051410f18effa7c8a2708",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_body_twohand.json": "7afaf2321facfbdc68de9ad8f90fb3022bca46f044184f564e6c627eaa8028df",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_magazine_native.json": "579887ec8eb46806bd11328e19b53894e75db1309779ab0f3937c051b43bbdce",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_magazine_twohand.json": "23a92820c7cf01079c1f0159d4c5c60d178be526065124e6bac6632ab1bc4e68",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_body_native.json": "a0e3cf8a0e12f0b6e2672dda71b02a2b830532c9c47987d7b58e49e47593f168",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_body_twohand.json": "cd1b211db7074cfb7f83328f308aa2151a8b724c25cb7602e362f839ffbf3ac2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_magazine_native.json": "147be3752875f6724e12b8aed715b3b133e540613d91fc4bc5336d1f1ca87afa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_magazine_twohand.json": "53ab76aece5f9ee3fe2704ff6771d9b333d3d66c608fdd05bf141bf987dd2ae1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_body_native.json": "5b9431c1b21be959b530996376ac5618bbf8c4dd152c1012cb743605fc623a0b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_body_twohand.json": "fb916c4748bf7b3951980438277841733dd3e448c65198cfb85323510eebc7ba",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_magazine_native.json": "a7d097188e7d4c432c34cb8fbffdc270217652361540307e51ba10a6f33dae58",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_magazine_twohand.json": "1b35a4ad4ebf50900233267241c8864488981a7ab9e988154d1dabf798669913",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_body_native.json": "ff04f32c385214de3c1f10a717bb5b81ffcbc94b5de6451c82ded2b5a857f0ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_body_twohand.json": "6ecf6cc3f3732a61d30ce15f8c492828ba69a21139c29f842e18721b1fec8c79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_magazine_native.json": "119b5cc762603ddc510a48d7b36462fc716ee88ed55246d050b71fa0cf7b0ff9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_magazine_twohand.json": "bc03654cd5b638a80b10b8684fa15a0ef758b4420d3894401332fa496e7c9bda",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_body_native.json": "917ae75a1fa3947a2da305d86d4874699255a608d57a7bf26037b20877523066",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_body_twohand.json": "93d4bfa7c15242fc9b35bbc213ea2c5719bbade30569df49e76d3e8147a4f7cf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_magazine_native.json": "96034292ad44867357b82e6aa2ff3690c04f9e7c40f80fae613b8162ab27b6ff",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_magazine_twohand.json": "7ee673e939b852f78203b7459041613a59f7bfb5030dd13c6f7dec5a724bb4e9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_body_native.json": "a141ecc1252d6d450f340cfbf3c24ba32108663973dc45c95e9c594f3c1f4de6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_body_twohand.json": "59e90f34857727bc13251f7fe4ce63baef85a8ca27cd6f67ac86c24e7b9af1f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_magazine_native.json": "40417f97b707c494399f9324e0dfa6d17f4e42286549be6481f39e302aa80a84",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_magazine_twohand.json": "eb6517b081e9385edf68fcd15e33358996bdd1f1a286128ada5ca48de6ada59f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_body_native.json": "d41c02dac461f3f9880951e2db71741527cbf965faccb8282f1cffc00dff2fd9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_body_twohand.json": "544fa886aea9e9814c20a5d504a46945b4261d2c71dd6bfc2335d6dc7e5ca3fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_magazine_native.json": "b1983580dd0b01c83010211029826089b9d0010a4198fcc39187603eb9c6e642",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_magazine_twohand.json": "2d7d441f22932bc3e307a8eed37abb5ae60533ff108128064d915aa49e857cb4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_body_native.json": "7696efb6387fe6e47d0a28e803631e627547cf3c5e1e5506a5db7f5bcdd69007",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_body_twohand.json": "cab650c5c97bb485a4e938e73b895a13239495cb6fce962572595020b685ed74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_magazine_native.json": "c3cb671f66edfc528f0d2355fd5016a058ff724929d9b9b4f395404aa442cfea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_magazine_twohand.json": "7427a9ec337b9719958d8bf64c4fb7b02ff28d23f2bd37510124cf25d561c98c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_60_body_native.json": "8cc82e40b64e20d1c6b407776c185e824c881de1505eb99afe8ae799c18853aa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_60_body_twohand.json": "c1d25fd4cf38689c10da86b9a494654abe672ad29522a842d8928c7171210875",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_60_magazine_native.json": "0108f5d97b7567310f96fb7bf4eea7082f4215f254a02d7a6d3a75f6c51cd6f2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_60_magazine_twohand.json": "3c5ebaaacee2512fdb7c46e29291a3996c164217657a7cf8992d2d936e5fd48b",
+    "src/main/resources/assets/destiny/items/weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes.json": "21ba1bb4ba135714eb931dbe6112d8d4d77cb1875354db324a740e917a94a974"
+  },
+  "limitations": [
+    "Worker reviewed fresh master Blender5.4 report, source matrices and three chain sheets; no independent Blender evaluation claimed.",
+    "ARMATURE only, no weapon mesh/camera/finger IK. Shared scout-family action selection is explicit, not weapon-exclusive provenance.",
+    "Authored magazine/contact path retained. Attachment releases by.60 seat; FIRST must verify actual fit and later wrist departure.",
+    "No source length/axis compensation, camera changes, hidden support or rest-contact edits. Full-chain source direction priority remains master-owned.",
+    "61 bank poses do not prove continuous native60fps interpolation.",
+    "Master owns materialization, all-route budget, FIRST PNG feedback, integration of worker correction/no-change response, and SECOND. Native acceptance remains pending."
+  ]
+}

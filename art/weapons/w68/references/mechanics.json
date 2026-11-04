@@ -1,0 +1,46 @@
+{
+  "stage": "W68",
+  "baseHash": 957782887,
+  "enhancedHashExcluded": 4116820839,
+  "measuredSecondary": {
+    "url": "https://www.light.gg/db/items/957782887/snapshot-sights/?_=150",
+    "publisher": "light.gg",
+    "primary": false,
+    "privateCapture": "research1.json",
+    "section": "Community Research",
+    "lastUpdatedReported": "2024-04-12",
+    "primaryDurationScalar": 0.5,
+    "specialDurationScalar": 0.8,
+    "retrieval": "Pinned search capture bound to the exact base URL and its own bounded section; no fresh gameplay measurement."
+  },
+  "historicalOfficialConflict": {
+    "urls": [
+      "https://www.bungie.net/7/en/News/article/51319",
+      "https://www.bungie.net/7/en/News/article/51380",
+      "https://www.bungie.net/7/en/News/Article/51250?hidenav=true"
+    ],
+    "year": 2022,
+    "primaryDurationScalar": 0.5,
+    "specialDurationScalar": 0.75,
+    "status": "Unresolved. Historical official Special duration differs from the captured 2024 community measurement; no intervening patch explanation or independent current confirmation is established."
+  },
+  "serverPolicy": {
+    "choice": "Measured-modern",
+    "primaryScalar": 0.5,
+    "specialScalar": 0.8,
+    "explanation": "Explicit supplied server choice follows the exact-base 2024 measurement despite the unresolved historical 2022 official conflict. This is not a claim that Bungie verified 0.8.",
+    "entry": "clamp(ceil(adsSeconds * ammoScalar * 20),1,20), only with a supported exact-base roll selected",
+    "exit": "Unchanged W44 baseTicks; entry-only speed is supplied project policy, not proven Destiny exit behavior.",
+    "unselected": "Keep each W44 base timing unchanged.",
+    "heavy": "No measured scalar. Official Heavy rolls remain references only; runtime selectable rolls exclude them and timing rows preserve snapshotTicks=baseTicks.",
+    "neutral": "Preserve six W44 two-tick neutral rows in reference evidence only; omit them from runtime timings."
+  },
+  "sourceBoundary": "Bungie inventory/plug sets prove exact identity, official faster-ADS description, ammo enum and selected roll eligibility. W44 is the pinned community-derived base-stat ADS model. Only the exact-base light.gg section supplies the chosen numeric duration reductions. Enhanced/mirror/catalyst sections do not establish base mechanics or eligibility.",
+  "limitations": [
+    "No native evidence or client launch; no live Destiny measurement.",
+    "No claim that historical/community conflict is resolved or that the chosen scalar matches today's Destiny sandbox.",
+    "20 Hz quantization/clamps and entry-only policy belong to this project.",
+    "A proven optional roll does not activate Snapshot on every weapon copy.",
+    "No production Java, test, implementation manifest or main-doc changes are generated."
+  ]
+}

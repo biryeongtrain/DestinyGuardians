@@ -1,0 +1,63 @@
+{
+  "stage": "W73",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourceHashes": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "run/private-sources/w73/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "run/private-sources/w73/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "run/private-sources/w73/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "research": {
+      "path": "run/private-sources/w73/research1.json",
+      "sha256": "834d52e16659dcc997d24052b3c907663972c158aa887ab848eecd03911919cd",
+      "bytes": 27965
+    },
+    "w46Extraction": {
+      "path": "art/weapons/w46/extraction.json",
+      "sha256": "be0a670f4db11adca87383344f13d1e3588f18f58bf22b1454b4652653c87cc8",
+      "bytes": 63780
+    },
+    "w46Runtime": {
+      "path": "src/main/resources/destiny/weapons/w46-timing.json",
+      "sha256": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+      "bytes": 29734
+    }
+  },
+  "generator": "scripts/extract_archers_tempo_w73.py",
+  "generatorSha256": "6046db660326c1af50002ceeb1189b8e20df6a61d4deb8164d81443ea4f0b93a",
+  "runtimeSha256": "19a3f2d275846b512a62b9f4d090765f9c8efc35096ba77c823d509420708c85",
+  "outputHashes": {
+    "src/main/resources/destiny/weapons/w73-archers-tempo.json": "19a3f2d275846b512a62b9f4d090765f9c8efc35096ba77c823d509420708c85",
+    "art/weapons/w73/references/socket-pools.json": "e776abe8af02e58d51481d77166079a207623640dc06c3644d21ff38145be610",
+    "art/weapons/w73/references/timings.json": "7c7617dd04aa2706026ac1b1452cc50dcb64854cdc781c326a1ede401d40d6a2",
+    "art/weapons/w73/references/mechanics.json": "f41209faba180e07749a053dd3dbe6596bd37c5867edb34e1b7564434a5b558d",
+    "art/weapons/w73/reference-notes.md": "30b55592569285f9b3fa4bab1b24648629ff2d84d4469e777cc48df81fd39dbc"
+  },
+  "capturedAtDate": "2026-10-24",
+  "privateSources": "run/private-sources/w73 retains byte-identical pinned official inventory/plug sets/manifest and raw web-tool research. research2.json, official-identity.json and the HTML/retrieval pair preserve ancillary retrieval attempts and are not consumed inputs.",
+  "sourceBoundary": "Official manifest identity/socket pools establish exact selected roll eligibility and the precision-hit description. Bungie 4.1.0 establishes standard 0.75 separately from Leviathan's catalyst. The bounded exact-base light.gg section supplies 3s and stow removal. W46 supplies raw official draw milliseconds. 20-TPS quantization and runtime ordering are project choices.",
+  "reproduce": "rtk proxy python3 scripts/extract_archers_tempo_w73.py --verify",
+  "verification": "Eight literal input SHA256 pins. Compare all six outputs byte for byte including Markdown. Verify performs no writes, directory creation, fetch, cache repair or networking. Missing/changed inputs fail before writes. Generator and five non-provenance output hashes are recorded; no self-hash cycle."
+}

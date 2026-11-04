@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "weapon": "retrofit_escapade",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A005",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.08,
+        0.18,
+        0.42,
+        0.5
+      ]
+    }
+  },
+  "sourceProvenance": {
+    "reviewPath": "/private/tmp/destiny-w214-source/source-review.json",
+    "reviewSha256": "7878a8ba396eb14eacf27cd0842d960e8e807e2d9d0bf4c0f5866e1f508ed0b7",
+    "blenderVersion": "5.4.0 Alpha",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/machine_gun_e5b72131/blender/source.blend",
+    "sourceBlendSha256": "11feeead0a96d1f0555ef6b168b42ee2698306688030bff4d4b92f563418a924",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/machine_gun_e5b72131/source-map.json",
+    "sourceMapSha256": "ee437999e565a7708313a3944c4098493914b7c2797da0dba161e6b71a8b8695",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/machine_gun_e5b72131/bone-map.json",
+    "boneMapSha256": "e152c9875efa62bfde0d0dbaa94b26d7b2e5727cc9d1686eb6053dc6f68b488e",
+    "evaluatedRigPath": "/private/tmp/destiny-w214-source/machine_gun_e5b72131.json",
+    "evaluatedRigSha256": "259b4918908485aa5a898e438f7ce34c89fdb70ea80ee009f579e73b0e8e8620",
+    "chainSheetPath": "/private/tmp/destiny-w214-source/sheets/machine_gun_e5b72131-80A8A005-upper-chain.png",
+    "chainSheetSha256": "10e81cc69489bd3df15377d7571e11c216ac89ea384dd51f8d75a82796b27dfb",
+    "rigAction": "80A8A005",
+    "action": "Armature|fp_80A8A005_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1.0,
+      180.0
+    ],
+    "sceneFps": 30,
+    "evaluatedSamples": 61,
+    "existingCacheJointAbsError": 0.0,
+    "masterReportedInputsUnchanged": true,
+    "objects": [
+      "ARMATURE"
+    ],
+    "sourceCameraRecovered": false,
+    "sourceMeshRecovered": false,
+    "sourceActionWeaponExclusive": false,
+    "matrixSpace": "armature_object; row-major, column vectors; matrix_world not applied",
+    "evaluationOwner": "master headless Blender; worker read report and full-chain61 JSON and viewed actual bone-only PNG; worker did not open Blender"
+  },
+  "evidence": [
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_mesh_contacts",
+      "observation": "Keep right rest [8,8.55,8.48]/[-24,0,0], left rest [7.8,8.85,-1.3]/[0,90,-85], reload [4.5,8.45,3.92]/[0,0,-80]. Drum outer wall contact is not cover hinge. Source palm rest offsets and reload handling target have distinct roles."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "accepted_effective_framing",
+      "observation": "Copied actual f.profile(data,retrofit_escapade,machine_gun): translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]. No weapon override existed. No limb bias, attenuation, lift or stretch added."
+    },
+    {
+      "source": "scripts/generate_reload_w181_retrofit_escapade.py",
+      "sourceSha256": "8da5ad15c89ebb9f127a005af5003a8ce6126c78b663324fd0e1beb7a178d762",
+      "role": "audited_authored_part_motion",
+      "observation": "Statically read AST constants and pure matrix/articulation functions; never imported/executed old generator. Preserve drum/belt hold .26..30, seated .50 onward, cover -96deg .18..58 closed .66, independent charging lug peak1.05 at .80, return .88."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/source-review.json",
+      "sourceSha256": "7878a8ba396eb14eacf27cd0842d960e8e807e2d9d0bf4c0f5866e1f508ed0b7",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated real source.blend with Blender5.4 Alpha before worker generation; ARMATURE only, OBSlot, action80A8A005, frames1..180 at30fps,61 samples, old-cache error0, all source inputs unchanged."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/machine_gun_e5b72131.json",
+      "sourceSha256": "259b4918908485aa5a898e438f7ce34c89fdb70ea80ee009f579e73b0e8e8620",
+      "role": "evaluated_source61_full_chain",
+      "observation": "Read all61 matrices including shoulders D1232BA2/17025F50, elbows897A1504/A3781DCD, wrists8C83CB67/DE9D6BEA and weapon4A0810C4. Forearms~8.14136 and upper arms~8.7266 at32 units/source unit; retain ordinary lengths and unattenuated FK. Source left wrist rises from relativeY6.132 atp.50 to11.008 atp.55, then6.274 atp.60; magazine must release rather than follow later cover/settling travel."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/sheets/machine_gun_e5b72131-80A8A005-upper-chain.png",
+      "sourceSha256": "10e81cc69489bd3df15377d7571e11c216ac89ea384dd51f8d75a82796b27dfb",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed actual PNG XZ/YZ chains atp0,.2,.4,.6,.8,1 before generating/designing. Bend/hand motion and near-return are visible; no mesh, camera, physical contact or native pass established."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate only. Master owns fresh source61+shoulders import, action whitelist, W214 loader/runtime60/test expansion, arms/upper-arm overlays and output materialization.",
+    "Three disjoint partitions:59body including independently translated charging_handle,51magazine (10drum+35round/link+6connector),24cover/optic with its own independent hinge articulation. Preserve134canonical solids and every UV/material face.",
+    "Authored magazine seats atp.50; gripWindow[.08,.18,.42,.50] fully attaches by withdrawal, releases during the final .42..50 approach and reaches zero at seating; it cannot drag the seated feed into cover closure .58..66 or charging .66..88. This is an authored fit, not an extracted attachment event or copied Lonesome window.",
+    "Accepted right/left rest and reload contact coordinates remain inherited; only explicit action, magazine hint and release envelope are added. Do not replace REST source mesh offsets with the reload target.",
+    "134weapon+estimated448ordinary-arm reserve=582elements, below1000; master must measure final all-route skin and overlay output before acceptance.",
+    "No limb stretch, damping, FK attenuation, hidden rest support, camera recovery or finger IK. FIRST images must return for worker correction or justified no-change, then master integrates for SECOND Vision."
+  ]
+}

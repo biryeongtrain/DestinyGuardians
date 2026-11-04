@@ -1,0 +1,70 @@
+{
+  "stage": "W171",
+  "selectedCount": 65,
+  "supportedCount": 6,
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourcePins": {
+    "src/main/resources/destiny/weapons/w30.json": {
+      "path": "src/main/resources/destiny/weapons/w30.json",
+      "sha256": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+      "bytes": 13784
+    },
+    "src/main/resources/destiny/weapons/w40-characteristics.json": {
+      "path": "src/main/resources/destiny/weapons/w40-characteristics.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "src/main/resources/destiny/weapons/w83-exotics.json": {
+      "path": "src/main/resources/destiny/weapons/w83-exotics.json",
+      "sha256": "bab9f12b8ffb99422a31b927455391d9f292da67ffa226ad3ddc96b0b1283d56",
+      "bytes": 3027
+    },
+    "src/main/resources/destiny/weapons/w84-exotics.json": {
+      "path": "src/main/resources/destiny/weapons/w84-exotics.json",
+      "sha256": "481a6353fb5d3fc040d71977da9c173c9e2fc8754050fe8bb237da5172837d6e",
+      "bytes": 2599
+    },
+    "art/weapons/w40/provenance.json": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "clarity": {
+      "path": "/private/tmp/w167-clarity.json",
+      "sha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+      "bytes": 2091445
+    }
+  },
+  "generator": "scripts/build_tap_the_trigger_profile_w171.py",
+  "generatorSha256": "9404bc9f7de01dd20cdbfab4d1bbb68599ced7047d553c259529a4baddf0d4b1",
+  "outputSha256": {
+    "src/main/resources/destiny/weapons/w171-tap-the-trigger.json": "94d8fb588f44eff1dd41c056fadd555d37c7266116e0c10311df906fd0bbd7e9",
+    "art/weapons/w171/tap-the-trigger/official-sockets.json": "3bc313a58b539ec488786a53917e4420760ad27594c7607016931ec53cbdabcb",
+    "art/weapons/w171/tap-the-trigger/clarity-source.json": "83cd390a516b3173171829c0456c87713a43795c9d793dfb608a1bac57f7fcd4"
+  },
+  "reproduce": "rtk proxy python3 scripts/build_tap_the_trigger_profile_w171.py --verify --self-test",
+  "limitations": [
+    "Bungie membership is the pinned Oct13 manifest snapshot; Clarity community mechanics use the pinned commit, not official engine measurements.",
+    "0.6 seconds maps to 12 ticks at 20Hz. Fusion gets 25% of bonuses: +10 stability, recoil x0.875, accuracy cone x0.975; ordinary +40, x0.5, x0.9.",
+    "No refresh until automatic weapons stop firing or the next burst. Actual runtime cycle and source/end-held integration are master-owned.",
+    "Controller trigger pressure behavior is source evidence only and outside the Java keyboard implementation.",
+    "Stability/recoil/spread/HUD adapters, combined perks and native Vision validation remain master-owned. Enhanced hash is excluded."
+  ]
+}

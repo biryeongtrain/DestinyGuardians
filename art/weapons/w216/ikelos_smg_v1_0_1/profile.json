@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "weapon": "ikelos_smg_v1_0_1",
+  "sourceAction": "80A8A170",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "keepMeshSupport": true,
+    "meshArmDirections": true,
+    "hideSupportAtRest": false,
+    "reloadCameraLower": 0,
+    "sourceWeaponRelative": true,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A170",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.06,
+        0.22,
+        0.62,
+        0.7
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "submachine_gun_cdf8185c",
+    "action": "80A8A170",
+    "sourceBlendSha256": "474d2fb3e1b97e605ed54998e6a08311a0cba7f44e826f0b98f44076302caba6",
+    "sourceMapSha256": "ccf84b37d2f0b48a4ffd196ab31e19e48d169ed40363e80215bad6333e57cd34",
+    "boneMapSha256": "dfb12f16b062776714efec4bda53470ae694c0ec223773e9d3b48c688c522bf9",
+    "evaluatedJsonSha256": "8f381506a064afb16da2480a2458e997405d5840972cc7afa83a257616c275c4"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w216/source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "sourceSha256": "3b5ec3c27772222c14730457fd1d9ff431c39802ae4df10bb7f286440aaf61d6",
+      "observation": "Re-read current master Blender5.4.0 Alpha export after READY metadata normalization: Armature only; OBSlot Armature|fp_80A8A170_reload_full|Base, frames1..91 at30fps,61poses, prior-cache joint error0 and allInputsUnchanged=true. Worker did not open/evaluate Blender."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/submachine_gun_cdf8185c.json",
+      "role": "fresh_source61_full_chain",
+      "sourceSha256": "8f381506a064afb16da2480a2458e997405d5840972cc7afa83a257616c275c4",
+      "observation": "Read actual61 weapon/shoulder/elbow/wrist matrices in armature-object space, row-major/column vectors. Original left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. At32units upper8.72669/8.72657, forearm8.14136. Preserve ordinary length/axes and full chain."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/submachine_gun_cdf8185c-80A8A170-upper-chain.png",
+      "role": "viewed_bone_only_sheet",
+      "sourceSha256": "e04731565886e7c6bd52e3c860bfe1de156792f9bd815bb0553597ea334b9164",
+      "observation": "Viewed actual six-pose XZ/YZ source projection0,.2,.4,.6,.8,1. Exchange and recovery are bone-only evidence; no recovered mesh contact/camera/IK or native visibility."
+    },
+    {
+      "source": "scripts/first_person_framing_w205.py",
+      "role": "preserved_effective_framing",
+      "observation": "Initial profile(load(),ikelos_smg_v1_0_1,submachine_gun) retained translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28 and legacy reloadCameraLower2.5. After FIRST image feedback, remove only legacy reloadCameraLower via explicit0. Keep all other framing keys and original rest contacts. Master full-chain branch overrides meshArmDirections."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "preserved_mesh_contacts",
+      "observation": "Keep right[8,8.4,8.25]/[0,0,0], left[7.8,9,3.6]/[-54,0,-20], reload[7.5,4.55,8.26]/[0,0,0]. No rest overrides."
+    },
+    {
+      "source": "scripts/generate_reload_w182_ikelos_smg_v1_0_1.py",
+      "role": "authored_geometry_and_knots",
+      "sourceSha256": "e4b6cdca770c37904e9e44995fcc0cd084ee6003abe581c1c67176af3a2842eb",
+      "observation": "AST-read constants without importing heavy W182. Exact eleven knots, GRIP and MAGAZINE_ANCHOR retained; body132 + complete magazine129 only,1solid. SOURCE.md and manifest retain Aztecross2018 pJdMgzVISnM footage provenance; no re-view of historical footage."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "role": "supported_attachment_release",
+      "observation": "Existing gripWindow and magazine part-shift hook used. Candidate[.06,.22,.62,.70] follows authored reach/withdrawal, fades during final insertion, ends exactly at.70 seat. Later.76/.80/.88 palm accent/recovery cannot drag seated payload. Fresh source left wrist weapon-local[-.03473,.10873,.14860] at.60,[-.03315,.30064,-.08202] at.65,[.06097,.08922,.00424] at.70; source travel is not proof of mesh contact."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/vision1/screenshots/ikelos_smg_v1_0_1-review.png",
+      "role": "first_native_image_worker_review",
+      "sourceSha256": "e3c3d1fd6351d98e22e5b2b067193fe904173271492541fafc58a2b7f82b0176",
+      "observation": "Viewed FIRST hip/ADS/reload comparison. Hip and ADS are clear; reload panel is low and cut by lower image edge."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/vision1/screenshots/ikelos_smg_v1_0_1-reload.png",
+      "role": "first_native_image_worker_review",
+      "sourceSha256": "42b1f78d0d5ed4c01a3efb444a109148c1300689cca76d76734bb10b6a421f42",
+      "observation": "Viewed samples01/04/07/09/12. Initial lift is visible in01/04; receiver/exchange is cropped at bottom in07,09 remains low,12 returns toward ready. Wall-time bracket sample IDs do not establish exact normalized poses."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/vision1/frames/w216-ikelos_smg_v1_0_1-reload-sample-07.png",
+      "role": "first_native_image_worker_review",
+      "sourceSha256": "ee0a43040a0dbd52511870ad96372c12d769ac0fc1e589eca73373be234f1b85",
+      "observation": "Viewed exact1708x960 FIRST PNG. Most receiver/support arm occupies bottom band; lower grip/magazine exchange is below the frame. Image supports removing extra downward framing, not changing source pose timing or moving-part path."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/vision1/frames/w216-ikelos_smg_v1_0_1-after-reload.png",
+      "role": "first_native_image_worker_review",
+      "sourceSha256": "cecd8c6abcd69836244333c47d4af8afc925a1a5e656e493c9c000b3487c2d15",
+      "observation": "Viewed exact FIRST recovery PNG: recognizable weapon and both arms restored in hip view, HUD32. Keep hip/rest framing unchanged. Still image alone does not verify ammo lifecycle/audio."
+    }
+  ],
+  "notes": [
+    "Post-FIRST correction: master supplied exact concern and PNGs; worker reviewed them and removed only legacy reloadCameraLower2.5 via explicit0. SECOND pending; no final native visibility acceptance.",
+    "Exact W182 geometry/UV/atlas/holds/knots/part path,61poses and gameplay32rounds/720RPM/45tick reload/audio unchanged. No slide mechanics, source attenuation or limb stretch. No new lift/depth/rotation compensation.",
+    "Current budget estimates remain reload133+448arm=581 and canonical220+448=668. Master owns materialization and all-route budget.",
+    "Original blend evaluation ->61pose implementation -> master FIRST -> exact feedback -> this owned-file correction completed; master SECOND remains required."
+  ],
+  "firstReview": {
+    "masterResult": "FIRST native12/12 reported by master; worker inspected supplied PNGs only",
+    "concern": "Body/magazine exchange cropped low in wall-time sample07 and low in sheet sample09",
+    "correction": {
+      "key": "framing.reloadCameraLower",
+      "before": 2.5,
+      "after": 0
+    },
+    "rationale": "Remove reload-only camera-Y assembly lowering now that original full-chain FK is active. Source contains no camera requiring this legacy offset. Keep all relative part/hand transforms, ordinary source limb lengths, hip/ADS/rest and61pose timing.",
+    "secondPending": true
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "stage": "W105",
+  "status": "PASS",
+  "offlineVerify": {
+    "status": "VERIFY_PASS",
+    "readOnlyOutputHashesUnchanged": true
+  },
+  "generatorSha256": "86d82236da34ae6584df5a3924aa727f229f45c983706344147b657785c47e7b",
+  "generatedOutputSha256": {
+    "src/main/resources/destiny/weapons/w105-shotgun-patterns.json": "055ce7dd5e73c81f23adc94e9c12a132232c040be5ebe8f861c87f305133b5e3",
+    "art/weapons/w105/references/evidence.json": "5c638e685dd401690e05e153c5a1be18170c9a9ff0c6fba2b0fff0ba0a862cd9",
+    "art/weapons/w105/references/roster-proof.json": "c25dd7010ac8c7f47ac339a8f419c4c3a93c96754c043b247e399fb0404dc635",
+    "art/weapons/w105/references/provenance.json": "2be00d6c3d54250b07181ceb42422c975a261d084b48d1159353a47a49828f79"
+  },
+  "semanticNegativeFixtures": [
+    {
+      "fixture": "slug-substituted-same-name-precision",
+      "status": "REJECTED",
+      "reason": "Initial intrinsic socket drift: first_in_last_out"
+    },
+    {
+      "fixture": "intrinsic-outside-intrinsic-category",
+      "status": "REJECTED",
+      "reason": "Intrinsic socket category drift"
+    },
+    {
+      "fixture": "intrinsic-definition-is-trait",
+      "status": "REJECTED",
+      "reason": "Exact definition drift: 3983457027"
+    },
+    {
+      "fixture": "wrong-official-edition-same-name",
+      "status": "REJECTED",
+      "reason": "Selected official identity/stat/ammo drift: mindbender_s_ambition_adept"
+    },
+    {
+      "fixture": "wrong-frame-on-exact-shotgun",
+      "status": "REJECTED",
+      "reason": "Exact selected frame/name/hash drift: dust_rock_blues"
+    },
+    {
+      "fixture": "family-classifier-broadens-roster",
+      "status": "REJECTED",
+      "reason": "Official/catalog shotgun classification mismatch"
+    },
+    {
+      "fixture": "historical-count-eight",
+      "status": "REJECTED",
+      "reason": "Missing URL-bound evidence: https://www.bungie.net/7/en/News/article/50572"
+    },
+    {
+      "fixture": "mirror-url-masquerades-as-primary",
+      "status": "REJECTED",
+      "reason": "Missing URL-bound evidence: https://www.bungie.net/7/en/News/article/51999"
+    },
+    {
+      "fixture": "ninth-search-query",
+      "status": "REJECTED",
+      "reason": "Focused web query bound drift"
+    },
+    {
+      "fixture": "illustration-count-tamper",
+      "status": "REJECTED",
+      "reason": "S19 visual count drift"
+    },
+    {
+      "fixture": "current-count-silently-promoted",
+      "status": "REJECTED",
+      "reason": "Runtime contract/schema/temporal/unknown/local-policy drift"
+    },
+    {
+      "fixture": "unknown-ads-coerced-to-local-factor",
+      "status": "REJECTED",
+      "reason": "Runtime contract/schema/temporal/unknown/local-policy drift"
+    },
+    {
+      "fixture": "invented-coordinate-array",
+      "status": "REJECTED",
+      "reason": "Runtime contract/schema/temporal/unknown/local-policy drift"
+    },
+    {
+      "fixture": "slug-incorrectly-given-twelve-pellets",
+      "status": "REJECTED",
+      "reason": "Runtime contract/schema/temporal/unknown/local-policy drift"
+    },
+    {
+      "fixture": "full-choke-assumed-equipped",
+      "status": "REJECTED",
+      "reason": "Runtime contract/schema/temporal/unknown/local-policy drift"
+    }
+  ],
+  "blackBoxNegativeFixtures": [
+    {
+      "fixture": "source-sha-tamper",
+      "status": "REJECTED",
+      "exitCode": 1,
+      "reason": "W105 extraction failed: Source SHA256 mismatch: selected"
+    },
+    {
+      "fixture": "output-byte-tamper",
+      "status": "REJECTED",
+      "exitCode": 1,
+      "reason": "W105 extraction failed: Generated output differs: src/main/resources/destiny/weapons/w105-shotgun-patterns.json"
+    }
+  ],
+  "disjointReproduction": {
+    "status": "PASS",
+    "roots": [
+      "run/private-sources/w105/repro-a",
+      "run/private-sources/w105/repro-b"
+    ],
+    "secondRootHasIndependentCopiedGeneratorAndAllPinnedSources": true,
+    "secondRootOfflineVerify": "PASS",
+    "comparedOutputs": {
+      "src/main/resources/destiny/weapons/w105-shotgun-patterns.json": {
+        "root": "055ce7dd5e73c81f23adc94e9c12a132232c040be5ebe8f861c87f305133b5e3",
+        "a": "055ce7dd5e73c81f23adc94e9c12a132232c040be5ebe8f861c87f305133b5e3",
+        "b": "055ce7dd5e73c81f23adc94e9c12a132232c040be5ebe8f861c87f305133b5e3"
+      },
+      "art/weapons/w105/references/evidence.json": {
+        "root": "5c638e685dd401690e05e153c5a1be18170c9a9ff0c6fba2b0fff0ba0a862cd9",
+        "a": "5c638e685dd401690e05e153c5a1be18170c9a9ff0c6fba2b0fff0ba0a862cd9",
+        "b": "5c638e685dd401690e05e153c5a1be18170c9a9ff0c6fba2b0fff0ba0a862cd9"
+      },
+      "art/weapons/w105/references/roster-proof.json": {
+        "root": "c25dd7010ac8c7f47ac339a8f419c4c3a93c96754c043b247e399fb0404dc635",
+        "a": "c25dd7010ac8c7f47ac339a8f419c4c3a93c96754c043b247e399fb0404dc635",
+        "b": "c25dd7010ac8c7f47ac339a8f419c4c3a93c96754c043b247e399fb0404dc635"
+      },
+      "art/weapons/w105/references/provenance.json": {
+        "root": "2be00d6c3d54250b07181ceb42422c975a261d084b48d1159353a47a49828f79",
+        "a": "2be00d6c3d54250b07181ceb42422c975a261d084b48d1159353a47a49828f79",
+        "b": "2be00d6c3d54250b07181ceb42422c975a261d084b48d1159353a47a49828f79"
+      }
+    }
+  },
+  "sealedW104": {
+    "files": 314,
+    "allBytesUnchanged": true,
+    "fileSetUnchanged": true
+  },
+  "queryStrings": 8,
+  "noBuildOrRuntime": true,
+  "limits": [
+    "Four generated JSON artifacts are reproduced; CONTRACT.md, REPORT.md and this verification record are handoff documents.",
+    "Offline image validation verifies source bytes and recorded human observations; it does not rerun visual analysis."
+  ]
+}

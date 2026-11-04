@@ -1,0 +1,2117 @@
+{
+  "schemaVersion": 1,
+  "profileCount": 63,
+  "supportedCount": 58,
+  "officialManifest": {
+    "manifest": {
+      "version": "245114.26.10.13.2000-1-bnet.66137",
+      "path": "/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+    },
+    "cachedInventorySha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+    "source": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+    "policy": "Pinned Oct13 official manifest; exact W30 selected item hashes, not family/element guesses."
+  },
+  "officialStatSource": "https://www.bungie.net/common/destiny2_content/json/en/DestinyStatDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "statHashes": {
+    "magazine": "3871231066",
+    "rpm": "4284893193",
+    "chargeMillis": "2961396640",
+    "drawMillis": "447667954",
+    "reloadSpeed": "4188031367"
+  },
+  "statMeanings": {
+    "magazine": {
+      "description": "The number of shots which can be fired before reloading.",
+      "name": "Magazine",
+      "iconHash": 0,
+      "hasIcon": false
+    },
+    "rpm": {
+      "description": "The number of shots per minute this weapon can fire.",
+      "name": "Rounds Per Minute",
+      "iconHash": 0,
+      "hasIcon": false
+    },
+    "chargeMillis": {
+      "description": "The time in milliseconds before a weapon fires.",
+      "name": "Charge Time",
+      "iconHash": 0,
+      "hasIcon": false
+    },
+    "drawMillis": {
+      "description": "The time in milliseconds it takes to draw an arrow. Release an arrow when fully drawn for maximum damage and speed.",
+      "name": "Draw Time",
+      "iconHash": 0,
+      "hasIcon": false
+    },
+    "reloadSpeed": {
+      "description": "The time it takes to reload this weapon.",
+      "name": "Reload Speed",
+      "iconHash": 0,
+      "hasIcon": false
+    }
+  },
+  "repository": "https://github.com/d2foundry/oracle_engine",
+  "commit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+  "commitDate": "2026-05-20",
+  "sourceHashes": {
+    "src/main/resources/destiny/weapons/w30.json": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+    "art/weapons/w40/definitions.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+    "art/weapons/w40/provenance.json": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+    "art/weapons/w43/extraction.json": "a133082c322a07e81837d0409caf09596dfad4fd9889904d1bdae7acd471d9d5",
+    "art/weapons/w46/weapon_formulas.json": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+    "art/weapons/w46/stat_calc.rs": "5662ee9dea9e59547d73f81cd7c02872046266acb7b24017d2d09c123f31e5c2",
+    "art/weapons/w46/build.rs": "85b2e35f1db47f55c58900020ebf44be0e409802beac395b4b4c538fad67a1bd",
+    "art/weapons/w46/weapon_constructor.rs": "50ea523af8ec5df1041e5f3cb1cafc84b03d2ffb59029f81303ec41ae4e367b9",
+    "art/weapons/w46/rs_types.rs": "faa476e6589d2362cf9ee8dd948410adfa7fa8507e8809f3cd10bb13ebba9b90",
+    "art/weapons/w46/stat-definitions.json": "e7959edc50506f902e548b5c9a7d55b119e1e14d0268d046259f13a4bd38b8fe",
+    "art/weapons/w46/d2_enums.rs": "db791f6c709e7007f8fab3fddc46ab34a0f78b9958fd9a0f897ad27f133baa4a",
+    "art/weapons/w46/official-item-evidence.json": "030bb98e997df7c3c89bc23db75c5990234f762c5a41f075cd95fa7a7ba4ba2c",
+    "src/main/resources/destiny/weapons/w40-characteristics.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+    "art/weapons/w46/MIT-LICENSE": "50173139375c53459837abdeb7ad9f264eba4f0bc2bb2c676932991ce158778d",
+    "art/weapons/w46/UNLICENSE": "6b0382b16279f26ff69014300541967a356a666eb0b91b422f6862f6b7dad17e",
+    "scripts/extract_weapon_timing_w46.py": "2be40bb4fbb1cc780773420317692fd2b3b006ca02d1bc5fe4a2efb567a1df94"
+  },
+  "runtimeSha256": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+  "policies": {
+    "magazine": "Exact positive official base stat; absent remains null, no perk/mag interpolation. Sword value is ammo capacity only; supported=false",
+    "cadence": "FIRING LOCKOUT AFTER FIRST BOLT, excludes subsequent charge: normal single-shot/pellet guns 1200/officialRPM; pulse/burst-sidearm 20*(endFrames+(N-1)*innerFrames)/30; fusion/LFR 20*((N-1)*innerFrames/30+fixedRecoverySeconds). Do not add Oracle charge-like end delay",
+    "charge": "Official milliseconds only for fusion/LFR; ceil(milliseconds/50), independent from historical Oracle cadence",
+    "draw": "Official bow Draw Time milliseconds only; ceil(milliseconds/50)",
+    "reload": "Historical community approximation evpp*x*x+vpp*x+offset seconds; ceil(seconds*20); bow x=min(ReloadSpeed,85); not raw Reload Speed seconds",
+    "shell": "Only shotguns use per-shell model (classification requires direct-source confirmation; Oracle does not encode granularity). Long Arm retains whole-mag scout approximation: original two-round loading not reconstructed; no verified insert timing",
+    "burst": "Pulse/sidearm consume per bullet. Fusion/LFR shared ammo per burst; shotgun zero-spacing pellets stay geometry, burstSize=1"
+  },
+  "limitations": [
+    "Official base snapshot Oct13 vs historical community curves May20; no current sandbox exactness claim",
+    "No perk/armor/frame/exotic animation modifiers; reload quadratics explicitly approximate in source",
+    "Shotgun per-shell classification needs independent direct-source confirmation; Oracle does not establish granularity or initial delay. Long Arm keeps whole-mag scout approximation, not an unverified per-insert duration",
+    "Unknown/missing values remain null; five swords unsupported, bows have no cadence or official magazine override",
+    "Glaive reused Charge Time ignored; ranged cadence/reload/magazine only, no melee timing",
+    "ceil to 20 Hz is Minecraft adaptation; fractional cadence and bolt spacing retained to 12 decimals",
+    "Pure data/API only; no WeaponProfile, WeaponCycle or runtime integration"
+  ],
+  "entries": [
+    {
+      "id": "duke_mk_44",
+      "bungieHash": 2112909414,
+      "family": "hand_cannon",
+      "officialStats": {
+        "magazine": 9,
+        "rpm": 120,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 30
+      },
+      "oracleFamily": "Hand Cannon",
+      "category": "120 RPM",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 15,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.5,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.137590643e-05,
+        "vpp": -0.02385522011,
+        "offset": 3.600042253,
+        "ammo_percent": 0.71
+      },
+      "reloadStatUsed": 30,
+      "reloadSeconds": 2.939623965487,
+      "oracleEffectiveRpm": 120.0,
+      "warnings": []
+    },
+    {
+      "id": "austringer",
+      "bungieHash": 3055790362,
+      "family": "hand_cannon",
+      "officialStats": {
+        "magazine": 11,
+        "rpm": 140,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 46
+      },
+      "oracleFamily": "Hand Cannon",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 13,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.43333333333333335,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.137590643e-05,
+        "vpp": -0.02385522011,
+        "offset": 3.600042253,
+        "ammo_percent": 0.71
+      },
+      "reloadStatUsed": 46,
+      "reloadSeconds": 2.63257354594588,
+      "oracleEffectiveRpm": 138.46153846153845,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "bungieHash": 3037520408,
+      "family": "hand_cannon",
+      "officialStats": {
+        "magazine": 11,
+        "rpm": 180,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 49
+      },
+      "oracleFamily": "Hand Cannon",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 10,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.3333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.137590643e-05,
+        "vpp": -0.02385522011,
+        "offset": 3.600042253,
+        "ammo_percent": 0.71
+      },
+      "reloadStatUsed": 49,
+      "reloadSeconds": 2.5785000189484295,
+      "oracleEffectiveRpm": 180.0,
+      "warnings": []
+    },
+    {
+      "id": "halfdan_d",
+      "bungieHash": 3778520450,
+      "family": "auto_rifle",
+      "officialStats": {
+        "magazine": 33,
+        "rpm": 400,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 28
+      },
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "firingFrames": {
+        "burst_delay": 5,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.16666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 8.55689e-05,
+        "vpp": -0.0242021,
+        "offset": 2.80673006666667
+      },
+      "reloadStatUsed": 28,
+      "reloadSeconds": 2.19615728426667,
+      "oracleEffectiveRpm": 360.0,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "ammit_ar2",
+      "bungieHash": 2119346509,
+      "family": "auto_rifle",
+      "officialStats": {
+        "magazine": 33,
+        "rpm": 450,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 38
+      },
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 4,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.13333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 8.55689e-05,
+        "vpp": -0.0242021,
+        "offset": 2.80673006666667
+      },
+      "reloadStatUsed": 38,
+      "reloadSeconds": 2.01061175826667,
+      "oracleEffectiveRpm": 450.0,
+      "warnings": []
+    },
+    {
+      "id": "gnawing_hunger",
+      "bungieHash": 821154603,
+      "family": "auto_rifle",
+      "officialStats": {
+        "magazine": 41,
+        "rpm": 600,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 57
+      },
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 3,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.1,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 8.55689e-05,
+        "vpp": -0.0242021,
+        "offset": 2.80673006666667
+      },
+      "reloadStatUsed": 57,
+      "reloadSeconds": 1.7052237227666698,
+      "oracleEffectiveRpm": 600.0,
+      "warnings": []
+    },
+    {
+      "id": "steelfeather_repeater",
+      "bungieHash": 1251729046,
+      "family": "auto_rifle",
+      "officialStats": {
+        "magazine": 49,
+        "rpm": 720,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 50
+      },
+      "oracleFamily": "Auto Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 2.5,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.08333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 8.55689e-05,
+        "vpp": -0.0242021,
+        "offset": 2.80673006666667
+      },
+      "reloadStatUsed": 50,
+      "reloadSeconds": 1.81054731666667,
+      "oracleEffectiveRpm": 720.0,
+      "warnings": []
+    },
+    {
+      "id": "cold_denial",
+      "bungieHash": 1216130969,
+      "family": "pulse_rifle",
+      "officialStats": {
+        "magazine": 28,
+        "rpm": 340,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 34
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "firingFrames": {
+        "burst_delay": 12,
+        "inner_burst_delay": 2,
+        "burst_size": 3,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.5333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "reloadStatUsed": 34,
+      "reloadSeconds": 2.15996051146667,
+      "oracleEffectiveRpm": 337.5,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "bygones",
+      "bungieHash": 2712244741,
+      "family": "pulse_rifle",
+      "officialStats": {
+        "magazine": 38,
+        "rpm": 390,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 46
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 10,
+        "inner_burst_delay": 2,
+        "burst_size": 3,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.4666666666666667,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "reloadStatUsed": 46,
+      "reloadSeconds": 1.9406240794666698,
+      "oracleEffectiveRpm": 385.7142857142857,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "chattering_bone",
+      "bungieHash": 568515759,
+      "family": "pulse_rifle",
+      "officialStats": {
+        "magazine": 33,
+        "rpm": 450,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 63
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "firingFrames": {
+        "burst_delay": 8,
+        "inner_burst_delay": 2,
+        "burst_size": 3,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.4,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "reloadStatUsed": 63,
+      "reloadSeconds": 1.6755595218666697,
+      "oracleEffectiveRpm": 450.0,
+      "warnings": []
+    },
+    {
+      "id": "blast_furnace",
+      "bungieHash": 3843477312,
+      "family": "pulse_rifle",
+      "officialStats": {
+        "magazine": 36,
+        "rpm": 450,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 36
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 10,
+        "inner_burst_delay": 2,
+        "burst_size": 4,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.5333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "reloadStatUsed": 36,
+      "reloadSeconds": 2.12155202346667,
+      "oracleEffectiveRpm": 450.0,
+      "warnings": []
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "bungieHash": 1280933460,
+      "family": "pulse_rifle",
+      "officialStats": {
+        "magazine": 34,
+        "rpm": 540,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 27
+      },
+      "oracleFamily": "Pulse Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 6,
+        "inner_burst_delay": 2,
+        "burst_size": 3,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.33333333333333337,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "reloadStatUsed": 27,
+      "reloadSeconds": 2.3002253298666697,
+      "oracleEffectiveRpm": 539.9999999999999,
+      "warnings": []
+    },
+    {
+      "id": "frontier_justice",
+      "bungieHash": 273396910,
+      "family": "scout_rifle",
+      "officialStats": {
+        "magazine": 13,
+        "rpm": 150,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 31
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "firingFrames": {
+        "burst_delay": 12,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.4,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "reloadStatUsed": 31,
+      "reloadSeconds": 2.35851898166666,
+      "oracleEffectiveRpm": 150.0,
+      "warnings": []
+    },
+    {
+      "id": "distant_relation",
+      "bungieHash": 2034817450,
+      "family": "scout_rifle",
+      "officialStats": {
+        "magazine": 16,
+        "rpm": 180,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 39
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 10,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.3333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "reloadStatUsed": 39,
+      "reloadSeconds": 2.19464018166666,
+      "oracleEffectiveRpm": 180.0,
+      "warnings": []
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "bungieHash": 2723241847,
+      "family": "scout_rifle",
+      "officialStats": {
+        "magazine": 15,
+        "rpm": 200,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 53
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "firingFrames": {
+        "burst_delay": 9,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.3,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "reloadStatUsed": 53,
+      "reloadSeconds": 1.93955010166666,
+      "oracleEffectiveRpm": 200.0,
+      "warnings": []
+    },
+    {
+      "id": "aishas_embrace",
+      "bungieHash": 2638190703,
+      "family": "scout_rifle",
+      "officialStats": {
+        "magazine": 17,
+        "rpm": 260,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 35
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 7,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.23333333333333334,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "reloadStatUsed": 35,
+      "reloadSeconds": 2.27493294166666,
+      "oracleEffectiveRpm": 257.1428571428571,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "long_arm",
+      "bungieHash": 8293111,
+      "family": "scout_rifle",
+      "officialStats": {
+        "magazine": 14,
+        "rpm": 120,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 45
+      },
+      "oracleFamily": "Scout Rifle",
+      "category": "aggresive",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 15,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.5,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "reloadStatUsed": 45,
+      "reloadSeconds": 2.0803759416666603,
+      "oracleEffectiveRpm": 120.0,
+      "warnings": [
+        "Original two-round loading not reconstructed; no verified per-insert curve. Whole-magazine default scout reload approximation retained, shellReload=false"
+      ]
+    },
+    {
+      "id": "antiope_d",
+      "bungieHash": 566976653,
+      "family": "submachine_gun",
+      "officialStats": {
+        "magazine": 30,
+        "rpm": 600,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 19
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 3.0,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.1,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.08642e-05,
+        "vpp": -0.0191345,
+        "offset": 2.62769
+      },
+      "reloadStatUsed": 19,
+      "reloadSeconds": 2.2861064762,
+      "oracleEffectiveRpm": 600.0,
+      "warnings": []
+    },
+    {
+      "id": "bug_out_bag",
+      "bungieHash": 2744715540,
+      "family": "submachine_gun",
+      "officialStats": {
+        "magazine": 36,
+        "rpm": 900,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 47
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 2.0,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.06666666666666667,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.08642e-05,
+        "vpp": -0.0191345,
+        "offset": 2.62769
+      },
+      "reloadStatUsed": 47,
+      "reloadSeconds": 1.8628175178,
+      "oracleEffectiveRpm": 900.0,
+      "warnings": []
+    },
+    {
+      "id": "ikelos_smg_v1_0_1",
+      "bungieHash": 1723472487,
+      "family": "submachine_gun",
+      "officialStats": {
+        "magazine": 32,
+        "rpm": 720,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 24
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 2.5,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.08333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.08642e-05,
+        "vpp": -0.0191345,
+        "offset": 2.62769
+      },
+      "reloadStatUsed": 24,
+      "reloadSeconds": 2.2035197791999996,
+      "oracleEffectiveRpm": 720.0,
+      "warnings": []
+    },
+    {
+      "id": "the_recluse",
+      "bungieHash": 3354242550,
+      "family": "submachine_gun",
+      "officialStats": {
+        "magazine": 41,
+        "rpm": 900,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 28
+      },
+      "oracleFamily": "Submachine Gun",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "firingFrames": {
+        "burst_delay": 2.0,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.06666666666666667,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.08642e-05,
+        "vpp": -0.0191345,
+        "offset": 2.62769
+      },
+      "reloadStatUsed": 28,
+      "reloadSeconds": 2.1396415328,
+      "oracleEffectiveRpm": 900.0,
+      "warnings": []
+    },
+    {
+      "id": "allied_demand",
+      "bungieHash": 1532276803,
+      "family": "sidearm",
+      "officialStats": {
+        "magazine": 15,
+        "rpm": 300,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 30
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 6,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.2,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "reloadStatUsed": 30,
+      "reloadSeconds": 1.79446144,
+      "oracleEffectiveRpm": 300.0,
+      "warnings": []
+    },
+    {
+      "id": "farewell",
+      "bungieHash": 541188001,
+      "family": "sidearm",
+      "officialStats": {
+        "magazine": 15,
+        "rpm": 360,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 49
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "firingFrames": {
+        "burst_delay": 5,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.16666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "reloadStatUsed": 49,
+      "reloadSeconds": 1.5935812211,
+      "oracleEffectiveRpm": 360.0,
+      "warnings": []
+    },
+    {
+      "id": "lonesome",
+      "bungieHash": 2199171672,
+      "family": "sidearm",
+      "officialStats": {
+        "magazine": 12,
+        "rpm": 260,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 21
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 7,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.23333333333333334,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "reloadStatUsed": 21,
+      "reloadSeconds": 1.8956206651,
+      "oracleEffectiveRpm": 257.1428571428571,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "bungieHash": 3751622019,
+      "family": "sidearm",
+      "officialStats": {
+        "magazine": 16,
+        "rpm": 450,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 34
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 4,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.13333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "reloadStatUsed": 34,
+      "reloadSeconds": 1.7507410016,
+      "oracleEffectiveRpm": 450.0,
+      "warnings": []
+    },
+    {
+      "id": "high_albedo",
+      "bungieHash": 1197486957,
+      "family": "sidearm",
+      "officialStats": {
+        "magazine": 27,
+        "rpm": 491,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 30
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Adaptive_Burst",
+      "firingFrames": {
+        "burst_delay": 7,
+        "inner_burst_delay": 2,
+        "burst_size": 3,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.3666666666666667,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "reloadStatUsed": 30,
+      "reloadSeconds": 1.79446144,
+      "oracleEffectiveRpm": 490.9090909090909,
+      "warnings": []
+    },
+    {
+      "id": "brass_attacks",
+      "bungieHash": 2121785039,
+      "family": "sidearm",
+      "officialStats": {
+        "magazine": 24,
+        "rpm": 325,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 27
+      },
+      "oracleFamily": "Sidearm",
+      "category": "default",
+      "subfamily": "Heavy_Burst",
+      "firingFrames": {
+        "burst_delay": 8,
+        "inner_burst_delay": 3,
+        "burst_size": 2,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.3666666666666667,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "reloadStatUsed": 27,
+      "reloadSeconds": 1.8277522219,
+      "oracleEffectiveRpm": 327.27272727272725,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "biting_winds",
+      "bungieHash": 1621657423,
+      "family": "bow",
+      "officialStats": {
+        "magazine": null,
+        "rpm": null,
+        "chargeMillis": 60,
+        "drawMillis": 667,
+        "reloadSpeed": 40
+      },
+      "oracleFamily": "Combat Bow",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 0,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.0,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 5.35476056419958e-05,
+        "vpp": -0.0102410419405799,
+        "offset": 1.10091136388022
+      },
+      "reloadStatUsed": 40,
+      "reloadSeconds": 0.7769458552842172,
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Official magazine stat absent/nonpositive; no override",
+        "Oracle has zero firing period for bows; draw/nock cycle is separate, no cadence override"
+      ]
+    },
+    {
+      "id": "whispering_slab",
+      "bungieHash": 211938782,
+      "family": "bow",
+      "officialStats": {
+        "magazine": null,
+        "rpm": null,
+        "chargeMillis": 80,
+        "drawMillis": 567,
+        "reloadSpeed": 60
+      },
+      "oracleFamily": "Combat Bow",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "firingFrames": {
+        "burst_delay": 0,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.0,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 5.35476056419958e-05,
+        "vpp": -0.0102410419405799,
+        "offset": 1.10091136388022
+      },
+      "reloadStatUsed": 60,
+      "reloadSeconds": 0.6792202277566108,
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Official magazine stat absent/nonpositive; no override",
+        "Oracle has zero firing period for bows; draw/nock cycle is separate, no cadence override"
+      ]
+    },
+    {
+      "id": "bite_of_the_fox",
+      "bungieHash": 1403800851,
+      "family": "sniper_rifle",
+      "officialStats": {
+        "magazine": 3,
+        "rpm": 72,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 25
+      },
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 25,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.8333333333333334,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.74498e-05,
+        "vpp": -0.0231542,
+        "offset": 3.8384
+      },
+      "reloadStatUsed": 25,
+      "reloadSeconds": 3.301701125,
+      "oracleEffectiveRpm": 72.0,
+      "warnings": []
+    },
+    {
+      "id": "beloved",
+      "bungieHash": 3107853529,
+      "family": "sniper_rifle",
+      "officialStats": {
+        "magazine": 4,
+        "rpm": 90,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 38
+      },
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 20,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.6666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.74498e-05,
+        "vpp": -0.0231542,
+        "offset": 3.8384
+      },
+      "reloadStatUsed": 38,
+      "reloadSeconds": 3.0559379112,
+      "oracleEffectiveRpm": 90.0,
+      "warnings": []
+    },
+    {
+      "id": "apostate",
+      "bungieHash": 2164448701,
+      "family": "sniper_rifle",
+      "officialStats": {
+        "magazine": 6,
+        "rpm": 140,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 61
+      },
+      "oracleFamily": "Sniper Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 13,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.43333333333333335,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.74498e-05,
+        "vpp": -0.0231542,
+        "offset": 3.8384
+      },
+      "reloadStatUsed": 61,
+      "reloadSeconds": 2.6769745058,
+      "oracleEffectiveRpm": 138.46153846153845,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "bungieHash": 912150785,
+      "family": "shotgun",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": 55,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 39
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 33,
+        "inner_burst_delay": 0,
+        "burst_size": 12,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 1.1,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "reloadStatUsed": 39,
+      "reloadSeconds": 0.7953123702,
+      "simultaneousPellets": 12,
+      "oracleEffectiveRpm": 54.54545454545454,
+      "warnings": [
+        "Per-shell/per-round classification is a gameplay assumption, not independently established by the Oracle quadratic; initial-entry delay unverified and intentionally absent",
+        "Oracle burst_size counts simultaneous pellets; runtime burstSize=1, existing pellet geometry must remain separate"
+      ]
+    },
+    {
+      "id": "dust_rock_blues",
+      "bungieHash": 636912560,
+      "family": "shotgun",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": 65,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 41
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 27,
+        "inner_burst_delay": 0,
+        "burst_size": 12,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 0.9,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "reloadStatUsed": 41,
+      "reloadSeconds": 0.7772155622000001,
+      "simultaneousPellets": 12,
+      "oracleEffectiveRpm": 66.66666666666667,
+      "warnings": [
+        "Per-shell/per-round classification is a gameplay assumption, not independently established by the Oracle quadratic; initial-entry delay unverified and intentionally absent",
+        "Oracle burst_size counts simultaneous pellets; runtime burstSize=1, existing pellet geometry must remain separate",
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "first_in_last_out",
+      "bungieHash": 3616586446,
+      "family": "shotgun",
+      "officialStats": {
+        "magazine": 6,
+        "rpm": 65,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 45
+      },
+      "oracleFamily": "Shotgun",
+      "category": "slug",
+      "subfamily": "Slug",
+      "firingFrames": {
+        "burst_delay": 27,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 0.9,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "reloadStatUsed": 45,
+      "reloadSeconds": 0.742559055,
+      "simultaneousPellets": 1,
+      "oracleEffectiveRpm": 66.66666666666667,
+      "warnings": [
+        "Per-shell/per-round classification is a gameplay assumption, not independently established by the Oracle quadratic; initial-entry delay unverified and intentionally absent",
+        "Oracle burst_size counts simultaneous pellets; runtime burstSize=1, existing pellet geometry must remain separate",
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "bungieHash": 2217366863,
+      "family": "shotgun",
+      "officialStats": {
+        "magazine": 6,
+        "rpm": 80,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 56
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Lightweight",
+      "firingFrames": {
+        "burst_delay": 22,
+        "inner_burst_delay": 0,
+        "burst_size": 12,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 0.7333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "reloadStatUsed": 56,
+      "reloadSeconds": 0.6578212831999999,
+      "simultaneousPellets": 12,
+      "oracleEffectiveRpm": 81.81818181818183,
+      "warnings": [
+        "Per-shell/per-round classification is a gameplay assumption, not independently established by the Oracle quadratic; initial-entry delay unverified and intentionally absent",
+        "Oracle burst_size counts simultaneous pellets; runtime burstSize=1, existing pellet geometry must remain separate",
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "ikelos_sg_v1_0_1",
+      "bungieHash": 1887808042,
+      "family": "shotgun",
+      "officialStats": {
+        "magazine": 7,
+        "rpm": 140,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 61
+      },
+      "oracleFamily": "Shotgun",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 13,
+        "inner_burst_delay": 0,
+        "burst_size": 12,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 0.43333333333333335,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "reloadStatUsed": 61,
+      "reloadSeconds": 0.6244278101999999,
+      "simultaneousPellets": 12,
+      "oracleEffectiveRpm": 138.46153846153845,
+      "warnings": [
+        "Per-shell/per-round classification is a gameplay assumption, not independently established by the Oracle quadratic; initial-entry delay unverified and intentionally absent",
+        "Oracle burst_size counts simultaneous pellets; runtime burstSize=1, existing pellet geometry must remain separate",
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "erentil_fr4",
+      "bungieHash": 2398848320,
+      "family": "fusion_rifle",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": null,
+        "chargeMillis": 967,
+        "drawMillis": null,
+        "reloadSpeed": 20
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "firingFrames": {
+        "burst_delay": 29,
+        "inner_burst_delay": 1,
+        "burst_size": 5,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 1.55,
+      "extraRecoverySeconds": 0.45,
+      "reloadCurve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "reloadStatUsed": 20,
+      "reloadSeconds": 2.45707364,
+      "warnings": [
+        "Cadence is post-first-bolt lockout: bolt span plus fixed recovery, EXCLUDES charge. Subsequent official chargeTicks is separate; historical Oracle end delay is NOT added"
+      ]
+    },
+    {
+      "id": "hollow_words",
+      "bungieHash": 607191995,
+      "family": "fusion_rifle",
+      "officialStats": {
+        "magazine": 6,
+        "rpm": null,
+        "chargeMillis": 800,
+        "drawMillis": null,
+        "reloadSpeed": 20
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 23.5,
+        "inner_burst_delay": 1,
+        "burst_size": 7,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 1.4333333333333333,
+      "extraRecoverySeconds": 0.45,
+      "reloadCurve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "reloadStatUsed": 20,
+      "reloadSeconds": 2.45707364,
+      "warnings": [
+        "Cadence is post-first-bolt lockout: bolt span plus fixed recovery, EXCLUDES charge. Subsequent official chargeTicks is separate; historical Oracle end delay is NOT added",
+        "Official charge milliseconds differ from historical Oracle end delay; both retained independently"
+      ]
+    },
+    {
+      "id": "dream_breaker",
+      "bungieHash": 2931957300,
+      "family": "fusion_rifle",
+      "officialStats": {
+        "magazine": 6,
+        "rpm": null,
+        "chargeMillis": 667,
+        "drawMillis": null,
+        "reloadSpeed": 30
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 20,
+        "inner_burst_delay": 1,
+        "burst_size": 7,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 1.3166666666666667,
+      "extraRecoverySeconds": 0.45,
+      "reloadCurve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "reloadStatUsed": 30,
+      "reloadSeconds": 2.2897836899999997,
+      "warnings": [
+        "Cadence is post-first-bolt lockout: bolt span plus fixed recovery, EXCLUDES charge. Subsequent official chargeTicks is separate; historical Oracle end delay is NOT added"
+      ]
+    },
+    {
+      "id": "null_composure",
+      "bungieHash": 1644680957,
+      "family": "fusion_rifle",
+      "officialStats": {
+        "magazine": 6,
+        "rpm": null,
+        "chargeMillis": 533,
+        "drawMillis": null,
+        "reloadSpeed": 48
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 15,
+        "inner_burst_delay": 1,
+        "burst_size": 9,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 1.2166666666666666,
+      "extraRecoverySeconds": 0.45,
+      "reloadCurve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "reloadStatUsed": 48,
+      "reloadSeconds": 2.0196719423999996,
+      "warnings": [
+        "Cadence is post-first-bolt lockout: bolt span plus fixed recovery, EXCLUDES charge. Subsequent official chargeTicks is separate; historical Oracle end delay is NOT added",
+        "Official charge milliseconds differ from historical Oracle end delay; both retained independently"
+      ]
+    },
+    {
+      "id": "coriolis_force",
+      "bungieHash": 3512349612,
+      "family": "fusion_rifle",
+      "officialStats": {
+        "magazine": 6,
+        "rpm": null,
+        "chargeMillis": 667,
+        "drawMillis": null,
+        "reloadSpeed": 34
+      },
+      "oracleFamily": "Fusion Rifle",
+      "category": "aggressive",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 20,
+        "inner_burst_delay": 0,
+        "burst_size": 7,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 1.1166666666666667,
+      "extraRecoverySeconds": 0.45,
+      "reloadCurve": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "reloadStatUsed": 34,
+      "reloadSeconds": 2.2263132835999997,
+      "warnings": [
+        "Cadence is post-first-bolt lockout: bolt span plus fixed recovery, EXCLUDES charge. Subsequent official chargeTicks is separate; historical Oracle end delay is NOT added"
+      ]
+    },
+    {
+      "id": "line_in_the_sand",
+      "bungieHash": 946443267,
+      "family": "linear_fusion_rifle",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": null,
+        "chargeMillis": 533,
+        "drawMillis": null,
+        "reloadSpeed": 23
+      },
+      "oracleFamily": "Linear Fusion Rifle",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 16,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 1.4833333333333334,
+      "extraRecoverySeconds": 0.95,
+      "reloadCurve": {
+        "evpp": 5.88462e-05,
+        "vpp": -0.0199884,
+        "offset": 2.87206463333
+      },
+      "reloadStatUsed": 23,
+      "reloadSeconds": 2.44346107313,
+      "warnings": [
+        "Cadence is post-first-bolt lockout: bolt span plus fixed recovery, EXCLUDES charge. Subsequent official chargeTicks is separate; historical Oracle end delay is NOT added"
+      ]
+    },
+    {
+      "id": "stormchaser",
+      "bungieHash": 3652506829,
+      "family": "linear_fusion_rifle",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": null,
+        "chargeMillis": 533,
+        "drawMillis": null,
+        "reloadSpeed": 25
+      },
+      "oracleFamily": "Linear Fusion Rifle",
+      "category": "default",
+      "subfamily": "Adaptive_Burst",
+      "firingFrames": {
+        "burst_delay": 16,
+        "inner_burst_delay": 5,
+        "burst_size": 3,
+        "one_ammo": true
+      },
+      "oraclePeriodSeconds": 1.8166666666666667,
+      "extraRecoverySeconds": 0.95,
+      "reloadCurve": {
+        "evpp": 5.88462e-05,
+        "vpp": -0.0199884,
+        "offset": 2.87206463333
+      },
+      "reloadStatUsed": 25,
+      "reloadSeconds": 2.40913350833,
+      "warnings": [
+        "Cadence is post-first-bolt lockout: bolt span plus fixed recovery, EXCLUDES charge. Subsequent official chargeTicks is separate; historical Oracle end delay is NOT added"
+      ]
+    },
+    {
+      "id": "retraced_path",
+      "bungieHash": 548958835,
+      "family": "trace_rifle",
+      "officialStats": {
+        "magazine": 94,
+        "rpm": 1000,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 45
+      },
+      "oracleFamily": "Trace Rifle",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 2.0,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.06666666666666667,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 5e-05,
+        "vpp": -0.0155,
+        "offset": 2.65
+      },
+      "reloadStatUsed": 45,
+      "reloadSeconds": 2.05375,
+      "oracleEffectiveRpm": 900.0,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "salvager_s_salvo",
+      "bungieHash": 2060863616,
+      "family": "grenade_launcher",
+      "officialStats": {
+        "magazine": 1,
+        "rpm": 90,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 70
+      },
+      "oracleFamily": "Grenade Launcher",
+      "category": "special",
+      "subfamily": "Lightweight",
+      "firingFrames": {
+        "burst_delay": 20,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.6666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 7.24199e-05,
+        "vpp": -0.0216432,
+        "offset": 3.24104606666667
+      },
+      "reloadStatUsed": 70,
+      "reloadSeconds": 2.0808795766666695,
+      "oracleEffectiveRpm": 90.0,
+      "warnings": []
+    },
+    {
+      "id": "deafening_whisper",
+      "bungieHash": 981718087,
+      "family": "grenade_launcher",
+      "officialStats": {
+        "magazine": 1,
+        "rpm": 72,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 70
+      },
+      "oracleFamily": "Grenade Launcher",
+      "category": "special",
+      "subfamily": "WaveFrame",
+      "firingFrames": {
+        "burst_delay": 20,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.6666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 7.24199e-05,
+        "vpp": -0.0216432,
+        "offset": 3.24104606666667
+      },
+      "reloadStatUsed": 70,
+      "reloadSeconds": 2.0808795766666695,
+      "oracleEffectiveRpm": 90.0,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "edge_transit",
+      "bungieHash": 218335759,
+      "family": "heavy_grenade_launcher",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": 120,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 39
+      },
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 15,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.5,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 7.55233e-05,
+        "vpp": -0.0248947,
+        "offset": 4.12880153333333
+      },
+      "reloadStatUsed": 39,
+      "reloadSeconds": 3.2727791726333297,
+      "oracleEffectiveRpm": 120.0,
+      "warnings": []
+    },
+    {
+      "id": "canis_major",
+      "bungieHash": 2066434718,
+      "family": "heavy_grenade_launcher",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": 150,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 22
+      },
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 12,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.4,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 7.55233e-05,
+        "vpp": -0.0248947,
+        "offset": 4.12880153333333
+      },
+      "reloadStatUsed": 22,
+      "reloadSeconds": 3.6176714105333296,
+      "oracleEffectiveRpm": 150.0,
+      "warnings": []
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "bungieHash": 1311684613,
+      "family": "heavy_grenade_launcher",
+      "officialStats": {
+        "magazine": 5,
+        "rpm": 120,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 42
+      },
+      "oracleFamily": "Grenade Launcher",
+      "category": "heavy",
+      "subfamily": "WaveFrame",
+      "firingFrames": {
+        "burst_delay": 20,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.6666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 7.55233e-05,
+        "vpp": -0.0248947,
+        "offset": 4.12880153333333
+      },
+      "reloadStatUsed": 42,
+      "reloadSeconds": 3.2164472345333297,
+      "oracleEffectiveRpm": 90.0,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "bad_omens",
+      "bungieHash": 991314988,
+      "family": "rocket_launcher",
+      "officialStats": {
+        "magazine": 1,
+        "rpm": 25,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 61
+      },
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Aggressive",
+      "firingFrames": {
+        "burst_delay": 33,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 1.1,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000103959,
+        "vpp": -0.0252069,
+        "offset": 4.09182213333333
+      },
+      "reloadStatUsed": 61,
+      "reloadSeconds": 2.9410326723333298,
+      "oracleEffectiveRpm": 54.54545454545454,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "bellowing_giant",
+      "bungieHash": 2186258845,
+      "family": "rocket_launcher",
+      "officialStats": {
+        "magazine": 1,
+        "rpm": 20,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 45
+      },
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 36,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 1.2,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000103959,
+        "vpp": -0.0252069,
+        "offset": 4.09182213333333
+      },
+      "reloadStatUsed": 45,
+      "reloadSeconds": 3.16802860833333,
+      "oracleEffectiveRpm": 50.0,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "code_duello",
+      "bungieHash": 2496242052,
+      "family": "rocket_launcher",
+      "officialStats": {
+        "magazine": 1,
+        "rpm": 15,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 35
+      },
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "firingFrames": {
+        "burst_delay": 38,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 1.2666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000103959,
+        "vpp": -0.0252069,
+        "offset": 4.09182213333333
+      },
+      "reloadStatUsed": 35,
+      "reloadSeconds": 3.3369304083333295,
+      "oracleEffectiveRpm": 47.36842105263158,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "pyroclastic_flow",
+      "bungieHash": 1289324202,
+      "family": "rocket_launcher",
+      "officialStats": {
+        "magazine": 1,
+        "rpm": 15,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 24
+      },
+      "oracleFamily": "Rocket Launcher",
+      "category": "default",
+      "subfamily": "Precision",
+      "firingFrames": {
+        "burst_delay": 42,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 1.4,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.000103959,
+        "vpp": -0.0252069,
+        "offset": 4.09182213333333
+      },
+      "reloadStatUsed": 24,
+      "reloadSeconds": 3.54673691733333,
+      "oracleEffectiveRpm": 42.85714285714286,
+      "warnings": [
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    },
+    {
+      "id": "fixed_odds",
+      "bungieHash": 2194955522,
+      "family": "machine_gun",
+      "officialStats": {
+        "magazine": 44,
+        "rpm": 360,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 31
+      },
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "High-Impact",
+      "firingFrames": {
+        "burst_delay": 5,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.16666666666666666,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905,
+        "ammo_percent": 0.65
+      },
+      "reloadStatUsed": 31,
+      "reloadSeconds": 5.2609558311,
+      "oracleEffectiveRpm": 360.0,
+      "warnings": []
+    },
+    {
+      "id": "hammerhead",
+      "bungieHash": 603242241,
+      "family": "machine_gun",
+      "officialStats": {
+        "magazine": 57,
+        "rpm": 450,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 64
+      },
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 4,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.13333333333333333,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905,
+        "ammo_percent": 0.65
+      },
+      "reloadStatUsed": 64,
+      "reloadSeconds": 4.5355806696,
+      "oracleEffectiveRpm": 450.0,
+      "warnings": []
+    },
+    {
+      "id": "retrofit_escapade",
+      "bungieHash": 3103325054,
+      "family": "machine_gun",
+      "officialStats": {
+        "magazine": 77,
+        "rpm": 900,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "reloadSpeed": 67
+      },
+      "oracleFamily": "Machine Gun",
+      "category": "default",
+      "subfamily": "Rapid-Fire",
+      "firingFrames": {
+        "burst_delay": 2,
+        "inner_burst_delay": 0.0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.06666666666666667,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905,
+        "ammo_percent": 0.65
+      },
+      "reloadStatUsed": 67,
+      "reloadSeconds": 4.4794152639,
+      "oracleEffectiveRpm": 900.0,
+      "warnings": []
+    },
+    {
+      "id": "abide_the_return",
+      "bungieHash": 1644160541,
+      "family": "sword",
+      "officialStats": {
+        "magazine": 50,
+        "rpm": null,
+        "chargeMillis": 20,
+        "drawMillis": null,
+        "reloadSpeed": null
+      },
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Exact Magazine stat is sword ammo capacity, not a reloadable magazine; supported=false",
+        "Sword unsupported: no Oracle timing model; retain existing runtime policy"
+      ]
+    },
+    {
+      "id": "goldtusk",
+      "bungieHash": 3371413057,
+      "family": "sword",
+      "officialStats": {
+        "magazine": 70,
+        "rpm": null,
+        "chargeMillis": 20,
+        "drawMillis": null,
+        "reloadSpeed": null
+      },
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Exact Magazine stat is sword ammo capacity, not a reloadable magazine; supported=false",
+        "Sword unsupported: no Oracle timing model; retain existing runtime policy"
+      ]
+    },
+    {
+      "id": "crown_splitter",
+      "bungieHash": 2782325302,
+      "family": "sword",
+      "officialStats": {
+        "magazine": 40,
+        "rpm": null,
+        "chargeMillis": 20,
+        "drawMillis": null,
+        "reloadSpeed": null
+      },
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Exact Magazine stat is sword ammo capacity, not a reloadable magazine; supported=false",
+        "Sword unsupported: no Oracle timing model; retain existing runtime policy"
+      ]
+    },
+    {
+      "id": "falling_guillotine",
+      "bungieHash": 614426548,
+      "family": "sword",
+      "officialStats": {
+        "magazine": 46,
+        "rpm": null,
+        "chargeMillis": 20,
+        "drawMillis": null,
+        "reloadSpeed": null
+      },
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Exact Magazine stat is sword ammo capacity, not a reloadable magazine; supported=false",
+        "Sword unsupported: no Oracle timing model; retain existing runtime policy"
+      ]
+    },
+    {
+      "id": "temptation_s_hook",
+      "bungieHash": 35794111,
+      "family": "sword",
+      "officialStats": {
+        "magazine": 23,
+        "rpm": null,
+        "chargeMillis": 50,
+        "drawMillis": null,
+        "reloadSpeed": null
+      },
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Exact Magazine stat is sword ammo capacity, not a reloadable magazine; supported=false",
+        "Sword unsupported: no Oracle timing model; retain existing runtime policy"
+      ]
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "bungieHash": 254636484,
+      "family": "glaive",
+      "officialStats": {
+        "magazine": 7,
+        "rpm": 55,
+        "chargeMillis": 41,
+        "drawMillis": null,
+        "reloadSpeed": 25
+      },
+      "oracleFamily": "Glaive",
+      "category": "default",
+      "subfamily": "Adaptive",
+      "firingFrames": {
+        "burst_delay": 27.0,
+        "inner_burst_delay": 0,
+        "burst_size": 1,
+        "one_ammo": false
+      },
+      "oraclePeriodSeconds": 0.9,
+      "extraRecoverySeconds": 0,
+      "reloadCurve": {
+        "evpp": 0.0,
+        "vpp": -0.0175,
+        "offset": 3.5
+      },
+      "reloadStatUsed": 25,
+      "reloadSeconds": 3.0625,
+      "oracleEffectiveRpm": 66.66666666666667,
+      "warnings": [
+        "Charge Time hash reused for non-charge stat; not interpreted as milliseconds for this family",
+        "Official RPM differs from pinned Oracle cadence; official raw RPM retained, cadence uses verified frame delays"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,582 @@
+{
+  "schema_version": 1,
+  "work_item": "W88",
+  "started_at_utc": "2026-10-24T18:27:48+00:00",
+  "completed_at_utc": "2026-10-24T18:32:20.750774+00:00",
+  "scope": "Bounded exact-source normal-weapon bow fatigue research; research artifacts only. No builds, runtime/source changes or app/world interaction.",
+  "decision": {
+    "ordinary_bow_new_quantitative_fatigue_evidence": false,
+    "maximum_hold_from_full_draw_ms": null,
+    "stability_to_maximum_hold_formula": null,
+    "precision_vs_lightweight_maximum_hold_difference": null,
+    "late_damage_curve": null,
+    "late_accuracy_curve": null,
+    "forced_release_damage_multiplier": null,
+    "forced_release_accuracy_cone": null,
+    "imperfect_draw_damage_curve": null,
+    "ready_for_exact_fatigue_implementation": false,
+    "handoff": "Keep perfect-window expiry separate from forced release. Official text supports real late damage/accuracy loss, but no sourced duration or curve allows exact gameplay implementation. Retain null; do not hardcode four seconds. Parent can prioritize another verified gap.",
+    "new_verified_relative_perk_modifier": {
+      "perk": "Sneak Bow",
+      "condition": "crouching",
+      "hold_duration_multiplier": 1.25,
+      "base_duration_ms": null
+    }
+  },
+  "selected_weapons": [
+    {
+      "hash": 1621657423,
+      "name": "Biting Winds",
+      "frame": "Precision Frame",
+      "intrinsic_hash": 715195141,
+      "stability": 43,
+      "display_draw_time_ms": 667,
+      "source": "current-items.raw.gz",
+      "extracted_copy": "selected-official-items.json",
+      "provenance": {
+        "stability": "/1621657423/stats/stats/155624089/value",
+        "draw_time": "/1621657423/stats/stats/447667954/value",
+        "intrinsic": "/715195141/displayProperties"
+      },
+      "maximum_hold_from_full_draw_ms": null,
+      "forced_release_from_draw_start_ms": null,
+      "late_damage_curve": null,
+      "late_accuracy_curve": null,
+      "imperfect_draw_damage_curve": null
+    },
+    {
+      "hash": 211938782,
+      "name": "Whispering Slab",
+      "frame": "Lightweight Frame",
+      "intrinsic_hash": 2108556049,
+      "stability": 53,
+      "display_draw_time_ms": 567,
+      "source": "current-items.raw.gz",
+      "extracted_copy": "selected-official-items.json",
+      "provenance": {
+        "stability": "/211938782/stats/stats/155624089/value",
+        "draw_time": "/211938782/stats/stats/447667954/value",
+        "intrinsic": "/2108556049/displayProperties"
+      },
+      "maximum_hold_from_full_draw_ms": null,
+      "forced_release_from_draw_start_ms": null,
+      "late_damage_curve": null,
+      "late_accuracy_curve": null,
+      "imperfect_draw_damage_curve": null
+    }
+  ],
+  "claims": [
+    {
+      "id": "late-loss",
+      "status": "official_historical_fulltext_verified_this_pass",
+      "source": "official-fulltext-web-capture.json",
+      "url": "https://www.bungie.net/7/en/News/article/51645",
+      "locator": "second content document, lines L127-L131",
+      "precise_text": "before you begin to lose accuracy and damage",
+      "finding": "Holding beyond the perfect-draw window begins losing damage and accuracy; no amount, shape, floor or forced-release endpoint is supplied."
+    },
+    {
+      "id": "stability-window",
+      "status": "official_historical_fulltext_verified_this_pass",
+      "source": "official-fulltext-web-capture.json",
+      "url": "https://www.bungie.net/7/en/News/article/51813",
+      "locator": "first content document, lines L213-L217",
+      "precise_text": "anything that affects the stability stat on a Bow will affect the perfect draw window",
+      "finding": "Stability modifiers, including the Rapid Hit example in the question, affect the perfect-draw window. No max-hold scaling or mid-draw update policy is specified."
+    },
+    {
+      "id": "lightweight-window-endpoints",
+      "status": "official_historical_fulltext_verified_this_pass",
+      "source": "official-fulltext-web-capture.json",
+      "url": "https://www.bungie.net/7/en/News/article/51645",
+      "locator": "second content document, L130-L131",
+      "values_seconds": [
+        0.5,
+        0.8
+      ],
+      "finding": "2022 lightweight perfect-window low/high endpoints only; neither maximum hold nor current full interpolation."
+    },
+    {
+      "id": "oathkeeper-official",
+      "status": "official_current_manifest",
+      "source": "current-items.raw.gz",
+      "locator": "JSON /1449897496/displayProperties/description",
+      "precise_text": "Bow perfect draw can be held indefinitely.",
+      "finding": "Adamantine Brace is an explicit indefinite-perfect-draw exception, with a separately described damage bonus."
+    },
+    {
+      "id": "oathkeeper-developer",
+      "status": "official_historical_fulltext",
+      "source": "bungie-oathkeeper.raw",
+      "url": "https://www.bungie.net/en/Forums/Post/249615515?page=0&path=1",
+      "locator": "a_dmg04 original post, 2018-11-08; paragraph beginning Moving forward",
+      "precise_text": "players may hold bow charges indefinitely",
+      "finding": "Developer additionally confirms Perfect Draw applies after longer holds. Historical minor charge-time reduction was not quantified here."
+    },
+    {
+      "id": "sneak-bow-modifier",
+      "status": "two_current_community_sources_agree",
+      "sources": [
+        {
+          "file": "ddc-weapon-perks.raw",
+          "locator": "Weapon Perks!D205; matched row retained in ddc-weapon-perks-matched-row.json"
+        },
+        {
+          "file": "clarity-live.raw",
+          "locator": "JSON /908147344/descriptions/en/4/linesContent/0/text"
+        }
+      ],
+      "precise_text": "25% increased Hold Time",
+      "hold_duration_multiplier": 1.25,
+      "condition": "while crouching",
+      "base_duration_ms": null,
+      "finding": "Relative perk modifier cannot establish a base ordinary-bow maximum hold. Enhanced entry also says 25%; extra Stability/Reload remain question marks."
+    },
+    {
+      "id": "oathkeeper-four-seconds",
+      "status": "community_text_verified_endpoint_distinction",
+      "sources": [
+        {
+          "file": "ddc-exotic-armors.raw",
+          "locator": "Exotic Armors!D85; matched row retained in ddc-exotic-armors-matched-row.json"
+        },
+        {
+          "file": "clarity-live.raw",
+          "locator": "JSON /1449897496/descriptions/en/6/linesContent/0/text"
+        }
+      ],
+      "finding": "Four seconds describes expiry of the PvE bonus damage, not expiry of indefinite Perfect Draw or ordinary-bow forced release. DDC counts from full draw; Clarity says Adamantine Brace being active. Do not silently unify those timing origins."
+    }
+  ],
+  "clarity_pin": {
+    "repository": "Database-Clarity/Live-Clarity-Database",
+    "branch": "live",
+    "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+    "entries": {
+      "908147344": {
+        "hash": 908147344,
+        "name": "Sneak Bow",
+        "lastUpload": 1723480728683,
+        "type": "Weapon Trait",
+        "uploadedBy": "Stardust",
+        "descriptions": {
+          "en": [
+            {
+              "linesContent": [
+                {
+                  "text": "Crouching grants the following benefits:"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• Prevents Radar Ping when shooting"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• ? Reload Speed"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• 0.8x Reload Duration Multiplier"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• 25% increased Hold Time"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "1663363584": {
+        "hash": 1663363584,
+        "name": "Sneak Bow",
+        "lastUpload": 1709252348445,
+        "type": "Weapon Trait Enhanced",
+        "uploadedBy": "Stardust",
+        "descriptions": {
+          "en": [
+            {
+              "linesContent": [
+                {
+                  "text": "Crouching grants the following benefits:"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• Prevents Radar Ping when shooting"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• ? Reload Speed"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• 0.8x Reload Duration Multiplier"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• 25% increased Hold Time"
+                }
+              ]
+            },
+            {
+              "classNames": [
+                "spacer"
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "🡅",
+                  "classNames": [
+                    "enhancedArrow"
+                  ]
+                },
+                {
+                  "text": " Grants an additional ? Stability and Reload Speed while crouched."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "1449897496": {
+        "hash": 1449897496,
+        "name": "Adamantine Brace",
+        "itemHash": 691578978,
+        "itemName": "Oathkeeper",
+        "lastUpload": 1766530840776,
+        "type": "Armor Trait Exotic",
+        "uploadedBy": "Stardust",
+        "descriptions": {
+          "en": [
+            {
+              "linesContent": [
+                {
+                  "text": "Passively grants 40 Airborne Effectiveness and 10 Draw Time Stat (equivalent of a Draw Time Masterwork) to Bows."
+                }
+              ]
+            },
+            {
+              "classNames": [
+                "spacer"
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "Full Draws grant 'Adamantine Brace':"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• Allows Perfect Draws to be held indefinitely"
+                }
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "• "
+                },
+                {
+                  "text": "Grants 37.5% increased damage against PVE Combatants for every 0.5 seconds you hold a perfect draw, up to a 200% increase",
+                  "classNames": [
+                    "pve"
+                  ]
+                }
+              ]
+            },
+            {
+              "classNames": [
+                "spacer"
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "PVE damage buff only affects the initial Impact damage (e.g. Wish Ender's overpenetration is unaffected) and expires after 4 seconds of Adamantine Brace being active."
+                }
+              ]
+            },
+            {
+              "classNames": [
+                "spacer"
+              ]
+            },
+            {
+              "linesContent": [
+                {
+                  "text": "Leviathan's Breath",
+                  "classNames": [
+                    "yellow"
+                  ]
+                },
+                {
+                  "text": " does not receive the damage increase."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "limitations": "Community research, not Bungie engine source. Live branch retrieval does not imply each individual entry was recently tested; lastUpload timestamps retained. DDC and Clarity Oathkeeper bonus progression/timing text differs; exact Oathkeeper curve not adopted."
+  },
+  "manifest": {
+    "version": "245114.26.10.13.2000-1-bnet.66137",
+    "selected_stats_revalidated": true,
+    "limitations": "Inspected selected item display stats, frame descriptions, and relevant perk descriptions contain no quantitative maximum-hold or late-decay function. This is not proof of absence from every manifest field or game engine."
+  },
+  "frame_observations": {
+    "performed": false,
+    "capture_fps": null,
+    "full_draw_frame": null,
+    "perfect_window_last_frame": null,
+    "forced_release_frame": null,
+    "trials": [],
+    "reason": "No suitable measured normal-bow footage obtained during bounded search; no game launched or controlled. Search hits about Oathkeeper bonus testing do not measure ordinary-bow fatigue."
+  },
+  "source_fetches": [
+    {
+      "id": "bungie-oathkeeper",
+      "url": "https://www.bungie.net/en/Forums/Post/249615515?page=0&path=1",
+      "final_url": "https://www.bungie.net/en/Forums/Post/249615515?page=0&path=1",
+      "fetched_at_utc": "2026-10-24T18:28:22.260656+00:00",
+      "http_status": 200,
+      "sha256": "e928cc1d8bf0043c9ae2795faf4e6facb9c216891161a766ba73302490133850",
+      "bytes": 146206,
+      "file": "bungie-oathkeeper.raw"
+    },
+    {
+      "id": "bungie51813-full",
+      "url": "https://www.bungie.net/en/Explore/Detail/News/51813",
+      "final_url": "https://www.bungie.net/7/en/News/article/51813",
+      "fetched_at_utc": "2026-10-24T18:29:28.430718+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie51813-full.raw"
+    },
+    {
+      "id": "bungie51813-fullarticle",
+      "url": "https://www.bungie.net/en/News/Article/51813",
+      "final_url": "https://www.bungie.net/7/en/News/article/51813",
+      "fetched_at_utc": "2026-10-24T18:28:41.721698+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie51813-fullarticle.raw"
+    },
+    {
+      "id": "bungie51813-static",
+      "url": "https://origin-static01.bungie.net/7/en/News/article/51813",
+      "final_url": "https://origin-static01.bungie.net/7/en/News/article/51813",
+      "fetched_at_utc": "2026-10-24T18:29:10.541853+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie51813-static.raw"
+    },
+    {
+      "id": "bungie51813",
+      "url": "https://www.bungie.net/7/en/News/article/51813",
+      "final_url": "https://www.bungie.net/7/en/News/article/51813",
+      "fetched_at_utc": "2026-10-24T18:28:22.754275+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie51813.raw"
+    },
+    {
+      "id": "bungie620-full",
+      "url": "https://www.bungie.net/en/Explore/Detail/News/51707",
+      "final_url": "https://www.bungie.net/7/en/News/article/51707",
+      "fetched_at_utc": "2026-10-24T18:29:29.306732+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie620-full.raw"
+    },
+    {
+      "id": "bungie620-fullarticle",
+      "url": "https://www.bungie.net/en/News/Article/51707",
+      "final_url": "https://www.bungie.net/7/en/News/article/51707",
+      "fetched_at_utc": "2026-10-24T18:28:41.714961+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie620-fullarticle.raw"
+    },
+    {
+      "id": "bungie620-static",
+      "url": "https://static01.bungie.net/7/en/News/article/51707",
+      "final_url": "https://static01.bungie.net/7/en/News/article/51707",
+      "fetched_at_utc": "2026-10-24T18:29:10.511134+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie620-static.raw"
+    },
+    {
+      "id": "bungie620",
+      "url": "https://www.bungie.net/7/en/News/article/51707",
+      "final_url": "https://www.bungie.net/7/en/News/article/51707",
+      "fetched_at_utc": "2026-10-24T18:28:22.700449+00:00",
+      "http_status": 200,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "bytes": 1301,
+      "file": "bungie620.raw"
+    },
+    {
+      "id": "clarity-live",
+      "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+      "final_url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+      "fetched_at_utc": "2026-10-24T18:29:10.206907+00:00",
+      "http_status": 200,
+      "sha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+      "bytes": 2091445,
+      "file": "clarity-live.raw"
+    },
+    {
+      "id": "clarity-tree-live",
+      "url": "https://api.github.com/repos/Database-Clarity/Live-Clarity-Database/git/trees/live?recursive=1",
+      "final_url": "https://api.github.com/repos/Database-Clarity/Live-Clarity-Database/git/trees/live?recursive=1",
+      "fetched_at_utc": "2026-10-24T18:28:41.752085+00:00",
+      "http_status": 200,
+      "sha256": "0185fdab79360a92d528abcd8805c915439ca442d3992b753e63bc0d25135ba7",
+      "bytes": 3188,
+      "file": "clarity-tree-live.raw"
+    },
+    {
+      "id": "current-items",
+      "url": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+      "final_url": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+      "fetched_at_utc": "2026-10-24T18:28:45.002424+00:00",
+      "http_status": 200,
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691,
+      "file": "current-items.raw.gz",
+      "storage_encoding": "gzip; decompress to reproduce raw sha256",
+      "stored_sha256": "de3dad1a091ecb1d939d85c06a7985a5992c522e1b1b1a2ce6a45888e43d096e",
+      "stored_bytes": 8792211
+    },
+    {
+      "id": "ddc-exotic-armors",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?headers=true&gid=1500097863",
+      "final_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?headers=true&gid=1500097863",
+      "fetched_at_utc": "2026-10-24T18:29:57.579408+00:00",
+      "http_status": 200,
+      "sha256": "1f758d8bc1441697ca7777d0bb3711cc35ef210add78987b938538a77359f243",
+      "bytes": 462678,
+      "file": "ddc-exotic-armors.raw"
+    },
+    {
+      "id": "ddc-home",
+      "url": "https://linktr.ee/destinyspreadsheets",
+      "final_url": "https://linktr.ee/destinyspreadsheets",
+      "fetched_at_utc": "2026-10-24T18:28:23.006806+00:00",
+      "http_status": 200,
+      "sha256": "50a1e5cd0ceb32f143cf9180d80c4f3210a7ad15a232598d17e04dd1329f54b8",
+      "bytes": 258617,
+      "file": "ddc-home.raw"
+    },
+    {
+      "id": "ddc-html",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview",
+      "final_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview",
+      "fetched_at_utc": "2026-10-24T18:29:28.751771+00:00",
+      "http_status": 200,
+      "sha256": "43b241cebffb033e4c68cef1138dd3f8db93c1019a5f71cb795bbb8ee3ab8ee6",
+      "bytes": 62956,
+      "file": "ddc-html.raw"
+    },
+    {
+      "id": "ddc-weapon-perks",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?headers=true&gid=1662574278",
+      "final_url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/htmlview/sheet?headers=true&gid=1662574278",
+      "fetched_at_utc": "2026-10-24T18:29:56.093452+00:00",
+      "http_status": 200,
+      "sha256": "850d7045851c3ba76fce2d794d45f01814fb7252b0cfb4bbf87083b37971ab82",
+      "bytes": 761367,
+      "file": "ddc-weapon-perks.raw"
+    },
+    {
+      "id": "manifest",
+      "url": "https://www.bungie.net/Platform/Destiny2/Manifest/",
+      "final_url": "https://www.bungie.net/Platform/Destiny2/Manifest/",
+      "fetched_at_utc": "2026-10-24T18:28:22.197155+00:00",
+      "http_status": 200,
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873,
+      "file": "manifest.raw"
+    },
+    {
+      "file": "official-fulltext-web-capture.json",
+      "sha256": "74c691b2e976892b781f9920bd6baf8c4dcf5b22ccf122242ec148082cf3a8d4",
+      "fetched_at_utc": "2026-10-24T18:30:03.088773+00:00",
+      "kind": "web tool fetched fulltext extract; HTTP raw shells kept separately",
+      "urls": [
+        "https://www.bungie.net/7/en/News/article/51813",
+        "https://www.bungie.net/7/en/News/article/51645"
+      ],
+      "line_provenance": {
+        "51813": "L213-L217",
+        "51645": "L127-L131"
+      }
+    }
+  ],
+  "retrieval_failures": [
+    {
+      "url": "https://api.github.com/repos/Database-Clarity/Live-Clarity-Database/git/trees/main?recursive=1",
+      "result": "404; resolved actual live branch using repository page"
+    },
+    {
+      "url": "https://www.bungie.net/Platform/Content/GetContentById/51707/en/?head=false",
+      "result": "HTTP 500; head=true also 500"
+    },
+    {
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/export?format=xlsx",
+      "result": "401; public htmlview and named sheet HTML succeeded"
+    },
+    {
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBvtO_xhWNuK8EXJFWAhZT4QsAak8-M/htmlview",
+      "result": "404 from incorrectly recalled ID; discarded; correct ID subsequently verified through DDC author link and public sheet title"
+    }
+  ],
+  "official_retrieval_limit": "Direct 51707/51813 HTTP captures returned identical 1301-byte JS shells, including redirect/static variants; they are not full-article proof. Web-tool retrieval subsequently obtained 51645 and 51813 article text; that actual response is separately stored and hashed. 51707 itself was not freshly full-text fetched. Existing W74 private capture was inspected but is not claimed as a new retrieval.",
+  "prior_work_read_only": [
+    "docs/design/89_W74_활_최적_발사창_HUD.md",
+    "art/weapons/w74/reference-notes.md",
+    "art/weapons/w74/fatigue-notes.md",
+    "art/weapons/w74/references/fatigue-research.json",
+    "art/weapons/w74/references/perfect-window.json",
+    "run/private-sources/w74/perfect-window-web-capture.json"
+  ],
+  "stop_reason": "No new quantitative ordinary-bow fatigue evidence at three-minute checkpoint; stopped hunting and finalized owned artifacts after parent instruction."
+}

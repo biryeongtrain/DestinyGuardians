@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "weapon": "hammerhead",
+  "framing": {
+    "translation": [
+      -0.8,
+      0.45,
+      4.25
+    ],
+    "rotation": [
+      -2,
+      1,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A005"
+    }
+  },
+  "evidence": [
+    {
+      "path": "art/weapons/w205/rigs/machine_gun_e5b72131.json",
+      "role": "exact non-fallback Hammerhead elbow/wrist directions and forearm lengths",
+      "idle": "80A8A00D",
+      "ads": "80A8A00E",
+      "cameraExported": false
+    },
+    {
+      "path": "art/weapons/w201/contacts.json",
+      "role": "inherit Hammerhead pistol grip, forward underside support and magazine reload contact"
+    },
+    {
+      "path": "art/weapons/w123/hammerhead/design.json",
+      "role": "gas cylinder underside, twin drums, hinged sight cover and W154 rigid XY belt with tips toward -Z"
+    },
+    {
+      "path": "art/weapons/w123/hammerhead/comparison.png",
+      "role": "viewed actual PNG; offline geometry and default appearance comparison, not native proof"
+    },
+    {
+      "path": "art/weapons/w114/hammerhead/reference-15.png",
+      "url": "https://www.youtube.com/watch?v=1lHv7453rUI&t=106",
+      "sourceSeconds": 106.4,
+      "role": "viewed actual gameplay PNG; low-right ready receiver, partly cropped hands; overlays limit precise composition"
+    },
+    {
+      "path": "art/weapons/w114/hammerhead/reference-08.png",
+      "url": "https://www.youtube.com/watch?v=1lHv7453rUI&t=103",
+      "sourceSeconds": 103.8,
+      "role": "viewed actual gameplay PNG; open hinged cover, exposed receiver/feed and partially occluded magazine handling"
+    },
+    {
+      "path": "art/weapons/w114/hammerhead/gameplay-provenance.json",
+      "role": "existing recording identity and frame timestamps"
+    },
+    {
+      "path": "scripts/rig_arms_w205.py",
+      "role": "W211 full-chain source directions, ordinary segment lengths and shared source weapon-parent motion; mesh rest contacts retained"
+    },
+    {
+      "path": "scripts/build_first_person_hands_w201.py",
+      "role": "shared weapon/contact framing and moving-magazine reload target"
+    },
+    {
+      "path": "scripts/first_person_framing_w205.py",
+      "role": "hip calibration fades to identity at full ADS; sourceViewRotation is rig direction calibration"
+    },
+    {
+      "path": "docs/qa/2026-10-28/w211/source/source-review.json",
+      "role": "Master headless Blender evaluation of original machine_gun_e5b72131 source; worker read report/matrices and viewed source sheet, did not open Blender",
+      "group": "machine_gun_e5b72131",
+      "reload": "80A8A005",
+      "samples": 61,
+      "cameraExported": false
+    }
+  ],
+  "notes": [
+    "Authored view calibration, not recovered camera data; exact source camera/projection is absent.",
+    "Positive translation Z moves the whole weapon and attached skin arms toward the camera in hip only. Ordinary exact-rig forearm lengths remain unchanged; no extension or length override.",
+    "keepMeshSupport retains the remodeled forward underside contact at idle/ADS; exact rig still supplies wrist twist, approach direction and length. Source-view rotation stays identity.",
+    "W201 contact positions/rotations and magazine policy/partHint are inherited unchanged: right [8,8.5,7.98], left [7.8,9.75,-3.8], reload [4.4,8.4,3.9]. The only reload override selects audited source action 80A8A005; this is not a weapon-exclusive action claim.",
+    "Support remains visible at rest for the heavy machine gun. No cameraDepth; full-ADS weapon display matrices retain the accepted baseline.",
+    "Fingerless player-skin forearms and shared W205 fallback wrist settings are inherited. No weapon mesh, UV, sight, third-person, audio, combat or reload timing edit.",
+    "W211 pre-Vision candidate: sourceFullChain=true opts this gun into evaluated shoulder-elbow-wrist directions, ordinary source segment lengths, source wrist travel and common source weapon-parent motion. This branch takes precedence over sourceWeaponRelative, so no inert flag is added. Master owns generation and actual Vision1, findings returned to worker, correction review and Vision2; no native acceptance is claimed."
+  ]
+}

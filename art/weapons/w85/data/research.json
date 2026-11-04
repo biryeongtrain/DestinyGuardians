@@ -1,0 +1,166 @@
+{
+  "stage": "W85 incoming-hit flinch + fixed Izanagi No Distractions; research-only",
+  "finishedAtUtc": "2026-10-24T17:27:51.829259+00:00",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "scope": [
+    "art/weapons/w85/reference-notes.md",
+    "art/weapons/w85/references/*",
+    "art/weapons/w85/data/research.json"
+  ],
+  "official": {
+    "weaponHash": 3211806999,
+    "noDistractionsHash": 2866798147,
+    "noDistractionsSandboxPerkHash": 3847840073,
+    "fixedSocket": {
+      "index": 3,
+      "singleInitialItemHash": 2866798147,
+      "source": "references/official-izanagi-item-raw.json#/sockets/socketEntries/3"
+    },
+    "description": {
+      "text": "Aiming this weapon for a short period reduces flinch.",
+      "source": "references/official-item-2866798147-raw.json#/displayProperties/description"
+    },
+    "stability": {
+      "baseDisplay": 41,
+      "chamberedCompensator": 10,
+      "compositeStock": 5,
+      "fixedRollDisplay": 56,
+      "sources": [
+        "references/official-izanagi-item-raw.json#/stats/stats/155624089",
+        "references/official-item-3661387068-raw.json#/investmentStats",
+        "references/official-item-3465198467-raw.json#/investmentStats"
+      ],
+      "flinchResistanceAt56": null
+    },
+    "flinch2022": {
+      "status": "Historical official announced 2022-04-21 and shipped 4.1.0, not an exhaustive current-patch audit",
+      "definition": "Aim deflection on receiving damage",
+      "familyAt100Stability": [
+        {
+          "weapons": [
+            "Auto Rifle",
+            "Submachine Gun",
+            "Bow"
+          ],
+          "resistanceAt100Stability": 0.25
+        },
+        {
+          "weapons": [
+            "Pulse Rifle",
+            "Scout Rifle",
+            "Sidearm",
+            "Machine Gun"
+          ],
+          "resistanceAt100Stability": 0.2
+        },
+        {
+          "weapons": [
+            "Hand Cannon",
+            "Trace Rifle"
+          ],
+          "resistanceAt100Stability": 0.15
+        },
+        {
+          "weapons": [
+            "Fusion Rifle",
+            "Shotgun",
+            "Sniper Rifle",
+            "Grenade Launcher (Breech)",
+            "Grenade Launcher (Drum)",
+            "Linear Fusion Rifle (Special)",
+            "Linear Fusion Rifle (Heavy)",
+            "Rocket Launcher"
+          ],
+          "resistanceAt100Stability": 0.1
+        }
+      ],
+      "below20Stability": "small flinch resistance penalty; exact curve not supplied here",
+      "higherZoom": "more affected by flinch; no exact zoom-to-angle function supplied",
+      "stacking": "multiplicative remaining-flinch factors",
+      "noDistractionsWorkedExampleFactor": 0.65,
+      "resilienceHistoricalEndpoints": {
+        "at0": 0,
+        "at100": 0.1,
+        "currentVerified": false
+      },
+      "sources": [
+        "references/bungie-twab-2022-04-21-raw.txt",
+        "references/bungie-update-410-raw.txt"
+      ]
+    },
+    "laterPatch": {
+      "version": "7.3.6",
+      "date": "2024-04-09",
+      "section": "Crucible Only Changes",
+      "quote": "Reduced flinch taken by all Primary weapons by 15%.",
+      "remainingFlinchFactor": 0.85,
+      "scope": "held/receiving Primary weapon in Crucible, NOT all flinch inflicted by primary weapon hits; not held Izanagi",
+      "source": "references/bungie-update-736-corrected-raw.txt",
+      "verifiedUnchangedThrough2026": false
+    }
+  },
+  "community": {
+    "source": "references/clarity-pinned-raw.json#/2866798147/descriptions/en",
+    "snapshotCommit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+    "noDistractions": {
+      "activationSeconds": 1,
+      "timerOrigin": "ADS input press",
+      "activationCondition": "ADS without firing",
+      "resistance": 0.35,
+      "remainingFlinchFactor": 0.65,
+      "removal": "no longer ADS",
+      "afterProcFiring": "Retained while ADS continues, per explicit remains-active-until-no-longer-ADS wording",
+      "beforeProcFiring": "Cannot satisfy an uninterrupted one-second ADS-without-firing interval across the shot; renewed quiet interval required. Exact reset-vs-pause implementation not directly described.",
+      "reload": "No independent rule established; ADS exit clears. Held ADS input during a reload is not proof of uninterrupted ADS.",
+      "handling": "No independent rule established; ADS exit clears.",
+      "stow": "ADS-session effect ends when ADS ends on stow; inference from stated removal condition, not an independently measured stow test.",
+      "dryFireOrRejectedTriggerResetsTimer": null
+    },
+    "enhancedNotEquipped": {
+      "hash": 3974407819,
+      "activationSeconds": 0.9,
+      "resistance": 0.35,
+      "note": "Not the fixed base trait on Izanagi; do not apply .9s activation by default."
+    }
+  },
+  "incomingDirection": {
+    "official": "Receiving damage causes aim deflection; zoom affects severity. No retrieved official exact relation from damage-source vector to pitch/yaw.",
+    "historicalCommunityQualifier": "CoolGuy 2018 description explicitly suspects controller/console-only behavior and asks for PC confirmation. Sparse storyboard shows scope displacement during red damage overlays, not a universal aim-assist formula.",
+    "sources": [
+      "references/youtube-coolguy-direction-raw.html",
+      "references/gameplay-evidence.json"
+    ],
+    "towardEnemyHeadUniversal": null,
+    "awayFromSourceUniversal": null,
+    "pitchYawFunction": null
+  },
+  "unresolved": {
+    "exactKickDegrees": null,
+    "exactRecoverySeconds": null,
+    "recoveryCurve": null,
+    "exactStabilityInterpolation": null,
+    "zoomScalingFunction": null,
+    "damageMagnitudeScaling": null,
+    "damageSourceTypeMatrix": null,
+    "healthVsShieldVsAbsorptionLoss": null,
+    "immuneOrZeroLossFlinch": null,
+    "dotAndAreaDamageFlinch": null,
+    "sameTickOrderingAtProcThreshold": null,
+    "nativeHookPoint": null,
+    "current2026FamilyTableRevalidated": false
+  },
+  "localPolicyBoundaries": [
+    "20 ticks as conversion of one second at20TPS; exact same-tick shot/proc ordering remains local",
+    "Post-actuallyHurt effective loss, authored/clamped rotation, direction fallback and recovery implementation are local choices, not sourced D2 internals",
+    "ADS continuity across handling/reload/input-held states must be defined by runtime; do not infer Destiny retention from held input alone",
+    "No target acquisition, head-seeking correction or arbitrary degrees claimed from historical controller test",
+    "Historical resilience endpoints and2024 Crucible primary factor are not silently applied universally/PvE/to Izanagi"
+  ],
+  "gameplay": {
+    "evidence": "references/gameplay-evidence.json",
+    "visuallyInspectedSheets": 4,
+    "sampling": "Direction video2s; resistance video5s, not frame-accurate timing",
+    "captions": "Attempt returned200zero bytes; no transcript claim"
+  },
+  "provenance": "references/provenance.json"
+}

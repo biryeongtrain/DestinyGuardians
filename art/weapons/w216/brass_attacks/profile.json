@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "weapon": "brass_attacks",
+  "sourceAction": "80A8ADE2",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8ADE2",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.12,
+        0.36,
+        0.43
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "sidearm_80771a27",
+    "action": "80A8ADE2",
+    "sourceBlendSha256": "29da093f34c158d1ef7f6f482d903f05429b79ab8d058ad33a7613adbceae34b",
+    "sourceMapSha256": "5963964a0e0b44daa09e3c30c6b8b2e9329d7b3c32f1a29604ab85748ac21cb8",
+    "boneMapSha256": "83e632846c984262cb10bdc6cbdcd1d83357c1c76226a8a4ebebb73afa4710e1"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w216/source/source-review.json",
+      "sourceSha256": "3b5ec3c27772222c14730457fd1d9ff431c39802ae4df10bb7f286440aaf61d6",
+      "role": "master_original_blender_evaluation",
+      "observation": "Read current normalized master headless Blender5.4.0 Alpha evaluation: ARMATURE only, OBSlot Armature|fp_80A8ADE2_reload_full|Base, frames1..67 at30fps,61 samples, prior-cache joint error0, allInputsUnchanged=true. Worker did not open/evaluate Blender."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sidearm_80771a27.json",
+      "sourceSha256": "2fefe3ce5619d594e53a44ec573e1217c4e1b9e3ba2db6e40b31dfa39999a273",
+      "role": "fresh_normalized_source61",
+      "observation": "Read61 original armature-object weapon/shoulder/elbow/wrist matrices. Left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. Source lengths at32 units: upper8.72669/8.72657 and forearms8.14136. Preserve ordinary lengths/axes and sourceFullChain; no attenuation or meshArmDirections priority."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/sidearm_80771a27-80A8ADE2-upper-chain.png",
+      "sourceSha256": "dfce89c54f21264b22f485046d25e84d8c8e0cf1edfeb2bf10cd656544767de9",
+      "role": "viewed_bone_only_upper_chain_sheet",
+      "observation": "Viewed six actual XZ/YZ bone-chain projections p=0,.2,.4,.6,.8,1 during preparation. Wrist travel through exchange/recovery; no weapon mesh, camera or native contact evidence."
+    },
+    {
+      "source": "scripts/generate_reload_w176_brass_attacks.py",
+      "sourceSha256": "139cdca64b8d1d69a370e50de24031209871983609f0afd850dcaa4afd91fa21",
+      "role": "authored_geometry_and_motion",
+      "observation": "AST-read inert constants/functions without importing/executing heavy W176 generator. Exact13 knots from owned manifest agree with source, including.20..28 withdrawal hold and magazine zero offset.43..1. Preserve base103 plus authored core/neck; grip95..102 and housing stay fixed. W176 SOURCE.md absent; retained manifest/motion-reference carry Ultraclocked F6-wH23URIw13.2..15.0s provenance. Footage not re-viewed."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Called first_person_framing_w205.profile(load(),brass_attacks,sidearm) before W216: translation[-1,.25,0],rotation[-1,0,0],scale.98,rightWristRoll27,hideSupportAtRest=true. Preserve actual spatial/wrist values; set required sourceFullChain/keepMeshSupport=true,hideSupportAtRest=false only."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_mesh_contacts_and_attachment_release",
+      "observation": "Keep right rest[8,10.1,8.37]/[-19,0,0],left rest[7.05,9.65,8.72]/[-19,0,-20],reload contact[7.1,6.62,9.34]/[-19,0,0]. Supported gripWindow[.05,.12,.36,.43] attaches by withdrawal and releases exactly by authored.43 seat. Later source wrist action cannot drag seated payload; not recovered IK/contact."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST implementation. Master owns shared loader/action binding/materialization/runtime60grid and all native/CU operations.",
+    "No geometry/atlas/ADS/gameplay/ammo/audio/duration changes; no new arm/camera compensation or slide mechanics.",
+    "Candidate113 weapon+448 classic arm surfaces=561; raw canonical244+448=692. These are estimates, not measured all-route acceptance.",
+    "Required sequence: original master Blender evaluation ->61 poses -> master FIRST exact feedback -> worker correction or justified nochange -> master SECOND. FIRST/SECOND pending."
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "stage": "W172",
+  "repository": "https://github.com/Database-Clarity/Live-Clarity-Database",
+  "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+  "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+  "sourceSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 4104185692,
+    "name": "Frenzy",
+    "lastUpload": 1783935545841,
+    "type": "Weapon Trait",
+    "uploadedBy": "Hawkmoona",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "After being in Combat for 12 seconds:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Grants 15% increased damage, 100 Handling, and 100 Reload Speed for 7.2 seconds."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Works and can activate while stowed. Dealing and receiving damage refreshes the buff duration."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "For Frenzy, being in Combat is defined as having either dealt or received damage within the last 5 seconds."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Self-damage and environmental damage do not count."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 3007133316,
+  "mechanics": {
+    "id": "frenzy",
+    "hash": 4104185692,
+    "activationTicks": 240,
+    "combatGraceTicks": 100,
+    "durationTicks": 144,
+    "damageMultiplier": 1.15,
+    "handlingBonus": 100,
+    "reloadBonus": 100,
+    "worksStowed": true,
+    "refreshOnDealtDamage": true,
+    "refreshOnReceivedDamage": true,
+    "selfDamageCounts": false,
+    "environmentalDamageCounts": false
+  },
+  "durationMultiplier": 1.0,
+  "sourceDurationMultiplier": "NO_DURATION_SCALAR_SPECIFIED_NEUTRAL_1",
+  "policies": {
+    "statCap": 100,
+    "durationMultiplier": 1.0,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "adsBounds": "CLAMP_TICKS_2_20_W44",
+    "glaiveAds": "W44_UNSUPPORTED_NEUTRAL_2_TICKS_ZERO_ORACLE_CURVE",
+    "handlingBounds": "W58_NO_EXTRA_TICK_CLAMP_STOW_AT_100_FLOOR",
+    "combatDefinition": "DEALT_OR_RECEIVED_DAMAGE_WITHIN_LAST_5_SECONDS",
+    "sourceDamageAttribution": "MASTER_OWNED_LOCAL_POLICY",
+    "sourceCombinedPerks": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "cycleIntegration": "MASTER_OWNED_LOCAL_POLICY",
+    "snapshotComposition": "W68_ENTRY_SCALAR_AFTER_FRENZY_STAT100_BEFORE_SINGLE_CEIL_CLAMP1_20"
+  },
+  "limitations": [
+    "Bungie Oct13 manifest and Oracle May20 curves are separate pinned snapshots. Community timings are historical approximations, not exact official animation measurements.",
+    "Clarity combat12s, damage15percent, handling/reload+100, buff7.2s, stowed activation, damage refresh and combat5s definition are source mechanics. Runtime attribution and cycle integration are master-owned local policies.",
+    "Stats clamp0..100, duration scalar1, stow-at100 floor, W44 ADS2..20ticks, no extra ready/stow clamp, ceil seconds*20 once.",
+    "Nezarec glaive ADS unsupported by W44: exact zero Oracle curve maps to existing neutral2ticks; no ADS improvement claimed. All10 eligible weapons retained.",
+    "No eligible shell reload or sword. Each plan explicitly includes shellReload=false, reloadPerRoundTicks=null, reloadInitialTicks=null; unexpected topology fails instead of dropping membership.",
+    "Snapshot co-selection is exact only for Austringer and Dream Breaker, socket3 vs Frenzy4. Apply W68 scalar .5/.8 to Frenzy stat100 ADS seconds before one ceil and W68 clamp1..20; entry-only local composition, not a measured joint Destiny effect. W68 historical Special .75 vs selected .8 conflict remains unresolved.",
+    "Other combined perks, armor, masterworks, combat runtime, native Vision and final gates are master-owned. Enhanced Frenzy is excluded."
+  ]
+}

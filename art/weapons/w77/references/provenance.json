@@ -1,0 +1,64 @@
+{
+  "stage": "W77",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourceHashes": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "catalog": {
+      "path": "src/main/resources/destiny/weapons/w30.json",
+      "sha256": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+      "bytes": 13784
+    },
+    "characteristics": {
+      "path": "src/main/resources/destiny/weapons/w40-characteristics.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "inventory": {
+      "path": "run/private-sources/w73/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "run/private-sources/w73/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "run/private-sources/w73/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "research": {
+      "path": "art/weapons/w77/references/research.json",
+      "sha256": "ca514c058c0461d8f445489bc9e6b3ccb0c1e96c3564003329181635db57ed66",
+      "bytes": 2569
+    }
+  },
+  "generator": "scripts/extract_dragonfly_w77.py",
+  "generatorSha256": "d3d2dcb7a4e0e0ce153ebb7d27adeba446277938b21d79cdd928514a77218b13",
+  "profile": "src/main/java/kim/biryeong/destiny/weapon/DragonflyProfile.java",
+  "profileSha256": "b1b7f33ac5a4d1f0a28acccbd9628bb3ad4c08c7910658737dffe295cfdb32f1",
+  "outputHashes": {
+    "src/main/resources/destiny/weapons/w77-dragonfly.json": "239e4fa48afebebd20ed765fc05b3e61bb34532bffea3a8cffdc536c867eab06",
+    "art/weapons/w77/references/socket-pools.json": "c744ee04d492feba2861ffa376b0c975dd3ad4c087f8ba96e739dd6e14a2ffce",
+    "art/weapons/w77/references/mechanics.json": "683bf18f8ef05a7ea25f99f482b24e20803450994ecafc20cb2d8dfe49d667c9",
+    "art/weapons/w77/reference-notes.md": "8d1a70779f7d6ab293f114b41b8715304bf8b2a5c558913ae938952b84022bbf"
+  },
+  "capturedDate": "2026-10-24",
+  "sourceBoundary": "Official manifest supplies identity, exact sockets, explicit rollability and weapon elements. Bungie July 3, 2025 announces normalized combatant explosion scaling replacing archetype scaling. light.gg supplies community 4.5 m radius and matching element. Fixed 10 Minecraft HP, linear 0.3 floor and meter/block mapping are local authored PvE policy. No original damage formula, enhanced behavior, or fresh gameplay measurement is claimed.",
+  "researchRepresentation": "Source hashes identify retrieved web-tool result representations, not original HTML bytes. Only compact paraphrased findings and locators are retained. Offline verification checks this pinned evidence summary and cached official components; it cannot reconstruct or revalidate discarded web responses.",
+  "reproduce": "rtk proxy python3 scripts/extract_dragonfly_w77.py --verify",
+  "inspect": "rtk proxy python3 scripts/extract_dragonfly_w77.py --inspect-source",
+  "verification": "Eight literal data SHA256 pins; exact comparison of all five generated files including notes/provenance. Generator and hand-authored profile hashes are recorded without a self-hash cycle. Inspection and verification do not write files, create directories, fetch, build, or repair caches. Cache overrides retain identical required content hashes. The profile itself is not generated or compiled by this script."
+}

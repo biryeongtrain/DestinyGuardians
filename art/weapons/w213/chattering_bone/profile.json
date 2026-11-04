@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "weapon": "chattering_bone",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A36A",
+      "partHint": "moving",
+      "policy": "magazine"
+    }
+  },
+  "evidence": [
+    {
+      "source": "art/weapons/w123/chattering_bone/comparison.png",
+      "role": "viewed_semantic_mesh_sheet",
+      "sourceSha256": "a2b5deebb2f17286ab3250f40cb1cd4e3a177a2ef8fb6c268f8a32f87cdac3ec",
+      "observation": "Viewed actual W128 side/front/rear oblique sheet: ivory structural shell, violet forearm and rear magazine, open trigger bow and optic. Preserve all90 opaque cuboids and face UV; offline sheet is not native evidence."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "retained_mesh_contacts",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "observation": "Retain right rest [8,8.15,8.67] / [-33,0,0], left rest [7.8,9.78,-1.6] / [0,90,-85], reload contact [7.45,7.7,11.95] / [15,0,0]. Source palms use REST mesh offsets plus original FK; reload.contact moves the held magazine relative to that palm. Do not substitute the reload contact as a rest wrist offset."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "role": "preserved_pulse_family_framing",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "observation": "Retain pulse_rifle translation [-0.65,0.6,0], rotation [-1,2,0], scale0.98; inherit rightWristRoll28 and leftRotation [15,35,-35]. No source-camera/FOV/lift or limb-length correction is inferred."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "sourceSha256": "cc9ef72c7c7e85936f3cf9bc1ad521a46cfac15c48e891412b1cc15685066d7f",
+      "observation": "Read master original .blend headless Blender5.4.0 Alpha evaluation before61 generation: ARMATURE only; OBSlot action Armature|fp_80A8A36A_reload_full|Base, frames1..105 at30fps,61 samples, old-cache joint error0 and allInputsUnchanged true. Worker reviewed evidence, did not independently evaluate Blender.",
+      "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/pulse_rifle_b4d01502/blender/source.blend",
+      "sourceBlendSha256": "042a9965b8f02a7e7bfda10914e2711b31e2add9417884d8b277e11ab9668f4d",
+      "sourceMapSha256": "73251b2726fbb4f652eb14baf6fe0e3552a9351c1515271684525f4b95bdcb74",
+      "boneMapSha256": "411b794dbe4c8791b9bc1c82bc1ef6833aeb71d308aaa08aab7aa0a205635547"
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/pulse_rifle_b4d01502.json",
+      "role": "evaluated_source61_full_chain",
+      "sourceSha256": "23ddccddd8b3d7e0302f3bc7f7b2487c65ad10c55a18611c7505925bc014cc5f",
+      "observation": "Read61 uniform normalized frames and weapon/shoulder/elbow/wrist matrices in armature object space, row-major column vectors. Names: left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. At32 model units/source unit ordinary forearms~8.14136 and upper arms~8.7266; start/end max matrix delta1.2844815501011908e-5. Preserve FK and ordinary lengths without stretching or attenuation."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/sheets/pulse_rifle_b4d01502-80A8A36A-upper-chain.png",
+      "role": "viewed_bone_only_source_sheet",
+      "sourceSha256": "be5cc8f75b3b1517f4b21eb50ca19400c9998a95404de62996eb72839fbb9549",
+      "observation": "Viewed actual six-pose XZ/YZ source-chain PNG at p=0,.2,.4,.6,.8,1. Shoulder/elbow/wrist posture changes through exchange and returns near idle. Bone-only projections establish no original mesh contact or camera."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/pulse_rifle_b4d01502/source-map.json",
+      "role": "shared_family_action_limit",
+      "sourceSha256": "73251b2726fbb4f652eb14baf6fe0e3552a9351c1515271684525f4b95bdcb74",
+      "observation": "Read source-map and mapped bones: non-fallback selector7B4E9613, representative cold_denial, shared Bygones/Cold Denial/Chattering Bone/Blast Furnace/Claws of the Wolf. Reload tags366/368/36A do not identify a weapon-exclusive selector; retain audited80A8A36A."
+    }
+  ],
+  "notes": [
+    "Candidate before FIRST Vision; no native acceptance claim. Master owns original61+shoulder import, explicit action whitelist, shared loader/runtime60grid, upper-arm retargeting and ordinary fingerless player-skin arms.",
+    "Retain all W172 authored knots/holds and source geometry/UV. Only scalar interpolation changes to C1 weighted-harmonic PCHIP with61 poses; no per-key smoothstops or authored retiming.",
+    "Keep both mesh support hands visible at rest, original FK and ordinary limb lengths. No stretch, attenuation, hidden support, invented camera or rest-contact override masks fit.",
+    "Current conservative budget538 =87body+3magazine+224classic forearm+224classic upper-arm surfaces; actual materialized graph budget remains master-owned.",
+    "Await exact FIRST native PNG/phase feedback, perform image-backed worker review/correction if warranted, then master SECOND Vision before final native acceptance."
+  ]
+}

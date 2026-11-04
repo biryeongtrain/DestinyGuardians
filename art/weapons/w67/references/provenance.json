@@ -1,0 +1,57 @@
+{
+  "stage": "W67",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourceHashes": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "w40Provenance": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "inventory": {
+      "path": "/private/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/private/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/private/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    },
+    "research1.json": {
+      "path": "/private/tmp/destiny-weapons-w67/research1.json",
+      "sha256": "86da1adbcf1aa29681aaf94a99f97778f05e46b1b0cdb7cb2c276e4e35fed629",
+      "bytes": 31466
+    },
+    "research2.json": {
+      "path": "/private/tmp/destiny-weapons-w67/research2.json",
+      "sha256": "bd6d0ebccf0c5e0cf4d9307c630909759d970eaacdafac55ffc47b65aa2963ef",
+      "bytes": 31487
+    }
+  },
+  "generator": "scripts/extract_precision_return_w67.py",
+  "generatorSha256": "aa07c9148315fc18566699dab87b8a60ba1fc1d9145d02e9f2a30fe3a5372c6c",
+  "runtimeSha256": "5ff05d82bb3e17eecb4754acd0be6a18f29ef2d147e4b1d8ad6db721e4d21976",
+  "outputHashes": {
+    "src/main/resources/destiny/weapons/w67-precision-return.json": "5ff05d82bb3e17eecb4754acd0be6a18f29ef2d147e4b1d8ad6db721e4d21976",
+    "art/weapons/w67/references/socket-pools.json": "48aab5fd29215b0f89f2c9071c23edbae9871865063cecb6e6514b5daa775cd2",
+    "art/weapons/w67/references/mechanics.json": "aabe045abe85b3fe648d30901f96549c6f39dc315dd717f8424b0e7826d3d976",
+    "art/weapons/w67/reference-notes.md": "f1cdf26599441b5bc01654de82d647d7850c26edb40eaa37e73801b456947098"
+  },
+  "retrievedAtDate": "2026-10-24",
+  "sourceBoundary": "Official manifest proves descriptions and selected rolls. Exact-base light.gg community measurements supply thresholds, the inter-hit interval, generated rounds, base-cap limit and stow persistence. Reload/body/miss resets remain unresolved; runtime boundary and HUD choices are supplied project policy.",
+  "privateSources": "Inventory, plug sets, manifest and both raw search captures remain outside the repository. No third research file is consumed. Public findings are bounded paraphrases, never full captures or credentials.",
+  "reproduce": "rtk proxy python3 scripts/extract_precision_return_w67.py --verify",
+  "verification": "Every consumed input has an explicit SHA256 pin; all five generated outputs are compared byte for byte. No write, network, fetch or cache repair in verify mode. Generator SHA and four non-provenance output hashes are recorded; provenance deliberately does not hash itself."
+}

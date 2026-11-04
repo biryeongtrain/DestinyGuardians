@@ -1,0 +1,77 @@
+{
+  "stage": "W73",
+  "label": "Archer's Tempo",
+  "font_source": "/System/Library/Fonts/Supplemental/Arial Narrow Bold.ttf",
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "font_size_px": 13,
+  "font_fit": "Largest integer size <=22 fitting full text with 4px padding",
+  "label_size_px": [
+    94,
+    24
+  ],
+  "alpha_bounds_px": [
+    4,
+    3,
+    90,
+    20
+  ],
+  "supersampling": 4,
+  "pillow_version": "12.3.0",
+  "provenance": "Original rasterized system-font glyphs matching W62; no ripped assets or bundled font.",
+  "preview": {
+    "path": "art/hud/w73-archers-tempo/offline-preview.png",
+    "status": "OFFLINE NOT INGAME",
+    "inputs": "Synthetic layout fixtures only; not runtime or gameplay evidence."
+  },
+  "runtime": {
+    "remaining": "WeaponArcherTempo.remaining(ServerPlayer), ticks",
+    "key": "destiny:hud_perk_archers_tempo_",
+    "timer": "ceil(remaining / 20)",
+    "row_order": [
+      "Kill Clip",
+      "Outlaw",
+      "Rampage",
+      "Archer's Tempo"
+    ],
+    "active_row_y": [
+      778,
+      746,
+      714,
+      682
+    ],
+    "nodes_per_active_row": 6,
+    "max_perk_nodes": 24,
+    "inactive": "Remove all six nodes when ticks <= 0",
+    "cache": "Existing CombatHud.sprite state cache and stable per-player IDs"
+  },
+  "pack_delta": {
+    "new_labels": 1,
+    "new_files": 3,
+    "reused": "W61 marker and colon, W39 digits; previous row labels in preview only"
+  },
+  "sha256": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_archers_tempo_w73.png": "f10ed0665095e243741724b4a8d64ea2d7bc326bdb7a2c1b230c38a945d0ca81",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_archers_tempo_w73.json": "e406f050f17294bf38b4058ff4effa4d20637c81b46b1aa9c8f3ffb9483d7e07",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_archers_tempo_w73.json": "25d4be3cd8a1f2af9f858c479f2aaa9bdf9afab1d200f8d858b5187a742273d0",
+    "art/hud/w73-archers-tempo/offline-preview.png": "feaa5f2fd4e6a58e6d224f20658dcd2ec88dd3d685fe7ae752305ab82e8d44c5"
+  },
+  "reused_texture_sha256": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_buff_w61.png": "266c85c76326fff6e9640d0d58d5092f443303b55c0f649ccfde1415c7472d3e",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_colon_w61.png": "77386204c7c80c453efc142222fc5d6a4309ad5673e4f58d61ad99434d9f7dae",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_kill_clip_w61.png": "eacf3f53ef743a79bc57dd5acdbf790db04fe72a8731f48caf061a3e7c8b97a4",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_outlaw_w62.png": "1612277963bb24b786b442fbba2f2ddf1aaea1e7c38defd8c0e5beff456931f3",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x1.png": "760aee61bc5679d12040cd7d33b5fb8d80083cbbcc74146ba3343901931a6f66",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x2.png": "66f7df5cb14f15b64167ba1faebb94a936ba768f687a4f104e29a640f7e0045f",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x3.png": "2412225b883e9d897ac795de8fa88aa0c3904898bf10492ea51ef64d24fa31b9",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_0.png": "c8fe8d9f0e80464a14798104c6d4a89ab2547986d07b4571cac43314734d578f",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_1.png": "64af6294443f3758201999bf9f0410f2a8d46d247b73a6b706d0b3690f206730",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_2.png": "aaa031a3ce85761d782e229c88ce086e22557a5f77eb8f99764c87c8cd9d7f5b",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_3.png": "54cd21df61f9838341a1e6a0ce5de426fc6b47cf07b31cf3a7c1844253ed3a95",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_4.png": "5b6a453dc0c9ddaa4ece0fab5aa18029b6ce2e53a90c309afaef236e3a11c303",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_5.png": "4fb9ce61dfa6a449d528c24f2f95101a21b46e60cd06082244e737d2f9a4dcbd",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_6.png": "9507d2344eeb9fe7e40587185b06bd70d75b31d2e01be169d80a0b89d9e2a33d",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_7.png": "9e5cc2de727f7d859338096afc4d762e77a83b65bd8d45a38c889fa7427fbd3e",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_8.png": "78690397578308a8ef2b733e4dc03c5968ea81c4a40ec45dae30f85510e2bb26",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_9.png": "cd707a132d1f3b44a3f919ea861cd4ffd5412ddbcfc7d5eb0a5f5d50ca71d32c"
+  }
+}

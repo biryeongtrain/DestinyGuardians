@@ -1,0 +1,98 @@
+{
+  "stage": "W61",
+  "baseHash": 1015611457,
+  "enhancedHashExcluded": 2923251173,
+  "ticksPerSecond": 20,
+  "killWindowSeconds": 3.6,
+  "killWindowTicks": 72,
+  "durationSeconds": 5,
+  "durationTicks": 100,
+  "multiplier": 1.25,
+  "primaryChange": {
+    "url": "https://www.bungie.net/7/en/News/article/destiny2_update_630",
+    "publisher": "Bungie",
+    "primary": true,
+    "title": "Destiny 2 Update 6.3.0",
+    "publishedAt": "2022-12-06T16:30:00.000Z",
+    "deliveryUid": "blt3562037c3d1279d1",
+    "bodyField": "html_content",
+    "heading": "Tunnel Vision + Kill Clip",
+    "damageExcerpt": "Reduced damage bonus from Kill Clip from 33% to 25%.",
+    "refreshExcerpt": "refreshed if activated while already active.",
+    "supports": [
+      "25 percent damage bonus",
+      "A qualifying activation can refresh an active buff"
+    ],
+    "doesNotEstablish": [
+      "Absolute timing",
+      "Stow behavior",
+      "Reload event classification"
+    ]
+  },
+  "communityMeasurements": {
+    "url": "https://www.light.gg/db/de/items/1015611457/kill-clip/?_=707",
+    "publisher": "light.gg",
+    "primary": false,
+    "section": "Community Research",
+    "searchCapture": "exact-search.json",
+    "windowExcerpt": "Finishing a reload within 3.6 seconds of a kill",
+    "durationExcerpt": "5 seconds",
+    "stowExcerpt": "Stowing the weapon removes the buff.",
+    "retrieval": "Search-index body of the exact base hash's German page; research text is English. Direct English page fetch failed with HTTP 402 in the web tool."
+  },
+  "enhancedComparison": {
+    "url": "https://www.light.gg/db/items/2923251173/kill-clip/?_=553",
+    "primary": false,
+    "durationSeconds": 5.5,
+    "killWindowSeconds": 3.6,
+    "implemented": false,
+    "warning": "5.5 seconds belongs to enhanced hash 2923251173, not base hash 1015611457."
+  },
+  "reloadRules": {
+    "windowEvent": "Reload completion, measured from the weapon kill; starting a reload within 72 ticks is insufficient if completion is late.",
+    "manualReload": {
+      "activates": true,
+      "evidence": "Official perk description plus community completion measurement"
+    },
+    "marksmanDodge": {
+      "activatesReloadPerks": true,
+      "primary": false,
+      "url": "https://www.light.gg/db/items/426473316/marksmans-dodge/",
+      "excerpt": "Counts as a manual reload and will activate reload-triggered perks such as Kill Clip.",
+      "integrationPolicy": "Call the activation hook at actual ammo transfer, with the same kill deadline; a dodge with no reload must not synthesize a reload event.",
+      "policyBoundary": "The source classifies the dodge; it does not independently test full-magazine, zero-reserve or zero-transfer cases."
+    },
+    "autoLoadingHolster": {
+      "activatesReloadPerks": false,
+      "primary": false,
+      "url": "https://d2.destinygamewiki.com/wiki/Auto-Loading_Holster",
+      "excerpt": "Auto-Loading Holster does not trigger on-reload effects",
+      "limitation": "Community wiki note, not an official Bungie assertion; the page's separate 3-second duration is not used."
+    },
+    "shotgunFirstShell": {
+      "verified": false,
+      "integrationPolicy": "Use the first successful shell insertion as the reload event and consume that kill eligibility once per reload sequence.",
+      "policyBoundary": "Suggested adaptation to this project's progressive reload events. Retrieved sources do not settle first-shell versus final-shell activation or repeated-shell refresh; not verified Destiny behavior."
+    }
+  },
+  "stowRules": {
+    "activeBuff": "remove",
+    "activeBuffVerifiedByCommunity": true,
+    "pendingKillWindow": "unresolved",
+    "suggestedIntegrationPolicy": "Clear active buff and pending eligibility on stow; do not restore either on draw.",
+    "policyBoundary": "Only active-buff removal is evidenced. Clearing the pending kill window is a conservative integration choice, not a sourced mechanic."
+  },
+  "refreshRules": {
+    "qualifyingKillAndReloadWhileActive": "Refresh active duration to the base 100 ticks from completion.",
+    "primarySupportsRefresh": true,
+    "integrationPolicy": "Consume the pending kill on activation; a reload with no new qualifying kill must not refresh.",
+    "policyBoundary": "One-time consumption, tick endpoint inclusion, and repeated reloads from the same kill are not independently established by the retrieved sources."
+  },
+  "damageBoundary": "Community research excludes splash/explosive damage belonging to other perks. This does not prove that a rocket's own blast is excluded. Projectile snapshot timing is not established here.",
+  "limitations": [
+    "Absolute times and stow cancellation are community measurements, not numeric Bungie manifest fields.",
+    "20 ticks per second is the project's conversion; Destiny tick-boundary inclusivity is not measured.",
+    "No live gameplay tests or exhaustive audit of later patches was performed.",
+    "Do not promote the explicitly labeled integration policies to verified Destiny facts."
+  ]
+}

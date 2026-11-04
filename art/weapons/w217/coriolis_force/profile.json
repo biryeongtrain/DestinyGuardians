@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "weapon": "coriolis_force",
+  "sourceAction": "80A8A43C",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A43C",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.18,
+        0.65,
+        0.74
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "fusion_rifle_9ab6be45",
+    "action": "80A8A43C",
+    "sourceBlendSha256": "3e3ca7e7d78ebdd6c95ff473a40d70303d3dc7ffd80f7135695abee2db79974b",
+    "sourceMapSha256": "80fa9d69178874c44b71434e0f24d7ff25f0d76f847cbf56128e2f48fcadcfcc",
+    "boneMapSha256": "a439c489fb5ab1de893beb8cfe682958641d1c2682059f849932a25db27d3fd4"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w217/source/source-review.json",
+      "sourceSha256": "d8edb0d97be1b4cc1446363216ac271fb6bbb1a91f3b52f1fa0b3dc48388fd6a",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original Blender5.4.0 Alpha read-only. ARMATURE only, OBSlot, actual Armature|fp_80A8A43C_reload_full|Base at30fps over1..106 and61 normalized samples. Existing joint max error0 and allInputsUnchanged true. Worker read fresh report; did not independently evaluate Blender. 80A8ADCA is iron_sight_idle and is not selected as reload."
+    },
+    {
+      "source": "art/weapons/w205/rigs/fusion_rifle_9ab6be45.json",
+      "sourceSha256": "ed8727287afffb9ff4ca1f5d87bae9a83e8b92c269bd05a704b41d089f8c5fd5",
+      "role": "fresh_evaluated_source61",
+      "observation": "Read exact fresh export from /private/tmp/destiny-w217-source/fusion_rifle_9ab6be45.json; master installs identical bytes at this path. w217Source61 exporter69694b95b969d2027d7e1b2afc532b2c0a3480c8b86662fc7d61165ed2924769. Armature-object row-major matrices/column vectors; original shoulder->elbow->wrist chain, ordinary lengths, no recovered weapon mesh/camera/IK. No weapon-exclusive source inference."
+    },
+    {
+      "source": "/private/tmp/destiny-w217-source/sheets/fusion_rifle_9ab6be45-80A8A43C-upper-chain.png",
+      "sourceSha256": "383f1550d20affa1fe81b05147b5093105bff455faa60822256137cd2d9e305e",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Viewed actual XZ/YZ projections at0,.2,.4,.6,.8,1. Support chain reaches down and changes pose during exchange, then returns; both complete upper chains are visible. These projections do not prove weapon contact, palm clearance or native camera fit."
+    },
+    {
+      "source": "scripts/generate_reload_w189_coriolis_force.py",
+      "sourceSha256": "5284ddc18a02d642318773ad1a76d50cb0cbd34a08be475e7fef6822bcb14f39",
+      "role": "preserved_authored_motion",
+      "observation": "AST-read literal KEYS/GRIP/MAGAZINE_ANCHOR/MAGAZINE_NAMES/PINS without importing or executing old generator. Preserve all13 knots, all five vector channels including cell-local angles and twohand correction, anchors, rigid algebra and partition. Lift.18, withdraw.25..36, exchange.36..56, incoming.56..74, seated neutral.74..1, lower.80..97 and recovery1. W215/216 supplies only weighted harmonic C1 PCHIP."
+    },
+    {
+      "source": "art/weapons/w189/coriolis_force/SOURCE.md",
+      "sourceSha256": "1f28585af36a1e65a64043b7d1ddfe404018bd5035ad70a4a1c06c8994240c4a",
+      "role": "authored_geometry_and_footage_provenance",
+      "observation": "Read W189 source and manifest: Ironworker Gaming 67wv69MomYQ, n772..856/12.86667..14.26667s at60fps. Preserve cartridge_solid60/cartridge_upper61 as the only moving elements. Red surround, floor/toe, rear grip, receiver, triggerguard, stock and U clamp remain fixed. Lower cell/grip intersection does not justify moving the whole grip/body. Original hidden cell/socket path remains authored."
+    },
+    {
+      "source": "art/weapons/w189/coriolis_force/storyboard.png",
+      "sourceSha256": "bfa4886eceb01938152158c7b745c188efae0bc94ed1081d55ff4c3f2c60e59b",
+      "role": "viewed_same_weapon_storyboard",
+      "observation": "Viewed retained actual source frames and authored comparison sheet. Central dark cell withdraws downward through red-surrounded bay; replacement rises from below-left and seats before support returns. Source perks/7-round footage do not change local6-round/45tick timing."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "retained_effective_framing",
+      "observation": "Read shared loader/profile and fusion_rifle family. No existing weapon profile; preserve translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]. Add only sourceFullChain=true, keepMeshSupport=true, hideSupportAtRest=false. Ordinary fingerless skin arms; no camera/arm compensation."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_mesh_contacts_and_release",
+      "observation": "Retain right[8,9.15,7.52]/[-18,0,0], left[7.8,10.78,-6]/[0,90,-85], reload[7.4,8.2,.02]/[0,0,0]. Explicit magazine partHint/policy and rigAction80A8A43C; gripWindow[.05,.18,.65,.74] releases during final incoming stroke, fully by cell neutral seat.74. FIRST must verify palm contact and grip clearance."
+    }
+  ],
+  "notes": [
+    "Candidate before FIRST. Master owns shared binding/runtime grid60, full-chain ordinary-length fingerless skin arms, materialization and all-route measured element budget.",
+    "All W189 geometry/UV/partition,13knots,five motion channels,anchors/holds retained; only interpolation changes to C1 weighted harmonic PCHIP. No element added or grip/body rework.",
+    "Cell local translation/rotation hold neutral.74..1; attachment release completes.74 so source-palm recovery cannot drag seated cell.",
+    "Estimated552reload=104weapon+448ordinary arm reserve; native241+448=689. These are estimates, not measured route acceptance.",
+    "Retain6rounds/45tick reload/667ms charge/14charge ticks/7bolt shared-ammo volley, duration, lifecycle and audio. Original30fps range1..106 does not retime gameplay.",
+    "Required sequence: master original Blender evaluation ->61poses ->master FIRST actual PNGs ->same worker correction or justified nochange ->master SECOND. Final native acceptance pending SECOND."
+  ]
+}

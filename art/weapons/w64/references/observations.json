@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "stage": "W64",
+  "implementationTarget": [
+    "duke_mk_44"
+  ],
+  "readiness": {
+    "duke_mk_44": "Ready for qualitative first-person attached-housing open/raise/load/close/return animation. Exact inner load-unit geometry and timings remain unverified.",
+    "austringer": "Inspected secondary mechanism reference only; excluded from W64 implementation per main task selection."
+  },
+  "coordinateConvention": "Left/right/up/down are as viewed by the player on the unmirrored first-person image; do not equate screen directions to model-local axes.",
+  "weapons": [
+    {
+      "id": "duke_mk_44",
+      "name": "Duke Mk. 44",
+      "bungieHash": 2112909414,
+      "videoId": "-oS68Bu_sDs",
+      "url": "https://www.youtube.com/watch?v=-oS68Bu_sDs&t=25",
+      "title": "Deleted Duke - Outlaw + Rampage, Keeping Duke - Rangefinder + Kill Clip",
+      "channel": "Rin",
+      "uploadDate": "20181112",
+      "fps": 30,
+      "identityEvidence": "Inventory frame at 48.000 seconds explicitly names DUKE MK. 44. Shape matches first-person gameplay and the W30 Duke source identity. Bungie hash comes from W30 catalog and W46 official-item evidence, not pixels.",
+      "reviewedReloadSeconds": [
+        25.4,
+        28.4
+      ],
+      "sampleType": {
+        "partialReload": true,
+        "ammoBefore": 7,
+        "ammoAfter": 9,
+        "reserveBefore": 107,
+        "reserveAfter": 105,
+        "outlawObserved": false,
+        "killClipHudObserved": true,
+        "normalBaseStatCertified": false,
+        "comment": "Title mentions an Outlaw roll, but selected gameplay shows Kill Clip and no Outlaw HUD. Do not label this an Outlaw reload or a controlled base-stat benchmark."
+      },
+      "mechanism": {
+        "observed": [
+          "A large cylindrical housing moves to screen left of the receiver and remains alongside the gun during the muzzle-up hold.",
+          "The housing and receiver form a clearly visible open gap; this is not a whole-weapon tilt alone.",
+          "The right hand keeps the grip while the gun raises almost muzzle-up.",
+          "The gun lowers/rolls while the left hand comes in from screen left toward the open cylinder area.",
+          "Hands remain near the receiver after the HUD ammo transfer.",
+          "The cylinder area closes/recovers and the gun returns forward."
+        ],
+        "notEstablished": [
+          "Full cylinder assembly removal/replacement is not observed and must not be asserted.",
+          "An inner magazine/drum extraction cannot be resolved confidently in this dark moving Duke sample.",
+          "Individual cartridge loading or a count of visible cartridges is not established.",
+          "An exact hinge pivot, local rotation axis, opening angle, translation distance, or hand IK curve is not measured from these frames."
+        ]
+      },
+      "phases": [
+        {
+          "sourceSeconds": [
+            25.4,
+            25.6
+          ],
+          "observation": "Previous shot/recoil transitions into raised/rolled reload preparation. Reload onset lies in this neighborhood; exact first reload frame not measured."
+        },
+        {
+          "sourceSeconds": [
+            25.9,
+            26.1
+          ],
+          "observation": "Cylinder housing is displaced toward screen left relative to receiver; circular end visible."
+        },
+        {
+          "sourceSeconds": [
+            26.3,
+            26.7
+          ],
+          "observation": "Muzzle nearly upright. Housing stays alongside frame on screen left; large opening/gap remains visible."
+        },
+        {
+          "sourceSeconds": [
+            26.8,
+            27.1
+          ],
+          "observation": "Gun lowers/rolls toward horizontal and left hand enters loading area. HUD still 7/107 at 27.100."
+        },
+        {
+          "sourceSeconds": [
+            27.1,
+            27.2
+          ],
+          "observation": "Ammo HUD transition bracket: 7/107 at 27.100; 9/105 at 27.200. This brackets visual transfer, not the exact engine event."
+        },
+        {
+          "sourceSeconds": [
+            27.2,
+            27.5
+          ],
+          "observation": "Ammo already credited while hands remain at cylinder/receiver; weapon has not returned to forward ready pose."
+        },
+        {
+          "sourceSeconds": [
+            27.6,
+            27.9
+          ],
+          "observation": "Closure and roll-down recovery; notably still tilted at 27.700, back toward forward position at 27.900."
+        },
+        {
+          "sourceSeconds": [
+            28.0,
+            28.1
+          ],
+          "observation": "Next shot occurs; ammo becomes 8. This bounds demonstrated subsequent fire, not earliest possible fire input."
+        }
+      ],
+      "timingPolicy": "Use source-time intervals as observational anchors, not current-game duration or normalized runtime keyframes. Do not equate HUD ammo credit, visual closure, ready pose, and next-shot observation. W46/W62/W63 authored server deadlines are separate evidence.",
+      "outlawComparison": {
+        "inspected": false,
+        "reason": "No verified active Outlaw reload comparison in selected frames; no acceleration ratio or phase invariance claimed."
+      }
+    },
+    {
+      "id": "austringer",
+      "name": "Austringer",
+      "bungieHash": 3055790362,
+      "videoId": "UnnN9RchNKQ",
+      "url": "https://www.youtube.com/watch?v=UnnN9RchNKQ&t=16",
+      "title": "Destiny 2 - All Menagerie Weapons - Animations & Sounds w/ Slow-Motion",
+      "channel": "Ultraclocked",
+      "uploadDate": "20210108",
+      "fps": 60,
+      "identityEvidence": "Video chapter 0:00-0:38 names Austringer; inventory name visible at 1 second in surveyed private frames. Historical Menagerie version corresponds to W30 hash3055790362; no hash is legible in video.",
+      "reviewedReloadSeconds": [
+        [
+          16.5,
+          19.65
+        ],
+        [
+          20.0,
+          25.95
+        ]
+      ],
+      "implementationScope": "Secondary reference only; do not apply its inner load-unit details to Duke without independent Duke evidence.",
+      "mechanism": {
+        "observed": [
+          "Black outer cylindrical housing opens to screen left and stays with the gun.",
+          "Muzzle-up hold exposes the receiver gap while housing remains alongside it.",
+          "At 22.150, a separate dark inner round unit with a brass/gold top is visible below the retained outer housing.",
+          "At 22.500 the outer housing remains in place; at 23.050 its open end is visible.",
+          "Left hand presents a brass-faced circular unit near the cylinder at 23.300, then the gun closes/recovers."
+        ],
+        "interpretation": "Observed appearance is consistent with an inner cylindrical ammunition unit being ejected/replaced inside an attached swing-out outer housing. It does not support throwing away/replacing the entire attached outer cylinder assembly.",
+        "notEstablished": [
+          "Mechanical internals and whether the circular unit should be called magazine, drum, or cartridge carrier.",
+          "Individual round insertion or cartridge count.",
+          "Exact contemporary sandbox timing or Outlaw timing."
+        ]
+      },
+      "speedEvidence": {
+        "normalSpeedWindowSeconds": [
+          16.5,
+          19.65
+        ],
+        "editedSlowMotionWindowSeconds": [
+          20.0,
+          25.95
+        ],
+        "visibleLabel": "0.5x",
+        "labelMeaning": "Edited replay speed label; neither Outlaw nor a game buff. Do not use displayed video duration as real-time reload duration."
+      },
+      "hudAmmoTransfer": null,
+      "hudAmmoTransferReason": "Clean showcase HUD suppressed; no ammo-event timestamp inferred from apparent insertion.",
+      "outlawComparison": {
+        "inspected": false
+      }
+    }
+  ],
+  "mainImplementationValuesReportedByUser": {
+    "scope": "Context only, not a change made or geometrically verified by this reference task.",
+    "weapon": "duke_mk_44",
+    "preservedSourceCubes": 232,
+    "bodyCubes": 211,
+    "cylinderCubes": 21,
+    "authoredYokeLinks": 2,
+    "totalCubes": 234,
+    "authoredPivot": [
+      8,
+      10.2,
+      5.17
+    ],
+    "authoredCylinderRotationZDegrees": 80,
+    "approxAuthoredBodyTiltDegrees": [
+      62,
+      65
+    ],
+    "evidenceClass": "Authored implementation choices reported by main; video supports qualitative motion only."
+  },
+  "limitations": [
+    "No native app, computer use, Blender, Blockbench operation or Gradle executed by this reference task.",
+    "No original animation asset rip or runtime/gameplay verification performed.",
+    "Static model identity does not prove animation mechanics.",
+    "Historical Duke inventory lists110 RPM; repository current official evidence lists120. This research makes no timing/RPM update."
+  ]
+}

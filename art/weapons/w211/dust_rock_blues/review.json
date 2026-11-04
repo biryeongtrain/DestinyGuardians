@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "stage": "W211",
+  "weapon": "dust_rock_blues",
+  "status": "worker_reviewed_pending_Vision2",
+  "ownedFiles": [
+    "art/weapons/w206/dust_rock_blues/profile.json",
+    "art/weapons/w211/dust_rock_blues/review.json"
+  ],
+  "profileBeforeSha256": "dba819f6883aa4df791dc733450e20ce06fdbd3298a64d12c816c6b4f1c60d04",
+  "profileAfterSha256": "408666ce4c0659589f5aa853c923d39ee913d5364f7b1a724b33fc69f869c2f8",
+  "changes": {
+    "framing": {
+      "sourceFullChain": true,
+      "reloadCameraLift": 5.0
+    },
+    "contacts.reload": {
+      "rigAction": "80A8A3F1",
+      "sourceShellPoseHold": true,
+      "sourcePalmContactFit": true
+    }
+  },
+  "preserved": {
+    "framingTranslationRotationScale": true,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "rightPalm": [
+      8,
+      7.9,
+      11.42
+    ],
+    "leftPalm": [
+      7.8,
+      8.52,
+      0.7
+    ],
+    "reloadContact": [
+      7.3,
+      9.15,
+      7.1
+    ],
+    "reloadRotation": [
+      0,
+      0,
+      -80
+    ],
+    "reloadPartHint": "loading_port",
+    "reloadPolicy": "shell",
+    "geometryUvAdsMatricesTimingAmmoAudioThirdPerson": "No edits; inherited accepted assets and mechanics remain master inputs."
+  },
+  "sourceReview": {
+    "report": "docs/qa/2026-10-28/w211/source/source-review.json",
+    "scope": "groups.shotgun_2eb0529e",
+    "reviewMethod": "Read master-owned Blender evaluation report/matrices and actually viewed six-pose XZ/YZ bone sheet; worker did not open/evaluate Blender or touch a live scene.",
+    "sheet": "docs/qa/2026-10-28/w211/source/sheets/shotgun_2eb0529e-80A8A3F1-upper-chain.png",
+    "sourceBlendSha256": "87ff521e800cc7f4aa339e79dfe22086f8c461eab229ec98c1ce1fcad8ee6052",
+    "rigArchive": "art/weapons/w205/rigs/shotgun_2eb0529e.json",
+    "rigArchiveSha256": "9ed823ff9fa2c6f0358f69b7d6b41deccb95c6bffafa6f41ebf2a9acaf46c904",
+    "sourceArchiveBytesIdentical": true,
+    "blenderVersion": "5.4.0 Alpha",
+    "masterReportsAllInputsUnchanged": true,
+    "action": "Armature|fp_80A8A3F1_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1,
+      101
+    ],
+    "evaluatedPoses": 61,
+    "matrixSpace": "armature_object; row-major column vectors; do not apply matrix_world again",
+    "binding": "Non-fallback shared shotgun group explicitly includes dust_rock_blues. rigAction selects an audited generic action, not an exact-weapon clip.",
+    "bones": {
+      "leftElbow": "897A1504",
+      "leftWrist": "8C83CB67",
+      "rightElbow": "A3781DCD",
+      "rightWrist": "DE9D6BEA",
+      "utility": "80E9F09E",
+      "weapon": "4A0810C4",
+      "leftShoulder": "D1232BA2",
+      "rightShoulder": "17025F50"
+    },
+    "directionCalibration": "Existing X-forward/Z-up to canonical -Z-forward/Y-up basis retained; identity sourceViewRotation. Source contains Armature only, no mesh or camera.",
+    "segmentLengthsModelUnitsApprox": {
+      "leftForearm": 8.141367,
+      "rightForearm": 8.141362,
+      "leftUpperArm": 8.726688,
+      "rightUpperArm": 8.726573
+    },
+    "adjacentPoseAudit": {
+      "path": "/private/tmp/destiny-w211-source/adjacent-pose-review.json",
+      "group": "shotgun_2eb0529e",
+      "action": "80A8A3F1",
+      "poses": 61,
+      "maxAdjacentJointRotationDeg": 77.26765,
+      "maxAdjacentJointTravelModelUnits": 9.71235,
+      "interpretation": "Source-only maxima from evaluated originals; not native screen measurements. Preserve fast changes until native findings justify correction; no resmoothing."
+    }
+  },
+  "shellAdaptation": {
+    "precedent": "art/weapons/w208/first_in_last_out/profile.json; current scripts/rig_arms_w205.py and scripts/build_first_person_hands_w201.py",
+    "sourcePoseHold": "Existing authored mapping: initial source_p=.35*smooth(p/.36), blend=smooth(p/.1); loop source_p=.35, blend=1; return source_p=.35, blend=1-smooth(p). Same source sample drives weapon and both full limb chains.",
+    "palmFit": "Existing reload_grip_weight: initial smooth((p-.04)/.32), loop 1, return 1-smooth(p). Fit left palm to composed shell reload_target while retaining source bend and ordinary lengths. No new sourcePalmContactWeight field.",
+    "portAndShell": "Keep loading_port hint and fixed neutral contact. Current builder falls back to the authored shell leaf for handling; do not attach loading port to pump or invent a new contact.",
+    "lifecycle": "Keep scripts/generate_insert_w207_dust_rock_blues.py: 61 poses per initial/loop/return bank, existing shell Hermite path, visibility .16<=q<.80, hidden HOME recycle, nonblocking six-tick return. These are existing authored policies, not extracted source shell events.",
+    "limitation": "Holding generic source progress .35 is an explicit shell-lifecycle adaptation, not exact full-reload replay or extracted per-insert timing."
+  },
+  "elementBudget": {
+    "body": 97,
+    "shell": 12,
+    "bothClassicForearmsConservative": 224,
+    "bothUpperArmsConservative": 224,
+    "expectedConservativeMax": 557,
+    "limit": 1000,
+    "status": "Master reports targeted gates passed and assembled maximum below1000 for Vision1; worker estimate remains557. Lift emits no new geometry. Master regeneration/gates for corrected candidate remain pending."
+  },
+  "workerValidation": {
+    "jsonParsing": "passed: both assigned JSON files parse after correction",
+    "minimalSemanticDelta": "passed: framing differs only by sourceFullChain=true; reload adds only audited rigAction and two shell handling opt-ins; inherited contact positions/rotations/policy/hint unchanged",
+    "generated": false,
+    "built": false,
+    "runtimeAccessed": false,
+    "committed": false,
+    "mainProfileStillMatchesSeed": "Historical pre-Vision1 check only; integrate against vision1Review.candidateProfileSha256, not original seed",
+    "vision1CorrectionDelta": "passed: only numeric framing addition reloadCameraLift=5.0; all preexisting framing and contacts equal reviewed candidate; evidence/notes updated"
+  },
+  "vision": {
+    "first": "completed by master; actual PNGs reviewed by worker",
+    "findingsToWorker": "received: repeated insert receiver/port and handling palms below viewport; hip/ADS clear",
+    "correction": "reloadCameraLift=5.0 selected in owned profile; master reports matching lifecycle support implemented; candidate pending generation/tests/Vision2",
+    "second": "pending master generation/tests and actual Vision2; raise further only if native findings show insufficient port/palm visibility",
+    "accepted": false
+  },
+  "masterReviewFocus": [
+    "Hip and full ADS sight clearance with both visible fingerless skin hands; ordinary connected elbows.",
+    "Initial reach, repeated shell contact at loading floor, no sideways generic-loop excursion or upper-arm intrusion.",
+    "Initial/loop/return and canonical seams, support-hand recovery, partial/interrupt reload; preserve timing/ammunition/audio.",
+    "Fast evaluated source pose changes require actual native inspection; 61 poses do not establish continuous 60fps."
+  ],
+  "vision1Review": {
+    "candidateProfileSha256": "fe00f574232f4b5464a3fb2c730b53e69d4073c46594c8d255ac71bfd80f2d6d",
+    "reviewBeforeSha256": "eaf3893b5182547e0a5d11b3525a6066faa7a17d7e11cab59ab5073c9ad1e365",
+    "viewedPngs": [
+      "docs/qa/2026-10-28/w211/vision1/screenshots/dust_rock_blues-review.png",
+      "docs/qa/2026-10-28/w211/vision1/screenshots/dust_rock_blues-reload.png",
+      "docs/qa/2026-10-28/w211/vision1/frames/w211-dust_rock_blues-reload-sample-12.png",
+      "docs/qa/2026-10-28/w211/vision1/frames/w211-dust_rock_blues-reload-sample-23.png",
+      "docs/qa/2026-10-28/w211/vision1/frames/w211-dust_rock_blues-after-reload.png"
+    ],
+    "finding": "Samples07/12/17/23 show mainly red shroud angled lower-right; receiver, loading port and shell/palm interaction are cropped below bottom. No contact relocation is justified by this common framing defect. Hip/ADS sight aperture clear in supplied sheet; after-reload returns to hip.",
+    "phaseEvidence": "Raw capture12 bracket clientTicks1691..1693 and capture23 bracket1732..1734; screenshot HUD shows2 and5 loaded respectively. Capture/server oracle timing is bracketed, not exact render synchronization; sample23 can straddle final insertion/return.",
+    "sourceHeldPose": {
+      "action": "80A8A3F1",
+      "progress": 0.35,
+      "frame": 36,
+      "weaponTranslationArmatureObject": [
+        0.1626308709383011,
+        -0.14999857544898987,
+        1.4483129978179932
+      ],
+      "unchanged": true
+    },
+    "emittedTransformEvidence": {
+      "body": "src/main/resources/assets/destiny/models/first_person_framing_w205/1d94d0b9dae0f836706d3c80.json",
+      "shell": "src/main/resources/assets/destiny/models/first_person_framing_w205/21e4685fbab60b9cc95cee3e.json",
+      "phase": "loop p=.5, twohand right FP context",
+      "bodyRotation": [
+        3.26934119,
+        27.12689023,
+        7.80899278
+      ],
+      "bodyTranslation": [
+        0.64538216,
+        0.22130474,
+        2.6755633
+      ],
+      "bodyScale": [
+        0.833,
+        0.833,
+        0.833
+      ],
+      "portDisplayPoint": [
+        -0.32644,
+        1.10937,
+        2.38125
+      ],
+      "shellPalmDisplayPoint": [
+        0.14472,
+        0.46696,
+        2.34042
+      ]
+    },
+    "liftEstimate": {
+      "cameraYDisplayUnits": 5.0,
+      "method": "Read existing emitted transforms only, no generation. Approximate pinhole held-item projection using anchor[.56,-.52,-.72], display units/16, vertical FOV70deg, height960; this is a calibration estimate, not recovered native/source camera. Predicted front shroud y680 is near observed~655, supporting direction/scale only.",
+      "portYBeforeApprox": 1021,
+      "shellPalmYBeforeApprox": 1066,
+      "portYAfterApprox": 646,
+      "shellPalmYAfterApprox": 693,
+      "sensitivityPixelsPerDisplayUnitApprox": 75,
+      "risk": "Actual camera/carrier/sway can differ; Vision2 must confirm insertion visibility, upper-arm clearance and return seams."
+    },
+    "rejectedAlternative": "Negative reloadCameraLower uses smooth((p-.02)/.12)*(1-smooth((p-.80)/.18)); local insert progress resets, so a large negative value would bob the assembly at every loop seam."
+  },
+  "sharedImplementationProposal": {
+    "required": false,
+    "implementedByWorker": false,
+    "owner": "master",
+    "file": "scripts/build_first_person_hands_w201.py",
+    "location": "with_hands.framed(), after source_weapon_display and before return/contact computation; leave existing reloadCameraLower behavior unchanged for other weapons",
+    "profileSchema": {
+      "path": "framing.reloadCameraLift",
+      "type": "finite nonnegative number",
+      "default": 0.0,
+      "units": "display translation model units in camera Y; positive raises"
+    },
+    "scope": "Explicit profile opt-in and insert_phase in initial/loop/return with reload.policy=shell, progress0..1. Exclude mode ads/inspect/scope; multiply by existing amount (zero at full ADS). No effect on canonical/rest routes or weapons without this field.",
+    "envelope": {
+      "initial": "smooth(progress/.36)",
+      "loop": "1.0 including progress0 and1",
+      "return": "1-smooth(progress)",
+      "outsideShellReload": "0.0"
+    },
+    "delta": "for ctx in FP: result[ctx][\"translation\"][1] += config[\"framing\"].get(\"reloadCameraLift\",0.0) * envelope * amount",
+    "composition": "Apply exactly once to each framed() result for body and every moving/hidden shell leaf. Build source palms/reload_target from these lifted displays, then attach normal-length forearms/upper arms. Do not add a second arm-only offset or scale by model size again.",
+    "continuity": "initial0=0; initial1=loop0=loop1=return0=1; return1=0 with zero envelope endpoint slopes. Source/body/shell timing and all original matrices remain unchanged.",
+    "materializationGuard": "For active nonzero lift, ensure weapon_node emits calibrated body/part display whenever hands use it; existing amount>0 reload path already does so. ADS/inspect/canonical retain accepted transforms.",
+    "implementationStatus": "Master reports shared reloadCameraLift support implemented: default0, initial smooth(p/.36), loop1, return1-smooth(p); applied once to body/parts before hands/contact fit. Worker did not edit shared code. Master generation/tests and actual Vision2 pending."
+  }
+}

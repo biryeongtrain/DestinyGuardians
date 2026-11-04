@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "weapon": "halfdan_d",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A395",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.53,
+        0.67
+      ]
+    }
+  },
+  "sourceProvenance": {
+    "reviewPath": "/private/tmp/destiny-w214-source/source-review.json",
+    "reviewSha256": "7878a8ba396eb14eacf27cd0842d960e8e807e2d9d0bf4c0f5866e1f508ed0b7",
+    "blenderVersion": "5.4.0 Alpha",
+    "evaluatedRigPath": "/private/tmp/destiny-w214-source/auto_rifle_943c13a2.json",
+    "evaluatedRigSha256": "a267ec5f1b939fea1b1000a7cb159424d5292624cc66e356ff6d92724342e333",
+    "chainSheetPath": "/private/tmp/destiny-w214-source/sheets/auto_rifle_943c13a2-80A8A395-upper-chain.png",
+    "chainSheetSha256": "38d49d16466d5e15498ce2832f30eb80f45c7cdc393b7db2ca9871f12b28e0d3",
+    "rigAction": "80A8A395",
+    "action": "Armature|fp_80A8A395_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1.0,
+      105.0
+    ],
+    "sceneFps": 30,
+    "evaluatedSamples": 61,
+    "existingCacheJointAbsError": 0.0,
+    "masterReportedInputsUnchanged": true,
+    "objects": [
+      "ARMATURE"
+    ],
+    "sourceCameraRecovered": false,
+    "sourceActionWeaponExclusive": false,
+    "matrixSpace": "armature_object; row-major, column vectors; matrix_world not applied",
+    "evaluationOwner": "master headless Blender; worker read report and all61 matrices and viewed PNG; worker did not open Blender or access SSD",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/blender/source.blend",
+    "sourceBlendSha256": "85d557ad5b5ba5f1148653f1f6ee8a99bad69172143c16c8c1161b9c04d9fe02",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/source-map.json",
+    "sourceMapSha256": "aafe9e2ed8a4074ca216557bb31fa2869032f7a6fda2d0ea0dbd5a4b2d9281b9",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/bone-map.json",
+    "boneMapSha256": "4b709c1d83bce0134c71bbd0dfc4c1b72bcf35af891614729d0661f90fa0ef9d"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w214-source/source-review.json",
+      "sourceSha256": "7878a8ba396eb14eacf27cd0842d960e8e807e2d9d0bf4c0f5866e1f508ed0b7",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated original source.blend in Blender5.4.0 Alpha: ARMATURE only, OBSlot80A8A395,1..105 at30fps,61 samples, old-cache max error0; unchanged inputs. Worker did not operate Blender. Source/map hashes are master-reported; worker did not read SSD sources."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/auto_rifle_943c13a2.json",
+      "sourceSha256": "a267ec5f1b939fea1b1000a7cb159424d5292624cc66e356ff6d92724342e333",
+      "role": "read_source_full_chain",
+      "observation": "Read61 shoulder/elbow/wrist/weapon matrices; exact start/end equality. At inherited32-unit conversion: forearms8.14136, upper left8.72669/right8.72657. Shared family bone-only evidence; no recovered magazine mesh, weapon-exclusive selector, camera or IK."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/sheets/auto_rifle_943c13a2-80A8A395-upper-chain.png",
+      "sourceSha256": "38d49d16466d5e15498ce2832f30eb80f45c7cdc393b7db2ca9871f12b28e0d3",
+      "role": "viewed_source_chain_png",
+      "observation": "Viewed actual six-pose XZ/YZ upper-chain sheet0,.2,.4,.6,.8,1 before authoring. Strong left-chain handling at.4/.6, return at1. Bone projections do not prove mesh contact or native visibility."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "preserved_mesh_contacts",
+      "observation": "Preserve right[8,8.55,8.55]/[-16,0,0], left[7.8,9.72,-1.8]/[0,90,-85], reload.contact[7.4,7.65,3.12]/rotation[-3,0,0]. Keep magazine hint/policy. No rest-palm correction before FIRST."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "actual_accepted_profile",
+      "observation": "Copy actual f.profile(f.load(),halfdan_d,auto_rifle): translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28,leftRotation[15,35,-35]. Add sourceFullChain/keepMeshSupport true, hideSupportAtRest false; no stretch, damping or new camera offset."
+    },
+    {
+      "source": "scripts/generate_reload_w180_halfdan_d.py",
+      "sourceSha256": "90b9db67425b4c84d8f00e878192e31e7bfb03e977a6aeb5a74d7ae40db25986",
+      "role": "audited_authored_motion",
+      "observation": "AST-extracted literal KEYS/GRIP/MAG_ANCHOR/MAGAZINE_NAMES and audited rigid pose_display; old generator never executed. Keep11 keys, clear hold.33..53, seat.67, rock.67..73, recovery.73..90, exact endpoints,114 canonical elements/UV:110body+4whole-magazine."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "sourceSha256": "9843a23f049cf264fbf851cedac35c300b5c4c0c7727385051e5cc13d36b2de1",
+      "role": "candidate_attachment_release",
+      "observation": "Read existing gripWindow/part_shift algebra only. Default[.05,.20,.78,.98] keeps seated magazine following late palm. Halfdan-specific[.05,.20,.53,.67] keeps reach and full extraction/clear hold, smoothly releases during authored replacement.53..67, zero at seat.67. Source wrist-minus-weapon at p=.666667/.733333/.8 in object space is[-.21876,.15539,-.02055]/[-.09187,.19247,.01016]/[.27389,.04905,.01394]. Preserve valid late hand travel. This is an attachment candidate, no recovered rack event or FIRST-validated contact."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST candidate only. Master owns copying original61+shoulders, RELOAD_ACTIONS whitelist, W214 loader/runtime60, tests, all materialization and fingerless player-skin forearm/upper-arm overlays.",
+    "REST right/left mesh offsets calibrate source palms. reload.contact locates held magazine relative to palm, not rest palms. Preserve inherited framing and rest position/rotation.",
+    "gripWindow[.05,.20,.53,.67] follows Halfdan clear-hold end.53 and seat.67. FIRST must check extraction, .53..67 release and .67..80 late handling with magazine seated.",
+    "Reload bank114+estimated four112-element arms=562. Native fallback238 weapon elements; master must measure all emitted routes with arms against1000. Candidate is not an all-route maximum.",
+    "Pure stdlib generator returns248 absolute-path byte mappings:247pack+manifest, no import/generate writes. Draft-only until master seed-complete/copy signal.",
+    "FIRST Vision, image-backed worker feedback or justified no-change, then SECOND remain pending. No native pass, recovered camera, physical finger IK,60fps or performance acceptance claimed."
+  ]
+}

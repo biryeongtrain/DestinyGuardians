@@ -1,0 +1,98 @@
+{
+  "stage": "W66",
+  "font_source": "/System/Library/Fonts/Supplemental/Arial Narrow Bold.ttf",
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "font_size_px": 18,
+  "label_size_px": [
+    94,
+    24
+  ],
+  "provenance": "Original system-font raster labels; no official Destiny glyphs, rip or bundled font.",
+  "preview": {
+    "path": "art/hud/w66-rampage/offline-preview.png",
+    "status": "NOT IN GAME",
+    "inputs": "Synthetic layout fixtures, never active-buff evidence."
+  },
+  "runtime": {
+    "stacks": "WeaponRampage.stacks(ServerPlayer): 0..3",
+    "remaining": "WeaponRampage.remaining(ServerPlayer): 0..90 next-stack-decay ticks",
+    "timer": "ceil(remaining / 20) using existing W39 digits and W61 colon",
+    "prefix": "destiny:hud_perk_",
+    "rampage_key": "rampage_",
+    "row_order": [
+      "Kill Clip",
+      "Outlaw",
+      "Rampage"
+    ],
+    "active_row_y": [
+      778,
+      746,
+      714
+    ],
+    "nodes_per_active_row": 6,
+    "max_perk_nodes": 18,
+    "zero_stacks": "Remove all six Rampage nodes; never display x0 or retain 0:00."
+  },
+  "pack_delta": {
+    "new_labels": 3,
+    "new_files": 9,
+    "prefix_counts_at_handoff": {
+      "textures/item/hud": {
+        "before": 100,
+        "after": 103
+      },
+      "models/gui/hud": {
+        "before": 100,
+        "after": 103
+      },
+      "items/gui/hud": {
+        "before": 100,
+        "after": 103
+      }
+    }
+  },
+  "layout_review": "94x24 label slot preserved; feed ends at y=790, super begins at y=816; ammo area unchanged.",
+  "sha256": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x1.png": "760aee61bc5679d12040cd7d33b5fb8d80083cbbcc74146ba3343901931a6f66",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_rampage_w66_x1.json": "d84a5501531c47efe7df5287c5d5e33de1acd00c9676770e322081731d826136",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_rampage_w66_x1.json": "6e6397dadad658f0bf6a1f9130b5c3ac0da47d4f9f4235a3abdca857891a65f5",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x2.png": "66f7df5cb14f15b64167ba1faebb94a936ba768f687a4f104e29a640f7e0045f",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_rampage_w66_x2.json": "98cfe9937683bbd5b3a4e0382f9a5a6e1373d20c05393c8fb5e39aa117d23523",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_rampage_w66_x2.json": "8fee2a7d2aa81a6ea6542f15a4800de8a669757b65cd865072cab9cf0d226428",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x3.png": "2412225b883e9d897ac795de8fa88aa0c3904898bf10492ea51ef64d24fa31b9",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_rampage_w66_x3.json": "4d90b3a2f0b6dcfdd5ad45ac840e130f4e0744929f83b8c52be31151626d2ed1",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_rampage_w66_x3.json": "70636efb17f6b600efcea9761289b6fce32f5a501ba8f043394a6c13f10781dd",
+    "art/hud/w66-rampage/offline-preview.png": "14af926e59bf2d72560b5c92393d8dc9d70ae44ee65617b137156658941306af"
+  },
+  "reused_texture_sha256": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_buff_w61.png": "266c85c76326fff6e9640d0d58d5092f443303b55c0f649ccfde1415c7472d3e",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_kill_clip_w61.png": "eacf3f53ef743a79bc57dd5acdbf790db04fe72a8731f48caf061a3e7c8b97a4",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_outlaw_w62.png": "1612277963bb24b786b442fbba2f2ddf1aaea1e7c38defd8c0e5beff456931f3",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_colon_w61.png": "77386204c7c80c453efc142222fc5d6a4309ad5673e4f58d61ad99434d9f7dae",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_0.png": "c8fe8d9f0e80464a14798104c6d4a89ab2547986d07b4571cac43314734d578f",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_1.png": "64af6294443f3758201999bf9f0410f2a8d46d247b73a6b706d0b3690f206730",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_2.png": "aaa031a3ce85761d782e229c88ce086e22557a5f77eb8f99764c87c8cd9d7f5b",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_3.png": "54cd21df61f9838341a1e6a0ce5de426fc6b47cf07b31cf3a7c1844253ed3a95",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_4.png": "5b6a453dc0c9ddaa4ece0fab5aa18029b6ce2e53a90c309afaef236e3a11c303",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_5.png": "4fb9ce61dfa6a449d528c24f2f95101a21b46e60cd06082244e737d2f9a4dcbd",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_6.png": "9507d2344eeb9fe7e40587185b06bd70d75b31d2e01be169d80a0b89d9e2a33d",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_7.png": "9e5cc2de727f7d859338096afc4d762e77a83b65bd8d45a38c889fa7427fbd3e",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_8.png": "78690397578308a8ef2b733e4dc03c5968ea81c4a40ec45dae30f85510e2bb26",
+    "src/main/resources/assets/destiny/textures/item/hud/ammo_digit_9.png": "cd707a132d1f3b44a3f919ea861cd4ffd5412ddbcfc7d5eb0a5f5d50ca71d32c"
+  },
+  "freeze_list": [
+    "scripts/generate_rampage_hud_w66.py",
+    "src/main/java/kim/biryeong/destiny/hud/WeaponPerkHud.java",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x1.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_rampage_w66_x1.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_rampage_w66_x1.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x2.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_rampage_w66_x2.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_rampage_w66_x2.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_rampage_w66_x3.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_rampage_w66_x3.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_rampage_w66_x3.json",
+    "art/hud/w66-rampage/offline-preview.png",
+    "art/hud/w66-rampage/manifest.json"
+  ]
+}

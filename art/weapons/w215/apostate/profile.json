@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "weapon": "apostate",
+  "sourceAction": "80A8A17D",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A17D",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.22,
+        0.58,
+        0.68
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "sniper_rifle_c96fceca",
+    "action": "80A8A17D",
+    "sourceBlendSha256": "ddef967e949ec4a0c2d987d87e53975523068aba175a9b66c6f481463fb2c48e",
+    "sourceMapSha256": "3a1e90ee321f3d09fc1d90882293f36f6d1a0eb7dccaff874ac18f08f653db63",
+    "boneMapSha256": "7cfe30097bd3f7bddf88df517213dd50ed92c127136eb59d56d9f1c5e6e9a228"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w215-source/source-review.json",
+      "sourceSha256": "c283ec4f4b0e39bce3eeabc27c8f459a84a905b89b95012d46fcafc4cc1de535",
+      "role": "master_original_blender_evaluation",
+      "observation": "Fresh master headless Blender5.4.0 Alpha evaluation: ARMATURE only; OBSlot Armature|fp_80A8A17D_reload_full|Base, frames1..111 at30fps,61 samples; old-cache joint max error0; allInputsUnchanged true. Worker read this record, did not evaluate/open Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/sniper_rifle_c96fceca.json",
+      "sourceSha256": "4465d751656e4c571d166f19a6eb1b1385518b1c6eee2ef5949e48c26fb467a6",
+      "role": "evaluated_source61_full_chain",
+      "observation": "Read original61 weapon/shoulder/elbow/wrist matrices, armature-object space, row-major column vectors. Left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. Source endpoint returns exactly. At32 units/source unit: left upper8.726686..8.726693/forearm8.141361..8.141367; right upper8.726569..8.726574/forearm8.141357..8.141365. Preserve ordinary lengths and source FK."
+    },
+    {
+      "source": "/private/tmp/destiny-w215-source/sheets/sniper_rifle_c96fceca-80A8A17D-upper-chain.png",
+      "sourceSha256": "91a14e3edce0de2ac1ecdaf9f87cd4005b768089325fb0c3109d3738d50a2904",
+      "role": "viewed_bone_only_source_sheet",
+      "observation": "Viewed six actual XZ/YZ projections p=0,.2,.4,.6,.8,1 before drafting. Support chain moves through exchange and returns to rest. Bone projections prove neither mesh contact nor recovered camera/IK."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "actual_effective_sniper_framing",
+      "observation": "Read first_person_framing_w205.load/profile and merged family plus weapon overrides exactly as implemented. No Apostate override exists in loaded W206/208/210/212/213/214 profiles. Copy all effective fields: translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]; add only required support/full-chain flags."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_mesh_contacts",
+      "observation": "Preserve right rest[8,8.16,8.14]/[-15,0,0], left rest[7.8,8.92,-1.6]/[0,90,-85], reload contact[7.35,7.95,3.1]/[0,0,0]. REST offsets plus original FK locate palms; reload.contact attaches magazine to support hand within gripWindow."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/generate_reload_w185_apostate.py",
+      "sourceSha256": "d7a49e2a3ac792422098b5d3f6ec2268587900409d7d27cdb6e31bceadfe2db0",
+      "role": "preserved_authored_motion",
+      "observation": "AST-read literal KEYS/GRIP/MAGAZINE_ANCHOR/MAGAZINE_NAMES/PINS; copied rigid algebra and existing shaft/partition without importing or executing W185. All11 knots retained: lift.22, withdrawal.34, exchange.46, incoming.58, seat overtravel.68, release/neutral seat.74 and authored recovery1. No new motion or geometry."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/build_first_person_hands_w201.py",
+      "sourceSha256": "9843a23f049cf264fbf851cedac35c300b5c4c0c7727385051e5cc13d36b2de1",
+      "role": "proposed_magazine_release",
+      "observation": "Read supported partHint/policy/gripWindow hooks and source-palm/part-shift behavior. Proposal [.05,.22,.58,.68] reaches before withdrawal, carries exchange/incoming, releases attachment through final insertion and ends by seat overtravel. Neutral seated offset remains0 from.74 to1; no late palm-follow during recovery. No sourcePalmContactFit or camera fields added; physical contact awaits FIRST."
+    }
+  ],
+  "notes": [
+    "Candidate before FIRST. Master owns fresh61 rig/action binding, profile loader, runtime grid60, normal-length visible fingerless player-skin upper arms/forearms and output materialization.",
+    "Preserve W185 authored whole-magazine path and existing hidden shaft; C1 weighted harmonic PCHIP replaces per-key smooth stops. Source upper-chain limitations: no recovered mesh/camera/finger IK.",
+    "Budget estimate563=110body+5magazine+448classic full-chain arm surfaces; native236+448=684. Master must measure all composed routes including arms under1000; estimate is not a measured acceptance.",
+    "No arm stretch, damping away lengths, hidden support, camera lowering/lift or rest contact changes. Preserve54tick timing,6round capacity,140RPM, ammo and audio.",
+    "FIRST master screenshots -> worker image-backed correction or no-change review -> master SECOND. Final acceptance only after SECOND."
+  ]
+}

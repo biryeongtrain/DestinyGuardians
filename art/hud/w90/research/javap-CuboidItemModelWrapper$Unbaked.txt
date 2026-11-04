@@ -1,0 +1,150 @@
+Compiled from "CuboidItemModelWrapper.java"
+public final class net.minecraft.client.renderer.item.CuboidItemModelWrapper$Unbaked extends java.lang.Record implements net.minecraft.client.renderer.item.ItemModel$Unbaked {
+  private final net.minecraft.resources.Identifier model;
+
+  private final java.util.Optional<com.mojang.math.Transformation> transformation;
+
+  private final java.util.List<net.minecraft.client.color.item.ItemTintSource> tints;
+
+  public static final com.mojang.serialization.MapCodec<net.minecraft.client.renderer.item.CuboidItemModelWrapper$Unbaked> MAP_CODEC;
+
+  public net.minecraft.client.renderer.item.CuboidItemModelWrapper$Unbaked(net.minecraft.resources.Identifier, java.util.Optional<com.mojang.math.Transformation>, java.util.List<net.minecraft.client.color.item.ItemTintSource>);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #7                  // Field model:Lnet/minecraft/resources/Identifier;
+         9: aload_0
+        10: aload_2
+        11: putfield      #13                 // Field transformation:Ljava/util/Optional;
+        14: aload_0
+        15: aload_3
+        16: putfield      #17                 // Field tints:Ljava/util/List;
+        19: return
+
+  public void resolveDependencies(net.minecraft.client.resources.model.ResolvableModel$Resolver);
+    Code:
+         0: aload_1
+         1: aload_0
+         2: getfield      #7                  // Field model:Lnet/minecraft/resources/Identifier;
+         5: invokeinterface #21,  2           // InterfaceMethod net/minecraft/client/resources/model/ResolvableModel$Resolver.markDependency:(Lnet/minecraft/resources/Identifier;)V
+        10: return
+
+  public net.minecraft.client.renderer.item.ItemModel bake(net.minecraft.client.renderer.item.ItemModel$BakingContext, org.joml.Matrix4fc);
+    Code:
+         0: aload_1
+         1: invokevirtual #27                 // Method net/minecraft/client/renderer/item/ItemModel$BakingContext.blockModelBaker:()Lnet/minecraft/client/resources/model/ModelBaker;
+         4: astore_3
+         5: aload_3
+         6: aload_0
+         7: getfield      #7                  // Field model:Lnet/minecraft/resources/Identifier;
+        10: invokeinterface #33,  2           // InterfaceMethod net/minecraft/client/resources/model/ModelBaker.getModel:(Lnet/minecraft/resources/Identifier;)Lnet/minecraft/client/resources/model/ResolvedModel;
+        15: astore        4
+        17: aload         4
+        19: invokeinterface #39,  1           // InterfaceMethod net/minecraft/client/resources/model/ResolvedModel.getTopTextureSlots:()Lnet/minecraft/client/resources/model/sprite/TextureSlots;
+        24: astore        5
+        26: aload         4
+        28: aload         5
+        30: aload_3
+        31: getstatic     #45                 // Field net/minecraft/client/renderer/block/dispatch/BlockModelRotation.IDENTITY:Lnet/minecraft/client/renderer/block/dispatch/BlockModelRotation;
+        34: invokeinterface #51,  4           // InterfaceMethod net/minecraft/client/resources/model/ResolvedModel.bakeTopGeometry:(Lnet/minecraft/client/resources/model/sprite/TextureSlots;Lnet/minecraft/client/resources/model/ModelBaker;Lnet/minecraft/client/renderer/block/dispatch/ModelState;)Lnet/minecraft/client/resources/model/geometry/QuadCollection;
+        39: astore        6
+        41: aload_3
+        42: aload         4
+        44: aload         5
+        46: invokestatic  #55                 // Method net/minecraft/client/renderer/item/ModelRenderProperties.fromResolvedModel:(Lnet/minecraft/client/resources/model/ModelBaker;Lnet/minecraft/client/resources/model/ResolvedModel;Lnet/minecraft/client/resources/model/sprite/TextureSlots;)Lnet/minecraft/client/renderer/item/ModelRenderProperties;
+        49: astore        7
+        51: aload         6
+        53: invokevirtual #61                 // Method net/minecraft/client/resources/model/geometry/QuadCollection.getAll:()Ljava/util/List;
+        56: invokestatic  #67                 // Method net/minecraft/client/renderer/item/CuboidItemModelWrapper.validateAtlasUsage:(Ljava/util/List;)V
+        59: aload_2
+        60: aload_0
+        61: getfield      #13                 // Field transformation:Ljava/util/Optional;
+        64: invokestatic  #73                 // Method com/mojang/math/Transformation.compose:(Lorg/joml/Matrix4fc;Ljava/util/Optional;)Lorg/joml/Matrix4fc;
+        67: astore        8
+        69: new           #68                 // class net/minecraft/client/renderer/item/CuboidItemModelWrapper
+        72: dup
+        73: aload_0
+        74: getfield      #17                 // Field tints:Ljava/util/List;
+        77: aload         6
+        79: aload         7
+        81: aload         8
+        83: invokespecial #79                 // Method net/minecraft/client/renderer/item/CuboidItemModelWrapper."<init>":(Ljava/util/List;Lnet/minecraft/client/resources/model/geometry/QuadCollection;Lnet/minecraft/client/renderer/item/ModelRenderProperties;Lorg/joml/Matrix4fc;)V
+        86: areturn
+
+  public com.mojang.serialization.MapCodec<net.minecraft.client.renderer.item.CuboidItemModelWrapper$Unbaked> type();
+    Code:
+         0: getstatic     #82                 // Field MAP_CODEC:Lcom/mojang/serialization/MapCodec;
+         3: areturn
+
+  public final java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokedynamic #86,  0             // InvokeDynamic #0:toString:(Lnet/minecraft/client/renderer/item/CuboidItemModelWrapper$Unbaked;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #90,  0             // InvokeDynamic #0:hashCode:(Lnet/minecraft/client/renderer/item/CuboidItemModelWrapper$Unbaked;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #94,  0             // InvokeDynamic #0:equals:(Lnet/minecraft/client/renderer/item/CuboidItemModelWrapper$Unbaked;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public net.minecraft.resources.Identifier model();
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field model:Lnet/minecraft/resources/Identifier;
+         4: areturn
+
+  public java.util.Optional<com.mojang.math.Transformation> transformation();
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field transformation:Ljava/util/Optional;
+         4: areturn
+
+  public java.util.List<net.minecraft.client.color.item.ItemTintSource> tints();
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field tints:Ljava/util/List;
+         4: areturn
+
+  private static com.mojang.datafixers.kinds.App lambda$static$0(com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+    Code:
+         0: aload_0
+         1: getstatic     #98                 // Field net/minecraft/resources/Identifier.CODEC:Lcom/mojang/serialization/Codec;
+         4: ldc           #104                // String model
+         6: invokeinterface #105,  2          // InterfaceMethod com/mojang/serialization/Codec.fieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+        11: invokedynamic #111,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        16: invokevirtual #115                // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+        19: getstatic     #121                // Field com/mojang/math/Transformation.EXTENDED_CODEC:Lcom/mojang/serialization/Codec;
+        22: ldc           #124                // String transformation
+        24: invokeinterface #125,  2          // InterfaceMethod com/mojang/serialization/Codec.optionalFieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+        29: invokedynamic #128,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+        34: invokevirtual #115                // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+        37: getstatic     #129                // Field net/minecraft/client/color/item/ItemTintSources.CODEC:Lcom/mojang/serialization/Codec;
+        40: invokeinterface #132,  1          // InterfaceMethod com/mojang/serialization/Codec.listOf:()Lcom/mojang/serialization/Codec;
+        45: ldc           #136                // String tints
+        47: invokestatic  #137                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        50: invokeinterface #142,  3          // InterfaceMethod com/mojang/serialization/Codec.optionalFieldOf:(Ljava/lang/String;Ljava/lang/Object;)Lcom/mojang/serialization/MapCodec;
+        55: invokedynamic #145,  0            // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+        60: invokevirtual #115                // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+        63: invokevirtual #146                // Method com/mojang/serialization/codecs/RecordCodecBuilder$Instance.group:(Lcom/mojang/datafixers/kinds/App;Lcom/mojang/datafixers/kinds/App;Lcom/mojang/datafixers/kinds/App;)Lcom/mojang/datafixers/Products$P3;
+        66: aload_0
+        67: invokedynamic #152,  0            // InvokeDynamic #4:apply:()Lcom/mojang/datafixers/util/Function3;
+        72: invokevirtual #155                // Method com/mojang/datafixers/Products$P3.apply:(Lcom/mojang/datafixers/kinds/Applicative;Lcom/mojang/datafixers/util/Function3;)Lcom/mojang/datafixers/kinds/App;
+        75: areturn
+
+  static {};
+    Code:
+         0: invokedynamic #160,  0            // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+         5: invokestatic  #161                // Method com/mojang/serialization/codecs/RecordCodecBuilder.mapCodec:(Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
+         8: putstatic     #82                 // Field MAP_CODEC:Lcom/mojang/serialization/MapCodec;
+        11: return
+}

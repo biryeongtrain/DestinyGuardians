@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "weapon": "claws_of_the_wolf",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A36A",
+      "partHint": "moving",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.68,
+        0.79
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w214-source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "sourceSha256": "7878a8ba396eb14eacf27cd0842d960e8e807e2d9d0bf4c0f5866e1f508ed0b7",
+      "observation": "Read master original source.blend headless Blender5.4.0 Alpha review before generation: ARMATURE only, OBSlot Armature|fp_80A8A36A_reload_full|Base, frames1..105 at30fps,61 samples; prior-cache joint max error0, allInputsUnchanged=true. Worker reviewed evidence and did not open/evaluate Blender.",
+      "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/pulse_rifle_b4d01502/blender/source.blend",
+      "sourceBlendSha256": "042a9965b8f02a7e7bfda10914e2711b31e2add9417884d8b277e11ab9668f4d",
+      "sourceMapSha256": "73251b2726fbb4f652eb14baf6fe0e3552a9351c1515271684525f4b95bdcb74",
+      "boneMapSha256": "411b794dbe4c8791b9bc1c82bc1ef6833aeb71d308aaa08aab7aa0a205635547"
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/pulse_rifle_b4d01502.json",
+      "role": "evaluated_source61_full_chain",
+      "sourceSha256": "fc911c2875f334a2386bdc4f2d2377c350ef11d9a46ed5bcc6500d644e2b8e3d",
+      "observation": "Read evaluated61 uniform frames in armature-object space, row-major/column vectors: left D1232BA2->897A1504->8C83CB67; right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4. Preserve source FK and ordinary limb lengths without stretch, damping or source attenuation."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/sheets/pulse_rifle_b4d01502-80A8A36A-upper-chain.png",
+      "role": "viewed_bone_only_source_sheet",
+      "sourceSha256": "be5cc8f75b3b1517f4b21eb50ca19400c9998a95404de62996eb72839fbb9549",
+      "observation": "Viewed actual six-pose XZ/YZ image at p=0,.2,.4,.6,.8,1 before design/generation. Chain changes during exchange and returns near rest; bone-only projections prove no mesh contact or recovered camera."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w123/claws_of_the_wolf/comparison.png",
+      "role": "viewed_semantic_mesh_sheet",
+      "sourceSha256": "42af70b67794387985bd6f000558061443d1fdafec16c9b986a9df0e98b00685",
+      "observation": "Viewed W138 side/front/rear oblique comparison: dark teal body/stock, burgundy forging, brass claws/markers, open swept guard and rear magazine. Keep all128 filled cuboids and face UV; offline sheet is not native evidence."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/contacts.json",
+      "role": "retained_mesh_contacts",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "observation": "Retain right rest[8,8.18,7.98]/[-17,0,0], left rest[7.8,9.22,-1.4]/[0,90,-85], reload contact[7.35,7.95,11.36]/[11,0,0]. Source palms use REST mesh offsets plus original FK; reload.contact locates the held part, not a replacement rest wrist offset."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w205/first-person-framing.json",
+      "role": "preserved_pulse_family_framing",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "observation": "Copied actual f.profile(f.load(),claws_of_the_wolf,pulse_rifle), including inherited rightWristRoll28 and leftRotation[15,35,-35]. Preserve translation[-.65,.6,0], rotation[-1,2,0], scale.98; no invented camera/lift/limb fit."
+    },
+    {
+      "source": "/private/tmp/destiny-w214-source/pulse_rifle_b4d01502.json",
+      "role": "shared_family_action_limit",
+      "sourceSha256": "fc911c2875f334a2386bdc4f2d2377c350ef11d9a46ed5bcc6500d644e2b8e3d",
+      "observation": "Evaluated metadata lists Cold Denial, Bygones, Chattering Bone, Blast Furnace and Claws of the Wolf with fallback=false. Keep audited80A8A36A; not weapon-exclusive. Source mesh/camera/IK absent."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/generate_reload_w174_claws_of_the_wolf.py",
+      "role": "preserved_authored_part_path",
+      "sourceSha256": "0834f5f35f6a9f046af01c0aaa7e63dc937eb489d029c2c86863f1f30beddfd1",
+      "observation": "Audited source AST constants/algebra only; old generator never imported/executed. Preserve all11 authored keys/holds, GRIP/MAG_ANCHOR/MAG_AXIS, moving indices111/112 magazine_core/floor, fixed housing and source hash."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/scripts/build_first_person_hands_w201.py",
+      "role": "proposed_attachment_release",
+      "sourceSha256": "9843a23f049cf264fbf851cedac35c300b5c4c0c7727385051e5cc13d36b2de1",
+      "observation": "Read existing gripWindow weight hook. Authored magazine offset reaches0 atp=.79 and stays0. Evaluated left wrist weapon-local moves from[-.1022,-.0005,-.2211] at.70 toward[.2241,.0595,-.0171] at.80. Candidate [.05,.20,.68,.79] fades attachment during final approach so no palm-follow remains after authored seat. This is a pre-FIRST proposal, not recovered mag contact or a confirmed rack."
+    }
+  ],
+  "notes": [
+    "Candidate before FIRST Vision. Master owns fresh61 shoulder-cache copy, RELOAD_ACTIONS whitelist, W214 loader/runtime60grid/testing, output materialization and fingerless player-skin forearm/upper-arm overlay.",
+    "Keep original FK/ordinary limb lengths and visible mesh support at rest. No damping, stretch, source attenuation, hidden support or new rest-contact/framing values.",
+    "W174 authored magazine seats atp=.79, base press .79..84; retain KEYS/holds and timing. Pre-FIRST attachment window differs from Lonesome because Claws uses its own .68 approach/.79 seat. Bone-only data cannot prove late rack or physical contact.",
+    "Budget estimate576=126body+2magazine+224classic forearm+224classic upper-arm surfaces. Master must measure the materialized all-route graph including arms against1000.",
+    "Await actual FIRST PNG/phase feedback, review/correct owned files if warranted, then master SECOND Vision; no native/visual acceptance is claimed."
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "reviewed": "2026-10-24",
+  "scope": "Research only; no runtime timing calibration or input telemetry.",
+  "officialInventory": {
+    "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+    "sourceUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+    "localCache": "/tmp/destiny-weapons-w30/bungie-items.json",
+    "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+    "definitions": [
+      {
+        "hash": 16392701,
+        "name": "Compact Arrow Shaft",
+        "description": "Thinner arrows to increase nocking speed and weapon handling.\n  •  Increases handling speed \n  •  Increases reload speed",
+        "definitionCanonicalSha256": "717c4d3bac5ce68f92a0368e94b0abf4e66fec857b5aee8f3279648d8ded4c2c"
+      },
+      {
+        "hash": 715195141,
+        "name": "Precision Frame",
+        "description": "Compound Bow. Longer draw time optimized for damage. \n[Reload]  : Use while drawn to cancel the shot.",
+        "definitionCanonicalSha256": "b00f476c287c14fd71e0b6a90ec6976d4e5587ca1b43675fbe985d6b42cc996f"
+      },
+      {
+        "hash": 2108556049,
+        "name": "Lightweight Frame",
+        "description": "Recurve Bow. Draw quickly and move faster while this weapon is equipped. \n[Reload]  : Use while drawn to cancel the shot.",
+        "definitionCanonicalSha256": "6f048d2a16c064d5f3be9a7efcb1eacf18a9be53eb8cbabcb6f45ebc1cf2b2f7"
+      },
+      {
+        "hash": 2493794080,
+        "name": "Bow Reloader",
+        "description": "This perk has been deprecated and no longer functions.",
+        "definitionCanonicalSha256": "fc0fda679b8e687d507d57f265605d9bb62a68a0f907ce565718e588e172f7db"
+      }
+    ],
+    "selectedBowIntrinsicLinks": [
+      {
+        "id": "biting_winds",
+        "itemHash": 1621657423,
+        "socketIndex": 0,
+        "intrinsicHash": 715195141
+      },
+      {
+        "id": "whispering_slab",
+        "itemHash": 211938782,
+        "socketIndex": 0,
+        "intrinsicHash": 2108556049
+      }
+    ]
+  },
+  "gameplay": {
+    "url": "https://www.youtube.com/watch?v=54yvDaDwlJ4",
+    "title": "Rapid hit on bows reload speed test",
+    "uploader": "cassuttaja",
+    "uploadDate": "20220927",
+    "downloadFormat": "244",
+    "size": [
+      854,
+      480
+    ],
+    "fps": 30,
+    "videoPath": "run/private-sources/w49/54yvDaDwlJ4.webm",
+    "videoSha256": "478183b560fd5f2309d43fd078f3c5204054340d3e0ea46e3b7ec91adc586104",
+    "infoPath": "run/private-sources/w49/54yvDaDwlJ4.info.json",
+    "infoSha256": "bd5609ca2c8484937be2885721bbac50425defa42297c58ce9b8fd69afae5123",
+    "contactSheetPath": "run/private-sources/w49/bow-exact-contact.jpg",
+    "contactSheetSha256": "cc6005eef53bfb2df36bfa922ae42c8b1a285d1dd321d2050818dd5055c5bf0c",
+    "frameNumbering": "Zero-based decoded source frames. Times are source PTS checked with ffmpeg showinfo, not action durations.",
+    "observations": [
+      {
+        "frame": 235,
+        "ptsSeconds": 7.833,
+        "visible": "Post-shot bow recovery/nock sequence; loaded-ammo HUD 0."
+      },
+      {
+        "frame": 240,
+        "ptsSeconds": 8.0,
+        "visible": "Bow lowered in recovery/nock sequence; loaded-ammo HUD 0."
+      },
+      {
+        "frame": 255,
+        "ptsSeconds": 8.5,
+        "visible": "Arrow on undrawn bow; loaded-ammo HUD 1."
+      },
+      {
+        "frame": 300,
+        "ptsSeconds": 10.0,
+        "visible": "Still undrawn/idle with loaded-ammo HUD 1; no new shot in intervening reviewed sequence."
+      }
+    ],
+    "limitations": [
+      "No input overlay: cannot prove absence of Reload or a second trigger input.",
+      "Historical 2022 recording; weapon roll, reload modifiers and Rapid Hit state are not controlled.",
+      "Uploader frame-count claims were not adopted. No base nock duration, input-to-reload delay, perfect-draw window, overdraw threshold or damage scalar is measured.",
+      "Observed return to a loaded idle bow supports the nock/draw distinction; automatic initiation remains a direction inference."
+    ]
+  },
+  "sources": [
+    {
+      "id": "official-full-auto",
+      "kind": "BUNGIE_ANNOUNCEMENT_HISTORICAL",
+      "url": "https://www.bungie.net/7/en/News/article/51999",
+      "published": "2022-12-01",
+      "supports": "Global accessibility Full Auto toggle is distinct from native weapon fire mode. No all-weapons post-reload guarantee."
+    },
+    {
+      "id": "official-charge-fix",
+      "kind": "BUNGIE_PATCH_NOTES_HISTORICAL",
+      "url": "https://www.bungie.net/7/en/News/article/hotfix_6_3_0_7",
+      "published": "2023-01-31",
+      "supports": "Held-trigger Full Auto stoppage was a bug; a separate fix prevents charge-based weapons skipping charge delay after empty-mag auto loading."
+    },
+    {
+      "id": "developer-bow-interview",
+      "kind": "BUNGIE_DESIGNER_INTERVIEW_HISTORICAL",
+      "url": "https://gameinformer.com/feature/2018/06/13/a-deep-dive-on-destiny-2-forsakens-new-bow",
+      "published": "2018-06-13",
+      "supports": "Designer Greg Peng says early release changes arrow trajectory. Does not specify current damage or velocity interpolation.",
+      "bungieCrossReference": "https://www.bungie.net/7/en/News/Article/46944",
+      "videoStatus": "Embedded Brightcove video returned 404; not claimed viewed."
+    },
+    {
+      "id": "bow-wiki",
+      "kind": "COMMUNITY_SECONDARY",
+      "url": "https://www.destinypedia.com/index.php?title=Combat_Bow&oldid=389637",
+      "supports": "Gameplay section describes early/undrawn releases, reduced damage/speed and greater arc, reload letdown, and eventual forced release. Not a primary quantitative specification."
+    },
+    {
+      "id": "empty-ads-report",
+      "kind": "USER_REPRO_REPORT_NOT_BUNGIE_SPEC",
+      "url": "https://www.bungie.net/en/Forums/Post/262342625",
+      "supports": "Expected empty-mag reload while maintaining fire/ADS; actual bug. Inputs are author-reported, not observed telemetry."
+    },
+    {
+      "id": "held-reload-report",
+      "kind": "USER_REPRO_REPORT_NOT_BUNGIE_SPEC",
+      "url": "https://www.bungie.net/en/Forums/Post/262105717",
+      "supports": "Full Auto expected when fire is held through reload; actual controller jamming. Does not establish default semi-auto behavior."
+    },
+    {
+      "id": "barrow-dyad-report",
+      "kind": "USER_REPORT_WITH_BNGHELP8_ACKNOWLEDGEMENT",
+      "url": "https://www.bungie.net/en/Forums/Post/264667841",
+      "published": "2025-03-20",
+      "supports": "BNGHelp8 acknowledges investigation of this exotic/settings issue; not a universal reload or resume rule."
+    },
+    {
+      "id": "lfr-anomaly",
+      "kind": "COMMUNITY_FIRST_PERSON_REPORT",
+      "url": "https://www.reddit.com/r/DestinyTheGame/comments/10qjbsh/",
+      "published": "2023-02-01",
+      "supports": "Author contrasts held-fire empty reload on sniper/SMG with LFR requiring manual reload or release/repress after a patch. Historical anomaly, not universal charged-weapon policy."
+    },
+    {
+      "id": "sprint-report",
+      "kind": "COMMUNITY_FIRST_PERSON_REPORT_NOT_OFFICIAL",
+      "url": "https://www.bungie.net/en/Forums/Post/243540461",
+      "supports": "Reports sprint-cancelled reload animation still leaves a firing delay; exact cancellation/commit/restart rules unverified."
+    }
+  ],
+  "authoredDirection": {
+    "emptyReload": "Queue after last successful shot and burst drain, independent of needing another press; initial scheduling bounded by next server tick.",
+    "automaticResume": "Only supported intrinsic automatic profiles with maintained real fire input, after reload and existing firing gates.",
+    "semiAuto": "No extra queued shot from old press.",
+    "chargedWeapons": "Fusion/LFR require fresh press under this project scope; not claimed universal Destiny behavior.",
+    "bow": "Successful released shot schedules nock; nock completion loads an arrow, never fires one. Draw time begins only after nock. Q cancels draw without a projectile.",
+    "partialDraw": "Positive early-release shot uses explicitly authored interpolation; no source-backed exact Destiny scalar.",
+    "timings": "Unknown. Next-tick initiation and any interpolation are implementation decisions, not measured Destiny constants."
+  }
+}

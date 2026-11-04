@@ -1,0 +1,72 @@
+{
+  "stage": "W172",
+  "label": "FRENZY",
+  "size": [
+    94,
+    24
+  ],
+  "font_family": "Arial Narrow Bold",
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "font_size_px": 22,
+  "horizontal_scale": 0.8996539792387543,
+  "alpha_bounds_px": [
+    13,
+    1,
+    82,
+    22
+  ],
+  "pillow_version": "12.3.0",
+  "freetype_version": "2.14.3",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "provenance": "Original generated system-font label, not an official Destiny sprite; no ripped asset or bundled font; W171 font, cap height and coverage method",
+  "runtime_contract": {
+    "icon_id": "destiny:gui/hud/perk_frenzy_w172",
+    "layout": "TIMER",
+    "valid_ticks": [
+      1,
+      144
+    ],
+    "seconds": "ceil(ticks / 20): 0:01..0:08 for ticks 1..144; absent at 0 or outside valid range",
+    "activation": "Observed live remaining ticks only; no manufactured activation or counter",
+    "priority": "After all existing fifteen kinds, including TAP_THE_TRIGGER",
+    "max_rows": 4,
+    "node_suffixes": [
+      "marker",
+      "label",
+      "minutes",
+      "colon",
+      "tens",
+      "ones"
+    ],
+    "marker": "Green utility 0x8DE2AF; gold remains Memento Mori / Honed Edge only",
+    "visibility": "Held weapon; hidden rows use current remaining ticks on promotion",
+    "layout_limits": "Existing TIMER renderer: label center 168, width 94, height 24; marker right 113, label left 121, label right 215, timer left 227; 8/12-unit gaps; 32-unit row pitch; no native validation claim",
+    "native_validation": "Pending master Vision: timer boundaries, expiry, cap promotion, cleanup, readability",
+    "integration": "Master owns WeaponPerkHud live adapter; pass actual ticks as twenty-first Snapshot argument"
+  },
+  "source_facts": [
+    "W171 pinned font, 22px cap-size input, BASIC engine, 4x supersampling",
+    "WeaponPerkHud TIMER slot is 94x24 and marker is green unless Mori/Honed"
+  ],
+  "local_choices": [
+    "Condense full authored label into existing TIMER slot; 144-tick bound from W172 task contract; 90 percent horizontal condensation"
+  ],
+  "pack_bytes": 10034,
+  "pack_byte_budget": 16384,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_frenzy_w172.png": "c47a4bcbc358fd0aba0cac68b7575a0dd6a35edd4ee511aa9cc8a44567d67a71",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_frenzy_w172.json": "f3dfbc2173bf2b12e2aa579acd3d14e82dad5732cb4f16ab599fceb3a84c1353",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_frenzy_w172.json": "77c0b9cbfaab2be69e58f7faf389a82d5f80011cecd40e9eb072bdb242c8915a"
+  },
+  "source_files": {
+    "art/hud/w172/frenzy.svg": "be9f2c53615e4628fec3048563a66868a43ade3706ca2fa9521d1b92a085b1aa"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_frenzy_w172.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_frenzy_w172.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_frenzy_w172.json",
+    "art/hud/w172/frenzy.svg",
+    "art/hud/w172/manifest.json"
+  ]
+}

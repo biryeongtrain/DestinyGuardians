@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "weapon": "the_recluse",
+  "framing": {
+    "translation": [
+      -0.7,
+      0.8,
+      1.0
+    ],
+    "rotation": [
+      -2,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      -3
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "meshArmDirections": true,
+    "rightWristRoll": 0,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        9.65,
+        8.1,
+        9.4
+      ],
+      "rotation": [
+        -30,
+        0,
+        35
+      ]
+    },
+    "left": {
+      "position": [
+        6.8,
+        8.15,
+        3.9
+      ],
+      "rotation": [
+        -32,
+        0,
+        -38
+      ]
+    },
+    "reload": {
+      "contact": [
+        6.45,
+        7.35,
+        8.65
+      ],
+      "rotation": [
+        -25,
+        0,
+        -35
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "rigAction": "80A8A192"
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w208-native/frames/w208-the_recluse-hip.png",
+      "observation": "Inspected actual native PNG via view_image: prominent arm reaches the forward black grip; existing contact override places both palms around Z3.8. This image does not identify which rendered arm is right, but confirms the reported forward-grip crowding."
+    },
+    {
+      "source": "/private/tmp/destiny-w208-native/screenshots/the_recluse-reload.png",
+      "observation": "Inspected actual native reload contact sheet via view_image: raised middle sample has long block arms and awkward hand/weapon alignment. This is pre-correction evidence, not acceptance of the new contacts."
+    },
+    {
+      "source": "art/weapons/w123/the_recluse/design.json",
+      "observation": "Canonical muzzle is -Z. Rotated foregrip/core long-axis endpoints are [8,6.22,4.65] and [8,10.18,3.10]; trigger upper/hook origins Z7.325/7.275; rear magazine/core long-axis endpoints [8,6.72,8.35] and [8,9.47,9.29]. Therefore the front grip is support and the black volume behind the trigger is the firing-grip location, despite its magazine partition name.",
+      "sourceSha256": "42fd43633d0168bf72e6bf4dbe439819a88bb6be63dd6e77f055ce32d4ef25d4"
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/weapon_surface_w123/the_recluse.json",
+      "observation": "Current main and isolated canonical full/body/magazine files match byte for byte. Rear black firing-grip-shaped volume is magazine/core plus magazine/front-round, both in moving magazine, not a separately fixed pistol_grip. Right palm is placed against its neutral rear/right flank but must follow BODY during reload; do not follow detached magazine with right hand."
+    },
+    {
+      "source": "art/weapons/w123/the_recluse/comparison.png",
+      "observation": "Inspected raw-source and semantic side/oblique sheet: open trigger between forward ribbed support grip and rear black grip; topology evidence supports separated hands rather than a cupped two-hand hold on front grip."
+    },
+    {
+      "source": "scripts/skin_arm_models_w204.py",
+      "observation": "Current fingerless block has pivot [8,8,8], hand end Y9, elbow end Y1.5, classic width/depth 2.4. Authored XYZ rotations send local -Y down/back/outward. Palm pivot is offset outside each grip flank to allow the solid hand end to contact the mesh without putting the whole forearm through it."
+    },
+    {
+      "source": "art/weapons/w205/rigs/submachine_gun_dc16526f.json",
+      "observation": "Idle 80A8A16E gives ordinary source forearm length about 8.141364 model units (Y scale 1.252518 relative to 6.5); preserve that length. Reload remains audited action 80A8A192. cameraExported false."
+    },
+    {
+      "source": "/private/tmp/destiny-w209-r3-native/screenshots/the_recluse-review.png",
+      "observation": "W209 FIRST actual source61 native review inspected via view_image: distinct rear right/forward left hip contacts and readable ADS aperture. Raised reload has exposed elbows and splayed forearms; no SECOND native acceptance yet."
+    },
+    {
+      "source": "/private/tmp/destiny-w209-r3-native/screenshots/the_recluse-reload.png",
+      "observation": "Inspected actual sample00/04/08/11/15 sheet. sample04/08 splay is material; do not hide/crop/stretch arms or disable source animation to conceal it."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w209/source-blender-61.json",
+      "observation": "Main provenance records 61 directly evaluated Blender poses for SMG 80A8A192, shared-frame error 0, unchanged source blend SHA 66480c98fd213479df5dcee83449b28eb9ef4e39329a4293e2649124f5b7ff79 and rig output SHA 72e3ad99e749300bebcbf0fe3a70763c3bc02f5210ea55856a9a1ad7fb998c30. Worker reads provenance, not claiming a new Blender evaluation."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w209/source-review/80A8A192-contact-sheet.png",
+      "observation": "Viewed main source bone-only X/Z and Y/Z armature-space sheet. It documents changing elbow/wrist/weapon posture, not original camera or mesh/contact verification; review-index reports original 3.0s, source FPS30, review sampling FPS20."
+    },
+    {
+      "source": "scripts/rig_arms_w205.py",
+      "observation": "Read CURRENT main shared source. Proposed parent transport Q=Dt*Drest^T, Qcanonical=C*Q*C^T, output=Rbody*Qcanonical*RmeshRest preserves rest calibration and common weapon-space axes. Read-only all61 matrix check gives max residual 8.881784197001252e-16 for Qcanonical*(C*Drest)=C*Dt. No shared code edited."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "observation": "Current main SMG family adds rightWristRoll 28 to explicit contact Z35, giving effective Z63. Profile now explicitly overrides rightWristRoll to 0 so authored [-30,0,35] is the complete right rest rotation. Source motion delta, lengths and all contact positions remain unchanged."
+    }
+  ],
+  "notes": [
+    "W209 FIRST native/source61 feedback: rightWristRoll 0 removes inherited SMG +28-degree rest calibration on top of the explicit +35-degree right contact. This corrects rest framing only; do not attenuate or erase source61 motion. Parent-space source transport and SECOND native review are master-owned.",
+    "Contact correction only: framing translation [-0.7,0.8,1], rotation [-2,2,0], scale 0.98 and sourceViewRotation [0,0,-3] retained. No geometry, UV, ADS graph, generator, timing, audio or main checkout edit.",
+    "meshArmDirections and keepMeshSupport remain true. W209 sourceWeaponRelative should transport source motion in common weapon parent axes: D=W^T*F, Q=Dt*Drest^T, Qcanonical=C*Q*C^T, Routput=Rbody*Qcanonical*RmeshRest. Retain ordinary source lengths and mesh palm translations. Preserve existing rest contact calibration; do not postmultiply a source-forearm-local delta into arbitrary per-contact axes.",
+    "Right is rear/right firing grip [9.65,8.1,9.4], left is forward/left support [6.8,8.15,3.9]; palm separation 6.194756 model units. Local -Y directions respectively [0.573576,-0.709406,0.409576] and [-0.615661,-0.668271,0.417582]: down, toward rear +Z and outward on opposite X sides.",
+    "Left reload contact [6.45,7.35,8.65], rotation [-25,0,-35], approaches the existing rear magazine proxy from its left/lower flank. Its local -Y is [-0.573576,-0.742404,0.346189]. Follow moving magazine only during handling and release/return using existing blend. Right stays body-relative, including when the rear proxy detaches.",
+    "Structural limitation: current moving magazine contains the rear firing-grip-shaped volume. This correction fixes hand role/contact assignment; it cannot establish a separately fixed pistol grip or recovered physical magazine boundary. Master should assess this separately; do not silently swap partitions or change geometry here.",
+    "Read-only offline classic-arm OBB check at ordinary source length: right full envelope overlaps rear grip volumes only, left full envelope overlaps forward grip volumes only; neither overlaps trigger/guard. Forearms below local Y7 clear all neutral canonical elements for right, left and reload. Reload palm-end envelope still overlaps the lower brace near the magazine/floorplate; native handling clearance remains pending.",
+    "Actual old native PNGs inspected; no post-change native acceptance, CU/Vision interaction, Gradle or generator execution. Master owns regeneration, tests, native review and shared retargeting integration."
+  ]
+}

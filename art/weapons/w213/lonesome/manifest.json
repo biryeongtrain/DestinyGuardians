@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "stage": "W213",
+  "weapon": "lonesome",
+  "generator": "scripts/generate_reload_w213_lonesome.py",
+  "generatorSha256": "c395541948d5e35db53e1d43cb06690f1810307681fd244fa7c79a438160ebc7",
+  "itemModel": "destiny:weapon_reload_w213_lonesome/lonesome",
+  "frames": 61,
+  "intervals": 60,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "thresholdEncoding": "float32(i/60)",
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "curve": "C1 PCHIP; shared weighted-harmonic tangents; zero at endpoints/holds/extrema",
+  "keyframes": [
+    [
+      0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      0
+    ],
+    [
+      0.15,
+      [
+        18,
+        -5,
+        -12
+      ],
+      [
+        -0.4,
+        0.2,
+        0
+      ],
+      0
+    ],
+    [
+      0.3,
+      [
+        36,
+        -10,
+        -24
+      ],
+      [
+        -0.8,
+        0.5,
+        0.3
+      ],
+      3
+    ],
+    [
+      0.45,
+      [
+        40,
+        -12,
+        -27
+      ],
+      [
+        -0.8,
+        0.5,
+        0.3
+      ],
+      6.7
+    ],
+    [
+      0.6,
+      [
+        40,
+        -12,
+        -27
+      ],
+      [
+        -0.8,
+        0.5,
+        0.3
+      ],
+      5.2
+    ],
+    [
+      0.75,
+      [
+        34,
+        -8,
+        -20
+      ],
+      [
+        -0.5,
+        0.3,
+        0.2
+      ],
+      0
+    ],
+    [
+      0.85,
+      [
+        16,
+        -3,
+        -8
+      ],
+      [
+        -0.2,
+        0.1,
+        0
+      ],
+      0
+    ],
+    [
+      1,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      0
+    ]
+  ],
+  "gripPivot": [
+    8,
+    9.44,
+    8.81
+  ],
+  "authoredTimingSource": "scripts/generate_reload_w164_lonesome.py",
+  "normalizedPhases": {
+    "raise": [
+      0,
+      0.15
+    ],
+    "withdraw": [
+      0.15,
+      0.45
+    ],
+    "insert": [
+      0.45,
+      0.75
+    ],
+    "recover": [
+      0.75,
+      1
+    ]
+  },
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/lonesome.json",
+  "sourceGeometryFileSha256": "5420acfac0c21795a37d206091fa2a79373d58ea124bb07351d2c4dacdeb5605",
+  "sourceElements": 97,
+  "partElements": {
+    "body": 95,
+    "moving": 3
+  },
+  "movingIndices": [
+    77,
+    78
+  ],
+  "movingNames": [
+    "heel",
+    "heel_lower"
+  ],
+  "addedInternalDetails": 1,
+  "fixedGripIndex": 72,
+  "partitionRationale": "95 body; heel77/heel_lower78 plus exact W164 internal insert form3 moving solids. Fixed grip72 remains solid; seated insert intersects hidden grip as before.",
+  "sourceElementsAndUVSha256": "4d78c90c5567b4ec3e776080e0fb4668349371022c404e85e73157f1d72aa566",
+  "partElementsAndUVSha256": {
+    "body": "82b6d66df3ea16e6be8cc20caf691a83ef21790f951d368180779ed369af0ca7",
+    "moving": "9c6dcd494777f43620c34fc2da9f981d9d0d2ec837a748d8ad90471343834b06"
+  },
+  "geometryAndUVPreserved": true,
+  "reloadWeaponElements": 98,
+  "canonicalWeaponElements": 236,
+  "ordinaryFullArmElementsUpperBound": 448,
+  "reloadWithArmsElementsUpperBound": 546,
+  "maxAssembledElements": 684,
+  "elementLimit": 1000,
+  "budgetBasis": "Alternative canonical236 or split98, plus four classic112 arm segments; master verifies actual composed graph.",
+  "hipEndpoints": [
+    0,
+    60
+  ],
+  "endpointDisplayExact": true,
+  "fallbackModelExact": true,
+  "fallback": "Canonical graph at negative progress, endpoints and non-FP; ADS/inspect precede reload dispatch.",
+  "sourceGroup": "sidearm_c0461d9d",
+  "rigAction": "80A8A560",
+  "partHint": "moving",
+  "sourceActionSourceRange": [
+    1.0,
+    67.0
+  ],
+  "currentSharedRigSamples": 61,
+  "requiredIntegratedSourceSamples": 61,
+  "sourceFullChain": true,
+  "sourceActionWeaponExclusive": false,
+  "sourceCameraRecovered": false,
+  "sourceEvidence": [
+    {
+      "source": "/private/tmp/destiny-w213-source/source-review.json",
+      "sha256": "cc9ef72c7c7e85936f3cf9bc1ad521a46cfac15c48e891412b1cc15685066d7f",
+      "observation": "Read master original source.blend evaluation in Blender5.4.0 Alpha: ARMATURE ONLY, no mesh/camera; 80A8A560, OBSlot, frames1..67 at30fps,61 evaluated samples, prior-cache max joint error0 and unchanged inputs. Worker did not operate Blender.",
+      "sourceBlendSha256": "16335951a2bd664aa4aba5ad9373de56be318d24f1795e3dd655fd5f1b172fb7",
+      "sourceMapSha256": "f7b016566e08ee86072a18b2d1bce2a53904e0227f574bc0332cd0bd2dd96ab0",
+      "boneMapSha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d"
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/sidearm_c0461d9d.json",
+      "sha256": "b3861168ca6c726d902996a06634cbf978f36a82a8ad8a73d2b7b43be1ce0a8d",
+      "observation": "Read original evaluated shoulder/elbow/wrist/weapon matrices in armature-object space, row-major/column vectors. Shared Allied Demand/Lonesome family, not a weapon-exclusive selector. Upper arms approximately8.72669/8.72657 and forearms8.14136 units at32-unit conversion."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/sheets/sidearm_c0461d9d-80A8A560-upper-chain.png",
+      "sha256": "ec1348a1ac4ddb0ea04b52fe7d14ef7c7d04e52485453762a14330a44beea834",
+      "observation": "Viewed actual six-panel XZ/YZ source chain at p=0,.2,.4,.6,.8,1 before61-generation. Both chains move during handling and return at1; no absent mesh contact or camera acceptance inferred."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sidearm_c0461d9d/source-map.json",
+      "sha256": "f7b016566e08ee86072a18b2d1bce2a53904e0227f574bc0332cd0bd2dd96ab0",
+      "observation": "Read group sidearm_c0461d9d, selector3EB02F1A shared by Allied Demand and Lonesome; reload_full/empty map80A8A560."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sidearm_c0461d9d/bone-map.json",
+      "sha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d",
+      "observation": "Read mapped upperarm/elbow/wrist/weapon parent chains; ordinary original lengths retained."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/screenshots/lonesome-review.png",
+      "sha256": "d81d7b82917799da9c930bcb0a7ea2400db2cf0e839f9e6a5b2feefdc071e4f2",
+      "observation": "Viewed FIRST actual hip/ADS/reload sheet: hip contact and centered irons clear; no rest contact/framing correction warranted."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/screenshots/lonesome-reload.png",
+      "sha256": "6d7bb33fb4a273130b394cefc288ef723f9c93e678dd4543c78572a2c9af9eaf",
+      "observation": "Viewed FIRST actual samples01/05/09/12/16 sheet and full raw01,05,09,10,11,12,13,14,15,16. Detached magazine in left palm05 approaches receiver09, then remains with left hand above/front of pistol in11..13 despite authored seating at.75. Ready silhouette recovers by16; its HUD still shows0, not yet ammo-complete."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/oracles/w213-lonesome-reload-timeline.json",
+      "sha256": "6cbc12be494c5603caeaae5bf2797c25bd226cba86f5f99982ce6e568f3e45c3",
+      "observation": "Read16 server presentation records. Active ticks1056/1062/1068/1074/1080/1086 use60grid indices3/12/22/31/41/50; duration38. Canonical inactive floats[0,-1], ammo12/0 from1092. Sparse server timeline does not identify an exact source frame for each capture."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/sequences/w213-lonesome-reload.json",
+      "sha256": "38b01ad034772869e673f2ba556a15493a5f3fdd7d7721ceaef0a5a3fd6c7e1f",
+      "observation": "Read capture brackets/observations: raw09 client588,11 client592..593,12 client594..595,13 client597,16 client604; ordinal12 is not source frame12. Observations place594 near wall1793137246448ms between server grid41 and50 records. Late source hand handling is valid; continuing magazine attachment is the mismatch."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-pass1-native/native-validation.json",
+      "sha256": "e5dbafb2f51fe7b20b69a5df66584120eecab47eab915646ccc2f259049207cb",
+      "observation": "Master FIRST12 native sequences passed; Lonesome fire5/reload40/ADS19 captures, all released/neutral, final ammo12/0. Read validation; this is not SECOND acceptance or continuous60fps certification."
+    },
+    {
+      "source": "scripts/build_first_person_hands_w201.py",
+      "sha256": "9843a23f049cf264fbf851cedac35c300b5c4c0c7727385051e5cc13d36b2de1",
+      "observation": "Read existing shared magazine attachment hook only. Default gripWindow[.05,.20,.78,.98] weights moving part shift toward source palm. sourceFullChain restores palm translation and rotation from original FK; per-profile gripWindow safely changes only part attachment. No shared code change or generator execution."
+    }
+  ],
+  "motionAuthorship": "Exact W164 part knots/holds, PCHIP between knots; original shared-family FK/shoulders and normal fingerless player-skin arm materialization are master-owned.",
+  "gameplayTimingChanged": false,
+  "mechanicsOrAudioChanged": false,
+  "nativeGameplayVerified": false,
+  "nativeVisibilityAccepted": false,
+  "packFiles": 247,
+  "totalReturnedFiles": 248,
+  "inputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/lonesome.json": "5420acfac0c21795a37d206091fa2a79373d58ea124bb07351d2c4dacdeb5605",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/lonesome.json": "91c2a950f979dee2e22afe74f75206bf53a451ab725ebb837b025bd52b4c0872",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/lonesome_twohand.json": "0b91770790ffd1267b850e44969113177a049800bdaa4c21d8eb34d849bc47a0",
+    "src/main/resources/assets/destiny/items/weapon/lonesome.json": "7665d22fe3263f21ef8618ba27dbbb9c5528e665df2c43758b8b3198e6f19232",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/lonesome.png": "71b2d1bfbf73a4d2d483c4f8bb4bf95f4f0b785a9c146e81af45722dbd2042af",
+    "art/weapons/w213/lonesome/profile.json": "760ef5ff1a52e9e4e46e53921a3436c5263b3a9d3786e61717f827279773085a",
+    "scripts/generate_reload_w213_lonesome.py": "c395541948d5e35db53e1d43cb06690f1810307681fd244fa7c79a438160ebc7",
+    "scripts/generate_reload_w164_lonesome.py": "8b551423b84fce176ed43925f277a8f873579ad41cfb33c51d8a9ffea614f365",
+    "art/weapons/w201/contacts.json": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+    "art/weapons/w205/rigs/sidearm_c0461d9d.json": "b3861168ca6c726d902996a06634cbf978f36a82a8ad8a73d2b7b43be1ce0a8d",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/lonesome_ads.json": "c23f66d3b4d6873dfccf9aafaefa52d3395fb92ea8633040921ddd5e6ead13fb",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/lonesome_ads_twohand.json": "96b2ea93b306f88578d27c6d762bfb225ef850ba4d77a1febdb8c665b017f05a",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/lonesome_inspect.json": "e8404103bac839d926fc038b678d08be8d7de7a36facc65d7a944ec7c6408c1e",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/lonesome_inspect_twohand.json": "e4a85f84dc06601e138faff2556a45cd8fcb5ac65800f2a57b34c007a0ce588a",
+    "art/weapons/w123/lonesome/design.json": "129488660ef4caf10ca429aab4a5b4c1d7625813709a77a5be5406a29d520b52",
+    "art/weapons/w123/lonesome/manifest.json": "3e195e72ff8c6c2e82cfffe7c31a1014602739c4c2696c2414eb6350004cf0b4",
+    "art/weapons/w205/first-person-framing.json": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+    "scripts/generate_reload_w212_bygones.py": "5567b64438a56a51f38703471c2b584574543f99d1ef35708550033c280e8331",
+    "scripts/build_weapons_w30.py": "e087fca588231486505691e97b5c2b581382c1055c76d64300dbc24118bf1d83",
+    "scripts/rig_arms_w205.py": "6e410c709efb733be1797dc0967f6196dd71bca19fcabd7bf7846e39283634ee",
+    "scripts/skin_arm_models_w204.py": "5ee8a0d196b144e67c510cb3a9f8e34a81b21254298aca8721c75f55097c1d2b"
+  },
+  "outputSha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_body.json": "b2830619e89c861a334e61abefce92919c10e5c739baef1b0830b754a0027b52",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_moving.json": "8eba467673848e5e9ed7cda7bc8f3ee571433b63c4f504e7a5ca6e45c7ac8736",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_00_body_native.json": "d58aafec5287b7fe153ee79965044c19bf9c6410802cf015de23c771fe51407a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_00_body_twohand.json": "7185e89310e55eb1e7c319e260de025c60a12214ea748fd7463567e11fa53607",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_00_moving_native.json": "c99a8cccc4d2620b81d7039e836f96ee67d9df129658f65ed79b3c460ee278dd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_00_moving_twohand.json": "7d486c27eb719f15c2f19dbb6643bc7be4b23d0ed3a99564c4acf2a9de4db615",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_01_body_native.json": "8ddc70d18f91782ab32a6f8fb94ccc22a866f40cb4a4a330505c2eecfaff5265",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_01_body_twohand.json": "45a17b2b0ce0c76bed045301dc60082ff0564a07117db892b4c3d014210a2bd0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_01_moving_native.json": "15ebf360a9962b9f5226f141864c7ac502061e185e243c268428b6327427823b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_01_moving_twohand.json": "007d2eddc11d2a4c92ed100820594604079b705dcd6f8890d7acd0f541bd4906",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_02_body_native.json": "891616e655fb1d74cc4a9865a63461bb6d73c9167bb27b00c4311b05de6124b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_02_body_twohand.json": "e0c0b247e187fd8d56dd9bf0a82679f02c4350656e8f83ca7e30aab2351bef81",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_02_moving_native.json": "54641694aa75b0a461661722e27117e3325c275251c0ab065d647c2aed4d6422",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_02_moving_twohand.json": "dad1009977e2f018e61ef7ab5a4044bbfeb2094ab36e9ccd4586b609cfc4f7f5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_03_body_native.json": "8b68990b175f5965e7c5da89e4babf74f3235df8b55c8a045f3aeeafaa17834f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_03_body_twohand.json": "b7a8cedc4936155f9b71505e179b98ca2e5565875d51c53d0dfb771bed659b34",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_03_moving_native.json": "8ea555fe257e53230bafa2f8fd7cc19de2943ee70ee4f7aef08ca1f7ef550029",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_03_moving_twohand.json": "e80da0a4505fb05cbc2883f4b4524eb728f3a29e8a6825b4202c32defef41394",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_04_body_native.json": "a3456663502f36eb0c5f32da029cdbca05420b14b7afc4b1a45cb25a7f732d06",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_04_body_twohand.json": "be1efec4e28bd173a45b85ef69c5320566f5df0c684c2c3399c951612a3a62fb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_04_moving_native.json": "9df0c5eeb68bc12250b90eda0035b8ea1dcf1ba7b7c105ff25f8affeceb36b3f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_04_moving_twohand.json": "87d88a63ffa0078fabc25c0ce96effc3850647e575ae0f8814eb69442888b141",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_05_body_native.json": "cf4a88c9a83d4c0f683d48e94e69bcb7883cb158951621f4496dbcd1542acde8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_05_body_twohand.json": "e1ad3378a798c0ababb820ff4d927459d076ced7f150a32866802213851ca307",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_05_moving_native.json": "4557da383436569a5f8f26881d5531ae5e5e14e0ec86279d536c8180f5e92e3a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_05_moving_twohand.json": "5f62423da439fc552797166f04cb634f0177265b988793e44f4a6cf7477fc25c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_06_body_native.json": "f466e65de39fd231927b48cbd076c0c41c2a9d919a0ad9213d7f6c34381aa4ef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_06_body_twohand.json": "ccf30a5c71cbcd912198549adf8b5047d987f1f530008a38c942ed9c4c3db4e2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_06_moving_native.json": "db09ebdefea57da517b4f73ec06407ffd2c8d1743dc8bee3cb40d7efc1a9a431",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_06_moving_twohand.json": "3e6afebd99d1068ffbd8d3344edba84d7395f3487ecd371867eee9adf4771b33",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_07_body_native.json": "49c8156f26e291fb6a5ba2db720b9633e0eb545659640d1d3086b3380bd10187",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_07_body_twohand.json": "6a9c1dd9b0ca814f9cd5b3c26f8763fa9e15b041bfacef4747c978570ab3faed",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_07_moving_native.json": "f0f4f8926c559a740a14111f086c12d143a0204a185778616f379d6ba3f85810",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_07_moving_twohand.json": "6cf6e7af452d927a8c1ea0a51ed3322fbddefc3d272af8a732b574feb90a3be6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_08_body_native.json": "f4392781c65e4fb9fc92b69a0bdbb781fdad7cac6fe4526db3f1aeb961568bd5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_08_body_twohand.json": "cbe812ef48f872c19ffa3b4e4fb4b430c0c5a6bd7fecfae0a345f1d12434a02f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_08_moving_native.json": "38b42dfb3a87c9b2251fc3771557f7293c27970ed187c6f534a8fbc7ddd1ced1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_08_moving_twohand.json": "e8893dd3f959cfc4e777ed50c8ddfd50e2ed883010e0cce3882f13077fd8a4f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_09_body_native.json": "312c1067257bc431f411ca1dde8f3b851e3a675e561ca73d7f5a90b40899f747",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_09_body_twohand.json": "c3800cddf86c9e9f1544d182eabdea901f76bcd3bceca8bd64dbb3c9a02719c1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_09_moving_native.json": "37b5abd304bf40d577f5752302f343b9208545387175ee48f25dd554136746af",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_09_moving_twohand.json": "aedaa3ce2283d98e12a073c5f7b99d2dcda634d6972ceb1e053453419d59b694",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_10_body_native.json": "0137408e1d9de6d98bb89d2459b835c0e34f8a366334ed9c73bbc90e5f5dd786",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_10_body_twohand.json": "4b914d6e6f1a26ced2cf201825ff4eb7c4b2f7200d2b4b3ab4650c38926e3dbe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_10_moving_native.json": "47c9a7b2b49016feddaad18a86c74ab40d0751e734a76d0374a10c9a150ce700",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_10_moving_twohand.json": "a81f34ca2ab55f63512ce8a9343ea9a41bea049c3c69d63f25da66ee92987249",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_11_body_native.json": "193e59eb18b74d9630ad1117f3de8c0f7bdb2d46b35a3e9aa5d95847ec820e98",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_11_body_twohand.json": "0761b3e49b9f0405092fbdba5ce96c0a209695f7296c20d822d350abf4ead778",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_11_moving_native.json": "8647ab11a60434341b1f7fe8cf33a5005d87d6368bac708145b2c17b640544f8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_11_moving_twohand.json": "309bd968cf7b2060b86d6bd1bf6c4bcdd95a2fc4e1e7c414397d485f27c22c63",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_12_body_native.json": "07180e078cc4df82e9ab77842f2ae63f8baed559031e0cf413174e7837696875",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_12_body_twohand.json": "0d8c1367433f00676caa3b25f372c5b8159bfeac6dca384cd251009026965ba9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_12_moving_native.json": "db8d41a9894ab3c58e452484d01af2c19f0cb4252bee576a43dbb39aa38c3098",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_12_moving_twohand.json": "087d7dab32932cd39940f60b8af135fc4a3cc4dc06336daada205ab15e715465",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_13_body_native.json": "693e899c76cd25a9bfc573b52c6428e14f1787dd487c9f0fd4496745e6c9ce1b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_13_body_twohand.json": "ea464083d9b6eb6cfe49949eed6db7d6abf253cc5db1d322e3e5df0b135b80ce",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_13_moving_native.json": "d21e324b2e80adc01953c58f53bcc52eea9c5559c311ebea5ea81160d8bccfff",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_13_moving_twohand.json": "9b51cc8eca9197b427ccf8b6268c68009beeb463978f687da651b455bf5896d4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_14_body_native.json": "1dd0eff37bc358f85307f531847dbbfa1319473abf92b28156fadda8c8f5cdc1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_14_body_twohand.json": "cb741ef7e7f152c56a89625d235f877f9fd535d541a58a1a5a1c6ac3f22206ea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_14_moving_native.json": "c4fd9e952217ea24bad6eb918fac5d7380b5fe440cff026d1dad673aec64b958",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_14_moving_twohand.json": "54944537e67377034d18f55a78b3cec60763dae8c81bb3d58cacb280bb8697d2",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_15_body_native.json": "24bc4c3a1bfb72739a7751e4cb319100b09d37a102c542239d075d125da4b452",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_15_body_twohand.json": "ed3310e20cef395acd64caeddd111e23a60b120f3beba90b1514a69c4c825a7a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_15_moving_native.json": "a8b7650737abae3c02af84aaf8c5c644251c9303c883d2e7c8c2bc3150da778b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_15_moving_twohand.json": "6d282292e33dbf94c4326030318a9f13263c74c6ce7299940a71c9364371eb74",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_16_body_native.json": "b3c68f2b38025d4a9d82c4a25b7c15258195ded986c9c0cddac44bcaf90e6327",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_16_body_twohand.json": "64d26412dc77c0ee5f971d478f340206987445d0e084dadf08a0e4287d4af36d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_16_moving_native.json": "2811a043f33de8f27dcfd326561eae1e1ba587d66da730355fd04a1ce61a9a97",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_16_moving_twohand.json": "178fe9f15d46fe070216672091c9e6adec081c38d0b7b0247eb8dd78544a5af7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_17_body_native.json": "3da746f7f6b1cf87d45e329c282c4a20fb98d21ba5314d9ff9de0987767dc07d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_17_body_twohand.json": "95d21541b087d05bd479ae9619b36fb7714caae4cc4a53bfda2e500ea7817d39",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_17_moving_native.json": "09187c4816a9c761080751c1b918bf86aa4a059cc7b96489c2b428ac15a4e4d5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_17_moving_twohand.json": "4029f8b61bfd752732a8b6d20f53236f4c732621991c95c3af641437b30fa6a0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_18_body_native.json": "3f0915e1784b7b894bb48bd63660ddf6ea390579b6fe4893c7918d83a53ee274",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_18_body_twohand.json": "4d5ea4991c9ea682bdc7c2095a8746612fa4d2b848fed5123cedbd033f572b3a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_18_moving_native.json": "e1bc6bea39972c867e35510c46ddc52197875256ea20862aa13387925d8dcbff",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_18_moving_twohand.json": "6701dcd0ec4ce7db3a663bb5ea49a96b1056dd49f5017ead6ee4c4a9cc2936ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_19_body_native.json": "a54fca71d314e3b70100779d29a8df4470b8d2f271c6dd855f383efdfb8acfc1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_19_body_twohand.json": "a80bdeb3fd8c486ff5499c0a19392f13f4217b4d5a3b0689138bcd86312b108c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_19_moving_native.json": "8f4bc7dde2dd89d36c9d130ec787f1ed84232f2a285a4315c26ceaedec8862af",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_19_moving_twohand.json": "b186e1362cad49ab9c00ea2b6d1f2770bfee6e45eccc916452ff7073e8b0e20f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_20_body_native.json": "240c4edada66d8f4b22bdbed6633b9783e835d742ec9895ac1a642596954b9d1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_20_body_twohand.json": "69eafbde903cd058b12f1a98c6528941f20e204e0dcbcd2d0a20c687458396ee",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_20_moving_native.json": "6a3a7a5222c2e4f60085d4f29fd2095376c0378d927436a0c86ddc27930a0793",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_20_moving_twohand.json": "228b23f18dea81bc75aba38087dce196f02ee393ddd5e9e92776a7987a7dbeab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_21_body_native.json": "3a2d3cf00186ed154b9503c6f40459afee9a0d957bfc9c610efca6e34457cc2a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_21_body_twohand.json": "353d149f84ff3a49dadd2224aa8227fc5c13b892191954c47b8a9fb4a460e9dd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_21_moving_native.json": "02fa6f0715383c4e19bd01cb45c0010688022caa4cf5ca51e39bee2c7c1ebe2b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_21_moving_twohand.json": "862d0ac85e4828faa8c88a002d680d4fb89f1fdac445c517af21e9a972cc6dbd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_22_body_native.json": "7ea6475ce62912ed6ee59a215b23b72c874446c8299307aa3b46bbdd94327e57",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_22_body_twohand.json": "8af760ed58833967336a7c2d767c71867cb4145ffb07bd804a2cf8fc4591037d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_22_moving_native.json": "8eaa5b136fa9f8b944961556df5d4e73f42d15a1361e57d6dcc7db1500a01845",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_22_moving_twohand.json": "e90c6e05600829e188ff04cd49e5d142f0567f8e31bc9ce9ac4ad96b5ed6a587",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_23_body_native.json": "3b51974616ffc49edc367a060934f3b9609de98006addb4d7f73a150e0e8a9c8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_23_body_twohand.json": "f790b32520557d2ddabf0bac903c5d413fcc4667ed232810968da68dde8d09c3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_23_moving_native.json": "057a5884a2b8aad81885f6208b2702868d715600ec44e5abd52f02896a4a2fc4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_23_moving_twohand.json": "21366e7774e3325f3c21b739c87cf904a2f2676059a7a80b3ef3fddd3519661d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_24_body_native.json": "e622fcb9a0d1cfca130ca5fbeba468396c01335bedb5584acc2d971cc8610520",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_24_body_twohand.json": "bacbfca0b1e22986f1c64619c035f7e19fe49f15cc5900a2861ecafac530af0d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_24_moving_native.json": "d7d9cf834b918b030c928948b587f56ec6e7361661b539ff7821d6c37f1e12e4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_24_moving_twohand.json": "81f3e5d31e347e106f59b5173d0d116f70c3719abddf6dccea32dcc04d655d19",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_25_body_native.json": "fe32366f36f7c70c2442b2e2704e13573fb738389e466960c25528e1efffc708",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_25_body_twohand.json": "35da097deaeed70a60a41fd8f6a4b8263d88155995f79edcb68bef56cc56a160",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_25_moving_native.json": "0683309996a52f43e0cf83cc88486d45f6924f90f68886fe05b5ea9e386e9bd6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_25_moving_twohand.json": "753d39375c9d6d1fe4ca3d9720b31916b8d76b3218017510b3d8448b0d6452cb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_26_body_native.json": "78ebf6c17f577cecc1c22654b63ca095224557f4b0e0e68b1f15e42f56494514",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_26_body_twohand.json": "98cc04bbb269d09d654912a741ca352bf1cf14be5c0ae7e45c5f7e89833f78c0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_26_moving_native.json": "f5028574f19f8bff5b393685caffcefa54b9fa586ce009802fe16dd10fe8c493",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_26_moving_twohand.json": "f7d0d40d6010abb6b4f80ae35a0cec83ce6505a20ee3b34f6f116ab799d01ba5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_27_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_27_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_27_moving_native.json": "1ee54ffae7f899737b8dd0d3a32e52dc29e499d841e7db33a8be9ff9e1b9dc60",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_27_moving_twohand.json": "f9698f2a17e8eb129a06db0f30eed3d7e39723c9f07a5f70db734a771ee5e29c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_28_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_28_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_28_moving_native.json": "4191a718234111c65df6677bafaccd2058604f438e62ee10e16af4d79aa21fc1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_28_moving_twohand.json": "8e9123a2a81894f68ec4275ed43ecea553565966b07d1dc9267a7865ab1a4012",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_29_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_29_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_29_moving_native.json": "a16898f6b1bc3a32a392e7bd394aa1fad62b33c1af601ad8d9075913da48719c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_29_moving_twohand.json": "32bb9298195c8b502e2d3b467b23c55f0da002c87e0d6af4e72a20b95ccd0690",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_30_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_30_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_30_moving_native.json": "d4a619cfddd39834e8db2179e4b5ff8b23ddd5e839e7aedae2dad24c918f7f7f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_30_moving_twohand.json": "41e300b5299a48afc2e573279a9bf4d126b9062fa57068f54a0e01986ad0b3e4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_31_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_31_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_31_moving_native.json": "de56898329c498936c5b312d1372f4fc48a0696dfa9d05ec9947dbc1a33253f5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_31_moving_twohand.json": "e177dd1a333c15452b3a3ce1a595b61aaa2aa5aa0a5c68e3fb56ed50273703ff",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_32_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_32_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_32_moving_native.json": "1e6f793cc3df394991229b5f71215017951bf984c64295d3f4bf13021972db1f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_32_moving_twohand.json": "62d6995a5f7fdba2b2526f298112e36cc1806743571214c9dab17d5e911c9938",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_33_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_33_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_33_moving_native.json": "62b7a166f56cca0b82f1e0eadd1e6a753a0e930d4b7c9616449c104408343325",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_33_moving_twohand.json": "a6fd4c3378f90e38e4c6d1e9bbafc063a6c83eda798b0cc914d955d82d363c7f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_34_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_34_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_34_moving_native.json": "48d7fcfc636ebf2ba8156e241697f006fad55652ab3fb9fae2653777b63c67c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_34_moving_twohand.json": "a85fe0bf72236e12109f430440152281d5fcf7b0915c0ebed455b94a4b251ff6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_35_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_35_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_35_moving_native.json": "b5791dbb33987b5e93fa7c425608a61d3fde01b0d9677a86c8230a6a681dcaef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_35_moving_twohand.json": "90a3cd28d234140a88f1c647403084d91a13c6f25a50ecd9770f17676b7fbb38",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_36_body_native.json": "1f558c3be8da97bb9b1b40c1cadc71c033a3cfef03bd19bc4a5872d257237eb9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_36_body_twohand.json": "7a973f39db2a4db505382e510673a1e1fe0d820a7f78c96837ccedc17efe05f1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_36_moving_native.json": "6f26cdef222d1c16ad60b5f675378f2170260ded64c8a81c6d37d61d8e1f96f7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_36_moving_twohand.json": "6b573bfe684f2b7a8ea70af81c22167c1bd80376f98dce1a328b2fe846eec331",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_37_body_native.json": "6fa55cfe167e21af3d632803ccb1d6043d272ef12a719b7bf584c563fceb348a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_37_body_twohand.json": "2208d3b35b0a499cb5c9a47431700596f8636e99f5e0fe1ff31815a95e8b697a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_37_moving_native.json": "dcba93c58f863c289a5ce2f1e72771beba799f491847bf9a5a3b99f8c71235e1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_37_moving_twohand.json": "b64a14871f886a806d4c9ff8fb12af497589e094c3b2695200a9af6b704ce294",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_38_body_native.json": "95dd2b2319ded7421878c337d0924406a53b12974011f8aa6910e6e5767c39f8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_38_body_twohand.json": "d1facf7a758d1764ac3a82bd2cc7cbf913f196eeb51f973072d4f72dadc25dfb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_38_moving_native.json": "fd8eb58fec4173dba6ea51ed52473a7747f52ec8da893692a3aa65e12f46ca21",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_38_moving_twohand.json": "a6dbb685693ab2bf7c2d9d77ca97b1e74891b4d719b45a9828c7408bd0f2dd32",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_39_body_native.json": "bc25db87d41438936547829173f57f11a032ad778a72a0b1a7f921e015dbec24",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_39_body_twohand.json": "4a1f00cea154332a7bdab494ab7ce180379b7b28b1f11a54a09e72103a7831e6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_39_moving_native.json": "3692e6a5d5262cefad1d0a3d70ba3a2292b54d559b82bf8a1ea2a64873a49b79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_39_moving_twohand.json": "53bf9a0fbc682b668e52a5b26b99b60e9697df0092d98c81f709fcf0e8aa4628",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_40_body_native.json": "c3a08ca81cb82529346bff29880d3bd236cc9978a25c1e9c1f2ade1cea1a62a6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_40_body_twohand.json": "558655698182609886ab48be4422c286340b246f53d8fc1ddec191f0e7f69651",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_40_moving_native.json": "560b0b7ac4cca2e02ac9aff213507e694fcce535cd5d0b916a69621bbe029be6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_40_moving_twohand.json": "70546071b3896e8f7346094e0c2244a1bfcb7b2b311fc8ab38172c4de7b00516",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_41_body_native.json": "36a5fdc06f8ff22a08211a08e69c50c47ba20bfa8a96b8eb67d6fa015f872195",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_41_body_twohand.json": "99e9ca684686d0f610a7a1a9df1f3f554f1bf8e66e76e463f9c569f945b996a8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_41_moving_native.json": "9d5b3678a27cb65668175c8051d5d56371fab5f0ab65489e6fdf1d52872d4fcd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_41_moving_twohand.json": "b6693d515370cf2656678b08acd05a8b36011dbe4bb3fbb18864115a7df5b309",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_42_body_native.json": "08bccee1f4b2e8b2886c483ff1ee2123ffea35301a8ca63dae989c12a9b4c0db",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_42_body_twohand.json": "81cf3fa6a4e9e24c208777f07bd15ddabae256d0e09ed8bda6b4a2f570c56d08",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_42_moving_native.json": "a5e0d2a02d81a39bfae36b2b9baa90abff5382203e008f27d66e2ff416013b5f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_42_moving_twohand.json": "02838c84d8903602df8cfd4f1a6da47d9e9e8e36d4e85c1e9f1823a446adc5cf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_43_body_native.json": "910446953a06b6bb31c96459fb08099e897f5b3aa51e63f48e83d5ce724bacea",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_43_body_twohand.json": "bf9dc7c2c55bcef331fed9f0bbf9408fcbe4a3e75850eacabe202f7f8344fa34",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_43_moving_native.json": "434e86824646d0838704972e681405d794f8fc6ad7f4884e75ec881f846c9789",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_43_moving_twohand.json": "5ef05b82fff933d6a2f4748f3658ab6ca7621711323ac0a262ea499fa6d68372",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_44_body_native.json": "d834fbe9eb0803641109bd9912400fed1071b5a435fd6cc985331a6148942fa6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_44_body_twohand.json": "1c9e6fb08eb1c7c6151ebf767d48870a71f1c4c34c25954f11e6e914e567d8fc",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_44_moving_native.json": "b0d0461e17abb6fae5b64a8a57d28ab08e3461795d0ed3d4db3b2d0dde3856fd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_44_moving_twohand.json": "8c4b8c94da9de49bf899a1b637b998867b03359590d2cf8f3c939a20b12f852c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_45_body_native.json": "617870b126c524945374313494b9954895c8d2caf27c5ed7d40b22e3f853473a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_45_body_twohand.json": "592ddce6511b38457a8ed9e5e29c9a0efdde1271a3dbf50d445c4f6fa197f6db",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_45_moving_native.json": "209284bf64437786871d489857625df57d8f601640bc3535a7b2df19af79c344",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_45_moving_twohand.json": "d9116be2b9272ade8c6a0a72086036cefe1c8a13437a53f9c46aafc2b2bb139e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_46_body_native.json": "838b13b22e84ceddac4e0ffa21fec5e07200ab92cd2f34e5cd062573c067a230",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_46_body_twohand.json": "3bf994b138cfb94393cc415ce6c915793960c8052b6385f3333bec5e442ef854",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_46_moving_native.json": "8f22f46ba67fc87722299cc176f29017c8f6447f3dbe44ababbad8d34f0cb3bf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_46_moving_twohand.json": "d2caa80de6fa7a2ee0b4943136041ed21efcbe4e3b26c8514e1d1eb341583ce8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_47_body_native.json": "5a3f5a394058cd726769ec8061cabdeb0c3f73d2d25999ed710c437089bc5d49",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_47_body_twohand.json": "a466951da986479b3178cf3217724d8f055e07e5557d4b00bf7fc4c6301177ae",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_47_moving_native.json": "54a9a4be416c6a80b329ba9cecd8bd772329eb5771c748ae6c0a3500976d1f5a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_47_moving_twohand.json": "5244b4de7914c77970170fb6d3f3381fc52fc037a40a90226273719a35299bcf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_48_body_native.json": "157d4410d8236b26e02fe7a75c7e9bed79a4a40d665f5780870959b23e9ef4d8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_48_body_twohand.json": "c6fd9ff861f15048d1306c702af7fdca5e5695fedfa6385fb1ce563c19562701",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_48_moving_native.json": "72652247450336e4f10d317e1036ae2a38fd7f807af593b8a7e9c32ead04fe4a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_48_moving_twohand.json": "394423f159ae9d7706ec99be199f1de9137d44b7c84449f07c2809281e95a17a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_49_body_native.json": "02b0e9e3507d0c9efa2f7391c79ccf63a00f854f4b99d597eb0a7e750906e793",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_49_body_twohand.json": "78d4344d866e82717d8cf8e9c87d3ea0f542befe2778372939b77bd42a0f94cb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_49_moving_native.json": "cbf6ff7c957e6ca7bfca1fb15c16d0a4646511725770c24148ae321f6c99cd2a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_49_moving_twohand.json": "306d9d6334aa76c056f07c5ea6a0a2a2f3dbea44cda4aeb89ad152e311f8939a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_50_body_native.json": "3ecee5e0470cb1d7c023c31f20e1eed8e185afbde62a2815329b3cb2225ff8c9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_50_body_twohand.json": "30c4997cf3fec10d5fd8ddcd064594393dde0afaa28d12fa60924215e57919c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_50_moving_native.json": "73a61f0feb5dd1900e2c7f1d4d9a309e292651164c807d84f80560bf70f521a8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_50_moving_twohand.json": "6ac3c65935f24f519b82b36b2fec2dcbd3806a17279b431d862dbd63962e38d1",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_51_body_native.json": "99a9b60e5153b09d70fd4c0dd723d59915678b9376ee35f1c3fdfe9078363c14",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_51_body_twohand.json": "9b1971f30df6b0826e104258302bd24a4a91fd21d3f7d5ef503970e1b5cc966a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_51_moving_native.json": "d7fa8ced9632548f57d7dac2ea0aacf2795efe6a437403b964e057166ab54691",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_51_moving_twohand.json": "76518b878f77634ada547f5884550391279071f473119d4024dad69b10a4e952",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_52_body_native.json": "d711df4dc0ac7bd6af4c843d77d04b76cdc28a4dc9993fd895cd8991ac378a0c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_52_body_twohand.json": "012c084bcd459085fcb31dffe691e52562b94d910719d96a2a3384736e40cc5d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_52_moving_native.json": "75d3ada464d581afd705b2580283d981939fb6fd9077c99c7d4fffadaf8c6c40",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_52_moving_twohand.json": "be1942cc6268951295af2542581cdb885e2ab8994c67d07d972732bfe6a06b11",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_53_body_native.json": "302fcc8935f947e72308a2ca8bf3e1cf0718ec0f6121f9bca45314d5580246b7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_53_body_twohand.json": "6fda85fe505589246f930eb64925c2e5ba37bdaa757cf6d8250f0c9e4be1f83a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_53_moving_native.json": "be01b9ff70fb6c84a62d09ed3e3e2309c62cbf8991d206b07e7fa56cd9d1b517",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_53_moving_twohand.json": "c1d80b82b7712834ad36ff04f241db1ea839f57056aa0ce88c45ee9003b56cc3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_54_body_native.json": "3cb01b973ae69a94bd37560a0d4839842804aec780a59fe36f71b0ae5210aa34",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_54_body_twohand.json": "b0e13d35f9ef6b9f1c0f2a037f8f936dbf788c1cbbf451018ba0922a75da5b31",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_54_moving_native.json": "82751bf6f784ff76e002bee290a6fbb3a68284cb53f5e83d45dd25fe014e2279",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_54_moving_twohand.json": "9e44a166da11e7cdc6ca3e3019fd4c52bf15b8789be836b5ccaabf7280c8963c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_55_body_native.json": "414ed686bc944661eef1e7bb8203684a41cb9e473151b2ae80ee5af73970e2e7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_55_body_twohand.json": "2bc9f2ffe7128ddbfc0ef3da25b15364b14bb93fdddf0f231dc987baa1f23a66",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_55_moving_native.json": "4ce36a6826a56095b9141811b43922e2dadcc019a983247fdf782478744e9e44",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_55_moving_twohand.json": "774c7bebbd96ef5dc1671e8ad45e610ab826dc5611d36625f483ebef7b9c190e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_56_body_native.json": "cd01bde485637c20e780eb859478c743b1feb37a239992006966415967f04d0c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_56_body_twohand.json": "d02d2f3ece85415d56ba98067878f21cb51ed341547d2fbb737cd39345bb9528",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_56_moving_native.json": "e6f9bda7c40436356dac0fad9528f87aa111df54fa671cdcda9ca00f97cc265e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_56_moving_twohand.json": "bd53727f120edb55424256bed63908925ef76fed30cbfb07fff0a262b68e7a3c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_57_body_native.json": "fcaf887cbe52cf686adf4f9e30537ce3885209b6991f4ef394446cbef48ca435",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_57_body_twohand.json": "f8277fce29bd097761fb487bcb1ac622bc96e1e383d7e955e4de7f35727663f5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_57_moving_native.json": "437b7c93b1b60768cd469f8bb3e0cebc6c4bafb947025b2a4b3bf3fd6fe45468",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_57_moving_twohand.json": "059110e3654af12a459c34282b4bf1a25886be4a72478d63cc4fd0461f7903ef",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_58_body_native.json": "2e70e6104a402896e52e9017a718355824f6e5038398930253eee3c016c40e66",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_58_body_twohand.json": "49b8f1f89c4462edcf506ebf9601d8b4f2429267fb3b55396f364aebe048380e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_58_moving_native.json": "97598eccfd9dcd08db12a22728ea430da281cd4c04ffc9f2fad36dac6a0cfd79",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_58_moving_twohand.json": "ed999d41c2ae3b894e3fde3887b7e20cf4249b8835a7fb76ce8f63ac1e6b8fec",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_59_body_native.json": "289d03c3b950867b785cd01fadafa5fd30bc1ce4bb31dae860ea6cbf5ebf8e73",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_59_body_twohand.json": "147bde8a9f3b44370ac9ed718fe31a9af72559bbfe7f78fea28cd79be50996b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_59_moving_native.json": "bc125131051ec6456aa8446f1b29491aa2e149b89003ee84f74cfd6b4cd5b745",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_59_moving_twohand.json": "abf304d8f7f268016e29a91488cb05f3f54de68ad61b4cddd0a0d8971a8c2647",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_60_body_native.json": "d58aafec5287b7fe153ee79965044c19bf9c6410802cf015de23c771fe51407a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_60_body_twohand.json": "7185e89310e55eb1e7c319e260de025c60a12214ea748fd7463567e11fa53607",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_60_moving_native.json": "c99a8cccc4d2620b81d7039e836f96ee67d9df129658f65ed79b3c460ee278dd",
+    "src/main/resources/assets/destiny/models/weapon_reload_w213_lonesome/lonesome_60_moving_twohand.json": "7d486c27eb719f15c2f19dbb6643bc7be4b23d0ed3a99564c4acf2a9de4db615",
+    "src/main/resources/assets/destiny/items/weapon_reload_w213_lonesome/lonesome.json": "05987ffe594e60210ff4e415046f74c30b5a7318ae97b2e884e2da0b38b9c2df"
+  },
+  "limitations": [
+    "Shared family ARMATURE ONLY, no mesh/camera or weapon-exclusive selector claim.",
+    "61 bank poses do not establish native60fps or change server pacing.",
+    "Original61 shoulder cache import, loader/runtime60grid and ordinary arm integration remain master-owned.",
+    "Keep REST mesh offsets plus original wrist FK; reload.contact relocates held part relative to palm, not the source chain.",
+    "No stretch, attenuation, hiding, finger IK or native acceptance claim.",
+    "FIRST Vision feedback, image-backed worker review/correction and SECOND Vision pending."
+  ]
+}

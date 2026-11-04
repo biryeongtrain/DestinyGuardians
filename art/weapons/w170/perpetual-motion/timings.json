@@ -1,0 +1,235 @@
+{
+  "stage": "W170",
+  "repository": "https://github.com/d2foundry/oracle_engine",
+  "commit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+  "commitDate": "2026-05-20",
+  "source": "build_resources/weapon_formulas.json",
+  "licenseSources": [
+    "art/weapons/w46/MIT-LICENSE",
+    "art/weapons/w46/UNLICENSE"
+  ],
+  "formula": "q(x)=evpp*x*x+vpp*x+offset; x=clamp(baseStat+10*stacks,0,100); scalar1; ceil20*q once; stow=max(q(x),q(100)); ADS clamp2..20ticks",
+  "entries": [
+    {
+      "id": "aishas_embrace",
+      "hash": 2638190703,
+      "family": "Scout Rifle",
+      "category": "default",
+      "curves": {
+        "reload": {
+          "evpp": 0.000102915,
+          "vpp": -0.0276889,
+          "offset": 3.11797356666666
+        },
+        "ready": {
+          "vpp": -0.00285336856,
+          "offset": 0.540561867
+        },
+        "stow": {
+          "vpp": -0.002941215324,
+          "offset": 0.527217745
+        },
+        "ads": {
+          "vpp": -0.001693527081,
+          "offset": 0.4114236019
+        }
+      },
+      "baseReloadStat": 35,
+      "baseHandlingStat": 26,
+      "baseStabilityStat": 46,
+      "baseline": {
+        "effectiveReloadStat": 35,
+        "effectiveHandlingStat": 26,
+        "seconds": {
+          "reload": 2.27493294166666,
+          "ready": 0.46637428443999995,
+          "stow": 0.450746146576,
+          "ads": 0.367391897794
+        },
+        "reloadTicks": 46,
+        "readyTicks": 10,
+        "stowTicks": 10,
+        "adsTicks": 8
+      },
+      "modified": [
+        {
+          "id": "aishas_embrace",
+          "stacks": 1,
+          "reloadTicks": 42,
+          "readyTicks": 9,
+          "stowTicks": 9,
+          "adsTicks": 8,
+          "stabilityBonus": 10,
+          "handlingBonus": 10,
+          "reloadBonus": 10,
+          "effectiveReloadStat": 45,
+          "effectiveHandlingStat": 36,
+          "seconds": {
+            "reload": 2.0803759416666603,
+            "ready": 0.43784059884,
+            "stow": 0.42133399333599997,
+            "ads": 0.350456626984
+          },
+          "effectiveStabilityStat": 56
+        },
+        {
+          "id": "aishas_embrace",
+          "stacks": 2,
+          "reloadTicks": 39,
+          "readyTicks": 9,
+          "stowTicks": 8,
+          "adsTicks": 7,
+          "stabilityBonus": 20,
+          "handlingBonus": 20,
+          "reloadBonus": 20,
+          "effectiveReloadStat": 55,
+          "effectiveHandlingStat": 46,
+          "seconds": {
+            "reload": 1.90640194166666,
+            "ready": 0.40930691323999996,
+            "stow": 0.39192184009599995,
+            "ads": 0.333521356174
+          },
+          "effectiveStabilityStat": 66
+        }
+      ]
+    },
+    {
+      "id": "retraced_path",
+      "hash": 548958835,
+      "family": "Trace Rifle",
+      "category": "default",
+      "curves": {
+        "reload": {
+          "evpp": 5e-05,
+          "vpp": -0.0155,
+          "offset": 2.65
+        },
+        "ready": {
+          "vpp": -0.00279338,
+          "offset": 0.51985381
+        },
+        "stow": {
+          "vpp": -0.00268436,
+          "offset": 0.48414822
+        },
+        "ads": {
+          "vpp": -0.001875,
+          "offset": 0.38975
+        }
+      },
+      "baseReloadStat": 45,
+      "baseHandlingStat": 46,
+      "baseStabilityStat": 75,
+      "baseline": {
+        "effectiveReloadStat": 45,
+        "effectiveHandlingStat": 46,
+        "seconds": {
+          "reload": 2.05375,
+          "ready": 0.39135833,
+          "stow": 0.36066766000000006,
+          "ads": 0.3035
+        },
+        "reloadTicks": 42,
+        "readyTicks": 8,
+        "stowTicks": 8,
+        "adsTicks": 7
+      },
+      "modified": [
+        {
+          "id": "retraced_path",
+          "stacks": 1,
+          "reloadTicks": 39,
+          "readyTicks": 8,
+          "stowTicks": 7,
+          "adsTicks": 6,
+          "stabilityBonus": 10,
+          "handlingBonus": 10,
+          "reloadBonus": 10,
+          "effectiveReloadStat": 55,
+          "effectiveHandlingStat": 56,
+          "seconds": {
+            "reload": 1.94875,
+            "ready": 0.36342452999999997,
+            "stow": 0.33382406000000003,
+            "ads": 0.28475
+          },
+          "effectiveStabilityStat": 85
+        },
+        {
+          "id": "retraced_path",
+          "stacks": 2,
+          "reloadTicks": 38,
+          "readyTicks": 7,
+          "stowTicks": 7,
+          "adsTicks": 6,
+          "stabilityBonus": 20,
+          "handlingBonus": 20,
+          "reloadBonus": 20,
+          "effectiveReloadStat": 65,
+          "effectiveHandlingStat": 66,
+          "seconds": {
+            "reload": 1.8537499999999998,
+            "ready": 0.33549072999999996,
+            "stow": 0.30698046,
+            "ads": 0.266
+          },
+          "effectiveStabilityStat": 95
+        }
+      ]
+    }
+  ],
+  "timings": [
+    {
+      "id": "aishas_embrace",
+      "stacks": 1,
+      "reloadTicks": 42,
+      "readyTicks": 9,
+      "stowTicks": 9,
+      "adsTicks": 8,
+      "stabilityBonus": 10,
+      "handlingBonus": 10,
+      "reloadBonus": 10
+    },
+    {
+      "id": "aishas_embrace",
+      "stacks": 2,
+      "reloadTicks": 39,
+      "readyTicks": 9,
+      "stowTicks": 8,
+      "adsTicks": 7,
+      "stabilityBonus": 20,
+      "handlingBonus": 20,
+      "reloadBonus": 20
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 1,
+      "reloadTicks": 39,
+      "readyTicks": 8,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "stabilityBonus": 10,
+      "handlingBonus": 10,
+      "reloadBonus": 10
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 2,
+      "reloadTicks": 38,
+      "readyTicks": 7,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "stabilityBonus": 20,
+      "handlingBonus": 20,
+      "reloadBonus": 20
+    }
+  ],
+  "limitations": [
+    "Official Bungie Oct13 snapshot and historical Oracle May20 curves are separate snapshots; timings are community approximations, not current exact official animation measurements.",
+    "Clarity establishes physical bonuses, threshold, stack times, removal grace and stowed activation only. Movement sampling, discontinuities and brief-pause progress are unknown and master-owned local policies.",
+    "Stat cap100, scalar1; source stow-at100 floor; W44 ADS2..20tick bounds; W58 ready/stow no extra tick clamp; ceil once at20Hz is local adaptation.",
+    "Combined perks/armor/masterworks, Minecraft stability mapping and native gameplay lifecycle are outside this profile. Enhanced Perpetual Motion is excluded.",
+    "No native game, input, HUD, DCC or full gate validation performed by this bounded profile generator."
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "weapon": "bellowing_giant",
+  "sourceAction": "80A8A1F5",
+  "framing": {
+    "translation": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": 1,
+    "rightWristRoll": 15,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A1F5",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.3,
+        0.35,
+        0.6,
+        0.65
+      ],
+      "hand": "right"
+    }
+  },
+  "sourceRig": {
+    "path": "art/weapons/w218/rigs/rocket_launcher_ba250bec.json",
+    "group": "rocket_launcher_ba250bec",
+    "action": "80A8A1F5",
+    "sourceBlendSha256": "814231f6f74533c758ea4527263b5b7df6e633e06d6755da60ae3b2616c53124",
+    "sourceMapSha256": "996e8d38b351230180852056488d6a9ed57819e1df192c1cc38ae67e3081effb",
+    "boneMapSha256": "bef1f40549f3d698efc439d17bf5c5f07ea443c55811c29705d5f9ec4b7c5259"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w218/source/source-review.json",
+      "sourceSha256": "f5a06a8373aa9ee1328f0d2b14c87dc187367edc7e28224f7bfa6287d64469d0",
+      "role": "master_original_blender_evaluation",
+      "observation": "Master evaluated source.blend read-only in Blender5.4.0 Alpha. ARMATURE only; OBSlot action Armature|fp_80A8A1F5_reload_full|Base, original1..133 at30fps;61 evaluated samples. Prior-cache joint error0; allInputsUnchanged=true. Worker read full report, did not independently open Blender."
+    },
+    {
+      "source": "art/weapons/w218/rigs/rocket_launcher_ba250bec.json",
+      "sourceSha256": "78d7101c57cc3a3a3d88e0dc957cbdb4982160e21ec7e11a9630e3bee5958e3d",
+      "role": "fresh_normalized_source61",
+      "observation": "Read fresh w218Source61 weapon/left+right shoulder/elbow/wrist matrices. Shared rocket_launcher_ba250bec includes Bellowing Giant, Bad Omens and Code Duello; report representative weapon is Bad Omens, not evidence of exclusive Bellowing mesh/camera. No source attenuation or limb scaling."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/source/sheets/rocket_launcher_ba250bec-80A8A1F5-upper-chain.png",
+      "sourceSha256": "14d6837253489e03a4b4802e05435eabbe893a3b44c8e135444cbc92a904d680",
+      "role": "viewed_bone_only_upper_chain_sheet",
+      "observation": "Viewed actual source XZ/YZ projections p=0,.2,.4,.6,.8,1. FIRST review and fresh matrices establish RIGHT wrist handles incoming payload, LEFT stabilizes body. Bone-only sheet cannot establish exact mesh contact/camera or concealed rocket geometry."
+    },
+    {
+      "source": "scripts/generate_reload_w187_bellowing_giant.py",
+      "sourceSha256": "1d87d69cb940a195d8b9309ed6c67ac7a539b5e78be2a735a21360381a3f8aed",
+      "role": "same_weapon_authored_geometry_and_motion",
+      "observation": "Read old generator inertly via AST and source text, manifest and SOURCE.md; never executed/imported generator or renderer. Preserve14 authored knots, grip[8,8.65,7.8], rocket anchor[8,12.05,.4], full114-element fixed carrier, identical16-element rigid whole rocket and all face UVs."
+    },
+    {
+      "source": "art/weapons/w187/bellowing_giant/storyboard.png",
+      "sourceSha256": "c65af981af9490c1d4c3a87275ff8f10060111fbd469cc33c2622729db7d77ce",
+      "role": "viewed_retained_same_weapon_reference",
+      "observation": "Viewed actual retained image. Storyboard source panels show same-weapon2018 gameplay: front muzzle presentation, right incoming whole rocket, axial push and palm release, forward/down return. Authored panels/comparison are offline independent framing without hands; not native Minecraft proof. Bright effects and hands hide exact rocket profile."
+    },
+    {
+      "source": "art/weapons/w187/bellowing_giant/comparison.png",
+      "sourceSha256": "d3f8eb77e66798404f59ac1dc3e3f5b9a47db827d478efa57ac687b323210ae4",
+      "role": "viewed_retained_same_weapon_reference",
+      "observation": "Viewed actual retained image. Storyboard source panels show same-weapon2018 gameplay: front muzzle presentation, right incoming whole rocket, axial push and palm release, forward/down return. Authored panels/comparison are offline independent framing without hands; not native Minecraft proof. Bright effects and hands hide exact rocket profile."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "effective_framing_preserved",
+      "observation": "Read canonical config and shared loader merge; rocket_launcher uses default because it has no family or weapon entry. Preserve default translation/rotation/scale/rightWristRoll exactly; no invented leftRotation."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_mesh_contacts_and_seat_release",
+      "observation": "Keep pistol right[8,8.35,7.83], foregrip left[8,8.95,2.17], reload[7,12.05,.4] and original rotations. FIRST correction explicitly chooses RIGHT hand for magazine action80A8A1F5/partHint magazine, gripWindow[.30,.35,.60,.65]: full attachment at first visible incoming rocket, zero at .65 seat. Mesh contact is already one unit beside rigid rocket anchor[8,12.05,.4]; no geometry-backed reason to move it. No spent extraction, bolt/latch or breech movement invented."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/screenshots/bellowing_giant-reload.png",
+      "sourceSha256": "0398bde245982fb9a19dcf1416a0c9c6787fb5ded565bf3ff135fcce18a52cf6",
+      "role": "viewed_FIRST_reload_sheet",
+      "observation": "Viewed actual FIRST motion sheet. Empty separated right palm at sample09 and absent readable round during handling/reseat require real right-hand routing correction."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/screenshots/bellowing_giant-review.png",
+      "sourceSha256": "cfbe0f4f1d86eb9f89b0052b3b25e14005bb8f20df002a77b5f3b22e3a02aa43",
+      "role": "viewed_FIRST_hip_ads_reload_sheet",
+      "observation": "Viewed native hip/ADS/reload sheet. Existing ADS remains a large close tube with open sight; correction does not change geometry/framing, and acceptance stays pending SECOND."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/first-post-reload-review.png",
+      "sourceSha256": "66ac853208a47161327067955b7fdc9699a09b793dca28d71aa40134cb17afcb",
+      "role": "viewed_FIRST_post_reload_sheet",
+      "observation": "Viewed Bellowing panel: recovered two-hand hip presentation, HUD1/reserve6; does not validate unseen reload payload."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-01.png",
+      "sourceSha256": "ae6cc74d4ed787c00c44a187ba575c6af04f55c1b5f1708322adc4ed9507534e",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Ready/early lift: body and both ordinary arms visible; no distinct incoming payload yet."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-05.png",
+      "sourceSha256": "2f36863344162ef9cb93dcfaee9bbbee89668141b134d17bf781dabcc6fec7de",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Raised launcher and approaching right forearm; no distinct held rocket visible."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-09.png",
+      "sourceSha256": "3caba8d894b0cbe9ed8d132650fe63364cd2b7c40d2160cf388bc6ac4dd2bd70",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Empty right hand clearly separated to the right of the steep launcher; incorrect LEFT-only payload attachment is visually confirmed."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-10.png",
+      "sourceSha256": "a00da74f231c38c3789a58c2d920dbe5a6800913981935b6c4992817e31a99ad",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Right palm returns toward tube; no independently readable canister silhouette."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-12.png",
+      "sourceSha256": "73bc162deb812b51383f94952540b242466e284b11849a1aa1d4eb20d69a6693",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Right hand crosses against the tube; rocket remains visually unestablished, so numeric/runtime pass is insufficient."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-13.png",
+      "sourceSha256": "ca3e07ad87ca2966e87849891a444f76c478c06497f858ecbb7a4c8820eb6162",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Right forearm alongside raised tube; a separate round/canister still not readable."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-14.png",
+      "sourceSha256": "d87ce5df6448231926e866edb3753c4580f3be4f087ad7cd9465c6c6da61c999",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Raised tube during late handling/reseat; no distinct right-held rocket visible."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-15.png",
+      "sourceSha256": "c9749e6e34ac611d03faea0dfdc88c24ecedac1b4f337dedb09970369ad15012",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Forward/down recovery begins; canister visibility/contact cannot be accepted from FIRST."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-16.png",
+      "sourceSha256": "2fc7283e46d1a44d651cffe40bb4046963a689a71547215f2c17ed0e7e821822",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Arm crosses top during recovery; original source recovery retained, SECOND must check release and clearance."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w218/vision1/frames/w218-bellowing_giant-reload-sample-18.png",
+      "sourceSha256": "c6c5a5c678c6e37301f95665c490a74b6afd8a540b52800e60555b74d48f81d1",
+      "role": "viewed_FIRST_raw_frame",
+      "observation": "Near ready recovery; post-reload sheet separately confirms stable hip return and HUD1."
+    }
+  ],
+  "notes": [
+    "FIRST feedback correction: explicit original RIGHT handling hand; shared selector is master-owned. Native/runtime FIRST checks passed, but visible held-rocket acceptance requires SECOND.",
+    "Existing shared loader selects default framing for rocket_launcher (no family entry or Bellowing profile): translation[0,0,0], rotation[0,0,0],scale1,rightWristRoll15. No new offsets/leftRotation; only required full-chain/support booleans added.",
+    "Keep all existing mesh rest and reload contact positions/rotations. Full shoulder/elbow/wrist chains drive ordinary fingerless player-skin arms; source is shared-family ARMATURE only.",
+    "RIGHT hand reaches full attachment at first visible payload pose .35 (approach .30..35), carries through .60, fades .60..65 and is zero at authored neutral seat .65. Original source right wrist has large incoming excursion by .35; delaying full grip until .43 missed initial grasp. Left stabilizes body. Source timing is unchanged.",
+    "W187 discrete dispatch visible7..13 occupies [.35,.70). Evaluate normalized time: W218 visible21..41; poses39..41 keep the original seated visibility hold. Constant scale throughout.",
+    "All14 W187 knots, equal holds, extrema, anchors, carrier/twohand/left-hand math,114 fixed elements+16 authored reload-only rocket elements and face UVs retained.",
+    "Reload130+448 reserved arms=578; raw canonical217+448=665. Master measures all composed routes, including canonical/ADS/inspect, under1000. Alternatives are not summed.",
+    "61 poses/60 intervals; no native continuous60fps claim. Capacity1/reload64ticks/cadence60ticks/ammo/audio remain unchanged.",
+    "Mandatory next step: master integrates generic reload.hand routing and this same-worker FIRST correction, then SECOND actual images must show a distinct round/canister with the RIGHT hand during handling and progressive reseat. No corrected-native visual acceptance yet."
+  ]
+}

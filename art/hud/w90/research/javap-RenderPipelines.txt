@@ -1,0 +1,194 @@
+Exact26.3 javap excerpts; original bytecode offsets preserved.
+      1039: invokevirtual #273                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withFragmentShader:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1042: getstatic     #233                // Field net/minecraft/client/renderer/BindGroupLayouts.SAMPLER0:Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;
+      1045: invokevirtual #82                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withBindGroupLayout:(Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1048: iconst_0
+      1049: getstatic     #236                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.BLOCK:Lcom/mojang/renderpearl/api/vertex/VertexFormat;
+      1052: invokevirtual #242                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withVertexBinding:(ILcom/mojang/renderpearl/api/vertex/VertexFormat;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1055: getstatic     #246                // Field com/mojang/renderpearl/api/pipeline/PrimitiveTopology.QUADS:Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;
+      1058: invokevirtual #252                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withPrimitiveTopology:(Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1061: getstatic     #56                 // Field com/mojang/renderpearl/api/pipeline/DepthStencilState.DEFAULT:Lcom/mojang/renderpearl/api/pipeline/DepthStencilState;
+      1064: invokevirtual #62                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withDepthStencilState:(Lcom/mojang/renderpearl/api/pipeline/DepthStencilState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1067: invokevirtual #135                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.buildSnippet:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      1070: putstatic     #346                // Field BEACON_BEAM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      1073: iconst_1
+      1074: anewarray     #129                // class com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet
+      1077: dup
+      1078: iconst_0
+      1079: getstatic     #157                // Field MATRICES_FOG_LIGHT_DIR_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      1082: aastore
+      1083: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1086: ldc_w         #349                // String core/item
+      1089: invokevirtual #270                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withVertexShader:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1092: ldc_w         #349                // String core/item
+      1095: invokevirtual #273                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withFragmentShader:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1098: getstatic     #351                // Field net/minecraft/client/renderer/BindGroupLayouts.SAMPLER0_SAMPLER1_SAMPLER2:Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;
+      1101: invokevirtual #82                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withBindGroupLayout:(Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1104: iconst_0
+      1105: getstatic     #316                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.ENTITY:Lcom/mojang/renderpearl/api/vertex/VertexFormat;
+      1108: invokevirtual #242                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withVertexBinding:(ILcom/mojang/renderpearl/api/vertex/VertexFormat;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1111: getstatic     #246                // Field com/mojang/renderpearl/api/pipeline/PrimitiveTopology.QUADS:Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;
+      1114: invokevirtual #252                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withPrimitiveTopology:(Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1117: getstatic     #56                 // Field com/mojang/renderpearl/api/pipeline/DepthStencilState.DEFAULT:Lcom/mojang/renderpearl/api/pipeline/DepthStencilState;
+      1120: invokevirtual #62                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withDepthStencilState:(Lcom/mojang/renderpearl/api/pipeline/DepthStencilState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1123: invokevirtual #135                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.buildSnippet:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      1126: putstatic     #354                // Field ITEM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      1129: iconst_0
+      1130: anewarray     #129                // class com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet
+      1133: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1136: getstatic     #145                // Field net/minecraft/client/renderer/BindGroupLayouts.DYNAMIC_TRANSFORMS:Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;
+      1139: invokevirtual #82                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withBindGroupLayout:(Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1142: getstatic     #148                // Field net/minecraft/client/renderer/BindGroupLayouts.FOG:Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;
+      1145: invokevirtual #82                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withBindGroupLayout:(Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1148: getstatic     #154                // Field net/minecraft/client/renderer/BindGroupLayouts.LIGHTING:Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;
+      1151: invokevirtual #82                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withBindGroupLayout:(Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1154: getstatic     #233                // Field net/minecraft/client/renderer/BindGroupLayouts.SAMPLER0:Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;
+      1157: invokevirtual #82                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withBindGroupLayout:(Lcom/mojang/renderpearl/api/pipeline/BindGroupLayout;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1160: ldc_w         #349                // String core/item
+      1163: invokevirtual #270                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withVertexShader:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1166: ldc_w         #349                // String core/item
+      1169: invokevirtual #273                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withFragmentShader:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1172: iconst_0
+      1173: getstatic     #316                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.ENTITY:Lcom/mojang/renderpearl/api/vertex/VertexFormat;
+      1176: invokevirtual #242                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withVertexBinding:(ILcom/mojang/renderpearl/api/vertex/VertexFormat;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1179: getstatic     #246                // Field com/mojang/renderpearl/api/pipeline/PrimitiveTopology.QUADS:Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;
+      1182: invokevirtual #252                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withPrimitiveTopology:(Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1185: new           #57                 // class com/mojang/renderpearl/api/pipeline/DepthStencilState
+      1188: dup
+      1189: getstatic     #193                // Field com/mojang/renderpearl/api/pipeline/CompareOp.GREATER_THAN_OR_EQUAL:Lcom/mojang/renderpearl/api/pipeline/CompareOp;
+      1192: iconst_0
+      1193: invokespecial #199                // Method com/mojang/renderpearl/api/pipeline/DepthStencilState."<init>":(Lcom/mojang/renderpearl/api/pipeline/CompareOp;Z)V
+      1196: invokevirtual #62                 // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withDepthStencilState:(Lcom/mojang/renderpearl/api/pipeline/DepthStencilState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1199: ldc_w         #325                // String ALPHA_CUTOUT
+      1202: ldc_w         #327                // float 0.1f
+      1205: invokevirtual #328                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withShaderDefine:(Ljava/lang/String;F)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      1208: invokevirtual #135                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.buildSnippet:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      1211: putstatic     #357                // Field OIT_ITEM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4630: iconst_0
+      4631: getstatic     #354                // Field ITEM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4634: aastore
+      4635: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4638: ldc_w         #777                // String pipeline/item_cutout
+      4641: invokevirtual #497                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withLocation:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4644: ldc_w         #325                // String ALPHA_CUTOUT
+      4647: ldc_w         #327                // float 0.1f
+      4650: invokevirtual #328                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withShaderDefine:(Ljava/lang/String;F)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4653: getstatic     #379                // Field com/mojang/renderpearl/api/pipeline/ColorTargetState.DEFAULT:Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;
+      4656: invokevirtual #189                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withColorTargetState:(Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4659: invokevirtual #500                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.build:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4662: invokestatic  #503                // Method register:(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4665: putstatic     #779                // Field ITEM_CUTOUT:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4668: iconst_2
+      4669: anewarray     #129                // class com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet
+      4672: dup
+      4673: iconst_0
+      4674: getstatic     #354                // Field ITEM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4677: aastore
+      4678: dup
+      4679: iconst_1
+      4680: getstatic     #92                 // Field GLINT_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4683: aastore
+      4684: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4687: ldc_w         #777                // String pipeline/item_cutout
+      4690: invokevirtual #497                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withLocation:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4693: ldc_w         #325                // String ALPHA_CUTOUT
+      4696: ldc_w         #327                // float 0.1f
+      4699: invokevirtual #328                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withShaderDefine:(Ljava/lang/String;F)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4702: getstatic     #379                // Field com/mojang/renderpearl/api/pipeline/ColorTargetState.DEFAULT:Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;
+      4705: invokevirtual #189                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withColorTargetState:(Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4708: invokevirtual #500                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.build:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4711: invokestatic  #503                // Method register:(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4714: putstatic     #782                // Field ITEM_CUTOUT_GLINT:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4717: iconst_2
+      4718: anewarray     #129                // class com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet
+      4721: dup
+      4722: iconst_0
+      4723: getstatic     #354                // Field ITEM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4726: aastore
+      4727: dup
+      4728: iconst_1
+      4729: getstatic     #68                 // Field GLINT_SPECIAL_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4732: aastore
+      4733: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4736: ldc_w         #777                // String pipeline/item_cutout
+      4739: invokevirtual #497                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withLocation:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4742: ldc_w         #325                // String ALPHA_CUTOUT
+      4745: ldc_w         #327                // float 0.1f
+      4748: invokevirtual #328                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withShaderDefine:(Ljava/lang/String;F)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4751: iconst_0
+      4752: getstatic     #785                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.ENTITY_GLINT_SPECIAL:Lcom/mojang/renderpearl/api/vertex/VertexFormat;
+      4755: invokevirtual #242                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withVertexBinding:(ILcom/mojang/renderpearl/api/vertex/VertexFormat;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4758: getstatic     #379                // Field com/mojang/renderpearl/api/pipeline/ColorTargetState.DEFAULT:Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;
+      4761: invokevirtual #189                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withColorTargetState:(Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4764: invokevirtual #500                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.build:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4767: invokestatic  #503                // Method register:(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4770: putstatic     #788                // Field ITEM_CUTOUT_GLINT_SPECIAL:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4773: iconst_1
+      4774: anewarray     #129                // class com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet
+      4777: dup
+      4778: iconst_0
+      4779: getstatic     #354                // Field ITEM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4782: aastore
+      4783: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4786: ldc_w         #791                // String pipeline/item_translucent
+      4789: invokevirtual #497                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withLocation:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4792: ldc_w         #325                // String ALPHA_CUTOUT
+      4795: ldc_w         #327                // float 0.1f
+      4798: invokevirtual #328                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withShaderDefine:(Ljava/lang/String;F)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4801: new           #103                // class com/mojang/renderpearl/api/pipeline/ColorTargetState
+      4804: dup
+      4805: getstatic     #387                // Field com/mojang/renderpearl/api/pipeline/BlendFunction.TRANSLUCENT:Lcom/mojang/renderpearl/api/pipeline/BlendFunction;
+      4808: invokespecial #390                // Method com/mojang/renderpearl/api/pipeline/ColorTargetState."<init>":(Lcom/mojang/renderpearl/api/pipeline/BlendFunction;)V
+      4811: invokevirtual #189                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withColorTargetState:(Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4814: invokevirtual #500                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.build:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4817: invokestatic  #503                // Method register:(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4820: putstatic     #793                // Field ITEM_TRANSLUCENT:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4823: ldc_w         #796                // String item
+      4826: iconst_1
+      4827: anewarray     #129                // class com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet
+      4830: dup
+      4831: iconst_0
+      4870: iconst_1
+      4871: getstatic     #92                 // Field GLINT_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4874: aastore
+      4875: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4878: ldc_w         #802                // String pipeline/item_translucent_glint
+      4881: invokevirtual #497                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withLocation:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4884: ldc_w         #325                // String ALPHA_CUTOUT
+      4887: ldc_w         #327                // float 0.1f
+      4890: invokevirtual #328                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withShaderDefine:(Ljava/lang/String;F)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4893: new           #103                // class com/mojang/renderpearl/api/pipeline/ColorTargetState
+      4896: dup
+      4897: getstatic     #387                // Field com/mojang/renderpearl/api/pipeline/BlendFunction.TRANSLUCENT:Lcom/mojang/renderpearl/api/pipeline/BlendFunction;
+      4900: invokespecial #390                // Method com/mojang/renderpearl/api/pipeline/ColorTargetState."<init>":(Lcom/mojang/renderpearl/api/pipeline/BlendFunction;)V
+      4903: invokevirtual #189                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withColorTargetState:(Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4906: invokevirtual #500                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.build:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4909: invokestatic  #503                // Method register:(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4912: putstatic     #804                // Field ITEM_TRANSLUCENT_GLINT:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4915: iconst_2
+      4916: anewarray     #129                // class com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet
+      4919: dup
+      4920: iconst_0
+      4921: getstatic     #354                // Field ITEM_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4926: iconst_1
+      4927: getstatic     #68                 // Field GLINT_SPECIAL_SNIPPET:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;
+      4930: aastore
+      4931: invokestatic  #131                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline.builder:([Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4934: ldc_w         #802                // String pipeline/item_translucent_glint
+      4937: invokevirtual #497                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withLocation:(Ljava/lang/String;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4940: ldc_w         #325                // String ALPHA_CUTOUT
+      4943: ldc_w         #327                // float 0.1f
+      4946: invokevirtual #328                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withShaderDefine:(Ljava/lang/String;F)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4949: iconst_0
+      4950: getstatic     #785                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.ENTITY_GLINT_SPECIAL:Lcom/mojang/renderpearl/api/vertex/VertexFormat;
+      4953: invokevirtual #242                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withVertexBinding:(ILcom/mojang/renderpearl/api/vertex/VertexFormat;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4956: new           #103                // class com/mojang/renderpearl/api/pipeline/ColorTargetState
+      4959: dup
+      4960: getstatic     #387                // Field com/mojang/renderpearl/api/pipeline/BlendFunction.TRANSLUCENT:Lcom/mojang/renderpearl/api/pipeline/BlendFunction;
+      4963: invokespecial #390                // Method com/mojang/renderpearl/api/pipeline/ColorTargetState."<init>":(Lcom/mojang/renderpearl/api/pipeline/BlendFunction;)V
+      4966: invokevirtual #189                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.withColorTargetState:(Lcom/mojang/renderpearl/api/pipeline/ColorTargetState;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline$Builder;
+      4969: invokevirtual #500                // Method com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.build:()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4972: invokestatic  #503                // Method register:(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4975: putstatic     #807                // Field ITEM_TRANSLUCENT_GLINT_SPECIAL:Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+      4978: ldc_w         #810                // String item_glint
+      4981: iconst_1

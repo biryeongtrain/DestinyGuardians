@@ -1,0 +1,5 @@
+# Falling Guillotine W135 — master art
+
+96 opaque meaningful cuboids. Broad filled paired silver blades, physical central inset/slot and stepped heel, hooked tips and selective silhouette teeth; black guard/retainers and source hand anchor. Large and small pale raised circular inserts are filled octagons. Actual EnviousTouch source contour tile is resampled in continuous authored face UV and reinterpreted in photo-based teal/bronze. Small fasteners, shallow dimples and diagrams are UV, not source islands or alpha shells.
+
+Read-only original FBX retained two source objects/12233 triangles in original X/Z/Y frame and anchor[8,5.825038936061844,8]; no assumption of gun -Z length. Raw diffuse is neutral and second energy object has labeled neutral reference, not default-dye recovery. Warm edge strips/pale inserts are static matte RGBA, not dynamically emissive, original PBR or animated Taken effects. Generic sword combat/swing/guard/ammo/audio, canonical display/scale and hand frame unchanged. CPU portrait comparisons/BB are offline evidence only. Native held/thirdperson/swing/guard and10-20display pending.

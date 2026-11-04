@@ -1,0 +1,15 @@
+# High Albedo W143 art review
+
+100 assembled opaque authored cuboids, 0 triangle adapters, 600 faces. Group counts: {"barrel": 25, "brace": 9, "bridge": 3, "cage": 8, "controls": 4, "cylinder": 26, "frame": 4, "grip": 5, "guard": 4, "receiver": 12}. The 1,000-element cap is a ceiling; the first blockout was 92 elements and the source-visible stepped barrel collar adds eight justified pieces. No rip-island transfer, voxel shell, alpha silhouette, or invented triangle schema.
+
+Identity: blue upper receiver and sloped carry bridge, red filled lower frame and slanted grip, orange cruciform front brace and cylinder band, black exposed upper barrel in red cage, forward knurled cylinder. Large receiver, frame and grip cores are filled intersecting solids; octagonal tube walls are reserved for actual cylindrical bores. Trigger guard follows the source's open lower end. The upper mouth, lower nozzle, carry slot and cage window are geometric openings. The bore closures are recessed inside the source frame.
+
+Face atlas: 1024 square opaque RGBA; coherent blue/red/orange material blocks, pressed housing channels, grip relief, restrained edge accents, knurl and small hardware in UV. Two-pixel edge gutters per face. Original accepted Decals mesh UVs provide only original side graphics (303 / SD / warning labels); the Main diffuse is not baked across the new body. Source typography follows its stored UV orientation instead of mirroring a new wordmark. Paint is a matte interpretation of the actual W31 defaultphoto, not original PBR recovery.
+
+Source provenance: inert Blender 2.91 SDNA reader adapted from the read-only Long Arm helper, with explicit version support and source-specific acceptance. Exactly two W30 accepted mesh objects, 10,378 Main + 26 Decals = 10,404 triangles. W30 count difference: zero. Stored object matrices and world X,Z,Y mapping, original scale 38.47337627105895 and anchor [8,8,8], are used directly; no recenter/renormalization. Source bounds are verified before authored geometry. The semantic envelope has small local differences recorded in manifest.json rather than being reported as exact source geometry.
+
+Exact canonical display copied from the dirty-seeded sidearm model. Existing ADS/twohand/inspect models, generic reload, shared routing, gameplay, Java, HUD and audio are untouched. Full-only output; no new moving magazine or split reload.
+
+comparison.png contains the actual defaultphoto, accepted undyed source, dirty-seeded 253-cube canonical model, and new model at identical source-derived side/front/rear camera scales, plus axial muzzle and atlas views. It is a CPU diffuse rendering, not a native screenshot. Worker opened and inspected the generated image; Blockbench UI review and native first/third person, ADS, generic reload and 10-20 simultaneous displays remain with master. Focused practical checks are documented in the worker report; no exhaustive certification is claimed.
+
+Limitations: simplified faceted cylinders and brace profile; shallow grooves/knurl/screws are paint. No native pack-load, DCC, dynamic PBR, performance or gameplay acceptance is asserted.

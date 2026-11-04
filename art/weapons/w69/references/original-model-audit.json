@@ -1,0 +1,4891 @@
+{
+  "schema": 1,
+  "task": "W69 original Ammit AR2 model identity, rig, animation and component audit",
+  "verified_utc": "2026-10-24T06:32:31.173434+00:00",
+  "repository": "/Users/qf/IdeaProjects/DestinyGuardians",
+  "branch_verified": "feat/hunter",
+  "scope": "Local private original sources only; no gameplay video research, geometry partition/generator/runtime implementation, GUI/MCP interaction, client launch, normal QA, source save, or commit.",
+  "identity": {
+    "weapon": "Ammit AR2",
+    "w30_id": "ammit_ar2",
+    "source_drive_id": "10O1xjObGAvW5x6uESPax0G-U1qA7Vh7f",
+    "drive_url": "https://drive.google.com/file/d/10O1xjObGAvW5x6uESPax0G-U1qA7Vh7f/view",
+    "source_archive_name": "Ammit AR2.7z Compressed archive",
+    "source_season": "Season 18 - Plunder Shared folder",
+    "files": [
+      {
+        "format": "blend",
+        "private_cache_path": "/tmp/destiny-weapons-w30/raw/ammit_ar2/extracted/Ammit AR2/Ammit AR2.blend",
+        "relative_to_extracted": "Ammit AR2/Ammit AR2.blend",
+        "bytes": 11987537,
+        "expected_sha256": "4898634c120d335b15465d61b9e3fa4979e78ef1e57bb87f4a43eef92ba4921d",
+        "sha256_before": "4898634c120d335b15465d61b9e3fa4979e78ef1e57bb87f4a43eef92ba4921d",
+        "sha256_after": "4898634c120d335b15465d61b9e3fa4979e78ef1e57bb87f4a43eef92ba4921d",
+        "matches_user_pin": true,
+        "matches_w30_manifest": true
+      },
+      {
+        "format": "fbx",
+        "private_cache_path": "/tmp/destiny-weapons-w30/raw/ammit_ar2/extracted/Ammit AR2/Ammit AR2.fbx",
+        "relative_to_extracted": "Ammit AR2/Ammit AR2.fbx",
+        "bytes": 1075116,
+        "expected_sha256": "45d3b95b8e875957f480f2ae97193b4aa2b01ea760583751d8633261b17c0b07",
+        "sha256_before": "45d3b95b8e875957f480f2ae97193b4aa2b01ea760583751d8633261b17c0b07",
+        "sha256_after": "45d3b95b8e875957f480f2ae97193b4aa2b01ea760583751d8633261b17c0b07",
+        "matches_user_pin": true,
+        "matches_w30_manifest": true
+      }
+    ],
+    "private_archive": {
+      "path": "/tmp/destiny-weapons-w30/raw/ammit_ar2/source.archive",
+      "bytes": 17600025,
+      "sha256": "708f491286e352a2997d1ba7891daf929d5c58c2b357a6368bf30adb6018b433",
+      "note": "Current local hash only; no expected archive hash supplied."
+    }
+  },
+  "repo_evidence": [
+    {
+      "path": "scripts/build_weapons_w30.py",
+      "sha256": "e087fca588231486505691e97b5c2b581382c1055c76d64300dbc24118bf1d83"
+    },
+    {
+      "path": "scripts/art/reconstruct_weapons_w30.py",
+      "sha256": "4b491ca19aa931b1f53694b1cb34aef188aed8a5d4f4f2ec720da914e0cce88d"
+    },
+    {
+      "path": "art/weapons/w30/manifest.json",
+      "sha256": "00efdf37737b96341e5b016a686dafdbe75bb94263e8b3d75e004025e65c0fbf"
+    },
+    {
+      "path": "art/weapons/w30/catalog.json",
+      "sha256": "3e9377cce928958a89208ce69f34210fe7e17ae17afd1f4959bb418b1ed120f5"
+    },
+    {
+      "path": "art/blockbench/weapons/w30/ammit_ar2.bbmodel",
+      "sha256": "e98d7cb58b352e428b7f134d5092f991f70e421d992e9813b7d4fc87c58da726"
+    }
+  ],
+  "method": {
+    "blender_version": "5.4.0 Alpha",
+    "blender_build_hash": "7a8f04b3bb5a",
+    "private_inspections": "/tmp/destiny-w69-source-inspect",
+    "separate_process_per_format": true,
+    "autoexec_disabled": true,
+    "blend_open": "bpy.ops.wm.open_mainfile(filepath=..., load_ui=False, use_scripts=False)",
+    "fbx_import": "bpy.ops.import_scene.fbx(filepath=..., use_anim=True, ignore_leaf_bones=False)",
+    "raw_fbx_check": "Bundled io_scene_fbx.parse_fbx.parse; inspected actual Objects records for animation, rig/deformer and Model subtypes.",
+    "animation_check": "Enumerated all bpy.data ID collections and embedded node trees for animation_data, all actions including layers/channelbags and legacy fcurves, object animation/constraints/modifiers, armatures/bones, NLA tracks/strips, drivers and shape keys.",
+    "source_script_execution": false,
+    "why_fresh_inspection_required": "Cached W30 audit recorded mesh/material data only; cached FBX inspector and reconstruction use use_anim=False, which cannot establish absence of animation.",
+    "process_runs": [
+      {
+        "mode": "blend",
+        "pid": 50787,
+        "argv": [
+          "/Applications/Blender.app/Contents/MacOS/Blender",
+          "--background",
+          "--factory-startup",
+          "--disable-autoexec",
+          "--threads",
+          "1",
+          "--python-exit-code",
+          "23",
+          "--python",
+          "/tmp/destiny-w69-source-inspect/inspect.py",
+          "--",
+          "blend"
+        ],
+        "timeout_seconds": 90,
+        "exit_code": 0,
+        "elapsed_seconds": 3.667
+      },
+      {
+        "mode": "fbx",
+        "pid": 50820,
+        "argv": [
+          "/Applications/Blender.app/Contents/MacOS/Blender",
+          "--background",
+          "--factory-startup",
+          "--disable-autoexec",
+          "--threads",
+          "1",
+          "--python-exit-code",
+          "23",
+          "--python",
+          "/tmp/destiny-w69-source-inspect/inspect.py",
+          "--",
+          "fbx"
+        ],
+        "timeout_seconds": 90,
+        "exit_code": 0,
+        "elapsed_seconds": 0.609
+      },
+      {
+        "mode": "detail",
+        "pid": 51198,
+        "argv": [
+          "/Applications/Blender.app/Contents/MacOS/Blender",
+          "--background",
+          "--factory-startup",
+          "--disable-autoexec",
+          "--threads",
+          "1",
+          "--python-exit-code",
+          "23",
+          "--python",
+          "/tmp/destiny-w69-source-inspect/detail.py",
+          "--",
+          "detail"
+        ],
+        "timeout_seconds": 90,
+        "exit_code": 0,
+        "elapsed_seconds": 1.296
+      }
+    ],
+    "private_scripts": [
+      {
+        "path": "/tmp/destiny-w69-source-inspect/inspect.py",
+        "sha256": "3fa579c50b93483be55176e22887472eddac1f205de73be3567db8d9c1a685a6"
+      },
+      {
+        "path": "/tmp/destiny-w69-source-inspect/detail.py",
+        "sha256": "62d954055edf7a65d73f13fb0ea4984bd4db13c6a6d50d98c3b97e00ad07a19e"
+      },
+      {
+        "path": "/tmp/destiny-w69-source-inspect/run.py",
+        "sha256": "f548ee43e5d79319656bc1e98066b97243b661b946f4a2a5e9ea9b093c59c619"
+      },
+      {
+        "path": "/tmp/destiny-w69-source-inspect/run-detail.py",
+        "sha256": "c8c6942e8ea413e50328a36398fc57ace4cc82ae61946cca45db4b816962914f"
+      }
+    ]
+  },
+  "formats": {
+    "blend": {
+      "source": "/tmp/destiny-weapons-w30/raw/ammit_ar2/extracted/Ammit AR2/Ammit AR2.blend",
+      "mode": "blend",
+      "blender_version": "5.4.0 Alpha",
+      "blender_build_hash": "7a8f04b3bb5a",
+      "autoexec_enabled": false,
+      "objects": [
+        {
+          "name": "Barrel Tube",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.001",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 24,
+          "edges": 42,
+          "polygons": 20,
+          "triangles": 20,
+          "material_slots": [
+            "Barrel Tube"
+          ],
+          "material_polygon_counts": {
+            "0": 20
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.013717000372707844,
+              -0.38464099168777466,
+              0.14511699974536896
+            ],
+            [
+              0.013717000372707844,
+              -0.1014069989323616,
+              0.17004500329494476
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 24,
+              "nonzero_assignments": 24,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 24,
+              "nonzero_assignments": 24,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Fluid",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.02.001",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 268,
+          "edges": 742,
+          "polygons": 476,
+          "triangles": 476,
+          "material_slots": [
+            "Fluid"
+          ],
+          "material_polygon_counts": {
+            "0": 476
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.04131900146603584,
+              -0.20508499443531036,
+              0.028246000409126282
+            ],
+            [
+              0.04131900146603584,
+              -0.15003100037574768,
+              0.0825830027461052
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 268,
+              "nonzero_assignments": 268,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 268,
+              "nonzero_assignments": 268,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Fluid Glass",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.02.002",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 268,
+          "edges": 742,
+          "polygons": 476,
+          "triangles": 476,
+          "material_slots": [
+            "Fluid Glass"
+          ],
+          "material_polygon_counts": {
+            "0": 476
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.042149998247623444,
+              -0.2058500051498413,
+              0.027123000472784042
+            ],
+            [
+              0.042149998247623444,
+              -0.14926600456237793,
+              0.08370699733495712
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 268,
+              "nonzero_assignments": 268,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 268,
+              "nonzero_assignments": 268,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Inner Omolon Logo",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.01.002",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 8,
+          "edges": 10,
+          "polygons": 4,
+          "triangles": 4,
+          "material_slots": [
+            "Inner Omolon Logo"
+          ],
+          "material_polygon_counts": {
+            "0": 4
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.019332999363541603,
+              -0.046640001237392426,
+              0.1279979944229126
+            ],
+            [
+              0.019332999363541603,
+              0.009542999789118767,
+              0.13874199986457825
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 8,
+              "nonzero_assignments": 8,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Suit2",
+              "vertex_assignments": 8,
+              "nonzero_assignments": 8,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Inner Structure",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.03.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 2834,
+          "edges": 6464,
+          "polygons": 3700,
+          "triangles": 3700,
+          "material_slots": [
+            "Inner Structure"
+          ],
+          "material_polygon_counts": {
+            "0": 3700
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.01821500062942505,
+              -0.08115799725055695,
+              0.1269019991159439
+            ],
+            [
+              0.01821500062942505,
+              0.13015399873256683,
+              0.1819240003824234
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 2834,
+              "nonzero_assignments": 2834,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor2",
+              "vertex_assignments": 2374,
+              "nonzero_assignments": 2374,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Cloth2",
+              "vertex_assignments": 460,
+              "nonzero_assignments": 460,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Magazine",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.05.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 180,
+          "edges": 336,
+          "polygons": 164,
+          "triangles": 164,
+          "material_slots": [
+            "Magazine"
+          ],
+          "material_polygon_counts": {
+            "0": 164
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.016908999532461166,
+              -0.24015100300312042,
+              -0.08198200166225433
+            ],
+            [
+              0.016908999532461166,
+              -0.12546299397945404,
+              0.022458000108599663
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pelvis",
+              "vertex_assignments": 180,
+              "nonzero_assignments": 180,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 90,
+              "nonzero_assignments": 90,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor2",
+              "vertex_assignments": 90,
+              "nonzero_assignments": 90,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Main - Body",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.002",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 2352,
+          "edges": 4823,
+          "polygons": 2556,
+          "triangles": 2556,
+          "material_slots": [
+            "Main"
+          ],
+          "material_polygon_counts": {
+            "0": 2556
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.03043700009584427,
+              -0.5761880278587341,
+              0.02639699913561344
+            ],
+            [
+              0.03043700009584427,
+              0.22071599960327148,
+              0.1842849999666214
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 2352,
+              "nonzero_assignments": 2352,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 1302,
+              "nonzero_assignments": 1302,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor2",
+              "vertex_assignments": 436,
+              "nonzero_assignments": 436,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Cloth1",
+              "vertex_assignments": 614,
+              "nonzero_assignments": 614,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Main - Omolon Logo",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.003",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 484,
+          "edges": 1050,
+          "polygons": 584,
+          "triangles": 584,
+          "material_slots": [
+            "Main"
+          ],
+          "material_polygon_counts": {
+            "0": 584
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.017023999243974686,
+              -0.022255999967455864,
+              0.17144399881362915
+            ],
+            [
+              0.017023999243974686,
+              0.03647699952125549,
+              0.17687900364398956
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 484,
+              "nonzero_assignments": 484,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Suit2",
+              "vertex_assignments": 484,
+              "nonzero_assignments": 484,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Main - Spot",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 4,
+          "edges": 5,
+          "polygons": 2,
+          "triangles": 2,
+          "material_slots": [
+            "Main"
+          ],
+          "material_polygon_counts": {
+            "0": 2
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.017862999811768532,
+              0.08132399618625641,
+              0.16583800315856934
+            ],
+            [
+              -0.013705000281333923,
+              0.08645600080490112,
+              0.17057999968528748
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 4,
+              "nonzero_assignments": 4,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 4,
+              "nonzero_assignments": 4,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Middle",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.02.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 9395,
+          "edges": 20505,
+          "polygons": 11417,
+          "triangles": 11417,
+          "material_slots": [
+            "Middle"
+          ],
+          "material_polygon_counts": {
+            "0": 11417
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.03880700096487999,
+              -0.39212900400161743,
+              -0.08117300271987915
+            ],
+            [
+              0.04357599839568138,
+              0.22672900557518005,
+              0.18775300681591034
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 9293,
+              "nonzero_assignments": 9293,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Utility",
+              "vertex_assignments": 102,
+              "nonzero_assignments": 102,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 670,
+              "nonzero_assignments": 670,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor2",
+              "vertex_assignments": 4906,
+              "nonzero_assignments": 4906,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Cloth1",
+              "vertex_assignments": 118,
+              "nonzero_assignments": 118,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Cloth2",
+              "vertex_assignments": 2168,
+              "nonzero_assignments": 2168,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Suit1",
+              "vertex_assignments": 132,
+              "nonzero_assignments": 132,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Suit2",
+              "vertex_assignments": 1401,
+              "nonzero_assignments": 1401,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Reticle",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.14.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 27,
+          "edges": 51,
+          "polygons": 25,
+          "triangles": 25,
+          "material_slots": [
+            "Reticle"
+          ],
+          "material_polygon_counts": {
+            "0": 25
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.009260999970138073,
+              -0.009422999806702137,
+              0.19089099764823914
+            ],
+            [
+              0.009260999970138073,
+              -0.009422999806702137,
+              0.22158999741077423
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 27,
+              "nonzero_assignments": 27,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 27,
+              "nonzero_assignments": 27,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Sights",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.06.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 532,
+          "edges": 1131,
+          "polygons": 606,
+          "triangles": 606,
+          "material_slots": [
+            "Sights"
+          ],
+          "material_polygon_counts": {
+            "0": 606
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.01235199999064207,
+              -0.029183000326156616,
+              0.18208299577236176
+            ],
+            [
+              0.014538000337779522,
+              -0.0029690000228583813,
+              0.21521499752998352
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 532,
+              "nonzero_assignments": 532,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Armor1",
+              "vertex_assignments": 532,
+              "nonzero_assignments": 532,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        },
+        {
+          "name": "Stock",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.04.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [
+            {
+              "name": "Armature",
+              "type": "ARMATURE",
+              "armature_object": null
+            }
+          ],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Ammit AR2"
+          ],
+          "vertices": 184,
+          "edges": 398,
+          "polygons": 220,
+          "triangles": 220,
+          "material_slots": [
+            "Stock"
+          ],
+          "material_polygon_counts": {
+            "0": 220
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.020347999408841133,
+              0.22482800483703613,
+              -0.006593000143766403
+            ],
+            [
+              0.020347999408841133,
+              0.26889199018478394,
+              0.16997699439525604
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null,
+          "vertex_group_set": "legacy_80",
+          "vertex_group_count": 80,
+          "nonempty_vertex_groups": [
+            {
+              "name": "Pedestal",
+              "vertex_assignments": 184,
+              "nonzero_assignments": 184,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            },
+            {
+              "name": "Slot_Cloth2",
+              "vertex_assignments": 184,
+              "nonzero_assignments": 184,
+              "min_weight": 1.0,
+              "max_weight": 1.0
+            }
+          ]
+        }
+      ],
+      "mesh_datablocks": [
+        {
+          "name": "Ammit-AR2.00.000",
+          "users": 1,
+          "vertices": 4,
+          "polygons": 2
+        },
+        {
+          "name": "Ammit-AR2.00.001",
+          "users": 1,
+          "vertices": 24,
+          "polygons": 20
+        },
+        {
+          "name": "Ammit-AR2.00.002",
+          "users": 1,
+          "vertices": 2352,
+          "polygons": 2556
+        },
+        {
+          "name": "Ammit-AR2.00.003",
+          "users": 1,
+          "vertices": 484,
+          "polygons": 584
+        },
+        {
+          "name": "Ammit-AR2.01.002",
+          "users": 1,
+          "vertices": 8,
+          "polygons": 4
+        },
+        {
+          "name": "Ammit-AR2.02.000",
+          "users": 1,
+          "vertices": 9395,
+          "polygons": 11417
+        },
+        {
+          "name": "Ammit-AR2.02.001",
+          "users": 1,
+          "vertices": 268,
+          "polygons": 476
+        },
+        {
+          "name": "Ammit-AR2.02.002",
+          "users": 1,
+          "vertices": 268,
+          "polygons": 476
+        },
+        {
+          "name": "Ammit-AR2.03.000",
+          "users": 1,
+          "vertices": 2834,
+          "polygons": 3700
+        },
+        {
+          "name": "Ammit-AR2.04.000",
+          "users": 1,
+          "vertices": 184,
+          "polygons": 220
+        },
+        {
+          "name": "Ammit-AR2.05.000",
+          "users": 1,
+          "vertices": 180,
+          "polygons": 164
+        },
+        {
+          "name": "Ammit-AR2.06.000",
+          "users": 1,
+          "vertices": 532,
+          "polygons": 606
+        },
+        {
+          "name": "Ammit-AR2.14.000",
+          "users": 1,
+          "vertices": 27,
+          "polygons": 25
+        }
+      ],
+      "armatures": [],
+      "actions": [],
+      "shape_key_datablocks": [],
+      "animation_data_owners": [
+        {
+          "id_path": "bpy.data.materials[\"Fluid\"].node_tree",
+          "name": "Shader Nodetree",
+          "id_type": "NODETREE",
+          "animation_data": {
+            "action": null,
+            "nla_tracks": [],
+            "drivers": [
+              {
+                "data_path": "nodes[\"Mapping.001\"].inputs[1].default_value",
+                "array_index": 1,
+                "expression": "frame/-100",
+                "type": "SCRIPTED",
+                "variables": []
+              }
+            ]
+          },
+          "owner_material": "Fluid"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Barrel Tube",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Barrel Tube"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "EEVEE_SPECULAR",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Dots Stroke",
+          "users": 2,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Material Node Tree Versioning",
+          "assigned_objects": [],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_DIFFUSE",
+            "BSDF_PRINCIPLED",
+            "FRAME",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Fluid",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Fluid"
+          ],
+          "image_nodes": [
+            {
+              "name": "Image Texture",
+              "type": "TEX_IMAGE",
+              "label": "",
+              "image": "09edee80.png",
+              "node_group": null
+            },
+            {
+              "name": "Image Texture.001",
+              "type": "TEX_IMAGE",
+              "label": "",
+              "image": "886eef80.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [],
+          "node_types": [
+            "ADD_SHADER",
+            "BSDF_GLOSSY",
+            "BSDF_TRANSPARENT",
+            "COMBXYZ",
+            "EMISSION",
+            "FRAME",
+            "MAPPING",
+            "MIX",
+            "MIX_SHADER",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL",
+            "TEX_COORD",
+            "TEX_IMAGE",
+            "VALUE"
+          ]
+        },
+        {
+          "name": "Fluid Glass",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Fluid Glass"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_GLOSSY",
+            "BSDF_TRANSPARENT",
+            "MIX_SHADER",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Inner Omolon Logo",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Inner Omolon Logo"
+          ],
+          "image_nodes": [
+            {
+              "name": "Normal Map",
+              "type": "TEX_IMAGE",
+              "label": "Normal Map [Set this to Non-Color]",
+              "image": "bfb2eb80_Normal.png",
+              "node_group": null
+            },
+            {
+              "name": "Diffuse Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture [Set this to sRGB]",
+              "image": "beb2eb80_Diffuse.png",
+              "node_group": null
+            },
+            {
+              "name": "Gstack Texture",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture [Set this to Non-Color]",
+              "image": "c0b2eb80_GStack.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "Ammit AR2",
+            "DyeSlot Converter 2",
+            "D2 PlayerGear Shader 3.0.8"
+          ],
+          "node_types": [
+            "FRAME",
+            "GROUP",
+            "OUTPUT_MATERIAL",
+            "TEX_IMAGE"
+          ]
+        },
+        {
+          "name": "Inner Structure",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Inner Structure"
+          ],
+          "image_nodes": [
+            {
+              "name": "Normal Map",
+              "type": "TEX_IMAGE",
+              "label": "Normal Map [Set this to Non-Color]",
+              "image": "937eeb80_Normal.png",
+              "node_group": null
+            },
+            {
+              "name": "Gstack Texture",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture [Set this to Non-Color]",
+              "image": "947eeb80_GStack.png",
+              "node_group": null
+            },
+            {
+              "name": "Diffuse Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture [Set this to sRGB]",
+              "image": "927eeb80_Diffuse.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "Ammit AR2",
+            "DyeSlot Converter 2",
+            "D2 PlayerGear Shader 3.0.8"
+          ],
+          "node_types": [
+            "FRAME",
+            "GROUP",
+            "OUTPUT_MATERIAL",
+            "TEX_IMAGE"
+          ]
+        },
+        {
+          "name": "Magazine",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Magazine"
+          ],
+          "image_nodes": [
+            {
+              "name": "Normal Map",
+              "type": "TEX_IMAGE",
+              "label": "Normal Map [Set this to Non-Color]",
+              "image": "1ca2eb80_Normal.png",
+              "node_group": null
+            },
+            {
+              "name": "Diffuse Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture [Set this to sRGB]",
+              "image": "1ba2eb80_Diffuse.png",
+              "node_group": null
+            },
+            {
+              "name": "Gstack Texture",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture [Set this to Non-Color]",
+              "image": "1da2eb80_GStack.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "DyeSlot Converter 2",
+            "Ammit AR2",
+            "D2 PlayerGear Shader 3.0.8"
+          ],
+          "node_types": [
+            "FRAME",
+            "GROUP",
+            "OUTPUT_MATERIAL",
+            "TEX_IMAGE"
+          ]
+        },
+        {
+          "name": "Main",
+          "users": 3,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Main - Body",
+            "Main - Omolon Logo",
+            "Main - Spot"
+          ],
+          "image_nodes": [
+            {
+              "name": "Diffuse Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture [Set this to sRGB]",
+              "image": "6e34eb80_Diffuse.png",
+              "node_group": null
+            },
+            {
+              "name": "Normal Map",
+              "type": "TEX_IMAGE",
+              "label": "Normal Map [Set this to Non-Color]",
+              "image": "6f34eb80_Normal.png",
+              "node_group": null
+            },
+            {
+              "name": "Gstack Texture",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture [Set this to Non-Color]",
+              "image": "7034eb80_GStack.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "DyeSlot Converter 2",
+            "D2 PlayerGear Shader 3.0.8",
+            "Ammit AR2"
+          ],
+          "node_types": [
+            "FRAME",
+            "GROUP",
+            "OUTPUT_MATERIAL",
+            "TEX_IMAGE"
+          ]
+        },
+        {
+          "name": "Middle",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Middle"
+          ],
+          "image_nodes": [
+            {
+              "name": "Normal Map",
+              "type": "TEX_IMAGE",
+              "label": "Normal Map [Set this to Non-Color]",
+              "image": "02b0eb80_Normal.png",
+              "node_group": null
+            },
+            {
+              "name": "Diffuse Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture [Set this to sRGB]",
+              "image": "01b0eb80_Diffuse.png",
+              "node_group": null
+            },
+            {
+              "name": "Gstack Texture",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture [Set this to Non-Color]",
+              "image": "03b0eb80_GStack.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "DyeSlot Converter 2",
+            "D2 PlayerGear Shader 3.0.8",
+            "Ammit AR2"
+          ],
+          "node_types": [
+            "FRAME",
+            "GROUP",
+            "OUTPUT_MATERIAL",
+            "TEX_IMAGE"
+          ]
+        },
+        {
+          "name": "Reticle",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Reticle"
+          ],
+          "image_nodes": [
+            {
+              "name": "Image Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture",
+              "image": "7febea80_Diffuse.png",
+              "node_group": null
+            },
+            {
+              "name": "Image Texture.001",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture",
+              "image": "80ebea80_GStack.png",
+              "node_group": null
+            },
+            {
+              "name": "Image Texture.002",
+              "type": "TEX_IMAGE",
+              "label": "Normap Map Texture",
+              "image": "3abcea80_Normal.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "Reticle Shader"
+          ],
+          "node_types": [
+            "GROUP",
+            "OUTPUT_MATERIAL",
+            "TEX_IMAGE"
+          ]
+        },
+        {
+          "name": "Sights",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Sights"
+          ],
+          "image_nodes": [
+            {
+              "name": "Normal Map",
+              "type": "TEX_IMAGE",
+              "label": "Normal Map [Set this to Non-Color]",
+              "image": "fcabea80_Normal.png",
+              "node_group": null
+            },
+            {
+              "name": "Diffuse Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture [Set this to sRGB]",
+              "image": "fbabea80_Diffuse.png",
+              "node_group": null
+            },
+            {
+              "name": "Gstack Texture",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture [Set this to Non-Color]",
+              "image": "fdabea80_GStack.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "DyeSlot Converter 2",
+            "Ammit AR2",
+            "D2 PlayerGear Shader 3.0.8"
+          ],
+          "node_types": [
+            "FRAME",
+            "GROUP",
+            "OUTPUT_MATERIAL",
+            "TEX_IMAGE"
+          ]
+        },
+        {
+          "name": "Stock",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Stock"
+          ],
+          "image_nodes": [
+            {
+              "name": "Normal Map",
+              "type": "TEX_IMAGE",
+              "label": "Normal Map [Set this to Non-Color]",
+              "image": "2d22eb80_Normal.png",
+              "node_group": null
+            },
+            {
+              "name": "Gstack Texture",
+              "type": "TEX_IMAGE",
+              "label": "Gstack Texture [Set this to Non-Color]",
+              "image": "2e22eb80_GStack.png",
+              "node_group": null
+            },
+            {
+              "name": "Diffuse Texture",
+              "type": "TEX_IMAGE",
+              "label": "Diffuse Texture [Set this to sRGB]",
+              "image": "2c22eb80_Diffuse.png",
+              "node_group": null
+            }
+          ],
+          "node_group_names": [
+            "DyeSlot Converter 2",
+            "Ammit AR2",
+            "D2 PlayerGear Shader 3.0.8"
+          ],
+          "node_types": [
+            "FRAME",
+            "GROUP",
+            "MAPPING",
+            "OUTPUT_MATERIAL",
+            "TEX_COORD",
+            "TEX_IMAGE"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "name": "01b0eb80_Diffuse.png",
+          "filepath": "//01b0eb80_Diffuse.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "02b0eb80_Normal.png",
+          "filepath": "//02b0eb80_Normal.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "03b0eb80_GStack.png",
+          "filepath": "//03b0eb80_GStack.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "09edee80.png",
+          "filepath": "//../../Downloads/Taraxippos [Rigged By BUNGIE]/09edee80.png",
+          "packed": false,
+          "size": [
+            0,
+            0
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "1ba2eb80_Diffuse.png",
+          "filepath": "//1ba2eb80_Diffuse.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "1ca2eb80_Normal.png",
+          "filepath": "//1ca2eb80_Normal.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "1da2eb80_GStack.png",
+          "filepath": "//1da2eb80_GStack.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "2c22eb80_Diffuse.png",
+          "filepath": "//2c22eb80_Diffuse.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "2d22eb80_Normal.png",
+          "filepath": "//2d22eb80_Normal.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "2e22eb80_GStack.png",
+          "filepath": "//2e22eb80_GStack.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "3104558709_Rubber_01_norm.png",
+          "filepath": "//Textures/Ammit-AR2/3104558709_Rubber_01_norm.png",
+          "packed": false,
+          "size": [
+            128,
+            128
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "327503503_gear_detail_armor_battleworn_dif.png",
+          "filepath": "//Textures/Ammit-AR2/327503503_gear_detail_armor_battleworn_dif.png",
+          "packed": false,
+          "size": [
+            128,
+            128
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "327503503_gear_detail_noise_norm.png",
+          "filepath": "//Textures/Ammit-AR2/327503503_gear_detail_noise_norm.png",
+          "packed": false,
+          "size": [
+            128,
+            128
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "369636616_gear_detail_crust2_overdif.png",
+          "filepath": "//Textures/Ammit-AR2/369636616_gear_detail_crust2_overdif.png",
+          "packed": false,
+          "size": [
+            128,
+            128
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "3abcea80_Normal.png",
+          "filepath": "//3abcea80_Normal.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "401755037_gear_detail_leather_norm.png",
+          "filepath": "//Textures/Ammit-AR2/401755037_gear_detail_leather_norm.png",
+          "packed": false,
+          "size": [
+            128,
+            128
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "6e34eb80_Diffuse.png",
+          "filepath": "//6e34eb80_Diffuse.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "6f34eb80_Normal.png",
+          "filepath": "//6f34eb80_Normal.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "7034eb80_GStack.png",
+          "filepath": "//7034eb80_GStack.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "7febea80_Diffuse.png",
+          "filepath": "//7febea80_Diffuse.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "80ebea80_GStack.png",
+          "filepath": "//80ebea80_GStack.png",
+          "packed": false,
+          "size": [
+            1024,
+            1024
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "886eef80.png",
+          "filepath": "//../../Downloads/Taraxippos [Rigged By BUNGIE]/886eef80.png",
+          "packed": false,
+          "size": [
+            0,
+            0
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "927eeb80_Diffuse.png",
+          "filepath": "//927eeb80_Diffuse.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "937eeb80_Normal.png",
+          "filepath": "//937eeb80_Normal.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "947eeb80_GStack.png",
+          "filepath": "//947eeb80_GStack.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "AmmoNumbers01_Emission.dds.001",
+          "filepath": "//../../../../Re-used Textures/Guns/AmmoNumbers01_Emission.dds",
+          "packed": true,
+          "size": [
+            512,
+            576
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "beb2eb80_Diffuse.png",
+          "filepath": "//beb2eb80_Diffuse.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "bfb2eb80_Normal.png",
+          "filepath": "//bfb2eb80_Normal.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "c0b2eb80_GStack.png",
+          "filepath": "//c0b2eb80_GStack.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "fbabea80_Diffuse.png",
+          "filepath": "//fbabea80_Diffuse.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "fcabea80_Normal.png",
+          "filepath": "//fcabea80_Normal.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "fdabea80_GStack.png",
+          "filepath": "//fdabea80_GStack.png",
+          "packed": false,
+          "size": [
+            2048,
+            2048
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "Iridescence_Lookup.dds",
+          "filepath": "\\\\Append libraries/Destiny Models/Re-used Textures/Iridescence_Lookup.dds",
+          "packed": true,
+          "size": [
+            64,
+            128
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "Missing_Textures_Warning.png",
+          "filepath": "//../../Downloads/Missing_Textures_Warning.png",
+          "packed": true,
+          "size": [
+            300,
+            300
+          ],
+          "source": "FILE"
+        },
+        {
+          "name": "Render Result",
+          "filepath": "",
+          "packed": false,
+          "size": [
+            0,
+            0
+          ],
+          "source": "VIEWER"
+        }
+      ],
+      "node_groups": [
+        {
+          "name": "Ammit AR2",
+          "type": "ShaderNodeTree",
+          "animation_data": null
+        },
+        {
+          "name": "Compositing Nodetree",
+          "type": "CompositorNodeTree",
+          "animation_data": null
+        },
+        {
+          "name": "D2 PlayerGear Shader 3.0.8",
+          "type": "ShaderNodeTree",
+          "animation_data": null
+        },
+        {
+          "name": "DyeSlot Converter 2",
+          "type": "ShaderNodeTree",
+          "animation_data": null
+        },
+        {
+          "name": "Reticle Shader",
+          "type": "ShaderNodeTree",
+          "animation_data": null
+        }
+      ],
+      "scenes": [
+        {
+          "name": "Scene",
+          "object_names": [
+            "Main - Spot",
+            "Barrel Tube",
+            "Main - Body",
+            "Main - Omolon Logo",
+            "Inner Omolon Logo",
+            "Middle",
+            "Fluid",
+            "Fluid Glass",
+            "Inner Structure",
+            "Stock",
+            "Magazine",
+            "Sights",
+            "Reticle"
+          ],
+          "frame_start": 1,
+          "frame_end": 250,
+          "frame_current": 50,
+          "fps": 24,
+          "fps_base": 1.0
+        }
+      ],
+      "texts": [
+        {
+          "name": "Ammit-AR2.py",
+          "use_module": false
+        }
+      ],
+      "libraries": [],
+      "raw_fbx": null,
+      "counts": {
+        "objects": 13,
+        "objects_by_type": {
+          "MESH": 13
+        },
+        "mesh_datablocks": 13,
+        "mesh_vertices": 16560,
+        "mesh_polygons": 20250,
+        "mesh_triangles": 20250,
+        "armatures": 0,
+        "bones": 0,
+        "actions": 0,
+        "animation_data_owners": 1,
+        "nla_tracks": 0,
+        "nla_strips": 0,
+        "drivers": 1,
+        "shape_keys": 0,
+        "materials": 12,
+        "images": 35,
+        "node_groups": 5,
+        "action_layers": 0,
+        "action_fcurves": 0,
+        "action_keyframes": 0,
+        "action_samples": 0,
+        "object_transform_actions": 0,
+        "object_constraints": 0,
+        "armature_modifiers": 13
+      },
+      "object_names": [
+        "Barrel Tube",
+        "Fluid",
+        "Fluid Glass",
+        "Inner Omolon Logo",
+        "Inner Structure",
+        "Magazine",
+        "Main - Body",
+        "Main - Omolon Logo",
+        "Main - Spot",
+        "Middle",
+        "Reticle",
+        "Sights",
+        "Stock"
+      ],
+      "armature_names": [],
+      "action_names": [],
+      "nla_track_names": [],
+      "vertex_group_sets": {
+        "legacy_80": [
+          "Pedestal",
+          "Pelvis",
+          "Utility",
+          "Thigh.L",
+          "Thigh.R",
+          "Spine_1",
+          "Calf.L",
+          "Calf.R",
+          "Spine_2",
+          "Foot.L",
+          "Foot.R",
+          "Spine_3",
+          "Clav.L",
+          "Neck_1",
+          "Clav.R",
+          "UpperArm.L",
+          "Neck_2",
+          "UpperArm.R",
+          "Head",
+          "ForeArm.L",
+          "ForeArm.R",
+          "Hand.L",
+          "Hand.R",
+          "Grip.L",
+          "Grip.R",
+          "Toe.L",
+          "Toe.R",
+          "Shoulder_Twist_Fixup.L",
+          "Shoulder_Twist_Fixup.R",
+          "Jaw",
+          "Brow_1.L",
+          "Eye.L",
+          "Upper_Eyelid.L",
+          "Upper_Lip_Corner.L",
+          "Wrist_Twist_Fixup.L",
+          "Brow_1.R",
+          "Eye.R",
+          "Upper_Eyelid.R",
+          "Upper_Lip_Corner.R",
+          "Wrist_Twist_Fixup.R",
+          "Index_1.L",
+          "Lower_Lip_Corner.L",
+          "Middle_1.L",
+          "Pinky_1.L",
+          "Ring_1.L",
+          "Thumb_1.L",
+          "Index_1.R",
+          "Lower_Lip_Corner.R",
+          "Middle_1.R",
+          "Pinky_1.R",
+          "Ring_1.R",
+          "Thumb_1.R",
+          "Index_2.L",
+          "Middle_2.L",
+          "Pinky_2.L",
+          "Ring_2.L",
+          "Thumb_2.L",
+          "Index_2.R",
+          "Middle_2.R",
+          "Pinky_2.R",
+          "Ring_2.R",
+          "Thumb_2.R",
+          "Index_3.L",
+          "Middle_3.L",
+          "Pinky_3.L",
+          "Ring_3.L",
+          "Thumb_3.L",
+          "Index_3.R",
+          "Middle_3.R",
+          "Pinky_3.R",
+          "Ring_3.R",
+          "Thumb_3.R",
+          "Slot_Armor1",
+          "Slot_Armor2",
+          "Slot_Cloth1",
+          "Slot_Cloth2",
+          "Slot_Suit1",
+          "Slot_Suit2",
+          "Slot_Extra1",
+          "Slot_Extra2"
+        ]
+      },
+      "source_blend_saved_version": [
+        3,
+        3,
+        6
+      ]
+    },
+    "fbx": {
+      "source": "/tmp/destiny-weapons-w30/raw/ammit_ar2/extracted/Ammit AR2/Ammit AR2.fbx",
+      "mode": "fbx",
+      "blender_version": "5.4.0 Alpha",
+      "blender_build_hash": "7a8f04b3bb5a",
+      "autoexec_enabled": false,
+      "objects": [
+        {
+          "name": "Barrel Tube",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.001",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 24,
+          "edges": 42,
+          "polygons": 20,
+          "triangles": 20,
+          "material_slots": [
+            "Barrel Tube"
+          ],
+          "material_polygon_counts": {
+            "0": 20
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.013717000372707844,
+              -0.38464096188545227,
+              0.14511701464653015
+            ],
+            [
+              0.013717000372707844,
+              -0.10140696913003922,
+              0.17004506289958954
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Fluid",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.02.001",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 268,
+          "edges": 742,
+          "polygons": 476,
+          "triangles": 476,
+          "material_slots": [
+            "Fluid"
+          ],
+          "material_polygon_counts": {
+            "0": 476
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.04131900146603584,
+              -0.20508497953414917,
+              0.02824603021144867
+            ],
+            [
+              0.04131900146603584,
+              -0.1500309854745865,
+              0.08258303254842758
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Fluid Glass",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.02.002",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 268,
+          "edges": 742,
+          "polygons": 476,
+          "triangles": 476,
+          "material_slots": [
+            "Fluid Glass"
+          ],
+          "material_polygon_counts": {
+            "0": 476
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.042149998247623444,
+              -0.20584999024868011,
+              0.02712303027510643
+            ],
+            [
+              0.042149998247623444,
+              -0.14926598966121674,
+              0.08370702713727951
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Inner Omolon Logo",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.01.002",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 8,
+          "edges": 10,
+          "polygons": 4,
+          "triangles": 4,
+          "material_slots": [
+            "Inner Omolon Logo"
+          ],
+          "material_polygon_counts": {
+            "0": 4
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.019332999363541603,
+              -0.046639978885650635,
+              0.1279979944229126
+            ],
+            [
+              0.019332999363541603,
+              0.009543022140860558,
+              0.13874201476573944
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Inner Structure",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.03.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 2834,
+          "edges": 6464,
+          "polygons": 3700,
+          "triangles": 3700,
+          "material_slots": [
+            "Inner Structure"
+          ],
+          "material_polygon_counts": {
+            "0": 3700
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.01821500062942505,
+              -0.08115796744823456,
+              0.1269019991159439
+            ],
+            [
+              0.01821500062942505,
+              0.13015402853488922,
+              0.1819240003824234
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Magazine",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.05.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 180,
+          "edges": 336,
+          "polygons": 164,
+          "triangles": 164,
+          "material_slots": [
+            "Magazine"
+          ],
+          "material_polygon_counts": {
+            "0": 164
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.016908999532461166,
+              -0.24015100300312042,
+              -0.08198197931051254
+            ],
+            [
+              0.016908999532461166,
+              -0.12546300888061523,
+              0.022458026185631752
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Main - Body",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.002",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 2352,
+          "edges": 4823,
+          "polygons": 2556,
+          "triangles": 2556,
+          "material_slots": [
+            "Main"
+          ],
+          "material_polygon_counts": {
+            "0": 2556
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.03043700009584427,
+              -0.5761880278587341,
+              0.026397041976451874
+            ],
+            [
+              0.03043700009584427,
+              0.22071602940559387,
+              0.18428508937358856
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Main - Omolon Logo",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.003",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 484,
+          "edges": 1050,
+          "polygons": 584,
+          "triangles": 584,
+          "material_slots": [
+            "Main"
+          ],
+          "material_polygon_counts": {
+            "0": 584
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.017023999243974686,
+              -0.022255972027778625,
+              0.17144399881362915
+            ],
+            [
+              0.017023999243974686,
+              0.03647702932357788,
+              0.17687900364398956
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Main - Spot",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.00.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 4,
+          "edges": 5,
+          "polygons": 2,
+          "triangles": 2,
+          "material_slots": [
+            "Main"
+          ],
+          "material_polygon_counts": {
+            "0": 2
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.017862999811768532,
+              0.0813240259885788,
+              0.16583798825740814
+            ],
+            [
+              -0.013705000281333923,
+              0.08645603060722351,
+              0.17057998478412628
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Middle",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.02.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 9395,
+          "edges": 20505,
+          "polygons": 11417,
+          "triangles": 11417,
+          "material_slots": [
+            "Middle"
+          ],
+          "material_polygon_counts": {
+            "0": 11417
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.03880700096487999,
+              -0.39212900400161743,
+              -0.08117299526929855
+            ],
+            [
+              0.04357599839568138,
+              0.22672902047634125,
+              0.18775303661823273
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Reticle",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.14.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 27,
+          "edges": 51,
+          "polygons": 25,
+          "triangles": 25,
+          "material_slots": [
+            "Reticle"
+          ],
+          "material_polygon_counts": {
+            "0": 25
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.009260999970138073,
+              -0.009422969073057175,
+              0.19089099764823914
+            ],
+            [
+              0.009260999970138073,
+              -0.009422963485121727,
+              0.22158999741077423
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Sights",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.06.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 532,
+          "edges": 1131,
+          "polygons": 606,
+          "triangles": 606,
+          "material_slots": [
+            "Sights"
+          ],
+          "material_polygon_counts": {
+            "0": 606
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.01235199999064207,
+              -0.02918297052383423,
+              0.18208299577236176
+            ],
+            [
+              0.014538000337779522,
+              -0.0029689674265682697,
+              0.21521499752998352
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        },
+        {
+          "name": "Stock",
+          "type": "MESH",
+          "data_name": "Ammit-AR2.04.000",
+          "parent": null,
+          "parent_type": "OBJECT",
+          "parent_bone": "",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_mode": "XYZ",
+          "rotation_euler": [
+            -1.6292067073209182e-07,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.6292067073209182e-07,
+              0.0
+            ],
+            [
+              0.0,
+              -1.6292067073209182e-07,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "animation_data": null,
+          "constraints": [],
+          "modifiers": [],
+          "vertex_groups": [],
+          "hide_viewport": false,
+          "hide_render": false,
+          "collections": [
+            "Collection"
+          ],
+          "vertices": 184,
+          "edges": 398,
+          "polygons": 220,
+          "triangles": 220,
+          "material_slots": [
+            "Stock"
+          ],
+          "material_polygon_counts": {
+            "0": 220
+          },
+          "uv_layers": [
+            "uv0",
+            "uv1",
+            "slot"
+          ],
+          "bounds_world": [
+            [
+              -0.020347999408841133,
+              0.22482800483703613,
+              -0.006593043450266123
+            ],
+            [
+              0.020347999408841133,
+              0.2688920199871063,
+              0.16997696459293365
+            ]
+          ],
+          "origin_world": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shape_keys": null
+        }
+      ],
+      "mesh_datablocks": [
+        {
+          "name": "Ammit-AR2.00.000",
+          "users": 1,
+          "vertices": 4,
+          "polygons": 2
+        },
+        {
+          "name": "Ammit-AR2.00.001",
+          "users": 1,
+          "vertices": 24,
+          "polygons": 20
+        },
+        {
+          "name": "Ammit-AR2.00.002",
+          "users": 1,
+          "vertices": 2352,
+          "polygons": 2556
+        },
+        {
+          "name": "Ammit-AR2.00.003",
+          "users": 1,
+          "vertices": 484,
+          "polygons": 584
+        },
+        {
+          "name": "Ammit-AR2.01.002",
+          "users": 1,
+          "vertices": 8,
+          "polygons": 4
+        },
+        {
+          "name": "Ammit-AR2.02.000",
+          "users": 1,
+          "vertices": 9395,
+          "polygons": 11417
+        },
+        {
+          "name": "Ammit-AR2.02.001",
+          "users": 1,
+          "vertices": 268,
+          "polygons": 476
+        },
+        {
+          "name": "Ammit-AR2.02.002",
+          "users": 1,
+          "vertices": 268,
+          "polygons": 476
+        },
+        {
+          "name": "Ammit-AR2.03.000",
+          "users": 1,
+          "vertices": 2834,
+          "polygons": 3700
+        },
+        {
+          "name": "Ammit-AR2.04.000",
+          "users": 1,
+          "vertices": 184,
+          "polygons": 220
+        },
+        {
+          "name": "Ammit-AR2.05.000",
+          "users": 1,
+          "vertices": 180,
+          "polygons": 164
+        },
+        {
+          "name": "Ammit-AR2.06.000",
+          "users": 1,
+          "vertices": 532,
+          "polygons": 606
+        },
+        {
+          "name": "Ammit-AR2.14.000",
+          "users": 1,
+          "vertices": 27,
+          "polygons": 25
+        }
+      ],
+      "armatures": [],
+      "actions": [],
+      "shape_key_datablocks": [],
+      "animation_data_owners": [],
+      "materials": [
+        {
+          "name": "Barrel Tube",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Barrel Tube"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Fluid",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Fluid"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Fluid Glass",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Fluid Glass"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Inner Omolon Logo",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Inner Omolon Logo"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Inner Structure",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Inner Structure"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Magazine",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Magazine"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Main",
+          "users": 3,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Main - Body",
+            "Main - Omolon Logo",
+            "Main - Spot"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Middle",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Middle"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Reticle",
+          "users": 1,
+          "diffuse_color": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Reticle"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Sights",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Sights"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        },
+        {
+          "name": "Stock",
+          "users": 1,
+          "diffuse_color": [
+            1.0,
+            0.5,
+            0.10000000149011612,
+            1.0
+          ],
+          "animation_data": null,
+          "node_tree": "Shader Nodetree",
+          "assigned_objects": [
+            "Stock"
+          ],
+          "image_nodes": [],
+          "node_group_names": [],
+          "node_types": [
+            "BSDF_PRINCIPLED",
+            "NORMAL_MAP",
+            "OUTPUT_MATERIAL"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "name": "Render Result",
+          "filepath": "",
+          "packed": false,
+          "size": [
+            0,
+            0
+          ],
+          "source": "VIEWER"
+        },
+        {
+          "name": "Viewer Node",
+          "filepath": "",
+          "packed": false,
+          "size": [
+            256,
+            256
+          ],
+          "source": "VIEWER"
+        }
+      ],
+      "node_groups": [],
+      "scenes": [
+        {
+          "name": "Scene",
+          "object_names": [
+            "Main - Spot",
+            "Barrel Tube",
+            "Main - Body",
+            "Main - Omolon Logo",
+            "Inner Omolon Logo",
+            "Middle",
+            "Fluid",
+            "Fluid Glass",
+            "Inner Structure",
+            "Stock",
+            "Magazine",
+            "Sights",
+            "Reticle"
+          ],
+          "frame_start": 1,
+          "frame_end": 250,
+          "frame_current": 1,
+          "fps": 24,
+          "fps_base": 1.0
+        }
+      ],
+      "texts": [],
+      "libraries": [],
+      "raw_fbx": {
+        "version": 7400,
+        "object_kind_counts": {
+          "Geometry": 13,
+          "Model": 13,
+          "Material": 11,
+          "AnimationStack": 0,
+          "AnimationLayer": 0,
+          "AnimationCurveNode": 0,
+          "AnimationCurve": 0,
+          "Deformer": 0,
+          "Pose": 0
+        },
+        "animation_objects": [],
+        "rig_objects": [],
+        "model_names": [
+          "Main - Spot\u0000\u0001Model",
+          "Barrel Tube\u0000\u0001Model",
+          "Main - Body\u0000\u0001Model",
+          "Main - Omolon Logo\u0000\u0001Model",
+          "Inner Omolon Logo\u0000\u0001Model",
+          "Middle\u0000\u0001Model",
+          "Fluid\u0000\u0001Model",
+          "Fluid Glass\u0000\u0001Model",
+          "Inner Structure\u0000\u0001Model",
+          "Stock\u0000\u0001Model",
+          "Magazine\u0000\u0001Model",
+          "Sights\u0000\u0001Model",
+          "Reticle\u0000\u0001Model"
+        ]
+      },
+      "counts": {
+        "objects": 13,
+        "objects_by_type": {
+          "MESH": 13
+        },
+        "mesh_datablocks": 13,
+        "mesh_vertices": 16560,
+        "mesh_polygons": 20250,
+        "mesh_triangles": 20250,
+        "armatures": 0,
+        "bones": 0,
+        "actions": 0,
+        "animation_data_owners": 0,
+        "nla_tracks": 0,
+        "nla_strips": 0,
+        "drivers": 0,
+        "shape_keys": 0,
+        "materials": 11,
+        "images": 2,
+        "node_groups": 0,
+        "action_layers": 0,
+        "action_fcurves": 0,
+        "action_keyframes": 0,
+        "action_samples": 0,
+        "object_transform_actions": 0,
+        "object_constraints": 0,
+        "armature_modifiers": 0
+      },
+      "object_names": [
+        "Barrel Tube",
+        "Fluid",
+        "Fluid Glass",
+        "Inner Omolon Logo",
+        "Inner Structure",
+        "Magazine",
+        "Main - Body",
+        "Main - Omolon Logo",
+        "Main - Spot",
+        "Middle",
+        "Reticle",
+        "Sights",
+        "Stock"
+      ],
+      "armature_names": [],
+      "action_names": [],
+      "nla_track_names": [],
+      "import_options": {
+        "use_anim": true,
+        "ignore_leaf_bones": false
+      }
+    }
+  },
+  "shader_motion_exception": {
+    "material": "Fluid",
+    "node_tree": "Shader Nodetree",
+    "drivers": [
+      {
+        "path": "nodes[\"Mapping.001\"].inputs[1].default_value",
+        "array_index": 1,
+        "expression": "frame/-100",
+        "type": "SCRIPTED"
+      }
+    ],
+    "links": [
+      {
+        "from_node": "Image Texture",
+        "from_socket": "Color",
+        "to_node": "Mix",
+        "to_socket": "A"
+      },
+      {
+        "from_node": "Mix",
+        "from_socket": "Result",
+        "to_node": "Glossy BSDF",
+        "to_socket": "Color"
+      },
+      {
+        "from_node": "Image Texture.001",
+        "from_socket": "Color",
+        "to_node": "Mix.002",
+        "to_socket": "B"
+      },
+      {
+        "from_node": "Image Texture",
+        "from_socket": "Color",
+        "to_node": "Mix.002",
+        "to_socket": "A"
+      },
+      {
+        "from_node": "Mapping",
+        "from_socket": "Vector",
+        "to_node": "Image Texture",
+        "to_socket": "Vector"
+      },
+      {
+        "from_node": "Texture Coordinate",
+        "from_socket": "UV",
+        "to_node": "Mapping",
+        "to_socket": "Vector"
+      },
+      {
+        "from_node": "Mapping.001",
+        "from_socket": "Vector",
+        "to_node": "Image Texture.001",
+        "to_socket": "Vector"
+      },
+      {
+        "from_node": "Texture Coordinate",
+        "from_socket": "UV",
+        "to_node": "Mapping.001",
+        "to_socket": "Vector"
+      },
+      {
+        "from_node": "Combine XYZ",
+        "from_socket": "Vector",
+        "to_node": "Mapping",
+        "to_socket": "Location"
+      },
+      {
+        "from_node": "Value",
+        "from_socket": "Value",
+        "to_node": "Combine XYZ",
+        "to_socket": "Y"
+      },
+      {
+        "from_node": "Glossy BSDF",
+        "from_socket": "BSDF",
+        "to_node": "Add Shader.001",
+        "to_socket": "Shader"
+      },
+      {
+        "from_node": "Emission",
+        "from_socket": "Emission",
+        "to_node": "Add Shader.001",
+        "to_socket": "Shader"
+      },
+      {
+        "from_node": "Mix.003",
+        "from_socket": "Result",
+        "to_node": "Emission",
+        "to_socket": "Color"
+      },
+      {
+        "from_node": "Mix.002",
+        "from_socket": "Result",
+        "to_node": "Mix.003",
+        "to_socket": "A"
+      },
+      {
+        "from_node": "Mix Shader",
+        "from_socket": "Shader",
+        "to_node": "Material Output",
+        "to_socket": "Surface"
+      },
+      {
+        "from_node": "Normal Map",
+        "from_socket": "Normal",
+        "to_node": "Glossy BSDF",
+        "to_socket": "Normal"
+      },
+      {
+        "from_node": "Add Shader.001",
+        "from_socket": "Shader",
+        "to_node": "Mix Shader",
+        "to_socket": "Shader"
+      },
+      {
+        "from_node": "Transparent BSDF",
+        "from_socket": "BSDF",
+        "to_node": "Mix Shader",
+        "to_socket": "Shader"
+      }
+    ],
+    "interpretation": "Frame-dependent material texture-coordinate motion; no mesh, bone, or reload keyframes. Expression read as data with autoexec disabled; playback not evaluated.",
+    "driven_node": {
+      "name": "Mapping.001",
+      "type": "MAPPING",
+      "image": null,
+      "inputs": [
+        {
+          "name": "Vector",
+          "identifier": "Vector",
+          "default_value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "linked": true
+        },
+        {
+          "name": "Location",
+          "identifier": "Location",
+          "default_value": [
+            0.0,
+            -0.5,
+            0.0
+          ],
+          "linked": false
+        },
+        {
+          "name": "Rotation",
+          "identifier": "Rotation",
+          "default_value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "linked": false
+        },
+        {
+          "name": "Scale",
+          "identifier": "Scale",
+          "default_value": [
+            2.0,
+            1.5,
+            1.0
+          ],
+          "linked": false
+        }
+      ]
+    },
+    "driven_texture": {
+      "name": "Image Texture.001",
+      "type": "TEX_IMAGE",
+      "image": "886eef80.png",
+      "inputs": [
+        {
+          "name": "Vector",
+          "identifier": "Vector",
+          "default_value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "linked": true
+        }
+      ]
+    }
+  },
+  "w30_reconciliation": {
+    "all_source_objects": 13,
+    "all_source_vertices": 16560,
+    "all_source_triangles": 20250,
+    "reticle_vertices": 27,
+    "reticle_triangles": 25,
+    "w30_included_objects": [
+      "Barrel Tube",
+      "Fluid",
+      "Fluid Glass",
+      "Inner Omolon Logo",
+      "Inner Structure",
+      "Magazine",
+      "Main - Body",
+      "Main - Omolon Logo",
+      "Main - Spot",
+      "Middle",
+      "Sights",
+      "Stock"
+    ],
+    "w30_included_object_count": 12,
+    "w30_included_vertices": 16533,
+    "w30_included_triangles": 20225,
+    "w30_manifest_source_triangles": 20225,
+    "triangles_match_after_reticle_exclusion": true,
+    "w30_textured_triangles": 19253,
+    "textured_triangles_note": "Historical generation count, not a current texture-availability assertion.",
+    "source_axis_and_mapping_from_w30": {
+      "length": 1,
+      "thin": 0,
+      "muzzle_sign": -1
+    },
+    "w30_scale": 29.582997427721224,
+    "w30_anchor": [
+      8.0,
+      8.0,
+      8.0
+    ],
+    "w30_bbmodel_cube_count": 199,
+    "w30_bbmodel_animations": [],
+    "both_formats_same_object_names_and_vertex_triangle_counts": true,
+    "fbx_roundoff_note": "Imported FBX bounds have small floating point/axis conversion differences; matching counts do not assert byte-identical geometry."
+  },
+  "reload_findings": {
+    "usable_ripped_reload_animation_exists_in_inspected_sources": false,
+    "basis": "Both original formats inspected with animation enabled/retained: no action, action curve, NLA strip, armature, bone, shape key or object transform animation. Raw FBX contains no Animation* objects or Deformer/Pose records.",
+    "qualification": "The blend is not entirely time-independent: Fluid has one frame-driven shader Mapping socket. All 13 meshes retain null-target Armature modifiers and 80 vertex groups; those remnants do not supply a usable rig or reload motion.",
+    "magazine": {
+      "object": "Magazine",
+      "mesh": "Ammit-AR2.05.000",
+      "vertices": 180,
+      "triangles": 164,
+      "material": "Magazine",
+      "parent": null,
+      "origin_world": [
+        0,
+        0,
+        0
+      ],
+      "assigned_legacy_group": "Pelvis",
+      "assigned_legacy_group_vertices": 180,
+      "observation": "Already a separate rigid mesh, but its source origin is shared world zero rather than a demonstrated magazine/socket pivot; no extraction path, timing or reload transform is stored."
+    },
+    "middle_utility_group": {
+      "object": "Middle",
+      "group": "Utility",
+      "assigned_vertices": 102,
+      "weight": 1.0,
+      "observation": "A bounded named subset for the main geometry owner to inspect if useful. No claim that it is a bolt, charging handle, or moving reload component; there is no target skeleton or motion track."
+    },
+    "other_named_components": [
+      "Main - Body",
+      "Main - Spot",
+      "Main - Omolon Logo",
+      "Inner Omolon Logo",
+      "Barrel Tube",
+      "Middle",
+      "Inner Structure",
+      "Stock",
+      "Sights",
+      "Fluid",
+      "Fluid Glass",
+      "Reticle"
+    ],
+    "no_separately_named_bolt_or_charging_handle_object": true,
+    "limits": "Absence of a separately named part does not establish absence of that geometry within Middle/Main - Body/Inner Structure. Hand poses, reload timing, bolt motion and partition choices require independent reference/implementation work owned by main."
+  },
+  "material_findings": {
+    "blend_material_datablocks": 12,
+    "blend_materials_assigned_to_meshes": 11,
+    "blend_unassigned_materials": [
+      "Dots Stroke"
+    ],
+    "fbx_material_datablocks": 11,
+    "fbx_image_nodes": 0,
+    "fbx_image_datablocks": 2,
+    "fbx_material_graph_note": "FBX importer produced material names but no connected image texture nodes or source node groups; prefer blend graph evidence for source material assignments.",
+    "blend_playergear_node_groups": [
+      "Ammit AR2",
+      "D2 PlayerGear Shader 3.0.8",
+      "DyeSlot Converter 2"
+    ],
+    "blend_reticle_group": "Reticle Shader",
+    "uv_layers_on_every_mesh": [
+      "uv0",
+      "uv1",
+      "slot"
+    ],
+    "source_color_note": "Main/Middle/Magazine/Stock/Sights/Inner Structure/Inner Omolon Logo have Diffuse/Normal/GStack image nodes plus dye/playergear groups. Fluid, Fluid Glass and Barrel Tube use distinct graphs, so diffuse-only or single-material assumptions lose source information. No source materials were rebaked or changed."
+  },
+  "preservation": {
+    "source_package_files_checked": 49,
+    "all_package_file_bytes_sizes_and_mtimes_unchanged": true,
+    "original_models_match_pins_after_all_processes": true,
+    "protected_processes_before": [
+      "48104 /Applications/Bl /Applications/Blockbench.app/Contents/MacOS/Blockbench",
+      "58116 /Applications/Bl /Applications/Blender.app/Contents/MacOS/Blender"
+    ],
+    "protected_processes_after": [
+      "48104 /Applications/Bl /Applications/Blockbench.app/Contents/MacOS/Blockbench",
+      "58116 /Applications/Bl /Applications/Blender.app/Contents/MacOS/Blender"
+    ],
+    "protected_pids": [
+      58116,
+      48104
+    ],
+    "own_headless_pids": [
+      50787,
+      50820,
+      51198
+    ],
+    "all_own_processes_exited_normally": true,
+    "own_process_timeout_seconds": 90,
+    "signals_sent": false,
+    "repository_files_written_only": [
+      "art/weapons/w69/references/original-model-audit.json",
+      "art/weapons/w69/references/original-model-audit.md"
+    ]
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "stage": "W105",
+  "records": [
+    {
+      "id": "manifest_intrinsics",
+      "sourceClass": "primary_official_manifest",
+      "revision": "245114.26.10.13.2000-1-bnet.66137",
+      "summary": "Exact five selected item hashes and initial intrinsic sockets distinguish four pellet frames from the explicit single slug."
+    },
+    {
+      "id": "s15_count",
+      "sourceClass": "primary_official_article",
+      "url": "https://www.bungie.net/7/en/News/article/50572",
+      "published": "2021-08-19",
+      "historicalPelletCount": 12,
+      "currentPelletCountConfirmed": false,
+      "summary": "Bungie explicitly states twelve. The contemporaneous randomized wedge/ring distribution is superseded; only the count is used."
+    },
+    {
+      "id": "s19_shapes",
+      "sourceClass": "primary_official_preview",
+      "url": "https://www.bungie.net/7/en/News/article/51999",
+      "published": "2022-12-01",
+      "revision": "S19 preview",
+      "summary": "Qualitative fixed shapes differ by pellet frame. Slug has a distinct precision reticle, not a pellet pattern.",
+      "currentUnchangedGeometryConfirmed": false
+    },
+    {
+      "id": "s19_illustrations",
+      "sourceClass": "primary_official_illustrations_with_human_observation",
+      "url": "https://www.bungie.net/7/en/News/article/51999",
+      "published": "2022-12-01",
+      "observations": {
+        "observedBy": "L1 visual inspection of four original Bungie S19 PNGs via view_image",
+        "automatedPelletDetection": false,
+        "geometryCoordinatesExtracted": false,
+        "currentSandboxClaim": false,
+        "frames": [
+          {
+            "frame": "aggressive",
+            "imageKey": "aggressiveImage",
+            "imageUrl": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadAggressive.png?av=1243294923&cv=3983621215",
+            "visiblePelletMarks": 12,
+            "layout": "One central mark, four inner marks, seven outer marks; interior occupancy, not a hollow ring."
+          },
+          {
+            "frame": "precision",
+            "imageKey": "precisionImage",
+            "imageUrl": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadPrecision.png?av=1243294923&cv=3983621215",
+            "visiblePelletMarks": 12,
+            "layout": "Ten perimeter marks around a vertical oval and two interior marks on its vertical axis."
+          },
+          {
+            "frame": "lightweight",
+            "imageKey": "lightweightImage",
+            "imageUrl": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadLightweight.png?av=1243294923&cv=3983621215",
+            "visiblePelletMarks": 12,
+            "layout": "Eight marks around a diamond and four interior marks forming a cross."
+          },
+          {
+            "frame": "rapid_fire",
+            "imageKey": "rapid_fireImage",
+            "imageUrl": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadsRapidFire.png?av=1243294923&cv=3983621215",
+            "visiblePelletMarks": 12,
+            "layout": "Eight marks at square corners and side midpoints and four interior marks."
+          }
+        ],
+        "limits": [
+          "Turquoise lines are reticle outlines, not pellet impacts.",
+          "Image-relative arrangement can inform historical reconstruction; pixels are not ballistic spread-angle measurements.",
+          "Visual observation is a recorded human judgment. Offline checks verify pinned bytes and observation consistency, not fresh automated vision."
+        ]
+      },
+      "images": [
+        {
+          "frame": "aggressive",
+          "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadAggressive.png?av=1243294923&cv=3983621215",
+          "cachePath": "run/private-sources/w105/aggressive.png",
+          "sha256": "af97f626d2652043263750561ce300b133f41814921c9d9b2ce7c835a71d79fe"
+        },
+        {
+          "frame": "precision",
+          "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadPrecision.png?av=1243294923&cv=3983621215",
+          "cachePath": "run/private-sources/w105/precision.png",
+          "sha256": "27882f386298fa0e6624309550e304bb9b0ae0894c2e0d6102207da34cb7c157"
+        },
+        {
+          "frame": "lightweight",
+          "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadLightweight.png?av=1243294923&cv=3983621215",
+          "cachePath": "run/private-sources/w105/lightweight.png",
+          "sha256": "fc15943e99e082e0ed6c4c14986359fdb2d0f5c8597ce2d689d518f99304e60a"
+        },
+        {
+          "frame": "rapid_fire",
+          "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadsRapidFire.png?av=1243294923&cv=3983621215",
+          "cachePath": "run/private-sources/w105/rapid_fire.png",
+          "sha256": "e31a992ecadba08dbe2407bc6a18f1038cf0844b897a4bfc5dc93058f62f8f47"
+        }
+      ],
+      "currentPelletCountConfirmed": false
+    },
+    {
+      "id": "s20_reticles",
+      "sourceClass": "primary_official_preview",
+      "url": "https://www.bungie.net/7/en/News/article/s20-weapon-tuning-preview",
+      "published": "2023-02-01",
+      "summary": "Reticle size begins responding to spread angle. This is a HUD change, not a generic ADS multiplier."
+    },
+    {
+      "id": "s21_lightweight",
+      "sourceClass": "primary_official_preview",
+      "url": "https://www.bungie.net/7/en/News/Article/weapon_tuning_s21_mid_season",
+      "published": "2023-07-06",
+      "summary": "Later reduction to lightweight outer horizontal spread prevents treating the S19 image as an unchanged current numeric layout.",
+      "adoptedAsGeometryScalar": false
+    },
+    {
+      "id": "ads2020",
+      "sourceClass": "primary_official_preview",
+      "url": "https://www.bungie.net/7/en/News/article/48743",
+      "published": "2020-02-20",
+      "summary": "ADS effective-range wording and subtype cone/range-stat separation do not resolve generic ADS spread shrink or its magnitude."
+    },
+    {
+      "id": "patch2026",
+      "sourceClass": "primary_official_patch",
+      "url": "https://static01.bungie.net/7/en/News/Article/destiny_update_9_7_0",
+      "published": "2026-06-09",
+      "revision": "Destiny 2 Update 9.7.0",
+      "summary": "Full Choke and Shot Package receive conditional spread changes. The Shot Package ADS change does not apply merely by being aggressive.",
+      "shotPackageIntrinsicHash": 3054949324,
+      "selectedInitialShotPackageCount": 0,
+      "adoptedAsGenericAdsScalar": false,
+      "currentPelletCountConfirmed": false
+    },
+    {
+      "id": "full_choke",
+      "sourceClass": "primary_official_manifest",
+      "revision": "245114.26.10.13.2000-1-bnet.66137",
+      "definitions": [
+        {
+          "hash": 1047830412,
+          "type": "Barrel",
+          "description": "Tightened barrel. Reduces projectile spread when aiming down sights at the cost of precision damage."
+        },
+        {
+          "hash": 3311319252,
+          "type": "Enhanced Barrel",
+          "description": "Tightened barrel. Reduces projectile spread when aiming down sights at the cost of precision damage."
+        }
+      ],
+      "summary": "An equipped conditional barrel effect; selected/equipped eligibility is outside this source profile.",
+      "assumeEquipped": false
+    },
+    {
+      "id": "secondary_ads_2020",
+      "sourceClass": "secondary_community_testing_report",
+      "url": "https://www.reddit.com/r/CruciblePlaybook/comments/fi4l1y",
+      "published": null,
+      "revisionContext": "2020 patch report before S19",
+      "dateBasis": "Exact post timestamp not verified; revision context follows the report and its linked February 2020 Bungie article.",
+      "summary": "Author reports testing and ADS cone tightening after the 2020 patch. No original datasets or calibration were inspected.",
+      "adoptedAsExactRule": false
+    },
+    {
+      "id": "secondary_ads_2023",
+      "sourceClass": "secondary_community_discussion",
+      "url": "https://www.reddit.com/r/CrucibleGuidebook/comments/18i77mt",
+      "published": null,
+      "revisionContext": "Later discussion, indexed as about three years old at capture",
+      "dateBasis": "Exact post timestamp not verified; web capture supplies approximate relative ages only.",
+      "summary": "Participants disagree about whether generic ADS still tightens spread; no resolved measurement is adopted.",
+      "adoptedAsExactRule": false
+    }
+  ],
+  "unknownSourceRules": {
+    "currentPelletCount": null,
+    "currentPatternUnchangedSinceS19": null,
+    "genericAdsShrinksPelletSpread": null,
+    "genericAdsSpreadMultiplier": null,
+    "pelletCoordinates": null,
+    "baseSpreadAngleDegrees": null,
+    "patternAspectRatios": null,
+    "sourceDamagePerPellet": null,
+    "sourceDamageScalars": null
+  },
+  "contradictionsAndLimitations": [
+    "Identity is proven for the pinned October 2026 official manifest and exact selected hashes, not every same-name weapon edition.",
+    "Twelve pellets is primary historical evidence: explicit August 2021 Bungie text and visual count in all four December 2022 S19 illustrations. No inspected source independently reconfirms live 2026 count.",
+    "The 2021 randomized wedge/ring rule is superseded by S19 fixed patterns; it is not adopted as geometry.",
+    "S19 is a dated preview. July 2023 explicitly retunes lightweight outer horizontal spread; unchanged current geometry is not established.",
+    "Generic ADS spread reduction and its magnitude remain unresolved even for S19. Range/falloff, aim assist, zoom and reticle size are distinct from physical pellet spread.",
+    "Community ADS assertions conflict and are secondary reports only. Full Choke and Shot Package are conditional effects, not a universal ADS rule or a default-equipped barrel claim.",
+    "No original coordinates, spread angles, aspect ratios, damage values or generic ADS scalars are authored. Unknown source values remain null.",
+    "Original official PNGs are private research inputs. Human inspection establishes the recorded visible arrangement; offline validation checks bytes and observation consistency, not fresh automated image understanding.",
+    "Illustration-relative reconstruction can preserve historical marker arrangement but cannot establish physical spread angles or unchanged live tuning.",
+    "Master adopts historical twelve only for the exact four non-slug rows, retains its existing local ADS factor and preserves local total HP budget; none of these local integration policies is an original Destiny damage claim.",
+    "No Java/tests/shared docs/registry/build/runtime/CU or visual assets are changed by this extractor; no child work is claimed."
+  ]
+}

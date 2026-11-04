@@ -1,0 +1,849 @@
+{
+  "schema_version": 1,
+  "wave": "W50",
+  "observed_date": "2026-10-24",
+  "observed_utc": "2026-10-24T00:28:40.007942+00:00",
+  "branch": "feat/hunter",
+  "worktree": "shared dirty; sidecar audio research only",
+  "source_root": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+  "decision": {
+    "named_nock_sources_exist": true,
+    "verified_isolated_charge_source": null,
+    "verified_isolated_nock_source": null,
+    "verified_isolated_reload_source": null,
+    "runtime_recommendation": "no-op: leave weapon.bow.charge and weapon.bow.reload unmapped; do not add a nock event/alias in this sidecar",
+    "future_nock_shortlist": [
+      "17J_qj3tzraWVT8zGC0GfYSqpRE810Fw1",
+      "1VjowG89fKou3bQAI32HV9x1n_bxoHj9B"
+    ],
+    "promotion_gate": "Independent audible review of original bytes to identify a single nocking action and establish boundaries; preserve generic versus named weapon provenance; define a one-shot nock/reload hook separately from charge."
+  },
+  "coverage": {
+    "legendary_bow_folders": 10,
+    "visible_legendary_bow_files": 106,
+    "classification": {
+      "other_arrow_effects": 27,
+      "named_nock": 5,
+      "ambiguous_draw": 35,
+      "fire_or_release": 35,
+      "ambiguous_handle": 4
+    },
+    "method": "Public Drive HTML visible row IDs/names; checked live against W33 cached Bow listing; SHA256 of raw snapshots and original candidate bytes. No audible playback or listening.",
+    "limitations": [
+      "HTML listing is not an authenticated paginated API inventory.",
+      "Exotic parent returned exactly 50 visible children; not exhausted. No full-tree absence claim. Exotic and legacy parent listings are contextual only; their child trees, supers, enemies, and seasonal content were not searched recursively.",
+      "No file explicitly named isolated charge or reload was observed in the ten inspected Legendary/Bow folders. Draw/Handle and short duration do not prove action identity or isolation.",
+      "Three newly fetched MP3 variants were header/hash checked only. Tripwire WAV PCM is structurally checked; finite samples do not verify its audible content."
+    ]
+  },
+  "w33_evidence": {
+    "files": [
+      {
+        "path": "src/main/resources/destiny/sounds/w33.json",
+        "sha256": "7bd79392bc81e821a1ec1b4d3154986e3cd9c09362cef9fe1c1bcfc0befe333b",
+        "bytes": 175058
+      },
+      {
+        "path": "run/private-sources/w33/selection.json",
+        "sha256": "fa9b1e86ffb8cad0f9b3ada2c06d21c926c814591f12d39e2a6f60cefa73a574",
+        "bytes": 36552
+      },
+      {
+        "path": "run/private-sources/w33/source-analysis.json",
+        "sha256": "66b55d2d7c80243a40cbd2ad2d896dab5299bbb6ce4860491ff81b954554e949",
+        "bytes": 21490
+      },
+      {
+        "path": "run/private-sources/w33/1UHNmTd15v9yYIdWaT1g_gTaGV-J_YbMN.json",
+        "sha256": "0107fadbc6da897c6f49c14689ab38ac034b546f164c2d5f7cfd0dd06be66de8",
+        "bytes": 1039
+      },
+      {
+        "path": "run/private-sources/w33/1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.json",
+        "sha256": "a32911d65dae34d7e26795a9d988b38e059797d023eb053abb9b0fdf0bfdf274",
+        "bytes": 1086
+      },
+      {
+        "path": "run/private-sources/w33/1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk.json",
+        "sha256": "372eb5b734d9e101732cd9b4d5572dfbebab83eb71458b68b8bd5d8ba70a729d",
+        "bytes": 866
+      },
+      {
+        "path": "docs/qa/2026-10-23/w33/audio/source-discovery.json",
+        "sha256": "b6dd942e59833f8e20b5235f2f2c658c80aae4d8bf850197a04a409fbcd04b85",
+        "bytes": 90572
+      }
+    ],
+    "missing_events": [
+      {
+        "event": "weapon.bow.charge",
+        "status": "unmapped",
+        "reason": "No isolated, verified charge clip selected. Charge_Cancel_Samples compilations and ambiguous Draw files were not imported.",
+        "fallback": {
+          "policy": "native_at_call_site_or_noop",
+          "custom_alias": null,
+          "note": "Keep existing native placeholder at the original Java site. Missing custom lookup is a no-op. No arbitrary native sound alias is inserted in sounds.json."
+        }
+      },
+      {
+        "event": "weapon.bow.reload",
+        "status": "unmapped",
+        "reason": "No named reload recording in selected source folder; Handle/Guard/Draw not relabeled as reload.",
+        "fallback": {
+          "policy": "native_at_call_site_or_noop",
+          "custom_alias": null,
+          "note": "Keep existing native placeholder at the original Java site. Missing custom lookup is a no-op. No arbitrary native sound alias is inserted in sounds.json."
+        }
+      }
+    ],
+    "nock_key_present": false,
+    "existing_fire": {
+      "event": "weapon.bow.fire",
+      "drive_id": "1mURd-w0hTrzUoOqvPP8cRK2MW1ixklNv",
+      "original_name": "Fire_1.mp3",
+      "source_folder": "Biting Winds",
+      "source_folder_id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "match": "named_weapon_representative",
+      "limitations": [
+        "Family representative, not an exact recording of every weapon/frame in w30."
+      ],
+      "source_sha256": "b6e4b5083d2b723154f4d1078c32e8d7e8380c28809c2061feed1ffa2a8fb22d",
+      "status": "named_action_source",
+      "source_identity_confidence": "named uploader weapon/ability folder and filename",
+      "action_confidence": "uploader action label; not independently audition verified",
+      "source_url": "https://drive.google.com/file/d/1mURd-w0hTrzUoOqvPP8cRK2MW1ixklNv/view",
+      "source_folder_url": "https://drive.google.com/drive/folders/1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "sound": "destiny:w33/weapon/bow/fire",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w33/weapon/bow/fire.ogg",
+      "source_bytes": 54110,
+      "source_audio": {
+        "duration_seconds": 1.933062,
+        "sample_peak_dbfs": -4.6381,
+        "rms_dbfs": -23.3931,
+        "clipped_samples": 0
+      },
+      "transforms": {
+        "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+        "source_window_start_seconds": 0.0,
+        "source_window_end_seconds": 1.9330625,
+        "crop_end_seconds": 1.933062,
+        "trim_start_seconds": 0.11,
+        "trim_end_seconds": 1.35,
+        "silence_rms_threshold_dbfs": -50.1742,
+        "gain_db": -1.3619,
+        "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+      },
+      "output": {
+        "duration_seconds": 1.24,
+        "sample_peak_dbfs": -5.8834,
+        "rms_dbfs": -22.8857,
+        "clipped_samples": 0,
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "codec": "vorbis",
+        "bytes": 14202,
+        "sha256": "fd391c34516f291fb4b4ace39ca1ec2f6bc2f56b0c8db11f73f7931897fdaab5"
+      }
+    },
+    "historical_surrogates": {
+      "hunter.void.super.draw": {
+        "event": "hunter.void.super.draw",
+        "drive_id": "1KHvfxhr4xmO1gesGqr-gyBG2Abd9ae1f",
+        "original_name": "Draw_1.mp3",
+        "source_folder": "Under Your Skin",
+        "source_folder_id": "1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+        "match": "provisional_action_candidate",
+        "status": "provisional_action_candidate",
+        "source_identity_confidence": "high: named source weapon/UI/action; desired ability identity absent",
+        "action_confidence": "approximation explicitly authorized; not audition verified",
+        "limitations": [
+          "Named Void legendary bow Draw_1 surrogate; not Shadowshot draw. Draw may mean equip rather than tension. User explicitly approved temporary approximation; no exact source claim."
+        ],
+        "source_sha256": "15c5be77e3723117466381830425508e9da5a0ef210dd44576fb9c75e40fb930",
+        "source_url": "https://drive.google.com/file/d/1KHvfxhr4xmO1gesGqr-gyBG2Abd9ae1f/view",
+        "source_folder_url": "https://drive.google.com/drive/folders/1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+        "sound": "destiny:w33/hunter/void/super/draw",
+        "asset_path": "src/main/resources/assets/destiny/sounds/w33/hunter/void/super/draw.ogg",
+        "source_bytes": 32826,
+        "source_audio": {
+          "duration_seconds": 1.044906,
+          "sample_peak_dbfs": -11.0953,
+          "rms_dbfs": -35.3326,
+          "clipped_samples": 0
+        },
+        "transforms": {
+          "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+          "source_window_start_seconds": 0.0,
+          "source_window_end_seconds": 1.04490625,
+          "crop_end_seconds": 1.044906,
+          "trim_start_seconds": 0.03,
+          "trim_end_seconds": 1.044906,
+          "silence_rms_threshold_dbfs": -58.0,
+          "gain_db": 5.0953,
+          "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+          "fade_in_ms": 2,
+          "fade_out_ms": 8,
+          "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+        },
+        "output": {
+          "duration_seconds": 1.010906,
+          "sample_peak_dbfs": -5.263,
+          "rms_dbfs": -30.313,
+          "clipped_samples": 0,
+          "channels": 1,
+          "sample_rate_hz": 32000,
+          "codec": "vorbis",
+          "bytes": 12317,
+          "sha256": "54f7a2244868ef21cbe4fc17d78e49c18ff889c7cc0122000e24ead542ce7e39"
+        }
+      },
+      "hunter.void.super.end": {
+        "event": "hunter.void.super.end",
+        "drive_id": "17J_qj3tzraWVT8zGC0GfYSqpRE810Fw1",
+        "original_name": "Arrow_Nock_1.mp3",
+        "source_folder": "_Arrows",
+        "source_folder_id": "1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+        "match": "provisional_action_candidate",
+        "status": "provisional_action_candidate",
+        "source_identity_confidence": "high: named source weapon/UI/action; desired ability identity absent",
+        "action_confidence": "approximation explicitly authorized; not audition verified",
+        "limitations": [
+          "Named generic short bow handling surrogate; no shutdown identity, not Shadowshot end. User explicitly approved temporary approximation; no exact source claim."
+        ],
+        "source_sha256": "4d3a04544a6a72b45e83519168fdc018f1a2f821a8cea6b087ef654717b71f70",
+        "source_url": "https://drive.google.com/file/d/17J_qj3tzraWVT8zGC0GfYSqpRE810Fw1/view",
+        "source_folder_url": "https://drive.google.com/drive/folders/1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+        "sound": "destiny:w33/hunter/void/super/end",
+        "asset_path": "src/main/resources/assets/destiny/sounds/w33/hunter/void/super/end.ogg",
+        "source_bytes": 35330,
+        "source_audio": {
+          "duration_seconds": 1.149406,
+          "sample_peak_dbfs": -10.2238,
+          "rms_dbfs": -38.0758,
+          "clipped_samples": 0
+        },
+        "transforms": {
+          "decode": "ffmpeg downmix to mono float32, 32000 Hz",
+          "source_window_start_seconds": 0.0,
+          "source_window_end_seconds": 1.14940625,
+          "crop_end_seconds": 1.149406,
+          "trim_start_seconds": 0.06,
+          "trim_end_seconds": 1.149406,
+          "silence_rms_threshold_dbfs": -58.0,
+          "gain_db": 4.2238,
+          "gain_policy": "RMS aim -21 dBFS, sample peak <= -6 dBFS, boost <= 12 dB; whichever permits less gain",
+          "fade_in_ms": 2,
+          "fade_out_ms": 8,
+          "encoder": "libvorbis quality 4, mono, 32000 Hz, bitexact flags; no concatenation or looping"
+        },
+        "output": {
+          "duration_seconds": 1.089406,
+          "sample_peak_dbfs": -6.8539,
+          "rms_dbfs": -33.7527,
+          "clipped_samples": 0,
+          "channels": 1,
+          "sample_rate_hz": 32000,
+          "codec": "vorbis",
+          "bytes": 12943,
+          "sha256": "13e1fd361a5864b5da9e7a394b257927f62d789806edbb797a3279d9da116d21"
+        }
+      }
+    },
+    "overlay_warning": "W33 Hunter Void phase records are historical provenance; w34/w36 overlays replace playback. Do not alias an ordinary bow to hunter.void.super.end or infer nock verification from old surrogate use."
+  },
+  "live_folder_evidence": [
+    {
+      "id": "1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+      "name": "Root",
+      "url": "https://drive.google.com/drive/folders/1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l",
+      "observed_utc": "2026-10-24T00:26:37.268514+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l.html",
+      "sha256": "24717d218105d72e177e65a552b7d72f3fe767cbf02e2a63e7b777a2ad3a23f4",
+      "title": "D2 Master SFX Drive - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 12,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1kWVlvhqvFkf_If5Q9Zd0mMIM1haa6u4l.json",
+        "sha256": "5652f06bc7e205165b80dd87a398bd3f009e1fd5737c33ba31bfa884550cd559",
+        "bytes": 2040
+      }
+    },
+    {
+      "id": "1Z9IXAMaNgP9KG1uIFs8TsetNzKia2PlZ",
+      "name": "__Legendary Weapons",
+      "url": "https://drive.google.com/drive/folders/1Z9IXAMaNgP9KG1uIFs8TsetNzKia2PlZ",
+      "observed_utc": "2026-10-24T00:26:38.032417+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1Z9IXAMaNgP9KG1uIFs8TsetNzKia2PlZ.html",
+      "sha256": "64b2232d5d9a9cc9c7ee7f8c5647d4711304c440c095671a3f497b1d2fbbf5df",
+      "title": "__Legendary Weapons - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 18,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1Z9IXAMaNgP9KG1uIFs8TsetNzKia2PlZ.json",
+        "sha256": "f32be5a14ed3c01022660d7cb63c7d9222e3c9a54c93ab38d4971a1dd3429fdb",
+        "bytes": 2627
+      }
+    },
+    {
+      "id": "1UHNmTd15v9yYIdWaT1g_gTaGV-J_YbMN",
+      "name": "Bow",
+      "url": "https://drive.google.com/drive/folders/1UHNmTd15v9yYIdWaT1g_gTaGV-J_YbMN",
+      "observed_utc": "2026-10-24T00:26:38.066719+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1UHNmTd15v9yYIdWaT1g_gTaGV-J_YbMN.html",
+      "sha256": "6315139dbeb78b1855b651a99f41df0522d62451a8d4e5af869fddb10750c759",
+      "title": "Bow - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 10,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1UHNmTd15v9yYIdWaT1g_gTaGV-J_YbMN.json",
+        "sha256": "2e106b0d5630c86b46b975591e78bab667bb97b7802fd657de33b6d364dc0531",
+        "bytes": 1691
+      }
+    },
+    {
+      "id": "1ytF85L4RhUtECU78hnB0a1kXmlNenJdJ",
+      "name": "__Exotic Weapons",
+      "url": "https://drive.google.com/drive/folders/1ytF85L4RhUtECU78hnB0a1kXmlNenJdJ",
+      "observed_utc": "2026-10-24T00:26:38.265924+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1ytF85L4RhUtECU78hnB0a1kXmlNenJdJ.html",
+      "sha256": "df7852cc54e3406f08ea1bdb76f93eabb0956500dd16b52d2e533e479960ebfe",
+      "title": "__Exotic Weapons - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 50,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1ytF85L4RhUtECU78hnB0a1kXmlNenJdJ.json",
+        "sha256": "7d918c727a807ff152d4e6360f5caf3e8ec96f0a4149b741565ebcb0b74ede99",
+        "bytes": 6228
+      }
+    },
+    {
+      "id": "1m13RJwrbFpXKYIZoK14QXmvWnq6VG-64",
+      "name": "Legacy Sounds [2014-2019]",
+      "url": "https://drive.google.com/drive/folders/1m13RJwrbFpXKYIZoK14QXmvWnq6VG-64",
+      "observed_utc": "2026-10-24T00:26:38.145042+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1m13RJwrbFpXKYIZoK14QXmvWnq6VG-64.html",
+      "sha256": "5a6b53daa6b34460d6b295474db1aed9ccfad0cb170978e32110a0fdb788da2b",
+      "title": "Legacy Sounds [2014-2019] - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 19,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1m13RJwrbFpXKYIZoK14QXmvWnq6VG-64.json",
+        "sha256": "9b1ebd12dc07101ce00257b01f9cefb4573194761e664676024a35360240103b",
+        "bytes": 2844
+      }
+    },
+    {
+      "id": "1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+      "name": "_Arrows",
+      "url": "https://drive.google.com/drive/folders/1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+      "observed_utc": "2026-10-24T00:26:38.202265+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH.html",
+      "sha256": "96b74e7a8c7313aa520dcdd9c69241a4ec2cbfd1ccb99dc0214379efc1b2bd34",
+      "title": "_Arrows - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 31,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH.json",
+        "sha256": "af1310588061508105d263f1fd967281a84f013b84fac82c3116cb2c8e3f9bcd",
+        "bytes": 4399
+      },
+      "action_names": {
+        "arrow_other": 27,
+        "nock": 4
+      }
+    },
+    {
+      "id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "name": "Biting Winds",
+      "url": "https://drive.google.com/drive/folders/1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "observed_utc": "2026-10-24T00:26:38.827050+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.html",
+      "sha256": "496940e770a7efd563872656285cc33f37995e193647c42c4da28c7e263f36ba",
+      "title": "Biting Winds - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 10,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.json",
+        "sha256": "363908cb9b0d02c23a8db7f3ae7f4e9cd9086d2b56bb10656bba6a83e56ba8c6",
+        "bytes": 1696
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4,
+        "handle_ambiguous": 2
+      }
+    },
+    {
+      "id": "1IG5XcCPd-fJeTsF-1wha9Dau0Zb2rJnV",
+      "name": "Holless",
+      "url": "https://drive.google.com/drive/folders/1IG5XcCPd-fJeTsF-1wha9Dau0Zb2rJnV",
+      "observed_utc": "2026-10-24T00:26:38.836890+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1IG5XcCPd-fJeTsF-1wha9Dau0Zb2rJnV.html",
+      "sha256": "a11fce347eaf3fb6a82539c1e1e75910d4fcb7373128e954da25cf6580970926",
+      "title": "Holless - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 8,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1IG5XcCPd-fJeTsF-1wha9Dau0Zb2rJnV.json",
+        "sha256": "fc81900daeb3747ada3b9015e81fb477e2337c83ea684981c9749202eb7630e8",
+        "bytes": 1458
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4
+      }
+    },
+    {
+      "id": "19o-Vjk35IRqvT1DkQZgm5wf8OR5TM3qO",
+      "name": "Imperial Needle",
+      "url": "https://drive.google.com/drive/folders/19o-Vjk35IRqvT1DkQZgm5wf8OR5TM3qO",
+      "observed_utc": "2026-10-24T00:26:38.853138+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-19o-Vjk35IRqvT1DkQZgm5wf8OR5TM3qO.html",
+      "sha256": "e6447dc9a7a66ac6f7b547e2f608ca70897c993f38f457e113b747166c7bc59c",
+      "title": "Imperial Needle - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 8,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-19o-Vjk35IRqvT1DkQZgm5wf8OR5TM3qO.json",
+        "sha256": "cd73d49c989f3333788199874832c7d9410db103c47543c673734bb13c8721b9",
+        "bytes": 1474
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4
+      }
+    },
+    {
+      "id": "1OnuIMZg5dyhZZ0PDZsAkmMg36C_I3T4Y",
+      "name": "Raconteur",
+      "url": "https://drive.google.com/drive/folders/1OnuIMZg5dyhZZ0PDZsAkmMg36C_I3T4Y",
+      "observed_utc": "2026-10-24T00:26:38.868752+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1OnuIMZg5dyhZZ0PDZsAkmMg36C_I3T4Y.html",
+      "sha256": "ddbde1db4871c2ee8a0616001bca6df1ccd3d4dc0c2f1a6cdc7a59bb40118693",
+      "title": "Raconteur - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 10,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1OnuIMZg5dyhZZ0PDZsAkmMg36C_I3T4Y.json",
+        "sha256": "e21c205f56b382405cc9b5156c040c554fc4b7f59cefb83639cde8f0e011cc07",
+        "bytes": 1690
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4,
+        "handle_ambiguous": 2
+      }
+    },
+    {
+      "id": "10dBMdJGLtT_C-tdKqDIgq5s43YxfjVMy",
+      "name": "Subtle Calamity",
+      "url": "https://drive.google.com/drive/folders/10dBMdJGLtT_C-tdKqDIgq5s43YxfjVMy",
+      "observed_utc": "2026-10-24T00:26:39.095224+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-10dBMdJGLtT_C-tdKqDIgq5s43YxfjVMy.html",
+      "sha256": "aee7d55a89646113fde936399cf5e2873a8fbfe239521410e746f47b4ea2bae5",
+      "title": "Subtle Calamity - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 8,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-10dBMdJGLtT_C-tdKqDIgq5s43YxfjVMy.json",
+        "sha256": "616456c505d5e0913545ed73345cae20814a9a2fd62f7032ffe3d16aae2ab917",
+        "bytes": 1474
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4
+      }
+    },
+    {
+      "id": "1bxSVdMDXdmXnXAoBV_HkCZcpshDucPg4",
+      "name": "Tripwire_Canary",
+      "url": "https://drive.google.com/drive/folders/1bxSVdMDXdmXnXAoBV_HkCZcpshDucPg4",
+      "observed_utc": "2026-10-24T00:26:39.572638+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1bxSVdMDXdmXnXAoBV_HkCZcpshDucPg4.html",
+      "sha256": "c3e8ac5cbf30d1444f7eebf32c962cbe24b962641f2d7a61010322c7fdb1984f",
+      "title": "Tripwire_Canary - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 7,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1bxSVdMDXdmXnXAoBV_HkCZcpshDucPg4.json",
+        "sha256": "30a07515e7908a83cc2f240923fcdf5bb2a33299ff5e9eecca8935473d604cca",
+        "bytes": 1381
+      },
+      "action_names": {
+        "nock": 1,
+        "draw_ambiguous": 3,
+        "fire_release": 3
+      }
+    },
+    {
+      "id": "1ZB-Hz3CaXzxuxj3PStv_sUsw6417kfv4",
+      "name": "Tyranny of Heaven",
+      "url": "https://drive.google.com/drive/folders/1ZB-Hz3CaXzxuxj3PStv_sUsw6417kfv4",
+      "observed_utc": "2026-10-24T00:26:39.612915+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1ZB-Hz3CaXzxuxj3PStv_sUsw6417kfv4.html",
+      "sha256": "d4f89de11c2d8154640b684c1a7ebc1175f5c39bc0f7e042628ef2e43173caca",
+      "title": "Tyranny of Heaven - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 8,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1ZB-Hz3CaXzxuxj3PStv_sUsw6417kfv4.json",
+        "sha256": "6a28a5691b466abcdf40fca3f6eceb45af26eed7ee4721601130d90e5ea564d6",
+        "bytes": 1478
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4
+      }
+    },
+    {
+      "id": "1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+      "name": "Under Your Skin",
+      "url": "https://drive.google.com/drive/folders/1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+      "observed_utc": "2026-10-24T00:26:39.641770+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_.html",
+      "sha256": "18dff869d4899cec9d303950e7d7e9fc56b84b2f17f0902f3209504d71933e93",
+      "title": "Under Your Skin - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 8,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_.json",
+        "sha256": "215edb95ff4013b90ce5603ae6a173cd111a3d0ea10a422e41dc61569c7d5ed7",
+        "bytes": 1474
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4
+      }
+    },
+    {
+      "id": "1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "name": "Whispering Slab",
+      "url": "https://drive.google.com/drive/folders/1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "observed_utc": "2026-10-24T00:26:39.684210+00:00",
+      "http_status": 200,
+      "source_path": "run/private-sources/w50/audio-drive-1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk.html",
+      "sha256": "84bc68d4b55a613fd2872704ffe2eede9d8b5dcf227410b157831ab912234d6d",
+      "title": "Whispering Slab - Google Drive",
+      "inspection": "HTML visible listing only; not authenticated API enumeration; not audible listening",
+      "visible_items": 8,
+      "inventory": {
+        "path": "run/private-sources/w50/audio-drive-1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk.json",
+        "sha256": "4dd248eb4e437f53e2bd0f96a54a78b300672ffbb4a15d71f64cada3b3980a36",
+        "bytes": 1474
+      },
+      "action_names": {
+        "draw_ambiguous": 4,
+        "fire_release": 4
+      }
+    }
+  ],
+  "nock_candidates": [
+    {
+      "id": "17J_qj3tzraWVT8zGC0GfYSqpRE810Fw1",
+      "name": "Arrow_Nock_1.mp3",
+      "folder": false,
+      "folder_id": "1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+      "folder_name": "_Arrows",
+      "source_path": "run/private-sources/w33/17J_qj3tzraWVT8zGC0GfYSqpRE810Fw1.mp3",
+      "source_sha256": "4d3a04544a6a72b45e83519168fdc018f1a2f821a8cea6b087ef654717b71f70",
+      "source_bytes": 35330,
+      "acquisition": "existing W33 cache",
+      "header_hex": "49443303000000003b60545945520000",
+      "listened": false,
+      "isolated_action_verified": false,
+      "status": "named_nock_candidate_unlistened",
+      "source_url": "https://drive.google.com/file/d/17J_qj3tzraWVT8zGC0GfYSqpRE810Fw1/view",
+      "w33_source_hash_matches": true,
+      "w33_historical_event": "hunter.void.super.end",
+      "w33_recorded_duration_seconds": 1.149406
+    },
+    {
+      "id": "1fyXOmoG0hoMutbHo1WypwJ9D3RfR96Bg",
+      "name": "Arrow_Nock_2.mp3",
+      "folder": false,
+      "folder_id": "1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+      "folder_name": "_Arrows",
+      "source_path": "run/private-sources/w50/audio-source-1fyXOmoG0hoMutbHo1WypwJ9D3RfR96Bg.mp3",
+      "source_sha256": "52fd0b03fe870039b7859995a7f01b37b0516ac5f1a2921680398046f37e9368",
+      "source_bytes": 39086,
+      "acquisition": "fresh public Drive download",
+      "header_hex": "49443303000000003b60545945520000",
+      "listened": false,
+      "isolated_action_verified": false,
+      "status": "named_nock_candidate_unlistened",
+      "source_url": "https://drive.google.com/file/d/1fyXOmoG0hoMutbHo1WypwJ9D3RfR96Bg/view"
+    },
+    {
+      "id": "1C8_IEBV9Z8BZImwA16wl2-Ckk63XTtTk",
+      "name": "Arrow_Nock_3.mp3",
+      "folder": false,
+      "folder_id": "1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+      "folder_name": "_Arrows",
+      "source_path": "run/private-sources/w50/audio-source-1C8_IEBV9Z8BZImwA16wl2-Ckk63XTtTk.mp3",
+      "source_sha256": "92ceb10b5e3af592bd5a467d970d74b74bb74b22e052e721e37e0a4d693cbbd9",
+      "source_bytes": 39712,
+      "acquisition": "fresh public Drive download",
+      "header_hex": "49443303000000003b60545945520000",
+      "listened": false,
+      "isolated_action_verified": false,
+      "status": "named_nock_candidate_unlistened",
+      "source_url": "https://drive.google.com/file/d/1C8_IEBV9Z8BZImwA16wl2-Ckk63XTtTk/view"
+    },
+    {
+      "id": "1uU6OMDKq85zrtPk612aYrhaI51W7TPMf",
+      "name": "Arrow_Nock_4.mp3",
+      "folder": false,
+      "folder_id": "1L-M2FS72lCI0AZNj-r1Crr5p1ioap7AH",
+      "folder_name": "_Arrows",
+      "source_path": "run/private-sources/w50/audio-source-1uU6OMDKq85zrtPk612aYrhaI51W7TPMf.mp3",
+      "source_sha256": "1cec4b13fa5a2f633bb95149ff768e5a814796a0172f95bd0fbf60265ffdadd7",
+      "source_bytes": 47224,
+      "acquisition": "fresh public Drive download",
+      "header_hex": "49443303000000003b60545945520000",
+      "listened": false,
+      "isolated_action_verified": false,
+      "status": "named_nock_candidate_unlistened",
+      "source_url": "https://drive.google.com/file/d/1uU6OMDKq85zrtPk612aYrhaI51W7TPMf/view"
+    },
+    {
+      "id": "1VjowG89fKou3bQAI32HV9x1n_bxoHj9B",
+      "name": "Arrow_nock.wav",
+      "folder": false,
+      "folder_id": "1bxSVdMDXdmXnXAoBV_HkCZcpshDucPg4",
+      "folder_name": "Tripwire_Canary",
+      "source_path": "run/private-sources/w50/audio-source-1VjowG89fKou3bQAI32HV9x1n_bxoHj9B.wav",
+      "source_sha256": "d75967a06c3cd706bc1f39129584c417bf9d35b5ff1af1415868c31fcb8ec7f4",
+      "source_bytes": 373514,
+      "acquisition": "fresh public Drive download",
+      "header_hex": "5249464602b3050057415645666d7420",
+      "listened": false,
+      "isolated_action_verified": false,
+      "status": "named_nock_candidate_unlistened",
+      "source_url": "https://drive.google.com/file/d/1VjowG89fKou3bQAI32HV9x1n_bxoHj9B/view",
+      "wav_header": {
+        "format_code": 3,
+        "format": "IEEE_FLOAT",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "bits_per_sample": 32,
+        "block_align": 8,
+        "data_bytes": 359736,
+        "frames": 44967,
+        "duration_seconds": 1.0196598639455783,
+        "chunks": [
+          {
+            "id": "fmt ",
+            "bytes": 16
+          },
+          {
+            "id": "data",
+            "bytes": 359736
+          },
+          {
+            "id": "LIST",
+            "bytes": 76
+          },
+          {
+            "id": "bext",
+            "bytes": 602
+          },
+          {
+            "id": "iXML",
+            "bytes": 1447
+          },
+          {
+            "id": "_PMX",
+            "bytes": 11576
+          }
+        ]
+      },
+      "pcm_checks": {
+        "samples": 89934,
+        "all_finite": true,
+        "sample_peak": 0.6275669932365417,
+        "scope": "numeric PCM validation only; does not establish action identity or isolation"
+      }
+    }
+  ],
+  "ambiguous_examples": [
+    {
+      "id": "1-nojcu6aEzA_MmqjIkp3rnrZXFeWB1Pz",
+      "name": "Draw_1.mp3",
+      "folder": false,
+      "source_folder": "Biting Winds",
+      "source_folder_id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "listing_source": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1EMTjGbMYu71Wcg-W3M4Tl4UvIgnnZOU6",
+      "name": "Draw_2.mp3",
+      "folder": false,
+      "source_folder": "Biting Winds",
+      "source_folder_id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "listing_source": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "12pRqO-7U20jerFtez7kP4sJGH4Zmb1nQ",
+      "name": "Draw_3.mp3",
+      "folder": false,
+      "source_folder": "Biting Winds",
+      "source_folder_id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "listing_source": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1zXQUomMErY0PUC5_4J2PTs2E6o1mUTmm",
+      "name": "Draw_4.mp3",
+      "folder": false,
+      "source_folder": "Biting Winds",
+      "source_folder_id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "listing_source": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1pqrQsvnqbDjM0KAhEbGIrhvNcW9IKa56",
+      "name": "Handle_1.mp3",
+      "folder": false,
+      "source_folder": "Biting Winds",
+      "source_folder_id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "listing_source": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "13UkzY_XL4z-4lYnSvdrStkOgiglcT8EE",
+      "name": "Handle_2.mp3",
+      "folder": false,
+      "source_folder": "Biting Winds",
+      "source_folder_id": "1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y",
+      "listing_source": "run/private-sources/w50/audio-drive-1EgUeMRRNMBYxt7lQKDM-4b3Y4RFedZ9y.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1KHvfxhr4xmO1gesGqr-gyBG2Abd9ae1f",
+      "name": "Draw_1.mp3",
+      "folder": false,
+      "source_folder": "Under Your Skin",
+      "source_folder_id": "1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+      "listing_source": "run/private-sources/w50/audio-drive-1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_.html",
+      "recommendation": "reject action assignment without independent action/isolation verification",
+      "cached_media": {
+        "path": "run/private-sources/w33/1KHvfxhr4xmO1gesGqr-gyBG2Abd9ae1f.mp3",
+        "sha256": "15c5be77e3723117466381830425508e9da5a0ef210dd44576fb9c75e40fb930",
+        "bytes": 32826
+      }
+    },
+    {
+      "id": "1GtcFaWZ0BsxKOQkfLy8uC0TLCu7BeaSS",
+      "name": "Draw_2.mp3",
+      "folder": false,
+      "source_folder": "Under Your Skin",
+      "source_folder_id": "1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+      "listing_source": "run/private-sources/w50/audio-drive-1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1SoY0KXUUKM4AZbNU5pJUJBDii6OfanNg",
+      "name": "DraW_3.mp3",
+      "folder": false,
+      "source_folder": "Under Your Skin",
+      "source_folder_id": "1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+      "listing_source": "run/private-sources/w50/audio-drive-1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "18BmNeBo7Qw-27pVOZHHYE7kdOlC8SGQW",
+      "name": "Draw_4.mp3",
+      "folder": false,
+      "source_folder": "Under Your Skin",
+      "source_folder_id": "1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_",
+      "listing_source": "run/private-sources/w50/audio-drive-1e3XY-ED2lhQj4h72AR1dpfLE-aMSRUw_.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1CJAsoy8tWh7oh6j0N38lDsEYwN1bMcpo",
+      "name": "Draw_1.mp3",
+      "folder": false,
+      "source_folder": "Whispering Slab",
+      "source_folder_id": "1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "listing_source": "run/private-sources/w50/audio-drive-1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1AViu28DKLhYaSxwAgS7iPv0s2XEUWUfJ",
+      "name": "Draw_2.mp3",
+      "folder": false,
+      "source_folder": "Whispering Slab",
+      "source_folder_id": "1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "listing_source": "run/private-sources/w50/audio-drive-1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1IhMVDGtg-wFip3Y5H6IlNF7kfWXi0cDP",
+      "name": "Draw_3.mp3",
+      "folder": false,
+      "source_folder": "Whispering Slab",
+      "source_folder_id": "1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "listing_source": "run/private-sources/w50/audio-drive-1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    },
+    {
+      "id": "1-tSoZs7O2XgFCs5DmO1z90e-CmTyHxIY",
+      "name": "Draw_4.mp3",
+      "folder": false,
+      "source_folder": "Whispering Slab",
+      "source_folder_id": "1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk",
+      "listing_source": "run/private-sources/w50/audio-drive-1EnZCnW__Yu5QV3FxG0Ns_fUGCUR502Nk.html",
+      "recommendation": "reject action assignment without independent action/isolation verification"
+    }
+  ],
+  "excluded_compilations": [
+    {
+      "id": "16gFSNyBQ0SU-C_AODEEW7vgqs4MCajIo",
+      "name": "Charge_Cancel_Samples.mp3 Audio",
+      "folder": false,
+      "source_folder": "Loaded Question (fusion rifle)",
+      "source_folder_id": "1MfS1lloFuxnVOEdEe9CW386sYyOf9SDN",
+      "inventory": {
+        "path": "run/private-sources/w33/1MfS1lloFuxnVOEdEe9CW386sYyOf9SDN.json",
+        "sha256": "5d2d55e29d1bb74a3190a991622c73f327256f307bf90721064e6cb53e4ea7e6",
+        "bytes": 1101
+      },
+      "decision": "exclude: other weapon family and compilation; no isolated bow action evidence",
+      "media_sha256": null
+    },
+    {
+      "id": "147lDLeameyZLyrbyHZG-lDCIpwEyHNW2",
+      "name": "Charge_Cancel_Samples.mp3 Audio",
+      "folder": false,
+      "source_folder": "Stormchaser (linear fusion rifle)",
+      "source_folder_id": "1aVYDBIGETT5xvpLxaapGNrVmGy7r6KRG",
+      "inventory": {
+        "path": "run/private-sources/w33/1aVYDBIGETT5xvpLxaapGNrVmGy7r6KRG.json",
+        "sha256": "176b59b2c6db5df54428becfaed18ffe295e6693d7af62e89096232b8c276fd1",
+        "bytes": 1208
+      },
+      "decision": "exclude: other weapon family and compilation; no isolated bow action evidence",
+      "media_sha256": null
+    }
+  ],
+  "artifacts_policy": "Raw captures and originals remain ignored at run/private-sources/w50/audio*; no resources, Java, model geometry, runtime or existing artifacts edited."
+}

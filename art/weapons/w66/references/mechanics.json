@@ -1,0 +1,110 @@
+{
+  "stage": "W66",
+  "baseHash": 3425386926,
+  "enhancedHashExcluded": 288411554,
+  "huckleberryHashExcluded": 3551326236,
+  "maxStacks": 3,
+  "baseDurationSeconds": 4.5,
+  "decayTicks": 90,
+  "ticksPerSecond": 20,
+  "multipliers": [
+    1.0,
+    1.1,
+    1.21,
+    1.331
+  ],
+  "trigger": {
+    "event": "weapon final blow",
+    "precisionRequired": false,
+    "reloadRequired": false,
+    "source": "Official base trait description establishes weapon kills and three stacks; numeric values are secondary."
+  },
+  "primaryChange": {
+    "url": "https://www.bungie.net/7/en/News/Article/destiny_update_9_5_0",
+    "publisher": "Bungie",
+    "primary": true,
+    "title": "Destiny 2 Update 9.5.0",
+    "publishedAt": "2025-12-02",
+    "sectionHeading": "Rampage",
+    "excerpt": "Now loses only one stack after the timer expires.",
+    "supports": "Each timer expiration removes one stack instead of clearing the entire buff.",
+    "doesNotEstablish": [
+      "Absolute duration",
+      "Damage percentages",
+      "Stow behavior",
+      "Kill refresh behavior"
+    ],
+    "privateEvidence": {
+      "changeCapture": "research2.json",
+      "changeUrl": "https://origin-static01.bungie.net/7/en/News/Article/destiny_update_9_5_0",
+      "absoluteDateCapture": "research3.json",
+      "dateUrl": "https://www.bungie.net/7/en/News/Article/destiny_update_9_5_0"
+    },
+    "captureBoundary": "research3 reports 888 article lines but stores only lines 0-285; its stored body proves the date, not the later Rampage section. research2 carries the official mirror's Rampage change."
+  },
+  "communityMeasurements": {
+    "url": "https://www.light.gg/db/items/3425386926/rampage/?_=688",
+    "publisher": "light.gg",
+    "primary": false,
+    "exactPerkHash": 3425386926,
+    "section": "Community Research",
+    "privateCapture": "research1.json",
+    "lastUpdatedReported": "2025-12-27",
+    "maxStacks": 3,
+    "durationSeconds": 4.5,
+    "damageIncreasePercentByStack": [
+      10,
+      21,
+      33.1
+    ],
+    "decay": "One stack expires per duration interval.",
+    "damageBoundary": "The damage from separate explosive/splash perks is outside this bonus.",
+    "stowMentioned": false,
+    "refreshMentionedExplicitly": false,
+    "retrieval": "Pinned URL-bound search body; direct light.gg open in research3 returned HTTP 402. This is community documentation, not fresh gameplay testing."
+  },
+  "stowAndRefreshSecondary": {
+    "url": "https://d2-arsenal.vercel.app/weapon/3132669561",
+    "publisher": "D2 Arsenal",
+    "primary": false,
+    "privateCapture": "research4.json",
+    "sectionHeading": "Rampage",
+    "confidence": "Single explicit secondary source for stow and refresh; no primary corroboration for either behavior.",
+    "stowPersists": true,
+    "additionalWeaponKillsRefresh": true,
+    "durationSeconds": 4.5,
+    "decaysOneStackAtATime": true,
+    "enhancedDurationSecondsExcluded": 5,
+    "identityBoundary": "A perk description on a different weapon page corroborates behavior only; this page does not prove selected-weapon eligibility or independently bind the description to the base hash.",
+    "retrieval": "Pinned search result, restricted to the Rampage section before the next perk. Adjacent Killing Tally/Outlaw text and generic forum posts are not Rampage or official evidence."
+  },
+  "sourceAudit": {
+    "eligibility": "Official pinned manifest, item hash, real trait category, non-fake randomized set and currentlyCanRoll=true.",
+    "oneStackDecay": "Official Bungie change plus exact-base light.gg and D2 Arsenal.",
+    "durationAndMultipliers": "Exact-base light.gg; secondary D2 Arsenal agrees on base values.",
+    "stow": "Single explicit D2 Arsenal secondary statement; exact-base light.gg omits stow and Bungie only proves decay. Do not infer cancellation from nearby other perks.",
+    "refresh": "Single explicit D2 Arsenal secondary statement. Exact-base light.gg and the Bungie patch do not establish the precise refresh deadline.",
+    "unresolved": [
+      "Independent live validation of stow/refresh",
+      "Precise tick endpoints and delayed-tick ordering",
+      "Destiny ownership/copy identity and in-flight projectile attribution"
+    ]
+  },
+  "projectIntegrationPolicy": {
+    "verifiedDestinyBehavior": false,
+    "session": "Maintain a timed session per owned ItemStack object; keep and advance decay while it is stowed.",
+    "kill": "Credit a confirmed weapon final blow to its original stack only while the owner still possesses it and its exact Rampage socket is still selected, even if another weapon is now held.",
+    "refresh": "After bringing due decay current, a qualifying kill adds one stack up to three and resets the next decay deadline to now+90, including at the cap.",
+    "decay": "Each elapsed 90-tick interval removes one stack; process every elapsed interval and preserve the remaining interval when catching up. Never clear all stacks on the first expiry.",
+    "stow": "Retain the session and its deadline through switching; stowing grants no extra time.",
+    "projectile": "Capture the emitted shot's multiplier; later stack changes or a kill's newly granted stack do not retroactively alter that shot.",
+    "identity": "Copies and new owners start without this object's session; no session inheritance. Possession/selection loss invalidates kill credit and the session.",
+    "boundary": "These are the agreed W66 runtime integration rules. The sources do not prove object identity, ownership transfer, emitted-shot snapshots or transaction ordering."
+  },
+  "limitations": [
+    "No live Destiny test or exhaustive later-patch audit; pinned evidence is not a current sandbox certification.",
+    "Pool eligibility grants an optional roll, not automatic trait selection on every weapon copy.",
+    "No enhanced, Huckleberry, catalyst, same-name reissue, sword or glaive eligibility inferred.",
+    "Base damage and separate explosive-damage perks require their own integration decisions; this resource only supplies Rampage's scalar."
+  ]
+}

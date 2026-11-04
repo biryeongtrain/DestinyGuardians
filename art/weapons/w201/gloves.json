@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "batch": "W201",
+  "feature": "w201-hands-art",
+  "authorship": "Original authored Minecraft cuboids and pixel atlas; Hunter-inspired cosmetics.",
+  "sourceLimits": [
+    "No extracted mesh, texture, player skin, or animation data used.",
+    "No official Bungie asset, replica accuracy, or player-skin matching claim.",
+    "Skill Ace/Izanagi study used for clean volumes and explicit face UVs only.",
+    "Static curled cosmetic pose; named finger segments are not animated bones.",
+    "Offline preview is not evidence of native pack load, contact, or performance."
+  ],
+  "design": {
+    "palette": {
+      "textile": "dark charcoal",
+      "plates": "pale gray ivory",
+      "seams": "muted bronze"
+    },
+    "identity": "compact armored dorsal plates, four articulated curls, opposed thumb, short angled cuff",
+    "geometry": "26 named cuboids per hand; no meshes, alpha cutouts, or noisy stacked micro-layers",
+    "wristForearmNominalLengthUnits": 4.46,
+    "wristForearmDownwardSpanUnits": 5.4245,
+    "palmAndFingersBoundsRelativeToGrip": {
+      "min": [
+        -0.88,
+        -1.03,
+        -1.14
+      ],
+      "max": [
+        1.5,
+        1.22,
+        1.12
+      ]
+    }
+  },
+  "gripOrigin": [
+    8,
+    8,
+    8
+  ],
+  "coordinateSpace": "Minecraft item model units; 16 units per item block, no display transform",
+  "directions": {
+    "weaponGripAxis": "+Y",
+    "muzzle": "-Z",
+    "rightPalmOutside": "+X",
+    "rightFingerCurl": "+X around front -Z, returning toward -X",
+    "rightForearm": "-Y and +Z, with a small +X offset",
+    "left": "exact X reflection around x=8; same grip origin and muzzle sign"
+  },
+  "gripClearance": {
+    "widthX": 1.1,
+    "depthZ": 1.3,
+    "minXZ": [
+      7.45,
+      7.35
+    ],
+    "maxXZ": [
+      8.55,
+      8.65
+    ],
+    "test": "All transformed element AABBs miss the core for all Y.",
+    "minimumAxisGapUnits": 0.03,
+    "limit": "Larger grips, trigger guards and weapon bodies require master contact adjustment."
+  },
+  "integration": {
+    "pivot": [
+      8,
+      8,
+      8
+    ],
+    "baseDisplayTransforms": false,
+    "pointTransform": "p_out = anchor_target + R * S * (p_model - [8,8,8])",
+    "nativeItemCenter": "Vanilla item geometry may subtract 0.5 block; [8,8,8] then maps to local zero.",
+    "masterOwns": "Item registration, graph overlays, weapon anchors, camera transforms and reload motion.",
+    "displayScale": "Inherits each weapon's display scale in the master graph; base gloves add no scale.",
+    "skinPolicy": "Opaque authored gloves; no player skin sampling or promise."
+  },
+  "texture": {
+    "path": "src/main/resources/assets/destiny/textures/item/weapon_hands_w201/gloves.png",
+    "resource": "destiny:item/weapon_hands_w201/gloves",
+    "size": [
+      256,
+      256
+    ],
+    "format": "RGB PNG, opaque",
+    "materials": [
+      "palm_textile",
+      "dorsal_plate",
+      "knuckle_plate",
+      "finger_textile",
+      "thumb_textile",
+      "wrist_cuff",
+      "forearm_textile",
+      "forearm_plate"
+    ],
+    "faceTiles": 48,
+    "tilePixels": 32,
+    "gutterPixels": 1,
+    "uvUnits": "0..16; reversed ranges intentional for mirrored hand"
+  },
+  "models": {
+    "right": {
+      "path": "src/main/resources/assets/destiny/models/weapon_hands_w201/glove_right.json",
+      "resource": "destiny:weapon_hands_w201/glove_right",
+      "elements": 26,
+      "faces": 156,
+      "bounds": {
+        "min": [
+          7.12,
+          1.5755,
+          6.86
+        ],
+        "max": [
+          10.23,
+          9.22,
+          11.834
+        ]
+      }
+    },
+    "left": {
+      "path": "src/main/resources/assets/destiny/models/weapon_hands_w201/glove_left.json",
+      "resource": "destiny:weapon_hands_w201/glove_left",
+      "elements": 26,
+      "faces": 156,
+      "bounds": {
+        "min": [
+          5.77,
+          1.5755,
+          6.86
+        ],
+        "max": [
+          8.88,
+          9.22,
+          11.834
+        ]
+      }
+    }
+  },
+  "elementsCounts": {
+    "right": 26,
+    "left": 26,
+    "simultaneousPair": 52
+  },
+  "preview": {
+    "path": "art/weapons/w201/gloves-preview.png",
+    "renderer": "stdlib textured triangle rasterizer, orthographic Z buffer",
+    "views": [
+      "right front three-quarter",
+      "right inner palm",
+      "right dorsal/rear",
+      "left front three-quarter",
+      "right muzzle side -Z",
+      "atlas"
+    ],
+    "testGrip": "Preview-only cyan 1.1 X 1.3 guide, not emitted into glove models."
+  },
+  "nativeChecksNeeded": [
+    "Register/load both item models and resolve texture in the master's pack.",
+    "Ace, Duke, Izanagi and Ammit: check hip fire, ADS/combat, trigger and sight occlusion.",
+    "Check reload phases and support-hand movement with inherited per-weapon display scale.",
+    "Check centered-anchor scale/rotation and left mirror in the native renderer.",
+    "Briefly inspect 10-20 displayed assemblies for visible artifacts or stutter."
+  ]
+}

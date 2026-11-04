@@ -1,0 +1,80 @@
+{
+  "stage": "W174",
+  "label": "FOCUSED FURY",
+  "size": [
+    94,
+    24
+  ],
+  "font_family": "Arial Narrow Bold",
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "font_size_px": 22,
+  "horizontal_scale": 0.6045694200351494,
+  "alpha_bounds_px": [
+    2,
+    1,
+    92,
+    23
+  ],
+  "pillow_version": "12.3.0",
+  "freetype_version": "2.14.3",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "provenance": "Original generated system-font label, not an official Destiny sprite; no ripped asset or bundled font; W171 font, cap height and coverage method",
+  "runtime_contract": {
+    "icon_id": "destiny:gui/hud/perk_focused_fury_w174",
+    "layout": "TIMER",
+    "valid_ticks": [
+      1,
+      220
+    ],
+    "seconds": "ceil(ticks / 20): 0:01..0:11 for ticks 1..220; absent at 0 or outside valid range",
+    "activation": "Observed live remaining ticks only; no manufactured activation or counter",
+    "priority": "Appended eighteenth kind after the unchanged seventeen-kind prefix, including ADRENALINE_JUNKIE",
+    "max_rows": 4,
+    "node_suffixes": [
+      "marker",
+      "label",
+      "minutes",
+      "colon",
+      "tens",
+      "ones"
+    ],
+    "marker": "Green buff 0x8DE2AF; gold remains Memento Mori / Honed Edge only",
+    "visibility": "Held weapon; hidden rows use current remaining ticks on promotion",
+    "layout_limits": "Existing TIMER renderer: label center 168, width 94, height 24; marker right 113, label left 121, label right 215, timer left 227; 8/12-unit gaps; 32-unit row pitch; no native validation claim",
+    "native_validation": "Pending master isolated native/Vision queue below; offline preview is not gameplay evidence",
+    "native_queue": [
+      "Activate actual Focused Fury and compare the HUD to live adapter remaining ticks",
+      "Capture ticks 220/201 as 0:11, 200 as 0:10, 21 as 0:02, 20/1 as 0:01; at 0 all six nodes disappear",
+      "Keep four older perks visible while Focused Fury decays offscreen, then expire one and capture slot four at current ticks",
+      "Inject diagnostic -1/0/221 ticks and confirm absence rather than clamping or manufactured activation",
+      "Verify held-weapon switch, expiry, death and disconnect reconciliation removes all six nodes and legacy x/count suffixes",
+      "Read full 94x24 FOCUSED FURY at native HUD scale beside 0:11, with green marker and 32-unit pitch; Mori/Honed stay gold"
+    ],
+    "integration": "Master owns WeaponPerkHud live adapter; pass actual ticks as twenty-fourth Snapshot argument"
+  },
+  "source_facts": [
+    "W171 pinned font, 22px cap-size input, BASIC engine, 4x supersampling",
+    "WeaponPerkHud TIMER slot is 94x24 and marker is green unless Mori/Honed"
+  ],
+  "local_choices": [
+    "Condense full authored label into existing TIMER slot; 220-tick bound from W174 task contract; 90 percent horizontal condensation"
+  ],
+  "pack_bytes": 10046,
+  "pack_byte_budget": 16384,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_focused_fury_w174.png": "2f030d1abcf615fa4133289b0132ca39d6bfb5a84a6000b09aebad801bb252ad",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_focused_fury_w174.json": "fff81f4ad0301c942429f24c7e894266aae0b88d46b8802dd2055e97a6fe51ac",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_focused_fury_w174.json": "8a8072dda528de3e89a62555808921260ff76ef6786fac71c13e4bcad138fbad"
+  },
+  "source_files": {
+    "art/hud/w174/focused-fury.svg": "76cd307d6244400f34d2fb7792b0fa026eaa69a086e8b51bd0420d295138e401"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_focused_fury_w174.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_focused_fury_w174.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_focused_fury_w174.json",
+    "art/hud/w174/focused-fury.svg",
+    "art/hud/w174/manifest.json"
+  ]
+}

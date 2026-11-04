@@ -1,0 +1,101 @@
+{
+  "stage": "W108",
+  "selectedCount": 63,
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventoryUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "plugSetsUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "sourcePins": {
+    "art/weapons/w40/definitions.json": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "art/weapons/w40/provenance.json": {
+      "path": "art/weapons/w40/provenance.json",
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "bytes": 541
+    },
+    "art/weapons/w43/extraction.json": {
+      "path": "art/weapons/w43/extraction.json",
+      "sha256": "a133082c322a07e81837d0409caf09596dfad4fd9889904d1bdae7acd471d9d5",
+      "bytes": 10866
+    },
+    "art/weapons/w46/weapon_formulas.json": {
+      "path": "art/weapons/w46/weapon_formulas.json",
+      "sha256": "fed3a0e02c72e34b8fb6daac459ca776fa31ef90b7350905b5f6276ff9b3178d",
+      "bytes": 94651
+    },
+    "art/weapons/w46/stat_calc.rs": {
+      "path": "art/weapons/w46/stat_calc.rs",
+      "sha256": "5662ee9dea9e59547d73f81cd7c02872046266acb7b24017d2d09c123f31e5c2",
+      "bytes": 23106
+    },
+    "art/weapons/w46/rs_types.rs": {
+      "path": "art/weapons/w46/rs_types.rs",
+      "sha256": "faa476e6589d2362cf9ee8dd948410adfa7fa8507e8809f3cd10bb13ebba9b90",
+      "bytes": 5728
+    },
+    "src/main/resources/destiny/weapons/w46-timing.json": {
+      "path": "src/main/resources/destiny/weapons/w46-timing.json",
+      "sha256": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+      "bytes": 29734
+    },
+    "src/main/resources/destiny/weapons/w62-outlaw.json": {
+      "path": "src/main/resources/destiny/weapons/w62-outlaw.json",
+      "sha256": "5188d73a271b0a5080eb99d47c50a6d37ccae11fe756ebd2893c70499f3637bc",
+      "bytes": 4222
+    },
+    "src/main/resources/destiny/weapons/w77-dragonfly.json": {
+      "path": "src/main/resources/destiny/weapons/w77-dragonfly.json",
+      "sha256": "239e4fa48afebebd20ed765fc05b3e61bb34532bffea3a8cffdc536c867eab06",
+      "bytes": 2056
+    },
+    "src/main/resources/destiny/weapons/w80-payload.json": {
+      "path": "src/main/resources/destiny/weapons/w80-payload.json",
+      "sha256": "000fef1ccea2cdc653f723be8d8eeefb209255673dcc8189b3732c69173a03fc",
+      "bytes": 2536
+    },
+    "art/weapons/w108/references/clarity-source.json": {
+      "path": "art/weapons/w108/references/clarity-source.json",
+      "sha256": "0c44c13f8355b5b97e3502e6201315737521f7a3573a01f05201ee7a65c21461",
+      "bytes": 4085
+    },
+    "inventory": {
+      "path": "/tmp/destiny-weapons-w30/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "/tmp/destiny-weapons-w60/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "/tmp/destiny-weapons-w60/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    }
+  },
+  "generator": "scripts/extract_feeding_frenzy_w108.py",
+  "generatorSha256": "afe31bc05167d4d1a09e53b84c1ab5b18a16fc9798eec6dade84c796e07e55b4",
+  "runtimeSha256": "1ffbff575f0a29adc5a749d581f31c2f6dd67dfea20cf4a3484b6d2c1c522ce8",
+  "retrievedAtDate": "2026-10-25",
+  "reproduce": "rtk proxy python3 scripts/extract_feeding_frenzy_w108.py --verify --self-test",
+  "verification": "Read-only offline byte comparison; every consumed source SHA pinned. Negative tests mutate in-memory copies only. No source credentials.",
+  "research": {
+    "primary": "Existing official matching inventory/plugset JSON caches",
+    "numeric": "Public Clarity exact-base entry from pinned current live commit",
+    "directLightgg": "HTTP403; no assertion based on unavailable page",
+    "lifecycle": "Unknown beyond stated per-kill stack grant, duration and maximum; no defaults inferred",
+    "researchChild": null
+  },
+  "limitations": [
+    "Manifest proves exact selected optional traits and stats, not that any stack automatically selects a trait.",
+    "Clarity is community research. Its live-branch commit is pinned; this is not a new Destiny gameplay measurement.",
+    "The exact-base Clarity entry does not establish stow persistence, reload consumption, refresh scope or expiration mode.",
+    "Absolute reload durations inherit W46 historical community approximations, not a current sandbox certification.",
+    "Reload-start snapshot and tick quantization are local integration policies.",
+    "No enhanced, newer weapon copies, armor/magazine/masterwork modifiers or unproved combined-perk formulas.",
+    "All 13 selected supported weapons use whole-magazine timing; no first-shell measurement is inferred."
+  ]
+}

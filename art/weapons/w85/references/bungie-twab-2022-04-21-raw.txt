@@ -1,0 +1,1125 @@
+Title: This Week at Bungie - 4/21/2022
+
+URL Source: https://www.bungie.net/en/News/Article/51250
+
+Published Time: 2022-04-21T16:59:53Z
+
+Markdown Content:
+This week at Bungie, we seem to have written a short novel about upcoming weapon sandbox changes.
+
+Hello, dear reader. I’d like to kick this TWAB off with a quick word of advice; never end your drafting phase with your introduction. I’ve been kicking this thing around for about 15 minutes now, trying to figure out the best way to launch you into yet another Mega-TWAB worth of sandbox information. We’ve got quite a few changes planned for next Season, and we’re excited to start spreading the word.
+
+Let’s keep our conversation about the live game short and sweet, shall we? It’s an interesting week, to say the least! Master difficulty for Vow of the Disciple has kicked off, with just a few short weeks left before Guardians begin to claim their raid titles. Grandmasters continue to push the limits of player skill, buildcrafting, and general gameplay strategy. Iron Banner has come and gone, but Trials of Osiris returns this Friday with some light changes to the post-Flawless experience. There’s still quite a bit to do, especially if you’re trying to finish off each fresh Triumph released with The Witch Queen and Season of the Risen. All said, we’re having a good time, and we hope you are too.
+
+![Image 1](https://www.bungie.net/pubassets/pkgs/157/157828/2022_TWQ_Lightblade_Strike_Compressed10.jpg?cv=3983621215&av=3627550501)
+
+Even with a solid launch in our sails, the winds of change will always catch up to Destiny. As mentioned, we’ll be talking about how those winds are shifting the sands of our weapons sandbox. Some of you know the Destiny sandbox like the back of your hands. In some cases, well enough to release a forty-five-minute video about the intricacies of Shotguns. Well, do we have some changes ready for you...
+
+I’ve been known to recommend grabbing a drink of water and a snack for larger TWABs, and this is no different. Take this at your own pace, have a good time, and ask questions once you’re through. Our community and sandbox teams will be at the ready to issue clarifications as we can, and will follow up in future posts, TWAB’s, or other means of communication if necessary.
+
+## That’s a big Sandbox...
+
+In a few short sentences, we’ll be passing the mic over to **Staff Designer Chris Proctor**. Chris joins us today as a representative of the team, speaking to a _few hundred bullets_ of sandbox patch notes that were developed by a group of rag-tag Guardians here at the studio. Each of them contributed many, many hours of their time to get these changes prepped and ready for **Season 17**(beginning May 24), and we’re expecting Crucible strategies to shift a bit in just a few short weeks.
+
+For those that aren’t in-tune with the intricacies of the Destiny sandbox, this will be a lot to take in. You might need to wait a bit for a fellow community member to break down some of these changes to be less daunting. From a high level, we’re covering the following today:
+
+*   A handful of goals from the team.
+*   Glaives, commentary on their design, and some plans for future tuning.
+*   Flinch and airborne gameplay, and how we’re pushing these into buildcrafting.
+*   Tuning one-hit kills in the Crucible.
+*   General tuning for Special ammo, Exotic weaponry, Legendary archetypes, and a slew of weapon perks.
+
+Let’s get to it.
+
+> **Proctor:**G'day G'dians.
+> 
+> 
+> In Season 17 the sandbox team is making changes across all aspects of the sandbox to improve the player experience of PvP. Here are the weapons team's goals to support that.
+> 
+> 
+> **Introduce levers to tune how players build for airborne gunplay**
+> 
+> 
+> Destiny has extremely fluid and expressive airborne movement, but that movement must be balanced against grounded players lest it become oppressive. We want players who enjoy that play style to be able to build into it, but they'll have to make tough choices about what they leave behind to do so. Successfully engaging in the air will no longer be as simple as "put an Icarus Grip mod on it," but the upside for heavily investing in it will be higher.
+> 
+> 
+> **Allow players to mitigate for flinch**
+> 
+> 
+> Excessive flinch is a frequent complaint from players, most importantly when using Primary weapons and taking large chunks of damage from enemies. Players should be able to invest in flinch resistance, and baseline flinch should be lower on Primary weapons, but hand-tuned per archetype so that the weapons that need flinch resistance have the easiest access to it.
+> 
+> 
+> **Reduce the number of one-hit kills in PvP**
+> 
+> 
+> Sandbox overall wants to reduce the number of one-hit kills in PvP, shifting combat more towards Primary gunplay. With weapons this means tuning Special weapons, both the effectiveness of specific weapons and Special weapon uptime overall, and one key primary outlier.
+> 
+> 
+> **Address common feedback on weapons across all game modes**
+> 
+> 
+> Each Season the weapons team looks at Legendary and Exotic weapons that are over or under-performing and make adjustments - Season 17 will be a larger pass than usual, with more of a focus on underused weapons and PvP balance.
+> 
+> 
+> With our goals stated, let’s get to the meat of it all. First up, Glaives.
+> 
+> 
+> ### **Glaive-a-rave**
+> 
+> 
+> We've noticed that several aspects of how Glaives interact with weapon and armor perks don't match player expectations, and want to take some time to clarify the intent, the changes included in Season 17, and the logic we'll use for future changes.
+> 
+> 
+> A Glaive melee is a basic melee attack, not a weapon attack, doesn't consume ammo and deals Kinetic damage. So, it's more like an unpowered punch than a Sword swing.
+> 
+> 
+> Allowing buffs to weapon damage to apply to Glaive melees would be too powerful for something without an ammo limitation, particularly in PvP where even a small damage buff would allow for incredibly fast two hit kills. Also, in general we'd prefer to increase Glaive melee damage directly (as we're doing, in fact!) instead of effectively making weapon damage perks mandatory on Glaives.
+> 
+> 
+> Glaives already have a long lunge distance, and increasing this at all results in unreliable behavior over the network, so no melee lunge distance buffs apply to Glaive melees.
+> 
+> 
+> Our intent is:
+
+    
+        *   Glaive melees **should**activate perks that trigger off base melee damage or kills (for example, ammo refill from Grave Robber, weapon damage buff 5x stacks on Swashbuckler, ammo refill from Sealed Ahamkara Grasps).
+        *   Glaive melees **should not** activate perks that trigger off powered melee damage or kills, or require expending subclass melee energy (such as Combination Blow or Assassin's Cowl).
+        *   Glaive melees **should**benefit from melee damage buffs (such as Winter's Guile or Wormgod Caress).
+        *   Glaive melees **should not** benefit from weapon damage buffs (such as Rampage, Kill Clip, Swashbuckler).
+        *   Glaive _projectiles_**should**benefit from weapon damage buffs.
+
+> With that expectation set, there are some inconsistencies with how these are implemented in game, some of which we've already fixed, some which we'll look at in the future.
+> 
+> 
+> Once we have these guidelines consistently implemented in-game we may look at specific cases where this doesn't match player expectation and do something custom, updating descriptions where needed for clarification, but our primary goal is that players be able to predict how a Glaive interaction will work.
+> 
+> 
+> Here's what we changed during Season 16, largely bug fixes with some quality-of-life changes:
+
+    
+        *   Glaive projectile hits to reach maximum energy decreased from 6 to 4.
+        *   Glaive melee can now be interrupted by Hunter dodge.
+        *   The Grave Robber perk now pulls from reserves on Glaives instead of generating ammo.
+        *   Glaives no longer get stuck in _clang recovery_ when using a melee attack on each other.
+        *   Sealed Ahamkara Grasps no longer reloads Glaives on projectile hits (but does on melee hits as expected).
+        *   Glaive melees can no longer stunlock high-health combatants.
+        *   Glaive melee kills are now tracked in match history, for bounties and so forth.
+
+> Here's what's changing in Season 17:
+
+    
+        *   We're pushing Glaives deeper into their roles of hard-hitting melee damage and near-complete protection when shielded, as well as increasing projectile speed to make them more reliable at range.
+
+        
+
+            
+                *   Note: the Glaive shield grants 97.5% damage resistance in PvE, 75% in PvP.
+                *   Increased melee damage vs PvE enemies (except for bosses and vehicles) by 25%.
+                *   Reduced energy drain speed while shielded by 30%.
+                *   Increased projectile speed dependent on the range stat:
+
+                
+
+                    
+                        *   At 0 stat: increased from 30 to 60 m/s.
+                        *   At 100 stat: increased from 80 to 100 m/s.
+
+> _Pictured: Guardians holding Exotic Glaives, which are about to be buffed in Season 17._
+
+    
+        *   Exotic Glaives have all been buffed, in addition to the global Glaive changes which make it easier to build energy (projectile speed making landing shots easier and energy granted per projectile hit).
+
+        
+
+            
+                *   Titan Glaive, Edge of Action: players now gain a Void overshield while inside the bubble, Helm of Saint-14 now applies to this bubble as it does for Ward of Dawn.
+                *   Warlock Glaive, Edge of Intent: increased speed and acceleration of the healing turret projectiles.
+                *   Hunter Glaive, Edge of Concurrence: tripled the damage of the wave detonation, increased the number of enemies it can chain to from 4 to 8.
+
+> ### Global Changes
+> 
+> 
+> **Flinch**
+> 
+> 
+> Aim deflection on receiving damage, typically called flinch, is a common pain point, particularly on Primary ammo weapons. We've rebuilt the **stability**weapon stat to grant flinch resistance in addition to its other effects, with a maximum flinch resistance of 10% to 25% dependent on weapon archetype. With this change players can build for flinch resistance, more easily on weapons that feel flinch more than others, and less so on Special weapons, which we don't want to be easier to use when under fire.
+> 
+> 
+> From internal playtests, you may not feel the difference when using just one source of flinch resistance, but when stacking two or more sources the benefit is strong.
+
+    
+        *   Note that higher zoom weapons are more affected by flinch, which we took into account when tuning these numbers.
+        *   Here's the breakdown for flinch resistance with 100 stability:
+
+        
+
+            
+                *   25%: Autorifle, Submachine Gun, Bow
+                *   20%: Pulse Rifle, Scout Rifle, Sidearm, Machine Gun
+                *   15%: Hand Cannon, Trace Rifle
+                *   10%: Fusion Rifle, Shotgun, Sniper Rifle, Grenade Launcher (both Breech and Drum), Linear Fusion Rifle (both Special and Heavy versions), Rocket Launcher
+                *   Note that a stability stat of below 20 will technically have a small flinch resistance penalty, but only around five weapons have a stability stat in that range.
+
+        *   Mentioning here because it's a related change, the **Resilience**character stat now grants flinch resistance of 0% at 0 stat, 10% at 100 stat.
+        *   Examples (note that sources of flinch resistance stack multiplicatively):
+
+        
+
+            
+                *   A 100-stability-stat Suros Pulse Rifle (with Suros Synergy active), 10 Resilience, No Distractions and two Unflinching Pulse Rifle armor mods, while buffed by Rally Barricade:
+
+                
+
+                    
+                        *   0.8 * 0.8 * 0.9 * 0.65 * 0.7 * 0.5 = 0.1x, i.e., 90% flinch resistance.
+
+                *   A 70-stability stat Hand Cannon, 5 Resilience, one Unflinching Hand Cannon armor mod:
+
+                
+
+                    
+                        *   0.91 x 0.95 x 0.7 = 0.61, i.e., 39% flinch resistance.
+
+> **Airborne Gunplay**
+> 
+> 
+> Before getting to buildcrafting, we’ve made a fundamental change to the modifiers applied while airborne. Your Primary weapons will have less randomness in projectile accuracy in most cases, you’ll have less aim assist instead, and will need precise aiming to land your shots without building heavily into airborne.
+> 
+> 
+> We've added a new weapon stat, "Airborne Effectiveness," which is present on all weapons (except those where being airborne doesn’t have an effect, Swords for example), which maps onto aspects of airborne gunplay using these guidelines:
+
+    
+        *   With little to no investment (0-30 airborne stat), a character will have a smaller accuracy penalty than retail but will have significantly lower aim assist.
+        *   With minimal investment (31-50 airborne stat), a character will have around the same in-air accuracy as Icarus-equipped weapons do currently, but with noticeably lower aim assist.
+        *   With substantial investment (51-70 airborne stat), a character will have better accuracy than retail weapons with Icarus, with fewer misses due to randomness, but with reduced aim assist.
+        *   With specialized investment (71-99 airborne stat), a character will have no airborne accuracy penalty, with very slightly less aim assist.
+        *   With full investment (100 airborne stat), a character will have no airborne accuracy penalty, and the same aim assist.
+
+> This stat has been hand tuned on all Exotic weapons, everything that shipped in Season 16 or 17, and everything that's ever shipped as Trials of Osiris or Nightfall loot. Older Legendary weapons have a default value, set per weapon archetype to a value just below the middle of the allowed stat range.
+> 
+> 
+> **NOTE:**this will be a hidden stat at Season 17 launch, similar to aim assist and recoil direction. You'll be able to check the stat on a specific weapon through the API, and in Season 18 several previously hidden stats will be visible on the weapon inspection screen.
+
+    
+        *   This stat influences several aspects of airborne gunplay:
+
+        
+
+            
+                *   Aim Assist cone penalty angles (i.e. auto-aim angle, reticle friction/adhesion angle) - a high-penalty to this angle at 0 stat, and a low or zero penalty at 100 stat.
+                *   Accuracy cone penalty angle for Primary weapons: a lower penalty than currently at 0 stat, zero penalty at 60-100 stat.
+                *   Accuracy cone penalty for Special weapons: a slightly lower penalty than currently at 0 stat, zero penalty at 100 stat.
+                *   Headshot aim assistance: 0 at 0 stat, 1 degree at 100-stat on Primary weapons, Slug Shotguns, Linear Fusion Rifles and Machine Guns, 0.5 degrees on Sniper Rifles.
+
+                
+
+                    
+                        *   This controls how forgiving headshots are while airborne - if this is zero, you must be pinpoint aiming _precisely_ at the head to get the headshot, otherwise you'll get a body shot even if your aim assist cone overlaps the head.
+                        *   Previously while airborne, players would get full aim assistance for headshots provided their aim assist cone overlapped the head _at all_.
+
+                *   Pellet Shotgun spread angle - +25% at 0 stat, 0 at 100-stat (i.e., more Shotgun spread at low Airborne Effectiveness stat).
+
+        *   What this means overall is that you'll get fewer misses due to randomness from the accuracy cone while airborne, but reliance on aiming is much higher at low stat. To make this easier you will need to build into airborne. With decent aim you will land more body shots instead of crits.
+        *   Before and after examples of accuracy cone penalty:
+
+        
+
+            
+                *   Hand Cannon
+
+                
+
+                    
+                        *   Before, 0.667 degrees airborne accuracy penalty
+                        *   After, 0 stat: 0.450 degrees
+                        *   After, 60 stat: 0 degrees
+
+                *   Sniper Rifle
+
+                
+
+                    
+                        *   Before, 3 degrees
+                        *   After, 0 stat: 2 degrees
+                        *   After, 60 stat: 0.8 degrees
+                        *   After, 100 stat: 0 degrees
+
+        *   The Airborne Effectiveness stat comes from three sources: weapon, subclass, and armor.
+
+        
+
+            
+                *   Weapon:
+
+                
+
+                    
+
+                        
+                            *   The weapon's base Airborne Effectiveness stat, with ranges varying from 0 to 10, and 0 to 30 depending on the weapon archetype.
+
+                            
+
+                                
+                                    *   Exotic weapons typically get bumped up, i.e., higher stat than Legendary weapons in that archetype (unless they're already extremely strong).
+
+                            *   The Icarus Grip/Adept Icarus weapon mod: +15.
+                            *   Certain weapon perks, such as the redesigned Air Assault.
+                            *   Valid stat ranges for Legendary weapons (Exotics sometimes exceed these).
+
+                            
+
+                                
+                                    *   Hand Cannon: 0-25
+                                    *   Sidearm: 0-30
+                                    *   Auto Rifle: 0-25
+                                    *   Pulse Rifle: 0-25
+                                    *   Scout Rifle: 0-20
+                                    *   Submachine Gun: 0-30
+                                    *   Bow: 0-20
+                                    *   Sniper Rifle: 0-5
+                                    *   Shotgun: 0-5
+                                    *   Fusion Rifle: 0-10
+                                    *   Breech Grenade Launcher: 0-5
+                                    *   Trace Rifle: 0-15
+                                    *   Rocket Launcher: 0-10
+                                    *   Machine Gun: 0-20
+                                    *   Linear Fusion Rifle: 0-15
+                                    *   Drum Grenade Launcher: 0-20
+                                    *   Glaive: 0-15
+
+                            *   Higher tiers of Legendary weapons (Trials, raid, Nightfall) use the upper end of these ranges, as with other stats.
+                            *   Some examples of Exotic weapon outliers:
+
+                            
+
+                                
+                                    *   Sweet Business: 27
+                                    *   Merciless: 15
+                                    *   Fighting Lion: 12
+                                    *   Sunshot: 27
+                                    *   Skyburner's Oath: 35
+                                    *   Rat King: 30
+                                    *   The Huckleberry: 33
+                                    *   Ace of Spades: 14 (as an example of an Exotic that is already plenty strong enough and doesn't need to excel here)
+                                    *   The Chaperone: 1 (ditto)
+                                    *   Thunderlord: 26
+                                    *   Traveler's Chosen: 35
+                                    *   [REDACTED]: 29
+
+                            *   Some examples of hand-tuned Legendary weapon stats:
+
+                            
+
+                                
+                                    *   Frontier's Cry: 19
+                                    *   Deliverance: 9
+                                    *   Submission: 27
+                                    *   Silicon Neuroma: 4
+                                    *   Cantata-57: 12
+                                    *   The Messenger: 20
+                                    *   Hung Jury SR4: 22
+                                    *   Ragnhild-D: 3
+                                    *   Igneous Hammer: 23
+
+                *   Subclass:
+
+                
+
+                    
+                        *   The Heat Rises ability: +70 while Heat Rises is active (i.e., on consuming your grenade)
+                        *   The Tempered Metal ability: +20 after getting a Solar weapon kill
+                        *   The Whisper of Hedrons Stasis Fragment: +20 after freezing a target
+
+                *   Exotic armor: armor that revolves around being airborne, or works on specific weapons, grants a bonus or penalty in the -50 to +40 range (or higher if conditional)
+
+                
+
+                    
+                        *   Foetracer: +20 to all
+                        *   Mechaneer's Tricksleeves: +50 to Sidearms
+                        *   Oathkeeper: +40 to Bows
+                        *   Sealed Ahamkara Grasps: +50 to all for 5 seconds after a melee hit
+                        *   Lucky Pants: +20 to Hand Cannons after readying a Hand Cannon
+                        *   ST0MP-EE5: -50 to all
+                        *   No Backup Plans: +30 to Shotguns
+                        *   Actium War Rig: +30 to Auto Rifles and Machine Guns
+                        *   Hallowfire Heart: +20 to all
+                        *   Lion Rampant: +50 hipfire only
+                        *   Peacekeepers: +40 to Submachine Guns
+                        *   Peregrine Greaves: +20 to all
+                        *   Eye of Another World: +15 to all
+                        *   Astrocyte Verse: +30 to all
+                        *   Ophidian Aspect: +10 to all
+                        *   Necrotic Grips: +30 to Weapons of Sorrow
+                        *   Wings of Sacred Dawn: +50 to all
+                        *   Boots of the Assembler: +30 to Lumina
+                        *   [redacted]: +30 to Fusion Rifles and Linear Fusion Rifles
+
+> This means that in general if you want good Airborne Effectiveness (say 70 stat), you should pick a weapon with a high stat, put Icarus on it, and either equip an Exotic armor piece that helps, or run a subclass Aspect, Fragment, or ability, and if you want the best possible Airborne Effectiveness, you'll generally have to go all in on weapon, Exotic armor, and subclass.
+> 
+> 
+> Examples:
+
+    
+        *   Frontier's Cry (with Precision Hand Cannon bonus), Icarus Grip, Lucky Pants:
+
+        
+
+            
+                *   19 + 25 + 15 + 20 = 79 Airborne Effectiveness
+
+        *   Submission, Icarus Grip, Stompees, Tempered Metal active:
+
+        
+
+            
+                *   27 + 15 - 50 + 20 = 12 Airborne Effectiveness
+
+        *   Tarrabah, Peacekeepers, Whisper of Hedrons active:
+
+        
+
+            
+                *   23 + 40 + 20 = 83 Airborne Effectiveness
+
+        *   Skyburner's Oath, Heat Rises active:
+
+        
+
+            
+                *   35 + 70 = 100 (i.e., capped)
+
+> This is a big weapon system change. We'll be monitoring how it rolls out and expect to make adjustments post-ship. For fun, here are some graphs showing the most used armor exotics across each class. We'll be watching data (and feedback) once these changes are live to see how things shift!
+> 
+> 
+> **Hunter**
+> 
+> 
+> ![Image 2](https://www.bungie.net/pubassets/pkgs/157/157828/TWAB_Hunter-Exotic-Armor-Usage.jpg?cv=3983621215&av=3627550501)****
+> 
+> 
+> **Titan**
+> 
+> 
+> ![Image 3](https://www.bungie.net/pubassets/pkgs/157/157828/TWAB_Titan-Exotic-Armor-Usage.jpg?cv=3983621215&av=3627550501)****
+> 
+> 
+> **Warlock**
+> 
+> 
+> ![Image 4](https://www.bungie.net/pubassets/pkgs/157/157828/TWAB_Warlock-Exotic-Armor-Usage.jpg?cv=3983621215&av=3627550501)****
+> 
+> 
+> **Playlist Weapons**
+> 
+> 
+> The latest playlist weapons drop from Gambit, Crucible, and strike activity completions. Older weapons are available from vendor-rank packages or can be focused.
+> 
+> 
+> ![Image 5](https://www.bungie.net/pubassets/pkgs/157/157828/V600_Ritual_Weapons.jpg?cv=3983621215&av=3627550501)
+> 
+> 
+> _Pictured: Playlist weapons released with Season of the Risen._
+> 
+> 
+> These weapons are intended to provide interesting drops even for players who spend a lot of time in an activity. And while we want to keep the large perk pools to address that goal, we want to provide a way to reduce the duration of the chase for players who want a specific weapon. Also, since the older playlist weapons are still available as vendor rank-up rewards we want them to feel more relevant in a post-Origin-Trait world.
+
+    
+        *   Playlist weapons now have a chance to roll with extra traits in one or both columns, increasing with number of rank resets with that vendor during a given Season.
+
+        
+
+            
+                *   Note, reputation resets each Season, so you’ll need to play these activities each Season to unlock the potential for extra perks.
+
+        *   All playlist weapons from Beyond Light and later will drop with the appropriate Origin Trait.
+
+> **Stat Display Update**
+> 
+> 
+> Following the recent change to show numbers for all stats instead of just bars, we've opted to change the stat display on weapons to more clearly reflect their capabilities. All weapon stat bars now range 0 to 100, instead of being limited to some range in the middle of the bar.
+> 
+> 
+> This change eliminates rounding and other errors, particularly on Adept weapons, Masterworks, and enhanced traits, and better conveys the bounds a weapon stat can exist within. This is purely a display change. No weapon behavior has changed, but you should expect all existing weapon stat bars to look slightly different.
+> 
+> 
+> **One-hit Kills and Special Ammo**
+> 
+> 
+> There are several damage buffs external to weapons that allow weapons to one-hit kill without much investment, such as an Aggressive Sniper Rifle with High Impact Reserves, Eriana’s Vow or Le Monarque, specifically when combined with an external 20% damage buff. As an example, Empowering Rift can give many Sniper Rifles one-hit body-shot capabilities in the Crucible.
+> 
+> 
+> ![Image 6](https://www.bungie.net/pubassets/pkgs/157/157828/2022_Season_of_the_Risen_Crucible_Compressed01.jpg?cv=3983621215&av=3627550501)
+> 
+> 
+> Most of these use the same buff under the hood, so we've adjusted them all at once. With these changes it's going to be much rarer to get an easy one-hit kill with a weapon that wouldn't typically allow it.
+
+    
+        *   Reduced the damage bonus for Empowering Rift, High Energy Fire, and Inertia Override from 20% to 15% against players (no effect in PvE).
+
+> In addition, we want Special ammo to be less plentiful, making it more difficult to chain Special weapon kills.
+
+    
+        *   Disabled ammo scavenger armor mods in PvP.
+
+        
+
+            
+                *   No matter how much ammo a player was carrying on death, if you pick up a Special brick you can only get one ammo for a Shotgun/Sniper Rifle (or "one kill's worth of ammo" for weapons that require more than one shot to kill, e.g., Forerunner, Trace Rifles)
+
+        *   Retuned several Special weapon archetypes and Exotic weapons (see below), with the general goal of reducing the effectiveness and uptime of Special weapons.
+
+> ### Archetypes
+> 
+> 
+> Special weapons, in particular Shotguns and Fusion Rifles, are responsible for more one-hit kills than we'd like in PvP. We still want them to be an option, but less ubiquitous, less effective at multiple ranges, and with lower uptime.
+> 
+> 
+> ![Image 7](https://www.bungie.net/pubassets/pkgs/157/157828/TWAB_Special-Weapons-by-Type_1.jpg?cv=3983621215&av=3627550501)
+> 
+> 
+> _Pictured: Special weapon usage in the Crucible, broken out by archetype._
+> 
+> 
+> **Special Weapons**
+
+    
+        *   All Special weapons have had their in-air accuracy significantly reduced. While we are okay with encouraging players to build into using their Primary weapons more effectively in the air, we do not believe a prevalence of airborne one-hit kill options is good for PvP.
+
+        
+
+            
+                *   Special Weapons have a slightly larger airborne accuracy penalty than Primary weapons at 0 Airborne Effectiveness stat, reduced to 0 at 100 stat.
+                *   Special Weapons have a similar airborne aim assist cone penalty to other weapons (around 50% at 0 stat), and this penalty can be reduced but not entirely removed by investing in Airborne Effectiveness.
+
+        *   Sniper Rifles are fairly slow to ready, stow and aim down sights, which has made Snapshot feel mandatory for many players.
+
+        
+
+            
+                *   Reduced Stow, Ready and Aim Down Sights times by 10%, i.e., all snipers are now snappier (there's a matching change to Snapshot below).
+                *   Sniper Rifles have less access to ammo than Shotguns and Fusion Rifles (where kills drop ammo right in front of you), so we think ammo scarcity will prevent Sniper Rifles from spiking.  
+
+> _Pictured: Shotgun usage, broken out by Intrinsic._
+
+    
+        *   Slug and pellet Shotguns are still overwhelmingly popular in PvP despite some recent changes, so we've touched them again with the goal of encouraging some diversity in Special weapon choice. We’re keeping an eye on this change, since we’ve touched Shotguns multiple times recently, and will adjust it if needed. With this change we expect Shotguns to have a shorter one-hit kill distance, but still be effective enough in that short-range kill role. This change reduces Shotgun one-hit kill distance by around 0.5m, because the importance of spread angle is just as high as damage falloff and this has not been touched.
+
+        
+
+            
+                *   Reduced damage falloff start and end by 1m.
+                *   Reduced aim assist and magnetism falloff start and end by 2m.
+
+        *   Fusion Rifle usage is trending pretty high, particularly in Trials, and bringing Shotguns down a little more would make them too good an option, so we've made a global change. With these changes 20m+ Fusion Rifle one-hit kills should be very uncommon (through a combination of damage falloff and recoil changes).
+
+        
+
+            
+                *   Reduced damage falloff near distance.
+
+                
+
+                    
+                        *   2m at 0 range (~2.7m when ADS with a 15-zoom stat)
+                        *   1.3m at 100 range (~2.275m when ADS with a 15-zoom stat)
+
+                *   Reduced damage falloff far distance.
+
+                
+
+                    
+                        *   1m at 0 range (~1.35m when ADS with a 15-zoom stat)
+                        *   1.3m at 100 range (~1.75m when ADS with a 15-zoom stat)
+
+                *   Reduced recoil scalar variance between 0 and 100 stability.
+
+                
+
+                    
+                        *   0 stability: unchanged at 0.750
+                        *   100 stability: increased from 0.500 to 0.550 (i.e., increased the recoil penalty slightly)
+
+> ![Image 8](https://www.bungie.net/pubassets/pkgs/157/157828/TWAB_Fusions-by-Name.jpg?cv=3983621215&av=3627550501)
+> 
+> 
+> _Pictured: Fusion Rifle usage, broken out by name._
+
+    
+        *   When we rebuilt Fusion Rifles in Season 15, we wanted to differentiate the subfamilies dramatically from each other, which worked! Now that we’ve seen them in action for a couple of Seasons, we’re pulling back from the extremes a little. With these changes Fusion Rifle subfamilies are still very different from each other, but high impacts are stronger and rapid-fires and precisions should be a little less dominant.
+
+        
+
+            
+                *   High Impact: reduced unmodified High Impact charge time from 1.000 to 0.960s, increased damage per burst by 10.
+                *   Precision: increased unmodified charge time from 0.740 to 0.780s.
+                *   Rapid Fire: increased unmodified charge time from 0.460 to 0.500, decreased damage per burst by 20.
+                *   New charge time and damage per burst for all Fusion Rifle subfamilies:
+
+                
+
+                    
+                        *   High Impact: 0.960s, 330 damage
+                        *   Precision: 0.780s, 280 damage
+                        *   Adaptive: 0.660s, 270 damage
+                        *   Rapid Fire: 0.500s, 245 damage
+
+        *   Besides Divinity, Trace Rifles aren't as popular in hard content as we want them to be (we particularly want damage type reworks of the oldest three Trace Rifles to have a chance to shine this Season), and they're also more affected by disabling scavenger armor mods than other Special weapons. With this change they're a better use of Special ammo against non-red bar targets.
+
+        
+
+            
+                *   Increase Trace Rifle damage against non-red bar combatants by 20%.
+                *   Increased ammo picked up per Special ammo brick from 18 to 30.
+
+> **Primary Weapons**
+
+    
+        *   Auto Rifles and Pulse Rifles aren't as competitive as we'd like at mid-range, and Lightweight Pulse Rifles are too hard to use to hit their optimal time to kill - with these changes we expect Auto Rifles and Pulse Rifles to better compete with Hand Cannons in mid-long range and outrange standard zoom Submachine Guns.
+
+        
+
+            
+                *   Auto Rifle
+
+                
+
+                    
+                        *   Increased damage falloff near distance by 0.75m.
+
+                *   Pulse Rifle
+
+                
+
+                    
+                        *   Increased damage falloff near distance based on the range stat:
+
+                        
+
+                            
+                                *   0 range: increased from 15 to 16m.
+                                *   100 range: increased from 22.5 to 24m.
+
+                                
+
+                                    
+                                        *   (Note that this is the hip-fire falloff distance and is multiplied by the zoom value to get the aim down sights falloff distance).
+
+                                *   Damage falloff far distance remains 40m regardless of the range stat.
+
+                        *   Increased Lightweight (450RPM) Pulse Rifle damage per bullet from 15 to 16 (with a 1.65x precision scalar this will increase precision damage from 24.75 to 26.4).
+
+                        
+
+                            
+                                *   This won't change the optimal time to kill in PvP but will reduce the number of crits required.
+
+        *   Zoom is too important a factor on Submachine Guns, and Submachine Guns with low zoom don’t feel competitive in PvP. We've reduced the variance in zoom, brought the base zoom up from 13 to 14 and extended the damage falloff distance. With this change, several standard zoom Submachine Guns will be more competitive, but this does make the inaccessible Submachine Gun with highest perk/trait RNG (Multimach) compete less with Auto Rifles and it will no longer straight-up outclass every other Submachine Gun in PvP.
+
+        
+
+            
+                *   Increased damage falloff by 1.5m
+                *   Adjusted zoom values on most viable Legendary Submachine Guns and one Exotic.
+
+                
+
+                    
+                        *   Shayura's Wrath: 17 to 16
+                        *   Multimach: With max zoom scope: 17 to 15 (second highest zoom will bring this to 14 instead)
+                        *   Stochastic Variable: 13 to 14
+                        *   Ikelos (just noting the change from The Witch Queen here): 13 to 14
+                        *   Seventh Seraph: 13 to 14
+                        *   Every Waking Moment: 13 to 14
+                        *   The Huckleberry: 13 to 15
+
+                *   We like Adaptive Submachine Guns and are starting to make them again. But in their current form they kill a little too fast with body shots, so we've reduced body damage to increase their body shot time to kill by one bullet without impacting their optimal time to kill.
+
+                
+
+                    
+                        *   Decreased body damage from 12 to 11.25
+                        *   Increased precision multiplier from 1.35 to 1.44
+
+        *   Precision Frame Hand Cannons have always been good while airborne, effectively having built-in Icarus Grip, and with the changes to airborne functionality we wanted to preserve that feel while translating their advantage to the new system.
+
+        
+
+            
+                *   Intrinsic switched from a 75% airborne accuracy penalty reduction to +25 Airborne Effectiveness stat (this means that if you had a Frontier's Cry with an Icarus Grip mod in it, you would be at 19 + 25 + 15 = 59 before factoring in armor or subclass).
+
+> **Heavy Weapons**
+
+    
+        *   Machine Guns still aren't where we want them to be in PvE, so we're giving them an additional buff, but less so against bosses, where their extremely long range and deep ammo reserves would make them strong in too many roles. With this change they'll shred most enemies without stepping on top tier boss damage options.
+
+        
+
+            
+                *   Increased damage by 40% against PvE enemies (20% vs bosses).
+
+                
+
+                    
+                        *   Xenophage and Grand Overture receive this buff, except for the bonus vs bosses.
+
+        *   Sword stats have been inconsistent for a while now, so we've tidied all of these up (mostly cosmetic)
+
+        
+
+            
+                *   Fixed several inconsistencies in stat display between different Swords (this has no gameplay impact).
+                *   Increased the charge rate stat of Sola's Scar from 20 to 50 to match Temptation's hook.
+
+        *   Rocket Launcher subfamilies weren’t differentiated enough by the previous change, so we’ve made the differences more extreme. With this change we expect there to be a more marked tradeoff for the intrinsic tracking on precisions, and a greater benefit for the other subfamilies. Specified relative to the baseline, i.e. High Impact Rocket Launchers
+
+        
+
+            
+                *   Precision: -10% damage (both impact and detonation)
+                *   High Impact: no change (this subfamily has the highest blast radius)
+                *   Adaptive and Aggressive: +10% damage
+
+> ![Image 9](https://www.bungie.net/pubassets/pkgs/157/157828/2022_TWQ_Gear_Compressed10.jpg?cv=3983621215&av=3627550501)
+> 
+> 
+> **Exotics**
+
+    
+        *   All Exotics that shipped before the Forsaken release now have their kill trackers visible by default
+        *   Fighting Lion needed a bit more of a buff, so we improved its reload speed when Thin the Herd is active a couple of releases back, and now we're increasing its blast radius and damage. With this change it should be easier to get the damage you need to trigger its perk.
+
+        
+
+            
+                *   Reverted the Season 15 Breech Grenade Launcher blast radius reduction, but just for Fighting Lion, i.e., increased blast radius by 0.4m.
+                *   Increased damage by 5%.
+
+        *   Eyes of Tomorrow as a raid Exotic ought to be better against tough PvE enemies - with this change it's a solid option in this role, particularly with the Adaptive Ordnance perk active.
+
+        
+
+            
+                *   Increased damage vs bosses and Champions by 30%.
+
+        *   Leviathan's Breath always felt like it should absolutely wreck Champions, and using its first shot to stun an Unstoppable Champion without it doing much damage felt bad. Archer's Tempo from its catalyst is significant on paper but in practice that draw speed buff isn't as noticeable as we'd like. Overall, we hope these changes make it feel a bit better against all types of Champions and other tough enemies in hard content.
+
+        
+
+            
+                *   The Archer's Tempo perk from the catalyst now has increased effect (just on this weapon).
+
+                
+
+                    
+                        *   The standard draw time scalar for Archer's Tempo is 0.75x, it is now 0.5625x on Leviathan's Breath.
+
+                *   Added a small delay before detonation on Champions, minibosses, and bosses - this allows the impact to stun an Unstoppable Champion and the detonation to deal bonus damage against the stunned Champion.
+                *   Damage changed to be more of an even split between impact and detonation, and increased damage across the board by ~50%.
+
+                
+
+                    
+                        *   Overall damage vs Champions is roughly doubled (even more compared to shooting an un-stunned unstoppable Champion).
+
+        *   The Huckleberry had an underwhelming engagement range, updated zoom based on the change to baseline Submachine Gun zoom.
+
+        
+
+            
+                *   Increased zoom stat from 13 to 15.
+
+        *   Our experiment with pushing Xenophage into harder-hitting but slower-firing didn't pan out, so we're increasing the rate of fire and adjusting damage back to what it was.
+
+        
+
+            
+                *   Increased rate of fire from 100RPM to 120RPM.
+                *   Reduced damage per bullet to match the previous.
+                *   Doesn't benefit from the Season 17 Machine Gun damage buff vs bosses.
+
+        *   Le Monarque is too oppressive when combined with external damage buffs, but we felt that it could be stronger in PvE - with this change combined with the damage buff change above we've introduced a 60-resilience gate on killing a Guardian in PvP with a crit while in an Empowering Rift or similar.
+
+        
+
+            
+                *   Reduced poison tick damage vs players by 25%.
+                *   Changed poison damage type from burn to poison (this is largely housekeeping, not gameplay-significant).
+                *   Increased poison tick damage vs AI by 50%.
+
+        *   Lorentz Driver can be difficult to fight against in PvP, in part because it does very high body shot damage. With this change, getting left super weak by a body shot should be less common, though we're keeping an eye on how this change lands and may revisit it later.
+
+        
+
+            
+                *   Reduced body shot damage against players by 20% (this will also prevent it from being a one-hit kill with a body shot while in an Empowering Rift, combined with that change).
+                *   Body damage reverts to old behavior when in the weapon's damage mode.
+                *   Precision damage in any mode unchanged.
+
+        *   Skyburner's Oath felt like it didn't have a niche, except for airborne memes, so we've made a bunch of changes aiming to improve its ease of use, give it some more utility and really push it into that airborne role.
+
+        
+
+            
+                *   Increased ADS projectile speed to 9999 (i.e., this projectile is now hitscan).
+                *   Both ADS and hip-fire are now 150 RPM.
+                *   Hip-fire projectile no longer tracks, but arcs similar to a Grenade Launcher and has a larger detonation size than ADS.
+                *   The hip-fire detonation also applies a burn to targets.
+                *   The bonus range from the Masterwork has been rolled into the base stats of the weapon. The Masterwork now grants bonus reload speed instead.
+                *   Has the highest Airborne Effectiveness stat of any weapon in the game (35).
+
+        *   The Last Word plays very differently on mouse and keyboard than it does on controller, but the disparity doesn't need to be that large. We're keeping an eye on this one too.
+
+        
+
+            
+                *   Reduced mouse and keyboard recoil penalty from 33% to 22%.
+
+        *   Arbalest is more dominant than intended in hard PvE content, able to fill the anti-barrier role as well as shield breaking and boss damage. We've made a fairly small adjustment here but may need to look at it again in a future Season.
+
+        
+
+            
+                *   Reduced damage vs Champions by 25% (will still break barriers in one hit).
+
+        *   Graviton Lance's catalyst didn't help the weapon enough, and we wanted to give it a bit of a boost. This change gives it some interesting utility in PvE and PvP, particularly with the buff to Exotic Primary weapons in The Witch Queen.
+
+        
+
+            
+                *   Catalyst changed from granting Hidden Hand to granting Vorpal Weapon and Turnabout.
+
+        *   Grand Overture's most recent adjustment switched the missiles to fire in bursts of 5, which allows for more granularity in unloading that damage, but sometimes you just want them all to fly out at once.
+
+        
+
+            
+                *   Reduced time between bursts when in missile mode. Holding the trigger will now fire all missiles in a continuous burst, tapping will fire 5-round bursts.
+
+        *   Coldheart: Arc damage type update, and Coldheart's Exotic trait more or less being "is a Trace Rifle" no longer fits in a world with Legendary Trace Rifles. The ease of use on sustained damage was also pretty low.
+
+        
+
+            
+                *   Sustained damage creates an Ionic Trace and collecting an Ionic Trace grants energy to all your abilities.
+                *   Increased grace time before the damage ramp clears from 0.113s to 1.0s.
+
+        *   Prometheus Lens: Solar damage type update, and generally this needed some tweaks to be viable
+
+        
+
+            
+                *   Sustained damage applies a more useful burn to targets.
+
+        *   Wavesplitter: Void damage type update, and the power-cycling mechanic was interesting but ultimately hard to capitalize on.
+
+        
+
+            
+                *   Power level no longer cycles randomly, the default damage output is the same as the old middle tier.
+                *   Picking up an Orb of Power now grants 10s of maximum power and caps at 20s, up from 5 and 10.
+                *   Now suppresses targets while granted this mode by picking up an Orb.
+
+        *   Osteo Striga's projectile somehow shipped rotated by 90 degrees, looks a bit weird.
+
+        
+
+            
+                *   Corrected rotation on the projectile model.
+
+        *   Lord of Wolves is kind of a Shotgun, but has its own custom tuning. It wasn't impacted by the previous Shotgun change, and was much too strong with Shotguns and Fusion Rifles getting reduced range, this brings it more in line.
+
+        
+
+            
+                *   Reduced damage falloff start and end by 25%.
+
+> **Perks**
+> 
+> 
+> Note: Where an enhanced perk exists and an adjustment is needed, it's been adjusted in the same way.
+
+    
+        *   Snapshot Sights has felt mandatory on Sniper Rifles forever, with this change a Sniper Rifle with Snapshot will feel about the same, but one without Snapshot will feel a lot snappier.
+
+        
+
+            
+                *   Increased ADS animation speed scalar from 0.5 to 0.75 for Special ammo weapons, Primary ammo weapons are unchanged.
+
+        *   Opening Shot has felt mandatory on Shotguns forever, in large part because it gives part of its buff as a damage falloff scalar - this isn't something we like on short-range weapons. You can still feel the range bump with this change unless range is already capped, but it won't let weapons push completely outside their intended engagement ranges.
+
+        
+
+            
+                *   Removed damage falloff scalar.
+                *   Increased range stat bonus from +20 to +25.
+                *   Other stats from this perk are unchanged (+20 aim assist stat, 5% reduced accuracy cone angle, 10% reduced accuracy cone growth).
+
+        *   Full Choke has been the go-to magazine perk forever (justified or not) - with this change other magazine options should be competitive.
+
+        
+
+            
+                *   Increased spread angle scale from 0.95 to 0.9625 (i.e., narrows the spread a little less).
+
+        *   Smoothbore has always felt like an awkward magazine perk, so we're buffing it a little.
+
+        
+
+            
+                *   Reduced spread angle scale from 1.1 to 1.075 (i.e., widens the spread a little less).
+
+        *   Desperado is a strong perk in its current form, but we'd like to be able to put it on more weapons without breaking PvP. With this adjustment it's still strong, has more PvE utility, and can be applied to Pulse Rifle subfamilies aside from High Impact if desired.
+
+        
+
+            
+                *   Increased fire recovery scalar from 0.415 to 0.7 (i.e., doesn't fire as fast with the perk active).
+                *   Reduced duration from 7s to 6s, added a timer to the buff text.
+                *   Removed the PvE damage penalty.
+
+        *   Air Assault was shelved a long time ago, but adding the Airborne Effectiveness stat gave us the opportunity to turn it into a perk that actually does what it says on the description. With this change, airborne gunplay while wounded will be much more effective.
+
+        
+
+            
+                *   Rebuilt now grants up to +60 Airborne Effectiveness stat when wounded (same trigger conditions as Eye of the Storm).
+
+        *   Mulligan was never quite strong enough to warrant a pick previously, but buffing it would have been risky on Special weapons. With this change, it's useful on rapid-fire Primary weapons where you don't expect every shot to hit, occupying a similar role to Triple Tap (but inverted).
+
+        
+
+            
+                *   Increased chance to return ammo on a miss from 20% to 35% on Primary ammo weapons.
+                *   Unchanged on Special and Heavy ammo weapons.
+
+        *   Compulsive Reloader shipped a little weak, with this change you can really feel the reload speed bump.
+
+        
+
+            
+                *   Increased reload stat buff from +40 to +50.
+                *   Added a 0.95x reload animation scalar.
+
+        *   Adagio was allowing for a one-hit body shot kill with slug Shotguns. While this is possible with other perks such as Swashbuckler, the investment required to trigger the perk is much too low for that power bump. With this change a slug Shotgun with Adagio will be less of a monster in PvP, but will still be able to get headshot kills at greater ranges with the perk active.
+
+        
+
+            
+                *   Reduced the damage bonus for Shotguns from 30% to 20%.
+
+> **Mods**
+
+    
+        *   Icarus Grip will now grant the Airborne Effectiveness stat instead of its previous airborne accuracy penalty scalar.
+
+        
+
+            
+                *   Removed airborne accuracy scalar, now grants +15 Airborne Effectiveness stat.
+                *   Adept Icarus Grip now grants +15 Airborne Effectiveness stat and +5 Handling.
+
+Well, that was quite a bit, wasn’t it? Let it soak in for a while. You may need to read a few sections more than once to understand the technical speak behind it all. Heck, you might not really understand the changes until they’re in your hands! In any case, we’ll be watching the conversation around these planned changes and answering things where we can.
+
+## Wait, More Weapon Talk?
+
+While the following isn’t about weapon tuning, we felt it was important to bundle the following with the mega-TWAB of upcoming sandbox information to keep players like you in the know. Just before last Season ended, we announced a list of weapons that would be rotating out of Destiny 2 activities with little time to spare. Some of these weapons could be seen as “powerhouses” in previous sandbox metas, while others were just happy to be included.
+
+Next Season, and the Season after, will be no different. In an effort to keep loot pools from overcrowding as we continue to develop and release sweet new pieces of gear, we’ll have a handful of weapons from Iron Banner, Nightfalls, and Trials of Osiris rotating out at the start of Season 17. We’re also including a list of weapons that will be rotating out in Season 18 in hopes of giving you a full Season to target anything that might be missing from your collections.
+
+**Leaving loot pools at the beginning of Season 17:**
+
+*   Iron Banner
+
+    
+        *   Occluded Finality Sniper Rifle
+        *   Finite Impactor Hand Cannon
+
+*   Nightfalls
+
+    
+        *   The Comedian Shotgun
+        *   Palindrome Hand Cannon
+
+*   Trials of Osiris
+
+    
+        *   Shayura’s Wrath Submachine Gun
+        *   The Messenger Pulse Rifle
+
+**Leaving loot pools at the beginning of Season 18:**
+
+*   Iron Banner
+
+    
+        *   Peacebond Sidearm
+        *   Archon's Thunder Machine Gun
+
+*   Nightfalls
+
+    
+        *   PLUG ONE.1 Fusion Rifle
+        *   The Hothead Rocket Launcher
+
+*   Trials of Osiris
+
+    
+        *   Eye of Sol Sniper Rifle
+        *   The Summoner Auto Rifle
+
+_Note: Season 18 is a ways out! Weapons included in our planned rotation are subject to change._
+
+While we don’t have any firm plans to share, we can note that the team is aware of the feedback surrounding weapon rotations and availability and looking at opportunities in the future to address it. To keep expectations in check, this is likely a longer-term investigation, so don’t expect too much news over the next Season. Once we have more information, we’ll be sure to let you know.
+
+Stay tuned for announcements on weapon rotation info and new weapons coming to each activity.
+
+## Near Term Abilities Tuning
+
+With weapons talk out of the way, let’s shift back to some near-term conversations and happenings in Destiny 2. Well, in the near term, we do have some tuning for abilities and Exotic armors in the Crucible as well. Next Tuesday, April 26, Destiny 2 Hotfix 4.0.1.1 will become available with the following changes:
+
+![Image 10](https://www.bungie.net/pubassets/pkgs/157/157828/2022_TWQ_Gear_Compressed01.jpg?cv=3983621215&av=3627550501)
+
+*   Axion Bolt base cooldown increased from 91s to 152s.
+*   Titan Barricade’s base cooldown when the Bastion Void Aspect is equipped is now 82s, up from 53s.
+
+    
+        *   This matches the recharge rate of Warlock Rift.
+
+*   Offensive Bulwark now provides 60% less bonus grenade energy regeneration in PvP game modes.
+*   Whisper of Chains now provides 15% bonus damage resistance against players when near a Stasis crystal, down from 25%.
+
+    
+        *   Unchanged vs. PvE targets.
+
+*   Renewal Grasps
+
+    
+        *   While equipped, Renewal Grasps increases the base cooldown of the Duskfield Grenade from 62s to 152s.
+        *   The outgoing damage penalty applied to player victims in the Renewal Grasps’ Duskfield Grenade reduced from 50% to 20%.
+
+        
+
+            
+                *   Damage unchanged vs. PvE targets.
+
+Stay tuned for the full patch notes article, planned for release alongside the hotfix!
+
+## Gambit Labs – Mote Thief
+
+![Image 11](https://www.bungie.net/pubassets/pkgs/157/157828/Gambit_Motes.jpg?cv=3983621215&av=3627550501)
+
+Looking to next week, we also have our second run of Gambit Labs coming into play. Invasion Swaps went off well, giving us great data and feedback on Mote dunking, invasion cadence, and primeval healing in a world where you invited opponents onto your playing field when hitting certain thresholds. For this edition of Labs, we’ll be experimenting with Mote Thieves starting on April 26.
+
+> Fundamentally, the original concept of the invader was Guardian as Taken Terror, overpowered and dangerous — something new to have to fight. While that is very compelling, we don't believe it is the only compelling invader fantasy. We believe the sneaky Mote Thief is worth exploring, too.
+
+    
+        *   Normal Mote drain from having two Blockers is disabled.
+        *   Instead, every second the invader is invading, one Mote drains directly from your bank to the invader's bank.
+
+Keep in mind, invaders need to be near the bank in order to drain Motes. This won’t be too much of a hide-and-seek affair. Do you prioritize clearing the active front of enemies, or do you help your teammates address a beefed-up Titan relaxing behind their Barricade, looking to steal some of your hard-earned Motes? Hunters may throw a Smoke Bomb or two in an effort to jam up your radar, while Warlocks could throw a strategically placed Well of Radiance directly above your bank, making it easier to fight alongside the Taken Blockers they just sent over.
+
+We’re looking forward to your feedback and will be watching the conversation throughout the week.
+
+## Prime the Drop Pod... for Rewards
+
+Just yesterday, I was discussing some fun Ghost Shell options with a friend seeking a new look for their companion. While it started with the question of “What looks best with the Butterbark shader?” it led to some fun commentary on cosmetic rewards in Destiny 2. Funny enough, this little Ghost Shell happens to be a part of this month's [Prime Rewards drop](https://gaming.amazon.com/loot/destiny2)! Don’t know what I’m talking about? Well, here’s the quick summary: Sign up for [Prime Gaming](https://gaming.amazon.com/loot/destiny2), link your Bungie.net account, get the sweet cosmetics listed below, with more rewards coming in future months. Seems simple, right? Well... it is! Lined up for this month, we have a killer Sparrow, a few ships jammed into one, and a fun little dance to do in the Tower.
+
+![Image 12](https://www.bungie.net/pubassets/pkgs/171/171060/detail_tab1_card1_2x.jpg?cv=3983621215&av=3627550501)
+
+*   Tip of the Spear Exotic Sparrow
+*   The Tall Tale Exotic Ship
+*   Drop Pod Legendary Ghost Shell
+*   Taunt Dance Legendary Emote
+
+## What... is Your Quest?
+
+![Image 13](https://www.bungie.net/pubassets/pkgs/157/157031/D2_DPS_Gif.gif?cv=3983621215&av=3627550501)
+
+It can be somewhat tricky keeping track of every quest that Destiny 2 has to offer. On occasion, quests may be abandoned to make some space in inventory, or to help focus on some of the more important storylines a player is completing. Where do quests go when they’ve been abandoned? While an easy answer for some, not all in the community are aware! This week, Destiny Player Support has a rundown on hotfix timelines for next week, as well as some general guidance for players seeking to cross a bridge on their journey to find the Holy Grail.
+
+This is their report.
+
+**CONTEST MODE EMBLEM GRANT**
+
+Players who completed the Vow of the Disciple raid during the 24 hour extension of Contest Mode have been granted the Day at the Pyramid Triumph and The Cleaver emblem.
+
+Qualifying players will need to visit their Postmaster and claim the Lost Package to unlock the Day at the Pyramid Triumph. Claiming this Triumph will then drop The Cleaver emblem.
+
+**QUEST ARCHIVE**
+
+Players who are missing quests or who are attempting to reacquire previously abandoned quests should visit the Quest Archive in the Tower Courtyard, located next to the Postmaster. From here players can reacquire abandoned quests, organized by quest type.
+
+Players who are unable to locate their abandoned quests at the Quest Archive should also verify that they have checked all the vendor pages of the vendor who originally provided the quest.
+
+**HOTFIX 4.0.1.1**
+
+Next Tuesday, April 26, Destiny 2 Hotfix 4.0.1.1 will be released. View our [Destiny Server and Update Status](https://help.bungie.net/hc/en-us/articles/360049199271) page for maintenance times, as well as the timeline below:
+
+*   9 AM PDT (1600 UTC): Destiny 2 maintenance begins.
+*   9:45 AM (1645 UTC): Destiny 2 is brought offline.
+*   10 AM (1700 UTC): Destiny 2 Hotfix 4.0.1.1 will begin rolling out across all platforms and regions.
+*   11 AM (1800 UTC): Destiny 2 maintenance completes.
+
+Below is a list of some issues that are scheduled to be resolved with Hotfix 4.0.1.1:
+
+*   The Summoner Auto Rifle from Saint-14's reputation rewards is missing a Masterwork slot.
+*   The Lightblade and the Birthplace of the Vile Grandmaster Nightfalls did not count towards the completion of the Total Conquest Triumph.
+*   In Gambit, the Primeval’s shield sometimes did not successfully drop after defeating the Envoys.
+
+**KNOWN ISSUES**
+
+While we continue investigating various [known issues](https://help.bungie.net/hc/en-us/articles/4416375175444-Destiny-2-Year-5-Known-Issues-and-Vital-Information), here is a list of the latest issues that were reported to us in our [#Help Forum](https://www.bungie.net/en/Forums/Topics/?tg=Help&tSort=0&tType=0&d=0&lang=en):
+
+*   The Renewal Grasps’ damage buff does not always function within a Duskfield Grenade’s area of effect.
+*   The Sweet Sorrow Auto Rifle has an overly bright muzzle flash.
+
+*   Words in text chat may display vertically. This can be resolved by restarting Destiny 2.
+*   Lumina’s muzzle flash is bright compared to other hand cannons.
+
+For a full list of emergent issues in Destiny 2, players can review our [Known Issues article](https://help.bungie.net/hc/en-us/articles/4416375175444-Destiny-2-Year-5-Known-Issues-and-Vital-Information). Players who observe other issues should report them to our [#Help forum](https://www.bungie.net/en/Forums/Topics/?tg=Help&tSort=0&tType=0&d=0&lang=en).
+
+## Lights, Camera, PvP Domination
+
+![Image 14](https://www.bungie.net/pubassets/pkgs/145/145100/TWAB_MovieOfTheWeek_2020_Animated.gif?cv=3983621215&av=3627550501)
+
+**Hippy:**OK, phew. That’s a lot of words you had to pore through before getting to some dope community-created content, but lots of cool things we’re excited to share and even more are comin’ down the pipeline. While we inch closer and closer to the finish line of the current Season, we’ve got some delectable art and movie pieces to enjoy. The first one is too good to pass up; a beautifully edited video showing off some PvP domination while still somehow being a wonderfully choreographed experience made by one heck of a team. The second? Well, the second you should just watch, especially if you’re a Cayde fan.
+
+**Movie of the Week: Wake Up**
+
+[Video 5](https://www.youtube.com/watch?v=-oZk4zYyct4)
+
+**Movie of the Week: The return of Cayde-6**
+
+[Video 6](https://www.youtube.com/watch?v=xRdOVoDQJ1w)
+
+## Weekly Art Stop
+
+![Image 15](https://www.bungie.net/pubassets/pkgs/145/145100/TWAB_ArtistOfTheWeek_2020_Animated_V2.gif?cv=3983621215&av=3627550501)
+
+**Sam:**Gosh I love Thursdays so much. The past week has been pretty magical on the Creations page, not that it isn’t every week, but you’ll see what I mean. Up this week, we have an introduction to Titan etiquette as I am personally trying to learn the way of the punch, but as a Warlock-main, the struggle is real. And because we cannot pass up a hauntingly beautiful drawing of one of our favorites, we have Sathona.
+
+![Image 16](https://www.bungie.net/pubassets/pkgs/157/157828/Titans_Punch.jpg?cv=3983621215&av=3627550501)
+
+![Image 17](https://www.bungie.net/pubassets/pkgs/157/157828/sathona2.jpg?cv=3983621215&av=3627550501)
+
+As always, don’t forget to tag #Destiny2Art, #AOTW, and #MOTW to get a chance at that spotlight for your own creative contributions. Plus, we just love to see ‘em, so keep ‘em coming!
+
+## Seven is the Magic Number...
+
+Depending on when you’re reading this, Trials is returning tomorrow after a short hiatus. It’ll be another Labs weekend featuring Capture Zones! Last time Trails was available, a pesky little bug had slipped in, granting a few additional Adept rewards to players on Confidence passages.
+
+Well, good news everyone! This was sort of a feature. While we discussed this in the [patch notes on Tuesday](https://www.bungie.net/en/Explore/Detail/News/51249), I still wanted to take a moment to highlight this change. Over the last few Seasons, we’ve seen some great feedback and data on Trials rewards. One piece of feedback specifically speaks to the Flawless pool that’s enabled each Sunday. While this creates a more welcoming environment for those of differing skill levels in the non-Flawless pool, we have heard feedback from those in the Flawless pool that things feel a bit more competitive without much of a change to rewards output.
+
+Moving forward, any player in the Flawless pool who is at the seventh win of a given passage will have chances for Adept weapons to drop post-match. Whether you still have Flawless passage or ended up with a couple losses under your belt, you’ll continue to have chances for post-match Adept drops once you’ve reached seven total wins. We’d been working on this change for a bit, but a small issue led us to backing out the change just before Season 16 began. Through that process, an alternate bug was introduced on Confidence passages, giving a slight preview of changes to come. Pardon our dust!
+
+In any case, we’re looking forward to watching the feedback roll in this weekend. I’ve heard this reward might be desirable for those who enjoy longer views on the battlefield. I never did snag a good roll on [REDACTED], so I’ll be spending some time in there this weekend. Maybe I’ll see you out there?
+
+With this 9k (our editor rounds up) behemoth of a blog article in the bag, I’m taking a few weeks off to relax in the... rain? Sun? You never really know during a Seattle spring. Whatever the weather, it’ll be nice to spend some time focusing on physical and mental health. There’s not a single doubt in my mind that I’ll play some Destiny (especially with some fun events on the way), but I might just hop in a car and start driving without a specific destination in mind. Maybe I’ll end up on a mountain, or maybe I’ll take a walk on a beach. Who knows where the road will take me. Now that we have more hands on the Community Team, we each have a few more opportunities to take a breather.
+
+I hope you’re able to find some time this year for the same. Be kind to yourselves, to each other, and I’ll see you again soon.
+
+Cheers,
+
+-dmg04

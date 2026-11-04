@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-24",
+  "evidenceBoundary": "Source-verified descriptions and dated patch rules. Current means latest applicable rule retrieved, not in-game verification or exhaustive patch coverage.",
+  "selectedIds": [
+    "abide_the_return",
+    "goldtusk",
+    "crown_splitter",
+    "falling_guillotine",
+    "temptation_s_hook"
+  ],
+  "manifestEvidence": "official-manifest.json",
+  "sourceEvidence": "sources.json",
+  "ammo": {
+    "type": "HEAVY",
+    "separateFromSwordEnergy": true,
+    "poolModel": "Single finite total; no reload transfer recommended.",
+    "poolModelStatus": "Corroborated by existing W46 sword-capacity interpretation and manifest, not directly stated by the retrieved Bungie patches; no live-game verification.",
+    "lightAttackAmmo": {
+      "value": null,
+      "status": "UNVERIFIED in retrieved official evidence; choose explicitly AUTHORED if needed."
+    },
+    "chargedHeavyAmmo": [
+      {
+        "id": "abide_the_return",
+        "value": null,
+        "status": "UNVERIFIED_CURRENT",
+        "sourceIds": [],
+        "note": "Do not infer current cost from 2019 patch, frame label, energy, or ammo-capacity stat."
+      },
+      {
+        "id": "goldtusk",
+        "value": null,
+        "status": "UNVERIFIED_CURRENT",
+        "sourceIds": [],
+        "note": "Do not infer current cost from 2019 patch, frame label, energy, or ammo-capacity stat."
+      },
+      {
+        "id": "crown_splitter",
+        "value": null,
+        "status": "UNVERIFIED_CURRENT",
+        "sourceIds": [],
+        "note": "Do not infer current cost from 2019 patch, frame label, energy, or ammo-capacity stat."
+      },
+      {
+        "id": "falling_guillotine",
+        "value": 4,
+        "status": "LATEST_RETRIEVED_OFFICIAL_PATCH",
+        "sourceIds": [
+          "s2026vortex"
+        ],
+        "note": "Do not infer current cost from 2019 patch, frame label, energy, or ammo-capacity stat."
+      },
+      {
+        "id": "temptation_s_hook",
+        "value": null,
+        "status": "UNVERIFIED_CURRENT",
+        "sourceIds": [],
+        "note": "Caster 2021 ammo=5 is historical; 2024 wording energy cost 5->4 is ambiguous."
+      }
+    ],
+    "unchargedHeavyAmmo": {
+      "value": 1,
+      "status": "OFFICIAL_PATCH_2024_06_04",
+      "sourceIds": [
+        "s2024"
+      ],
+      "scope": "Adaptive explicit; same as other uncharged heavies per patch. Exact frame/airborne exceptions not playtested."
+    },
+    "historicalChargedCosts": [
+      {
+        "frame": "adaptive",
+        "value": 4,
+        "date": "2019-06-04",
+        "sourceId": "s2019"
+      },
+      {
+        "frame": "aggressive",
+        "value": 4,
+        "date": "2019-06-04",
+        "sourceId": "s2019"
+      },
+      {
+        "frame": "lightweight",
+        "value": 3,
+        "date": "2019-06-04",
+        "sourceId": "s2019"
+      },
+      {
+        "frame": "vortex",
+        "value": 6,
+        "date": "2021-05-11",
+        "sourceId": "s2021vortex",
+        "supersededBy": "s2026vortex"
+      },
+      {
+        "frame": "caster",
+        "value": 5,
+        "date": "2021-12-07",
+        "sourceId": "s2021caster",
+        "laterAmbiguousChange": "s2024caster"
+      }
+    ],
+    "rawMagazineStat": "50,70,40,46,23 respectively in selected-item order; raw base stats, NOT verified final perk-adjusted capacities or magazine-plus-reserve budgets."
+  },
+  "energy": {
+    "latestRetrievedRule": "energy > 0 permits full-power heavy; energy == 0 permits unpowered/weak heavy subject to ammo/attack legality.",
+    "status": "OFFICIAL_PATCH_2023_08_22",
+    "sourceIds": [
+      "s2023",
+      "s2024"
+    ],
+    "historical": "2020 full-energy stronger / partial weaker; cached 2026 intrinsic text repeats this older wording.",
+    "linearPartialEnergyDamageCurveVerified": false,
+    "fullEnergyGateRequired": false,
+    "exactHeavyEnergyDrain": null,
+    "exactRegenRate": null,
+    "rechargeDelayRangeSeconds": [
+      1.05,
+      2.7
+    ],
+    "rechargeStatHash": 3022301683,
+    "warning": "Charge Time hash 2961396640 values 20/50 are not sword milliseconds. Do not use generic ranged reload/RPM formulas."
+  },
+  "guard": {
+    "ammoSpent": 0,
+    "minimumAmmoToBegin": 1,
+    "sourceIds": [
+      "s2020ship",
+      "s2023"
+    ],
+    "continuousDrain": "Supported by 2020 active guard energy consumption / guard endurance plus 2023 duration improvements. Exact rate and regen-while-held behavior unverified.",
+    "drainOnIncomingHit": false,
+    "guardEfficiencyRemoved": true,
+    "regen": "After a short charge-rate-dependent delay; faster recharge after 2023. Do not infer exact piecewise/tick formulas.",
+    "pveDamageReductionRange": [
+      0.825,
+      0.95
+    ],
+    "pvpDamageReductionRange": [
+      0.525,
+      0.65
+    ],
+    "resistanceStatToDrFormula": null,
+    "energyToDrFormula": null,
+    "energyToDrNote": "No retrieved official source establishes DR proportional to remaining energy. Published DR depends on guard resistance stat.",
+    "damageWhileGuardedNote": "Damage eligibility, angle, unblockable attacks and bypass exceptions not measured."
+  },
+  "frames": [
+    {
+      "id": "abide_the_return",
+      "bungieHash": 1644160541,
+      "frame": "adaptive",
+      "heavyShape": "uppercut",
+      "status": "OFFICIAL_PINNED_MANIFEST",
+      "unknowns": [
+        "damage",
+        "range/radius",
+        "timing",
+        "hit count",
+        "movement displacement"
+      ]
+    },
+    {
+      "id": "goldtusk",
+      "bungieHash": 3371413057,
+      "frame": "lightweight",
+      "heavyShape": "dash",
+      "status": "OFFICIAL_PINNED_MANIFEST",
+      "unknowns": [
+        "damage",
+        "range/radius",
+        "timing",
+        "hit count",
+        "movement displacement"
+      ]
+    },
+    {
+      "id": "crown_splitter",
+      "bungieHash": 2782325302,
+      "frame": "aggressive",
+      "heavyShape": "slam",
+      "status": "OFFICIAL_PINNED_MANIFEST",
+      "unknowns": [
+        "damage",
+        "range/radius",
+        "timing",
+        "hit count",
+        "movement displacement"
+      ]
+    },
+    {
+      "id": "falling_guillotine",
+      "bungieHash": 614426548,
+      "frame": "vortex",
+      "heavyShape": "spin",
+      "status": "OFFICIAL_PINNED_MANIFEST",
+      "unknowns": [
+        "damage",
+        "range/radius",
+        "timing",
+        "hit count",
+        "movement displacement"
+      ]
+    },
+    {
+      "id": "temptation_s_hook",
+      "bungieHash": 35794111,
+      "frame": "caster",
+      "heavyShape": "projectile",
+      "status": "OFFICIAL_PINNED_MANIFEST",
+      "unknowns": [
+        "damage",
+        "range/radius",
+        "timing",
+        "hit count",
+        "projectile speed/lifetime/tracking"
+      ]
+    }
+  ],
+  "authoredBalanceBoundary": [
+    "Any selected light/charged-heavy ammo cost lacking a current official source.",
+    "Damage values, per-frame cadence, weak-heavy damage multiplier, hit shapes/ranges, movement distances, projectile tuning.",
+    "Guard drain rate, regeneration rate/interpolation, exact per-guard DR and charge-rate mapping.",
+    "Any continuous energy-to-heavy-damage or energy-to-guard-DR curve.",
+    "Single-pool/no-reload runtime translation is supported design interpretation, not live-game proof."
+  ],
+  "temptationsHookDamageWarning": {
+    "sourceId": "s2025hook",
+    "note": "2025-03-18 patch updates Hook to modern caster damage profiles; old low-damage numbers are not current evidence."
+  }
+}

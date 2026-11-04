@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "weapon": "dust_rock_blues",
+  "framing": {
+    "translation": [
+      -0.9,
+      0.45,
+      3.5
+    ],
+    "rotation": [
+      -1.5,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      0
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true,
+    "reloadCameraLift": 5.0
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A3F1",
+      "sourceShellPoseHold": true,
+      "sourcePalmContactFit": true
+    }
+  },
+  "evidence": [
+    {
+      "source": "art/weapons/w205/rigs/shotgun_2eb0529e.json",
+      "role": "exact_source_rig",
+      "observation": "Non-fallback shotgun binding explicitly includes dust_rock_blues; idle 80A8A3C2, ADS 80A8A3C5. Wrist/elbow directions and ordinary forearm lengths remain source-driven. cameraExported=false; sourceViewRotation [0,0,0] adds no extra direction calibration."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "inherited_mesh_contacts",
+      "observation": "Keep right [8,7.9,11.42] on Ivory_grip and left [7.8,8.52,0.7] under Foreend_black_core. Keep loading-port contact [7.3,9.15,7.1], partHint loading_port, policy shell. No contact position or rotation overrides; W211 adds only reload action/handling opt-ins."
+    },
+    {
+      "source": "art/weapons/w123/dust_rock_blues/design.json",
+      "role": "mesh_support_retention",
+      "observation": "Foreend_black_core spans Z -1.57..3.05 and Y 8.775..9.465. Authored left contact is below its underside. Source wrist separation differs from this remodeled fore-end: retain mesh contact with keepMeshSupport while using the rig directions and lengths."
+    },
+    {
+      "source": "art/weapons/w123/dust_rock_blues/comparison.png",
+      "role": "viewed_actual_png",
+      "observation": "Viewed reference photo and source/remodel obliques. Preserve long red shroud, ivory rear/grip, silver six-rib pump, dark inserts, open muzzle and sight notch. Source photo URL: https://www.bungie.net/common/destiny2_content/screenshots/636912560.jpg"
+    },
+    {
+      "source": "docs/qa/2026-10-26/w148/native/frames/w148-final-dust_rock_blues-hip.png",
+      "role": "viewed_historical_native_png",
+      "observation": "Older gun-only lower-right hip presentation with stock cropped at the right/bottom edge. It predates W205 skin arms and cannot establish current W206 acceptance or exact hand placement."
+    },
+    {
+      "source": "art/weapons/w178/first_in_last_out/reference-01.png",
+      "url": "https://www.youtube.com/watch?v=5IZfs2bjrYY&t=26",
+      "role": "viewed_related_shotgun_gameplay_png",
+      "observation": "First In, Last Out, not Dust Rock Blues: 26.4s frame shows support hand beneath fore-end and forearm entering bottom; 27.6667s reference-06.png shows underside handling during shell reload. Used only for broad shotgun support/reload semantics; not exact Dust Rock Blues framing or timing."
+    },
+    {
+      "source": "scripts/first_person_framing_w205.py",
+      "role": "hip_only_transform_contract",
+      "observation": "Positive translation Z moves gun and contacts toward camera; hip correction fades to zero through ADS. No cameraDepth. Gun full-ADS display is preserved at zero weight. Concrete numbers are authored calibration, not recovered camera data."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w211/vision1/screenshots/dust_rock_blues-reload.png",
+      "role": "viewed_actual_vision1_png",
+      "observation": "Viewed actual review/reload sheets and raw sample12/sample23 PNGs plus after-reload. Samples07/12/17/23 show red barrel but crop receiver/port and handling palms below the lower edge; pictured hip/ADS sights are clear. Held source progress .35/frame36 is retained. Shared framed() currently has no reloadCameraLift consumer; master implementation required before this candidate can affect output."
+    }
+  ],
+  "notes": [
+    "Authored first-person calibration candidate; native hip/ADS/reload verification pending master.",
+    "Compared with W205 shotgun [-0.65,0.6,0], [-1,2,0], 0.98: move inward another 0.25, reduce upward shift by 0.15, move toward camera 3.5 model units and add 0.5 degrees downward pitch. Preserve the existing scale and yaw.",
+    "Do not extend arms: unchanged exact-rig elbow/wrist length, unchanged fingerless skin-arm geometry; keepMeshSupport changes support contact placement only.",
+    "sourceViewRotation is rig direction calibration only, not camera recovery. Identity leaves the existing X-forward/Z-up mapping intact.",
+    "Inherit W201 contacts and shell loading policy. Keep support visible at rest; release toward the fixed receiver loading port during each shell insert and return beneath pump.",
+    "No weapon surface, sight geometry, accepted full-ADS weapon matrix, third-person display, audio or combat changes. Related-shotgun footage is not exact-weapon camera evidence.",
+    "W211 candidate: sourceFullChain=true uses evaluated source shoulder/elbow/wrist directions and common source weapon motion. It takes precedence over sourceWeaponRelative; no inert sourceWeaponRelative flag is added. Existing framing and ordinary source segment lengths are retained.",
+    "Explicit audited generic shotgun action 80A8A3F1 is not weapon-exclusive and supplies no extracted shell events. sourceShellPoseHold=true adapts the existing initial/loop/return lifecycle: initial approaches source progress .35, loop holds .35, return blends that same body/limb sample to rest. sourcePalmContactFit=true uses the existing handling weight to fit the left palm to the authored shell target. Preserve W201 contacts and W207 shell path, visibility and gameplay timing.",
+    "Worker reviewed master headless Blender report, original evaluated matrices and source bone sheet; did not open or evaluate Blender. W211 first actual Vision reviewed: hip/ADS sight clear; receiver/shell handling is cropped below frame during repeated inserts. Original fast adjacent-pose changes remain untouched; no arbitrary resmoothing or continuous60fps claim. Second actual Vision remains pending master.",
+    "Vision1 correction candidate: framing.reloadCameraLift=5.0 display model units, positive camera Y, applied by master after source_weapon_display to every framed body/part before contact and upper-arm attachment. Shell initial weight smooth(p/.36), loop weight1 including endpoints, return weight1-smooth(p); multiply by existing framing amount for ADS fade, and zero outside active shell reload/ADS/inspect/scope. Do not use negative reloadCameraLower with its per-loop fade. Existing hip/ADS transforms, contact coordinates, ordinary arm lengths and shell/gameplay timing remain unchanged. Estimated port/palm y~646/~693 in a960px frame, not a native measurement or Vision2 acceptance."
+  ]
+}

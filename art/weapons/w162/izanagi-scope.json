@@ -1,0 +1,74 @@
+{
+  "stage": "W162",
+  "weapon": "izanagis_burden",
+  "generator": "scripts/generate_izanagi_scope_w162.py",
+  "artwork": "Authored approximation from inspected original gameplay samples; not extracted or pixel-exact Bungie scope art",
+  "references": [
+    {
+      "url": "https://www.youtube.com/watch?v=KgJR3zohsEs",
+      "author": "Cheese Forever",
+      "sample": "W84 L3 M0 tiles1,7 (approx sampler2s,14s), 320x180",
+      "observed": "Wide clipped top corners, joined side contours, inward bars and small center sight"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ov6C5oF7KSc",
+      "author": "Ultraclocked",
+      "sample": "W84 L2 M1 ADS sequence; M2 tiles4,5,6 (approx sampler108s,110s,112s), 160x90",
+      "observed": "Normal/Honed/empty reticle comparison, warm brighter charged side contours",
+      "limitation": "Storyboard samples establish qualitative form, not exact linework, timing or dynamic reticle values"
+    },
+    {
+      "path": "art/weapons/w84/model/source/izanagi.bbmodel",
+      "observed": "79 canonical source cubes; zero-thickness lenses43,78, south UV[0,32,20.5,52] red clipped ring/ticks",
+      "limitation": "Physical lens texture is not a full-screen scope asset; unchanged and not repackaged as exact HUD"
+    }
+  ],
+  "sourceSha256": {
+    "src/main/resources/destiny/weapons/w84-exotics.json": "481a6353fb5d3fc040d71977da9c173c9e2fc8754050fe8bb237da5172837d6e",
+    "art/weapons/w84/model/source/izanagi.bbmodel": "9ae28369f80ff0f81bb7e1344ee50b618b9a2de62dcafc631287084dbe3c8f31",
+    "art/weapons/w84/references/gameplay-evidence.json": "9f7acd97e856158a947e23540827cdef52129c7ca196ce69f4d8e190268f0623",
+    "art/weapons/w84/references/youtube-KgJR3zohsEs-storyboard-L3-M0-raw.jpg": "180b84805dba18ffcb5da5a7d8c5d3941572fb32b482017b98b38d2afda87de6",
+    "art/weapons/w84/references/youtube-ov6C5oF7KSc-storyboard-L2-M1-raw.jpg": "dda6164cbcf6e13645bc7c78cc489de0915a13301c9841f10b7f9c0ef3159978",
+    "art/weapons/w84/references/youtube-ov6C5oF7KSc-storyboard-L2-M2-raw.jpg": "b92105f1ae48bfd0211890d4e5387ce51649ac935adfada60b5f419a3121a920",
+    "src/main/resources/assets/destiny/items/weapon_izanagi_w91/izanagis_burden.json": "e1a32bbdff914271fa611f8ec8366fbe3985e475c17f1d002d2a4d1325a94a07",
+    "src/main/resources/assets/destiny/items/weapon/izanagis_burden.json": "aacf7db971fb5172cea6e515a105dc1f467ccf370f603504ca2ae14cd153dc4d",
+    "src/main/resources/assets/destiny/textures/item/weapon/izanagis_burden_lens.png": "905b370044dbbb942b2db8515e29f2a053725a8d67268ad7c9d376124b7b7423"
+  },
+  "render": {
+    "frameVirtualSize": 3840,
+    "reticleVirtualSize": 80,
+    "aimPoint": [
+      960,
+      540
+    ],
+    "atlas": "Physical textures/item/hud PNGs and destiny:item/hud model references; no automatic conversion assumed",
+    "frameDepth": 0,
+    "reticleDepth": 6,
+    "normalTint": "FFFFFF",
+    "fundedHonedTint": "FFAA8C",
+    "perspective": "Only held-item FP contexts are empty. Vanilla server HUD follows ADS in F5 too; no forced camera",
+    "zoom": "Unchanged sourced45 / 4.5x in existing aim profile; no FOV writes here"
+  },
+  "nonFirstPerson": "W91 graph specialized by removing only unreachable FP display-context branches; preserves slot6, pose and both grips",
+  "sharedIntegration": [
+    "Parent: active W91 scoped IDLE selects WeaponScopes wrapper; RELOAD/HONED retain W91",
+    "Parent: register WeaponIzanagiScopeW162GameTests in shared fabric-gametest entrypoint",
+    "Parent: update superseded W84 no-scope, W45 exactly-five and W91 charged ADS routing assertions"
+  ],
+  "nativeQueue": [
+    "Pack reload and actual scope PNG at16:9/ultrawide",
+    "Both FP hands/grips; F5 observer charged cosmetic",
+    "Normal/Honed reload visible,61-tick commit and real charged shot",
+    "ADS release,swap,death,external camera cleanup; ammo/vitals above mask"
+  ],
+  "proofBoundary": "Offline artwork/codec/regressions only; GameTests authored for parent central run; no native client/server execution by worker",
+  "sha256": {
+    "src/main/resources/assets/destiny/items/weapon_scope_w45/izanagis_burden.json": "d8dc9f6170d26450a1b9b330928b8aa8661a0611619199e4562eaa6f51c408e5",
+    "src/main/resources/assets/destiny/textures/item/hud/scope_w162_izanagis_burden_frame.png": "288427f7e92a9e3fcda8f9c417ccfb1ab018a43b8e4b78e8d7792ef89d006269",
+    "src/main/resources/assets/destiny/models/gui/hud/scope_w162_izanagis_burden_frame.json": "ab6f8c1357e26b5f25bc47eeee467d7acb762c98ceb681b407a5a107fad2824e",
+    "src/main/resources/assets/destiny/items/gui/hud/scope_w162_izanagis_burden_frame.json": "fde2085ac705f72ad40671606af168e7662d617a58b0ca09dc6bd47ed47e1a18",
+    "src/main/resources/assets/destiny/textures/item/hud/scope_w162_izanagis_burden_reticle.png": "5bcba05af604a9897050f347927ae22d07cff3d8b31d671b1380a02d7eb4ef1a",
+    "src/main/resources/assets/destiny/models/gui/hud/scope_w162_izanagis_burden_reticle.json": "194b43185e85a0922fb24c50e92690f7f1006acc608a303554f903eacc5a5c9e",
+    "src/main/resources/assets/destiny/items/gui/hud/scope_w162_izanagis_burden_reticle.json": "760b18bf27bb4fdfd267a6653b99c75c0b9147c73d6b5c682792a1b5f2cd9b84"
+  }
+}

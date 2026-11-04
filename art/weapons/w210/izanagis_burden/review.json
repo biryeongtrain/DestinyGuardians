@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "stage": "W210",
+  "weapon": "izanagis_burden",
+  "status": "first_ordinary_and_fixture_Honed_Vision_reviewed_no_profile_change_second_Vision_pending",
+  "candidateProfile": "art/weapons/w206/izanagis_burden/profile.json",
+  "worktree": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w210-izanagis_burden",
+  "worktreeModified": true,
+  "sourceInspection": {
+    "originalBlendEvaluation": "Master-supplied separate original Blender process; not independently opened by this worker.",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/sniper_rifle_ececad46/blender/source.blend",
+    "inspectedPaths": [
+      "/private/tmp/destiny-w210-source/source-review.json",
+      "/private/tmp/destiny-w210-source/sniper_rifle_ececad46.json",
+      "/private/tmp/destiny-w210-source/sheets/sniper_rifle_ececad46-80A8A140-upper-chain.png",
+      "/private/tmp/destiny-w210-source/sheets/sniper_rifle_ececad46-80A8A14D-upper-chain.png",
+      "/Users/qf/IdeaProjects/DestinyGuardians/AGENTS.md",
+      "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w206/izanagis_burden/profile.json",
+      "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/contacts.json",
+      "/Users/qf/IdeaProjects/DestinyGuardians/src/main/resources/assets/destiny/models/item/weapon/izanagis_burden.json",
+      "/Users/qf/IdeaProjects/DestinyGuardians/scripts/rig_arms_w205.py",
+      "/Users/qf/IdeaProjects/DestinyGuardians/scripts/build_first_person_hands_w201.py",
+      "/Users/qf/IdeaProjects/DestinyGuardians/scripts/generate_izanagi_presentation_w91.py",
+      "/Users/qf/.codex/skills/minecraft-weapon-art-design/SKILL.md",
+      "/Users/qf/.codex/skills/minecraft-weapon-art-design/references/ace-izanagi-study.md"
+    ],
+    "viewedSourceSheets": [
+      "sniper_rifle_ececad46-80A8A140-upper-chain.png",
+      "sniper_rifle_ececad46-80A8A14D-upper-chain.png"
+    ],
+    "group": "sniper_rifle_ececad46",
+    "idle": "80A8A138",
+    "ads": "80A8A13F",
+    "ordinaryAction": "80A8A140",
+    "honedCandidateAction": "80A8A14D",
+    "originalEvaluatedSamplesPerReload": 61,
+    "sourceFrameRange": [
+      1,
+      102
+    ],
+    "sourceFps": 30,
+    "sourceHasMesh": false,
+    "sourceHasCamera": false,
+    "matrixSpace": "armature_object",
+    "matrixConvention": "row-major; column vectors",
+    "modelUnitConversion": {
+      "factor": 32,
+      "status": "authored_calibration_not_recovered_camera"
+    },
+    "segmentLengthRangesModelUnits": {
+      "80A8A140": {
+        "leftupperArm": {
+          "min": 8.726686137681575,
+          "max": 8.726692589318422
+        },
+        "leftforearm": {
+          "min": 8.141360908754029,
+          "max": 8.141366740794032
+        },
+        "rightupperArm": {
+          "min": 8.726568477645563,
+          "max": 8.726574595229813
+        },
+        "rightforearm": {
+          "min": 8.141359150208725,
+          "max": 8.141365033249377
+        }
+      },
+      "80A8A14D": {
+        "leftupperArm": {
+          "min": 8.726687261404956,
+          "max": 8.726692209750349
+        },
+        "leftforearm": {
+          "min": 8.141361326888365,
+          "max": 8.141366725779834
+        },
+        "rightupperArm": {
+          "min": 8.72656711051551,
+          "max": 8.726575553699194
+        },
+        "rightforearm": {
+          "min": 8.141358848525343,
+          "max": 8.141365922949788
+        }
+      }
+    },
+    "sheetFinding": "Both bones-only sheets show changing bent upper/forearm chains through reload, with closing samples near opening arrangement. They cannot establish contact, visibility, gameplay semantics or native acceptance."
+  },
+  "patchRationale": [
+    "Enable sourceFullChain and remove superseded sourceViewRotation [18,0,0]; retain original shoulder/elbow/wrist bends in shared weapon-parent space.",
+    "Retain existing framing and contacts, keepMeshSupport=true, hideSupportAtRest=false; cube23 supports existing long-forebody palm calibration.",
+    "Preserve ordinary/Honed CMD6 branches, scope, magazine/bolt partition, timing, audio and all mesh/UV."
+  ],
+  "narrowChecks": {
+    "profileJson": "passed_finite_JSON",
+    "exactGroupAndNonFallback": "passed",
+    "sourceActionSelection": "passed_ordinary_80A8A140_and_honed_80A8A14D",
+    "reloadSampleCounts": "passed_61_each",
+    "progressCoordinates": "passed_i_over_60",
+    "requiredSourceMatrices": "passed_4x4_finite",
+    "segmentLengths": "observed_ordinary_lengths_no_extension_requested",
+    "sharedAssetsGenerated": false,
+    "runtimeOrBuildRun": false,
+    "reviewJson": "passed_after_first_ordinary_and_fixture_Honed_review_only_update"
+  },
+  "integrationDependencies": [
+    "Master imports original61 + shoulder matrices",
+    "Master gates upper-arm emissions by profile",
+    "Master uses common source weapon parent for body and wrist translations"
+  ],
+  "vision": {
+    "first": {
+      "status": "ordinary_and_fixture_Honed_images_independently_viewed",
+      "images": [
+        "/private/tmp/destiny-w210-pass1-native/screenshots/izanagis_burden-review.png",
+        "/private/tmp/destiny-w210-pass1-native/screenshots/izanagis_burden-reload.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagis_burden-hip.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagis_burden-reload-sample-04.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagis_burden-reload-sample-08.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagis_burden-reload-sample-13.png",
+        "/private/tmp/destiny-w210-pass1-native/screenshots/izanagi-honed-review.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-02.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-03.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-04.png",
+        "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-05.png"
+      ],
+      "findingsReceived": true,
+      "masterReported": "Native use/reload/ADS completed; two distinct firing/forebody hands in hip; unobstructed scope aperture/reticle; normal source limbs through lower frame and late upper handling hand in reload samples08/13.",
+      "independentFindings": [
+        "Hip original PNG shows distinct rear firing hand and front underside support, each visually meeting the weapon; no confirmed wrist/prop separation in the visible contact areas.",
+        "ADS tile in the actual review sheet shows a clear scope aperture and central aiming mark; no visible hand occlusion of that aperture in this sampled view.",
+        "Original reload04 shows a wrist/palm against the rear weapon area with the arm exiting the lower frame. Reload08 shows the forebody-side hand meeting/overlapping the weapon silhouette. Reload13 shows the late upper hand and cuff continuous with its sleeve, crossing the upper weapon area while the other arm approaches the underside.",
+        "The late upper hand is compatible with the original right-hand excursion; treating the left as the sole reload handler throughout would contradict the source matrices. No confirmed swapped-hand or detached-wrist mismatch is established by the inspected PNGs.",
+        "Magazine/bolt contact surfaces are partly occluded and the source export contains no weapon mesh; these views do not prove exact finger/bolt engagement or continuous contact between samples. No speculative palm offset or mesh/timing adjustment is justified."
+      ],
+      "sourceDominantHandCheck": {
+        "source": "/private/tmp/destiny-w210-source/sniper_rifle_ececad46.json",
+        "action": "80A8A140",
+        "method": "Current weapon-local wrist position minus action-start weapon-local wrist position, using transposed source weapon rotation and authored x32 conversion; rounded travel distances, not runtime screen measurements.",
+        "samples": [
+          {
+            "progress": 0.2,
+            "sourceFrame": 21.2,
+            "leftWristTravelModelUnits": 15.6384,
+            "rightWristTravelModelUnits": 0.0001
+          },
+          {
+            "progress": 0.4,
+            "sourceFrame": 41.4,
+            "leftWristTravelModelUnits": 3.7237,
+            "rightWristTravelModelUnits": 0.0
+          },
+          {
+            "progress": 0.6,
+            "sourceFrame": 61.6,
+            "leftWristTravelModelUnits": 3.2233,
+            "rightWristTravelModelUnits": 6.1887
+          },
+          {
+            "progress": 0.8,
+            "sourceFrame": 81.8,
+            "leftWristTravelModelUnits": 2.8531,
+            "rightWristTravelModelUnits": 3.1701
+          }
+        ],
+        "conclusion": "Early source handling excursion is left-hand dominated while right stays at grip; later right leaves grip and returns. Source confirms phase-dependent handling, not a permanently fixed right firing wrist. No source mesh is available to certify the exact original prop contact.",
+        "nativeSampleTiming": "Viewed sample04 bracket clientTick1523..1525, sample08 1538..1540, sample13 1554..1556 from native capture metadata. Capture ordinals are not equated to original source frame indices."
+      },
+      "honed": {
+        "status": "fixture_initiated_actual_art_images_independently_reviewed_no_profile_change",
+        "images": [
+          "/private/tmp/destiny-w210-pass1-native/screenshots/izanagi-honed-review.png",
+          "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-02.png",
+          "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-03.png",
+          "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-04.png",
+          "/private/tmp/destiny-w210-pass1-native/frames/w210-izanagi-honed-05.png"
+        ],
+        "initiation": "Explicit server debug weapon-honed-reload fixture, as reported by master; not native Ctrl+Q proof.",
+        "masterReported": "16 actual bracketed captures w210-izanagi-honed-00..15; finished oracle retained. Worker inspected the actual review sheet and original handling frames02..05; no claim to have viewed all16 originals or independently read the finished oracle.",
+        "findings": [
+          "Review sheet shows both ready hands at00 and return to the same supported ready arrangement at06/09/12/15. Post-charge tiles display Honed Edge x4 and ammunition1; opening tile displays ammunition4.",
+          "Original02 shows both arms at the lowered/rear handling region. Original03/04 show the upper right-side handling hand raised over the weapon, with palm/cuff/sleeve visibly continuous, while the other arm approaches the long forebody from below. Original05 shows that upper hand withdrawing toward the lower-right edge.",
+          "Raised hand and weapon have visible separation in parts of03/04. This is an excursion/transit pose, not evidence of sustained bolt grasp; source wrist motion also leaves the firing grip during this phase. The sampled views do not establish that the hand must be touching a specific bolt surface at those instants.",
+          "No confirmed wrist/sleeve detachment, swapped source hand, stretched limb or failed return is established by these samples. Exact late bolt engagement remains unproven because contact surfaces are occluded/partly separated and the original source export has no prop mesh. No arbitrary contact/framing correction is justified."
+        ],
+        "sourceDominantHandCheck": {
+          "action": "80A8A14D",
+          "method": "Weapon-local wrist travel relative to action start, authored x32 conversion; not runtime pixel measurements or a mapping of native capture ordinal to source frame.",
+          "samples": [
+            {
+              "progress": 0.2,
+              "leftWristTravelModelUnits": 15.8289,
+              "rightWristTravelModelUnits": 0.0001
+            },
+            {
+              "progress": 0.4,
+              "leftWristTravelModelUnits": 3.7077,
+              "rightWristTravelModelUnits": 0.0001
+            },
+            {
+              "progress": 0.6,
+              "leftWristTravelModelUnits": 3.1846,
+              "rightWristTravelModelUnits": 6.1887
+            },
+            {
+              "progress": 0.8,
+              "leftWristTravelModelUnits": 2.573,
+              "rightWristTravelModelUnits": 3.1701
+            },
+            {
+              "progress": 1.0,
+              "leftWristTravelModelUnits": 0.0,
+              "rightWristTravelModelUnits": 0.0
+            }
+          ],
+          "conclusion": "Honed candidate also has early left excursion followed by late right excursion and return of both wrists; upper handling hand is compatible with source phase-dependent hand roles."
+        },
+        "captureBracketsClientTick": {
+          "02": [
+            3521,
+            3523
+          ],
+          "03": [
+            3531,
+            3533
+          ],
+          "04": [
+            3539,
+            3541
+          ],
+          "05": [
+            3549,
+            3551
+          ]
+        },
+        "nativeCtrlQVerified": false,
+        "confirmedMismatches": []
+      }
+    },
+    "agentCorrection": {
+      "status": "ordinary_and_fixture_Honed_review_completed_no_runtime_change",
+      "profileChanged": false,
+      "confirmedMismatches": [],
+      "decision": "Retain profile unchanged after ordinary and fixture-Honed art review. No confirmed attachment or source-hand mismatch warrants a profile correction. Preserve existing source rest palm calibration and phase-dependent source chain travel. Only review.json updated."
+    },
+    "second": {
+      "status": "pending_master_after_integration_repeat_same_scenarios",
+      "images": []
+    },
+    "accepted": false
+  },
+  "pendingNativeScenarios": [
+    "Second Vision of hip, ADS, ordinary reload, fixture-Honed reload and recovery after master integrates this response",
+    "Native Ctrl+Q Honed initiation remains unverified; debug fixture art capture does not prove it",
+    "Both grip modes and classic/slim arms remain unverified beyond supplied sampled views",
+    "Exact magazine/bolt contact where occluded or separated during sampled transit poses"
+  ],
+  "limitations": [
+    "Original blend was evaluated by the master-owned process; worker inspected report/matrices/source sheets plus supplied ordinary and fixture-Honed native PNGs, without opening Blender or Minecraft.",
+    "61 source samples do not prove vanilla60fps continuous interpolation.",
+    "Source candidate labeling and fixture-Honed images do not prove original Honed exclusivity, original event semantics or native Ctrl+Q initiation.",
+    "Art review covers actual sheets and explicitly listed originals only; precise occluded bolt engagement and continuity between sampled frames are not certified.",
+    "First ordinary and fixture-Honed agent review is complete with no justified runtime change; second Vision is pending and candidate is not final."
+  ],
+  "readyAuthorization": "Master READY received; staged candidate applied to exclusive assigned worktree paths. Candidate is not final."
+}

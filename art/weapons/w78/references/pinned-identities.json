@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-24",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "inventorySourceUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+  "inventoryCache": "run/private-sources/w73/bungie-items.json",
+  "policy": "Exact W40 selected hashes; no live manifest refresh or same-name substitution. Hashes are unsigned decimal Bungie entity IDs, not content digests.",
+  "weapons": [
+    {
+      "localId": "deafening_whisper",
+      "weaponHash": 981718087,
+      "name": "Deafening Whisper",
+      "weaponJsonPointer": "/981718087",
+      "weaponDefinitionCanonicalSha256": "2f7cd53e5bd21cbcf6acc7f9bd91b94e612e05b371c31e2e1bdbcc4ad69c7903",
+      "slot": "ENERGY",
+      "equipmentSlotTypeHash": 2465295065,
+      "ammo": "SPECIAL",
+      "ammoType": 2,
+      "damageType": "VOID",
+      "damageTypeEnum": 4,
+      "damageTypeHash": 3454344768,
+      "frameHash": 1395789926,
+      "frameName": "Wave Frame",
+      "frameJsonPointer": "/1395789926",
+      "frameDefinitionCanonicalSha256": "e9257846d16ac4abbd816c42bcc433370da05e70d39755edbec35755260ea5b3",
+      "frameDescriptionSummary": "Single-shot handheld launcher; ground contact produces an energy wave.",
+      "frameSocketJsonPointer": "/981718087/sockets/socketEntries/0/singleInitialItemHash",
+      "frameSocketTypeHash": 3956125808,
+      "frameReusablePlugSetHash": 29,
+      "frameReusablePlugItems": [
+        1395789926
+      ],
+      "w40DefinitionMatchesPinnedInventoryStats": true,
+      "baseStats": {
+        "blastRadius": {
+          "statHash": 3614673599,
+          "value": 50
+        },
+        "velocity": {
+          "statHash": 2523465841,
+          "value": 64
+        },
+        "roundsPerMinute": {
+          "statHash": 4284893193,
+          "value": 72
+        },
+        "magazine": {
+          "statHash": 3871231066,
+          "value": 1
+        }
+      },
+      "baseStatBoundary": "Definition values before instance roll/perk/mod changes; Velocity and Blast Radius values are unitless stats, not physical speed or meters."
+    },
+    {
+      "localId": "dimensional_hypotrochoid",
+      "weaponHash": 1311684613,
+      "name": "Dimensional Hypotrochoid",
+      "weaponJsonPointer": "/1311684613",
+      "weaponDefinitionCanonicalSha256": "aaaa81f467648a6a6d67101a71b7c52ed3f2b447f2a23b3c66124154ad03e22d",
+      "slot": "POWER",
+      "equipmentSlotTypeHash": 953998645,
+      "ammo": "HEAVY",
+      "ammoType": 3,
+      "damageType": "STASIS",
+      "damageTypeEnum": 6,
+      "damageTypeHash": 151347233,
+      "frameHash": 2571259936,
+      "frameName": "Compressed Wave Frame",
+      "frameJsonPointer": "/2571259936",
+      "frameDefinitionCanonicalSha256": "79a003bc7f79fbf109c35a2a47967ead7fe4eb106960e1019f44964063edc6e7",
+      "frameDescriptionSummary": "Ground contact produces a compressed-energy wave.",
+      "frameSocketJsonPointer": "/1311684613/sockets/socketEntries/0/singleInitialItemHash",
+      "frameSocketTypeHash": 3956125808,
+      "frameReusablePlugSetHash": 430,
+      "frameReusablePlugItems": [
+        2571259936
+      ],
+      "w40DefinitionMatchesPinnedInventoryStats": true,
+      "baseStats": {
+        "blastRadius": {
+          "statHash": 3614673599,
+          "value": 50
+        },
+        "velocity": {
+          "statHash": 2523465841,
+          "value": 33
+        },
+        "roundsPerMinute": {
+          "statHash": 4284893193,
+          "value": 120
+        },
+        "magazine": {
+          "statHash": 3871231066,
+          "value": 5
+        }
+      },
+      "baseStatBoundary": "Definition values before instance roll/perk/mod changes; Velocity and Blast Radius values are unitless stats, not physical speed or meters."
+    }
+  ],
+  "socketTrap": {
+    "notFrameHash": 3690882495,
+    "name": "Legendary Infusion",
+    "location": "sockets.intrinsicSockets[0].plugItemHash on both weapons",
+    "correctFrameLocation": "sockets.socketEntries[0].singleInitialItemHash",
+    "reason": "Despite its array name, intrinsicSockets contains infusion here; resolve the actual frame through socketEntries and its reusable plug set."
+  },
+  "sameNameNonWeaponEntries": [
+    {
+      "hash": 3439074281,
+      "name": "Dimensional Hypotrochoid",
+      "hasEquippingBlock": false,
+      "reason": "Not the selected equippable weapon; name matching alone is insufficient."
+    },
+    {
+      "hash": 3585040495,
+      "name": "Dimensional Hypotrochoid",
+      "hasEquippingBlock": false,
+      "reason": "Not the selected equippable weapon; name matching alone is insufficient."
+    }
+  ]
+}

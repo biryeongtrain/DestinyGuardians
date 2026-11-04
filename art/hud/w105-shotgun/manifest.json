@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 2,
+  "generator": "scripts/generate_shotgun_reticles_w105.py",
+  "originalArtwork": false,
+  "proceduralRedraw": true,
+  "style": "Historical S19 image-informed procedural adaptation; not pixel-exact or current-2026-exact.",
+  "provenance": {
+    "sourceContract": "art/weapons/w105/references/CONTRACT.md",
+    "primarySource": "https://www.bungie.net/7/en/News/article/51999",
+    "primarySourceDate": "2022-12-01",
+    "sourceScope": "Historical S19 reticle motifs visually inspected in four official Bungie illustrations.",
+    "referenceImagesUsed": [
+      {
+        "frame": "aggressive",
+        "path": "run/private-sources/w105/aggressive.png",
+        "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadAggressive.png?av=1243294923&cv=3983621215",
+        "sha256": "af97f626d2652043263750561ce300b133f41814921c9d9b2ce7c835a71d79fe",
+        "size": [
+          250,
+          250
+        ],
+        "use": "Visual motif reference only; source pixels are not copied into outputs."
+      },
+      {
+        "frame": "precision",
+        "path": "run/private-sources/w105/precision.png",
+        "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadPrecision.png?av=1243294923&cv=3983621215",
+        "sha256": "27882f386298fa0e6624309550e304bb9b0ae0894c2e0d6102207da34cb7c157",
+        "size": [
+          250,
+          250
+        ],
+        "use": "Visual motif reference only; source pixels are not copied into outputs."
+      },
+      {
+        "frame": "lightweight",
+        "path": "run/private-sources/w105/lightweight.png",
+        "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadLightweight.png?av=1243294923&cv=3983621215",
+        "sha256": "fc15943e99e082e0ed6c4c14986359fdb2d0f5c8597ce2d689d518f99304e60a",
+        "size": [
+          250,
+          250
+        ],
+        "use": "Visual motif reference only; source pixels are not copied into outputs."
+      },
+      {
+        "frame": "rapid_fire",
+        "path": "run/private-sources/w105/rapid_fire.png",
+        "url": "https://www.bungie.net/pubassets/pkgs/172/172233/ShotgunSpreadsRapidFire.png?av=1243294923&cv=3983621215",
+        "sha256": "e31a992ecadba08dbe2407bc6a18f1038cf0844b897a4bfc5dc93058f62f8f47",
+        "size": [
+          250,
+          250
+        ],
+        "use": "Visual motif reference only; source pixels are not copied into outputs."
+      }
+    ],
+    "referenceLimit": "Official historical PNGs inspected. Authored stroke dimensions, spacing and alpha; no pixel-exact reproduction or unchanged-2026 claim.",
+    "unchanged2026BehaviorProven": false,
+    "aggressiveBoundary": "Central circle with seven separated outer bent segments follows the historical reticle motif; it does not imply a hollow pellet distribution.",
+    "authoredNotMeasured": [
+      "normalized motif dimensions",
+      "arc spans and gaps",
+      "stroke",
+      "alpha",
+      "antialiasing",
+      "HUD screen size"
+    ],
+    "unknowns": [
+      "unchanged current-2026 reticle appearance",
+      "physical pellet coordinates",
+      "spread angles",
+      "universal ADS scalar"
+    ]
+  },
+  "renderer": {
+    "library": "Pillow",
+    "version": "12.3.0",
+    "supersample": 8,
+    "downsample": "LANCZOS"
+  },
+  "textureSize": [
+    128,
+    128
+  ],
+  "frames": {
+    "aggressive": {
+      "image": "reticle_w105_shotgun_aggressive",
+      "modelId": "destiny:gui/hud/reticle_w105_shotgun_aggressive",
+      "paths": {
+        "texture": "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_aggressive.png",
+        "item": "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_aggressive.json",
+        "model": "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_aggressive.json"
+      },
+      "historicalPelletPattern": "fixed evenly distributed cone; reticle circles and segments are not pellet marks",
+      "authoredGeometry": {
+        "outline": "seven_separated_bent_segments",
+        "radii": [
+          51,
+          51
+        ],
+        "centerCircleRadius": 16.5,
+        "cornerCount": 7,
+        "edgeFraction": 0.21,
+        "center": [
+          64,
+          64
+        ],
+        "circleStrokePixels": 1.75,
+        "outerStrokePixels": 1.25,
+        "outerAlpha": 190
+      }
+    },
+    "precision": {
+      "image": "reticle_w105_shotgun_precision",
+      "modelId": "destiny:gui/hud/reticle_w105_shotgun_precision",
+      "paths": {
+        "texture": "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_precision.png",
+        "item": "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_precision.json",
+        "model": "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_precision.json"
+      },
+      "historicalPelletPattern": "vertical oval",
+      "authoredGeometry": {
+        "outline": "four_separated_oval_arcs",
+        "radii": [
+          31,
+          46
+        ],
+        "centerCircleRadius": 14.5,
+        "arcDegrees": [
+          [
+            -120,
+            -60
+          ],
+          [
+            -15,
+            15
+          ],
+          [
+            60,
+            120
+          ],
+          [
+            165,
+            195
+          ]
+        ],
+        "center": [
+          64,
+          64
+        ],
+        "circleStrokePixels": 1.75,
+        "outerStrokePixels": 1.25,
+        "outerAlpha": 190
+      }
+    },
+    "lightweight": {
+      "image": "reticle_w105_shotgun_lightweight",
+      "modelId": "destiny:gui/hud/reticle_w105_shotgun_lightweight",
+      "paths": {
+        "texture": "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_lightweight.png",
+        "item": "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_lightweight.json",
+        "model": "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_lightweight.json"
+      },
+      "historicalPelletPattern": "diamond",
+      "authoredGeometry": {
+        "outline": "four_separated_diamond_corners",
+        "radii": [
+          43,
+          39
+        ],
+        "centerCircleRadius": 18,
+        "edgeFraction": 0.28,
+        "center": [
+          64,
+          64
+        ],
+        "circleStrokePixels": 1.75,
+        "outerStrokePixels": 1.25,
+        "outerAlpha": 190
+      }
+    },
+    "rapid_fire": {
+      "image": "reticle_w105_shotgun_rapid_fire",
+      "modelId": "destiny:gui/hud/reticle_w105_shotgun_rapid_fire",
+      "paths": {
+        "texture": "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_rapid_fire.png",
+        "item": "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_rapid_fire.json",
+        "model": "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_rapid_fire.json"
+      },
+      "historicalPelletPattern": "square",
+      "authoredGeometry": {
+        "outline": "four_separated_square_brackets",
+        "radii": [
+          26,
+          26
+        ],
+        "centerCircleRadius": 16,
+        "bracketArm": 14,
+        "center": [
+          64,
+          64
+        ],
+        "circleStrokePixels": 1.75,
+        "outerStrokePixels": 1.25,
+        "outerAlpha": 190
+      }
+    }
+  },
+  "hudContract": {
+    "maxHudNodes": 2,
+    "additionalHudNodes": 0,
+    "frameNodes": 1,
+    "existingSeparateCenterNodes": 1,
+    "centerOpening": "Transparent central 12x12 pixels inside the circle; no baked aim point or pellet dots.",
+    "color": "Pure white RGB with alpha coverage; custom_model_data tint index 0.",
+    "quad": "W44 one zero-depth 0,0,8 to 16,16,8 element; north and south faces.",
+    "integration": "Assets only; caller owns model selection and any runtime size feedback.",
+    "ballistics": "No physical pellet coordinates or ADS calibration encoded in these textures.",
+    "slug": "Existing W44 pinpoint-slug assets unchanged and not regenerated."
+  },
+  "maxHudNodes": 2,
+  "assetCount": 12,
+  "sha256": {
+    "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_aggressive.json": "eba35c538b1449ce7960838ae1f6aff6a4e37c8f611b33e4342bbac4b68bc0e1",
+    "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_lightweight.json": "d1400b703a50e1a71ab22406b10a63477e4acf5924d139c146be44dbdd055b19",
+    "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_precision.json": "d0ba22dc12bfd38689976313ef9a452e3a068bd09fad8fd8575605b264139d42",
+    "src/main/resources/assets/destiny/items/gui/hud/reticle_w105_shotgun_rapid_fire.json": "5aa301dbac73da49b8f4a83990c99ade4f65c6b632c6539d87f0d10ccc827f26",
+    "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_aggressive.json": "d992dc0a1e7dbff11f04490d2a9f08655b95cd71014642e4717e3fef1deabcfa",
+    "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_lightweight.json": "76cbd547427cd8fa04937cfe168801b5d4cb22ca8f03953e660f0781410ff112",
+    "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_precision.json": "f50072e018eba943cc1745fced50dd2ff31f215dd915dd0720252ecd5b17cef7",
+    "src/main/resources/assets/destiny/models/gui/hud/reticle_w105_shotgun_rapid_fire.json": "e4564965d5561ae155479c56900e1e602e01dffd5309237a55cc82e1d4eb0932",
+    "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_aggressive.png": "1a002f3865add5e553010ddbff90b8dc4e3421c8520a8320dd16ac69f7187abe",
+    "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_lightweight.png": "c6837d225c9cb309c69bbe5e05ab39e0a064f374ddefc86fb886060a176ff634",
+    "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_precision.png": "9e58979fac0cd041802bf3b0f0bb0a75a3ee8d527f4f1408a356d2ef0f6deb7e",
+    "src/main/resources/assets/destiny/textures/item/hud/reticle_w105_shotgun_rapid_fire.png": "28d5c5b4056bd0fca8569bbbdf8ea6cd70baf82c7c061acc7ac03b5fd8f11dc6"
+  },
+  "designReference": {
+    "path": "art/hud/w105-shotgun/contact-sheet.png",
+    "sha256": "2d173ffe67c014e594ac9a94e196260fa9194f3cfd51c2f3cc6474578454e8ab",
+    "nativeEvidence": false,
+    "inGameScreenshot": false
+  }
+}

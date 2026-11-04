@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "stage": "W169",
+  "weapon": "duke_mk_44",
+  "url": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+  "title": "Deleted Duke - Outlaw + Rampage, Keeping Duke - Rangefinder + Kill Clip",
+  "channel": "Rin",
+  "uploadDate": "20181112",
+  "selectedSeconds": [
+    25.5,
+    27.9
+  ],
+  "inspectedActualFrames": true,
+  "authoredApproximation": true,
+  "referenceConfidence": "High for visible opening/hold/lower/close order; moderate for hand-contact gesture; low for hidden loader mechanics or numerical motion.",
+  "sourceVideo": {
+    "privateCachePath": "/private/tmp/destiny-w64-reference/-oS68Bu_sDs.mp4",
+    "sha256": "0da7f343966728f1715bffe93f439e0f861ad2a5dd364f1fb6486d2b48aa9270",
+    "sourceDimensions": [
+      1280,
+      720
+    ],
+    "fps": 30,
+    "identityFrameSeconds": 48.0,
+    "identityEvidence": "W64 identity still explicitly names DUKE MK. 44; original cached video hash reverified for this task."
+  },
+  "extraction": {
+    "tool": "ffmpeg 7.1 (cached imageio_ffmpeg binary)",
+    "commandTemplate": "rtk proxy <ffmpeg> -loglevel error -ss <sourceSeconds> -i <privateCachedVideo> -frames:v 1 -y <ownedReference.png>",
+    "timestampMeaning": "Requested absolute source-video seconds; first decoded frame at/after seek. Nominal frame index is not an engine trace.",
+    "processing": "Full 1280x720 RGB PNG, no crop, mirror, paint edits or resizing; storyboard thumbnails only are resized."
+  },
+  "mechanism": {
+    "layout": "Attached swing-out cylinder housing and yoke; receiver/frame fixed",
+    "visible": "Housing moves independently to screen left, then remains beside receiver during upright hold. Hand contact precedes closure.",
+    "unresolved": "Inner loader/drum removal, cartridges and linkage articulation are occluded or unresolved."
+  },
+  "observations": [
+    {
+      "sourceSeconds": [
+        25.5,
+        25.7
+      ],
+      "fact": "Right hand retains grip as gun raises/rolls after previous recoil."
+    },
+    {
+      "sourceSeconds": [
+        25.9,
+        26.5
+      ],
+      "fact": "Cylindrical housing opens beside receiver; near-upright hold retains a visible gap."
+    },
+    {
+      "sourceSeconds": [
+        26.8,
+        27.5
+      ],
+      "fact": "Gun lowers/rolls and left hand enters; loading area is occluded. HUD changes 7/107 to 9/105 between 27.1 and 27.2, before recovery."
+    },
+    {
+      "sourceSeconds": [
+        27.7,
+        27.9
+      ],
+      "fact": "Tilted closing/reseat gesture then forward recovery; HUD credit and visual closure are separate observations."
+    }
+  ],
+  "sampleType": {
+    "partialReload": true,
+    "ammoBefore": 7,
+    "ammoAfter": 9,
+    "reserveBefore": 107,
+    "reserveAfter": 105,
+    "outlawObserved": false,
+    "normalBaseStatCertified": false
+  },
+  "pendingReferenceSlots": [],
+  "limitations": [
+    "Numerical body angles, opening angle, pivot interpretation and normalized phase timing are authored approximations, not camera calibration or extracted animation/bones.",
+    "Dark/silver gameplay appearance is motion evidence only; current W127 blue paint/UV are preserved.",
+    "Loader contact is represented by weapon lowering/rolling and an open hold; no visible loader, cases, rounds or support-hand IK is authored.",
+    "Partial reload footage with Kill Clip HUD; no verified active Outlaw comparison or base-duration/perk-speed certification.",
+    "Native visual framing, handedness and clearances remain master QA; source frames and offline renders do not prove native success."
+  ],
+  "frames": [
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-00.png",
+      "timestampSeconds": 25.5,
+      "frameIndexAtNominalFps": 765,
+      "sha256": "52290a203d1021cd3fd5ce36433d0a2887a87a9372fcdbcbf055c23360c71594",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "raise after previous shot",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-01.png",
+      "timestampSeconds": 25.7,
+      "frameIndexAtNominalFps": 771,
+      "sha256": "138fb94c647deb83f2a47435bbc5684df634206aeeddc1096643321d58987f49",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "roll / preparation",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-02.png",
+      "timestampSeconds": 25.9,
+      "frameIndexAtNominalFps": 777,
+      "sha256": "2572601f4a4f3f868846fb40b9185eab1d579ad0075ea4942d3ae65d04d25504",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "opening begins",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-03.png",
+      "timestampSeconds": 26.1,
+      "frameIndexAtNominalFps": 783,
+      "sha256": "5d2661a29e8e9db7bc3b7e82f6b6ec7cac0e2420cbb296e2b3d51f3fb3234e04",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "housing displaced beside receiver",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-04.png",
+      "timestampSeconds": 26.3,
+      "frameIndexAtNominalFps": 789,
+      "sha256": "6fb634591328001553dd8ab1d9a4a8b7a6ade693c7da637b57f71c74e3b4537c",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "muzzle-up open hold",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-05.png",
+      "timestampSeconds": 26.5,
+      "frameIndexAtNominalFps": 795,
+      "sha256": "112f289cef9a03cfce7c16857b24c0d8fd594be1aa73b6fafd66d4c1557d1798",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "upright open housing and gap",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-06.png",
+      "timestampSeconds": 26.8,
+      "frameIndexAtNominalFps": 804,
+      "sha256": "dd3f945b2d20b8034779842576b41feddcfb4f299b8ea7a3f8d365d2509c960c",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "lower / roll out of hold",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-07.png",
+      "timestampSeconds": 27.1,
+      "frameIndexAtNominalFps": 813,
+      "sha256": "005928205be52c053a27b02cac0f3c280a12838fcc5f2811d936c3371af50917",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "hand / loader-contact area, HUD 7/107",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-08.png",
+      "timestampSeconds": 27.2,
+      "frameIndexAtNominalFps": 816,
+      "sha256": "0a6935fd73c84a5c9eaee90b80770129d960116abf6f4a9793b70a8e841a7211",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "hand occludes receiver, HUD 9/105",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-09.png",
+      "timestampSeconds": 27.5,
+      "frameIndexAtNominalFps": 825,
+      "sha256": "7dfcb687aae5a29bcc980adb19c2d9ed063bf98155a0862528710349dfa5cbf7",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "hands still at receiver after credit",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-10.png",
+      "timestampSeconds": 27.7,
+      "frameIndexAtNominalFps": 831,
+      "sha256": "0fbf6f7923e9c55a16b986967bd85d1164db8571bc73f7abe205c29b7f34773b",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "closing / tilted recovery",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    },
+    {
+      "path": "art/weapons/w169/duke_mk_44/reference-11.png",
+      "timestampSeconds": 27.9,
+      "frameIndexAtNominalFps": 837,
+      "sha256": "18d3b6b7b5702427dcb317af7d2fba2dc3de246af2cf197d70cbe572436149c1",
+      "sourceURL": "https://www.youtube.com/watch?v=-oS68Bu_sDs",
+      "observation": "forward ready recovery",
+      "confidence": "High for visible pose/HUD; hidden loading mechanics unresolved"
+    }
+  ]
+}

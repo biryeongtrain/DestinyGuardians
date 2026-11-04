@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "weapon": "steelfeather_repeater",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A395",
+      "partHint": "moving",
+      "policy": "magazine"
+    }
+  },
+  "sourceProvenance": {
+    "reviewPath": "/private/tmp/destiny-w213-source/source-review.json",
+    "reviewSha256": "cc9ef72c7c7e85936f3cf9bc1ad521a46cfac15c48e891412b1cc15685066d7f",
+    "blenderVersion": "5.4.0 Alpha",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/blender/source.blend",
+    "sourceBlendSha256": "85d557ad5b5ba5f1148653f1f6ee8a99bad69172143c16c8c1161b9c04d9fe02",
+    "sourceMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/source-map.json",
+    "sourceMapSha256": "aafe9e2ed8a4074ca216557bb31fa2869032f7a6fda2d0ea0dbd5a4b2d9281b9",
+    "boneMap": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/bone-map.json",
+    "boneMapSha256": "4b709c1d83bce0134c71bbd0dfc4c1b72bcf35af891614729d0661f90fa0ef9d",
+    "evaluatedRigPath": "/private/tmp/destiny-w213-source/auto_rifle_943c13a2.json",
+    "evaluatedRigSha256": "f698e2e974a2f4a586857d8cd509f19da1603457c5c4cb5617651510288c1113",
+    "chainSheetPath": "/private/tmp/destiny-w213-source/sheets/auto_rifle_943c13a2-80A8A395-upper-chain.png",
+    "chainSheetSha256": "38d49d16466d5e15498ce2832f30eb80f45c7cdc393b7db2ca9871f12b28e0d3",
+    "rigAction": "80A8A395",
+    "action": "Armature|fp_80A8A395_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1,
+      105
+    ],
+    "sceneFps": 30,
+    "evaluatedSamples": 61,
+    "existingCacheJointAbsError": 0.0,
+    "masterReportedInputsUnchanged": true,
+    "objects": [
+      "ARMATURE"
+    ],
+    "sourceCameraRecovered": false,
+    "sourceActionWeaponExclusive": false,
+    "sharedSelector": "61CCE0D7",
+    "matrixSpace": "armature_object; row-major, column vectors; matrix_world not applied",
+    "evaluationOwner": "master headless Blender; worker read report, rig, maps and viewed actual PNG"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w213-source/source-review.json",
+      "role": "master_original_blender_evaluation",
+      "sourceSha256": "cc9ef72c7c7e85936f3cf9bc1ad521a46cfac15c48e891412b1cc15685066d7f",
+      "observation": "Master evaluated original source.blend in Blender 5.4.0 Alpha. Only Armature, no mesh/camera. OBSlot action Armature|fp_80A8A395_reload_full|Base, frames 1..105 at 30fps, 61 poses, old joint error 0. Worker did not operate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/auto_rifle_943c13a2.json",
+      "sourceSha256": "f698e2e974a2f4a586857d8cd509f19da1603457c5c4cb5617651510288c1113",
+      "role": "read_source_full_chain",
+      "observation": "Read all61 evaluated shoulder/elbow/wrist/weapon matrices. Start/end matrix max absolute delta is 0.0. Authored 32-unit conversion gives forearms about 8.14136 and upper arms about 8.7266. Retain source FK and ordinary lengths; no stretch or excursion attenuation."
+    },
+    {
+      "source": "/private/tmp/destiny-w213-source/sheets/auto_rifle_943c13a2-80A8A395-upper-chain.png",
+      "sourceSha256": "38d49d16466d5e15498ce2832f30eb80f45c7cdc393b7db2ca9871f12b28e0d3",
+      "role": "viewed_source_chain_png",
+      "observation": "Viewed actual six-pose XZ/YZ source chain PNG at p=0,.2,.4,.6,.8,1. Left handling chain moves strongly at .4/.6 and returns at 1. Bone projections provide no source mesh contact or recovered camera proof."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/source-map.json",
+      "sourceSha256": "aafe9e2ed8a4074ca216557bb31fa2869032f7a6fda2d0ea0dbd5a4b2d9281b9",
+      "role": "read_shared_family_map",
+      "observation": "Non-fallback representative halfdan_d, selector61CCE0D7 shared by Halfdan-D, Ammit AR2, Gnawing Hunger and Steelfeather Repeater. 395/38C/38A share reload_full/reload_empty labels. Choose audited395 without claiming weapon-exclusive selection."
+    },
+    {
+      "source": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/auto_rifle_943c13a2/bone-map.json",
+      "sourceSha256": "4b709c1d83bce0134c71bbd0dfc4c1b72bcf35af891614729d0661f90fa0ef9d",
+      "role": "read_bone_hierarchy",
+      "observation": "Left D1232BA2->897A1504->8C83CB67, right17025F50->A3781DCD->DE9D6BEA; weapon4A0810C4 descends from right wrist through19AB4BEF. Preserve evaluated shoulder/elbow/wrist bends."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "role": "retained_mesh_rest_contacts",
+      "observation": "Read actual pistol_grip, forearm_rubber and magazine_core evidence. Preserve right [8,8.22,8.25]/[-33,0,0], left [7.8,8.78,-1.6]/[0,90,-85], reload [7.35,7.65,3.3]/[0,0,0]. Reload partHint moving matches only solids45..48;49..50 stay body. No rest-palm override is warranted before FIRST Vision."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "role": "retained_auto_rifle_family_framing",
+      "observation": "Preserve translation[-.65,.6,0], rotation[-1,2,0], scale.98, inherited rightWristRoll28 and leftRotation[15,35,-35]. No source camera calibration or new depth/view bias is inferred."
+    },
+    {
+      "source": "scripts/generate_reload_w166_steelfeather_repeater.py",
+      "role": "preserved_authored_motion",
+      "observation": "Read exact W166 keys, .40..55 exchange hold, seating by.74, GRIP[8,8.31,8.195] and rigid moving partition45..48. Pure local PCHIP replaces per-key smoothstop; geometry, face UV and all authored knots remain unchanged."
+    }
+  ],
+  "notes": [
+    "Pre-FIRST Vision candidate. Master owns original61+shoulders import, explicit action whitelist, shared loader/runtime60, upper-arm retargeting, ordinary fingerless player-skin materialization and output writes.",
+    "source_palm_translations uses REST right/left mesh offsets plus original FK in the shared weapon parent. contacts.reload.contact only locates the held moving part relative to the source palm; changing it is not a rest-palm correction.",
+    "Keep sourceFullChain=true, keepMeshSupport=true and hideSupportAtRest=false. No arm stretch, FK attenuation, hidden support arm or camera compensation is added to mask fit.",
+    "89 weapon solids =85body+4moving. Shared builder reserves up to112 per segment, four ordinary arm segments: conservative537 simultaneously emitted elements including arms, below1000. Final materialized counts are master-owned.",
+    "FIRST native PNGs must return to this worker for image-backed corrections or justified no-change. SECOND Vision follows master integration. No native acceptance, physical finger IK, recovered camera or60fps certification is claimed."
+  ]
+}

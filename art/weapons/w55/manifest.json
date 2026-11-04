@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "stage": "W55",
+  "authoredOn": "2026-10-24",
+  "model": "guardian_sword_w55",
+  "baseline": "art/blockbench/animations/guardian_sword_w53.bbmodel",
+  "baselineRuntime": "src/main/resources/destiny/animation/sword_w53.animation.json",
+  "inheritedAnimationCount": 29,
+  "inheritedHunterAnimationCount": 21,
+  "inheritedSwordAnimationCount": 8,
+  "appendedLoopCount": 4,
+  "totalAnimationCount": 33,
+  "runtimeExportCount": 12,
+  "authoredNotD2Measured": true,
+  "clips": [
+    {
+      "name": "h15_sword_idle",
+      "lengthSeconds": 2.4,
+      "loop": true,
+      "rotationKeyCountPerBone": 17,
+      "rootYRangeModelUnits": [
+        0.3958,
+        0.3981
+      ],
+      "maxSampledFloorErrorModelUnits": 8e-05,
+      "capeRotationExcursionDegrees": 1.8,
+      "footZExcursionModelUnits": [
+        0.007036,
+        0.041963
+      ],
+      "visualIntention": "W53 low ready with subtle breath and cape settling"
+    },
+    {
+      "name": "h15_sword_move",
+      "lengthSeconds": 0.8,
+      "loop": true,
+      "rotationKeyCountPerBone": 17,
+      "rootYRangeModelUnits": [
+        -0.6696,
+        0.4277
+      ],
+      "maxSampledFloorErrorModelUnits": 0.02116,
+      "capeRotationExcursionDegrees": 9.942488,
+      "footZExcursionModelUnits": [
+        11.090035,
+        10.188079
+      ],
+      "visualIntention": "alternating leg/knee gait, steady weapon carry, cape sway"
+    },
+    {
+      "name": "h15_sword_guard",
+      "lengthSeconds": 1.6,
+      "loop": true,
+      "rotationKeyCountPerBone": 17,
+      "rootYRangeModelUnits": [
+        0.4072,
+        0.4086
+      ],
+      "maxSampledFloorErrorModelUnits": 8e-05,
+      "capeRotationExcursionDegrees": 2.6,
+      "footZExcursionModelUnits": [
+        0.013754,
+        0.082384
+      ],
+      "bladeDirectionMinUpComponent": 0.937236,
+      "freeWristMinYModelUnits": 22.9086,
+      "visualIntention": "raised frontal blade, free hand up, defensive breath pulse"
+    },
+    {
+      "name": "h15_sword_air",
+      "lengthSeconds": 1.2,
+      "loop": true,
+      "rotationKeyCountPerBone": 17,
+      "rootYRangeModelUnits": [
+        -0.915,
+        -0.7182
+      ],
+      "maxSampledFloorErrorModelUnits": 8e-05,
+      "capeRotationExcursionDegrees": 8.0,
+      "footZExcursionModelUnits": [
+        0.137612,
+        0.163012
+      ],
+      "visualIntention": "tucked knees, restrained torso motion and flowing cape"
+    }
+  ],
+  "preservedSwordClips": [
+    {
+      "name": "h15_sword_light_1",
+      "lengthSeconds": 0.45,
+      "rawSha256": "a58e2e0779eaff76320888298bb294b598e1bc9216696e6268066128c69bc20e"
+    },
+    {
+      "name": "h15_sword_light_2",
+      "lengthSeconds": 0.5,
+      "rawSha256": "99dfe295ad5518ec187430008e5516151b60e44835e8d4aeffc42659b493037c"
+    },
+    {
+      "name": "h15_sword_light_3",
+      "lengthSeconds": 0.55,
+      "rawSha256": "a77f176bf64ece9d23c8ab333cbd10a0972a85cb9121d728c8515404d89702d1"
+    },
+    {
+      "name": "h15_sword_uppercut",
+      "lengthSeconds": 0.85,
+      "rawSha256": "2eec035a188ec48b0481ada50515cf09aac26bee29777613d24f293f6272ea58"
+    },
+    {
+      "name": "h15_sword_dash",
+      "lengthSeconds": 0.75,
+      "rawSha256": "777bb426c1390714f9fc4390f8a65b9c42428e99dd763cf1a5652fbe25a3dd59"
+    },
+    {
+      "name": "h15_sword_slam",
+      "lengthSeconds": 0.95,
+      "rawSha256": "dce9d79cffdeaa410e001849ef774b0e35ce0b2da5dc24144803dc1ebe31d062"
+    },
+    {
+      "name": "h15_sword_vortex",
+      "lengthSeconds": 1.05,
+      "rawSha256": "4e2c45647ed2d113ec160ed1c5fa48b51018dec8acdd210d9c2eff7d32f722e4"
+    },
+    {
+      "name": "h15_sword_caster",
+      "lengthSeconds": 0.8,
+      "rawSha256": "41983a523646166c7687005a945debab282bd479e17755e66a5bb425fc8c743f"
+    }
+  ],
+  "rootPolicy": "All new loops: zero rotation/X/Z; H15 floor-fit Y only, including air. No jump offset.",
+  "heldItemPolicy": "Unchanged equipment pivots/bind rotations/native display mapping; unit scales.",
+  "inputSha256": {
+    "art/blockbench/animations/guardian_hunter_h26_r2.bbmodel": "47f058bcc8f768ef310a4d7e49a9b4aa6ce05fa3e769224809097afcd2a3a7c9",
+    "scripts/build_hunter_animation_h15.py": "3908d921f42d52ae84f880021a6e06d10316084aec8a309453a338abb24805c6",
+    "scripts/build_hunter_animation_h19.py": "483a796efdcab5dbf3fcc997ca5fc3118c4b693da6a3f47f520b5e06561af9ef",
+    "scripts/build_hunter_animation_h20.py": "8d8dde7a49b54af3a31c3c78c1182c2851784277b75a8510a301fcdf95c79428",
+    "art/weapons/w51/references/official-manifest.json": "15e159014db61a2838559fbc9ca581f7ec98e605ea0e0df216bdb94fbbb55eba",
+    "art/weapons/w52/references/videos.json": "8536cbb4c75da9324fc5cd4b08877d7e1ae58c9dd51e1a4981087b647aef2b5a",
+    "art/weapons/w52/references/mechanics.json": "d910a9dfc46413116554f4d8621ba57ccf35e17e72b36abf67d3b1b86a6c7492",
+    "art/weapons/w52/references/light-contact.jpg": "d2e70012effb80c800da9a412e65d0519572424490fbce3c04399ee3ea624241",
+    "art/weapons/w52/references/heavy-contact.jpg": "e36b208be67fe9a812d344b8d61e8eafb1fe5c93b6f98dc71c1ab093cd489e5f",
+    "art/weapons/w52/references/aerial-contact.jpg": "84e5d567bb1f3316ffc74e2af88fdf33e622f02594022c23770011c9a93af4e0",
+    "art/weapons/w52/references/aggressive-heavy-contact.jpg": "940978070d28df70582797784ea11a2263d2885aae496440115956a81ceafccc",
+    "src/main/resources/assets/destiny/models/weapon/sword/abide_the_return.json": "8f6f9593d9a8dbd84022d4fe726152f799b71a55ae253e3f636e0bc5f46534c8",
+    "src/main/resources/assets/destiny/models/weapon/sword/goldtusk.json": "ca9d5e0f093983cf833417408fef8cb6a70a130fbb442938cb1b5a8d3be980f0",
+    "src/main/resources/assets/destiny/models/weapon/sword/crown_splitter.json": "50c519fa916a61e749ed7c72c29cf9fc4f173e93d8bbeaad98ad330dabfc3cdf",
+    "src/main/resources/assets/destiny/models/weapon/sword/falling_guillotine.json": "324e1e54a8b6b70ab91be37286a4c172a42abdb9fe8716b9d6a76e721ba931b6",
+    "src/main/resources/assets/destiny/models/weapon/sword/temptation_s_hook.json": "f5c48f76395c7b969fbb6867d75fd3b0bf038e1f1d6a73992d91e94a01b92277",
+    "scripts/build_sword_animation_w53.py": "6f96b1f1bb7b276b11b733b0186c07959402e57dd53dd5d02f7ade0b53f5a0ae",
+    "art/blockbench/animations/guardian_sword_w53.bbmodel": "41ff15db10994f1871ccb8ccb49a5aa9ba962aba2515381cdf77cf771fb77f3f",
+    "src/main/resources/destiny/animation/sword_w53.animation.json": "78c6a81b019cc659ea99f048c44de8f01d77b48d1cb3fe482121fc5f4234cd45"
+  },
+  "outputSha256": {
+    "scripts/build_sword_stance_w55.py": "e0046fead88825e269350c1f4bfb39281fe78d97ab61b64a2790663bf8558a77",
+    "art/blockbench/animations/guardian_sword_w55.bbmodel": "70c04327a8791cdcba971ab6eea798ecd0a8062592bccd9f3d3ce7d530025631",
+    "src/main/resources/destiny/animation/sword_w55.animation.json": "55d043f78cf8bb0c56df2018b94aa3afa186fc009e4f308fa6756969f71ac155",
+    "art/weapons/w55/animation-notes.md": "4352cf5c8a862ed565934a519335daab56e74c17947debb8efadb3df53afd69e"
+  },
+  "validation": {
+    "nativeClientVerified": false,
+    "appOrBuildRun": false,
+    "rawRigFieldsPreserved": true,
+    "rawInheritedClipsPreserved": true,
+    "rawOriginalRuntimeClipsPreserved": true,
+    "loopEndpointsIdentical": true,
+    "floorSampleRateHz": 200,
+    "floorFitKeyRateHz": 40,
+    "moveFloorFitKeyRateHz": 80,
+    "finiteTransformsAndFK": true,
+    "animatedBoneCount": 16,
+    "deterministicGeneration": "two independent byte comparisons in --verify"
+  }
+}

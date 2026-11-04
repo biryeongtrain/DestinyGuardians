@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "hashAlgorithm": "SHA-256",
+  "hashMeaning": "Exact existing file bytes, without modifying the caches. Canonical entity hashes in pinned-identities.json instead hash compact sorted-key UTF-8 JSON.",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "w40AndW73ManifestPinsAgree": true,
+  "files": [
+    {
+      "path": "art/weapons/w40/provenance.json",
+      "bytes": 541,
+      "sha256": "281bba3a34ec308b9f7b64d09c7d2b012925bcee1a4b02fac12a99ca9d730d42",
+      "sourceUrls": [
+        "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+      ],
+      "evidenceBoundary": "Local provenance pin; inventory digest independently checked."
+    },
+    {
+      "path": "art/weapons/w40/definitions.json",
+      "bytes": 34655,
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "sourceUrls": [
+        "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+      ],
+      "evidenceBoundary": "Local selected definition summary; two selected records agree with W73 inventory."
+    },
+    {
+      "path": "run/private-sources/w73/manifest.json",
+      "bytes": 188873,
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "sourceUrls": [
+        "https://www.bungie.net/Platform/Destiny2/Manifest/"
+      ],
+      "evidenceBoundary": "Cached official manifest; file time is not the manifest version date."
+    },
+    {
+      "path": "run/private-sources/w73/bungie-items.json",
+      "bytes": 199128691,
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "sourceUrls": [
+        "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+      ],
+      "evidenceBoundary": "Official full inventory cache; primary source for identities and frame descriptions."
+    },
+    {
+      "path": "run/private-sources/w73/bungie-plugsets.json",
+      "bytes": 10438797,
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "sourceUrls": [
+        "https://www.bungie.net/common/destiny2_content/json/en/DestinyPlugSetDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
+      ],
+      "evidenceBoundary": "Official plug-set cache; sets 29 and 430 confirm base frame plugs."
+    },
+    {
+      "path": "run/private-sources/w73/bungie-update-4-1-0.html",
+      "bytes": 1301,
+      "sha256": "c459c654995c5627f1b7fa4e7ed356882975edefdc5829afa9edfcffa59b3f14",
+      "sourceUrls": [
+        "https://www.bungie.net/7/en/News/article/51380"
+      ],
+      "evidenceBoundary": "1301-byte SPA application shell, not article body; does not establish wave geometry."
+    },
+    {
+      "path": "run/private-sources/w73/bungie-update-4-1-0-retrieval.json",
+      "bytes": 1107,
+      "sha256": "38d9bd420f6327ca4d6584dc0ecc6196dd83e34715b7b4f70b155ac1ae8427d0",
+      "sourceUrls": [
+        "https://www.bungie.net/7/en/News/article/51380"
+      ],
+      "evidenceBoundary": "HTTP metadata for SPA shell. Headers/cookies intentionally not copied."
+    },
+    {
+      "path": "run/private-sources/w73/official-identity.json",
+      "bytes": 15304,
+      "sha256": "887cc9c6115b627e0c62c9f7ca0a02d3ed2bc2384a6a223fa1a3896b6fe1602d",
+      "sourceUrls": [
+        "https://www.bungie.net/7/en/News/article/51380"
+      ],
+      "evidenceBoundary": "Existing external-reader response about Update 4.1.0; not a wave-specific primary finding."
+    },
+    {
+      "path": "run/private-sources/w73/research1.json",
+      "bytes": 27965,
+      "sha256": "834d52e16659dcc997d24052b3c907663972c158aa887ab848eecd03911919cd",
+      "sourceUrls": [
+        "https://www.bungie.net/7/en/News/article/51380",
+        "https://www.light.gg/db/items/201365942/archers-tempo/"
+      ],
+      "evidenceBoundary": "Existing bow research response. Inspected for relevance; not used to support wave behavior."
+    },
+    {
+      "path": "run/private-sources/w73/research2.json",
+      "bytes": 381,
+      "sha256": "adc93494af75146af93b34d1a751ff22507bccae7469929678d9cd6a3c70d12c",
+      "sourceUrls": [
+        "https://www.light.gg/db/items/201365942/archers-tempo/?_=727"
+      ],
+      "evidenceBoundary": "Failed external retrieval from earlier bow research; no evidentiary value for waves."
+    }
+  ]
+}

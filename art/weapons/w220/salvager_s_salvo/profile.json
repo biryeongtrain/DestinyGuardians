@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "stage": "W220",
+  "weapon": "salvager_s_salvo",
+  "sourceAction": "80A8A136",
+  "sourceRig": {
+    "group": "grenade_launcher_83c75a3c",
+    "action": "80A8A136",
+    "sourceBlendSha256": "7f4de5315e6d6fe3dd47bc0effc9cd25c51cdd634c1a37ee2903eb51f51b98e3",
+    "sourceMapSha256": "4d5b83154e6b568e7077c417625cf0811050d518b303e019a4519e658eaca866",
+    "boneMapSha256": "65bc0b7155e47ac6b8834c39252f373908e0270af2be841f403f6d876600cc23"
+  },
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        8.18,
+        8.24
+      ],
+      "rotation": [
+        -32.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        8.0,
+        8.9,
+        -2.14
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        6.1,
+        12.27,
+        3.6
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -80.0
+      ],
+      "partHint": "round",
+      "policy": "magazine",
+      "hand": "left",
+      "rigAction": "80A8A136",
+      "gripWindow": [
+        0.45,
+        0.48,
+        0.56,
+        0.65
+      ]
+    }
+  },
+  "evidence": [
+    "/private/tmp/destiny-w220-source/source-review.json",
+    "/private/tmp/destiny-w220-source/source-handling-evidence.json",
+    "/private/tmp/destiny-w220-source/source-selection-review.json",
+    "/private/tmp/destiny-w220-source/sheets/grenade_launcher_83c75a3c-80A8A136-upper-chain.png",
+    "art/weapons/w173/salvager_s_salvo/storyboard.png",
+    "art/weapons/w173/salvager_s_salvo/manifest.json",
+    "scripts/skin_arm_models_w204.py",
+    "scripts/build_first_person_hands_w201.py",
+    "scripts/rig_arms_w205.py",
+    "scripts/reload_hand_w218.py",
+    "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w220/vision1/screenshots/salvager_s_salvo-review.png",
+    "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w220/vision1/screenshots/salvager_s_salvo-reload.png",
+    "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w220/first-post-reload-review.png"
+  ],
+  "contactAuthorship": "Idle rear grip and vertical foregrip retained exactly from W201. FIRST images03..12, especially04..07, partly hide the cosmetic case. Actual W204 classic forearm bounds are [6.8,1.5,6.8]..[9.2,9,9.2], slim [7.1,1.5,6.8]..[8.9,9,9.2]; contact origin [8,8,8] lies inside the hand, with the hand end at Y9. Full source retargeting preserves width/depth and applies reference forearm-length ratio1.2525177286296538 along Y for this rig. A case-surface anchor [7.4,12.27,3.6] placed most sampled cartridge points inside that hand during full attachment. Set the round palm-origin anchor to [6.1,12.27,3.6], offset 1.3 additional units toward negative barrel-localX so the cartridge projects beyond the hand surface with shallow contact. This moves only round translation, not source palms or limbs. Existing case/rim geometry, UV and reload rotation unchanged. Ramp .45..48, full .48..56, release .56..65; zero shift at.65 restores the exact authored bore seat. Round alone uses magazine policy; receiver plugs and barrel never detach. This is authored mesh clearance, not recovered original glove contact.",
+  "limitations": [
+    "Master evaluated original Blender5.4 Alpha read-only; worker read evidence and viewed actual source upper-chain sheet and W173 storyboard. No independent Blender evaluation claimed.",
+    "ARMATURE only; weapon mesh, camera and finger IK absent. Action136 selected explicitly from shared single-GL variants136/126; no per-weapon selector recovered.",
+    "61 poses/60 intervals do not establish native60fps continuous interpolation.",
+    "Source weapon replay replaces authored body carrier; authored mechanism and full source limb travel retained. No source axis damping, stretching, support hiding or new camera offset.",
+    "Cosmetic round visible27..39 (.45..65), hidden40 onward; source-left translation attachment releases fully by.65 seat, before closure.69..76. Round contact and concealed insertion dimensions remain authored approximations.",
+    "107 active weapon elements +448 classic arm surfaces =555 candidate estimate. Parent-resolved canonical routes counted separately; master must verify final materialized routes.",
+    "Worker viewed FIRST native review/reload sheets, frames03..12 and post-recovery. First capture indices bracket time, not exact progress; exact hand/case seating remains partly occluded. Case-to-palm clearance correction is based on actual builder geometry and source matrices. SECOND native contact/clearance review remains pending; no new gameplay or performance verification by worker."
+  ]
+}

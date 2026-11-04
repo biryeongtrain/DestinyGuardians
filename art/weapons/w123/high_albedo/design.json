@@ -1,0 +1,8634 @@
+{
+  "id": "high_albedo",
+  "revision": "W143",
+  "method": "authored_semantic_filled_solids_face_uv",
+  "source": {
+    "source_objects": [
+      "High-Albedo.00.000",
+      "High-Albedo.01.000"
+    ],
+    "excluded_objects": [],
+    "source_triangles": 10404,
+    "textured_triangles": 10404,
+    "source_bounds": [
+      [
+        -0.031936001032590866,
+        -0.29837000370025635,
+        -0.05920200049877167
+      ],
+      [
+        0.031936001032590866,
+        0.09150999784469604,
+        0.1684180051088333
+      ]
+    ],
+    "model_bounds": [
+      [
+        6.771314215680205,
+        5.722299158811338,
+        -3.4793014203572152
+      ],
+      [
+        9.228685784319795,
+        14.479609281373273,
+        11.520698579642785
+      ]
+    ],
+    "source_axis": {
+      "length": 1,
+      "thin": 0,
+      "muzzle_sign": -1
+    },
+    "scale": 38.47337627105895,
+    "anchor": [
+      8.0,
+      8.0,
+      8.0
+    ],
+    "source_files": {
+      "High Albedo.blend": "b89316f091dff5883899f64c0ee07d1d7d683024cd26736736f8fd18a33515bb"
+    },
+    "grid": [
+      8,
+      66,
+      112
+    ],
+    "occupied_cells": 12452,
+    "resolution": 112,
+    "method": "source_projected_volume_cuboids_v1",
+    "cube_count": 253,
+    "texture_sha256": "8d2b35e3c5d36cb0d11b4dea05a6080786e9aaeefdcacd7119797236342755c6"
+  },
+  "source_matching": {
+    "objects": 2,
+    "triangles": 10404,
+    "w30_triangles": 10404,
+    "triangle_difference": 0,
+    "basis": "stored Blender object matrix; world X,Z,Y * source scale + anchor"
+  },
+  "identity": [
+    "blue upper receiver and sloping carry bridge",
+    "red lower frame and substantial slanted grip",
+    "orange cruciform muzzle brace",
+    "exposed black upper barrel within red cage",
+    "knurled lower cylinder and original source decals"
+  ],
+  "geometry_rationale": {
+    "receiver": "Broad filled masses preserve transverse depth and grip anchor.",
+    "barrel": "Octagonal walls keep actual bores; solid breech closes their recessed rear.",
+    "cylinder": "Eight knurled walls and eight nozzle walls model the forward cylinder, with a solid rear closure.",
+    "cage": "Open rails/posts frame the exposed barrel in side and oblique views.",
+    "brace": "Cross lugs and bridge preserve the distinctive orange/blue muzzle silhouette.",
+    "grip": "Thick core, slanted backstrap and heel preserve hand frame; grooves are UV.",
+    "guard": "Swept open-bottom guard as in source; no opaque panel crosses finger clearance."
+  },
+  "parts": [
+    {
+      "group": "receiver",
+      "material": "blue",
+      "motif": "housing",
+      "geometry": {
+        "name": "blue_receiver",
+        "from": [
+          7.24,
+          11.945,
+          5.32
+        ],
+        "to": [
+          8.76,
+          13.895,
+          11.14
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue_edge",
+      "motif": "housing",
+      "geometry": {
+        "name": "blue_top_spine",
+        "from": [
+          7.39,
+          13.81,
+          5.425
+        ],
+        "to": [
+          8.61,
+          14.11,
+          10.575
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "black",
+      "motif": "panel",
+      "geometry": {
+        "name": "rear_heel",
+        "from": [
+          7.26,
+          11.635,
+          10.94
+        ],
+        "to": [
+          8.74,
+          13.685,
+          11.32
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            12.66,
+            11.13
+          ],
+          "axis": "x",
+          "angle": -14
+        }
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue",
+      "motif": "housing",
+      "geometry": {
+        "name": "rear_chamfer",
+        "from": [
+          7.35,
+          13.54,
+          10.625
+        ],
+        "to": [
+          8.65,
+          14.02,
+          11.275
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            13.78,
+            10.95
+          ],
+          "axis": "x",
+          "angle": -22.5
+        }
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue",
+      "motif": "collar",
+      "geometry": {
+        "name": "front_receiver_collar",
+        "from": [
+          7.04,
+          11.875,
+          4.87
+        ],
+        "to": [
+          8.96,
+          14.025,
+          5.29
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue_edge",
+      "motif": "plain",
+      "geometry": {
+        "name": "collar_crown",
+        "from": [
+          7.235,
+          13.96,
+          4.87
+        ],
+        "to": [
+          8.765,
+          14.14,
+          5.29
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue_edge",
+      "motif": "sight",
+      "geometry": {
+        "name": "rear_sight_blade",
+        "from": [
+          7.87,
+          14.1003907,
+          8.68
+        ],
+        "to": [
+          8.13,
+          14.4796093,
+          9.36
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue_edge",
+      "motif": "panel",
+      "geometry": {
+        "name": "lower_blue_ledge",
+        "from": [
+          7.14,
+          11.925,
+          5.39
+        ],
+        "to": [
+          8.86,
+          12.175,
+          11.01
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "orange",
+      "motif": "reservoir",
+      "geometry": {
+        "name": "reservoir_7.22",
+        "from": [
+          7.16,
+          12.82,
+          5.435
+        ],
+        "to": [
+          7.28,
+          13.8,
+          7.705
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue_edge",
+      "motif": "plain",
+      "geometry": {
+        "name": "reservoir_sill_7.22",
+        "from": [
+          7.12,
+          12.64,
+          5.295
+        ],
+        "to": [
+          7.32,
+          12.84,
+          7.845
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "orange",
+      "motif": "reservoir",
+      "geometry": {
+        "name": "reservoir_8.78",
+        "from": [
+          8.72,
+          12.82,
+          5.435
+        ],
+        "to": [
+          8.84,
+          13.8,
+          7.705
+        ]
+      }
+    },
+    {
+      "group": "receiver",
+      "material": "blue_edge",
+      "motif": "plain",
+      "geometry": {
+        "name": "reservoir_sill_8.78",
+        "from": [
+          8.68,
+          12.64,
+          5.295
+        ],
+        "to": [
+          8.88,
+          12.84,
+          7.845
+        ]
+      }
+    },
+    {
+      "group": "frame",
+      "material": "red",
+      "motif": "frame",
+      "geometry": {
+        "name": "red_lower_receiver",
+        "from": [
+          7.22,
+          11.145,
+          5.06
+        ],
+        "to": [
+          8.78,
+          11.975,
+          10.88
+        ]
+      }
+    },
+    {
+      "group": "frame",
+      "material": "red",
+      "motif": "frame",
+      "geometry": {
+        "name": "red_foreframe",
+        "from": [
+          7.26,
+          11.285,
+          0.81
+        ],
+        "to": [
+          8.74,
+          11.955,
+          4.93
+        ]
+      }
+    },
+    {
+      "group": "frame",
+      "material": "red",
+      "motif": "frame",
+      "geometry": {
+        "name": "red_frame_haunch",
+        "from": [
+          7.21,
+          10.69,
+          4.745
+        ],
+        "to": [
+          8.79,
+          11.31,
+          6.215
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            11.0,
+            5.48
+          ],
+          "axis": "x",
+          "angle": -17
+        }
+      }
+    },
+    {
+      "group": "frame",
+      "material": "red",
+      "motif": "frame",
+      "geometry": {
+        "name": "grip_saddle",
+        "from": [
+          7.27,
+          10.245,
+          5.9
+        ],
+        "to": [
+          8.73,
+          11.075,
+          8.52
+        ]
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_0",
+        "from": [
+          7.7578983,
+          13.56,
+          -1.68
+        ],
+        "to": [
+          8.2421017,
+          13.73,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            13.645,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 0
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_1",
+        "from": [
+          7.4149515,
+          13.4179468,
+          -1.68
+        ],
+        "to": [
+          7.8991549,
+          13.5879468,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            7.657053211124524,
+            13.502946788875475,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_2",
+        "from": [
+          7.2728983,
+          13.075,
+          -1.68
+        ],
+        "to": [
+          7.7571017,
+          13.245,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            7.515,
+            13.16,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 90
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_3",
+        "from": [
+          7.4149515,
+          12.7320532,
+          -1.68
+        ],
+        "to": [
+          7.8991549,
+          12.9020532,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            7.657053211124524,
+            12.817053211124525,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 135
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_4",
+        "from": [
+          7.7578983,
+          12.59,
+          -1.68
+        ],
+        "to": [
+          8.2421017,
+          12.76,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.675,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 180
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_5",
+        "from": [
+          8.1008451,
+          12.7320532,
+          -1.68
+        ],
+        "to": [
+          8.5850485,
+          12.9020532,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            8.342946788875475,
+            12.817053211124524,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 225
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_6",
+        "from": [
+          8.2428983,
+          13.075,
+          -1.68
+        ],
+        "to": [
+          8.7271017,
+          13.245,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            8.485,
+            13.16,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 270
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "barrel",
+      "geometry": {
+        "name": "black_barrel_7",
+        "from": [
+          8.1008451,
+          13.4179468,
+          -1.68
+        ],
+        "to": [
+          8.5850485,
+          13.5879468,
+          4.83
+        ],
+        "rotation": {
+          "origin": [
+            8.342946788875476,
+            13.502946788875475,
+            1.5750000000000002
+          ],
+          "axis": "z",
+          "angle": 315
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "black",
+      "motif": "plain",
+      "geometry": {
+        "name": "breech_core",
+        "from": [
+          7.6,
+          12.76,
+          4.285
+        ],
+        "to": [
+          8.4,
+          13.56,
+          4.835
+        ]
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_0",
+        "from": [
+          7.7081926,
+          13.67,
+          -0.3
+        ],
+        "to": [
+          8.2918074,
+          13.85,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            13.76,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 0
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_1",
+        "from": [
+          7.2839286,
+          13.4942641,
+          -0.3
+        ],
+        "to": [
+          7.8675433,
+          13.6742641,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            7.575735931288071,
+            13.584264068711928,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_2",
+        "from": [
+          7.1081926,
+          13.07,
+          -0.3
+        ],
+        "to": [
+          7.6918074,
+          13.25,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            7.4,
+            13.16,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 90
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_3",
+        "from": [
+          7.2839286,
+          12.6457359,
+          -0.3
+        ],
+        "to": [
+          7.8675433,
+          12.8257359,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            7.575735931288071,
+            12.735735931288072,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 135
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_4",
+        "from": [
+          7.7081926,
+          12.47,
+          -0.3
+        ],
+        "to": [
+          8.2918074,
+          12.65,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.56,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 180
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_5",
+        "from": [
+          8.1324567,
+          12.6457359,
+          -0.3
+        ],
+        "to": [
+          8.7160714,
+          12.8257359,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            8.424264068711928,
+            12.73573593128807,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 225
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_6",
+        "from": [
+          8.3081926,
+          13.07,
+          -0.3
+        ],
+        "to": [
+          8.8918074,
+          13.25,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            8.6,
+            13.16,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 270
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "blue",
+      "motif": "sleeve",
+      "geometry": {
+        "name": "blue_barrel_sleeve_7",
+        "from": [
+          8.1324567,
+          13.4942641,
+          -0.3
+        ],
+        "to": [
+          8.7160714,
+          13.6742641,
+          1.2
+        ],
+        "rotation": {
+          "origin": [
+            8.42426406871193,
+            13.584264068711928,
+            0.44999999999999996
+          ],
+          "axis": "z",
+          "angle": 315
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_0",
+        "from": [
+          7.7289033,
+          13.66,
+          2.56
+        ],
+        "to": [
+          8.2710967,
+          13.8,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            13.73,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 0
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_1",
+        "from": [
+          7.3258525,
+          13.4930509,
+          2.56
+        ],
+        "to": [
+          7.8680458,
+          13.6330509,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            7.596949134723668,
+            13.563050865276333,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_2",
+        "from": [
+          7.1589033,
+          13.09,
+          2.56
+        ],
+        "to": [
+          7.7010967,
+          13.23,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            7.43,
+            13.16,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 90
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_3",
+        "from": [
+          7.3258525,
+          12.6869491,
+          2.56
+        ],
+        "to": [
+          7.8680458,
+          12.8269491,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            7.596949134723668,
+            12.756949134723667,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 135
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_4",
+        "from": [
+          7.7289033,
+          12.52,
+          2.56
+        ],
+        "to": [
+          8.2710967,
+          12.66,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            12.59,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 180
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_5",
+        "from": [
+          8.1319542,
+          12.6869491,
+          2.56
+        ],
+        "to": [
+          8.6741475,
+          12.8269491,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            8.403050865276333,
+            12.756949134723667,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 225
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_6",
+        "from": [
+          8.2989033,
+          13.09,
+          2.56
+        ],
+        "to": [
+          8.8410967,
+          13.23,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            8.57,
+            13.16,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 270
+        }
+      }
+    },
+    {
+      "group": "barrel",
+      "material": "steel",
+      "motif": "collar",
+      "geometry": {
+        "name": "barrel_step_collar_7",
+        "from": [
+          8.1319542,
+          13.4930509,
+          2.56
+        ],
+        "to": [
+          8.6741475,
+          13.6330509,
+          3.1
+        ],
+        "rotation": {
+          "origin": [
+            8.403050865276333,
+            13.563050865276333,
+            2.83
+          ],
+          "axis": "z",
+          "angle": 315
+        }
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red_edge",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_rail_7.12_12.37",
+        "from": [
+          7.045,
+          12.295,
+          0.78
+        ],
+        "to": [
+          7.195,
+          12.445,
+          4.9
+        ]
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red_edge",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_rail_7.12_13.99",
+        "from": [
+          7.045,
+          13.915,
+          0.78
+        ],
+        "to": [
+          7.195,
+          14.065,
+          4.9
+        ]
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_post_7.12_0.8",
+        "from": [
+          7.03,
+          12.32,
+          0.715
+        ],
+        "to": [
+          7.21,
+          14.04,
+          0.885
+        ]
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_post_7.12_3.78",
+        "from": [
+          7.03,
+          12.32,
+          3.695
+        ],
+        "to": [
+          7.21,
+          14.04,
+          3.865
+        ]
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red_edge",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_rail_8.88_12.37",
+        "from": [
+          8.805,
+          12.295,
+          0.78
+        ],
+        "to": [
+          8.955,
+          12.445,
+          4.9
+        ]
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red_edge",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_rail_8.88_13.99",
+        "from": [
+          8.805,
+          13.915,
+          0.78
+        ],
+        "to": [
+          8.955,
+          14.065,
+          4.9
+        ]
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_post_8.88_0.8",
+        "from": [
+          8.79,
+          12.32,
+          0.715
+        ],
+        "to": [
+          8.97,
+          14.04,
+          0.885
+        ]
+      }
+    },
+    {
+      "group": "cage",
+      "material": "red",
+      "motif": "rail",
+      "geometry": {
+        "name": "cage_post_8.88_3.78",
+        "from": [
+          8.79,
+          12.32,
+          3.695
+        ],
+        "to": [
+          8.97,
+          14.04,
+          3.865
+        ]
+      }
+    },
+    {
+      "group": "bridge",
+      "material": "blue_edge",
+      "motif": "plain",
+      "geometry": {
+        "name": "bridge_front",
+        "from": [
+          7.8,
+          13.375,
+          -0.525
+        ],
+        "to": [
+          8.2,
+          15.345,
+          -0.345
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            14.36,
+            -0.43499999999999994
+          ],
+          "axis": "x",
+          "angle": 90.0
+        }
+      }
+    },
+    {
+      "group": "bridge",
+      "material": "blue",
+      "motif": "plain",
+      "geometry": {
+        "name": "bridge_drop",
+        "from": [
+          7.8,
+          13.8096919,
+          0.775
+        ],
+        "to": [
+          8.2,
+          14.5403081,
+          0.955
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            14.175,
+            0.865
+          ],
+          "axis": "x",
+          "angle": 120.42578380196122
+        }
+      }
+    },
+    {
+      "group": "bridge",
+      "material": "blue",
+      "motif": "plain",
+      "geometry": {
+        "name": "bridge_rear",
+        "from": [
+          7.8,
+          12.1698913,
+          2.93
+        ],
+        "to": [
+          8.2,
+          15.8501087,
+          3.11
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            14.01,
+            3.02
+          ],
+          "axis": "x",
+          "angle": 89.3772443127937
+        }
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_top",
+        "from": [
+          7.365,
+          14.0,
+          -1.6
+        ],
+        "to": [
+          8.635,
+          14.36,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_bottom",
+        "from": [
+          7.365,
+          11.895,
+          -1.6
+        ],
+        "to": [
+          8.635,
+          12.265,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_side_7.36",
+        "from": [
+          7.23,
+          12.225,
+          -1.6
+        ],
+        "to": [
+          7.49,
+          14.095,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_side_8.64",
+        "from": [
+          8.51,
+          12.225,
+          -1.6
+        ],
+        "to": [
+          8.77,
+          14.095,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_lug_6.98_12.62",
+        "from": [
+          6.7713142,
+          12.5,
+          -1.6
+        ],
+        "to": [
+          7.1886858,
+          12.74,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_lug_9.02_12.62",
+        "from": [
+          8.8113142,
+          12.5,
+          -1.6
+        ],
+        "to": [
+          9.2286858,
+          12.74,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_lug_6.98_13.7",
+        "from": [
+          6.7713142,
+          13.58,
+          -1.6
+        ],
+        "to": [
+          7.1886858,
+          13.82,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_lug_9.02_13.7",
+        "from": [
+          8.8113142,
+          13.58,
+          -1.6
+        ],
+        "to": [
+          9.2286858,
+          13.82,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "brace",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "brace_lower_neck",
+        "from": [
+          7.705,
+          11.455,
+          -1.6
+        ],
+        "to": [
+          8.295,
+          11.925,
+          -1.3
+        ]
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_0",
+        "from": [
+          7.7454719,
+          11.8,
+          -3.05
+        ],
+        "to": [
+          8.2545281,
+          11.98,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.89,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 0
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_1",
+        "from": [
+          7.3848474,
+          11.6506245,
+          -3.05
+        ],
+        "to": [
+          7.8939037,
+          11.8306245,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            7.639375541594861,
+            11.74062445840514,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_2",
+        "from": [
+          7.2354719,
+          11.29,
+          -3.05
+        ],
+        "to": [
+          7.7445281,
+          11.47,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            7.49,
+            11.38,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 90
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_3",
+        "from": [
+          7.3848474,
+          10.9293755,
+          -3.05
+        ],
+        "to": [
+          7.8939037,
+          11.1093755,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            7.639375541594861,
+            11.019375541594862,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 135
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_4",
+        "from": [
+          7.7454719,
+          10.78,
+          -3.05
+        ],
+        "to": [
+          8.2545281,
+          10.96,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            10.870000000000001,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 180
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_5",
+        "from": [
+          8.1060963,
+          10.9293755,
+          -3.05
+        ],
+        "to": [
+          8.6151526,
+          11.1093755,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            8.36062445840514,
+            11.019375541594862,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 225
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_6",
+        "from": [
+          8.2554719,
+          11.29,
+          -3.05
+        ],
+        "to": [
+          8.7645281,
+          11.47,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            8.51,
+            11.38,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 270
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "steel",
+      "motif": "knurl",
+      "geometry": {
+        "name": "knurled_cylinder_7",
+        "from": [
+          8.1060963,
+          11.6506245,
+          -3.05
+        ],
+        "to": [
+          8.6151526,
+          11.8306245,
+          2.43
+        ],
+        "rotation": {
+          "origin": [
+            8.36062445840514,
+            11.74062445840514,
+            -0.30999999999999983
+          ],
+          "axis": "z",
+          "angle": 315
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_0",
+        "from": [
+          7.811746,
+          11.6,
+          -3.4793014
+        ],
+        "to": [
+          8.188254,
+          11.82,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.71,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 0
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_1",
+        "from": [
+          7.5784008,
+          11.5033452,
+          -3.4793014
+        ],
+        "to": [
+          7.9549087,
+          11.7233452,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            7.766654762208439,
+            11.613345237791561,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_2",
+        "from": [
+          7.481746,
+          11.27,
+          -3.4793014
+        ],
+        "to": [
+          7.858254,
+          11.49,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            7.67,
+            11.38,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 90
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_3",
+        "from": [
+          7.5784008,
+          11.0366548,
+          -3.4793014
+        ],
+        "to": [
+          7.9549087,
+          11.2566548,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            7.766654762208439,
+            11.14665476220844,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 135
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_4",
+        "from": [
+          7.811746,
+          10.94,
+          -3.4793014
+        ],
+        "to": [
+          8.188254,
+          11.16,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.05,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 180
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_5",
+        "from": [
+          8.0450913,
+          11.0366548,
+          -3.4793014
+        ],
+        "to": [
+          8.4215992,
+          11.2566548,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            8.23334523779156,
+            11.14665476220844,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 225
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_6",
+        "from": [
+          8.141746,
+          11.27,
+          -3.4793014
+        ],
+        "to": [
+          8.518254,
+          11.49,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            8.33,
+            11.38,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 270
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "silver",
+      "motif": "nozzle",
+      "geometry": {
+        "name": "silver_nozzle_7",
+        "from": [
+          8.0450913,
+          11.5033452,
+          -3.4793014
+        ],
+        "to": [
+          8.4215992,
+          11.7233452,
+          -3.01
+        ],
+        "rotation": {
+          "origin": [
+            8.23334523779156,
+            11.613345237791561,
+            -3.2446507
+          ],
+          "axis": "z",
+          "angle": 315
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "black",
+      "motif": "plain",
+      "geometry": {
+        "name": "cylinder_end_core",
+        "from": [
+          7.6,
+          10.98,
+          0.465
+        ],
+        "to": [
+          8.4,
+          11.78,
+          0.735
+        ]
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_0",
+        "from": [
+          7.720619,
+          11.9,
+          -1.62
+        ],
+        "to": [
+          8.279381,
+          12.04,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            11.97,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 0
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_1",
+        "from": [
+          7.303426,
+          11.727193,
+          -1.62
+        ],
+        "to": [
+          7.862188,
+          11.867193,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            7.582806999099937,
+            11.797193000900064,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_2",
+        "from": [
+          7.130619,
+          11.31,
+          -1.62
+        ],
+        "to": [
+          7.689381,
+          11.45,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            7.41,
+            11.38,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 90
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_3",
+        "from": [
+          7.303426,
+          10.892807,
+          -1.62
+        ],
+        "to": [
+          7.862188,
+          11.032807,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            7.582806999099937,
+            10.962806999099937,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 135
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_4",
+        "from": [
+          7.720619,
+          10.72,
+          -1.62
+        ],
+        "to": [
+          8.279381,
+          10.86,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            8.0,
+            10.790000000000001,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 180
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_5",
+        "from": [
+          8.137812,
+          10.892807,
+          -1.62
+        ],
+        "to": [
+          8.696574,
+          11.032807,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            8.417193000900063,
+            10.962806999099937,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 225
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_6",
+        "from": [
+          8.310619,
+          11.31,
+          -1.62
+        ],
+        "to": [
+          8.869381,
+          11.45,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            8.59,
+            11.38,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 270
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "orange",
+      "motif": "brace",
+      "geometry": {
+        "name": "orange_cylinder_band_7",
+        "from": [
+          8.137812,
+          11.727193,
+          -1.62
+        ],
+        "to": [
+          8.696574,
+          11.867193,
+          -1.24
+        ],
+        "rotation": {
+          "origin": [
+            8.417193000900063,
+            11.797193000900064,
+            -1.4300000000000002
+          ],
+          "axis": "z",
+          "angle": 315
+        }
+      }
+    },
+    {
+      "group": "cylinder",
+      "material": "blue",
+      "motif": "label",
+      "geometry": {
+        "name": "blue_cylinder_mount",
+        "from": [
+          7.36,
+          10.855,
+          2.35
+        ],
+        "to": [
+          8.64,
+          11.705,
+          3.71
+        ]
+      }
+    },
+    {
+      "group": "grip",
+      "material": "red",
+      "motif": "grip",
+      "geometry": {
+        "name": "grip_core",
+        "from": [
+          7.38,
+          6.475,
+          7.01
+        ],
+        "to": [
+          8.62,
+          10.825,
+          8.69
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            8.65,
+            7.85
+          ],
+          "axis": "x",
+          "angle": -17
+        }
+      }
+    },
+    {
+      "group": "grip",
+      "material": "blue",
+      "motif": "backstrap",
+      "geometry": {
+        "name": "blue_backstrap",
+        "from": [
+          7.275,
+          6.37,
+          8.26
+        ],
+        "to": [
+          8.725,
+          10.59,
+          9.02
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            8.48,
+            8.64
+          ],
+          "axis": "x",
+          "angle": -17
+        }
+      }
+    },
+    {
+      "group": "grip",
+      "material": "red_edge",
+      "motif": "grip",
+      "geometry": {
+        "name": "red_finger_spine",
+        "from": [
+          7.44,
+          6.67,
+          6.935
+        ],
+        "to": [
+          8.56,
+          10.57,
+          7.185
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            8.62,
+            7.06
+          ],
+          "axis": "x",
+          "angle": -17
+        }
+      }
+    },
+    {
+      "group": "grip",
+      "material": "blue_edge",
+      "motif": "panel",
+      "geometry": {
+        "name": "grip_heel",
+        "from": [
+          7.26,
+          5.92,
+          7.745
+        ],
+        "to": [
+          8.74,
+          6.44,
+          9.435
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            6.18,
+            8.59
+          ],
+          "axis": "x",
+          "angle": -17
+        }
+      }
+    },
+    {
+      "group": "grip",
+      "material": "black",
+      "motif": "mag",
+      "geometry": {
+        "name": "magazine_base",
+        "from": [
+          7.325,
+          5.81,
+          7.89
+        ],
+        "to": [
+          8.675,
+          6.13,
+          9.45
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            5.97,
+            8.67
+          ],
+          "axis": "x",
+          "angle": -17
+        }
+      }
+    },
+    {
+      "group": "guard",
+      "material": "red",
+      "motif": "plain",
+      "geometry": {
+        "name": "guard_root",
+        "from": [
+          7.775,
+          10.2307382,
+          3.84
+        ],
+        "to": [
+          8.225,
+          11.4492618,
+          4.16
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            10.84,
+            4.0
+          ],
+          "axis": "x",
+          "angle": -156.80140948635182
+        }
+      }
+    },
+    {
+      "group": "guard",
+      "material": "red",
+      "motif": "plain",
+      "geometry": {
+        "name": "guard_elbow",
+        "from": [
+          7.775,
+          9.6376466,
+          3.37
+        ],
+        "to": [
+          8.225,
+          10.3623534,
+          3.69
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            10.0,
+            3.53
+          ],
+          "axis": "x",
+          "angle": -140.5993393365205
+        }
+      }
+    },
+    {
+      "group": "guard",
+      "material": "red_edge",
+      "motif": "guard",
+      "geometry": {
+        "name": "guard_free_tip",
+        "from": [
+          7.76,
+          8.6874195,
+          3.47
+        ],
+        "to": [
+          8.24,
+          9.8525805,
+          3.87
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            9.27,
+            3.67
+          ],
+          "axis": "x",
+          "angle": 140.5721978039638
+        }
+      }
+    },
+    {
+      "group": "guard",
+      "material": "black",
+      "motif": "plain",
+      "geometry": {
+        "name": "trigger",
+        "from": [
+          7.88,
+          9.5691824,
+          5.57
+        ],
+        "to": [
+          8.12,
+          10.6708176,
+          5.77
+        ],
+        "rotation": {
+          "origin": [
+            8,
+            10.120000000000001,
+            5.67
+          ],
+          "axis": "x",
+          "angle": -176.87786953788427
+        }
+      }
+    },
+    {
+      "group": "controls",
+      "material": "steel",
+      "motif": "control",
+      "geometry": {
+        "name": "selector_hub_7.1",
+        "from": [
+          6.99,
+          10.89,
+          5.09
+        ],
+        "to": [
+          7.21,
+          11.49,
+          5.69
+        ],
+        "rotation": {
+          "origin": [
+            7.1,
+            11.19,
+            5.39
+          ],
+          "axis": "x",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "controls",
+      "material": "steel",
+      "motif": "control",
+      "geometry": {
+        "name": "selector_lever_7.1",
+        "from": [
+          6.985,
+          10.4638084,
+          5.615
+        ],
+        "to": [
+          7.215,
+          11.3461916,
+          5.855
+        ],
+        "rotation": {
+          "origin": [
+            7.1,
+            10.905000000000001,
+            5.734999999999999
+          ],
+          "axis": "x",
+          "angle": 128.55839990066488
+        }
+      }
+    },
+    {
+      "group": "controls",
+      "material": "steel",
+      "motif": "control",
+      "geometry": {
+        "name": "selector_hub_8.9",
+        "from": [
+          8.79,
+          10.89,
+          5.09
+        ],
+        "to": [
+          9.01,
+          11.49,
+          5.69
+        ],
+        "rotation": {
+          "origin": [
+            8.9,
+            11.19,
+            5.39
+          ],
+          "axis": "x",
+          "angle": 45
+        }
+      }
+    },
+    {
+      "group": "controls",
+      "material": "steel",
+      "motif": "control",
+      "geometry": {
+        "name": "selector_lever_8.9",
+        "from": [
+          8.785,
+          10.4638084,
+          5.615
+        ],
+        "to": [
+          9.015,
+          11.3461916,
+          5.855
+        ],
+        "rotation": {
+          "origin": [
+            8.9,
+            10.905000000000001,
+            5.734999999999999
+          ],
+          "axis": "x",
+          "angle": 128.55839990066488
+        }
+      }
+    }
+  ],
+  "palette": {
+    "blue": [
+      74,
+      137,
+      168
+    ],
+    "blue_edge": [
+      117,
+      173,
+      195
+    ],
+    "red": [
+      169,
+      37,
+      27
+    ],
+    "red_edge": [
+      203,
+      52,
+      34
+    ],
+    "orange": [
+      232,
+      100,
+      25
+    ],
+    "steel": [
+      59,
+      64,
+      67
+    ],
+    "black": [
+      23,
+      28,
+      31
+    ],
+    "silver": [
+      147,
+      158,
+      161
+    ]
+  },
+  "full_only": true,
+  "source_frame_unchanged": true,
+  "openings": {
+    "guard": [
+      8,
+      9.9,
+      4.8
+    ],
+    "carry_slot": [
+      8,
+      14.1,
+      -0.45
+    ],
+    "cage_window": [
+      8,
+      13.82,
+      2.0
+    ]
+  },
+  "bore_probes": [
+    {
+      "name": "upper_muzzle",
+      "center": [
+        8,
+        13.16
+      ],
+      "z_range": [
+        -1.7,
+        4.25
+      ],
+      "back": [
+        8,
+        13.16,
+        4.55
+      ]
+    },
+    {
+      "name": "lower_nozzle",
+      "center": [
+        8,
+        11.38
+      ],
+      "z_range": [
+        -3.5,
+        0.4
+      ],
+      "back": [
+        8,
+        11.38,
+        0.6
+      ]
+    }
+  ],
+  "filled_probes": {
+    "receiver": [
+      8,
+      12.9,
+      8.5
+    ],
+    "lower_frame": [
+      8,
+      11.6,
+      7.5
+    ],
+    "grip": [
+      8,
+      8.65,
+      7.85
+    ]
+  },
+  "input_sha256": {
+    "art/blockbench/weapons/w30/high_albedo.bbmodel": "fd64a844f49437f66d61351f6f42152b81ab7d92e0270342d05b090bba0d467a",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/high_albedo.json": "8a8b8f38c8332ce63bf953c29de7c4e651a17c12549670bfb336ca9885ec412d",
+    "art/weapons/w31/references.json": "acdcf48cc947d2dd7f195497bfef346c9de330405a4f4378f8bdaf859ffe5df3",
+    "scripts/generate_surface_w123_beloved.py": "760430343541ffb1f490a3c8b2aa8089527805d84b881763951d7df2b220a0c8",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/high_albedo_ads.json": "9455363f2bd087739c8d4873471ac84daf257091fc7a7958f6211aee6fc932f8",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/high_albedo_ads_twohand.json": "88dcfa332a400ee329597911af736798629072246d939575b8d2ba7d582b7fa1",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/high_albedo_inspect.json": "fcc677f8b5ca28245b0f418f57121623550c47cfd9fb739bb971ca8935d5ed21",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/high_albedo_inspect_twohand.json": "1395bab1725350d2b0ab9e36e6cabbbed5eeb82fb90083050cb54eaa68e3a228",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/high_albedo_twohand.json": "5165fd6a6159aab9978939e7a1d02fc1615328d1b8a2ca71aa81c6b550940e6b"
+  },
+  "raw_input_sha256": {
+    "/tmp/destiny-weapons-w30/raw/high_albedo/extracted/High Albedo.blend": "b89316f091dff5883899f64c0ee07d1d7d683024cd26736736f8fd18a33515bb",
+    "/tmp/destiny-weapons-w30/raw/high_albedo/extracted/High Albedo Main_Diffuse.dds": "361632733cf7c6befa342940ce8bc03e6a5fa56cdb03b56f812f575c1b83e91c",
+    "/tmp/destiny-weapons-w30/raw/high_albedo/extracted/High Albedo Decals_Diffuse.dds": "7363756e28e9316ed34306648fd70f097de327dffdef80a12639a33a69985902",
+    "/tmp/destiny-weapons-w31/references/high_albedo.jpg": "27254c3fc29cc4508345d014a6ddf80ae84ec1b393142c8af941d7c6274282e6"
+  },
+  "limitations": [
+    "Authored matte default paint is not original PBR reconstruction.",
+    "Minor screws, grip relief, housing channels and knurl are face UV, not perforations.",
+    "Octagonal barrel/cylinder and simplified brace approximate curved source surfaces.",
+    "Static full model retains generic reload; no new split reload or moving cylinder.",
+    "Offline orthographic comparisons do not certify native views, pack load, ADS or performance."
+  ],
+  "atlas": {
+    "size": 1024,
+    "gutter": 2,
+    "used_height": 533,
+    "face_islands": 600,
+    "islands": [
+      {
+        "element": "black_barrel_0",
+        "face": "down",
+        "pixels": [
+          2,
+          2,
+          14,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_0",
+        "face": "up",
+        "pixels": [
+          18,
+          2,
+          30,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_1",
+        "face": "down",
+        "pixels": [
+          34,
+          2,
+          46,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_1",
+        "face": "up",
+        "pixels": [
+          50,
+          2,
+          62,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_2",
+        "face": "down",
+        "pixels": [
+          66,
+          2,
+          78,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_2",
+        "face": "up",
+        "pixels": [
+          82,
+          2,
+          94,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_3",
+        "face": "down",
+        "pixels": [
+          98,
+          2,
+          110,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_3",
+        "face": "up",
+        "pixels": [
+          114,
+          2,
+          126,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_4",
+        "face": "down",
+        "pixels": [
+          130,
+          2,
+          142,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_4",
+        "face": "up",
+        "pixels": [
+          146,
+          2,
+          158,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_5",
+        "face": "down",
+        "pixels": [
+          162,
+          2,
+          174,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_5",
+        "face": "up",
+        "pixels": [
+          178,
+          2,
+          190,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_6",
+        "face": "down",
+        "pixels": [
+          194,
+          2,
+          206,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_6",
+        "face": "up",
+        "pixels": [
+          210,
+          2,
+          222,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_7",
+        "face": "down",
+        "pixels": [
+          226,
+          2,
+          238,
+          159
+        ]
+      },
+      {
+        "element": "black_barrel_7",
+        "face": "up",
+        "pixels": [
+          242,
+          2,
+          254,
+          159
+        ]
+      },
+      {
+        "element": "red_lower_receiver",
+        "face": "down",
+        "pixels": [
+          258,
+          2,
+          296,
+          142
+        ]
+      },
+      {
+        "element": "red_lower_receiver",
+        "face": "up",
+        "pixels": [
+          300,
+          2,
+          338,
+          142
+        ]
+      },
+      {
+        "element": "blue_receiver",
+        "face": "down",
+        "pixels": [
+          342,
+          2,
+          379,
+          142
+        ]
+      },
+      {
+        "element": "blue_receiver",
+        "face": "up",
+        "pixels": [
+          383,
+          2,
+          420,
+          142
+        ]
+      },
+      {
+        "element": "lower_blue_ledge",
+        "face": "down",
+        "pixels": [
+          424,
+          2,
+          466,
+          137
+        ]
+      },
+      {
+        "element": "lower_blue_ledge",
+        "face": "up",
+        "pixels": [
+          470,
+          2,
+          512,
+          137
+        ]
+      },
+      {
+        "element": "knurled_cylinder_0",
+        "face": "down",
+        "pixels": [
+          516,
+          2,
+          529,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_0",
+        "face": "up",
+        "pixels": [
+          533,
+          2,
+          546,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_1",
+        "face": "down",
+        "pixels": [
+          550,
+          2,
+          563,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_1",
+        "face": "up",
+        "pixels": [
+          567,
+          2,
+          580,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_2",
+        "face": "down",
+        "pixels": [
+          584,
+          2,
+          597,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_2",
+        "face": "up",
+        "pixels": [
+          601,
+          2,
+          614,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_3",
+        "face": "down",
+        "pixels": [
+          618,
+          2,
+          631,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_3",
+        "face": "up",
+        "pixels": [
+          635,
+          2,
+          648,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_4",
+        "face": "down",
+        "pixels": [
+          652,
+          2,
+          665,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_4",
+        "face": "up",
+        "pixels": [
+          669,
+          2,
+          682,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_5",
+        "face": "down",
+        "pixels": [
+          686,
+          2,
+          699,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_5",
+        "face": "up",
+        "pixels": [
+          703,
+          2,
+          716,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_6",
+        "face": "down",
+        "pixels": [
+          720,
+          2,
+          733,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_6",
+        "face": "up",
+        "pixels": [
+          737,
+          2,
+          750,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_7",
+        "face": "down",
+        "pixels": [
+          754,
+          2,
+          767,
+          134
+        ]
+      },
+      {
+        "element": "knurled_cylinder_7",
+        "face": "up",
+        "pixels": [
+          771,
+          2,
+          784,
+          134
+        ]
+      },
+      {
+        "element": "blue_top_spine",
+        "face": "down",
+        "pixels": [
+          788,
+          2,
+          818,
+          126
+        ]
+      },
+      {
+        "element": "blue_top_spine",
+        "face": "up",
+        "pixels": [
+          822,
+          2,
+          852,
+          126
+        ]
+      },
+      {
+        "element": "grip_core",
+        "face": "east",
+        "pixels": [
+          856,
+          2,
+          897,
+          107
+        ]
+      },
+      {
+        "element": "grip_core",
+        "face": "west",
+        "pixels": [
+          901,
+          2,
+          942,
+          107
+        ]
+      },
+      {
+        "element": "grip_core",
+        "face": "north",
+        "pixels": [
+          946,
+          2,
+          976,
+          107
+        ]
+      },
+      {
+        "element": "grip_core",
+        "face": "south",
+        "pixels": [
+          980,
+          2,
+          1010,
+          107
+        ]
+      },
+      {
+        "element": "blue_backstrap",
+        "face": "north",
+        "pixels": [
+          2,
+          163,
+          37,
+          265
+        ]
+      },
+      {
+        "element": "blue_backstrap",
+        "face": "south",
+        "pixels": [
+          41,
+          163,
+          76,
+          265
+        ]
+      },
+      {
+        "element": "blue_backstrap",
+        "face": "east",
+        "pixels": [
+          80,
+          163,
+          99,
+          265
+        ]
+      },
+      {
+        "element": "blue_backstrap",
+        "face": "west",
+        "pixels": [
+          103,
+          163,
+          122,
+          265
+        ]
+      },
+      {
+        "element": "red_foreframe",
+        "face": "down",
+        "pixels": [
+          126,
+          163,
+          162,
+          262
+        ]
+      },
+      {
+        "element": "red_foreframe",
+        "face": "up",
+        "pixels": [
+          166,
+          163,
+          202,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_12.37",
+        "face": "down",
+        "pixels": [
+          206,
+          163,
+          210,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_12.37",
+        "face": "up",
+        "pixels": [
+          214,
+          163,
+          218,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_13.99",
+        "face": "down",
+        "pixels": [
+          222,
+          163,
+          226,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_13.99",
+        "face": "up",
+        "pixels": [
+          230,
+          163,
+          234,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_12.37",
+        "face": "down",
+        "pixels": [
+          238,
+          163,
+          242,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_12.37",
+        "face": "up",
+        "pixels": [
+          246,
+          163,
+          250,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_13.99",
+        "face": "down",
+        "pixels": [
+          254,
+          163,
+          258,
+          262
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_13.99",
+        "face": "up",
+        "pixels": [
+          262,
+          163,
+          266,
+          262
+        ]
+      },
+      {
+        "element": "red_finger_spine",
+        "face": "north",
+        "pixels": [
+          270,
+          163,
+          297,
+          257
+        ]
+      },
+      {
+        "element": "red_finger_spine",
+        "face": "south",
+        "pixels": [
+          301,
+          163,
+          328,
+          257
+        ]
+      },
+      {
+        "element": "red_finger_spine",
+        "face": "east",
+        "pixels": [
+          332,
+          163,
+          339,
+          257
+        ]
+      },
+      {
+        "element": "red_finger_spine",
+        "face": "west",
+        "pixels": [
+          343,
+          163,
+          350,
+          257
+        ]
+      },
+      {
+        "element": "bridge_rear",
+        "face": "north",
+        "pixels": [
+          354,
+          163,
+          364,
+          252
+        ]
+      },
+      {
+        "element": "bridge_rear",
+        "face": "south",
+        "pixels": [
+          368,
+          163,
+          378,
+          252
+        ]
+      },
+      {
+        "element": "bridge_rear",
+        "face": "east",
+        "pixels": [
+          382,
+          163,
+          387,
+          252
+        ]
+      },
+      {
+        "element": "bridge_rear",
+        "face": "west",
+        "pixels": [
+          391,
+          163,
+          396,
+          252
+        ]
+      },
+      {
+        "element": "grip_saddle",
+        "face": "down",
+        "pixels": [
+          400,
+          163,
+          436,
+          226
+        ]
+      },
+      {
+        "element": "grip_saddle",
+        "face": "up",
+        "pixels": [
+          440,
+          163,
+          476,
+          226
+        ]
+      },
+      {
+        "element": "reservoir_sill_7.22",
+        "face": "down",
+        "pixels": [
+          480,
+          163,
+          485,
+          225
+        ]
+      },
+      {
+        "element": "reservoir_sill_7.22",
+        "face": "up",
+        "pixels": [
+          489,
+          163,
+          494,
+          225
+        ]
+      },
+      {
+        "element": "reservoir_sill_8.78",
+        "face": "down",
+        "pixels": [
+          498,
+          163,
+          503,
+          225
+        ]
+      },
+      {
+        "element": "reservoir_sill_8.78",
+        "face": "up",
+        "pixels": [
+          507,
+          163,
+          512,
+          225
+        ]
+      },
+      {
+        "element": "reservoir_7.22",
+        "face": "down",
+        "pixels": [
+          516,
+          163,
+          520,
+          218
+        ]
+      },
+      {
+        "element": "reservoir_7.22",
+        "face": "up",
+        "pixels": [
+          524,
+          163,
+          528,
+          218
+        ]
+      },
+      {
+        "element": "reservoir_8.78",
+        "face": "down",
+        "pixels": [
+          532,
+          163,
+          536,
+          218
+        ]
+      },
+      {
+        "element": "reservoir_8.78",
+        "face": "up",
+        "pixels": [
+          540,
+          163,
+          544,
+          218
+        ]
+      },
+      {
+        "element": "front_receiver_collar",
+        "face": "north",
+        "pixels": [
+          548,
+          163,
+          595,
+          215
+        ]
+      },
+      {
+        "element": "front_receiver_collar",
+        "face": "south",
+        "pixels": [
+          599,
+          163,
+          646,
+          215
+        ]
+      },
+      {
+        "element": "front_receiver_collar",
+        "face": "east",
+        "pixels": [
+          650,
+          163,
+          661,
+          215
+        ]
+      },
+      {
+        "element": "front_receiver_collar",
+        "face": "west",
+        "pixels": [
+          665,
+          163,
+          676,
+          215
+        ]
+      },
+      {
+        "element": "rear_heel",
+        "face": "north",
+        "pixels": [
+          680,
+          163,
+          716,
+          213
+        ]
+      },
+      {
+        "element": "rear_heel",
+        "face": "south",
+        "pixels": [
+          720,
+          163,
+          756,
+          213
+        ]
+      },
+      {
+        "element": "rear_heel",
+        "face": "east",
+        "pixels": [
+          760,
+          163,
+          770,
+          213
+        ]
+      },
+      {
+        "element": "rear_heel",
+        "face": "west",
+        "pixels": [
+          774,
+          163,
+          784,
+          213
+        ]
+      },
+      {
+        "element": "bridge_front",
+        "face": "north",
+        "pixels": [
+          788,
+          163,
+          798,
+          211
+        ]
+      },
+      {
+        "element": "bridge_front",
+        "face": "south",
+        "pixels": [
+          802,
+          163,
+          812,
+          211
+        ]
+      },
+      {
+        "element": "bridge_front",
+        "face": "east",
+        "pixels": [
+          816,
+          163,
+          821,
+          211
+        ]
+      },
+      {
+        "element": "bridge_front",
+        "face": "west",
+        "pixels": [
+          825,
+          163,
+          830,
+          211
+        ]
+      },
+      {
+        "element": "blue_receiver",
+        "face": "east",
+        "pixels": [
+          834,
+          163,
+          974,
+          210
+        ]
+      },
+      {
+        "element": "blue_receiver",
+        "face": "west",
+        "pixels": [
+          2,
+          269,
+          142,
+          316
+        ]
+      },
+      {
+        "element": "blue_receiver",
+        "face": "north",
+        "pixels": [
+          146,
+          269,
+          183,
+          316
+        ]
+      },
+      {
+        "element": "blue_receiver",
+        "face": "south",
+        "pixels": [
+          187,
+          269,
+          224,
+          316
+        ]
+      },
+      {
+        "element": "brace_side_7.36",
+        "face": "east",
+        "pixels": [
+          228,
+          269,
+          236,
+          314
+        ]
+      },
+      {
+        "element": "brace_side_7.36",
+        "face": "west",
+        "pixels": [
+          240,
+          269,
+          248,
+          314
+        ]
+      },
+      {
+        "element": "brace_side_8.64",
+        "face": "east",
+        "pixels": [
+          252,
+          269,
+          260,
+          314
+        ]
+      },
+      {
+        "element": "brace_side_8.64",
+        "face": "west",
+        "pixels": [
+          264,
+          269,
+          272,
+          314
+        ]
+      },
+      {
+        "element": "brace_side_7.36",
+        "face": "north",
+        "pixels": [
+          276,
+          269,
+          283,
+          314
+        ]
+      },
+      {
+        "element": "brace_side_7.36",
+        "face": "south",
+        "pixels": [
+          287,
+          269,
+          294,
+          314
+        ]
+      },
+      {
+        "element": "brace_side_8.64",
+        "face": "north",
+        "pixels": [
+          298,
+          269,
+          305,
+          314
+        ]
+      },
+      {
+        "element": "brace_side_8.64",
+        "face": "south",
+        "pixels": [
+          309,
+          269,
+          316,
+          314
+        ]
+      },
+      {
+        "element": "cage_post_7.12_0.8",
+        "face": "east",
+        "pixels": [
+          320,
+          269,
+          325,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_7.12_0.8",
+        "face": "north",
+        "pixels": [
+          329,
+          269,
+          334,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_7.12_0.8",
+        "face": "south",
+        "pixels": [
+          338,
+          269,
+          343,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_7.12_0.8",
+        "face": "west",
+        "pixels": [
+          347,
+          269,
+          352,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_7.12_3.78",
+        "face": "east",
+        "pixels": [
+          356,
+          269,
+          361,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_7.12_3.78",
+        "face": "north",
+        "pixels": [
+          365,
+          269,
+          370,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_7.12_3.78",
+        "face": "south",
+        "pixels": [
+          374,
+          269,
+          379,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_7.12_3.78",
+        "face": "west",
+        "pixels": [
+          383,
+          269,
+          388,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_0.8",
+        "face": "east",
+        "pixels": [
+          392,
+          269,
+          397,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_0.8",
+        "face": "north",
+        "pixels": [
+          401,
+          269,
+          406,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_0.8",
+        "face": "south",
+        "pixels": [
+          410,
+          269,
+          415,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_0.8",
+        "face": "west",
+        "pixels": [
+          419,
+          269,
+          424,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_3.78",
+        "face": "east",
+        "pixels": [
+          428,
+          269,
+          433,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_3.78",
+        "face": "north",
+        "pixels": [
+          437,
+          269,
+          442,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_3.78",
+        "face": "south",
+        "pixels": [
+          446,
+          269,
+          451,
+          311
+        ]
+      },
+      {
+        "element": "cage_post_8.88_3.78",
+        "face": "west",
+        "pixels": [
+          455,
+          269,
+          460,
+          311
+        ]
+      },
+      {
+        "element": "grip_heel",
+        "face": "down",
+        "pixels": [
+          464,
+          269,
+          500,
+          310
+        ]
+      },
+      {
+        "element": "grip_heel",
+        "face": "up",
+        "pixels": [
+          504,
+          269,
+          540,
+          310
+        ]
+      },
+      {
+        "element": "grip_core",
+        "face": "down",
+        "pixels": [
+          544,
+          269,
+          574,
+          310
+        ]
+      },
+      {
+        "element": "grip_core",
+        "face": "up",
+        "pixels": [
+          578,
+          269,
+          608,
+          310
+        ]
+      },
+      {
+        "element": "magazine_base",
+        "face": "down",
+        "pixels": [
+          612,
+          269,
+          645,
+          307
+        ]
+      },
+      {
+        "element": "magazine_base",
+        "face": "up",
+        "pixels": [
+          649,
+          269,
+          682,
+          307
+        ]
+      },
+      {
+        "element": "red_frame_haunch",
+        "face": "down",
+        "pixels": [
+          686,
+          269,
+          724,
+          305
+        ]
+      },
+      {
+        "element": "red_frame_haunch",
+        "face": "up",
+        "pixels": [
+          728,
+          269,
+          766,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_0",
+        "face": "down",
+        "pixels": [
+          770,
+          269,
+          785,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_0",
+        "face": "up",
+        "pixels": [
+          789,
+          269,
+          804,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_1",
+        "face": "down",
+        "pixels": [
+          808,
+          269,
+          823,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_1",
+        "face": "up",
+        "pixels": [
+          827,
+          269,
+          842,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_2",
+        "face": "down",
+        "pixels": [
+          846,
+          269,
+          861,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_2",
+        "face": "up",
+        "pixels": [
+          865,
+          269,
+          880,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_3",
+        "face": "down",
+        "pixels": [
+          884,
+          269,
+          899,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_3",
+        "face": "up",
+        "pixels": [
+          903,
+          269,
+          918,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_4",
+        "face": "down",
+        "pixels": [
+          922,
+          269,
+          937,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_4",
+        "face": "up",
+        "pixels": [
+          941,
+          269,
+          956,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_5",
+        "face": "down",
+        "pixels": [
+          960,
+          269,
+          975,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_5",
+        "face": "up",
+        "pixels": [
+          979,
+          269,
+          994,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_6",
+        "face": "down",
+        "pixels": [
+          998,
+          269,
+          1013,
+          305
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_6",
+        "face": "up",
+        "pixels": [
+          2,
+          320,
+          17,
+          356
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_7",
+        "face": "down",
+        "pixels": [
+          21,
+          320,
+          36,
+          356
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_7",
+        "face": "up",
+        "pixels": [
+          40,
+          320,
+          55,
+          356
+        ]
+      },
+      {
+        "element": "blue_cylinder_mount",
+        "face": "down",
+        "pixels": [
+          59,
+          320,
+          90,
+          353
+        ]
+      },
+      {
+        "element": "blue_cylinder_mount",
+        "face": "up",
+        "pixels": [
+          94,
+          320,
+          125,
+          353
+        ]
+      },
+      {
+        "element": "guard_root",
+        "face": "north",
+        "pixels": [
+          129,
+          320,
+          140,
+          350
+        ]
+      },
+      {
+        "element": "guard_root",
+        "face": "south",
+        "pixels": [
+          144,
+          320,
+          155,
+          350
+        ]
+      },
+      {
+        "element": "guard_root",
+        "face": "east",
+        "pixels": [
+          159,
+          320,
+          167,
+          350
+        ]
+      },
+      {
+        "element": "guard_root",
+        "face": "west",
+        "pixels": [
+          171,
+          320,
+          179,
+          350
+        ]
+      },
+      {
+        "element": "guard_free_tip",
+        "face": "north",
+        "pixels": [
+          183,
+          320,
+          195,
+          348
+        ]
+      },
+      {
+        "element": "guard_free_tip",
+        "face": "south",
+        "pixels": [
+          199,
+          320,
+          211,
+          348
+        ]
+      },
+      {
+        "element": "guard_free_tip",
+        "face": "east",
+        "pixels": [
+          215,
+          320,
+          225,
+          348
+        ]
+      },
+      {
+        "element": "guard_free_tip",
+        "face": "west",
+        "pixels": [
+          229,
+          320,
+          239,
+          348
+        ]
+      },
+      {
+        "element": "trigger",
+        "face": "north",
+        "pixels": [
+          243,
+          320,
+          249,
+          347
+        ]
+      },
+      {
+        "element": "trigger",
+        "face": "south",
+        "pixels": [
+          253,
+          320,
+          259,
+          347
+        ]
+      },
+      {
+        "element": "trigger",
+        "face": "east",
+        "pixels": [
+          263,
+          320,
+          268,
+          347
+        ]
+      },
+      {
+        "element": "trigger",
+        "face": "west",
+        "pixels": [
+          272,
+          320,
+          277,
+          347
+        ]
+      },
+      {
+        "element": "reservoir_7.22",
+        "face": "east",
+        "pixels": [
+          281,
+          320,
+          336,
+          344
+        ]
+      },
+      {
+        "element": "reservoir_7.22",
+        "face": "west",
+        "pixels": [
+          340,
+          320,
+          395,
+          344
+        ]
+      },
+      {
+        "element": "reservoir_8.78",
+        "face": "east",
+        "pixels": [
+          399,
+          320,
+          454,
+          344
+        ]
+      },
+      {
+        "element": "reservoir_8.78",
+        "face": "west",
+        "pixels": [
+          458,
+          320,
+          513,
+          344
+        ]
+      },
+      {
+        "element": "reservoir_7.22",
+        "face": "north",
+        "pixels": [
+          517,
+          320,
+          521,
+          344
+        ]
+      },
+      {
+        "element": "reservoir_7.22",
+        "face": "south",
+        "pixels": [
+          525,
+          320,
+          529,
+          344
+        ]
+      },
+      {
+        "element": "reservoir_8.78",
+        "face": "north",
+        "pixels": [
+          533,
+          320,
+          537,
+          344
+        ]
+      },
+      {
+        "element": "reservoir_8.78",
+        "face": "south",
+        "pixels": [
+          541,
+          320,
+          545,
+          344
+        ]
+      },
+      {
+        "element": "selector_lever_7.1",
+        "face": "east",
+        "pixels": [
+          549,
+          320,
+          555,
+          342
+        ]
+      },
+      {
+        "element": "selector_lever_7.1",
+        "face": "north",
+        "pixels": [
+          559,
+          320,
+          565,
+          342
+        ]
+      },
+      {
+        "element": "selector_lever_7.1",
+        "face": "south",
+        "pixels": [
+          569,
+          320,
+          575,
+          342
+        ]
+      },
+      {
+        "element": "selector_lever_7.1",
+        "face": "west",
+        "pixels": [
+          579,
+          320,
+          585,
+          342
+        ]
+      },
+      {
+        "element": "selector_lever_8.9",
+        "face": "east",
+        "pixels": [
+          589,
+          320,
+          595,
+          342
+        ]
+      },
+      {
+        "element": "selector_lever_8.9",
+        "face": "north",
+        "pixels": [
+          599,
+          320,
+          605,
+          342
+        ]
+      },
+      {
+        "element": "selector_lever_8.9",
+        "face": "south",
+        "pixels": [
+          609,
+          320,
+          615,
+          342
+        ]
+      },
+      {
+        "element": "selector_lever_8.9",
+        "face": "west",
+        "pixels": [
+          619,
+          320,
+          625,
+          342
+        ]
+      },
+      {
+        "element": "blue_cylinder_mount",
+        "face": "east",
+        "pixels": [
+          629,
+          320,
+          662,
+          341
+        ]
+      },
+      {
+        "element": "blue_cylinder_mount",
+        "face": "west",
+        "pixels": [
+          666,
+          320,
+          699,
+          341
+        ]
+      },
+      {
+        "element": "blue_cylinder_mount",
+        "face": "north",
+        "pixels": [
+          703,
+          320,
+          734,
+          341
+        ]
+      },
+      {
+        "element": "blue_cylinder_mount",
+        "face": "south",
+        "pixels": [
+          738,
+          320,
+          769,
+          341
+        ]
+      },
+      {
+        "element": "red_lower_receiver",
+        "face": "east",
+        "pixels": [
+          773,
+          320,
+          913,
+          340
+        ]
+      },
+      {
+        "element": "red_lower_receiver",
+        "face": "west",
+        "pixels": [
+          2,
+          360,
+          142,
+          380
+        ]
+      },
+      {
+        "element": "grip_saddle",
+        "face": "east",
+        "pixels": [
+          146,
+          360,
+          209,
+          380
+        ]
+      },
+      {
+        "element": "grip_saddle",
+        "face": "west",
+        "pixels": [
+          213,
+          360,
+          276,
+          380
+        ]
+      },
+      {
+        "element": "red_lower_receiver",
+        "face": "north",
+        "pixels": [
+          280,
+          360,
+          318,
+          380
+        ]
+      },
+      {
+        "element": "red_lower_receiver",
+        "face": "south",
+        "pixels": [
+          322,
+          360,
+          360,
+          380
+        ]
+      },
+      {
+        "element": "grip_saddle",
+        "face": "north",
+        "pixels": [
+          364,
+          360,
+          400,
+          380
+        ]
+      },
+      {
+        "element": "grip_saddle",
+        "face": "south",
+        "pixels": [
+          404,
+          360,
+          440,
+          380
+        ]
+      },
+      {
+        "element": "breech_core",
+        "face": "north",
+        "pixels": [
+          444,
+          360,
+          464,
+          380
+        ]
+      },
+      {
+        "element": "breech_core",
+        "face": "south",
+        "pixels": [
+          468,
+          360,
+          488,
+          380
+        ]
+      },
+      {
+        "element": "cylinder_end_core",
+        "face": "north",
+        "pixels": [
+          492,
+          360,
+          512,
+          380
+        ]
+      },
+      {
+        "element": "cylinder_end_core",
+        "face": "south",
+        "pixels": [
+          516,
+          360,
+          536,
+          380
+        ]
+      },
+      {
+        "element": "breech_core",
+        "face": "east",
+        "pixels": [
+          540,
+          360,
+          554,
+          380
+        ]
+      },
+      {
+        "element": "breech_core",
+        "face": "west",
+        "pixels": [
+          558,
+          360,
+          572,
+          380
+        ]
+      },
+      {
+        "element": "cylinder_end_core",
+        "face": "east",
+        "pixels": [
+          576,
+          360,
+          583,
+          380
+        ]
+      },
+      {
+        "element": "cylinder_end_core",
+        "face": "west",
+        "pixels": [
+          587,
+          360,
+          594,
+          380
+        ]
+      },
+      {
+        "element": "blue_backstrap",
+        "face": "down",
+        "pixels": [
+          598,
+          360,
+          633,
+          379
+        ]
+      },
+      {
+        "element": "blue_backstrap",
+        "face": "up",
+        "pixels": [
+          637,
+          360,
+          672,
+          379
+        ]
+      },
+      {
+        "element": "guard_elbow",
+        "face": "north",
+        "pixels": [
+          676,
+          360,
+          687,
+          378
+        ]
+      },
+      {
+        "element": "guard_elbow",
+        "face": "south",
+        "pixels": [
+          691,
+          360,
+          702,
+          378
+        ]
+      },
+      {
+        "element": "bridge_drop",
+        "face": "north",
+        "pixels": [
+          706,
+          360,
+          716,
+          378
+        ]
+      },
+      {
+        "element": "bridge_drop",
+        "face": "south",
+        "pixels": [
+          720,
+          360,
+          730,
+          378
+        ]
+      },
+      {
+        "element": "guard_elbow",
+        "face": "east",
+        "pixels": [
+          734,
+          360,
+          742,
+          378
+        ]
+      },
+      {
+        "element": "guard_elbow",
+        "face": "west",
+        "pixels": [
+          746,
+          360,
+          754,
+          378
+        ]
+      },
+      {
+        "element": "bridge_drop",
+        "face": "east",
+        "pixels": [
+          758,
+          360,
+          763,
+          378
+        ]
+      },
+      {
+        "element": "bridge_drop",
+        "face": "west",
+        "pixels": [
+          767,
+          360,
+          772,
+          378
+        ]
+      },
+      {
+        "element": "red_foreframe",
+        "face": "east",
+        "pixels": [
+          776,
+          360,
+          875,
+          377
+        ]
+      },
+      {
+        "element": "red_foreframe",
+        "face": "west",
+        "pixels": [
+          879,
+          360,
+          978,
+          377
+        ]
+      },
+      {
+        "element": "red_foreframe",
+        "face": "north",
+        "pixels": [
+          982,
+          360,
+          1018,
+          377
+        ]
+      },
+      {
+        "element": "red_foreframe",
+        "face": "south",
+        "pixels": [
+          2,
+          384,
+          38,
+          401
+        ]
+      },
+      {
+        "element": "rear_sight_blade",
+        "face": "down",
+        "pixels": [
+          42,
+          384,
+          49,
+          401
+        ]
+      },
+      {
+        "element": "rear_sight_blade",
+        "face": "up",
+        "pixels": [
+          53,
+          384,
+          60,
+          401
+        ]
+      },
+      {
+        "element": "rear_chamfer",
+        "face": "down",
+        "pixels": [
+          64,
+          384,
+          96,
+          400
+        ]
+      },
+      {
+        "element": "rear_chamfer",
+        "face": "up",
+        "pixels": [
+          100,
+          384,
+          132,
+          400
+        ]
+      },
+      {
+        "element": "red_frame_haunch",
+        "face": "north",
+        "pixels": [
+          136,
+          384,
+          174,
+          399
+        ]
+      },
+      {
+        "element": "red_frame_haunch",
+        "face": "south",
+        "pixels": [
+          178,
+          384,
+          216,
+          399
+        ]
+      },
+      {
+        "element": "red_frame_haunch",
+        "face": "east",
+        "pixels": [
+          220,
+          384,
+          256,
+          399
+        ]
+      },
+      {
+        "element": "red_frame_haunch",
+        "face": "west",
+        "pixels": [
+          260,
+          384,
+          296,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_7.1",
+        "face": "east",
+        "pixels": [
+          300,
+          384,
+          315,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_7.1",
+        "face": "west",
+        "pixels": [
+          319,
+          384,
+          334,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_8.9",
+        "face": "east",
+        "pixels": [
+          338,
+          384,
+          353,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_8.9",
+        "face": "west",
+        "pixels": [
+          357,
+          384,
+          372,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_7.1",
+        "face": "down",
+        "pixels": [
+          376,
+          384,
+          382,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_7.1",
+        "face": "north",
+        "pixels": [
+          386,
+          384,
+          392,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_7.1",
+        "face": "south",
+        "pixels": [
+          396,
+          384,
+          402,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_7.1",
+        "face": "up",
+        "pixels": [
+          406,
+          384,
+          412,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_8.9",
+        "face": "down",
+        "pixels": [
+          416,
+          384,
+          422,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_8.9",
+        "face": "north",
+        "pixels": [
+          426,
+          384,
+          432,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_8.9",
+        "face": "south",
+        "pixels": [
+          436,
+          384,
+          442,
+          399
+        ]
+      },
+      {
+        "element": "selector_hub_8.9",
+        "face": "up",
+        "pixels": [
+          446,
+          384,
+          452,
+          399
+        ]
+      },
+      {
+        "element": "breech_core",
+        "face": "down",
+        "pixels": [
+          456,
+          384,
+          476,
+          398
+        ]
+      },
+      {
+        "element": "breech_core",
+        "face": "up",
+        "pixels": [
+          480,
+          384,
+          500,
+          398
+        ]
+      },
+      {
+        "element": "grip_heel",
+        "face": "east",
+        "pixels": [
+          504,
+          384,
+          545,
+          397
+        ]
+      },
+      {
+        "element": "grip_heel",
+        "face": "west",
+        "pixels": [
+          549,
+          384,
+          590,
+          397
+        ]
+      },
+      {
+        "element": "grip_heel",
+        "face": "north",
+        "pixels": [
+          594,
+          384,
+          630,
+          397
+        ]
+      },
+      {
+        "element": "grip_heel",
+        "face": "south",
+        "pixels": [
+          634,
+          384,
+          670,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_0",
+        "face": "down",
+        "pixels": [
+          674,
+          384,
+          688,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_0",
+        "face": "up",
+        "pixels": [
+          692,
+          384,
+          706,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_1",
+        "face": "down",
+        "pixels": [
+          710,
+          384,
+          724,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_1",
+        "face": "up",
+        "pixels": [
+          728,
+          384,
+          742,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_2",
+        "face": "down",
+        "pixels": [
+          746,
+          384,
+          760,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_2",
+        "face": "up",
+        "pixels": [
+          764,
+          384,
+          778,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_3",
+        "face": "down",
+        "pixels": [
+          782,
+          384,
+          796,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_3",
+        "face": "up",
+        "pixels": [
+          800,
+          384,
+          814,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_4",
+        "face": "down",
+        "pixels": [
+          818,
+          384,
+          832,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_4",
+        "face": "up",
+        "pixels": [
+          836,
+          384,
+          850,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_5",
+        "face": "down",
+        "pixels": [
+          854,
+          384,
+          868,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_5",
+        "face": "up",
+        "pixels": [
+          872,
+          384,
+          886,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_6",
+        "face": "down",
+        "pixels": [
+          890,
+          384,
+          904,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_6",
+        "face": "up",
+        "pixels": [
+          908,
+          384,
+          922,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_7",
+        "face": "down",
+        "pixels": [
+          926,
+          384,
+          940,
+          397
+        ]
+      },
+      {
+        "element": "barrel_step_collar_7",
+        "face": "up",
+        "pixels": [
+          944,
+          384,
+          958,
+          397
+        ]
+      },
+      {
+        "element": "rear_chamfer",
+        "face": "north",
+        "pixels": [
+          962,
+          384,
+          994,
+          396
+        ]
+      },
+      {
+        "element": "rear_chamfer",
+        "face": "south",
+        "pixels": [
+          2,
+          405,
+          34,
+          417
+        ]
+      },
+      {
+        "element": "rear_chamfer",
+        "face": "east",
+        "pixels": [
+          38,
+          405,
+          54,
+          417
+        ]
+      },
+      {
+        "element": "rear_chamfer",
+        "face": "west",
+        "pixels": [
+          58,
+          405,
+          74,
+          417
+        ]
+      },
+      {
+        "element": "brace_lower_neck",
+        "face": "north",
+        "pixels": [
+          78,
+          405,
+          93,
+          417
+        ]
+      },
+      {
+        "element": "brace_lower_neck",
+        "face": "south",
+        "pixels": [
+          97,
+          405,
+          112,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_0",
+        "face": "down",
+        "pixels": [
+          116,
+          405,
+          126,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_0",
+        "face": "up",
+        "pixels": [
+          130,
+          405,
+          140,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_1",
+        "face": "down",
+        "pixels": [
+          144,
+          405,
+          154,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_1",
+        "face": "up",
+        "pixels": [
+          158,
+          405,
+          168,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_2",
+        "face": "down",
+        "pixels": [
+          172,
+          405,
+          182,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_2",
+        "face": "up",
+        "pixels": [
+          186,
+          405,
+          196,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_3",
+        "face": "down",
+        "pixels": [
+          200,
+          405,
+          210,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_3",
+        "face": "up",
+        "pixels": [
+          214,
+          405,
+          224,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_4",
+        "face": "down",
+        "pixels": [
+          228,
+          405,
+          238,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_4",
+        "face": "up",
+        "pixels": [
+          242,
+          405,
+          252,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_5",
+        "face": "down",
+        "pixels": [
+          256,
+          405,
+          266,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_5",
+        "face": "up",
+        "pixels": [
+          270,
+          405,
+          280,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_6",
+        "face": "down",
+        "pixels": [
+          284,
+          405,
+          294,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_6",
+        "face": "up",
+        "pixels": [
+          298,
+          405,
+          308,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_7",
+        "face": "down",
+        "pixels": [
+          312,
+          405,
+          322,
+          417
+        ]
+      },
+      {
+        "element": "silver_nozzle_7",
+        "face": "up",
+        "pixels": [
+          326,
+          405,
+          336,
+          417
+        ]
+      },
+      {
+        "element": "brace_lower_neck",
+        "face": "east",
+        "pixels": [
+          340,
+          405,
+          348,
+          417
+        ]
+      },
+      {
+        "element": "brace_lower_neck",
+        "face": "west",
+        "pixels": [
+          352,
+          405,
+          360,
+          417
+        ]
+      },
+      {
+        "element": "front_receiver_collar",
+        "face": "down",
+        "pixels": [
+          364,
+          405,
+          411,
+          416
+        ]
+      },
+      {
+        "element": "front_receiver_collar",
+        "face": "up",
+        "pixels": [
+          415,
+          405,
+          462,
+          416
+        ]
+      },
+      {
+        "element": "collar_crown",
+        "face": "down",
+        "pixels": [
+          466,
+          405,
+          503,
+          416
+        ]
+      },
+      {
+        "element": "collar_crown",
+        "face": "up",
+        "pixels": [
+          507,
+          405,
+          544,
+          416
+        ]
+      },
+      {
+        "element": "rear_heel",
+        "face": "down",
+        "pixels": [
+          548,
+          405,
+          584,
+          415
+        ]
+      },
+      {
+        "element": "rear_heel",
+        "face": "up",
+        "pixels": [
+          588,
+          405,
+          624,
+          415
+        ]
+      },
+      {
+        "element": "rear_sight_blade",
+        "face": "east",
+        "pixels": [
+          628,
+          405,
+          645,
+          415
+        ]
+      },
+      {
+        "element": "rear_sight_blade",
+        "face": "west",
+        "pixels": [
+          649,
+          405,
+          666,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_0",
+        "face": "down",
+        "pixels": [
+          670,
+          405,
+          684,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_0",
+        "face": "up",
+        "pixels": [
+          688,
+          405,
+          702,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_1",
+        "face": "down",
+        "pixels": [
+          706,
+          405,
+          720,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_1",
+        "face": "up",
+        "pixels": [
+          724,
+          405,
+          738,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_2",
+        "face": "down",
+        "pixels": [
+          742,
+          405,
+          756,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_2",
+        "face": "up",
+        "pixels": [
+          760,
+          405,
+          774,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_3",
+        "face": "down",
+        "pixels": [
+          778,
+          405,
+          792,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_3",
+        "face": "up",
+        "pixels": [
+          796,
+          405,
+          810,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_4",
+        "face": "down",
+        "pixels": [
+          814,
+          405,
+          828,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_4",
+        "face": "up",
+        "pixels": [
+          832,
+          405,
+          846,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_5",
+        "face": "down",
+        "pixels": [
+          850,
+          405,
+          864,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_5",
+        "face": "up",
+        "pixels": [
+          868,
+          405,
+          882,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_6",
+        "face": "down",
+        "pixels": [
+          886,
+          405,
+          900,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_6",
+        "face": "up",
+        "pixels": [
+          904,
+          405,
+          918,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_7",
+        "face": "down",
+        "pixels": [
+          922,
+          405,
+          936,
+          415
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_7",
+        "face": "up",
+        "pixels": [
+          940,
+          405,
+          954,
+          415
+        ]
+      },
+      {
+        "element": "guard_free_tip",
+        "face": "down",
+        "pixels": [
+          958,
+          405,
+          970,
+          415
+        ]
+      },
+      {
+        "element": "guard_free_tip",
+        "face": "up",
+        "pixels": [
+          974,
+          405,
+          986,
+          415
+        ]
+      },
+      {
+        "element": "rear_sight_blade",
+        "face": "north",
+        "pixels": [
+          990,
+          405,
+          997,
+          415
+        ]
+      },
+      {
+        "element": "rear_sight_blade",
+        "face": "south",
+        "pixels": [
+          1001,
+          405,
+          1008,
+          415
+        ]
+      },
+      {
+        "element": "brace_bottom",
+        "face": "north",
+        "pixels": [
+          2,
+          421,
+          33,
+          430
+        ]
+      },
+      {
+        "element": "brace_bottom",
+        "face": "south",
+        "pixels": [
+          37,
+          421,
+          68,
+          430
+        ]
+      },
+      {
+        "element": "brace_top",
+        "face": "north",
+        "pixels": [
+          72,
+          421,
+          103,
+          430
+        ]
+      },
+      {
+        "element": "brace_top",
+        "face": "south",
+        "pixels": [
+          107,
+          421,
+          138,
+          430
+        ]
+      },
+      {
+        "element": "brace_bottom",
+        "face": "east",
+        "pixels": [
+          142,
+          421,
+          150,
+          430
+        ]
+      },
+      {
+        "element": "brace_bottom",
+        "face": "west",
+        "pixels": [
+          154,
+          421,
+          162,
+          430
+        ]
+      },
+      {
+        "element": "brace_top",
+        "face": "east",
+        "pixels": [
+          166,
+          421,
+          174,
+          430
+        ]
+      },
+      {
+        "element": "brace_top",
+        "face": "west",
+        "pixels": [
+          178,
+          421,
+          186,
+          430
+        ]
+      },
+      {
+        "element": "blue_top_spine",
+        "face": "east",
+        "pixels": [
+          190,
+          421,
+          314,
+          429
+        ]
+      },
+      {
+        "element": "blue_top_spine",
+        "face": "west",
+        "pixels": [
+          318,
+          421,
+          442,
+          429
+        ]
+      },
+      {
+        "element": "magazine_base",
+        "face": "east",
+        "pixels": [
+          446,
+          421,
+          484,
+          429
+        ]
+      },
+      {
+        "element": "magazine_base",
+        "face": "west",
+        "pixels": [
+          488,
+          421,
+          526,
+          429
+        ]
+      },
+      {
+        "element": "magazine_base",
+        "face": "north",
+        "pixels": [
+          530,
+          421,
+          563,
+          429
+        ]
+      },
+      {
+        "element": "magazine_base",
+        "face": "south",
+        "pixels": [
+          567,
+          421,
+          600,
+          429
+        ]
+      },
+      {
+        "element": "brace_bottom",
+        "face": "down",
+        "pixels": [
+          604,
+          421,
+          635,
+          429
+        ]
+      },
+      {
+        "element": "brace_bottom",
+        "face": "up",
+        "pixels": [
+          639,
+          421,
+          670,
+          429
+        ]
+      },
+      {
+        "element": "brace_top",
+        "face": "down",
+        "pixels": [
+          674,
+          421,
+          705,
+          429
+        ]
+      },
+      {
+        "element": "brace_top",
+        "face": "up",
+        "pixels": [
+          709,
+          421,
+          740,
+          429
+        ]
+      },
+      {
+        "element": "blue_top_spine",
+        "face": "north",
+        "pixels": [
+          744,
+          421,
+          774,
+          429
+        ]
+      },
+      {
+        "element": "blue_top_spine",
+        "face": "south",
+        "pixels": [
+          778,
+          421,
+          808,
+          429
+        ]
+      },
+      {
+        "element": "brace_lower_neck",
+        "face": "down",
+        "pixels": [
+          812,
+          421,
+          827,
+          429
+        ]
+      },
+      {
+        "element": "brace_lower_neck",
+        "face": "up",
+        "pixels": [
+          831,
+          421,
+          846,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_12.62",
+        "face": "down",
+        "pixels": [
+          850,
+          421,
+          861,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_12.62",
+        "face": "up",
+        "pixels": [
+          865,
+          421,
+          876,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_13.7",
+        "face": "down",
+        "pixels": [
+          880,
+          421,
+          891,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_13.7",
+        "face": "up",
+        "pixels": [
+          895,
+          421,
+          906,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_12.62",
+        "face": "down",
+        "pixels": [
+          910,
+          421,
+          921,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_12.62",
+        "face": "up",
+        "pixels": [
+          925,
+          421,
+          936,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_13.7",
+        "face": "down",
+        "pixels": [
+          940,
+          421,
+          951,
+          429
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_13.7",
+        "face": "up",
+        "pixels": [
+          955,
+          421,
+          966,
+          429
+        ]
+      },
+      {
+        "element": "guard_elbow",
+        "face": "down",
+        "pixels": [
+          970,
+          421,
+          981,
+          429
+        ]
+      },
+      {
+        "element": "guard_elbow",
+        "face": "up",
+        "pixels": [
+          985,
+          421,
+          996,
+          429
+        ]
+      },
+      {
+        "element": "guard_root",
+        "face": "down",
+        "pixels": [
+          1000,
+          421,
+          1011,
+          429
+        ]
+      },
+      {
+        "element": "guard_root",
+        "face": "up",
+        "pixels": [
+          2,
+          434,
+          13,
+          442
+        ]
+      },
+      {
+        "element": "brace_side_7.36",
+        "face": "down",
+        "pixels": [
+          17,
+          434,
+          24,
+          442
+        ]
+      },
+      {
+        "element": "brace_side_7.36",
+        "face": "up",
+        "pixels": [
+          28,
+          434,
+          35,
+          442
+        ]
+      },
+      {
+        "element": "brace_side_8.64",
+        "face": "down",
+        "pixels": [
+          39,
+          434,
+          46,
+          442
+        ]
+      },
+      {
+        "element": "brace_side_8.64",
+        "face": "up",
+        "pixels": [
+          50,
+          434,
+          57,
+          442
+        ]
+      },
+      {
+        "element": "red_finger_spine",
+        "face": "down",
+        "pixels": [
+          61,
+          434,
+          88,
+          441
+        ]
+      },
+      {
+        "element": "red_finger_spine",
+        "face": "up",
+        "pixels": [
+          92,
+          434,
+          119,
+          441
+        ]
+      },
+      {
+        "element": "cylinder_end_core",
+        "face": "down",
+        "pixels": [
+          123,
+          434,
+          143,
+          441
+        ]
+      },
+      {
+        "element": "cylinder_end_core",
+        "face": "up",
+        "pixels": [
+          147,
+          434,
+          167,
+          441
+        ]
+      },
+      {
+        "element": "lower_blue_ledge",
+        "face": "east",
+        "pixels": [
+          171,
+          434,
+          306,
+          440
+        ]
+      },
+      {
+        "element": "lower_blue_ledge",
+        "face": "west",
+        "pixels": [
+          310,
+          434,
+          445,
+          440
+        ]
+      },
+      {
+        "element": "lower_blue_ledge",
+        "face": "north",
+        "pixels": [
+          449,
+          434,
+          491,
+          440
+        ]
+      },
+      {
+        "element": "lower_blue_ledge",
+        "face": "south",
+        "pixels": [
+          495,
+          434,
+          537,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_0",
+        "face": "east",
+        "pixels": [
+          541,
+          434,
+          553,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_0",
+        "face": "west",
+        "pixels": [
+          557,
+          434,
+          569,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_1",
+        "face": "east",
+        "pixels": [
+          573,
+          434,
+          585,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_1",
+        "face": "west",
+        "pixels": [
+          589,
+          434,
+          601,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_2",
+        "face": "east",
+        "pixels": [
+          605,
+          434,
+          617,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_2",
+        "face": "west",
+        "pixels": [
+          621,
+          434,
+          633,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_3",
+        "face": "east",
+        "pixels": [
+          637,
+          434,
+          649,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_3",
+        "face": "west",
+        "pixels": [
+          653,
+          434,
+          665,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_4",
+        "face": "east",
+        "pixels": [
+          669,
+          434,
+          681,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_4",
+        "face": "west",
+        "pixels": [
+          685,
+          434,
+          697,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_5",
+        "face": "east",
+        "pixels": [
+          701,
+          434,
+          713,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_5",
+        "face": "west",
+        "pixels": [
+          717,
+          434,
+          729,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_6",
+        "face": "east",
+        "pixels": [
+          733,
+          434,
+          745,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_6",
+        "face": "west",
+        "pixels": [
+          749,
+          434,
+          761,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_7",
+        "face": "east",
+        "pixels": [
+          765,
+          434,
+          777,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_7",
+        "face": "west",
+        "pixels": [
+          781,
+          434,
+          793,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_12.62",
+        "face": "north",
+        "pixels": [
+          797,
+          434,
+          808,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_12.62",
+        "face": "south",
+        "pixels": [
+          812,
+          434,
+          823,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_13.7",
+        "face": "north",
+        "pixels": [
+          827,
+          434,
+          838,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_13.7",
+        "face": "south",
+        "pixels": [
+          842,
+          434,
+          853,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_12.62",
+        "face": "north",
+        "pixels": [
+          857,
+          434,
+          868,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_12.62",
+        "face": "south",
+        "pixels": [
+          872,
+          434,
+          883,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_13.7",
+        "face": "north",
+        "pixels": [
+          887,
+          434,
+          898,
+          440
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_13.7",
+        "face": "south",
+        "pixels": [
+          902,
+          434,
+          913,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_0",
+        "face": "north",
+        "pixels": [
+          917,
+          434,
+          927,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_0",
+        "face": "south",
+        "pixels": [
+          931,
+          434,
+          941,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_1",
+        "face": "north",
+        "pixels": [
+          945,
+          434,
+          955,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_1",
+        "face": "south",
+        "pixels": [
+          959,
+          434,
+          969,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_2",
+        "face": "north",
+        "pixels": [
+          973,
+          434,
+          983,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_2",
+        "face": "south",
+        "pixels": [
+          987,
+          434,
+          997,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_3",
+        "face": "north",
+        "pixels": [
+          1001,
+          434,
+          1011,
+          440
+        ]
+      },
+      {
+        "element": "silver_nozzle_3",
+        "face": "south",
+        "pixels": [
+          2,
+          446,
+          12,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_4",
+        "face": "north",
+        "pixels": [
+          16,
+          446,
+          26,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_4",
+        "face": "south",
+        "pixels": [
+          30,
+          446,
+          40,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_5",
+        "face": "north",
+        "pixels": [
+          44,
+          446,
+          54,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_5",
+        "face": "south",
+        "pixels": [
+          58,
+          446,
+          68,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_6",
+        "face": "north",
+        "pixels": [
+          72,
+          446,
+          82,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_6",
+        "face": "south",
+        "pixels": [
+          86,
+          446,
+          96,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_7",
+        "face": "north",
+        "pixels": [
+          100,
+          446,
+          110,
+          452
+        ]
+      },
+      {
+        "element": "silver_nozzle_7",
+        "face": "south",
+        "pixels": [
+          114,
+          446,
+          124,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_12.62",
+        "face": "east",
+        "pixels": [
+          128,
+          446,
+          136,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_12.62",
+        "face": "west",
+        "pixels": [
+          140,
+          446,
+          148,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_13.7",
+        "face": "east",
+        "pixels": [
+          152,
+          446,
+          160,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_6.98_13.7",
+        "face": "west",
+        "pixels": [
+          164,
+          446,
+          172,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_12.62",
+        "face": "east",
+        "pixels": [
+          176,
+          446,
+          184,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_12.62",
+        "face": "west",
+        "pixels": [
+          188,
+          446,
+          196,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_13.7",
+        "face": "east",
+        "pixels": [
+          200,
+          446,
+          208,
+          452
+        ]
+      },
+      {
+        "element": "brace_lug_9.02_13.7",
+        "face": "west",
+        "pixels": [
+          212,
+          446,
+          220,
+          452
+        ]
+      },
+      {
+        "element": "selector_lever_7.1",
+        "face": "down",
+        "pixels": [
+          224,
+          446,
+          230,
+          452
+        ]
+      },
+      {
+        "element": "selector_lever_7.1",
+        "face": "up",
+        "pixels": [
+          234,
+          446,
+          240,
+          452
+        ]
+      },
+      {
+        "element": "selector_lever_8.9",
+        "face": "down",
+        "pixels": [
+          244,
+          446,
+          250,
+          452
+        ]
+      },
+      {
+        "element": "selector_lever_8.9",
+        "face": "up",
+        "pixels": [
+          254,
+          446,
+          260,
+          452
+        ]
+      },
+      {
+        "element": "black_barrel_0",
+        "face": "east",
+        "pixels": [
+          264,
+          446,
+          421,
+          451
+        ]
+      },
+      {
+        "element": "black_barrel_0",
+        "face": "west",
+        "pixels": [
+          425,
+          446,
+          582,
+          451
+        ]
+      },
+      {
+        "element": "black_barrel_1",
+        "face": "east",
+        "pixels": [
+          586,
+          446,
+          743,
+          451
+        ]
+      },
+      {
+        "element": "black_barrel_1",
+        "face": "west",
+        "pixels": [
+          747,
+          446,
+          904,
+          451
+        ]
+      },
+      {
+        "element": "black_barrel_2",
+        "face": "east",
+        "pixels": [
+          2,
+          456,
+          159,
+          461
+        ]
+      },
+      {
+        "element": "black_barrel_2",
+        "face": "west",
+        "pixels": [
+          163,
+          456,
+          320,
+          461
+        ]
+      },
+      {
+        "element": "black_barrel_3",
+        "face": "east",
+        "pixels": [
+          324,
+          456,
+          481,
+          461
+        ]
+      },
+      {
+        "element": "black_barrel_3",
+        "face": "west",
+        "pixels": [
+          485,
+          456,
+          642,
+          461
+        ]
+      },
+      {
+        "element": "black_barrel_4",
+        "face": "east",
+        "pixels": [
+          646,
+          456,
+          803,
+          461
+        ]
+      },
+      {
+        "element": "black_barrel_4",
+        "face": "west",
+        "pixels": [
+          807,
+          456,
+          964,
+          461
+        ]
+      },
+      {
+        "element": "black_barrel_5",
+        "face": "east",
+        "pixels": [
+          2,
+          465,
+          159,
+          470
+        ]
+      },
+      {
+        "element": "black_barrel_5",
+        "face": "west",
+        "pixels": [
+          163,
+          465,
+          320,
+          470
+        ]
+      },
+      {
+        "element": "black_barrel_6",
+        "face": "east",
+        "pixels": [
+          324,
+          465,
+          481,
+          470
+        ]
+      },
+      {
+        "element": "black_barrel_6",
+        "face": "west",
+        "pixels": [
+          485,
+          465,
+          642,
+          470
+        ]
+      },
+      {
+        "element": "black_barrel_7",
+        "face": "east",
+        "pixels": [
+          646,
+          465,
+          803,
+          470
+        ]
+      },
+      {
+        "element": "black_barrel_7",
+        "face": "west",
+        "pixels": [
+          807,
+          465,
+          964,
+          470
+        ]
+      },
+      {
+        "element": "knurled_cylinder_0",
+        "face": "east",
+        "pixels": [
+          2,
+          474,
+          134,
+          479
+        ]
+      },
+      {
+        "element": "knurled_cylinder_0",
+        "face": "west",
+        "pixels": [
+          138,
+          474,
+          270,
+          479
+        ]
+      },
+      {
+        "element": "knurled_cylinder_1",
+        "face": "east",
+        "pixels": [
+          274,
+          474,
+          406,
+          479
+        ]
+      },
+      {
+        "element": "knurled_cylinder_1",
+        "face": "west",
+        "pixels": [
+          410,
+          474,
+          542,
+          479
+        ]
+      },
+      {
+        "element": "knurled_cylinder_2",
+        "face": "east",
+        "pixels": [
+          546,
+          474,
+          678,
+          479
+        ]
+      },
+      {
+        "element": "knurled_cylinder_2",
+        "face": "west",
+        "pixels": [
+          682,
+          474,
+          814,
+          479
+        ]
+      },
+      {
+        "element": "knurled_cylinder_3",
+        "face": "east",
+        "pixels": [
+          818,
+          474,
+          950,
+          479
+        ]
+      },
+      {
+        "element": "knurled_cylinder_3",
+        "face": "west",
+        "pixels": [
+          2,
+          483,
+          134,
+          488
+        ]
+      },
+      {
+        "element": "knurled_cylinder_4",
+        "face": "east",
+        "pixels": [
+          138,
+          483,
+          270,
+          488
+        ]
+      },
+      {
+        "element": "knurled_cylinder_4",
+        "face": "west",
+        "pixels": [
+          274,
+          483,
+          406,
+          488
+        ]
+      },
+      {
+        "element": "knurled_cylinder_5",
+        "face": "east",
+        "pixels": [
+          410,
+          483,
+          542,
+          488
+        ]
+      },
+      {
+        "element": "knurled_cylinder_5",
+        "face": "west",
+        "pixels": [
+          546,
+          483,
+          678,
+          488
+        ]
+      },
+      {
+        "element": "knurled_cylinder_6",
+        "face": "east",
+        "pixels": [
+          682,
+          483,
+          814,
+          488
+        ]
+      },
+      {
+        "element": "knurled_cylinder_6",
+        "face": "west",
+        "pixels": [
+          818,
+          483,
+          950,
+          488
+        ]
+      },
+      {
+        "element": "knurled_cylinder_7",
+        "face": "east",
+        "pixels": [
+          2,
+          492,
+          134,
+          497
+        ]
+      },
+      {
+        "element": "knurled_cylinder_7",
+        "face": "west",
+        "pixels": [
+          138,
+          492,
+          270,
+          497
+        ]
+      },
+      {
+        "element": "reservoir_sill_7.22",
+        "face": "east",
+        "pixels": [
+          274,
+          492,
+          336,
+          497
+        ]
+      },
+      {
+        "element": "reservoir_sill_7.22",
+        "face": "west",
+        "pixels": [
+          340,
+          492,
+          402,
+          497
+        ]
+      },
+      {
+        "element": "reservoir_sill_8.78",
+        "face": "east",
+        "pixels": [
+          406,
+          492,
+          468,
+          497
+        ]
+      },
+      {
+        "element": "reservoir_sill_8.78",
+        "face": "west",
+        "pixels": [
+          472,
+          492,
+          534,
+          497
+        ]
+      },
+      {
+        "element": "collar_crown",
+        "face": "north",
+        "pixels": [
+          538,
+          492,
+          575,
+          497
+        ]
+      },
+      {
+        "element": "collar_crown",
+        "face": "south",
+        "pixels": [
+          579,
+          492,
+          616,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_0",
+        "face": "east",
+        "pixels": [
+          620,
+          492,
+          656,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_0",
+        "face": "west",
+        "pixels": [
+          660,
+          492,
+          696,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_1",
+        "face": "east",
+        "pixels": [
+          700,
+          492,
+          736,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_1",
+        "face": "west",
+        "pixels": [
+          740,
+          492,
+          776,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_2",
+        "face": "east",
+        "pixels": [
+          780,
+          492,
+          816,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_2",
+        "face": "west",
+        "pixels": [
+          820,
+          492,
+          856,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_3",
+        "face": "east",
+        "pixels": [
+          860,
+          492,
+          896,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_3",
+        "face": "west",
+        "pixels": [
+          900,
+          492,
+          936,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_4",
+        "face": "east",
+        "pixels": [
+          940,
+          492,
+          976,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_4",
+        "face": "west",
+        "pixels": [
+          980,
+          492,
+          1016,
+          497
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_5",
+        "face": "east",
+        "pixels": [
+          2,
+          501,
+          38,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_5",
+        "face": "west",
+        "pixels": [
+          42,
+          501,
+          78,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_6",
+        "face": "east",
+        "pixels": [
+          82,
+          501,
+          118,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_6",
+        "face": "west",
+        "pixels": [
+          122,
+          501,
+          158,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_7",
+        "face": "east",
+        "pixels": [
+          162,
+          501,
+          198,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_7",
+        "face": "west",
+        "pixels": [
+          202,
+          501,
+          238,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_0",
+        "face": "north",
+        "pixels": [
+          242,
+          501,
+          257,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_0",
+        "face": "south",
+        "pixels": [
+          261,
+          501,
+          276,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_1",
+        "face": "north",
+        "pixels": [
+          280,
+          501,
+          295,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_1",
+        "face": "south",
+        "pixels": [
+          299,
+          501,
+          314,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_2",
+        "face": "north",
+        "pixels": [
+          318,
+          501,
+          333,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_2",
+        "face": "south",
+        "pixels": [
+          337,
+          501,
+          352,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_3",
+        "face": "north",
+        "pixels": [
+          356,
+          501,
+          371,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_3",
+        "face": "south",
+        "pixels": [
+          375,
+          501,
+          390,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_4",
+        "face": "north",
+        "pixels": [
+          394,
+          501,
+          409,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_4",
+        "face": "south",
+        "pixels": [
+          413,
+          501,
+          428,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_5",
+        "face": "north",
+        "pixels": [
+          432,
+          501,
+          447,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_5",
+        "face": "south",
+        "pixels": [
+          451,
+          501,
+          466,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_6",
+        "face": "north",
+        "pixels": [
+          470,
+          501,
+          485,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_6",
+        "face": "south",
+        "pixels": [
+          489,
+          501,
+          504,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_7",
+        "face": "north",
+        "pixels": [
+          508,
+          501,
+          523,
+          506
+        ]
+      },
+      {
+        "element": "blue_barrel_sleeve_7",
+        "face": "south",
+        "pixels": [
+          527,
+          501,
+          542,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_0",
+        "face": "north",
+        "pixels": [
+          546,
+          501,
+          559,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_0",
+        "face": "south",
+        "pixels": [
+          563,
+          501,
+          576,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_1",
+        "face": "north",
+        "pixels": [
+          580,
+          501,
+          593,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_1",
+        "face": "south",
+        "pixels": [
+          597,
+          501,
+          610,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_2",
+        "face": "north",
+        "pixels": [
+          614,
+          501,
+          627,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_2",
+        "face": "south",
+        "pixels": [
+          631,
+          501,
+          644,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_3",
+        "face": "north",
+        "pixels": [
+          648,
+          501,
+          661,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_3",
+        "face": "south",
+        "pixels": [
+          665,
+          501,
+          678,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_4",
+        "face": "north",
+        "pixels": [
+          682,
+          501,
+          695,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_4",
+        "face": "south",
+        "pixels": [
+          699,
+          501,
+          712,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_5",
+        "face": "north",
+        "pixels": [
+          716,
+          501,
+          729,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_5",
+        "face": "south",
+        "pixels": [
+          733,
+          501,
+          746,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_6",
+        "face": "north",
+        "pixels": [
+          750,
+          501,
+          763,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_6",
+        "face": "south",
+        "pixels": [
+          767,
+          501,
+          780,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_7",
+        "face": "north",
+        "pixels": [
+          784,
+          501,
+          797,
+          506
+        ]
+      },
+      {
+        "element": "knurled_cylinder_7",
+        "face": "south",
+        "pixels": [
+          801,
+          501,
+          814,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_0",
+        "face": "north",
+        "pixels": [
+          818,
+          501,
+          830,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_0",
+        "face": "south",
+        "pixels": [
+          834,
+          501,
+          846,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_1",
+        "face": "north",
+        "pixels": [
+          850,
+          501,
+          862,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_1",
+        "face": "south",
+        "pixels": [
+          866,
+          501,
+          878,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_2",
+        "face": "north",
+        "pixels": [
+          882,
+          501,
+          894,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_2",
+        "face": "south",
+        "pixels": [
+          898,
+          501,
+          910,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_3",
+        "face": "north",
+        "pixels": [
+          914,
+          501,
+          926,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_3",
+        "face": "south",
+        "pixels": [
+          930,
+          501,
+          942,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_4",
+        "face": "north",
+        "pixels": [
+          946,
+          501,
+          958,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_4",
+        "face": "south",
+        "pixels": [
+          962,
+          501,
+          974,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_5",
+        "face": "north",
+        "pixels": [
+          978,
+          501,
+          990,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_5",
+        "face": "south",
+        "pixels": [
+          994,
+          501,
+          1006,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_6",
+        "face": "north",
+        "pixels": [
+          1010,
+          501,
+          1022,
+          506
+        ]
+      },
+      {
+        "element": "black_barrel_6",
+        "face": "south",
+        "pixels": [
+          2,
+          510,
+          14,
+          515
+        ]
+      },
+      {
+        "element": "black_barrel_7",
+        "face": "north",
+        "pixels": [
+          18,
+          510,
+          30,
+          515
+        ]
+      },
+      {
+        "element": "black_barrel_7",
+        "face": "south",
+        "pixels": [
+          34,
+          510,
+          46,
+          515
+        ]
+      },
+      {
+        "element": "collar_crown",
+        "face": "east",
+        "pixels": [
+          50,
+          510,
+          61,
+          515
+        ]
+      },
+      {
+        "element": "collar_crown",
+        "face": "west",
+        "pixels": [
+          65,
+          510,
+          76,
+          515
+        ]
+      },
+      {
+        "element": "bridge_drop",
+        "face": "down",
+        "pixels": [
+          80,
+          510,
+          90,
+          515
+        ]
+      },
+      {
+        "element": "bridge_drop",
+        "face": "up",
+        "pixels": [
+          94,
+          510,
+          104,
+          515
+        ]
+      },
+      {
+        "element": "bridge_front",
+        "face": "down",
+        "pixels": [
+          108,
+          510,
+          118,
+          515
+        ]
+      },
+      {
+        "element": "bridge_front",
+        "face": "up",
+        "pixels": [
+          122,
+          510,
+          132,
+          515
+        ]
+      },
+      {
+        "element": "bridge_rear",
+        "face": "down",
+        "pixels": [
+          136,
+          510,
+          146,
+          515
+        ]
+      },
+      {
+        "element": "bridge_rear",
+        "face": "up",
+        "pixels": [
+          150,
+          510,
+          160,
+          515
+        ]
+      },
+      {
+        "element": "trigger",
+        "face": "down",
+        "pixels": [
+          164,
+          510,
+          170,
+          515
+        ]
+      },
+      {
+        "element": "trigger",
+        "face": "up",
+        "pixels": [
+          174,
+          510,
+          180,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_7.12_0.8",
+        "face": "down",
+        "pixels": [
+          184,
+          510,
+          189,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_7.12_0.8",
+        "face": "up",
+        "pixels": [
+          193,
+          510,
+          198,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_7.12_3.78",
+        "face": "down",
+        "pixels": [
+          202,
+          510,
+          207,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_7.12_3.78",
+        "face": "up",
+        "pixels": [
+          211,
+          510,
+          216,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_8.88_0.8",
+        "face": "down",
+        "pixels": [
+          220,
+          510,
+          225,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_8.88_0.8",
+        "face": "up",
+        "pixels": [
+          229,
+          510,
+          234,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_8.88_3.78",
+        "face": "down",
+        "pixels": [
+          238,
+          510,
+          243,
+          515
+        ]
+      },
+      {
+        "element": "cage_post_8.88_3.78",
+        "face": "up",
+        "pixels": [
+          247,
+          510,
+          252,
+          515
+        ]
+      },
+      {
+        "element": "reservoir_sill_7.22",
+        "face": "north",
+        "pixels": [
+          256,
+          510,
+          261,
+          515
+        ]
+      },
+      {
+        "element": "reservoir_sill_7.22",
+        "face": "south",
+        "pixels": [
+          265,
+          510,
+          270,
+          515
+        ]
+      },
+      {
+        "element": "reservoir_sill_8.78",
+        "face": "north",
+        "pixels": [
+          274,
+          510,
+          279,
+          515
+        ]
+      },
+      {
+        "element": "reservoir_sill_8.78",
+        "face": "south",
+        "pixels": [
+          283,
+          510,
+          288,
+          515
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_12.37",
+        "face": "east",
+        "pixels": [
+          292,
+          510,
+          391,
+          514
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_12.37",
+        "face": "west",
+        "pixels": [
+          395,
+          510,
+          494,
+          514
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_13.99",
+        "face": "east",
+        "pixels": [
+          498,
+          510,
+          597,
+          514
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_13.99",
+        "face": "west",
+        "pixels": [
+          601,
+          510,
+          700,
+          514
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_12.37",
+        "face": "east",
+        "pixels": [
+          704,
+          510,
+          803,
+          514
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_12.37",
+        "face": "west",
+        "pixels": [
+          807,
+          510,
+          906,
+          514
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_13.99",
+        "face": "east",
+        "pixels": [
+          910,
+          510,
+          1009,
+          514
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_13.99",
+        "face": "west",
+        "pixels": [
+          2,
+          519,
+          101,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_0",
+        "face": "north",
+        "pixels": [
+          105,
+          519,
+          119,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_0",
+        "face": "south",
+        "pixels": [
+          123,
+          519,
+          137,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_1",
+        "face": "north",
+        "pixels": [
+          141,
+          519,
+          155,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_1",
+        "face": "south",
+        "pixels": [
+          159,
+          519,
+          173,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_2",
+        "face": "north",
+        "pixels": [
+          177,
+          519,
+          191,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_2",
+        "face": "south",
+        "pixels": [
+          195,
+          519,
+          209,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_3",
+        "face": "north",
+        "pixels": [
+          213,
+          519,
+          227,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_3",
+        "face": "south",
+        "pixels": [
+          231,
+          519,
+          245,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_4",
+        "face": "north",
+        "pixels": [
+          249,
+          519,
+          263,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_4",
+        "face": "south",
+        "pixels": [
+          267,
+          519,
+          281,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_5",
+        "face": "north",
+        "pixels": [
+          285,
+          519,
+          299,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_5",
+        "face": "south",
+        "pixels": [
+          303,
+          519,
+          317,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_6",
+        "face": "north",
+        "pixels": [
+          321,
+          519,
+          335,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_6",
+        "face": "south",
+        "pixels": [
+          339,
+          519,
+          353,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_7",
+        "face": "north",
+        "pixels": [
+          357,
+          519,
+          371,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_7",
+        "face": "south",
+        "pixels": [
+          375,
+          519,
+          389,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_0",
+        "face": "north",
+        "pixels": [
+          393,
+          519,
+          407,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_0",
+        "face": "south",
+        "pixels": [
+          411,
+          519,
+          425,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_1",
+        "face": "north",
+        "pixels": [
+          429,
+          519,
+          443,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_1",
+        "face": "south",
+        "pixels": [
+          447,
+          519,
+          461,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_2",
+        "face": "north",
+        "pixels": [
+          465,
+          519,
+          479,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_2",
+        "face": "south",
+        "pixels": [
+          483,
+          519,
+          497,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_3",
+        "face": "north",
+        "pixels": [
+          501,
+          519,
+          515,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_3",
+        "face": "south",
+        "pixels": [
+          519,
+          519,
+          533,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_4",
+        "face": "north",
+        "pixels": [
+          537,
+          519,
+          551,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_4",
+        "face": "south",
+        "pixels": [
+          555,
+          519,
+          569,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_5",
+        "face": "north",
+        "pixels": [
+          573,
+          519,
+          587,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_5",
+        "face": "south",
+        "pixels": [
+          591,
+          519,
+          605,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_6",
+        "face": "north",
+        "pixels": [
+          609,
+          519,
+          623,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_6",
+        "face": "south",
+        "pixels": [
+          627,
+          519,
+          641,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_7",
+        "face": "north",
+        "pixels": [
+          645,
+          519,
+          659,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_7",
+        "face": "south",
+        "pixels": [
+          663,
+          519,
+          677,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_0",
+        "face": "east",
+        "pixels": [
+          681,
+          519,
+          694,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_0",
+        "face": "west",
+        "pixels": [
+          698,
+          519,
+          711,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_1",
+        "face": "east",
+        "pixels": [
+          715,
+          519,
+          728,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_1",
+        "face": "west",
+        "pixels": [
+          732,
+          519,
+          745,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_2",
+        "face": "east",
+        "pixels": [
+          749,
+          519,
+          762,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_2",
+        "face": "west",
+        "pixels": [
+          766,
+          519,
+          779,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_3",
+        "face": "east",
+        "pixels": [
+          783,
+          519,
+          796,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_3",
+        "face": "west",
+        "pixels": [
+          800,
+          519,
+          813,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_4",
+        "face": "east",
+        "pixels": [
+          817,
+          519,
+          830,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_4",
+        "face": "west",
+        "pixels": [
+          834,
+          519,
+          847,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_5",
+        "face": "east",
+        "pixels": [
+          851,
+          519,
+          864,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_5",
+        "face": "west",
+        "pixels": [
+          868,
+          519,
+          881,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_6",
+        "face": "east",
+        "pixels": [
+          885,
+          519,
+          898,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_6",
+        "face": "west",
+        "pixels": [
+          902,
+          519,
+          915,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_7",
+        "face": "east",
+        "pixels": [
+          919,
+          519,
+          932,
+          523
+        ]
+      },
+      {
+        "element": "barrel_step_collar_7",
+        "face": "west",
+        "pixels": [
+          936,
+          519,
+          949,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_0",
+        "face": "east",
+        "pixels": [
+          953,
+          519,
+          963,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_0",
+        "face": "west",
+        "pixels": [
+          967,
+          519,
+          977,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_1",
+        "face": "east",
+        "pixels": [
+          981,
+          519,
+          991,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_1",
+        "face": "west",
+        "pixels": [
+          995,
+          519,
+          1005,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_2",
+        "face": "east",
+        "pixels": [
+          1009,
+          519,
+          1019,
+          523
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_2",
+        "face": "west",
+        "pixels": [
+          2,
+          527,
+          12,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_3",
+        "face": "east",
+        "pixels": [
+          16,
+          527,
+          26,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_3",
+        "face": "west",
+        "pixels": [
+          30,
+          527,
+          40,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_4",
+        "face": "east",
+        "pixels": [
+          44,
+          527,
+          54,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_4",
+        "face": "west",
+        "pixels": [
+          58,
+          527,
+          68,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_5",
+        "face": "east",
+        "pixels": [
+          72,
+          527,
+          82,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_5",
+        "face": "west",
+        "pixels": [
+          86,
+          527,
+          96,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_6",
+        "face": "east",
+        "pixels": [
+          100,
+          527,
+          110,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_6",
+        "face": "west",
+        "pixels": [
+          114,
+          527,
+          124,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_7",
+        "face": "east",
+        "pixels": [
+          128,
+          527,
+          138,
+          531
+        ]
+      },
+      {
+        "element": "orange_cylinder_band_7",
+        "face": "west",
+        "pixels": [
+          142,
+          527,
+          152,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_12.37",
+        "face": "north",
+        "pixels": [
+          156,
+          527,
+          160,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_12.37",
+        "face": "south",
+        "pixels": [
+          164,
+          527,
+          168,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_13.99",
+        "face": "north",
+        "pixels": [
+          172,
+          527,
+          176,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_7.12_13.99",
+        "face": "south",
+        "pixels": [
+          180,
+          527,
+          184,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_12.37",
+        "face": "north",
+        "pixels": [
+          188,
+          527,
+          192,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_12.37",
+        "face": "south",
+        "pixels": [
+          196,
+          527,
+          200,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_13.99",
+        "face": "north",
+        "pixels": [
+          204,
+          527,
+          208,
+          531
+        ]
+      },
+      {
+        "element": "cage_rail_8.88_13.99",
+        "face": "south",
+        "pixels": [
+          212,
+          527,
+          216,
+          531
+        ]
+      }
+    ]
+  }
+}

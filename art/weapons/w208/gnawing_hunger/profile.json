@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "weapon": "gnawing_hunger",
+  "framing": {
+    "translation": [
+      -0.7,
+      0.75,
+      1.0
+    ],
+    "rotation": [
+      -2,
+      1.5,
+      0
+    ],
+    "scale": 0.98,
+    "sourceViewRotation": [
+      0,
+      0,
+      -4
+    ],
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A395",
+      "contact": [
+        7.4,
+        6.7,
+        3.35
+      ],
+      "rotation": [
+        12,
+        0,
+        0
+      ],
+      "partHint": "moving",
+      "policy": "magazine"
+    }
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w210-source/source-review.json",
+      "observation": "Inspected master-provided report from a separate background Blender 5.4.0 Alpha process evaluating original source.blend; not a live DCC inspection by this worker. auto_rifle_943c13a2 contains only Armature, no source mesh/camera. Action Armature|fp_80A8A395_reload_full|Base uses OBSlot, frames 1..105, 61 evaluated poses at scene 30 fps. Reported prior-cache joint error is 0.0 and allInputsUnchanged is true."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/auto_rifle_943c13a2.json",
+      "observation": "Read actual evaluated shoulder/elbow/wrist/weapon matrices. Non-fallback shared group includes Gnawing Hunger, Ammit, Halfdan and Steelfeather; only this Gnawing profile opts into full chain. 395/38C/38A share reload labels; 395 remains an explicit audited candidate choice, not a proven weapon-exclusive clip. Matrix space is armature_object, row-major with column vectors; matrix_world is not applied. Conversion by 32 is authored, not recovered camera calibration."
+    },
+    {
+      "source": "/private/tmp/destiny-w210-source/sheets/auto_rifle_943c13a2-80A8A395-upper-chain.png",
+      "observation": "Viewed actual six-sample XZ/YZ sheet at p=0,.2,.4,.6,.8,1. The left elbow/wrist makes the main handling excursion at .4/.6 and both chains return at 1. This is source bones only; it proves neither remodeled mesh contact nor native visibility."
+    },
+    {
+      "source": "src/main/resources/assets/destiny/models/weapon_surface_w123/gnawing_hunger.json",
+      "observation": "Read 114-element model, grip/core 43, foreend/lower-spine 61 and magazine 54..58. Existing right [8,8.65,8.28], left [7.8,9.42,-1.4] and magazine-middle [7.4,6.7,3.35] calibration retained; source skeleton without its mesh cannot justify a new contact offset."
+    },
+    {
+      "source": "art/weapons/w123/gnawing_hunger/comparison.png",
+      "observation": "Viewed actual side, muzzle-oblique, opposite-rear and detail sheet. Cloth grip, lower fore-end, curved magazine, hollow skeleton stock and reflex opening remain the existing model. Offline artwork only."
+    },
+    {
+      "source": "art/weapons/w164/gnawing_hunger/storyboard.png",
+      "url": "https://www.youtube.com/watch?v=3XU0AygDiKI",
+      "observation": "Viewed actual cached sheet, twelve gameplay frames 25.900..27.275s: raised/rolled exchange with hand-occluded magazine path, lowering and recovery. Existing W164 timing and hold retained; red shader is not adopted as default paint."
+    },
+    {
+      "source": "scripts/generate_reload_w208_gnawing_hunger.py",
+      "observation": "Read 61-pose generator and unchanged W164 normalized knots, including .38..50 hold; GRIP [8,9.2,8.1], moving elements 54..58 and geometry/UV convention remain untouched. Master owns source-motion integration and materialization."
+    }
+  ],
+  "notes": [
+    "W210 pre-Vision candidate. Enable sourceFullChain for gnawing_hunger only; keepMeshSupport true and hideSupportAtRest false. Master imports the original61+shoulders cache and gates upper-arm emission by this per-weapon full-chain opt-in.",
+    "Retain existing W208 authored translation [-0.7,0.75,1], rotation [-2,1.5,0], scale .98 and sourceViewRotation [0,0,-4]; these are inherited calibration, not recovered camera values or newly verified native framing.",
+    "Retain W201 mesh rest-palm positions and current reload contact/rotation/policy. Full-chain replay must transport weapon-body and wrist translations through the same weapon parent, keeping the fixed rest-space mesh offset; do not pin animated source wrists to unrelated authored targets.",
+    "During attachment, the detached moving magazine follows the source left handling wrist through the existing grip/release envelope. Preserve the five-element magazine geometry and authored part transform. Do not add arbitrary contact corrections unsupported by source mesh.",
+    "Ordinary exported source lengths at authored 32-unit conversion are about 8.14136 forearm and 8.7266 upper arm before display scale. No arm extension, new camera-depth offset, mesh, UV, timing, gameplay duration, ammunition or audio change.",
+    "Master must inspect classic/slim idle hip, ADS transition and full ADS, reload extraction/reseat and recovery using actual Vision PNGs. First review must return to this worker for evidence-based corrections or documented no-change, followed by master second Vision. No native acceptance is claimed."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "weapon": "distant_relation",
+  "sourceAction": "80A8A345",
+  "framing": {
+    "translation": [
+      -0.65,
+      0.6,
+      0
+    ],
+    "rotation": [
+      -1,
+      2,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 28,
+    "leftRotation": [
+      15,
+      35,
+      -35
+    ],
+    "sourceFullChain": true,
+    "keepMeshSupport": true,
+    "hideSupportAtRest": false
+  },
+  "contacts": {
+    "reload": {
+      "rigAction": "80A8A345",
+      "partHint": "magazine",
+      "policy": "magazine",
+      "gripWindow": [
+        0.05,
+        0.2,
+        0.6,
+        0.66
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "scout_rifle_98cec92a",
+    "action": "80A8A345",
+    "sourceBlendSha256": "be7c6bb31dc5734de8a82d93fb92c619e581fa2c7bd04951e59e884aebf49941",
+    "sourceMapSha256": "d97ed313c4bcec5414900a745b6657e578623348908b0ed91205f5e34f5d3315",
+    "boneMapSha256": "34cc654306ee835cf908f72fed910a3955868195289e1109178a45c237fcee40"
+  },
+  "evidence": [
+    {
+      "source": "docs/qa/2026-10-28/w216/source/source-review.json",
+      "sourceSha256": "3b5ec3c27772222c14730457fd1d9ff431c39802ae4df10bb7f286440aaf61d6",
+      "role": "master_original_blender_evaluation",
+      "observation": "Fresh master headless Blender5.4.0 Alpha; ARMATURE only, OBSlot, actual Armature|fp_80A8A345_reload_full|Base frames1..105 at30fps and61 samples. Alternatives80A8A337/331 evaluated. allInputsUnchanged true; prior joint max error0. Worker read report, did not independently open/evaluate Blender."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/scout_rifle_98cec92a.json",
+      "sourceSha256": "83b850d2d8c60439aefd0f56eb9d6374e38fa237be81e8b5a5ae09e2f6a9c544",
+      "role": "fresh_evaluated_source61",
+      "observation": "Re-read current normalized metadata after READY; all poses identical. w216Source61 exporter54b2f8673aaf75b97a388077ecad683eef2441a73f313194e52ce9b6cd514a38. Armature-object row-major matrices/column vectors. Preserve original shoulder->elbow->wrist axes/ordinary lengths and sourceFullChain; no mesh/camera/finger IK recovered."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A345-upper-chain.png",
+      "sourceSha256": "d86f7568ed6de126a720fce6e2242d16fa0af8aa530d3a7d36d0d4e4c9319227",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Viewed XZ/YZ projections at0,.2,.4,.6,.8,1. 80A8A345: selected original handling chain. Source hand travels away after insertion then returns. Bone projection does not establish mesh contact or native camera."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A337-upper-chain.png",
+      "sourceSha256": "ef0114867cd884955dd29b0b089ed850894dcc42cd481ed2e3ee19c8356ccc20",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Viewed XZ/YZ projections at0,.2,.4,.6,.8,1. 80A8A337: evaluated alternative; not selected. Source hand travels away after insertion then returns. Bone projection does not establish mesh contact or native camera."
+    },
+    {
+      "source": "docs/qa/2026-10-28/w216/source/sheets/scout_rifle_98cec92a-80A8A331-upper-chain.png",
+      "sourceSha256": "67dc11cad4b713517efe290c63197132ab9bf34794628863c622cb73a4a3568d",
+      "role": "viewed_bone_only_sheet",
+      "observation": "Viewed XZ/YZ projections at0,.2,.4,.6,.8,1. 80A8A331: evaluated alternative; not selected. Source hand travels away after insertion then returns. Bone projection does not establish mesh contact or native camera."
+    },
+    {
+      "source": "scripts/generate_reload_w184_distant_relation.py",
+      "sourceSha256": "d62c0ff6c4b33cac5ad3595ff9106d47af0da8c0a85d4811fc662cc82880a6f9",
+      "role": "preserved_authored_motion",
+      "observation": "AST-read literal KEYS/GRIP/MAGAZINE_ANCHOR/MAGAZINE_NAMES/PINS without importing heavy generator. Copy exact rigid algebra, partition and upper neck. All11 Distant Relation knots retained: lift.20, withdraw.32, exchange.44, incoming.60, seat.66, fast lower.82, settling dip/recover1. W215 contributes interpolation only."
+    },
+    {
+      "source": "art/weapons/w184/distant_relation/SOURCE.md",
+      "sourceSha256": "86bc9adb9ceb79dca85944d57a5ac846562a3b42b74af08d32785ce7b1dd117d",
+      "role": "authored_geometry_and_footage_provenance",
+      "observation": "Read W184 source and manifest: DFP4SvDoK8HidQ, n20070..20184/334.5..336.4s. Retain86 body+magazine_body/floor58/59+existing authored hidden upper neck=89 reload elements. No new geometry/atlas or invented bolt stroke; exact hidden shaft fidelity unverified."
+    },
+    {
+      "source": "art/weapons/w205/first-person-framing.json",
+      "sourceSha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "role": "retained_effective_framing",
+      "observation": "Read first_person_framing_w205.load/profile using family scout_rifle. Effective translation[-.65,.6,0], rotation[-1,2,0], scale.98, rightWristRoll28, leftRotation[15,35,-35]. No existing weapon override. Preserve spatial fields exactly, add only required full-chain/support flags."
+    },
+    {
+      "source": "art/weapons/w201/contacts.json",
+      "sourceSha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "role": "retained_mesh_contacts_and_release",
+      "observation": "Retain right[8,8.62,8.35]/[-22,0,0], left[7.8,9.05,-.4]/[0,90,-85], reload contact[7.55,6.65,10.68]/[35,0,0]. Supported gripWindow[.05,.20,.60,.66] releases source-palm attachment during final insertion and completely by authored seat. No late seated-payload drag; FIRST must verify contact."
+    }
+  ],
+  "notes": [
+    "Candidate before FIRST. Master owns shared rig/action binding, profile loader/runtime grid60, full-chain normal-length fingerless arms, materialization and all-route measured budget.",
+    "W184 motion/geometry/UV/holds preserved; C1 weighted harmonic PCHIP replaces segment smoothstops. Neutral magazine offset0 from.66 through1; attachment ends.66.",
+    "Estimated537 reload elements=89weapon+448ordinary arm reserve; native244+448=692. Estimates are not measured route acceptance.",
+    "No new arm/camera compensations, source damping, hidden support or rest contact change. Preserve44ticks/16rounds/180RPM/ammo/audio.",
+    "Required sequence: original blend master evaluation ->61poses ->master FIRST PNGs ->exact worker feedback ->correction or justified nochange ->master SECOND. Final native acceptance pending SECOND."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "stage": "W74",
+  "oracleCommit": "dcd0c7d302b056ffbb532edcb711d724a17ca8c1",
+  "oracleRepository": "https://github.com/d2foundry/oracle_engine",
+  "oracleFormulaSource": "https://github.com/d2foundry/oracle_engine/blob/dcd0c7d302b056ffbb532edcb711d724a17ca8c1/src/weapons/stat_calc.rs",
+  "officialCorroboration": "https://www.bungie.net/7/en/News/article/51707",
+  "officialScope": "6.2.0 lightweight window endpoints 0.50s/0.80s and qualitative late damage/accuracy loss; no exact max-hold/decay curve",
+  "interpolationScope": "Precision and lightweight linear interpolation from pinned community calculator, not official engine measurement",
+  "rounding": "Integer microseconds; ceil(windowMicros/50000); half-open [fullDraw, fullDraw+windowTicks)",
+  "baseStatsOnly": true,
+  "stabilityStatHash": 155624089,
+  "weapons": [
+    {
+      "id": "biting_winds",
+      "hash": 1621657423,
+      "frame": "precision",
+      "stability": 43,
+      "windowMicros": 407500,
+      "windowTicks": 9
+    },
+    {
+      "id": "whispering_slab",
+      "hash": 211938782,
+      "frame": "lightweight",
+      "stability": 53,
+      "windowMicros": 659000,
+      "windowTicks": 14
+    }
+  ],
+  "forcedReleaseImplemented": false,
+  "lateDamageOrAccuracyPenaltyImplemented": false,
+  "sha256": {
+    "art/weapons/w46/stat_calc.rs": "5662ee9dea9e59547d73f81cd7c02872046266acb7b24017d2d09c123f31e5c2",
+    "art/weapons/w46/build.rs": "85b2e35f1db47f55c58900020ebf44be0e409802beac395b4b4c538fad67a1bd",
+    "art/weapons/w46/extraction.json": "be0a670f4db11adca87383344f13d1e3588f18f58bf22b1454b4652653c87cc8",
+    "art/weapons/w46/official-item-evidence.json": "030bb98e997df7c3c89bc23db75c5990234f762c5a41f075cd95fa7a7ba4ba2c",
+    "art/weapons/w46/stat-definitions.json": "e7959edc50506f902e548b5c9a7d55b119e1e14d0268d046259f13a4bd38b8fe",
+    "src/main/resources/destiny/weapons/w30.json": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
+    "src/main/resources/destiny/weapons/w40-characteristics.json": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1"
+  }
+}

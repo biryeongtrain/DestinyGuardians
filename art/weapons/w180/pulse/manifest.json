@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "feature": "w180-pulse",
+  "authored_at": "2026-10-26T18:49:17.968140+00:00",
+  "reference": {
+    "url": "https://www.youtube.com/watch?v=O0uvtZMID9E&t=1045s",
+    "title": "Destiny 2 All SUPER Sounds - MEGA SHOWCASE including NEW SUPERS + PRISMATIC",
+    "uploader": "thatguyHoody",
+    "chapter_seconds": [
+      1045,
+      1064
+    ],
+    "observation_windows_seconds": [
+      [
+        1046.8,
+        1047.3
+      ],
+      [
+        1047.4,
+        1047.7
+      ],
+      [
+        1048.1,
+        1048.3
+      ],
+      [
+        1057,
+        1058.5
+      ]
+    ],
+    "inspection": "Re-inspected existing W34 cached contact sheets; approximate labels +/-0.1s; no fresh fetch.",
+    "observed": "Violet caster/environment energy at cast and bright bow at release, then unobstructed first-person view.",
+    "limits": [
+      "Reference is Deadfall only; no new direct Solar/Arc timing measurement.",
+      "Does not isolate an original screen-space corona shader from world VFX.",
+      "Original impact timing/identity is not established by this sheet.",
+      "W180 radius/shoulder/tints and the weaker impact are authored local adaptation, not extracted original parameters."
+    ]
+  },
+  "local_adaptation": "Authored screen-space shoulder/rim and tints, not extracted original renderer data.",
+  "model_output": {
+    "assembled_elements": 0,
+    "limit": 1000,
+    "applicable": false
+  },
+  "lifecycle": {
+    "activation_ticks": 10,
+    "impact_ticks": 4,
+    "changed": false
+  },
+  "layout": {
+    "block": "PulseConfig",
+    "ordered_fields": [
+      "vec4 Tint",
+      "vec4 Shape"
+    ],
+    "sampler": "InSampler",
+    "additional_renderer_uniforms": false
+  },
+  "controls": {
+    "shape": [
+      0.8,
+      0.12,
+      0.55,
+      0.45
+    ],
+    "activation_budget": 0.12,
+    "impact_budget": 0.08,
+    "per_channel_added_light_cap": 0.12,
+    "exact_quiet_radius": 0.3,
+    "band_test_radius": [
+      0.7,
+      0.98
+    ],
+    "minimum_band_light_floor": {
+      "activation": 0.08,
+      "impact": 0.05
+    },
+    "impact_amplitude_ratio": 0.6666666666666666,
+    "tints": {
+      "solar": [
+        1,
+        0.6,
+        0.16
+      ],
+      "arc": [
+        0.3,
+        0.8,
+        1
+      ],
+      "void": [
+        0.7,
+        0.36,
+        1
+      ]
+    }
+  },
+  "comparison": {
+    "classification": "offline same-image CPU comparison; not native PNG after",
+    "source_file": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-27/w179/native/frames/shader-solar-activation_pulse-off.png",
+    "source_sha256": "de322092f362bffc5d34fa2368066abf4a76741e4c39cd5bf4becef4bc43e6c9",
+    "source_dimensions": [
+      1708,
+      960
+    ],
+    "working_dimensions": [
+      480,
+      270
+    ],
+    "comparison_dimensions": [
+      1504,
+      2196
+    ],
+    "shader_sha256": "2bad8e643261e0708a5609b4d9e7aa7825e9101a1538941e1dde362c654f397c",
+    "baseline_shader_sha256": "3aba1600f1e9502373a40282041583b402b96a588c112e9589c2748d4799c456",
+    "sampling": "Stored RGB, normalized pixel-center UV; y orientation irrelevant to radial shader; resize off input once then apply response",
+    "exposure": 1,
+    "difference_amplification": 1,
+    "comparison_sha256": "eed5e64d8e5efd4ea7e4b64cfdabd8587d45004c6543823bf20ec5574cf34496"
+  },
+  "cpu_metrics": {
+    "solar_activation": {
+      "old_band_min": 0.014665215004538074,
+      "new_band_min": 0.08424955464657129,
+      "old_visible_fraction": 0.06916666666666667,
+      "new_visible_fraction": 0.6694444444444444,
+      "new_peak_sampled": 0.11066275898738775
+    },
+    "solar_impact": {
+      "old_band_min": 0.012669126515919874,
+      "new_band_min": 0.05616636976438086,
+      "old_visible_fraction": 0.0,
+      "new_visible_fraction": 0.6705555555555556,
+      "new_peak_sampled": 0.0737751726582585
+    },
+    "arc_activation": {
+      "old_band_min": 0.014665215004538074,
+      "new_band_min": 0.08424955464657129,
+      "old_visible_fraction": 0.06916666666666667,
+      "new_visible_fraction": 0.6694444444444444,
+      "new_peak_sampled": 0.11066275898738775
+    },
+    "arc_impact": {
+      "old_band_min": 0.012669126515919874,
+      "new_band_min": 0.05616636976438086,
+      "old_visible_fraction": 0.0,
+      "new_visible_fraction": 0.6705555555555556,
+      "new_peak_sampled": 0.0737751726582585
+    },
+    "void_activation": {
+      "old_band_min": 0.014665215004538074,
+      "new_band_min": 0.08424955464657129,
+      "old_visible_fraction": 0.06916666666666667,
+      "new_visible_fraction": 0.6694444444444444,
+      "new_peak_sampled": 0.11066275898738775
+    },
+    "void_impact": {
+      "old_band_min": 0.012669126515919874,
+      "new_band_min": 0.05616636976438086,
+      "old_visible_fraction": 0.0,
+      "new_visible_fraction": 0.6705555555555556,
+      "new_peak_sampled": 0.0737751726582585
+    }
+  },
+  "validation": {
+    "junit": {
+      "tests": 5,
+      "classes": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "python_cpu": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "glslang": {
+      "checks": 1,
+      "exit": 0
+    },
+    "packaged_exact_assets": 7,
+    "expected_w179_negative_control_failures": 2,
+    "gametests_run": 0,
+    "native_gpu_run": false,
+    "native_acceptance": "Pending master GPU/camera session",
+    "preserved_build_failures": 2,
+    "private_evidence": "/private/tmp/w180-pulse-report"
+  },
+  "files": {
+    "src/main/resources/assets/destiny/shaders/post/super_pulse.fsh": {
+      "sha256": "2bad8e643261e0708a5609b4d9e7aa7825e9101a1538941e1dde362c654f397c",
+      "bytes": 1384
+    },
+    "src/main/resources/assets/destiny/post_effect/super/solar_impact_pulse.json": {
+      "sha256": "f6c0fab94bb23ed461995214f4663eb86a7b799ba86900eb3349bc00ded4ee99",
+      "bytes": 1864
+    },
+    "src/main/resources/assets/destiny/post_effect/super/arc_activation_pulse.json": {
+      "sha256": "9b96932c3c0194c37333db7f8d0b0d4a39c1e4558ecc6f8ec1335cdedcabe983",
+      "bytes": 1863
+    },
+    "src/main/resources/assets/destiny/post_effect/super/arc_impact_pulse.json": {
+      "sha256": "37be4214199a717e6e3ad5b05b958932609c09122fa1dc2300546f24ef0fa221",
+      "bytes": 1863
+    },
+    "src/main/resources/assets/destiny/post_effect/super/void_impact_pulse.json": {
+      "sha256": "dc32f27dd51897cdc3be0a30c16918ecdb3db5d4be22bdb7c91f1ea3bf1a0d34",
+      "bytes": 1864
+    },
+    "src/main/resources/assets/destiny/post_effect/super/void_activation_pulse.json": {
+      "sha256": "434da9b76ff2991f63ff6df77a6e0d38fe44645d955eb59423a89d04d351e1ac",
+      "bytes": 1864
+    },
+    "src/main/resources/assets/destiny/post_effect/super/solar_activation_pulse.json": {
+      "sha256": "9819ec3ec00e9fcafee21356930b13b01dcceefb6791ce096a37f3d79b6277f7",
+      "bytes": 1864
+    },
+    "src/test/java/kim/biryeong/destiny/PostPulseAssetTest.java": {
+      "sha256": "5808507f997329b60dd859ff91deb469cd211c8adb65ef9c7959f135a79b83e8",
+      "bytes": 7403
+    },
+    "src/test/java/kim/biryeong/destiny/PostPulseW180Test.java": {
+      "sha256": "8bcc851b68e6c86daf205d1b2a6f059326f60c3655895b201e4f1a3ebe56a3b7",
+      "bytes": 2939
+    },
+    "scripts/qa/test_post_pulse_w180.py": {
+      "sha256": "8d30e42ce38793bb7290ef249d01d8a8c3902fa7a2cfcde9234979c43e2b82ef",
+      "bytes": 8319
+    },
+    "art/weapons/w180/pulse/SOURCE.md": {
+      "sha256": "7771553876ce53daf42707d6ebaa5805c7418901219d844c974aaa55e752e145",
+      "bytes": 6144
+    },
+    "art/weapons/w180/pulse/comparison.png": {
+      "sha256": "eed5e64d8e5efd4ea7e4b64cfdabd8587d45004c6543823bf20ec5574cf34496",
+      "bytes": 1329238
+    }
+  }
+}

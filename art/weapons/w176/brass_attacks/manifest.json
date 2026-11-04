@@ -1,0 +1,665 @@
+{
+  "stage": "W176",
+  "revision": 3,
+  "weapon": "brass_attacks",
+  "itemModel": "destiny:weapon_reload_w176_brass_attacks/brass_attacks",
+  "ownedFiles": 106,
+  "generatedFiles": 90,
+  "packFiles": 87,
+  "staticParts": 2,
+  "parentDisplayChildren": 84,
+  "frames": 21,
+  "progressFloatIndex": 1,
+  "gripFlagIndex": 0,
+  "firstPersonContexts": [
+    "firstperson_righthand",
+    "firstperson_lefthand"
+  ],
+  "sourceElements": 111,
+  "bodyElements": 110,
+  "movingElements": 3,
+  "magazineElements": 3,
+  "maxAssembledElements": 113,
+  "elementLimit": 1000,
+  "movingIndices": [
+    103
+  ],
+  "movingNames": [
+    "magazine_base"
+  ],
+  "fixedHousingIndices": [
+    45,
+    56,
+    63,
+    64,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102
+  ],
+  "fixedHousingNames": [
+    "rear_breech_core",
+    "rear_cap",
+    "receiver_core",
+    "rear_shoulder",
+    "grip_core",
+    "grip_wrist",
+    "grip_panel_-1",
+    "grip_panel_1",
+    "frontstrap",
+    "backstrap",
+    "upper_backstrap",
+    "heel"
+  ],
+  "partitionRationale": "Existing W143 semantic magazine group: index103 magazine_base only. Adjacent heel102 belongs to grip and stays fixed, together with grip panels/core/wrist, shroud, receiver and trigger. All 111 canonical elements/face UV/paint preserved. One reload-only internal box lies within opaque grip_core95; one recessed neck joins it to magazine_base103 within grip/heel housing at rest. All three move rigidly together; no revoxelization.",
+  "sourceGeometryPath": "src/main/resources/assets/destiny/models/weapon_surface_w123/brass_attacks.json",
+  "sourceGeometryFileSha256": "49d02c139b239ecff7814bbb579ec0958a80d7bba75e3575f15b760a7e5dec09",
+  "sourceElementsAndUVSha256": "7c69a23cb03011fc2692df8283c3bbee3a66c93da2bca9193e215551f6431ccf",
+  "partElementsAndUVSha256": {
+    "body": "21e1c0cfbf3ebf5cc8eff64bbbbde26392fcac1a8fe905785ef99d0d67728698",
+    "magazine": "bd92c0fe8c2c25f7fd158637b8c6b95354bcdfc4cc7bff37fdf805106e7ce195"
+  },
+  "sourceRevision": "W143 clean semantic solids selected by weapon_surface_w123 manifest; W30 base file remains untouched",
+  "geometryAndUVPreserved": true,
+  "addedElements": 2,
+  "authoredCore": {
+    "name": "authored_internal_magazine_core",
+    "from": [
+      7.42,
+      7.15,
+      7.32
+    ],
+    "to": [
+      8.58,
+      12.75,
+      9.35
+    ],
+    "rotation": {
+      "origin": [
+        8.0,
+        10.02,
+        8.4
+      ],
+      "axis": "x",
+      "angle": -19.051009
+    },
+    "faces": {
+      "north": {
+        "uv": [
+          14.96875,
+          0.03125,
+          15.515625,
+          2.25
+        ],
+        "texture": "#0"
+      },
+      "south": {
+        "uv": [
+          0.03125,
+          3.90625,
+          0.578125,
+          6.125
+        ],
+        "texture": "#0"
+      },
+      "west": {
+        "uv": [
+          13.921875,
+          0.03125,
+          14.90625,
+          2.25
+        ],
+        "texture": "#0"
+      },
+      "east": {
+        "uv": [
+          12.875,
+          0.03125,
+          13.859375,
+          2.25
+        ],
+        "texture": "#0"
+      },
+      "up": {
+        "uv": [
+          13.21875,
+          3.90625,
+          13.765625,
+          4.890625
+        ],
+        "texture": "#0"
+      },
+      "down": {
+        "uv": [
+          12.609375,
+          3.90625,
+          13.15625,
+          4.890625
+        ],
+        "texture": "#0"
+      }
+    }
+  },
+  "authoredNeck": {
+    "name": "authored_internal_magazine_neck",
+    "from": [
+      7.5,
+      6.7,
+      8.55
+    ],
+    "to": [
+      8.5,
+      7.45,
+      10.25
+    ],
+    "rotation": {
+      "origin": [
+        8.0,
+        6.62,
+        9.34
+      ],
+      "axis": "x",
+      "angle": -19.05
+    },
+    "faces": {
+      "north": {
+        "uv": [
+          14.96875,
+          0.03125,
+          15.515625,
+          2.25
+        ],
+        "texture": "#0"
+      },
+      "south": {
+        "uv": [
+          0.03125,
+          3.90625,
+          0.578125,
+          6.125
+        ],
+        "texture": "#0"
+      },
+      "west": {
+        "uv": [
+          13.921875,
+          0.03125,
+          14.90625,
+          2.25
+        ],
+        "texture": "#0"
+      },
+      "east": {
+        "uv": [
+          12.875,
+          0.03125,
+          13.859375,
+          2.25
+        ],
+        "texture": "#0"
+      },
+      "up": {
+        "uv": [
+          13.21875,
+          3.90625,
+          13.765625,
+          4.890625
+        ],
+        "texture": "#0"
+      },
+      "down": {
+        "uv": [
+          12.609375,
+          3.90625,
+          13.15625,
+          4.890625
+        ],
+        "texture": "#0"
+      }
+    }
+  },
+  "authoredCoreContainingElement": 95,
+  "canonicalMovingElements": 1,
+  "canonicalPartitionElements": 111,
+  "authoredCorePolicy": "Frame13.533 supports box volume; exact hidden extents,7.5-unit clearance stroke and copied dark grip_core face UVs are authored. Core remains inside opaque grip_core95; V3 neck bridges the base/core gap, recessed within grip/heel housing at rest. Basic offline idle and three magazine closeups, not exhaustive containment proof. Shares magazine parent/transform; no new texture.",
+  "hipEndpoints": [
+    0,
+    20
+  ],
+  "fallback": "Exact canonical items/weapon/brass_attacks graph for all non-FP and inactive negative progress; ADS/inspect retained",
+  "keyframes": [
+    [
+      0.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.06,
+      [
+        27,
+        -8,
+        -12
+      ],
+      [
+        0.18,
+        0.08,
+        0.02
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.12,
+      [
+        46,
+        -14,
+        -25
+      ],
+      [
+        0.35,
+        0.18,
+        0.08
+      ],
+      [
+        0.0,
+        -0.4726170518984341,
+        0.1631965754997109
+      ]
+    ],
+    [
+      0.2,
+      [
+        40,
+        -12,
+        -23
+      ],
+      [
+        0.2,
+        0.1,
+        0.12
+      ],
+      [
+        0.0,
+        -7.089255778476511,
+        2.447948632495663
+      ]
+    ],
+    [
+      0.28,
+      [
+        36,
+        -10,
+        -22
+      ],
+      [
+        0.12,
+        0.06,
+        0.1
+      ],
+      [
+        0.0,
+        -7.089255778476511,
+        2.447948632495663
+      ]
+    ],
+    [
+      0.36,
+      [
+        33,
+        -9,
+        -20
+      ],
+      [
+        0.08,
+        0.02,
+        0.06
+      ],
+      [
+        -0.35,
+        -2.25,
+        0.78
+      ]
+    ],
+    [
+      0.43,
+      [
+        27,
+        -8,
+        -16
+      ],
+      [
+        0.03,
+        -0.04,
+        0.02
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.5,
+      [
+        12,
+        -7,
+        -10
+      ],
+      [
+        0,
+        -0.08,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.58,
+      [
+        16,
+        -12,
+        -16
+      ],
+      [
+        -0.08,
+        -0.02,
+        0.05
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.69,
+      [
+        25,
+        -3,
+        4
+      ],
+      [
+        -0.1,
+        -0.12,
+        0.1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.78,
+      [
+        -6,
+        4,
+        3
+      ],
+      [
+        -0.08,
+        -0.38,
+        0.05
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      0.9,
+      [
+        -4,
+        2,
+        1
+      ],
+      [
+        -0.02,
+        -0.14,
+        0.01
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      1.0,
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "gripPivot": [
+    8.0,
+    10.02,
+    8.4
+  ],
+  "magazineAnchor": [
+    8.0,
+    6.62,
+    9.34
+  ],
+  "magazineExtractionAxis": [
+    0.0,
+    -0.9452341037968682,
+    0.3263931509994218
+  ],
+  "normalizedPhases": {
+    "quickCant": [
+      0,
+      0.12
+    ],
+    "withdrawalGuess": [
+      0.12,
+      0.2
+    ],
+    "exchangeBelowFrame": [
+      0.2,
+      0.28
+    ],
+    "replacementApproachGuess": [
+      0.28,
+      0.36
+    ],
+    "reseat": [
+      0.36,
+      0.43
+    ],
+    "lowerAfterSeat": [
+      0.43,
+      0.5
+    ],
+    "actionGestureProxy": [
+      0.5,
+      0.78
+    ],
+    "recover": [
+      0.78,
+      1
+    ]
+  },
+  "sourceObservedSeconds": [
+    13.2,
+    15.0
+  ],
+  "reference": "https://www.youtube.com/watch?v=F6-wH23URIw",
+  "referenceConfidence": "high identity; moderate visible cant/action phases; low hidden magazine travel and exact camera-space angles",
+  "motionAuthorship": "Brass-specific quick cant, early grip-fed baseplate exchange, seat, secondary action cant/dip, hip recovery authored after 12 inspected normal-speed Ultraclocked frames and inventory-name identity verification. W174 rigid composition/export pattern reused; Claws and Lonesome curves/extra inserts not used.",
+  "timingPolicy": "Visual normalized phases only; observed seconds do not override catalog/perk reload speed.",
+  "rotationConvention": "JOML Rx Ry Rz; R_idle * R_body about W143 grip_core pivot; source-local -Y withdrawal at -19.05-degree grip cant; scale once; twohand rigid carrier compensation",
+  "comparisonMethod": "Independent explicit-axis reconstruction of emitted display children; three oblique cameras with common row framing, source axis/angle rotations preserved in render-only conversion. Actual-frame storyboard compares nearest authored sample.",
+  "nativeGameplayVerified": false,
+  "handIK": false,
+  "extractedAnimation": false,
+  "extractedBones": false,
+  "mechanicsOrAudioChanged": false,
+  "integration": {
+    "requiresNewMasterRoute": true,
+    "workerRuntimeEdited": false,
+    "masterOwnsRegistryRuntime": true,
+    "requiredMasterModel": "destiny:weapon_reload_w176_brass_attacks/brass_attacks",
+    "catalogId": "brass_attacks",
+    "liveOwnerOnly": "Master publishes float index1 only for live local owner first-person reload. Inactive negative progress and non-FP use canonical graph. Restore cancel/complete/equip/unequip/death/disconnect.",
+    "preserve": "Prior routes, catalog24 rounds, reload37ticks, 325rpm two-round burst, cadence/ammo-credit/perk-speed and all audio unchanged."
+  },
+  "nativeQueue": [
+    "Both FP hands/grips: quick cant, magazine_base103 plus authored core/neck separate rigidly, fixed heel102/core/panels, reseat seam and exact hip recovery",
+    "Non-FP/observer/GUI/ground and inactive negative progress canonical; ADS/inspect transitions retained",
+    "Master route plus live-owner float1 cancel/complete/equip/death/disconnect restore; capacity/timing/audio untouched",
+    "Brief 10-20 displayed weapons for obvious visual defects; offline imagery is not native/performance evidence"
+  ],
+  "limitations": [
+    "Magazine withdrawal depth, lateral replacement approach and exact angles are authored guesses beneath hand occlusion, not extracted animation.",
+    "W143 provides magazine_base103 but no hidden tube. V3 retains one reload-only box inside opaque grip_core95 and adds one recessed connector neck to join the canonical baseplate. Both reuse existing dark grip UVs. Hidden extent/attachment is authored from frame13.533 box-volume evidence, not recovered geometry; all111 canonical elements remain intact, heel102 stays fixed.",
+    "Follow-up action gesture is represented by rigid weapon cant/dip only. No independent slide, hands, left-hand IK, third-person reload or recovered bones.",
+    "Native Minecraft, audio alignment and 10-20 displayed weapons remain master-owned and unverified."
+  ],
+  "sourceSha256": {
+    "src/main/resources/weapon_surface_w123/manifest.json": "4972bd808e5150d09e8f55e2c663b45f88ad8e660300310c5ecc04f4f672db6b",
+    "art/weapons/w123/brass_attacks/design.json": "cd1cf376272f2de6a6a417cfe46547d54ae8136edc1f0052f34fb2e25b601d56",
+    "src/main/resources/assets/destiny/models/weapon_surface_w123/brass_attacks.json": "49d02c139b239ecff7814bbb579ec0958a80d7bba75e3575f15b760a7e5dec09",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/brass_attacks_twohand.json": "a9617a1be4aa3d30907c25af909d32e375c9974eb7c3d6215ed5ea95d1825494",
+    "src/main/resources/assets/destiny/items/weapon/brass_attacks.json": "678051c7ff93f5171893a1234d7bd8b8c9d0a469fab7ccb65de0350f291f137b",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/brass_attacks.png": "b5c08322401ae7b6c6511b3cfd58c087e93497ed75d93ec8752aedd87139682d",
+    "art/weapons/w176/brass_attacks/motion-reference.json": "697077b2fa0299be2e7b782467b7551603dd3ddec5c9a5f4362923414aa4d61d",
+    "scripts/generate_reload_w176_brass_attacks.py": "139cdca64b8d1d69a370e50de24031209871983609f0afd850dcaa4afd91fa21",
+    "scripts/generate_surface_w123_hammerhead.py": "32da14289526e54f0d41378f77a2f3c7085caf57bb31f269862a251c86c2fbd0",
+    "src/main/resources/destiny/weapons/w46-timing.json": "e4c3334f528de8c48d1159c94197d9423db7cd94b9daab85889b041bd717dc07",
+    "src/main/resources/destiny/sounds/w63-reload.json": "e89b09c8d1402239fa65873b5e96fc7f55d1b3107b753aab8c8d5474bcbb750b"
+  },
+  "canonicalSha256": {
+    "src/main/resources/assets/destiny/models/weapon/sidearm/brass_attacks.json": "225ab67eb09f06d81f4c962736f3a726974f8a9653e24d5907c96043efab145a",
+    "src/main/resources/assets/destiny/models/weapon/sidearm/brass_attacks_twohand.json": "a9617a1be4aa3d30907c25af909d32e375c9974eb7c3d6215ed5ea95d1825494",
+    "src/main/resources/assets/destiny/items/weapon/brass_attacks.json": "678051c7ff93f5171893a1234d7bd8b8c9d0a469fab7ccb65de0350f291f137b",
+    "src/main/resources/assets/destiny/textures/item/weapon/w123/brass_attacks.png": "b5c08322401ae7b6c6511b3cfd58c087e93497ed75d93ec8752aedd87139682d"
+  },
+  "sha256": {
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_body.json": "a62b063c3c6e4e53979e1e8bdc4fc42cc9495fdee2f3f0ebdc6534fdd6c45e44",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_magazine.json": "a2a4c17126c585f1071fa655592e18e12a524b0a641b35c1da3ec0885e0e541a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_00_body_native.json": "26fe79e7dbe71408a61cab2cf7a6cf05e701d6c3149830648ce30849a484e354",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_00_body_twohand.json": "b36df3422fdc198c9b355c709fe97fb43d4e86fbc965554cbb48b4ae53dea0b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_00_magazine_native.json": "0d027ef6bb7ba6727285db58063327f23010dc63cb27a38e2e2c2dcb5e8168a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_00_magazine_twohand.json": "3d5aa0bf6deebc1a783333075c4eef1b8d5c639c4eb71821842907e2ad1b8c3e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_01_body_native.json": "6ad3d21da4dbe5157cb66508be568d0f47c46a74d545a425cb35b4fa4c5a1604",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_01_body_twohand.json": "b91de4b7cd1d57df8c2033863e28c8f0e5910cdbf5a729054be93f85f7c27e52",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_01_magazine_native.json": "fcf20732c1f218a04f3e5b827dfb6d70e840816cbff04f1ba1242f039fdca5fa",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_01_magazine_twohand.json": "c961ea1f48b70dd1a6aca1f3408462fff6551b70ed899a0db2f2a59288e8920b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_02_body_native.json": "19bebbf0d1d5d17da514606d0385dc2fa5a645280b39c32b35b79bda7542407f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_02_body_twohand.json": "c8839af10d9fea5cc4f3fb28f2120c27e641a13f288d6ab6bc72eff12e19b5fe",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_02_magazine_native.json": "31de9524766404d8b7d3aa5ddfb82f44f5e2cca83c0c95d8c2b030aee0ecae10",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_02_magazine_twohand.json": "e631df475b6fc26d5af30fd075d8d8edcd8c66a0a0ec24cc46902e9c3285cadf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_03_body_native.json": "7711af5f841d37ddb27272f81d02799b43b69daa7e16fb9b3c408a86689ae7c7",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_03_body_twohand.json": "a834dbdb44b3fb27ce0aadf6672fc27cbdb9255b38a76f52a78fc2f7a775f54f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_03_magazine_native.json": "37ad1b7f849e971780f6c9e914e990754eb2e5fc26e1dae774298b8a5cb7a1c4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_03_magazine_twohand.json": "3b780efcf69d6b356b22c1bacb067171505fb3db5d525a92b5417fbfa494113c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_04_body_native.json": "390648ddb558d18ab0f02dae18856e07f036d87aea5da1d4c8df32ce91390ba4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_04_body_twohand.json": "5e44ea7f0bc1dbd355cab5f19af5d03b008786c071ca09eb74fcf646b174b1ba",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_04_magazine_native.json": "97d87ef2e75935c026648fde3b57904ad6bd9369f6312a8add281e2ed8260c28",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_04_magazine_twohand.json": "ce595a710a465cb063e02dd381a69908b69f06991f4be7d5d942f04750e96534",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_05_body_native.json": "dbb89ec364d66ffd9fceed9b0755fdf71e55d864383770840ed0042876fc9026",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_05_body_twohand.json": "8b7ae59c3a246fed0d2427654ce52ae3aed690329e8ab981f22da72f5b1ed78d",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_05_magazine_native.json": "8aacdc2364a831944a206b174a46e741b139d344ed499541c7bc077e3b6796df",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_05_magazine_twohand.json": "24f4d1801c6ec12dec0938eb60a15f2f8a592ff0b083aaa192079ff8e506d535",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_06_body_native.json": "76fb8235a9d5851b7c3ff0ecf512ecfb3617b2ab5e6ac61dad153a1ef8626d2f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_06_body_twohand.json": "0756dda237590ed343d4906fe5cb0a42dbf5368b60da20f0f95cbfda33f16d81",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_06_magazine_native.json": "31a0910b7c3d57a90662277f3150f62232333e3be77b9716f11ccae7962914c4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_06_magazine_twohand.json": "7814281a45c01900db312ae53c415633012d5177ce41caa901198e5e5b66adf9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_07_body_native.json": "4e70c8b73c5a8a7c80401b164ea3d4adb93da62685be9087afe9d2bd07a452bb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_07_body_twohand.json": "588acc35c21e1f3c3d616278f00cc6b86f3f6da085d60f3656d5dfe34fa2d387",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_07_magazine_native.json": "6799bd65b7a3af8385cc61942bce16b34f70434bf78827237dc4d247213766ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_07_magazine_twohand.json": "15219608f2975795fb625eeb8b9ae522d48e326b4ef384e22d39a6c11db74a47",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_08_body_native.json": "e0665611dcad06853d5cba860440d6cd421d37ec41451d61b9d65fac757dac34",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_08_body_twohand.json": "d366b94e434d74eb698ea655e81ebe69209a024726572fbb14a4c32581fa25a9",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_08_magazine_native.json": "d068fe455844b1bdfdbe7f440cf4e813fdc76e5f880c7748fe608c21a1cf2563",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_08_magazine_twohand.json": "a1a96d3c1e7cb75a950fd69986841ced23daf9c04220b129b91ccccbd09a3e10",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_09_body_native.json": "946733c80403e5c853742503e9f605d59400d27bd9b85fa5f775cd22ba18f748",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_09_body_twohand.json": "2fec322b933c9d22c9fd4a906e4dc6192c11590cc76be24053df4389d98db13e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_09_magazine_native.json": "83bb93d6687553ff7091a455481810f9122a0240e51d2b3be964497be0e18d43",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_09_magazine_twohand.json": "6760880fe722f207e17e93d1e3f32488e44a4d099c9a2dd8321889c1a86b014f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_10_body_native.json": "be37e76fd996c09398e8d49043e4d7a9a23e9b308277e64ecd1ef389451c58ab",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_10_body_twohand.json": "d90808a7be2ece5d3e7c54083cbdb97b32a40fb31b85729b4e941426b46fb7d3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_10_magazine_native.json": "846e6e5b8469cd72e417735f077ecb2fb84ee667261edb575cc365e952b33c6b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_10_magazine_twohand.json": "d0d4b8c1816371e94a2d6253eb029cae6eeb5db6e164e954e76df01f18b105a5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_11_body_native.json": "9c5833ce35f0c251ab8d4dc88b591f27754924719ff5d244755bc1939894e705",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_11_body_twohand.json": "0bf838d5cec78a8070f4af8d07e9441e2e931ad18e897821ae5d63a4aa8482fb",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_11_magazine_native.json": "c58819431cb244643fc3aefa1a365e9df4d073bbff9471c428961a73a6d0006c",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_11_magazine_twohand.json": "aca21478e60026856d10cc7e1cbd1febd0b778ca7cff0e8f13aa4ac3bccd078f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_12_body_native.json": "9bb9b879943e915b14430557434a4ac3172a27379b296f01bc6405231cbc098f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_12_body_twohand.json": "49003edbf6d2b55f5cb5b187da955c3eea3a12df109b8791334ecd151b21b7c6",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_12_magazine_native.json": "f15eddbae2bad2826df74514c7cc8f2593a44f2a364c37677b177263cd1e935b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_12_magazine_twohand.json": "92103165488b579eb927f5cc8bb43e4e01b9931490e122506eccfef62f954900",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_13_body_native.json": "3ac5bbb1046db6db707dee3852b7519e704403e4a7ddfdf1a88feaff01a527cf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_13_body_twohand.json": "b26e49ccadfb04035361ec9a359611e610816eca6542158e6c5c3dda2bb11a4b",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_13_magazine_native.json": "eb355788307f94b70fd2839d029c1595a67a3b0c7e2ca20eae72cd930a6c0f9f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_13_magazine_twohand.json": "d647149fd69865c6b5969b90a29949769d2694d2d0970f5834abb02e029d00ce",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_14_body_native.json": "d9721c483f8236ac13a64c172f9885108ec43b0977e6e47319413f668493617a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_14_body_twohand.json": "d31326425ffebf2876f0a0540712f6dcfc7e16b7f8d0d619603e556e556ca03a",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_14_magazine_native.json": "1673a58d5cb9215accf7e4693fccc7ea1f3b41e5f47e5eba07fb1e0f542a85e4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_14_magazine_twohand.json": "e731b08c7db334f20fe8c99b425df081a546add68aa1b1957ce12dba814957f5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_15_body_native.json": "8dc444957428c904fe7cde8bc9a7dad2b8873dcb7c13fffd420c0da8922343f4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_15_body_twohand.json": "eef1a75938e70a1e6b1437937e1938928bb43fb16f8ecc31bdc32de5cc652646",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_15_magazine_native.json": "93df02cf28bac2c70e09409289b8d52ca0875b24c1df4dfdeed3e13290f9c61e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_15_magazine_twohand.json": "ef2374b73a9cec1d83ec92e8a54b69838414ab4dbe0ec3aa471e3ba2efbf165e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_16_body_native.json": "cf979e3dc9e340da0581c82265b4834777e3d5d48fd97049cab1c1f68172fbdf",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_16_body_twohand.json": "9c58e00ef4a28ae9c22bc9eb962461796724afedb76b8e2cd64d2cbb2eea27c5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_16_magazine_native.json": "fe60854d3ce596cc2e9ca3a7262f614046286dc3d7a6b4654a3eaf8be35764b5",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_16_magazine_twohand.json": "09ad1fdcfc215531badc7247bbbdccd671d08e8f87ba29087921f535c16457f0",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_17_body_native.json": "3f5140308e726233b3b812649c3bba22a3d3ab3b21159a3296b5861ce57e117f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_17_body_twohand.json": "855c9cade00f91b26dcc74e725882fb30fa340add91c39457b1e5ce7ca8657b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_17_magazine_native.json": "edc3851d0b2729b0c9323c7db0a7219864468e332ca357eccb21beaa00360bb3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_17_magazine_twohand.json": "e9f7b6714752d624f3712d1bf67a2d96447247aa13dfc5a03c183c9e8f65144e",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_18_body_native.json": "aa479d01d829662f4b062bb1651c9caefd941c8e1a4b47db872d902da308595f",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_18_body_twohand.json": "a0997f167ac527b96be45b321953b30558bb498d94f4c8bf2801bd8823236d26",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_18_magazine_native.json": "c1eb202ff1f92f0e22cabbe78c6ebd2d003db3cf5b0ace77ce1daedbcb374644",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_18_magazine_twohand.json": "d479bb222a6361eda5259f507946fb7edb1c0dabdc304c426632b3cccb6e0071",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_19_body_native.json": "ece6a67a0ad2b504e64c90902cf7f6970dd48a5f6d0b789e792c0d24749a36f3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_19_body_twohand.json": "45790e5be199a8175bbcf76a98aa14f6ff8ff05f789d638bf11a0da5d3e7b516",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_19_magazine_native.json": "ccab289e3464e54c2d87cc6d3352a4a4d560d21b8fa47efbe4aa539b4dd063c8",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_19_magazine_twohand.json": "b680cc44bcd36f9b6a49ea1dfad82930e277a506eab0601669931ed895e0fa68",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_20_body_native.json": "26fe79e7dbe71408a61cab2cf7a6cf05e701d6c3149830648ce30849a484e354",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_20_body_twohand.json": "b36df3422fdc198c9b355c709fe97fb43d4e86fbc965554cbb48b4ae53dea0b3",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_20_magazine_native.json": "0d027ef6bb7ba6727285db58063327f23010dc63cb27a38e2e2c2dcb5e8168a4",
+    "src/main/resources/assets/destiny/models/weapon_reload_w176_brass_attacks/brass_attacks_20_magazine_twohand.json": "3d5aa0bf6deebc1a783333075c4eef1b8d5c639c4eb71821842907e2ad1b8c3e",
+    "src/main/resources/assets/destiny/items/weapon_reload_w176_brass_attacks/brass_attacks.json": "68436671d59aa3cf50b7e145fd4942f3a2193c2670d38ab06e09bf64a601aaa6",
+    "art/weapons/w176/brass_attacks/comparison.png": "3350f72eba71925f0a3092f6f90190be8b9f5bd64da227c121539e6608a3be46",
+    "art/weapons/w176/brass_attacks/storyboard.png": "1decffeec3fba1de0864b5155df20a0bc446b418d5ef7474e5df887de4604189"
+  }
+}

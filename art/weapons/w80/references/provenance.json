@@ -1,0 +1,83 @@
+{
+  "stage": "W80",
+  "researchDate": "2026-10-24",
+  "finishedAtUtc": "2026-10-24T14:21:01.789506+00:00",
+  "ownedPaths": [
+    "art/weapons/w80/reference-notes.md",
+    "art/weapons/w80/references/*"
+  ],
+  "inputPins": {
+    "selected": {
+      "path": "art/weapons/w40/definitions.json",
+      "sha256": "5d27e02c073de0b348ba15312643cc7029a044ed5617a801dbfed2d86cd8f9a1",
+      "bytes": 34655
+    },
+    "catalog": {
+      "path": "art/weapons/w30/catalog.json",
+      "sha256": "3e9377cce928958a89208ce69f34210fe7e17ae17afd1f4959bb418b1ed120f5",
+      "bytes": 32576
+    },
+    "inventory": {
+      "path": "run/private-sources/w73/bungie-items.json",
+      "sha256": "b47bba01acdcb7c08e28726647864efefea8ffe73a7098d1c725c7118545b94c",
+      "bytes": 199128691
+    },
+    "plugSets": {
+      "path": "run/private-sources/w73/bungie-plugsets.json",
+      "sha256": "8e3e4625cefca0fcec28524b2de7e65020fe1a7111fa38aa079ad4974cd67959",
+      "bytes": 10438797
+    },
+    "manifest": {
+      "path": "run/private-sources/w73/manifest.json",
+      "sha256": "bf6fd27036df7d87a2ea03d0e688b7c0b7cc76a9c3ff783ad14b3f14f4d07dce",
+      "bytes": 188873
+    }
+  },
+  "evidenceBoundary": "No inferred DDC split. Formula/radius from exact original formatted row, PvE/PvP colors established by exact original legend. Clarity original direct immutable record corroborates. Bungie historical excerpts retrieved through Jina with explicit original URL. Failed/JS-shell/search snippets never establish mechanics.",
+  "retrievalLimitations": [
+    "Direct Bungie news retrieval returned only a 1301-byte JS shell.",
+    "Direct light.gg EP returned HTTP 403; its Jina rendering exposed weapon lists but no Community Research section, so it is not mechanics evidence.",
+    "No run/private-sources/w43 directory exists. Current W75 DDC CSV caches exist, but current formatted original row was preferred.",
+    "Original DDC EP and Clarity EP omit explicit shot-distance-falloff language. No exemption is asserted as verified."
+  ],
+  "outputHashes": {
+    "art/weapons/w80/reference-notes.md": {
+      "sha256": "03a6990397e902f65bd8ad10d4956252d147ee9d286af6cc593b5a5410fe7bde",
+      "bytes": 13289
+    },
+    "art/weapons/w80/references/bungie-2024-03-05-excerpt.json": {
+      "sha256": "91cada3d46355645d2df663204c7ac4bcb9acac5f33667ecce3765806a39e0cf",
+      "bytes": 1452
+    },
+    "art/weapons/w80/references/bungie-2024-04-04-excerpt.json": {
+      "sha256": "d303c4c53e2b4f69a6c7c3818cd4d617e0c62ad62029377c1d3db78ae38d1898",
+      "bytes": 1622
+    },
+    "art/weapons/w80/references/clarity-explosive-payload.json": {
+      "sha256": "69951183a2c41c158df5ce065de1c7063ec0a4bd783cd587cb36715b3c6dffe2",
+      "bytes": 2762
+    },
+    "art/weapons/w80/references/coexisting-sockets.json": {
+      "sha256": "51b2f02986110875b19e8a790264fde3cedc7f341276ec92e3991cd7776a54c9",
+      "bytes": 20859
+    },
+    "art/weapons/w80/references/ddc-explosive-payload.json": {
+      "sha256": "c5401182d6ba66e0fe6fc29b2a67d7854b2e2617c238c6ad65f974cf3ba3661d",
+      "bytes": 4237
+    },
+    "art/weapons/w80/references/ddc-mode-legend.json": {
+      "sha256": "2e485b2d78d259c480ffd61c6272b84c38250061b71fa617e3457547933f9e18",
+      "bytes": 4974
+    },
+    "art/weapons/w80/references/official-eligibility.json": {
+      "sha256": "b4be25641b653f95025367a5dcc6a72604294c2fa450404d6799b6704c5a91bf",
+      "bytes": 61666
+    },
+    "art/weapons/w80/references/source-contract.json": {
+      "sha256": "a2958b5eb105d71e212fa8de3aa71a7e5d797cfad2a3a769f469fdf7b3bcdcec",
+      "bytes": 4431
+    }
+  },
+  "selfHash": "Not included, avoiding a self-reference cycle.",
+  "verification": "All four pre-existing W73/selected literal hashes verified before eligibility scan. W30 catalog/selected exact 63 IDs and hashes matched. Complete 63/678/627 traversal yielded five base EP rows, zero based socket 4. Raw pool entries retain currentlyCanRoll=true and isFakePlugSet=false. Artifact JSON parsing/hash and internal algebra checked without production tests/build/client/app execution."
+}

@@ -1,0 +1,70 @@
+{
+  "taskId": "W91-N2",
+  "candidatePin": null,
+  "result": "planned_unrun",
+  "executionOwner": "topmaster central single Vision batch after all writers stop and central gates pass",
+  "evidenceBoundary": {
+    "fixtureSelection": "Server carried-slot packet/loadout selection is setup and server evidence; never a Vision native slot-input receipt.",
+    "unsupportedInputs": [
+      {"input": "hotbar slot keys/scroll", "nativeStatus": "not_run_capability", "reason": "No supported Vision v1 slot input established; exercise server fixture selection explicitly."},
+      {"input": "Q/Ctrl+Q", "nativeStatus": "not_run_capability", "reason": "Vision native-input v1 does not support these keys; any reload packet fixture is not keyboard evidence."}
+    ],
+    "audio": "No new audio in N2. Event/packet evidence is not listening. No capture or listening performed; no listening claim.",
+    "sampling": "Server-tick model samples only; phase labels require server-state brackets. PNG timing is not exact tick/render-frame synchronization.",
+    "visual": "Authored poses on original detailed geometry/baseUV, not measured D2 animation, hand motion, IK or render-frame interpolation."
+  },
+  "scenarios": [
+    {
+      "taskId": "W91-N2-pair-carriers",
+      "candidatePin": null,
+      "capability": {"required": ["central native framebuffer capture", "server fixture selection and state oracle"], "nativeInput": "No supported native slot input claimed; resolve actual capture capabilities centrally."},
+      "fixtureId": "w91-n2-pair-carriers-isolated",
+      "setup": ["Use W90 isolated spawn-disabled QA world and central profile; record player UUID, dimension, position, yaw/pitch, FOV, shader and pack/source/JAR/cache pins.", "Use owned Austringer and Beloved in their real loadout slots. Record exact stack identities/components, magazine/reserve/overflow, current selection and original CMD. No targets required.", "Exercise both directions with incoming NATIVE and TWO_HAND grip; include both first-person hands where the central fixture supports them."],
+      "inputSteps": [{"kind": "server_fixture", "action": "Select opposite real weapon through validated carried-slot/loadout pathway; advance actual server ticks; label selection as fixture."}, {"kind": "native_capture", "action": "Capture bounded first-person observations and neutral third-person/inventory views using only supported central capabilities."}],
+      "serverOracle": ["Handling.Presentation reports original outgoing, STOW then READY, with unchanged original deadlines; selected stack is incoming throughout.", "Float5 = phase base + floor(progress*20)/20 + stable positive binding offset below .001. Polymer pair route uses current incoming carrier/flag0.", "STOW model parents outgoing detailed geometry; READY parents incoming. Authoritative item model, charged state, ammo, overflow, lore, HUD selected incoming row and unrelated CMD remain unchanged.", "At completion no swap binding; exact incoming HIP fallback, no automatic shot/reload/ADS or new projectile."],
+      "framePlan": ["Neutral before selection", "Bracketed early/middle/last observable STOW", "Bracketed early/middle/last observable READY", "First observed finished incoming HIP", "GUI/third person remains selected incoming"],
+      "audioClaim": "none; no audio listening/capture performed",
+      "cleanup": ["In finally release only agent-owned input lease/held inputs; confirm neutral ACK and server use/ADS state.", "Cleanup exact owner runtime/Handling/presentation/HUD; restore original selection, stack components and central fixture state; remove only run-owned fixture entities/reservations.", "Verify float5 restoration and other fields, no leaked binding/HUD/session/inputs before next scenario."],
+      "result": "planned_unrun"
+    },
+    {
+      "taskId": "W91-N2-retarget",
+      "candidatePin": null,
+      "capability": {"required": ["server same-tick selection fixture", "central native capture"], "nativeInput": "Hotbar selection remains server fixture, not native keyboard evidence."},
+      "fixtureId": "w91-n2-retarget-isolated",
+      "setup": ["Use the same isolated/pinned central setup and exact pair stacks; snapshot ammo/components/HUD. Add an owned ordinary building item in a separate slot."],
+      "inputSteps": [{"kind": "server_fixture", "action": "During unfinished STOW select back, detour to building, then select pair target in the same tick; repeat later during STOW."}, {"kind": "server_fixture", "action": "After READY begins, select original weapon to start the actually selected incoming weapon's new STOW."}, {"kind": "native_capture", "action": "Capture before/after brackets around these bounded fixture transitions."}],
+      "serverOracle": ["Unfinished STOW retains original outgoing and stowAt; same-entry return has no supported distinct-pair view. Final distinct target returns correct pair view without extending stow.", "READY retarget replaces outgoing with actually selected weapon and starts its existing stow/ready deadlines.", "Old carriers restore their original slot5, unrelated fields/ammo survive, and no buffered input creates a shot."],
+      "framePlan": ["Before retarget", "After same-tick fixture batch", "READY before interruption", "New STOW after interruption", "Finished neutral"],
+      "audioClaim": "none; no listening evidence",
+      "cleanup": ["Finally release agent-owned leases and verify neutral inputs.", "Restore exact owned stacks/selection and retire owner runtime/Handling/presentation/HUD; remove only owned fixture item/entity records and confirm teardown before continuing."],
+      "result": "planned_unrun"
+    },
+    {
+      "taskId": "W91-N2-ownership-suspend",
+      "candidatePin": null,
+      "capability": {"required": ["server exact-stack transfer and lifecycle fixture", "central native capture"], "nativeInput": "Ownership, super, dimension and spectator transitions are explicit server fixtures."},
+      "fixtureId": "w91-n2-ownership-suspend-isolated",
+      "setup": ["Create only run-owned donor/recipient fixtures with recorded UUIDs, levels, original states and exact pair stacks. Use a preexisting slot5 collision sentinel; retain recipient original item for restoration."],
+      "inputSteps": [{"kind": "server_fixture", "action": "While STOW active move exact stack to recipient, use actual recipient selection, then invoke deliberately late donor cleanup."}, {"kind": "server_fixture", "action": "Separately exercise exact-stack copy replacement, level mismatch, spectator/death and production super suspension; use registered cleanup and restore original states."}, {"kind": "native_capture", "action": "Observe only centrally supported local view; remote ownership claims require server oracle, not inferred pixels."}],
+      "serverOracle": ["Queries do not mutate and reject stale stack/owner/level/ineligible bindings. Persisted CMD and previews never authorize a swap route/gameplay.", "Recipient offset avoids saved original and donor last sample across all phases. Late donor clear does not change recipient; final recipient cleanup restores only original slot5 and preserves newer floats/flags/strings/colors.", "Runtime skill cancellation and ADS suspend do not reset Handling; actual ineligibility suppresses presentation and creates no gameplay rights or ammo."],
+      "framePlan": ["Before transfer/suspend", "After server-oracle bracket", "After recipient restoration/neutral"],
+      "audioClaim": "none; sound packets are not listening evidence",
+      "cleanup": ["Finally neutralize only agent-owned input leases with actual release confirmation.", "Restore donor and recipient exact inventories, selection, level, health/game mode/super state; cleanup owner runtime/HUD and fixture registrations on every terminal outcome.", "Confirm no run-owned sessions/entities/reservations and preserved original slot5/unrelated components."],
+      "result": "planned_unrun"
+    },
+    {
+      "taskId": "W91-N2-post-ready-input-regression",
+      "candidatePin": null,
+      "capability": {"required": ["central native input capability discovery", "supported bounded use/crouch actions", "server exact ammo/victim oracle", "native capture"], "nativeInput": "Use only capabilities actually advertised centrally; otherwise record not_run_capability. Q and slot keys are excluded."},
+      "fixtureId": "w91-n2-post-ready-input-regression-isolated",
+      "setup": ["Use central isolated arena and record all corridor candidates, exact owned target UUID/species/position/AABB/team/HP/absorption/cover, owner loadout and ammo. Select pair with explicit server fixture and wait for actual Handling deadline."],
+      "inputSteps": [{"kind": "native_if_supported", "action": "Acquire lease, perform bounded actual use input before/after server ready bracket, then release in finally. Separately hold/release supported crouch input to verify ADS starts only after ready."}],
+      "serverOracle": ["Before original deadline no accepted shot/reload/ADS; after it only actual input can create a paid shot with exact magazine decrement and expected victim/HP change.", "Post-ready ADS uses existing route/clock and returns neutral on release; no residual swap model or rewritten firing deadline. Unexpected corridor entities fail diagnosis rather than being deleted."],
+      "framePlan": ["Pre-ready blocked bracket", "Finished HIP", "Supported post-ready input/ADS bracket", "Released neutral"],
+      "audioClaim": "No listening result; N2 adds no sound",
+      "cleanup": ["Finally release lease and confirm heldKeys/pendingSteps/nativeInput/server use/ADS neutral; stop follow-up input if release cannot be confirmed.", "Cleanup exact owned targets/projectiles/runtime/HUD/session and restore original fixture/environment/loadout state through registered teardown."],
+      "result": "planned_unrun"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "stage": "W171",
+  "commit": "039cfbc4732c33573568b28cc6335dd3332a9296",
+  "repository": "https://github.com/Database-Clarity/Live-Clarity-Database",
+  "url": "https://raw.githubusercontent.com/Database-Clarity/Live-Clarity-Database/039cfbc4732c33573568b28cc6335dd3332a9296/descriptions/clarity.json",
+  "sourceSha256": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
+  "base": {
+    "hash": 1890422124,
+    "name": "Tap the Trigger",
+    "lastUpload": 1783446631691,
+    "type": "Weapon Trait",
+    "uploadedBy": "Hawkmoona",
+    "descriptions": {
+      "en": [
+        {
+          "linesContent": [
+            {
+              "text": "Firing grants 'Tap The Trigger' for 0.6 seconds, providing the following benefits:"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 40 Stability"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 50% decreased Recoil"
+            }
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "• 10% decreased Accuracy Cone Size"
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Fusion Rifles only receive "
+            },
+            {
+              "text": "25% of the benefits",
+              "title": [
+                {
+                  "linesContent": [
+                    {
+                      "text": "10 Stability, -12.5% Recoil, and -2.5% Accuracy Cone Size"
+                    }
+                  ]
+                }
+              ],
+              "classNames": [
+                "title"
+              ]
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "Buff cannot be refreshed until Automatic Weapons stop firing, or until the next burst."
+            }
+          ]
+        },
+        {
+          "classNames": [
+            "spacer"
+          ]
+        },
+        {
+          "linesContent": [
+            {
+              "text": "[Controller-Only]",
+              "classNames": [
+                "green"
+              ]
+            },
+            {
+              "text": " Weapon fires the instant trigger pressure is applied."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enhancedExcludedHash": 1523649716,
+  "mechanics": {
+    "id": "tap_the_trigger",
+    "hash": 1890422124,
+    "durationSeconds": 0.6,
+    "durationTicks": 12,
+    "ordinary": {
+      "stabilityBonus": 40,
+      "recoilScalar": 0.5,
+      "accuracyScalar": 0.9
+    },
+    "fusion": {
+      "stabilityBonus": 10,
+      "recoilScalar": 0.875,
+      "accuracyScalar": 0.975
+    }
+  },
+  "policies": {
+    "refresh": "AFTER_AUTOMATIC_STOPS_FIRING_OR_NEXT_BURST",
+    "cycleIntegration": "MASTER_OWNED_LOCAL_POLICY",
+    "stabilityRecoilSpreadAdapters": "MASTER_OWNED_LOCAL_POLICY",
+    "controllerPressure": "CONTROLLER_ONLY_OUTSIDE_JAVA_KEYBOARD_IMPLEMENTATION",
+    "tickConversion": "0.6_SECONDS_TIMES_20_EQUALS_12"
+  },
+  "limitations": [
+    "Bungie membership is the pinned Oct13 manifest snapshot; Clarity community mechanics use the pinned commit, not official engine measurements.",
+    "0.6 seconds maps to 12 ticks at 20Hz. Fusion gets 25% of bonuses: +10 stability, recoil x0.875, accuracy cone x0.975; ordinary +40, x0.5, x0.9.",
+    "No refresh until automatic weapons stop firing or the next burst. Actual runtime cycle and source/end-held integration are master-owned.",
+    "Controller trigger pressure behavior is source evidence only and outside the Java keyboard implementation.",
+    "Stability/recoil/spread/HUD adapters, combined perks and native Vision validation remain master-owned. Enhanced hash is excluded."
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "classification": "official primary-source summaries",
+  "researchDate": "2026-10-24",
+  "sources": [
+    {
+      "id": "O1",
+      "title": "Pinned Bungie inventory and plug-set definitions",
+      "sourceUrl": "https://www.bungie.net/common/destiny2_content/json/en/DestinyInventoryItemDefinition-e677f6ea-2a1e-48d4-a8c8-700a39a62585.json",
+      "sourceCache": "run/private-sources/w73/bungie-items.json",
+      "version": "245114.26.10.13.2000-1-bnet.66137",
+      "evidenceLocator": "/981718087 and /1311684613; frame descriptions /1395789926/displayProperties/description and /2571259936/displayProperties/description",
+      "summary": [
+        "Deafening Whisper is the selected special-ammo Void Wave Frame.",
+        "Dimensional Hypotrochoid is the selected heavy-ammo Stasis Compressed Wave Frame.",
+        "Both frame descriptions tie wave creation to contact with ground."
+      ],
+      "boundary": "No numerical wave dimensions, speed, slope limit, bounce coefficient, direct-hit damage or full terrain algorithm are exposed by these descriptions."
+    },
+    {
+      "id": "O2",
+      "title": "Destiny 2 Update 7.2.0.1 - Season of the Witch",
+      "sourceUrl": "https://www.bungie.net/7/en/News/Article/season-witch-update-7-2-0-1",
+      "version": "7.2.0.1",
+      "evidenceLocator": "Weapons > Weapon Archetypes > Wave Frame Heavy Grenade Launchers; reader lines 397-399",
+      "summary": [
+        "Heavy Wave Frame launchers had both the size and damage of self-damage AOE reduced, to make near-feet firing safer."
+      ],
+      "boundary": "This establishes historical self-damage AOE, not a new radial enemy-damage burst. No radius or damage values are specified; zero self-damage is not established."
+    },
+    {
+      "id": "O3",
+      "title": "Destiny 2 Update 7.3.5",
+      "sourceUrl": "https://www.bungie.net/7/en/News/article/destiny_2_update_7_3_5",
+      "publicationDate": "2024-03-05",
+      "version": "7.3.5",
+      "evidenceLocator": "Weapons > Weapon Archetypes > Heavy Grenade Launcher; reader lines 379-385",
+      "summary": [
+        "Heavy Wave damage increased by 20 percent and wave width by 40 percent.",
+        "The enclosing Heavy Grenade Launcher section also reports 10 percent more direct-hit impact damage and 5 percent more detonation damage, with a PvP offset for the latter."
+      ],
+      "numericChanges": {
+        "heavyWaveDamageMultiplierRelativeToPriorPatch": 1.2,
+        "heavyWaveWidthMultiplierRelativeToPriorPatch": 1.4,
+        "heavyGLImpactDamageMultiplierRelativeToPriorPatch": 1.1,
+        "heavyGLDetonationDamageMultiplierRelativeToPriorPatch": 1.05
+      },
+      "boundary": "Historical relative changes, not absolute values. The generic heavy changes do not expose the compressed-wave impact/explosion/wave damage split. Do not apply these multipliers again to an already-current tuning profile. The 40 percent width change is not a heavy-versus-special width ratio."
+    },
+    {
+      "id": "O4",
+      "title": "Destiny 2 Update 8.0.0.1",
+      "sourceUrl": "https://www.bungie.net/7/en/News/article/destiny_2_update_8_0_0_1",
+      "publicationDate": "2024-06-04",
+      "version": "8.0.0.1",
+      "evidenceLocator": "Weapons > Wave Grenade Launchers; reader lines 650-654",
+      "summary": [
+        "Blast Radius now changes wave dimensions, predominantly width, with length and height also scaling.",
+        "The displayed baseline Blast Radius changed from 100 to 50; 50 denotes the previous baseline and larger stat values enlarge a wave segment.",
+        "Special-ammo wave length changed from 22 meters to 15 meters, excluding Dead Messenger."
+      ],
+      "numericFacts": {
+        "specialWaveLengthBeforeMeters": 22,
+        "specialWaveLengthAfterMeters": 15,
+        "displayedBlastRadiusBaseline": 50
+      },
+      "boundary": "The special-ammo length statement covers Deafening Whisper by class, not Dimensional Hypotrochoid. It is a published 2024 value, not a new 2026 measurement. The broader wave-size paragraph is not limited to special ammo, but provides no compressed-wave size curve or absolute heavy length/width. No interpolation law is published."
+    },
+    {
+      "id": "O5",
+      "title": "Destiny 2 Update 9.0.0.1",
+      "sourceUrl": "https://www.bungie.net/7/en/News/Article/destiny_update_9_0_0_1",
+      "publicationDate": "2025-07-15",
+      "version": "9.0.0.1",
+      "evidenceLocator": "Weapons > Wave Frame Weapons; reader lines 936-937",
+      "summary": [
+        "Fixed a bug in which one player’s wave damage temporarily prevented a target from receiving similar-archetype wave damage from other players."
+      ],
+      "boundary": "Supports avoiding a shared cross-player immunity gate; it does not specify same-wave hit count, repeat-hit intervals or a per-projectile collision algorithm."
+    },
+    {
+      "id": "O6",
+      "title": "Destiny 2 Update 9.7.0",
+      "sourceUrl": "https://www.bungie.net/7/en-us/News/Article/destiny_update_9_7_0",
+      "publicationDate": "2026-06-09",
+      "version": "9.7.0",
+      "evidenceLocator": "Weapons > Anti-Champion 2.0, reader lines 804-822; Heavy Grenade Launchers > General, lines 987-990",
+      "summary": [
+        "The archetype table assigns Unstoppable to Wave breach GLs and Compressed Wave drum GLs.",
+        "Heavy Grenade Launchers receive 5 percent more damage against bosses and champions."
+      ],
+      "boundary": "Later official context, not geometry evidence. Champion behavior is outside this sidecar’s implementation scope; the general heavy change supplies no absolute damage or direct-hit/wave split."
+    }
+  ]
+}

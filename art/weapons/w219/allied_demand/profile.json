@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "stage": "W219",
+  "weapon": "allied_demand",
+  "sourceAction": "80A8A560",
+  "framing": {
+    "translation": [
+      -1.0,
+      0.25,
+      0
+    ],
+    "rotation": [
+      -1,
+      0,
+      0
+    ],
+    "scale": 0.98,
+    "rightWristRoll": 27,
+    "hideSupportAtRest": false,
+    "sourceFullChain": true,
+    "keepMeshSupport": true
+  },
+  "contacts": {
+    "right": {
+      "position": [
+        8.0,
+        9.15,
+        8.88
+      ],
+      "rotation": [
+        -12.0,
+        0.0,
+        0.0
+      ]
+    },
+    "left": {
+      "position": [
+        7.25,
+        8.75,
+        9.16
+      ],
+      "rotation": [
+        -12.0,
+        0.0,
+        -20.0
+      ]
+    },
+    "reload": {
+      "contact": [
+        7.35,
+        7.35,
+        8.85
+      ],
+      "rotation": [
+        -12.0,
+        0.0,
+        0.0
+      ],
+      "partHint": "magazine",
+      "policy": "magazine",
+      "rigAction": "80A8A560",
+      "hand": "left",
+      "gripWindow": [
+        0.05,
+        0.1,
+        0.45,
+        0.55
+      ]
+    }
+  },
+  "sourceRig": {
+    "group": "sidearm_c0461d9d",
+    "action": "80A8A560",
+    "path": "art/weapons/w219/rigs/sidearm_c0461d9d.json",
+    "sourceBlendSha256": "16335951a2bd664aa4aba5ad9373de56be318d24f1795e3dd655fd5f1b172fb7",
+    "sourceMapSha256": "f7b016566e08ee86072a18b2d1bce2a53904e0227f574bc0332cd0bd2dd96ab0",
+    "boneMapSha256": "9dfc8310af1a45c4a61aee93012bc1f69b22de843ef2acb9e7f5365070a4c86d"
+  },
+  "evidence": [
+    {
+      "source": "/private/tmp/destiny-w219-source/source-review.json",
+      "sha256": "99b7a8001a2a09a88d9232c4e5945cb25d0f7d7cd5460380595406d947309138",
+      "observation": "Read master original .blend read-only Blender5.4.0 Alpha evaluation: ARMATURE ONLY, OBSlot Armature|fp_80A8A560_reload_full|Base, frames1..67 at30fps,61 samples, old joint error0, allInputsUnchanged=true. Worker did not open or independently evaluate Blender."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sheets/sidearm_c0461d9d-80A8A560-upper-chain.png",
+      "sha256": "ec1348a1ac4ddb0ea04b52fe7d14ef7c7d04e52485453762a14330a44beea834",
+      "observation": "Worker VIEWED actual six-panel XZ/YZ source chain PNG at0,.2,.4,.6,.8,1 before generating. Large handling-arm excursion and return; no mesh/camera or native contact evidence."
+    },
+    {
+      "source": "/private/tmp/destiny-w219-source/sidearm_c0461d9d.json",
+      "sha256": "28e4d5b81784c8efd315c4849b1d53370b1d5e9737eba98d75d21c997256d184",
+      "observation": "Read fresh original61 matrices and shoulder chains. Left D1232BA2->897A1504->8C83CB67 is handling arm; right17025F50->A3781DCD->DE9D6BEA stays at weapon4A0810C4. In source weapon coordinates, left wrist moves down about17.112 model units at.35, returns to about-2.144 at.50 and rises by.60; right wrist-relative shift remains about.23. This supports LEFT magazine handling and release before later manipulation; boundaries/contact are authored, not source events."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/src/main/resources/assets/destiny/models/weapon_surface_w123/allied_demand.json",
+      "sha256": "4d5506885862a4f081ec62984a02ddc0e58e93981450a2192c1aef23d02565c0",
+      "observation": "Own canonical85 elements: moving magazine_lower63/magazine_floor64, fixed green_grip_core57 through heel62. Split83body+2magazine; add one small internal shaft fitted to existing cross-section/rotation and same per-face magazine UVs. Hidden-detail interpretation only, no recovered mesh claim or canonical/texture edits."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w205/first-person-framing.json",
+      "sha256": "783fdde584ed580ab6c828238f6e95b3053cf4347db1a6c33983dc572d44bd90",
+      "observation": "Preserve effective sidearm translation[-1,.25,0], rotation[-1,0,0],scale.98,rightWristRoll27. No weapon-specific prior profile found. Enable sourceFullChain/keepMeshSupport and required visible rest support; family hideSupportAtRest=true becomes false explicitly."
+    },
+    {
+      "source": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/contacts.json",
+      "sha256": "50d03b787bab38f1e4966ee370b8944cac488e1721626a98525106e32c3b14d1",
+      "observation": "Retain own right[8,9.15,8.88]/[-12,0,0],left[7.25,8.75,9.16]/[-12,0,-20],reload.contact[7.35,7.35,8.85]/[-12,0,0]. Contact is approximate authored mesh placement. Magazine gripWindow[.05,.10,.45,.55] follows source left-wrist withdrawal/return and releases before late source hand lift. No limb/contact camera refit."
+    }
+  ],
+  "notes": [
+    "NEW Allied Demand reload route. Lonesome generator read only for matrix/graph infrastructure; no Lonesome geometry, pivot or motion knots copied.",
+    "Magazine shaft is authored internal detail using existing magazine faces/UVs. Source .blend has no weapon mesh/camera/finger IK.",
+    "Keep ordinary fingerless player-skin full shoulder/elbow/wrist chains, no length stretching, per-axis damping, hiding or camera compensation.",
+    "Pose bank uses own original61 FK and existing shared .1 boundary transition, with source left-wrist-relative magazine travel and authored .55 seating/release. Shared part-to-palm fit remains master-owned.",
+    "All shared dependencies are read/hash-recorded dynamically. No newly pinned shared-file hashes.",
+    "Stats, cadence, ammo, reload clocks and sounds unchanged. Pure generate returns only own models, item and manifest; no resource writes.",
+    "FIRST Vision image-backed SAME-worker review/correction or justified nochange and SECOND Vision pending. No final native acceptance."
+  ]
+}

@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "batch": "W211",
+  "weapon": "blast_furnace",
+  "status": "worker_reviewed_pending_Vision2",
+  "ownership": {
+    "worktree": "/Users/qf/IdeaProjects/DestinyGuardians-worktrees/w211-blast_furnace",
+    "files": [
+      "art/weapons/w206/blast_furnace/profile.json",
+      "art/weapons/w211/blast_furnace/review.json"
+    ],
+    "masterOwns": [
+      "shared rig/generator sources",
+      "generation",
+      "build/JUnit",
+      "CU/Vision",
+      "integration"
+    ]
+  },
+  "change": {
+    "profileBeforeSha256": "0c8fa6f02fdf6db4824357e3c0a67561e702857b8434237d9f57a5eeb28bba00",
+    "profileAfterSha256": "5d4ba09550f537df3a467a0f159df48784164bbb2c39addce86cdc97596f69ad",
+    "functionalDelta": {
+      "framing.sourceFullChain": true
+    },
+    "documentationDelta": "Clarify inherited arm-direction precedence and full-chain magazine handling; append W211 source provenance and pending review sequence.",
+    "sourceWeaponRelativeAdded": false,
+    "contactsChanged": false,
+    "framingNumbersChanged": false,
+    "sourceSamplesChanged": false
+  },
+  "source": {
+    "group": "pulse_rifle_b4d01502",
+    "rigAction": "80A8A36A",
+    "action": "Armature|fp_80A8A36A_reload_full|Base",
+    "slot": "OBSlot",
+    "sourceFrameRange": [
+      1.0,
+      105.0
+    ],
+    "samples": 61,
+    "idle": "80A8A422",
+    "ads": "80A8A330",
+    "sourceBlend": "/Volumes/qf-ssd/DestinyGuardians-Animation-Return-2026-10-27/destiny-animation-return/clips/pulse_rifle_b4d01502/blender/source.blend",
+    "sourceBlendSha256": "042a9965b8f02a7e7bfda10914e2711b31e2add9417884d8b277e11ab9668f4d",
+    "report": "docs/qa/2026-10-28/w211/source/source-review.json",
+    "reportSha256": "6f8cea0ca5ef45c806e04a805afb0a84397ab404cacda052ed5a47a53eee339d",
+    "export": "docs/qa/2026-10-28/w211/source/pulse_rifle_b4d01502.json",
+    "exportSha256": "8dc37ec2dc379998c8217f68ed727c4825e0212732f0a96c4388484b790bfab5",
+    "cache": "art/weapons/w205/rigs/pulse_rifle_b4d01502.json",
+    "cacheSha256": "8dc37ec2dc379998c8217f68ed727c4825e0212732f0a96c4388484b790bfab5",
+    "reportRecordedCacheSha256": "9f7164aef691e67b016d1a8130c179f832bfc768fb2f59e0628be17e0abc0093",
+    "evaluatedExportCacheJointComparison": {
+      "80A8A422": {
+        "samples": 1,
+        "maxJointAbsError": 0.0
+      },
+      "80A8A36A": {
+        "samples": 61,
+        "maxJointAbsError": 0.0
+      },
+      "80A8A368": {
+        "samples": 61,
+        "maxJointAbsError": 0.0
+      },
+      "80A8A366": {
+        "samples": 61,
+        "maxJointAbsError": 0.0
+      },
+      "80A8A330": {
+        "samples": 1,
+        "maxJointAbsError": 0.0
+      }
+    },
+    "originalInputIntegrity": "Master report records allInputsUnchanged=true; worker did not independently evaluate or hash the SSD originals.",
+    "inspection": "Worker read master evaluation report, expanded matrices, current shared rig/build code and accepted full-chain profiles; actually viewed source/sheets/pulse_rifle_b4d01502-80A8A36A-upper-chain.png. No live Blender scene or new Blender process opened.",
+    "matrixSpace": "armature_object, row-major, column vectors; no matrix_world reapplication",
+    "basis": "Authored canonical C maps source X-forward/Z-up into view XYZ; 32 model units per source unit is calibration, not a recovered camera.",
+    "scope": "Shared pulse-family action chosen explicitly; source contains Armature without mesh or camera, so exact weapon variant, mesh contact depth and original FOV are not established."
+  },
+  "rigPolicy": {
+    "chain": "Original shoulder/elbow/wrist directions and bend; ordinary rest lengths, no limb extension.",
+    "restLengthsModelUnits": {
+      "left": {
+        "forearm": 8.141364,
+        "upper": 8.726691
+      },
+      "right": {
+        "forearm": 8.141363,
+        "upper": 8.726571
+      }
+    },
+    "sourceFullChainPrecedence": "Full-chain branch supplies evaluated weapon-relative axes; inherited sourceViewRotation/rightWristRoll/leftRotation do not direct that branch.",
+    "weaponMotion": "Existing full-chain implementation consumes the same joint sample for source weapon display, palm travel and upper-arm bend.",
+    "restContacts": {
+      "right": [
+        8.0,
+        8.4,
+        8.27
+      ],
+      "left": [
+        7.8,
+        9.45,
+        -0.5
+      ]
+    },
+    "reloadContact": [
+      7.4,
+      8.0,
+      11.78
+    ],
+    "reloadPolicy": "Inherited magazine policy and grip/release envelope; detached moving magazine follows source left handling palm while attached, then returns to authored part path.",
+    "contactFit": "No shell-specific hold or palm-contact flags; no contact offset edits.",
+    "preserved": [
+      "geometry",
+      "UV",
+      "accepted ADS weapon matrices",
+      "timing and hold knots",
+      "ammunition",
+      "audio",
+      "third-person"
+    ]
+  },
+  "adjacentPoseAudit": {
+    "path": "/private/tmp/destiny-w211-source/adjacent-pose-review.json",
+    "sha256": "4d722ae5741c9acae9fb902fd6ca2963a56e75eb3900cfcc60959ab28994690f",
+    "selectedAction": {
+      "group": "pulse_rifle_b4d01502",
+      "action": "80A8A36A",
+      "poses": 61,
+      "maxAdjacentJointRotationDeg": 57.4424,
+      "maxAdjacentJointTravelModelUnits": 8.86765
+    },
+    "interpretation": "Fast adjacent changes originate in master-evaluated original source. Preserve all samples; no arbitrary smoothing or invented timing. 61 poses do not establish continuous native 60fps interpolation."
+  },
+  "validation": {
+    "performed": [
+      "JSON parse",
+      "seed profile SHA-256 check",
+      "semantic delta limited to sourceFullChain plus documentation",
+      "seed export/cache joint matrix comparison",
+      "Actually viewed master Vision1 review/reload PNGs, raw samples13..18, after-reload PNG and original source upper-chain sheet",
+      "Read Vision1 capture brackets and reload timeline; verified candidate profile hash in master-generated manifest"
+    ],
+    "generationRun": false,
+    "buildOrJUnitRun": false,
+    "runtimeOrVisionAccessed": false,
+    "assembledElementBudget": {
+      "limit": 1000,
+      "status": "master_generated_manifest_below_limit",
+      "requirement": "Count simultaneously assembled body + moving parts + both forearms/palms + both upper arms; do not double-count alternate full/split representations.",
+      "observedMaxAssembledElements": 697,
+      "manifest": "/Users/qf/IdeaProjects/DestinyGuardians/art/weapons/w201/manifest.json",
+      "manifestSha256AtReview": "62e5ee5616a648a0f89c56275592e113c030cefdcffe1c75304e4e6d98b87a58",
+      "manifestCandidateProfileSha256": "5d4ba09550f537df3a467a0f159df48784164bbb2c39addce86cdc97596f69ad"
+    },
+    "savedVisionArtifactsInspected": true,
+    "activeRuntimeOrVisionEndpointAccessed": false,
+    "masterTargetedGates": {
+      "status": "passed_reported_by_master",
+      "attribution": "User delivery of Vision1 findings; worker did not execute generation, build or JUnit."
+    }
+  },
+  "risksForMasterVision": [
+    "Hip and ADS transition/full ADS: both fingerless skin hands, connected ordinary-length elbows, no upper arm obstructing the optic.",
+    "Reload: inspect large original source excursions, rear-magazine contact during extraction/reseat and source/body/part common motion.",
+    "Inspect late recovery and canonical return for contact release, visible pops or chain discontinuity; preserve rejected frames and exact source progress findings."
+  ],
+  "reviewSequence": {
+    "sourceBlender": "master_evaluated",
+    "source61Pose": "master_evaluated_and_worker_read",
+    "masterVision1": "completed_master_capture_worker_inspected_saved_pngs",
+    "workerFindingsAndCorrection": "completed_evidence_based_no_change",
+    "masterVision2": "pending",
+    "nativeAcceptance": false
+  },
+  "vision1WorkerReview": {
+    "decision": "evidence_based_no_change",
+    "profileBeforeSha256": "5d4ba09550f537df3a467a0f159df48784164bbb2c39addce86cdc97596f69ad",
+    "profileAfterSha256": "5d4ba09550f537df3a467a0f159df48784164bbb2c39addce86cdc97596f69ad",
+    "reviewBeforeSha256": "43922c951de90af0cfe08de6f94a9ed7b314e272057afa346fc389cd74ada2e8",
+    "profileModified": false,
+    "correction": "None: supplied PNGs show no concrete palm/magazine gap or failed sampled return warranting contact, framing, timing or source-pose edits.",
+    "inspectedImages": [
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/screenshots/blast_furnace-review.png",
+        "sha256": "78a8d9a7574e8c36a3834988fd0794df166f4f407d57025c141510c3af57a1e9"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/screenshots/blast_furnace-reload.png",
+        "sha256": "62e40b774a340d65e9925e325c3a4dce5f386da836e6c80e46bdda13bfa8b4ca"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-reload-sample-13.png",
+        "sha256": "52fac31e5afa47bb661b1547201ee69e79ab9eb881cf19e427f5138b9e931993"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-reload-sample-14.png",
+        "sha256": "aea5ca775d9b307ee436748e784ff18c49bfe5be40807a7e1a439397f723eed4"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-reload-sample-15.png",
+        "sha256": "3ab296700299e3e67f7679d50f0080a19201205385ebf0b413b3b31a179f9d67"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-reload-sample-16.png",
+        "sha256": "798491aca501633d15f9ba2b8c7e782dc38fce857279ca0779d9afdb4c203644"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-reload-sample-17.png",
+        "sha256": "15efa88472663cd47499fbd936a7a98ea4719d438d0f03138c4fbfc626608e12"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-reload-sample-18.png",
+        "sha256": "df85ecfcda9770bd10357ffa6820f0cfff76017a44f654f04d03ef3d849bd2c2"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-after-reload.png",
+        "sha256": "787c2a095e06eb6c70a4d75907285f01e12dcd64daac61879645acc6acc76283"
+      },
+      {
+        "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/source/sheets/pulse_rifle_b4d01502-80A8A36A-upper-chain.png",
+        "sha256": "be5cc8f75b3b1517f4b21eb50ca19400c9998a95404de62996eb72839fbb9549"
+      }
+    ],
+    "findings": [
+      {
+        "area": "hip_and_ads",
+        "observation": "Review PNG shows skin support hand under the fore-end; trigger arm is largely below/right crop. Full ADS aperture and red dot remain visible above the stock without upper-arm intrusion in the supplied frame.",
+        "limitation": "This crop does not establish full trigger-chain visibility or every ADS transition pose, classic/slim skin variant."
+      },
+      {
+        "area": "steep_source_reload",
+        "observation": "Reload sheet samples04/08 show steep upright weapon motion cropped at the top. Original source upper-chain sheet and adjacent-pose audit show substantial source excursions.",
+        "decision": "Preserve original action80A8A36A, source61 samples and timing. Top crop alone does not establish an erroneous limb direction or justify flattening."
+      },
+      {
+        "area": "magazine_contact",
+        "observation": "Actually viewed raw samples13/14: detached rear magazine sits to the left of the well and visibly meets the left block palm; no clear air gap between palm and handled magazine is apparent. Receiver separation is expected while detached.",
+        "decision": "Keep inherited rest/reload contacts and magazine policy.",
+        "limitation": "Palm occlusion and a single view prevent exact contact-depth or collision certification; sparse PNGs do not prove contact through every intermediate source pose."
+      },
+      {
+        "area": "handling_return",
+        "observation": "Raw sample15 lowers the weapon and brings the arm back alongside it; samples16/17 show lowered late-reload poses without a persistently detached magazine. Sample18 brackets the reload/canonical model switch, and the separate after-reload PNG shows the regular hip presentation with support hand back under the fore-end.",
+        "decision": "No visible failed recovery justifies a profile correction.",
+        "limitation": "Sample17 spans client ticks1012..1016. Sample18 has reload model before and canonical after; the screenshot is not an exact phase/render synchronization proof. Continuous canonical-return seam remains a Vision2 check."
+      }
+    ],
+    "captureBrackets": [
+      {
+        "sample": 4,
+        "file": "frames/w211-blast_furnace-reload-sample-04.png",
+        "clientTicksBeforeAfter": [
+          983,
+          983
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace"
+        ]
+      },
+      {
+        "sample": 8,
+        "file": "frames/w211-blast_furnace-reload-sample-08.png",
+        "clientTicksBeforeAfter": [
+          991,
+          992
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace"
+        ]
+      },
+      {
+        "sample": 13,
+        "file": "frames/w211-blast_furnace-reload-sample-13.png",
+        "clientTicksBeforeAfter": [
+          1002,
+          1003
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace"
+        ]
+      },
+      {
+        "sample": 14,
+        "file": "frames/w211-blast_furnace-reload-sample-14.png",
+        "clientTicksBeforeAfter": [
+          1004,
+          1005
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace"
+        ]
+      },
+      {
+        "sample": 15,
+        "file": "frames/w211-blast_furnace-reload-sample-15.png",
+        "clientTicksBeforeAfter": [
+          1007,
+          1008
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace"
+        ]
+      },
+      {
+        "sample": 16,
+        "file": "frames/w211-blast_furnace-reload-sample-16.png",
+        "clientTicksBeforeAfter": [
+          1010,
+          1010
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace"
+        ]
+      },
+      {
+        "sample": 17,
+        "file": "frames/w211-blast_furnace-reload-sample-17.png",
+        "clientTicksBeforeAfter": [
+          1012,
+          1016
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace"
+        ]
+      },
+      {
+        "sample": 18,
+        "file": "frames/w211-blast_furnace-reload-sample-18.png",
+        "clientTicksBeforeAfter": [
+          1017,
+          1017
+        ],
+        "modelsBeforeAfter": [
+          "destiny:weapon_hands_w201/weapon_reload_w207_blast_furnace/blast_furnace",
+          "destiny:weapon_hands_w201/weapon/blast_furnace"
+        ]
+      }
+    ],
+    "sequenceEvidence": {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/sequences/w211-blast_furnace-reload.json",
+      "sha256": "994f3e0a0a922415f054a0af8270f799d1992289f35926cec6d35522707f7828",
+      "returncode": 0,
+      "monitorError": null,
+      "captures": 39
+    },
+    "timelineEvidence": {
+      "path": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/oracles/w211-blast_furnace-reload-timeline.json",
+      "sha256": "4aeda6768b7ae5a1f99638ff5be346c7895bc0946a88710b294b86c3191f25ce",
+      "presentations": [
+        {
+          "tick": "1725",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "0/0",
+          "floats": []
+        },
+        {
+          "tick": "1731",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.06666667
+          ]
+        },
+        {
+          "tick": "1737",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "tick": "1742",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.31666666
+          ]
+        },
+        {
+          "tick": "1746",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.41666666
+          ]
+        },
+        {
+          "tick": "1750",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.5
+          ]
+        },
+        {
+          "tick": "1755",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.6166667
+          ]
+        },
+        {
+          "tick": "1761",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.76666665
+          ]
+        },
+        {
+          "tick": "1766",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.8833333
+          ]
+        },
+        {
+          "tick": "1770",
+          "model": "destiny:weapon_reload_w207_blast_furnace/blast_furnace",
+          "reloading": "true",
+          "ammo": "0/0",
+          "floats": [
+            0.0,
+            0.96666664
+          ]
+        },
+        {
+          "tick": "1775",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1781",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1786",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1790",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1795",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1801",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1807",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1812",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1816",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "tick": "1821",
+          "model": "destiny:weapon/blast_furnace",
+          "reloading": "false",
+          "ammo": "36/0",
+          "floats": [
+            0.0,
+            -1.0
+          ]
+        }
+      ],
+      "interpretation": "Saved server observations advance reload progress to .96666664 at tick1770, then canonical model/reloading=false and ammo36/0 by tick1775. Client capture indices and server ticks are separate brackets, not exact PNG-to-source-pose assignments."
+    },
+    "afterReloadEvidence": {
+      "metadata": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/frames/w211-blast_furnace-after-reload.json",
+      "clientTicksBeforeAfter": [
+        1073,
+        1074
+      ],
+      "model": "destiny:weapon_hands_w201/weapon/blast_furnace",
+      "serverBracket": "/Users/qf/IdeaProjects/DestinyGuardians/docs/qa/2026-10-28/w211/vision1/brackets/w211-blast_furnace-after-reload.json",
+      "observation": "Saved bracket includes canonical model, reloading=false and ammo36/0 around server ticks1825/1830."
+    },
+    "vision2Focus": [
+      "Recheck hip support/trigger visibility and clear ADS aperture using the same candidate.",
+      "Recheck detached magazine-to-palm contact, reseat/release and late-to-canonical return; retain steep original source motion.",
+      "Keep bracketed-frame, original-camera and exact-contact-depth limits explicit; no continuous60fps or exact source-mesh claim."
+    ],
+    "nativeAcceptance": false
+  }
+}
