@@ -11,7 +11,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Brightness;
-import net.minecraft.world.entity.Display;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -21,7 +20,7 @@ import org.joml.Vector3f;
 
 /**
  * A personal loot drop in the world (Destiny drops are per player): only the owner sees it and walking over it
- * collects it. Engrams float as their glyph; weapons spin as their model. Expires after {@link #LIFE} ticks.
+ * collects it. Engrams float as a spinning 3D engram; weapons spin as their model. Expires after {@link #LIFE} ticks.
  */
 final class WorldDrop {
     static final int LIFE = 20 * 120;
@@ -43,7 +42,7 @@ final class WorldDrop {
         ItemStack stack;
         if (reward.engram() != null) {
             stack = new ItemStack(Items.PAPER);
-            stack.set(DataComponents.ITEM_MODEL, Identifier.parse("destiny:gui/hud/" + Loot.engramIcon(reward.engram())));
+            stack.set(DataComponents.ITEM_MODEL, engramModel(reward.engram()));
         } else stack = WeaponItems.entry(reward.weapon()).map(WeaponModels::create).orElse(ItemStack.EMPTY);
         item = new ItemDisplayElement(stack);
         item.setItemDisplayContext(ItemDisplayContext.FIXED);
@@ -52,7 +51,6 @@ final class WorldDrop {
         item.setViewRange(2f);
         item.setGlowing(true);
         item.setGlowColorOverride(color);
-        if (reward.engram() != null) item.setBillboardMode(Display.BillboardConstraints.CENTER);
         holder.addElement(item);
         place();
         new ManualAttachment(holder, level, () -> pos);
@@ -63,15 +61,23 @@ final class WorldDrop {
     private void place() {
         float bob = (float) Math.sin(age / 12.0) * .08f;
         if (reward.engram() != null) {
-            item.setScale(new Vector3f(.55f));
-            item.setTranslation(new Vector3f(0, .9f + bob, 0));
-            item.setLeftRotation(new Quaternionf().rotateZ(age * .03f));
+            item.setScale(new Vector3f(1.15f));
+            item.setTranslation(new Vector3f(0, .85f + bob, 0));
+            item.setLeftRotation(new Quaternionf().rotateY(age * .045f).rotateX(.42f).rotateZ(age * .017f));
         } else {
             item.setScale(new Vector3f(.8f));
             item.setTranslation(new Vector3f(0, .7f + bob, 0));
             item.setLeftRotation(new Quaternionf().rotateY(age * .05f));
         }
         item.startInterpolationIfDirty();
+    }
+
+    /** 3D dodecahedron engram (scripts/loot/build_engram_models.py); unknown tiers keep the flat Bungie glyph. */
+    static Identifier engramModel(String tier) {
+        return switch (tier) {
+            case "common", "uncommon", "rare", "legendary", "exotic" -> Identifier.parse("destiny:loot/engram_" + tier);
+            default -> Identifier.parse("destiny:gui/hud/" + Loot.engramIcon(tier));
+        };
     }
 
     /** @return false when finished (collected, expired or owner gone). */
