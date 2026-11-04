@@ -65,5 +65,11 @@ public final class CinematicHands {
         }
         kim.biryeong.minigamelib.cinematic.CameraViews.sending(p.inventoryMenu::sendAllDataToRemote);
     }
+    /** The weapon the player held before the scene (copy), for showing on a staged body's hand; EMPTY if none. */
+    public static ItemStack heldBeforeStow(ServerPlayer p) {
+        var s = STOWED.get(p.getUUID());
+        if (s == null || s.player != p || s.clientOnly) return p.getMainHandItem().copy();
+        return p.getInventory().getItem(s.slot).copy();
+    }
     public static boolean stowed(ServerPlayer p) { var s = STOWED.get(p.getUUID()); return s != null && s.player == p; }
 }

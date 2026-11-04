@@ -153,7 +153,15 @@ public final class ActivityCast implements AutoCloseable {
             try {
                 // A foreign animation acquired during the lead is never stopped.
                 if (!PlayerAnimations.isPlaying(actor.player()))
-                    CameraViews.sending(() -> actor.playing = PlayerAnimations.playIntroInPlace(actor.player(), actor.placement.animation()));
+                    CameraViews.sending(() -> {
+                        actor.playing = PlayerAnimations.playIntroInPlace(actor.player(), actor.placement.animation());
+                        // Staged poses hold the Guardian's own weapon model on the rig hand (visual only; the
+                        // real slot stays stowed so no first-person/vanilla held item is drawn).
+                        if (actor.playing) {
+                            var weapon = CinematicHands.heldBeforeStow(actor.player());
+                            if (!weapon.isEmpty()) PlayerAnimations.superItem(actor.player(), weapon);
+                        }
+                    });
                 if (!actor.playing) release(actor);
             } catch (RuntimeException | LinkageError error) { warn("body start", error); release(actor); }
         }
