@@ -1,0 +1,53 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon_scope_w45/line_in_the_sand_twohand",
+            "tints": [
+              {
+                "type": "minecraft:constant",
+                "value": 12023807
+              }
+            ]
+          },
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon_scope_w45/line_in_the_sand_native",
+            "tints": [
+              {
+                "type": "minecraft:constant",
+                "value": 12023807
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:condition",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "destiny:weapon/linear_fusion_rifle/line_in_the_sand_ads_twohand"
+      },
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "destiny:weapon/linear_fusion_rifle/line_in_the_sand_ads"
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

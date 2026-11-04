@@ -1,0 +1,2371 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand",
+          "thirdperson_righthand",
+          "thirdperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": "ads",
+              "model": {
+                "type": "minecraft:range_dispatch",
+                "property": "minecraft:custom_model_data",
+                "index": 2,
+                "fallback": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds"
+                    }
+                  }
+                },
+                "entries": [
+                  {
+                    "threshold": 0,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_empty_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 1,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_loaded_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 2,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_00_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 3,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_01_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 4,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_02_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 5,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_03_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 6,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_04_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 7,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_05_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 8,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_06_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 9,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_07_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 10,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_08_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 11,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_09_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 12,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_10_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 13,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_11_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 14,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_12_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 15,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_13_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 16,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_14_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 17,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_15_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 18,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_16_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 19,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_17_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 20,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_18_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 21,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_19_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 22,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_20_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 32,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_00_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 33,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_01_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 34,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_02_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 35,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_03_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 36,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_04_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 37,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_05_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 38,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_06_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 39,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_07_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 40,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_08_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 41,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_09_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 42,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_10_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 43,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_11_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 44,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_12_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 45,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_13_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 46,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_14_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 47,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_15_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 48,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_16_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 49,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_17_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 50,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_18_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 51,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_19_ads"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 52,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_ads"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_20_ads"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "when": "inspect",
+              "model": {
+                "type": "minecraft:range_dispatch",
+                "property": "minecraft:custom_model_data",
+                "index": 2,
+                "fallback": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/bow/biting_winds_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds"
+                    }
+                  }
+                },
+                "entries": [
+                  {
+                    "threshold": 0,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_empty_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 1,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_loaded_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 2,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_00_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 3,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_01_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 4,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_02_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 5,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_03_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 6,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_04_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 7,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_05_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 8,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_06_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 9,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_07_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 10,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_08_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 11,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_09_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 12,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_10_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 13,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_11_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 14,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_12_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 15,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_13_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 16,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_14_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 17,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_15_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 18,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_16_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 19,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_17_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 20,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_18_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 21,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_19_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 22,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_draw_20_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 32,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_00_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 33,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_01_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 34,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_02_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 35,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_03_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 36,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_04_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 37,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_05_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 38,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_06_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 39,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_07_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 40,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_08_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 41,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_09_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 42,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_10_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 43,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_11_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 44,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_12_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 45,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_13_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 46,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_14_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 47,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_15_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 48,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_16_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 49,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_17_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 50,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_18_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 51,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_19_inspect"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "threshold": 52,
+                    "model": {
+                      "type": "minecraft:composite",
+                      "models": [
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_body_inspect"
+                        },
+                        {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon_bow_w50/biting_winds_nock_20_inspect"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 2,
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds_ads_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds_ads"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds_inspect_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/bow/biting_winds_inspect"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/bow/biting_winds_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/bow/biting_winds"
+                }
+              }
+            },
+            "entries": [
+              {
+                "threshold": 0,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_empty_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 1,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_loaded_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 2,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_00_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 3,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_01_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 4,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_02_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 5,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_03_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 6,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_04_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 7,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_05_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 8,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_06_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 9,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_07_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 10,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_08_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 11,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_09_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 12,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_10_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 13,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_11_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 14,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_12_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 15,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_13_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 16,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_14_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 17,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_15_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 18,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_16_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 19,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_17_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 20,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_18_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 21,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_19_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 22,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_draw_20_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 32,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_00_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 33,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_01_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 34,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_02_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 35,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_03_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 36,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_04_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 37,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_05_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 38,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_06_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 39,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_07_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 40,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_08_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 41,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_09_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 42,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_10_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 43,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_11_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 44,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_12_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 45,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_13_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 46,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_14_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 47,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_15_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 48,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_16_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 49,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_17_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 50,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_18_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 51,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_19_hip"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 52,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_body_hip"
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon_bow_w50/biting_winds_nock_20_hip"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/bow/biting_winds_ads_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/bow/biting_winds_ads"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/bow/biting_winds_inspect_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/bow/biting_winds_inspect"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/bow/biting_winds_twohand"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/bow/biting_winds"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

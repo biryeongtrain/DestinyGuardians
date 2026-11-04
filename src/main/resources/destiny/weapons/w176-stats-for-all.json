@@ -1,0 +1,198 @@
+{
+  "stage": "W176",
+  "perk": {
+    "id": "stats_for_all",
+    "hash": 1583705720,
+    "hitWindowTicks": 60,
+    "durationTicks": 200,
+    "handlingBonus": 35,
+    "reloadBonus": 35,
+    "stabilityBonus": 10,
+    "rangeBonus": 10,
+    "falloffScalar": 1.05,
+    "reloadScalar": 0.95,
+    "refresh": false
+  },
+  "policies": {
+    "statCap": 100,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "bonusInputs": "TOTALS_INCLUDE_SFA_DO_NOT_ADD_35_AGAIN",
+    "reloadScalarInput": "TOTAL_PRODUCT_INCLUDES_SFA_0_95_ONCE",
+    "handling": "W58_STOW_AT100_FLOOR_NO_EXTRA_CLAMP",
+    "ads": "W44_CLAMP_2_20_NO_COMPATIBLE_SNAPSHOT_ON_THESE_FOUR",
+    "ballistics": "W43_HIP_RANGE_PLUS10_CAP100_THEN_1_05_BOTH_ENDPOINTS_MASTER_ADS_AFTER",
+    "explosive": "RANGE_INDEPENDENT_SENTINEL_NEUTRAL_NO_TRAVEL_OR_BLAST_INVENTION",
+    "collection": "NEW_DISTINCT_TARGET_RENEWS60_DUPLICATE_NO_EXTEND_NO_COLLECTION_WHILE_ACTIVE",
+    "expiry": "INCLUSIVE_DEADLINE_EXPIRED_QUERIES_PURE",
+    "stowReload": "LOCAL_PRESERVE_DEADLINES_TIME_CONTINUES_NOT_SOURCE_PROVEN",
+    "lifecycle": "MASTER_IDENTITY_SESSIONS_ATTRIBUTION_LOCAL_POLICY"
+  },
+  "weapons": [
+    {
+      "id": "ammit_ar2",
+      "hash": 2119346509,
+      "socket": 3,
+      "perkHash": 1583705720,
+      "plugSetHash": 1723759242
+    },
+    {
+      "id": "aishas_embrace",
+      "hash": 2638190703,
+      "socket": 3,
+      "perkHash": 1583705720,
+      "plugSetHash": 7997267
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "hash": 1311684613,
+      "socket": 3,
+      "perkHash": 1583705720,
+      "plugSetHash": 3235863202
+    },
+    {
+      "id": "retrofit_escapade",
+      "hash": 3103325054,
+      "socket": 3,
+      "perkHash": 1583705720,
+      "plugSetHash": 3756086698
+    }
+  ],
+  "curves": [
+    {
+      "id": "ammit_ar2",
+      "baseReloadStat": 38,
+      "baseHandlingStat": 46,
+      "baseRangeStat": 61,
+      "ballistics": {
+        "offsetStart": 10.75,
+        "vppStart": 0.125,
+        "offsetEnd": 40.0,
+        "vppEnd": 0.0,
+        "floor": 0.5,
+        "precision": 1.5588235294117647
+      },
+      "reload": {
+        "evpp": 8.55689e-05,
+        "vpp": -0.0242021,
+        "offset": 2.80673006666667
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001875,
+        "offset": 0.38975
+      }
+    },
+    {
+      "id": "aishas_embrace",
+      "baseReloadStat": 35,
+      "baseHandlingStat": 26,
+      "baseRangeStat": 34,
+      "ballistics": {
+        "offsetStart": 30.25,
+        "vppStart": 0.1568,
+        "offsetEnd": 60.75,
+        "vppEnd": 0.0,
+        "floor": 0.5,
+        "precision": 1.696078431372549
+      },
+      "reload": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      }
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "baseReloadStat": 42,
+      "baseHandlingStat": 42,
+      "baseRangeStat": null,
+      "ballistics": {
+        "offsetStart": 999.0,
+        "vppStart": 0.0,
+        "offsetEnd": 999.9,
+        "vppEnd": 0.0,
+        "floor": 0.999,
+        "precision": 1.0
+      },
+      "reload": {
+        "evpp": 7.55233e-05,
+        "vpp": -0.0248947,
+        "offset": 4.12880153333333
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      }
+    },
+    {
+      "id": "retrofit_escapade",
+      "baseReloadStat": 67,
+      "baseHandlingStat": 56,
+      "baseRangeStat": 23,
+      "ballistics": {
+        "offsetStart": 28.5,
+        "vppStart": 0.0223,
+        "offsetEnd": 38.2,
+        "vppEnd": 0.0,
+        "floor": 0.5,
+        "precision": 1.303921568627451
+      },
+      "reload": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.002391721353,
+        "offset": 0.4950499748
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002041393236,
+        "offset": 0.4547501262
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001234477537,
+        "offset": 0.4574687027
+      }
+    }
+  ]
+}

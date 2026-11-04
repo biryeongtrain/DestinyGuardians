@@ -1,0 +1,662 @@
+{
+  "stage": "W169",
+  "perk": {
+    "id": "rapid_hit",
+    "hash": 247725512,
+    "durationTicks": 40,
+    "maxStacks": 5,
+    "mechanicsSource": "art/weapons/w169/rapid-hit/clarity-source.json",
+    "timingSource": "art/weapons/w169/rapid-hit/reload-timings.json"
+  },
+  "policies": {
+    "sourceRefreshScope": "UNKNOWN",
+    "sourceExpirationMode": "UNKNOWN",
+    "sourceStowPersistence": "UNKNOWN",
+    "sourceReloadConsumption": "UNKNOWN",
+    "sourceReloadSnapshot": "UNKNOWN",
+    "sourceCombinedReloadPerks": "UNKNOWN",
+    "hitRefresh": "WHOLE_WINDOW_40_TICKS_LOCAL_POLICY",
+    "expiration": "READ_ONLY_EXPIRE_LOCAL_POLICY",
+    "stowPersistence": "SAME_IDENTITY_CLOCK_CONTINUES_LOCAL_POLICY",
+    "reloadSnapshot": "AT_RELOAD_START_NONCONSUMING_NO_REFRESH_LOCAL_POLICY",
+    "weakenedBodyHits": "SOURCE_WEAKENED_AT_ACTUAL_IMPACT_LOCAL_MAPPING",
+    "stabilityIntegration": "MINECRAFT_CURVE_MASTER_OWNED_LOCAL_POLICY",
+    "statCap": 100,
+    "bowStatCap": 85,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "bowTiming": "HISTORICAL_W46_NOCK_ONLY_DRAW_UNCHANGED",
+    "longArmTiming": "SOURCE_INSERT_UNKNOWN_LOCAL_BASE_PHASE_RATIO"
+  },
+  "tiers": [
+    {
+      "stacks": 1,
+      "stabilityBonus": 2,
+      "reloadBonus": 5,
+      "durationMultiplier": 0.99
+    },
+    {
+      "stacks": 2,
+      "stabilityBonus": 12,
+      "reloadBonus": 30,
+      "durationMultiplier": 0.96
+    },
+    {
+      "stacks": 3,
+      "stabilityBonus": 14,
+      "reloadBonus": 35,
+      "durationMultiplier": 0.95
+    },
+    {
+      "stacks": 4,
+      "stabilityBonus": 18,
+      "reloadBonus": 42,
+      "durationMultiplier": 0.945
+    },
+    {
+      "stacks": 5,
+      "stabilityBonus": 25,
+      "reloadBonus": 60,
+      "durationMultiplier": 0.92
+    }
+  ],
+  "weapons": [
+    {
+      "id": "duke_mk_44",
+      "hash": 2112909414,
+      "socket": 2,
+      "perkHash": 247725512,
+      "plugSetHash": 3744182842
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "hash": 2723241847,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 2564227946
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 3056706286
+    },
+    {
+      "id": "allied_demand",
+      "hash": 1532276803,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 3275836355
+    },
+    {
+      "id": "lonesome",
+      "hash": 2199171672,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 3612808001
+    },
+    {
+      "id": "brass_attacks",
+      "hash": 2121785039,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 100135553
+    },
+    {
+      "id": "biting_winds",
+      "hash": 1621657423,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 3968704963
+    },
+    {
+      "id": "bite_of_the_fox",
+      "hash": 1403800851,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 563442205
+    },
+    {
+      "id": "apostate",
+      "hash": 2164448701,
+      "socket": 4,
+      "perkHash": 247725512,
+      "plugSetHash": 2826016044
+    },
+    {
+      "id": "line_in_the_sand",
+      "hash": 946443267,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 1503774254
+    },
+    {
+      "id": "stormchaser",
+      "hash": 3652506829,
+      "socket": 3,
+      "perkHash": 247725512,
+      "plugSetHash": 897699284
+    }
+  ],
+  "curves": [
+    {
+      "id": "duke_mk_44",
+      "evpp": 6.137590643e-05,
+      "vpp": -0.02385522011,
+      "offset": 3.600042253,
+      "statCap": 100
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "evpp": 0.000102915,
+      "vpp": -0.0276889,
+      "offset": 3.11797356666666,
+      "statCap": 100
+    },
+    {
+      "id": "long_arm",
+      "evpp": 0.000102915,
+      "vpp": -0.0276889,
+      "offset": 3.11797356666666,
+      "statCap": 100
+    },
+    {
+      "id": "allied_demand",
+      "evpp": 2.38311e-05,
+      "vpp": -0.0124553,
+      "offset": 2.14667245,
+      "statCap": 100
+    },
+    {
+      "id": "lonesome",
+      "evpp": 2.38311e-05,
+      "vpp": -0.0124553,
+      "offset": 2.14667245,
+      "statCap": 100
+    },
+    {
+      "id": "brass_attacks",
+      "evpp": 2.38311e-05,
+      "vpp": -0.0124553,
+      "offset": 2.14667245,
+      "statCap": 100
+    },
+    {
+      "id": "biting_winds",
+      "evpp": 5.35476056419958e-05,
+      "vpp": -0.0102410419405799,
+      "offset": 1.10091136388022,
+      "statCap": 85
+    },
+    {
+      "id": "bite_of_the_fox",
+      "evpp": 6.74498e-05,
+      "vpp": -0.0231542,
+      "offset": 3.8384,
+      "statCap": 100
+    },
+    {
+      "id": "apostate",
+      "evpp": 6.74498e-05,
+      "vpp": -0.0231542,
+      "offset": 3.8384,
+      "statCap": 100
+    },
+    {
+      "id": "line_in_the_sand",
+      "evpp": 5.88462e-05,
+      "vpp": -0.0199884,
+      "offset": 2.87206463333,
+      "statCap": 100
+    },
+    {
+      "id": "stormchaser",
+      "evpp": 5.88462e-05,
+      "vpp": -0.0199884,
+      "offset": 2.87206463333,
+      "statCap": 100
+    }
+  ],
+  "reloads": [
+    {
+      "id": "duke_mk_44",
+      "stacks": 1,
+      "firstTicks": 57,
+      "intervalTicks": 57,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 35
+    },
+    {
+      "id": "duke_mk_44",
+      "stacks": 2,
+      "firstTicks": 46,
+      "intervalTicks": 46,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 60
+    },
+    {
+      "id": "duke_mk_44",
+      "stacks": 3,
+      "firstTicks": 44,
+      "intervalTicks": 44,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 65
+    },
+    {
+      "id": "duke_mk_44",
+      "stacks": 4,
+      "firstTicks": 42,
+      "intervalTicks": 42,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 72
+    },
+    {
+      "id": "duke_mk_44",
+      "stacks": 5,
+      "firstTicks": 36,
+      "intervalTicks": 36,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 90
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "stacks": 1,
+      "firstTicks": 37,
+      "intervalTicks": 37,
+      "baseReloadStat": 53,
+      "effectiveReloadStat": 58
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "stacks": 2,
+      "firstTicks": 30,
+      "intervalTicks": 30,
+      "baseReloadStat": 53,
+      "effectiveReloadStat": 83
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "stacks": 3,
+      "firstTicks": 29,
+      "intervalTicks": 29,
+      "baseReloadStat": 53,
+      "effectiveReloadStat": 88
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "stacks": 4,
+      "firstTicks": 27,
+      "intervalTicks": 27,
+      "baseReloadStat": 53,
+      "effectiveReloadStat": 95
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "stacks": 5,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 53,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "long_arm",
+      "stacks": 1,
+      "firstTicks": 40,
+      "intervalTicks": 40,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 50
+    },
+    {
+      "id": "long_arm",
+      "stacks": 2,
+      "firstTicks": 32,
+      "intervalTicks": 32,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 75
+    },
+    {
+      "id": "long_arm",
+      "stacks": 3,
+      "firstTicks": 30,
+      "intervalTicks": 30,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 80
+    },
+    {
+      "id": "long_arm",
+      "stacks": 4,
+      "firstTicks": 29,
+      "intervalTicks": 29,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 87
+    },
+    {
+      "id": "long_arm",
+      "stacks": 5,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 45,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "allied_demand",
+      "stacks": 1,
+      "firstTicks": 35,
+      "intervalTicks": 35,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 35
+    },
+    {
+      "id": "allied_demand",
+      "stacks": 2,
+      "firstTicks": 29,
+      "intervalTicks": 29,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 60
+    },
+    {
+      "id": "allied_demand",
+      "stacks": 3,
+      "firstTicks": 28,
+      "intervalTicks": 28,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 65
+    },
+    {
+      "id": "allied_demand",
+      "stacks": 4,
+      "firstTicks": 26,
+      "intervalTicks": 26,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 72
+    },
+    {
+      "id": "allied_demand",
+      "stacks": 5,
+      "firstTicks": 23,
+      "intervalTicks": 23,
+      "baseReloadStat": 30,
+      "effectiveReloadStat": 90
+    },
+    {
+      "id": "lonesome",
+      "stacks": 1,
+      "firstTicks": 37,
+      "intervalTicks": 37,
+      "baseReloadStat": 21,
+      "effectiveReloadStat": 26
+    },
+    {
+      "id": "lonesome",
+      "stacks": 2,
+      "firstTicks": 31,
+      "intervalTicks": 31,
+      "baseReloadStat": 21,
+      "effectiveReloadStat": 51
+    },
+    {
+      "id": "lonesome",
+      "stacks": 3,
+      "firstTicks": 29,
+      "intervalTicks": 29,
+      "baseReloadStat": 21,
+      "effectiveReloadStat": 56
+    },
+    {
+      "id": "lonesome",
+      "stacks": 4,
+      "firstTicks": 28,
+      "intervalTicks": 28,
+      "baseReloadStat": 21,
+      "effectiveReloadStat": 63
+    },
+    {
+      "id": "lonesome",
+      "stacks": 5,
+      "firstTicks": 24,
+      "intervalTicks": 24,
+      "baseReloadStat": 21,
+      "effectiveReloadStat": 81
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 1,
+      "firstTicks": 36,
+      "intervalTicks": 36,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 32
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 2,
+      "firstTicks": 30,
+      "intervalTicks": 30,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 57
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 3,
+      "firstTicks": 28,
+      "intervalTicks": 28,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 62
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 4,
+      "firstTicks": 27,
+      "intervalTicks": 27,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 69
+    },
+    {
+      "id": "brass_attacks",
+      "stacks": 5,
+      "firstTicks": 23,
+      "intervalTicks": 23,
+      "baseReloadStat": 27,
+      "effectiveReloadStat": 87
+    },
+    {
+      "id": "biting_winds",
+      "stacks": 1,
+      "firstTicks": 15,
+      "intervalTicks": 15,
+      "baseReloadStat": 40,
+      "effectiveReloadStat": 45
+    },
+    {
+      "id": "biting_winds",
+      "stacks": 2,
+      "firstTicks": 13,
+      "intervalTicks": 13,
+      "baseReloadStat": 40,
+      "effectiveReloadStat": 70
+    },
+    {
+      "id": "biting_winds",
+      "stacks": 3,
+      "firstTicks": 13,
+      "intervalTicks": 13,
+      "baseReloadStat": 40,
+      "effectiveReloadStat": 75
+    },
+    {
+      "id": "biting_winds",
+      "stacks": 4,
+      "firstTicks": 12,
+      "intervalTicks": 12,
+      "baseReloadStat": 40,
+      "effectiveReloadStat": 82
+    },
+    {
+      "id": "biting_winds",
+      "stacks": 5,
+      "firstTicks": 12,
+      "intervalTicks": 12,
+      "baseReloadStat": 40,
+      "effectiveReloadStat": 85
+    },
+    {
+      "id": "bite_of_the_fox",
+      "stacks": 1,
+      "firstTicks": 64,
+      "intervalTicks": 64,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 30
+    },
+    {
+      "id": "bite_of_the_fox",
+      "stacks": 2,
+      "firstTicks": 54,
+      "intervalTicks": 54,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 55
+    },
+    {
+      "id": "bite_of_the_fox",
+      "stacks": 3,
+      "firstTicks": 52,
+      "intervalTicks": 52,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 60
+    },
+    {
+      "id": "bite_of_the_fox",
+      "stacks": 4,
+      "firstTicks": 49,
+      "intervalTicks": 49,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 67
+    },
+    {
+      "id": "bite_of_the_fox",
+      "stacks": 5,
+      "firstTicks": 44,
+      "intervalTicks": 44,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 85
+    },
+    {
+      "id": "apostate",
+      "stacks": 1,
+      "firstTicks": 52,
+      "intervalTicks": 52,
+      "baseReloadStat": 61,
+      "effectiveReloadStat": 66
+    },
+    {
+      "id": "apostate",
+      "stacks": 2,
+      "firstTicks": 44,
+      "intervalTicks": 44,
+      "baseReloadStat": 61,
+      "effectiveReloadStat": 91
+    },
+    {
+      "id": "apostate",
+      "stacks": 3,
+      "firstTicks": 43,
+      "intervalTicks": 43,
+      "baseReloadStat": 61,
+      "effectiveReloadStat": 96
+    },
+    {
+      "id": "apostate",
+      "stacks": 4,
+      "firstTicks": 42,
+      "intervalTicks": 42,
+      "baseReloadStat": 61,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "apostate",
+      "stacks": 5,
+      "firstTicks": 41,
+      "intervalTicks": 41,
+      "baseReloadStat": 61,
+      "effectiveReloadStat": 100
+    },
+    {
+      "id": "line_in_the_sand",
+      "stacks": 1,
+      "firstTicks": 47,
+      "intervalTicks": 47,
+      "baseReloadStat": 23,
+      "effectiveReloadStat": 28
+    },
+    {
+      "id": "line_in_the_sand",
+      "stacks": 2,
+      "firstTicks": 38,
+      "intervalTicks": 38,
+      "baseReloadStat": 23,
+      "effectiveReloadStat": 53
+    },
+    {
+      "id": "line_in_the_sand",
+      "stacks": 3,
+      "firstTicks": 37,
+      "intervalTicks": 37,
+      "baseReloadStat": 23,
+      "effectiveReloadStat": 58
+    },
+    {
+      "id": "line_in_the_sand",
+      "stacks": 4,
+      "firstTicks": 35,
+      "intervalTicks": 35,
+      "baseReloadStat": 23,
+      "effectiveReloadStat": 65
+    },
+    {
+      "id": "line_in_the_sand",
+      "stacks": 5,
+      "firstTicks": 30,
+      "intervalTicks": 30,
+      "baseReloadStat": 23,
+      "effectiveReloadStat": 83
+    },
+    {
+      "id": "stormchaser",
+      "stacks": 1,
+      "firstTicks": 47,
+      "intervalTicks": 47,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 30
+    },
+    {
+      "id": "stormchaser",
+      "stacks": 2,
+      "firstTicks": 38,
+      "intervalTicks": 38,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 55
+    },
+    {
+      "id": "stormchaser",
+      "stacks": 3,
+      "firstTicks": 36,
+      "intervalTicks": 36,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 60
+    },
+    {
+      "id": "stormchaser",
+      "stacks": 4,
+      "firstTicks": 34,
+      "intervalTicks": 34,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 67
+    },
+    {
+      "id": "stormchaser",
+      "stacks": 5,
+      "firstTicks": 30,
+      "intervalTicks": 30,
+      "baseReloadStat": 25,
+      "effectiveReloadStat": 85
+    }
+  ]
+}

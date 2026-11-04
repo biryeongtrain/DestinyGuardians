@@ -1,0 +1,692 @@
+{
+  "stage": "W178",
+  "perk": {
+    "id": "threat_detector",
+    "hash": 4071163871,
+    "radius": 15.0,
+    "stabilityBonus": [
+      0,
+      15,
+      40
+    ],
+    "reloadBonus": [
+      0,
+      18,
+      60
+    ],
+    "handlingBonus": [
+      0,
+      25,
+      100
+    ],
+    "handlingScalar": [
+      1.0,
+      0.9,
+      0.81
+    ]
+  },
+  "policies": {
+    "radius": "LOCAL_INCLUSIVE_FINITE_EUCLIDEAN_FOOTPOINT_SPHERE_ONE_BLOCK_PER_METRE",
+    "enemies": "LOCAL_PROJECT_COMBAT_ENEMY_MOB_OR_ENEMY_EXCLUDE_PLAYERS_ARMORSTANDS_ALLIES_TAMED_DEAD_REMOVED_SPECTATORS",
+    "visibility": "NO_WALL_TEST_SOURCE_UNSPECIFIED",
+    "activation": "HELD_EXACT_ORIGINAL_LAST_UPDATE_SAMPLE_NO_LINGER_NO_TIMER_RESCAN_SAME_TICK",
+    "identity": "OWNER_LEVEL_GUARDIAN_DATA_RUNTIME_CLASS_CANONICAL_ENTRY_EXACT_ROLL_STACK_IDENTITY",
+    "timing": "SUM_STATS_CAP_0_100_RAW_CURVES_SCALE_THEN_CEIL_ONCE",
+    "handling": "READY_AND_STOW_ONLY_SCALAR_STOW_AT100_FLOOR_BEFORE_SCALAR",
+    "ads": "NO_THREAT_SCALAR_SNAPSHOT_ENTRY_ONLY_PRIMARY_0_5_SPECIAL_0_8",
+    "reload": "NO_THREAT_SCALAR_PRESERVE_DISTINCT_SHELL_PHASES_ACCEPTED_PLAN_IMMUTABLE",
+    "combination": "LOCAL_SUM_COMPATIBLE_STATS_MULTIPLY_SOURCED_SCALARS_BEFORE_QUANTIZATION",
+    "damageRange": "UNCHANGED",
+    "historical": "D2FOUNDRY_ORACLE_DCD0C7D302B056FFBB532EDCB711D724A17CA8C1_NOT_CURRENT_SANDBOX_MEASUREMENT"
+  },
+  "weapons": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "hash": 3037520408,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 903350103
+    },
+    {
+      "id": "cold_denial",
+      "hash": 1216130969,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 330841869
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "hash": 1280933460,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 206409262
+    },
+    {
+      "id": "bug_out_bag",
+      "hash": 2744715540,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 907333373
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "hash": 3751622019,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 3268663985
+    },
+    {
+      "id": "high_albedo",
+      "hash": 1197486957,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 2797218184
+    },
+    {
+      "id": "brass_attacks",
+      "hash": 2121785039,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 100135553
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "hash": 912150785,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 1732284294
+    },
+    {
+      "id": "dust_rock_blues",
+      "hash": 636912560,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 3511609070
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "hash": 2217366863,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 2514419370
+    },
+    {
+      "id": "dream_breaker",
+      "hash": 2931957300,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 3785896921
+    },
+    {
+      "id": "line_in_the_sand",
+      "hash": 946443267,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 1503774254
+    },
+    {
+      "id": "deafening_whisper",
+      "hash": 981718087,
+      "socket": 4,
+      "perkHash": 4071163871,
+      "plugSetHash": 3588287812
+    },
+    {
+      "id": "edge_transit",
+      "hash": 218335759,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 447678063
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "hash": 1311684613,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 3235863202
+    },
+    {
+      "id": "bellowing_giant",
+      "hash": 2186258845,
+      "socket": 4,
+      "perkHash": 4071163871,
+      "plugSetHash": 1722393382
+    },
+    {
+      "id": "hammerhead",
+      "hash": 603242241,
+      "socket": 3,
+      "perkHash": 4071163871,
+      "plugSetHash": 2515290473
+    }
+  ],
+  "curves": [
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "baseReloadStat": 49,
+      "baseHandlingStat": 30,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 6.137590643e-05,
+        "vpp": -0.02385522011,
+        "offset": 3.600042253
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.002942857143,
+        "offset": 0.4782571429
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002952380952,
+        "offset": 0.5133809524
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001666666667,
+        "offset": 0.3316666667
+      }
+    },
+    {
+      "id": "cold_denial",
+      "baseReloadStat": 34,
+      "baseHandlingStat": 24,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00312085,
+        "offset": 0.54370932
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.0035545,
+        "offset": 0.55005845
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00196208,
+        "offset": 0.4574687
+      }
+    },
+    {
+      "id": "claws_of_the_wolf",
+      "baseReloadStat": 27,
+      "baseHandlingStat": 21,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 9.26208e-05,
+        "vpp": -0.0256877,
+        "offset": 2.92627266666667
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00312085,
+        "offset": 0.54370932
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.0035545,
+        "offset": 0.55005845
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00196208,
+        "offset": 0.4574687
+      }
+    },
+    {
+      "id": "bug_out_bag",
+      "baseReloadStat": 47,
+      "baseHandlingStat": 47,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 6.08642e-05,
+        "vpp": -0.0191345,
+        "offset": 2.62769
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.002376970528,
+        "offset": 0.4710178204
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002547978067,
+        "offset": 0.4481295408
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001873200822,
+        "offset": 0.3581576422
+      }
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "baseReloadStat": 34,
+      "baseHandlingStat": 49,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      }
+    },
+    {
+      "id": "high_albedo",
+      "baseReloadStat": 30,
+      "baseHandlingStat": 51,
+      "shellReload": false,
+      "snapshotScalar": 0.5,
+      "reload": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      }
+    },
+    {
+      "id": "brass_attacks",
+      "baseReloadStat": 27,
+      "baseHandlingStat": 36,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      }
+    },
+    {
+      "id": "mindbender_s_ambition_adept",
+      "baseReloadStat": 39,
+      "baseHandlingStat": 31,
+      "shellReload": true,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      }
+    },
+    {
+      "id": "dust_rock_blues",
+      "baseReloadStat": 41,
+      "baseHandlingStat": 34,
+      "shellReload": true,
+      "snapshotScalar": 0.8,
+      "reload": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      }
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "baseReloadStat": 56,
+      "baseHandlingStat": 68,
+      "shellReload": true,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 6.40462e-05,
+        "vpp": -0.0141721,
+        "offset": 1.25061
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.003271255061,
+        "offset": 0.5388744939
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.003388663968,
+        "offset": 0.5711336032
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00233805668,
+        "offset": 0.451194332
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "baseReloadStat": 30,
+      "baseHandlingStat": 27,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      }
+    },
+    {
+      "id": "line_in_the_sand",
+      "baseReloadStat": 23,
+      "baseHandlingStat": 26,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 5.88462e-05,
+        "vpp": -0.0199884,
+        "offset": 2.87206463333
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      }
+    },
+    {
+      "id": "deafening_whisper",
+      "baseReloadStat": 70,
+      "baseHandlingStat": 72,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 7.24199e-05,
+        "vpp": -0.0216432,
+        "offset": 3.24104606666667
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      }
+    },
+    {
+      "id": "edge_transit",
+      "baseReloadStat": 39,
+      "baseHandlingStat": 42,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 7.55233e-05,
+        "vpp": -0.0248947,
+        "offset": 4.12880153333333
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      }
+    },
+    {
+      "id": "dimensional_hypotrochoid",
+      "baseReloadStat": 42,
+      "baseHandlingStat": 42,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 7.55233e-05,
+        "vpp": -0.0248947,
+        "offset": 4.12880153333333
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      }
+    },
+    {
+      "id": "bellowing_giant",
+      "baseReloadStat": 45,
+      "baseHandlingStat": 44,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 0.000103959,
+        "vpp": -0.0252069,
+        "offset": 4.09182213333333
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.003998740554,
+        "offset": 0.6635944584
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.003296509536,
+        "offset": 0.5463332134
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.002139258726,
+        "offset": 0.528984167
+      }
+    },
+    {
+      "id": "hammerhead",
+      "baseReloadStat": 64,
+      "baseHandlingStat": 50,
+      "shellReload": false,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.002391721353,
+        "offset": 0.4950499748
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.002041393236,
+        "offset": 0.4547501262
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.001234477537,
+        "offset": 0.4574687027
+      }
+    }
+  ],
+  "coSelections": [
+    {
+      "id": "high_albedo",
+      "perk": "snapshot",
+      "roll": {
+        "id": "high_albedo",
+        "hash": 1197486957,
+        "socket": 4,
+        "perkHash": 957782887,
+        "plugSetHash": 718633408
+      }
+    },
+    {
+      "id": "dust_rock_blues",
+      "perk": "snapshot",
+      "roll": {
+        "id": "dust_rock_blues",
+        "hash": 636912560,
+        "socket": 4,
+        "perkHash": 957782887,
+        "plugSetHash": 1624251370
+      }
+    },
+    {
+      "id": "brass_attacks",
+      "perk": "frenzy",
+      "roll": {
+        "id": "brass_attacks",
+        "hash": 2121785039,
+        "socket": 4,
+        "perkHash": 4104185692,
+        "plugSetHash": 3403850295
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "perk": "frenzy",
+      "roll": {
+        "id": "dream_breaker",
+        "hash": 2931957300,
+        "socket": 4,
+        "perkHash": 4104185692,
+        "plugSetHash": 1206254527
+      }
+    },
+    {
+      "id": "parcel_of_stardust_fell_to_earth",
+      "perk": "outlaw",
+      "roll": {
+        "id": "parcel_of_stardust_fell_to_earth",
+        "hash": 2217366863,
+        "socket": 4,
+        "perkHash": 1168162263,
+        "plugSetHash": 3424940310
+      }
+    },
+    {
+      "id": "seventh_seraph_officer_revolver",
+      "perk": "feeding_frenzy",
+      "roll": {
+        "id": "seventh_seraph_officer_revolver",
+        "hash": 3037520408,
+        "socket": 4,
+        "perkHash": 2779035018,
+        "plugSetHash": 3527094473
+      }
+    }
+  ]
+}

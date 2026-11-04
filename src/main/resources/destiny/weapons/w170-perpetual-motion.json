@@ -1,0 +1,135 @@
+{
+  "stage": "W170",
+  "perk": {
+    "id": "perpetual_motion",
+    "hash": 1428297954,
+    "minSpeed": 2.0,
+    "firstStackTicks": 40,
+    "secondStackTicks": 200,
+    "stopGraceTicks": 10,
+    "maxStacks": 2,
+    "worksStowed": true
+  },
+  "policies": {
+    "statCap": 100,
+    "durationMultiplier": 1.0,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "adsBounds": "CLAMP_TICKS_2_20_W44",
+    "handlingBounds": "W58_NO_EXTRA_TICK_CLAMP_STOW_AT_100_FLOOR",
+    "sourceMovementSampling": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "sourceDiscontinuities": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "sourceBriefPauseProgress": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "sourceCombinedPerks": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "stabilityIntegration": "MINECRAFT_CURVE_MASTER_OWNED_LOCAL_POLICY"
+  },
+  "weapons": [
+    {
+      "id": "aishas_embrace",
+      "hash": 2638190703,
+      "socket": 3,
+      "perkHash": 1428297954,
+      "plugSetHash": 7997267
+    },
+    {
+      "id": "retraced_path",
+      "hash": 548958835,
+      "socket": 3,
+      "perkHash": 1428297954,
+      "plugSetHash": 2945646047
+    }
+  ],
+  "curves": [
+    {
+      "id": "aishas_embrace",
+      "baseReloadStat": 35,
+      "baseHandlingStat": 26,
+      "baseStabilityStat": 46,
+      "reload": {
+        "evpp": 0.000102915,
+        "vpp": -0.0276889,
+        "offset": 3.11797356666666
+      },
+      "ready": {
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stow": {
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "ads": {
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      }
+    },
+    {
+      "id": "retraced_path",
+      "baseReloadStat": 45,
+      "baseHandlingStat": 46,
+      "baseStabilityStat": 75,
+      "reload": {
+        "evpp": 5e-05,
+        "vpp": -0.0155,
+        "offset": 2.65
+      },
+      "ready": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stow": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "ads": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      }
+    }
+  ],
+  "timings": [
+    {
+      "id": "aishas_embrace",
+      "stacks": 1,
+      "reloadTicks": 42,
+      "readyTicks": 9,
+      "stowTicks": 9,
+      "adsTicks": 8,
+      "stabilityBonus": 10,
+      "handlingBonus": 10,
+      "reloadBonus": 10
+    },
+    {
+      "id": "aishas_embrace",
+      "stacks": 2,
+      "reloadTicks": 39,
+      "readyTicks": 9,
+      "stowTicks": 8,
+      "adsTicks": 7,
+      "stabilityBonus": 20,
+      "handlingBonus": 20,
+      "reloadBonus": 20
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 1,
+      "reloadTicks": 39,
+      "readyTicks": 8,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "stabilityBonus": 10,
+      "handlingBonus": 10,
+      "reloadBonus": 10
+    },
+    {
+      "id": "retraced_path",
+      "stacks": 2,
+      "reloadTicks": 38,
+      "readyTicks": 7,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "stabilityBonus": 20,
+      "handlingBonus": 20,
+      "reloadBonus": 20
+    }
+  ]
+}

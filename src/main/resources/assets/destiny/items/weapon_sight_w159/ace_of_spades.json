@@ -1,0 +1,549 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": "inspect",
+              "model": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:item/weapon/ace_of_spades_inspect"
+                },
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:item/weapon/ace_of_spades_inspect_twohand"
+                }
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 3,
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_00_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_00_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.05,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_01_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_01_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.1,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_02_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_02_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.15,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_03_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_03_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.2,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_04_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_04_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_05_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_05_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.3,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_06_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_06_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.35,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_07_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_07_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.4,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_08_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_08_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.45,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_09_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_09_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_10_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_10_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.55,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_11_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_11_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.6,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_12_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_12_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.65,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_13_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_13_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.7,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_14_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_14_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_15_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_15_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.8,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_16_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_16_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.85,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_17_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_17_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.9,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_18_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_18_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 0.95,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_19_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_19_twohand"
+                  }
+                }
+              },
+              {
+                "threshold": 1.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_20_native"
+                  },
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_sight_w159/ace_of_spades_20_twohand"
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "hip",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades"
+                    },
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades_twohand"
+                    }
+                  }
+                },
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades_ads"
+                    },
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades_ads_twohand"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades_inspect"
+                    },
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades_inspect_twohand"
+                    }
+                  }
+                },
+                {
+                  "when": "scope",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades_scope"
+                    },
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:item/weapon/ace_of_spades_scope_twohand"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:item/weapon/ace_of_spades"
+                },
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:item/weapon/ace_of_spades_twohand"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "hip",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades"
+            },
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades_twohand"
+            }
+          }
+        },
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades_ads"
+            },
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades_ads_twohand"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades_inspect"
+            },
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades_inspect_twohand"
+            }
+          }
+        },
+        {
+          "when": "scope",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades_scope"
+            },
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:item/weapon/ace_of_spades_scope_twohand"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:item/weapon/ace_of_spades"
+        },
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:item/weapon/ace_of_spades_twohand"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

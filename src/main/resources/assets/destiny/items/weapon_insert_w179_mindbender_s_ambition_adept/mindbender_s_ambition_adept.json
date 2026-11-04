@@ -1,0 +1,2385 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": "ads",
+              "model": {
+                "type": "minecraft:select",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "cases": [
+                  {
+                    "when": "ads",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads"
+                      }
+                    }
+                  },
+                  {
+                    "when": "inspect",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect"
+                      }
+                    }
+                  }
+                ],
+                "fallback": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_twohand"
+                  },
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept"
+                  }
+                }
+              }
+            },
+            {
+              "when": "inspect",
+              "model": {
+                "type": "minecraft:select",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "cases": [
+                  {
+                    "when": "ads",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads"
+                      }
+                    }
+                  },
+                  {
+                    "when": "inspect",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect"
+                      }
+                    }
+                  }
+                ],
+                "fallback": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_twohand"
+                  },
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept"
+                  }
+                }
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 4,
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_00_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_00_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_00_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_00_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.05,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_01_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_01_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.1,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_02_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_02_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.15,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_03_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_03_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.2,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_04_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_04_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_05_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_05_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_06_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_06_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.35,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_07_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_07_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_08_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_08_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.45,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_09_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_09_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_10_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_10_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.55,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_11_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_11_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_12_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_12_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.65,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_13_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_13_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_14_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_14_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_15_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_15_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_16_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_16_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.85,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_17_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_17_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_18_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_18_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.95,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_19_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_19_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 1.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_20_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_initial_20_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_00_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_00_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_00_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_00_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.05,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_01_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_01_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.1,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_02_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_02_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.15,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_03_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_03_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.2,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_04_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_04_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_05_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_05_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.3,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_06_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_06_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.35,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_07_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_07_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.4,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_08_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_08_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.45,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_09_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_09_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_10_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_10_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.55,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_11_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_11_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.6,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_12_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_12_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.65,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_13_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_13_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.7,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_14_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_14_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_15_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_15_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.8,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_16_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_16_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.85,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_17_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_17_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.9,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_18_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_18_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 2.95,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_19_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_19_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 3.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_20_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_loop_20_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_00_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_00_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_00_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_00_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.05,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_01_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_01_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.1,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_02_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_02_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.15,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_03_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_03_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.2,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_04_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_04_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_05_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_05_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.3,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_06_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_06_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.35,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_07_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_07_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.4,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_08_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_08_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.45,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_09_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_09_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_10_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_10_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.55,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_11_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_11_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.6,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_12_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_12_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.65,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_13_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_13_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.7,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_14_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_14_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_15_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_15_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.8,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_16_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_16_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.85,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_17_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_17_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.9,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_18_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_18_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 4.95,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_19_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_19_shell_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 5.0,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_20_shell_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_insert_w179_mindbender_s_ambition_adept/mindbender_s_ambition_adept_return_20_shell_native"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_ads"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_inspect"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept_twohand"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/shotgun/mindbender_s_ambition_adept"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

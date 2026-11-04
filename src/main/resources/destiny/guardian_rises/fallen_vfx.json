@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "source": "Rising-Guardian-Fallen-AV-2026-11-01 (Charm 3.5.0, Steam build 25932352)",
+  "note": "Texture first-surface port; colour via custom_model_data tint; D2 shader/HDR not reproduced.",
+  "sprites": {
+    "glow": {
+      "texture": "80D8A448",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80CEA1D8@80CEA1DB",
+        "80A6DB04@80A6DB1C",
+        "80A5ABFB@80A5AC46",
+        "80A5AFC8@80A5AFDB"
+      ],
+      "role": "soft light: shock-pistol light flash, shrapnel glow, Walker EMP flash, weakpoint bright_flash",
+      "cell": null,
+      "source_sha256": "eb8f98c85b098d9501c43835b9aab4089a00a9025fecad2934e362bffe57d493",
+      "output_sha256": "b491310638651c955dba22001926439751f6baa17da6cc81aabb572a065f7cba"
+    },
+    "energy_ring": {
+      "texture": "80D8D777",
+      "shape": "quad",
+      "size": 128,
+      "particles": [
+        "80CEA1BE@80CEA1DB",
+        "80A5A2B8@80A5A2D7 (ring)"
+      ],
+      "role": "shock-pistol muzzle burst; Walker cannon muzzle ring; shield pop",
+      "cell": null,
+      "source_sha256": "aa07d271e44e63912ff9d3037cecb30fe8ae6ca820bd4338668089f3c6cc0d87",
+      "output_sha256": "0917ca73930ecd23fbafcf275fec602377be5f009cac7cf1e1451d2f6711cf25"
+    },
+    "flash_star": {
+      "texture": "80D8A430",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80CEA676@80CEA54B (flash_round)"
+      ],
+      "role": "wire-rifle round flash",
+      "cell": null,
+      "source_sha256": "105e2ff73f716bf610184e5709770ae6d8188a27c2b78180258a83200e3f04e1",
+      "output_sha256": "515ce586cbb187d37ca02698e61fa292d4f0e52e7cda71c2d856bb52e462b62f"
+    },
+    "flash_jet": {
+      "texture": "80D899BF",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80CEA693@80CEA54B (flash_long)"
+      ],
+      "role": "wire-rifle long flash",
+      "cell": null,
+      "source_sha256": "e7ea30290f2b4ce11d77569bb3b18ae48b404116a4b5f5f2277cdf172469b81b",
+      "output_sha256": "1bc6b63861cef3f373c664631146faeb4a6ab72e3b3dd10cf9ab253a9b270f9c"
+    },
+    "burst_star": {
+      "texture": "80D8A2AB",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80CEA681@80CEA54B"
+      ],
+      "role": "wire-rifle secondary burst; reused for bolt impacts (the impact sequences 80A6DB53/80CEA00A carry sounds only)",
+      "cell": null,
+      "source_sha256": "53408865dd808fc04a900d232b433667890fa9fdb139252e07801d2aa94d63d4",
+      "output_sha256": "46856b023f3fdd95bd08955beab97940410fd76f9bb1e0a8f963783f14f123fe"
+    },
+    "shrap_round": {
+      "texture": "80D89B5C",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80A6DAED@80A6DB1C (flash_round)"
+      ],
+      "role": "shrapnel launcher round flash",
+      "cell": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "source_sha256": "edcb8e03e9d4edb080d690b0363e14e17684c474dabfb51a8ea63dfdc35fe0c8",
+      "output_sha256": "ccab3082e57c2c0a23b8613ca6c60f3f0887ba533cd3c46920c50dba81127b8b"
+    },
+    "shrap_long": {
+      "texture": "80D89DF5",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80A6DAF1@80A6DB1C (flash_long)"
+      ],
+      "role": "shrapnel launcher long flash",
+      "cell": [
+        1,
+        3,
+        0,
+        1
+      ],
+      "source_sha256": "e817f262b0e73faa9c5e53ed1bdbd8b83a7f32f86e64eb9985fadd324e86a59e",
+      "output_sha256": "0d90d6c8f8694dc73d18172c2b183de6225ec6944d38878303c8b0f23b7e79a7"
+    },
+    "cannon_jet": {
+      "texture": "80D8A0AD",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80A5A2C4@80A5A2D7 (flash_long)"
+      ],
+      "role": "Walker cannon long flash",
+      "cell": [
+        1,
+        3,
+        0,
+        1
+      ],
+      "source_sha256": "70a25199fce455c571f648e15e34c5f5d876c99c8954cca98d36a76d236ed151",
+      "output_sha256": "f2066c25bc70413de82224ec246704479b5f4fc94ee4ec353e2727794c32aeb9"
+    },
+    "fire_puffs": {
+      "texture": "80D8A3E4",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80A6DAFF@80A6DB1C (fireball)",
+        "80A5A261@80A5A26D (fireball)"
+      ],
+      "role": "explosion fireball body (one of the fireball material's textures)",
+      "cell": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "source_sha256": "be7ef7dc80c21b16ec2c59b543be1c04460e87f39278a414617c3a2e75425f1a",
+      "output_sha256": "6e0dd5f549d40c35462faa0a4eda310fc45a7ca1876b567757fbc1d0d69d7106"
+    },
+    "smoke": {
+      "texture": "80D8A3E7",
+      "shape": "quad",
+      "size": 64,
+      "particles": [
+        "80A5A268@80A5A26D (smoke)",
+        "80D92741@80D9274A (smoke_plume)"
+      ],
+      "role": "explosion smoke",
+      "cell": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "source_sha256": "d3ad752d5b59573ccda53bbd09685a7655b75988a545f0b5e1fed196e3a0bc76",
+      "output_sha256": "5a64fbe39932cd716803111108e7070f8f823df64609281998dc2c449bc82f47"
+    },
+    "emp_arcs": {
+      "texture": "80D8A3AB",
+      "shape": "quad",
+      "size": 128,
+      "particles": [
+        "80A5AC02/80A5AC22/80A5AC2D/80A5AC45@80A5AC46"
+      ],
+      "role": "Walker EMP lightning",
+      "cell": null,
+      "source_sha256": "0c0eb028d10ca9f02d36decb63639f956064b9fd6190223a451ee0d0140b560f",
+      "output_sha256": "3c707504b11b09472d90cb3d73a8cf2f5221cec1044f039f79c4e11b19cb055d"
+    },
+    "contrail": {
+      "texture": "80D8A384",
+      "shape": "beam",
+      "size": 64,
+      "particles": [
+        "80CEA182@80CEA22C (contrail)"
+      ],
+      "role": "bolt contrail",
+      "cell": null,
+      "source_sha256": "073ab25137ede1e335dc3cb156040489082a9e11a3587e9db2d098d6853a1136",
+      "output_sha256": "5bad93e959f2cd4858c4acbb1d5cd42405eae17261190b780f80013e15acb198"
+    },
+    "bolt_core": {
+      "texture": "80D8D7D0",
+      "shape": "beam",
+      "size": 32,
+      "particles": [
+        "80CEA193@80CEA22C"
+      ],
+      "role": "bolt body",
+      "cell": null,
+      "source_sha256": "eb1ba55c0d1ad4a1e89a1e69b4e01f0936746945b6618fe18a65ca8879c4b6cc",
+      "output_sha256": "cbf8170c11c241dd55d1c92fc31d9cb2e459a39d846abe23252ac2c014669a44"
+    }
+  }
+}

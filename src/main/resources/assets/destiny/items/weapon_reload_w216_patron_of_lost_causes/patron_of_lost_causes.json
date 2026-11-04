@@ -1,0 +1,2281 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": "ads",
+              "model": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads"
+                }
+              }
+            },
+            {
+              "when": "inspect",
+              "model": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect"
+                }
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 1,
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes"
+                    }
+                  }
+                }
+              },
+              {
+                "threshold": 0.01666666753590107,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_01_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.03333333507180214,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_02_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.05000000074505806,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_03_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.06666667014360428,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_04_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.0833333358168602,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_05_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.10000000149011612,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_06_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.11666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_07_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.13333334028720856,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_08_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.15000000596046448,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_09_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.1666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_10_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.18333333730697632,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_11_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.20000000298023224,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_12_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.21666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_13_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.23333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_14_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_15_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.2666666805744171,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_16_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.28333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_17_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.30000001192092896,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_18_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_19_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_20_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3499999940395355,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_21_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.36666667461395264,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_22_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.38333332538604736,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_23_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4000000059604645,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_24_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4166666567325592,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_25_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_26_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.44999998807907104,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_27_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.46666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_28_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4833333194255829,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_29_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_30_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5166666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_31_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5333333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_32_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.550000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_33_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5666666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_34_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5833333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_35_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6000000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_36_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6166666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_37_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6333333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_38_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6499999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_39_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_40_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6833333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_41_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.699999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_42_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7166666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_43_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7333333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_44_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_45_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7666666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_46_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7833333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_47_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.800000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_48_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_49_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_50_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8500000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_51_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8666666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_52_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8833333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_53_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8999999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_54_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9166666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_55_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_56_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.949999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_57_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9666666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_58_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9833333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w216_patron_of_lost_causes/patron_of_lost_causes_59_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 1.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes"
+                    }
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/scout_rifle/patron_of_lost_causes"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_ads"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_inspect"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes_twohand"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/scout_rifle/patron_of_lost_causes"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

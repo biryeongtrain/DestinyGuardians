@@ -1,0 +1,3225 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": "ads",
+              "model": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads"
+                }
+              }
+            },
+            {
+              "when": "inspect",
+              "model": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect"
+                }
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 1,
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major"
+                    }
+                  }
+                }
+              },
+              {
+                "threshold": 0.01666666753590107,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_01_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.03333333507180214,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_02_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.05000000074505806,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_03_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.06666667014360428,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_04_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.0833333358168602,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_05_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.10000000149011612,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_06_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.11666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_07_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.13333334028720856,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_08_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.15000000596046448,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_09_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.1666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_10_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.18333333730697632,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_11_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.20000000298023224,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_12_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.21666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_13_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.23333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_14_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_15_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.2666666805744171,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_16_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.28333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_17_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.30000001192092896,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_18_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_19_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_20_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3499999940395355,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_21_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.36666667461395264,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_22_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.38333332538604736,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_23_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4000000059604645,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_24_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4166666567325592,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_25_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_26_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.44999998807907104,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_27_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.46666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_28_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4833333194255829,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_29_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_30_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5166666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_31_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5333333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_32_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.550000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_33_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5666666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_34_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5833333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_35_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6000000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_36_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6166666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_37_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6333333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_38_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6499999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_39_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_40_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6833333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_41_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.699999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_42_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7166666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_43_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7333333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_44_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_45_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7666666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_46_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7833333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_47_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.800000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_48_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_49_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_50_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8500000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_51_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8666666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_52_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8833333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_53_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8999999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_54_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9166666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_55_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_56_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.949999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_57_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9666666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_58_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9833333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_magazine_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_cradle_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_latch_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_magazine_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_cradle_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w220_canis_major/canis_major_59_latch_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 1.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major"
+                    }
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/heavy_grenade_launcher/canis_major_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/heavy_grenade_launcher/canis_major"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/heavy_grenade_launcher/canis_major_ads"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/heavy_grenade_launcher/canis_major_inspect"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/heavy_grenade_launcher/canis_major_twohand"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/heavy_grenade_launcher/canis_major"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

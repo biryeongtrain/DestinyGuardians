@@ -1,0 +1,2307 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": [
+                "ads",
+                "inspect"
+              ],
+              "model": {
+                "type": "minecraft:select",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "cases": [
+                  {
+                    "when": "ads",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/submachine_gun/the_recluse_ads_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/submachine_gun/the_recluse_ads"
+                      }
+                    }
+                  },
+                  {
+                    "when": "inspect",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/submachine_gun/the_recluse_inspect_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/submachine_gun/the_recluse_inspect"
+                      }
+                    }
+                  }
+                ],
+                "fallback": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/submachine_gun/the_recluse_twohand"
+                  },
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/submachine_gun/the_recluse"
+                  }
+                }
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 1,
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse"
+                    }
+                  }
+                }
+              },
+              {
+                "threshold": 0.01666666753590107,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_01_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_01_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.03333333507180214,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_02_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_02_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.05000000074505806,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_03_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_03_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.06666667014360428,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_04_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_04_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.0833333358168602,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_05_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_05_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.10000000149011612,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_06_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_06_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.11666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_07_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_07_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.13333334028720856,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_08_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_08_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.15000000596046448,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_09_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_09_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.1666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_10_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_10_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.18333333730697632,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_11_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_11_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.20000000298023224,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_12_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_12_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.21666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_13_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_13_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.23333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_14_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_14_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_15_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_15_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.2666666805744171,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_16_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_16_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.28333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_17_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_17_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.30000001192092896,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_18_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_18_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_19_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_19_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_20_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_20_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3499999940395355,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_21_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_21_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_21_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_21_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.36666667461395264,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_22_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_22_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_22_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_22_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.38333332538604736,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_23_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_23_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_23_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_23_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4000000059604645,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_24_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_24_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_24_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_24_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4166666567325592,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_25_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_25_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_25_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_25_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_26_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_26_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_26_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_26_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.44999998807907104,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_27_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_27_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_27_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_27_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.46666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_28_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_28_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_28_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_28_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4833333194255829,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_29_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_29_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_29_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_29_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_30_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_30_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_30_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_30_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5166666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_31_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_31_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_31_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_31_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5333333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_32_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_32_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_32_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_32_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.550000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_33_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_33_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_33_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_33_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5666666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_34_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_34_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_34_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_34_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5833333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_35_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_35_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_35_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_35_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6000000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_36_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_36_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_36_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_36_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6166666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_37_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_37_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_37_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_37_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6333333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_38_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_38_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_38_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_38_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6499999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_39_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_39_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_39_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_39_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_40_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_40_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_40_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_40_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6833333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_41_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_41_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_41_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_41_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.699999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_42_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_42_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_42_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_42_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7166666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_43_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_43_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_43_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_43_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7333333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_44_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_44_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_44_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_44_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_45_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_45_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_45_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_45_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7666666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_46_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_46_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_46_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_46_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7833333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_47_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_47_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_47_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_47_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.800000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_48_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_48_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_48_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_48_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_49_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_49_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_49_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_49_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_50_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_50_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_50_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_50_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8500000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_51_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_51_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_51_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_51_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8666666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_52_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_52_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_52_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_52_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8833333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_53_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_53_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_53_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_53_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8999999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_54_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_54_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_54_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_54_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9166666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_55_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_55_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_55_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_55_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_56_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_56_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_56_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_56_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.949999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_57_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_57_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_57_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_57_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9666666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_58_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_58_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_58_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_58_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9833333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_59_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_59_magazine_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_59_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_the_recluse/the_recluse_59_magazine_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 1.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/submachine_gun/the_recluse_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse"
+                    }
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse_ads_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse_ads"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse_inspect_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/submachine_gun/the_recluse_inspect"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/submachine_gun/the_recluse_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/submachine_gun/the_recluse"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/submachine_gun/the_recluse_ads_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/submachine_gun/the_recluse_ads"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/submachine_gun/the_recluse_inspect_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/submachine_gun/the_recluse_inspect"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/submachine_gun/the_recluse_twohand"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/submachine_gun/the_recluse"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

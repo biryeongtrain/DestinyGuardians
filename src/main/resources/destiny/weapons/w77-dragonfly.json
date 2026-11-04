@@ -1,0 +1,62 @@
+{
+  "stage": "W77",
+  "perk": {
+    "id": "dragonfly",
+    "hash": 2848615171,
+    "radiusMeters": 4.5,
+    "damageHp": 10.0,
+    "falloffFloor": 0.3,
+    "radiusSource": {
+      "authority": "community",
+      "url": "https://www.light.gg/db/items/2848615171/dragonfly/",
+      "sourceSha256": "3a6e1ee9f301f6326d7c93b294ed6411761df786c8ccd01a8d39fab212c828c3"
+    },
+    "officialChange": {
+      "authority": "official",
+      "url": "https://www.bungie.net/7/en/News/Article/twid_07_03_2025",
+      "sourceSha256": "c90396e9be6af1edcfd8a6208b484726b5e499ff2cd9a77543d4c893408cb655"
+    },
+    "damagePolicy": {
+      "authority": "local_authored_pve",
+      "units": "Minecraft HP",
+      "scaling": "fixed_perk_damage",
+      "description": "Authored PvE center damage of 10 Minecraft HP for every eligible weapon. No conversion from Destiny damage and no multiplication by weapon damage, archetype, ammo, critical, range, or active weapon damage buffs."
+    },
+    "falloffPolicy": {
+      "authority": "local_authored_pve",
+      "units": "damage fraction",
+      "scaling": "linear_floor",
+      "description": "For finite distance d >= 0: inside inclusive radius r, fraction=max(0.3,1-d/r); outside r, fraction=0. Thus center damage is 10 HP and boundary damage is 3 HP. One sourced meter maps to one Minecraft block. Curve, 0.3 floor, boundary inclusion, and unit mapping are local choices, not sourced Destiny mechanics."
+    }
+  },
+  "weapons": [
+    {
+      "id": "brass_attacks",
+      "hash": 2121785039,
+      "socket": 4,
+      "perkHash": 2848615171,
+      "plugSetHash": 3403850295
+    },
+    {
+      "id": "distant_relation",
+      "hash": 2034817450,
+      "socket": 4,
+      "perkHash": 2848615171,
+      "plugSetHash": 3824767299
+    },
+    {
+      "id": "line_in_the_sand",
+      "hash": 946443267,
+      "socket": 4,
+      "perkHash": 2848615171,
+      "plugSetHash": 3257645194
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "socket": 4,
+      "perkHash": 2848615171,
+      "plugSetHash": 619833418
+    }
+  ]
+}

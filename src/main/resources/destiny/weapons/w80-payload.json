@@ -1,0 +1,63 @@
+{
+  "stage": "W80",
+  "perk": {
+    "id": "explosive_payload",
+    "hash": 3038247973,
+    "convertedBodyFraction": 0.5,
+    "pveExplosionMultiplier": 1.3,
+    "radiusMeters": 3,
+    "radialFloor": 0.25,
+    "radialPolicy": "local_linear_floor_nearest_aabb",
+    "mechanicsSource": {
+      "authority": "community",
+      "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4/edit?gid=1662574278",
+      "sha256": "c5401182d6ba66e0fe6fc29b2a67d7854b2e2617c238c6ad65f974cf3ba3661d"
+    },
+    "localPolicy": {
+      "authority": "local_authored_pve",
+      "units": "Minecraft HP; one source meter maps to one block",
+      "radial": "Nearest target AABB point; max(.25,1-d/3) within inclusive radius, zero outside. Primary struck target receives full explosion. This curve, floor, primary rule and boundary inclusion are authored choices, not source-measured Destiny mechanics.",
+      "visibility": "Loaded segment plus native COLLIDER clip; block face origin outward 1/64 block. Nonallied PvE only; no terrain/fire. Max128 admitted contacts sorted primary/distance/UUID.",
+      "precision": "Physical impact retains crit bonus: B*(M-.5)*bulletFalloff; explosion .65*B cannot crit, gives no precision final-blow callbacks. Uses existing weapon buff snapshots for both components.",
+      "omissions": "No Destiny-specific stagger tiers, no PvP, no enhanced +5 reload, no Timed Payload. Reuses native EXPLOSION/CRIT accents and mapped weapon impact audio; not exact extracted perk VFX/SFX.",
+      "bulletDistance": "Impact uses existing bullet-distance falloff, explosion does not. Exemption could not be confirmed in retained current sources; implemented as an explicitly local policy, not a verified original mechanic."
+    }
+  },
+  "weapons": [
+    {
+      "id": "distant_relation",
+      "hash": 2034817450,
+      "socket": 4,
+      "perkHash": 3038247973,
+      "plugSetHash": 3824767299
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "hash": 2723241847,
+      "socket": 4,
+      "perkHash": 3038247973,
+      "plugSetHash": 120674550
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "socket": 4,
+      "perkHash": 3038247973,
+      "plugSetHash": 619833418
+    },
+    {
+      "id": "bite_of_the_fox",
+      "hash": 1403800851,
+      "socket": 4,
+      "perkHash": 3038247973,
+      "plugSetHash": 2442672691
+    },
+    {
+      "id": "apostate",
+      "hash": 2164448701,
+      "socket": 4,
+      "perkHash": 3038247973,
+      "plugSetHash": 2826016044
+    }
+  ]
+}

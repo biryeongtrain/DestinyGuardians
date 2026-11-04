@@ -1,0 +1,196 @@
+{
+  "stage": "W173",
+  "perk": {
+    "id": "adrenaline_junkie",
+    "hash": 11612903,
+    "durationTicks": 90,
+    "maxStacks": 5,
+    "weaponKillStacks": 1,
+    "grenadeKillStacks": 5,
+    "grenadeKillsWorkStowed": true,
+    "handlingBonus": 20,
+    "damageMultipliers": [
+      1.067,
+      1.133,
+      1.2,
+      1.266,
+      1.333
+    ]
+  },
+  "policies": {
+    "statCap": 100,
+    "durationMultiplier": 1.0,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "adsBounds": "CLAMP_TICKS_2_20_W44",
+    "glaiveAds": "W44_UNSUPPORTED_NEUTRAL_2_TICKS_ZERO_ORACLE_CURVE",
+    "swordHandling": "UNSUPPORTED_NO_OFFICIAL_HANDLING_STAT_OR_ORACLE_CURVE_NULL_TIMINGS_DAMAGE_ELIGIBLE",
+    "handlingBounds": "W58_NO_EXTRA_TICK_CLAMP_STOW_AT_100_FLOOR",
+    "reload": "NO_BONUS_NO_RELOAD_CURVE_OR_TIMING_OVERRIDE",
+    "sourceDamageAttribution": "MASTER_OWNED_LOCAL_POLICY",
+    "cycleIntegration": "MASTER_OWNED_LOCAL_POLICY",
+    "snapshotComposition": "W68_ENTRY_SCALAR_AFTER_AJ_HANDLING20_BEFORE_SINGLE_CEIL_CLAMP1_20_EXACT_INTERSECTION_EMPTY"
+  },
+  "weapons": [
+    {
+      "id": "ammit_ar2",
+      "hash": 2119346509,
+      "socket": 4,
+      "perkHash": 11612903,
+      "plugSetHash": 560115158
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "socket": 4,
+      "perkHash": 11612903,
+      "plugSetHash": 619833418
+    },
+    {
+      "id": "farewell",
+      "hash": 541188001,
+      "socket": 4,
+      "perkHash": 11612903,
+      "plugSetHash": 3819615926
+    },
+    {
+      "id": "goldtusk",
+      "hash": 3371413057,
+      "socket": 4,
+      "perkHash": 11612903,
+      "plugSetHash": 700250835
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "hash": 254636484,
+      "socket": 4,
+      "perkHash": 11612903,
+      "plugSetHash": 699056095
+    }
+  ],
+  "curves": [
+    {
+      "id": "ammit_ar2",
+      "supported": true,
+      "baseHandlingStat": 46,
+      "neutralAds": false,
+      "ready": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stow": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "ads": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      }
+    },
+    {
+      "id": "long_arm",
+      "supported": true,
+      "baseHandlingStat": 53,
+      "neutralAds": false,
+      "ready": {
+        "vpp": -0.00285336856,
+        "offset": 0.540561867
+      },
+      "stow": {
+        "vpp": -0.002941215324,
+        "offset": 0.527217745
+      },
+      "ads": {
+        "vpp": -0.001693527081,
+        "offset": 0.4114236019
+      }
+    },
+    {
+      "id": "farewell",
+      "supported": true,
+      "baseHandlingStat": 64,
+      "neutralAds": false,
+      "ready": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stow": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "ads": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      }
+    },
+    {
+      "id": "goldtusk",
+      "supported": false,
+      "baseHandlingStat": null,
+      "neutralAds": false,
+      "ready": null,
+      "stow": null,
+      "ads": null
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "supported": true,
+      "baseHandlingStat": 42,
+      "neutralAds": true,
+      "ready": {
+        "vpp": -0.002139219,
+        "offset": 0.42369
+      },
+      "stow": {
+        "vpp": -0.002827674,
+        "offset": 0.5147
+      },
+      "ads": {
+        "vpp": -0.0,
+        "offset": 0.0
+      }
+    }
+  ],
+  "timings": [
+    {
+      "id": "ammit_ar2",
+      "supported": true,
+      "readyTicks": 7,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "adsSupported": true
+    },
+    {
+      "id": "long_arm",
+      "supported": true,
+      "readyTicks": 7,
+      "stowTicks": 7,
+      "adsTicks": 6,
+      "adsSupported": true
+    },
+    {
+      "id": "farewell",
+      "supported": true,
+      "readyTicks": 5,
+      "stowTicks": 6,
+      "adsTicks": 4,
+      "adsSupported": true
+    },
+    {
+      "id": "goldtusk",
+      "supported": false,
+      "readyTicks": null,
+      "stowTicks": null,
+      "adsTicks": null,
+      "adsSupported": false
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "supported": true,
+      "readyTicks": 6,
+      "stowTicks": 7,
+      "adsTicks": 2,
+      "adsSupported": false
+    }
+  ],
+  "snapshotADS": []
+}

@@ -1,0 +1,95 @@
+{
+  "stage": "W190",
+  "perk": {
+    "id": "ensemble",
+    "hash": 2621346526,
+    "radiusMetres": 15,
+    "handlingBonus": 30,
+    "reloadBonus": 40,
+    "lingerSeconds": 1.5,
+    "lingerTicks": 30
+  },
+  "policies": {
+    "enhanced": "EXCLUDED",
+    "geometry": "LOCAL_EUCLIDEAN_FOOTPOINT_INCLUSIVE_NO_LOS_1_BLOCK_PER_METRE",
+    "ally": "OTHER_ALIVE_CONNECTED_NONSPECTATOR_SERVER_PLAYER_SAME_LEVEL_BOTH_UNTEAMED_OR_VANILLA_ALLIED",
+    "state": "ACTUAL_EQUIPPED_STACK_OWNER_LEVEL_EXISTING_GUARDIAN_DATA_RUNTIME_CLASS_HELD_OR_ACCEPTED_SELECTION",
+    "timing": "TOTAL_STATS_CAP100_RAW_CURVES_CEIL_ONCE_NO_ENSEMBLE_SCALAR",
+    "coSelectedStatProviders": [],
+    "surplus": "SAME_SOCKET3_EXCLUDED"
+  },
+  "weapons": [
+    {
+      "id": "canis_major",
+      "hash": 2066434718,
+      "socket": 3,
+      "perkHash": 2621346526,
+      "plugSetHash": 4037911937
+    }
+  ],
+  "curves": [
+    {
+      "id": "canis_major",
+      "baseReloadStat": 22,
+      "baseHandlingStat": 20,
+      "shellReload": false,
+      "reloadStatCap": 100,
+      "snapshotScalar": null,
+      "reload": {
+        "evpp": 7.55233e-05,
+        "vpp": -0.0248947,
+        "offset": 4.12880153333333
+      },
+      "ready": {
+        "evpp": 0.0,
+        "vpp": -0.00272791,
+        "offset": 0.55133684
+      },
+      "stow": {
+        "evpp": 0.0,
+        "vpp": -0.00232786,
+        "offset": 0.48726765
+      },
+      "ads": {
+        "evpp": 0.0,
+        "vpp": -0.00187072,
+        "offset": 0.50019128
+      }
+    }
+  ],
+  "coSelections": [
+    {
+      "id": "canis_major",
+      "perk": "kill_clip",
+      "roll": {
+        "id": "canis_major",
+        "hash": 2066434718,
+        "socket": 4,
+        "perkHash": 1015611457,
+        "plugSetHash": 2791121719
+      }
+    },
+    {
+      "id": "canis_major",
+      "perk": "rampage",
+      "roll": {
+        "id": "canis_major",
+        "hash": 2066434718,
+        "socket": 4,
+        "perkHash": 3425386926,
+        "plugSetHash": 2791121719
+      }
+    },
+    {
+      "id": "canis_major",
+      "perk": "vorpal",
+      "roll": {
+        "id": "canis_major",
+        "hash": 2066434718,
+        "socket": 4,
+        "perkHash": 1546637391,
+        "plugSetHash": 2791121719
+      }
+    }
+  ]
+}

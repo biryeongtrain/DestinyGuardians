@@ -1,0 +1,55 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "ads",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon/fusion_rifle/coriolis_force_ads_twohand"
+          },
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon/fusion_rifle/coriolis_force_ads"
+          }
+        }
+      },
+      {
+        "when": "inspect",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon/fusion_rifle/coriolis_force_inspect_twohand"
+          },
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon/fusion_rifle/coriolis_force_inspect"
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:condition",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "destiny:weapon/fusion_rifle/coriolis_force_twohand"
+      },
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "destiny:weapon/fusion_rifle/coriolis_force"
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

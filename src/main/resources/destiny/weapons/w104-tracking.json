@@ -1,0 +1,69 @@
+{
+  "stage": "W104",
+  "intrinsic": {
+    "hash": 3419274965,
+    "name": "Precision Frame",
+    "type": "Intrinsic",
+    "requiresAim": true,
+    "mechanicsSource": "art/weapons/w104/references/mechanics.json"
+  },
+  "perk": {
+    "id": "tracking_module",
+    "hash": 3977735242,
+    "enhancedHash": 406461158,
+    "enhancedImplemented": false,
+    "requiresAim": true,
+    "mechanicsSource": "art/weapons/w104/references/mechanics.json"
+  },
+  "intrinsicWeapons": [
+    {
+      "id": "pyroclastic_flow",
+      "hash": 1289324202,
+      "socket": 0,
+      "intrinsicHash": 3419274965,
+      "proofMode": "initialIntrinsic"
+    }
+  ],
+  "weapons": [
+    {
+      "id": "bad_omens",
+      "hash": 991314988,
+      "socket": 3,
+      "perkHash": 3977735242,
+      "plugSetHash": 457210958,
+      "proofMode": "randomized"
+    },
+    {
+      "id": "bellowing_giant",
+      "hash": 2186258845,
+      "socket": 3,
+      "perkHash": 3977735242,
+      "plugSetHash": 2605036073,
+      "proofMode": "randomized"
+    }
+  ],
+  "sourceRules": {
+    "requiresAim": true,
+    "requiresAimSource": "Official intrinsic/trait descriptions",
+    "continuousAimAfterLaunchRequired": null,
+    "unknownSourceRules": {
+      "acquireSeconds": null,
+      "acquireTicks": null,
+      "acquireConeDegrees": null,
+      "acquireRangeMetres": null,
+      "turnDegreesPerSecond": null,
+      "turnDegreesPerTick": null,
+      "releaseAimGraceSeconds": null,
+      "releaseAimGraceTicks": null,
+      "breakTrackingOnMidflightLineOfSightLoss": null,
+      "midflightLossConeDegrees": null,
+      "midflightLossTimeoutSeconds": null,
+      "reacquireAfterDeadOrInvalidTarget": null,
+      "lockSnapshotAtLaunch": null,
+      "trackingPersistsAfterWeaponStow": null,
+      "trackingPersistsAfterTraitEdit": null,
+      "precisionAndModuleUseIdenticalTuning": null,
+      "pvpTrackingMultiplier": null
+    }
+  }
+}

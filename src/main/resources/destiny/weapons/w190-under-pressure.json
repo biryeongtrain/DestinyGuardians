@@ -1,0 +1,96 @@
+{
+  "stage": "W190",
+  "perk": {
+    "id": "under_pressure",
+    "hash": 1645158859,
+    "thresholdRatioExclusive": 0.5,
+    "accuracyConeReductionAtHalf": 0.125,
+    "accuracyConeReductionAtEmpty": 0.25,
+    "originalAccuracyVerified": true,
+    "originalStabilityText": "up to +30?",
+    "originalStabilityVerified": false,
+    "temporaryServerStabilityCap": 30,
+    "temporaryServerStabilityCurve": "floor(30 * (1 - 2 * rounds / baseCapacity)) below half; otherwise 0",
+    "source": "art/weapons/w190/under-pressure/source.json"
+  },
+  "policies": {
+    "ammo": "READ_ONLY_TRUE_LOADED_ROUNDS_CANONICAL_BASE_CAPACITY_NO_RESERVES",
+    "condition": "STRICTLY_BELOW_HALF_LINEAR_TO_EMPTY",
+    "unsupported": "BONUS_ZERO_SCALAR_ONE_INCLUDING_INVALID_RESOURCE_OR_AMMO",
+    "accuracy": "CONE_SIZE_ONLY_NOT_CONE_GROWTH_OR_AIM_ASSIST",
+    "stability": "TEMPORARY_SERVER_LINEAR_0_TO_30_FLOOR_ORIGINAL_UNVERIFIED",
+    "enhanced": "EXCLUDED"
+  },
+  "weapons": [
+    {
+      "id": "bygones",
+      "hash": 2712244741,
+      "socket": 4,
+      "perkHash": 1645158859,
+      "plugSetHash": 3060320121
+    },
+    {
+      "id": "chattering_bone",
+      "hash": 568515759,
+      "socket": 4,
+      "perkHash": 1645158859,
+      "plugSetHash": 423791138
+    },
+    {
+      "id": "patron_of_lost_causes",
+      "hash": 2723241847,
+      "socket": 4,
+      "perkHash": 1645158859,
+      "plugSetHash": 120674550
+    },
+    {
+      "id": "long_arm",
+      "hash": 8293111,
+      "socket": 3,
+      "perkHash": 1645158859,
+      "plugSetHash": 3056706286
+    },
+    {
+      "id": "dead_man_walking_xx7463",
+      "hash": 3751622019,
+      "socket": 3,
+      "perkHash": 1645158859,
+      "plugSetHash": 3268663985
+    },
+    {
+      "id": "hollow_words",
+      "hash": 607191995,
+      "socket": 3,
+      "perkHash": 1645158859,
+      "plugSetHash": 637298592
+    },
+    {
+      "id": "dream_breaker",
+      "hash": 2931957300,
+      "socket": 3,
+      "perkHash": 1645158859,
+      "plugSetHash": 3785896921
+    },
+    {
+      "id": "coriolis_force",
+      "hash": 3512349612,
+      "socket": 3,
+      "perkHash": 1645158859,
+      "plugSetHash": 2568674372
+    },
+    {
+      "id": "line_in_the_sand",
+      "hash": 946443267,
+      "socket": 3,
+      "perkHash": 1645158859,
+      "plugSetHash": 1503774254
+    },
+    {
+      "id": "fixed_odds",
+      "hash": 2194955522,
+      "socket": 3,
+      "perkHash": 1645158859,
+      "plugSetHash": 4227334000
+    }
+  ]
+}

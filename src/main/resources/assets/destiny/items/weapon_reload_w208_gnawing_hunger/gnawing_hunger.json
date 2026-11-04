@@ -1,0 +1,2359 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "cases": [
+            {
+              "when": "ads",
+              "model": {
+                "type": "minecraft:select",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "cases": [
+                  {
+                    "when": "ads",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads"
+                      }
+                    }
+                  },
+                  {
+                    "when": "inspect",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect"
+                      }
+                    }
+                  }
+                ],
+                "fallback": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/auto_rifle/gnawing_hunger_twohand"
+                  },
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/auto_rifle/gnawing_hunger"
+                  }
+                }
+              }
+            },
+            {
+              "when": "inspect",
+              "model": {
+                "type": "minecraft:select",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "cases": [
+                  {
+                    "when": "ads",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads"
+                      }
+                    }
+                  },
+                  {
+                    "when": "inspect",
+                    "model": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:custom_model_data",
+                      "index": 0,
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect_twohand"
+                      },
+                      "on_false": {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect"
+                      }
+                    }
+                  }
+                ],
+                "fallback": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/auto_rifle/gnawing_hunger_twohand"
+                  },
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/auto_rifle/gnawing_hunger"
+                  }
+                }
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:custom_model_data",
+            "index": 1,
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger"
+                    }
+                  }
+                }
+              },
+              {
+                "threshold": 0.01666666753590107,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_01_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_01_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_01_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_01_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.03333333507180214,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_02_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_02_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_02_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_02_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.05000000074505806,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_03_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_03_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_03_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_03_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.06666667014360428,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_04_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_04_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_04_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_04_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.0833333358168602,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_05_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_05_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_05_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_05_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.10000000149011612,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_06_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_06_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_06_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_06_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.11666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_07_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_07_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_07_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_07_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.13333334028720856,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_08_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_08_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_08_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_08_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.15000000596046448,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_09_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_09_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_09_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_09_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.1666666716337204,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_10_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_10_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_10_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_10_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.18333333730697632,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_11_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_11_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_11_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_11_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.20000000298023224,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_12_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_12_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_12_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_12_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.21666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_13_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_13_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_13_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_13_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.23333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_14_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_14_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_14_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_14_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.25,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_15_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_15_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_15_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_15_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.2666666805744171,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_16_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_16_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_16_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_16_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.28333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_17_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_17_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_17_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_17_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.30000001192092896,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_18_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_18_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_18_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_18_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_19_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_19_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_19_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_19_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3333333432674408,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_20_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_20_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_20_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_20_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.3499999940395355,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_21_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_21_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_21_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_21_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.36666667461395264,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_22_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_22_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_22_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_22_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.38333332538604736,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_23_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_23_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_23_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_23_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4000000059604645,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_24_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_24_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_24_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_24_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4166666567325592,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_25_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_25_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_25_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_25_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_26_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_26_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_26_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_26_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.44999998807907104,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_27_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_27_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_27_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_27_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.46666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_28_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_28_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_28_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_28_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.4833333194255829,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_29_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_29_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_29_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_29_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_30_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_30_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_30_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_30_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5166666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_31_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_31_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_31_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_31_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5333333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_32_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_32_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_32_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_32_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.550000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_33_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_33_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_33_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_33_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5666666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_34_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_34_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_34_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_34_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.5833333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_35_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_35_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_35_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_35_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6000000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_36_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_36_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_36_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_36_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6166666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_37_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_37_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_37_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_37_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6333333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_38_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_38_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_38_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_38_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6499999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_39_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_39_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_39_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_39_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6666666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_40_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_40_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_40_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_40_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.6833333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_41_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_41_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_41_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_41_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.699999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_42_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_42_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_42_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_42_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7166666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_43_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_43_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_43_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_43_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7333333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_44_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_44_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_44_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_44_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.75,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_45_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_45_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_45_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_45_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7666666507720947,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_46_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_46_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_46_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_46_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.7833333611488342,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_47_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_47_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_47_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_47_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.800000011920929,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_48_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_48_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_48_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_48_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8166666626930237,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_49_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_49_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_49_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_49_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8333333134651184,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_50_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_50_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_50_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_50_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8500000238418579,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_51_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_51_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_51_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_51_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8666666746139526,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_52_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_52_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_52_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_52_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8833333253860474,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_53_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_53_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_53_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_53_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.8999999761581421,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_54_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_54_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_54_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_54_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9166666865348816,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_55_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_55_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_55_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_55_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9333333373069763,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_56_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_56_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_56_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_56_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.949999988079071,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_57_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_57_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_57_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_57_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9666666388511658,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_58_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_58_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_58_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_58_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 0.9833333492279053,
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "on_true": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_59_body_twohand"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_59_moving_twohand"
+                      }
+                    ]
+                  },
+                  "on_false": {
+                    "type": "minecraft:composite",
+                    "models": [
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_59_body_native"
+                      },
+                      {
+                        "type": "minecraft:model",
+                        "model": "destiny:weapon_reload_w208_gnawing_hunger/gnawing_hunger_59_moving_native"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "threshold": 1.0,
+                "model": {
+                  "type": "minecraft:select",
+                  "property": "minecraft:custom_model_data",
+                  "index": 0,
+                  "cases": [
+                    {
+                      "when": "ads",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads"
+                        }
+                      }
+                    },
+                    {
+                      "when": "inspect",
+                      "model": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:custom_model_data",
+                        "index": 0,
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect_twohand"
+                        },
+                        "on_false": {
+                          "type": "minecraft:model",
+                          "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect"
+                        }
+                      }
+                    }
+                  ],
+                  "fallback": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger"
+                    }
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:custom_model_data",
+              "index": 0,
+              "cases": [
+                {
+                  "when": "ads",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads"
+                    }
+                  }
+                },
+                {
+                  "when": "inspect",
+                  "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+                    "index": 0,
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect_twohand"
+                    },
+                    "on_false": {
+                      "type": "minecraft:model",
+                      "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect"
+                    }
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:condition",
+                "property": "minecraft:custom_model_data",
+                "index": 0,
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/auto_rifle/gnawing_hunger_twohand"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "destiny:weapon/auto_rifle/gnawing_hunger"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "cases": [
+        {
+          "when": "ads",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/auto_rifle/gnawing_hunger_ads"
+            }
+          }
+        },
+        {
+          "when": "inspect",
+          "model": {
+            "type": "minecraft:condition",
+            "property": "minecraft:custom_model_data",
+            "index": 0,
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect_twohand"
+            },
+            "on_false": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/auto_rifle/gnawing_hunger_inspect"
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:condition",
+        "property": "minecraft:custom_model_data",
+        "index": 0,
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/auto_rifle/gnawing_hunger_twohand"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/auto_rifle/gnawing_hunger"
+        }
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

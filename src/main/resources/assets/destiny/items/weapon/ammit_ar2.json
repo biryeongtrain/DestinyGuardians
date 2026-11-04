@@ -1,0 +1,130 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "ads",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_true": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "thirdperson_righthand",
+                  "thirdperson_lefthand"
+                ],
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 1,
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_pose_w161/ammit_ar2_ads"
+                  },
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/auto_rifle/ammit_ar2_ads_twohand"
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/auto_rifle/ammit_ar2_ads_twohand"
+            }
+          },
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon/auto_rifle/ammit_ar2_ads"
+          }
+        }
+      },
+      {
+        "when": "inspect",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_true": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "thirdperson_righthand",
+                  "thirdperson_lefthand"
+                ],
+                "model": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:custom_model_data",
+                  "index": 1,
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon_pose_w161/ammit_ar2_inspect"
+                  },
+                  "on_false": {
+                    "type": "minecraft:model",
+                    "model": "destiny:weapon/auto_rifle/ammit_ar2_inspect_twohand"
+                  }
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "destiny:weapon/auto_rifle/ammit_ar2_inspect_twohand"
+            }
+          },
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:weapon/auto_rifle/ammit_ar2_inspect"
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:condition",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "on_true": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": [
+              "thirdperson_righthand",
+              "thirdperson_lefthand"
+            ],
+            "model": {
+              "type": "minecraft:condition",
+              "property": "minecraft:custom_model_data",
+              "index": 1,
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "destiny:weapon_pose_w161/ammit_ar2_hip"
+              },
+              "on_false": {
+                "type": "minecraft:model",
+                "model": "destiny:weapon/auto_rifle/ammit_ar2_twohand"
+              }
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "destiny:weapon/auto_rifle/ammit_ar2_twohand"
+        }
+      },
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "destiny:weapon/auto_rifle/ammit_ar2"
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}

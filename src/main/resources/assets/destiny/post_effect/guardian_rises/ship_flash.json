@@ -1,0 +1,68 @@
+{
+    "targets": {
+        "swap": {}
+    },
+    "passes": [
+        {
+            "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "destiny:post/rg_revive",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "minecraft:main",
+                    "bilinear": true
+                }
+            ],
+            "output": "swap",
+            "uniforms": {
+                "ReviveConfig": [
+                    {
+                        "name": "Tint",
+                        "type": "vec4",
+                        "value": [
+                            0.86,
+                            0.94,
+                            1.0,
+                            0.97
+                        ]
+                    },
+                    {
+                        "name": "Shape",
+                        "type": "vec4",
+                        "value": [
+                            2.2,
+                            9.0,
+                            1.8,
+                            0.3
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "minecraft:post/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap"
+                }
+            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [
+                            1,
+                            1,
+                            1,
+                            1
+                        ]
+                    }
+                ]
+            },
+            "output": "minecraft:main"
+        }
+    ]
+}

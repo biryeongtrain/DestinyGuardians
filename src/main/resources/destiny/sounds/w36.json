@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "wave": "w36",
+  "overrides_wave": "w34",
+  "source": {
+    "url": "https://www.youtube.com/watch?v=O0uvtZMID9E&t=1050s",
+    "video_id": "O0uvtZMID9E",
+    "chapter": "Shadowshot - Deadfall",
+    "cache_name": "O0uvtZMID9E-source.m4a",
+    "sha256": "4a6776d942b49a8fd614927b86ca93b79a89cee22809c733b3b566b0c714dd5f"
+  },
+  "events": {
+    "hunter.void.super.start": {
+      "event": "hunter.void.super.start",
+      "sound": "destiny:w36/hunter/void/super/cast",
+      "asset_path": "src/main/resources/assets/destiny/sounds/w36/hunter/void/super/cast.ogg",
+      "status": "continuous_video_mix_edit",
+      "source_window_seconds": [
+        1047.47,
+        1049.7
+      ],
+      "source_sha256": "4a6776d942b49a8fd614927b86ca93b79a89cee22809c733b3b566b0c714dd5f",
+      "transforms": {
+        "filter": "highpass=f=40,lowpass=f=14000,afftdn=nr=6:nf=-46:tn=0",
+        "gain_db": -0.0015,
+        "fade_in_ms": 2,
+        "fade_out_ms": 150,
+        "sample_rate_hz": 32000,
+        "channels": 1,
+        "internal_cuts": 0,
+        "concatenation": false,
+        "inserted_silence": false,
+        "time_stretch": false,
+        "pitch_shift": false
+      },
+      "output": {
+        "duration_seconds": 2.23,
+        "sample_peak_dbfs": -6.1715,
+        "rms_dbfs": -22.1818,
+        "clipped_samples": 0,
+        "codec": "vorbis",
+        "channels": 1,
+        "sample_rate_hz": 32000,
+        "bytes": 21780,
+        "sha256": "c92e6eb4f72bd2ae976fbd7b3f49490656034c024ce12802332b297148fc71d7"
+      }
+    }
+  },
+  "playback": {
+    "trigger": "successful activation only",
+    "suppressed_phase_actions": [
+      "draw",
+      "fire",
+      "impact",
+      "end"
+    ],
+    "release_reference_seconds": 0.35,
+    "note": "Mixed impact/tail stays on recorded timeline, not spatially rescheduled to actual projectile collision. Gameplay impact remains collision-driven."
+  },
+  "verification_limits": "One contiguous original AAC interval; trimmed leading .30s swell to align reference release with seven ticks. No independent acoustic listening or isolated-stem verification; ambience/overlapping source effects may remain."
+}

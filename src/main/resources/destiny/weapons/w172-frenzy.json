@@ -1,0 +1,483 @@
+{
+  "stage": "W172",
+  "perk": {
+    "id": "frenzy",
+    "hash": 4104185692,
+    "activationTicks": 240,
+    "combatGraceTicks": 100,
+    "durationTicks": 144,
+    "damageMultiplier": 1.15,
+    "handlingBonus": 100,
+    "reloadBonus": 100,
+    "worksStowed": true,
+    "refreshOnDealtDamage": true,
+    "refreshOnReceivedDamage": true,
+    "selfDamageCounts": false,
+    "environmentalDamageCounts": false
+  },
+  "policies": {
+    "statCap": 100,
+    "durationMultiplier": 1.0,
+    "rounding": "CEIL_SECONDS_TIMES_20_ONCE",
+    "adsBounds": "CLAMP_TICKS_2_20_W44",
+    "glaiveAds": "W44_UNSUPPORTED_NEUTRAL_2_TICKS_ZERO_ORACLE_CURVE",
+    "handlingBounds": "W58_NO_EXTRA_TICK_CLAMP_STOW_AT_100_FLOOR",
+    "combatDefinition": "DEALT_OR_RECEIVED_DAMAGE_WITHIN_LAST_5_SECONDS",
+    "sourceDamageAttribution": "MASTER_OWNED_LOCAL_POLICY",
+    "sourceCombinedPerks": "UNKNOWN_MASTER_OWNED_LOCAL_POLICY",
+    "cycleIntegration": "MASTER_OWNED_LOCAL_POLICY",
+    "snapshotComposition": "W68_ENTRY_SCALAR_AFTER_FRENZY_STAT100_BEFORE_SINGLE_CEIL_CLAMP1_20"
+  },
+  "weapons": [
+    {
+      "id": "austringer",
+      "hash": 3055790362,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 785215120
+    },
+    {
+      "id": "allied_demand",
+      "hash": 1532276803,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 703779397
+    },
+    {
+      "id": "farewell",
+      "hash": 541188001,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 3819615926
+    },
+    {
+      "id": "brass_attacks",
+      "hash": 2121785039,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 3403850295
+    },
+    {
+      "id": "dream_breaker",
+      "hash": 2931957300,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 1206254527
+    },
+    {
+      "id": "stormchaser",
+      "hash": 3652506829,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 4213354588
+    },
+    {
+      "id": "retraced_path",
+      "hash": 548958835,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 398391969
+    },
+    {
+      "id": "code_duello",
+      "hash": 2496242052,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 147528717
+    },
+    {
+      "id": "retrofit_escapade",
+      "hash": 3103325054,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 2461260598
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "hash": 254636484,
+      "socket": 4,
+      "perkHash": 4104185692,
+      "plugSetHash": 699056095
+    }
+  ],
+  "curves": [
+    {
+      "id": "austringer",
+      "baseReloadStat": 46,
+      "baseHandlingStat": 47,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 6.137590643e-05,
+        "vpp": -0.02385522011,
+        "offset": 3.600042253,
+        "ammo_percent": 0.71
+      },
+      "ready": {
+        "vpp": -0.002942857143,
+        "offset": 0.4782571429
+      },
+      "stow": {
+        "vpp": -0.002952380952,
+        "offset": 0.5133809524
+      },
+      "ads": {
+        "vpp": -0.001666666667,
+        "offset": 0.3316666667
+      }
+    },
+    {
+      "id": "allied_demand",
+      "baseReloadStat": 30,
+      "baseHandlingStat": 48,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "ready": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stow": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "ads": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      }
+    },
+    {
+      "id": "farewell",
+      "baseReloadStat": 49,
+      "baseHandlingStat": 64,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "ready": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stow": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "ads": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      }
+    },
+    {
+      "id": "brass_attacks",
+      "baseReloadStat": 27,
+      "baseHandlingStat": 36,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 2.38311e-05,
+        "vpp": -0.0124553,
+        "offset": 2.14667245
+      },
+      "ready": {
+        "vpp": -0.00264010989,
+        "offset": 0.4232582418
+      },
+      "stow": {
+        "vpp": -0.00197527473,
+        "offset": 0.4298956044
+      },
+      "ads": {
+        "vpp": -0.0022293956,
+        "offset": 0.3435796703
+      }
+    },
+    {
+      "id": "dream_breaker",
+      "baseReloadStat": 30,
+      "baseHandlingStat": 27,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 6.15281e-05,
+        "vpp": -0.0198054,
+        "offset": 2.8285704
+      },
+      "ready": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stow": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "ads": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      }
+    },
+    {
+      "id": "stormchaser",
+      "baseReloadStat": 25,
+      "baseHandlingStat": 30,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 5.88462e-05,
+        "vpp": -0.0199884,
+        "offset": 2.87206463333
+      },
+      "ready": {
+        "vpp": -0.001448069241,
+        "offset": 0.4990612517
+      },
+      "stow": {
+        "vpp": -0.002863515313,
+        "offset": 0.4445712383
+      },
+      "ads": {
+        "vpp": -0.001693741678,
+        "offset": 0.4112330226
+      }
+    },
+    {
+      "id": "retraced_path",
+      "baseReloadStat": 45,
+      "baseHandlingStat": 46,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 5e-05,
+        "vpp": -0.0155,
+        "offset": 2.65
+      },
+      "ready": {
+        "vpp": -0.00279338,
+        "offset": 0.51985381
+      },
+      "stow": {
+        "vpp": -0.00268436,
+        "offset": 0.48414822
+      },
+      "ads": {
+        "vpp": -0.001875,
+        "offset": 0.38975
+      }
+    },
+    {
+      "id": "code_duello",
+      "baseReloadStat": 35,
+      "baseHandlingStat": 69,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 0.000103959,
+        "vpp": -0.0252069,
+        "offset": 4.09182213333333
+      },
+      "ready": {
+        "vpp": -0.003998740554,
+        "offset": 0.6635944584
+      },
+      "stow": {
+        "vpp": -0.003296509536,
+        "offset": 0.5463332134
+      },
+      "ads": {
+        "vpp": -0.002139258726,
+        "offset": 0.528984167
+      }
+    },
+    {
+      "id": "retrofit_escapade",
+      "baseReloadStat": 67,
+      "baseHandlingStat": 56,
+      "neutralAds": false,
+      "reload": {
+        "evpp": 9.05351e-05,
+        "vpp": -0.0305819,
+        "offset": 6.1219905,
+        "ammo_percent": 0.65
+      },
+      "ready": {
+        "vpp": -0.002391721353,
+        "offset": 0.4950499748
+      },
+      "stow": {
+        "vpp": -0.002041393236,
+        "offset": 0.4547501262
+      },
+      "ads": {
+        "vpp": -0.001234477537,
+        "offset": 0.4574687027
+      }
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "baseReloadStat": 25,
+      "baseHandlingStat": 42,
+      "neutralAds": true,
+      "reload": {
+        "evpp": 0.0,
+        "vpp": -0.0175,
+        "offset": 3.5
+      },
+      "ready": {
+        "vpp": -0.002139219,
+        "offset": 0.42369
+      },
+      "stow": {
+        "vpp": -0.002827674,
+        "offset": 0.5147
+      },
+      "ads": {
+        "vpp": -0.0,
+        "offset": 0.0
+      }
+    }
+  ],
+  "timings": [
+    {
+      "id": "austringer",
+      "reloadTicks": 37,
+      "readyTicks": 4,
+      "stowTicks": 5,
+      "adsTicks": 4,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "allied_demand",
+      "reloadTicks": 23,
+      "readyTicks": 4,
+      "stowTicks": 5,
+      "adsTicks": 3,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "farewell",
+      "reloadTicks": 23,
+      "readyTicks": 4,
+      "stowTicks": 5,
+      "adsTicks": 3,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "brass_attacks",
+      "reloadTicks": 23,
+      "readyTicks": 4,
+      "stowTicks": 5,
+      "adsTicks": 3,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "dream_breaker",
+      "reloadTicks": 30,
+      "readyTicks": 8,
+      "stowTicks": 4,
+      "adsTicks": 5,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "stormchaser",
+      "reloadTicks": 30,
+      "readyTicks": 8,
+      "stowTicks": 4,
+      "adsTicks": 5,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "retraced_path",
+      "reloadTicks": 32,
+      "readyTicks": 5,
+      "stowTicks": 5,
+      "adsTicks": 5,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "code_duello",
+      "reloadTicks": 53,
+      "readyTicks": 6,
+      "stowTicks": 5,
+      "adsTicks": 7,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "retrofit_escapade",
+      "reloadTicks": 80,
+      "readyTicks": 6,
+      "stowTicks": 6,
+      "adsTicks": 7,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": true
+    },
+    {
+      "id": "nezarec_s_whisper",
+      "reloadTicks": 35,
+      "readyTicks": 5,
+      "stowTicks": 5,
+      "adsTicks": 2,
+      "shellReload": false,
+      "reloadPerRoundTicks": null,
+      "reloadInitialTicks": null,
+      "reloadPlanKind": "WHOLE_MAGAZINE",
+      "adsSupported": false
+    }
+  ],
+  "snapshotADS": [
+    {
+      "id": "austringer",
+      "frenzySocket": 4,
+      "snapshotSocket": 3,
+      "snapshotPlugSetHash": 2750499928,
+      "perkHash": 957782887,
+      "ammoType": 1,
+      "scalar": 0.5,
+      "adsSeconds": 0.165,
+      "adsTicks": 2
+    },
+    {
+      "id": "dream_breaker",
+      "frenzySocket": 4,
+      "snapshotSocket": 3,
+      "snapshotPlugSetHash": 3785896921,
+      "perkHash": 957782887,
+      "ammoType": 2,
+      "scalar": 0.8,
+      "adsSeconds": 0.2418588548,
+      "adsTicks": 4
+    }
+  ]
+}

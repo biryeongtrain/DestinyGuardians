@@ -1,0 +1,59 @@
+{
+  "stage": "W174",
+  "perk": {
+    "id": "focused_fury",
+    "hash": 2896038713,
+    "durationTicks": 220,
+    "damageMultiplier": 1.25,
+    "precisionFraction": 0.35
+  },
+  "policies": {
+    "threshold": "CEIL_35_PERCENT_OFFICIAL_BASE_MAGAZINE",
+    "progressReset": "STOW_OR_RELOAD",
+    "buffWhileStowed": "REMAINS_ACTIVE_CLARITY",
+    "refresh": "LOCAL_CONSUME_THRESHOLD_RESET_COUNTER_ZERO_REFRESH_220_TICKS",
+    "deadline": "LOCAL_STOW_RELOAD_PRESERVE_DEADLINE_NO_PAUSE",
+    "damageAttribution": "MASTER_PAID_DIRECT_ONLY_NO_OTHER_PERK_SPLASH",
+    "lifecycle": "MASTER_OWNED_LOCAL_POLICY"
+  },
+  "weapons": [
+    {
+      "id": "aishas_embrace",
+      "hash": 2638190703,
+      "socket": 4,
+      "perkHash": 2896038713,
+      "plugSetHash": 4211351701
+    },
+    {
+      "id": "retraced_path",
+      "hash": 548958835,
+      "socket": 4,
+      "perkHash": 2896038713,
+      "plugSetHash": 398391969
+    },
+    {
+      "id": "fixed_odds",
+      "hash": 2194955522,
+      "socket": 4,
+      "perkHash": 2896038713,
+      "plugSetHash": 1686775256
+    }
+  ],
+  "magazines": [
+    {
+      "id": "aishas_embrace",
+      "baseMagazine": 17,
+      "threshold": 6
+    },
+    {
+      "id": "retraced_path",
+      "baseMagazine": 94,
+      "threshold": 33
+    },
+    {
+      "id": "fixed_odds",
+      "baseMagazine": 44,
+      "threshold": 16
+    }
+  ]
+}

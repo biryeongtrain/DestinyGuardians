@@ -1,0 +1,87 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "hip",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades_twohand"
+          }
+        }
+      },
+      {
+        "when": "ads",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades_ads"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades_ads_twohand"
+          }
+        }
+      },
+      {
+        "when": "inspect",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades_inspect"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades_inspect_twohand"
+          }
+        }
+      },
+      {
+        "when": "scope",
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:custom_model_data",
+          "index": 0,
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades_scope"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "destiny:item/weapon/ace_of_spades_scope_twohand"
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:condition",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "destiny:item/weapon/ace_of_spades"
+      },
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "destiny:item/weapon/ace_of_spades_twohand"
+      }
+    }
+  },
+  "hand_animation_on_swap": false
+}
