@@ -82,12 +82,24 @@ public final class HudPainter {
         paint(key, new Box(x, y, size, size), depth, color, null, Identifier.parse("destiny:gui/hud/" + icon), false, 0);
     }
 
+    /**
+     * An icon that follows a moving point (a pointer): position changes of the same icon are interpolated by the
+     * client over {@code glide} ticks, so 20 Hz server updates render as continuous motion.
+     */
+    public void glide(String key, String icon, float x, float y, float size, float depth, int color, int glide) {
+        paint(key, new Box(x, y, size, size), depth, color, null, Identifier.parse("destiny:gui/hud/" + icon), false, 0, glide);
+    }
+
     /** A non-square HUD image (box size in canvas pixels). */
     public void image(String key, String icon, float x, float y, float width, float height, float depth, int color) {
         paint(key, new Box(x, y, width, height), depth, color, null, Identifier.parse("destiny:gui/hud/" + icon), false, 0);
     }
 
     private void paint(String key, Box box, float depth, int color, String weapon, Identifier model, boolean stretch, float spin) {
+        paint(key, box, depth, color, weapon, model, stretch, spin, 0);
+    }
+
+    private void paint(String key, Box box, float depth, int color, String weapon, Identifier model, boolean stretch, float spin, int glide) {
         String id = prefix + key;
         used.add(id);
         Tile state = new Tile(box, depth, color, weapon, model, stretch, spin);
@@ -112,7 +124,11 @@ public final class HudPainter {
         if (weapon != null) hud.setLeftRotation(new Vector3f(0, (float) Math.toRadians(spin), 0),
                 old != null && old.getExtraData(STATE) instanceof Tile last && last.spin() != spin ? 20 : 0);
         hud.setAlignment(stretch ? DisplayHud.HudAlignment.UNALIGNED : DisplayHud.HudAlignment.CENTER);
-        hud.setLocation(box.x(), box.y(), depth);
+        // Only a pure move of the same tile glides; any other change snaps (the last transformation call sets the
+        // interpolation duration of the whole packet).
+        boolean moved = glide > 0 && old != null && old.getExtraData(STATE) instanceof Tile last
+                && last.box().width() == box.width() && last.box().height() == box.height() && last.depth() == depth;
+        hud.setLocation(box.x(), box.y(), depth, moved ? glide : 0);
         hud.setAboveHand(true);
         hud.setViewRange(1000);
         hud.removeWhenPlayerDied(true);
