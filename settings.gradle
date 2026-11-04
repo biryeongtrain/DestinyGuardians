@@ -14,5 +14,11 @@ includeBuild('libs/minigame-lib')
 // GCB-server (선택): 로컬 체크아웃이 있으면 소스에서 빌드한다. 경로는 gradle.properties 의 gcb_server_dir.
 def gcbDir = file(providers.gradleProperty('gcb_server_dir').getOrElse('../GCB-server'))
 if (new File(gcbDir, 'build.gradle').exists()) {
-    includeBuild(gcbDir)
+    includeBuild(gcbDir) {
+        // Isolated worktrees use libs/gcb-server: the checkout directory's case must not
+        // change the published GCB-server module identity in a composite build.
+        dependencySubstitution {
+            substitute module('kim.biryeong:GCB-server') using project(':')
+        }
+    }
 }

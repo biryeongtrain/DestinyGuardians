@@ -31,7 +31,8 @@ public final class WeaponPackOptimizer {
         builder.forEachResource(files::put);
         PackAtlasRouting.apply(builder, files);
         kim.biryeong.destiny.weapon.WeaponSurfaceProjection.projectOutput(files);
-        var active = WeaponPackRoots.active();
+        WeaponSkinAssets.mirror(builder, files);
+        var active = WeaponPackRoots.activeWithSkins();
         if (kim.biryeong.destiny.weapon.ProfileWeaponView.enabled()) { ProfileArmAssets.compact(builder, files, active); return; }
         var excluded = new HashSet<String>();
         for (var source : WeaponFirstPersonHands.sources()) {

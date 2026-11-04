@@ -49,6 +49,7 @@ public final class CrucibleRuntime {
         final String previousTeam;
         int respawnAt, protectedUntil, arrivalAfter;
         boolean needsArrival;
+        CrucibleDeathScene.Death death;
         Member(ServerPlayer p) {
             player = p; previousMode = p.gameMode();
             previousTeam = p.getTeam() == null ? null : p.getTeam().getName();
@@ -80,6 +81,9 @@ public final class CrucibleRuntime {
                                 return 1;
                             }))));
         });
+        // W303: Crucible keeps its own native-death five-second scene; it only borrows the Guardian Down HUD.
+        kim.biryeong.destiny.down.GuardianDown.register((p, source) ->
+                participating(p) ? kim.biryeong.destiny.down.GuardianDown.Options.VANILLA : null);
         ServerTickEvents.END_SERVER_TICK.register(CrucibleRuntime::tick);
         ServerLivingEntityEvents.ALLOW_DAMAGE.register(CrucibleRuntime::allowDamage);
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, damage) -> {
@@ -102,7 +106,10 @@ public final class CrucibleRuntime {
                 next.setScore(old.getScore());
             }
             CrucibleTeamVisuals.remove(old);
+            CrucibleDeathScene.stop(old);
+            CrucibleRecovery.clearDeathEffect(next);
             member.player = next;
+            if (member.death != null) next.setGameMode(GameType.SPECTATOR);
             // Native respawn may still complete its own position/connection restoration.
             // Apply the arena transfer after that stack unwinds, before combat is enabled.
             member.needsArrival = true;
@@ -213,6 +220,9 @@ public final class CrucibleRuntime {
     }
 
     public static boolean join(ServerPlayer player) {
+        if (kim.biryeong.destiny.strike.devils.DevilsLair.participating(player)) {
+            player.sendSystemMessage(Component.literal("공격전에서 나간 뒤 참가하세요.")); return false;
+        }
         if (participating(player)) return true;
         if (CrucibleRecovery.pending(player)) return false;
         if (!player.isAlive() || player.hasDisconnected() || player.isSpectator() || player.isPassenger()) return false;
@@ -246,6 +256,8 @@ public final class CrucibleRuntime {
         Member m = MEMBERS.get(p.getUUID());
         if (m == null || m.player != p) return false;
         if (intro != null) intro.cancel(p);
+        CrucibleDeathScene.stop(p);
+        m.death = null;
         Boolean gravity=INTRO_GRAVITY.remove(p);if(gravity!=null)p.setNoGravity(gravity);
         AbilityService.cleanup(p);
         MEMBERS.remove(p.getUUID()); match.leave(p.getUUID());
@@ -281,6 +293,8 @@ public final class CrucibleRuntime {
 
     private static void arrive(Member m, boolean fresh) {
         ServerPlayer p = m.player;
+        CrucibleDeathScene.stop(p);
+        m.death = null;
         AbilityService.cleanup(p);
         var position = arena.spawn(team(p), MEMBERS.keySet().stream().toList().indexOf(p.getUUID()));
         transferring++;
@@ -332,8 +346,15 @@ public final class CrucibleRuntime {
         if (!(killer instanceof ServerPlayer)) killer = p.getLastHurtByPlayer();
         UUID id = killer instanceof ServerPlayer k && enemies(k, p) ? k.getUUID() : null;
         match.kill(id, p.getUUID(), match.life(p.getUUID()));
-        m.respawnAt = now() + 100;
+        m.respawnAt = now() + CrucibleDeathScene.RESPAWN_TICKS;
+        // A void death uses the team spawn rather than a camera under the map.
+        Vec3 ghostAt = p.position().add(0, 1.1, 0);
+        if (arena != null && p.getY() < arena.returnBelowY())
+            ghostAt = arena.spawn(team(p), 0).position().add(0, 1.1, 0);
+        m.death = new CrucibleDeathScene.Death(p.level(), ghostAt, p.getYRot(), m.respawnAt,
+                id != null ? killer.getDisplayName().getString() : "환경 피해");
         if (intro != null) intro.cancel(p);
+        AbilityService.cleanup(p);
         CrucibleHud.remove(p);
     }
 
@@ -355,11 +376,20 @@ public final class CrucibleRuntime {
             if (member.needsArrival) {
                 if (now() < member.arrivalAfter || !p.isAlive()
                         || s.getPlayerList().getPlayer(p.getUUID()) != p) continue;
-                arrive(member, false);
+                if (member.death != null && now() < member.respawnAt) {
+                    transferring++;
+                    try {
+                        CrucibleDeathScene.start(p, member.death);
+                    } catch (RuntimeException failure) {
+                        DestinyGuardians.LOGGER.error("시련의 장 사망 연출 시작 실패", failure);
+                        // Still wait out the life timer, safely at the team spawn.
+                        arrive(member, false);
+                    } finally { transferring--; }
+                } else arrive(member, false);
                 member.needsArrival = false;
             }
             if (p.isDeadOrDying()) {
-                if (now() >= member.respawnAt) {
+                if (member.death != null || now() >= member.respawnAt) {
                     transferring++;
                     try {
                         // The vanilla handler also replaces connection.player, resets movement
@@ -372,6 +402,13 @@ public final class CrucibleRuntime {
                 continue;
             }
             if (p.level() != arena.level()) { leave(p, false); continue; }
+            if (member.death != null) {
+                if (now() < member.respawnAt) {
+                    CrucibleDeathScene.tick(p, now());
+                    continue;
+                }
+                arrive(member, false);
+            }
             if (now() >= member.respawnAt && !match.alive(p.getUUID())) match.respawn(p.getUUID());
             if (p.getY() < arena.returnBelowY()) {
                 // Void is a real life loss during play; warmup/intro only rescues.
@@ -411,7 +448,12 @@ public final class CrucibleRuntime {
                 for (Member m : MEMBERS.values()) { arrive(m, false); thaw(m.player); CrucibleSounds.play(m.player, "start"); }
             } else if (phase == ControlMatch.Phase.RESULTS) {
                 closeIntro();
-                for (Member m : MEMBERS.values()) { AbilityService.cleanup(m.player); freeze(m.player); CrucibleSounds.play(m.player, match.snapshot().winner() == team(m.player) ? "victory" : "defeat"); }
+                for (Member m : MEMBERS.values()) {
+                    if (m.death != null && m.player.isAlive()) arrive(m, false);
+                    else { CrucibleDeathScene.stop(m.player); m.death = null; }
+                    AbilityService.cleanup(m.player); freeze(m.player);
+                    CrucibleSounds.play(m.player, match.snapshot().winner() == team(m.player) ? "victory" : "defeat");
+                }
             } else if (observed == ControlMatch.Phase.RESULTS) {
                 for (Member m : List.copyOf(MEMBERS.values())) leave(m.player, true);
             } else closeIntro();
@@ -421,7 +463,7 @@ public final class CrucibleRuntime {
         refreshTeamVisuals();
         if (s.getTickCount() % 5 == 0) {
             var snap = match.snapshot();
-            for (Member m : MEMBERS.values()) if (m.player.isAlive()) {
+            for (Member m : MEMBERS.values()) if (m.player.isAlive() && m.death == null) {
                 // HUD displays are owned UI in the cinematic world; its packet filter must
                 // not silently discard the new content while the HUD caches it as delivered.
                 var roster = rosterFor(m.player);

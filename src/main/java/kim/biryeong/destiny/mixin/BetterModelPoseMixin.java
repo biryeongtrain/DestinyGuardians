@@ -32,6 +32,7 @@ public abstract class BetterModelPoseMixin {
     @Shadow private boolean firstTick;
     @Shadow private boolean skipInterpolation;
     @Unique private boolean destiny$sampled;
+    @Unique private int destiny$smoothingTicks = 1;
     @Unique private final BoneMovement destiny$previous = new BoneMovement();
     @Unique private final BoneMovement destiny$next = new BoneMovement();
 
@@ -40,6 +41,7 @@ public abstract class BetterModelPoseMixin {
         if (ServerPoseSampling.active()) {
             firstTick = true; // Use BM's own dirty and cache invalidation path.
             destiny$sampled = true;
+            destiny$smoothingTicks = ServerPoseSampling.smoothingTicks();
         }
         return original.call();
     }
@@ -73,8 +75,8 @@ public abstract class BetterModelPoseMixin {
     }
 
     @WrapMethod(method = "interpolationDuration")
-    private int destiny$oneTickSmoothing(Operation<Integer> original) {
-        return destiny$sampled ? (skipInterpolation ? 0 : 1) : original.call();
+    private int destiny$poseSmoothing(Operation<Integer> original) {
+        return destiny$sampled ? (skipInterpolation ? 0 : destiny$smoothingTicks) : original.call();
     }
 
     @WrapMethod(method = "progress")

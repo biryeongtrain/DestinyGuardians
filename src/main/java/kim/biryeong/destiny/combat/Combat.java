@@ -18,16 +18,45 @@ import java.util.List;
 
 /** 능력 피해·대상 선택. 플레이어 PvP는 시련의 장 세션의 적 팀 사이에서만 허용한다. */
 public final class Combat {
-    private record HurtContext(LivingEntity target, net.minecraft.world.damagesource.DamageSource source) { }
+    private record HurtContext(LivingEntity target, net.minecraft.world.damagesource.DamageSource source, Object emission) { }
     private static final ThreadLocal<HurtContext> ACTIVE_HURT = new ThreadLocal<>();
+    private static final ThreadLocal<Object> EMISSION = new ThreadLocal<>();
 
-    /** Only the synchronous custom damage call may suppress its damage-driven impulse.
-     * Explicit jump/dodge/ability movement outside hurtServer is never rewritten. */
+    /** One accepted firing/contact event, shared by all of its multipart contacts. */
+    public static EmissionScope emission(Object identity) { return new EmissionScope(java.util.Objects.requireNonNull(identity)); }
+    public static final class EmissionScope implements AutoCloseable {
+        private final Object previous=EMISSION.get();
+        private boolean closed;
+        private EmissionScope(Object identity){EMISSION.set(identity);}
+        @Override public void close(){
+            if(closed)return;closed=true;
+            if(previous==null)EMISSION.remove();else EMISSION.set(previous);
+        }
+    }
+    /** Exposed only during the matching synchronous hurt call, never a stale/nested source. */
+    public static Object damageEmission(net.minecraft.world.damagesource.DamageSource source) {
+        var context=ACTIVE_HURT.get();
+        return context!=null&&context.source()==source?context.emission():null;
+    }
+
+    /** Enemy attacks do not push guardians; custom outgoing damage also keeps its scoped policy.
+     * Cancel the impulse before velocity synchronization, without rewriting jump/dodge movement. */
     public static boolean suppressesKnockback(LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
+        if (target instanceof ServerPlayer && source != null && source.getEntity() instanceof Mob) return true;
         var context = ACTIVE_HURT.get();
         return context != null && context.target() == target && context.source() == source;
     }
     private Combat() {
+    }
+
+    /** Multipart hitboxes keep region dispatch, but perks/rewards refer to one living actor. */
+    public static LivingEntity damageOwner(LivingEntity target) {
+        return target instanceof kim.biryeong.destiny.strike.devils.DevilsMob mob ? mob.damageOwner() : target;
+    }
+    public static float damagePool(LivingEntity target) {
+        if(target instanceof kim.biryeong.destiny.strike.devils.DevilsMob mob && mob.walkerState()!=null)
+            return (float)mob.walkerState().damagePool();
+        return target.getHealth()+target.getAbsorptionAmount();
     }
 
     public static boolean isEnemy(ServerPlayer source, Entity entity) {
@@ -76,9 +105,11 @@ public final class Combat {
                 || source.isRemoved() || target.isRemoved()) {
             return false;
         }
+        if (!kim.biryeong.destiny.strike.devils.DevilsLair.allows(source)) return false;
         if (!kim.biryeong.destiny.world.TowerSpawnWorld.mayAttack(level, target)) return false;
         if (target instanceof ServerPlayer player
                 && !kim.biryeong.destiny.crucible.CrucibleRuntime.canFight(source, player)) return false;
+        kim.biryeong.destiny.down.GuardianDown.attacked(source);
         if (attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.PRIMARY
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.SPECIAL
                 || attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.HEAVY) {
@@ -86,7 +117,9 @@ public final class Combat {
         }
         amount = PveDamageBalance.scale(amount, attribution.kind(), target instanceof Player);
         if (!Float.isFinite(amount) || amount <= 0) return false;
-        float before=target.getHealth()+target.getAbsorptionAmount();
+        var recipient=damageOwner(target);
+        if(!recipient.isAlive()||recipient.isRemoved())return false;
+        float before=damagePool(target);
         target.damageCooldownTime = 0;
         var damageSource = target instanceof ServerPlayer
                 ? new GuardianDamageSource(level.registryAccess().lookupOrThrow(
@@ -96,7 +129,7 @@ public final class Combat {
                 : source.damageSources().playerAttack(source);
         var reward = kim.biryeong.destiny.crucible.CrucibleSuperRewards.begin(source, target, attribution);
         var previous = ACTIVE_HURT.get();
-        ACTIVE_HURT.set(new HurtContext(target, damageSource));
+        ACTIVE_HURT.set(new HurtContext(target, damageSource, EMISSION.get()));
         boolean completed = false;
         try {
             target.hurtServer(level, damageSource, amount);
@@ -105,13 +138,13 @@ public final class Combat {
             if (previous == null) ACTIVE_HURT.remove(); else ACTIVE_HURT.set(previous);
             reward.finish(completed);
         }
-        kim.biryeong.destiny.weapon.AmmoEconomy.afterDamage(source,target,attribution,before,
-                target.getHealth()+target.getAbsorptionAmount());
-        target.setLastHurtByPlayer(source, 100);
-        boolean killed = !target.isAlive() || target.isDeadOrDying();
+        float after=damagePool(target);
+        kim.biryeong.destiny.weapon.AmmoEconomy.afterDamage(source,recipient,attribution,before,after);
+        if(after<before)recipient.setLastHurtByPlayer(source, 100);
+        boolean killed = after<before && (!recipient.isAlive() || recipient.isDeadOrDying());
         // PvP has its own actual-loss payout; do not also grant the old generic 4% kill reward.
-        if (killed && !(target instanceof ServerPlayer)) {
-            AbilityService.onKill(source, target, element);
+        if (killed && !(recipient instanceof ServerPlayer)) {
+            AbilityService.onKill(source, recipient, element);
         }
         return killed;
     }

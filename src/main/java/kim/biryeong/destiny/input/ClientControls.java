@@ -31,6 +31,7 @@ public final class ClientControls {
         final int joined;
         boolean installed, recommended, announced;
         String version = "";
+        final ControlNotices notices = new ControlNotices();
         Session(int joined) { this.joined = joined; }
     }
 
@@ -50,11 +51,23 @@ public final class ClientControls {
                 boolean graceElapsed = server.getTickCount() - session.joined >= HANDSHAKE_GRACE_TICKS;
                 if (session.installed && !session.announced && (!session.version.isEmpty() || graceElapsed)) {
                     session.announced = true;
-                    server.getPlayerList().broadcastSystemMessage(installedMessage(player.getName(), session.version), false);
+                    var message = installedMessage(player.getName(), session.version);
+                    for (var recipient : server.getPlayerList().getPlayers())
+                        SESSIONS.computeIfAbsent(recipient.getUUID(), id -> new Session(server.getTickCount()))
+                                .notices.announce(player.getUUID(), message);
                 } else if (!session.installed && !session.recommended && graceElapsed) {
                     session.recommended = true;
-                    player.sendSystemMessage(recommendation());
+                    session.notices.recommend(recommendation());
                 }
+            }
+            // Drain after all detections: a late handshake cancels a queued recommendation
+            // before any recipient can receive it. Each connection owns its own backlog.
+            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                var session = SESSIONS.get(player.getUUID());
+                boolean blocked = player.hasDisconnected() || !player.connection.hasClientLoaded()
+                        || kim.biryeong.destiny.strike.devils.DevilsLair.participating(player)
+                        || kim.biryeong.destiny.hud.CombatHud.cinematic.test(player);
+                session.notices.drain(blocked).forEach(player::sendSystemMessage);
             }
         });
     }
@@ -67,6 +80,7 @@ public final class ClientControls {
                 ignored -> new Session(player.level().getServer().getTickCount()));
         Capability current = detector.apply(player);
         if (current.detected()) {
+            session.notices.installed();
             if (!session.installed) Guardians.runtime(player).lastShiftPressTick = Integer.MIN_VALUE / 2;
             session.installed = true;
             String version = versionLabel(current.version());

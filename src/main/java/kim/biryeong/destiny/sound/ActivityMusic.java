@@ -5,6 +5,7 @@ import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.crucible.CrucibleRuntime;
 import kim.biryeong.destiny.crucible.ControlMatch;
 import kim.biryeong.destiny.world.TowerSpawnWorld;
+import kim.biryeong.destiny.tutorial.Tutorial;
 import kim.biryeong.minigamelib.cinematic.CameraViews;
 import kim.biryeong.minigamelib.MinigameLib;
 import kim.biryeong.minigamelib.Playback;
@@ -64,6 +65,10 @@ public final class ActivityMusic {
         return Map.copyOf(result);
     }
     static MusicSequence.Scene scene(boolean tower, boolean participant, ControlMatch.Phase phase) {
+        return scene(tower, participant, phase, false);
+    }
+    static MusicSequence.Scene scene(boolean tower, boolean participant, ControlMatch.Phase phase, boolean tutorial) {
+        if (tutorial) return MusicSequence.Scene.TUTORIAL;
         if (participant) return switch (phase) {
             case INTRO -> MusicSequence.Scene.INTRO;
             case RESULTS -> MusicSequence.Scene.RESULTS;
@@ -79,7 +84,9 @@ public final class ActivityMusic {
             // Native respawn replaces ServerPlayer, including the entity sound anchor.
             if (old != null && old.player != player) { stop(old); LISTENERS.remove(player.getUUID()); }
             var listener = LISTENERS.computeIfAbsent(player.getUUID(), id -> new Listener(player));
-            var desired = scene(TowerSpawnWorld.isTower(player.level()), CrucibleRuntime.participating(player), phase);
+            var desired = kim.biryeong.destiny.strike.devils.DevilsLair.briefing(player)
+                    ? MusicSequence.Scene.DEVILS_DESCENT
+                    : scene(TowerSpawnWorld.isTower(player.level()), CrucibleRuntime.participating(player), phase, Tutorial.active(player));
             boolean ready = !player.hasDisconnected() && player.connection.hasClientLoaded() && MusicPacks.ready(player);
             var change = listener.sequence.update(desired, PLAYLISTS.get(desired), ready, listener.playback == null || listener.playback.done(), now);
             if (change.stop()) stop(listener);
@@ -109,6 +116,20 @@ public final class ActivityMusic {
     private static void remove(ServerPlayer p) {
         var listener = LISTENERS.remove(p.getUUID());
         if (listener != null) stop(listener);
+    }
+    /** End this run immediately, including a restart before the next server tick. */
+    public static void tutorialEnded(ServerPlayer p) {
+        ended(p, MusicSequence.Scene.TUTORIAL);
+    }
+    /** Generation cancellation must reset even when a new briefing starts within this tick. */
+    public static void devilsEnded(ServerPlayer p) {
+        ended(p, MusicSequence.Scene.DEVILS_DESCENT);
+    }
+    private static void ended(ServerPlayer p, MusicSequence.Scene scene) {
+        var listener = LISTENERS.get(p.getUUID());
+        if (listener == null || listener.player != p || listener.sequence.scene() != scene) return;
+        listener.sequence.update(MusicSequence.Scene.NONE, List.of(), false, true, System.nanoTime());
+        stop(listener);
     }
     /** Observation for server QA, not an assertion of audible output. */
     public static String current(ServerPlayer p) {

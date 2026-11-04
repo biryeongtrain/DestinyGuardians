@@ -45,7 +45,8 @@ public final class WeaponLoadout {
         return List.copyOf(result);
     }
     public static boolean canUse(ServerPlayer p) {
-        if(!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(p))return false;
+        if (!kim.biryeong.destiny.strike.devils.DevilsLair.allows(p)) return false;
+        if(!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(p)||kim.biryeong.destiny.down.GuardianDown.active(p))return false;
         kim.biryeong.destiny.crucible.CrucibleAmmo.guard(p);
         if(!enabled(p))return true;
         int index=p.getInventory().getSelectedSlot();

@@ -5,6 +5,7 @@ import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
 import net.minecraft.network.protocol.game.ServerboundPunchPacket;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
+import net.minecraft.network.protocol.game.ServerboundSetCarriedItemPacket;
 import kim.biryeong.destiny.camera.SuperCamera;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -34,7 +35,7 @@ public abstract class ServerGamePacketListenerImplMixin {
     @Inject(method = "tickPlayer", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/server/level/ServerPlayer;doTick()V", shift = At.Shift.AFTER))
     private void destiny$retainCameraPhysics(CallbackInfoReturnable<Boolean> cir) {
-        if (SuperCamera.active(player)) {
+        if (kim.biryeong.destiny.down.GuardianDown.holdReviveMovement(player) || SuperCamera.active(player)) {
             resetPosition();
             // Camera ownership cancels handleMovePlayer, so an earlier floating flag
             // is otherwise never recomputed, even after native physics lands the player.
@@ -50,6 +51,10 @@ public abstract class ServerGamePacketListenerImplMixin {
             target = "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
             shift = At.Shift.AFTER), cancellable = true)
     private void destiny$cameraRotation(ServerboundMovePlayerPacket packet, CallbackInfo ci) {
+        if (kim.biryeong.destiny.down.GuardianDown.holdReviveMovement(player)) {
+            resetPosition(); clientIsFloating = false; player.connection.resetFlyingTicks();
+            ci.cancel(); return;
+        }
         if (SuperCamera.move(player, packet)) ci.cancel();
     }
 
@@ -57,6 +62,12 @@ public abstract class ServerGamePacketListenerImplMixin {
             target = "Lnet/minecraft/server/level/ServerPlayer;setLastClientInput(Lnet/minecraft/world/entity/player/Input;)V"))
     private void destiny$input(ServerboundPlayerInputPacket packet, CallbackInfo ci) {
         InputRouter.onPlayerInput(player, player.getLastClientInput(), packet.input());
+    }
+
+    @Inject(method = "handleSetCarriedItem", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedSlot(I)V"))
+    private void destiny$swordSlotChange(ServerboundSetCarriedItemPacket packet, CallbackInfo ci) {
+        kim.biryeong.destiny.weapon.WeaponRuntime.selectedSlotChanging(player,packet.getSlot());
     }
 
     @Inject(method = "handlePlayerAction", at = @At(value = "INVOKE",

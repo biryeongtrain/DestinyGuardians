@@ -188,6 +188,8 @@ public final class WeaponBallisticsW43GameTests {
             // The level rays are deliberately below the boundary, never on an epsilon edge.
             var from=p.getEyePosition();
             e.setPos(e.getX(),from.y+.02-e.getBoundingBox().getYsize()*.75,e.getZ());
+            // Let the repositioned stationary fixture replace its previous rendered history.
+            h.runAfterDelay(6, () -> {
             var box=e.getBoundingBox();
             double[][] oval={{-.22,1},{.22,1},{.48,.48},{.61,0},{.48,-.48},{.22,-1},
                     {-.22,-1},{-.48,-.48},{-.61,0},{-.48,.48},{0,.32},{0,-.32}};
@@ -218,6 +220,7 @@ public final class WeaponBallisticsW43GameTests {
             check(h,WeaponDamageNumbers.active(p)==2,"Mixed confirmed transaction generates two categories");
             mixedNumbers(h,p);
             h.succeed();
+            });
         });
     }
 

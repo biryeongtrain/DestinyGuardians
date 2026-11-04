@@ -133,7 +133,8 @@ public final class TowerSpawnWorld {
         });
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             if (!alive && enabled() && !kim.biryeong.destiny.crucible.CrucibleRuntime.participating(newPlayer)
-                    && !kim.biryeong.destiny.tutorial.Tutorial.active(newPlayer)) teleport(newPlayer);
+                    && !kim.biryeong.destiny.tutorial.Tutorial.active(newPlayer)
+                    && !kim.biryeong.destiny.campaign.RisingCampaign.active(newPlayer)) teleport(newPlayer);
         });
         // Rescue before player physics/damage. Returning is allowed for creative administrators as well.
         ServerTickEvents.START_SERVER_TICK.register(TowerSpawnWorld::tick);

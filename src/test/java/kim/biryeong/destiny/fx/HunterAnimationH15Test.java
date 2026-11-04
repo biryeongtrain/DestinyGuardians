@@ -50,11 +50,11 @@ class HunterAnimationH15Test {
         assertEquals(before, template);
         for (String section : new String[]{"groups", "elements", "outliner", "textures"})
             assertEquals(template.get(section), result.get(section), section);
-        assertEquals(11, result.getAsJsonArray("animations").size());
+        assertEquals(clips.size() + 1, result.getAsJsonArray("animations").size());
         assertEquals("artist_idle", result.getAsJsonArray("animations").get(0).getAsJsonObject().get("name").getAsString());
         var uuids = new HashSet<String>();
         template.getAsJsonArray("groups").forEach(g -> uuids.add(g.getAsJsonObject().get("uuid").getAsString()));
-        for (int i = 1; i <= 10; i++)
+        for (int i = 1; i <= clips.size(); i++)
             assertTrue(uuids.containsAll(result.getAsJsonArray("animations").get(i).getAsJsonObject()
                     .getAsJsonObject("animators").keySet()));
     }

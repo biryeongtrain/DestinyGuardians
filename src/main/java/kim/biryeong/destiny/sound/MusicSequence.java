@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /** Per-listener activity policy. MusicService owns audio duration; only inter-track gaps live here. */
 public final class MusicSequence {
-    public enum Scene { NONE, TOWER, INTRO, RESULTS }
+    public enum Scene { NONE, TOWER, INTRO, RESULTS, TUTORIAL, DEVILS_DESCENT }
     public record Track(String event, double seconds, float volume) {
         public Track {
             if (event == null || !event.matches("[a-z0-9_]+") || !Double.isFinite(seconds)

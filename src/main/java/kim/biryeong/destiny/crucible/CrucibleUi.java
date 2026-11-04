@@ -131,6 +131,20 @@ public final class CrucibleUi {
         f.finish();
     }
 
+    /** Spare centre: the deployed Ghost remains the visual focus throughout the countdown. */
+    public static void death(ServerPlayer p, int remaining, String killer) {
+        Session s = SESSIONS.computeIfAbsent(p.getUUID(), k -> new Session());
+        Frame f = new Frame(p, s);
+        f.sprite("down_header", "crucible_banner", 960, 80, 1800, 110, 20, 0x641F29);
+        f.text("down_title", bold("수호자 사망", WHITE), 380, 56, 40, 540, 30);
+        f.text("down_wait", c("고스트가 부활을 준비하고 있습니다", GREY), 400, 105, 22, 650, 30);
+        f.text("down_killer", c("처치자  ·  " + killer, WHITE), 1510, 75, 24, 620, 30);
+        f.sprite("down_footer", "crucible_banner", 960, 950, 1800, 90, 20, DARK);
+        f.text("down_countdown", bold("부활까지 " + ((remaining + 19) / 20) + "초", WHITE), 310, 943, 30, 500, 30);
+        f.text("down_hint", c("팀 스폰 지점에서 자동 부활", GREY), 1480, 948, 24, 640, 30);
+        f.finish();
+    }
+
     // ---- frame ------------------------------------------------------------------------------------------------
     private static final class Frame {
         final ServerPlayer p; final Session s; final Set<String> used = new HashSet<>();

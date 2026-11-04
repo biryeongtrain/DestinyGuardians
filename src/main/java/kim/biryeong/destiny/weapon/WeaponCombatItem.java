@@ -41,6 +41,9 @@ public final class WeaponCombatItem extends Item implements PolymerItem {
         return WeaponModels.twoHanded(stack) ? Items.CROSSBOW : Items.STICK;
     }
     @Override public Identifier getPolymerItemModel(ItemStack stack, PacketContext context, HolderLookup.Provider lookup) {
+        return WeaponSkins.route(stack, baseItemModel(stack));
+    }
+    private Identifier baseItemModel(ItemStack stack) {
         if (WeaponSwapPresentation.active(stack)) return WeaponSwapPresentation.model(stack);
         if (WeaponInsertPresentation.active(stack)) return WeaponInsertPresentation.model(WeaponItems.entry(stack).orElseThrow());
         if (WeaponIzanagiPresentation.active(stack)) return WeaponIzanagiPresentation.scopedIdle(stack)

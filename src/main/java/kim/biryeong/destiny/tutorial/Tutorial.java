@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.ability.Ability;
 import kim.biryeong.destiny.ability.AbilityService;
+import kim.biryeong.destiny.campaign.RisingCampaign;
+import kim.biryeong.destiny.campaign.RisingMission;
 import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.CharacterLoadouts;
@@ -136,6 +138,8 @@ public final class Tutorial {
         if (initialized) return;
         initialized = true;
         TutorialLoan.init();
+        // W300: "A Guardian Rises" replaces first-time entry unless -Ddestiny.guardianRises=false.
+        RisingCampaign.init();
         ServerTickEvents.END_SERVER_TICK.register(Tutorial::tick);
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             for (var s : List.copyOf(SESSIONS.values())) end(s, false);
@@ -146,7 +150,10 @@ public final class Tutorial {
             if (s != null && s.player == handler.getPlayer()) end(s, false);
         });
         // Recover an interrupted loan even if this account already completed the tutorial.
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> TutorialLoan.restore(handler.getPlayer()));
+        // A Guardian Rises run that is still inside its reconnect grace keeps its mission weapons.
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            if (!RisingCampaign.holdsLoan(handler.getPlayer())) TutorialLoan.restore(handler.getPlayer());
+        });
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
             UUID owner = TARGET_OWNERS.remove(entity.getUUID());
             if (owner == null) return;
@@ -186,6 +193,7 @@ public final class Tutorial {
                     return 1;
                 }))).then(Commands.literal("나가기").executes(c -> {
                     var p = c.getSource().getPlayerOrException();
+                    if (RisingCampaign.leave(p)) return 1;
                     var s = SESSIONS.get(p.getUUID());
                     if (s == null) { c.getSource().sendFailure(Component.literal("진행 중인 튜토리얼이 없습니다.")); return 0; }
                     end(s, true);
@@ -195,15 +203,33 @@ public final class Tutorial {
 
     // ---- public hooks ----------------------------------------------------------------------------------------
 
-    public static boolean active(ServerPlayer p) { return p != null && SESSIONS.containsKey(p.getUUID()); }
+    /**
+     * Legacy tutorial session, or a running Guardian Rises mission whose one-time Rise music may play
+     * (ActivityMusic's tutorial scene and the Tower respawn guard read this).
+     */
+    public static boolean active(ServerPlayer p) {
+        return p != null && (SESSIONS.containsKey(p.getUUID()) || RisingCampaign.musicScene(p));
+    }
 
     /** Every account completes this rollout once; class and legacy completion are irrelevant. */
     public static boolean shouldStart(ServerPlayer p) {
-        return TutorialEnrollment.required(p.getAttachedOrElse(COMPLETED_REVISION, 0), active(p));
+        if (RisingMission.enabled()) return RisingCampaign.shouldStart(p);
+        return TutorialEnrollment.required(p.getAttachedOrElse(COMPLETED_REVISION, 0), SESSIONS.containsKey(p.getUUID()));
     }
+
+    /** Guardian Rises objective tracker on the tutorial HUD layout (subtitles belong to the presentation lane). */
+    public static void campaignHud(ServerPlayer p, String chapter, int index, int total, String title, int count, int goal,
+                                   String key, String action, String toastTitle, String toastSub) {
+        var objectives = goal > 1 ? List.of(new TutorialUi.Objective(title, count, goal)) : List.<TutorialUi.Objective>of();
+        var toast = toastTitle == null ? null : new TutorialUi.Toast(toastTitle, toastSub == null ? "" : toastSub, TutorialUi.GOLD);
+        TutorialUi.render(p, new TutorialUi.View(chapter, Math.max(1, index), total, title, objectives, key, action,
+                null, toast, null, WeaponScreen.active(p)));
+    }
+    public static void campaignHudClear(ServerPlayer p) { TutorialUi.remove(p); }
 
     /** Abilities return piece by piece; each slot unlocks at its own lesson. */
     public static boolean allows(ServerPlayer p, AbilitySlot slot) {
+        if (RisingCampaign.running(p)) return RisingCampaign.allows(p, slot);
         var s = SESSIONS.get(p.getUUID());
         if (s == null || s.player != p) return true;
         Step need = switch (slot) {
@@ -236,6 +262,8 @@ public final class Tutorial {
     }
 
     public static String start(ServerPlayer p) {
+        if (kim.biryeong.destiny.strike.devils.DevilsLair.participating(p)) return "공격전에서 나간 뒤 시작하세요.";
+        if (RisingMission.enabled()) return RisingCampaign.start(p, false);
         if (!p.level().getServer().isSameThread()) return "서버에서 다시 시도하세요.";
         if (!p.isAlive() || p.isSpectator() || p.hasDisconnected()) return "살아 있는 접속 플레이어만 시작할 수 있습니다.";
         if (kim.biryeong.destiny.crucible.CrucibleRuntime.participating(p)) return "시련의 장에 참가 중에는 시작할 수 없습니다.";
@@ -320,6 +348,7 @@ public final class Tutorial {
 
     private static void end(Session s, boolean toTower) {
         if (!SESSIONS.remove(s.player.getUUID(), s)) return;
+        kim.biryeong.destiny.sound.ActivityMusic.tutorialEnded(s.player);
         clearTargets(s);
         TutorialLoan.restore(s.player);
         TutorialVoice.stop(s.player, s.activeVoice);

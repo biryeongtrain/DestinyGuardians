@@ -32,14 +32,14 @@ class CameraMathTest {
         point(-0.45, -rear + 0.25, -rear, CameraMath.desired(0, 0, 0, 0, -45));
     }
 
-    @Test void bowFramingWidensOnlyTheShoulderAndRetainsRearDistance() {
+    @Test void bowFramingMovesTowardCentreWithoutChangingRearDistanceOrAim() {
         for (float yaw : new float[]{0, 37, 90, 180, 270}) {
             for (float pitch : new float[]{-90, -45, 0, 45, 90}) {
                 var standard = CameraMath.desired(10, 64, 20, yaw, pitch);
                 var bow = CameraMath.desiredBow(10, 64, 20, yaw, pitch);
                 double radians = Math.toRadians(yaw);
-                point(standard.x() - .7 * Math.cos(radians), standard.y(),
-                        standard.z() - .7 * Math.sin(radians), bow);
+                point(standard.x() - .3 * Math.cos(radians), standard.y(),
+                        standard.z() - .3 * Math.sin(radians), bow);
             }
         }
         assertThrows(IllegalArgumentException.class, () -> CameraMath.desiredBow(0, 0, 0, Float.NaN, 0));

@@ -177,6 +177,28 @@ public final class CombatW273GameTests {
         h.succeed();
     }
 
+    @GameTest(structure="destiny-test:floor", environment="destiny-test:w90_isolated", maxTicks=20)
+    public void enemyDamagePreservesGuardianMotion(GameTestHelper h) {
+        var player = TestPlayers.hunter(h, Element.SOLAR, new Vec3(2, 1, 2), 0, 0);
+        var enemy = h.spawn(EntityTypes.HUSK, new net.minecraft.core.BlockPos(4, 1, 4));
+        enemy.setNoAi(true);
+        TestCleanup.register(h, () -> { enemy.discard(); TestPlayers.remove(player); });
+        var motion = new Vec3(.25, .18, -.35);
+        var source = enemy.damageSources().mobAttack(enemy);
+        player.setDeltaMovement(motion);
+        player.setOnGround(true);
+        float before = total(player);
+        player.damageCooldownTime = 0;
+        player.hurtServer(player.level(), source, 2);
+        check(h, total(player) < before, "Enemy damage still removes guardian health");
+        check(h, player.getDeltaMovement().equals(motion), "Enemy hurt preserves existing movement");
+        player.knockback(.8, 1, 0, source, 2, true);
+        check(h, player.getDeltaMovement().equals(motion), "Explicit mob attack knockback is suppressed too");
+        player.knockback(.4, 1, 0, player.damageSources().generic(), 1, false);
+        check(h, !player.getDeltaMovement().equals(motion), "Non-mob impulses remain functional");
+        h.succeed();
+    }
+
     private static void checkMotionPacket(GameTestHelper h, Object packet, ServerPlayer target, Vec3 before) {
         if (packet instanceof net.minecraft.network.protocol.BundlePacket<?> bundle) {
             for (var child : bundle.subPackets()) checkMotionPacket(h, child, target, before);

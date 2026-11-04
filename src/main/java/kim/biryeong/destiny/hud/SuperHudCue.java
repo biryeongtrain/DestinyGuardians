@@ -15,7 +15,7 @@ public final class SuperHudCue {
     private int readyAt;
     private int castAt;
 
-    public void sample(int tick, Object equippedSuper, boolean ready, boolean active) {
+    public boolean sample(int tick, Object equippedSuper, boolean ready, boolean active) {
         ready &= !active && equippedSuper != null;
         if (!initialized || !Objects.equals(loadout, equippedSuper)) {
             initialized = true;
@@ -23,13 +23,14 @@ public final class SuperHudCue {
             wasReady = ready;
             wasActive = active;
             showingReady = showingCast = false;
-            return; // Joining/respawning/changing subclass at 100% is not a new charge event.
+            return false; // Joining/respawning/changing subclass at 100% is not a new charge event.
         }
         if (!ready || active || age(tick, readyAt) >= READY_TICKS) showingReady = false;
         // A one-shot super (e.g. Shadowshot) can end immediately after firing.
         // Let its short release finish; lifecycle/loadout reset still cancels it.
         if (age(tick, castAt) >= CAST_TICKS) showingCast = false;
-        if (ready && !wasReady) {
+        boolean charged = ready && !wasReady;
+        if (charged) {
             readyAt = tick;
             showingReady = true;
         }
@@ -39,6 +40,7 @@ public final class SuperHudCue {
         }
         wasReady = ready;
         wasActive = active;
+        return charged;
     }
 
     private static int age(int now, int start) { return now - start; }

@@ -17,4 +17,7 @@ public interface SuperSession {
     /** Cast/roaming protection can end before a projectile or recovery session finishes. */
     default boolean damageResistanceActive() { return true; }
 
+    /** Finite super-weapon shots; empty for supers without a magazine. Not a duration estimate. */
+    default java.util.OptionalInt ammunition() { return java.util.OptionalInt.empty(); }
+    default int ammunitionCapacity() { return 1; }
 }

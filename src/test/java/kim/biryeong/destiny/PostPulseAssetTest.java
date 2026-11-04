@@ -32,6 +32,14 @@ class PostPulseAssetTest {
         while (fields.find()) layout.add(fields.group(1) + " " + fields.group(2));
         assertEquals(List.of("vec4 Tint", "vec4 Shape"), layout);
         assertTrue(shader.contains("uniform sampler2D InSampler;"));
+        var samplers = Pattern.compile("uniform\\s+sampler\\w+\\s+(\\w+)\\s*;").matcher(shader);
+        List<String> samplerNames = new ArrayList<>();
+        while (samplers.find()) samplerNames.add(samplers.group(1));
+        assertEquals(List.of("InSampler"), samplerNames, "Only the unshifted scene input");
+        var blocks = Pattern.compile("uniform\\s+(\\w+)\\s*\\{").matcher(shader);
+        List<String> blockNames = new ArrayList<>();
+        while (blocks.find()) blockNames.add(blocks.group(1));
+        assertEquals(List.of("PulseConfig"), blockNames, "No invented renderer/time inputs");
         assertTrue(shader.contains("layout(location = 0) in vec2 texCoord;"));
         assertTrue(shader.contains("layout(location = 0) out vec4 fragColor;"));
 

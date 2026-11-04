@@ -10,11 +10,12 @@ import net.minecraft.world.level.GameType;
 
 /** Saved with player data so a restart cannot strand an arena player in adventure mode. */
 final class CrucibleRecovery {
-    record State(String mode, String team, boolean noGravity) {
+    record State(String mode, String team, boolean noGravity, boolean deathEffect) {
         static final Codec<State> CODEC = RecordCodecBuilder.create(i -> i.group(
                 Codec.STRING.fieldOf("mode").forGetter(State::mode),
                 Codec.STRING.optionalFieldOf("team", "").forGetter(State::team),
-                Codec.BOOL.optionalFieldOf("no_gravity", false).forGetter(State::noGravity)
+                Codec.BOOL.optionalFieldOf("no_gravity", false).forGetter(State::noGravity),
+                Codec.BOOL.optionalFieldOf("death_effect", false).forGetter(State::deathEffect)
         ).apply(i, State::new));
     }
     static final AttachmentType<State> DATA = AttachmentRegistry.create(
@@ -25,11 +26,24 @@ final class CrucibleRecovery {
     static boolean pending(ServerPlayer p) { return p.getAttached(DATA) != null; }
     static void remember(ServerPlayer p) {
         if (!pending(p)) p.setAttached(DATA, new State(p.gameMode().getName(),
-                p.getTeam() == null ? "" : p.getTeam().getName(), p.isNoGravity()));
+                p.getTeam() == null ? "" : p.getTeam().getName(), p.isNoGravity(), false));
+    }
+    static void markDeathEffect(ServerPlayer p) {
+        State state = p.getAttached(DATA);
+        if (state != null) p.setAttached(DATA, new State(state.mode(), state.team(), state.noGravity(), true));
+    }
+    /** Native post-effects are saved in player NBT. Clear only our persisted ownership after a crash/rejoin. */
+    static void clearDeathEffect(ServerPlayer p) {
+        State state = p.getAttached(DATA);
+        if (state != null && state.deathEffect()) {
+            p.removePostEffect(CrucibleDeathScene.EFFECT);
+            p.setAttached(DATA, new State(state.mode(), state.team(), state.noGravity(), false));
+        }
     }
     static void restore(ServerPlayer p) {
         State state = p.getAttached(DATA);
         if (state == null) return;
+        clearDeathEffect(p);
         p.setGameMode(GameType.byName(state.mode(), GameType.SURVIVAL));
         p.setNoGravity(state.noGravity());
         var board = p.level().getServer().getScoreboard();

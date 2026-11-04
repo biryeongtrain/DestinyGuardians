@@ -177,7 +177,13 @@ public final class ShotgunPatternW105GameTests {
                     "One actual trigger consumes exactly one finite magazine unit regardless of pellet count");
         }
 
+        void sample(Husk target, Actor actor, Point point, double spread, boolean hit, String label, Runnable after) {
+            sample(target, actor, point, spread, hit, label, 6, after);
+        }
         void sample(Husk target, Actor actor, Point point, double spread, boolean hit, String label) {
+            sample(target, actor, point, spread, hit, label, 0, () -> {});
+        }
+        private void sample(Husk target, Actor actor, Point point, double spread, boolean hit, String label, int settleTicks, Runnable after) {
             var eye = actor.player().getEyePosition();
             // W241 rotates the entire authored pellet pattern around one stochastic axis.
             // Predict from a fixed RNG seed, never from observed impacts or production offsets().
@@ -187,9 +193,15 @@ public final class ShotgunPatternW105GameTests {
             target.setHealth(1000);
             bounded(target);
             check(h, WeaponDamageNumbers.active(actor.player()) == 0, "Independent owner starts without feedback");
-            paid(actor);
-            check(h, (target.getHealth() < 1000) == hit, label + " actual fixed footprint at " + point);
-            check(h, WeaponDamageNumbers.active(actor.player()) == (hit ? 1 : 0), label + " confirmed feedback matches actual hit");
+            // Publish the fixture's new stationary position beyond the bounded render-history window.
+            // The geometry/ammo/feedback oracles are unchanged; this test is not a moving-target test.
+            Runnable verify = () -> {
+                paid(actor);
+                check(h, (target.getHealth() < 1000) == hit, label + " actual fixed footprint at " + point);
+                check(h, WeaponDamageNumbers.active(actor.player()) == (hit ? 1 : 0), label + " confirmed feedback matches actual hit");
+                after.run();
+            };
+            if (settleTicks == 0) verify.run(); else h.runAfterDelay(settleTicks, verify);
         }
     }
 
@@ -234,17 +246,17 @@ public final class ShotgunPatternW105GameTests {
             boolean shouldHit = i < positives || i == witnesses.size()-1;
             f.at(time, () -> {
                 var hip = f.fresh(id, z, false);
-                f.sample(target, hip, point, .12, shouldHit, id+" hip sample "+index);
-                f.retire(hip);
+                f.sample(target, hip, point, .12, shouldHit, id+" hip sample "+index, () -> f.retire(hip));
                 aiming[0] = f.fresh(id, z, true);
             });
             f.at(time+30, () -> {
                 var ads = aiming[0];
                 check(h, WeaponAiming.progress(ads.player()) >= .999f && WeaponAiming.bloom(ads.player()) == 0,
                         "Natural production ticks completed ADS without dummy shots or duplicate ticks");
-                f.sample(target, ads, point, .078, shouldHit, id+" ADS sample "+index);
-                f.retire(ads);
-                if (index == witnesses.size()-1) h.succeed();
+                f.sample(target, ads, point, .078, shouldHit, id+" ADS sample "+index, () -> {
+                    f.retire(ads);
+                    if (index == witnesses.size()-1) h.succeed();
+                });
             });
         }
     }

@@ -4,6 +4,7 @@ import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.attachment.ChunkAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import kim.biryeong.destiny.DestinyGuardians;
+import kim.biryeong.destiny.guardian.Element;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +21,7 @@ import org.joml.Vector3f;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 /** Ultimate cosmetics only. BetterModel owns bursts; one Polymer display stretches each thin beam. */
 public final class SuperVfx {
@@ -82,9 +84,17 @@ public final class SuperVfx {
         return stack;
     }
 
+    /** H26 flourish accent at its authored contact; cosmetic only, no strike or damage. */
+    public static void arcDeploy(ServerPlayer player) {
+        accent(() -> SuperEnergyVfx.strike(player));
+        Fx.sound(player.level(), player.position(), net.minecraft.sounds.SoundEvents.PLAYER_ATTACK_SWEEP, .9f, .8f);
+    }
+
     public static void arcSweep(ServerPlayer player, double reach) {
+        accent(() -> SuperEnergyVfx.strike(player));
         HunterVfx.play(player, player.level(), player.position().add(0, 1.1, 0), HunterVfx.Kind.ARC_SWEEP,
                 reach * 0.85, 12, 0, player.getYRot() + 180);
+        accent(() -> H20SuperVfx.arcStrike(player, reach));
     }
 
     public static void arcHit(ServerPlayer player, LivingEntity target) {
@@ -96,7 +106,50 @@ public final class SuperVfx {
         HunterVfx.play(player, player.level(), from, HunterVfx.Kind.SOLAR_MUZZLE, 0.65, 9);
         HunterVfx.play(player, player.level(), impact, HunterVfx.Kind.SOLAR_IMPACT, 1.0, 14);
         trail(player, from, impact, 10);
+        accent(() -> H20SuperVfx.solarShot(player, from));
     }
+
+    /** Call after successful super activation/limb setup. One cosmetic prop cue per owner, 420t watchdog. */
+    public static boolean materialize(ServerPlayer owner, Element element) {
+        boolean started = H20SuperVfx.materialize(owner, element);
+        if (started) accent(() -> SuperEnergyVfx.start(owner, element));
+        return started;
+    }
+
+    /** Void only: call with actual server-side draw progress each charging tick, not elapsed wall time. */
+    public static void charge(ServerPlayer owner, double progress01) { H20SuperVfx.charge(owner, progress01); }
+
+    /** Actual arrow-spawn tick, not button-press tick. Fixed origin prevents a later turn smearing the snap. */
+    public static boolean voidRelease(ServerPlayer owner, Vec3 from, Vec3 direction) {
+        boolean released = H20SuperVfx.release(owner, from, direction);
+        if (released) accent(() -> SuperEnergyVfx.release(owner, from, direction));
+        return released;
+    }
+
+    /** Observes the real projectile's position after SimProjectile.tickAll; never advances or damages it. */
+    public static boolean followArrow(ServerPlayer owner, SimProjectile arrow) {
+        return H20SuperVfx.followArrow(owner, arrow);
+    }
+
+    /** Normal session end only: finish the prop cue, preserving launched arrows and world-space anchors. */
+    public static void dematerialize(ServerPlayer owner, Element element) {
+        H20SuperVfx.dematerialize(owner, element);
+        accent(() -> SuperEnergyVfx.end(owner));
+    }
+
+    /** Separate from activeCount, whose existing contract counts only real Polymer beam holders. */
+    public record LifecycleSnapshot(UUID owner, String kind, String phase, int age, int expiresAt) { }
+    public static List<LifecycleSnapshot> lifecycleSnapshots() { return H20SuperVfx.snapshots(); }
+    public static int lifecycleCount(ServerPlayer owner) { return H20SuperVfx.count(owner); }
+    /** H20 authored particle points requested this server tick, not packets/viewers or live GPU particles. */
+    public static int lifecycleParticleCount(ServerPlayer owner) { return H20SuperVfx.particleCount(owner); }
+
+    /** Separate from legacy beam/lifecycle telemetry: H25 actually allocates reusable item displays. */
+    public record EnergySnapshot(UUID owner, Element element, int displays, String phase, int expiresAt, int lastTick) { }
+    public static List<EnergySnapshot> energySnapshots() { return SuperEnergyVfx.snapshots(); }
+    public static int energyDisplayCount(ServerPlayer owner) { return SuperEnergyVfx.displays(owner); }
+    /** Must run AFTER PlayerAnimations.tick so attachments use the pose just sent this server tick. */
+    public static void tickEquipmentEnergy(MinecraftServer server) { SuperEnergyVfx.tick(server); }
 
     /** Starts one bounded flame tracer, independent of hit/damage logic. */
     public static boolean trail(ServerPlayer owner, Vec3 from, Vec3 to, int ticks) {
@@ -104,8 +157,12 @@ public final class SuperVfx {
     }
 
     public static boolean anchor(ServerPlayer owner, Vec3 position, int ticks) {
-        return HunterVfx.play(owner, owner.level(), position.add(0, 0.25, 0),
+        if (owner == null || !finite(position) || ticks <= 0) return false;
+        boolean started = HunterVfx.play(owner, owner.level(), position.add(0, 0.25, 0),
                 HunterVfx.Kind.VOID_ANCHOR, 1.3, ticks);
+        // Preserve artist/backend availability semantics; never substitute a new mesh for their model.
+        if (started) H20SuperVfx.anchor(owner, position, ticks);
+        return started;
     }
 
     /** Up to three nearest enemies are represented; gameplay still affects every enemy in the radius. */
@@ -160,6 +217,7 @@ public final class SuperVfx {
     }
 
     public static void tick(MinecraftServer server) {
+        H20SuperVfx.tick(server);
         var iterator = BEAMS.iterator();
         while (iterator.hasNext()) {
             Beam beam = iterator.next();
@@ -178,6 +236,8 @@ public final class SuperVfx {
     }
 
     public static void cancelOwned(ServerPlayer owner) {
+        SuperEnergyVfx.cancel(owner);
+        H20SuperVfx.cancelOwned(owner);
         var iterator = BEAMS.iterator();
         while (iterator.hasNext()) {
             Beam beam = iterator.next();
@@ -190,6 +250,7 @@ public final class SuperVfx {
 
     /** End only this anchor's refreshed links, without removing unrelated trails or another anchor. */
     public static void cancelLinks(ServerPlayer owner, Vec3 anchor) {
+        H20SuperVfx.cancelAnchor(owner, anchor);
         var iterator = BEAMS.iterator();
         while (iterator.hasNext()) {
             Beam beam = iterator.next();
@@ -201,6 +262,8 @@ public final class SuperVfx {
     }
 
     public static void clearAll() {
+        SuperEnergyVfx.clear();
+        H20SuperVfx.clearAll();
         var beams = new ArrayList<>(BEAMS);
         BEAMS.clear();
         beams.forEach(SuperVfx::close);
@@ -217,6 +280,13 @@ public final class SuperVfx {
 
     private static boolean finite(Vec3 p) {
         return p != null && Double.isFinite(p.x) && Double.isFinite(p.y) && Double.isFinite(p.z);
+    }
+
+    private static void accent(Runnable action) {
+        try { action.run(); }
+        catch (RuntimeException failure) {
+            DestinyGuardians.LOGGER.warn("H20 ultimate accent failed: {}", failure.toString());
+        }
     }
 
     private static void close(Beam beam) {

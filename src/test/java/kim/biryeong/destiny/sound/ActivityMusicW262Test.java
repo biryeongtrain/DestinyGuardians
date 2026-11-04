@@ -10,6 +10,11 @@ import static kim.biryeong.destiny.sound.MusicSequence.Scene.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActivityMusicW262Test {
+    @Test void tutorialHasItsOwnSceneRegardlessOfStageOrTowerTransition() {
+        assertEquals(TUTORIAL, ActivityMusic.scene(false, false, ControlMatch.Phase.WAITING, true));
+        assertEquals(TUTORIAL, ActivityMusic.scene(true, false, ControlMatch.Phase.WAITING, true));
+        assertEquals(TOWER, ActivityMusic.scene(true, false, ControlMatch.Phase.WAITING, false));
+    }
     @Test void matchOwnershipOverridesTowerUntilLeaveAndCombatIsSilent() {
         assertEquals(TOWER, ActivityMusic.scene(true, false, ControlMatch.Phase.WAITING));
         assertEquals(NONE, ActivityMusic.scene(false, false, ControlMatch.Phase.INTRO));

@@ -15,6 +15,9 @@ public final class ShadowshotTiming {
 
     public boolean requested() { return elapsed >= 0; }
     public boolean drawn() { return elapsed >= DRAW_TICKS && !released; }
+    /** One transition tick; H20 local nocks at .10/.15/.20/.25s. */
+    public int bowStage() { return elapsed < 4 ? 0 : elapsed == 4 ? 1 : elapsed == 5 ? 2 : 3; }
+    public double progress() { return Math.clamp(elapsed / (double) RELEASE_TICKS, 0, 1); }
     public boolean advance() {
         if (elapsed < 0 || released) return false;
         if (++elapsed < RELEASE_TICKS) return false;

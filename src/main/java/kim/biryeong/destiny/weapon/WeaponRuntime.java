@@ -189,6 +189,7 @@ public final class WeaponRuntime {
     public static void init() {
         if (initialized) return;
         initialized = true;
+        WeaponHitscan.init();
         WeaponCombatItem.init();
         WeaponLoadout.init();
         kim.biryeong.destiny.fx.WaveCrestVfx.init();
@@ -755,6 +756,10 @@ public final class WeaponRuntime {
         swordContact(player,contact);
     }
     private static void swordContact(ServerPlayer player,SwordContact contact) {
+        try(var emission=Combat.emission(contact)){swordContactInEmission(player,contact);}
+    }
+    private static void swordContactInEmission(ServerPlayer player,SwordContact contact) {
+        kim.biryeong.destiny.down.GuardianDown.attacked(player);
         var entry=contact.entry;
         var base=contact.base;
         var profile=contact.profile;
@@ -839,6 +844,13 @@ public final class WeaponRuntime {
     }
     private static void emit(ServerPlayer player, WeaponCatalog.Entry entry, WeaponProfile p, boolean playFire, int boltIndex,
                              WeaponHighImpactReserves.Token highImpact, DamageTraits acceptedTraits, WeaponShotTraits.Snapshot shotTraits) {
+        try(var emission=Combat.emission(new Object())){
+            emitInEmission(player,entry,p,playFire,boltIndex,highImpact,acceptedTraits,shotTraits);
+        }
+    }
+    private static void emitInEmission(ServerPlayer player, WeaponCatalog.Entry entry, WeaponProfile p, boolean playFire, int boltIndex,
+                             WeaponHighImpactReserves.Token highImpact, DamageTraits acceptedTraits, WeaponShotTraits.Snapshot shotTraits) {
+        kim.biryeong.destiny.down.GuardianDown.attacked(player);
         // Cosmetic recovery never blocks an accepted shot or leaves its old arms/parts behind.
         WeaponReloadPresentation.clear(player,player.getMainHandItem());
         WeaponInsertPresentation.clear(player,player.getMainHandItem());
@@ -872,6 +884,7 @@ public final class WeaponRuntime {
         Vec3 impactPosition = null;
         var payload=WeaponPayload.capture(player,entry,p);
         HitResult payloadHit=null;
+        AABB payloadBody=null;
         var shotgunShape=ShotgunPatternProfile.shape(entry);
         Vec3 firingAxis = p.mode() == WeaponProfile.Mode.MELEE ? player.getLookAngle().normalize()
                 : WeaponAiming.direction(player, WeaponShotTraits.accuracy(player, shotTraits));
@@ -894,7 +907,9 @@ public final class WeaponRuntime {
                 direction = direction.add(right.scale(Math.cos(angle) * spread)).add(up.scale(Math.sin(angle) * spread)).normalize();
             }
             Vec3 to = loadedEnd(player.level(), from, from.add(direction.scale(WeaponBallistics.traceRange(p))));
-            HitResult hit = trace(player, from, to, p.mode() == WeaponProfile.Mode.MELEE ? 0.15f : 0.03f);
+            var instant = p.mode() == WeaponProfile.Mode.HITSCAN
+                    ? WeaponHitscan.trace(player, from, to, .03f, entity -> enemy(player, entity)) : null;
+            HitResult hit = instant != null ? instant.hit() : trace(player, from, to, .15f);
             // Native AABB.clip reports entry crossings, not a ray beginning inside an inflated
             // enemy box. Dash/point-blank melee must still hit that contact; a zero-distance wall wins.
             if(p.mode()==WeaponProfile.Mode.MELEE
@@ -909,14 +924,15 @@ public final class WeaponRuntime {
                 float targetBase = p.mode() == WeaponProfile.Mode.MELEE ? CrucibleDamage.melee(entry,target,p.damage())
                         : CrucibleDamage.base(entry, target, p.damage());
                 boolean precision = p.mode() != WeaponProfile.Mode.MELEE
-                        && WeaponPrecision.critical(target, from, hit.getLocation(), targetBallistics.precision());
+                        && WeaponPrecision.critical(target, from, hit.getLocation(), targetBallistics.precision(),
+                                instant != null && instant.body() != null ? instant.body() : target.getBoundingBox());
                 float amount = p.mode() == WeaponProfile.Mode.MELEE ? targetBase
                         : targetBallistics.damage(targetBase, from.distanceTo(hit.getLocation()), precision);
                 if(payload.active())amount=PayloadProfile.impact(targetBase,targetBallistics.precision(),precision,
                         ballistics.falloff(from.distanceTo(hit.getLocation())));
                 damage.computeIfAbsent(target, ignored -> new HitDamage()).add(amount, precision, hit.getLocation());
             }
-            if(payload.active())payloadHit=hit;
+            if(payload.active()) { payloadHit=hit; payloadBody=instant==null?null:instant.body(); }
             if (impactPosition == null && hit.getType() != HitResult.Type.MISS) impactPosition = hit.getLocation();
             if (i == 0) Fx.line(player.level(), from, hit.getLocation(), ace.empowered()?0xFFC773:shotTraits.damage().color(), 1.0, 0.5f);
         }
@@ -950,9 +966,11 @@ public final class WeaponRuntime {
         });
         // A separate body-only transaction: explosive final blows cannot become precision kills/refunds.
         // Capture the same source's damage buffs above, never whichever weapon a callback equipped later.
-        for(var contact:WeaponPayload.detonate(player,payload,payloadHit))
+        try(var explosion=Combat.emission(new Object())) {
+        for(var contact:WeaponPayload.detonate(player,payload,payloadHit,payloadBody))
             apply(player,contact.target(),CrucibleDamage.payload(entry, contact.target(), p.damage())*contact.fraction(),false,contact.point(),
                     attribution,perks,WeaponOutlaw.Token.NONE,rampage,WeaponPrecisionReturn.Token.NONE,demolitionist,feedingFrenzy,damageTraits.perkSplash());
+        }
         if (impactPosition != null) DestinySounds.at(player.level(), impactPosition, DestinySounds.weaponKey(entry, "impact"), .8f);
     }
     /** One damage transaction per target: pellet precision cannot multiply every pellet or bypass immunity. */
@@ -983,14 +1001,16 @@ public final class WeaponRuntime {
                                WeaponKillClip.Token perks, WeaponOutlaw.Token reloadPerk, WeaponRampage.Token rampage,
                                WeaponPrecisionReturn.Token precisionReturn, WeaponDemolitionist.Token demolitionist,
                                WeaponFeedingFrenzy.Token feedingFrenzy, DamageTraits damageTraits) {
+        LivingEntity contact = target;
+        target = Combat.damageOwner(contact);
         float effectivePrecision=WeaponPrecisionDamage.boost(WeaponShotTraits.precisionDamage(owner,damageTraits.shotTraits(),hits.precision,target),damageTraits.firingLine().precisionMultiplier())*WeaponShotTraits.precision(owner,damageTraits.shotTraits());
         float effectiveBody = WeaponShotTraits.bodyDamage(damageTraits.shotTraits(), hits.body);
         float requested = (effectiveBody + effectivePrecision) * perks.multiplier() * rampage.multiplier() * damageTraits.multiplier(owner,target);
         if (!Float.isFinite(requested) || requested <= 0) return 0;
         boolean weakened = kim.biryeong.destiny.combat.Statuses.has(target, kim.biryeong.destiny.combat.Keyword.WEAKENED);
-        float before = target.getHealth() + target.getAbsorptionAmount();
-        boolean killed = Combat.damage(owner.level(), owner, target, requested, WeaponShotTraits.element(damageTraits.shotTraits()), attribution);
-        float actual = before - target.getHealth() - target.getAbsorptionAmount();
+        float before = Combat.damagePool(contact);
+        boolean killed = Combat.damage(owner.level(), owner, contact, requested, WeaponShotTraits.element(damageTraits.shotTraits()), attribution);
+        float actual = before - Combat.damagePool(contact);
         if (!Float.isFinite(actual) || actual <= 0) return 0;
         // One cue per observed damage transaction, after immunity/absorption checks.
         kim.biryeong.destiny.hud.WeaponHitHud.confirm(owner, actual, killed);
@@ -1342,6 +1362,9 @@ public final class WeaponRuntime {
         impact(shot,BlockHitResult.miss(shot.position,net.minecraft.core.Direction.UP,BlockPos.containing(shot.position)),shot.position);
     }
     private static boolean tickShot(Shot shot) {
+        try(var emission=Combat.emission(shot)){return tickShotInEmission(shot);}
+    }
+    private static boolean tickShotInEmission(Shot shot) {
         var owner = shot.owner;
         if (!owner.isAlive() || owner.isRemoved() || owner.isSpectator() || owner.hasDisconnected() || owner.level() != shot.level) return false;
         if(shot.breach!=null&&(shot.breach.detonate()||shot.life==0)) {
@@ -1435,6 +1458,9 @@ public final class WeaponRuntime {
         return shot.remaining>.001;
     }
     private static void impact(Shot shot, HitResult hit, Vec3 segmentFrom) {
+        try(var emission=Combat.emission(shot)){impactInEmission(shot,hit,segmentFrom);}
+    }
+    private static void impactInEmission(Shot shot, HitResult hit, Vec3 segmentFrom) {
         var p = shot.profile;
         if(shot.entry.family().equals("sword"))
             kim.biryeong.destiny.sound.SwordSounds.casterImpact(shot.level,hit.getLocation());

@@ -161,7 +161,11 @@ public final class RisingCampaign {
         var s = p == null ? null : SESSIONS.get(p.getUUID());
         return s != null && s.state == State.RUNNING && s.instance != null && p.level() == s.instance.level();
     }
-    /** Mission session exists in any state (queued, preparing, running, reconnect grace). */
+    /** Admission ownership includes queued/preparing/ending and reconnect grace. */
+    public static boolean participating(ServerPlayer p) {
+        return p != null && SESSIONS.containsKey(p.getUUID());
+    }
+    /** Connected running mission, even during a transfer between its zones. */
     public static boolean running(ServerPlayer p) {
         var s = p == null ? null : SESSIONS.get(p.getUUID());
         return s != null && s.state == State.RUNNING && s.disconnectedAt < 0;
@@ -201,6 +205,7 @@ public final class RisingCampaign {
 
     /** Queue a run (or resume the stored checkpoint). Returns null on success, or a Korean error. */
     public static String start(ServerPlayer p, boolean replay) {
+        if (kim.biryeong.destiny.strike.devils.DevilsLair.participating(p)) return "공격전에서 나간 뒤 시작하세요.";
         if (server == null || instances == null || !p.level().getServer().isSameThread()) return "서버에서 다시 시도하세요.";
         if (!p.isAlive() || p.isSpectator() || p.hasDisconnected()) return "살아 있는 접속 플레이어만 시작할 수 있습니다.";
         if (kim.biryeong.destiny.crucible.CrucibleRuntime.participating(p)) return "시련의 장에 참가 중에는 시작할 수 없습니다.";

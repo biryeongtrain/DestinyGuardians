@@ -232,7 +232,12 @@ public final class WeaponPayloadW80GameTests {
 
     private static float splash(ItemStack gun, Vec3 origin, LivingEntity target) {
         double d = nearestDistance(origin, target);
-        return d > 3 ? 0 : (float) (profile(gun).damage() * .65 * Math.max(.25, 1 - d / 3));
+        // User-approved PvE tuning: primary x1.5, special x2.5, applied after payload splitting.
+        // Keep the expected factors independent of Combat's implementation to catch double scaling.
+        double balance=switch(AmmoGeneration.weapon(WeaponItems.entry(gun).orElseThrow()).kind()) {
+            case PRIMARY -> 1.5; case SPECIAL -> 2.5; default -> 1;
+        };
+        return d > 3 ? 0 : (float) (profile(gun).damage() * .65 * balance * Math.max(.25, 1 - d / 3));
     }
 
     private static void blasted(GameTestHelper h, ItemStack gun, Vec3 origin, LivingEntity target) {

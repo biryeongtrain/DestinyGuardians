@@ -9,6 +9,7 @@ import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
 import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.fx.AbilityParticles;
+import kim.biryeong.destiny.sound.DestinySounds;
 import kim.biryeong.destiny.fx.HunterVfx;
 import kim.biryeong.destiny.fx.SimProjectile;
 import kim.biryeong.destiny.guardian.AbilitySlot;
@@ -37,66 +38,78 @@ public final class HunterMelee extends Ability {
 
     @Override
     public boolean activate(ServerPlayer player) {
-        return switch (element()) {
-            case ARC -> combinationBlow(player);
-            case SOLAR -> knife(player);
-            default -> smoke(player);
-        };
-    }
-
-    private boolean combinationBlow(ServerPlayer player) {
-        ServerLevel level = player.level();
-        Vec3 dir = Motion.horizontalLook(player);
-        Motion.setVelocity(player, new Vec3(dir.x * param("lunge", 1.3), 0.1, dir.z * param("lunge", 1.3)));
-        Fx.sound(level, player.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.8f);
-        float damage = (float) param("damage", 12);
-        double reach = param("reach", 2.8);
-        Tasks.run(player, level, age -> {
-            Vec3 center = player.position().add(0, 1, 0).add(Motion.horizontalLook(player).scale(1.2));
-            AbilityParticles.send(player, level, ParticleTypes.ELECTRIC_SPARK, center.x, center.y, center.z, 6, 0.4, 0.4, 0.4, 0.1);
-            if (age == 3) {
-                for (LivingEntity e : Combat.enemiesNear(level, player, center, reach)) {
-                    Fx.line(player, level, player.getEyePosition(), e.position().add(0, e.getBbHeight() / 2, 0), element().color(), 0.25, 1.0f);
-                    if (Combat.damage(level, player, e, AbilityDamage.pvp(this, "strike", e, damage), element())) {
-                        Statuses.apply(player, Keyword.AMPLIFIED, (int) param("amplified_ticks", 120));
-                        player.heal((float) param("heal_on_kill", 4));
+        HunterSkillCast cast = HunterSkillCast.begin(player, slot(), HunterAbilityVisuals.meleeAnimation(element()),
+                HunterAbilityVisuals.melee(element()));
+        if (cast == null) return false;
+        var weaponTraits = kim.biryeong.destiny.weapon.MeleeWeaponTraits.accepted(player);
+        if (element() == Element.ARC) {
+            cast.at(HunterSkillTiming.ARC_LUNGE_TICKS, () -> {
+                Vec3 dir = Motion.horizontalLook(player);
+                Motion.setVelocity(player, new Vec3(dir.x * param("lunge", 1.3), 0.1, dir.z * param("lunge", 1.3)));
+            });
+        }
+        cast.contact(element() == Element.ARC ? HunterSkillTiming.ARC_CONTACT_TICKS : HunterSkillTiming.THROW_CONTACT_TICKS,
+                () -> {
+                    switch (element()) {
+                        case ARC -> combinationBlow(player, cast, weaponTraits);
+                        case SOLAR -> knife(player, cast, weaponTraits);
+                        default -> smoke(player, cast);
                     }
-                }
-                boolean modeled = HunterVfx.play(player, level, center, HunterVfx.Kind.ARC_STRIKE, 1.1, 16);
-                Fx.burst(player, level, center, element(), modeled ? 8 : 30, 0.6);
-                return false;
-            }
-            return true;
-        });
+                });
         return true;
     }
 
-    private boolean knife(ServerPlayer player) {
+    private void combinationBlow(ServerPlayer player, HunterSkillCast cast, kim.biryeong.destiny.weapon.MeleeWeaponTraits.Snapshot traits) {
+        ServerLevel level = cast.level();
+        DestinySounds.hunterOrVanilla(level, player.position(), element(), "melee.cast", SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.8f);
+        float damage = (float) param("damage", 12);
+        double reach = param("reach", 2.8);
+        Vec3 center = player.position().add(0, 1, 0).add(Motion.horizontalLook(player).scale(1.2));
+        AbilityParticles.send(player, level, ParticleTypes.ELECTRIC_SPARK, center.x, center.y, center.z, 6, 0.4, 0.4, 0.4, 0.1);
+        boolean contacted = false;
+        for (LivingEntity e : Combat.enemiesNear(level, player, center, reach)) {
+            contacted = true;
+            Fx.line(player, level, player.getEyePosition(), e.position().add(0, e.getBbHeight() / 2, 0), element().color(), 0.25, 1.0f);
+            if (kim.biryeong.destiny.weapon.MeleeWeaponTraits.poweredDamage(level, player, e, AbilityDamage.pvp(this, "strike", e, damage), element(), traits)) {
+                Statuses.apply(player, Keyword.AMPLIFIED, (int) param("amplified_ticks", 120));
+                player.heal((float) param("heal_on_kill", 4));
+            }
+        }
+        if (contacted) DestinySounds.hunter(level, center, element(), "melee.impact", .8f);
+        boolean modeled = HunterVfx.play(player, level, center, HunterVfx.Kind.ARC_STRIKE, 1.1, 16);
+        Fx.burst(player, level, center, element(), modeled ? 8 : 30, 0.6);
+    }
+
+    private void knife(ServerPlayer player, HunterSkillCast cast, kim.biryeong.destiny.weapon.MeleeWeaponTraits.Snapshot traits) {
+        ServerLevel level = cast.level();
         float damage = (float) param("damage", 10);
         SimProjectile.launch(player, player.getEyePosition(), player.getLookAngle().scale(param("speed", 2.2)), 0.008, 30,
                 HunterAbilityVisuals.melee(element()), 0.6f, element().color(), hit -> {
-                    ServerLevel level = player.level();
+                    if (!cast.valid()) return;
                     boolean modeled = HunterVfx.play(player, level, hit.getLocation(), HunterVfx.Kind.SOLAR_KNIFE, 0.65, 22);
                     Fx.burst(player, level, hit.getLocation(), element(), modeled ? 6 : 20, 0.3);
+                    DestinySounds.hunter(level, hit.getLocation(), element(), "melee.impact", .7f);
                     if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity target) {
-                        Combat.damage(level, player, target, AbilityDamage.pvp(this, "knife", target, damage), element());
+                        kim.biryeong.destiny.weapon.MeleeWeaponTraits.poweredDamage(level, player, target, AbilityDamage.pvp(this, "knife", target, damage), element(), traits);
                         Statuses.scorch(player, target, (int) param("scorch_ticks", 80));
                     }
                 });
-        Fx.sound(player.level(), player.getEyePosition(), SoundEvents.TRIDENT_THROW.value(), 0.8f, 1.5f);
-        return true;
+        DestinySounds.hunterOrVanilla(level, player.getEyePosition(), element(), "melee.cast", SoundEvents.TRIDENT_THROW.value(), 0.8f, 1.5f);
     }
 
-    private boolean smoke(ServerPlayer player) {
+    private void smoke(ServerPlayer player, HunterSkillCast cast) {
+        ServerLevel level = cast.level();
         double radius = param("radius", 3.5);
         int duration = (int) param("duration_ticks", 100);
+        DestinySounds.hunter(level, player.getEyePosition(), element(), "melee.cast", .7f);
         SimProjectile.launch(player, player.getEyePosition(), player.getLookAngle().scale(1.0).add(0, 0.1, 0), 0.05, 60,
                 HunterAbilityVisuals.melee(element()), 0.5f, element().color(), hit -> {
-                    ServerLevel level = player.level();
+                    if (!cast.valid()) return;
                     Vec3 pos = hit.getLocation();
                     boolean modeled = HunterVfx.play(player, level, pos, HunterVfx.Kind.VOID_SMOKE, radius, duration);
-                    Fx.sound(level, pos, SoundEvents.FIRE_EXTINGUISH, 0.8f, 0.6f);
+                    DestinySounds.hunterOrVanilla(level, pos, element(), "melee.impact", SoundEvents.FIRE_EXTINGUISH, 0.8f, 0.6f);
                     Tasks.run(player, level, age -> {
+                        if (!cast.valid()) return false;
                         if (!modeled || age % 4 == 0) {
                             AbilityParticles.send(player, level, ParticleTypes.LARGE_SMOKE, pos.x, pos.y + 0.5, pos.z, modeled ? 2 : 6, radius / 2, 0.5, radius / 2, 0.01);
                             AbilityParticles.send(player, level, Fx.dust(element().color(), 2.0f), pos.x, pos.y + 0.5, pos.z, modeled ? 1 : 4, radius / 2, 0.5, radius / 2, 0.0);
@@ -112,6 +125,5 @@ public final class HunterMelee extends Ability {
                         return age < duration;
                     });
                 });
-        return true;
     }
 }

@@ -59,8 +59,11 @@ public final class CombatHud {
         return Float.isFinite(value) && Float.isFinite(max) && max > 0 ? Math.clamp(value / max, 0f, 1f) : 0f;
     }
 
+    /** W300: owner-private cinematics (campaign presentation) hide the whole combat HUD while true. */
+    public static volatile java.util.function.Predicate<ServerPlayer> cinematic = p -> false;
+
     public static void update(ServerPlayer player) {
-        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) { remove(player); return; }
+        if (kim.biryeong.destiny.inventory.WeaponScreen.active(player) || cinematic.test(player)) { remove(player); return; }
         if (player.isDeadOrDying() || player.isSpectator()) {
             remove(player);
             return;

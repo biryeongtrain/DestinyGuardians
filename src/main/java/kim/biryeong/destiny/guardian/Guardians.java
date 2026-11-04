@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,6 +31,11 @@ public final class Guardians {
 
     public static GuardianRuntime runtime(ServerPlayer player) {
         return RUNTIME.computeIfAbsent(player.getUUID(), id -> new GuardianRuntime());
+    }
+
+    /** Observation only: an eligibility/diagnostic query must not create runtime state. */
+    public static Optional<GuardianRuntime> runtimeIfPresent(ServerPlayer player) {
+        return Optional.ofNullable(RUNTIME.get(player.getUUID()));
     }
 
     public static void forget(ServerPlayer player) {

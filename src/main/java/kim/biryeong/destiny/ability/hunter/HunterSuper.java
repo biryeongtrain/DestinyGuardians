@@ -11,10 +11,13 @@ import kim.biryeong.destiny.combat.Keyword;
 import kim.biryeong.destiny.combat.Statuses;
 import kim.biryeong.destiny.fx.Fx;
 import kim.biryeong.destiny.fx.AbilityParticles;
+import kim.biryeong.destiny.sound.DestinySounds;
 import kim.biryeong.destiny.fx.PostEffects;
 import kim.biryeong.destiny.fx.PlayerAnimations;
 import kim.biryeong.destiny.fx.SimProjectile;
 import kim.biryeong.destiny.fx.SuperVfx;
+import kim.biryeong.destiny.fx.SuperAttackTiming;
+import kim.biryeong.destiny.fx.GoldenGunHandPose;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianClass;
@@ -54,7 +57,7 @@ public final class HunterSuper extends Ability {
     @Override
     public boolean activate(ServerPlayer player) {
         if (!kim.biryeong.destiny.camera.SuperCamera.start(player, element())) return false;
-        SuperSession session = switch (element()) {
+        Session session = switch (element()) {
             case ARC -> new ArcStaff(player);
             case SOLAR -> new GoldenGun(player);
             default -> new Shadowshot(player);
@@ -70,11 +73,15 @@ public final class HunterSuper extends Ability {
             return false;
         }
         PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()), element() == Element.VOID);
+        if (element() == Element.ARC) kim.biryeong.destiny.camera.SuperCamera.blockMovement(player, SuperAttackTiming.ARC_DEPLOY);
+        if (element() != Element.VOID) PlayerAnimations.play(player, "super_" + element().getSerializedName() + "_start");
+        SuperVfx.materialize(player, element());
         // Keep the core silhouette readable; the old eye-height flame cloud obscured first person.
         AbilityParticles.send(player, player.level(), Fx.dust(element().color(), 0.65f), player.getX(), player.getY() + 0.25,
                 player.getZ(), 16, 0.55, 0.12, 0.55, 0.01);
         kim.biryeong.destiny.sound.SuperCastSounds.play(player, player.position(),
                 "hunter." + element().getSerializedName() + ".super.start", SoundEvents.BEACON_ACTIVATE, 1f, 1.4f);
+        session.onActivated();
         return true;
     }
 
@@ -89,6 +96,9 @@ public final class HunterSuper extends Ability {
             this.duration = duration;
         }
 
+        /** Runs only after the camera, limb, equipment and start cue have succeeded. */
+        protected void onActivated() { }
+
         @Override
         public boolean tick() {
             syncHand();
@@ -102,7 +112,9 @@ public final class HunterSuper extends Ability {
 
         @Override
         public void end() {
+            if (player.isAlive() && element() != Element.VOID) DestinySounds.hunter(player.level(), player.position(), element(), "super.end", .65f);
             PostEffects.exit(player, element());
+            SuperVfx.dematerialize(player, element());
             PlayerAnimations.finishSuper(player);
             DisplayHud.removeHud(player, HAND_HUD_ID);
         }
@@ -112,12 +124,18 @@ public final class HunterSuper extends Ability {
             syncHand();
         }
 
-        private void syncHand() {
+        protected void animateHand(ItemDisplayHud hud) { }
+
+        protected void syncHand() {
             if (PlayerAnimations.ownerSeesLimb(player)) {
                 DisplayHud.removeHud(player, HAND_HUD_ID);
                 return;
             }
-            if (handStack == null || DisplayHud.getHud(player, HAND_HUD_ID) != null) return;
+            if (handStack == null) return;
+            if (DisplayHud.getHud(player, HAND_HUD_ID) instanceof ItemDisplayHud existing) {
+                animateHand(existing);
+                return;
+            }
             DisplayHud.removeHud(player, HAND_HUD_ID);
             ItemDisplayHud hud = new ItemDisplayHud();
             hud.setItem(handStack);
@@ -126,6 +144,7 @@ public final class HunterSuper extends Ability {
             hud.setViewRange(1000);
             hud.setAboveHand(true);
             hud.setLocation(1420, 860, 0);
+            animateHand(hud);
             hud.spawn(player, HAND_HUD_ID);
         }
     }
@@ -133,6 +152,8 @@ public final class HunterSuper extends Ability {
     /** Arc: 아크 지팡이. */
     private final class ArcStaff extends Session {
         private int nextStrike;
+        private boolean queued;
+        private final SuperAttackTiming contact = new SuperAttackTiming();
 
         ArcStaff(ServerPlayer player) {
             super(player, (int) param("duration_ticks", 400));
@@ -142,6 +163,10 @@ public final class HunterSuper extends Ability {
 
         @Override
         public boolean tick() {
+            if (age + 1 == SuperAttackTiming.ARC_DEPLOY_SWING) SuperVfx.arcDeploy(player);
+            if (age >= SuperAttackTiming.ARC_DEPLOY && queued) { queued = false; primary(); }
+            if (contact.advance()) strike();
+            if (age == duration - 7) PlayerAnimations.play(player, "super_arc_end");
             if (age % 4 == 0) {
                 Vec3 p = player.position().add(0, 1, 0);
                 AbilityParticles.send(player, player.level(), ParticleTypes.ELECTRIC_SPARK, p.x, p.y, p.z, 4, 0.4, 0.6, 0.4, 0.05);
@@ -151,11 +176,14 @@ public final class HunterSuper extends Ability {
 
         @Override
         public void primary() {
-            if (age < nextStrike) {
-                return;
-            }
-            nextStrike = age + (int) param("strike_interval_ticks", 6);
+            if (age < SuperAttackTiming.ARC_DEPLOY) { queued = true; return; }
+            if (age < nextStrike || age + SuperAttackTiming.ARC_CONTACT >= duration || contact.pending()) return;
+            nextStrike = age + Math.max(SuperAttackTiming.ARC_RECOVERY, (int) param("strike_interval_ticks", SuperAttackTiming.ARC_RECOVERY));
+            contact.request(SuperAttackTiming.ARC_CONTACT);
             PlayerAnimations.superAttack(player, element());
+        }
+
+        private void strike() {
             ServerLevel level = player.level();
             Vec3 eye = player.getEyePosition();
             Vec3 look = player.getLookAngle();
@@ -167,13 +195,14 @@ public final class HunterSuper extends Ability {
                 Vec3 dir = look.yRot((float) a);
                 Fx.line(player, level, eye.add(dir.scale(1.0)), eye.add(dir.scale(reach)), element().glow(), 0.6, 0.7f);
             }
-            Fx.sound(level, eye, SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.2f);
+            DestinySounds.hunterOrVanilla(level, eye, element(), "super.fire", SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.2f);
             int impactVisuals = 0;
             for (LivingEntity e : Combat.enemiesNear(level, player, eye, reach)) {
                 Vec3 to = e.position().add(0, e.getBbHeight() / 2, 0).subtract(eye).normalize();
                 if (to.dot(look) >= cosHalf) {
-                    Combat.damage(level, player, e, AbilityDamage.pvp(HunterSuper.this, "strike", e, (float) param("damage", 16)), element());
-                    if (impactVisuals++ < 2) SuperVfx.arcHit(player, e);
+                    Combat.damage(level, player, e, AbilityDamage.pvp(HunterSuper.this, "strike", e, (float) param("damage", 16)), element(),kim.biryeong.destiny.weapon.AmmoGeneration.SUPER);
+                    if (impactVisuals++ == 0) DestinySounds.hunter(level, e.position(), element(), "super.impact", .65f);
+                    if (impactVisuals <= 2) SuperVfx.arcHit(player, e);
                     PostEffects.pulse(player, element(), true);
                     AbilityParticles.send(player, level, ParticleTypes.ELECTRIC_SPARK, e.getX(), e.getY() + 1, e.getZ(), 12, 0.3, 0.5, 0.3, 0.2);
                 }
@@ -182,6 +211,8 @@ public final class HunterSuper extends Ability {
 
         @Override
         public void end() {
+            queued = false;
+            contact.cancel();
             super.end();
             player.removeEffect(net.minecraft.world.effect.MobEffects.SPEED);
         }
@@ -191,6 +222,10 @@ public final class HunterSuper extends Ability {
     private final class GoldenGun extends Session {
         private int shots;
         private int nextShot;
+        private boolean queued;
+        private int lastContact = -1;
+        private int dissolveAt = -1;
+        private final SuperAttackTiming contact = new SuperAttackTiming();
 
         GoldenGun(ServerPlayer player) {
             super(player, (int) param("duration_ticks", 200));
@@ -200,20 +235,58 @@ public final class HunterSuper extends Ability {
 
         @Override
         public boolean tick() {
-            return shots > 0 && super.tick();
+            if (age >= SuperAttackTiming.SOLAR_DEPLOY && queued) { queued = false; primary(); }
+            if (contact.advance()) {
+                lastContact = age;
+                hitscan(player, param("range", 80), (float) param("damage", 80), element(), Keyword.SCORCHED);
+                DestinySounds.hunterOrVanilla(player.level(), player.getEyePosition(), element(), "super.fire", SoundEvents.TRIDENT_THUNDER.value(), 0.7f, 1.8f);
+                if (shots == 0) dissolveAt = age + 3;
+            }
+            if (age == dissolveAt || age == duration - 7) PlayerAnimations.play(player, "super_solar_end");
+            boolean live = super.tick();
+            return live && (dissolveAt < 0 || age < dissolveAt + 6);
         }
 
         @Override
         public void primary() {
-            if (shots <= 0 || age < nextShot) {
+            if (age < SuperAttackTiming.SOLAR_DEPLOY) { queued = true; return; }
+            if (shots <= 0 || age < nextShot || contact.pending() || age + SuperAttackTiming.SOLAR_CONTACT >= duration) {
                 return;
             }
             shots--;
-            nextShot = age + (int) param("shot_interval_ticks", 8);
+            nextShot = age + Math.max(SuperAttackTiming.SOLAR_RECOVERY, (int) param("shot_interval_ticks", 8));
+            contact.request(SuperAttackTiming.SOLAR_CONTACT);
             PlayerAnimations.superAttack(player, element());
-            hitscan(player, param("range", 80), (float) param("damage", 80), element(), Keyword.SCORCHED);
-            Fx.sound(player.level(), player.getEyePosition(), SoundEvents.TRIDENT_THUNDER.value(), 0.7f, 1.8f);
         }
+
+        @Override
+        protected void animateHand(ItemDisplayHud hud) {
+            var pose = GoldenGunHandPose.sample(age, lastContact < 0 ? -1 : age - lastContact,
+                    duration - age, dissolveAt < 0 ? -1 : age - dissolveAt);
+            hud.updateWhenDataChanged(false);
+            // Separate aim view from GUI inventory yaw. Shared mesh still equips in third-person.
+            hud.setItemTransform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND);
+            hud.setLocation(pose.x(), pose.y(), 0);
+            hud.setScale(pose.size(), pose.size(), 1);
+            // DisplayHud.vecToQuat calls rotateZYX(vector.x, vector.y, vector.z).
+            // Its first slot is therefore physical Z roll; the old third slot pitched X instead.
+            hud.setLeftRotation(pose.roll(), 0, 0);
+            hud.updateWhenDataChanged(true);
+            hud.update();
+        }
+
+        @Override
+        public void end() {
+            queued = false;
+            contact.cancel();
+            super.end();
+        }
+
+        @Override
+        public java.util.OptionalInt ammunition() { return java.util.OptionalInt.of(shots); }
+
+        @Override
+        public int ammunitionCapacity() { return Math.max(1, (int)param("shots", 3)); }
 
         @Override
         public float remaining() {
@@ -225,52 +298,61 @@ public final class HunterSuper extends Ability {
     private final class Shadowshot extends Session {
         private boolean fired;
         private final kim.biryeong.destiny.fx.ShadowshotTiming draw = new kim.biryeong.destiny.fx.ShadowshotTiming();
-        private boolean drawnVisual;
+        private int bowStage = -1;
+        private ShadowshotLift lift;
 
         Shadowshot(ServerPlayer player) {
-            super(player, (int) param("aim_ticks", 200));
+            super(player, kim.biryeong.destiny.fx.ShadowshotTiming.RELEASE_TICKS + 1);
             handItem(kim.biryeong.destiny.fx.SuperVisuals.item(element()));
         }
 
         @Override
         public boolean tick() {
-            if (!draw.requested() && age + 1 >= duration) {
-                primary();
-            }
+            if (lift != null) lift.tick(player);
             if (draw.advance()) releaseArrow();
-            if (!drawnVisual && draw.drawn()) {
-                drawnVisual = true;
-                PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.drawnBow(), true);
+            if (draw.requested() && !fired) {
+                SuperVfx.charge(player, draw.progress());
+                if (bowStage != draw.bowStage()) {
+                    bowStage = draw.bowStage();
+                    PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.bowStage(bowStage), true);
+                }
             }
-            boolean aiming = super.tick();
-            // A timeout starts the same bounded draw; it must not discard the pending arrow.
-            return !fired && (draw.requested() || aiming);
+            boolean live = super.tick();
+            return !fired && live;
         }
 
         @Override
         public void primary() {
+            // Deadfall is one automatic cast. Clicks cannot restart, rush or duplicate it.
+        }
+
+        @Override
+        protected void onActivated() {
             if (!draw.request()) return;
+            lift = new ShadowshotLift(player);
+            bowStage = 0;
+            PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.bowStage(0), true);
             PlayerAnimations.superAttack(player, element());
-            Fx.sound(player.level(), player.getEyePosition(), SoundEvents.CROSSBOW_LOADING_START.value(), .5f, .7f);
         }
 
         private void releaseArrow() {
             fired = true;
-            PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.item(element()), true);
+            PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.releasedBow(), true);
             ServerLevel level = player.level();
             double radius = param("tether_radius", 7);
             int tetherTicks = (int) param("tether_ticks", 160);
             float impactDamage = (float) param("damage", 20);
-            Fx.sound(level, player.getEyePosition(), SoundEvents.ARROW_SHOOT, 1f, 0.6f);
-            SimProjectile.launch(player, player.getEyePosition(), player.getLookAngle().scale(2.6), 0.01, 40,
+            // W36: activation already plays the uninterrupted cast, including release/impact tail.
+            Vec3 release = ShadowshotLift.releasePoint(player);
+            SuperVfx.voidRelease(player, release, player.getLookAngle());
+            SimProjectile arrow = SimProjectile.launch(player, release, player.getLookAngle().scale(2.6), 0.01, 40,
                     shadowArrow(), 0.8f, element().color(), hit -> {
                         Vec3 anchor = hit.getLocation();
                         SuperVfx.anchor(player, anchor, tetherTicks);
                         PostEffects.pulse(player, element(), true);
                         Fx.burst(player, level, anchor, element(), 80, 1.0);
-                        Fx.sound(level, anchor, SoundEvents.ENDER_EYE_DEATH, 1f, 0.5f);
                         for (LivingEntity e : Combat.enemiesNear(level, player, anchor, radius)) {
-                            Combat.damage(level, player, e, AbilityDamage.pvp(HunterSuper.this, "impact", e, impactDamage), element());
+                            Combat.damage(level, player, e, AbilityDamage.pvp(HunterSuper.this, "impact", e, impactDamage), element(),kim.biryeong.destiny.weapon.AmmoGeneration.SUPER);
                         }
                         Tasks.run(player, level, age -> {
                             var enemies = Combat.enemiesNear(level, player, anchor, radius);
@@ -293,6 +375,14 @@ public final class HunterSuper extends Ability {
                             return keep;
                         });
                     });
+            SuperVfx.followArrow(player, arrow);
+        }
+
+        @Override
+        public void end() {
+            // No persistent gravity/flight state to restore, and no task can write after this.
+            lift = null;
+            super.end();
         }
 
         @Override
@@ -326,7 +416,7 @@ public final class HunterSuper extends Ability {
         Fx.line(player, level, eye.add(player.getLookAngle().scale(0.8)).add(0, -0.15, 0), impact, element.color(), 0.3, 1.1f);
         Fx.burst(player, level, impact, element, 30, 0.3);
         if (entity != null && entity.getEntity() instanceof LivingEntity target) {
-            Combat.damage(level, player, target, AbilityDamage.pvp(this, "shot", target, damage), element);
+            Combat.damage(level, player, target, AbilityDamage.pvp(this, "shot", target, damage), element,kim.biryeong.destiny.weapon.AmmoGeneration.SUPER);
             PostEffects.pulse(player, element, true);
             if (keyword != null && target.isAlive()) {
                 if (keyword == Keyword.SCORCHED) Statuses.scorch(player, target, 100);

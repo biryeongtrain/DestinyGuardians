@@ -35,6 +35,11 @@ public final class WeaponFirstPersonHands {
                     throw new IllegalStateException("Invalid first-person arm mapping: " + from);
                 result.put(source, target);
             });
+            // W302 skins mirror every base route under the renamed path.
+            for (var skin : WeaponSkins.ALL) for (var e : java.util.List.copyOf(result.entrySet())) {
+                var from = WeaponSkins.route(skin, e.getKey());
+                if (!from.equals(e.getKey())) result.put(from, WeaponSkins.route(skin, e.getValue()));
+            }
             return Map.copyOf(result);
         } catch (java.io.IOException e) {
             throw new IllegalStateException("Unreadable first-person arm routes", e);

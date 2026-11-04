@@ -24,9 +24,9 @@ public final class CameraMath {
         return desired(eyeX, eyeY, eyeZ, yaw, pitch, SHOULDER_RIGHT);
     }
 
-    /** Wider Void framing exposes the supporting arm and draw hand, rather than a head-occluded pole. */
+    /** Keep the bow nearer the owner's centre aim while retaining clearance around the draw hand. */
     public static Point desiredBow(double eyeX, double eyeY, double eyeZ, float yaw, float pitch) {
-        return desired(eyeX, eyeY, eyeZ, yaw, pitch, 1.15);
+        return desired(eyeX, eyeY, eyeZ, yaw, pitch, 0.75);
     }
 
     private static Point desired(double eyeX, double eyeY, double eyeZ, float yaw, float pitch, double shoulderRight) {

@@ -3,11 +3,13 @@
   "package": "kim.biryeong.destiny.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "MaxHealthLimitMixin",
     "WeaponScreenInputMixin",
     "InventoryMenuInputMixin",
     "InventoryMenuPlayerMixin",
     "InventoryMenuRecipeMixin",
     "WeaponScreenPresentationMixin",
+    "AutoHostStartupMixin",
     "BetterModelClockMixin",
     "BetterModelPoseMixin",
     "BetterModelEquipmentMixin",
@@ -17,9 +19,14 @@
     "PlayerDamageMixin",
     "GuardianFoodMixin",
     "GuardianNaturalHealingMixin",
+    "InventoryAceMixin",
+    "WeaponContainerSynchronizerMixin",
+    "WeaponListenerPresentationMixin",
+    "WeaponUseTraceMixin",
     "SuperCameraPlayerMixin",
     "DisplayCameraAccessor",
-    "ServerGamePacketListenerImplMixin"
+    "ServerGamePacketListenerImplMixin",
+    "WeaponPlayerPoseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -177,6 +177,9 @@ class FireVariantsW98Test {
         assertEquals(Set.of("destiny_music:tower_80d73421", "destiny_music:tower_80d7341d",
                 "destiny_music:tower_80d73424", "destiny_music:tower_80d73419",
                 "destiny_music:crucible_intro", "destiny_music:crucible_result"), musicEvents);
+        // W300 campaign / W303 Guardian Down audio layer (scripts/campaign/campaign_audio_layer.py).
+        for (var value : json(Path.of("art/campaign/w300/audio-inventory.json")).getAsJsonArray("paths"))
+            expected.add(value.getAsString()); // pinned clips already arrive through ReviewedAudioW234
         assertAudioInventory(expected, actual);
         assertSixOggBytes(w98);
     }

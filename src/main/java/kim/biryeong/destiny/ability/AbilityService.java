@@ -179,6 +179,8 @@ public final class AbilityService {
 
     /** 입력 동작 처리. 처리했으면 true. */
     public static boolean perform(ServerPlayer player, GuardianAction action) {
+        if (kim.biryeong.destiny.down.GuardianDown.active(player)) return false;
+        if (!kim.biryeong.destiny.strike.devils.DevilsLair.allows(player)) return false;
         if (!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(player)) return false;
         if (!Guardians.isGuardian(player) || player.isSpectator() || player.isDeadOrDying()) {
             return false;
@@ -202,6 +204,8 @@ public final class AbilityService {
     }
 
     public static Result use(ServerPlayer player, AbilitySlot slot) {
+        if (kim.biryeong.destiny.down.GuardianDown.active(player)) return Result.BUSY;
+        if (!kim.biryeong.destiny.strike.devils.DevilsLair.allows(player)) return Result.BUSY;
         if (!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(player)) return Result.BUSY;
         if (player.isDeadOrDying() || player.isSpectator()) return Result.FAILED;
         if (!Guardians.isGuardian(player)) {
@@ -243,6 +247,8 @@ public final class AbilityService {
         if (!ability.activate(player)) {
             return Result.FAILED;
         }
+        if (slot == AbilitySlot.GRENADE || slot == AbilitySlot.MELEE || slot == AbilitySlot.SUPER)
+            kim.biryeong.destiny.down.GuardianDown.attacked(player);
         if (slot == AbilitySlot.SUPER) {
             data.setSuperEnergy(0f);
         } else {

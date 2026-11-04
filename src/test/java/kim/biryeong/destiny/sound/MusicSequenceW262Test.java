@@ -49,7 +49,7 @@ class MusicSequenceW262Test {
         assertEquals(a,state.update(TOWER, tracks, true, false, 3).play());
     }
     @Test void packReloadDoesNotReplayStartedOrCompletedOneShot() {
-        for (var scene : List.of(INTRO, RESULTS)) for (boolean completed : List.of(false, true)) {
+        for (var scene : List.of(INTRO, RESULTS, TUTORIAL, DEVILS_DESCENT)) for (boolean completed : List.of(false, true)) {
             var oneShot = new MusicSequence();
             oneShot.update(scene, tracks, true, false, 0);
             if (completed) oneShot.update(scene, tracks, true, true, 10_000_000_000L);
@@ -62,5 +62,17 @@ class MusicSequenceW262Test {
     @Test void invalidDurationCannotSpamPlayback() {
         assertThrows(IllegalArgumentException.class, () -> new MusicSequence.Track("a", Double.NaN, .5f));
         assertThrows(IllegalArgumentException.class, () -> new MusicSequence.Track("a", 0, .5f));
+    }
+    @Test void tutorialWaitsForPackPlaysOnceAndStopsOnExitOrRestart() {
+        assertNull(state.update(TUTORIAL, List.of(a), false, false, 0).play());
+        assertEquals(a, state.update(TUTORIAL, List.of(a), true, false, 1).play());
+        assertNull(state.update(TUTORIAL, List.of(a), true, false, 2).play());
+        assertTrue(state.update(TUTORIAL, List.of(a), true, true, 3).stop());
+        assertNull(state.update(TUTORIAL, List.of(a), true, true, 4).play());
+        // The explicit end hook resets even if /tutorial restarts in this same tick.
+        state.update(NONE, List.of(), false, true, 4);
+        assertEquals(a, state.update(TUTORIAL, List.of(a), true, false, 4).play());
+        assertTrue(state.update(NONE, List.of(), false, true, 5).stop());
+        assertEquals(b, state.update(TOWER, List.of(b), true, false, 6).play());
     }
 }

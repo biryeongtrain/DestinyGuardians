@@ -25,6 +25,8 @@ public final class Statuses {
     private static final Map<UUID, ServerLevel> LEVELS = new HashMap<>();
     private static final Map<UUID, net.minecraft.server.level.ServerPlayer> SCORCH_OWNERS = new HashMap<>();
 
+    private static final Map<UUID, kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.GrenadeToken> SCORCH_GRENADES = new HashMap<>();
+
     private Statuses() {
     }
 
@@ -68,18 +70,30 @@ public final class Statuses {
     }
 
     public static void scorch(net.minecraft.server.level.ServerPlayer owner, LivingEntity target, int ticks) {
+        SCORCH_GRENADES.remove(target.getUUID());
         apply(target, Keyword.SCORCHED, ticks);
         SCORCH_OWNERS.put(target.getUUID(), owner);
         target.setLastHurtByPlayer(owner, ticks);
     }
 
+    /** Dedicated grenade attribution; later melee/super scorch explicitly replaces this credit. */
+    public static void scorch(net.minecraft.server.level.ServerPlayer owner, LivingEntity target, int ticks,
+                              kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.GrenadeToken token) {
+        if (!target.isAlive()) return;
+        scorch(owner, target, ticks);
+        if (token != null && token != kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.GrenadeToken.NONE)
+            SCORCH_GRENADES.put(target.getUUID(), token);
+    }
+
     /** Includes vanilla fire ticks, which can kill before the explicit scorch pulse. */
     public static void creditFireDeath(LivingEntity target, net.minecraft.world.damagesource.DamageSource source) {
         var owner = SCORCH_OWNERS.remove(target.getUUID());
+        var grenade = SCORCH_GRENADES.remove(target.getUUID());
         if (owner != null && has(target, Keyword.SCORCHED)
                 && source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE)
                 && owner.isAlive() && !owner.isRemoved()) {
             kim.biryeong.destiny.ability.AbilityService.onKill(owner, target, kim.biryeong.destiny.guardian.Element.SOLAR);
+            kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeKilled(owner, grenade, target);
         }
     }
 
@@ -87,8 +101,10 @@ public final class Statuses {
         ACTIVE.remove(entity.getUUID());
         LEVELS.remove(entity.getUUID());
         SCORCH_OWNERS.remove(entity.getUUID());
+        SCORCH_GRENADES.remove(entity.getUUID());
         if (entity instanceof net.minecraft.server.level.ServerPlayer player) {
             SCORCH_OWNERS.values().removeIf(owner -> owner == player);
+            SCORCH_GRENADES.keySet().retainAll(SCORCH_OWNERS.keySet());
         }
     }
 
@@ -108,11 +124,14 @@ public final class Statuses {
                 it.remove();
                 LEVELS.remove(entry.getKey());
                 SCORCH_OWNERS.remove(entry.getKey());
+                SCORCH_GRENADES.remove(entry.getKey());
                 continue;
             }
             long now = level.getGameTime();
             entry.getValue().values().removeIf(until -> until <= now);
-            if (!entry.getValue().containsKey(Keyword.SCORCHED)) SCORCH_OWNERS.remove(entry.getKey());
+            if (!entry.getValue().containsKey(Keyword.SCORCHED)) {
+                SCORCH_OWNERS.remove(entry.getKey()); SCORCH_GRENADES.remove(entry.getKey());
+            }
             if (entry.getValue().isEmpty()) {
                 it.remove();
                 LEVELS.remove(entry.getKey());
@@ -145,6 +164,7 @@ public final class Statuses {
         ACTIVE.clear();
         LEVELS.clear();
         SCORCH_OWNERS.clear();
+        SCORCH_GRENADES.clear();
     }
 
     private static void clearTarget(LivingEntity target) {

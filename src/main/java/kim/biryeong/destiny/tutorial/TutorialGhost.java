@@ -18,7 +18,7 @@ import org.joml.Vector3f;
 import java.util.Collection;
 
 /** Owner-private Generalist Shell derivative. Eleven displays, interpolated at 10 Hz. */
-final class TutorialGhost {
+public final class TutorialGhost {
     private static final class Attachment extends EntityAttachment {
         final ServerPlayer owner;
         Attachment(ElementHolder holder, ServerPlayer owner) { super(holder, owner, false); this.owner = owner; attach(); }
@@ -36,8 +36,13 @@ final class TutorialGhost {
     private Vec3 position;
     private Vec3 anchor;
     private int speakingUntil;
+    private Vec3 deployedViewer;
+    private Vec3 lookAt;
+    private float scale = SCALE, openTarget = -1f;
+    private int growTicks, grown;
+    static final float SCALE = .72f;
 
-    TutorialGhost(ServerPlayer owner, Vec3 start) {
+    public TutorialGhost(ServerPlayer owner, Vec3 start) {
         this.owner = owner;
         this.position = start;
         add("eye_lens_emissive");
@@ -51,9 +56,9 @@ final class TutorialGhost {
         add("outershell_9b1a9b66");
         add("outershell_bbb26ac5");
         add("outershell_eaa747df");
+        place();
         new Attachment(holder, owner);
         holder.startWatching(owner);
-        place();
     }
 
     private void add(String name) {
@@ -61,8 +66,9 @@ final class TutorialGhost {
         stack.set(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath("destiny", "tutorial/ghost/" + name));
         var e = new ItemDisplayElement(stack);
         e.setItemDisplayContext(ItemDisplayContext.NONE);
-        e.setScale(new Vector3f(.72f));
-        e.setBrightness(name.startsWith("eye") ? new Brightness(15, 15) : new Brightness(10, 12));
+        e.setScale(new Vector3f(SCALE));
+        // W301: full brightness so the (now white) Generalist Shell reads white rather than grey.
+        e.setBrightness(name.startsWith("eye") ? new Brightness(15, 15) : new Brightness(14, 15));
         // ItemDisplayRenderer rotates every item by PI around Y after the display transform.
         // Cancel that rotation so the exported +Z eye actually faces the owner.
         e.setRightRotation(new Quaternionf().rotateY((float) Math.PI));
@@ -74,11 +80,22 @@ final class TutorialGhost {
     }
 
     /** Fixed world anchor, or null to follow the player's shoulder. */
-    void anchor(Vec3 world) { this.anchor = world; }
-    void speak(int untilTick) { speakingUntil = untilTick; }
+    public void anchor(Vec3 world) { this.anchor = world; }
+    /** Reuse the same shell asset for a fixed, fully deployed resurrection ghost. */
+    public void deploy(Vec3 viewer) { deployedViewer = viewer; }
+    public void speak(int untilTick) { speakingUntil = untilTick; }
+    /** Point the eye at a world position (null: face the viewer as before). */
+    public void look(Vec3 world) { lookAt = world; }
+    /** Shell openness override 0..1.15 (negative: automatic). */
+    public void open(float target) { openTarget = target; }
+    /** Transmat in: grows from nothing to full size over {@code ticks}. */
+    public void transmat(int ticks) { growTicks = Math.max(1, ticks); grown = 0; scale = 0f; vanishing = false; }
+    /** Transmat out: shrinks to nothing over {@code ticks} (the Ghost returns into its Guardian). */
+    public void vanish(int ticks) { growTicks = Math.max(1, ticks); grown = 0; vanishing = true; }
+    private boolean vanishing;
     Vec3 position() { return position; }
 
-    void tick(int now) {
+    public void tick(int now) {
         if ((now & 1) != 0) return;
         Vec3 target;
         if (anchor != null) target = anchor.add(0, Math.sin(now / 12.0) * .08, 0);
@@ -90,7 +107,16 @@ final class TutorialGhost {
             target = owner.position().add(right.scale(1.25)).add(forward.scale(2.1)).add(0, owner.getEyeHeight() + .45 + Math.sin(now / 12.0) * .06, 0);
         }
         position = position.distanceToSqr(target) > 64 ? target : position.lerp(target, .3);
-        openness += ((now < speakingUntil ? .28f : 0f) - openness) * .22f;
+        float want = openTarget >= 0 ? openTarget : deployedViewer != null ? 1.15f : now < speakingUntil ? .28f : 0f;
+        openness += (want - openness) * .22f;
+        if (growTicks > 0) {
+            grown = Math.min(growTicks, grown + 2);
+            float u = grown / (float) growTicks;
+            float e = u * u * (3 - 2 * u);
+            scale = SCALE * (vanishing ? 1 - e : e);
+            if (grown >= growTicks) growTicks = 0;
+            for (var part : parts) part.setScale(new Vector3f(scale));
+        }
         place();
         holder.tick();
     }
@@ -98,13 +124,14 @@ final class TutorialGhost {
     private void place() {
         Vec3 offset = position.subtract(owner.position());
         // Face the player: the eye points from the ghost to the player's eyes.
-        Vec3 look = owner.getEyePosition().subtract(position);
+        Vec3 look = (lookAt != null ? lookAt : deployedViewer != null ? deployedViewer : owner.getEyePosition()).subtract(position);
+        if (look.lengthSqr() < 1e-6) look = new Vec3(0, 0, 1);
         float yaw = (float) Math.atan2(look.x, look.z);
         float pitch = (float) -Math.atan2(look.y, Math.sqrt(look.x * look.x + look.z * look.z));
         var facing = new Quaternionf().rotateY(yaw).rotateX(pitch);
         for (int i = 0; i < parts.size(); i++) {
             var part = parts.get(i);
-            var local = i < 3 ? new Vector3f() : new Vector3f(RADIAL[i]).mul(openness);
+            var local = i < 3 ? new Vector3f() : new Vector3f(RADIAL[i]).mul(openness * scale / SCALE);
             facing.transform(local);
             part.setLeftRotation(facing);
             part.setTranslation(local.add((float) offset.x, (float) offset.y, (float) offset.z));
@@ -126,5 +153,5 @@ final class TutorialGhost {
         new Vector3f(-0.0062720f,-0.2140460f,-0.1172277f)
     };
 
-    void destroy() { holder.destroy(); }
+    public void destroy() { holder.destroy(); }
 }
