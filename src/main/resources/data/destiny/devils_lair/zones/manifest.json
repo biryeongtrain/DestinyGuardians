@@ -1,0 +1,1590 @@
+{
+  "schema": 1,
+  "activity": "devils_lair",
+  "fixedPlayers": 3,
+  "sourceRoot": "/Users/qf/Downloads/Devils-Lair-Strike-KO-2026-11-02",
+  "status": "source-derived implementation candidate; native QA required",
+  "samplerSha256": "8db3e9d69576df0eeb1e2811826d48b257af4068a9a4d94014095634404f5563",
+  "generatorSha256": "8412dba92f36e6bd38d7e3df95d00a9f5c25ef8f902b43718c7c30efc3004769",
+  "zones": {
+    "rocketyard": {
+      "size": [
+        128,
+        70,
+        106
+      ],
+      "palette": 86,
+      "runs": 76981,
+      "blocks": 107118,
+      "bytes": 64196,
+      "sourceGlb": "maps_glb/rocketyard.textured.glb",
+      "sourceSha256": "6bcee4b3cbc0171666de0e8771a2de88a60d3078fa35e89516727f965e46eccc",
+      "cropSourceZUp": {
+        "min": [
+          175,
+          -350,
+          -5
+        ],
+        "max": [
+          303,
+          -244,
+          65
+        ]
+      },
+      "mapping": "local = (source.x-minX, source.z-minZ, -source.y+maxY)",
+      "scale": 1.0,
+      "sourceSampleStep": 0.3,
+      "sourceVoxelCount": 107157,
+      "adaptations": [
+        {
+          "kind": "authored_landing_or_boss_pad",
+          "anchor": "IN",
+          "radius": 4,
+          "height": 4,
+          "changedBlocks": 124
+        },
+        {
+          "kind": "authored_bidirectional_flank_step",
+          "cells": [
+            [
+              69,
+              14,
+              29
+            ],
+            [
+              69,
+              14,
+              30
+            ]
+          ],
+          "reason": "Reverse mob route cannot climb the source two-block drop"
+        }
+      ],
+      "changedFromSourceBlocks": 131,
+      "anchorProvenance": [
+        {
+          "id": "RY.IN",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            255,
+            -265,
+            5
+          ],
+          "mappedBeforeProjection": [
+            80.0,
+            10.0,
+            21.0
+          ],
+          "final": [
+            79.5,
+            16.0,
+            20.5
+          ],
+          "projectionBlocks": 6.0415
+        },
+        {
+          "id": "RY.C1",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            239,
+            -281,
+            5
+          ],
+          "mappedBeforeProjection": [
+            64.0,
+            10.0,
+            37.0
+          ],
+          "final": [
+            63.5,
+            10.0,
+            36.5
+          ],
+          "projectionBlocks": 0.7071
+        },
+        {
+          "id": "RY.C2",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            228,
+            -301,
+            5
+          ],
+          "mappedBeforeProjection": [
+            53.0,
+            10.0,
+            57.0
+          ],
+          "final": [
+            53.5,
+            12.0,
+            56.5
+          ],
+          "projectionBlocks": 2.1213
+        },
+        {
+          "id": "RY.L",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            211,
+            -284,
+            5
+          ],
+          "mappedBeforeProjection": [
+            36.0,
+            10.0,
+            40.0
+          ],
+          "final": [
+            35.5,
+            10.0,
+            39.5
+          ],
+          "projectionBlocks": 0.7071
+        },
+        {
+          "id": "RY.R",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            257,
+            -302,
+            7
+          ],
+          "mappedBeforeProjection": [
+            82.0,
+            12.0,
+            58.0
+          ],
+          "final": [
+            81.5,
+            11.0,
+            58.5
+          ],
+          "projectionBlocks": 1.2247
+        },
+        {
+          "id": "RY.OUT",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            206,
+            -319,
+            5
+          ],
+          "mappedBeforeProjection": [
+            31.0,
+            10.0,
+            75.0
+          ],
+          "final": [
+            31.5,
+            12.0,
+            75.5
+          ],
+          "projectionBlocks": 2.1213
+        }
+      ],
+      "reachableCells": 8543,
+      "routeCount": 6,
+      "offlineRoutesVerified": true,
+      "inGameVerified": false,
+      "remainingChecks": [
+        "3-player travel, boss footprint and all spawn LoS",
+        "native screenshots and lighting",
+        "combat corridor widths and all flank paths",
+        "continuous outer boundary and fall-recovery runtime"
+      ]
+    },
+    "refinery": {
+      "size": [
+        100,
+        50,
+        95
+      ],
+      "palette": 79,
+      "runs": 76260,
+      "blocks": 100826,
+      "bytes": 62263,
+      "sourceGlb": "maps_glb/refinery.textured.glb",
+      "sourceSha256": "7c77b7aa66673a13fe47fedf008dd6ab0d1af3b5dad542f357f400e776dd9b27",
+      "cropSourceZUp": {
+        "min": [
+          -15,
+          -180,
+          -5
+        ],
+        "max": [
+          85,
+          -85,
+          45
+        ]
+      },
+      "mapping": "local = (source.x-minX, source.z-minZ, -source.y+maxY)",
+      "scale": 1.0,
+      "sourceSampleStep": 0.3,
+      "sourceVoxelCount": 100925,
+      "adaptations": [
+        {
+          "kind": "authored_landing_or_boss_pad",
+          "anchor": "IN",
+          "radius": 4,
+          "height": 4,
+          "changedBlocks": 182
+        },
+        {
+          "kind": "authored_tall_actor_clearance",
+          "cells": [
+            [
+              45,
+              14,
+              57
+            ],
+            [
+              46,
+              14,
+              56
+            ],
+            [
+              46,
+              14,
+              57
+            ],
+            [
+              46,
+              14,
+              58
+            ],
+            [
+              47,
+              14,
+              57
+            ],
+            [
+              47,
+              14,
+              58
+            ],
+            [
+              47,
+              14,
+              59
+            ],
+            [
+              48,
+              14,
+              58
+            ],
+            [
+              52,
+              14,
+              64
+            ],
+            [
+              53,
+              14,
+              63
+            ],
+            [
+              53,
+              14,
+              64
+            ],
+            [
+              53,
+              14,
+              65
+            ],
+            [
+              54,
+              14,
+              64
+            ],
+            [
+              54,
+              14,
+              65
+            ],
+            [
+              54,
+              14,
+              66
+            ],
+            [
+              55,
+              14,
+              65
+            ],
+            [
+              61,
+              19,
+              71
+            ],
+            [
+              62,
+              19,
+              70
+            ],
+            [
+              62,
+              19,
+              71
+            ],
+            [
+              62,
+              19,
+              72
+            ],
+            [
+              63,
+              19,
+              71
+            ]
+          ],
+          "reason": "Native RF.C-to-entry path: full voxel and top slabs block the three-cell navigation envelope of 2.3-block actors"
+        }
+      ],
+      "changedFromSourceBlocks": 210,
+      "anchorProvenance": [
+        {
+          "id": "RF.IN",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            6,
+            -108,
+            6
+          ],
+          "mappedBeforeProjection": [
+            21.0,
+            11.0,
+            23.0
+          ],
+          "final": [
+            28.5,
+            12.0,
+            28.5
+          ],
+          "projectionBlocks": 9.3541
+        },
+        {
+          "id": "RF.G",
+          "kind": "source_reference_projected_to_reachable_voxel",
+          "sourceReference": "o_ghost_scan_cage_orb",
+          "sourceXYZ": [
+            28.00349,
+            -131.09035,
+            7.4045687
+          ],
+          "mappedBeforeProjection": [
+            43.00349,
+            12.404568699999999,
+            46.09035
+          ],
+          "final": [
+            43.5,
+            13.0,
+            46.5
+          ],
+          "projectionBlocks": 0.8769
+        },
+        {
+          "id": "RF.A",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            10,
+            -128,
+            6
+          ],
+          "mappedBeforeProjection": [
+            25.0,
+            11.0,
+            43.0
+          ],
+          "final": [
+            25.5,
+            12.0,
+            51.5
+          ],
+          "projectionBlocks": 8.5732
+        },
+        {
+          "id": "RF.B",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            43,
+            -122,
+            6
+          ],
+          "mappedBeforeProjection": [
+            58.0,
+            11.0,
+            37.0
+          ],
+          "final": [
+            57.5,
+            11.0,
+            37.5
+          ],
+          "projectionBlocks": 0.7071
+        },
+        {
+          "id": "RF.C",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            48,
+            -151,
+            13
+          ],
+          "mappedBeforeProjection": [
+            63.0,
+            18.0,
+            66.0
+          ],
+          "final": [
+            62.5,
+            18.0,
+            68.5
+          ],
+          "projectionBlocks": 2.5495
+        },
+        {
+          "id": "RF.D",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            15,
+            -152,
+            6
+          ],
+          "mappedBeforeProjection": [
+            30.0,
+            11.0,
+            67.0
+          ],
+          "final": [
+            34.5,
+            12.0,
+            62.5
+          ],
+          "projectionBlocks": 6.442
+        },
+        {
+          "id": "RF.EXIT",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            43,
+            -154,
+            7
+          ],
+          "mappedBeforeProjection": [
+            58.0,
+            12.0,
+            69.0
+          ],
+          "final": [
+            57.5,
+            12.0,
+            68.5
+          ],
+          "projectionBlocks": 0.7071
+        },
+        {
+          "id": "RF.source.o_laserweb_behavior0302",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            41.40148,
+            -148.872,
+            6.6324377
+          ],
+          "final": [
+            56.40148,
+            11.6324377,
+            63.872000000000014
+          ],
+          "worldID": "C4639D9E392F8173"
+        },
+        {
+          "id": "RF.source.o_laserweb_behavior0301",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            39.275482,
+            -150.998,
+            6.6324377
+          ],
+          "final": [
+            54.275482,
+            11.6324377,
+            65.99799999999999
+          ],
+          "worldID": "E3F80248B7108D3A"
+        },
+        {
+          "id": "RF.source.o_laserweb_behavior0203",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            33.667538,
+            -149.61092,
+            6.6324377
+          ],
+          "final": [
+            48.667538,
+            11.6324377,
+            64.61092
+          ],
+          "worldID": "4E3595C785C4ACED"
+        },
+        {
+          "id": "RF.source.o_laserweb_behavior0202",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            37.903877,
+            -145.3745,
+            6.6324377
+          ],
+          "final": [
+            52.903877,
+            11.6324377,
+            60.37450000000001
+          ],
+          "worldID": "4D2E583546A0B1C3"
+        },
+        {
+          "id": "RF.source.o_laserweb_behavior0201",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            35.77788,
+            -147.5005,
+            6.6324377
+          ],
+          "final": [
+            50.77788,
+            11.6324377,
+            62.50049999999999
+          ],
+          "worldID": "9A5FF61C95AFBEB3"
+        },
+        {
+          "id": "RF.source.o_laserweb_behavior0102",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            34.286602,
+            -141.75735,
+            6.6324377
+          ],
+          "final": [
+            49.286602,
+            11.6324377,
+            56.75735
+          ],
+          "worldID": "472668248FD44D71"
+        },
+        {
+          "id": "RF.source.o_laserweb_behavior0101",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            32.16059,
+            -143.88339,
+            6.6324377
+          ],
+          "final": [
+            47.16059,
+            11.6324377,
+            58.88338999999999
+          ],
+          "worldID": "3BD1CCA909E24BEC"
+        },
+        {
+          "id": "RF.source.o_laserweb_pillblocker0101",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            31.59492,
+            -143.31769,
+            6.6324377
+          ],
+          "final": [
+            46.59492,
+            11.6324377,
+            58.31769
+          ],
+          "worldID": "CE9D3CF177668489"
+        },
+        {
+          "id": "RF.source.o_laserweb_pillblocker0102",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            33.720905,
+            -141.19168,
+            6.6324377
+          ],
+          "final": [
+            48.720905,
+            11.6324377,
+            56.19167999999999
+          ],
+          "worldID": "9BBC4B35F277517D"
+        },
+        {
+          "id": "RF.source.o_laserweb_pillblocker0201",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            35.070774,
+            -146.7934,
+            6.6324377
+          ],
+          "final": [
+            50.070774,
+            11.6324377,
+            61.79339999999999
+          ],
+          "worldID": "276CCEA2494714DB"
+        },
+        {
+          "id": "RF.source.o_laserweb_pillblocker0202",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            37.19677,
+            -144.66739,
+            6.6324377
+          ],
+          "final": [
+            52.19677,
+            11.6324377,
+            59.66739000000001
+          ],
+          "worldID": "8858F5E677BD8DD8"
+        },
+        {
+          "id": "RF.source.o_laserweb_pillblocker0203",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            32.96043,
+            -148.90381,
+            6.6324377
+          ],
+          "final": [
+            47.96043,
+            11.6324377,
+            63.90380999999999
+          ],
+          "worldID": "922941AA156579F0"
+        },
+        {
+          "id": "RF.source.o_laserweb_pillblocker0301",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            38.568375,
+            -150.2909,
+            6.6324377
+          ],
+          "final": [
+            53.568375,
+            11.6324377,
+            65.2909
+          ],
+          "worldID": "A2183D40054EA53B"
+        },
+        {
+          "id": "RF.source.o_laserweb_pillblocker0302",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            40.694374,
+            -148.16489,
+            6.6324377
+          ],
+          "final": [
+            55.694374,
+            11.6324377,
+            63.164890000000014
+          ],
+          "worldID": "A001A4145B2056DA"
+        },
+        {
+          "id": "RF.source.o_ghost_scan_cage_cyln",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            29.114115,
+            -132.2933,
+            8.3644
+          ],
+          "final": [
+            44.114115,
+            13.3644,
+            47.29329999999999
+          ],
+          "worldID": "4F40CA3EFAD5CB53"
+        },
+        {
+          "id": "RF.source.o_ghost_scan_cage_orb",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            28.00349,
+            -131.09035,
+            7.4045687
+          ],
+          "final": [
+            43.00349,
+            12.404568699999999,
+            46.09035
+          ],
+          "worldID": "03DF4C0DC30BBF6C"
+        },
+        {
+          "id": "RF.source.o_laserweb03",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            35.643234,
+            -145.41454,
+            6.4875083
+          ],
+          "final": [
+            50.643234,
+            11.4875083,
+            60.41453999999999
+          ],
+          "worldID": "37A80E4471833A84"
+        },
+        {
+          "id": "RF.source.o_laserweb02",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            35.643234,
+            -145.41454,
+            6.4875083
+          ],
+          "final": [
+            50.643234,
+            11.4875083,
+            60.41453999999999
+          ],
+          "worldID": "04F62FF7678A3715"
+        },
+        {
+          "id": "RF.source.o_laserweb01",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            35.643234,
+            -145.41454,
+            6.4875083
+          ],
+          "final": [
+            50.643234,
+            11.4875083,
+            60.41453999999999
+          ],
+          "worldID": "A054F9A5298693F5"
+        }
+      ],
+      "reachableCells": 5749,
+      "routeCount": 6,
+      "offlineRoutesVerified": true,
+      "inGameVerified": false,
+      "remainingChecks": [
+        "3-player travel, boss footprint and all spawn LoS",
+        "native screenshots and lighting",
+        "combat corridor widths and all flank paths",
+        "continuous outer boundary and fall-recovery runtime"
+      ]
+    },
+    "blast": {
+      "size": [
+        130,
+        80,
+        124
+      ],
+      "palette": 86,
+      "runs": 92836,
+      "blocks": 134719,
+      "bytes": 73567,
+      "sourceGlb": "maps_glb/the_blast.textured.glb",
+      "sourceSha256": "8b63dc21c722acacf2ddbb2444fb911b2fa8de94e5343d4d11d44afc66428ba0",
+      "cropSourceZUp": {
+        "min": [
+          -20,
+          -372,
+          -5
+        ],
+        "max": [
+          110,
+          -248,
+          75
+        ]
+      },
+      "mapping": "local = (source.x-minX, source.z-minZ, -source.y+maxY)",
+      "scale": 1.0,
+      "sourceSampleStep": 0.3,
+      "sourceVoxelCount": 134910,
+      "adaptations": [
+        {
+          "kind": "authored_landing_or_boss_pad",
+          "anchor": "IN",
+          "radius": 4,
+          "height": 4,
+          "changedBlocks": 115
+        },
+        {
+          "kind": "authored_landing_or_boss_pad",
+          "anchor": "W",
+          "radius": 4,
+          "height": 9,
+          "changedBlocks": 81
+        },
+        {
+          "kind": "authored_landing_or_boss_pad",
+          "anchor": "B1",
+          "radius": 3,
+          "height": 9,
+          "changedBlocks": 49
+        },
+        {
+          "kind": "authored_landing_or_boss_pad",
+          "anchor": "B2",
+          "radius": 3,
+          "height": 9,
+          "changedBlocks": 267
+        }
+      ],
+      "changedFromSourceBlocks": 520,
+      "anchorProvenance": [
+        {
+          "id": "BL.IN",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            60,
+            -269,
+            5
+          ],
+          "mappedBeforeProjection": [
+            80.0,
+            10.0,
+            21.0
+          ],
+          "final": [
+            80.5,
+            10.0,
+            20.5
+          ],
+          "projectionBlocks": 0.7071
+        },
+        {
+          "id": "BL.H",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            47,
+            -309,
+            4
+          ],
+          "mappedBeforeProjection": [
+            67.0,
+            9.0,
+            61.0
+          ],
+          "final": [
+            68.5,
+            9.0,
+            62.5
+          ],
+          "projectionBlocks": 2.1213
+        },
+        {
+          "id": "BL.L",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            18,
+            -317,
+            5
+          ],
+          "mappedBeforeProjection": [
+            38.0,
+            10.0,
+            69.0
+          ],
+          "final": [
+            38.5,
+            14.0,
+            68.5
+          ],
+          "projectionBlocks": 4.062
+        },
+        {
+          "id": "BL.R",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            78,
+            -316,
+            7
+          ],
+          "mappedBeforeProjection": [
+            98.0,
+            12.0,
+            68.0
+          ],
+          "final": [
+            99.5,
+            10.0,
+            65.5
+          ],
+          "projectionBlocks": 3.5355
+        },
+        {
+          "id": "BL.D1",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            69,
+            -336,
+            6
+          ],
+          "mappedBeforeProjection": [
+            89.0,
+            11.0,
+            88.0
+          ],
+          "final": [
+            89.5,
+            8.0,
+            87.5
+          ],
+          "projectionBlocks": 3.0822
+        },
+        {
+          "id": "BL.W",
+          "kind": "source_reference_projected_to_reachable_voxel",
+          "sourceReference": "walker_actor_80CC073C",
+          "sourceXYZ": [
+            41.50606,
+            -349.42175,
+            7.792013
+          ],
+          "mappedBeforeProjection": [
+            61.50606,
+            12.792013,
+            101.42174999999997
+          ],
+          "final": [
+            61.5,
+            13.0,
+            101.5
+          ],
+          "projectionBlocks": 0.2223
+        },
+        {
+          "id": "BL.B1",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            67,
+            -324,
+            4
+          ],
+          "mappedBeforeProjection": [
+            87.0,
+            9.0,
+            76.0
+          ],
+          "final": [
+            86.5,
+            8.0,
+            75.5
+          ],
+          "projectionBlocks": 1.2247
+        },
+        {
+          "id": "BL.B2",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            28,
+            -331,
+            4
+          ],
+          "mappedBeforeProjection": [
+            48.0,
+            9.0,
+            83.0
+          ],
+          "final": [
+            50.5,
+            14.0,
+            79.5
+          ],
+          "projectionBlocks": 6.5955
+        },
+        {
+          "id": "BL.EXIT",
+          "kind": "source_reference_projected_to_reachable_voxel",
+          "sourceReference": "o_cosmo_strike01_door01",
+          "sourceXYZ": [
+            19.49999,
+            -359.3998,
+            9.399996
+          ],
+          "mappedBeforeProjection": [
+            39.49999,
+            14.399996,
+            111.39980000000003
+          ],
+          "final": [
+            39.5,
+            13.0,
+            111.5
+          ],
+          "projectionBlocks": 1.4036
+        },
+        {
+          "id": "BL.source.o_cosmo_strike01_door01",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            19.49999,
+            -359.3998,
+            9.399996
+          ],
+          "final": [
+            39.49999,
+            14.399996,
+            111.39980000000003
+          ],
+          "worldID": "61134E17D333F79D"
+        }
+      ],
+      "reachableCells": 9486,
+      "routeCount": 8,
+      "offlineRoutesVerified": true,
+      "inGameVerified": false,
+      "remainingChecks": [
+        "3-player travel, boss footprint and all spawn LoS",
+        "native screenshots and lighting",
+        "combat corridor widths and all flank paths",
+        "continuous outer boundary and fall-recovery runtime"
+      ]
+    },
+    "lair": {
+      "size": [
+        107,
+        88,
+        90
+      ],
+      "palette": 88,
+      "runs": 66305,
+      "blocks": 94780,
+      "bytes": 53061,
+      "sourceGlb": "maps_glb/devils_lair.textured.glb",
+      "sourceSha256": "4d85e27c7db9cc3f1473b9da86ba680093d149da1c8aae570fbbef4091c8708d",
+      "cropSourceZUp": {
+        "min": [
+          -82,
+          -440,
+          12
+        ],
+        "max": [
+          25,
+          -350,
+          100
+        ]
+      },
+      "mapping": "local = (source.x-minX, source.z-minZ, -source.y+maxY)",
+      "scale": 1.0,
+      "sourceSampleStep": 0.3,
+      "sourceVoxelCount": 94828,
+      "adaptations": [
+        {
+          "kind": "authored_landing_or_boss_pad",
+          "anchor": "IN",
+          "radius": 4,
+          "height": 4,
+          "changedBlocks": 138
+        }
+      ],
+      "changedFromSourceBlocks": 147,
+      "anchorProvenance": [
+        {
+          "id": "SP.IN",
+          "kind": "source_reference_projected_to_reachable_voxel",
+          "sourceReference": "o_cosmo_strike01_hangar_door01",
+          "sourceXYZ": [
+            -5.0322313,
+            -372.56586,
+            24.49999
+          ],
+          "mappedBeforeProjection": [
+            76.9677687,
+            12.49999,
+            22.565859999999986
+          ],
+          "final": [
+            77.5,
+            12.0,
+            22.5
+          ],
+          "projectionBlocks": 0.7332
+        },
+        {
+          "id": "SP.C",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            -30,
+            -396,
+            26
+          ],
+          "mappedBeforeProjection": [
+            52.0,
+            14.0,
+            46.0
+          ],
+          "final": [
+            53.5,
+            12.0,
+            47.5
+          ],
+          "projectionBlocks": 2.9155
+        },
+        {
+          "id": "SP.L",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            -46,
+            -390,
+            25
+          ],
+          "mappedBeforeProjection": [
+            36.0,
+            13.0,
+            40.0
+          ],
+          "final": [
+            35.5,
+            12.0,
+            39.5
+          ],
+          "projectionBlocks": 1.2247
+        },
+        {
+          "id": "SP.R",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            -16,
+            -413,
+            25
+          ],
+          "mappedBeforeProjection": [
+            66.0,
+            13.0,
+            63.0
+          ],
+          "final": [
+            65.5,
+            17.0,
+            62.5
+          ],
+          "projectionBlocks": 4.062
+        },
+        {
+          "id": "SP.B",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            -52,
+            -415,
+            25
+          ],
+          "mappedBeforeProjection": [
+            30.0,
+            13.0,
+            65.0
+          ],
+          "final": [
+            28.5,
+            8.0,
+            66.5
+          ],
+          "projectionBlocks": 5.4314
+        },
+        {
+          "id": "SP.D1",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            -54,
+            -399,
+            25
+          ],
+          "mappedBeforeProjection": [
+            28.0,
+            13.0,
+            49.0
+          ],
+          "final": [
+            30.5,
+            10.0,
+            49.5
+          ],
+          "projectionBlocks": 3.937
+        },
+        {
+          "id": "SP.D2",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            -27,
+            -422,
+            25
+          ],
+          "mappedBeforeProjection": [
+            55.0,
+            13.0,
+            72.0
+          ],
+          "final": [
+            52.5,
+            12.0,
+            71.5
+          ],
+          "projectionBlocks": 2.7386
+        },
+        {
+          "id": "SP.CHEST",
+          "kind": "authored_gameplay_anchor_on_source_geometry",
+          "sourceReference": null,
+          "sourceXYZ": [
+            -28,
+            -385,
+            25
+          ],
+          "mappedBeforeProjection": [
+            54.0,
+            13.0,
+            35.0
+          ],
+          "final": [
+            52.5,
+            12.0,
+            34.5
+          ],
+          "projectionBlocks": 1.8708
+        },
+        {
+          "id": "SP.source.o_cosmo_strike01_hangar_door01",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            -5.0322313,
+            -372.56586,
+            24.49999
+          ],
+          "final": [
+            76.9677687,
+            12.49999,
+            22.565859999999986
+          ],
+          "worldID": "31024AEC356EAEBF"
+        },
+        {
+          "id": "SP.source.servitor_warp_1",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            -26.911566,
+            -397.95822,
+            32.06017
+          ],
+          "final": [
+            55.088434,
+            20.06017,
+            47.95821999999998
+          ],
+          "worldID": "648A08ED3E52A469"
+        },
+        {
+          "id": "SP.source.servitor_warp_2",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            -25.216791,
+            -391.707,
+            28.747055
+          ],
+          "final": [
+            56.783209,
+            16.747055,
+            41.706999999999994
+          ],
+          "worldID": "C017D60CE8786780"
+        },
+        {
+          "id": "SP.source.servitor_warp_3",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            -31.367842,
+            -385.6599,
+            28.747055
+          ],
+          "final": [
+            50.632158000000004,
+            16.747055,
+            35.65989999999999
+          ],
+          "worldID": "C8FB90FA72870D78"
+        },
+        {
+          "id": "SP.source.servitor_warp_4",
+          "kind": "exact_source_marker_transform",
+          "sourceXYZ": [
+            -37.67245,
+            -387.57187,
+            32.06017
+          ],
+          "final": [
+            44.32755,
+            20.06017,
+            37.57186999999999
+          ],
+          "worldID": "A54BC1542FD1E3A8"
+        },
+        {
+          "id": "SP.S1",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -43,
+            -414,
+            29
+          ],
+          "final": [
+            39.0,
+            17.0,
+            64.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S1.alternative.1",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -41,
+            -412,
+            29
+          ],
+          "final": [
+            41.0,
+            17.0,
+            62.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S1.alternative.2",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -45,
+            -410,
+            34
+          ],
+          "final": [
+            37.0,
+            22.0,
+            60.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S2",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -22,
+            -415,
+            31
+          ],
+          "final": [
+            60.0,
+            19.0,
+            65.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S2.alternative.1",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -22,
+            -417,
+            31
+          ],
+          "final": [
+            60.0,
+            19.0,
+            67.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S2.alternative.2",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -22,
+            -419,
+            32
+          ],
+          "final": [
+            60.0,
+            20.0,
+            69.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S3",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -52,
+            -400,
+            33
+          ],
+          "final": [
+            30.0,
+            21.0,
+            50.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S3.alternative.1",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -56,
+            -396,
+            33
+          ],
+          "final": [
+            26.0,
+            21.0,
+            46.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        },
+        {
+          "id": "SP.S3.alternative.2",
+          "kind": "authored_shield_servitor",
+          "sourceXYZ": [
+            -56,
+            -400,
+            34
+          ],
+          "final": [
+            26.0,
+            22.0,
+            50.0
+          ],
+          "reason": "Distinct arena sectors with alternate clear-air pads; native-world collision and arrival firing-line regression"
+        }
+      ],
+      "reachableCells": 5572,
+      "routeCount": 9,
+      "offlineRoutesVerified": true,
+      "inGameVerified": false,
+      "remainingChecks": [
+        "3-player travel, boss footprint and all spawn LoS",
+        "native screenshots and lighting",
+        "combat corridor widths and all flank paths",
+        "continuous outer boundary and fall-recovery runtime"
+      ]
+    }
+  },
+  "texturesSha256": {
+    "../surface_assets/TexturesPNG/80A683A5.png": "f33cf26922dc8c85bd94e720897288cc6d076737bd49a5372c4340116cfdcc19",
+    "../surface_assets/TexturesPNG/80A7125A.png": "0ac07102ff30cda7857dd34553a8672bd1e01b3df2e57e20ebce64922802454a",
+    "../surface_assets/TexturesPNG/80A71361.png": "ef6b1a9b7c84c4271b27e59efdf1dec1bdbf5a2e0dae398a848e206e00329fe2",
+    "../surface_assets/TexturesPNG/80A7138E.png": "52628420fbb644f9dc08b9da95843714e77db8d615fa171a2fb5e84d91f033ef",
+    "../surface_assets/TexturesPNG/80A71396.png": "0023ecdeaa488930f50a67c684c7940b480f1d888ff1c0fd6464c400acea3649",
+    "../surface_assets/TexturesPNG/80A71410.png": "0225f593f836a68d996f4171bb359ef69df64f618b9e017f270a5e6a275821cd",
+    "../surface_assets/TexturesPNG/80A71418.png": "0f44aab610925a895eb281ce4b62d3b72018e640516acbc18e85bbfb56286964",
+    "../surface_assets/TexturesPNG/80D8A475.png": "54014ccde7c5db59e5b3eac6bba70e9424ca5d45c89f0c48c6f0fce530c6ef79",
+    "../surface_assets/TexturesPNG/810862AA.png": "5f46e5645c4d0d1907dc2e8da1d7acce3c2e82686917132a204c34c9f9fcc16e",
+    "../surface_assets/TexturesPNG/8108635D.png": "f92fad52201131e812e31a88a5ba8fbd6b2644addc9f58a358e74d7b239d042c",
+    "../surface_assets/TexturesPNG/81086377.png": "545bf17b410485228a97a72de45b976bd8e9fe4f0ec026b39f6e6dd4e02ea693",
+    "../surface_assets/TexturesPNG/8108637C.png": "4b882d81247b670ee14f25758ec3ea51601a1133917ed293c53c5a1791eb5cd7",
+    "../surface_assets/TexturesPNG/81086391.png": "9dc2fa0066cedc77e69559ffb037f8ea7d85fc81b098833ebb1deb968bc8409b",
+    "../surface_assets/TexturesPNG/8108639F.png": "a459aa681c4c0b0e9ff0ff954f7adf76e00fc900a7337840c9f0638e156c5ee5",
+    "../surface_assets/TexturesPNG/810863A9.png": "660c6a859e6bfaf0a01e3af254b21eb013c4d05fb33c8b290e6f9357a79aab7a",
+    "../surface_assets/TexturesPNG/810867A7.png": "4d505b6ba637da898fa9e7e02d2d4e309e5ed63d7ce08ea7356b91f1ad6c36a9",
+    "../surface_assets/TexturesPNG/81087D81.png": "da9e74941f67f8ed80924686b4401594bd243393e7437447c28fcd3ebcbd9bfb",
+    "../surface_assets/TexturesPNG/81087DB1.png": "af7afa6b103e3becec6781c63133e3563dfb6520c658273fb29f88842e94cc11",
+    "../surface_assets/TexturesPNG/81087DC3.png": "c0bb18f315a19bd2785ea975441c09e247a120932c6d590fa5ef94f25075e2ed",
+    "../surface_assets/TexturesPNG/81087DCB.png": "0494f00fecb6f55ab9bcb2759ae553754d4612d4a6c215cd2fdb72c29611cfba",
+    "../surface_assets/TexturesPNG/81087F5B.png": "053d90c9e2ed2b4739789c0c19548479951f33936e5ddb315d1c8e7d10949383",
+    "../surface_assets/TexturesPNG/810895C4.png": "5a4e266c0dafa21105f9c4cfb9912272dde932d5b921517b98f0afad1df1609b",
+    "../surface_assets/TexturesPNG/810895C7.png": "9f62caa02e65247ff6734d3a2788c2252a1a856abd4169108dc533fe858b15ec",
+    "../surface_assets/TexturesPNG/810895E9.png": "6235675146b52695fb13fcc9b6236580ec1e631aaf2506ec8d0e4b1165190c78",
+    "../surface_assets/TexturesPNG/8108964C.png": "6b131d2390c436818109e448cb4beb38a26602aafeb76253fb6044f1789ff051",
+    "../surface_assets/TexturesPNG/81089660.png": "2559998d88a6f9ed27d3a3a8bc21ffbec6929c923d378cb4692a93b2088e2f1e",
+    "../surface_assets/TexturesPNG/810896AC.png": "551ad0e964383982e70c3c14423c3bc6bcd41dc5c69f0156ae7d8ff20e0b17ac",
+    "../surface_assets/TexturesPNG/81089760.png": "3fc324c0cd71fa4ba94b70f59bd56f9fcec2ff74e45f9e3e11a85fdefbe4d8f4",
+    "../surface_assets/TexturesPNG/81089CC2.png": "8d9722d23ca6afdef4510e58e092381b7b2d45bede8991b3986302ec7869da55",
+    "../surface_assets/TexturesPNG/81089CC8.png": "8a2b3e3af50da038e1bc6c6478602fad62cbfcdad86494c17488e4c22b1ec712",
+    "../surface_assets/TexturesPNG/81089CE2.png": "e3740f12f2df9c2bc0356e26a0b5a83f99f2bc8a53d9cca8d4db22b9ce6d56df",
+    "../surface_assets/TexturesPNG/81089CF7.png": "e3bfdc0368ff6cf6e0f7eec120d3fafbf0a0bad3ae8b1f20275b0a1e60035890",
+    "../surface_assets/TexturesPNG/81089CFB.png": "d468307330d62f15f8336f757074ccb045f54b27e712578958ccd15647820296",
+    "../surface_assets/TexturesPNG/81089D04.png": "3a6f0890dea6e84557251cfb1a87341c2fe25e7cd019655592f90c52ac6d7017",
+    "../surface_assets/TexturesPNG/81089D1B.png": "6d1420397c713288571c44f1d41ae3306f5c408998ee664e9a77ab783734efd4",
+    "../surface_assets/TexturesPNG/8108B3A0.png": "99b7a91d4d82937d8ece3427f18a417156d9efda01571fefd2a13b9cf5fd2487",
+    "../surface_assets/TexturesPNG/8108EECB.png": "1735c3034bdbfbaab913781e42732b1192454ac179b40fb80d148f11aa9b4eb2",
+    "../surface_assets/TexturesPNG/8108EEED.png": "d34d42e75ab3d57acd41818f6fd16d545146f71c59917d067b426f0d19fd6575",
+    "../surface_assets/TexturesPNG/8108EEF4.png": "e05df6b37475762283376694b241766e004ea80b7679883eb5f187a2c5dc0ffe",
+    "../surface_assets/TexturesPNG/8108EEFB.png": "b03562b2e6c50e9bd75e2d6234dd5713e1eb939a7cb2fb2b3e85431f900d8aba",
+    "../surface_assets/TexturesPNG/8108EF03.png": "3ac7c7814026b55715788da7fcc7b9708e01ff74b925b38bdf973a10b377fb8c",
+    "../surface_assets/TexturesPNG/8108EF0B.png": "f76401dcd816bc369c223dfa0298d12a32c3cc4a75152054bc5bcf68afe92ae4",
+    "../surface_assets/TexturesPNG/8108EF20.png": "8d5971f6f819ca94d70ae6274f6970447ffa48b9b053ad75c88854ceb7a20a8a",
+    "../surface_assets/TexturesPNG/8108F0E7.png": "716e7d951136cbc2c7dbb5c76b4781ea7f9d4d94532f001d2e3fde45d9ca73e8",
+    "../surface_assets/TexturesPNG/8108F1F0.png": "bf196bec53a536c1c3e99a2e8f9f5005c33c7af923460fb3b75ab8eee8ebe890",
+    "../surface_assets/TexturesPNG/8108F1F2.png": "a7f8b47d878d39b0c5bb99e924e45091f3dfcfa7dd39f57f1dc8b8a11769d161",
+    "../surface_assets/TexturesPNG/8108F1F6.png": "38c0aee798bfecde7cdf6ffa26c2adbf9d16f6633e2c749cdaf385919b3945a4",
+    "../surface_assets/TexturesPNG/8108F211.png": "e94a678312eca6d1ca938e674f10bca63a939a92bba887e69e52c9c9487e0381",
+    "../surface_assets/TexturesPNG/81090E7C.png": "6ec64ee01fde710abfc2983912a8f65234b63b7f188aa62e48a54f28f406d5bc",
+    "../surface_assets/TexturesPNG/81090EF2.png": "ae1cd0bb6cccd8e563783033addb9cfe7f10cd0c23978d67653776738082ecdc",
+    "../surface_assets/TexturesPNG/81090EF8.png": "0ca891d256e26e254dec1025ccdac0ef5786684385fa8015f0a5ff49f2ff2d50",
+    "../surface_assets/TexturesPNG/81091609.png": "4b917c6b177d77a2e0a9b6a9cc575ab298068fb1939511db530c35e14971452f",
+    "../surface_assets/TexturesPNG/8109162C.png": "ea79161067c76c0a5d6044b6354088a4f1255d994ce1c66eb537d71f5826531c",
+    "../surface_assets/TexturesPNG/8109165F.png": "d5a3f7bfb37ec9181d4326a2dfb4a9b7468f029686004da706b6a2ef98147c8f",
+    "../surface_assets/TexturesPNG/81091674.png": "ac2a460d11fc4b477a523c7b9c4934a7159f8ba7adfc6cc56f38f755c8c266d8",
+    "../surface_assets/TexturesPNG/8109169C.png": "758a24a9e36f014dbd44e702391c994c113a337894b1408a054cd0114d316196",
+    "../surface_assets/TexturesPNG/810916AA.png": "e703a1a5eb4f6bdffb009bc455c3b6d19d38834b059579aa5f73dc9cecb0db2e",
+    "../surface_assets/TexturesPNG/810916B3.png": "b0b222f490fcdddaeba57eab29d2fce03468c3df485a58ad6d75d19a3511e887",
+    "../surface_assets/TexturesPNG/810916D3.png": "71901298c947295db5906200b57e3b590c74213610826a5f9d50173a7cbff11d",
+    "../surface_assets/TexturesPNG/81091C1D.png": "c8c71c19651d992513e1ba92ccd1fb5baaae2aa7c49148c4d3d893a49ca2fdac",
+    "../surface_assets/TexturesPNG/81092326.png": "9eb0f2c1362fb175221853e67751c6862e9af1745f13684c502ced562904db67",
+    "../surface_assets/TexturesPNG/810947A8.png": "93ab3442dbbde2ae3acacb9a33e9ba567f4997c6e3f70129fc05ca7e39813360",
+    "../surface_assets/TexturesPNG/81094DB0.png": "73f825ac9263bc9225a58ef044041fef18d6fbe204502d0dc6c321ba1bee8197",
+    "../surface_assets/TexturesPNG/81094DDA.png": "b56b977dfdfe60fd9985509e2da2c587522491909e4ea69fe2939caa7903f4f7",
+    "../surface_assets/TexturesPNG/81094DEE.png": "2d4ad009c64b2f1e53bec692ba5d2826079cfa4fe722018fe4ac6786b6554d24",
+    "../surface_assets/TexturesPNG/81094E04.png": "8f0b5653b7c76695c107e33a0aaed575886ed9db578f5c2070b70580c03de113",
+    "../surface_assets/TexturesPNG/81094EDD.png": "20aa1507145423045ba622e1d2efe59a4017c53ce9c29278781dbb82452d94df",
+    "../surface_assets/TexturesPNG/81099693.png": "3c5a314ec36dea5d51b8fc88cba4d7fd57829a5a1277ab53b43e96e87110fb93",
+    "../surface_assets/TexturesPNG/810996F1.png": "0d415ef29b2b09f0354f7a69649f4cd4247777461a4ef843973cf7091d85fdd6",
+    "../surface_assets/TexturesPNG/810996F5.png": "f5a09af0dc4ea4f7448b651a3bdbdde58d5d4e573713d47eb609ee61963b97d0",
+    "../surface_assets/TexturesPNG/81099713.png": "6cfd96c46045c93a5e7db724c46883bc78c303497611cf55341b15b4427125e6",
+    "../surface_assets/TexturesPNG/810997B2.png": "8a1c85d2990d31bda648a7e1afff15f6d80bf56fccdbd12e1209434f4c62710a",
+    "../surface_assets/TexturesPNG/810997C9.png": "96087e86e23f23730b2453958b2140c58b23f37a12561b630bd2e7e04a253846",
+    "../surface_assets/TexturesPNG/81099892.png": "2af20f94b984ab9f5e61ebc2259b7f969735595e9466ca13856d8a3dcc96b1e9",
+    "../surface_assets/TexturesPNG/8109C2B4.png": "f0ca9d8407dc0afd7f50f07d55ebc5adecf08a0047942521f44f69c54f479ef9",
+    "../surface_assets/TexturesPNG/8109C2C6.png": "daa02db3f6a196ddacc464f0fb19eaf37c8c3661692a1b180feb826b01db5ba0",
+    "../surface_assets/TexturesPNG/8109C2D4.png": "caec488af6d76a2098d1cbaeac6f0dd2f350d2822620b4cfc13361ce71eb6ee5"
+  },
+  "outputsSha256": {
+    "rocketyard.zone": "e7d04491950bf99651cafeb4890ceeb71981c0ce1bf850f06d3e1e1d2a9d8037",
+    "refinery.zone": "33407dfbe59306ac6be8d52adbbdb8d607c7f3003b06674423ec50e86db2b810",
+    "blast.zone": "4ecd0b158d613782dfca23bb0cf21dcab78df4dd0f8d335215dc28842743fdfc",
+    "lair.zone": "675f213252277e0711235067279175e1d86300ca281341ad3bd0a6b67dca55f5",
+    "markers.json": "f9a707f6e4b78991cafc3ba4508e81657a55edcefd25d842fc0c231e3d08286f",
+    "routes.json": "97d4ff541b3ffae758e053e9a5992ee13b9b08c65d8c29b28c2ae7c3f5488ceb"
+  }
+}
