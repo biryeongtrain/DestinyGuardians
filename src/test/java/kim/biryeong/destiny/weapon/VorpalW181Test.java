@@ -23,6 +23,7 @@ class VorpalW181Test {
         "canis_major:2066434718:4:2791121719",
         "dimensional_hypotrochoid:1311684613:4:1092097342",
         "retrofit_escapade:3103325054:4:2461260598",
+        "salvager_s_salvo:2060863616:4:254", // W320 curated fixed roll
         "crown_splitter:2782325302:4:99092784",
         "temptation_s_hook:35794111:4:2147541212",
         "nezarec_s_whisper:254636484:4:699056095");
@@ -49,7 +50,7 @@ class VorpalW181Test {
         }
         assertEquals(EXPECTED, actual);
         assertEquals(65, WeaponCatalog.all().size());
-        assertEquals(16, WeaponCatalog.all().stream().filter(VorpalProfile::supports).count());
+        assertEquals(17, WeaponCatalog.all().stream().filter(VorpalProfile::supports).count());
         assertThrows(UnsupportedOperationException.class, () -> VorpalProfile.rolls().clear());
     }
 
@@ -61,7 +62,7 @@ class VorpalW181Test {
             float expected = switch (ammo) { case PRIMARY -> 1.20f; case SPECIAL -> 1.15f; case HEAVY -> 1.10f; };
             assertEquals(expected, VorpalProfile.multiplier(e), e.id());
         }
-        assertEquals(Map.of(WeaponAmmoType.PRIMARY, 6, WeaponAmmoType.SPECIAL, 4, WeaponAmmoType.HEAVY, 6), counts);
+        assertEquals(Map.of(WeaponAmmoType.PRIMARY, 6, WeaponAmmoType.SPECIAL, 5, WeaponAmmoType.HEAVY, 6), counts);
         assertEquals(1.10f, VorpalProfile.multiplier(entry("crown_splitter")));
         assertEquals(1.15f, VorpalProfile.multiplier(entry("nezarec_s_whisper")));
         assertEquals(1.20f, VorpalProfile.multiplier(entry("whispering_slab")));

@@ -45,6 +45,10 @@ public final class SwordCycle {
     }
 
     public int energy() { return energy; }
+    /** W323 perk refund (Duelist's Trance): adds energy, never above capacity; no delay/combo change. */
+    public void restore(int amount) {
+        if (amount > 0) energy = (int) Math.min(CAPACITY, (long) energy + amount);
+    }
     public boolean guarding() { return guarding; }
     public int combo() { return combo; }
 

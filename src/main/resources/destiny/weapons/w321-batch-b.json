@@ -1,0 +1,460 @@
+{
+  "stage": "W321",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "perks": {
+    "target_lock": {
+      "hash": 365154968,
+      "name": "Target Lock",
+      "koName": "대상 조준",
+      "koDescription": "무기가 대상에 오래 머물수록 대상에 주는 피해가 증가합니다.",
+      "description": "Damage increases the longer this weapon remains on a target.",
+      "damage": true,
+      "mechanics": {
+        "hitGapTicks": 4,
+        "startFraction": 0.125,
+        "endFraction": 1.1033,
+        "pveStart": 0.167,
+        "pveEnd": 0.4,
+        "pvpStart": 0.1046,
+        "pvpEnd": 0.25
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 223,
+        "text": "Damage instances within 0.2 seconds of each without missing increments a Magazine-capacity based counter towards a damage increase. Upon scoring >12.5% of Magazine as hits. Grants a continuously increasing damage buff as further hits are scored, up to 110.33% of the Magazine capacity. Visual Buff Stacks to Magazine Thresholds: x2 = >35.5% | x3 = >54.5% | x4 = >74.5% | x5 = >110.33% Initially grants 16.7% ↑18.8% [10.46% ↑12.54% ] increased damage that ramps up to 40% ↑45% [25% ↑30% ] increased damage after scoring >110.33% of Magazine as hits Grants an average of 25% ↑28.3% [15.85% ↑19.02% ] increased damage over an entire Magazine assuming no misses or ammo refill/generation. ↑Damage Increase begins at 18.8% [12.54%] and ends at 45% [30%] . Results in a 28.3% [19.02%] Average Damage Increase over a full Magazine. Target Lock Calculator , courtesy of Clarity .",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Counter = consecutive confirmed direct hits within 0.2s (4 ticks) as a fraction of base magazine; linear ramp between DDC start/end values. Any 4-tick gap, stow or edit resets. Applies to direct damage only."
+    },
+    "envious_assassin": {
+      "hash": 968510818,
+      "name": "Envious Assassin",
+      "koName": "선망의 암살자",
+      "koDescription": "이 무기가 수납된 상태에서 다른 무기로 대상을 처치하면 예비 탄약으로 이 무기의 탄창을 장전합니다. 해당 효과는 처치한 대상의 수에 따라 탄창을 범람시킬 수 있습니다.",
+      "description": "Defeating targets with other weapons before drawing this one transfers ammo to the magazine from reserves. This effect can overflow the magazine based on the number of targets defeated.",
+      "damage": false,
+      "mechanics": {
+        "primaryPerKill": 0.1,
+        "specialPerKill": 0.2,
+        "perActivationCap": 1.0,
+        "totalCapMagazines": 3.0
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 89,
+        "text": "Upon readying the weapon after scoring kills with a different weapon: Overflows Magazine from reserves based on the amount of kills achieved, up to 200% Increased Magazine Size. Primary Weapons : 10% ↑12.5% Increased Magazine Capacity per Kill. Special Weapons | Power Weapons : 20% ↑22.5% Increased Magazine Capacity per Kill. Each activation can grant up to 100% Increased Magazine Capacity if activated with a full magazine. Always rounds magazine up. Can overflow based on the magazine size at the moment of swapping, i.e. if empty and after reaching the max bonus, magazine capacity will be fully refilled.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Kills with another equipped weapon while this one is stowed are counted per item. On ready: rounds += ceil(magazine*min(kills*perKill,1)), capped at 3x magazine (DDC up to +200%), funded only from reserves."
+    },
+    "envious_arsenal": {
+      "hash": 3987942396,
+      "name": "Envious Arsenal",
+      "koName": "선망의 무기고",
+      "koDescription": "이 무기를 꺼내기 전에 다른 두 무기로 피해를 입히면 이 무기의 탄창이 재장전됩니다.",
+      "description": "Dealing damage with both other weapons before readying this weapon refills it from reserves.",
+      "damage": false,
+      "mechanics": {
+        "requiredOtherWeapons": 2
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 88,
+        "text": "Upon dealing ANY damage with both other weapons , and then readying the weapon: Fully refills magazine. Damage-Over-Time effects also work. ↑Passively grants +10 Ammo Generation.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Positive actual damage from both other equipped weapons while this one is stowed; on ready refills the magazine to base capacity from reserves. Enhanced +10 Ammo Generation excluded (base trait)."
+    },
+    "harmony": {
+      "hash": 438098033,
+      "name": "Harmony",
+      "koName": "화음",
+      "koDescription": "다른 무기로 결정타를 기록하면 잠시 동안 이 무기의 공격력과 성능이 증가합니다.",
+      "description": "Final blows with other weapons improve this weapon's damage and performance for a short duration.",
+      "damage": true,
+      "mechanics": {
+        "windowTicks": 60,
+        "durationTicks": 140,
+        "damageMultiplier": 1.2,
+        "handlingBonus": 15
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 112,
+        "text": "Upon readying a weapon within 3 seconds of getting a kill with a different weapon : 20% Increased damage and +15 Handling for 7 ↑8 seconds. Buff persists through stow.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Ready within 3s of a final blow with a different weapon grants +20% damage for 7s; persists through stow. +15 Handling is NOT applied: no sourced handling curve exists for retraced_path/goldtusk in this repo."
+    },
+    "under_over": {
+      "hash": 1870851715,
+      "name": "Under-Over",
+      "koName": "안과 밖",
+      "koDescription": "보호막이 있는 대상에게 추가 피해를 줍니다. 전투원의 보호막에 약간의 추가 피해를 줍니다.",
+      "description": "Deals bonus damage to targets with overshields. Deals a small amount of bonus damage to combatant shields.",
+      "damage": true,
+      "mechanics": {
+        "combatantShieldMultiplier": 1.5,
+        "guardianOvershieldMultiplier": 1.2
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 241,
+        "text": "Passively increases direct damage dealt against shielded enemies. Does not increase the damage of Explosive Damage Perks. 50% ↑55% Increased Damage against Combatant Elemental Shields and Barrier Champion Shields . 125% ↑140% Increased Damage against Combatant Overshields. 20% ↑22% Increased Damage against Guardian Overshields. 20% ↑22% Increased Bodyshot Damage against Guardians with Woven Mail.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Minecraft combatant shields are absorption; elemental shield and overshield cannot be distinguished, so all combatant absorption uses the DDC elemental-shield +50%. Guardian absorption uses DDC Guardian overshield +20%. Whole direct transaction scaled while shield is up; explosive/perk splash excluded."
+    },
+    "golden_tricorn": {
+      "hash": 2610012052,
+      "name": "Golden Tricorn",
+      "koName": "황금 트라이콘",
+      "koDescription": "이 무기로 결정타를 기록하면 공격력이 증가합니다. 이 강화 효과가 활성화되어 있는 동안, 같은 피해 유형의 수류탄 또는 근접 공격으로 처치를 기록하면 공격력과 지속 시간이 크게 증가합니다.",
+      "description": "Final blows with this weapon grant bonus damage. While this buff is active, grenade or melee kills of the same damage type greatly increase its damage and duration.",
+      "damage": true,
+      "mechanics": {
+        "weaponKillMultiplier": 1.15,
+        "weaponKillTicks": 140,
+        "abilityKillMultiplier": 1.5,
+        "abilityKillTicks": 200
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 109,
+        "text": "On Weapon Kill : Golden Tricorn x1 | 15% Increased damage for 7 seconds. Additional Weapon Kills refresh the buff duration to 7 ↑8 seconds. Buff is removed on stow. On Grenade or Powered Melee Kill, while the buff is active, if the Weapon's Element matches the Grenade or Melee Element, respectively: Golden Tricorn x2 | 50% increased damage for 10 seconds. Additional Grenade or Powered Melee Kills refresh the buff duration to 10 seconds. Buff is removed on stow.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Ability kill = any Combat.damage kill attributed ABILITY (grenade/melee/class ability are not distinguished by the runtime) whose element equals the weapon element. Stow clears."
+    },
+    "lasting_impression": {
+      "hash": 3927722942,
+      "name": "Lasting Impression",
+      "koName": "지속되는 인상",
+      "koDescription": "로켓이 적중 지점에 부착되고 잠시 후 폭발합니다. 폭발 반경과 피해가 증가합니다.",
+      "description": "Rockets attach on impact and detonate after a delay. Increases blast radius and damage.",
+      "damage": true,
+      "mechanics": {
+        "delayTicks": 60,
+        "damageMultiplier": 1.35,
+        "blastRadiusScale": 1.15
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 138,
+        "text": "Passively grants +50 Blast Radius. Rockets attach on impact, detonating after 3 seconds, dealing an additional 35% Explosive Damage. ↑Passively grants an additional +5 Blast Radius.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Rocket blast is deferred 3s and follows the struck entity. DDC +50 Blast Radius stat has no stat->meter curve here; local radius x1.15."
+    },
+    "timed_payload": {
+      "hash": 1954620775,
+      "name": "Timed Payload",
+      "koName": "시한 탄두",
+      "koDescription": "투사체가 적에게 부착되고 일정 시간 지연된 후에 폭발합니다.",
+      "description": "Projectiles attached to enemies explode after a short delay.",
+      "damage": true,
+      "mechanics": {
+        "payloadFraction": 0.55,
+        "payloadBonusPve": 0.3,
+        "delayTicks": 12,
+        "radius": 1.5,
+        "splashFloor": 0.5
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 230,
+        "text": "Weapons deal 55% of their Non-Precision Direct Impact Damage as a Timed Payload . Timed Payload detonates after 0.6 seconds of impact, damaging enemies within ? meters. Timed Payload portion deals 30% increased damage and inflicts increased stagger against Combatants. Impact Damage's Precision Multiplier is increased to offset the Timed Payload portion lacking the ability to score Precision Hits . New Ratio = (Base Ratio - 55%) / (1 - 55%) Overall Damage Increase: Damage is increased by 16.5% of the Weapon's Bodyshot Damage. Precision Damage Increase is equal to 16.5% / Precision Multiplier . Bodyshot damage remains the same. Precision Damage remains \"roughly\" the same. ↑Passively grants +5 Stability.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "55% of body-equivalent impact damage is moved into a payload detonating after 0.6s at the struck target (PvE +30%, PvP no bonus); precision damage keeps (mult-0.55) body units. Radius '?' in DDC: local 1.5 blocks, others 50%."
+    },
+    "reservoir_burst": {
+      "hash": 1427256713,
+      "name": "Reservoir Burst",
+      "koName": "충전 점발사격",
+      "koDescription": "탄창이 최대일 때 점발사격이 추가 피해를 줍니다. 이 사격으로 사망한 적은 폭발합니다.",
+      "description": "When the battery is full, your next burst deals additional damage and causes enemies to explode on death.",
+      "damage": true,
+      "mechanics": {
+        "damageMultiplier": 1.3,
+        "burstLatchTicks": 10,
+        "explosionFraction": 1.0,
+        "radius": 3.0
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 186,
+        "text": "Passively grants +30 Magazine Size. While at or above 100% Magazine Capacity : Grants 30% ↑33% Increased damage. Direct Damage Kills cause enemies to explode on death, dealing varying [162] Elemental Damage in a ? metre radius. Damage against Combatants scales with Combatant Rank Modifiers . Linear Fusion Rifles have an additional 1.3x multiplier against Combatants. Reservoir Burst Explosion Damage: High-Impact Fusion: 623? (OLD Loaded Question) Precision Fusion: 623 Rapid Fusion: 637 Aggressive Fusion: 758 Precision LFR: 308 Adaptive Burst LFR: 410",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "Full magazine observed at the last server tick latches +30% for the next burst (10-tick bolt window). Direct kills explode for 1.0x weapon local per-bolt damage within 3 blocks (DDC radius '?'). +30 Magazine stat not applied (no fusion magazine stat curve)."
+    },
+    "explosive_head": {
+      "hash": 3365897133,
+      "name": "Explosive Head",
+      "koName": "폭발형 화살촉",
+      "koDescription": "발사한 화살이 잠시 후에 폭발합니다.",
+      "description": "Arrows explode after a short delay.",
+      "damage": true,
+      "mechanics": {
+        "payloadFraction": 0.5,
+        "payloadBonusPve": 0.3,
+        "radius": 3.0,
+        "minDelayTicks": 4,
+        "maxDelayTicks": 16,
+        "ticksPerBlock": 0.25
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 90,
+        "text": "Bows deal 50% of their Non-Precision Direct Impact Damage as an Explosive Payload . Explosive Payload detonates after a distance-based timer, damaging enemies within 3 meters. Explosive Payload portion deals 30% increased damage and inflicts increased stagger against Combatants. Impact Damage's Precision Multiplier is increased to offset the Explosive Payload portion lacking the ability to score Precision Hits . New Ratio = (Base Ratio - 50%) / (1 - 50%) Overall Damage Increase: Damage is increased by 15% of the Weapon's Bodyshot Damage. Precision Damage Increase is equal to 15% / Precision Multiplier . Damage remains the same. ↑Passively grants +5 Accuracy.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "50% of body-equivalent arrow impact damage becomes a payload (PvE +30%) detonating after a distance-based delay clamp(4+0.25*blocks,4,16) ticks within 3 blocks; arrows striking terrain also detonate there."
+    },
+    "cluster_bomb": {
+      "hash": 1275731761,
+      "name": "Cluster Bomb",
+      "koName": "집속 폭탄",
+      "koDescription": "로켓이 폭발할 때 집속 폭탄을 방출합니다.",
+      "description": "Rockets spawn cluster bombs upon detonation.",
+      "damage": true,
+      "mechanics": {
+        "bombs": 8,
+        "fractionEach": 0.04,
+        "radius": 1.5,
+        "spread": 3.0,
+        "minDelayTicks": 6,
+        "maxDelayTicks": 14
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 49,
+        "text": "Releases 8 Cluster Bombs on impact. Cluster Bombs explode on impact, each dealing up to 150 ↑165 [11 ↑12 ] damage with no falloff over 4 meters.",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "8 bomblets scatter up to 3 blocks from the rocket detonation and explode 6-14 ticks later; each 4% of rocket local damage (DDC 150 vs ~3.7k rocket blast ratio, local), no falloff within 1.5 blocks."
+    },
+    "chain_reaction": {
+      "hash": 2396489472,
+      "name": "Chain Reaction",
+      "koName": "연쇄 반응",
+      "koDescription": "이 무기로 결정타를 기록할 때마다 원소 피해를 주는 폭발을 일으킵니다.",
+      "description": "Each final blow with this weapon creates an elemental damage explosion.",
+      "damage": true,
+      "mechanics": {
+        "fraction": 0.15,
+        "specialFullRadius": 2.4,
+        "specialMaxRadius": 6.0,
+        "powerFullRadius": 3.0,
+        "powerMaxRadius": 7.0,
+        "maxDepth": 8
+      },
+      "source": {
+        "authority": "DDC Weapon Perks (PvE base, non-enhanced)",
+        "url": "https://docs.google.com/spreadsheets/d/1WaxvbLx7UoSZaBqdFr1u32F2uWVLo-CJunJB4nlGUE4",
+        "row": 42,
+        "text": "On Weapon Kill : Target explodes, dealing varying [ Special = 44.8? ↑49.3? | Power = 72.8 ↑80? ] Weapon-Element Matching Damage , down to 0% damage. Rocket Pulse: 158 ↑174 | Breech GL: 189 ↑208 | Shotgun, Area Denial GL: 236 ↑260 | Glaive: 284 ↑313 | 2.4m No Falloff, 6m Maximum Falloff on Special Weapons Wave GL, MG, Sword: 352 ↑387 | Drum GL, LFR : 448 ↑493 | RL: 543 ↑598 | 3m No Falloff, 7m Maximum Falloff for Power Weapons . ↑Passively grants +20 Guard Endurance to Swords .",
+        "htmlSha256": "c9795151d23ff9342404998ffccb18769940eb9e4621b9cbb2b1d1fa7ddd8833"
+      },
+      "localPolicy": "On final blow (including its own explosions, depth<=8) explode for 15% of weapon local damage with DDC radii (full to 2.4/3m, linear to 0 at 6/7m). Absolute DDC values are Destiny units; fraction is local. Sword guard +20 is enhanced only."
+    }
+  },
+  "weapons": [
+    {
+      "perk": "target_lock",
+      "id": "retrofit_escapade",
+      "hash": 3103325054,
+      "socket": 4,
+      "perkHash": 365154968,
+      "plugSetHash": 2461260598
+    },
+    {
+      "perk": "envious_assassin",
+      "id": "bite_of_the_fox",
+      "hash": 1403800851,
+      "socket": 3,
+      "perkHash": 968510818,
+      "plugSetHash": 563442205
+    },
+    {
+      "perk": "envious_assassin",
+      "id": "dimensional_hypotrochoid",
+      "hash": 1311684613,
+      "socket": 3,
+      "perkHash": 968510818,
+      "plugSetHash": 3235863202
+    },
+    {
+      "perk": "envious_arsenal",
+      "id": "dimensional_hypotrochoid",
+      "hash": 1311684613,
+      "socket": 3,
+      "perkHash": 3987942396,
+      "plugSetHash": 3235863202
+    },
+    {
+      "perk": "harmony",
+      "id": "retraced_path",
+      "hash": 548958835,
+      "socket": 4,
+      "perkHash": 438098033,
+      "plugSetHash": 398391969
+    },
+    {
+      "perk": "harmony",
+      "id": "goldtusk",
+      "hash": 3371413057,
+      "socket": 4,
+      "perkHash": 438098033,
+      "plugSetHash": 700250835
+    },
+    {
+      "perk": "under_over",
+      "id": "allied_demand",
+      "hash": 1532276803,
+      "socket": 4,
+      "perkHash": 1870851715,
+      "plugSetHash": 703779397
+    },
+    {
+      "perk": "under_over",
+      "id": "bite_of_the_fox",
+      "hash": 1403800851,
+      "socket": 4,
+      "perkHash": 1870851715,
+      "plugSetHash": 2442672691
+    },
+    {
+      "perk": "golden_tricorn",
+      "id": "retraced_path",
+      "hash": 548958835,
+      "socket": 4,
+      "perkHash": 2610012052,
+      "plugSetHash": 398391969
+    },
+    {
+      "perk": "golden_tricorn",
+      "id": "retrofit_escapade",
+      "hash": 3103325054,
+      "socket": 4,
+      "perkHash": 2610012052,
+      "plugSetHash": 2461260598
+    },
+    {
+      "perk": "lasting_impression",
+      "id": "code_duello",
+      "hash": 2496242052,
+      "socket": 4,
+      "perkHash": 3927722942,
+      "plugSetHash": 147528717
+    },
+    {
+      "perk": "timed_payload",
+      "id": "seventh_seraph_officer_revolver",
+      "hash": 3037520408,
+      "socket": 4,
+      "perkHash": 1954620775,
+      "plugSetHash": 3527094473
+    },
+    {
+      "perk": "reservoir_burst",
+      "id": "null_composure",
+      "hash": 1644680957,
+      "socket": 4,
+      "perkHash": 1427256713,
+      "plugSetHash": 273
+    },
+    {
+      "perk": "explosive_head",
+      "id": "biting_winds",
+      "hash": 1621657423,
+      "socket": 4,
+      "perkHash": 3365897133,
+      "plugSetHash": 2763203653
+    },
+    {
+      "perk": "cluster_bomb",
+      "id": "bad_omens",
+      "hash": 991314988,
+      "socket": 4,
+      "perkHash": 1275731761,
+      "plugSetHash": 2955928741
+    },
+    {
+      "perk": "cluster_bomb",
+      "id": "bellowing_giant",
+      "hash": 2186258845,
+      "socket": 4,
+      "perkHash": 1275731761,
+      "plugSetHash": 1722393382
+    },
+    {
+      "perk": "cluster_bomb",
+      "id": "code_duello",
+      "hash": 2496242052,
+      "socket": 4,
+      "perkHash": 1275731761,
+      "plugSetHash": 147528717
+    },
+    {
+      "perk": "cluster_bomb",
+      "id": "pyroclastic_flow",
+      "hash": 1289324202,
+      "socket": 4,
+      "perkHash": 1275731761,
+      "plugSetHash": 3838086002
+    },
+    {
+      "perk": "chain_reaction",
+      "id": "salvager_s_salvo",
+      "hash": 2060863616,
+      "socket": 4,
+      "perkHash": 2396489472,
+      "plugSetHash": 254
+    },
+    {
+      "perk": "chain_reaction",
+      "id": "canis_major",
+      "hash": 2066434718,
+      "socket": 4,
+      "perkHash": 2396489472,
+      "plugSetHash": 2791121719
+    },
+    {
+      "perk": "chain_reaction",
+      "id": "dimensional_hypotrochoid",
+      "hash": 1311684613,
+      "socket": 4,
+      "perkHash": 2396489472,
+      "plugSetHash": 1092097342
+    },
+    {
+      "perk": "chain_reaction",
+      "id": "code_duello",
+      "hash": 2496242052,
+      "socket": 4,
+      "perkHash": 2396489472,
+      "plugSetHash": 147528717
+    },
+    {
+      "perk": "chain_reaction",
+      "id": "goldtusk",
+      "hash": 3371413057,
+      "socket": 4,
+      "perkHash": 2396489472,
+      "plugSetHash": 700250835
+    }
+  ]
+}

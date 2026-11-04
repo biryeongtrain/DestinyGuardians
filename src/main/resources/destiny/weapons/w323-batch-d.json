@@ -1,0 +1,275 @@
+{
+  "stage": "W323",
+  "manifestVersion": "245114.26.10.13.2000-1-bnet.66137",
+  "ddcSource": "Destiny Data Compendium / Weapon Perks (PvE base)",
+  "perks": [
+    {
+      "id": "turnabout",
+      "name": "Turnabout",
+      "hash": 2209918983,
+      "ddcRow": 239,
+      "ddc": "Upon breaking a Combatant's Elemental Shield or a Guardian's Shield while in Super:Grants a 50 HP Overshield for 10 ↑11.5 seconds.Damage dealt to Overshields does not stop Health Regeneration.Overshield can stack with other overshields, such as Void Overshield and Class Stat Overshield. Overshield layers are determined by \"First In, First Out\".",
+      "values": {
+        "overshieldHp": 50,
+        "durationTicks": 200
+      },
+      "localPolicy": "Combatant elemental shield = absorption pool reaching 0; Guardian shield = HP above 100/230 crossing to <=100 while the target is in Super. 50 HP scaled by owner max health/230. Separate MAX_ABSORPTION layer; FIFO with other layers is approximated by one vanilla absorption pool.",
+      "rolls": [
+        {
+          "id": "ammit_ar2",
+          "hash": 2119346509,
+          "socket": 3,
+          "perkHash": 2209918983,
+          "plugSetHash": 1723759242
+        },
+        {
+          "id": "aishas_embrace",
+          "hash": 2638190703,
+          "socket": 4,
+          "perkHash": 2209918983,
+          "plugSetHash": 4211351701
+        },
+        {
+          "id": "beloved",
+          "hash": 3107853529,
+          "socket": 4,
+          "perkHash": 2209918983,
+          "plugSetHash": 887157889
+        },
+        {
+          "id": "stormchaser",
+          "hash": 3652506829,
+          "socket": 3,
+          "perkHash": 2209918983,
+          "plugSetHash": 897699284
+        },
+        {
+          "id": "dimensional_hypotrochoid",
+          "hash": 1311684613,
+          "socket": 4,
+          "perkHash": 2209918983,
+          "plugSetHash": 1092097342
+        },
+        {
+          "id": "retrofit_escapade",
+          "hash": 3103325054,
+          "socket": 3,
+          "perkHash": 2209918983,
+          "plugSetHash": 3756086698
+        },
+        {
+          "id": "nezarec_s_whisper",
+          "hash": 254636484,
+          "socket": 4,
+          "perkHash": 2209918983,
+          "plugSetHash": 699056095
+        }
+      ]
+    },
+    {
+      "id": "counterattack",
+      "name": "Counterattack",
+      "hash": 3016987351,
+      "ddcRow": 59,
+      "ddc": "Upon receiving damage within 0.5 seconds of starting to guard:50% increased damage for 2 ↑3 seconds.",
+      "values": {
+        "windowTicks": 10,
+        "damageMultiplier": 1.5,
+        "durationTicks": 40
+      },
+      "localPolicy": "Window measured from the first guarding tick; only frontal PvE mob hits are guardable (existing guard rule). Buff applies to that sword's damage only.",
+      "rolls": [
+        {
+          "id": "goldtusk",
+          "hash": 3371413057,
+          "socket": 4,
+          "perkHash": 3016987351,
+          "plugSetHash": 700250835
+        },
+        {
+          "id": "crown_splitter",
+          "hash": 2782325302,
+          "socket": 4,
+          "perkHash": 3016987351,
+          "plugSetHash": 99092784
+        },
+        {
+          "id": "falling_guillotine",
+          "hash": 614426548,
+          "socket": 4,
+          "perkHash": 3016987351,
+          "plugSetHash": 66521752
+        }
+      ]
+    },
+    {
+      "id": "flash_counter",
+      "name": "Flash Counter",
+      "hash": 2244851822,
+      "ddcRow": 99,
+      "ddc": "Upon receiving damage while guarding:Triggers a Frontal Blast, dealing up to 110 [?] Weapon-Matching Damage and disorienting Combatants in a large cone up to ~8? meters away for 5 ↑6 seconds.Damage scales from 75 [14] at point-blank, up to 110 [45] at ? meters. Concussion strength against Guardians scale similarly with distance.Damage against Combatants scales with Combatant Rank Modifiers and counts as Weapon Damage.Incurs a 2.5 second cooldown between activations.",
+      "values": {
+        "cooldownTicks": 50,
+        "radius": 8.0,
+        "localConeDegrees": 60.0,
+        "pointBlankFactor": 0.75,
+        "maxFactor": 1.1,
+        "disorientTicks": 100
+      },
+      "localPolicy": "DDC '~8?' m cone and '?' far range: local 8 block radius, 60 degree half cone, line of sight. Damage = sword base damage x (0.75 at point blank .. 1.10 at 8 blocks), DDC 75->110 per 100. Disorient = existing BLINDED status for 5 s. Triggered from blocked frontal PvE hits; resolved on the next server tick.",
+      "rolls": [
+        {
+          "id": "abide_the_return",
+          "hash": 1644160541,
+          "socket": 4,
+          "perkHash": 2244851822,
+          "plugSetHash": 2761485963
+        },
+        {
+          "id": "crown_splitter",
+          "hash": 2782325302,
+          "socket": 3,
+          "perkHash": 2244851822,
+          "plugSetHash": 427353656
+        },
+        {
+          "id": "temptation_s_hook",
+          "hash": 35794111,
+          "socket": 4,
+          "perkHash": 2244851822,
+          "plugSetHash": 2147541212
+        }
+      ]
+    },
+    {
+      "id": "tilting_at_windmills",
+      "name": "Tilting at Windmills",
+      "hash": 3526486541,
+      "ddcRow": 229,
+      "ddc": "Upon blocking damage with the Glaive Shield:25?% Increased Movement Speed while Blocking for 4 ↑5 seconds until no longer blocking, or when Weapon Energy depletes.",
+      "values": {
+        "speedBonus": 0.25,
+        "durationTicks": 80
+      },
+      "localPolicy": "DDC '25?%': +25% movement speed (multiplicative attribute) while the glaive shield is up, 4 s after the last blocked hit; lowering the shield ends it.",
+      "rolls": [
+        {
+          "id": "nezarec_s_whisper",
+          "hash": 254636484,
+          "socket": 3,
+          "perkHash": 3526486541,
+          "plugSetHash": 210449465
+        }
+      ]
+    },
+    {
+      "id": "valiant_charge",
+      "name": "Valiant Charge",
+      "hash": 4274614370,
+      "ddcRow": 244,
+      "ddc": "Upon guarding against a hit...or receiving healing from an ally while guarding?:80% Increased Lunge Distance for the next swing within 1 ↑1.5 second.Guarding against additional hits refreshes the buff duration.",
+      "values": {
+        "lungeScale": 1.8,
+        "windowTicks": 20
+      },
+      "localPolicy": "Next light swing within 1 s lunges with x1.8 acquisition range and distance (healing trigger not modelled: no ally-heal event while guarding).",
+      "rolls": [
+        {
+          "id": "goldtusk",
+          "hash": 3371413057,
+          "socket": 3,
+          "perkHash": 4274614370,
+          "plugSetHash": 1162279549
+        }
+      ]
+    },
+    {
+      "id": "duelists_trance",
+      "name": "Duelist's Trance",
+      "hash": 3705817207,
+      "ddcRow": 77,
+      "ddc": "On Sword Kill:+60 ↑+65 Guard Efficiency, +60 ↑+65 Guard Resistance, +60 ↑+60 Guard Endurance, and +60 ↑+65 Charge Rate.Buff is removed on stow.",
+      "values": {
+        "statBonus": 60,
+        "localStatScale": 0.3
+      },
+      "localPolicy": "+60 stat points mapped locally to 30%: guard resistance (blocked damage x0.7), guard endurance (30% of guard drain refunded), charge rate (+30% regeneration). Guard efficiency has no system: guard hits never cost sword energy here.",
+      "rolls": [
+        {
+          "id": "goldtusk",
+          "hash": 3371413057,
+          "socket": 3,
+          "perkHash": 3705817207,
+          "plugSetHash": 1162279549
+        }
+      ]
+    },
+    {
+      "id": "cold_steel",
+      "name": "Cold Steel",
+      "hash": 3650930298,
+      "ddcRow": 50,
+      "ddc": "Powered Sword Hits inflict Slow for 4.25+? [1.5+?] seconds.Light Attacks inflict x40 Slow.Heavy Attacks inflict x60 Slow.Flash Counter's disorienting blast inflicts x60 Slow.↑Passively grants +10 Ammo Capacity (Swords) and +10 Magazine Stat (Identical to Tactical Mag)",
+      "values": {
+        "pveSlowTicks": 85,
+        "pvpSlowTicks": 30,
+        "lightAmplifier": 0,
+        "heavyAmplifier": 1
+      },
+      "localPolicy": "Slow = vanilla Slowness: light x40 -> amplifier 0, heavy and Flash Counter x60 -> amplifier 1. DDC '4.25+?' PvE / '1.5+?' PvP seconds used as 85 / 30 ticks. Passive +10 ammo capacity/magazine not applied: no sword ammo-capacity stat path.",
+      "rolls": [
+        {
+          "id": "goldtusk",
+          "hash": 3371413057,
+          "socket": 4,
+          "perkHash": 3650930298,
+          "plugSetHash": 700250835
+        }
+      ]
+    },
+    {
+      "id": "unstoppable_force",
+      "name": "Unstoppable Force",
+      "hash": 2224838837,
+      "ddcRow": 243,
+      "ddc": "Upon blocking damage with Glaive Shield:20% increased projectile damage for 4 ↑5 seconds, or until no longer blocking.Blocking additional damage refreshes the buff duration.",
+      "values": {
+        "damageMultiplier": 1.2,
+        "durationTicks": 80
+      },
+      "localPolicy": "Glaive projectile damage x1.2 for 4 s after the last blocked hit (refreshes). DDC 'or until no longer blocking' is not used because glaive shots cannot be fired with the shield raised; the timer is the only expiry.",
+      "rolls": [
+        {
+          "id": "nezarec_s_whisper",
+          "hash": 254636484,
+          "socket": 4,
+          "perkHash": 2224838837,
+          "plugSetHash": 699056095
+        }
+      ]
+    },
+    {
+      "id": "master_of_arms",
+      "name": "Master of Arms",
+      "hash": 3081867624,
+      "ddcRow": 146,
+      "ddc": "Upon scoring a Weapon Kill with any weapon:Master of Arms x1 | 15% Increased Damage for 7 ↑8? seconds. Timer starts on Weapon Kill.Buff persists through stow.Upon scoring a Weapon Kill with any weapon, while Master of Arms x1 is active:Master of Arms x2 | 25% Increased Damage for 4 ↑5? seconds. Timer starts on Weapon Kill.Additional Kills with any weapon refresh the Master of Arms duration. Buff drops down to x1 Master of Arms upon expiring.Buff persists through stow.↑Buff duration is increased. x1 to 8 seconds, and x2 to 5? seconds.",
+      "values": {
+        "x1Multiplier": 1.15,
+        "x1Ticks": 140,
+        "x2Multiplier": 1.25,
+        "x2Ticks": 80
+      },
+      "localPolicy": "Any weapon-runtime final blow by the owner counts. x1 refreshes to 7 s, a kill during x1 grants/refreshes x2 for 4 s; x2 expiry falls back to the running x1. Persists through stow; only applies to The Recluse damage with the trait selected.",
+      "rolls": [
+        {
+          "id": "the_recluse",
+          "hash": 3354242550,
+          "socket": 4,
+          "perkHash": 3081867624,
+          "plugSetHash": 1493
+        }
+      ]
+    }
+  ]
+}

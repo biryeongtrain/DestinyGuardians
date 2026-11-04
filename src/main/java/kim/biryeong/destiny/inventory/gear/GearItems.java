@@ -33,7 +33,7 @@ public final class GearItems {
             new StatDef("1931675084", "탄약 생성", true));
 
     public record Stat(String name, int value, boolean bar) { }
-    public record Perk(String id, String name, String description) { }
+    public record Perk(String id, long hash, String name, String description) { }
 
     /** One owned weapon; {@code inventoryIndex}/{@code stack} are the click token for equipping. */
     public record Weapon(int inventoryIndex, ItemStack stack, WeaponCatalog.Entry entry, boolean equipped,
@@ -86,12 +86,12 @@ public final class GearItems {
 
     /** The traits rolled on this exact stack (bound to the weapon), in socket order. */
     public static List<Perk> perks(ItemStack stack) {
-        record Found(int socket, String id) { }
+        record Found(int socket, String id, long hash) { }
         var found = new ArrayList<Found>();
         for (String id : WeaponPerks.ids())
-            WeaponPerks.selected(stack, id).ifPresent(r -> found.add(new Found(r.socket(), id)));
+            WeaponPerks.selected(stack, id).ifPresent(r -> found.add(new Found(r.socket(), id, r.perkHash())));
         found.sort(java.util.Comparator.comparingInt(Found::socket));
-        return found.stream().map(f -> new Perk(f.id(), label(f.id()), WeaponPerkLabels.description(f.id()))).toList();
+        return found.stream().map(f -> new Perk(f.id(), f.hash(), label(f.id()), WeaponPerkLabels.description(f.id()))).toList();
     }
 
     private static String label(String id) {

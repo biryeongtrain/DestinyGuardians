@@ -144,13 +144,19 @@ public final class GearScreen {
         }
         if (packet.hasPosition()) {
             double x = packet.getX(s.anchor.x), y = packet.getY(p.getY()), z = packet.getZ(s.anchor.z);
-            if (!Double.isFinite(x + y + z)) { p.connection.teleport(s.anchor.x, p.getY(), s.anchor.z, p.getYRot(), p.getXRot()); return true; }
+            if (!Double.isFinite(x + y + z)) { pin(p, s.anchor.x, p.getY(), s.anchor.z); return true; }
             double dx = x - s.anchor.x, dz = z - s.anchor.z;
-            if (dx * dx + dz * dz > .0001) p.connection.teleport(s.anchor.x, y, s.anchor.z, p.getYRot(), p.getXRot());
+            if (dx * dx + dz * dz > .0001) pin(p, s.anchor.x, y, s.anchor.z);
             else { p.absSnapTo(s.anchor.x, y, s.anchor.z); p.setOnGround(packet.isOnGround()); }
             s.anchor = new Vec3(s.anchor.x, y, s.anchor.z);
         }
         return true;
+    }
+
+    /** Correct a position claim without touching the view: the rotation is the mouse pointer and is relative 0. */
+    private static void pin(ServerPlayer p, double x, double y, double z) {
+        p.connection.teleport(new net.minecraft.world.entity.PositionMoveRotation(new Vec3(x, y, z), Vec3.ZERO, 0, 0),
+                java.util.Set.of(net.minecraft.world.entity.Relative.Y_ROT, net.minecraft.world.entity.Relative.X_ROT));
     }
 
     public static boolean input(ServerPlayer p, Input next) {
@@ -198,6 +204,11 @@ public final class GearScreen {
     private static void gearClick(Session s, int node) {
         if (node == GearLayout.ARMORY && armory(s.owner)) {
             close(s.owner); WeaponScreen.openArmory(s.owner); return;
+        }
+        if (node >= GearLayout.ENGRAM && node < GearLayout.ENGRAM + GearLayout.ENGRAM_COUNT) {
+            String error = kim.biryeong.destiny.loot.Loot.decode(s.owner, node - GearLayout.ENGRAM);
+            notice(s, error == null ? "엔그램을 해독했습니다." : error);
+            refresh(s); return;
         }
         if (node == GearSlot.SUBCLASS.ordinal()) { s.stage = Stage.SUBCLASS; s.expanded = null; refresh(s); return; }
         if (node >= 0 && node < GearLayout.SLOT_COUNT) {
@@ -249,7 +260,8 @@ public final class GearScreen {
         int stored = s.expanded == null || s.expanded.weapon() == null ? 0
                 : Optional.ofNullable(s.buckets.get(s.expanded.weapon())).map(b -> b.stored().size()).orElse(0);
         return GearLayout.nodes(s.stage, s.expanded, Math.max(stored, s.expanded == null ? 0 : GearLayout.STORAGE_COUNT),
-                s.options.size(), s.stage == Stage.GEAR && armory(s.owner));
+                s.options.size(), s.stage == Stage.GEAR && armory(s.owner),
+                kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams().size());
     }
 
     /** Pointer hover: focus the node under the cursor; a weapon slot opens its grid until the cursor leaves. */
@@ -352,7 +364,7 @@ public final class GearScreen {
                 s.controls.x(), s.controls.y(), s.controls.yaw(), s.controls.pitch(), Map.copyOf(s.buckets), tooltip ? hovered : null, compare, s.detail,
                 ((now(s) - s.openedAt) / 20) * 30f % 360, s.field, s.fields, s.options, s.message, armory(s.owner),
                 kim.biryeong.destiny.guardian.Guardians.data(s.owner).guardianClass(),
-                WeaponScreen.characterView(s.owner, s.field));
+                WeaponScreen.characterView(s.owner, s.field), kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams());
         GearHud.render(s.owner, s.view);
     }
 }

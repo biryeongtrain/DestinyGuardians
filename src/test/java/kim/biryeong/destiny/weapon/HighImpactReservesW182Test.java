@@ -19,6 +19,7 @@ class HighImpactReservesW182Test {
         "bug_out_bag:2744715540:4:575371383",
         "high_albedo:1197486957:4:718633408",
         "dream_breaker:2931957300:4:1206254527",
+        "null_composure:1644680957:4:273", // W320 curated fixed roll
         "hammerhead:603242241:4:2479293397");
 
     static JsonObject resource() {
@@ -43,7 +44,7 @@ class HighImpactReservesW182Test {
         }
         assertEquals(EXPECTED, actual);
         assertEquals(65, WeaponCatalog.all().size());
-        assertEquals(10, WeaponCatalog.all().stream().filter(HighImpactReservesProfile::supports).count());
+        assertEquals(11, WeaponCatalog.all().stream().filter(HighImpactReservesProfile::supports).count());
         assertThrows(UnsupportedOperationException.class, () -> HighImpactReservesProfile.rolls().clear());
     }
 

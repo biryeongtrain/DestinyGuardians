@@ -11,18 +11,19 @@ import net.minecraft.world.entity.TamableAnimal;
  * weapons, grenades and supers use that DamageSource too. Never hook generic onKill.
  */
 public final class MeleeWeaponTraits {
-    public record Snapshot(WeaponSwashbuckler.MeleeToken swashbuckler, WeaponGraveRobber.Token graveRobber, WeaponPugilist.MeleeToken pugilist, WeaponWellRounded.Token wellRounded) {
-        public static final Snapshot NONE = new Snapshot(WeaponSwashbuckler.MeleeToken.NONE,WeaponGraveRobber.Token.NONE,WeaponPugilist.MeleeToken.NONE,WeaponWellRounded.Token.NONE);
+    public record Snapshot(WeaponSwashbuckler.MeleeToken swashbuckler, WeaponGraveRobber.Token graveRobber, WeaponPugilist.MeleeToken pugilist, WeaponWellRounded.Token wellRounded, PerkBatchC.MeleeToken batchC /* W322 batch C */) {
+        public static final Snapshot NONE = new Snapshot(WeaponSwashbuckler.MeleeToken.NONE,WeaponGraveRobber.Token.NONE,WeaponPugilist.MeleeToken.NONE,WeaponWellRounded.Token.NONE,PerkBatchC.MeleeToken.NONE);
     }
     private MeleeWeaponTraits() {}
     public static Snapshot accepted(ServerPlayer p) {
-        return new Snapshot(WeaponSwashbuckler.meleeAccepted(p),WeaponGraveRobber.accepted(p),WeaponPugilist.meleeAccepted(p),WeaponWellRounded.accepted(p,kim.biryeong.destiny.guardian.AbilitySlot.MELEE));
+        return new Snapshot(WeaponSwashbuckler.meleeAccepted(p),WeaponGraveRobber.accepted(p),WeaponPugilist.meleeAccepted(p),WeaponWellRounded.accepted(p,kim.biryeong.destiny.guardian.AbilitySlot.MELEE),PerkBatchC.meleeAccepted(p));
     }
     /** Real direct powered contact only. Damage-over-time/status pulses are deliberately excluded. */
     public static boolean poweredDamage(ServerLevel level,ServerPlayer p,LivingEntity target,float amount,
                                         Element element,Snapshot source) {
         boolean eligible=Combat.isEnemy(p,target) && !p.isAlliedTo(target)
                 && !(target instanceof TamableAnimal tame && tame.isTame());
+        if(source!=null&&eligible)amount=source.batchC().apply(target,amount); // W322 batch C One-Two Punch
         float before=target.getHealth()+target.getAbsorptionAmount();
         boolean killed=Combat.damage(level,p,target,amount,element);
         float actual=before-target.getHealth()-target.getAbsorptionAmount();

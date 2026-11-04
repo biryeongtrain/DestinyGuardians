@@ -146,6 +146,8 @@ public final class Combat {
         if (killed && !(recipient instanceof ServerPlayer)) {
             AbilityService.onKill(source, recipient, element);
         }
+        if (killed && attribution.kind() == kim.biryeong.destiny.weapon.AmmoGeneration.Kind.ABILITY)
+            kim.biryeong.destiny.weapon.PerkBatchB.abilityKilled(source, element); // W321 batch B Golden Tricorn
         return killed;
     }
 }

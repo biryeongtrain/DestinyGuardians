@@ -14,6 +14,7 @@ public final class HeatingUpProfile {
     private static final List<WeaponPerks.Roll> EXPECTED = List.of(
         new WeaponPerks.Roll("farewell", 541188001L, 3, HASH, 284168234L),
         new WeaponPerks.Roll("dream_breaker", 2931957300L, 3, HASH, 3785896921L),
+        new WeaponPerks.Roll("null_composure", 1644680957L, 3, HASH, 272L), // curated fixed-roll legendary
         new WeaponPerks.Roll("retrofit_escapade", 3103325054L, 3, HASH, 3756086698L));
     private static final JsonObject PERK = JsonParser.parseString("""
         {"id":"heating_up","hash":1570042021,"durationTicks":110,"maxStacks":2,

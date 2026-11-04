@@ -27,6 +27,7 @@ EXPECTED = {
     ("bug_out_bag", 2744715540, 4, BASE, 575371383),
     ("high_albedo", 1197486957, 4, BASE, 718633408),
     ("dream_breaker", 2931957300, 4, BASE, 1206254527),
+    ("null_composure", 1644680957, 4, BASE, 273),
     ("hammerhead", 603242241, 4, BASE, 2479293397),
 }
 MAPPING = "MEASURED_2019_40ROUND_QUANTIZED_ENDPOINT_NORMALIZATION_W182_NOT_CURRENT_EXACT_FORMULA"
@@ -103,9 +104,11 @@ def encode(value):
 
 
 def eligible(index, traits, field, pool, match, exotic):
-    return (not exotic and index in traits and field == "randomizedPlugSetHash"
-            and pool.get("isFakePlugSet") is False and match.get("plugItemHash") == BASE
-            and match.get("currentlyCanRoll") is True)
+    # W320 follow-up: curated fixed-roll legendaries expose their trait column as reusablePlugSetHash with isFakePlugSet true.
+    randomized = field == "randomizedPlugSetHash" and pool.get("isFakePlugSet") is False
+    curated = field == "reusablePlugSetHash" and pool.get("isFakePlugSet") is True
+    return (not exotic and index in traits and (randomized or curated)
+            and match.get("plugItemHash") == BASE and match.get("currentlyCanRoll") is True)
 
 
 def validate(resource):
@@ -118,7 +121,7 @@ def validate(resource):
     require(all(set(r) == set(KEYS) and isinstance(r["id"], str)
                 and all(type(r[k]) is int for k in KEYS[1:]) for r in rows), "roll schema")
     values = [tuple(r[k] for k in KEYS) for r in rows]
-    require(len(values) == len(set(values)) == 10 and set(values) == EXPECTED, "exact10 base sockets")
+    require(len(values) == len(set(values)) == 11 and set(values) == EXPECTED, "exact11 base sockets")
 
 
 def generate(args):

@@ -35,6 +35,7 @@ EXPECTED = [
     ("patron_of_lost_causes", 2723241847, 4, 120674550),
     ("long_arm", 8293111, 3, 3056706286),
     ("dead_man_walking_xx7463", 3751622019, 3, 3268663985),
+    ("erentil_fr4", 2398848320, 3, 664),
     ("hollow_words", 607191995, 3, 637298592),
     ("dream_breaker", 2931957300, 3, 3785896921),
     ("coriolis_force", 3512349612, 3, 2568674372),
@@ -146,8 +147,11 @@ def generate(args):
                 for match in pool["reusablePlugItems"]:
                     if match["plugItemHash"] not in (BASE, ENHANCED):
                         continue
-                    admitted = (legendary and index in traits and field == "randomizedPlugSetHash"
-                                and pool["isFakePlugSet"] is False and match["plugItemHash"] == BASE
+                    # W320 follow-up: curated fixed-roll legendaries expose their trait column as reusablePlugSetHash with isFakePlugSet true.
+                    admitted = (legendary and index in traits
+                                and ((field == "randomizedPlugSetHash" and pool["isFakePlugSet"] is False)
+                                     or (field == "reusablePlugSetHash" and pool["isFakePlugSet"] is True))
+                                and match["plugItemHash"] == BASE
                                 and match.get("currentlyCanRoll") is True)
                     scan["references"].append({"socket": index, "field": field, "plugSetHash": pool_hash,
                         "isFakePlugSet": pool["isFakePlugSet"], "matchingEntry": match, "admitted": admitted})

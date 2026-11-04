@@ -24,6 +24,8 @@ class ThreatDetectorProfileW178Test {
         "dust_rock_blues:636912560:3:3511609070",
         "parcel_of_stardust_fell_to_earth:2217366863:3:2514419370",
         "dream_breaker:2931957300:3:3785896921",
+        "ikelos_smg_v1_0_1:1723472487:4:1329", // W320 curated fixed-roll legendary
+        "ikelos_sg_v1_0_1:1887808042:4:1324",
         "line_in_the_sand:946443267:3:1503774254",
         "deafening_whisper:981718087:4:3588287812",
         "edge_transit:218335759:3:447678063",
@@ -49,7 +51,7 @@ class ThreatDetectorProfileW178Test {
         }
         assertEquals(EXPECTED, actual);
         assertEquals(65, WeaponCatalog.all().size());
-        assertEquals(17, WeaponCatalog.all().stream().filter(ThreatDetectorProfile::supports).count());
+        assertEquals(19, WeaponCatalog.all().stream().filter(ThreatDetectorProfile::supports).count());
         assertFalse(ThreatDetectorProfile.supports(entry("ammit_ar2")));
         assertFalse(ThreatDetectorProfile.supports(entry("ace_of_spades")));
         assertThrows(UnsupportedOperationException.class, () -> ThreatDetectorProfile.rolls().clear());
@@ -119,6 +121,6 @@ class ThreatDetectorProfileW178Test {
             assertEquals(h.get("stowTicks").getAsInt(),ThreatDetectorProfile.handlingTicks(e,0,1,false));
             assertEquals(aim.get(e.id()).get("transitionTicks").getAsInt(),ThreatDetectorProfile.adsTicks(e,0,false));
         }
-        assertEquals(3,shells);
+        assertEquals(4,shells); // + IKELOS_SG
     }
 }

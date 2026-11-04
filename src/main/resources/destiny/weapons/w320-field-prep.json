@@ -1,0 +1,117 @@
+{
+ "stage": "W320",
+ "perk": {
+  "id": "field_prep",
+  "hash": 2869569095,
+  "ammoGenerationBonus": 20,
+  "crouchReloadBonus": 50,
+  "crouchReloadScalar": 0.8,
+  "crouchHandlingScalar": 0.8
+ },
+ "policies": {
+  "crouch": "server-authoritative Player#isCrouching; shift also drives ADS input in this port",
+  "ammoGeneration": "added to this weapon's AmmoGeneration stat at emission (clamped 0..100)",
+  "reloadComposition": "stat curve ratio at +50 Reload, then x0.8, applied to the incoming plan"
+ },
+ "source": {
+  "manifest": "245114.26.10.13.2000-1-bnet.66137",
+  "officialDescription": "Increases ammo generation. Faster reload, stow, and ready speed when you're crouching.",
+  "ddcSheet": "Weapon Perks",
+  "ddcRow": "1662574278R94",
+  "ddcText": "95 Field Prep Passively grants +20 ↑+30 Ammo Generation. While Crouched : +50 ↑+55? Reload Speed, 0.8x Reload Duration Multiplier, and 0.8x Ready/Stow Duration Multiplier.",
+  "scope": "PvE base (non-enhanced); '?' values are not facts, see policies"
+ },
+ "weapons": [
+  {
+   "id": "duke_mk_44",
+   "hash": 2112909414,
+   "socket": 4,
+   "perkHash": 2869569095,
+   "plugSetHash": 3815727680
+  },
+  {
+   "id": "gnawing_hunger",
+   "hash": 821154603,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 1144396384
+  },
+  {
+   "id": "claws_of_the_wolf",
+   "hash": 1280933460,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 206409262
+  },
+  {
+   "id": "patron_of_lost_causes",
+   "hash": 2723241847,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 2564227946
+  },
+  {
+   "id": "dust_rock_blues",
+   "hash": 636912560,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 3511609070
+  },
+  {
+   "id": "edge_transit",
+   "hash": 218335759,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 447678063
+  },
+  {
+   "id": "canis_major",
+   "hash": 2066434718,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 4037911937
+  },
+  {
+   "id": "dimensional_hypotrochoid",
+   "hash": 1311684613,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 3235863202
+  },
+  {
+   "id": "bad_omens",
+   "hash": 991314988,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 457210958
+  },
+  {
+   "id": "bellowing_giant",
+   "hash": 2186258845,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 2605036073
+  },
+  {
+   "id": "code_duello",
+   "hash": 2496242052,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 3719628667
+  },
+  {
+   "id": "fixed_odds",
+   "hash": 2194955522,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 4227334000
+  },
+  {
+   "id": "retrofit_escapade",
+   "hash": 3103325054,
+   "socket": 3,
+   "perkHash": 2869569095,
+   "plugSetHash": 3756086698
+  }
+ ]
+}

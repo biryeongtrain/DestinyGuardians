@@ -33,6 +33,7 @@ EXPECTED = [
     {'id': 'gnawing_hunger', 'hash': 821154603, 'socket': 3, 'perkHash': BASE, 'plugSetHash': 1144396384},
     {'id': 'cold_denial', 'hash': 1216130969, 'socket': 3, 'perkHash': BASE, 'plugSetHash': 330841869},
     {'id': 'blast_furnace', 'hash': 3843477312, 'socket': 3, 'perkHash': BASE, 'plugSetHash': 1976101165},
+    {'id': 'frontier_justice', 'hash': 273396910, 'socket': 3, 'perkHash': BASE, 'plugSetHash': 174},
     {'id': 'distant_relation', 'hash': 2034817450, 'socket': 3, 'perkHash': BASE, 'plugSetHash': 1131958073},
     {'id': 'bug_out_bag', 'hash': 2744715540, 'socket': 3, 'perkHash': BASE, 'plugSetHash': 907333373},
     {'id': 'lonesome', 'hash': 2199171672, 'socket': 3, 'perkHash': BASE, 'plugSetHash': 3612808001},
@@ -91,8 +92,10 @@ class Rows(HTMLParser):
 
 
 def eligible(index, traits, field, pool, match, exotic):
-    return (not exotic and index in traits and field == "randomizedPlugSetHash"
-            and pool.get("isFakePlugSet") is False
+    # W320 follow-up: curated fixed-roll legendaries expose their trait column as reusablePlugSetHash with isFakePlugSet true.
+    randomized = field == "randomizedPlugSetHash" and pool.get("isFakePlugSet") is False
+    curated = field == "reusablePlugSetHash" and pool.get("isFakePlugSet") is True
+    return (not exotic and index in traits and (randomized or curated)
             and match.get("plugItemHash") == BASE and match.get("currentlyCanRoll") is True)
 
 
@@ -111,8 +114,8 @@ def validate(resource):
     require(all(set(r) == set(KEYS) and isinstance(r["id"], str)
                 and all(type(r[k]) is int for k in KEYS[1:]) for r in rows), "roll schema")
     tuples = [tuple(r[k] for k in KEYS) for r in rows]
-    require(len(tuples) == len(set(tuples)) == 10
-            and set(tuples) == {tuple(r[k] for k in KEYS) for r in EXPECTED}, "exact10 base sockets")
+    require(len(tuples) == len(set(tuples)) == 11
+            and set(tuples) == {tuple(r[k] for k in KEYS) for r in EXPECTED}, "exact11 base sockets")
 
 
 def generate(args):
@@ -285,7 +288,7 @@ def main():
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(raw)
     print(json.dumps({"verified" if args.verify else "generated": len(outputs),
-                      "catalogCount": 65, "baseRollCount": 10, "negativeChecks": negatives}))
+                      "catalogCount": 65, "baseRollCount": 11, "negativeChecks": negatives}))
 
 
 if __name__ == "__main__":

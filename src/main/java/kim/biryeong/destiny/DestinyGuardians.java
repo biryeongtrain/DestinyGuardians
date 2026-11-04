@@ -67,6 +67,7 @@ public final class DestinyGuardians implements ModInitializer {
         Guardians.init();
         kim.biryeong.destiny.input.ClientControls.init();
         kim.biryeong.destiny.inventory.WeaponScreen.init();
+        kim.biryeong.destiny.loot.Loot.init();
         kim.biryeong.destiny.hud.IncomingDamageHud.init();
         kim.biryeong.destiny.weapon.WeaponPreviewItem.init();
         kim.biryeong.destiny.weapon.WeaponRuntime.init();

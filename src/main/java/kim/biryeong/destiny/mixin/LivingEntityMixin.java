@@ -56,6 +56,7 @@ public abstract class LivingEntityMixin {
         float modified=Statuses.modifyIncoming((LivingEntity) (Object) this, amount);
         if ((Object)this instanceof net.minecraft.server.level.ServerPlayer player) {
             modified = kim.biryeong.destiny.combat.SuperDamageResistance.modifyIncoming(player, source, modified);
+            modified = kim.biryeong.destiny.combat.FrostArmor.modifyIncoming(player, modified); // W322 batch C
             return kim.biryeong.destiny.weapon.WeaponRuntime.guardDamage(player,source,modified);
         }
         return modified;

@@ -30,6 +30,7 @@ EXPECTED = {
     ("stormchaser", 3652506829, 4, BASE, 4213354588),
     ("canis_major", 2066434718, 4, BASE, 2791121719),
     ("dimensional_hypotrochoid", 1311684613, 4, BASE, 1092097342),
+    ("salvager_s_salvo", 2060863616, 4, BASE, 254),
     ("retrofit_escapade", 3103325054, 4, BASE, 2461260598),
     ("crown_splitter", 2782325302, 4, BASE, 99092784),
     ("temptation_s_hook", 35794111, 4, BASE, 2147541212),
@@ -49,7 +50,7 @@ PINS = {
     "clarity": "881ed03880ad1869f4c82e2f0c879cacc3f5e9feae21b2d51ae80a2002175384",
 }
 NATIVE_PENDING = [
-    "Master registry: explicit base selection, new/default/enhanced/corrupt socket inert; UI exact16 only.",
+    "Master registry: explicit base selection, new/default/enhanced/corrupt socket inert; UI exact17 only.",
     "Paid PRIMARY/SPECIAL/HEAVY 1.20/1.15/1.10 versus native WitherBoss and EnderDragon.",
     "Ordinary/high-HP/named mob inert; destiny_boss/destiny_vehicle Mob tagged at impact eligible; untag removes bonus.",
     "Tagged Player/ArmorStand/nonmob, dead/removed target inert; no PvP or nonliving vehicle damage expansion.",
@@ -75,9 +76,11 @@ def encode(value):
 
 
 def eligible(index, traits, field, pool, match, exotic):
-    return (not exotic and index in traits and field == "randomizedPlugSetHash"
-            and pool.get("isFakePlugSet") is False and match.get("plugItemHash") == BASE
-            and match.get("currentlyCanRoll") is True)
+    # W320 follow-up: curated fixed-roll legendaries expose a reusablePlugSetHash with isFakePlugSet true.
+    randomized = field == "randomizedPlugSetHash" and pool.get("isFakePlugSet") is False
+    curated = field == "reusablePlugSetHash" and pool.get("isFakePlugSet") is True
+    return (not exotic and index in traits and (randomized or curated)
+            and match.get("plugItemHash") == BASE and match.get("currentlyCanRoll") is True)
 
 
 def validate(resource):
@@ -87,7 +90,7 @@ def validate(resource):
     require(all(set(r) == set(KEYS) and isinstance(r["id"], str)
                 and all(type(r[k]) is int for k in KEYS[1:]) for r in rows), "roll schema")
     values = [tuple(r[k] for k in KEYS) for r in rows]
-    require(len(values) == len(set(values)) == 16 and set(values) == EXPECTED, "exact16 base sockets")
+    require(len(values) == len(set(values)) == 17 and set(values) == EXPECTED, "exact17 base sockets")
 
 
 def generate(args):
@@ -256,7 +259,7 @@ def main():
         else:
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(raw)
-    print("W181 exact16, selected65, four filtered JSON outputs", "VERIFIED" if args.verify else "GENERATED")
+    print("W181 exact17, selected65, four filtered JSON outputs", "VERIFIED" if args.verify else "GENERATED")
 
 
 if __name__ == "__main__":

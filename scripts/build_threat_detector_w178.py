@@ -29,6 +29,8 @@ EXPECTED = {
 ("dust_rock_blues",636912560,3,BASE,3511609070),
 ("parcel_of_stardust_fell_to_earth",2217366863,3,BASE,2514419370),
 ("dream_breaker",2931957300,3,BASE,3785896921),
+("ikelos_smg_v1_0_1",1723472487,4,BASE,1329),
+("ikelos_sg_v1_0_1",1887808042,4,BASE,1324),
 ("line_in_the_sand",946443267,3,BASE,1503774254),
 ("deafening_whisper",981718087,4,BASE,3588287812),
 ("edge_transit",218335759,3,BASE,447678063),
@@ -66,13 +68,16 @@ def require(ok, why):
 def digest(raw): return hashlib.sha256(raw).hexdigest()
 def encode(x): return (json.dumps(x,indent=2,ensure_ascii=False,allow_nan=False)+"\n").encode()
 def eligible(index, traits, field, pool, match, exotic, perk=BASE):
-    return (not exotic and index in traits and field=="randomizedPlugSetHash"
-            and pool.get("isFakePlugSet") is False and match.get("plugItemHash")==perk
+    # W320 follow-up: curated fixed-roll legendaries (e.g. IKELOS) expose their trait column as a
+    # reusablePlugSetHash with isFakePlugSet true; both forms are official rollable trait pools.
+    randomized=field=="randomizedPlugSetHash" and pool.get("isFakePlugSet") is False
+    curated=field=="reusablePlugSetHash" and pool.get("isFakePlugSet") is True
+    return (not exotic and index in traits and (randomized or curated) and match.get("plugItemHash")==perk
             and match.get("currentlyCanRoll") is True)
 def membership(rows):
     require(all(set(r)==set(KEYS) and all(type(r[k]) is int for k in KEYS[1:]) for r in rows),"roll schema")
     keys=[tuple(r[k] for k in KEYS) for r in rows]
-    require(len(keys)==len(set(keys))==17 and set(keys)==EXPECTED,"exact17 base sockets")
+    require(len(keys)==len(set(keys))==19 and set(keys)==EXPECTED,"exact19 base sockets")
 def solve(c, stat):
     require(set(c)=={"evpp","vpp","offset"} and all(type(x) in (int,float) and math.isfinite(x) for x in c.values()),"finite curve")
     v=c["evpp"]*stat*stat+c["vpp"]*stat+c["offset"]
@@ -195,7 +200,7 @@ def generate(args):
              ART+"clarity-source.json":{"source":"https://github.com/Clarity-Destiny/Descriptions","cacheSha256":PINS["clarity"],"base":clarity,"enhancedExcludedHash":ENHANCED,"mechanics":PERK,"policies":POLICIES}}
     outputs[ART+"manifest.json"]={"stage":"W178","generator":SCRIPT,"generatorSha256":digest((args.root/SCRIPT).read_bytes()),"sourcePins":pins,"version":VERSION,"curveAudit":audit,"pairCases":cases,"outputs":{k:digest(encode(v)) for k,v in outputs.items()},
         "nativePending":["MASTER actualGT integration","HUD four nodes no countdown","paid recoil/bloom/flinch and no damage/range change","identity lifecycle and accepted in-flight reload timing","ready/stow and ADS entry/exit"],
-        "limitations":["Current official sockets; historical community raw stat curves.","Local Minecraft footpoint sphere and project PvE enemy policy; no line-of-sight requirement in source.","Only Snapshot2/Frenzy2/Outlaw1/FeedingFrenzy1 distinct pairs. AJ/PM/RapidHit/SFA impossible in selected17.","No original first-shell delay inferred; preserve accepted base phases by unrounded ratio if distinct."]}
+        "limitations":["Current official sockets; historical community raw stat curves.","Local Minecraft footpoint sphere and project PvE enemy policy; no line-of-sight requirement in source.","Only Snapshot2/Frenzy2/Outlaw1/FeedingFrenzy1 distinct pairs. AJ/PM/RapidHit/SFA impossible in selected19.","No original first-shell delay inferred; preserve accepted base phases by unrounded ratio if distinct."]}
     return outputs
 
 def self_test(outputs):
@@ -235,5 +240,5 @@ def main():
         dest=a.root/name;raw=encode(value)
         if a.verify:require(dest.read_bytes()==raw,"generated drift: "+name)
         else:dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(raw)
-    print("W178 exact17, selected65, six distinct pairs, four outputs", "VERIFIED" if a.verify else "GENERATED")
+    print("W178 exact19, selected65, six distinct pairs, four outputs", "VERIFIED" if a.verify else "GENERATED")
 if __name__=="__main__":main()

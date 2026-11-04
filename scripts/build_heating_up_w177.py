@@ -22,6 +22,7 @@ SUFFIX = "e677f6ea-2a1e-48d4-a8c8-700a39a62585.json"
 CLARITY_COMMIT = "039cfbc4732c33573568b28cc6335dd3332a9296"
 EXPECTED = {("farewell", 541188001, 3, BASE, 284168234),
             ("dream_breaker", 2931957300, 3, BASE, 3785896921),
+            ("null_composure", 1644680957, 3, BASE, 272),
             ("retrofit_escapade", 3103325054, 3, BASE, 3756086698)}
 PERK = {"id": "heating_up", "hash": BASE, "durationTicks": 110, "maxStacks": 2,
         "remainsWhileStowed": True, "stabilityBonus": [0, 15, 30],
@@ -54,9 +55,11 @@ def encoded(value):
 
 def eligible(index, traits, field, pool, match, exotic):
     # A current zero-weight roll is legal; reusable/direct/enhanced references alone are not.
-    return (not exotic and index in traits and field == "randomizedPlugSetHash"
-            and pool.get("isFakePlugSet") is False and match.get("plugItemHash") == BASE
-            and match.get("currentlyCanRoll") is True)
+    # W320 follow-up: curated fixed-roll legendaries expose a reusablePlugSetHash with isFakePlugSet true.
+    randomized = field == "randomizedPlugSetHash" and pool.get("isFakePlugSet") is False
+    curated = field == "reusablePlugSetHash" and pool.get("isFakePlugSet") is True
+    return (not exotic and index in traits and (randomized or curated)
+            and match.get("plugItemHash") == BASE and match.get("currentlyCanRoll") is True)
 
 
 def validate_membership(rows):
@@ -65,7 +68,7 @@ def validate_membership(rows):
             and type(r["id"]) is str and all(type(r[k]) is int for k in fields[1:])
             for r in rows), "Exact roll schema")
     keys = [tuple(r[k] for k in fields) for r in rows]
-    require(len(keys) == len(set(keys)) == 3 and set(keys) == EXPECTED, "Exact selected3 sockets")
+    require(len(keys) == len(set(keys)) == 4 and set(keys) == EXPECTED, "Exact selected4 sockets")
 
 
 def validate_resource(resource):
@@ -153,7 +156,7 @@ def generate(args):
                     row = {"id": w["id"], "hash": item["hash"], "socket": index, "perkHash": BASE, "plugSetHash": ph}
                     rows.append(row)
                     proofs.append({**row, "socketCategoryHash": TRAIT, "socketEntry": socket,
-                                   "plugSetField": field, "isFakePlugSet": False, "matchingEntries": [match]})
+                                   "plugSetField": field, "isFakePlugSet": pool["isFakePlugSet"], "matchingEntries": [match]})
         scans.append(scan)
     validate_membership(rows)
     base = data["clarity"][str(BASE)]
@@ -253,7 +256,7 @@ def main():
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(encoded(value))
         print(json.dumps({"stage": "W177", "status": "VERIFY_PASS" if args.verify else "GENERATED",
-            "selectedScanned": 65, "supported": 3, "deterministicRepeat": args.self_test,
+            "selectedScanned": 65, "supported": 4, "deterministicRepeat": args.self_test,
             "negativeCasesRejected": rejected, "outputs": list(outputs)}, indent=2))
     except (OSError, ValueError, KeyError, TypeError) as error:
         print("W177 extraction failed: " + str(error), file=sys.stderr)

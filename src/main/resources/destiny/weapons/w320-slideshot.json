@@ -1,0 +1,79 @@
+{
+ "stage": "W320",
+ "perk": {
+  "id": "slideshot",
+  "hash": 3161816588,
+  "refillFraction": 0.15,
+  "rangeBonus": 20,
+  "stabilityBonus": 20,
+  "durationTicks": 50,
+  "cooldownTicks": 6,
+  "firstShotOnly": true,
+  "removedOnStow": true
+ },
+ "policies": {
+  "slide": "LOCAL_POLICY: same server slide detector as Slideways",
+  "stabilityBonus": "LOCAL_POLICY: DDC base value is marked '?'; +20 used as written but unconfirmed",
+  "refillRounding": "LOCAL_POLICY: ceil(15% of magazine), at least one round, from reserve",
+  "firstShot": "range/stability end after the first paid emission (pulse burst: first bullet)"
+ },
+ "source": {
+  "manifest": "245114.26.10.13.2000-1-bnet.66137",
+  "officialDescription": "Sliding partially reloads this weapon's magazine and temporarily boosts range and stability.",
+  "ddcSheet": "Weapon Perks",
+  "ddcRow": "1662574278R201",
+  "ddcText": "202 Slideshot Upon Sliding : Refills 15% of Magazine, and grants +20 ↑+22 Range, and +20? +22? Stability for 2.5 seconds. Only affects the first shot. Incurs a 0.3 seconds cooldown after activation. Can be activated multiple times in one slide. Buff is removed on stow.",
+  "scope": "PvE base (non-enhanced); '?' values are not facts, see policies"
+ },
+ "weapons": [
+  {
+   "id": "bygones",
+   "hash": 2712244741,
+   "socket": 4,
+   "perkHash": 3161816588,
+   "plugSetHash": 3060320121
+  },
+  {
+   "id": "blast_furnace",
+   "hash": 3843477312,
+   "socket": 4,
+   "perkHash": 3161816588,
+   "plugSetHash": 169306153
+  },
+  {
+   "id": "claws_of_the_wolf",
+   "hash": 1280933460,
+   "socket": 3,
+   "perkHash": 3161816588,
+   "plugSetHash": 206409262
+  },
+  {
+   "id": "lonesome",
+   "hash": 2199171672,
+   "socket": 4,
+   "perkHash": 3161816588,
+   "plugSetHash": 167712635
+  },
+  {
+   "id": "dust_rock_blues",
+   "hash": 636912560,
+   "socket": 3,
+   "perkHash": 3161816588,
+   "plugSetHash": 3511609070
+  },
+  {
+   "id": "first_in_last_out",
+   "hash": 3616586446,
+   "socket": 3,
+   "perkHash": 3161816588,
+   "plugSetHash": 267999755
+  },
+  {
+   "id": "parcel_of_stardust_fell_to_earth",
+   "hash": 2217366863,
+   "socket": 3,
+   "perkHash": 3161816588,
+   "plugSetHash": 2514419370
+  }
+ ]
+}

@@ -22,6 +22,7 @@ EXPECTED = [
     ("apostate", 2164448701, 3, 1306932196),
     ("dust_rock_blues", 636912560, 3, 3511609070),
     ("parcel_of_stardust_fell_to_earth", 2217366863, 4, 3424940310),
+    ("ikelos_sg_v1_0_1", 1887808042, 4, 1324),
     ("dream_breaker", 2931957300, 3, 3785896921),
     ("coriolis_force", 3512349612, 3, 2568674372),
     ("line_in_the_sand", 946443267, 3, 1503774254),
@@ -65,9 +66,10 @@ def main():
                           for n in category["socketIndexes"]})
         for index in indices:
             socket = sockets["socketEntries"][index]
-            pool_hash = socket.get("randomizedPlugSetHash")
+            # W320 follow-up: curated fixed-roll legendaries expose their trait column as reusablePlugSetHash with isFakePlugSet true.
+            pool_hash = socket.get("randomizedPlugSetHash") or socket.get("reusablePlugSetHash")
             pool = pools.get(str(pool_hash), {})
-            if pool.get("isFakePlugSet") is not False:
+            if pool.get("isFakePlugSet") is not ("randomizedPlugSetHash" not in socket):
                 continue
             matches = [plug for plug in pool.get("reusablePlugItems", [])
                        if plug.get("plugItemHash") == BASE and plug.get("currentlyCanRoll") is True]
@@ -79,7 +81,7 @@ def main():
             rolls.append(roll)
             proofs.append(dict(roll=roll, traitCategory=TRAIT_CATEGORY,
                                itemName=item["displayProperties"]["name"], tierType=5,
-                               exotic=False, isFakePlugSet=False, socket=socket,
+                               exotic=False, isFakePlugSet=pool["isFakePlugSet"], socket=socket,
                                matchingPlug=matches[0], canonicalEntry=canonical[weapon["id"]]))
     assert [(r["id"], r["hash"], r["socket"], r["plugSetHash"]) for r in rolls] == EXPECTED
     # Select one bounded row by the export's zero-based anchor, not a huge HTML dump.

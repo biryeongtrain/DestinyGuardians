@@ -17,6 +17,7 @@ public final class AmbitiousAssassinProfile {
         new WeaponPerks.Roll("distant_relation", 2034817450L, 4, HASH, 3824767299L),
         new WeaponPerks.Roll("high_albedo", 1197486957L, 3, HASH, 2797218184L),
         new WeaponPerks.Roll("coriolis_force", 3512349612L, 3, HASH, 2568674372L),
+        new WeaponPerks.Roll("salvager_s_salvo", 2060863616L, 3, HASH, 253L), // curated fixed-roll legendary
         new WeaponPerks.Roll("deafening_whisper", 981718087L, 3, HASH, 3110206796L),
         new WeaponPerks.Roll("edge_transit", 218335759L, 4, HASH, 2535579724L),
         new WeaponPerks.Roll("bellowing_giant", 2186258845L, 4, HASH, 1722393382L),

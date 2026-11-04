@@ -1,7 +1,7 @@
 {
   "stage": "W178",
   "generator": "scripts/build_threat_detector_w178.py",
-  "generatorSha256": "000afe335b8c0bb551ebcd0d19c20e65d53cc2e374c8d7a9165a5bf739e51aae",
+  "generatorSha256": "c8152191e051ab2bcdd0f09b20b1eb000d33e5b96d3ccc3ba7e5e8b2d9733f62",
   "sourcePins": {
     "src/main/resources/destiny/weapons/w30.json": {
       "sha256": "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a",
@@ -319,6 +319,59 @@
       ]
     },
     {
+      "id": "ikelos_smg_v1_0_1",
+      "mapping": {
+        "id": "ikelos_smg_v1_0_1",
+        "family": "Submachine Gun",
+        "category": "default",
+        "subfamily": "Aggressive",
+        "encodedPveCrit": 0
+      },
+      "baseline": {
+        "readyTicks": 7,
+        "stowTicks": 6,
+        "adsTicks": 5,
+        "reloadTicks": 45
+      },
+      "timing": {
+        "supported": true,
+        "magazine": 32,
+        "rpm": 720,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "cadenceTicks": 1.666666666667,
+        "burstSpacingTicks": 0.0,
+        "burstSize": 1,
+        "sharedBurstAmmo": false,
+        "chargeTicks": null,
+        "drawTicks": null,
+        "reloadTicks": 45,
+        "shellReload": false,
+        "reloadPerRoundTicks": null,
+        "reloadInitialTicks": null
+      },
+      "tiers": [
+        {
+          "readyTicks": 7,
+          "stowTicks": 6,
+          "adsTicks": 5,
+          "reloadTicks": 45
+        },
+        {
+          "readyTicks": 5,
+          "stowTicks": 4,
+          "adsTicks": 4,
+          "reloadTicks": 39
+        },
+        {
+          "readyTicks": 4,
+          "stowTicks": 4,
+          "adsTicks": 4,
+          "reloadTicks": 29
+        }
+      ]
+    },
+    {
       "id": "dead_man_walking_xx7463",
       "mapping": {
         "id": "dead_man_walking_xx7463",
@@ -627,6 +680,59 @@
           "stowTicks": 5,
           "adsTicks": 5,
           "reloadTicks": 12
+        },
+        {
+          "readyTicks": 4,
+          "stowTicks": 4,
+          "adsTicks": 5,
+          "reloadTicks": 10
+        }
+      ]
+    },
+    {
+      "id": "ikelos_sg_v1_0_1",
+      "mapping": {
+        "id": "ikelos_sg_v1_0_1",
+        "family": "Shotgun",
+        "category": "default",
+        "subfamily": "Rapid-Fire",
+        "encodedPveCrit": -20
+      },
+      "baseline": {
+        "readyTicks": 8,
+        "stowTicks": 9,
+        "adsTicks": 7,
+        "reloadTicks": 13
+      },
+      "timing": {
+        "supported": true,
+        "magazine": 7,
+        "rpm": 140,
+        "chargeMillis": null,
+        "drawMillis": null,
+        "cadenceTicks": 8.571428571429,
+        "burstSpacingTicks": 0.0,
+        "burstSize": 1,
+        "sharedBurstAmmo": false,
+        "chargeTicks": null,
+        "drawTicks": null,
+        "reloadTicks": null,
+        "shellReload": true,
+        "reloadPerRoundTicks": 13,
+        "reloadInitialTicks": null
+      },
+      "tiers": [
+        {
+          "readyTicks": 8,
+          "stowTicks": 9,
+          "adsTicks": 7,
+          "reloadTicks": 13
+        },
+        {
+          "readyTicks": 6,
+          "stowTicks": 7,
+          "adsTicks": 6,
+          "reloadTicks": 11
         },
         {
           "readyTicks": 4,
@@ -1351,8 +1457,8 @@
     }
   ],
   "outputs": {
-    "src/main/resources/destiny/weapons/w178-threat-detector.json": "8e593a1698dff17bb8260e40b9b1e3befe3efaca9fd54d990e89fdddf62cb4e4",
-    "art/weapons/w178/threat-detector/official-sockets.json": "2b3efa8d1e13405f761863b3ecb71624376e308fed90583951d4fb8b1be4f6fa",
+    "src/main/resources/destiny/weapons/w178-threat-detector.json": "7d5e1938eb8fcf2cc3b2b1f2da63496e87d16c55f60ae455323d7f497dbbabae",
+    "art/weapons/w178/threat-detector/official-sockets.json": "60d04d6acd3daeb13af042371917d815f88a81217ab949bc9da5ad26ea17a030",
     "art/weapons/w178/threat-detector/clarity-source.json": "afd5bc99dd136c9f93d2e7ab932034b03ae1907779f67771ec3185051659b7b2"
   },
   "nativePending": [
@@ -1365,7 +1471,7 @@
   "limitations": [
     "Current official sockets; historical community raw stat curves.",
     "Local Minecraft footpoint sphere and project PvE enemy policy; no line-of-sight requirement in source.",
-    "Only Snapshot2/Frenzy2/Outlaw1/FeedingFrenzy1 distinct pairs. AJ/PM/RapidHit/SFA impossible in selected17.",
+    "Only Snapshot2/Frenzy2/Outlaw1/FeedingFrenzy1 distinct pairs. AJ/PM/RapidHit/SFA impossible in selected19.",
     "No original first-shell delay inferred; preserve accepted base phases by unrounded ratio if distinct."
   ]
 }

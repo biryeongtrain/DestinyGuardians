@@ -19,7 +19,7 @@ import net.minecraft.world.phys.*;
 import java.util.*;
 
 /** Strike-owned enemy, using authored fixed-three tuning. No vanilla attack goals or loot. */
-public final class DevilsMob extends Monster implements PolymerEntity {
+public final class DevilsMob extends Monster implements PolymerEntity, kim.biryeong.destiny.loot.LootTagged {
     final DevilsPlan.Kind kind;
     DevilsActors runtime;
     DevilsDirector.ActorRef ref;
@@ -69,6 +69,15 @@ public final class DevilsMob extends Monster implements PolymerEntity {
     }
     boolean attachModel() { model=DevilsActorModel.attach(this); if(model!=null&&armorOpen)model.armorOpen(); return model != null; }
     public DevilsPlan.Kind kind() { return kind; }
+    /** Destiny enemy ranks: red-bar minors, yellow-bar majors, Brig/Walker/Sepiks bosses; walker parts drop nothing. */
+    @Override public Tier lootTier() {
+        if (root != null) return Tier.NONE;
+        return switch (kind) {
+            case DREG, VANDAL, SHANK, THRALL, ACOLYTE -> Tier.MINOR;
+            case MARAUDER, CAPTAIN, KNIGHT, WIZARD, SERVITOR -> Tier.MAJOR;
+            case BRIG, WALKER, SEPIKS -> Tier.BOSS;
+        };
+    }
     public DevilsDirector.ActorRef reference() { return ref; }
     public boolean armorOpen() { return armorOpen; }
     public boolean walkerPart() { return root != null; }

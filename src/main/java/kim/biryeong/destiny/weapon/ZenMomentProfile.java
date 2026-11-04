@@ -20,6 +20,7 @@ public final class ZenMomentProfile {
         new WeaponPerks.Roll("gnawing_hunger",821154603L,3,HASH,1144396384L),
         new WeaponPerks.Roll("cold_denial",1216130969L,3,HASH,330841869L),
         new WeaponPerks.Roll("blast_furnace",3843477312L,3,HASH,1976101165L),
+        new WeaponPerks.Roll("frontier_justice",273396910L,3,HASH,174L), // curated fixed-roll legendary
         new WeaponPerks.Roll("distant_relation",2034817450L,3,HASH,1131958073L),
         new WeaponPerks.Roll("bug_out_bag",2744715540L,3,HASH,907333373L),
         new WeaponPerks.Roll("lonesome",2199171672L,3,HASH,3612808001L),
@@ -45,7 +46,7 @@ public final class ZenMomentProfile {
         byte[] raw = bytes("/destiny/weapons/w188-zen_moment.json");
         try {
             check(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(raw))
-                    .equals("df64fed09aecc6dbdb0e4644a3a7f62e7ccc440aa26415a6065cc4c75d1c8532"), "checksum");
+                    .equals("e7cfd735995a8710dce0a0ed46f7f9bfb14f11df8c0ab05f970da03329f326fc"), "checksum");
         } catch (NoSuchAlgorithmException error) { throw new IllegalStateException(error); }
         var root = JsonParser.parseString(new String(raw, StandardCharsets.UTF_8)).getAsJsonObject();
         check(root.keySet().equals(Set.of("stage", "perk", "weapons"))
@@ -57,7 +58,7 @@ public final class ZenMomentProfile {
                     && !rolls.contains(roll), "exact unique base roll");
             rolls.add(roll);
         }
-        check(rolls.size() == EXPECTED.size(), "complete ten sockets");
+        check(rolls.size() == EXPECTED.size(), "complete eleven sockets");
         Map<String, WeaponCatalog.Entry> entries = new HashMap<>();
         for (var row : json("/destiny/weapons/w30.json").getAsJsonArray()) {
             var entry = GSON.fromJson(row, WeaponCatalog.Entry.class);

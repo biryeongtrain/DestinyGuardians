@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HeatingUpProfileW177Test {
     private static final String TARGET = "src/main/resources/destiny/weapons/w177-heating-up.json";
     private static final String ART = "art/weapons/w177/heating-up/";
-    private static final Set<String> IDS = Set.of("farewell", "dream_breaker", "retrofit_escapade");
+    private static final Set<String> IDS = Set.of("farewell", "dream_breaker", "null_composure", "retrofit_escapade");
     private static JsonElement json(String path) throws Exception {
         return JsonParser.parseString(Files.readString(Path.of(path)));
     }
@@ -41,9 +41,10 @@ class HeatingUpProfileW177Test {
         assertEquals(Set.of(
             new WeaponPerks.Roll("farewell", 541188001L, 3, 1570042021L, 284168234L),
             new WeaponPerks.Roll("dream_breaker", 2931957300L, 3, 1570042021L, 3785896921L),
+            new WeaponPerks.Roll("null_composure", 1644680957L, 3, 1570042021L, 272L), // W320 curated fixed roll
             new WeaponPerks.Roll("retrofit_escapade", 3103325054L, 3, 1570042021L, 3756086698L)),
             new HashSet<>(HeatingUpProfile.rolls()));
-        assertEquals(3, HeatingUpProfile.rolls().size());
+        assertEquals(4, HeatingUpProfile.rolls().size());
         assertThrows(UnsupportedOperationException.class, () -> HeatingUpProfile.rolls().clear());
     }
 
@@ -106,7 +107,7 @@ class HeatingUpProfileW177Test {
             p -> p.addProperty("socket", "3"), p -> p.addProperty("perkHash", 2748258257L),
             p -> p.addProperty("plugSetHash", 1), p -> p.addProperty("extra", true), p -> p.remove("id")))
             rejects(r -> edit.accept(r.getAsJsonArray("weapons").get(0).getAsJsonObject()));
-        assertEquals(3, HeatingUpProfile.rolls().size());
+        assertEquals(4, HeatingUpProfile.rolls().size());
     }
 
     @Test void scannerEvidenceCovers65AndEveryAcceptedCurrentRandomizedSocket() throws Exception {
@@ -117,7 +118,7 @@ class HeatingUpProfileW177Test {
         for (var scan : proof.getAsJsonArray("scans"))
             assertTrue(scanned.add(scan.getAsJsonObject().get("id").getAsString()));
         assertEquals(new HashSet<>(catalog().stream().map(WeaponCatalog.Entry::id).toList()), scanned);
-        assertEquals(3, proof.getAsJsonArray("accepted").size());
+        assertEquals(4, proof.getAsJsonArray("accepted").size());
         var accepted = new HashSet<WeaponPerks.Roll>();
         for (var e : proof.getAsJsonArray("accepted")) {
             var p = e.getAsJsonObject();
@@ -125,9 +126,11 @@ class HeatingUpProfileW177Test {
             assertTrue(accepted.add(roll));
             assertEquals(1570042021L, roll.perkHash());
             assertEquals(4241085061L, p.get("socketCategoryHash").getAsLong());
-            assertEquals("randomizedPlugSetHash", p.get("plugSetField").getAsString());
-            assertFalse(p.get("isFakePlugSet").getAsBoolean());
-            assertEquals(roll.plugSetHash(), p.getAsJsonObject("socketEntry").get("randomizedPlugSetHash").getAsLong());
+            // W320: curated fixed-roll legendaries use a reusable "fake" plug set as their trait column.
+            String field = p.get("plugSetField").getAsString();
+            assertTrue(field.equals("randomizedPlugSetHash") || field.equals("reusablePlugSetHash"));
+            assertEquals(field.equals("reusablePlugSetHash"), p.get("isFakePlugSet").getAsBoolean());
+            assertEquals(roll.plugSetHash(), p.getAsJsonObject("socketEntry").get(field).getAsLong());
             var match = p.getAsJsonArray("matchingEntries").get(0).getAsJsonObject().getAsJsonObject("item");
             assertTrue(match.get("currentlyCanRoll").getAsBoolean());
             assertEquals(1570042021L, match.get("plugItemHash").getAsLong());

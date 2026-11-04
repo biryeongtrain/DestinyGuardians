@@ -59,13 +59,32 @@ public final class WeaponPerks {
                 : ArcherTempoProfile.ID.equals(id) ? ArcherTempoProfile.rolls()
                 : OutlawProfile.ID.equals(id) ? OutlawProfile.rolls()
                 : RampageProfile.ID.equals(id) ? RampageProfile.rolls()
-                : SnapshotAimProfile.ID.equals(id) ? SnapshotAimProfile.rolls() : PrecisionReturnProfile.rolls(id);
+                : SnapshotAimProfile.ID.equals(id) ? SnapshotAimProfile.rolls()
+                : PerkBatchDProfile.owns(id) ? PerkBatchDProfile.rolls(id) // W323 batch D
+                : PerkBatchBProfile.owns(id) ? PerkBatchBProfile.rolls(id) // W321 batch B
+                : PerkBatchA.has(id) ? PerkBatchA.rolls(id) // W320 batch A
+                : PerkBatchC.has(id) ? PerkBatchC.rolls(id) // W322 batch C
+                : PrecisionReturnProfile.rolls(id);
         return entry.isEmpty() ? List.of() : pool.stream().filter(r -> r.id.equals(entry.get().id())).toList();
     }
-    public static List<String> ids() { return List.of(ID, IronGazeProfile.ID, SlickdrawProfile.ID, GutshotProfile.ID, CorneredProfile.ID, OsmosisProfile.ID, HipFireGripProfile.ID, MovingTargetProfile.ID, HeadseekerProfile.ID, SteadyHandsProfile.ID, PulseMonitorProfile.ID, UnrelentingProfile.ID, WhirlwindBladeProfile.ID, EnGardeProfile.ID, OpeningShotProfile.ID, BoxBreathingProfile.ID, DynamicSwayProfile.ID, AssassinsBladeProfile.ID, KillingTallyProfile.ID, SympatheticArsenalProfile.ID, NoDistractionsProfile.ID, RelentlessStrikesProfile.ID, TirelessBladeProfile.ID, MulliganProfile.ID, AmbitiousAssassinProfile.ID, ClownCartridgeProfile.ID, OverflowProfile.ID, AdagioProfile.ID, ImpulseAmplifierProfile.ID, RangefinderProfile.ID, BackupPlanProfile.ID, EncoreProfile.ID, WellRoundedProfile.ID, WellspringProfile.ID, ThreshProfile.ID, PugilistProfile.ID, FiringLineProfile.ID, FullAutoProfile.ID, IronReachProfile.ID, UnderPressureProfile.ID, CompulsiveReloaderProfile.ID, EnsembleProfile.ID, FirmlyPlantedProfile.ID, ZenMomentProfile.ID, LeadFromGoldProfile.ID, QuickdrawProfile.ID, ElementalCapacitorProfile.ID, SurplusProfile.ID, HighImpactReservesProfile.ID, VorpalProfile.ID, ThreatDetectorProfile.ID, HeatingUpProfile.ID, StatsForAllProfile.ID, FocusedFuryProfile.ID, AdrenalineJunkieProfile.ID, FrenzyProfile.ID, TapTheTriggerProfile.ID, PerpetualMotionProfile.ID, RapidHitProfile.ID, SubsistenceProfile.ID, MultikillClipProfile.ID, KillClipProfile.ID, OutlawProfile.ID, RampageProfile.ID,
-            PrecisionReturnProfile.TRIPLE_TAP, PrecisionReturnProfile.FOURTH_TIMES, SnapshotAimProfile.ID, ArcherTempoProfile.ID, DragonflyProfile.ID, PayloadProfile.ID, DemolitionistProfile.ID, TrackingProfile.ID, FeedingFrenzyProfile.ID, OneForAllProfile.ID, SurroundedProfile.ID, SwashbucklerProfile.ID, GraveRobberProfile.ID); }
+    public static List<String> ids() { // W320 batch A
+        var all = new ArrayList<>(baseIds()); all.addAll(PerkBatchA.ids()); return List.copyOf(all);
+    }
+    private static List<String> baseIds() { return List.of(ID, IronGazeProfile.ID, SlickdrawProfile.ID, GutshotProfile.ID, CorneredProfile.ID, OsmosisProfile.ID, HipFireGripProfile.ID, MovingTargetProfile.ID, HeadseekerProfile.ID, SteadyHandsProfile.ID, PulseMonitorProfile.ID, UnrelentingProfile.ID, WhirlwindBladeProfile.ID, EnGardeProfile.ID, OpeningShotProfile.ID, BoxBreathingProfile.ID, DynamicSwayProfile.ID, AssassinsBladeProfile.ID, KillingTallyProfile.ID, SympatheticArsenalProfile.ID, NoDistractionsProfile.ID, RelentlessStrikesProfile.ID, TirelessBladeProfile.ID, MulliganProfile.ID, AmbitiousAssassinProfile.ID, ClownCartridgeProfile.ID, OverflowProfile.ID, AdagioProfile.ID, ImpulseAmplifierProfile.ID, RangefinderProfile.ID, BackupPlanProfile.ID, EncoreProfile.ID, WellRoundedProfile.ID, WellspringProfile.ID, ThreshProfile.ID, PugilistProfile.ID, FiringLineProfile.ID, FullAutoProfile.ID, IronReachProfile.ID, UnderPressureProfile.ID, CompulsiveReloaderProfile.ID, EnsembleProfile.ID, FirmlyPlantedProfile.ID, ZenMomentProfile.ID, LeadFromGoldProfile.ID, QuickdrawProfile.ID, ElementalCapacitorProfile.ID, SurplusProfile.ID, HighImpactReservesProfile.ID, VorpalProfile.ID, ThreatDetectorProfile.ID, HeatingUpProfile.ID, StatsForAllProfile.ID, FocusedFuryProfile.ID, AdrenalineJunkieProfile.ID, FrenzyProfile.ID, TapTheTriggerProfile.ID, PerpetualMotionProfile.ID, RapidHitProfile.ID, SubsistenceProfile.ID, MultikillClipProfile.ID, KillClipProfile.ID, OutlawProfile.ID, RampageProfile.ID,
+            PrecisionReturnProfile.TRIPLE_TAP, PrecisionReturnProfile.FOURTH_TIMES, SnapshotAimProfile.ID, ArcherTempoProfile.ID, DragonflyProfile.ID, PayloadProfile.ID, DemolitionistProfile.ID, TrackingProfile.ID, FeedingFrenzyProfile.ID, OneForAllProfile.ID, SurroundedProfile.ID, SwashbucklerProfile.ID, GraveRobberProfile.ID,
+            // W323 batch D
+            PerkBatchDProfile.TURNABOUT, PerkBatchDProfile.COUNTERATTACK, PerkBatchDProfile.FLASH_COUNTER, PerkBatchDProfile.TILTING, PerkBatchDProfile.VALIANT_CHARGE, PerkBatchDProfile.DUELISTS_TRANCE, PerkBatchDProfile.COLD_STEEL, PerkBatchDProfile.UNSTOPPABLE_FORCE, PerkBatchDProfile.MASTER_OF_ARMS,
+            // W321 batch B
+            PerkBatchBProfile.TARGET_LOCK, PerkBatchBProfile.ENVIOUS_ASSASSIN, PerkBatchBProfile.ENVIOUS_ARSENAL, PerkBatchBProfile.HARMONY, PerkBatchBProfile.UNDER_OVER, PerkBatchBProfile.GOLDEN_TRICORN, PerkBatchBProfile.LASTING_IMPRESSION, PerkBatchBProfile.TIMED_PAYLOAD, PerkBatchBProfile.RESERVOIR_BURST, PerkBatchBProfile.EXPLOSIVE_HEAD, PerkBatchBProfile.CLUSTER_BOMB, PerkBatchBProfile.CHAIN_REACTION,
+            // W322 batch C
+            PerkBatchCProfile.GENESIS, PerkBatchCProfile.DISRUPTION_BREAK, PerkBatchCProfile.SHIELD_DISORIENT,
+            PerkBatchCProfile.ENERGY_TRANSFER, PerkBatchCProfile.INCANDESCENT, PerkBatchCProfile.ADAPTIVE_MUNITIONS,
+            PerkBatchCProfile.RIMESTEALER, PerkBatchCProfile.CRYSTALLINE_CORPSEBLOOM, PerkBatchCProfile.SHOOT_TO_LOOT,
+            PerkBatchCProfile.REDIRECTION, PerkBatchCProfile.ONE_TWO_PUNCH); }
     public static List<String> choices(ItemStack stack) { return ids().stream().filter(id -> !available(stack, id).isEmpty()).toList(); }
     public static String name(String id) {
+        var batchA = PerkBatchA.name(id); if (batchA != null) return batchA; // W320 batch A
+        if (PerkBatchDProfile.owns(id)) return kim.biryeong.destiny.inventory.WeaponPerkLabels.name(id); // W323 batch D
         if (IronGazeProfile.ID.equals(id)) return "Iron Gaze";
         if (SlickdrawProfile.ID.equals(id)) return "Slickdraw";
         if (GutshotProfile.ID.equals(id)) return "Gutshot Straight";
@@ -138,8 +157,10 @@ if (TirelessBladeProfile.ID.equals(id)) return "지칠 줄 모르는 칼날";
         if (DragonflyProfile.ID.equals(id)) return "잠자리";
         if (ArcherTempoProfile.ID.equals(id)) return "Archer's Tempo";
         if (SnapshotAimProfile.ID.equals(id)) return "스냅샷 조준경";
+        if (PerkBatchBProfile.owns(id)) return PerkBatchBProfile.koName(id); // W321 batch B
         if (PrecisionReturnProfile.TRIPLE_TAP.equals(id)) return "Triple Tap";
         if (PrecisionReturnProfile.FOURTH_TIMES.equals(id)) return "Fourth Time's the Charm";
+        if (PerkBatchC.has(id)) return PerkBatchC.name(id); // W322 batch C
         return ID.equals(id) ? "자동 장전 총집" : KillClipProfile.ID.equals(id) ? "살상 탄창" : OutlawProfile.ID.equals(id) ? "무법자" : RampageProfile.ID.equals(id) ? "광란" : id;
     }
     private static long savedHash(CompoundTag tag, int socket) {
@@ -201,6 +222,10 @@ if (TirelessBladeProfile.ID.equals(id)) return "지칠 줄 모르는 칼날";
         WeaponMultikillClip.edited(stack);
         WeaponSubsistence.edited(stack);
         WeaponGraveRobber.edited(stack);
+        PerkBatchD.edited(stack); // W323 batch D
+        PerkBatchB.edited(stack); // W321 batch B
+        PerkBatchA.edited(stack); // W320 batch A
+        PerkBatchC.edited(stack); // W322 batch C
         return true;
     }
     /** Atomic exact-pool replacement. Validate the whole tuple set before lifecycle or NBT writes. */
@@ -261,6 +286,10 @@ if (TirelessBladeProfile.ID.equals(id)) return "지칠 줄 모르는 칼날";
         WeaponMultikillClip.edited(stack);
         WeaponSubsistence.edited(stack);
         WeaponGraveRobber.edited(stack);
+        PerkBatchD.edited(stack); // W323 batch D
+        PerkBatchB.edited(stack); // W321 batch B
+        PerkBatchA.edited(stack); // W320 batch A
+        PerkBatchC.edited(stack); // W322 batch C
         return true;
     }
 }

@@ -1,0 +1,49 @@
+{
+ "stage": "W320",
+ "perk": {
+  "id": "tunnel_vision",
+  "hash": 2946784966,
+  "killWindowTicks": 72,
+  "durationTicks": 100,
+  "aimAssistBonus": 20,
+  "growthScalar": 0.85,
+  "adsScalar": 0.8
+ },
+ "policies": {
+  "aimAssist": "source-only; this port has no aim assist simulation",
+  "growthScalar": "LOCAL_POLICY: DDC '-?%' cone growth; 0.85 is a local placeholder, not a Destiny value",
+  "adsScalar": "LOCAL_POLICY: DDC '+?' ADS handling; x0.8 ADS duration is a local placeholder, not a Destiny value",
+  "trigger": "reload completion of this weapon within 3.6s of this weapon's final blow"
+ },
+ "source": {
+  "manifest": "245114.26.10.13.2000-1-bnet.66137",
+  "officialDescription": "Reloading after defeating a target greatly increases target acquisition and aim down sight speed for a short duration.",
+  "ddcSheet": "Weapon Perks",
+  "ddcRow": "1662574278R237",
+  "ddcText": "238 Tunnel Vision Upon finishing a reload within 3.6 seconds of a Weapon Kill: +20 Aim Assist, -?% Accuracy Cone Growth, and +? ADS Handling for 5 ↑6 seconds. Buff duration can be refreshed through additional activations.",
+  "scope": "PvE base (non-enhanced); '?' values are not facts, see policies"
+ },
+ "weapons": [
+  {
+   "id": "aishas_embrace",
+   "hash": 2638190703,
+   "socket": 3,
+   "perkHash": 2946784966,
+   "plugSetHash": 7997267
+  },
+  {
+   "id": "farewell",
+   "hash": 541188001,
+   "socket": 3,
+   "perkHash": 2946784966,
+   "plugSetHash": 284168234
+  },
+  {
+   "id": "dream_breaker",
+   "hash": 2931957300,
+   "socket": 3,
+   "perkHash": 2946784966,
+   "plugSetHash": 3785896921
+  }
+ ]
+}

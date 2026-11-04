@@ -72,16 +72,28 @@ public final class PulseMonitorProfile {
         check(d.coSelections!=null&&d.coSelections.size()==7&&new HashSet<>(d.coSelections).equals(expectedPairs),"exact7 companion tuples");
         return new Data(d.stage,p,List.copyOf(d.weapons),List.copyOf(d.curves),List.copyOf(d.coSelections));
     }
-    public static List<WeaponPerks.Roll> rolls() { return DATA.weapons; }
+    /** W322: the current manifest also rolls trait 205890336 ("Pulse Monitor"). It is the same
+     * logical pulse_monitor trait; W200 972757866 tuples come first so saved selections are unchanged. */
+    private static final List<WeaponPerks.Roll> ALL_ROLLS=allRolls();
+    private static List<WeaponPerks.Roll> allRolls() {
+        var all=new ArrayList<>(DATA.weapons);
+        all.addAll(PerkBatchCProfile.pulseMonitorAliases());
+        return List.copyOf(all);
+    }
+    public static List<WeaponPerks.Roll> rolls() { return ALL_ROLLS; }
     public static boolean supports(WeaponCatalog.Entry entry) {
-        return entry!=null&&entry.equals(CATALOG.get(entry.id()))&&EXPECTED.stream().anyMatch(r->r.id().equals(entry.id()));
+        return entry!=null&&entry.equals(CATALOG.get(entry.id()))&&ALL_ROLLS.stream().anyMatch(r->r.id().equals(entry.id()));
+    }
+    /** Only W200 weapons have pinned raw handling curves. Alias-only weapons use the scalar policy. */
+    public static boolean hasCurve(WeaponCatalog.Entry entry) {
+        return supports(entry)&&EXPECTED.stream().anyMatch(r->r.id().equals(entry.id()));
     }
     public static int handlingBonus() { return DATA.perk.handlingBonus; }
     public static double handlingScalar() { return DATA.perk.handlingScalar; }
     public static double healthThreshold() { return DATA.perk.healthThreshold; }
     public static int lingerTicks() { return DATA.perk.lingerTicks; }
     public static boolean compatible(WeaponCatalog.Entry entry,String perk,WeaponPerks.Roll roll) {
-        return supports(entry)&&DATA.coSelections.stream().anyMatch(c->c.id.equals(entry.id())&&c.perk.equals(perk)&&c.roll.equals(roll));
+        return hasCurve(entry)&&DATA.coSelections.stream().anyMatch(c->c.id.equals(entry.id())&&c.perk.equals(perk)&&c.roll.equals(roll));
     }
     private static Curve curve(WeaponCatalog.Entry entry) {
         if(!supports(entry))throw new IllegalArgumentException("Noncanonical Pulse Monitor entry");

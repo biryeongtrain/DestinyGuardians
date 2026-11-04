@@ -150,6 +150,25 @@ public final class AmmoEconomy {
     public static int collectForMarksmanDodge(ServerPlayer p) {
         return collect(p,MARKSMAN_PICKUP_RADIUS*MARKSMAN_PICKUP_RADIUS,false);
     }
+    /** W322 Shoot to Loot: a personal Special/Heavy brick crossed by an accepted weapon ray segment.
+     * Same grant/no-space retention/expiry as a body pickup. @return bricks actually consumed. */
+    public static int collectAlong(ServerPlayer p,Vec3 from,Vec3 to,double radius) {
+        var list=BRICKS.get(p.getUUID());if(list==null||from==null||to==null)return 0;
+        int consumed=0;
+        for(var it=list.iterator();it.hasNext();) {
+            var b=it.next();
+            if(b.owner()!=p||!eligible(p)||p.level()!=b.level()||p.level().getGameTime()>=b.expires()
+                    ||b.type()==WeaponAmmoType.PRIMARY
+                    ||kim.biryeong.destiny.combat.StasisCrystals.segmentDistance(from,to,
+                        b.position().add(0,AmmoBrickVisual.SCALE*.5,0))>radius)continue;
+            if(grant(p,b.type())>0) {
+                b.visual().destroy();it.remove();consumed++;
+                p.level().playSound(null,p.blockPosition(),SoundEvents.ITEM_PICKUP,SoundSource.PLAYERS,.45f,b.type()==WeaponAmmoType.SPECIAL?1.5f:.8f);
+            }
+        }
+        if(list.isEmpty())BRICKS.remove(p.getUUID());
+        return consumed;
+    }
     public static void tickPlayer(ServerPlayer p) { collect(p,2.25,true); }
     private static int collect(ServerPlayer p,double radiusSquared,boolean requireSight) {
         var list=BRICKS.get(p.getUUID());if(list==null)return 0;

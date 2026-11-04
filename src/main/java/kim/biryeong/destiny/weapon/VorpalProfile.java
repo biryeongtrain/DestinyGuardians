@@ -30,6 +30,7 @@ public final class VorpalProfile {
         roll("stormchaser", 3652506829L, 4213354588L),
         roll("canis_major", 2066434718L, 2791121719L),
         roll("dimensional_hypotrochoid", 1311684613L, 1092097342L),
+        roll("salvager_s_salvo", 2060863616L, 254L), // curated fixed-roll legendary socket4
         roll("retrofit_escapade", 3103325054L, 2461260598L),
         roll("crown_splitter", 2782325302L, 99092784L),
         roll("temptation_s_hook", 35794111L, 2147541212L),
@@ -75,7 +76,7 @@ public final class VorpalProfile {
             exact(perk.get("heavyMultiplier"), "1.10");
             check(data.get("weapons") instanceof JsonArray, "weapon array");
             var rows = data.getAsJsonArray("weapons");
-            check(rows.size() == EXPECTED.size(), "sixteen exact sockets");
+            check(rows.size() == EXPECTED.size(), "seventeen exact sockets");
             var result = new ArrayList<WeaponPerks.Roll>();
             var seen = new HashSet<WeaponPerks.Roll>();
             for (var value : rows) {
@@ -144,7 +145,7 @@ public final class VorpalProfile {
         return switch (id) {
             case "seventh_seraph_officer_revolver", "steelfeather_repeater", "patron_of_lost_causes",
                  "aishas_embrace", "farewell", "whispering_slab" -> WeaponAmmoType.PRIMARY;
-            case "bite_of_the_fox", "first_in_last_out", "hollow_words", "nezarec_s_whisper" -> WeaponAmmoType.SPECIAL;
+            case "bite_of_the_fox", "first_in_last_out", "hollow_words", "nezarec_s_whisper", "salvager_s_salvo" -> WeaponAmmoType.SPECIAL;
             default -> WeaponAmmoType.HEAVY; // Only the exact allowlisted remaining six reach this branch.
         };
     }

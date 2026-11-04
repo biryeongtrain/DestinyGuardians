@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 
 /** W68 real ServerPlayer/production-runtime tests, driven on delayed server ticks.
  * Literal sockets were independently enumerated from cached W30 Bungie items and W60 plug sets
- * at the exact W40 item hashes. Fifteen official rows include TWO unsupported Heavy rows.
+ * at the exact W40 item hashes. Fifteen official rows; the two Heavy rows use the W320 local 0.8 scalar.
  * Literal timing rows come from W44 raw seconds, scaling BEFORE ceil(seconds * 20).
  * Policy: Primary .5, Special .8; historical official 2022 .75 conflicts with the pinned
  * source-tier policy and is not silently substituted. Enhanced 4116820839 is excluded.
@@ -66,6 +66,8 @@ public final class WeaponSnapshotW68GameTests {
     private static final Set<WeaponPerks.Roll> HEAVY_OFFICIAL = Set.of(
             new WeaponPerks.Roll("edge_transit", 218335759L, 3, 957782887L, 447678063L),
             new WeaponPerks.Roll("bad_omens", 991314988L, 3, 957782887L, 457210958L));
+    private static final Set<WeaponPerks.Roll> OFFICIAL = java.util.stream.Stream.concat(ROWS.stream(), HEAVY_OFFICIAL.stream())
+            .collect(java.util.stream.Collectors.toUnmodifiableSet());
     private static final List<SnapshotAimProfile.Timing> TIMINGS = List.of(
             new SnapshotAimProfile.Timing("duke_mk_44", 6, 3, 1, 0.28166666669),
             new SnapshotAimProfile.Timing("austringer", 6, 3, 1, 0.253333333351),
@@ -114,10 +116,10 @@ public final class WeaponSnapshotW68GameTests {
             new SnapshotAimProfile.Timing("retraced_path", 7, 5, 2, 0.3035),
             new SnapshotAimProfile.Timing("salvager_s_salvo", 8, 6, 2, 0.36924088),
             new SnapshotAimProfile.Timing("deafening_whisper", 8, 6, 2, 0.36549944),
-            new SnapshotAimProfile.Timing("edge_transit", 9, 9, 3, 0.42162104),
+            new SnapshotAimProfile.Timing("edge_transit", 9, 7, 3, 0.42162104),
             new SnapshotAimProfile.Timing("canis_major", 10, 10, 3, 0.46277688),
             new SnapshotAimProfile.Timing("dimensional_hypotrochoid", 9, 9, 3, 0.42162104),
-            new SnapshotAimProfile.Timing("bad_omens", 10, 10, 3, 0.48619899248),
+            new SnapshotAimProfile.Timing("bad_omens", 10, 8, 3, 0.48619899248),
             new SnapshotAimProfile.Timing("bellowing_giant", 9, 9, 3, 0.43485678305599995),
             new SnapshotAimProfile.Timing("code_duello", 8, 8, 3, 0.38137531490599996),
             new SnapshotAimProfile.Timing("pyroclastic_flow", 9, 9, 3, 0.44127455923399994),
@@ -229,16 +231,16 @@ public final class WeaponSnapshotW68GameTests {
     }
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
-    public void exactThirteenSelectableOfficialRowsAndTwoHeavyExclusionsAcrossAll63Commands(GameTestHelper h) {
+    public void allFifteenOfficialRowsSelectableIncludingHeavyLocalPolicy(GameTestHelper h) {
         WeaponModelGameTests.assertCatalogExpansion(h);
         check(h, SnapshotAimProfile.ID.equals(SNAPSHOT) && SnapshotAimProfile.HASH == HASH
-                        && WeaponCatalog.all().size() == 65 && SnapshotAimProfile.rolls().size() == 13
-                        && Set.copyOf(SnapshotAimProfile.rolls()).equals(ROWS)
+                        && WeaponCatalog.all().size() == 65 && SnapshotAimProfile.rolls().size() == 15
+                        && Set.copyOf(SnapshotAimProfile.rolls()).equals(OFFICIAL)
                         && ROWS.size() + HEAVY_OFFICIAL.size() == 15, "Independent complete official/subset contract");
-        var p = player(h); int allowed = 0, heavyDenied = 0;
+        var p = player(h); int allowed = 0, heavyAllowed = 0;
         for (var e : WeaponCatalog.all()) {
             p.getInventory().clearContent(); var stack = equip(h, p, e.id(), false); var before = stack.copy();
-            var expected = ROWS.stream().filter(r -> r.id().equals(e.id())).toList();
+            var expected = OFFICIAL.stream().filter(r -> r.id().equals(e.id())).toList();
             check(h, WeaponPerks.available(stack, SNAPSHOT).equals(expected)
                             && WeaponPerks.selected(stack, SNAPSHOT).isEmpty(), "Exact socket availability/no default: " + e.id());
             check(h, command(h, p, "list") == 1 && command(h, p, "status") == 1
@@ -247,6 +249,7 @@ public final class WeaponSnapshotW68GameTests {
             check(h, command(h, p, "select " + SNAPSHOT) == (legal ? 1 : 0), "All-65 actual command allow/deny: " + e.id());
             if (legal) {
                 allowed++;
+                if (HEAVY_OFFICIAL.stream().anyMatch(r -> r.id().equals(e.id()))) heavyAllowed++;
                 check(h, WeaponPerks.selected(stack, SNAPSHOT).orElseThrow().equals(expected.getFirst())
                                 && SnapshotAimProfile.enterTicks(stack) == timing(e.id()).snapshotTicks(), "Exact selected official row");
                 var selected = stack.copy();
@@ -255,15 +258,9 @@ public final class WeaponSnapshotW68GameTests {
             } else {
                 check(h, ItemStack.matches(before, stack) && WeaponPerks.selected(stack, SNAPSHOT).isEmpty(),
                         "Rejected trait grants no ammo/components: " + e.id());
-                if (HEAVY_OFFICIAL.stream().anyMatch(r -> r.id().equals(e.id()))) {
-                    heavyDenied++;
-                    check(h, WeaponCharacteristics.of(e).ammo() == WeaponAmmoType.HEAVY
-                                    && SnapshotAimProfile.enterTicks(stack) == timing(e.id()).baseTicks(),
-                            "Official Heavy socket is explicitly unsupported and retains base ADS");
-                }
             }
         }
-        check(h, allowed == 13 && heavyDenied == 2, "Exactly 13 supported selections and both official Heavy denials");
+        check(h, allowed == 15 && heavyAllowed == 2, "All 15 official selections, including both Heavy rows (W320 local 0.8)");
         p.setItemInHand(InteractionHand.MAIN_HAND, WeaponModels.create(entry("beloved")));
         var preview = p.getMainHandItem().copy();
         check(h, command(h, p, "select " + SNAPSHOT) == 0 && ItemStack.matches(preview, p.getMainHandItem()),
@@ -291,7 +288,7 @@ public final class WeaponSnapshotW68GameTests {
         for (int kind = 0; kind < 8; kind++) {
             String id = kind == 5 ? "duke_mk_44" : kind == 6 ? "edge_transit" : kind == 7 ? "bad_omens" : "beloved";
             var p = player(h); var stack = equip(h, p, id, false);
-            forged(stack, kind == 1 ? 4 : 3, kind == 0 ? ENHANCED : HASH);
+            forged(stack, kind == 1 || kind >= 6 ? 4 : 3, kind == 0 ? ENHANCED : HASH);
             if (kind >= 2 && kind <= 4) {
                 var tag = stack.get(DataComponents.CUSTOM_DATA).copyTag();
                 if (kind == 2) { var sockets = new CompoundTag(); sockets.putDouble("3", (double)HASH);

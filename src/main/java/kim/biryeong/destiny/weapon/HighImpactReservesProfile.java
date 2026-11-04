@@ -31,6 +31,7 @@ public final class HighImpactReservesProfile {
         roll("bug_out_bag", 2744715540L, 4, 575371383L),
         roll("high_albedo", 1197486957L, 4, 718633408L),
         roll("dream_breaker", 2931957300L, 4, 1206254527L),
+        roll("null_composure", 1644680957L, 4, 273L), // curated fixed-roll legendary
         roll("hammerhead", 603242241L, 4, 2479293397L));
     private static final List<WeaponPerks.Roll> ROLLS = load();
     private HighImpactReservesProfile() {}
@@ -75,7 +76,7 @@ public final class HighImpactReservesProfile {
             exact(perk.get("fusionMaximum"), "1.229");
             check(data.get("weapons") instanceof JsonArray, "weapon array");
             var rows = data.getAsJsonArray("weapons");
-            check(rows.size() == EXPECTED.size(), "ten exact sockets");
+            check(rows.size() == EXPECTED.size(), "eleven exact sockets");
             var result = new ArrayList<WeaponPerks.Roll>();
             var seen = new HashSet<WeaponPerks.Roll>();
             for (var value : rows) {

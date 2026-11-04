@@ -32,6 +32,7 @@ public abstract class PlayerDamageMixin {
             kim.biryeong.destiny.crucible.CrucibleHealth.damaged(p, p.getHealth() < healthBefore);
             kim.biryeong.destiny.weapon.WeaponUnrelenting.damaged(p,loss);
             kim.biryeong.destiny.weapon.WeaponPulseMonitor.damaged(p,loss);
+            kim.biryeong.destiny.weapon.PerkBatchC.damaged(p,source,loss); // W322 batch C Energy Transfer
             kim.biryeong.destiny.weapon.WeaponFrenzy.received(p,source,loss);
             WeaponAiming.damaged(p,source,loss);
             kim.biryeong.destiny.hud.IncomingDamageHud.damaged(p,source,loss);

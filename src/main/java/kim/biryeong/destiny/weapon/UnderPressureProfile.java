@@ -19,7 +19,7 @@ public final class UnderPressureProfile {
     public static final boolean ORIGINAL_STABILITY_VERIFIED = false;
     public static final int TEMPORARY_SERVER_STABILITY_CAP = 30;
     private static final String RESOURCE = "/destiny/weapons/w190-under-pressure.json";
-    private static final String RESOURCE_SHA256 = "40627c938d7550b7c48d6abd829be61fd1591997ffcce9142af147820a174c20";
+    private static final String RESOURCE_SHA256 = "895a9e398913bc4236f3949a1a3dc1efa99e52540f666c7de760d7d043ce5e30";
     private static final String CATALOG_SHA256 = "2b1026245da2dc33003271e225b5d20de63531ae1321b7e941efae4178b5c68a";
     private static final Gson GSON = new Gson();
     private static final List<WeaponPerks.Roll> EXPECTED = List.of(
@@ -28,6 +28,7 @@ public final class UnderPressureProfile {
         roll("patron_of_lost_causes", 2723241847L, 4, 120674550L),
         roll("long_arm", 8293111L, 3, 3056706286L),
         roll("dead_man_walking_xx7463", 3751622019L, 3, 3268663985L),
+        roll("erentil_fr4", 2398848320L, 3, 664L), // curated fixed-roll legendary
         roll("hollow_words", 607191995L, 3, 637298592L),
         roll("dream_breaker", 2931957300L, 3, 3785896921L),
         roll("coriolis_force", 3512349612L, 3, 2568674372L),
@@ -64,7 +65,7 @@ public final class UnderPressureProfile {
                     && perk.get("temporaryServerStabilityCap").getAsInt() == TEMPORARY_SERVER_STABILITY_CAP,
                     "base identity and temporary tuning policy");
             List<WeaponPerks.Roll> rolls = List.of(GSON.fromJson(root.get("weapons"), WeaponPerks.Roll[].class));
-            require(rolls.equals(EXPECTED), "exact ten randomized sockets");
+            require(rolls.equals(EXPECTED), "exact eleven official sockets");
             var canonical = new HashMap<String, WeaponCatalog.Entry>();
             var entries = GSON.fromJson(pinned("/destiny/weapons/w30.json", CATALOG_SHA256), WeaponCatalog.Entry[].class);
             for (var entry : entries) {

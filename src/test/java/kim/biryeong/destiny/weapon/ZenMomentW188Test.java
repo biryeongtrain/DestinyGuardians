@@ -10,7 +10,7 @@ class ZenMomentW188Test {
     private static WeaponCatalog.Entry entry(String id) { return WeaponCatalog.find(id).orElseThrow(); }
     @Test void exactTenCanonicalBaseSocketsAndNoEnhanced() {
         assertEquals("zen_moment", ZenMomentProfile.ID); assertEquals(2387244414L, ZenMomentProfile.HASH);
-        assertEquals(10, ZenMomentProfile.rolls().size());
+        assertEquals(11, ZenMomentProfile.rolls().size()); // W320: + Frontier Justice curated fixed roll
         var ids = new HashSet<String>();
         for (var roll : ZenMomentProfile.rolls()) {
             assertEquals(ZenMomentProfile.HASH, roll.perkHash()); assertTrue(ids.add(roll.id()));

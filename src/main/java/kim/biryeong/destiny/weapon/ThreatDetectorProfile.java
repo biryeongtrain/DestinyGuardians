@@ -16,7 +16,7 @@ public final class ThreatDetectorProfile {
     public static final String ID = "threat_detector";
     public static final long HASH = 4071163871L;
     private static final String RESOURCE = "/destiny/weapons/w178-threat-detector.json";
-    private static final String SHA256 = "8e593a1698dff17bb8260e40b9b1e3befe3efaca9fd54d990e89fdddf62cb4e4";
+    private static final String SHA256 = "7d5e1938eb8fcf2cc3b2b1f2da63496e87d16c55f60ae455323d7f497dbbabae";
     private static final Gson GSON = new Gson();
     private static final List<WeaponPerks.Roll> EXPECTED = List.of(
         new WeaponPerks.Roll("seventh_seraph_officer_revolver", 3037520408L, 3, HASH, 903350103L),
@@ -30,6 +30,8 @@ public final class ThreatDetectorProfile {
         new WeaponPerks.Roll("dust_rock_blues", 636912560L, 3, HASH, 3511609070L),
         new WeaponPerks.Roll("parcel_of_stardust_fell_to_earth", 2217366863L, 3, HASH, 2514419370L),
         new WeaponPerks.Roll("dream_breaker", 2931957300L, 3, HASH, 3785896921L),
+        new WeaponPerks.Roll("ikelos_smg_v1_0_1", 1723472487L, 4, HASH, 1329L), // curated fixed-roll legendary
+        new WeaponPerks.Roll("ikelos_sg_v1_0_1", 1887808042L, 4, HASH, 1324L), // curated fixed-roll legendary
         new WeaponPerks.Roll("line_in_the_sand", 946443267L, 3, HASH, 1503774254L),
         new WeaponPerks.Roll("deafening_whisper", 981718087L, 4, HASH, 3588287812L),
         new WeaponPerks.Roll("edge_transit", 218335759L, 3, HASH, 447678063L),
@@ -77,7 +79,7 @@ public final class ThreatDetectorProfile {
             check(EXPECTED.contains(roll) && !rolls.contains(roll) && row.equals(GSON.toJsonTree(roll)), "exact unique base roll");
             rolls.add(roll);
         }
-        check(rolls.size() == 17, "complete exact17");
+        check(rolls.size() == 19, "complete exact19");
         var curves = new HashMap<String, Curve>();
         var stats = byId("/destiny/weapons/w40-characteristics.json");
         var reloads = byId("/destiny/weapons/w46-timing.json");
@@ -101,7 +103,7 @@ public final class ThreatDetectorProfile {
                 && Math.clamp(quantize(c.ads.seconds(c.baseHandlingStat)), 2, 20)
                     == aim.get(c.id).getAsJsonObject("profile").get("transitionTicks").getAsInt(), "four raw baselines");
         }
-        check(curves.size() == 17, "complete curves");
+        check(curves.size() == 19, "complete curves");
         var companions = new ArrayList<Companion>();
         for (var row : root.getAsJsonArray("coSelections")) {
             var pair = GSON.fromJson(row, Companion.class);

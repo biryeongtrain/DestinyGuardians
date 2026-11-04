@@ -35,9 +35,7 @@ public final class WeaponPerkCommands {
         String id = clear ? null : StringArgumentType.getString(c, "id");
         if (!clear && !WeaponPerks.ids().contains(id))
             return fail(c, "아직 구현되지 않은 특성입니다.");
-        if (!clear && SnapshotAimProfile.ID.equals(id)
-                && WeaponCharacteristics.of(WeaponItems.entry(stack).orElseThrow()).ammo() == WeaponAmmoType.HEAVY)
-            return fail(c, "중화기 스냅샷은 속도 배율 자료가 없어 아직 지원하지 않습니다. 공식 소켓 존재 여부와는 별개입니다.");
+        // W320: official Heavy Snapshot rolls use the local 0.8 scalar (w320-snapshot-heavy.json).
         boolean wasFullAuto=WeaponFullAuto.selected(p);
         boolean changed;
         if (clear) changed = WeaponPerks.clear(stack);
@@ -55,6 +53,7 @@ public final class WeaponPerkCommands {
             WeaponPugilist.changed(p,stack);
             WeaponEnsemble.changed(p, stack);
             WeaponHolster.changed(p, stack);
+            PerkBatchC.changed(p, stack); // W322 batch C
             WeaponKillClip.changed(p, stack);
             WeaponOutlaw.changed(p, stack);
             WeaponFeedingFrenzy.changed(p, stack);
@@ -74,6 +73,9 @@ public final class WeaponPerkCommands {
             WeaponRampage.changed(p, stack);
             WeaponPrecisionReturn.changed(p, stack);
             WeaponDemolitionist.changed(p, stack);
+            PerkBatchD.changed(p, stack); // W323 batch D
+            PerkBatchB.changed(p, stack); // W321 batch B
+            PerkBatchA.changed(p, stack); // W320 batch A
             p.getInventory().setChanged(); p.containerMenu.broadcastChanges();
         }
         c.getSource().sendSuccess(() -> Component.literal(clear ? "선택 특성 해제 · 탄약 보존"

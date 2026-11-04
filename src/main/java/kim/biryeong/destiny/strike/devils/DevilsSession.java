@@ -463,7 +463,11 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     @Override public void spawned(DevilsDirector.Spawn spawn, Vec3 at) {
         if (running() && spawn.ref().generation() == director.generation()) presentation.spawned(this, spawn, at);
     }
-    @Override public void completed(long generation) { if (generation == director.generation()) completeAt = server.getTickCount(); }
+    @Override public void completed(long generation) {
+        if (generation != director.generation()) return;
+        completeAt = server.getTickCount();
+        kim.biryeong.destiny.loot.Loot.activityComplete("devils_lair", participants(), "악마의 소굴");
+    }
     @Override public void problem(String message) { if (problems.add(message)) DestinyGuardians.LOGGER.warn("[DevilsLair {}] {}", id(), message); }
     void disconnected(ServerPlayer p, long now) {
         DevilsCombatSounds.stop(p); music.remove(p);
@@ -494,7 +498,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     }
     void stop(String reason) {
         if (state == State.CLOSED || state == State.DRAINING) return;
-        state = State.DRAINING; music.close(); director.close(); recovery.close(); actors.close(); build.close(); presentation.close(); voice.close(); supplies.close(); supplyStations.close();
+        state = State.DRAINING; kim.biryeong.destiny.loot.Loot.activityClosed(players()); music.close(); director.close(); recovery.close(); actors.close(); build.close(); presentation.close(); voice.close(); supplies.close(); supplyStations.close();
         for (var p : players()) { cancelDown(p); DevilsObjectives.remove(p); clearGuide(p); p.sendSystemMessage(Component.literal(reason)); }
     }
     void drain() {

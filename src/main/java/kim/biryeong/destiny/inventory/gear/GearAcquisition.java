@@ -1,7 +1,6 @@
 package kim.biryeong.destiny.inventory.gear;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
-import kim.biryeong.destiny.inventory.WeaponPerkSelection;
 import kim.biryeong.destiny.weapon.*;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.commands.Commands;
@@ -10,8 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The single path that puts a new weapon into a Guardian's possession (rewards, vendors and admin grants all
@@ -45,31 +42,23 @@ public final class GearAcquisition {
 
     /** Null on success; otherwise why the weapon could not be stored. Never displaces an existing item. */
     public static String give(ServerPlayer p, WeaponCatalog.Entry entry, net.minecraft.util.RandomSource random) {
-        var slot = WeaponCharacteristics.of(entry).slot();
+        return store(p, kim.biryeong.destiny.loot.LootRoller.create(entry, random));
+    }
+
+    /** Put an already-built weapon stack (perks rolled) into storage. Null on success; never displaces items. */
+    public static String store(ServerPlayer p, ItemStack stack) {
+        var entry = WeaponItems.entry(stack);
+        if (entry.isEmpty()) return "무기가 아닙니다.";
+        var slot = WeaponLoadout.slot(p, stack, entry.get());
         long stored = kim.biryeong.destiny.inventory.WeaponEquipmentService.owned(p, slot).stream()
                 .filter(o -> o.inventoryIndex() >= 3).count();
         if (stored >= GearLayout.STORAGE_COUNT) return GearSlot.of(slot).label() + " 보관 칸이 가득 찼습니다.";
         int free = -1;
         for (int i = 3; i < 36; i++) if (p.getInventory().getItem(i).isEmpty()) { free = i; break; }
         if (free < 0) return "보관 공간이 없습니다.";
-        var stack = WeaponItems.create(entry);
-        roll(stack, random);
         p.getInventory().setItem(free, stack);
         p.getInventory().setChanged();
         p.containerMenu.broadcastChanges();
         return null;
-    }
-
-    /** One damage and one utility trait from the weapon's own perk pool, chosen once at acquisition. */
-    static void roll(ItemStack stack, net.minecraft.util.RandomSource random) {
-        String damage = pick(WeaponPerkSelection.options(stack, WeaponPerkSelection.Group.DAMAGE), random);
-        String utility = pick(WeaponPerkSelection.options(stack, WeaponPerkSelection.Group.UTILITY), random);
-        if (WeaponPerkSelection.configure(stack, damage, utility) != null) WeaponPerkSelection.configure(stack, damage, "");
-    }
-
-    private static String pick(List<WeaponPerkSelection.Option> options, net.minecraft.util.RandomSource random) {
-        var ids = new ArrayList<String>();
-        for (var o : options) if (!o.id().isEmpty() && o.enabled()) ids.add(o.id());
-        return ids.isEmpty() ? "" : ids.get(random.nextInt(ids.size()));
     }
 }

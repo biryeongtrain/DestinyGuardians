@@ -1,0 +1,76 @@
+{
+ "stage": "W320",
+ "perk": {
+  "id": "eye_of_the_storm",
+  "hash": 699525795,
+  "triggerShield": 40,
+  "fullShield": 80,
+  "handlingBonus": 30,
+  "coneScalar": 0.6,
+  "growthScalar": 0.83
+ },
+ "policies": {
+  "shield": "shield HP = scaled Minecraft health minus Guardian health pool (PvE 200=70+130, Crucible 230=100+130)",
+  "scaling": "activates at <=40 shield HP; effect=(80-shield)/80 linear; ends when shield >=80",
+  "handling": "fractional +30 handling evaluated on the original stat curve without rounding the stat"
+ },
+ "source": {
+  "manifest": "245114.26.10.13.2000-1-bnet.66137",
+  "officialDescription": "This weapon becomes more accurate and boosts handling as your health gets lower.",
+  "ddcSheet": "Weapon Perks",
+  "ddcRow": "1662574278R92",
+  "ddcText": "93 Eye of the Storm As Shield HP drops, initially triggering at 40 Shield HP , maxing out in effect at 0 Shield HP : Linearly grants up to +30 ↑+33 Handling, -40% ↑-44% Accuracy Cone Size, and -17% ↑-19% Accuracy Cone Growth. Buff dynamically scales from 0% effect at 80 Shield HP , up to 100% effect at 0 Shield HP (also known as Critical Health ) Buff lasts until Shields are restored to 80 Shield HP .",
+  "scope": "PvE base (non-enhanced); '?' values are not facts, see policies"
+ },
+ "weapons": [
+  {
+   "id": "austringer",
+   "hash": 3055790362,
+   "socket": 3,
+   "perkHash": 699525795,
+   "plugSetHash": 2750499928
+  },
+  {
+   "id": "cold_denial",
+   "hash": 1216130969,
+   "socket": 4,
+   "perkHash": 699525795,
+   "plugSetHash": 720537379
+  },
+  {
+   "id": "aishas_embrace",
+   "hash": 2638190703,
+   "socket": 4,
+   "perkHash": 699525795,
+   "plugSetHash": 4211351701
+  },
+  {
+   "id": "allied_demand",
+   "hash": 1532276803,
+   "socket": 4,
+   "perkHash": 699525795,
+   "plugSetHash": 703779397
+  },
+  {
+   "id": "first_in_last_out",
+   "hash": 3616586446,
+   "socket": 4,
+   "perkHash": 699525795,
+   "plugSetHash": 1439234589
+  },
+  {
+   "id": "dream_breaker",
+   "hash": 2931957300,
+   "socket": 4,
+   "perkHash": 699525795,
+   "plugSetHash": 1206254527
+  },
+  {
+   "id": "coriolis_force",
+   "hash": 3512349612,
+   "socket": 4,
+   "perkHash": 699525795,
+   "plugSetHash": 753624012
+  }
+ ]
+}

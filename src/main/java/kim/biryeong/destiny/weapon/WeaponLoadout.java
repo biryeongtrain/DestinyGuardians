@@ -28,9 +28,8 @@ public final class WeaponLoadout {
     public static void standalone(ServerPlayer p) { WeaponRuntime.cancelUseForSkill(p);p.setAttached(ENABLED,false); }
     public static boolean enabled(ServerPlayer p) { return p.getAttachedOrElse(ENABLED,false); }
     public static WeaponSlot slot(ServerPlayer p, ItemStack stack, WeaponCatalog.Entry weapon) {
-        if (kim.biryeong.destiny.tutorial.TutorialLoan.active(p)
-                && kim.biryeong.destiny.tutorial.TutorialLoan.borrowed(p, stack)
-                && weapon.id().equals(kim.biryeong.destiny.campaign.RisingLoadout.RIFLE)
+        // Khvostov 7G-02 is a kinetic auto rifle in Destiny; its catalog frame donor (Gnawing Hunger) is energy.
+        if (weapon.id().equals(kim.biryeong.destiny.campaign.RisingLoadout.RIFLE)
                 && WeaponSkins.of(stack).filter(s -> s.id().equals(kim.biryeong.destiny.campaign.RisingLoadout.RIFLE_SKIN)).isPresent())
             return WeaponSlot.KINETIC;
         return WeaponCharacteristics.of(weapon).slot();

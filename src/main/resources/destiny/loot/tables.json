@@ -1,0 +1,20 @@
+{
+  "_doc": "Shared loot tables. Weapon filters match the catalog (w30/w40): exotic, slots (KINETIC/ENERGY/POWER), ammo (PRIMARY/SPECIAL/HEAVY), families, ids, exclude. Engram tiers decode through engramTables. Every weapon reward rolls one implemented trait per trait column.",
+  "tables": {
+    "strike_completion": { "rolls": 1, "entries": [ { "weight": 1, "weapon": { "exotic": false } } ] },
+    "strike_chest": { "rolls": 1, "entries": [
+      { "weight": 6, "engram": "legendary" },
+      { "weight": 3, "weapon": { "exotic": false } },
+      { "weight": 1, "engram": "exotic" } ] },
+    "enemy_minor": { "rolls": 1, "chance": 0.03, "entries": [ { "weight": 1, "engram": "legendary" } ] },
+    "enemy_major": { "rolls": 1, "chance": 0.12, "entries": [ { "weight": 9, "engram": "legendary" }, { "weight": 1, "engram": "exotic" } ] },
+    "enemy_boss": { "rolls": 1, "chance": 0.5, "entries": [ { "weight": 4, "engram": "legendary" }, { "weight": 5, "weapon": { "exotic": false } }, { "weight": 1, "engram": "exotic" } ] },
+    "engram_legendary": { "rolls": 1, "entries": [ { "weight": 1, "weapon": { "exotic": false } } ] },
+    "engram_exotic": { "rolls": 1, "entries": [ { "weight": 1, "weapon": { "exotic": true } } ] }
+  },
+  "engramTables": { "legendary": "engram_legendary", "exotic": "engram_exotic" },
+  "enemies": { "minor": "enemy_minor", "major": "enemy_major", "boss": "enemy_boss" },
+  "activities": {
+    "devils_lair": { "completion": "strike_completion", "chest": "strike_chest" }
+  }
+}

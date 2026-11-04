@@ -68,6 +68,25 @@ public final class GearHud {
         if (v.tooltip() != null) tooltip(p, v, v.tooltip(), v.compare(), tooltipLeft(v));
         else if (v.focus() >= 0 && v.focus() < GearLayout.SLOT_COUNT) staticTooltip(p, v, GearSlot.values()[v.focus()]);
         if (v.armory()) button(p, "armory", GearLayout.armory(), "테스트 무기고", v.focus() == GearLayout.ARMORY);
+        engrams(p, v);
+    }
+
+    /** Held engrams; hovering one shows its name, clicking decodes it into storage. */
+    private static void engrams(HudPainter p, GearView v) {
+        if (v.engrams().isEmpty()) return;
+        var first = GearLayout.engram(0);
+        p.textRight("engram_label", "엔그램  " + v.engrams().size() + " / " + GearLayout.ENGRAM_COUNT, first.x() - 40, first.y() - 12, 18, MUTED, 255);
+        for (int i = 0; i < Math.min(GearLayout.ENGRAM_COUNT, v.engrams().size()); i++) {
+            var b = GearLayout.engram(i);
+            String tier = v.engrams().get(i);
+            boolean focused = v.focus() == GearLayout.ENGRAM + i;
+            p.rect("engram_" + i + "_bg", b.x(), b.y(), b.width(), b.height(), 108, focused ? 0x2E3740 : 0x161C22);
+            p.icon("engram_" + i, GearIcons.engram(tier).orElse("bungie/engram_legendary"), b.x(), b.y(), b.width() - 4, 112, 0xFFFFFF);
+            if (focused) {
+                p.frame("engram_" + i + "_edge", b, 2, 114, WHITE);
+                p.text("engram_tip", kim.biryeong.destiny.loot.Loot.engramName(tier) + "  ·  좌클릭 해독", b.x(), b.y() + 48, 18, GOLD);
+            }
+        }
     }
 
     private static Box focusBox(GearView v) {
@@ -136,7 +155,10 @@ public final class GearHud {
         }
         p.rect(k + "_bg", b.x(), b.y(), b.width(), b.height(), depth, w.exotic() ? dim(EXOTIC, .55f) : LEGENDARY);
         p.rect(k + "_shade", b.x(), b.y() + b.height() * .32f, b.width(), b.height() * .36f, depth + .5f, w.exotic() ? dim(EXOTIC, .42f) : 0x452856);
-        p.weapon(k + "_model", w.id(), b.x(), b.y() - 4, b.width() * .92f, depth + 2);
+        // Skinned (campaign) weapons look different from their catalog donor: show their own model.
+        var icon = kim.biryeong.destiny.weapon.WeaponSkins.of(w.stack()).isPresent() ? java.util.Optional.<String>empty() : GearIcons.weapon(w.id());
+        if (icon.isPresent()) p.icon(k + "_model", icon.get(), b.x(), b.y(), b.width() - 4, depth + 2, 0xFFFFFF);
+        else p.weapon(k + "_model", w.id(), b.x(), b.y() - 4, b.width() * .92f, depth + 2);
         p.icon(k + "_damage", "ammo_damage_" + w.damage().toLowerCase(Locale.ROOT), b.x() - b.width() / 2 + 14, b.y() + b.height() / 2 - 14, 18, depth + 4, damageColor(w.damage()));
     }
 
@@ -195,7 +217,7 @@ public final class GearHud {
             for (var perk : w.perks()) {
                 int index = j++;
                 rows.add(new Row(30, y -> {
-                    p.rect("tip_perk_" + index + "_dot", x0 + 8, y + 10, 10, 10, 132, WHITE);
+                    perkIcon(p, "tip_perk_" + index + "_dot", perk, x0 + 10, y + 12, 26, 132);
                     p.textLeft("tip_perk_" + index, perk.name(), x0 + 24, y, 20, WHITE, TIP_W - 72, 255);
                 }));
             }
@@ -205,13 +227,22 @@ public final class GearHud {
         float bodyTop = top + 104, h = 16;
         for (var r : rows) h += r.height();
         p.rect("tip_head", left + TIP_W / 2, top + 52, TIP_W, 104, 120, head);
-        p.weapon("tip_icon", w.id(), left + 58, top + 52, 84, 124);
+        var headIcon = kim.biryeong.destiny.weapon.WeaponSkins.of(w.stack()).isPresent() ? java.util.Optional.<String>empty() : GearIcons.weapon(w.id());
+        if (headIcon.isPresent()) p.icon("tip_icon", headIcon.get(), left + 58, top + 52, 84, 124, 0xFFFFFF);
+        else p.weapon("tip_icon", w.id(), left + 58, top + 52, 84, 124);
         p.textLeft("tip_name", w.name(), left + 110, top + 22, 28, WHITE, TIP_W - 130, 255);
         p.textLeft("tip_type", w.family() + "  ·  " + (w.exotic() ? "경이" : "전설") + (w.equipped() ? "  ·  장착 중" : ""),
                 left + 110, top + 62, 20, w.exotic() ? 0xFFF3CF : 0xD9C9E3, TIP_W - 130, 255);
         p.rect("tip_body", left + TIP_W / 2, bodyTop + h / 2, TIP_W, h, 120, PANEL);
         float y = bodyTop + 12;
         for (var r : rows) { r.draw().accept(y); y += r.height(); }
+    }
+
+    /** The trait's official circular icon, or a plain dot when the manifest has none. */
+    private static void perkIcon(HudPainter p, String key, GearItems.Perk perk, float x, float y, float size, float depth) {
+        var icon = GearIcons.perk(perk.hash());
+        if (icon.isPresent()) p.icon(key, icon.get(), x, y, size, depth, 0xFFFFFF);
+        else p.rect(key, x - 2, y - 2, 10, 10, depth, WHITE);
     }
 
     private static Row rule(HudPainter p, String key, float left) {
@@ -283,7 +314,7 @@ public final class GearHud {
         y += 38;
         int j = 0;
         for (var perk : w.perks()) {
-            p.rect("detail_perk_" + j + "_dot", x0 + 8, y + 10, 10, 10, 112, WHITE);
+            perkIcon(p, "detail_perk_" + j + "_dot", perk, x0 + 10, y + 12, 26, 112);
             p.textLeft("detail_perk_" + j, perk.name(), x0 + 24, y, 20, WHITE, 480, 255);
             int lines = p.wrappedLeft("detail_perk_" + j + "_desc", perk.description(), x0 + 24, y + 28, 18, MUTED, 480, 3, 24, 255);
             y += 36 + lines * 24; j++;

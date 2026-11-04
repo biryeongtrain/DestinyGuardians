@@ -31,6 +31,7 @@ public final class WeaponHandling {
         int ticks = WeaponItems.entry(stack).map(WeaponHandlingProfile::of).filter(WeaponHandlingProfile::supported)
                 .map(profile -> WeaponQuickdraw.handlingTicks(p,stack,ready,WeaponFirmlyPlanted.handlingTicks(p,stack,ready,WeaponElementalCapacitor.handlingTicks(p,stack,ready,WeaponSurplus.handlingTicks(p,stack,ready,WeaponThreatDetector.handlingTicks(p,stack,ready,WeaponStatsForAll.handlingTicks(p,stack,ready,WeaponFrenzy.handlingTicks(p,stack,ready,WeaponAdrenalineJunkie.handlingTicks(p,stack,ready,WeaponPerpetualMotion.handlingTicks(p,stack,ready,
                         ready ? profile.readyTicks() : profile.stowTicks())))))))))).orElse(0);
+        ticks = PerkBatchA.handlingTicks(p,stack,ready,ticks); // W320 batch A
         return WeaponSlickdraw.handlingTicks(p,stack,ready,WeaponSteadyHands.handlingTicks(p,stack,ready,WeaponRecoveryHandling.handlingTicks(p,stack,ready,WeaponBackupPlan.handlingTicks(p,stack,ready,WeaponWellRounded.handlingTicks(p,stack,ready,WeaponPugilist.handlingTicks(p,stack,ready,WeaponEnsemble.handlingTicks(p,stack,ready,ticks)))))));
     }
     /** Observe inventory replacement/commands, including swaps to non-weapons, before inputs or ticks. */
@@ -62,6 +63,7 @@ public final class WeaponHandling {
         if (s.cycle.phase(now(p)) != WeaponSwapCycle.Phase.STOW)
             s.outgoing = WeaponItems.entry(s.stack).orElse(null);
         int stow = duration(p, s.stack, false);
+        PerkBatchA.stowing(p, s.stack); // W320 batch A: after the outgoing stow duration
         WeaponAssassinsBlade.stowing(p,s.stack); WeaponUnrelenting.stowing(p,s.stack); WeaponWhirlwindBlade.stowing(p,s.stack); WeaponEnGarde.stowing(p,s.stack); WeaponOpeningShot.stowing(p,s.stack); WeaponBoxBreathing.stowing(p,s.stack); WeaponHeadseeker.stowing(p,s.stack); WeaponSteadyHands.stowing(p,s.stack); WeaponDynamicSway.released(p,s.stack);
         WeaponKillingTally.stowing(p,s.stack); WeaponSympatheticArsenal.stowing(p,s.stack);
         WeaponAdagio.stowing(p,s.stack); WeaponClownCartridge.stowing(p,s.stack);
@@ -69,6 +71,7 @@ public final class WeaponHandling {
         WeaponCornered.stowing(p,s.stack);
         WeaponEnsemble.stowing(p,s.stack);
         WeaponEnsemble.selecting(p,desired);
+        PerkBatchB.selecting(p,s.stack,desired); // W321 batch B
         WeaponWellRounded.selecting(p,desired);
         WeaponBackupPlan.selecting(p,desired);
         // Capture outgoing Quickdraw first. A real incoming identity change then owns its own window.

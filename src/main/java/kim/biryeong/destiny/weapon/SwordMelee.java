@@ -19,8 +19,9 @@ public final class SwordMelee {
         return Combat.isEnemy(player,target)&&!player.isAlliedTo(target)
                 &&!(target instanceof TamableAnimal animal&&animal.isTame());
     }
-    private static List<LivingEntity> candidates(ServerPlayer player,boolean lunge) {
-        double range=lunge?SwordArc.LUNGE_RANGE:SwordArc.LIGHT_RANGE;
+    private static List<LivingEntity> candidates(ServerPlayer player,boolean lunge) { return candidates(player,lunge,1); }
+    private static List<LivingEntity> candidates(ServerPlayer player,boolean lunge,double scale) {
+        double range=Math.min(8,(lunge?SwordArc.LUNGE_RANGE:SwordArc.LIGHT_RANGE)*scale); // SwordArc.inside cap
         double height=lunge?SwordArc.LUNGE_HEIGHT:SwordArc.LIGHT_HEIGHT;
         double cosine=lunge?SwordArc.LUNGE_COS:SwordArc.LIGHT_COS;
         Vec3 origin=body(player),forward=forward(player);
@@ -66,6 +67,26 @@ public final class SwordMelee {
             return;
         }
         move(player,forward(player),fallback);
+    }
+    /** W323 Valiant Charge: acquisition range and lunge distance scaled; long moves are split into legal steps. */
+    public static void lunge(ServerPlayer player,double fallback,double scale) {
+        if(!Double.isFinite(scale)||scale<=1||scale>2) { lunge(player,fallback); return; }
+        for(var target:candidates(player,true,scale)) {
+            if(!visible(player,target))continue;
+            Vec3 delta=target.position().subtract(player.position());
+            double distance=Math.hypot(delta.x,delta.z);
+            double reach=Math.min(Math.max(0,distance-SwordArc.LUNGE_STOP),SwordArc.LUNGE_MAX*scale);
+            moveFar(player,new Vec3(delta.x,0,delta.z),Math.max(reach,Math.min(fallback,Math.max(0,distance-SwordArc.LUNGE_STOP))));
+            return;
+        }
+        moveFar(player,forward(player),fallback*scale);
+    }
+    private static void moveFar(ServerPlayer player,Vec3 direction,double distance) {
+        if(!Double.isFinite(distance)||distance<=0)return;
+        double first=Math.min(2,distance);
+        Vec3 start=player.position();
+        move(player,direction,first);
+        if(distance>first&&player.position().distanceToSqr(start)>=first*first-1e-3)move(player,direction,Math.min(2,distance-first));
     }
     /** Horizontal sampled displacement; preserves Y, view and native delta velocity. No chunk loads. */
     static void move(ServerPlayer player,Vec3 direction,double distance) {

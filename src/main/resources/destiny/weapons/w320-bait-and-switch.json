@@ -1,0 +1,33 @@
+{
+ "stage": "W320",
+ "perk": {
+  "id": "bait_and_switch",
+  "hash": 3078487919,
+  "chainTicks": 140,
+  "damageMultiplier": 1.3,
+  "durationTicks": 200,
+  "persistsThroughStow": true
+ },
+ "policies": {
+  "equipped": "loadout equipped weapons, or hotbar weapons in standalone mode",
+  "chain": "each weapon damage instance must follow the previous one within 7s; timer disabled while active",
+  "damage": "captured at emission; projectiles keep the buff they were fired with"
+ },
+ "source": {
+  "manifest": "245114.26.10.13.2000-1-bnet.66137",
+  "officialDescription": "Deal damage with all equipped weapons within a short time to give this weapon a damage boost.",
+  "ddcSheet": "Weapon Perks",
+  "ddcRow": "1662574278R24",
+  "ddcText": "25 Bait and Switch Upon scoring a damage instance with each equipped weapon within 7 seconds of the last damage instance : 30% increased damage for 10 ↑11 seconds. Buff cannot be refreshed until its duration expires. Damage Timer is disabled while the perk is active. Buff persists through stow.",
+  "scope": "PvE base (non-enhanced); '?' values are not facts, see policies"
+ },
+ "weapons": [
+  {
+   "id": "dimensional_hypotrochoid",
+   "hash": 1311684613,
+   "socket": 4,
+   "perkHash": 3078487919,
+   "plugSetHash": 1092097342
+  }
+ ]
+}

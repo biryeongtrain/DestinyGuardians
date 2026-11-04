@@ -12,13 +12,14 @@ for w in cat:
  if w['exotic']:continue
  item=inv[str(w['bungieHash'])];s=item['sockets'];indices=sorted({i for c in s['socketCategories'] if c['socketCategoryHash']==4241085061 for i in c['socketIndexes']})
  for i in indices:
-  e=s['socketEntries'][i];pool=pools.get(str(e.get('randomizedPlugSetHash')), {})
-  if pool.get('isFakePlugSet') is not False:continue
+  # W320 follow-up: curated fixed-roll legendaries expose their trait column as reusablePlugSetHash with isFakePlugSet true.
+  e=s['socketEntries'][i];field='randomizedPlugSetHash' if 'randomizedPlugSetHash' in e else 'reusablePlugSetHash';pool=pools.get(str(e.get(field)), {})
+  if pool.get('isFakePlugSet') is not (field=='reusablePlugSetHash'):continue
   matches=[x for x in pool.get('reusablePlugItems',[]) if x.get('plugItemHash')==base and x.get('currentlyCanRoll') is True]
   if matches:
    assert len(matches)==1
-   r={'id':w['id'],'hash':w['bungieHash'],'socket':i,'perkHash':base,'plugSetHash':e['randomizedPlugSetHash']};rolls.append(r);proof.append({'roll':r,'socketEntry':e,'matchingPlug':matches[0]})
-assert len(rolls)==13
+   r={'id':w['id'],'hash':w['bungieHash'],'socket':i,'perkHash':base,'plugSetHash':e[field]};rolls.append(r);proof.append({'roll':r,'socketEntry':e,'matchingPlug':matches[0]})
+assert len(rolls)==14
 plain=lambda x:html.unescape(re.sub('<[^>]*>',' ',x)).strip()
 rows=[r for r in re.findall(r'<tr\b[^>]*>.*?</tr>',ddcpath.read_text(),re.S) if any(plain(c)=='Ambitious Assassin' for c in re.findall(r'<td\b[^>]*>.*?</td>',r,re.S))]
 assert len(rows)==1;row=rows[0];text=plain(row);assert '150%' in text and '20%' in text and '10%' in text and 'Always rounds' in text

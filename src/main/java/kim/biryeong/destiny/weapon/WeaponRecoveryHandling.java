@@ -51,6 +51,8 @@ public final class WeaponRecoveryHandling {
         int pulse = WeaponPulseMonitor.handlingBonus(p, stack);
         var entry = WeaponItems.entry(stack).orElse(null);
         if (pulse <= 0 || !PulseMonitorProfile.supports(entry)) return base;
+        // W322 alias-only weapon: no pinned handling curve; explicit local policy applies the 0.95 ready/stow scalar.
+        if (!PulseMonitorProfile.hasCurve(entry)) return base < 0 ? base : Math.max(1, (int) Math.ceil(base * WeaponPulseMonitor.handlingScalar(p, stack)));
         int threats = threats(p, stack);
         boolean quickdraw = selected(stack, QuickdrawProfile.ID)
                 && WeaponQuickdraw.handlingTicks(p, stack, ready, -1) != -1;
@@ -62,7 +64,7 @@ public final class WeaponRecoveryHandling {
     public static int adsTicks(ServerPlayer p, WeaponCatalog.Entry entry, int base, boolean entering) {
         var stack = p.getMainHandItem();
         int pulse = WeaponPulseMonitor.handlingBonus(p, stack);
-        if (pulse <= 0 || !PulseMonitorProfile.supports(entry)
+        if (pulse <= 0 || !PulseMonitorProfile.hasCurve(entry)
                 || WeaponItems.entry(stack).filter(entry::equals).isEmpty()) return base;
         return PulseMonitorProfile.adsTicks(entry, rawBonus(p, stack, pulse, threats(p, stack), false),
                 entering && selected(stack, SnapshotAimProfile.ID));

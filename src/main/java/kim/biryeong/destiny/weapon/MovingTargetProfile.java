@@ -23,6 +23,7 @@ public final class MovingTargetProfile {
         new WeaponPerks.Roll("apostate", 2164448701L, 3, HASH, 1306932196L),
         new WeaponPerks.Roll("dust_rock_blues", 636912560L, 3, HASH, 3511609070L),
         new WeaponPerks.Roll("parcel_of_stardust_fell_to_earth", 2217366863L, 4, HASH, 3424940310L),
+        new WeaponPerks.Roll("ikelos_sg_v1_0_1", 1887808042L, 4, HASH, 1324L), // curated fixed-roll legendary
         new WeaponPerks.Roll("dream_breaker", 2931957300L, 3, HASH, 3785896921L),
         new WeaponPerks.Roll("coriolis_force", 3512349612L, 3, HASH, 2568674372L),
         new WeaponPerks.Roll("line_in_the_sand", 946443267L, 3, HASH, 1503774254L),
@@ -55,7 +56,7 @@ public final class MovingTargetProfile {
             if (EXPECTED.stream().anyMatch(r -> r.id().equals(entry.id())))
                 check(entries.putIfAbsent(entry.id(), entry) == null, "duplicate canonical entry");
         }
-        check(entries.size() == EXPECTED.size(), "17 canonical entries");
+        check(entries.size() == EXPECTED.size(), "18 canonical entries");
         var seen = new HashSet<String>();
         for (var row : json("/destiny/weapons/w40-characteristics.json").getAsJsonArray()) {
             var stat = row.getAsJsonObject();
@@ -78,7 +79,7 @@ public final class MovingTargetProfile {
             check(roll != null && EXPECTED.contains(roll) && seen.add(roll)
                     && row.equals(GSON.toJsonTree(roll)), "exact unique base socket");
         }
-        check(seen.size() == EXPECTED.size(), "complete 17 sockets");
+        check(seen.size() == EXPECTED.size(), "complete 18 sockets");
     }
     static void validateResource(String value) {
         try { validate(JsonParser.parseString(value).getAsJsonObject()); }

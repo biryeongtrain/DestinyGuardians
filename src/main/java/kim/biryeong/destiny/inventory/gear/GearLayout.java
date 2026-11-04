@@ -11,7 +11,8 @@ import java.util.Map;
  */
 public final class GearLayout {
     public static final int SLOT_COUNT = 10, STORAGE = 10, STORAGE_COUNT = 9, CLOSE = 19, ARMORY = 20,
-            FIELD = 21, FIELD_COUNT = 7, BACK = 28, NODE_COUNT = 29;
+            FIELD = 21, FIELD_COUNT = 7, BACK = 28,
+            ENGRAM = 29, ENGRAM_COUNT = 10, NODE_COUNT = 39;
     public static final float SLOT = 120, CELL = 104, STEP = 116;
     static final float LEFT_X = 300, RIGHT_X = 1620, TOP_Y = 280, ROW = 140;
     /** Vertical band in which a storage grid may sit. */
@@ -49,12 +50,19 @@ public final class GearLayout {
     public static Box field(int index) { return new Box(330, 250 + index * 104, 380, 92); }
     public static Box option(int index) { return new Box(760 + (index % 3) * 200, 330 + (index / 3) * 200, 184, 184); }
 
+    /** Held engram {@code index} (0..9): Destiny's engram row, top right of the character screen. */
+    public static Box engram(int index) { return new Box(1150 + index * 58, 92, 50, 50); }
+
     public static Box close() { return new Box(1760, 1022, 200, 48); }
     public static Box armory() { return new Box(1530, 1022, 220, 48); }
     public static Box back() { return new Box(160, 1022, 200, 48); }
 
     /** Every visible interactive node for a state, in stable order. */
     public static Map<Integer, Box> nodes(Stage stage, GearSlot expanded, int storageCount, int optionCount, boolean armory) {
+        return nodes(stage, expanded, storageCount, optionCount, armory, 0);
+    }
+
+    public static Map<Integer, Box> nodes(Stage stage, GearSlot expanded, int storageCount, int optionCount, boolean armory, int engrams) {
         var out = new LinkedHashMap<Integer, Box>();
         switch (stage) {
             case GEAR -> {
@@ -62,6 +70,7 @@ public final class GearLayout {
                 if (expanded != null && expanded.weapon() != null)
                     for (int i = 0; i < Math.min(STORAGE_COUNT, storageCount); i++) out.put(STORAGE + i, storage(expanded, i));
                 if (armory) out.put(ARMORY, armory());
+                for (int i = 0; i < Math.min(ENGRAM_COUNT, engrams); i++) out.put(ENGRAM + i, engram(i));
             }
             case DETAIL -> out.put(BACK, back());
             case SUBCLASS -> { for (int i = 0; i < FIELD_COUNT; i++) out.put(FIELD + i, field(i)); out.put(BACK, back()); }
