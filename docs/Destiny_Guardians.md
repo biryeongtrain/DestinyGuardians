@@ -574,3 +574,151 @@ H11 일반 SF 외형 중 나이프와 섬광탄은 실제 Destiny 도면/게임 
 소이·소용돌이·연막은 원작 외형 미확인 잠정 모델이며 원본 게임 메시를 사용하는 것은 아닙니다.
 맨손 Arc 연속 타격과 기존 피해/쿨타임은 유지합니다.
 참고작 크레딧·편집 원본·실행 경로: [능력 모델 문서](design/14_헌터_능력_모델.md).
+
+
+## W162 — 조준경과 자세 전환 보완
+이자나기 일반/Honed scope(원작gameplay참고 근사)와실제pose직후 Ammit게시를추가했다. 실제독립관찰client측면·탄약소모·Mori교체cleanup·Ace빨간ADS홀로그램을검증했다. 전체회귀23불일치는정리대기이며전체goal진행중이다. [디자인](design/149_W162_이자나기_스코프와_자세전환.md) · [실행·실패·스크린샷](qa/2026-10-26/w162/README.md).
+
+
+## W163 — 현재 조준·미술 회귀 정리
+기존 모델/궁극기/탄약 동작을 보존하고 전체 JVM 회귀1,223개를 통과하도록 명시적으로 갱신했다. 작은 기관총 HUD 실루엣3종은 현재 모델 기준으로 재생성했다. 새 실게임·청취 완료 주장은 없으며 전체 구현 goal은 계속 진행중이다. [실행·범위·한계](qa/2026-10-26/w163/README.md).
+
+
+## W164 — 무기별 장전 보강
+Gnawing Hunger와 Lonesome의 실제 장전 영상을 참고해 FP모션을 추가했다. 기존형상·UV·탄약·시간·사운드를 유지하며 탄창부품을 독립적으로 움직인다. 두파지방식의 실게임장전·복귀·ADS, 현재Ace의줌전용빨간홀로그램을 확인했다. 전체JUnit1,232개와새서버GT6개통과; 원작손IK나전체goal완료는아니다. [단계별구현·검증](qa/2026-10-26/w164/README.md).
+
+
+## W165 — 다중 처치 탄창 추가
+공식socket을확인한10개무기에Multikill Clip을선택할수있다. 실제처치후재장전탄약삽입으로1/2/3중첩·17/33/50percent5초를적용하고전용중첩/시간HUD를연결했다. 전체JUnit1,266개와실제서버GT8개통과,새HUD클라이언트화면은취합대기다. 기존Ace의줌전용빨간홀로그램은그대로유지한다. [범위·단계·검증](qa/2026-10-26/w165/README.md). 전체무기구현goal진행중.
+
+
+## W166 — 두 무기 개별 장전 모션
+Steelfeather Repeater와 Bug-Out Bag에 실제 영상 참조 기반 1인칭 탄창 교체를 추가했다. 정돈된 기존 형상·UV·안료를 유지하며89/100요소다. Python16/중앙targetedJUnit19/실제서버GT6통과,JAR·서버팩174entry일치. 새실게임은온보딩기동1회/PNG1/입력0으로모델·HUD수락대기다. 기존Ace줌전용빨간홀로그램은유지하며전체무기구현goal진행중이다. [구현·근거·검증](qa/2026-10-26/w166/README.md).
+
+
+## W167 — 연명 특성과 불펍 장전
+공식socket7개무기에연명(Subsistence)을추가했다. 무기처치시탄창의10percent(자동소총/기관단총17percent)올림을예비탄에서보충하며장전버프를발동하지않는다. 탄약HUD는실제저장량으로갱신한다. ColdDenial은실제게임영상처럼총을세우고뒤쪽탄창을교체하도록추가했다(95+5=100요소,기존UV/안료/게임시간유지). 전체JUnit1,284·실제서버GT12통과;새실화면·청취는대기다. [구현·자료·단계기록](qa/2026-10-26/w167/README.md). 전체무기/HUD/audio목표진행중.
+
+
+### W168 — 두 장전 추가와 실제 특성 HUD 검증
+Austringer 실린더 개방/닫힘과 Bygones 후방 탄창 교환을 실제 원작 영상 참조로 추가했다. 기존 깔끔한126/129요소·UV·안료를 유지하며 장전 표현 대상은14종이다. 두 CoW제품별 회귀를 통합하고 Python19/JUnit35/실제FabricGT6을 통과했다. Vision으로 두무기양grip 장전·이후ADS,16display짧은표시를 확인했고 이전 연명refill·MKCx3/만료·세무기장전 대기열도 대표 취합했다. 기존Ace빨간ADS홀로그램은 유지했다. 손IK/3인칭장전모션/nativeQ/실청취/다인성능과전체목표는별도다. [작업·검증기록](qa/2026-10-26/w168/README.md).
+
+
+### W169 — 신속 발사와 Duke 장전 현대화
+공식socket을확인한11종에신속발사(RapidHit)를추가했다. 실제정밀타격또는약화된적의유효타격으로최대5중첩하며안정성/장전속도와전용x5·남은시간HUD를연결했다. Duke는현재정돈된파란147요소외관을유지해실린더열기/기립/닫기모션을실제영상참조로갱신했다. 전체JUnit1,325·실제서버GT15통과,Vision에서몸통부정·5중첩/만료·양grip장전/ADS·16display대표장면을직접확인하고소유runtime정리완료. 기존Ace줌전용빨간홀로그램유지,원작정확반동/손IK/nativeQ/실청취/다인성능은별도다. [구현·자료·단계기록](qa/2026-10-26/w169/README.md). 전체무기/HUD/audio목표진행중.
+
+
+### W170 — 이동 특성과 추적 소총 장전
+공식socket을확인한Aisha’s Embrace/Retraced Path에영속적인움직임을추가했다. 이동2초/10초x1/x2로안정성·조작성·장전속도와count-onlyHUD를연결하고실제장비수납중에도축적한다. Retraced는원작영상참조로총을옆세워하부팩을교체하는양grip1인칭장전을추가했다(99요소,기존표면/안료보존).
+3개CoW제품을통합해최종JUnit1,362/실제서버GT12통과. Vision에서두파지장전0→94·이후ADS·16display장면을확인했다. 이동x2가늦게쌓이는native결함을발견해패킷몰림대응을수정했으며,수정후x2실화면은현재Mac잠금으로대기다. 기존Ace의줌전용빨간홀로그램은보존했다. 원작손IK/nativeQ/청취/다인성능/전체목표완료주장은아니다. [작업·실패·검증기록](qa/2026-10-26/w170/README.md).
+
+
+### W171 — 짧은 첫발 특성과 정찰소총 장전
+[구현·검증기록](qa/2026-10-26/w171/README.md). 공식6socket에방아쇠당기기(TTT)를추가했다. 실제유료첫발의12틱stability40/recoil.5/accuracy.9(융합quarter10/.875/.975),자동연사hold갱신금지/release재무장,원본stacklifecycle와실제남은시간HUD를연결했다. Aisha는실제영상84.60–86.40초참조의FP21샘플양grip후방탄창교환/92요소/기존UV·안료보존으로route16종. CoW3제품121소유경로SHA통합·leader종료,mastertargeted54/실제Fabric9/최종JUnit1,390·196class/JAR91byte일치. 원래GTfixture(infiniteReserve)실패와worker테스트오타19!=18을보존했다. 사용자첨부의에이스빨간괄호+중앙점은기존W159 ADS전용구현과일치해보존·재검사했으며신규기능으로세지않는다. 이번freshCU가Mac잠금명시하여새client/server/native/token/lease/awake미기동,새픽셀/청취수락없음. 수정된W170이동x2와W171TTT/Aisha실화면은수동해제후한ownedbackgroundsession에취합한다. 손IK/nativeQ/3P장전/실청취/다인FPS/정밀원작엔진인증은별도,전체goalactive.
+
+
+## W172 — 광폭·수다쟁이 뼈 / W170–171 실게임 취합 완료
+[W172 QA](qa/2026-10-26/w172/README.md): 공식10socket광폭 실제combat12초/144틱수명·유료무기피해15%·handling/reload100·Snapshot/장전scalar조합·실제timerHUD, Chattering21표본2grip개별FP장전90요소/route17을 추가했다. 독립dirtyCoW3제품122경로SHA통합. targeted91/actualFabric12/최종JUnit1427(200class),JAR91/clientZIP90+downloadSHA일치. 첫W108testsourcehash실패와ZIPserverprofile검사scope오류를보존·수정했다.
+한ownedVision40completed/releasedops·516action/554rawPNG·대표74장으로 수정후이동x2/정지제거,TTT짧은timer·hold만료/재무장,Aisha/Chattering양grip0→17/33·postADS4·fixture교체취소2,earnedFrenzy유료5발11→6/HP1000→963.95·실제timer/expiry,16display짧은장면·Chattering3Pcanonicalfixture,기존AceADSredON/HIPOFF확인. 이번종료상태모두windowActive=true라새비활성검증으로세지않음. nativeQ/손IK/3P장전/실청취/다인FPS는별도.
+freshCUFinderunlock+boundedmasterawake78523/3600s를사용했고 ownruntime/lease/native/portsrelays/awake정리완료. sourcepin321·과거13QAseal보존. 기존end_of_frame경고는shader후속이며전체무기/HUD/audio목표는진행중.
+
+### W173 구현 추가 — 수류탄/무기 연계와 Salvo 장전
+
+아드레날린 중독자의공식기본5소켓과실제무기처치+1/수류탄처치5중첩(90틱/handling20/최대33.3%피해),수납원본귀속·Solar연소/공허pulse및전용count/timerHUD를연결했다. Salvo는실제영상12프레임을기준으로101원본요소를28고정+73힌지로분리하고삽입구간에6요소탄을추가해최대107요소의개방장전으로확장했다. 원래UV/안료/탄약·장전시간·사운드는유지했다.
+
+독립worktree3개통합,최종1470JUnit/actualGT12/native20으로이번배치를수락했다. 전체무기구현목표의완료선언은아니며손IK/nativeQ/새3P장전/왼손전수·실청취·다인FPS는이번인증범위밖이다. [원작참고·실제PNG·실패/수정·정리기록](qa/2026-10-26/w173/README.md).
+
+
+## W174 — 집중된 분노 · 늑대의 발톱 장전 (2026-10-27)
+
+독립 dirty-CoW3제품/profile7+HUD8+장전106=121경로 SHA통합. 공식기본FocusedFury3소켓(Aisha6/17·Retraced33/94·FixedOdds16/44),35%기본탄창정밀→25%피해11초/220틱·유료emission단일귀속·장전/수납부분counter reset/획득buff유지·6노드실제timerHUD를추가했다. threshold소비/갱신상세는원문과구분한로컬정책이다. Claws실제영상3.2–5.667초12프레임기반후방탄창장전(21샘플2grip/128요소/route19),원래UV·안료/34탄47틱/음원보존. 처음Outlast선정은master의catalog오류여서Claws로정정했고기존catalog를넓히지않았다.
+
+최종targeted79/actualFabricGT11/전체JUnit1507(208class)통과. JAR91resources/headlessPolymer90assets exactbyte,players0·ownserver/ports/relay/awake정리. **새native0/월드PNG0/청취0**:현재실화면preflight미성립으로새client/lease는시작하지않았으며잠금/SDL문제로단정하지않는다. 다음freshunlockedframebuffer후Aisha6precision/실제timer·expiry와Claws양gripempty-use0→34/복귀/postADS/취소/3Pcanonical/16display를한세션취합한다. 손IK/nativeQ/3P장전/실청취/다인FPS는별도이며전체goalactive.
+
+[W174 구현·원작참고·실패/수정·검증기록](qa/2026-10-27/w174/README.md)
+
+
+## W176 — 모두를 위한 능력치 · 황동 공격 장전 (2026-10-27)
+
+독립dirtyCoW3제품/profile9+HUD8+장전106=123경로를SHA대조후통합했다. 공식기본StatsforAll4소켓에실제유료3적→비갱신10초·조작성/장전35·안정성/사거리10·거리1.05/장전.95,정확한Frenzy/AJ합성과6노드timerHUD를연결했다. 수납/장전절대시계유지는원문과구분한로컬정책이다. Brass는실제영상13.2–15초기반21표본2grip장전/최대113요소/route20,원래111형상·UV/안료·24탄37틱/음원을유지한다. 밑판만있는V1/분리틈V2는반려하고내부몸체+연결목V3를통합했다.
+최종targeted88/실제FabricGT13/전체JUnit1,548(212class)통과,JAR91resources/headlessPolymer90assets정확일치. 이전reflectionvector및GT예약Runnable중복fixture실패와수정을보존했다. 사용자unlock보고후CUapp/FinderAX는접근됐지만screencapture가이미지를만들지못해새native0/월드PNG0/청취0;잠김/SDL실패로단정하지않고client/lease를기동하지않았다. 다음freshframebuffer후W174+W176대표특성/HUD/장전을한세션취합한다.141sourcepin/과거16QA봉인보존·ownheadlessserver/ports정리,전체goalactive.
+
+[구현·원작자료·실패/수정·검증기록](qa/2026-10-27/w176/README.md).
+
+
+## W177 — 가열 · 여우의 물기/나쁜 징조 장전 (2026-10-27)
+
+독립dirty-CoW3제품221소유경로SHA통합·리더종료. 기존W60자동장전중복은피하고 공식기본HeatingUp3소켓(Farewell/DreamBreaker/RetrofitEscapade)에 실제유료최종타최대2중첩/110틱갱신,안정성15/30·반동방향20/40·정확도size/growth.85/.75와8노드실제HUD를추가했다. 수납유지는원문,장전유지·source수명은로컬정책이다. 실제영상각12프레임기반Bite112요소/BadOmens129요소FP21표본2grip장전/route22종,기존UV·안료·탄약·음원유지. 볼트고정/손IK·새3P장전주장없음.
+중앙targeted88pass뒤GT문자열compile오류를수정하고actualFabric13/13,최종fullJUnit1579(217class)1회통과. JAR178/headlessPolymer177byte일치·247sourcepin/과거17QA보존·ownheadlessserverexit0/portsfree. 최초HUDvector/누락route/fixturecompile실패는보존. 사용자unlock보고후freshCU는locked오류를반환해새native0/월드PNG0/청취0;인증우회·client반복기동은하지않았다. 다음실제framebuffer확보시boundedmasterawake로W174/W176/W177를한ownedVision세션취합한다. 전체goalactive.
+
+[구현·실패/수정·검증 기록](qa/2026-10-27/w177/README.md).
+
+
+## W178 — 위협 감지기 · 선입후출 셸 장전 · 꿈의 파괴자 (2026-10-27)
+
+3개 독립dirty-CoW제품worktree의389소유경로와masterHUD5출력/공유runtime을SHA기준선대조후통합했다. 공식기본ThreatDetector17소켓에실제loaded15m적1/2+→안정성15/40·장전18/60·조작성25/100·ready/stow.9/.81과4노드COUNT HUD를연결했다. 별도ADSscalar·피해/사거리·가짜timer는없으며inclusive발위치구/PvE판정은로컬정책이다. 공식합법6짝만rawstat합산/단일올림하며원본source/context수명과acceptedreloadsnapshot을보존한다.
+실제같은무기영상각12프레임으로FILO초기→held단발반복→6틱cosmetic복귀(최대109요소/원래6탄·15틱한발),Dream분리cell융합장전(186요소/6탄·46틱/wholemagroute23)을추가했다. 기존UV·안료·음원·탄약권한은보존했다. 손IK/새3P장전은아니다.
+중앙targeted90/actualFabric16/최종fullJUnit1607(222class)1회통과. JAR346/serverPolymer345자산·실제client다운로드45,481,707bytes/SHA일치,420sourcepin/과거18QA봉인보존. 이번fresh Finder AX+실제screenshot성공후boundedmasterawake로ownserver/client각1회,71고유nativeoperation/804rawPNG를취합했다. 6종×2grip실제empty-use장전12/후속ADS12·Threat0/1/2/제거와대표FocusedFury/SFA/HeatingUp유료획득/HUD/만료,교체취소·3Pcanonical복귀·16displaybrief확인. 최초SFA-on-Brassfixture선택거절은보존하고Aisha공식소켓으로정정했다. 제품소켓확장/재빌드없이검증했다.
+QA원위치/air/peaceful/FP·native중립복원후ownclient(SIGINTlauncher-2)/serverexit0·ports/relays/boundedawake종료. background옵트인은켰지만모든종료windowActive=true라새unfocused수락으로세지않는다. 실청취/nativeQ/F5/손IK/새3P장전/다인FPS는미검증선택후속이며end_of_frame post효과경고는별도유지. 전체goalactive.
+
+[구현·실패/수정·자동/실화면 검증](qa/2026-10-27/w178/README.md).
+
+## W179 — 세 무기 장전 · 실제 후처리 검토 (2026-10-27)
+
+독립dirty-CoW3개/리더3명이450소유경로를 반환해SHA통합했다. Fixed Odds153요소 덮개·탄통/탄띠 장전, Null91요소 에너지셀, Mindbender116요소 최초들기→held한발반복→cosmetic복귀를 실제같은무기영상에 맞춰 추가했다. Mindbender자료는standard이며Adept원형은유지했다. whole-mag25/phased3라우트,590canonical/data/audio/postFXpin불변. 최종JUnit1626(227class)/actualFabricGT13통과;실제download46,221,564bytes·신규pack429자산SHA일치.
+freshCU+boundedmasterawake로ownserver/client각1회,52고유nativeoperation/264rawPNG를취합했다.3무기×2파지empty-use장전6/ADS6·fixture교체취소·3Pcanonical/16displaybrief·지속postFX3색적용복원을확인했다. 6pulse시각강도/순간파형과Mindbender발사뒤재장전재시작의최종native중단수락은보류하고trace를보존했다. 서버직접GT통과로대체하지않는다. effect/display/forceload0·QA원상태/native중립복원후ownclient/server/ports/relays/awake종료. 손IK/새3P장전/실청취/다인FPS주장없음,전체goalactive.
+
+[상세 결과·실제 GIF](qa/2026-10-27/w179/README.md).
+
+
+## W180 — 개별 장전2종·궁극기 펄스 검증 (2026-10-27)
+
+독립 dirty-CoW3개에서 Halfdan-D114요소 상자탄창 장전, Edge Transit96요소 rigid-drum 장전,6종궁극기 pulse corona/rim 개선을201소유경로로통합했다. whole-mag27route,기존탄약/시간/UV/안료/ADS/음원과10·4틱pulse수명유지. 최종JUnit1639(230class)/actualFabricGT10통과,181pack자산·실제download46,597,747bytes/SHA일치,783sourcepin/W179봉인953파일불변.
+master한세션61고유nativeoperation/393PNG로2무기×2grip장전4/ADS4·fixture취소2·16display·3Pcanonical/FP복귀와9종postFX ON/OFF를검토했다. 3속성native궁극기후activation pulse등록/자연제거를서버poll로확인했지만정확GPU프레임/impact4틱은미인증. 샷건1발소진→별도자동재장전,2발중1발발사→중단유지를실제paidtrace로분리해기존정책을보존했다. effect/display/forceload0·QA원위치/FP/native중립복원후ownclient/server/ports/relays/awake종료. 실청취/손IK/새3P장전/다인FPS주장없음,전체goalactive.
+
+[상세 결과·실제 GIF](qa/2026-10-27/w180/README.md).
+
+
+## W181 — 치명적인 무기와 실린더·탄통 장전 (2026-10-27)
+
+독립 dirty-CoW3개/리더3명의198소유경로를 통합했다. Vorpal 공식기본16소켓을 유료발사 불변출처·현재대상 조건부 피해에 연결해 primary/special/heavy의1.20/1.15/1.10을 적용했다. Minecraft native Wither/Dragon 또는 명시태그Mob이며 PvP/비생명체차량은 제외한다. Officer121요소 실린더 장전과 Retrofit134요소 덮개·탄통/탄띠 장전을 실제같은무기 영상에 맞춰 추가했다. whole-mag29route, 원형UV/안료/ADS/음원/실탄/시간은 보존했다.
+최종JUnit1662(234class)/actualFabricGT14통과. JAR175/serverpack174리소스 및 실제download47,048,305bytes/SHA일치,984sourcepin/W180봉인1196파일불변. master단일세션49고유nativeoperation/466PNG로 장전4/ADS4·서버fixture취소2·16display·Retrofit3Pcanonical/복귀와 Vorpal12실탄HP대조를 확인했다. 자동무기1~2발 소모는paidtrace와 대조해 탄당비율로 판정했다. 발사체교체후출처/능력제외/native보스판정은actualGT이며 같은native범위로 오인하지 않는다.
+effect/display/mob/forceload정리·QA원위치/FP/air/alive20/native중립 후 ownruntime/ports/relays/awake종료. stop직전list는1명이며0명ACK주장없음. 실청취/손IK/새3P장전/다인FPS는 미검증, 전체goalactive.
+
+[상세 결과·실제 GIF](qa/2026-10-27/w181/README.md).
+
+
+## W182 — 기관단총장전·저탄창 피해 (구현/자동검사 완료, native 대기)
+
+독립3 dirty-CoW worktree/리더가 반환한198경로를 SHAguard통합했다. Antiope-D118요소(113+5)/30발46틱과 IKELOS v1.0.1 133요소(132+1)/32발45틱의 원작영상 기반 그립탄창 FP장전을 추가해 whole-mag31경로가 됐다. 기존UV/안료/ADS/음원/실탄권한·canonicalfallback을 유지한다. HIR공식base10소켓을 유료소모직전탄수 immutable token으로 연결했다. ordinarypulse는 매실탄,sharedfusion은 cartridge전체bolt에같은token을쓴다. 능력/월도근접/다른perk추가폭발은제외한다.
+최종freshJUnit1689/238classes,actualFabricGT15(장전7+HIR8),Python7+10/HIR41negative 및 deterministicverify,JAR175resource exact통과.1182sourcepin/통합198파일/W181봉인1292파일불변. HIR정수곡선은2019실측rung+Clarityendpoint를정규화한잠정adaptation이며,currentDDC7.5%와과거10%plateau불일치/소형탄창차이등원작충실도는미해결이다.
+사용자해제알림후freshCU도잠금감지라W182native기동0/operation0/PNG0;구현과actualGT만통과했다. 장전/ADS/취소/16display/3Pfallback/HIR14대조를한세션으로취합대기한다. coordinator/owncaffeinate해제·소유PIDs/ports/relays없음. 손IK/새3P장전/실청취/다인FPS미검증;전체goalactive.
+
+[근거·제한·검증](qa/2026-10-27/w182/README.md).
+
+
+## W183 — 잉여·정찰/보조무기 장전 (자동검사 완료, native 대기)
+
+잉여의 공식 base9소켓/실제 수류탄·근접·직업능력 준비수0–3을 stability/handling/reload와 초록 COUNT HUD에 연결했다. 합법 동반 rawstat/scalar 단일올림·owned incoming/outgoing·수락장전 immutable·무기/능력 권한을 유지한다. Patron98요소/15발39틱과 HighAlbedo111reload요소(원래100+reference-backed shaft11)/27발36틱의 원작영상 기반 FP장전을 추가했다. Albedo초기 밑판만 이동한 결과는 거부·보완했고 canonical/UV/안료/ADS/실탄/음원은 보존했다. whole-mag33경로다.
+3dirty-CoW리더/199배타경로 SHA통합, 최종freshJUnit1724/243classes·actualFabricGT15(장전7+Surplus8)·JAR178resource exact통과.1380sourcepin/통합199파일/W182봉인865파일불변. 사용자의 해제 알림 뒤freshCU도잠금감지라 native기동0/operation0/PNG0; 준비 helper는 실행 증거가 아니다. bounded1800초coordinator와owncaffeinate92373해제·ports/relay/ownruntime없음. W182HIR수치미확정·실청취·손IK·새3P장전·다인FPS/실화면 수락은 미해결이고 전체goalactive다.
+
+[설계](design/157_W183_잉여와_정찰보조무기장전.md) · [근거·제한·검증](qa/2026-10-27/w183/README.md).
+
+
+## W184 진행 — 궁극기 속성 기반 무기 스탯
+
+3dirty-CoW199배타경로로 Distant Relation·Farewell 개별장전과 원소축전지의 실제 장착SUPER속성 기반스탯을 분담한다. master는sharedruntime/actualGT/팩검사와단일Vision취합을 소유한다. 잠금우회·가짜passiveHUD는추가하지않는다. [계획](qa/2026-10-27/w184/PLAN.md).
+
+
+## W184 — 원소 축전지·정찰/보조무기 장전 (통합/자동검사 완료, native 대기)
+
+3dirty-CoW리더의199배타경로를SHA통합했다. Distant Relation89요소/16발44틱과 Farewell118요소/15발32틱의 원작영상 기반 통탄창 FP장전을 추가해 whole-mag35라우트가 됐다. Farewell은 기존heel/loop에 source-backed shaft3개를 보완했고, exact0/1 canonical·기존UV/안료/ADS/음원/실탄권한을 보존했다.
+원소축전지의 공식base2소켓을 실제등록·장착SUPER속성에 연결했다. Solarreload50/Archandling50/Voidstability20, 실제소유incoming/outgoing·합법SteelFF/PatronRH rawstat/scalar단일올림·수락장전immutable을 유지한다. 무기속성/다른능력/궁극기에너지는선택자가아니고,가짜passiveHUD나없는Stasis/Strand는추가하지않는다.
+최종freshJUnit1754/247classes·actualFabricGT16(장전7+EC9)·JAR175resource/실제생성서버팩174asset SHA일치,1582pin/W183봉인534파일불변. 팩47,488,556bytes이며클라이언트다운로드는미검증이다. freshCU가해제답변후에도잠금을반환해client기동0/native0/PNG0;headless팩서버1회만실행했다. ownserver exit0·ports/relay정리·agents3종료/worktree보존,보안우회없음. HIR정수공식·실청취·손IK·새3P장전·다인FPS는미해결이고전체goalactive다.
+
+[설계](design/158_W184_원소축전지와_정찰보조무기장전.md) · [근거·검증·제한](qa/2026-10-27/w184/README.md).
+
+
+## W185 — 빠른 무장 / 저격·융합 개별 장전
+
+3개 독립 dirty-CoW worktree의200경로를 SHA 통합했다. 실제 교체 후20틱 handling100/ready-only0.95·실제 ADS 입력 취소의 Quickdraw16공식소켓과 Apostate115/Hollow Words97요소의 원작영상 기반 개별 장전을 추가했다. whole-mag37라우트이며 기존UV/ADS/음원/실탄권한을 유지한다. freshJUnit1777/251classes·actualFabricGT16·JAR175리소스/실제서버팩174자산 통과. freshCU잠금반환으로 native/새PNG0이고 전체목표는 진행중이다. [검증·원작·한계](qa/2026-10-27/w185/README.md).
