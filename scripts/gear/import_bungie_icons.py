@@ -18,6 +18,10 @@ index = json.load(open(CACHE / "icons/index.json"))
 version = json.load(open(CACHE / "manifest.json"))["Response"]["version"]
 model_template = json.load(open(ASSETS / "models/gui/hud/gear_cursor.json"))
 out = {"manifestVersion": version, "weapons": {}, "perks": {}, "engrams": {}}
+_prev = ROOT / "src/main/resources/destiny/gear/bungie-icons.json"
+if _prev.exists():  # keep sections owned by other importers (scripts/economy/import_economy_icons.py)
+    for _k, _v in json.load(open(_prev)).items():
+        if _k not in out: out[_k] = _v
 for key, url in sorted(index.items()):
     im = Image.open(CACHE / "icons" / f"{key}.png").convert("RGBA")
     if im.size != (96, 96): im = im.resize((96, 96), Image.LANCZOS)

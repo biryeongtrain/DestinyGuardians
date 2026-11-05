@@ -280,6 +280,9 @@ public final class Loot {
         if (t.isEmpty()) return;
         var at = entity.position();
         for (var r : LootRoller.roll(t.get(), killer.getRandom())) drop(killer, at, r);
+        // Glimmer income: every combatant kill pays a little (Destiny's on-kill Glimmer).
+        long glimmer = switch (tier) { case MINOR -> killer.getRandom().nextInt(3) == 0 ? 1 : 0; case MAJOR -> 3; case BOSS -> 20; case NONE -> 0; };
+        kim.biryeong.destiny.economy.Economy.reward(killer, glimmer, "처치");
     }
 
     private static void tick(MinecraftServer server) {

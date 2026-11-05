@@ -47,6 +47,10 @@ dependencies {
     implementation "eu.pb4:polymer-resource-pack-extras:${project.polymer_version}"
     implementation "eu.pb4:polymer-autohost:${project.polymer_version}"
 
+    // Patbox Common Economy API: 미광체를 다른 경제 모드와 공유하는 통화 제공자로 등록한다.
+    implementation "eu.pb4:common-economy-api:2.0.0"
+    include "eu.pb4:common-economy-api:2.0.0"
+
     // BetterModel: 플레이어 limb·적·보스 모델과 애니메이션. 배포 JAR에 포함한다.
     implementation "io.github.toxicity188:bettermodel-fabric:${project.bettermodel_version}"
     include "io.github.toxicity188:bettermodel-fabric:${project.bettermodel_version}"

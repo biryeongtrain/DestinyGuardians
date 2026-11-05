@@ -201,7 +201,8 @@ public final class GearScreen {
         inv.setChanged();
         p.level().playSound(null, p.getX(), p.getY(), p.getZ(), net.minecraft.sounds.SoundEvents.GRINDSTONE_USE,
                 net.minecraft.sounds.SoundSource.PLAYERS, .6f, 1.4f);
-        notice(s, w.name() + " 분해");
+        long glimmer = kim.biryeong.destiny.economy.Economy.reward(p, kim.biryeong.destiny.economy.Economy.dismantleValue(w.rarity()), "분해");
+        notice(s, w.name() + " 분해" + (glimmer > 0 ? " · 미광체 +" + glimmer : ""));
         refresh(s); return true;
     }
 
