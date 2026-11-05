@@ -96,6 +96,8 @@ public final class DestinyGuardians implements ModInitializer {
         if (FabricLoader.getInstance().isModLoaded("gcb-server")) {
             initGcb();
         }
+        // Last pack hook: lossless output compression after every other converter.
+        kim.biryeong.destiny.compat.pack.PackCompression.init();
 
         logDependency("polymer-core");
         logDependency("bettermodel");
