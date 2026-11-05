@@ -9,6 +9,7 @@ registry.json (id, Drive file id, base catalog id, tier).  Python 3 + Pillow; Bl
   python3 scripts/art/w325/kit.py extract ID      headless Blender -> art/weapons/w325/ID/proj_cache (6 views albedo+depth)
   python3 scripts/art/w325/kit.py build   ID      design.py -> atlas, skin json (parts with UVs), HUD icon, manifest
   python3 scripts/art/w325/kit.py render  ID      review renders of the built model -> art/weapons/w325/ID/review/*.png
+  python3 scripts/art/w325/kit.py adscheck ID     ADS occlusion check vs the base top profile (must report OK)
   python3 scripts/art/w325/kit.py contract BASE   print the base weapon's body/magazine geometry bounds (layout contract)
 
 design.py (art/weapons/w325/ID/design.py) defines:
@@ -16,7 +17,8 @@ design.py (art/weapons/w325/ID/design.py) defines:
                                (vanilla item px, gun along z, muzzle -z, up +y, centred x=8; same frame as the base)
   model2world(name, p)      -> rip world point (metres, Blender coords) the model point p should sample
   is_magazine(name)         -> bool (default: name starts with 'mag_'); magazine elements become parts.magazine
-  optional: T (texels per px, default 16), ATLAS (default 512), grade(rgb), special(e, fn, s, t) -> rgba | None,
+  optional: STYLE ('pixel' default: Minecraft hand-painted look = weapon palette quantisation + majority cleanup +
+           crisp 1-texel bevel lines; 'projection' = legacy smooth bake), PALETTE (colours, default 14), T (texels per px, default 16), ATLAS (default 512), grade(rgb), special(e, fn, s, t) -> rgba | None,
             clear(e, fn) -> bool (face painted alpha 0, e.g. sight glass), NO_OVERLAY (bool), FALLBACK rgba.
 """
 import hashlib, importlib.util, json, math, os, re, subprocess, sys, urllib.request
@@ -173,6 +175,9 @@ def load_design(wid):
     spec.loader.exec_module(m); return m
 
 
+SEAM, RIDGE, WEAR_DL, GRAIN = 30.0, 30.0, 46.0, float(os.environ.get('W325_GRAIN', '.45'))
+
+
 class Baker:
     def __init__(self, wid):
         self.wid = wid; self.D = load_design(wid); D = self.D
@@ -208,13 +213,14 @@ class Baker:
         w = max(1, int(round(math.dist((0, 0, 0), u) * self.T))); h = max(1, int(round(math.dist((0, 0, 0), v) * self.T)))
         nm = rotate_vec(NORMALS[fn], rot_of(e)); view = self.pick(e, fn, face_point(e, fn, .5, .5), nm)
         img = Image.new('RGBA', (w, h)); px = img.load(); valid = [[False] * h for _ in range(w)]
+        self._painted = painted = [[False] * h for _ in range(w)]
         if self.clear(e, fn):
             return img, [[True] * h for _ in range(w)], True
         for i in range(w):
             for j in range(h):
                 sp = self.special(e, fn, (i + .5) / w, (j + .5) / h)
                 if sp is not None:
-                    px[i, j] = tuple(sp); valid[i][j] = True; continue
+                    px[i, j] = tuple(sp); valid[i][j] = True; painted[i][j] = True; continue
                 acc = [0.0] * 3; n = 0
                 for a in range(2):
                     for b in range(2):
@@ -272,6 +278,238 @@ class Baker:
         if flags[1]:
             for j in range(h): tint(w - 1, j, .06)
 
+    def pixelate(self, faces):
+        """Minecraft weapon look (W30 Gnawing Hunger / Blast Furnace / Recluse): a small shared palette, flat colour
+        blocks with no projection noise, and crisp 1-texel light/dark bevel lines on exposed edges."""
+        k = int(getattr(self.D, 'PALETTE', 20))
+        opaque = [img for n, f, img, clear, e, o, pm in faces if not clear]
+        if not opaque: return
+        # palette from all opaque texels (special()-painted colours included), median cut in RGB
+        sw = sum(i.size[0] for i in opaque); sh = max(i.size[1] for i in opaque)
+        strip = Image.new('RGB', (sw, sh)); x = 0
+        mask = Image.new('L', (sw, sh), 0)
+        for i in opaque:
+            strip.paste(i.convert('RGB'), (x, 0)); mask.paste(i.getchannel('A'), (x, 0)); x += i.size[0]
+        px = [c for c, a in zip(strip.getdata(), mask.getdata()) if a > 0]
+        sample = Image.new('RGB', (len(px), 1)); sample.putdata(px)
+        pal = sample.quantize(colors=k, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
+        extra = getattr(self.D, 'PALETTE_KEEP', [])   # exact accent colours a design wants preserved
+        for idx, (n, f, img, clear, e, others, pm) in enumerate(faces):
+            if clear: continue
+            a = img.getchannel('A')
+            q = img.convert('RGB').quantize(palette=pal, dither=Image.Dither.NONE)
+            w, h = q.size
+            # Flat panels: grime/camo noise within a small contrast of the face's dominant colour collapses into it;
+            # only strong features (decals, slots, colour-blocked panels) survive as their own palette colour.
+            rgb = q.convert('RGB'); hist = rgb.getcolors(w * h) or []
+            if hist:
+                dom = max(hist)[1]; ld = 0.299 * dom[0] + 0.587 * dom[1] + 0.114 * dom[2]
+                tol = float(getattr(self.D, 'FLAT_TOL', 26))
+                rp = rgb.load()
+                for i in range(w):
+                    for j in range(h):
+                        c = rp[i, j]; lc = 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]
+                        chroma = max(abs((c[t] - lc) - (dom[t] - ld)) for t in range(3))
+                        if abs(lc - ld) < tol and chroma < tol * .9: rp[i, j] = dom
+            if w >= 3 and h >= 3:   # majority cleanup: isolated texels join their neighbourhood
+                rgb = rgb.filter(ImageFilter.ModeFilter(3))
+            out = rgb.convert('RGBA'); out.putalpha(a)
+            if extra:   # specials keep their exact colour where they were painted
+                op = out.load(); ip = img.load()
+                for i in range(w):
+                    for j in range(h):
+                        c = ip[i, j][:3]
+                        if any(sum(abs(c[t] - ex[t]) for t in range(3)) < 24 for ex in extra): op[i, j] = tuple(c) + (ip[i, j][3],)
+            # Hand-painted texels (special()) are authored detail: panel lines, lettering, decals. They bypass the
+            # palette, flattening and majority filter (which would erase 1-texel lines) and keep their exact colour.
+            op = out.load(); ip = img.load()
+            for i in range(w):
+                for j in range(h):
+                    if pm[i][j]: op[i, j] = ip[i, j]
+            self.bevel(out, e, f, others)
+            faces[idx] = (n, f, out, clear, e, others, pm)
+
+    # ------------------------------------------------------------------ material style (W123 parity)
+    KINDS = {
+        # field: soft cosine shading across the face; grain: deterministic material texture; detail: weight of the rip's
+        # high-pass luminance (panel seams, vents, engraving, logos) carried onto the clean material colour.
+        'metal':   dict(field=.06, grain='brushed', amp=7, detail=1.0, rim=.20),
+        'steel':   dict(field=.05, grain='brushed', amp=9, detail=1.0, rim=.26),
+        'gold':    dict(field=.08, grain='brushed', amp=6, detail=.8, rim=.30, border=True),
+        'paint':   dict(field=.05, grain='fine', amp=3, detail=1.1, rim=.16),
+        'polymer': dict(field=.04, grain='stipple', amp=6, detail=.9, rim=.10),
+        'rubber':  dict(field=.03, grain='cross', amp=7, detail=.6, rim=.05),
+        'cloth':   dict(field=.03, grain='weave', amp=10, detail=.7, rim=.04),
+        'wood':    dict(field=.05, grain='wood', amp=12, detail=.8, rim=.10),
+        'glow':    dict(field=.00, grain=None, amp=0, detail=.3, rim=.0),
+        'lens':    dict(field=.10, grain=None, amp=0, detail=.0, rim=.35),
+        'dark':    dict(field=.03, grain='fine', amp=2, detail=.6, rim=.06),
+    }
+
+    def material_of(self, e, fn):
+        f = getattr(self.D, 'material', None)
+        if f: return f(e['name'], fn)
+        return None
+
+    def materialize(self, faces):
+        """W123-style surface: every part gets a clean material base (palette colour + shading + grain) and keeps the
+        rip's own surface detail as luminance relief, so the result reads as the original gun, not flat blocks."""
+        mats = dict(getattr(self.D, 'MATERIALS', {}))
+        # auto palette fallback: the weapon's dominant rip colours (median cut), kind guessed from chroma/brightness
+        opaque = [img for n, f, img, clear, e, o, pm in faces if not clear]
+        if not opaque: return
+        sw = sum(i.size[0] for i in opaque); sh = max(i.size[1] for i in opaque)
+        strip = Image.new('RGB', (sw, sh)); x = 0
+        for i in opaque: strip.paste(i.convert('RGB'), (x, 0)); x += i.size[0]
+        auto = strip.quantize(colors=int(getattr(self.D, 'PALETTE', 8)), method=Image.Quantize.MEDIANCUT,
+                              dither=Image.Dither.NONE).getpalette()[:3 * int(getattr(self.D, 'PALETTE', 8))]
+        auto = [tuple(auto[i:i + 3]) for i in range(0, len(auto), 3)]
+        for idx, (n, f, img, clear, e, others, pm) in enumerate(faces):
+            if clear: continue
+            w, h = img.size
+            rgb = img.convert('RGB')
+            L = rgb.convert('L')
+            r = max(1, int(round(self.T * .12)))
+            blur = L.filter(ImageFilter.GaussianBlur(r * 1.6))
+            lp = L.load(); bp = blur.load()
+            m = self.material_of(e, f)
+            if isinstance(m, str): m = mats.get(m, {'kind': m})
+            if m is None or 'color' not in (m or {}):
+                mean = rgb.resize((1, 1), Image.BOX).getpixel((0, 0))
+                col = min(auto, key=lambda c: sum((c[t] - mean[t]) ** 2 for t in range(3)))
+                lum = .299 * col[0] + .587 * col[1] + .114 * col[2]; chroma = max(col) - min(col)
+                kind = (m or {}).get('kind') or ('dark' if lum < 45 else 'paint' if chroma > 28 else 'metal' if lum > 110 else 'polymer')
+                m = dict(color=col, kind=kind, **{k: v for k, v in (m or {}).items() if k not in ('color', 'kind')})
+            k = dict(self.KINDS.get(m.get('kind', 'paint'), self.KINDS['paint'])); k.update({a: m[a] for a in m if a in k})
+            base = m['color']; out = Image.new('RGBA', (w, h)); op = out.load(); ip = img.load()
+            # thin-line seam mask: a rip texel counts as a panel seam only when it is clearly darker than its
+            # surroundings AND part of a 1-2 texel wide continuous line (grime blotches and speckle are rejected)
+            raw = [[(lp[i, j] - bp[i, j]) < -SEAM for j in range(h)] for i in range(w)]
+            seam = [[False] * h for _ in range(w)]
+            for i in range(w):
+                for j in range(h):
+                    if not raw[i][j]: continue
+                    nb = sum(raw[a][b] for a in range(max(0, i - 1), min(w, i + 2)) for b in range(max(0, j - 1), min(h, j + 2))) - 1
+                    big = sum(raw[a][b] for a in range(max(0, i - 2), min(w, i + 3)) for b in range(max(0, j - 2), min(h, j + 3)))
+                    seam[i][j] = 2 <= nb <= 4 and big <= 11
+            seed = sum(ord(c) for c in n + f) % 97
+            blum = .299 * base[0] + .587 * base[1] + .114 * base[2]; bchroma = max(base) - min(base)
+            wear = m.get('wear')
+            if wear is None and m.get('kind', 'paint') == 'paint' and m.get('wear', True) is not False:
+                wear = (188, 178, 156) if blum < 150 else tuple(int(c * .45) for c in base)
+            if wear is False: wear = None
+            long_u = w >= h
+            for i in range(w):
+                for j in range(h):
+                    if pm[i][j] and not os.environ.get('W325_IGNORE_SPECIAL'): op[i, j] = ip[i, j]; continue
+                    v = (j + .5) / h
+                    fld = 1 + k['field'] * math.cos(v * math.pi)
+                    hp = (lp[i, j] - bp[i, j]) * k['detail']
+                    # W123 language: relief is authored lines, not soft noise. Strong rip seams become a crisp dark
+                    # texel, strong ridges a crisp light texel; weak relief is kept faint so plates stay clean.
+                    if seam[i][j] and k['detail'] > 0: d = -.34
+                    else: d = max(-.05, min(.05, hp * .25 / 255.0))
+                    g = 0.0; a = k['amp']
+                    if k['grain'] == 'brushed':
+                        t = j if long_u else i
+                        g = (((t * 37 + seed) % 11) - 5) / 5 * a * (.6 + .4 * (((t * 13 + seed) % 3) == 0))
+                    elif k['grain'] == 'stipple':
+                        g = ((((i * 73) ^ (j * 151) + seed) % 7) - 3) / 3 * a
+                    elif k['grain'] == 'fine':
+                        g = (((i * 17 + j * 29 + seed) % 23) - 11) / 11 * a
+                    elif k['grain'] == 'cross':
+                        g = (-a if ((i + j) % 3 == 0 or (i - j) % 3 == 0) else a * .4)
+                    elif k['grain'] == 'weave':
+                        g = (a if ((i // 2 + j // 2) % 2) else -a)
+                    elif k['grain'] == 'wood':
+                        t = (i if long_u else j) * .0 + (j if long_u else i)
+                        g = math.sin((t + 3 * math.sin((i if long_u else j) * .07 + seed)) * .9) * a
+                    c = tuple(max(0, min(255, int(round(base[t] * fld * (1 + d * 1.35) + g * GRAIN)))) for t in range(3))
+                    if wear is not None and not seam[i][j]:
+                        rc = ip[i, j]; rl = .299 * rc[0] + .587 * rc[1] + .114 * rc[2]
+                        # paint chipped to the substrate: the rip shows bare metal / primer where it is much lighter
+                        # (or darker, on light paint) than the coat; keep those texels as crisp wear marks.
+                        if (rl - blum > WEAR_DL and (max(rc) - min(rc)) < bchroma + 30) or (blum > 150 and blum - rl > WEAR_DL * 1.4):
+                            c = tuple(int(wear[t] * (.92 + .08 * fld)) for t in range(3))
+                    op[i, j] = c + (255,)
+            # material motifs readable at play distance (W123 receiver/grip/rail motifs)
+            kind = m.get('kind', 'paint'); side = f in ('east', 'west', 'north', 'south')
+            def shade(i, j, fac):
+                if not pm[i][j]: op[i, j] = lighten(op[i, j][:3], fac) + (255,)
+            if kind in ('metal', 'steel') and side and h >= 5:
+                band = max(1, h // 7)
+                for i in range(w):
+                    for j in range(1, 1 + band): shade(i, j, .16 if kind == 'steel' else .11)
+                    shade(i, h - 2, -.12)
+            if kind == 'rubber' and w >= 4 and h >= 4:
+                for i in range(w):
+                    for j in range(h):
+                        if (i % 3 == 0) and (j % 3 == 0): shade(i, j, -.22)
+                        elif ((i + 1) % 3 == 0) and ((j + 1) % 3 == 0): shade(i, j, .07)
+            if kind == 'polymer' and w >= 4 and h >= 4:
+                for i in range(w):
+                    for j in range(h):
+                        if ((i * 7 + j * 13 + seed) % 9) == 0: shade(i, j, .10)
+            if kind == 'gold' and side and h >= 4:
+                for i in range(w): shade(i, 1, .22)
+            # machined plate edge (W123 col[edge]=base+10): every panel reads as a separate part, not one slab
+            if k.get('plate', True) and w >= 4 and h >= 4 and m.get('kind') not in ('rubber', 'dark', 'glow', 'lens', 'cloth'):
+                for i in range(w):
+                    for j in range(h):
+                        if (i in (0, w - 1) or j in (0, h - 1)) and not pm[i][j]:
+                            op[i, j] = tuple(min(255, c + 10) for c in op[i, j][:3]) + (255,)
+            if k.get('border') and w >= 6 and h >= 6:
+                for i in range(1, w - 1):
+                    for j in (1, h - 2): op[i, j] = tuple(max(0, int(c * .72)) for c in op[i, j][:3]) + (255,)
+                for j in range(1, h - 1):
+                    for i in (1, w - 2): op[i, j] = tuple(max(0, int(c * .72)) for c in op[i, j][:3]) + (255,)
+            if k['rim'] > 0: self.rim(out, e, f, others, k['rim'])
+            faces[idx] = (n, f, out, clear, e, others, pm)
+
+    def rim(self, img, e, fn, others, s):
+        """1-texel lit top edge and dark lower seam on exposed edges (Ace/W123 edge language)."""
+        w, h = img.size; px = img.load()
+        if w < 3 or h < 3: return
+        o, u, v = face_frame(e, fn); lu = math.dist((0, 0, 0), u) or 1; lv = math.dist((0, 0, 0), v) or 1
+        flags = []
+        for s_, t_ in ((-0.004, .5), (1.004, .5), (.5, -0.004), (.5, 1.004)):
+            ss = .5 + (s_ - .5) * (1 + .06 / lu) if s_ != .5 else .5; tt = .5 + (t_ - .5) * (1 + .06 / lv) if t_ != .5 else .5
+            flags.append(not any(inside(x, face_point(e, fn, ss, tt, push=-0.015)) for x in others))
+        def tint(i, j, f):
+            c = px[i, j]
+            if c[3] == 255: px[i, j] = lighten(c, f) + (255,)
+        if flags[2]:
+            for i in range(w): tint(i, 0, s)
+        if flags[3]:
+            for i in range(w): tint(i, h - 1, -s * 1.2)
+        if flags[0]:
+            for j in range(h): tint(0, j, s * .5)
+        if flags[1]:
+            for j in range(h): tint(w - 1, j, -s * .6)
+
+    def bevel(self, img, e, fn, others):
+        """Crisp 1-texel edge lines: top/left light, bottom/right dark on side faces; light rim on top faces."""
+        w, h = img.size; px = img.load()
+        if w < 2 or h < 2: return
+        o, u, v = face_frame(e, fn); lu = math.dist((0, 0, 0), u) or 1; lv = math.dist((0, 0, 0), v) or 1
+        flags = []
+        for s, t_ in ((-0.004, .5), (1.004, .5), (.5, -0.004), (.5, 1.004)):
+            ss = .5 + (s - .5) * (1 + .06 / lu) if s != .5 else .5; tt = .5 + (t_ - .5) * (1 + .06 / lv) if t_ != .5 else .5
+            flags.append(not any(inside(x, face_point(e, fn, ss, tt, push=-0.015)) for x in others))
+        side = fn in ('north', 'south', 'east', 'west')
+        def tint(i, j, f):
+            c = px[i, j]
+            if c[3] == 255: px[i, j] = lighten(c, f) + (255,)
+        hi, lo = (.22, -.28) if side else (.16, -.12)
+        if flags[2]:
+            for i in range(w): tint(i, 0, hi)
+        if flags[3]:
+            for i in range(w): tint(i, h - 1, lo)
+        if flags[0]:
+            for j in range(1, h - 1): tint(0, j, hi * .6)
+        if flags[1]:
+            for j in range(1, h - 1): tint(w - 1, j, lo * .6)
+
     def build(self):
         els = [dict(e) for e in self.D.elements()]
         names = [e['name'] for e in els]
@@ -280,6 +518,7 @@ class Baker:
             for v in e['from'] + e['to']:
                 if not -16 <= v <= 32: raise SystemExit(f'{e["name"]} outside -16..32')
         faces, hidden = [], []
+        style = os.environ.get('W325_STYLE') or getattr(self.D, 'STYLE', 'pixel')
         for e in els:
             others = [o for o in els if o is not e and self.is_mag(o['name']) == self.is_mag(e['name'])]
             for fn in FACE_AXES:
@@ -287,10 +526,14 @@ class Baker:
                 img, valid, clear = self.face(e, fn)
                 if not clear:
                     self.inpaint(img, valid, self.fallback)
-                    if img.size[0] >= 3 and img.size[1] >= 3:
-                        img = Image.blend(img, img.filter(ImageFilter.MedianFilter(3)), .5)
-                    self.edges(img, e, fn, others)
-                faces.append((e['name'], fn, img))
+                    if style == 'projection':
+                        if img.size[0] >= 3 and img.size[1] >= 3:
+                            img = Image.blend(img, img.filter(ImageFilter.MedianFilter(3)), .5)
+                        self.edges(img, e, fn, others)
+                faces.append((e['name'], fn, img, clear, e, others, self._painted))
+        if style == 'pixel': self.pixelate(faces)
+        if style == 'material': self.materialize(faces)
+        faces = [(n, f, img) for n, f, img, *_ in faces]
         order = sorted([((n, f), img.size[0] + 2, img.size[1] + 2) for n, f, img in faces] + [(('_h', '_'), 4, 4)],
                        key=lambda r: (-r[2], -r[1], r[0]))
         pos = {}; x = y = shelf = 0
@@ -393,6 +636,44 @@ def contract(base):
     print(f'({len(hits)} files mention {base}; W302 contract examples: art/weapons/w302/*/manifest.json)')
 
 
+def _corners(e):
+    f, t = e['from'], e['to']; rot = rot_of(e)
+    return [rotate((x, y, z), rot) for x in (f[0], t[0]) for y in (f[1], t[1]) for z in (f[2], t[2])]
+
+
+def adscheck(wid):
+    """ADS occlusion check: the ADS camera sits behind the gun on the sight line, so anything the skin puts above the
+    base's own (in-game validated) top profile behind the muzzle blocks the view. For every 0.25 px z slice of the rear
+    two thirds, compare the skin's top y (elements crossing the centre band x 7..9) with the base body's top y there."""
+    r = reg(wid); base = r['base']; md = ASSETS / 'models'
+    cands = [md / f'weapon_sight_w151/{base}_body.json'] + sorted(md.glob(f'weapon_reload_w*_{base}/{base}_body.json')) \
+        + sorted(md.glob(f'weapon/*/{base}.json'))
+    src = next((p for p in cands if p.exists() and json.loads(p.read_text()).get('elements')), None)
+    if src is None: raise SystemExit(f'no base body model for {base}')
+    base_els = json.loads(src.read_text())['elements']
+    skin = json.loads(skin_path(wid).read_text())['parts']['body']
+    def top(els, z0, z1, band=(6.6, 9.4)):
+        best = None
+        for e in els:
+            c = _corners(e)
+            if max(p[2] for p in c) < z0 or min(p[2] for p in c) > z1: continue
+            if max(p[0] for p in c) < band[0] or min(p[0] for p in c) > band[1]: continue
+            if any(f.get('texture') not in ('#0', None) for f in e.get('faces', {}).values()) and 'aim' in e.get('name', ''): continue
+            y = max(p[1] for p in c); best = y if best is None or y > best else best
+        return best
+    zs = [p[2] for e in base_els for p in _corners(e)]
+    zmin, zmax = min(zs), max(zs); start = zmin + (zmax - zmin) / 3
+    bad = []; z = start
+    while z < zmax:
+        b = top(base_els, z, z + .25); k = top(skin, z, z + .25)
+        if k is not None and (b is None or k > b + .15): bad.append((round(z, 2), round(k, 2), None if b is None else round(b, 2)))
+        z += .25
+    print(f'adscheck {wid} vs {src.relative_to(ROOT)}: z {start:.2f}..{zmax:.2f}')
+    if not bad: print('  OK: skin never rises above the base top profile behind the front third'); return
+    print('  ABOVE BASE (z, skin top, base top) — lower these or the ADS view is blocked:')
+    for row in bad: print('   ', row)
+
+
 def render(wid, views='west,east,top,q,front'):
     out = art(wid) / 'review'; out.mkdir(parents=True, exist_ok=True)
     subprocess.run([BLENDER, '-b', '--python', str(HERE / 'render_model.py'), '--', str(out / wid), str(skin_path(wid)),
@@ -402,4 +683,4 @@ def render(wid, views='west,east,top,q,front'):
 if __name__ == '__main__':
     if len(sys.argv) < 3: raise SystemExit(__doc__)
     cmd, arg = sys.argv[1], sys.argv[2]
-    {'fetch': fetch, 'extract': extract, 'build': lambda w: Baker(w).build(), 'render': render, 'contract': contract}[cmd](arg)
+    {'fetch': fetch, 'extract': extract, 'build': lambda w: Baker(w).build(), 'render': render, 'contract': contract, 'adscheck': adscheck}[cmd](arg)
