@@ -14,9 +14,18 @@ import java.util.*;
  * entry. An entry gives either a weapon chosen by {@link WeaponFilter} or an engram of a tier, or nothing.
  */
 public final class LootTables {
-    /** Weapon pool filter. Null fields match everything. */
+    /**
+     * Weapon pool filter. Null fields match everything. {@code rarity} (W325) selects item tiers: common, uncommon,
+     * rare (Red War skins), legendary, exotic; null keeps the catalog pool (legendary + exotic, narrowed by
+     * {@code exotic}). {@code ids}/{@code exclude} match catalog ids or skin ids.
+     */
     public record WeaponFilter(Boolean exotic, List<String> slots, List<String> ammo, List<String> families,
-                               List<String> ids, List<String> exclude) { }
+                               List<String> ids, List<String> exclude, List<String> rarity) {
+        public WeaponFilter(Boolean exotic, List<String> slots, List<String> ammo, List<String> families,
+                            List<String> ids, List<String> exclude) {
+            this(exotic, slots, ammo, families, ids, exclude, null);
+        }
+    }
     public record Entry(int weight, WeaponFilter weapon, String engram) {
         public boolean empty() { return weapon == null && engram == null; }
     }
@@ -51,9 +60,14 @@ public final class LootTables {
             for (var a : file.activities.values()) { require(file, a.completion()); require(file, a.chest()); }
             if (file.enemies != null) { require(file, file.enemies.minor()); require(file, file.enemies.major()); require(file, file.enemies.boss()); }
             for (var t : file.engramTables.values()) require(file, t);
-            for (var t : tables.values()) for (var entry : t.entries())
+            for (var t : tables.values()) for (var entry : t.entries()) {
+                if (entry.weapon() != null && entry.weapon().rarity() != null)
+                    for (var r : entry.weapon().rarity())
+                        if (kim.biryeong.destiny.weapon.WeaponRarity.parse(r).isEmpty())
+                            throw new IllegalStateException("Unknown rarity " + r + " in " + t.id());
                 if (entry.engram() != null && !file.engramTables.containsKey(entry.engram()))
                     throw new IllegalStateException("Unknown engram tier " + entry.engram() + " in " + t.id());
+            }
             return file;
         } catch (java.io.IOException e) { throw new IllegalStateException(e); }
     }

@@ -28,7 +28,7 @@ for key, url in sorted(index.items()):
                "tints": [{"type": "minecraft:custom_model_data", "index": 0, "default": 16777215}]}},
               open(ITEMS / f"{key}.json", "w"), indent=2)
     kind, _, name = key.partition("_")
-    out[{"weapon": "weapons", "perk": "perks", "engram": "engrams"}[kind]][name] = {"icon": "bungie/" + key, "source": "https://www.bungie.net" + url}
+    out[{"weapon": "weapons", "perk": "perks", "engram": "engrams"}[kind]][name] = {"icon": "bungie/" + key, "source": url[6:] if url.startswith("local:") else "https://www.bungie.net" + url}
 dest = ROOT / "src/main/resources/destiny/gear/bungie-icons.json"
 dest.parent.mkdir(parents=True, exist_ok=True)
 json.dump(out, open(dest, "w"), indent=1, sort_keys=True)

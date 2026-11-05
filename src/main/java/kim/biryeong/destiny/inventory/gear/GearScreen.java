@@ -45,6 +45,8 @@ public final class GearScreen {
         Stage stage = Stage.GEAR;
         GearSlot expanded;
         int focus = -1, hoverSince, repeatAt, lastClick = Integer.MIN_VALUE / 2, lastActive, openedAt;
+        /** W325 dismantle confirmation: the inventory index armed by the first Q and its expiry tick. */
+        int dismantleIndex = -1, dismantleUntil;
         Input input = Input.EMPTY;
         boolean pointerDriven = true;
         String message = "";
@@ -175,6 +177,32 @@ public final class GearScreen {
         if (w == null) { notice(s, "무기에 커서를 올린 뒤 F를 누르면 상세 정보를 봅니다."); render(s); return true; }
         s.detail = w; s.stage = Stage.DETAIL; s.focus = GearLayout.BACK;
         render(s); return true;
+    }
+
+    /**
+     * Q (drop): dismantle the hovered stored weapon. The first press arms it, a second press within two seconds
+     * removes it (Destiny's hold-to-dismantle without a hold input). Equipped weapons cannot be dismantled.
+     */
+    public static boolean dismantle(ServerPlayer p) {
+        var s = current(p); if (s == null) return false;
+        if (s.stage != Stage.GEAR) return true;
+        var w = hoveredWeapon(s);
+        if (w == null) { notice(s, "보관함의 무기에 커서를 올린 뒤 Q를 누르면 분해합니다."); render(s); return true; }
+        if (w.equipped()) { notice(s, "장착 중인 무기는 분해할 수 없습니다."); render(s); return true; }
+        int now = now(s);
+        if (s.dismantleIndex != w.inventoryIndex() || now > s.dismantleUntil) {
+            s.dismantleIndex = w.inventoryIndex(); s.dismantleUntil = now + 40;
+            notice(s, w.name() + " · 한 번 더 Q를 누르면 분해합니다."); render(s); return true;
+        }
+        s.dismantleIndex = -1;
+        var inv = p.getInventory();
+        if (inv.getItem(w.inventoryIndex()) != w.stack()) { notice(s, "무기 상태가 바뀌어 분해를 취소했습니다."); refresh(s); return true; }
+        inv.setItem(w.inventoryIndex(), net.minecraft.world.item.ItemStack.EMPTY);
+        inv.setChanged();
+        p.level().playSound(null, p.getX(), p.getY(), p.getZ(), net.minecraft.sounds.SoundEvents.GRINDSTONE_USE,
+                net.minecraft.sounds.SoundSource.PLAYERS, .6f, 1.4f);
+        notice(s, w.name() + " 분해");
+        refresh(s); return true;
     }
 
     public static boolean click(ServerPlayer p, boolean back) {

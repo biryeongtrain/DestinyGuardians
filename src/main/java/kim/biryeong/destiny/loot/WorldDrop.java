@@ -43,7 +43,11 @@ final class WorldDrop {
         if (reward.engram() != null) {
             stack = new ItemStack(Items.PAPER);
             stack.set(DataComponents.ITEM_MODEL, engramModel(reward.engram()));
-        } else stack = WeaponItems.entry(reward.weapon()).map(WeaponModels::create).orElse(ItemStack.EMPTY);
+        } else {
+            stack = WeaponItems.entry(reward.weapon()).map(WeaponModels::create).orElse(ItemStack.EMPTY);
+            var skin = kim.biryeong.destiny.weapon.WeaponSkins.of(reward.weapon());   // W302/W325 skinned drops show their own model
+            if (!stack.isEmpty() && skin.isPresent()) kim.biryeong.destiny.weapon.WeaponSkins.apply(stack, skin.get().id());
+        }
         item = new ItemDisplayElement(stack);
         item.setItemDisplayContext(ItemDisplayContext.FIXED);
         item.setBrightness(new Brightness(15, 15));

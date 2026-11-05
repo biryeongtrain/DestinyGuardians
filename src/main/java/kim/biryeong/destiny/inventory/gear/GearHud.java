@@ -153,12 +153,12 @@ public final class GearHud {
             p.rect(k + "_plus_v", b.x(), b.y(), 1, 24, depth + 1, LINE);
             return;
         }
-        p.rect(k + "_bg", b.x(), b.y(), b.width(), b.height(), depth, w.exotic() ? dim(EXOTIC, .55f) : LEGENDARY);
-        p.rect(k + "_shade", b.x(), b.y() + b.height() * .32f, b.width(), b.height() * .36f, depth + .5f, w.exotic() ? dim(EXOTIC, .42f) : 0x452856);
-        // Skinned (campaign) weapons look different from their catalog donor: show their own model.
-        var icon = kim.biryeong.destiny.weapon.WeaponSkins.of(w.stack()).isPresent() ? java.util.Optional.<String>empty() : GearIcons.weapon(w.id());
+        p.rect(k + "_bg", b.x(), b.y(), b.width(), b.height(), depth, tile(w));
+        p.rect(k + "_shade", b.x(), b.y() + b.height() * .32f, b.width(), b.height() * .36f, depth + .5f, shade(w));
+        // Skinned weapons (W302 campaign, W325 Red War tiers) use their own Bungie icon; no icon: their own model.
+        var icon = GearIcons.weapon(w.iconId());
         if (icon.isPresent()) p.icon(k + "_model", icon.get(), b.x(), b.y(), b.width() - 4, depth + 2, 0xFFFFFF);
-        else p.weapon(k + "_model", w.id(), b.x(), b.y() - 4, b.width() * .92f, depth + 2);
+        else p.weapon(k + "_model", w.iconId(), b.x(), b.y() - 4, b.width() * .92f, depth + 2);
         p.icon(k + "_damage", "ammo_damage_" + w.damage().toLowerCase(Locale.ROOT), b.x() - b.width() / 2 + 14, b.y() + b.height() / 2 - 14, 18, depth + 4, damageColor(w.damage()));
     }
 
@@ -188,7 +188,7 @@ public final class GearHud {
 
     private static void tooltip(HudPainter p, GearView v, GearItems.Weapon w, GearItems.Weapon compare, float left) {
         float top = 176, x0 = left + 24, x1 = left + TIP_W - 24;
-        int head = w.exotic() ? EXOTIC : LEGENDARY;
+        int head = tile(w);
         var rows = new ArrayList<Row>();
         if (!w.flavour().isBlank()) {
             var lines = HudPainter.wrap(w.flavour(), 18, TIP_W - 48, 3);
@@ -220,19 +220,21 @@ public final class GearHud {
                     perkIcon(p, "tip_perk_" + index + "_dot", perk, x0 + 10, y + 12, 26, 132);
                     p.textLeft("tip_perk_" + index, perk.name(), x0 + 24, y, 20, WHITE, TIP_W - 72, 255);
                 }));
+                if (!perk.deltas().isEmpty())
+                    rows.add(new Row(24, y -> deltaLine(p, "tip_perk_" + index + "_d", perk, x0 + 24, y - 4, 16)));
             }
         }
         rows.add(rule(p, "tip_rule3", left));
-        rows.add(new Row(30, y -> p.textLeft("tip_hint", w.equipped() ? "장착 중  ·  F 상세 보기" : "좌클릭 장착  ·  F 상세 보기", x0, y, 18, GOLD, TIP_W - 48, 255)));
+        rows.add(new Row(30, y -> p.textLeft("tip_hint", w.equipped() ? "장착 중  ·  F 상세 보기" : "좌클릭 장착  ·  F 상세 보기  ·  Q 분해", x0, y, 18, GOLD, TIP_W - 48, 255)));
         float bodyTop = top + 104, h = 16;
         for (var r : rows) h += r.height();
         p.rect("tip_head", left + TIP_W / 2, top + 52, TIP_W, 104, 120, head);
-        var headIcon = kim.biryeong.destiny.weapon.WeaponSkins.of(w.stack()).isPresent() ? java.util.Optional.<String>empty() : GearIcons.weapon(w.id());
+        var headIcon = GearIcons.weapon(w.iconId());
         if (headIcon.isPresent()) p.icon("tip_icon", headIcon.get(), left + 58, top + 52, 84, 124, 0xFFFFFF);
-        else p.weapon("tip_icon", w.id(), left + 58, top + 52, 84, 124);
+        else p.weapon("tip_icon", w.iconId(), left + 58, top + 52, 84, 124);
         p.textLeft("tip_name", w.name(), left + 110, top + 22, 28, WHITE, TIP_W - 130, 255);
-        p.textLeft("tip_type", w.family() + "  ·  " + (w.exotic() ? "경이" : "전설") + (w.equipped() ? "  ·  장착 중" : ""),
-                left + 110, top + 62, 20, w.exotic() ? 0xFFF3CF : 0xD9C9E3, TIP_W - 130, 255);
+        p.textLeft("tip_type", w.family() + "  ·  " + w.rarity().label() + (w.equipped() ? "  ·  장착 중" : ""),
+                left + 110, top + 62, 20, mix(w.rarity().color(), 0xFFFFFF, .55f), TIP_W - 130, 255);
         p.rect("tip_body", left + TIP_W / 2, bodyTop + h / 2, TIP_W, h, 120, PANEL);
         float y = bodyTop + 12;
         for (var r : rows) { r.draw().accept(y); y += r.height(); }
@@ -245,12 +247,28 @@ public final class GearHud {
         else p.rect(key, x - 2, y - 2, 10, 10, depth, WHITE);
     }
 
+    /** "총열   사거리 +15   안정성 -10": slot muted, stat names muted, signed values green/red. */
+    private static void deltaLine(HudPainter p, String key, GearItems.Perk perk, float x, float y, float px) {
+        p.textLeft(key + "_slot", perk.slot(), x, y, px, DIM, 80, 255);
+        x += HudPainter.width(perk.slot(), px) + px;
+        int i = 0;
+        for (var d : perk.deltas()) {
+            p.textLeft(key + "_n" + i, d.stat(), x, y, px, MUTED, 200, 255);
+            x += HudPainter.width(d.stat(), px) + px * .7f;
+            String v = (d.value() > 0 ? "+" : "") + d.value();
+            p.textLeft(key + "_v" + i, v, x, y, px, d.value() > 0 ? UP : DOWN, 80, 255);
+            x += HudPainter.width(v, px) + px; i++;
+        }
+    }
+
     private static Row rule(HudPainter p, String key, float left) {
         return new Row(14, y -> p.rect(key, left + TIP_W / 2, y + 6, TIP_W - 48, 1, 124, LINE));
     }
 
     static void statRow(HudPainter p, String k, GearItems.Stat stat, Integer other, float x0, float x1, float y) {
         p.textLeft(k + "_name", stat.name(), x0, y, 18, MUTED, 170, 255);
+        // Comparison with the equipped weapon wins; otherwise highlight what this weapon's barrel/magazine changed.
+        if ((other == null || other == stat.value()) && stat.base() != null) other = stat.base();
         int color = other == null || other == stat.value() ? WHITE : stat.value() > other ? UP : DOWN;
         p.textRight(k + "_value", Integer.toString(stat.value()), x1, y, 18, color, 255);
         if (!stat.bar()) return;
@@ -297,9 +315,9 @@ public final class GearHud {
         var w = v.detail();
         if (w == null) return;
         p.rect("detail_stage", 700, 560, 1100, 820, 102, 0x141A20);
-        p.weapon("detail_model", w.id(), 680, 540, 700, 110);
-        p.textLeft("detail_name", w.name(), 180, 200, 40, w.exotic() ? EXOTIC : WHITE, 900, 255);
-        p.textLeft("detail_type", w.family() + "  ·  " + (w.exotic() ? "경이" : "전설") + "  ·  " + WeaponScreenText.damage(w.damage()),
+        p.weapon("detail_model", w.iconId(), 680, 540, 700, 110);
+        p.textLeft("detail_name", w.name(), 180, 200, 40, w.exotic() ? EXOTIC : w.rarity() == kim.biryeong.destiny.weapon.WeaponRarity.LEGENDARY ? WHITE : w.rarity().color(), 900, 255);
+        p.textLeft("detail_type", w.family() + "  ·  " + w.rarity().label() + "  ·  " + WeaponScreenText.damage(w.damage()),
                 180, 252, 22, MUTED, 900, 255);
         if (!w.flavour().isBlank()) p.wrappedLeft("detail_flavour", w.flavour(), 180, 860, 20, MUTED, 1000, 2, 30, 255);
         float left = 1300, x0 = left + 24, x1 = left + 540;
@@ -316,6 +334,7 @@ public final class GearHud {
         for (var perk : w.perks()) {
             perkIcon(p, "detail_perk_" + j + "_dot", perk, x0 + 10, y + 12, 26, 112);
             p.textLeft("detail_perk_" + j, perk.name(), x0 + 24, y, 20, WHITE, 480, 255);
+            if (!perk.deltas().isEmpty()) { deltaLine(p, "detail_perk_" + j + "_d", perk, x0 + 24, y + 26, 18); y += 24; }
             int lines = p.wrappedLeft("detail_perk_" + j + "_desc", perk.description(), x0 + 24, y + 28, 18, MUTED, 480, 3, 24, 255);
             y += 36 + lines * 24; j++;
             if (y > 900) break;
@@ -403,6 +422,20 @@ public final class GearHud {
         int g = Math.round(((a >> 8) & 255) + (((b >> 8) & 255) - ((a >> 8) & 255)) * t);
         int bl = Math.round((a & 255) + ((b & 255) - (a & 255)) * t);
         return r << 16 | g << 8 | bl;
+    }
+
+    /** W325 tile/header colour per tier (legendary/exotic keep their established values). */
+    static int tile(GearItems.Weapon w) {
+        return switch (w.rarity()) {
+            case EXOTIC -> dim(EXOTIC, .55f); case LEGENDARY -> LEGENDARY; case RARE -> RARE; case UNCOMMON -> UNCOMMON;
+            case COMMON -> 0x6E6A66;
+        };
+    }
+
+    static int shade(GearItems.Weapon w) {
+        return switch (w.rarity()) {
+            case EXOTIC -> dim(EXOTIC, .42f); case LEGENDARY -> 0x452856; default -> dim(tile(w), .82f);
+        };
     }
 
     static int rarity(String r) {

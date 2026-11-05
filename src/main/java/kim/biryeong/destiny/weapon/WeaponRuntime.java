@@ -644,6 +644,7 @@ public final class WeaponRuntime {
         plan=WeaponImpulseAmplifier.plan(player,entry,plan);
         plan=WeaponSympatheticArsenal.plan(player,entry,plan);
         plan=PerkBatchA.plan(player,entry,plan); // W320 batch A
+        plan=WeaponComponents.plan(player,entry,plan); // W326 components
         if (!s.cycle.startReload(now(player), p, ammo, plan, ReloadCreditProfile.ammoTicks(entry,plan))) return false;
         if (!shotCaused) GcbWeaponInput.cancelFire(player);
         s.clownReload=WeaponClownCartridge.acceptedReload(player);
@@ -1666,7 +1667,7 @@ public final class WeaponRuntime {
                     && s.stack == player.getMainHandItem() && s.cycle.reloading();
             int phase = reloading ? s.cycle.reloadPhaseTicks() : profile.reloadTicks();
             int remaining = reloading ? (int)Math.min(phase,s.cycle.reloadRemaining(now(player))) : 0;
-            return new WeaponAmmoState(entry.family(), ammo.rounds(), ammo.reserve(), Math.max(profile.magazine(),ammo.rounds()),
+            return new WeaponAmmoState(entry.family(), ammo.rounds(), ammo.reserve(), Math.max(WeaponComponents.profile(player.getMainHandItem(),profile).magazine(),ammo.rounds()),
                     remaining, phase, false, profile.infiniteReserve());
         });
     }

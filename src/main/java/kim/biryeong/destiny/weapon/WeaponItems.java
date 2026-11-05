@@ -46,6 +46,7 @@ public final class WeaponItems {
     public static WeaponMagazine magazine(ItemStack stack, WeaponProfile p) {
         var data = stack.get(DataComponents.CUSTOM_DATA);
         // Missing/corrupt ammunition never refills a saved item.
+        p = WeaponComponents.profile(stack, p); // W326 magazine components
         if (data == null) return new WeaponMagazine(p, 0, 0);
         var tag = data.copyTag();
         // Pure projection only. HUD/get/inspect must not migrate or save the real item.

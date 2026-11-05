@@ -169,9 +169,10 @@ public final class Loot {
                 p.sendOverlayMessage(Component.literal(error));
                 return false;
             }
-            p.setAttached(PROFILE, profile(p).plus("legendary"));
-            p.sendSystemMessage(Component.literal(error + " 무기를 전설 엔그램으로 보관했습니다."));
-            announce(p, LootRoller.Reward.engram("legendary"), source);
+            String tier = rarity(r).id();
+            p.setAttached(PROFILE, profile(p).plus(tier));
+            p.sendSystemMessage(Component.literal(error + " 무기를 " + engramName(tier) + "으로 보관했습니다."));
+            announce(p, LootRoller.Reward.engram(tier), source);
             return true;
         }
         if (profile(p).engrams().size() >= LootProfile.ENGRAM_CAP) {
@@ -212,8 +213,7 @@ public final class Loot {
         for (var spec : STARTER) {
             var entry = WeaponCatalog.find(spec[0]);
             if (entry.isEmpty()) continue;
-            var stack = LootRoller.create(entry.get(), p.getRandom());
-            if (spec[1] != null) WeaponSkins.apply(stack, spec[1]);
+            var stack = LootRoller.create(entry.get(), spec[1], p.getRandom());
             var slot = WeaponLoadout.slot(p, stack, entry.get());
             var inv = p.getInventory();
             if (inv.getItem(slot.hotbar()).isEmpty()) { inv.setItem(slot.hotbar(), stack); p.setAttached(WeaponLoadout.ENABLED, true); }
@@ -292,27 +292,36 @@ public final class Loot {
 
     // ---------------------------------------------------------------- presentation
 
-    static boolean exotic(LootRoller.Reward r) {
-        if (r.engram() != null) return r.engram().equals("exotic");
-        return WeaponItems.entry(r.weapon()).map(e -> WeaponCharacteristics.of(e).exotic()).orElse(false);
+    static boolean exotic(LootRoller.Reward r) { return rarity(r) == WeaponRarity.EXOTIC; }
+    /** W325 tier of a reward: an engram's tier, or the weapon's (skin tier first). */
+    public static WeaponRarity rarity(LootRoller.Reward r) {
+        if (r.engram() != null) return WeaponRarity.parse(r.engram()).orElse(WeaponRarity.LEGENDARY);
+        return WeaponRarity.of(r.weapon());
     }
-    static int color(LootRoller.Reward r) { return exotic(r) ? EXOTIC : 0xB57BE0; }
+    static int color(LootRoller.Reward r) { return rarity(r).color(); }
     static String engramIcon(String tier) { return GearIcons.engram(tier).orElse("bungie/engram_legendary"); }
     public static String engramName(String tier) {
-        return switch (tier) { case "exotic" -> "경이 엔그램"; case "rare" -> "희귀 엔그램"; case "prime" -> "최상급 엔그램"; default -> "전설 엔그램"; };
+        return switch (tier) { case "exotic" -> "경이 엔그램"; case "rare" -> "희귀 엔그램"; case "uncommon" -> "고급 엔그램";
+            case "common" -> "일반 엔그램"; case "prime" -> "최상급 엔그램"; default -> "전설 엔그램"; };
     }
 
     private static void announce(ServerPlayer p, LootRoller.Reward r, String source) {
         if (r.engram() != null) {
-            LootToast.show(p, engramIcon(r.engram()), null, engramName(r.engram()), source, exotic(r) ? EXOTIC : LEGENDARY);
+            LootToast.show(p, engramIcon(r.engram()), null, engramName(r.engram()), source, band(rarity(r)));
             return;
         }
         var entry = WeaponItems.entry(r.weapon());
         if (entry.isEmpty()) return;
         var skin = WeaponSkins.of(r.weapon());
-        String name = skin.map(WeaponSkins.Skin::name).orElse(WeaponScreenText.weapon(entry.get().id(), entry.get().name()));
-        String icon = skin.isPresent() ? null : GearIcons.weapon(entry.get().id()).orElse(null);
-        LootToast.show(p, icon, entry.get().id(), name, source + "  ·  " + WeaponScreenText.family(entry.get().family()),
-                exotic(r) ? EXOTIC : LEGENDARY);
+        String name = skin.map(WeaponSkins.Skin::display).orElse(WeaponScreenText.weapon(entry.get().id(), entry.get().name()));
+        String icon = GearIcons.weapon(skin.map(WeaponSkins.Skin::id).orElse(entry.get().id())).orElse(null);
+        var tier = rarity(r);
+        LootToast.show(p, icon, entry.get().id(), name, source + "  ·  " + tier.label() + " " + WeaponScreenText.family(entry.get().family()),
+                band(tier));
+    }
+
+    /** Toast/tile band colour; legendary/exotic keep their established Destiny values. */
+    static int band(WeaponRarity tier) {
+        return switch (tier) { case EXOTIC -> EXOTIC; case LEGENDARY -> LEGENDARY; default -> tier.band(); };
     }
 }

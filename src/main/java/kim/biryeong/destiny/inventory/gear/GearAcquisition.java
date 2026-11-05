@@ -25,11 +25,33 @@ public final class GearAcquisition {
                         .then(Commands.literal("give").then(Commands.argument("player", EntityArgument.player())
                                 .then(Commands.argument("id", StringArgumentType.word()).executes(c -> {
                                     var p = EntityArgument.getPlayer(c, "player");
-                                    var entry = WeaponCatalog.find(StringArgumentType.getString(c, "id"));
+                                    String id = StringArgumentType.getString(c, "id");
+                                    var entry = WeaponCatalog.find(id);
+                                    var skin = WeaponSkins.find(id);   // W325/W302 skin ids give the skinned weapon
+                                    if (entry.isEmpty() && skin.isPresent()) entry = WeaponCatalog.find(skin.get().base());
                                     if (entry.isEmpty()) { c.getSource().sendFailure(Component.literal("무기 id를 찾을 수 없습니다.")); return 0; }
-                                    String error = give(p, entry.get(), p.getRandom());
+                                    String error = store(p, kim.biryeong.destiny.loot.LootRoller.create(entry.get(),
+                                            skin.map(WeaponSkins.Skin::id).orElse(null), p.getRandom()));
                                     if (error != null) { c.getSource().sendFailure(Component.literal(error)); return 0; }
-                                    c.getSource().sendSuccess(() -> Component.literal("지급: " + entry.get().id()), false);
+                                    c.getSource().sendSuccess(() -> Component.literal("지급: " + id), false);
+                                    return 1;
+                                }))))
+                        .then(Commands.literal("equip").then(Commands.argument("player", EntityArgument.player())
+                                .then(Commands.argument("id", StringArgumentType.word()).executes(c -> {
+                                    // QA: replace the loadout slot's weapon with a fresh one (catalog or skin id) and hold it.
+                                    var p = EntityArgument.getPlayer(c, "player");
+                                    String id = StringArgumentType.getString(c, "id");
+                                    var skin = WeaponSkins.find(id);
+                                    var entry = skin.isPresent() ? WeaponCatalog.find(skin.get().base()) : WeaponCatalog.find(id);
+                                    if (entry.isEmpty()) { c.getSource().sendFailure(Component.literal("무기 id를 찾을 수 없습니다.")); return 0; }
+                                    var stack = kim.biryeong.destiny.loot.LootRoller.create(entry.get(), skin.map(WeaponSkins.Skin::id).orElse(null), p.getRandom());
+                                    var slot = WeaponLoadout.slot(p, stack, entry.get());
+                                    p.getInventory().setItem(slot.hotbar(), stack);
+                                    p.getInventory().setChanged();
+                                    p.setAttached(WeaponLoadout.ENABLED, true);
+                                    WeaponLoadout.select(p, slot);
+                                    WeaponHandling.update(p);
+                                    c.getSource().sendSuccess(() -> Component.literal("장착: " + id), false);
                                     return 1;
                                 }))))
                         .then(Commands.literal("status").then(Commands.argument("player", EntityArgument.player()).executes(c -> {

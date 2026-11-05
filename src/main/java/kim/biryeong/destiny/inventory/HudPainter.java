@@ -9,6 +9,7 @@ import kim.biryeong.minigamelib.displayhud.ItemDisplayHud;
 import kim.biryeong.minigamelib.displayhud.TextDisplayHud;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FontDescription;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Display;
@@ -31,6 +32,22 @@ import java.util.Set;
  */
 public final class HudPainter {
     public static final float MIN_TEXT_PIXELS = 18f;
+    /** Noto Sans KR (OFL) bitmap font already shipped for the objective HUD; no new font file. */
+    private static final FontDescription.Resource FONT =
+            new FontDescription.Resource(Identifier.fromNamespaceAndPath("destiny", "rg_objective_medium"));
+    /** Display scale per reference pixel: Noto Hangul advance 19 units vs vanilla 9 at scale 5 (≈ same size). */
+    private static final float FONT_SCALE = 2.2f;
+    private static final java.util.Map<Integer, Integer> ADVANCES = loadAdvances();
+    private static java.util.Map<Integer, Integer> loadAdvances() {
+        try (var in = HudPainter.class.getResourceAsStream("/assets/destiny/hud/rg_objective_metrics.json")) {
+            if (in == null) return java.util.Map.of();
+            var json = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8))
+                    .getAsJsonObject().getAsJsonObject("medium");
+            var out = new java.util.HashMap<Integer, Integer>();
+            for (var e : json.entrySet()) out.put(e.getKey().codePointAt(0), e.getValue().getAsInt());
+            return java.util.Map.copyOf(out);
+        } catch (java.io.IOException e) { return java.util.Map.of(); }
+    }
     private static final String STATE = "hud_painter_state";
     private static final Identifier SOLID = Identifier.parse("destiny:gui/hud/solid");
 
@@ -74,8 +91,18 @@ public final class HudPainter {
     /** {@code spin} degrees about the vertical axis. Only for models drawn well in front of every other layer:
      * GUI models are flattened to one unit of depth, so a rotated card would cut through nearby layers. */
     public void weapon(String key, String weaponId, float x, float y, float size, float depth, float spin) {
-        if (WeaponCatalog.find(weaponId).isEmpty()) return;
+        if (WeaponCatalog.find(weaponId).isEmpty() && kim.biryeong.destiny.weapon.WeaponSkins.find(weaponId).isEmpty()) return;
         paint(key, new Box(x, y, size, size), depth, 0xFFFFFF, weaponId, null, false, spin);
+    }
+
+    /** A catalog weapon, or a skin id (W302/W325) drawn over its base so the GUI model is the skin's. */
+    private static ItemStack weaponStack(String id) {
+        var entry = WeaponCatalog.find(id);
+        if (entry.isPresent()) return WeaponModels.create(entry.get());
+        var skin = kim.biryeong.destiny.weapon.WeaponSkins.find(id).orElseThrow();
+        var stack = WeaponModels.create(WeaponCatalog.find(skin.base()).orElseThrow());
+        kim.biryeong.destiny.weapon.WeaponSkins.apply(stack, id);
+        return stack;
     }
 
     public void icon(String key, String icon, float x, float y, float size, float depth, int color) {
@@ -123,7 +150,7 @@ public final class HudPainter {
         if (!(old != null && old.getExtraData(STATE) instanceof Tile last && last.color() == color
                 && Objects.equals(last.weapon(), weapon) && Objects.equals(last.model(), model))) {
             ItemStack stack;
-            if (weapon != null) stack = WeaponModels.create(WeaponCatalog.find(weapon).orElseThrow());
+            if (weapon != null) stack = weaponStack(weapon);
             else {
                 stack = new ItemStack(Items.PAPER);
                 stack.set(DataComponents.ITEM_MODEL, model == null ? SOLID : model);
@@ -197,16 +224,16 @@ public final class HudPainter {
         if (old != null && !(old instanceof TextDisplayHud)) { old.remove(); old = null; }
         TextDisplayHud hud = old instanceof TextDisplayHud label ? label : new TextDisplayHud();
         hud.updateWhenDataChanged(false);
-        hud.setLineWidth(512);
+        hud.setLineWidth(4096); // single line: wider Noto glyphs must not wrap
         hud.setTextAlignment(Display.TextDisplay.Align.CENTER);
-        Component component = Component.literal(text).withStyle(style -> style.withColor(color));
+        Component component = Component.literal(text).withStyle(style -> style.withColor(color).withFont(FONT));
         hud.setText(component);
         hud.getTextDisplay().setText(Component.literal("\n").append(component));
         hud.setBackgroundColor(0);
         hud.setShadowToggle(false);
         boolean fade = old != null && old.getExtraData(STATE) instanceof Label last && last.opacity() != opacity;
         hud.setOpacity(Math.max(4, opacity), fade ? 3 : 0);
-        hud.setScale(pixels * 5, pixels * 5, 1);
+        hud.setScale(pixels * FONT_SCALE, pixels * FONT_SCALE, 1);
         hud.setAlignment(DisplayHud.HudAlignment.CENTER);
         hud.setLocation(x, y + pixels * 1.25f, 130);
         hud.setAboveHand(true);
@@ -251,15 +278,20 @@ public final class HudPainter {
     public static float width(String text, float pixels) {
         float units = 0;
         for (int point : text.codePoints().toArray()) units += advance(point);
-        return units * pixels * 0.125f;
+        return units * pixels * UNIT;
     }
-
-    static int advance(int point) { return point == ' ' ? 4 : point < 128 || point == '…' ? 6 : 9; }
+    /** Reference pixels per font unit (display units = scale × font units / 40, as with the vanilla font at scale 5). */
+    private static final float UNIT = FONT_SCALE / 40f;
+    static int advance(int point) {
+        Integer a = ADVANCES.get(point);
+        if (a != null) return a;
+        return ADVANCES.isEmpty() ? (point == ' ' ? 4 : point < 128 || point == '…' ? 6 : 9) * 19 / 9 : ADVANCES.getOrDefault((int) '?', 12);
+    }
 
     public static String ellipsized(String value, float pixels, float maxWidth) {
         String clean = value == null ? "" : value.replaceAll("[\\p{Cntrl}]|§", " ").strip();
         if (width(clean, pixels) <= maxWidth) return clean;
-        float budget = maxWidth / (pixels * 0.125f) - advance('…');
+        float budget = maxWidth / (pixels * UNIT) - advance('…');
         StringBuilder out = new StringBuilder();
         for (int point : clean.codePoints().toArray()) {
             if (advance(point) > budget) break;
@@ -280,7 +312,7 @@ public final class HudPainter {
                 if (!line.isEmpty()) { lines.add(line.toString()); line.setLength(0); }
                 String rest = word;
                 while (width(rest, pixels) > maxWidth) {
-                    String head = ellipsized(rest, pixels, maxWidth + advance('…') * pixels * 0.125f);
+                    String head = ellipsized(rest, pixels, maxWidth + advance('…') * pixels * UNIT);
                     head = head.endsWith("…") ? head.substring(0, head.length() - 1) : head;
                     if (head.isEmpty()) break;
                     lines.add(head); rest = rest.substring(head.length());

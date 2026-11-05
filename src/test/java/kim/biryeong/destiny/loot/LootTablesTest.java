@@ -36,9 +36,34 @@ class LootTablesTest {
         assertTrue(heavy.stream().allMatch(e -> WeaponCharacteristics.of(e).slot().name().equals("POWER")));
     }
 
-    @Test void enemyDropChancesStayLow() {
-        assertTrue(LootTables.table("enemy_minor").orElseThrow().chance() <= .05);
-        assertTrue(LootTables.table("enemy_major").orElseThrow().chance() <= .2);
+    /** W325 loot-shooter pacing: frequent low-tier drops, legendaries stay a small share of trash-mob loot. */
+    @Test void enemyDropPacing() {
+        var minor = LootTables.table("enemy_minor").orElseThrow();
+        assertTrue(minor.chance() <= .2);
+        assertTrue(LootTables.table("enemy_major").orElseThrow().chance() <= .5);
+        int total = 0, legendaryOrBetter = 0;
+        for (var e : minor.entries()) {
+            total += e.weight();
+            boolean low = e.weapon() != null && e.weapon().rarity() != null
+                    && e.weapon().rarity().stream().allMatch(r -> List.of("common", "uncommon", "rare").contains(r));
+            if (!low) legendaryOrBetter += e.weight();
+        }
+        assertTrue(legendaryOrBetter * 10 <= total, "legendary share of minor drops");
+    }
+
+    @Test void tieredSkinsAreDroppableAndRollFewerTraits() {
+        var rare = LootRoller.candidates(new LootTables.WeaponFilter(null, null, null, null, null, null, List.of("rare")));
+        assertFalse(rare.isEmpty());
+        for (var c : rare) {
+            assertNotNull(c.skin());
+            assertEquals(kim.biryeong.destiny.weapon.WeaponRarity.RARE, c.rarity());
+        }
+        // Without a rarity filter the pool stays the legendary/exotic catalog.
+        assertTrue(LootRoller.candidates(new LootTables.WeaponFilter(false, null, null, null, null, null)).stream().allMatch(c -> c.skin() == null));
+        assertEquals(0, kim.biryeong.destiny.weapon.WeaponRarity.COMMON.traitColumns());
+        assertEquals(0, kim.biryeong.destiny.weapon.WeaponRarity.UNCOMMON.traitColumns()); // W326: green = barrel + magazine only
+        assertEquals(1, kim.biryeong.destiny.weapon.WeaponRarity.RARE.traitColumns());
+        for (String t : List.of("common", "uncommon", "rare")) assertTrue(LootTables.engramTable(t).isPresent(), t);
     }
 
     @Test void profileCodecRoundTrips() {

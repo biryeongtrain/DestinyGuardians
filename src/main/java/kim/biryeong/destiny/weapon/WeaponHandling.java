@@ -32,6 +32,7 @@ public final class WeaponHandling {
                 .map(profile -> WeaponQuickdraw.handlingTicks(p,stack,ready,WeaponFirmlyPlanted.handlingTicks(p,stack,ready,WeaponElementalCapacitor.handlingTicks(p,stack,ready,WeaponSurplus.handlingTicks(p,stack,ready,WeaponThreatDetector.handlingTicks(p,stack,ready,WeaponStatsForAll.handlingTicks(p,stack,ready,WeaponFrenzy.handlingTicks(p,stack,ready,WeaponAdrenalineJunkie.handlingTicks(p,stack,ready,WeaponPerpetualMotion.handlingTicks(p,stack,ready,
                         ready ? profile.readyTicks() : profile.stowTicks())))))))))).orElse(0);
         ticks = PerkBatchA.handlingTicks(p,stack,ready,ticks); // W320 batch A
+        ticks = WeaponComponents.handlingTicks(stack,ready,ticks); // W326 components
         return WeaponSlickdraw.handlingTicks(p,stack,ready,WeaponSteadyHands.handlingTicks(p,stack,ready,WeaponRecoveryHandling.handlingTicks(p,stack,ready,WeaponBackupPlan.handlingTicks(p,stack,ready,WeaponWellRounded.handlingTicks(p,stack,ready,WeaponPugilist.handlingTicks(p,stack,ready,WeaponEnsemble.handlingTicks(p,stack,ready,ticks)))))));
     }
     /** Observe inventory replacement/commands, including swaps to non-weapons, before inputs or ticks. */

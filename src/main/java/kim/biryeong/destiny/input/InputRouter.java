@@ -70,6 +70,10 @@ public final class InputRouter {
         if (kim.biryeong.destiny.inventory.WeaponScreen.active(player)) {
             // This hook runs before the screen's own action mixin and cancels it: route F (detail view) here.
             if (action == ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND) kim.biryeong.destiny.inventory.WeaponScreen.swapKey(player);
+            if (action == ServerboundPlayerActionPacket.Action.DROP_ITEM || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS) {
+                kim.biryeong.destiny.input.CancelledDropSync.restore(player, action);
+                kim.biryeong.destiny.inventory.gear.GearScreen.dismantle(player);   // W325: Q dismantles in the gear screen
+            }
             return true;
         }
         if ((action == ServerboundPlayerActionPacket.Action.DROP_ITEM

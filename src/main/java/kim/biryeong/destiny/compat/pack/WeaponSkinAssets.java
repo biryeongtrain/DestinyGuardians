@@ -45,14 +45,23 @@ public final class WeaponSkinAssets {
                 parts = JsonParser.parseString(utf8(in.readAllBytes())).getAsJsonObject();
             } catch (java.io.IOException ex) { throw new IllegalStateException(ex); }
             var out = new HashMap<String, JsonObject>();
+            var lazy = new java.util.LinkedHashMap<String, PackResource>();
             var framing = new HashMap<String, String>();
             for (var e : files.entrySet()) {
                 String path = e.getKey();
                 if (!path.startsWith("assets/destiny/") || !path.endsWith(".json")) continue;
-                if (path.startsWith("assets/destiny/models/weapon_surface_w123/")) continue;
+                // W325: W123 surfaces are mirrored too (rocket/heavy sight leaves use them as parents); their elements
+                // are replaced by the skin geometry like any other assembled-gun leaf.
                 boolean framed = path.startsWith(FRAMING);
                 String renamed = WeaponSkins.rename(skin, path);
                 if (!framed && renamed.equals(path)) continue;
+                if (!framed && path.startsWith("assets/destiny/items/") && !files.containsKey(renamed)) {
+                    // W325: item routes are 10-60 MB each and ~60 skins share a few bases. Mirror them as a lazy textual
+                    // rename of the base route (the same edit rewrite() makes: only "destiny:" ids change) so the heap
+                    // never holds a parsed tree or a second full copy per skin.
+                    lazy.put(renamed, new Renamed(e.getValue(), skin, framing));
+                    continue;
+                }
                 String text = e.getValue().asString();
                 if (framed && !text.contains(skin.base())) continue;
                 if (framed) renamed = path.substring(0, path.length() - 5) + "_" + skin.id() + ".json";
@@ -68,8 +77,37 @@ public final class WeaponSkinAssets {
                 if (json.has("elements")) json = geometry(json, e.getKey(), skin, parts, files);
                 result.put(e.getKey(), PackResource.fromString(json.toString()));
             }
+            result.putAll(lazy);
         }
         return result;
+    }
+
+    private static final java.util.regex.Pattern ID = java.util.regex.Pattern.compile("\"(destiny:[^\"\\\\]*)\"");
+
+    /** Lazy renamed copy of a base item route; computed on read, never cached. */
+    private record Renamed(PackResource source, WeaponSkins.Skin skin, Map<String, String> framing) implements PackResource {
+        @Override public byte[] readAllBytes() {
+            var m = ID.matcher(source.asString());
+            var sb = new StringBuilder();
+            while (m.find()) {
+                String s = m.group(1);
+                String r = framing.getOrDefault(s, WeaponSkins.rename(skin, s));
+                m.appendReplacement(sb, java.util.regex.Matcher.quoteReplacement("\"" + r + "\""));
+            }
+            m.appendTail(sb);
+            return sb.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        }
+        @Override public java.io.InputStream getStream() { return new java.io.ByteArrayInputStream(readAllBytes()); }
+    }
+
+    private static final java.util.List<String> MOVING = java.util.List.of("magazine", "moving", "cylinder", "barrel", "cradle", "lever");
+    private static final java.util.Set<String> MOVING_PARTS = java.util.Set.of("magazine", "barrel", "cradle", "lever");
+
+    /** Leaf role: the suffix after the skin id and an optional frame number, without the _native/_twohand grip. */
+    static String role(String leafName, String base) {
+        var m = java.util.regex.Pattern.compile("(?:^|_)(?:\\d+_)?(magazine|moving|cylinder|barrel|cradle|lever|round|body)(?:_native|_twohand)?$")
+                .matcher(leafName);
+        return m.find() ? m.group(1) : "whole";
     }
 
     private static String id(String path) {
@@ -119,17 +157,30 @@ public final class WeaponSkinAssets {
                 t.addProperty(key, t.get(key).getAsString().replace(skin.id(), skin.base()));
             return leaf;
         }
-        // Reload banks split the gun into a body and one moving magazine leaf ("_magazine" or "_moving");
-        // any other leaf is the whole assembled gun.
-        boolean magazineLeaf = name.endsWith("_magazine") || name.endsWith("_moving");
-        String baseDir = dir.replace(skin.id(), skin.base());
-        boolean split = files.containsKey(baseDir + skin.base() + "_magazine.json")
-                || files.containsKey(baseDir + skin.base() + "_moving.json");
-        for (var key : p.keySet()) {
-            boolean isMag = key.equals("magazine");
-            if (magazineLeaf ? !isMag : (split && name.endsWith("_body") && isMag)) continue;
-            for (var el : p.getAsJsonArray(key)) elements.add(el.deepCopy());
+        // Reload banks split the gun into a body and moving leaves. W325 roles by leaf suffix:
+        //   _magazine/_moving/_cylinder -> parts.magazine; _barrel -> parts.barrel or parts.magazine (salvager-style
+        //   break-open GL); _cradle/_lever -> parts.<role> or nothing (pyroclastic loader pieces);
+        //   _round -> base round art (like _shell); _body -> every part except moving ones when the bank is split;
+        //   any other leaf is the whole assembled gun.
+        String role = role(name, skin.base());
+        if (role.equals("round")) {
+            var t = leaf.getAsJsonObject("textures");
+            if (t != null) for (var key : new ArrayList<>(t.keySet()))
+                t.addProperty(key, t.get(key).getAsString().replace(skin.id(), skin.base()));
+            return leaf;
         }
+        String baseDir = dir.replace(skin.id(), skin.base());
+        boolean split = false;
+        for (String r : MOVING) split |= files.containsKey(baseDir + skin.base() + "_" + r + ".json");
+        java.util.List<String> use = new java.util.ArrayList<>();
+        switch (role) {
+            case "magazine", "moving", "cylinder" -> use.add("magazine");
+            case "barrel" -> use.add(p.has("barrel") ? "barrel" : "magazine");
+            case "cradle", "lever" -> { if (p.has(role)) use.add(role); }
+            case "body" -> { for (var key : p.keySet()) if (!split || !MOVING_PARTS.contains(key)) use.add(key); }
+            default -> use.addAll(p.keySet());
+        }
+        for (var key : use) if (p.has(key)) for (var el : p.getAsJsonArray(key)) elements.add(el.deepCopy());
         // Keep overlay elements that do not paint with the weapon atlas (e.g. W151/W148 ADS aim tips).
         // "no_overlay": the skin paints its own reticle (W302 Khvostov hairline holo), so drop the W148 aim dot.
         boolean keepOverlay = !(parts.has("no_overlay") && parts.get("no_overlay").getAsBoolean());
@@ -150,10 +201,10 @@ public final class WeaponSkinAssets {
     private static JsonObject textures(JsonObject leaf, WeaponSkins.Skin skin, boolean hud) {
         var t = leaf.has("textures") ? leaf.getAsJsonObject("textures").deepCopy() : new JsonObject();
         if (hud) {
-            // Skin HUD silhouettes live outside the closed W112 set: textures/item/hud/w302/ammo_<skin>.png.
+            // Skin HUD silhouettes live outside the closed W112 set: skin.hud() (w302/ or w325/ ammo_<skin>.png).
             for (var key : new ArrayList<>(t.keySet()))
                 if (t.get(key).getAsString().equals("destiny:item/hud/ammo_weapon_w112_" + skin.id()))
-                    t.addProperty(key, "destiny:item/hud/w302/ammo_" + skin.id());
+                    t.addProperty(key, skin.hud());
             return t;
         }
         t.addProperty("0", skin.texture());
