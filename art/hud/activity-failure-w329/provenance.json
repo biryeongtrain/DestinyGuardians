@@ -1,8 +1,8 @@
 {
   "version": "W329",
-  "visualStatus": "AUTHORED_APPROXIMATION_NOT_ORIGINAL_RIP",
+  "visualStatus": "USER_SUPPLIED_ORIGINAL_CROP_BLACK_ALPHA_WITH_SYNCHRONIZED_CONTENT_FADE",
   "visualRecipe": "scripts/art/build_activity_failure_w329.py",
-  "visualLimits": "Simple authored skull/triangle/diamond/geometric backdrop; does not reproduce original smoky skull animation, original runtime timing, exact typeface/layout or every original screen detail. 1920x1080 server DisplayHud layout requires native PNG acceptance.",
+  "visualLimits": "Original skull+red geometry is retained; neutral dark paper is explicitly decomposed into alpha with red chroma preserved. No generated replacement or silhouette redraw. Text/table are live authored DisplayHud. No original full UI runtime/animation claim.",
   "references": [
     {
       "page": "https://www.behance.net/gallery/60073341/Destiny-2-UI-Visual-Design",
@@ -180,9 +180,129 @@
       "bytes": 173
     },
     {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner.json",
+      "sha256": "d017f4881432d5f3ca8b99819defb02fafef060eec2d204baf3439da790afd8f",
+      "bytes": 180
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner_f01.json",
+      "sha256": "896390d3a87a8b80d9e87b9fc38e7ef0fa258b89451a874e25fdf8af93bf6a02",
+      "bytes": 184
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner_f02.json",
+      "sha256": "68c64a582d30b10d5ae192860a38509eb7f0f4b679a30e2cd0cfff0462a098ee",
+      "bytes": 184
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner_f03.json",
+      "sha256": "b5beff7999da22b3d8aa7bfe09e904ace264129cf7398421179d34457f6a6f13",
+      "bytes": 184
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner_f04.json",
+      "sha256": "336a749c117326c5194503ffea82ad7eb54eb946e826a97ccf6c732c72b27155",
+      "bytes": 184
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner_f05.json",
+      "sha256": "40544ca059259e568ba89da67da2784951fd792206b81e5f635094a3174ea782",
+      "bytes": 184
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner_f06.json",
+      "sha256": "d246f1d31bcf776b3240562240a061ace005f1c3abd9ee90d09ba09a05b384ee",
+      "bytes": 184
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/failure_banner_f07.json",
+      "sha256": "c723f7c769da166dbdc5910b833b41dbca8fc15cfa9be4009dad87fa70535099",
+      "bytes": 184
+    },
+    {
       "path": "src/main/resources/assets/destiny_activity_failure/items/gui/restricted.json",
       "sha256": "542d67fa11495cdc35d3c3cb4896fd366dddf5da1275662b891e72fdab9380f4",
       "bytes": 176
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule.json",
+      "sha256": "f384a0c6d30df337140c4d2058393635bafea58dcf6de24380d9fb6337e2a782",
+      "bytes": 170
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule_f01.json",
+      "sha256": "087c3d4f2cf1b678ab25ce6d37c1eabd972b136ebe5a336b2a573a673cb4e0fb",
+      "bytes": 174
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule_f02.json",
+      "sha256": "8c71c4521f6fff2d1a4dbef1eb58712bd9ee1981ab040a56c2fe7f2c1a3f7bf5",
+      "bytes": 174
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule_f03.json",
+      "sha256": "11b5f849a769f25697e5aaac8429c4956c49e0bd5215ac305f2b676691588187",
+      "bytes": 174
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule_f04.json",
+      "sha256": "7f9920aff9957e61f0f81000008799a4f26e52ebdca09e40c44f920c72fa3317",
+      "bytes": 174
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule_f05.json",
+      "sha256": "2c9df068eb1cbdad1acc2a1d251dc77e5e8ae4d414a091351a4e97dd1b6d710a",
+      "bytes": 174
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule_f06.json",
+      "sha256": "d02c95f533c695fbe0f9a1cebdb53608706b659e5434086bb73ff1e0f15fdef4",
+      "bytes": 174
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/rule_f07.json",
+      "sha256": "fea4ef05162a9f36d6a6d4b8ae8c8a79bf88adcbc16f94362b836248685bc80d",
+      "bytes": 174
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row.json",
+      "sha256": "41a4d1d33d3e250703e377c95ea494c8d093eeaf3d5254f5ab74ec5c1ff7e325",
+      "bytes": 175
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row_f01.json",
+      "sha256": "51f4f7b28efa031285aa64125128f3a49402dbb2290478c5202e2dce515a2afe",
+      "bytes": 179
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row_f02.json",
+      "sha256": "93b7779f33564be6000b53b7669ec9c5bb2a7b9e4f17cb9eefbb561e95808a22",
+      "bytes": 179
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row_f03.json",
+      "sha256": "9ccf8eb8aab20cae96b9b1198fa3e9cb9639ab13a5fc18ed13e2da359e48993b",
+      "bytes": 179
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row_f04.json",
+      "sha256": "11ac1e11ba5506c338980ff6da52d81910cbf616c0366a5719ec22ca0af5bc78",
+      "bytes": 179
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row_f05.json",
+      "sha256": "79e854aa1cf656a66bb8d1a2dcbcaa1d7f99ba2c1d11c4f35ed2f8728619ad7c",
+      "bytes": 179
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row_f06.json",
+      "sha256": "3d33a4c734e7bf34c7c38a523c016fe3b7112227a597b0bb15e107bd10f87371",
+      "bytes": 179
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/items/gui/table_row_f07.json",
+      "sha256": "d5b1268fad7203ad578d6d035bbde0878601401bf79e4f4f994cd43c198914bb",
+      "bytes": 179
     },
     {
       "path": "src/main/resources/assets/destiny_activity_failure/items/gui/wipe.json",
@@ -240,9 +360,129 @@
       "bytes": 294
     },
     {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner.json",
+      "sha256": "b77cdb3e95b00bb6581765cb72b9676aa85cecb59024d0768d2d22a5c847b00e",
+      "bytes": 301
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner_f01.json",
+      "sha256": "f6338bcd44cd22ec70d1bd4760f8a04bf0fdf2d4afae37886c061b88738b0585",
+      "bytes": 305
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner_f02.json",
+      "sha256": "abe88c0e7c99038e354dd45cf38716bb44a382c1ceed8ce897a73ab98545962f",
+      "bytes": 305
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner_f03.json",
+      "sha256": "26362468c998e44d2d2e09cf687cc2e39c6a7654326152d369b9b22ac6416cb7",
+      "bytes": 305
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner_f04.json",
+      "sha256": "c4d5a8b32ec88734fb30d2c8a33be4ff9ec027d35b1a425b6590c64d3ff2e824",
+      "bytes": 305
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner_f05.json",
+      "sha256": "8815d0650ab1c72abc5f972667ac53994668999cdd9431bff4754a16b74cd0b4",
+      "bytes": 305
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner_f06.json",
+      "sha256": "fd36b6a1870ac86cf197a7c91b1be9400e6e63e759b7d7ecb3028ea1611c9364",
+      "bytes": 305
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/failure_banner_f07.json",
+      "sha256": "2c5bcfbdbd60f2ecd47b889b188182b139b5013298e77533c8aa40814111b99f",
+      "bytes": 305
+    },
+    {
       "path": "src/main/resources/assets/destiny_activity_failure/models/gui/restricted.json",
       "sha256": "e920ae625fc7c4247f6603b88b898ca9753b880b9e6944a9b7bc0bb8fda618a9",
       "bytes": 297
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule.json",
+      "sha256": "8c1df5e304e96fcf57607faec404c1a8ae9ecef0be4fd1ea3c34811ed48012ca",
+      "bytes": 291
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule_f01.json",
+      "sha256": "95568aa7b262ebd6b8e995a3f858b0525fa8b4e80fe97e23c4d9c3221ba21fbd",
+      "bytes": 295
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule_f02.json",
+      "sha256": "2a1cc9870d14775e61a56a49bc6dc78b7614ccffcff5149106927f641e31f99a",
+      "bytes": 295
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule_f03.json",
+      "sha256": "57c936cde49ce6db60ac6242059f19cf814e21d9fe3ec324a98ef6e18b13f7af",
+      "bytes": 295
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule_f04.json",
+      "sha256": "4b058c0f11cf0661453843e8350c7c10801df0cb2f77fa822817695b80877330",
+      "bytes": 295
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule_f05.json",
+      "sha256": "314bd96fe49ee347b2500509fb6dba5be3d9ea2774b79671d7f0fd6a1ceab84d",
+      "bytes": 295
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule_f06.json",
+      "sha256": "4c71238dc8435d6f38900ba35e8e078660631c44ad449f0bca4d03b491be8e43",
+      "bytes": 295
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/rule_f07.json",
+      "sha256": "8eddead329d01cb2593bf452628b98b734044feb89d151c8841475523b44a97a",
+      "bytes": 295
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row.json",
+      "sha256": "8eba7fe14034e87393a30aca15316ee722086e1faeded967bac3861c939a0a6e",
+      "bytes": 296
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row_f01.json",
+      "sha256": "09142978d5740a43b8beb092fc6dee9ed692ec71157c401800e20d40114a4aff",
+      "bytes": 300
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row_f02.json",
+      "sha256": "1111730c6bee43be6d63c1d7099fd7ec0de688f77b6ff4dcb0f7c9070ec2e02a",
+      "bytes": 300
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row_f03.json",
+      "sha256": "4f449a964554bb512e0d496a6e0374c92213e6c14f1ea50c2d0229199cc29f9e",
+      "bytes": 300
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row_f04.json",
+      "sha256": "ebab5f80a682ec13cb68d2329caabc32e9859bfcfe2ac6d49570d807b17bfd89",
+      "bytes": 300
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row_f05.json",
+      "sha256": "0c759e9b29b2f0775c9b33535e89f9e5024ef4f0b2881c4c4f8abcc56cc79851",
+      "bytes": 300
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row_f06.json",
+      "sha256": "97d5bc56155f33b8f4d2ceda2ba28100bb0fcc3fc4cf17582f5290acb22b6d97",
+      "bytes": 300
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/models/gui/table_row_f07.json",
+      "sha256": "992bf017cfa93a97cea611ef87f0480d512fea8394be327fdb611dc9f0586a83",
+      "bytes": 300
     },
     {
       "path": "src/main/resources/assets/destiny_activity_failure/models/gui/wipe.json",
@@ -315,9 +555,129 @@
       "bytes": 73
     },
     {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner.png",
+      "sha256": "4c6b232cca4e86745268697ed415c7c7654ebbaff6eff5e2aceeafe78494465e",
+      "bytes": 307259
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner_f01.png",
+      "sha256": "1db4a08dace694c6a2c52a5fd506c763e49623490bb7cd88233b2c00f873866f",
+      "bytes": 254783
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner_f02.png",
+      "sha256": "54e5ee4fe69a679123441730feca86379473be05670c1a8b0faa7031cd1deb6c",
+      "bytes": 273350
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner_f03.png",
+      "sha256": "02dfefbc8d0a380b79cf360c946e2a88092565b26ad415d42d721aaec79c6867",
+      "bytes": 285708
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner_f04.png",
+      "sha256": "7d9041b5a1e4e35451a3aa901e332f8e01bef8046774d1c1ff6098efd5fa2f94",
+      "bytes": 290752
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner_f05.png",
+      "sha256": "918bd07b5f107b7c095dfd5817cfd7c51080c2da105a272f55f2cb24c0b5249d",
+      "bytes": 296124
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner_f06.png",
+      "sha256": "9e3b0c7efad2dc14a35bf1b35cbdeadf451cd0d3f85b5a088110a9e1c98b1546",
+      "bytes": 300287
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner_f07.png",
+      "sha256": "148a2ff7d6fb0165fc7a53f8218371ea0be0af6f897dce65bf245aca9e760428",
+      "bytes": 304896
+    },
+    {
       "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/restricted.png",
       "sha256": "543d87640a1d619aa79aa7bd9f3d306eae7524f3cf68bd7666cd78d1a3ae8f0e",
       "bytes": 1578
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule.png",
+      "sha256": "60ffd2c283635d9875ee649d4dd294fb97af2443ff05508d968c858b011dbea0",
+      "bytes": 71
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule_f01.png",
+      "sha256": "8ad2b964f6f57a284fc019cc7504ad3f785015301bd0908ba562acd2d479cad3",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule_f02.png",
+      "sha256": "1d71b55c7ab805a9e20bc69d0ced8f57b3db614e0c5f511d5b746baa042e25a6",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule_f03.png",
+      "sha256": "62cc57a61c3e9232390ef1268e717c231238f8d922ba88c263ea957e73249b67",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule_f04.png",
+      "sha256": "ca8fbae98e18eb605c66a78b3b86f0614d1963efd0ad20bd5401a2628c90e2e7",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule_f05.png",
+      "sha256": "89c0d230073273a569326b8e4efe0531c7938613524206f1a28dbdefa4f079d2",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule_f06.png",
+      "sha256": "c71aa62899ac5e4cbd1e4a67f15be82969a69919a048e64338ce50be3d2545f0",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/rule_f07.png",
+      "sha256": "cc18fe15dcfc3334b368b08a412a66dd1741fc8d021c772565c608d6d85a9081",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row.png",
+      "sha256": "11fdf2bc8392bdfac93ac2acc0c7ca041e5dedf5dbdb369efc892c1541d8bff2",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row_f01.png",
+      "sha256": "8529621659e334d8c84186ce3f47507b01830b5d1e11e2b8bba7ac57e4387109",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row_f02.png",
+      "sha256": "6bdad8818bf538c039615954db212e11f85b3fad560bce2b9019dfca171d5451",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row_f03.png",
+      "sha256": "4b404b026f58113d73e659b4af22f42b58d046dcaf1004158b17e6a43979559a",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row_f04.png",
+      "sha256": "37508068c1adb87b7e9e2887e0e157eec51d4fb2eb305c30b2a620eb6df18386",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row_f05.png",
+      "sha256": "bf12a75f82c9c5b6f94a5a6b4fc56e859a464ec6e586f141ebce98e5e394a361",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row_f06.png",
+      "sha256": "5e529adedee05454ab78cc2eaa70cd7d5c3afbf6371a607d2d1535548f75ce74",
+      "bytes": 74
+    },
+    {
+      "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/table_row_f07.png",
+      "sha256": "84c086b1ebbeccc0de93d1c09430a1d4670534463e287bc396c80ffacb1dfff8",
+      "bytes": 74
     },
     {
       "path": "src/main/resources/assets/destiny_activity_failure/textures/gui/wipe.png",
@@ -327,7 +687,14 @@
   ],
   "atlasRegistration": {
     "path": "src/main/resources/assets/minecraft/atlases/items.json",
-    "sha256": "e917014bf9195d8fc322004fabbd41882e4ac3b38b96a9fbf9d87c69a2cb4f1e",
+    "sha256": "4d84c8b6c7e1d025a12ef45491798d7a6e378efcb57d6bd25ed716ff61f76896",
     "reason": "26.3 item/block atlas defaults do not scan custom textures/gui paths;12 exact single sources register the owned HUD sprites in minecraft:items without broad directory expansion."
+  },
+  "resultsRedesign": {
+    "referencePage": "https://www.behance.net/gallery/25091219/Destiny-Year-1-InterfaceVisual-Design/modules/165396681",
+    "userImageReference": "User-provided screenshot /var/folders/wg/4qbt7wnd2sg_v3848xjr63gc0000gn/T/codex-clipboard-d5e40186-5fbf-4aa4-8d13-5efcd038330e.png inspected read-only; no reference UI pixels/names/censor boxes distributed.",
+    "artMetadata": "art/hud/activity-failure-w329/user-source/manifest.json",
+    "layout": "Upper-left original banner black-to-alpha, no rectangular paper; title/table/self row synchronize9-step0..20tick fade. Implementation-definition footer removed; labels, attempt and restart countdown remain.",
+    "classification": "USER_SUPPLIED_ORIGINAL_CROP_BLACK_ALPHA_LIVE_STATS_TABLE"
   }
 }

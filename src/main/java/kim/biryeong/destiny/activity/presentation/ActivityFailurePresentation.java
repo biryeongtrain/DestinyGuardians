@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 
 /** Per-session presentation; adapters supply authoritative restriction/wipe facts and eligible viewers. */
 public final class ActivityFailurePresentation implements AutoCloseable {
+    private kim.biryeong.destiny.activity.ActivityAttemptStats.Snapshot results;
     public static final int ENTRY_TICKS = 100;
     private static final BitSet CHANNELS = new BitSet(64);
     private final UUID activity;
@@ -39,7 +40,11 @@ public final class ActivityFailurePresentation implements AutoCloseable {
     public ActivityFailureState state() { return state; }
     public void scope(long generation, String zone, boolean restricted) {
         boolean changed = state.generation() != generation || !state.zone().equals(zone) || state.restricted() != restricted;
-        if (state.scope(generation, zone, restricted) && changed) clearViewers();
+        if (state.scope(generation, zone, restricted) && changed) { results = null; clearViewers(); }
+    }
+    public void results(kim.biryeong.destiny.activity.ActivityAttemptStats.Snapshot snapshot) {
+        if (!closed && state.wiping() && snapshot != null && snapshot.token().activity().equals(activity)
+                && snapshot.token().generation() == state.generation()) results = snapshot;
     }
     public boolean beginWipe(long generation) { return !closed && state.beginWipe(generation); }
     public boolean tick(long generation, boolean audienceReady) { return !closed && state.tick(generation, audienceReady); }
@@ -62,7 +67,7 @@ public final class ActivityFailurePresentation implements AutoCloseable {
                 if (!Objects.equals(view.heardWipe, state.wipe())) { play(p, wipeSound); view.heardWipe = state.wipe(); }
             } else if (view.enteredAt < 0) { play(p, entrySound); view.enteredAt = now; }
             view.hud.render(!state.wiping() && now - view.enteredAt < ENTRY_TICKS, state.wiping(),
-                    state.wipeAge(), state.remainingSeconds(), wipeRemaining);
+                    state.wipeAge(), state.remainingSeconds(), wipeRemaining, results);
         }
     }
     /** Exact connection only: a delayed old disconnect cannot remove a replacement connection's HUD. */

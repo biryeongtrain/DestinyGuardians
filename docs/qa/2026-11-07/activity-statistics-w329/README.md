@@ -1,0 +1,17 @@
+# W329 original wipe artwork, actual attempt statistics and mission selection sound
+
+Final implementation uses the user-supplied Destiny screenshot crop (0,0,460,702), with black paper converted to alpha while preserving the skull and red line shapes. The original uploaded bytes and crop provenance remain in art/hud/activity-failure-w329/user-source. The generated illustration is retired and absent from the deployed pack. Final output intentionally differs from the opaque screenshot pixels because transparency is requested.
+
+Banner, title, all text, table rows and own-row gold marker share a20tick fade with9 bounded opacity stages. This is a short vanilla-compatible stepped fade, not a claim of continuous60fps alpha animation. Removed the implementation-description footer. Actual PNGs: fade-in.png (faint), statistics.png (world visible through original paper area), statistics-complete.png (full presentation).
+
+The common attempt accumulator records actual HP/shield loss (overkill excluded), kills, boss damage as a subset of total damage, and owned down-life deaths once. A session adapter filters exact connected participant, activity world and current owned actor generation. Wipe freezes an immutable table; retries and checkpoint advancement reset the attempt. Individual departures and stale tokens do not rewrite a frozen result. Shared damage observers detach only a failing listener and do not change damage/rewards.
+
+Native master validation on isolated DevilsQA: real scout-rifle fire killed a current owned actor with5HP; server and framebuffer both showed kills1, damage5, boss0, deaths1. Result remained frozen through presentation. Checkpoint reset advanced generation2→3 and attempt1→2 with all totals0. No injected statistics were used. Actual table currently validated with one connected player; multi-row/presence/state invariants are covered by targeted tests rather than a multi-client native run.
+
+Director - Select Mission.mp3 (user Drive128ZA85NsiwoARDbKAUXcp9LqoqaCL1hT) is separate from Mission Click and Countdown. Native card selection emitted its SoundEngine event once; back then same-card selection emitted no second event. Successful team retarget routes only to retained connected members. Source length3.004917s and full OGG3.005533s retained, manifest in art/audio/activity-transition-w329. Engine playback is evidence of client sound handling; human speaker listening acceptance was not separately established.
+
+Verification: base activity/melee regression50/50 passed (commit986224653). New stats/related targeted JUnit16/16 passed before same-generation scope hardening; scope5/5 and final atlas checks passed. New runtime stats/presentation6/6 passed after fixing the test enemy absorption cap precondition. Minor subsequent original-art/alpha/fade changes used targeted atlas checks and final native PNG validation; full combat gate was not repeated for those art-only changes. Historical full-suite19 failures remain documented in the base batch report and were not presented as a green full suite.
+
+Final pack188236924bytes,36 HUD sprites, item atlas remains16384x16384; no new namespace missing textures/stitch failure found. Exact artifact and pack hashes are adjacent JSON files. Normal Minecraft profiles were not changed. Existing W327 working-tree changes were present during QA and remain outside the scoped commits. Raw logs, failed attempts, input records and all40 fade PNGs remain at /tmp/w329-activity-combat/qa.
+
+QA handoff/cleanup status is recorded in final-handoff.json.

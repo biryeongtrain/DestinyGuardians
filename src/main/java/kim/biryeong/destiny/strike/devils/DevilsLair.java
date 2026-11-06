@@ -129,6 +129,10 @@ public final class DevilsLair {
                                 .executes(c -> qaFailure(c.getSource(), c.getSource().getPlayerOrException(), "status"))
                                 .then(Commands.argument("player", EntityArgument.player()).executes(c ->
                                         qaFailure(c.getSource(), EntityArgument.getPlayer(c, "player"), "status"))))
+                        .then(Commands.literal("qa_stats_target").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .executes(c -> qaFailure(c.getSource(), c.getSource().getPlayerOrException(), "stats_target"))
+                                .then(Commands.argument("player", EntityArgument.player()).executes(c ->
+                                        qaFailure(c.getSource(), EntityArgument.getPlayer(c, "player"), "stats_target"))))
                         .then(Commands.literal("leave").executes(c -> { leave(c.getSource().getPlayerOrException()); return 1; }))
                         .then(Commands.literal("status").executes(c -> {
                             var s = session(c.getSource().getPlayerOrException());
@@ -141,7 +145,9 @@ public final class DevilsLair {
         if (action.equals("status")) {
             source.sendSuccess(() -> Component.literal(s.failureStatus()), false); return 1;
         }
-        boolean success = action.equals("restriction") ? s.qaRestriction() : s.qaWipe();
+        boolean success = switch (action) {
+            case "restriction" -> s.qaRestriction(); case "stats_target" -> s.qaStatsTarget(player); default -> s.qaWipe();
+        };
         if (!success) { source.sendFailure(Component.literal("활동/팩 준비 또는 제한 구역 상태를 확인하세요.")); return 0; }
         source.sendSuccess(() -> Component.literal(s.failureStatus()), false); return 1;
     }

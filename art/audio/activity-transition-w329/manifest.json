@@ -1,0 +1,46 @@
+{
+  "source_url": "https://drive.google.com/file/d/128ZA85NsiwoARDbKAUXcp9LqoqaCL1hT/view?usp=sharing",
+  "drive_id": "128ZA85NsiwoARDbKAUXcp9LqoqaCL1hT",
+  "selected_by": "user",
+  "source_name": "Director - Select Mission.mp3",
+  "source_bytes": 79776,
+  "source_sha256": "e67df6e2ed40d2c2efda56b60b6e2e857c26c498399c61fb65342dd3667864a6",
+  "source_duration_seconds": 3.004917,
+  "source_channels": 2,
+  "source_sample_rate": 44100,
+  "semantic_mapping": "User described sound for changing activities; Drive Content-Disposition identifies Director - Select Mission. Used for confirmed changed activity-card selection and successful changed fireteam retarget, independent from Mission Click and Countdown. Filename and user-description inference; no original-game provenance or speaker-listening claim.",
+  "conversion": "Full original decoded to stereo Vorbis q6 at44100Hz, no cuts or speed changes. End padded to original MP3 container duration; codec padding retained. Native Vorbis encoder used because local FFmpeg has no libvorbis.",
+  "ffmpeg_args": [
+    "-map",
+    "0:a:0",
+    "-af",
+    "apad=whole_dur=3.004917",
+    "-c:a",
+    "vorbis",
+    "-strict",
+    "experimental",
+    "-q:a",
+    "6",
+    "-ar",
+    "44100"
+  ],
+  "output": "src/main/resources/assets/destiny_activity_transition/sounds/director_select_mission.ogg",
+  "output_sha256": "c2d259f0a628a0942d430dd92301039bada356ec99b967a4de98ce4660ac3935",
+  "output_info": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "sample_rate": "44100",
+        "channels": 2
+      }
+    ],
+    "format": {
+      "duration": "3.005533",
+      "size": "58345"
+    }
+  },
+  "event": "destiny_activity_transition:select_mission",
+  "category": "MASTER",
+  "dispatch_policy": "Owner-only after a changed card selection commits; connected fireteam recipients after a changed retarget commits. No hover, repaint, same-ID, cancel or failed-change dispatch."
+}

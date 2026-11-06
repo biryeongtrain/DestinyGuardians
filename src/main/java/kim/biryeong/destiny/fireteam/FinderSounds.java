@@ -22,6 +22,15 @@ final class FinderSounds {
     }
     static void play(ServerPlayer p, SoundEvent sound, float volume, float pitch) { play(p, Holder.direct(sound), volume, pitch); }
 
+    /** The user-selected Select Mission one-shot, committed changes only; separate from launch/countdown. */
+    static boolean activityChanged(ServerPlayer player, String previous, String next) {
+        if (next == null || Objects.equals(previous, next) || player.hasDisconnected() || player.isRemoved()
+                || !player.level().getServer().isSameThread()) return false;
+        var event = Identifier.fromNamespaceAndPath("destiny_activity_transition", "select_mission");
+        play(player, SoundEvent.createVariableRangeEvent(event), 1f, 1f);
+        return true;
+    }
+
     static Countdown countdown(ServerPlayer player, Object launch, int now) {
         if (!player.level().getServer().isSameThread()) throw new IllegalStateException("Countdown audio requires server thread");
         var slots = COUNTDOWNS.computeIfAbsent(player.connection, key -> new HashMap<>());

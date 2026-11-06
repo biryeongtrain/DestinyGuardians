@@ -183,7 +183,7 @@ public final class FinderScreen {
         hover(s);
         for (var t : s.targets) if (t.key().equals(s.focus)) {
             // Accepted play carries its own exact click+countdown recording from tick0.
-            if (!Set.of("play", "play_solo", "ft_play").contains(t.key())) sound(s, 1.4f);
+            if (!Set.of("play", "play_solo", "ft_play", "retarget").contains(t.key()) && !t.key().startsWith("card_")) sound(s, 1.4f);
             t.action().accept(s);
             if (current(p) == s) render(s);
             return true;
@@ -328,8 +328,16 @@ public final class FinderScreen {
             int open = Fireteams.roster().listings(a.id()).size();
             p.textRight(key + "_size", a.sizeLabel() + (a.maxPlayers() > 1 ? "  ·  모집 " + open : "  ·  1인"), cx + 200, cy + 96, 17, open > 0 ? GOOD : MUTED, 255);
             if (hot) p.frame(key + "_edge", b, 2, 110, WHITE);
-            f.target(key, b, ss -> { ss.activity = a.id(); ss.page = Page.ACTIVITY; ss.listPage = 0; });
+            f.target(key, b, ss -> selectActivity(ss, a));
         }
+    }
+
+    private static void selectActivity(Session s, ActivityCatalog.Activity activity) {
+        if (current(s.owner) != s || s.owner.level() != s.level || s.owner.hasDisconnected()
+                || ActivityCatalog.find(activity.id()).orElse(null) != activity) return;
+        String previous = s.activity;
+        s.activity = activity.id(); s.page = Page.ACTIVITY; s.listPage = 0;
+        FinderSounds.activityChanged(s.owner, previous, s.activity);
     }
 
     private static void activityPage(Frame f, ActivityCatalog.Activity a) {

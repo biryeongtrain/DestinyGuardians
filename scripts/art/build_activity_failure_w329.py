@@ -4,6 +4,7 @@ import json
 import math
 import hashlib
 import os
+import shutil
 import struct
 import subprocess
 import zlib
@@ -22,6 +23,47 @@ def png(path, w, h, pixel):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 6, 0, 0, 0))
                      + chunk(b'IDAT', zlib.compress(raw, 9)) + chunk(b'IEND', b''))
+
+
+def original_banner_crop():
+    """Original shape crop with user-requested black-paper-to-alpha colour decomposition only."""
+    source = ROOT / 'art/hud/activity-failure-w329/user-source/wipe-original.png'
+    data = source.read_bytes(); offset = 8; packed = b''
+    while offset < len(data):
+        size = struct.unpack('>I', data[offset:offset+4])[0]
+        kind, value = data[offset+4:offset+8], data[offset+8:offset+8+size]
+        if kind == b'IHDR': w, h, depth, color, _, _, interlace = struct.unpack('>IIBBBBB', value)
+        if kind == b'IDAT': packed += value
+        offset += size + 12
+    if depth != 8 or color not in [2, 6] or interlace != 0: raise ValueError('Unsupported original PNG encoding')
+    channels = 4 if color == 6 else 3; stride = w * channels; decoded = zlib.decompress(packed)
+    rows = []; previous = bytearray(stride); position = 0
+    def paeth(a, b, c):
+        p = a+b-c; ds = [abs(p-a), abs(p-b), abs(p-c)]
+        return [a, b, c][ds.index(min(ds))]
+    for y in range(h):
+        mode = decoded[position]; position += 1
+        row = bytearray(decoded[position:position+stride]); position += stride
+        for i in range(stride):
+            left = row[i-channels] if i >= channels else 0
+            up = previous[i]; corner = previous[i-channels] if i >= channels else 0
+            predictor = [0, left, up, (left+up)//2, paeth(left, up, corner)][mode]
+            row[i] = (row[i]+predictor) & 255
+        rows.append(bytes(row)); previous = row
+    if (w, h) != (1107, 702): raise ValueError('Source dimensions changed; crop must be reviewed')
+    def pixel(x, y):
+        value = tuple(rows[y][x*channels:(x+1)*channels])
+        rgb = value[:3]; neutral = min(rgb)
+        # Remove only the neutral dark-paper pedestal; preserve every chromatic red-line residual.
+        white = max(0, (neutral - 24) * 255 / 231)
+        premultiplied = [min(255, white + c - neutral) for c in rgb]
+        alpha = max(premultiplied)
+        if alpha <= 0: return (0, 0, 0, 0)
+        return tuple(round(c * 255 / alpha) for c in premultiplied) + (round(alpha),)
+    png(ASSETS / 'textures/gui/failure_banner.png', 460, 702, pixel)
+    for step in range(1, 8):
+        png(ASSETS / ('textures/gui/failure_banner_f0' + str(step) + '.png'), 460, 702,
+            lambda x, y, s=step: pixel(x, y)[:3] + (round(pixel(x, y)[3] * s / 8),))
 
 
 def distance(x, y, a, b):
@@ -50,7 +92,8 @@ def icon(kind):
     return pixel
 
 
-names = ['restricted', 'wipe', 'backdrop'] + ['black_' + str(n) for n in range(9)]
+names = ['restricted', 'wipe', 'backdrop', 'failure_banner', 'table_row', 'rule'] + ['black_' + str(n) for n in range(9)]
+names += [base + '_f0' + str(step) for base in ['failure_banner', 'table_row', 'rule'] for step in range(1, 8)]
 for kind in ['restricted', 'wipe']:
     png(ASSETS / ('textures/gui/' + kind + '.png'), 256, 256, icon(kind))
 for n in range(9):
@@ -66,6 +109,15 @@ def backdrop(x, y):
 
 
 png(ASSETS / 'textures/gui/backdrop.png', 512, 288, backdrop)
+original_banner_crop()
+for retired in ['failure_skull', 'failure_lines']:
+    for folder, extension in [('items', '.json'), ('models', '.json'), ('textures', '.png')]:
+        (ASSETS / (folder + '/gui/' + retired + extension)).unlink(missing_ok=True)
+png(ASSETS / 'textures/gui/table_row.png', 2, 2, lambda x, y: (255, 255, 255, 70))
+png(ASSETS / 'textures/gui/rule.png', 2, 2, lambda x, y: (255, 255, 255, 255))
+for step in range(1, 8):
+    png(ASSETS / ('textures/gui/table_row_f0' + str(step) + '.png'), 2, 2, lambda x, y, s=step: (255, 255, 255, round(70*s/8)))
+    png(ASSETS / ('textures/gui/rule_f0' + str(step) + '.png'), 2, 2, lambda x, y, s=step: (255, 255, 255, round(255*s/8)))
 for name in names:
     item = ASSETS / ('items/gui/' + name + '.json')
     model = ASSETS / ('models/gui/' + name + '.json')

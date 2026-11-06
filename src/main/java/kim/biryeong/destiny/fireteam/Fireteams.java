@@ -143,11 +143,20 @@ public final class Fireteams {
     }
 
     static String retarget(ServerPlayer leader, ActivityCatalog.Activity activity) {
+        if (server == null || !server.isSameThread() || server.getPlayerList().getPlayer(leader.getUUID()) != leader
+                || leader.hasDisconnected() || leader.isRemoved()) return "현재 접속에서 다시 시도하세요.";
+        var oldTeam = ROSTER.team(leader.getUUID()).orElse(null);
+        String previous = oldTeam == null ? null : oldTeam.activity();
         var e = ROSTER.retarget(leader.getUUID(), activity.id(), activity.maxPlayers());
         if (e != null) return e.message;
         var t = ROSTER.team(leader.getUUID()).orElseThrow();
+        if (Objects.equals(previous, activity.id())) return null;
         if (activity.maxPlayers() < 2) ROSTER.listed(leader.getUUID(), false);
-        tell(t, "목표 활동: " + activity.name(), true);
+        tell(t, "목표 활동: " + activity.name(), true, false);
+        for (var id : t.members()) {
+            var player = server.getPlayerList().getPlayer(id);
+            if (player != null) FinderSounds.activityChanged(player, previous, activity.id());
+        }
         changed(t);
         return null;
     }

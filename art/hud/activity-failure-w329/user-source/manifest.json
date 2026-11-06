@@ -1,0 +1,45 @@
+{
+  "classification": "USER_SUPPLIED_ORIGINAL_CROP_BLACK_PAPER_TO_ALPHA",
+  "sourceProvidedBy": "user; explicit request to use original Destiny skull+red geometry",
+  "sourceArchive": "art/hud/activity-failure-w329/user-source/wipe-original.png",
+  "sourceSha256": "a626e766495cb881bdb4a34e841af883bd24f520d24fe8ee948e1db0c8dc93fb",
+  "sourceBytes": 606991,
+  "sourceDimensions": [
+    1107,
+    702
+  ],
+  "crop": {
+    "x": 0,
+    "y": 0,
+    "width": 460,
+    "height": 702
+  },
+  "output": "src/main/resources/assets/destiny_activity_failure/textures/gui/failure_banner.png",
+  "outputSha256": "4c6b232cca4e86745268697ed415c7c7654ebbaff6eff5e2aceeafe78494465e",
+  "decodedRgbaPixelSha256": "ece892078c8bea96e65266a5ca2d63c929c9e561dc9d3ad8ef597003d475435b",
+  "pixelValidation": "Original source/crop coordinates unchanged; black-to-alpha color decomposition applied explicitly, so output is not claimed byte-identical to unprocessed source crop.",
+  "inspection": [
+    {
+      "path": "/var/folders/wg/4qbt7wnd2sg_v3848xjr63gc0000gn/T/codex-clipboard-359993e8-7c89-482e-b997-286c554c5670.png",
+      "sha256": "a626e766495cb881bdb4a34e841af883bd24f520d24fe8ee948e1db0c8dc93fb"
+    },
+    {
+      "path": "/var/folders/wg/4qbt7wnd2sg_v3848xjr63gc0000gn/T/codex-clipboard-d5e40186-5fbf-4aa4-8d13-5efcd038330e.png",
+      "sha256": "d254c232f9b4d8a579a2dbea532ec3a2af9bf199d58095b22da8652e6695fe9c"
+    }
+  ],
+  "selectionReason": "Latest source crop preserves full skull jaw and lower red triangle tip, excludes title/nicknames/redactions at x465+. Earlier1920 source has own-row pointer atx394 y585 in the desired lower region.",
+  "hudDisplay": [
+    410,
+    626
+  ],
+  "retiredArt": "Generated skull source/manifest retained as historical only; its six deployed skull/line files removed.",
+  "processing": "User requested neutral dark-paper removal: neutral=min(R,G,B); white=max(0,(neutral-24)*255/231); each premultiplied channel=white+channel-neutral; outputalpha=max(premultiplied), RGB unpremultiplied. Red chroma residual retained even below neutral floor. No silhouette generation, redraw, spatial warp, resampling or newimagegen.",
+  "alphaValidation": {
+    "zeroPixels": 33815,
+    "totalPixels": 322920,
+    "min": 0,
+    "max": 255
+  },
+  "fade": "One shared9-step progress0..20ticks for banner, text, row and rule.0 hides content,1..7 exactalpha variants,8 base. Original230tick SFX/recovery unchanged."
+}

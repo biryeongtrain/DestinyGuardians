@@ -142,6 +142,7 @@ public final class Combat {
         kim.biryeong.destiny.weapon.AmmoEconomy.afterDamage(source,recipient,attribution,before,after);
         if(after<before)recipient.setLastHurtByPlayer(source, 100);
         boolean killed = after<before && (!recipient.isAlive() || recipient.isDeadOrDying());
+        CombatDamageEvents.applied(source, recipient, attribution, before - after, killed);
         // PvP has its own actual-loss payout; do not also grant the old generic 4% kill reward.
         if (killed && !(recipient instanceof ServerPlayer)) {
             AbilityService.onKill(source, recipient, element);

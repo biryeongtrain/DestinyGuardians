@@ -30,6 +30,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private final DevilsActors actors;
     private final DevilsRecovery recovery;
     private final ActivityFailurePresentation failure;
+    private final DevilsAttemptStats attemptStats;
     private final DevilsSupplies supplies;
     private final DevilsSupplyStations supplyStations;
     private final Set<UUID> supplySneaking = new HashSet<>();
@@ -55,6 +56,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private State state = State.PREPARING;
     private long createdAt, admittedAt, gatherAt = -1, completeAt = -1;
     private boolean resetPlacement;
+    private UUID qaStatsTarget;
 
     DevilsSession(MinecraftServer server, DevilsInstances instances, DevilsInstances.Instance instance,
                   List<ServerPlayer> players) {
@@ -66,6 +68,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         supplies = new DevilsSupplies(ids);
         supplyStations = new DevilsSupplyStations(instance.level());
         actors = new DevilsActors(instance.level(), () -> director, this);
+        attemptStats = new DevilsAttemptStats(this, players);
         voice = newVoice(); presentation = DevilsLair.presentationFor(this);
         recovery.reset(director.generation(), Zone.RY); createdAt = server.getTickCount();
         instances.own(instance, build::close); instances.own(instance, actors::close);
@@ -76,6 +79,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         instances.own(instance, music::close);
         instances.own(instance, supplyStations::close);
         instances.own(instance, failure::close);
+        instances.own(instance, attemptStats::close);
     }
     private DevilsVoicePlayback newVoice() {
         return new DevilsVoicePlayback(this::players, token -> {
@@ -194,6 +198,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         };
     }
     private void syncFailureScope() {
+        attemptStats.scope();
         boolean restricted = restricted(director.phase());
         recovery.restricted(restricted);
         failure.scope(director.generation(), director.phase().zone().name(), restricted);
@@ -344,7 +349,9 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     }
     GuardianDown.Options downed(ServerPlayer p) {
         if (!running() || p.level() != level() || !member(p.getUUID()) || joining.contains(p.getUUID())) return null;
-        if (recovery.down(p.getUUID(), director.generation()).isEmpty()) return null;
+        var down = recovery.down(p.getUUID(), director.generation());
+        if (down.isEmpty()) return null;
+        attemptStats.down(down.orElseThrow());
         kim.biryeong.destiny.down.FireteamReviveAudio.announce(p, players());
         roster.down(p.getUUID(), true); downBodies.put(p.getUUID(), p.position());
         return downOptions.computeIfAbsent(p.getUUID(), id -> new GuardianDown.Options(false, director.phase().zone() == Zone.RY ? 100 : 600, true,
@@ -395,6 +402,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     }
     @Override public void wipe(long generation) {
         if (generation != director.generation() || !running() || !failure.beginWipe(generation)) return;
+        failure.results(attemptStats.freeze());
         director.pause(true); music.close(); voice.close(); speaking = null;
         presentation.cancelGeneration(generation);
         spawnTelegraphs.clear(); spawnLead.clear(); spawnSearches.clear();
@@ -550,7 +558,34 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         return "activity=" + id() + " generation=" + director.generation() + " phase=" + director.phase()
                 + " restricted=" + failure.state().restricted() + " wiping=" + failure.state().wiping()
                 + " wipeAge=" + failure.state().wipeAge() + " wipeRemaining=" + snapshot.wipeRemaining()
-                + " living=" + snapshot.living() + " resetPlacement=" + resetPlacement;
+                + " living=" + snapshot.living() + " resetPlacement=" + resetPlacement + " qaStatsTarget=" + qaStatsTarget + attemptStats.status();
+    }
+    /** OP fixture only: prepare an already-owned actor for an actual native shot; never inject a statistic. */
+    boolean qaStatsTarget(ServerPlayer player) {
+        if (!allows(player) || failure.state().wiping()) return false;
+        var mob = actors.active.values().stream().filter(e -> e.isAlive() && !e.isRemoved() && !e.walkerPart()
+                && !e.kind().boss() && e.reference().generation() == director.generation()).findFirst().orElse(null);
+        if (mob == null) return false;
+        Vec3 look = player.getLookAngle().multiply(1, 0, 1);
+        if (look.lengthSqr() < .01) return false;
+        for (int distance = 4; distance <= 7; distance++) {
+            Vec3 ahead = player.position().add(look.normalize().scale(distance));
+            var hit = level().clip(new ClipContext(ahead.add(0, 3, 0), ahead.add(0, -4, 0), ClipContext.Block.COLLIDER,
+                    ClipContext.Fluid.NONE, player));
+            if (hit.getType() != HitResult.Type.BLOCK) continue;
+            Vec3 feet = hit.getLocation().add(0, .03, 0);
+            if (!contains(director.phase().zone(), feet) || !level().noCollision(mob, mob.getBoundingBox().move(feet.subtract(mob.position())))) continue;
+            mob.setPos(feet); mob.setDeltaMovement(Vec3.ZERO); mob.setNoAi(true);
+            mob.setHealth(Math.min(5, mob.getHealth())); mob.damageCooldownTime = 0;
+            qaStatsTarget = mob.getUUID(); return true;
+        }
+        return false;
+    }
+    boolean acceptStats(kim.biryeong.destiny.combat.CombatDamageEvents.Applied event, DevilsMob mob) {
+        return running() && !resetPlacement && !failure.state().wiping() && event.source().level() == level()
+                && mob.level() == level() && mob.runtime == actors && mob.reference() != null
+                && mob.reference().generation() == director.generation() && member(event.source().getUUID())
+                && players().stream().anyMatch(p -> p == event.source());
     }
     /** Sepiks's arena centre on the floor, front turned to the arena entrance (null: map not ready). */
     private java.util.Map.Entry<Vec3, Float> rewardChestSpot() {
@@ -599,7 +634,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     }
     void stop(String reason) {
         if (state == State.CLOSED || state == State.DRAINING) return;
-        state = State.DRAINING; failure.close(); kim.biryeong.destiny.loot.Loot.activityClosed(players()); music.close(); director.close(); recovery.close(); actors.close(); build.close(); presentation.close(); voice.close(); supplies.close(); supplyStations.close();
+        state = State.DRAINING; attemptStats.close(); failure.close(); kim.biryeong.destiny.loot.Loot.activityClosed(players()); music.close(); director.close(); recovery.close(); actors.close(); build.close(); presentation.close(); voice.close(); supplies.close(); supplyStations.close();
         for (var p : players()) { cancelDown(p); DevilsObjectives.remove(p); clearGuide(p); p.sendSystemMessage(Component.literal(reason)); }
     }
     void drain() {
