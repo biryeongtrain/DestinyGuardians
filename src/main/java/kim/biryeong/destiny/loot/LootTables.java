@@ -30,8 +30,18 @@ public final class LootTables {
         public boolean empty() { return weapon == null && engram == null; }
     }
     public record Table(String id, int rolls, double chance, List<Entry> entries) { }
-    /** Activity hook: completion reward table, end chest table. */
-    public record Activity(String completion, String chest) { }
+    /**
+     * Activity hook: completion reward table, end chest table, and the Glimmer the chest bursts out as
+     * {@code [min, max]} (inclusive; one value = fixed; absent = none).
+     */
+    public record Activity(String completion, String chest, List<Long> glimmer) {
+        public Activity(String completion, String chest) { this(completion, chest, null); }
+        public long rollGlimmer(net.minecraft.util.RandomSource random) {
+            if (glimmer == null || glimmer.isEmpty()) return 0;
+            long lo = Math.max(0, glimmer.getFirst()), hi = Math.max(lo, glimmer.getLast());
+            return lo + (hi > lo ? (long) random.nextInt((int) Math.min(Integer.MAX_VALUE, hi - lo + 1)) : 0);
+        }
+    }
     /** Enemy drop tables by tier (minor / major / boss). */
     public record Enemies(String minor, String major, String boss) { }
     private record File(Map<String, Table> tables, Map<String, Activity> activities, Enemies enemies,
@@ -57,7 +67,11 @@ public final class LootTables {
             }
             var file = new File(Map.copyOf(tables), raw.activities == null ? Map.of() : Map.copyOf(raw.activities),
                     raw.enemies, raw.engramTables == null ? Map.of() : Map.copyOf(raw.engramTables));
-            for (var a : file.activities.values()) { require(file, a.completion()); require(file, a.chest()); }
+            for (var a : file.activities.values()) {
+                require(file, a.completion()); require(file, a.chest());
+                if (a.glimmer() != null && (a.glimmer().size() > 2 || a.glimmer().stream().anyMatch(g -> g == null || g < 0)))
+                    throw new IllegalStateException("Activity glimmer must be [min, max] >= 0");
+            }
             if (file.enemies != null) { require(file, file.enemies.minor()); require(file, file.enemies.major()); require(file, file.enemies.boss()); }
             for (var t : file.engramTables.values()) require(file, t);
             for (var t : tables.values()) for (var entry : t.entries()) {

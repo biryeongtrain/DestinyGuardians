@@ -111,6 +111,12 @@ public final class DevilsLair {
                                 .then(Commands.argument("players", EntityArgument.players()).executes(c -> {
                                     return startCommand(c.getSource(), List.copyOf(EntityArgument.getPlayers(c, "players")));
                                 })))
+                        .then(Commands.literal("qa_complete").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .then(Commands.argument("player", EntityArgument.player()).executes(c -> {
+                                    var s = session(EntityArgument.getPlayer(c, "player"));
+                                    if (s == null) { c.getSource().sendFailure(Component.literal("공격전 참가 중이 아닙니다.")); return 0; }
+                                    s.qaComplete(); return 1;
+                                })))
                         .then(Commands.literal("leave").executes(c -> { leave(c.getSource().getPlayerOrException()); return 1; }))
                         .then(Commands.literal("status").executes(c -> {
                             var s = session(c.getSource().getPlayerOrException());

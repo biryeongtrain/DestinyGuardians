@@ -63,8 +63,8 @@ public final class Loot {
         });
         ServerPlayConnectionEvents.DISCONNECT.register((h, s) -> LootToast.forget(h.getPlayer()));
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+            for (var c : List.copyOf(CHESTS)) c.close(true);
             for (var d : List.copyOf(DROPS)) d.close(true);
-            for (var c : List.copyOf(CHESTS)) c.close(false);
             DROPS.clear(); CHESTS.clear();
         });
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, env) -> dispatcher.register(Commands.literal("destiny")
@@ -93,9 +93,23 @@ public final class Loot {
                                     var p = EntityArgument.getPlayer(c, "player");
                                     String t = StringArgumentType.getString(c, "table");
                                     if (LootTables.table(t).isEmpty()) return 0;
-                                    chest(p, inFront(p, 5), t, "보상 상자");
+                                    chest(p, inFront(p, 4), t, 0, "보상 상자");
                                     return 1;
-                                }))))
+                                })
+                                .then(Commands.argument("glimmer", com.mojang.brigadier.arguments.IntegerArgumentType.integer(0, 100000)).executes(c -> {
+                                    var p = EntityArgument.getPlayer(c, "player");
+                                    String t = StringArgumentType.getString(c, "table");
+                                    if (LootTables.table(t).isEmpty()) return 0;
+                                    chest(p, inFront(p, 4), t, com.mojang.brigadier.arguments.IntegerArgumentType.getInteger(c, "glimmer"), "보상 상자");
+                                    return 1;
+                                })))))
+                        .then(Commands.literal("complete").then(Commands.argument("activity", StringArgumentType.word()).executes(c -> {
+                            String a = StringArgumentType.getString(c, "activity");
+                            if (LootTables.activity(a).isEmpty()) { c.getSource().sendFailure(Component.literal("활동 없음: " + a)); return 0; }
+                            var p = c.getSource().getPlayerOrException();
+                            activityComplete(a, List.of(p), "QA 활동");
+                            return 1;
+                        })))
                         .then(Commands.literal("engram").then(Commands.argument("player", EntityArgument.player())
                                 .then(Commands.argument("tier", StringArgumentType.word()).executes(c -> {
                                     var p = EntityArgument.getPlayer(c, "player");
@@ -138,12 +152,22 @@ public final class Loot {
      * reward chest {@code chestAt} (null: in front of them). Unknown activity ids do nothing.
      */
     public static void activityComplete(String activity, List<ServerPlayer> players, String title) {
+        activityComplete(activity, players, title, null, 0);
+    }
+
+    /**
+     * As above with the chest at a fixed spot ({@code chestYaw}: the way its front faces). Every participant gets
+     * their own chest there; each only sees their own (Destiny's personal loot).
+     */
+    public static void activityComplete(String activity, List<ServerPlayer> players, String title, Vec3 chestAt, float chestYaw) {
         var hook = LootTables.activity(activity);
         if (hook.isEmpty()) return;
         for (var p : players) {
             if (hook.get().completion() != null) grantTable(p, hook.get().completion(), title + " 완료");
             if (hook.get().chest() != null) {
-                chest(p, inFront(p, 3), hook.get().chest(), title + " 보상 상자");
+                long glimmer = hook.get().rollGlimmer(p.getRandom());
+                if (chestAt != null) CHESTS.add(new LootChest(p, chestAt, chestYaw, hook.get().chest(), glimmer, title + " 보상 상자"));
+                else CHESTS.add(new LootChest(p, inFront(p, 3), p.getYRot() + 180, hook.get().chest(), glimmer, title + " 보상 상자"));
                 p.sendSystemMessage(Component.literal("보상 상자가 나타났습니다.").withStyle(net.minecraft.ChatFormatting.GOLD));
             }
         }
@@ -290,8 +314,28 @@ public final class Loot {
         DROPS.add(new WorldDrop(owner, pos, r));
     }
 
-    public static void chest(ServerPlayer owner, Vec3 at, String table, String source) {
-        CHESTS.add(new LootChest(owner, at, owner.getYRot(), table, source));
+    /** A personal reward chest facing {@code owner}. */
+    public static void chest(ServerPlayer owner, Vec3 at, String table, long glimmer, String source) {
+        CHESTS.add(new LootChest(owner, at, owner.getYRot() + 180, table, glimmer, source));
+    }
+    public static void chest(ServerPlayer owner, Vec3 at, String table, String source) { chest(owner, at, table, 0, source); }
+
+    /** A personal world drop exactly at {@code at} (the chest burst has already spread them). */
+    static void dropAt(ServerPlayer owner, Vec3 at, LootRoller.Reward r) { DROPS.add(new WorldDrop(owner, at, r, LANDED_PICKUP_DELAY)); }
+    /** Burst rewards stay on the ground briefly so the Guardian sees what dropped before walking it up. */
+    static final int LANDED_PICKUP_DELAY = 16;
+
+    /** Standing point on the first floor at or below {@code at} within {@code depth} blocks, null if none. */
+    public static Vec3 floor(net.minecraft.server.level.ServerLevel level, Vec3 at, int depth) {
+        var pos = net.minecraft.core.BlockPos.containing(at.x, at.y + .5, at.z);
+        if (!level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()) pos = pos.above();
+        for (int i = 0; i <= depth; i++, pos = pos.below()) {
+            var below = pos.below();
+            var shape = level.getBlockState(below).getCollisionShape(level, below);
+            if (!shape.isEmpty() && level.getBlockState(pos).getCollisionShape(level, pos).isEmpty())
+                return new Vec3(at.x, below.getY() + shape.max(net.minecraft.core.Direction.Axis.Y), at.z);
+        }
+        return null;
     }
 
     static Vec3 inFront(ServerPlayer p, double distance) {

@@ -464,9 +464,29 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         if (running() && spawn.ref().generation() == director.generation()) presentation.spawned(this, spawn, at);
     }
     @Override public void completed(long generation) {
-        if (generation != director.generation()) return;
+        if (!running() || completeAt >= 0 || generation != director.generation()) return;
         completeAt = server.getTickCount();
-        kim.biryeong.destiny.loot.Loot.activityComplete("devils_lair", participants(), "악마의 소굴");
+        // Downed members still earned completion loot; combat targeting excludes them.
+        var recipients = players().stream().filter(p -> p.level() == level()).toList();
+        var spot = rewardChestSpot();
+        if (spot == null) kim.biryeong.destiny.loot.Loot.activityComplete("devils_lair", recipients, "악마의 소굴");
+        else kim.biryeong.destiny.loot.Loot.activityComplete("devils_lair", recipients, "악마의 소굴", spot.getKey(), spot.getValue());
+    }
+    /** QA: run the completion hook (reward chests) without fighting to the end. */
+    void qaComplete() {
+        if (running() && completeAt < 0 && place(Zone.SP, players(), false)) director.complete();
+    }
+    /** Sepiks's arena centre on the floor, front turned to the arena entrance (null: map not ready). */
+    private java.util.Map.Entry<Vec3, Float> rewardChestSpot() {
+        try {
+            var origin = DevilsWorldBuild.origin(Zone.SP);
+            var centre = DevilsMaps.anchor(Zone.SP, "SP.C", origin).pos();
+            var entry = DevilsMaps.anchor(Zone.SP, "SP.IN", origin).pos();
+            var floor = kim.biryeong.destiny.loot.Loot.floor(level(), centre, 24);
+            if (floor == null) return null;
+            var d = entry.subtract(centre);
+            return java.util.Map.entry(floor, (float) Math.toDegrees(Math.atan2(-d.x, d.z)));
+        } catch (RuntimeException error) { problem("Reward chest spot failed: " + error); return null; }
     }
     @Override public void problem(String message) { if (problems.add(message)) DestinyGuardians.LOGGER.warn("[DevilsLair {}] {}", id(), message); }
     void disconnected(ServerPlayer p, long now) {

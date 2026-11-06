@@ -36,18 +36,15 @@ final class WorldDrop {
     private int age;
     boolean done;
 
-    WorldDrop(ServerPlayer owner, Vec3 at, LootRoller.Reward reward) {
+    private final int pickupAfter;
+
+    WorldDrop(ServerPlayer owner, Vec3 at, LootRoller.Reward reward) { this(owner, at, reward, 0); }
+
+    WorldDrop(ServerPlayer owner, Vec3 at, LootRoller.Reward reward, int pickupAfter) {
+        this.pickupAfter = pickupAfter;
         this.owner = owner; this.level = owner.level(); this.reward = reward; this.pos = at;
         this.color = Loot.color(reward);
-        ItemStack stack;
-        if (reward.engram() != null) {
-            stack = new ItemStack(Items.PAPER);
-            stack.set(DataComponents.ITEM_MODEL, engramModel(reward.engram()));
-        } else {
-            stack = WeaponItems.entry(reward.weapon()).map(WeaponModels::create).orElse(ItemStack.EMPTY);
-            var skin = kim.biryeong.destiny.weapon.WeaponSkins.of(reward.weapon());   // W302/W325 skinned drops show their own model
-            if (!stack.isEmpty() && skin.isPresent()) kim.biryeong.destiny.weapon.WeaponSkins.apply(stack, skin.get().id());
-        }
+        ItemStack stack = displayStack(reward);
         item = new ItemDisplayElement(stack);
         item.setItemDisplayContext(ItemDisplayContext.FIXED);
         item.setBrightness(new Brightness(15, 15));
@@ -62,17 +59,35 @@ final class WorldDrop {
         LootSounds.drop(owner, at, Loot.exotic(reward));
     }
 
-    private void place() {
+    /** What a reward looks like in the world: the 3D engram of its tier, or the weapon's (skinned) model. */
+    static ItemStack displayStack(LootRoller.Reward reward) {
+        if (reward.engram() != null) {
+            var stack = new ItemStack(Items.PAPER);
+            stack.set(DataComponents.ITEM_MODEL, engramModel(reward.engram()));
+            return stack;
+        }
+        var stack = WeaponItems.entry(reward.weapon()).map(WeaponModels::create).orElse(ItemStack.EMPTY);
+        var skin = kim.biryeong.destiny.weapon.WeaponSkins.of(reward.weapon());   // W302/W325 skinned drops show their own model
+        if (!stack.isEmpty() && skin.isPresent()) kim.biryeong.destiny.weapon.WeaponSkins.apply(stack, skin.get().id());
+        return stack;
+    }
+
+    /** Hover transform at {@code age} (shared with the chest burst so a landing reward hands over seamlessly). */
+    static void pose(ItemDisplayElement item, LootRoller.Reward reward, int age, float lift) {
         float bob = (float) Math.sin(age / 12.0) * .08f;
         if (reward.engram() != null) {
             item.setScale(new Vector3f(1.15f));
-            item.setTranslation(new Vector3f(0, .85f + bob, 0));
+            item.setTranslation(new Vector3f(0, .85f + bob + lift, 0));
             item.setLeftRotation(new Quaternionf().rotateY(age * .045f).rotateX(.42f).rotateZ(age * .017f));
         } else {
             item.setScale(new Vector3f(.8f));
-            item.setTranslation(new Vector3f(0, .7f + bob, 0));
+            item.setTranslation(new Vector3f(0, .7f + bob + lift, 0));
             item.setLeftRotation(new Quaternionf().rotateY(age * .05f));
         }
+    }
+
+    private void place() {
+        pose(item, reward, age, 0);
         item.startInterpolationIfDirty();
     }
 
@@ -94,7 +109,7 @@ final class WorldDrop {
             level.sendParticles(owner, new DustParticleOptions(color, .8f), true, false, pos.x, pos.y + .2 + (age / 5 % 8) * .35, pos.z, 1, .04, .08, .04, 0);
         }
         holder.tick();
-        if (owner.isAlive() && owner.position().distanceToSqr(pos.x, owner.getY(), pos.z) < PICKUP * PICKUP && Math.abs(owner.getY() - pos.y) < 2.5) {
+        if (age >= pickupAfter && owner.isAlive() && owner.position().distanceToSqr(pos.x, owner.getY(), pos.z) < PICKUP * PICKUP && Math.abs(owner.getY() - pos.y) < 2.5) {
             if (Loot.collect(owner, reward, "획득")) { close(); return false; }
         }
         return true;

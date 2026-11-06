@@ -72,4 +72,11 @@ class LootTablesTest {
         assertEquals(p, LootProfile.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, json).getOrThrow());
         assertEquals(List.of("exotic"), p.minus(0).engrams());
     }
+
+    @Test void strikeChestBurstsGlimmer() {
+        var hook = LootTables.activity("devils_lair").orElseThrow();
+        var rng = RandomSource.create(7);
+        for (int i = 0; i < 200; i++) { long g = hook.rollGlimmer(rng); assertTrue(g >= 40 && g <= 60, "glimmer " + g); }
+        assertEquals(0, new LootTables.Activity("strike_completion", "strike_chest").rollGlimmer(rng));
+    }
 }

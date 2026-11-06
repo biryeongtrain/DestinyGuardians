@@ -392,7 +392,8 @@ public final class DevilsDirector implements AutoCloseable {
             if (live) host.retire(reference(actor), reason);
         }
     }
-    private void complete() {
+    /** Also used by the operator-only completion fixture; production enters through Sepiks defeat. */
+    void complete() {
         if (completionSent) return;
         completionSent = true;
         retireOrdinary(Retirement.BOSS_DEFEATED);
