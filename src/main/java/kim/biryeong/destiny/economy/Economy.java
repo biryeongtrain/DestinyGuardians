@@ -2,6 +2,7 @@ package kim.biryeong.destiny.economy;
 
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.inventory.WeaponEquipmentService;
+import kim.biryeong.destiny.inventory.WeaponStorage;
 import kim.biryeong.destiny.inventory.WeaponScreenText;
 import kim.biryeong.destiny.inventory.gear.GearAcquisition;
 import kim.biryeong.destiny.weapon.*;
@@ -203,8 +204,8 @@ public final class Economy {
 
     /** Null when inventory slot {@code index} may leave the player for the economy, else why not. */
     public static String movable(ServerPlayer p, int index) {
-        if (index < FIRST_SLOT || index > LAST_SLOT) return "장착 중인 무기는 옮길 수 없습니다.";
-        var stack = p.getInventory().getItem(index);
+        if (index < FIRST_SLOT || (!WeaponStorage.token(index) && index > LAST_SLOT)) return "장착 중인 무기는 옮길 수 없습니다.";
+        var stack = WeaponStorage.resolve(p, index);
         if (stack.isEmpty()) return "빈 칸입니다.";
         if (kim.biryeong.destiny.tutorial.TutorialLoan.active(p) || kim.biryeong.destiny.tutorial.TutorialLoan.borrowed(p, stack))
             return "실습용으로 빌린 무기는 옮길 수 없습니다.";
@@ -233,12 +234,7 @@ public final class Economy {
         var engram = kim.biryeong.destiny.loot.Loot.engramTier(stack);
         if (engram.isPresent()) return kim.biryeong.destiny.loot.Loot.engramRoom(p);
         var entry = WeaponItems.entry(stack);
-        if (entry.isPresent()) {
-            var slot = WeaponLoadout.slot(p, stack, entry.get());
-            long stored = WeaponEquipmentService.owned(p, slot).stream().filter(o -> o.inventoryIndex() >= FIRST_SLOT).count();
-            if (stored >= kim.biryeong.destiny.inventory.gear.GearLayout.STORAGE_COUNT)
-                return kim.biryeong.destiny.inventory.gear.GearSlot.of(slot).label() + " 보관 칸이 가득 찼습니다.";
-        }
+        if (entry.isPresent()) return WeaponStorage.room(p, stack);
         for (int i = FIRST_SLOT; i <= LAST_SLOT; i++) if (p.getInventory().getItem(i).isEmpty()) return null;
         return "인벤토리에 빈 칸이 없습니다.";
     }
@@ -256,17 +252,20 @@ public final class Economy {
 
     /** Take inventory slot {@code index} out as a payload (removing it). Caller must commit. */
     static ItemPayload take(ServerPlayer p, int index) {
-        var stack = p.getInventory().getItem(index);
+        var stack = WeaponStorage.resolve(p, index);
         var payload = payload(stack);
-        p.getInventory().setItem(index, ItemStack.EMPTY);
-        p.getInventory().setChanged();
+        if (WeaponStorage.token(index)) {
+            if (!WeaponStorage.remove(p, index, stack)) throw new IllegalStateException("Storage ownership changed");
+        } else { p.getInventory().setItem(index, ItemStack.EMPTY); p.getInventory().setChanged(); }
         return payload;
     }
 
     /** Undo {@link #take} when the ledger refused the payload. */
     static void restore(ServerPlayer p, int index, ItemPayload payload) {
         var stack = stack(payload).orElseThrow();
-        if (p.getInventory().getItem(index).isEmpty()) { p.getInventory().setItem(index, stack); p.getInventory().setChanged(); }
+        if (WeaponStorage.token(index) && WeaponStorage.restore(p, index, stack)) return;
+        if (!WeaponStorage.token(index) && WeaponItems.entry(stack).isPresent()) { WeaponStorage.retain(p, stack); return; }
+        if (!WeaponStorage.token(index) && p.getInventory().getItem(index).isEmpty()) { p.getInventory().setItem(index, stack); p.getInventory().setChanged(); }
         else if (place(p, stack) != null) LEDGER.deliver(p.getUUID(), EconomyLedger.MailKind.OVERFLOW, "시스템", payload, 0, "보관 실패로 반환된 물품", now());
     }
 }

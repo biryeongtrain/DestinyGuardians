@@ -65,6 +65,13 @@ public abstract class ServerGamePacketListenerImplMixin {
     }
 
     @Inject(method = "handleSetCarriedItem", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
+            shift = At.Shift.AFTER), cancellable = true)
+    private void destiny$combatSlotGuard(ServerboundSetCarriedItemPacket packet, CallbackInfo ci) {
+        if (kim.biryeong.destiny.inventory.WeaponHotbarGuard.rejectSlot(player, packet.getSlot())) ci.cancel();
+    }
+
+    @Inject(method = "handleSetCarriedItem", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedSlot(I)V"))
     private void destiny$swordSlotChange(ServerboundSetCarriedItemPacket packet, CallbackInfo ci) {
         kim.biryeong.destiny.weapon.WeaponRuntime.selectedSlotChanging(player,packet.getSlot());

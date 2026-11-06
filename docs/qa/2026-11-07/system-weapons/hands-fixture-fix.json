@@ -1,0 +1,13 @@
+{
+  "id": "w328-empty-hand-native-inventory-fixture-fix",
+  "files": [
+    {
+      "path": "src/gametest/java/kim/biryeong/destiny/test/EmptyHandW328GameTests.java",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians/src/gametest/java/kim/biryeong/destiny/test/EmptyHandW328GameTests.java",
+      "beforeSha256": "33f9adab17f07a2b6f3f16ee3a4c102d9673f90ccd0161b540d3286b352105fb",
+      "afterSha256": "b23bc71972166583398526193eeaa8babb09e65513538811161f9de8d05c1a86"
+    }
+  ],
+  "reason": "Fake TestPlayers are not in ChunkMap tracker; setCamera invoked DistanceManager.removePlayer and NPE. Use public LivingEntity sleeping-state setter, true Gear blocker, cleared in finally. No production change.",
+  "validation": "Verified vanilla26.3 bytecode: setSleepingPos writes sleeping metadata, isSleeping checks its presence, clearSleepingPos clears it. Master central rerun pending."
+}

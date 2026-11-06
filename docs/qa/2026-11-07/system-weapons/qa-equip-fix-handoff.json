@@ -1,0 +1,13 @@
+{
+  "id": "w328-qa-equip-legendary-identity-fix",
+  "files": [
+    {
+      "path": "src/main/java/kim/biryeong/destiny/inventory/gear/GearAcquisition.java",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-special/DestinyGuardians/src/main/java/kim/biryeong/destiny/inventory/gear/GearAcquisition.java",
+      "beforeSha256": "d9288bf57a3527c0df6c96af8d0768dda22457053c33a0b3fd15e2a3778b4f17",
+      "afterSha256": "20999d9c761660425930183efdf44ac7fa120f6995411040f71e4da62e6cd842"
+    }
+  ],
+  "reason": "OP gear equip resolved legendary catalog IDs to their cosmetic base and WeaponSkins.apply rejected the mismatched identity before inventory mutation. Match gear give catalog-first resolution; no change to loadout enabled ordering or storage behavior.",
+  "validation": "Source traced all three IDs through WeaponSkins.apply guard. No build or shared runtime commands executed."
+}

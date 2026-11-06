@@ -24,18 +24,23 @@ public final class InventoryMenuRedirect {
     private static int next = BASE;
     private record Armed(ServerPlayer owner, Object connection, List<RecipeDisplayId> ids) { }
     private static final Map<UUID, Armed> ARMED = new HashMap<>();
+    private static final Map<UUID, ServerPlayer> NATIVE_OPEN = new HashMap<>();
+    public static boolean nativeOpen(ServerPlayer player) { return NATIVE_OPEN.get(player.getUUID()) == player; }
     private InventoryMenuRedirect() { }
 
     public static void init() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
-                server.execute(() -> arm(handler.getPlayer())));
-        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> arm(newPlayer));
+                server.execute(() -> { NATIVE_OPEN.remove(handler.getPlayer().getUUID()); arm(handler.getPlayer()); }));
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> { NATIVE_OPEN.remove(oldPlayer.getUUID()); arm(newPlayer); });
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            NATIVE_OPEN.remove(handler.getPlayer().getUUID(), handler.getPlayer());
             var a = ARMED.get(handler.getPlayer().getUUID());
             if (a != null && a.owner == handler.getPlayer()) ARMED.remove(handler.getPlayer().getUUID());
         });
-        ServerLifecycleEvents.SERVER_STOPPED.register(server -> ARMED.entrySet().removeIf(e ->
-                e.getValue().owner.level().getServer() == server));
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+            ARMED.entrySet().removeIf(e -> e.getValue().owner.level().getServer() == server);
+            NATIVE_OPEN.entrySet().removeIf(e -> e.getValue().level().getServer() == server);
+        });
     }
 
     /** Keep page-one beacons after vanilla unlock/remove/datapack recipe synchronization. */
@@ -48,6 +53,7 @@ public final class InventoryMenuRedirect {
      * The managed inventory book contains only four beacons to guarantee page-one visibility.
      */
     public static void externalMenu(ServerPlayer player) {
+        NATIVE_OPEN.remove(player.getUUID(), player);
         var a = ARMED.get(player.getUUID());
         if (a == null || a.owner != player || a.connection != player.connection) return;
         ARMED.remove(player.getUUID());
@@ -56,7 +62,8 @@ public final class InventoryMenuRedirect {
 
     /** Re-arm after native inventory closes, including a rejected menu-open attempt. */
     public static void closed(ServerPlayer player) {
-        if (player.containerMenu == player.inventoryMenu) arm(player);
+        NATIVE_OPEN.remove(player.getUUID(), player);
+        if (player.containerMenu == player.inventoryMenu) { WeaponStorage.migrate(player); WeaponHotbarGuard.restoreCombatSlot(player); arm(player); }
     }
 
     /** True only for our reserved beacon, so ordinary seen recipes retain vanilla behavior. */
@@ -73,6 +80,7 @@ public final class InventoryMenuRedirect {
             arm(player);
         } else {
             // The native inventory remains usable when a midair/super guard rejects our HUD.
+            NATIVE_OPEN.put(player.getUUID(), player);
             player.getRecipeBook().sendInitialRecipeBook(player);
         }
         return true;

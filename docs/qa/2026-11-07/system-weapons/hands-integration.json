@@ -1,0 +1,48 @@
+{
+  "id": "w328-hide-first-person-profile-hands",
+  "files": [
+    {
+      "path": "src/main/resources/destiny/profile_view/sample.fsh",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians/src/main/resources/destiny/profile_view/sample.fsh",
+      "beforeSha256": "df177f66b74551f8147b795b0534a150b4bd4efa6f055dfd2d64919e6f07d17f",
+      "afterSha256": "be40883ad193a24933ea45ff01064645710e202e3412a3588800bbc365aeed28"
+    },
+    {
+      "path": "src/main/java/kim/biryeong/destiny/weapon/WeaponOutboundPresentation.java",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians/src/main/java/kim/biryeong/destiny/weapon/WeaponOutboundPresentation.java",
+      "beforeSha256": "42faa13ead0931b04f2f16b125441df453bc8e0be39d1aed8ffd2bb2d7d1a110",
+      "afterSha256": "6124333f5754b98d9794d167cd11f1a78313208cedc3ad915a4a0f472f0a696c"
+    },
+    {
+      "path": "src/main/java/kim/biryeong/destiny/weapon/WeaponSkinArms.java",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians/src/main/java/kim/biryeong/destiny/weapon/WeaponSkinArms.java",
+      "beforeSha256": "60816aa60f1fee61b77af679ffd05f3375456139b6620d363b3017be7cdb7bb7",
+      "afterSha256": "a42164fc98b554499a46d6f48685ba03df4fb2aaf9bff29a205f1b49dc2c5b03"
+    },
+    {
+      "path": "src/gametest/java/kim/biryeong/destiny/test/EmptyHandW328GameTests.java",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians/src/gametest/java/kim/biryeong/destiny/test/EmptyHandW328GameTests.java",
+      "beforeSha256": null,
+      "afterSha256": "33f9adab17f07a2b6f3f16ee3a4c102d9673f90ccd0161b540d3286b352105fb"
+    }
+  ],
+  "validation": {
+    "glslangStageCompiles": 16,
+    "glslangLinks": 8,
+    "allPass": true,
+    "nativeQa": "master pending",
+    "sourceClientJar": "/Users/qf/.gradle/caches/fabric-loom/26.3/minecraft-client.jar",
+    "clientJarSha256": "4508d006323f24fa02876310c192d739af56516eb259000ac50f0909a68c9a2d",
+    "javaCompile": "Original3tests+initialGUIpredicate compileJava+compileGametestJava passed; final unifiedGUI+fourthremote-camera test pending master integrated compile."
+  },
+  "coverage": "Production ProfileWeaponView custom skin arms hidden by exact core-shader marker; native bare arm suppressed with selected-empty 0..2 client-only empty-model carrier while no GUI is open. Server inventory, other slots and observers unchanged.",
+  "limitations": [
+    "Requires core worker InputRouter emptyHandCarrier DROP guard for immediate resend after client-predicted Q.",
+    "Legacy diagnostic pixel-arm JVM mode unchanged.",
+    "Native client/server QA pending master."
+  ],
+  "tests": "4 EmptyHandW328GameTests; fourth uses genuine remote-camera Gear blocker, then restores camera while native E remains open. Registration in core delta.",
+  "dependencies": [
+    "Core worker inventory.WeaponHotbarGuard.guiOpen now includes InventoryMenuRedirect.nativeOpen"
+  ]
+}

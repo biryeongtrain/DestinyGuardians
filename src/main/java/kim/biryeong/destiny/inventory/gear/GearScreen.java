@@ -4,6 +4,8 @@ import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.hud.CombatHud;
 import kim.biryeong.destiny.inventory.WeaponEquipmentService;
+import kim.biryeong.destiny.inventory.WeaponStorage;
+import kim.biryeong.destiny.inventory.WeaponHotbarGuard;
 import kim.biryeong.destiny.inventory.WeaponScreen;
 import kim.biryeong.destiny.inventory.WeaponScreenControls;
 import kim.biryeong.destiny.inventory.WeaponScreenLayout.Box;
@@ -55,6 +57,7 @@ public final class GearScreen {
         List<WeaponScreenView.CharacterField> fields = List.of();
         List<WeaponScreenView.CharacterOption> options = List.of();
         final EnumMap<WeaponSlot, GearItems.Bucket> buckets = new EnumMap<>(WeaponSlot.class);
+        final EnumMap<WeaponSlot, Integer> storagePages = new EnumMap<>(WeaponSlot.class);
         GearView view;
         Session(ServerPlayer p) {
             owner = p; level = p.level(); connection = p.connection; anchor = p.position();
@@ -102,6 +105,7 @@ public final class GearScreen {
         if (active(p)) return true;
         String reason = blocked(p);
         if (reason != null) { p.sendOverlayMessage(Component.literal(reason)); return false; }
+        WeaponStorage.migrate(p);
         var old = OPEN.get(p.getUUID()); if (old != null) retire(old);
         WeaponRuntime.cancelUseForSkill(p); WeaponAiming.suspend(p); p.stopUsingItem();
         p.setSprinting(false); p.setShiftKeyDown(false); p.setLastClientInput(Input.EMPTY);
@@ -126,7 +130,7 @@ public final class GearScreen {
             var attr = s.owner.getAttribute(type); if (attr != null) attr.removeModifier(FREEZE);
         }
         s.owner.setLastClientInput(Input.EMPTY);
-        if (!s.owner.hasDisconnected()) s.owner.inventoryMenu.broadcastFullState();
+        if (!s.owner.hasDisconnected()) { WeaponHotbarGuard.restoreCombatSlot(s.owner); s.owner.inventoryMenu.broadcastFullState(); }
     }
 
     /** Pointer from view rotation. Horizontal position claims are pinned; vertical (falling) passes through. */
@@ -196,7 +200,7 @@ public final class GearScreen {
     private static void lock(Session s) {
         var w = hoveredWeapon(s);
         if (w == null) { notice(s, "무기에 커서를 올린 뒤 Shift를 누르면 잠급니다."); render(s); return; }
-        var stack = s.owner.getInventory().getItem(w.inventoryIndex());
+        var stack = WeaponStorage.resolve(s.owner, w.inventoryIndex());
         if (stack != w.stack()) { refresh(s); return; }
         boolean locked = kim.biryeong.destiny.weapon.WeaponLock.toggle(stack);
         s.owner.getInventory().setChanged();
@@ -239,10 +243,9 @@ public final class GearScreen {
             notice(s, w.name() + " · 한 번 더 Q를 누르면 분해합니다."); render(s); return true;
         }
         s.dismantleIndex = -1;
-        var inv = p.getInventory();
-        if (inv.getItem(w.inventoryIndex()) != w.stack()) { notice(s, "무기 상태가 바뀌어 분해를 취소했습니다."); refresh(s); return true; }
-        inv.setItem(w.inventoryIndex(), net.minecraft.world.item.ItemStack.EMPTY);
-        inv.setChanged();
+        if (WeaponStorage.resolve(p, w.inventoryIndex()) != w.stack()) { notice(s, "무기 상태가 바뀌어 분해를 취소했습니다."); refresh(s); return true; }
+        if (WeaponStorage.token(w.inventoryIndex())) WeaponStorage.remove(p, w.inventoryIndex(), w.stack());
+        else { p.getInventory().setItem(w.inventoryIndex(), net.minecraft.world.item.ItemStack.EMPTY); p.getInventory().setChanged(); }
         p.level().playSound(null, p.getX(), p.getY(), p.getZ(), net.minecraft.sounds.SoundEvents.GRINDSTONE_USE,
                 net.minecraft.sounds.SoundSource.PLAYERS, .6f, 1.4f);
         long glimmer = kim.biryeong.destiny.economy.Economy.reward(p, kim.biryeong.destiny.economy.Economy.dismantleValue(w.rarity()), "분해");
@@ -286,13 +289,20 @@ public final class GearScreen {
         if (node == GearSlot.SUBCLASS.ordinal()) { s.stage = Stage.SUBCLASS; s.expanded = null; refresh(s); return; }
         if (node >= 0 && node < GearLayout.SLOT_COUNT) {
             var slot = GearSlot.values()[node];
-            if (slot.weapon() != null) { s.expanded = slot; render(s); }
+            if (slot.weapon() != null) {
+                var bucket = s.buckets.get(slot.weapon());
+                if (s.expanded == slot && bucket != null && bucket.stored().size() > GearLayout.STORAGE_COUNT) {
+                    int pages = (bucket.stored().size() + GearLayout.STORAGE_COUNT - 1) / GearLayout.STORAGE_COUNT;
+                    s.storagePages.put(slot.weapon(), (s.storagePages.getOrDefault(slot.weapon(), 0) + 1) % pages);
+                }
+                s.expanded = slot; render(s);
+            }
             else notice(s, slot.armor() ? "방어구는 아직 교체할 수 없습니다." : "고스트 의체는 아직 교체할 수 없습니다.");
             render(s); return;
         }
         if (node >= GearLayout.STORAGE && node < GearLayout.STORAGE + GearLayout.STORAGE_COUNT && s.expanded != null) {
             var bucket = s.buckets.get(s.expanded.weapon());
-            int index = node - GearLayout.STORAGE;
+            int index = node - GearLayout.STORAGE + storageOffset(s, s.expanded.weapon());
             if (bucket == null || index >= bucket.stored().size()) return;
             var w = bucket.stored().get(index);
             String error = WeaponEquipmentService.equip(s.owner, w.inventoryIndex(), w.stack());
@@ -366,7 +376,7 @@ public final class GearScreen {
         }
         if (s.stage == Stage.GEAR && s.expanded != null && n >= GearLayout.STORAGE && n < GearLayout.STORAGE + GearLayout.STORAGE_COUNT) {
             var b = s.buckets.get(s.expanded.weapon());
-            int i = n - GearLayout.STORAGE;
+            int i = n - GearLayout.STORAGE + storageOffset(s, s.expanded.weapon());
             return b == null || i >= b.stored().size() ? null : b.stored().get(i);
         }
         return null;
@@ -414,15 +424,35 @@ public final class GearScreen {
         render(s);
     }
 
+    private static int storageOffset(Session s, WeaponSlot slot) {
+        var bucket = s.buckets.get(slot);
+        int pages = bucket == null ? 1 : Math.max(1, (bucket.stored().size() + GearLayout.STORAGE_COUNT - 1) / GearLayout.STORAGE_COUNT);
+        int page = Math.min(s.storagePages.getOrDefault(slot, 0), pages - 1);
+        s.storagePages.put(slot, page);
+        return page * GearLayout.STORAGE_COUNT;
+    }
+    private static Map<WeaponSlot, GearItems.Bucket> visibleBuckets(Session s) {
+        var result = new EnumMap<WeaponSlot, GearItems.Bucket>(WeaponSlot.class);
+        s.buckets.forEach((slot, bucket) -> {
+            int from = storageOffset(s, slot);
+            result.put(slot, new GearItems.Bucket(bucket.equipped(), bucket.stored().subList(from, Math.min(from + GearLayout.STORAGE_COUNT, bucket.stored().size()))));
+        });
+        return Map.copyOf(result);
+    }
     private static void render(Session s) {
         if (s.messageUntil > 0 && now(s) >= s.messageUntil) { s.message = ""; s.messageUntil = 0; }
         var hovered = s.stage == Stage.GEAR ? hoveredWeapon(s) : null;
         var bucket = s.expanded == null || s.expanded.weapon() == null ? null : s.buckets.get(s.expanded.weapon());
         var compare = hovered != null && !hovered.equipped() && bucket != null ? bucket.equipped() : null;
         boolean tooltip = hovered != null && now(s) - s.hoverSince >= TOOLTIP_DELAY;
+        String message = s.message;
+        if (message.isBlank() && bucket != null && bucket.stored().size() > GearLayout.STORAGE_COUNT)
+            message = "보관함 " + (storageOffset(s, s.expanded.weapon()) / GearLayout.STORAGE_COUNT + 1) + "/"
+                    + ((bucket.stored().size() + GearLayout.STORAGE_COUNT - 1) / GearLayout.STORAGE_COUNT)
+                    + " · 장착 무기 클릭: 다음 페이지";
         s.view = new GearView(s.owner.getGameProfile().name(), s.stage, s.expanded, s.focus,
-                s.controls.x(), s.controls.y(), s.controls.yaw(), s.controls.pitch(), Map.copyOf(s.buckets), tooltip ? hovered : null, compare, s.detail,
-                ((now(s) - s.openedAt) / 20) * 30f % 360, s.field, s.fields, s.options, s.message, armory(s.owner),
+                s.controls.x(), s.controls.y(), s.controls.yaw(), s.controls.pitch(), visibleBuckets(s), tooltip ? hovered : null, compare, s.detail,
+                ((now(s) - s.openedAt) / 20) * 30f % 360, s.field, s.fields, s.options, message, armory(s.owner),
                 kim.biryeong.destiny.guardian.Guardians.data(s.owner).guardianClass(),
                 WeaponScreen.characterView(s.owner, s.field), kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams(),
                 glimmer(s.owner));

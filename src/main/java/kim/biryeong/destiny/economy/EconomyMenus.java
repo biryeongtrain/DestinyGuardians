@@ -3,6 +3,7 @@ package kim.biryeong.destiny.economy;
 import kim.biryeong.destiny.economy.EconomyLedger.Listing;
 import kim.biryeong.destiny.economy.EconomyLedger.Mail;
 import kim.biryeong.destiny.weapon.WeaponRarity;
+import kim.biryeong.destiny.inventory.WeaponStorage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -73,6 +74,10 @@ public final class EconomyMenus {
         void redraw() {
             cells.clear();
             screen.draw(this, cells);
+            if (screen instanceof VaultScreen || screen instanceof SendScreen || screen instanceof SellScreen)
+                cells.put(48, new Cell(named(Items.CHEST, text("보관 무기 선택", ChatFormatting.YELLOW),
+                        text("캐릭터 보관함의 무기를 선택합니다.", ChatFormatting.GRAY)),
+                        (r, s) -> open(owner, new StoredWeaponsScreen(screen))));
             // Feedback inside the panel (the action bar sits behind the dimmed menu). Slot 52 is free on every screen.
             if (!notice.isEmpty() && owner.level().getServer().getTickCount() < noticeUntil)
                 cells.put(52, new Cell(econStyled(noticeGood ? "confirm" : "cancel",
@@ -136,15 +141,15 @@ public final class EconomyMenus {
     /** Null when the sell screen opened with inventory slot {@code index} picked, else why not. */
     public static String sellable(ServerPlayer p, int index) {
         String why = Economy.movable(p, index);
-        if (why == null && kim.biryeong.destiny.weapon.WeaponItems.entry(p.getInventory().getItem(index)).isEmpty())
+        if (why == null && kim.biryeong.destiny.weapon.WeaponItems.entry(WeaponStorage.resolve(p, index)).isEmpty())
             why = EconomyLedger.Error.NOT_A_WEAPON.message;
-        if (why == null && kim.biryeong.destiny.weapon.WeaponLock.locked(p.getInventory().getItem(index)))
+        if (why == null && kim.biryeong.destiny.weapon.WeaponLock.locked(WeaponStorage.resolve(p, index)))
             why = "잠긴 무기는 판매할 수 없습니다.";
         return why;
     }
     public static void openSell(ServerPlayer p, int index) {
         var sell = new SellScreen();
-        if (sellable(p, index) == null) { sell.index = index; sell.picked = p.getInventory().getItem(index); }
+        if (sellable(p, index) == null) { sell.index = index; sell.picked = WeaponStorage.resolve(p, index); }
         open(p, sell);
     }
 
@@ -272,6 +277,28 @@ public final class EconomyMenus {
         return m >= 60 ? (m / 60) + "시간 " + (m % 60) + "분" : Math.max(1, m) + "분";
     }
 
+    /** A display-only picker for system-owned weapons; never puts authoritative stacks in menu slots. */
+    static final class StoredWeaponsScreen extends Screen {
+        final Screen destination; int page;
+        StoredWeaponsScreen(Screen destination) { this.destination = destination; }
+        @Override Component title(Menu m) { return EconomyGui.title("vault", "보관 무기 선택"); }
+        @Override void draw(Menu m, Map<Integer, Cell> cells) {
+            var rows = WeaponStorage.entries(m.owner);
+            page = Math.min(page, pages(rows.size()) - 1);
+            for (int i = 0; i < PAGE && page * PAGE + i < rows.size(); i++) {
+                var row = rows.get(page * PAGE + i);
+                cells.put(i, new Cell(show(Economy.payloadPreview(row.stack()), List.of(text("클릭: 선택", ChatFormatting.YELLOW))), (r, s) -> {
+                    if (WeaponStorage.get(m.owner, row.token()) != row.stack()) { say(m, "보관함이 변경되었습니다.", false); return; }
+                    open(m.owner, destination);
+                    var returned = OPEN.get(m.owner.getUUID());
+                    if (returned != null && returned.screen == destination) { destination.inventory(returned, row.token()); returned.redraw(); }
+                }));
+            }
+            cells.put(49, new Cell(named(Items.BARRIER, text("돌아가기", ChatFormatting.WHITE)), (r, s) -> open(m.owner, destination)));
+            pager(cells, page, pages(rows.size()), p -> { page = p; m.redraw(); });
+        }
+    }
+
     // ================================================================== vault
 
     static final class VaultScreen extends Screen {
@@ -283,10 +310,10 @@ public final class EconomyMenus {
             page = Math.min(page, pages(items.size()) - 1);
             for (int i = 0; i < PAGE && page * PAGE + i < items.size(); i++) {
                 var item = items.get(page * PAGE + i);
-                cells.put(i, new Cell(show(item, List.of(text("클릭: 인벤토리로 꺼내기", ChatFormatting.YELLOW))), (r, s) -> withdraw(m, item.uid())));
+                cells.put(i, new Cell(show(item, List.of(text("클릭: 꺼내기 · 무기는 캐릭터 보관함으로", ChatFormatting.YELLOW))), (r, s) -> withdraw(m, item.uid())));
             }
             cells.put(49, new Cell(icon(VAULT_ICON, text("창고 " + items.size() + "/" + EconomyLedger.VAULT_CAP, ChatFormatting.WHITE),
-                    text("아래 인벤토리의 아이템을 클릭하면 보관합니다.", ChatFormatting.GRAY),
+                    text("일반 아이템은 아래에서, 무기는 보관 무기 선택에서 고르세요.", ChatFormatting.GRAY),
                     text("장착 중인 무기(1~3번 칸)는 보관할 수 없습니다.", ChatFormatting.GRAY)), null));
             cells.put(47, new Cell(balance(m.owner), null));
             pager(cells, page, pages(items.size()), p -> { page = p; m.redraw(); });
@@ -379,7 +406,7 @@ public final class EconomyMenus {
             int n = 0;
             for (var x : Economy.ledger().mail(m.owner.getUUID())) if (claim(m, x.id(), false)) n++;
             int left = Economy.ledger().mail(m.owner.getUUID()).size();
-            if (n == 0) say(m, left == 0 ? "받을 우편이 없습니다." : "받을 수 있는 우편이 없습니다. 인벤토리 공간을 확인하세요.", false);
+            if (n == 0) say(m, left == 0 ? "받을 우편이 없습니다." : "받을 수 있는 우편이 없습니다. 인벤토리·무기 보관함 공간을 확인하세요.", false);
             else say(m, n + "개를 받았습니다." + (left > 0 ? " " + left + "개는 남았습니다." : ""), true);
         }
     }
@@ -392,9 +419,9 @@ public final class EconomyMenus {
         SendScreen(UUID to, String toName, String message) { this.to = to; this.toName = toName; this.message = message == null ? "" : message; }
         @Override Component title(Menu m) { return EconomyGui.title("send", "우편 보내기 · " + toName); }
         @Override void draw(Menu m, Map<Integer, Cell> cells) {
-            if (index >= 0 && m.owner.getInventory().getItem(index) != picked) { index = -1; picked = ItemStack.EMPTY; }
+            if (index >= 0 && WeaponStorage.resolve(m.owner, index) != picked) { index = -1; picked = ItemStack.EMPTY; }
             if (index >= 0) cells.put(13, new Cell(show(Economy.payloadPreview(picked), List.of(text("클릭: 첨부 해제", ChatFormatting.YELLOW))), (r, s) -> { index = -1; picked = ItemStack.EMPTY; m.redraw(); }));
-            else cells.put(13, new Cell(named(Items.ITEM_FRAME, text("첨부할 아이템", ChatFormatting.WHITE), text("아래 인벤토리에서 클릭하세요. (선택)", ChatFormatting.GRAY)), null));
+            else cells.put(13, new Cell(named(Items.ITEM_FRAME, text("첨부할 아이템", ChatFormatting.WHITE), text("일반 아이템은 아래에서, 무기는 보관 무기 선택에서 고르세요. (선택)", ChatFormatting.GRAY)), null));
             stepper(cells, 18, amount, Economy.ledger().glimmer(m.owner.getUUID()), v -> { amount = v; m.redraw(); }, "보낼 미광체");
             cells.put(31, new Cell(named(Items.NAME_TAG, text("받는 사람: " + toName, ChatFormatting.WHITE),
                     text(message.isEmpty() ? "메시지 없음" : "“" + message + "”", ChatFormatting.GRAY)), null));
@@ -406,11 +433,11 @@ public final class EconomyMenus {
         @Override void inventory(Menu m, int i) {
             String why = Economy.movable(m.owner, i);
             if (why != null) { say(m, why, false); return; }
-            index = i; picked = m.owner.getInventory().getItem(i);
+            index = i; picked = WeaponStorage.resolve(m.owner, i);
         }
         private void send(Menu m) {
             var l = Economy.ledger(); var me = m.owner.getUUID();
-            if (index >= 0 && m.owner.getInventory().getItem(index) != picked) { say(m, "첨부한 아이템이 바뀌었습니다. 다시 선택하세요.", false); index = -1; return; }
+            if (index >= 0 && WeaponStorage.resolve(m.owner, index) != picked) { say(m, "첨부한 아이템이 바뀌었습니다. 다시 선택하세요.", false); index = -1; return; }
             if (index < 0 && amount == 0) { say(m, EconomyLedger.Error.EMPTY_MAIL); return; }
             if (index >= 0) { String why = Economy.movable(m.owner, index); if (why != null) { say(m, why, false); return; } }
             if (l.playerMailCount(to) >= EconomyLedger.POSTMASTER_CAP) { say(m, EconomyLedger.Error.RECIPIENT_FULL); return; }
@@ -493,7 +520,7 @@ public final class EconomyMenus {
             cells.put(50, new Cell(named(Items.BOOK, text("내 판매 목록 (" + Economy.ledger().listingsOf(me).size() + "/" + EconomyLedger.MAX_LISTINGS + ")", ChatFormatting.WHITE)),
                     (r, s) -> open(m.owner, new MyListingsScreen())));
             cells.put(51, new Cell(named(Items.GOLD_INGOT, text("무기 판매 등록", ChatFormatting.GOLD),
-                    text("아래 인벤토리의 무기를 클릭해도 됩니다.", ChatFormatting.GRAY)), (r, s) -> open(m.owner, new SellScreen())));
+                    text("판매 화면의 보관 무기 선택에서 무기를 고르세요.", ChatFormatting.GRAY)), (r, s) -> open(m.owner, new SellScreen())));
             pager(cells, page, pages(list.size()), p -> { page = p; m.redraw(); });
         }
         @Override void inventory(Menu m, int index) {
@@ -532,7 +559,7 @@ public final class EconomyMenus {
             if (!r.ok()) { say(m, r.error()); return; }
             var sale = r.value();
             String err = fits ? Economy.place(m.owner, stack.get()) : "공간 부족";
-            if (err != null) l.deliver(me, EconomyLedger.MailKind.AUCTION_ITEM, "경매장", sale.listing().item(), 0, "구매한 물품 (인벤토리 공간 부족)", now);
+            if (err != null) l.deliver(me, EconomyLedger.MailKind.AUCTION_ITEM, "경매장", sale.listing().item(), 0, "구매한 물품 (보관 공간 부족)", now);
             Economy.commit(m.owner);
             Economy.notify(sale.listing().seller(), sale.listing().item().name() + " 판매 완료: " + glimmer(sale.proceeds()) + " 미광체 (수수료 "
                     + glimmer(sale.tax()) + ")" + (sale.proceedsMailed() ? " · 우편함에 보관" : ""));
@@ -573,13 +600,13 @@ public final class EconomyMenus {
         void pick(Menu m, int i) {
             String why = sellable(m.owner, i);
             if (why != null) { say(m, why, false); return; }
-            index = i; picked = m.owner.getInventory().getItem(i);
+            index = i; picked = WeaponStorage.resolve(m.owner, i);
         }
         @Override void inventory(Menu m, int i) { pick(m, i); }
         @Override void draw(Menu m, Map<Integer, Cell> cells) {
-            if (index >= 0 && m.owner.getInventory().getItem(index) != picked) { index = -1; picked = ItemStack.EMPTY; }
-            if (index >= 0) cells.put(13, new Cell(show(Economy.payloadPreview(picked), List.of(text("다른 무기를 고르려면 인벤토리에서 클릭", ChatFormatting.GRAY))), null));
-            else cells.put(13, new Cell(named(Items.ITEM_FRAME, text("판매할 무기", ChatFormatting.WHITE), text("아래 인벤토리에서 무기를 클릭하세요.", ChatFormatting.GRAY)), null));
+            if (index >= 0 && WeaponStorage.resolve(m.owner, index) != picked) { index = -1; picked = ItemStack.EMPTY; }
+            if (index >= 0) cells.put(13, new Cell(show(Economy.payloadPreview(picked), List.of(text("다른 무기는 보관 무기 선택에서 고르세요.", ChatFormatting.GRAY))), null));
+            else cells.put(13, new Cell(named(Items.ITEM_FRAME, text("판매할 무기", ChatFormatting.WHITE), text("보관 무기 선택 버튼에서 판매할 무기를 고르세요.", ChatFormatting.GRAY)), null));
             stepper(cells, 18, price, EconomyLedger.MAX_PRICE, v -> { price = Math.max(EconomyLedger.MIN_PRICE, v); m.redraw(); }, "판매 가격");
             cells.put(30, new Cell(named(Items.CLOCK, text("판매 기간: " + hours + "시간", ChatFormatting.WHITE), text("클릭: 변경", ChatFormatting.GRAY)),
                     (r, s) -> { hours = cycle(EconomyLedger.DURATIONS_HOURS, hours); m.redraw(); }));
@@ -596,7 +623,7 @@ public final class EconomyMenus {
         private void list(Menu m) {
             var l = Economy.ledger(); var me = m.owner.getUUID();
             if (index < 0) { say(m, "판매할 무기를 먼저 고르세요.", false); return; }
-            if (m.owner.getInventory().getItem(index) != picked) { say(m, "선택한 무기가 바뀌었습니다. 다시 고르세요.", false); index = -1; return; }
+            if (WeaponStorage.resolve(m.owner, index) != picked) { say(m, "선택한 무기가 바뀌었습니다. 다시 고르세요.", false); index = -1; return; }
             String why = sellable(m.owner, index);
             if (why != null) { say(m, why, false); return; }
             var preview = Economy.payloadPreview(picked);

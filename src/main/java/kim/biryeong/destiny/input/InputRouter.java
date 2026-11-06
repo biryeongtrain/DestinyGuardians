@@ -78,6 +78,9 @@ public final class InputRouter {
         }
         if ((action == ServerboundPlayerActionPacket.Action.DROP_ITEM
                 || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
+                && kim.biryeong.destiny.weapon.WeaponOutboundPresentation.emptyHandCarrier(player)) return true;
+        if ((action == ServerboundPlayerActionPacket.Action.DROP_ITEM
+                || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS)
                 && kim.biryeong.destiny.weapon.WeaponItems.entry(player.getMainHandItem()).isPresent()) {
             // Holding Ctrl to sprint changes Q into DROP_ALL_ITEMS on vanilla clients.
             // While actually sprinting it is ordinary reload, never the removed Ctrl+Q special action.

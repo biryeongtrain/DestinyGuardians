@@ -3,6 +3,7 @@ package kim.biryeong.destiny.test;
 import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.ability.SuperSession;
 import kim.biryeong.destiny.inventory.WeaponEquipmentService;
+import kim.biryeong.destiny.inventory.WeaponStorage;
 import kim.biryeong.destiny.weapon.*;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.component.DataComponents;
@@ -100,8 +101,8 @@ public final class WeaponEquipmentW227GameTests {
         var b = before(p);
         long total = ammo(old).total() + ammo(incoming).total();
         check(h, WeaponEquipmentService.equip(p, 35, incoming) == null, "Storage index35 accepted");
-        check(h, p.getInventory().getItem(1) == incoming && p.getInventory().getItem(35) == old,
-                "Only the two original objects swap");
+        check(h, p.getInventory().getItem(1) == incoming && p.getInventory().getItem(35).isEmpty() && WeaponStorage.entries(p).stream().anyMatch(e -> e.stack() == old),
+                "The two original objects transfer between equipment and persistent storage");
         check(h, ItemStack.matches(old, b.contents().get(1)) && ItemStack.matches(incoming, b.contents().get(35)),
                 "All item components, saved ammunition, overflow and selected rolls survive");
         for (int i = 0; i < b.references().size(); i++) if (i != 1 && i != 35)
@@ -130,7 +131,7 @@ public final class WeaponEquipmentW227GameTests {
         var oldBefore = old.copy();
         var aceBefore = ace.copy();
         check(h, WeaponEquipmentService.equip(p, 9, ace) == null, "Owned Ace from index9 accepted");
-        check(h, p.getMainHandItem() == ace && p.getInventory().getItem(9) == old
+        check(h, p.getMainHandItem() == ace && p.getInventory().getItem(9).isEmpty() && WeaponStorage.entries(p).stream().anyMatch(e -> e.stack() == old)
                 && p.getInventory().getItem(0) == ace, "Ace/original references preserved");
         check(h, ItemStack.matches(old, oldBefore) && ItemStack.matches(ace, aceBefore)
                 && ammo(old).rounds() == 7 && ammo(ace).rounds() == 4, "Original and exotic ammo/components retained");
@@ -333,7 +334,7 @@ public final class WeaponEquipmentW227GameTests {
         p.getInventory().setItem(1, ItemStack.EMPTY);
         p.getInventory().setItem(9, izanagi);
         check(h, WeaponEquipmentService.equip(p, 9, izanagi) == null && p.getInventory().getItem(0) == izanagi
-                && p.getInventory().getItem(9) == ace, "Replacing an exotic in its own category is legal, stored exotic is not equipped");
+                && p.getInventory().getItem(9).isEmpty() && WeaponStorage.entries(p).stream().anyMatch(e -> e.stack() == ace), "Replacing an exotic in its own category is legal, stored exotic is not equipped");
         var energy = item("nezarec_s_whisper", 2, 5, 0);
         p.getInventory().setItem(10, energy);
         check(h, WeaponEquipmentService.equip(p, 10, energy) == null, "Stored second exotic cannot block other equipment");

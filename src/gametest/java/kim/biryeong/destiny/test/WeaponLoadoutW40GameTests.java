@@ -75,9 +75,9 @@ public final class WeaponLoadoutW40GameTests {
         var old=equip(h,p,"austringer",7,0);var replacement=item("duke_mk_44",3,0);
         p.getInventory().setItem(4,replacement);p.getInventory().setSelectedSlot(4);
         check(h,WeaponLoadout.equipHeld(p)==null,"Replacing same bucket swaps actual references");
-        check(h,p.getInventory().getItem(0)==replacement&&p.getInventory().getItem(4)==old,"Old weapon preserved in source storage slot");
+        check(h,p.getInventory().getItem(0)==replacement&&p.getInventory().getItem(4).isEmpty()&&kim.biryeong.destiny.inventory.WeaponStorage.entries(p).stream().anyMatch(e->e.stack()==old),"Old weapon preserved in persistent player storage");
         p.connection.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(4));
-        check(h,!WeaponRuntime.beginUse(p),"Carried backup outside equipped buckets cannot bypass three-slot loadout");
+        check(h,p.getInventory().getSelectedSlot()==0&&p.getMainHandItem()==replacement,"Invalid combat slot is rejected before changing the equipped weapon");
         check(h,WeaponItems.magazine(old,WeaponProfile.forEntry(WeaponItems.entry(old).orElseThrow())).rounds()==7,"Blocked extra gun consumes nothing");
         h.succeed();
     }

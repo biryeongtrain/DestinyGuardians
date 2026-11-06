@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Read-only projections of the player's real weapon stacks for the gear screen. Storage is the player's own
- * inventory (slots 3..35); perks live on each stack, so they travel with the weapon. Nothing here mutates.
+ * Read-only projections of the player's real weapon stacks for the gear screen. Storage is a persistent player
+ * attachment; equipped slots remain in inventory. Perks travel with each canonical stack. Nothing here mutates.
  */
 public final class GearItems {
     /** Stat display order of the Destiny tooltip; {@code bar=false} values are numbers only. */

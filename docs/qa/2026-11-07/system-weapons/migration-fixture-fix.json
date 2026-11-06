@@ -1,0 +1,12 @@
+{
+  "id": "w328-migration-roll-fixture-fix",
+  "files": [
+    {
+      "path": "src/gametest/java/kim/biryeong/destiny/test/WeaponStorageW328GameTests.java",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-special/DestinyGuardians/src/gametest/java/kim/biryeong/destiny/test/WeaponStorageW328GameTests.java",
+      "beforeSha256": "19c2598b84a46573f2af3c36978fefe33e11249345ccb778f462b7eca5fbe29f",
+      "afterSha256": "5b274359a7e3adc6d5e4ccb45110f46a8490ca58649be748700e0f89e8f2be88"
+    }
+  ],
+  "reason": "WeaponPerks.select(stack) defaults to auto-loading holster, which Eyasluna cannot roll. Select explicit manifest Headstone and assert exact selected Roll survives migration in addition to full ItemStack.matches."
+}

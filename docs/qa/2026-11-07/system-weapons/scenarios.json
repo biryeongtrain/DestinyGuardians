@@ -1,0 +1,40 @@
+{
+  "masterOnly": true,
+  "handRender": [
+    "equipped HIP gun AND custom gripping hands visible",
+    "native ADS/reload preserves custom weapon hands",
+    "empty selected0..2 has no vanilla fist",
+    "native Q on empty slot restores invisible presentation; no real item",
+    "third-person player arms and E paperdoll remain"
+  ],
+  "storage": [
+    "before/after join migration preserves non-equipped weapon count/components",
+    "actual0..2equipped stay physical;3..35 spare weapons absent",
+    "E equipment view shows stash and swaps ownedstack withoutduplication",
+    "loot/reward direct storage",
+    "serverpacket4..9 rejected beforelifecycle, accepted1..3;native fire remainsusable",
+    "GUI exemption andclose validselection",
+    "reconnect/restartpersist"
+  ],
+  "evidenceDistinction": "Master now has actual native hotbar/E input support in isolated QA client; protocol/server fixture and actual PNG evidence still distinguished.",
+  "nativeInputTool": {
+    "project": "/tmp/w328-vision-native-client",
+    "unitTests": 63,
+    "nodeTests": 34,
+    "keys": [
+      "hotbar_1",
+      "hotbar_2",
+      "hotbar_3",
+      "hotbar_4",
+      "hotbar_5",
+      "hotbar_6",
+      "hotbar_7",
+      "hotbar_8",
+      "hotbar_9",
+      "inventory",
+      "drop"
+    ],
+    "path": "Actual vanilla KeyMapping consumption; no direct slot assignment or synthesized selection packet"
+  },
+  "userCorrection": "Only native vanilla unarmed hand is hidden. Original request interpreted too broadly first; all custom profile weapon arms restored byte-for-byte before final build."
+}

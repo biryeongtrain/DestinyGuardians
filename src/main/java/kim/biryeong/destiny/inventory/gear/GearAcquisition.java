@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * The single path that puts a new weapon into a Guardian's possession (rewards, vendors and admin grants all
- * call {@link #give}). The weapon goes to storage (inventory slots 3..35) with its perks rolled once; perks stay
+ * call {@link #give}). The weapon goes to persistent player storage with its perks rolled once; perks stay
  * bound to that stack. A bucket holds at most {@link GearLayout#STORAGE_COUNT} stored weapons.
  */
 public final class GearAcquisition {
@@ -42,7 +42,9 @@ public final class GearAcquisition {
                                     var p = EntityArgument.getPlayer(c, "player");
                                     String id = StringArgumentType.getString(c, "id");
                                     var skin = WeaponSkins.find(id);
-                                    var entry = skin.isPresent() ? WeaponCatalog.find(skin.get().base()) : WeaponCatalog.find(id);
+                                    // Legendary IDs have their own catalog identity even when they also expose skin assets.
+                                    var entry = WeaponCatalog.find(id);
+                                    if (entry.isEmpty() && skin.isPresent()) entry = WeaponCatalog.find(skin.get().base());
                                     if (entry.isEmpty()) { c.getSource().sendFailure(Component.literal("무기 id를 찾을 수 없습니다.")); return 0; }
                                     var stack = kim.biryeong.destiny.loot.LootRoller.create(entry.get(), skin.map(WeaponSkins.Skin::id).orElse(null), p.getRandom());
                                     var slot = WeaponLoadout.slot(p, stack, entry.get());
@@ -69,18 +71,6 @@ public final class GearAcquisition {
 
     /** Put an already-built weapon stack (perks rolled) into storage. Null on success; never displaces items. */
     public static String store(ServerPlayer p, ItemStack stack) {
-        var entry = WeaponItems.entry(stack);
-        if (entry.isEmpty()) return "무기가 아닙니다.";
-        var slot = WeaponLoadout.slot(p, stack, entry.get());
-        long stored = kim.biryeong.destiny.inventory.WeaponEquipmentService.owned(p, slot).stream()
-                .filter(o -> o.inventoryIndex() >= 3).count();
-        if (stored >= GearLayout.STORAGE_COUNT) return GearSlot.of(slot).label() + " 보관 칸이 가득 찼습니다.";
-        int free = -1;
-        for (int i = 3; i < 36; i++) if (p.getInventory().getItem(i).isEmpty()) { free = i; break; }
-        if (free < 0) return "보관 공간이 없습니다.";
-        p.getInventory().setItem(free, stack);
-        p.getInventory().setChanged();
-        p.containerMenu.broadcastChanges();
-        return null;
+        return kim.biryeong.destiny.inventory.WeaponStorage.store(p, stack);
     }
 }

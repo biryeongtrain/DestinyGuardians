@@ -1,0 +1,30 @@
+{
+  "id": "w328-restore-custom-weapon-hands",
+  "files": [
+    {
+      "path": "src/main/resources/destiny/profile_view/sample.fsh",
+      "sourcePath": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians/src/main/resources/destiny/profile_view/sample.fsh",
+      "beforeSha256": "be40883ad193a24933ea45ff01064645710e202e3412a3588800bbc365aeed28",
+      "afterSha256": "df177f66b74551f8147b795b0534a150b4bd4efa6f055dfd2d64919e6f07d17f"
+    }
+  ],
+  "reason": "User clarification: retain custom weapon grip/reload hands; suppress only native unarmed first-person hand. Restore exact pre-W328 custom-arm fragment sampling.",
+  "validation": {
+    "preW328ByteIdentical": true,
+    "liveQA": "pending master",
+    "noRuntimeOrBuildByWorker": true
+  },
+  "unchanged": [
+    "WeaponOutboundPresentation selected-empty0..2 client-only invisible model carrier",
+    "WeaponSkinArms initialization",
+    "InputRouter cosmetic drop correction",
+    "GUI exemptions and native inventory handling"
+  ],
+  "qa": [
+    "Equip weapon: custom grip arms visible in hip and ADS; custom reload arms visible during reload and returned pose.",
+    "Select actually empty slot0..2: only invisible wire carrier, native bare arm absent, real server inventory EMPTY.",
+    "Open E/native/container GUI: carrier removed; close restores if selected slot truly empty.",
+    "Q while empty: native prediction corrected, no owned/dropped item.",
+    "Third-person player arms/body remain visible."
+  ]
+}

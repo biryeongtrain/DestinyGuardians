@@ -80,6 +80,7 @@ public final class WeaponSkinArms {
     }
 
     public static void init() {
+        WeaponOutboundPresentation.init();
         if (ProfileWeaponView.enabled() || initialized || !FabricLoader.getInstance().isModLoaded("bettermodel")) return;
         initialized = true;
         ServerTickEvents.END_SERVER_TICK.register(WeaponSkinArms::tick);

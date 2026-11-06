@@ -23,7 +23,7 @@ public final class WeaponLoadout {
         }
     }
     private WeaponLoadout() {}
-    public static void init() {}
+    public static void init() { kim.biryeong.destiny.inventory.WeaponStorage.init(); }
     /** OP fixture compatibility; does not alter inventory or firing cooldown. */
     public static void standalone(ServerPlayer p) { WeaponRuntime.cancelUseForSkill(p);p.setAttached(ENABLED,false); }
     public static boolean enabled(ServerPlayer p) { return p.getAttachedOrElse(ENABLED,false); }
@@ -63,31 +63,7 @@ public final class WeaponLoadout {
     }
     /** All validation occurs before changing either inventory slot. Never mints or destroys an item. */
     public static String equipHeld(ServerPlayer p) {
-        if(!p.isAlive()||p.isRemoved()||p.isSpectator()||AbilityService.inSuper(p))return "현재 동작 중에는 장비를 변경할 수 없습니다.";
-        ItemStack held=p.getMainHandItem();var entry=WeaponItems.entry(held);
-        if(entry.isEmpty())return "소유한 전투 무기를 주 손에 들어 주세요. 프리뷰는 사용할 수 없습니다.";
-        int from=p.getInventory().getSelectedSlot();int to=slot(p,held,entry.get()).hotbar();
-        ItemStack previous=p.getInventory().getItem(to);
-        if(from!=to&&!previous.isEmpty()) {
-            var previousEntry=WeaponItems.entry(previous);
-            if(previousEntry.isEmpty()||slot(p,previous,previousEntry.get()).hotbar()!=to||from<3)
-                return "대상 장비 슬롯을 먼저 비워 주세요. 기존 아이템은 덮어쓰지 않습니다.";
-        }
-        long exoticCount=equipped(p).stream().filter(e->e.slot().hotbar()!=to&&e.characteristics().exotic()).count();
-        if(WeaponCharacteristics.of(entry.get()).exotic()&&exoticCount>0)return "경이 무기는 한 개만 장착할 수 있습니다.";
-        WeaponHandling.update(p);
-        WeaponRuntime.cancelUseForSkill(p);
-        if(from!=to) {
-            p.getInventory().setItem(from,previous);
-            p.getInventory().setItem(to,held);
-        }
-        p.setAttached(ENABLED,true);
-        p.getInventory().setSelectedSlot(to);
-        p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetHeldSlotPacket(to));
-        WeaponHandling.update(p);
-        kim.biryeong.destiny.crucible.CrucibleAmmo.equipmentChanged(p);
-        p.getInventory().setChanged();
-        p.containerMenu.broadcastChanges();
-        return null;
+        return kim.biryeong.destiny.inventory.WeaponEquipmentService.equip(p,
+                p.getInventory().getSelectedSlot(), p.getMainHandItem());
     }
 }

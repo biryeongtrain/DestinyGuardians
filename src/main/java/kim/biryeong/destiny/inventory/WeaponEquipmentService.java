@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/** Inventory ownership boundary for the weapon HUD. UI sessions never own item copies. */
+/** Equipped inventory plus persistent spare-weapon ownership. UI sessions never own item copies. */
 public final class WeaponEquipmentService {
     private static final int MAIN_SIZE = 36;
 
@@ -28,8 +28,8 @@ public final class WeaponEquipmentService {
         return stack.getCount() == 1 ? WeaponItems.entry(stack) : Optional.empty();
     }
 
-    /** Pure server inventory projection, in actual index order, including equipped choices.
-     * The references are click tokens, not a promise that ownership will survive until equip.
+    /** Read-only equipped/spare projection. Tokens >=1000 resolve only through WeaponStorage.
+     * Legacy physical spares remain readable until the next migration boundary.
      */
     public static List<Owned> owned(ServerPlayer p, WeaponSlot slot) {
         List<Owned> result = new ArrayList<>();
@@ -39,11 +39,16 @@ public final class WeaponEquipmentService {
             if (entry.isPresent() && WeaponLoadout.slot(p, stack, entry.get()) == slot)
                 result.add(new Owned(index, stack, entry.get(), index == slot.hotbar()));
         }
+        for (var stored : WeaponStorage.entries(p)) {
+            var entry = live(stored.stack());
+            if (entry.isPresent() && WeaponLoadout.slot(p, stored.stack(), entry.get()) == slot)
+                result.add(new Owned(stored.token(), stored.stack(), entry.get(), false));
+        }
         return List.copyOf(result);
     }
 
     /** Revalidate a click against the exact owned object. All rejection paths precede lifecycle
-     * callbacks and inventory/attachment writes. Server-thread confinement makes the two-slot
+     * callbacks and inventory/attachment writes. Server-thread confinement makes the storage/equipment
      * transaction indivisible to other inventory actions; asynchronous/stale callers must retry.
      * @return null on success, otherwise a player-facing reason
      */
@@ -51,7 +56,7 @@ public final class WeaponEquipmentService {
         if (!p.level().getServer().isSameThread()) return "서버에서 장비를 다시 선택해 주세요.";
         if (!p.isAlive() || p.isRemoved() || p.isSpectator() || p.hasDisconnected() || AbilityService.inSuper(p))
             return "현재 동작 중에는 장비를 변경할 수 없습니다.";
-        if (from < 0 || from >= MAIN_SIZE || expected == null || p.getInventory().getItem(from) != expected)
+        if (from < 0 || (!WeaponStorage.token(from) && from >= MAIN_SIZE) || expected == null || WeaponStorage.resolve(p, from) != expected)
             return "인벤토리가 변경되었습니다. 소유 무기를 다시 선택해 주세요.";
         var entry = live(expected);
         if (entry.isEmpty()) return "소유한 전투 무기 한 개를 선택해 주세요. 프리뷰는 사용할 수 없습니다.";
@@ -76,6 +81,8 @@ public final class WeaponEquipmentService {
         }
         if (exotics > 1) return "경이 무기는 한 개만 장착할 수 있습니다.";
 
+        if (from != to && !displaced.isEmpty() && WeaponStorage.data(p).nextId() == Integer.MAX_VALUE)
+            return "무기 보관함에 더 저장할 수 없습니다.";
         int selected = p.getInventory().getSelectedSlot();
         if (from == to && selected == to) {
             // Reaffirming current equipment must not cancel a reload/charge or restart its
@@ -86,7 +93,12 @@ public final class WeaponEquipmentService {
         WeaponHandling.update(p);
         WeaponRuntime.cancelUseForSkill(p);
         if (from != to) {
-            p.getInventory().setItem(from, displaced);
+            if (WeaponStorage.token(from)) {
+                if (!WeaponStorage.exchange(p, from, expected, displaced)) throw new IllegalStateException("Validated storage ownership changed");
+            } else {
+                p.getInventory().setItem(from, ItemStack.EMPTY);
+                WeaponStorage.retain(p, displaced);
+            }
             p.getInventory().setItem(to, expected);
         }
         p.setAttached(WeaponLoadout.ENABLED, true);
