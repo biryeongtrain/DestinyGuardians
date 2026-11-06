@@ -415,7 +415,7 @@ public final class GearHud {
     private static void footer(HudPainter p, GearView v) {
         p.rect("footer_rule", 960, 990, 1760, 1, 104, LINE);
         String hint = switch (v.stage()) {
-            case GEAR -> "좌클릭 · Space 선택    F 상세    A 판매    Shift 잠금    W 경매장    S 창고    우클릭 · E 닫기";
+            case GEAR -> "좌클릭 · Space 선택    F 상세    A 판매    Shift 잠금    W 경매장    S 창고    D 화력팀    우클릭 · E 닫기";
             case DETAIL -> "F · 우클릭 뒤로    E 닫기";
             default -> "좌클릭 · Space 선택    우클릭 뒤로    E 닫기";
         };

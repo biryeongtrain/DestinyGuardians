@@ -203,6 +203,24 @@ public final class RisingCampaign {
         return true;
     }
 
+    /** Null when {@link #start} would queue this player now. Read-only. */
+    public static String check(ServerPlayer p) {
+        if (kim.biryeong.destiny.strike.devils.DevilsLair.participating(p)) return "공격전에서 나간 뒤 시작하세요.";
+        if (server == null || instances == null || !p.level().getServer().isSameThread()) return "서버에서 다시 시도하세요.";
+        if (!p.isAlive() || p.isSpectator() || p.hasDisconnected()) return "살아 있는 접속 플레이어만 시작할 수 있습니다.";
+        if (kim.biryeong.destiny.crucible.CrucibleRuntime.participating(p)) return "시련의 장에 참가 중에는 시작할 수 없습니다.";
+        if (AbilityService.inSuper(p)) return "궁극기 사용 중에는 시작할 수 없습니다.";
+        if (kim.biryeong.destiny.down.GuardianDown.active(p)) return "쓰러진 상태에서는 시작할 수 없습니다.";
+        if (SESSIONS.containsKey(p.getUUID())) return "이미 진행 중인 임무가 있습니다.";
+        if (kim.biryeong.destiny.tutorial.Tutorial.active(p)) return "튜토리얼을 마친 뒤 시작하세요.";
+        return null;
+    }
+    /** The mission placed this player in its instance and is running (its opening presentation owns the view). */
+    public static boolean entered(ServerPlayer p) {
+        var s = SESSIONS.get(p.getUUID());
+        return s != null && s.state == State.RUNNING && s.instance != null && p.level() == s.instance.level();
+    }
+
     /** Queue a run (or resume the stored checkpoint). Returns null on success, or a Korean error. */
     public static String start(ServerPlayer p, boolean replay) {
         if (kim.biryeong.destiny.strike.devils.DevilsLair.participating(p)) return "공격전에서 나간 뒤 시작하세요.";

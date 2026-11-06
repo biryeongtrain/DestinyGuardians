@@ -109,7 +109,7 @@ public final class WeaponScreen {
     }
 
     /** True while either the gear screen or the admin test armory is open. */
-    public static boolean active(ServerPlayer p) { return current(p) != null || kim.biryeong.destiny.inventory.gear.GearScreen.active(p); }
+    public static boolean active(ServerPlayer p) { return current(p) != null || kim.biryeong.destiny.inventory.gear.GearScreen.active(p) || kim.biryeong.destiny.fireteam.FinderScreen.active(p); }
     public static boolean armoryActive(ServerPlayer p) { return current(p) != null; }
     /** Observation only: never opens, refreshes, renders or initializes guardian state. Server thread only. */
     public static Optional<WeaponScreenView> snapshot(ServerPlayer p) {
@@ -129,6 +129,7 @@ public final class WeaponScreen {
     /** F while a menu is open: detail view in the gear screen, close for the armory. */
     public static void swapKey(ServerPlayer p) {
         if (kim.biryeong.destiny.inventory.gear.GearScreen.inspect(p)) return;
+        if (kim.biryeong.destiny.fireteam.FinderScreen.active(p)) return;
         close(p);
     }
     public static boolean openArmory(ServerPlayer p) {
@@ -159,6 +160,7 @@ public final class WeaponScreen {
     }
     public static void close(ServerPlayer p) {
         kim.biryeong.destiny.inventory.gear.GearScreen.close(p);
+        kim.biryeong.destiny.fireteam.FinderScreen.close(p);
         var s = current(p); if (s != null) retire(s);
     }
     private static void retire(Session s) {
@@ -176,6 +178,7 @@ public final class WeaponScreen {
     /** Called only after packet thread validation. Suppress position claims, accept finite pointer rotation. */
     public static boolean move(ServerPlayer p, ServerboundMovePlayerPacket packet) {
         if (kim.biryeong.destiny.inventory.gear.GearScreen.move(p, packet)) return true;
+        if (kim.biryeong.destiny.fireteam.FinderScreen.move(p, packet)) return true;
         var s = current(p); if (s == null) return false;
         if (packet.hasRotation()) {
             float yaw = packet.getYRot(p.getYRot()), pitch = packet.getXRot(p.getXRot());
@@ -197,6 +200,7 @@ public final class WeaponScreen {
     }
     public static boolean input(ServerPlayer p, Input next) {
         if (kim.biryeong.destiny.inventory.gear.GearScreen.input(p, next)) return true;
+        if (kim.biryeong.destiny.fireteam.FinderScreen.input(p, next)) return true;
         var s = current(p); if (s == null) return false;
         Input old = s.input; s.input = next; touch(s);
         if (next.jump() && !old.jump()) { s.pointerDriven = false; click(p, false); }
@@ -214,6 +218,7 @@ public final class WeaponScreen {
     }
     public static boolean click(ServerPlayer p, boolean back) {
         if (kim.biryeong.destiny.inventory.gear.GearScreen.click(p, back)) return true;
+        if (kim.biryeong.destiny.fireteam.FinderScreen.click(p, back)) return true;
         var s = current(p); if (s == null) return false;
         // Coalesce same-tick packet variants, while allowing a fresh click at the same screen position.
         int now = now(s); if (now - s.lastClick < 3) return true;

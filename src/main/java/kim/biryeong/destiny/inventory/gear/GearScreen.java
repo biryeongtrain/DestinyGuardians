@@ -168,6 +168,7 @@ public final class GearScreen {
         if (next.forward() && !old.forward()) openEconomy(s, true);
         else if (next.backward() && !old.backward()) openEconomy(s, false);
         else if (next.left() && !old.left()) sell(s);
+        else if (next.right() && !old.right()) { var p0 = s.owner; close(p0); kim.biryeong.destiny.fireteam.FinderScreen.open(p0); }
         else if (next.shift() && !old.shift()) lock(s);
         return true;
     }

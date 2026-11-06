@@ -123,6 +123,26 @@ public final class DevilsLair {
         source.sendSuccess(() -> Component.literal("악마의 소굴: " + players.size() + "인 입장 준비 중 · 전투 난이도는 3인 기준 고정"), true);
         return 1;
     }
+    /** Null when {@link #start} would accept these players now. Read-only (the finder calls it every second). */
+    public static String check(List<ServerPlayer> players) {
+        if (server == null || !server.isSameThread()) return "서버에서 다시 시도하세요.";
+        if (players.isEmpty() || players.size() > 3 || players.stream().map(ServerPlayer::getUUID).distinct().count() != players.size())
+            return "서로 다른 접속 플레이어 1~3명이 필요합니다.";
+        if (maps == null || !maps.isDone()) return "공격전 맵을 준비 중입니다.";
+        if (maps.isCompletedExceptionally()) return "공격전 맵을 읽지 못했습니다.";
+        for (var p : players) {
+            if (server.getPlayerList().getPlayer(p.getUUID()) != p || p.hasDisconnected() || !p.isAlive()
+                    || p.isSpectator() || p.isCreative() || !p.connection.hasClientLoaded() || !MusicPacks.ready(p))
+                return p.getGameProfile().name() + " 님의 생존 상태와 리소스 팩 로드가 필요합니다.";
+            if (participating(p) || RisingCampaign.participating(p) || Tutorial.active(p)
+                    || CrucibleRuntime.participating(p) || AbilityService.inSuper(p) || GuardianDown.active(p))
+                return p.getGameProfile().name() + " 님이 다른 활동 또는 궁극기 사용 중입니다.";
+        }
+        return null;
+    }
+    /** The strike has placed this player in its world and the run (briefing first) is live. */
+    public static boolean entered(ServerPlayer p) { return active(p); }
+
     public static String start(List<ServerPlayer> players) {
         if (server == null || !server.isSameThread()) return "서버에서 다시 시도하세요.";
         if (players.isEmpty() || players.size() > 3 || players.stream().map(ServerPlayer::getUUID).distinct().count() != players.size())
