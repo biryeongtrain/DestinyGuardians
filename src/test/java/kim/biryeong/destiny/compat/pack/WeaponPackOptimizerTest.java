@@ -28,6 +28,24 @@ class WeaponPackOptimizerTest {
             "thirdperson_lefthand", "gui", "ground", "fixed", "head", "none");
 
     @Test
+    void hiddenFirstPersonWrapperPrunesReloadGraphAndPreservesOtherContexts() {
+        var original = select(DISPLAY, 0,
+                select(DISPLAY, 0, model("world"),
+                        many(model("unreachable_reload"), "firstperson_righthand", "firstperson_lefthand"),
+                        one("gui", model("inventory"))),
+                many(JsonParser.parseString("{\"type\":\"minecraft:empty\"}").getAsJsonObject(),
+                        "firstperson_righthand", "firstperson_lefthand"));
+        var optimized = WeaponPackOptimizer.specialize(original.deepCopy());
+        for (String context : CONTEXTS) {
+            var input = new Input(context, Map.of(), Map.of());
+            assertEquals(evaluate(original, input), evaluate(optimized, input), context);
+        }
+        assertFalse(optimized.toString().contains("unreachable_reload"));
+        assertTrue(optimized.toString().contains("inventory"));
+        assertTrue(optimized.toString().contains("world"));
+    }
+
+    @Test
     void mixedDisplayCasesNarrowBothHandsAndKeepFallbackExclusions() {
         var firstPerson = select(DISPLAY, -1, model("unreachable_fp_fallback"),
                 one("firstperson_righthand", model("right")),

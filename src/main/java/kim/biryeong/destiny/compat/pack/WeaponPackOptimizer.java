@@ -82,6 +82,8 @@ public final class WeaponPackOptimizer {
         }
         for (String path : files.keySet())
             if (generatedPose(path) && !reachable.contains(path)) excluded.add(path);
+        int sharedPoses = SharedWeaponGeometry.compact(builder, files, excluded);
+        DestinyGuardians.LOGGER.info("Weapon pose geometry: {} leaves sharing unchanged base geometry", sharedPoses);
         int sharedModels = PackModelDeduplicator.compact(builder, files, excluded);
         int previousOmitted = excluded.size();
         PackModelPruner.prune(files, excluded);

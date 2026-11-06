@@ -42,9 +42,16 @@ public final class ProfileArmAssets {
             var view=new JsonObject();view.add("model",gun);
             put(builder,files,WeaponPackOptimizer.itemPath(view(source)),view);
             after+=view.toString().getBytes(StandardCharsets.UTF_8).length;
-            // Inventory, dropped and observer third-person representations retain the original route.
-            var held=new JsonObject();held.add("model",firstPersonEmpty(
-                    JsonParser.parseString(files.get(WeaponPackOptimizer.itemPath(source)).asString()).getAsJsonObject().getAsJsonObject("model")));
+            // Specialize the original route too: nested selectors otherwise bake unreachable
+            // first-person/reload leaves even when the outer display context rules them out.
+            String sourcePath=WeaponPackOptimizer.itemPath(source);
+            var originalItem=JsonParser.parseString(files.get(sourcePath).asString()).getAsJsonObject();
+            originalItem.add("model",WeaponPackOptimizer.specialize(originalItem.getAsJsonObject("model")));
+            put(builder,files,sourcePath,originalItem);
+            // The held wrapper hides first person, so specialize again with that constraint.
+            // Copy before mutation: the original item must retain its first-person fallback.
+            var held=new JsonObject();
+            held.add("model",WeaponPackOptimizer.specialize(firstPersonEmpty(originalItem.getAsJsonObject("model").deepCopy())));
             put(builder,files,wrapped,held);omitted.remove(wrapped);
             after+=held.toString().getBytes(StandardCharsets.UTF_8).length;
         }
@@ -61,6 +68,8 @@ public final class ProfileArmAssets {
             if(n.has("parent")) {String parent=WeaponPackOptimizer.modelPath(n.get("parent").getAsString());if(reachable.add(parent))queue.add(parent);}
         }
         for(String path:files.keySet())if(WeaponPackOptimizer.generatedPose(path)&&!reachable.contains(path))omitted.add(path);
+        int sharedPoses=SharedWeaponGeometry.compact(builder,files,omitted);
+        DestinyGuardians.LOGGER.info("Weapon pose geometry: {} leaves sharing unchanged base geometry",sharedPoses);
         int sharedModels=PackModelDeduplicator.compact(builder,files,omitted);
         int previousOmitted=omitted.size();
         PackModelPruner.prune(files,omitted);
