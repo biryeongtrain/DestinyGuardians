@@ -1,0 +1,51 @@
+{
+  "source_url": "https://drive.google.com/file/d/131_ndTXUG-08ev6wuRdiNK7ecmOqUjMQ/view",
+  "selected_by": "user",
+  "source_name": "Director - Mission Click and Countdown.mp3",
+  "source_sha256": "229a004fe54964c41ce25fddb1eb5c85e47a943b4d0cb9a555e43e66ca189222",
+  "source_bytes": 159903,
+  "source_duration_seconds": 6.343583,
+  "conversion": "Full source decoded to stereo Vorbis q6 44100Hz; no cuts/speed changes. Trailing silence padded to original MP3 container duration to preserve full6.343583s timeline. Local FFmpeg has native Vorbis encoder; libvorbis unavailable.",
+  "ffmpeg_args": [
+    "-map",
+    "0:a:0",
+    "-af",
+    "apad=whole_dur=6.343583",
+    "-c:a",
+    "vorbis",
+    "-strict",
+    "experimental",
+    "-q:a",
+    "6",
+    "-ar",
+    "44100"
+  ],
+  "output": "src/main/resources/assets/destiny_activity_launch/sounds/director_mission_click_countdown.ogg",
+  "output_sha256": "95aa673dafd7c4cf48c923bf8b05c28c824392896a9bace3461d0fac2e78eca5",
+  "output_info": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "sample_rate": "44100",
+        "channels": 2
+      }
+    ],
+    "format": {
+      "duration": "6.347755",
+      "size": "104527"
+    }
+  },
+  "timeline_ticks": {
+    "accepted_audio_start": 0,
+    "visual_5": 20,
+    "visual_4": 40,
+    "visual_3": 60,
+    "visual_2": 80,
+    "visual_1": 100,
+    "fade_start": 104,
+    "activity_launch": 120,
+    "natural_audio_tail_until": 127
+  },
+  "provenance_note": "Exact user-selected provided Director MP3. No additional claim about original game extraction/authorship/license beyond provided source."
+}

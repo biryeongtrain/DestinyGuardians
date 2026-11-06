@@ -32,7 +32,7 @@ public final class Fireteams {
         FinderActivities.register();
         FinderScreen.init();
         ServerLifecycleEvents.SERVER_STARTED.register(s -> server = s);
-        ServerLifecycleEvents.SERVER_STOPPING.register(s -> { for (var l : LAUNCHES.values()) l.abort(); LAUNCHES.clear(); });
+        ServerLifecycleEvents.SERVER_STOPPING.register(s -> { for (var l : LAUNCHES.values()) l.abort(); LAUNCHES.clear(); FinderSounds.reset(s); });
         ServerLifecycleEvents.SERVER_STOPPED.register(s -> server = null);
         ServerTickEvents.END_SERVER_TICK.register(Fireteams::tick);
         ServerPlayConnectionEvents.DISCONNECT.register((h, s) -> leave(h.getPlayer(), "접속을 종료했습니다."));
@@ -104,16 +104,20 @@ public final class Fireteams {
 
     /** Leave (or be removed on disconnect). Cancels a countdown; the activity itself keeps its own roster. */
     public static void leave(ServerPlayer p, String why) {
+        if (server != null) {
+            var current = server.getPlayerList().getPlayer(p.getUUID());
+            if (current != null && current != p) return; // A late disconnect cannot remove a replacement connection's team.
+        }
         var t = ROSTER.team(p.getUUID()).orElse(null);
         if (t == null) return;
         var l = LAUNCHES.get(t.id);
-        if (l != null && l.phase() == ActivityLaunch.Phase.COUNTDOWN) l.cancel(name(p) + " 님이 화력팀을 떠났습니다.");
+        if (l != null && l.cancelable() && l.owns(p)) l.cancel(name(p) + " 님이 화력팀을 떠났습니다.");
         boolean wasLeader = t.leader().equals(p.getUUID());
         ROSTER.leave(p.getUUID());
         if (t.size() > 0) {
             tell(t, name(p) + " 님이 " + (why == null ? "화력팀을 떠났습니다." : why), false);
             if (wasLeader) tell(t, t.name(t.leader()) + " 님이 화력팀장이 되었습니다.", true);
-        } else LAUNCHES.remove(t.id);
+        } else if (l != null && LAUNCHES.remove(t.id, l)) l.abort();
         changed(t);
     }
 
@@ -170,6 +174,8 @@ public final class Fireteams {
      * fireteam size and the activity's own preconditions before the countdown starts.
      */
     static String play(ServerPlayer p, ActivityCatalog.Activity soloActivity) {
+        if (server == null || !server.isSameThread() || server.getPlayerList().getPlayer(p.getUUID()) != p
+                || p.hasDisconnected() || p.isRemoved()) return "현재 접속에서 다시 시도하세요.";
         var t = ROSTER.team(p.getUUID()).orElse(null);
         if (t == null) {
             if (soloActivity == null) return "활동을 먼저 고르세요.";
@@ -192,10 +198,12 @@ public final class Fireteams {
         String error = activity.launcher().check(online);
         if (error != null) return error;
         ROSTER.launching(t, true);
-        LAUNCHES.put(t.id, new ActivityLaunch(server, t, activity));
+        var launch = new ActivityLaunch(server, t, activity, List.copyOf(online));
+        LAUNCHES.put(t.id, launch);
         // The countdown plays over the world (Destiny closes the director when the launch starts).
         for (var m : online) FinderScreen.close(m);
-        tell(t, activity.name() + " 출발까지 5초. 화력팀장은 /화력팀 취소로 멈출 수 있습니다.", true);
+        launch.accept();
+        tell(t, activity.name() + " · 1초 뒤 출발 카운트다운이 시작됩니다. /화력팀 취소로 멈출 수 있습니다.", true, false);
         changed(t);
         return null;
     }
@@ -205,7 +213,8 @@ public final class Fireteams {
         if (t == null) return FireteamRoster.Error.NO_FIRETEAM.message;
         if (!t.leader().equals(leader.getUUID())) return FireteamRoster.Error.NOT_LEADER.message;
         var l = LAUNCHES.get(t.id);
-        if (l == null || l.phase() != ActivityLaunch.Phase.COUNTDOWN) return "취소할 수 있는 출발이 없습니다.";
+        if (l == null || !l.cancelable() || !l.owns(leader)
+                || server.getPlayerList().getPlayer(leader.getUUID()) != leader) return "취소할 수 있는 출발이 없습니다.";
         l.cancel("화력팀장이 취소했습니다.");
         return null;
     }
@@ -213,14 +222,14 @@ public final class Fireteams {
     // ------------------------------------------------------------------ tick & notifications
 
     private static void tick(MinecraftServer s) {
+        FinderSounds.tick(s);
         for (var e : List.copyOf(LAUNCHES.entrySet())) {
             var l = e.getValue();
             try { l.tick(); }
             catch (RuntimeException ex) {
                 kim.biryeong.destiny.DestinyGuardians.LOGGER.error("[Fireteams] launch tick failed", ex); l.abort();
             }
-            if (l.phase() == ActivityLaunch.Phase.DONE) {
-                LAUNCHES.remove(e.getKey());
+            if (l.phase() == ActivityLaunch.Phase.DONE && LAUNCHES.remove(e.getKey(), l)) {
                 ROSTER.launching(l.team, false);
                 changed(l.team);
             }
@@ -237,13 +246,14 @@ public final class Fireteams {
         }
     }
 
-    private static void tell(FireteamRoster.Team t, String text, boolean good) {
+    private static void tell(FireteamRoster.Team t, String text, boolean good) { tell(t, text, good, true); }
+    private static void tell(FireteamRoster.Team t, String text, boolean good, boolean sound) {
         if (t == null || server == null) return;
         for (var id : t.members()) {
             var p = server.getPlayerList().getPlayer(id);
             if (p == null) continue;
             p.sendSystemMessage(Component.literal("[화력팀] ").withColor(0x7FB2E5).append(Component.literal(text).withColor(good ? 0xD8E2EA : 0xE0A35A)));
-            FinderSounds.play(p, SoundEvents.NOTE_BLOCK_CHIME, .4f, good ? 1.4f : .9f);
+            if (sound) FinderSounds.play(p, SoundEvents.NOTE_BLOCK_CHIME, .4f, good ? 1.4f : .9f);
         }
     }
 

@@ -217,6 +217,15 @@ public final class GuardianDown {
         return true;
     }
 
+    /** Wipe overlay handoff keeps the exact activity-owned camera/input state without a revive callback. */
+    public static boolean suppressHudOwned(ServerPlayer player, Options owner, boolean hidden) {
+        Down down = owned(player, owner);
+        if (down == null) return false;
+        down.presentationHidden = hidden;
+        if (hidden) down.hud.clear();
+        return true;
+    }
+
     /** Activity kill boundaries bypass temporary damage immunity, but retain the owned revival policy.
      * The activity supplies a supported body location so allies can still revive a fallen player. */
     public static boolean fallOwned(ServerPlayer player, Options owner, Vec3 body) {
@@ -468,6 +477,7 @@ public final class GuardianDown {
         boolean effect, ended;
         int hold, checkpointHold, revivingAt = -1;
         boolean toRespawnPoint;
+        boolean presentationHidden;
         int motionAt = -1;
         Vec3 motionAnchor;
         FireteamReviveAudio progressAudio;
@@ -693,6 +703,7 @@ public final class GuardianDown {
         }
 
         void render(int now) {
+            if (presentationHidden) { hud.clear(); return; }
             int age = now - started;
             float charge = options.readyTicks() <= 0 ? 1 : Math.min(1f, age / (float) options.readyTicks());
             boolean ready = now >= readyAt;

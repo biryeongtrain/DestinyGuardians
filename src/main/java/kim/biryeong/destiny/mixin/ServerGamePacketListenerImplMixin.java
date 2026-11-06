@@ -28,6 +28,16 @@ public abstract class ServerGamePacketListenerImplMixin {
     @Shadow
     public abstract void resetPosition();
 
+    @Inject(method="handlePlayerPositionChange",at=@At("HEAD"))
+    private void destiny$dashMovementStart(double x,double y,double z,float yaw,float pitch,boolean grounded,boolean collision,CallbackInfo ci) {
+        kim.biryeong.destiny.combat.MeleeLunge.beforeClientMovement(player);
+    }
+
+    @Inject(method="handlePlayerPositionChange",at=@At("TAIL"))
+    private void destiny$dashMovementEnd(double x,double y,double z,float yaw,float pitch,boolean grounded,boolean collision,CallbackInfo ci) {
+        kim.biryeong.destiny.combat.MeleeLunge.afterClientMovement(player);
+    }
+
     /** Vanilla rewinds doTick movement to firstGoodXYZ immediately after this call.
      * During camera ownership, keep the one collision-resolved native step as that baseline.
      * resetPosition only updates connection bookkeeping; it neither moves nor sends a teleport.

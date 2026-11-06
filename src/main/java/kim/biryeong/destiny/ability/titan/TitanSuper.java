@@ -169,10 +169,9 @@ public final class TitanSuper extends Ability {
         void strike(boolean slam) {
             ServerPlayer p=c.owner;Vec3 center=p.position().add(0,1,0),forward=Motion.horizontalLook(p);
             ClassAbilityEffects.sound(p,ability.element(),"super.fire");
-            for(LivingEntity e:TitanAbilities.targets(c,center,TitanAbilities.value(ability,"radius",3.5,1,5))) {
-                Vec3 delta=e.getBoundingBox().getCenter().subtract(center);
-                if(slam||delta.lengthSqr()<1e-8||forward.dot(delta.normalize())>.25)damage(e,slam?"slam":"light");
-            }
+            for(LivingEntity e:kim.biryeong.destiny.combat.MeleeSweep.frontal(p,
+                    TitanAbilities.value(ability,"radius",3.5,1,5),slam?-1:.25,1.8))
+                damage(e,slam?"slam":"light");
             ClassAbilityEffects.burst(p,center,ability.element(),slam?3:1.5);
             ClassAbilityEffects.soundAt(p,ability.element(),ability.id().getPath(),"super.impact",center);
         }

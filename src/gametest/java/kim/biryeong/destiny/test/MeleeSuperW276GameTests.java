@@ -39,7 +39,7 @@ public final class MeleeSuperW276GameTests {
             check(h, Math.abs(boosted - base * 1.3) < 1e-6, "Speed +30% during melee super: base=" + base + " now=" + boosted);
             double z = p.getZ();
             check(h, AbilityService.perform(p, GuardianAction.PRIMARY) && session.primaries == 1, "Primary reaches the session");
-            check(h, p.getZ() - z > .5, "Light attack steps forward: dz=" + (p.getZ() - z));
+            check(h, Math.abs(p.getZ() - z) < 1e-6, "A session without an accepted contact cannot lunge: dz=" + (p.getZ() - z));
             double z2 = p.getZ();
             AbilityService.perform(p, GuardianAction.PRIMARY);
             check(h, Math.abs(p.getZ() - z2) < 1e-6, "Held clicks are rate-limited");

@@ -282,7 +282,8 @@ public final class TitanExpandedSupers {
                     if(supported(o.p)&&waves.size()<3)waves.add(new Firewave(o));
                 } else {
                     Vec3 center=o.p.position().add(0,.9,0);
-                    o.damage(center,o.value("spin_radius",3,1,5),(float)o.value("spin_damage",14,0,80),null,"spin");
+                    for(LivingEntity e:kim.biryeong.destiny.combat.MeleeSweep.frontal(o.p,o.value("spin_radius",3,1,5),-1,1.8))
+                        Combat.damage(o.level,o.p,e,AbilityDamage.pvp(o.ability,"spin",e,(float)o.value("spin_damage",14,0,80)),Element.SOLAR,AmmoGeneration.SUPER);
                     o.burst(center,2);
                 }
                 ClassAbilityEffects.sound(o.p,Element.SOLAR,o.path(),"super.fire");

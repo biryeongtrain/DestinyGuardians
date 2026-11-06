@@ -2,6 +2,7 @@ package kim.biryeong.destiny.strike.devils;
 
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.down.GuardianDown;
+import kim.biryeong.destiny.activity.presentation.ActivityFailurePresentation;
 import kim.biryeong.minigamelib.music.MusicPacks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -28,6 +29,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private final DevilsDirector director;
     private final DevilsActors actors;
     private final DevilsRecovery recovery;
+    private final ActivityFailurePresentation failure;
     private final DevilsSupplies supplies;
     private final DevilsSupplyStations supplyStations;
     private final Set<UUID> supplySneaking = new HashSet<>();
@@ -60,6 +62,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         this.ids = players.stream().map(ServerPlayer::getUUID).toList();
         roster = new DevilsRoster(ids); build = new DevilsWorldBuild(instance.level());
         director = new DevilsDirector(this); recovery = new DevilsRecovery(instance.id(), ids, this);
+        failure = new ActivityFailurePresentation(instance.id());
         supplies = new DevilsSupplies(ids);
         supplyStations = new DevilsSupplyStations(instance.level());
         actors = new DevilsActors(instance.level(), () -> director, this);
@@ -72,6 +75,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         instances.own(instance, () -> { guides.values().forEach(kim.biryeong.destiny.activity.presentation.ObjectiveGuide::clear); guides.clear(); });
         instances.own(instance, music::close);
         instances.own(instance, supplyStations::close);
+        instances.own(instance, failure::close);
     }
     private DevilsVoicePlayback newVoice() {
         return new DevilsVoicePlayback(this::players, token -> {
@@ -87,7 +91,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     public boolean member(UUID id) { return ids.contains(id) && !departed.contains(id); }
     public boolean closed() { return state == State.CLOSED; }
     public boolean running() { return state == State.RUNNING; }
-    private boolean readyLivingAudience(ServerPlayer p) { return running() && !joining.contains(p.getUUID()) && !resetPlacement
+    private boolean readyLivingAudience(ServerPlayer p) { return running() && !joining.contains(p.getUUID()) && !resetPlacement && !failure.state().wiping()
             && p.level() == level() && recovery.token(p.getUUID()).isEmpty() && ready(p); }
     public boolean allows(ServerPlayer p) { return readyLivingAudience(p) && !presentation.hidden(p); }
     public String status() { var s = director.snapshot(); return state + " / " + s.phase() + " / " + s.occupied() + "/" + s.zone().actorCap(); }
@@ -121,15 +125,15 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
             }
             if (build.state() != DevilsWorldBuild.State.READY) return;
             if (!supplyStations.prepare()) { problem("Safe supply station placement unavailable"); return; }
-            if (players().size() != ids.size() || players().stream().anyMatch(p -> !ready(p))) return;
+            if (players().size() != DevilsAdmission.count(roster.members(), this::member) || players().stream().anyMatch(p -> !ready(p))) return;
             if (!place(Zone.RY, players(), true)) return;
             instances.ready(instance); state = State.ADMITTING; admittedAt = now; return;
         }
         if (state == State.ADMITTING) {
             if (now - admittedAt > 1200) { stop("입장 확인 시간 초과"); return; }
             for (var p : players()) roster.ready(p.getUUID(), p.level() == level() && ready(p));
-            if (!roster.allReady()) return;
-            state = State.RUNNING; instances.running(instance); syncPresence(); director.begin(ids.size());
+            if (!DevilsAdmission.ready(roster.members(), this::member)) return;
+            state = State.RUNNING; instances.running(instance); syncPresence(); director.begin(DevilsAdmission.count(roster.members(), this::member));
         }
         for (var p : players()) {
             if (joining.contains(p.getUUID())) {
@@ -150,9 +154,11 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
                 var option = downOptions.get(p.getUUID()); if (option != null) restoreDown(p, option);
             }
         }
-        if (!resetPlacement) checkFalls();
+        if (!resetPlacement && !failure.state().wiping()) checkFalls();
         if (state != State.RUNNING) return;
         syncPresence();
+        syncFailureScope();
+        if (failure.state().wiping()) { tickWipe(now); return; }
         boolean paused = roster.connected() == 0 || resetPlacement;
         boolean noTargets = participants().isEmpty();
         var pause = DevilsPausePolicy.forPresence(paused, players().stream().anyMatch(this::readyLivingAudience), !noTargets);
@@ -163,6 +169,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         }
         if (!paused) {
             inputs(); recovery.tick(); syncReviveAudio();
+            if (failure.state().wiping()) { tickWipe(now); return; }
             if (resetPlacement || state != State.RUNNING) return;
             if (!pause.progress()) voice.tick();
             director.tick(); transition(now);
@@ -170,6 +177,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         presentation.tick(this, paused);
         music.tick(director.phase(), players().stream().filter(p -> p.level() == level() && !joining.contains(p.getUUID())).toList(), System.nanoTime());
         guides(now);
+        renderFailure(now);
         if (now % 4 == 0) for (var p : players()) if (p.level() == level()) {
             DevilsObjectives.render(p, director.snapshot(), atDevice(p), GuardianDown.active(p) || presentation.hidden(p),
                     allows(p) && supplyStations.lookingAt(p, director.phase().zone()),
@@ -178,6 +186,38 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
 
         }
         if (completeAt >= 0 && now - completeAt >= 600 && !voice.playing()) stop("공격전 완료");
+    }
+    static boolean restricted(DevilsDirector.Phase phase) {
+        return switch (phase) {
+            case READY, BRIEFING, RY_APPROACH, RY_CLEAR, RF_CLEAR, BL_CLEAR, COMPLETE, CLOSED -> false;
+            default -> true;
+        };
+    }
+    private void syncFailureScope() {
+        boolean restricted = restricted(director.phase());
+        recovery.restricted(restricted);
+        failure.scope(director.generation(), director.phase().zone().name(), restricted);
+    }
+    private List<ServerPlayer> failureAudience() {
+        return players().stream().filter(p -> p.level() == level() && !joining.contains(p.getUUID()) && ready(p)).toList();
+    }
+    private void renderFailure(long now) {
+        failure.render(failureAudience(), presentation::hidden, now, recovery.snapshot().wipeRemaining());
+    }
+    private void tickWipe(long now) {
+        long generation = director.generation();
+        if (!running() || generation != failure.state().generation()) return;
+        director.pause(true); actors.tick(true);
+        var audience = failureAudience();
+        for (var p : audience) {
+            var owner = downOptions.get(p.getUUID());
+            if (owner != null) GuardianDown.suppressHudOwned(p, owner, true);
+            DevilsObjectives.remove(p); clearGuide(p);
+        }
+        boolean recover = failure.tick(generation, !audience.isEmpty());
+        renderFailure(now);
+        // No scheduler closure can outlive this session. State consumes the one recovery trigger.
+        if (recover && running() && generation == director.generation()) director.resetCheckpoint("화력팀 전멸");
     }
     /** Shared waypoint + breadcrumb guidance; hidden while downed, in cinematics or still being placed. */
     private void guides(long now) {
@@ -351,9 +391,14 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
             p.setGameMode(GameType.SPECTATOR);
             problem("Owned down scene could not resume for " + p.getUUID());
         }
+        if (failure.state().wiping()) GuardianDown.suppressHudOwned(p, option, true);
     }
     @Override public void wipe(long generation) {
-        if (generation == director.generation() && running()) director.resetCheckpoint("화력팀 전멸");
+        if (generation != director.generation() || !running() || !failure.beginWipe(generation)) return;
+        director.pause(true); music.close(); voice.close(); speaking = null;
+        presentation.cancelGeneration(generation);
+        spawnTelegraphs.clear(); spawnLead.clear(); spawnSearches.clear();
+        players().forEach(DevilsCombatSounds::stop);
     }
     @Override public void checkpointReset(Zone zone, long generation, String reason) {
         problem("Checkpoint reset " + zone + ": " + reason);
@@ -366,8 +411,9 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         downOptions.clear(); downBodies.clear(); revivals.clear(); deviceHolds.clear();
         for (var m : roster.members()) roster.down(m.id(), false);
         syncPresence();
+        syncFailureScope();
     }
-    public void introFinished(long generation) { if (running()) director.introFinished(generation); }
+    public void introFinished(long generation) { if (running() && !failure.state().wiping()) director.introFinished(generation); }
     @Override public boolean spawn(DevilsDirector.Spawn spawn) {
         deferredSpawn = null;
         boolean accepted = running() && !resetPlacement && actors.spawn(spawn);
@@ -447,13 +493,14 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         if (cue.equals(speaking)) { speaking = null; voice.close(); }
     }
     @Override public void cancelGeneration(long generation) {
+        failure.scope(director.generation(), director.phase().zone().name(), false);
         music.close();
         spawnSearches.clear(); spawnTelegraphs.clear(); spawnLead.clear(); deferredSpawn = null;
         players().forEach(kim.biryeong.destiny.sound.ActivityMusic::devilsEnded);
         players().forEach(DevilsCombatSounds::stop);
         speaking = null; voice.close(); voice = newVoice(); presentation.cancelGeneration(generation);
     }
-    @Override public void phaseChanged(DevilsDirector.Snapshot snapshot) { pruneSpawnTelegraphs(snapshot); presentation.phase(this, snapshot); }
+    @Override public void phaseChanged(DevilsDirector.Snapshot snapshot) { syncFailureScope(); pruneSpawnTelegraphs(snapshot); presentation.phase(this, snapshot); }
     @Override public void incoming(long generation, List<DevilsPlan.Slot> slots, int ticks) {
         if (generation != director.generation() || !running()) return;
         for (var slot : slots) spawnLead.put(slot.id(), ticks);
@@ -476,6 +523,35 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     void qaComplete() {
         if (running() && completeAt < 0 && place(Zone.SP, players(), false)) director.complete();
     }
+    /** OP-only native fixture: move the retained ready team to the ordinary RF checkpoint. */
+    boolean qaRestriction() {
+        if (!running() || failure.state().wiping() || players().isEmpty()
+                || players().stream().anyMatch(p -> !ready(p) || p.level() != level())) return false;
+        if (!place(Zone.RF, players(), false)) return false;
+        director.qaCheckpoint(Zone.RF); resetRecovery();
+        return true;
+    }
+    /** OP-only native fixture: real down policy, Ghost ownership, grace timer and delayed recovery. */
+    boolean qaWipe() {
+        if (!running() || !restricted(director.phase()) || failure.state().wiping()) return false;
+        var living = participants();
+        if (living.isEmpty()) return false;
+        for (var p : living) {
+            var option = downed(p);
+            if (option == null) continue;
+            Vec3 body = supportedPositions.getOrDefault(p.getUUID(), p.position());
+            downBodies.put(p.getUUID(), body); DevilsLair.cleanup(p);
+            if (!GuardianDown.fallOwned(p, option, body)) restoreDown(p, option);
+        }
+        return true;
+    }
+    String failureStatus() {
+        var snapshot = recovery.snapshot();
+        return "activity=" + id() + " generation=" + director.generation() + " phase=" + director.phase()
+                + " restricted=" + failure.state().restricted() + " wiping=" + failure.state().wiping()
+                + " wipeAge=" + failure.state().wipeAge() + " wipeRemaining=" + snapshot.wipeRemaining()
+                + " living=" + snapshot.living() + " resetPlacement=" + resetPlacement;
+    }
     /** Sepiks's arena centre on the floor, front turned to the arena entrance (null: map not ready). */
     private java.util.Map.Entry<Vec3, Float> rewardChestSpot() {
         try {
@@ -490,6 +566,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     }
     @Override public void problem(String message) { if (problems.add(message)) DestinyGuardians.LOGGER.warn("[DevilsLair {}] {}", id(), message); }
     void disconnected(ServerPlayer p, long now) {
+        failure.remove(p);
         DevilsCombatSounds.stop(p); music.remove(p);
         supplySneaking.remove(p.getUUID());
         supplies.leave(p);
@@ -509,16 +586,20 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     }
     void leave(ServerPlayer p) {
         if (!member(p.getUUID())) return;
+        failure.remove(p);
         DevilsCombatSounds.stop(p); music.remove(p);
         supplies.leave(p); pendingSupplyReset.remove(p.getUUID());
         cancelDown(p); DevilsObjectives.remove(p); clearGuide(p); voice.disconnected(p); presentation.disconnected(p);
         roster.disconnected(p.getUUID(), server.getTickCount()); recovery.presence(p.getUUID(), false, false);
+        joining.remove(p.getUUID()); joinPlaced.remove(p.getUUID()); supplySneaking.remove(p.getUUID());
+        deviceHolds.remove(p.getUUID()); downOptions.remove(p.getUUID()); downBodies.remove(p.getUUID());
+        supportedPositions.remove(p.getUUID()); revivals.remove(p.getUUID());
         departed.add(p.getUUID()); DevilsLair.restore(p);
-        if (state != State.RUNNING || ids.stream().noneMatch(this::member)) stop("화력팀 이탈");
+        if (ids.stream().noneMatch(this::member)) stop("화력팀 이탈");
     }
     void stop(String reason) {
         if (state == State.CLOSED || state == State.DRAINING) return;
-        state = State.DRAINING; kim.biryeong.destiny.loot.Loot.activityClosed(players()); music.close(); director.close(); recovery.close(); actors.close(); build.close(); presentation.close(); voice.close(); supplies.close(); supplyStations.close();
+        state = State.DRAINING; failure.close(); kim.biryeong.destiny.loot.Loot.activityClosed(players()); music.close(); director.close(); recovery.close(); actors.close(); build.close(); presentation.close(); voice.close(); supplies.close(); supplyStations.close();
         for (var p : players()) { cancelDown(p); DevilsObjectives.remove(p); clearGuide(p); p.sendSystemMessage(Component.literal(reason)); }
     }
     void drain() {

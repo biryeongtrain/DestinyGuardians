@@ -142,6 +142,14 @@ public final class CrucibleRuntime {
     }
 
     public static boolean participating(ServerPlayer p) { return p != null && MEMBERS.containsKey(p.getUUID()); }
+    /** A fresh member is allocated on every join, so old UI cannot leave a later match entry. */
+    public static Object participationToken(ServerPlayer p) {
+        var m = p == null ? null : MEMBERS.get(p.getUUID());
+        return m != null && m.player == p ? m : null;
+    }
+    public static boolean leave(ServerPlayer p, Object expected) {
+        return expected != null && participationToken(p) == expected && leave(p, true);
+    }
     /** Identity only: arrival/respawn may legitimately precede canAct becoming true. */
     public static boolean currentParticipant(ServerPlayer p) {
         var m = p == null ? null : MEMBERS.get(p.getUUID());

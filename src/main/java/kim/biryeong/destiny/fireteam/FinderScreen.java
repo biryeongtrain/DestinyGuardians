@@ -182,7 +182,8 @@ public final class FinderScreen {
         }
         hover(s);
         for (var t : s.targets) if (t.key().equals(s.focus)) {
-            sound(s, 1.4f);
+            // Accepted play carries its own exact click+countdown recording from tick0.
+            if (!Set.of("play", "play_solo", "ft_play").contains(t.key())) sound(s, 1.4f);
             t.action().accept(s);
             if (current(p) == s) render(s);
             return true;
@@ -346,8 +347,9 @@ public final class FinderScreen {
         boolean leader = me != null && me.leader().equals(s.owner.getUUID());
         boolean here = me != null && me.activity().equals(a.id());
         var launching = me == null ? null : Fireteams.launch(me).orElse(null);
-        if (launching != null && launching.phase() == ActivityLaunch.Phase.COUNTDOWN) {
-            p.textLeft("act_launch", "출발까지 " + launching.secondsLeft() + "초", 966, 478, 22, GOLD, 430, 255);
+        if (launching != null && launching.cancelable()) {
+            int seconds = launching.secondsLeft();
+            p.textLeft("act_launch", seconds > 0 ? "출발까지 " + seconds + "초" : "출발 준비 중", 966, 478, 22, GOLD, 430, 255);
         } else if (me == null) {
             if (a.maxPlayers() > 1) button(f, "recruit", new Box(1060, 496, 196, 52), "화력팀 모집", true,
                     ss -> result(ss, Fireteams.create(ss.owner, a, true), a.name() + " 화력팀 모집을 시작했습니다."));
@@ -453,8 +455,9 @@ public final class FinderScreen {
             p.textLeft("ft_tags_ro", String.join("  ·  ", me.tags()), left + 4, y - 14, 16, MUTED, 370, 255);
             y += 30;
         }
-        if (launching != null && launching.phase() == ActivityLaunch.Phase.COUNTDOWN) {
-            p.text("ft_count", "출발까지 " + launching.secondsLeft(), cx, 900, 30, GOLD);
+        if (launching != null && launching.cancelable()) {
+            int seconds = launching.secondsLeft();
+            p.text("ft_count", seconds > 0 ? "출발까지 " + seconds : "출발 준비 중", cx, 900, 30, GOLD);
             if (leader) button(f, "ft_cancel", new Box(cx, 966, 380, 54), "출발 취소", true, ss -> result(ss, Fireteams.cancel(ss.owner), null));
         } else if (me.inActivity()) {
             p.text("ft_busy", "화력팀이 활동 중입니다.", cx, 920, 20, MUTED);

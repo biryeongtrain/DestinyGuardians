@@ -59,6 +59,7 @@ public final class GearScreen {
         final EnumMap<WeaponSlot, GearItems.Bucket> buckets = new EnumMap<>(WeaponSlot.class);
         final EnumMap<WeaponSlot, Integer> storagePages = new EnumMap<>(WeaponSlot.class);
         GearView view;
+        kim.biryeong.destiny.activity.ActivityExit.Ticket exitTicket;
         Session(ServerPlayer p) {
             owner = p; level = p.level(); connection = p.connection; anchor = p.position();
             controls.baseline(p.getYRot(), p.getXRot());
@@ -92,6 +93,8 @@ public final class GearScreen {
 
     /** Null when the screen may open now, otherwise the reason. Combat and airborne states are allowed. */
     static String blocked(ServerPlayer p) {
+        if (kim.biryeong.destiny.down.GuardianDown.active(p))
+            return "다운 상태에서는 /활동 나가기 로 활동에서 나갈 수 있습니다.";
         if (kim.biryeong.destiny.tutorial.TutorialLoan.active(p)) return "무기군 실습 중입니다. 대표 무기로 표적을 처치하면 다음 무기를 드립니다.";
         if (!p.level().getServer().isSameThread() || !p.isAlive() || p.isRemoved() || p.hasDisconnected() || p.isSpectator())
             return "지금은 장비 화면을 열 수 없습니다.";
@@ -219,6 +222,7 @@ public final class GearScreen {
     /** F (swap hands): open/close the detail view of the hovered weapon. */
     public static boolean inspect(ServerPlayer p) {
         var s = current(p); if (s == null) return false;
+        if (s.stage == Stage.ACTIVITY_EXIT) return true;
         if (s.stage == Stage.DETAIL) { s.stage = Stage.GEAR; s.detail = null; render(s); return true; }
         var w = hoveredWeapon(s);
         if (w == null) { notice(s, "무기에 커서를 올린 뒤 F를 누르면 상세 정보를 봅니다."); render(s); return true; }
@@ -265,6 +269,19 @@ public final class GearScreen {
             case GEAR -> gearClick(s, node);
             case SUBCLASS, OPTIONS -> characterClick(s, node);
             case DETAIL -> { }
+            case ACTIVITY_EXIT -> {
+                if (node == GearLayout.LEAVE_CONFIRM) {
+                    var ticket = s.exitTicket;
+                    if (!kim.biryeong.destiny.activity.ActivityExit.current(p, ticket)) {
+                        s.exitTicket = null; s.stage = Stage.GEAR;
+                        notice(s, "활동 상태가 바뀌어 나가기를 취소했습니다."); refresh(s);
+                    } else {
+                        close(p);
+                        if (!kim.biryeong.destiny.activity.ActivityExit.leave(p, ticket))
+                            p.sendSystemMessage(Component.literal("활동 상태가 바뀌어 나가기를 취소했습니다."));
+                    }
+                }
+            }
         }
         return true;
     }
@@ -272,12 +289,19 @@ public final class GearScreen {
     private static void back(Session s) {
         switch (s.stage) {
             case GEAR -> close(s.owner);
-            case DETAIL, SUBCLASS -> { s.stage = Stage.GEAR; s.detail = null; render(s); }
+            case DETAIL, SUBCLASS, ACTIVITY_EXIT -> { s.stage = Stage.GEAR; s.detail = null; s.exitTicket = null; render(s); }
             case OPTIONS -> { s.stage = Stage.SUBCLASS; refresh(s); }
         }
     }
 
     private static void gearClick(Session s, int node) {
+        if (node == GearLayout.LEAVE) {
+            s.exitTicket = kim.biryeong.destiny.activity.ActivityExit.capture(s.owner).orElse(null);
+            if (s.exitTicket == null) { notice(s, "현재 참가 중인 활동이 없습니다."); render(s); return; }
+            s.stage = Stage.ACTIVITY_EXIT; s.expanded = null;
+            var cancel = GearLayout.exitCancel(); s.controls.point(cancel.x(), cancel.y()); s.focus = GearLayout.BACK;
+            render(s); return;
+        }
         if (node == GearLayout.ARMORY && armory(s.owner)) {
             close(s.owner); WeaponScreen.openArmory(s.owner); return;
         }
@@ -349,7 +373,8 @@ public final class GearScreen {
                 : Optional.ofNullable(s.buckets.get(s.expanded.weapon())).map(b -> b.stored().size()).orElse(0);
         return GearLayout.nodes(s.stage, s.expanded, Math.max(stored, s.expanded == null ? 0 : GearLayout.STORAGE_COUNT),
                 s.options.size(), s.stage == Stage.GEAR && armory(s.owner),
-                kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams().size());
+                kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams().size(),
+                kim.biryeong.destiny.activity.ActivityExit.capture(s.owner).isPresent());
     }
 
     /** Pointer hover: focus the node under the cursor; a weapon slot opens its grid until the cursor leaves. */
@@ -393,6 +418,7 @@ public final class GearScreen {
         }
         if (v.tooltip() != null) sb.append(" tooltip=").append(v.tooltip().id());
         if (v.detail() != null) sb.append(" detail=").append(v.detail().id());
+        if (!v.activityName().isBlank()) sb.append(" activity=").append(v.activityName());
         return sb.toString();
     }
 
@@ -455,7 +481,8 @@ public final class GearScreen {
                 ((now(s) - s.openedAt) / 20) * 30f % 360, s.field, s.fields, s.options, message, armory(s.owner),
                 kim.biryeong.destiny.guardian.Guardians.data(s.owner).guardianClass(),
                 WeaponScreen.characterView(s.owner, s.field), kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams(),
-                glimmer(s.owner));
+                glimmer(s.owner), s.exitTicket != null ? s.exitTicket.name()
+                        : kim.biryeong.destiny.activity.ActivityExit.capture(s.owner).map(kim.biryeong.destiny.activity.ActivityExit.Ticket::name).orElse(""));
         GearHud.render(s.owner, s.view);
     }
 }

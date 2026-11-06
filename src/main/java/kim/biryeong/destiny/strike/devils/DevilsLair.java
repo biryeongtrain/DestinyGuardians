@@ -117,12 +117,35 @@ public final class DevilsLair {
                                     if (s == null) { c.getSource().sendFailure(Component.literal("공격전 참가 중이 아닙니다.")); return 0; }
                                     s.qaComplete(); return 1;
                                 })))
+                        .then(Commands.literal("qa_restriction").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .executes(c -> qaFailure(c.getSource(), c.getSource().getPlayerOrException(), "restriction"))
+                                .then(Commands.argument("player", EntityArgument.player()).executes(c ->
+                                        qaFailure(c.getSource(), EntityArgument.getPlayer(c, "player"), "restriction"))))
+                        .then(Commands.literal("qa_wipe").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .executes(c -> qaFailure(c.getSource(), c.getSource().getPlayerOrException(), "wipe"))
+                                .then(Commands.argument("player", EntityArgument.player()).executes(c ->
+                                        qaFailure(c.getSource(), EntityArgument.getPlayer(c, "player"), "wipe"))))
+                        .then(Commands.literal("qa_failure_status").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .executes(c -> qaFailure(c.getSource(), c.getSource().getPlayerOrException(), "status"))
+                                .then(Commands.argument("player", EntityArgument.player()).executes(c ->
+                                        qaFailure(c.getSource(), EntityArgument.getPlayer(c, "player"), "status"))))
                         .then(Commands.literal("leave").executes(c -> { leave(c.getSource().getPlayerOrException()); return 1; }))
                         .then(Commands.literal("status").executes(c -> {
                             var s = session(c.getSource().getPlayerOrException());
                             c.getSource().sendSuccess(() -> Component.literal(s == null ? "공격전 참가 중이 아닙니다." : s.status()), false); return 1;
                         })))));
     }
+    private static int qaFailure(net.minecraft.commands.CommandSourceStack source, ServerPlayer player, String action) {
+        var s = session(player);
+        if (s == null) { source.sendFailure(Component.literal("공격전 참가 중이 아닙니다.")); return 0; }
+        if (action.equals("status")) {
+            source.sendSuccess(() -> Component.literal(s.failureStatus()), false); return 1;
+        }
+        boolean success = action.equals("restriction") ? s.qaRestriction() : s.qaWipe();
+        if (!success) { source.sendFailure(Component.literal("활동/팩 준비 또는 제한 구역 상태를 확인하세요.")); return 0; }
+        source.sendSuccess(() -> Component.literal(s.failureStatus()), false); return 1;
+    }
+
     private static int startCommand(net.minecraft.commands.CommandSourceStack source, List<ServerPlayer> players) {
         String error = start(players);
         if (error != null) { source.sendFailure(Component.literal(error)); return 0; }
@@ -201,6 +224,12 @@ public final class DevilsLair {
         return SESSIONS.values().stream().filter(s -> s.member(p.getUUID()) && !s.closed()).findFirst().orElse(null);
     }
     public static boolean participating(ServerPlayer p) { return session(p) != null; }
+    /** Opaque per-run identity, including preparation/admission. */
+    public static Object participationToken(ServerPlayer p) { return p == null ? null : session(p); }
+    public static boolean leave(ServerPlayer p, Object expected) {
+        if (expected == null || participationToken(p) != expected) return false;
+        leave(p); return true;
+    }
     public static boolean briefing(ServerPlayer p) {
         var s = session(p);
         return s != null && s.running() && p.level() == s.level()

@@ -80,6 +80,7 @@ public final class AbilityService {
     }
 
     public static void cleanup(ServerPlayer player) {
+        kim.biryeong.destiny.combat.MeleeLunge.cancel(player);
         kim.biryeong.destiny.combat.GuardianRecovery.forget(player);
         kim.biryeong.destiny.combat.SupportOvershield.cleanup(player);
         GrenadeThrow.cleanup(player);
@@ -192,7 +193,6 @@ public final class AbilityService {
                     yield false;
                 }
                 runtime.superSession.primary();
-                MeleeSuperMovement.attackStep(player, runtime);
                 yield true;
             }
             case AIR_JUMP -> use(player, AbilitySlot.JUMP) == Result.OK;
@@ -280,6 +280,7 @@ public final class AbilityService {
     }
 
     private static void completeSuper(ServerPlayer player) {
+        kim.biryeong.destiny.combat.MeleeLunge.cancel(player);
         GuardianRuntime runtime = Guardians.runtime(player);
         SuperSession session = runtime.superSession;
         runtime.superSession = null;

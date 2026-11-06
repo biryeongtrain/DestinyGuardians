@@ -218,7 +218,7 @@ public final class HunterExpandedSupers {
         final Lease lease; final Expanded ability; final String path; final ScopedCloak cloak;
         final long started; final int windup, firstContact, secondContact;
         long endAt, nextAttack, lastTick=Long.MIN_VALUE, pendingAt=-1, decloakedUntil;
-        boolean ended, firstDone, secondDone, heavyPending; int charges=3, combo, attackCount, visibleDrainRemainder;
+        boolean ended, firstDone, secondDone, heavyPending, groundedPending; int charges=3, combo, attackCount, visibleDrainRemainder;
         Session(Lease l, Expanded a) {
             lease=l; ability=a; path=a.id().getPath(); started=l.level.getGameTime();
             cloak=a.kind==Kind.SPECTRAL?new ScopedCloak(l):null;
@@ -270,6 +270,7 @@ public final class HunterExpandedSupers {
             if (!live() || now() >= endAt || now() < nextAttack || now()-started < windup || pendingAt >= 0) return;
             if (ability.kind == Kind.SPECTRAL) {
                 heavyPending=lease.owner.isShiftKeyDown();
+                groundedPending=lease.owner.onGround();
                 String phase=heavyPending ? "attack3" : (combo++ & 1) == 1 ? "attack2" : "attack";
                 playAttack(phase);
                 int animation=clipTicks(phase,heavyPending?18:12);
@@ -347,11 +348,8 @@ public final class HunterExpandedSupers {
             ClassAbilityEffects.sound(lease.owner,ability.element(),path,"super.fire");
             Vec3 eye=lease.owner.getEyePosition(), look=lease.owner.getLookAngle();
             double range=value(ability,heavy?"heavy_range":"range",heavy?4:3.3,1,5);
-            for (LivingEntity e : targets(lease,eye,range)) {
-                Vec3 delta=center(e).subtract(eye);
-                if (delta.lengthSqr()<.01 || delta.normalize().dot(look) > (heavy?.15:.3))
-                    damage(lease,e,heavy?"heavy":"light",(float)value(ability,heavy?"heavy_damage":"damage",heavy?18:11,.1,60));
-            }
+            MeleeSuperMovement.contact(lease.owner,this,range,heavy?.15:.3,1.8,true,groundedPending,
+                    e->damage(lease,e,heavy?"heavy":"light",(float)value(ability,heavy?"heavy_damage":"damage",heavy?18:11,.1,60)));
             ClassAbilityEffects.burst(lease.owner,eye.add(look.scale(1.5)),Element.VOID,heavy?2:1.2);
         }
         private void dagger() {

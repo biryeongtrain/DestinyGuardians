@@ -12,13 +12,13 @@ import java.util.Map;
 public final class GearLayout {
     public static final int SLOT_COUNT = 10, STORAGE = 10, STORAGE_COUNT = 9, CLOSE = 19, ARMORY = 20,
             FIELD = 21, FIELD_COUNT = 7, BACK = 28,
-            ENGRAM = 29, ENGRAM_COUNT = 10, NODE_COUNT = 39;
+            ENGRAM = 29, ENGRAM_COUNT = 10, LEAVE = 39, LEAVE_CONFIRM = 40, NODE_COUNT = 41;
     public static final float SLOT = 120, CELL = 104, STEP = 116;
     static final float LEFT_X = 300, RIGHT_X = 1620, TOP_Y = 280, ROW = 140;
     /** Vertical band in which a storage grid may sit. */
     static final float GRID_TOP = 200, GRID_BOTTOM = 940;
 
-    public enum Stage { GEAR, DETAIL, SUBCLASS, OPTIONS }
+    public enum Stage { GEAR, DETAIL, SUBCLASS, OPTIONS, ACTIVITY_EXIT }
 
     private GearLayout() { }
 
@@ -57,12 +57,20 @@ public final class GearLayout {
     public static Box armory() { return new Box(1530, 1022, 220, 48); }
     public static Box back() { return new Box(160, 1022, 200, 48); }
 
+    public static Box leave() { return back(); }
+    public static Box exitCancel() { return new Box(800, 640, 260, 56); }
+    public static Box exitConfirm() { return new Box(1120, 640, 260, 56); }
+
     /** Every visible interactive node for a state, in stable order. */
     public static Map<Integer, Box> nodes(Stage stage, GearSlot expanded, int storageCount, int optionCount, boolean armory) {
         return nodes(stage, expanded, storageCount, optionCount, armory, 0);
     }
 
     public static Map<Integer, Box> nodes(Stage stage, GearSlot expanded, int storageCount, int optionCount, boolean armory, int engrams) {
+        return nodes(stage, expanded, storageCount, optionCount, armory, engrams, false);
+    }
+    public static Map<Integer, Box> nodes(Stage stage, GearSlot expanded, int storageCount, int optionCount,
+                                          boolean armory, int engrams, boolean activity) {
         var out = new LinkedHashMap<Integer, Box>();
         switch (stage) {
             case GEAR -> {
@@ -70,8 +78,10 @@ public final class GearLayout {
                 if (expanded != null && expanded.weapon() != null)
                     for (int i = 0; i < Math.min(STORAGE_COUNT, storageCount); i++) out.put(STORAGE + i, storage(expanded, i));
                 if (armory) out.put(ARMORY, armory());
+                if (activity) out.put(LEAVE, leave());
                 for (int i = 0; i < Math.min(ENGRAM_COUNT, engrams); i++) out.put(ENGRAM + i, engram(i));
             }
+            case ACTIVITY_EXIT -> { out.put(BACK, exitCancel()); out.put(LEAVE_CONFIRM, exitConfirm()); }
             case DETAIL -> out.put(BACK, back());
             case SUBCLASS -> { for (int i = 0; i < FIELD_COUNT; i++) out.put(FIELD + i, field(i)); out.put(BACK, back()); }
             case OPTIONS -> {

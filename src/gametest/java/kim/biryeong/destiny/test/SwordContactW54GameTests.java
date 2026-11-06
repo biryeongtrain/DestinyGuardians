@@ -45,6 +45,7 @@ public final class SwordContactW54GameTests {
         var p=hunter?TestPlayers.hunter(h,Element.SOLAR,new Vec3(2.5,1,z),-90,0)
                 :TestPlayers.create(h,new Vec3(2.5,1,z),-90,0);
         p.setOnGround(true);
+        MeleeNativeTestFrames.track(h,()->MeleeNativeTestFrames.cameraFrame(p));
         var level=p.level();
         TestCleanup.register(h, ()->{
             WeaponRuntime.cleanup(p);AbilityService.cleanup(p);CombatHud.remove(p);
@@ -78,6 +79,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=800, environment = "destiny-test:w90_isolated")
     public void lightAndFiveHeavyFormsCommitCostThenContactExactlyOnceAtAuthoredCue(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p=player(h,6.5,false);var enemy=target(h,4.5,6.5);
         var sequence=loaded(h);
         var ids=List.of("abide_the_return","abide_the_return","goldtusk","crown_splitter","falling_guillotine","temptation_s_hook");
@@ -117,6 +119,8 @@ public final class SwordContactW54GameTests {
                     if(profile.shape()==SwordProfile.Shape.CASTER&&heavy)
                         check(h,WeaponRuntime.activeProjectiles(p)==1&&enemy.getHealth()==HP,"Caster releases at cue; travel still precedes HP");
                     else check(h,enemy.getHealth()<HP,id+": real HP changes at the exact cue tick");
+                    if(!heavy||profile.shape()==SwordProfile.Shape.DASH)
+                        check(h,p.position().distanceToSqr(body[0])<=.41*.41,id+": cue advances at most one native physics frame rather than teleporting the full dash");
                     float once=enemy.getHealth();int projectiles=WeaponRuntime.activeProjectiles(p);
                     WeaponRuntime.tickPlayer(p);WeaponRuntime.tickPlayer(p);
                     check(h,enemy.getHealth()==once&&WeaponRuntime.activeProjectiles(p)==projectiles,
@@ -135,6 +139,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=240, environment = "destiny-test:w90_isolated")
     public void secondAndThirdComboUseTheirOwnLaterCueAndPreserveFinisherDamage(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p=player(h,6.5,false);var enemy=target(h,4.5,6.5);ItemStack[] stack={null};
         var sequence=loaded(h).thenExecute(()->stack[0]=equip(p,"abide_the_return",12));
         float[] damage=new float[3];
@@ -156,6 +161,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=180, environment = "destiny-test:w90_isolated")
     public void cancellationMatrixCannotDeliverStaleDamageOrRefundAcceptedCosts(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var names=List.of("swap","skill","cleanup","guard","spectator","death","dimension","foreign","teleport","abilityCleanup");
         var players=new ArrayList<ServerPlayer>();var stacks=new ArrayList<ItemStack>();
         var trackers=new ArrayList<kr.toxicity.model.api.tracker.EntityTracker>();
@@ -221,6 +227,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=100, environment = "destiny-test:w90_isolated")
     public void contactReacquiresCurrentAimTargetsAndNewBlockingWalls(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var turn=player(h,1.5,false);var blocked=player(h,6.5,false);var moved=player(h,11.5,false);
         var old=target(h,4.5,1.5);var behind=target(h,.5,1.5);var wallTarget=target(h,4.5,6.5);var entrant=target(h,11.5,11.5);
         loaded(h).thenExecute(()->{
@@ -239,6 +246,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=100, environment = "destiny-test:w90_isolated")
     public void actualHotbarAndOffhandRoundTripsCancelEvenWithinOneServerTick(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var hotbar=player(h,2.5,false);var offhand=player(h,9.5,false);
         var a=target(h,4.5,2.5);var b=target(h,4.5,9.5);ItemStack[] stacks=new ItemStack[2];
         loaded(h).thenExecute(()->{
@@ -262,6 +270,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=100, environment = "destiny-test:w90_isolated")
     public void redundantAndInvalidHotbarPacketsDoNotCancelAValidContact(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p=player(h,6.5,false);var enemy=target(h,4.5,6.5);ItemStack[] stack={null};
         loaded(h).thenExecute(()->{
             stack[0]=equip(p,"abide_the_return",12);InputRouter.onPunch(p);
@@ -277,6 +286,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=120, environment = "destiny-test:w90_isolated")
     public void actualSolarHandoffCancelsPendingSwordAndForeignRollRejectsNewCost(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var solar=player(h,2.5,true);var roll=player(h,9.5,true);
         var a=target(h,4.5,2.5);var b=target(h,4.5,9.5);ItemStack[] stacks=new ItemStack[2];
         loaded(h).thenExecute(()->{
@@ -295,6 +305,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=120, environment = "destiny-test:w90_isolated")
     public void acceptanceAfterAnimationTickCannotDamageBeforeTheActualClockReachesCue(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p=player(h,6.5,false);var enemy=target(h,4.5,6.5);
         boolean[] flags={false,false,false,false};long[] started={0},frames={0};ItemStack[] stack={null};
         TestCleanup.register(h, ()->flags[0]=false);
@@ -324,6 +335,7 @@ public final class SwordContactW54GameTests {
 
     @GameTest(structure=FLOOR,maxTicks=100, environment = "destiny-test:w90_isolated")
     public void closedCosmeticCannotEraseAcceptedTimedGameplayOrCauseAnImmediateHit(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p=player(h,6.5,false);var enemy=target(h,4.5,6.5);ItemStack[] stack={null};long[] started={0};
         boolean[] phases={false,false};
         int delay=SwordTiming.contactTicks(SwordProfile.Shape.UPPERCUT,false,1);

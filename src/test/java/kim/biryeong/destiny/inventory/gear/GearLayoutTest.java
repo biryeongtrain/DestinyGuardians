@@ -47,4 +47,21 @@ class GearLayoutTest {
         for (var l : lines) assertTrue(HudPainter.width(l, 18) <= 200 + 1, l);
         assertTrue(lines.getLast().endsWith("…"));
     }
+    @Test void activityExitHasSeparateConfirmationAndNoEquipmentActions() {
+        var normal = GearLayout.nodes(Stage.GEAR, null, 0, 0, false, 0, false);
+        assertFalse(normal.containsKey(GearLayout.LEAVE));
+        var live = GearLayout.nodes(Stage.GEAR, GearSlot.ENERGY, 9, 0, true, 10, true);
+        var leave = GearLayout.leave();
+        assertEquals(GearLayout.LEAVE, GearLayout.hit(live, leave.x(), leave.y()));
+        for (var e : live.entrySet()) if (e.getKey() != GearLayout.LEAVE)
+            assertFalse(e.getValue().contains(leave.x(), leave.y()), "leave does not overlap another action");
+        var confirm = GearLayout.nodes(Stage.ACTIVITY_EXIT, null, 0, 0, false, 0, true);
+        assertEquals(java.util.Set.of(GearLayout.BACK, GearLayout.LEAVE_CONFIRM, GearLayout.CLOSE), confirm.keySet());
+        assertEquals(-1, GearLayout.hit(confirm, leave.x(), leave.y()), "repeat click at entry cannot confirm");
+        var cancel = GearLayout.exitCancel(); var accept = GearLayout.exitConfirm();
+        assertEquals(GearLayout.BACK, GearLayout.hit(confirm, cancel.x(), cancel.y()));
+        assertEquals(GearLayout.LEAVE_CONFIRM, GearLayout.hit(confirm, accept.x(), accept.y()));
+        assertFalse(cancel.contains(accept.x(), accept.y()));
+    }
+
 }

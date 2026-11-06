@@ -20,9 +20,8 @@ public final class TitanMelee extends Ability {
         float damage=(float)TitanAbilities.value(this,"damage",element()==Element.ARC?14:12,0,100);
         if(element()==Element.ARC) {
             Vec3 eye=p.getEyePosition(),forward=Motion.horizontalLook(p);
-            for(LivingEntity e:TitanAbilities.targets(c,eye,TitanAbilities.value(this,"reach",4,1,6))) {
-                Vec3 delta=e.getBoundingBox().getCenter().subtract(eye);
-                if(delta.lengthSqr()>1e-8&&forward.dot(delta.normalize())>=.55) {
+            for(LivingEntity e:kim.biryeong.destiny.combat.MeleeSweep.frontal(p,TitanAbilities.value(this,"reach",4,1,6),.55,1.6)) {
+                {
                     MeleeWeaponTraits.poweredDamage(c.level,p,e,AbilityDamage.pvp(this,"strike",e,damage),element(),token);
                     Fx.line(c.owner, c.level,eye,e.getBoundingBox().getCenter(),element().color(),.3,1.2f);
                 }

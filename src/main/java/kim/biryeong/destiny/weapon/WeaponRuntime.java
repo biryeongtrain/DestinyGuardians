@@ -68,6 +68,7 @@ public final class WeaponRuntime {
         void releaseHold() { WeaponDynamicSway.released(owner,stack); WeaponTapTheTrigger.released(owner,stack); holding = false; fired = false; heldUntil = -1; cycle.cancelCharge(); acceptedBowDraw=null; }
         void cancel() { cancel(false); }
         void cancel(boolean preserveFundedIzanagiCue) {
+            kim.biryeong.destiny.combat.MeleeLunge.cancelWeapon(owner);
             WeaponFireMotion.clear(owner);
             WeaponClownCartridge.changed(owner,stack);
             WeaponSympatheticArsenal.reloadCancelled(owner,stack);
@@ -775,20 +776,33 @@ public final class WeaponRuntime {
         if(!contact.heavy) {
             // Keep legal start contacts when lunging past nearby side enemies. This authored
             // start/end sweep is deduplicated; one enemy never pays damage twice.
-            var contacts=new LinkedHashSet<>(SwordMelee.cleave(player));
-            if(!contact.empty) SwordMelee.lunge(player,SwordArc.STEP,PerkBatchD.lungeScale(player)); else SwordMelee.move(player,Vec3.directionFromRotation(0,player.getYRot()),SwordArc.STEP);
-            contacts.addAll(SwordMelee.cleave(player));
-            int hits=0;
-            for(var target:contacts) {
-                if(hits++>=SwordArc.MAX_HITS)break;
-                apply(player,target,contact.empty ? damage : CrucibleDamage.melee(entry,target,damage),
-                        false,SwordMelee.point(target),AmmoGeneration.weapon(entry),damageTraits);
-            }
+            var stack=player.getMainHandItem();
+            java.util.function.BooleanSupplier valid=()->available(player)&&player.getMainHandItem()==stack
+                    &&!AbilityService.inSuper(player)&&!player.isShiftKeyDown();
+            SwordMelee.sweepLunge(player,SwordArc.attackStep(player.onGround()),
+                    contact.empty?1:PerkBatchD.lungeScale(player),valid,
+                    SwordArc.LIGHT_RANGE,SwordArc.LIGHT_COS,SwordArc.LIGHT_HEIGHT,target->{
+                        try(var emission=Combat.emission(contact)) {
+                            apply(player,target,contact.empty?damage:CrucibleDamage.melee(entry,target,damage),false,
+                                    SwordMelee.point(target),AmmoGeneration.weapon(entry),damageTraits);
+                        }
+                    });
             return;
         }
-        if (profile.shape()==SwordProfile.Shape.DASH) SwordMelee.move(player,player.getLookAngle(),1.6);
-        if (profile.shape()==SwordProfile.Shape.UPPERCUT || profile.shape()==SwordProfile.Shape.DASH)
-            emit(player,entry,profile.attack(base,damage,true),false,0,WeaponHighImpactReserves.Token.NONE,damageTraits);
+        if (profile.shape()==SwordProfile.Shape.DASH) {
+            var stack=player.getMainHandItem();
+            kim.biryeong.destiny.combat.MeleeLunge.start(player,player.getLookAngle(),1.6,
+                    ()->available(player)&&player.getMainHandItem()==stack&&!AbilityService.inSuper(player),
+                    SwordArc.LIGHT_RANGE,SwordArc.LIGHT_COS,1.5,target->{
+                        try(var emission=Combat.emission(contact)) {
+                            apply(player,target,CrucibleDamage.melee(entry,target,damage),false,
+                                    SwordMelee.point(target),AmmoGeneration.weapon(entry),damageTraits);
+                        }
+                    });
+        } else if (profile.shape()==SwordProfile.Shape.UPPERCUT) {
+            for(var target:kim.biryeong.destiny.combat.MeleeSweep.frontal(player,SwordArc.LIGHT_RANGE,SwordArc.LIGHT_COS,2.5))
+                apply(player,target,CrucibleDamage.melee(entry,target,damage),false,SwordMelee.point(target),AmmoGeneration.weapon(entry),damageTraits);
+        }
         else if (profile.shape()==SwordProfile.Shape.CASTER) {
             if(activeProjectiles(player)<MAX_PROJECTILES_PER_PLAYER) {
                 kim.biryeong.destiny.sound.SwordSounds.contact(player,entry,true,contact.empty,contact.grounded);
@@ -799,14 +813,8 @@ public final class WeaponRuntime {
             // Authored slam/spin: one damage transaction per enemy, never through walls.
             Vec3 center=player.position().add(0,.5,0);
             double radius=profile.shape()==SwordProfile.Shape.SLAM?3:3.5;
-            for(var target:Combat.enemiesNear(player.level(),player,center,radius)) {
-                if(!enemy(player,target))continue;
-                Vec3 point=target.position().add(0,target.getBbHeight()*.5,0);
-                if(!player.level().hasChunkAt(BlockPos.containing(point)))continue;
-                var wall=player.level().clip(new ClipContext(center,point,ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,player));
-                if(wall.getType()!=HitResult.Type.MISS&&center.distanceToSqr(wall.getLocation())+1e-3<center.distanceToSqr(point))continue;
-                apply(player,target,CrucibleDamage.melee(entry,target,damage),false,point,AmmoGeneration.weapon(entry),damageTraits);
-            }
+            for(var target:kim.biryeong.destiny.combat.MeleeSweep.frontal(player,radius,-1,1.8))
+                apply(player,target,CrucibleDamage.melee(entry,target,damage),false,SwordMelee.point(target),AmmoGeneration.weapon(entry),damageTraits);
             Fx.ring(player.level(),center,radius,WeaponCharacteristics.of(entry).damage().color(),24);
         }
     }
@@ -876,6 +884,20 @@ public final class WeaponRuntime {
                 detachRemote(state);
                 state.remoteShot=shot;
             }
+            return;
+        }
+        if (p.mode() == WeaponProfile.Mode.MELEE) {
+            var traits=acceptedTraits!=null?acceptedTraits:entry.family().equals("sword")
+                    ?DamageTraits.capture(player,highImpact,shotTraits):DamageTraits.NONE;
+            var melee=entry.family().equals("glaive")?MeleeWeaponTraits.accepted(player):MeleeWeaponTraits.Snapshot.NONE;
+            var attribution=entry.family().equals("glaive")?AmmoGeneration.GLAIVE_MELEE:AmmoGeneration.weapon(entry);
+            for(var target:kim.biryeong.destiny.combat.MeleeSweep.frontal(player,Math.clamp(p.range(),.1,8),
+                    Math.cos(Math.toRadians(55)),1.5)) {
+                float actual=apply(player,target,CrucibleDamage.melee(entry,target,p.damage()),false,
+                        target.getBoundingBox().getCenter(),attribution,traits);
+                if(actual>0) MeleeWeaponTraits.confirmed(player,melee,target,false,!target.isAlive());
+            }
+            WeaponShotTraits.resolved(player,traits.shotTraits());
             return;
         }
         var mulligan=p.mode()==WeaponProfile.Mode.HITSCAN?WeaponMulligan.capture(player,entry):WeaponMulligan.Token.NONE;
@@ -1683,6 +1705,7 @@ public final class WeaponRuntime {
                 && s.stack == stack && s.cycle.reloading();
     }
     public static void cleanup(ServerPlayer owner) {
+        kim.biryeong.destiny.combat.MeleeLunge.cancelWeapon(owner);
         GcbWeaponInput.cleanup(owner);
         kim.biryeong.destiny.sound.ReloadAudio.stop(owner);
         WeaponCrouchPresentation.cleanup(owner);

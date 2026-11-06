@@ -196,17 +196,15 @@ public final class HunterSuper extends Ability {
                 Fx.line(player, level, eye.add(dir.scale(1.0)), eye.add(dir.scale(reach)), element().glow(), 0.6, 0.7f);
             }
             DestinySounds.hunterOrVanilla(level, eye, element(), "super.fire", SoundEvents.PLAYER_ATTACK_SWEEP, 1f, 1.2f);
-            int impactVisuals = 0;
-            for (LivingEntity e : Combat.enemiesNear(level, player, eye, reach)) {
-                Vec3 to = e.position().add(0, e.getBbHeight() / 2, 0).subtract(eye).normalize();
-                if (to.dot(look) >= cosHalf) {
-                    Combat.damage(level, player, e, AbilityDamage.pvp(HunterSuper.this, "strike", e, (float) param("damage", 16)), element(),kim.biryeong.destiny.weapon.AmmoGeneration.SUPER);
-                    if (impactVisuals++ == 0) DestinySounds.hunter(level, e.position(), element(), "super.impact", .65f);
-                    if (impactVisuals <= 2) SuperVfx.arcHit(player, e);
-                    PostEffects.pulse(player, element(), true);
-                    AbilityParticles.send(player, level, ParticleTypes.ELECTRIC_SPARK, e.getX(), e.getY() + 1, e.getZ(), 12, 0.3, 0.5, 0.3, 0.2);
-                }
-            }
+            int[] impactVisuals = {0};
+            kim.biryeong.destiny.ability.MeleeSuperMovement.contact(player,this,
+                    Math.clamp(reach,.1,8),cosHalf,1.8,true,e->{
+                Combat.damage(level,player,e,AbilityDamage.pvp(HunterSuper.this,"strike",e,(float)param("damage",16)),
+                        element(),kim.biryeong.destiny.weapon.AmmoGeneration.SUPER);
+                if(impactVisuals[0]++==0)DestinySounds.hunter(level,e.position(),element(),"super.impact",.65f);
+                if(impactVisuals[0]<=2)SuperVfx.arcHit(player,e);
+                PostEffects.pulse(player,element(),true);
+            });
         }
 
         @Override

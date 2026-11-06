@@ -67,7 +67,7 @@ public final class HunterMelee extends Ability {
         Vec3 center = player.position().add(0, 1, 0).add(Motion.horizontalLook(player).scale(1.2));
         AbilityParticles.send(player, level, ParticleTypes.ELECTRIC_SPARK, center.x, center.y, center.z, 6, 0.4, 0.4, 0.4, 0.1);
         boolean contacted = false;
-        for (LivingEntity e : Combat.enemiesNear(level, player, center, reach)) {
+        for (LivingEntity e : kim.biryeong.destiny.combat.MeleeSweep.frontal(player,Math.clamp(reach,.1,8),.25,1.6)) {
             contacted = true;
             Fx.line(player, level, player.getEyePosition(), e.position().add(0, e.getBbHeight() / 2, 0), element().color(), 0.25, 1.0f);
             if (kim.biryeong.destiny.weapon.MeleeWeaponTraits.poweredDamage(level, player, e, AbilityDamage.pvp(this, "strike", e, damage), element(), traits)) {

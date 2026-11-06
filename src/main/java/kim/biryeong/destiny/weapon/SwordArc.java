@@ -5,8 +5,11 @@ public final class SwordArc {
     public static final double LIGHT_RANGE=3.5, LIGHT_COS=Math.cos(Math.toRadians(65)), LIGHT_HEIGHT=1.5;
     public static final double LUNGE_RANGE=5.3, LUNGE_COS=Math.cos(Math.toRadians(35)), LUNGE_HEIGHT=1.25;
     public static final double LUNGE_MAX=1.8, LUNGE_STOP=1.1;
-    /** Forward step of every light attack (swords and melee supers) when no target is in the lunge cone. */
+    /** Legacy short-step value retained for existing authored callers; live light attacks use attackStep. */
     public static final double STEP=0.9;
+    /** W329 user-requested Minecraft tuning, not extracted Destiny displacement. */
+    public static final double GROUND_STEP=2, AIR_STEP=5;
+    public static double attackStep(boolean grounded) { return grounded ? GROUND_STEP : AIR_STEP; }
     public static final int MAX_CANDIDATES=64, MAX_HITS=16;
     private SwordArc() {}
     /** Yaw-based slash/acquisition cone plus independent body-height tolerance. */

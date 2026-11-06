@@ -44,7 +44,8 @@ public final class WarlockMelee extends Ability {
         float damage = (float) WarlockAbilities.value(this, "damage", 6, .1, 30);
         switch (element()) {
             case ARC -> {
-                LivingEntity first = WarlockAbilities.aimed(lease, WarlockAbilities.value(this, "range", 5, 1, 8));
+                LivingEntity first = kim.biryeong.destiny.combat.MeleeSweep.frontal(p,
+                        WarlockAbilities.value(this,"range",5,1,8),.35,1.6).stream().findFirst().orElse(null);
                 if (first == null) return false;
                 chain(lease, first, damage, traits);
             }
@@ -99,12 +100,12 @@ public final class WarlockMelee extends Ability {
         for (int i = 0; i < cap && target != null; i++) {
             Vec3 end = WarlockAbilities.center(target);
             if (!WarlockAbilities.visible(lease, from, end)) break;
-            visited.add(target.getUUID());
+            visited.add(Combat.damageOwner(target).getUUID());
             MeleeWeaponTraits.poweredDamage(lease.level, lease.owner, target,
                     AbilityDamage.pvp(this, i == 0 ? "direct" : "chain", target, damage), element(), traits);
             Fx.line(lease.owner, lease.level, from, end, element().color(), .25, .8f);
             from = end;
-            target = WarlockAbilities.targets(lease, from, hop).stream().filter(e -> !visited.contains(e.getUUID())).findFirst().orElse(null);
+            target = WarlockAbilities.targets(lease, from, hop).stream().filter(e -> !visited.contains(Combat.damageOwner(e).getUUID())).findFirst().orElse(null);
         }
         ClassAbilityEffects.sound(lease.owner, element(), "melee.impact");
     }

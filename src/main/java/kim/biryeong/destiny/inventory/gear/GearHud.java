@@ -38,6 +38,7 @@ public final class GearHud {
             case GEAR -> gear(p, v);
             case DETAIL -> detail(p, v);
             case SUBCLASS, OPTIONS -> subclass(p, v);
+            case ACTIVITY_EXIT -> exit(p, v);
         }
         footer(p, v);
         cursor(p, v);
@@ -74,6 +75,7 @@ public final class GearHud {
         else if (v.focus() >= 0 && v.focus() < GearLayout.SLOT_COUNT) staticTooltip(p, v, GearSlot.values()[v.focus()]);
         if (v.armory()) button(p, "armory", GearLayout.armory(), "테스트 무기고", v.focus() == GearLayout.ARMORY);
         engrams(p, v);
+        if (!v.activityName().isBlank()) button(p, "leave", GearLayout.leave(), "활동 나가기", v.focus() == GearLayout.LEAVE);
     }
 
     /** Held engrams; hovering one shows its name, clicking decodes it into storage. */
@@ -408,6 +410,16 @@ public final class GearHud {
 
     private static String fieldTitle(GearView v) {
         return v.fields().stream().filter(f -> f.id().equals(v.field())).map(WeaponScreenView.CharacterField::name).findFirst().orElse("") + " 선택";
+    }
+
+    private static void exit(HudPainter p, GearView v) {
+        p.rect("exit_panel", 960, 520, 920, 400, 104, PANEL);
+        p.text("exit_title", "활동에서 나가시겠습니까?", 960, 370, 34, WHITE);
+        p.textFit("exit_activity", v.activityName(), 960, 440, 28, GOLD, 840);
+        p.text("exit_personal", "본인만 활동에서 나가며, 남은 화력팀은 계속 진행합니다.", 960, 510, 22, MUTED);
+        p.text("exit_return", "전투를 계속하려면 ‘계속하기’를 선택하세요.", 960, 550, 20, MUTED);
+        button(p, "exit_cancel", GearLayout.exitCancel(), "계속하기", v.focus() == GearLayout.BACK);
+        button(p, "exit_confirm", GearLayout.exitConfirm(), "활동 나가기", v.focus() == GearLayout.LEAVE_CONFIRM);
     }
 
     // ---------------------------------------------------------------- shared bits

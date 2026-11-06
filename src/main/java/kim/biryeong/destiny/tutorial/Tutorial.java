@@ -211,6 +211,16 @@ public final class Tutorial {
         return p != null && (SESSIONS.containsKey(p.getUUID()) || RisingCampaign.musicScene(p));
     }
 
+    /** Legacy fallback only; Guardian Rises has its own adapter and cleanup. */
+    public static Object participationToken(ServerPlayer p) {
+        var s = p == null ? null : SESSIONS.get(p.getUUID());
+        return s != null && s.player == p ? s : null;
+    }
+    public static boolean leave(ServerPlayer p, Object expected) {
+        if (expected == null || participationToken(p) != expected) return false;
+        end((Session) expected, true); return true;
+    }
+
     /** Every account completes this rollout once; class and legacy completion are irrelevant. */
     public static boolean shouldStart(ServerPlayer p) {
         if (RisingMission.enabled()) return RisingCampaign.shouldStart(p);

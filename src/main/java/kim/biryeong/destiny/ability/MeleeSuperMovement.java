@@ -12,7 +12,6 @@ import java.util.Set;
 public final class MeleeSuperMovement {
     public static final Identifier SPEED_ID = DestinyGuardians.id("melee_super_speed");
     public static final double SPEED_BONUS = 0.30;
-    static final int STEP_COOLDOWN_TICKS = 8;
     /** Arc Staff, Spectral Blades, Fists of Havoc, Sentinel Shield, Burning Maul. */
     public static final Set<Identifier> MELEE_SUPERS = Set.of(
             DestinyGuardians.id("hunter/arc_staff"), DestinyGuardians.id("hunter/spectral_blades"),
@@ -43,13 +42,21 @@ public final class MeleeSuperMovement {
         if (speed != null && speed.hasModifier(SPEED_ID)) speed.removeModifier(SPEED_ID);
     }
 
-    /** Forward step on a light attack, rate-limited so held clicks do not chain teleports. */
-    static void attackStep(ServerPlayer player, kim.biryeong.destiny.guardian.GuardianRuntime runtime) {
-        if (!active(player) || AbilityService.equipped(player, kim.biryeong.destiny.guardian.AbilitySlot.SUPER)
-                .map(a -> a.id().equals(DestinyGuardians.id("titan/arc_super"))).orElse(true)) return; // Fists already lunge by velocity
-        int now = player.level().getServer().getTickCount();
-        if (now - runtime.meleeSuperStepAt < STEP_COOLDOWN_TICKS) return;
-        runtime.meleeSuperStepAt = now;
-        kim.biryeong.destiny.weapon.SwordMelee.lunge(player, kim.biryeong.destiny.weapon.SwordArc.STEP);
+    /** Only the exact accepted session may start this contact; rejected inputs never move. */
+    public static boolean contact(ServerPlayer player, SuperSession session, double reach, double cosine,
+                                  double height, boolean lunge, java.util.function.Consumer<net.minecraft.world.entity.LivingEntity> damage) {
+        return contact(player,session,reach,cosine,height,lunge,player.onGround(),damage);
+    }
+    /** The accepted attack owns ground/air tuning even if it lands during its authored contact windup. */
+    public static boolean contact(ServerPlayer player, SuperSession session, double reach, double cosine,
+                                  double height, boolean lunge, boolean acceptedGrounded,
+                                  java.util.function.Consumer<net.minecraft.world.entity.LivingEntity> damage) {
+        java.util.function.BooleanSupplier valid=()->active(player)&&kim.biryeong.destiny.guardian.Guardians.runtimeIfPresent(player)
+                .map(r->r.superSession==session).orElse(false);
+        if(!valid.getAsBoolean())return false;
+        if(lunge)kim.biryeong.destiny.weapon.SwordMelee.sweepLunge(player,
+                kim.biryeong.destiny.weapon.SwordArc.attackStep(acceptedGrounded),1,valid,reach,cosine,height,damage);
+        else for(var target:kim.biryeong.destiny.combat.MeleeSweep.frontal(player,reach,cosine,height))damage.accept(target);
+        return true;
     }
 }

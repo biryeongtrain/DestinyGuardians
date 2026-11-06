@@ -18,10 +18,12 @@ public abstract class SuperCameraPlayerMixin {
     @Inject(method = "doTick", at = @At("HEAD"))
     private void destiny$serverCameraInput(CallbackInfo ci) {
         SuperCamera.beforePhysics((ServerPlayer) (Object) this);
+        kim.biryeong.destiny.combat.MeleeLunge.beforePhysics((ServerPlayer)(Object)this);
     }
 
     @Inject(method = "doTick", at = @At("TAIL"))
     private void destiny$serverCameraFall(CallbackInfo ci) {
         SuperCamera.afterPhysics((ServerPlayer) (Object) this);
+        kim.biryeong.destiny.combat.MeleeLunge.afterPhysics((ServerPlayer)(Object)this);
     }
 }

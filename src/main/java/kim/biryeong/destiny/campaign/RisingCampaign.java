@@ -195,6 +195,16 @@ public final class RisingCampaign {
         return ok;
     }
 
+    /** Opaque run identity for a confirmation; a later run never reuses it. */
+    public static Object participationToken(ServerPlayer p) {
+        if (p == null) return null;
+        var s = SESSIONS.get(p.getUUID());
+        return s != null && s.state != State.ENDING ? s : null;
+    }
+    public static boolean leave(ServerPlayer p, Object expected) {
+        return expected != null && participationToken(p) == expected && leave(p);
+    }
+
     /** Player-requested exit (e.g. /튜토리얼 나가기). Progress is kept at the last checkpoint. */
     public static boolean leave(ServerPlayer p) {
         var s = SESSIONS.get(p.getUUID());

@@ -55,61 +55,32 @@ public final class SwordMelee {
     static List<LivingEntity> cleave(ServerPlayer player) {
         return candidates(player,false).stream().filter(target->visible(player,target)).limit(SwordArc.MAX_HITS).toList();
     }
-    /** Closest currently visible, forward legal target; never a saved lock or movement without an accepted light. */
-    static void lunge(ServerPlayer player) { lunge(player,SwordArc.STEP); }
-    /** Lunge toward the closest visible legal target, otherwise step forward along the body yaw. */
-    public static void lunge(ServerPlayer player,double fallback) {
-        for(var target:candidates(player,true)) {
-            if(!visible(player,target))continue;
-            Vec3 delta=target.position().subtract(player.position());
-            double distance=Math.hypot(delta.x,delta.z);
-            move(player,new Vec3(delta.x,0,delta.z),Math.max(SwordArc.lungeDistance(distance),Math.min(fallback,Math.max(0,distance-SwordArc.LUNGE_STOP))));
-            return;
-        }
-        move(player,forward(player),fallback);
+    public static void lunge(ServerPlayer player,double distance) { lunge(player,distance,1); }
+    public static void lunge(ServerPlayer player,double distance,double scale) {
+        sweepLunge(player,distance,scale,()->true,0,0,0,null);
     }
-    /** W323 Valiant Charge: acquisition range and lunge distance scaled; long moves are split into legal steps. */
-    public static void lunge(ServerPlayer player,double fallback,double scale) {
-        if(!Double.isFinite(scale)||scale<=1||scale>2) { lunge(player,fallback); return; }
+    /** Accepted attack owns a bounded native velocity lease; geometry follows actual movement ticks. */
+    public static void sweepLunge(ServerPlayer player,double distance,double scale,
+            java.util.function.BooleanSupplier valid,double reach,double cosine,double height,
+            java.util.function.Consumer<LivingEntity> contact) {
+        if(!Double.isFinite(distance)||distance<=0||distance>8)return;
+        scale=Double.isFinite(scale)?Math.clamp(scale,1,2):1;
+        Vec3 direction=forward(player);double budget=Math.min(8,distance*scale);
         for(var target:candidates(player,true,scale)) {
             if(!visible(player,target))continue;
             Vec3 delta=target.position().subtract(player.position());
-            double distance=Math.hypot(delta.x,delta.z);
-            double reach=Math.min(Math.max(0,distance-SwordArc.LUNGE_STOP),SwordArc.LUNGE_MAX*scale);
-            moveFar(player,new Vec3(delta.x,0,delta.z),Math.max(reach,Math.min(fallback,Math.max(0,distance-SwordArc.LUNGE_STOP))));
+            double horizontal=Math.hypot(delta.x,delta.z);
+            budget=Math.min(budget,Math.max(0,horizontal-SwordArc.LUNGE_STOP));
+            direction=new Vec3(delta.x,0,delta.z);break;
+        }
+        if(budget<=1e-5) {
+            if(contact!=null)for(var target:kim.biryeong.destiny.combat.MeleeSweep.frontal(player,reach,cosine,height))contact.accept(target);
             return;
         }
-        moveFar(player,forward(player),fallback*scale);
+        kim.biryeong.destiny.combat.MeleeLunge.start(player,direction,budget,valid,reach,cosine,height,contact);
     }
-    private static void moveFar(ServerPlayer player,Vec3 direction,double distance) {
-        if(!Double.isFinite(distance)||distance<=0)return;
-        double first=Math.min(2,distance);
-        Vec3 start=player.position();
-        move(player,direction,first);
-        if(distance>first&&player.position().distanceToSqr(start)>=first*first-1e-3)move(player,direction,Math.min(2,distance-first));
-    }
-    /** Horizontal sampled displacement; preserves Y, view and native delta velocity. No chunk loads. */
+    /** Heavy dash shares the same finite velocity path, without target acquisition. */
     static void move(ServerPlayer player,Vec3 direction,double distance) {
-        if(!Double.isFinite(distance)||distance<=0||distance>2||!Double.isFinite(direction.x)||!Double.isFinite(direction.z))return;
-        Vec3 step=new Vec3(direction.x,0,direction.z);
-        if(step.lengthSqr()<1e-8)return;
-        Vec3 start=player.position(),end=start,unit=step.normalize();
-        int steps=(int)Math.ceil(distance/.1);
-        for(int i=1;i<=steps;i++) {
-            Vec3 next=start.add(unit.scale(Math.min(distance,i*.1)));
-            AABB box=player.getBoundingBox().move(next.subtract(start));
-            if(!loaded(player,box)||!player.level().getWorldBorder().isWithinBounds(box)
-                    ||!player.level().noCollision(player,box))break;
-            end=next;
-        }
-        if(end.distanceToSqr(start)>1e-8) {
-            // Native teleport uses relative-zero delta on the wire (preserve the
-            // client's real velocity), but its server base is getKnownMovement(),
-            // not getDeltaMovement(). Keep our existing server velocity as well;
-            // otherwise a lunge can erase falling motion before the next move packet.
-            Vec3 velocity=player.getDeltaMovement();
-            player.teleportTo(end.x,end.y,end.z);
-            player.setDeltaMovement(velocity);
-        }
+        kim.biryeong.destiny.combat.MeleeLunge.start(player,direction,distance,()->true,0,0,0,null);
     }
 }

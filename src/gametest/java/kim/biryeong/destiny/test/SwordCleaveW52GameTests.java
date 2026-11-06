@@ -48,6 +48,8 @@ public final class SwordCleaveW52GameTests {
     private static ServerPlayer player(GameTestHelper h, double z) {
         var p = TestPlayers.create(h, new Vec3(2.5, 1, z), -90, 0);
         p.setOnGround(true);
+        MeleeNativeTestFrames.prepareGround(h,p);
+        MeleeNativeTestFrames.track(h,()->{WeaponRuntime.tickPlayer(p);MeleeNativeTestFrames.cameraFrame(p);});
         TestCleanup.register(h, () -> {
             AbilityService.cleanup(p);
             WeaponRuntime.cleanup(p);
@@ -121,6 +123,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void preLungeSidesAndOverlappingContactsCleaveOnceForOneAmmo(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 6.5);
         var stack = equip(p, 12);
         var left = target(h, 3.3, 5);
@@ -133,7 +136,7 @@ public final class SwordCleaveW52GameTests {
         InputRouter.onPunch(p);
         beforeLightContact(h, p, start, left, right, overlapA, overlapB, postOnly);
         check(h, ammo(stack).rounds() == 11, "Multi-target light pays once before contact");
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(p);
             check(h, p.getX() > left.getX() && p.getX() > right.getX(),
                     "Accepted targeted lunge passes the nearby lateral contacts");
@@ -151,6 +154,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void sixteenTargetCapAppliesAcrossPreAndPostLungeHpTransactions(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 6.5);
         var stack = equip(p, 12);
         List<Husk> pre = new ArrayList<>();
@@ -163,7 +167,7 @@ public final class SwordCleaveW52GameTests {
         WeaponRuntime.onPunch(p);
         beforeLightContact(h, p, start, java.util.stream.Stream.concat(pre.stream(), post.stream()).toArray(Husk[]::new));
         check(h, ammo(stack).rounds() == 11, "Capped cleave pays once at acceptance");
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(p);
             long preHurt = pre.stream().filter(e -> e.getHealth() < HP).count();
             long postHurt = post.stream().filter(e -> e.getHealth() < HP).count();
@@ -183,6 +187,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")
     public void alliesTamesAndWorldIndexedPlayersAreExcludedFromHpAndAcquisition(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 2.5);
         var stack = equip(p, 12);
         var ally = target(h, 3.8, 2.5);
@@ -216,12 +221,12 @@ public final class SwordCleaveW52GameTests {
         var enemy = target(h, 3.5, 8);
         float victimHp = victim.getHealth();
         var before = attacker.position();
-        h.startSequence().thenIdle(lightContact() + 1).thenExecute(() -> {
+        h.startSequence().thenIdle(lightContact() + 7).thenExecute(() -> {
             WeaponRuntime.tickPlayer(p);
             check(h, legal.getHealth() < HP && ally.getHealth() == HP && wolf.getHealth() == HP
                             && ammo(stack).rounds() == 11,
                     "Legal side enemy loses HP while allied hostile and unowned tame remain unharmed");
-            unchanged(h, p, start, "Excluded forward mobs cannot become lunge targets");
+            check(h,horizontal(start,p.position())<=2+EPS,"Excluded mobs cannot extend the authored forward step");
             // TestPlayers share a profile name: remove this team before exercising actual PvP exclusion.
             scoreboard.removePlayerTeam(team);
             check(h, !attacker.isAlliedTo(victim), "PvP victim is not filtered merely as a team ally");
@@ -236,12 +241,13 @@ public final class SwordCleaveW52GameTests {
             WeaponRuntime.tickPlayer(attacker);
             check(h, victim.getHealth() == victimHp && enemy.getHealth() < HP && ammo(paid).rounds() == 11,
                     "World-present player retains real HP while a legal side PvE victim is cleaved");
-            unchanged(h, attacker, before, "Player bodies cannot acquire a sword lunge");
+            check(h,horizontal(before,attacker.position())<=2+EPS,"Excluded players cannot extend the authored forward step");
         }).thenSucceed();
     }
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void solidLosAndLowBodyWallStopLungeAndPreventThroughWallHp(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var blocked = player(h, 2.5);
         var a = equip(blocked, 12);
         // Keep the full mob box outside the wall. A delayed test must not confuse
@@ -262,10 +268,10 @@ public final class SwordCleaveW52GameTests {
         WeaponRuntime.onPunch(body);
         beforeLightContact(h, body, start, beyond);
         check(h, ammo(a).rounds() == 11 && ammo(b).rounds() == 11, "Both blocked swings pay on acceptance");
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(blocked);
             WeaponRuntime.tickPlayer(body);
-            unchanged(h, blocked, before, "An enemy behind solid LOS cannot acquire any lunge");
+            check(h,blocked.getBoundingBox().maxX<=h.absoluteVec(new Vec3(4,1,2)).x+EPS,"Blocked target cannot pull the native dash through a wall");
             check(h, hidden.getHealth() == HP && ammo(a).rounds() == 11,
                     "Accepted blocked swing pays once but cannot cleave through the wall");
             check(h, body.getX() >= start.x - EPS && body.getBoundingBox().maxX <= h.absoluteVec(new Vec3(3, 1, 9)).x + EPS
@@ -279,6 +285,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void closeEnemyContactHitsWithoutMovementOrCameraChange(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 6.5);
         var stack = equip(p, 12);
         p.setXRot(23);
@@ -289,7 +296,7 @@ public final class SwordCleaveW52GameTests {
                 "Contact fixture includes the former ray-start-inside-body regression");
         WeaponRuntime.onPunch(p);
         beforeLightContact(h, p, before, enemy);
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(p);
             unchanged(h, p, before, "Contact inside the 1.1 authored stop distance never lunges or separates the player");
             check(h, enemy.getHealth() < HP && ammo(stack).rounds() == 11
@@ -301,6 +308,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void closestVisibleFrontEnemyGuidesBoundedHorizontalLungeAndStopDistance(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 6.5);
         var stack = equip(p, 12);
         p.setXRot(31);
@@ -318,15 +326,15 @@ public final class SwordCleaveW52GameTests {
         WeaponRuntime.onPunch(shortStep);
         beforeLightContact(h, p, start, closest, farther);
         beforeLightContact(h, shortStep, origin, near, far);
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(p);
             WeaponRuntime.tickPlayer(shortStep);
             double moved = horizontal(start, p.position());
-            check(h, moved > 0 && moved <= 1.8 + EPS && p.getZ() > start.z
-                            && p.getY() == start.y && p.getYRot() == yaw && p.getXRot() == pitch,
-                    "Closest visible off-axis enemy guides a bounded horizontal displacement with unchanged view/Y");
-            check(h, closest.getHealth() < HP && farther.getHealth() == HP && ammo(stack).rounds() == 11,
-                    "Only enemies within the actual start/end cleave poses lose real HP");
+            check(h, moved > 0 && moved <= 2 + EPS && p.getZ() > start.z
+                            && Math.abs(p.getY()-start.y)<EPS && p.onGround() && p.getYRot() == yaw && p.getXRot() == pitch,
+                    "Closest visible off-axis enemy guides a bounded native displacement: delta="+p.position().subtract(start)+" view="+p.getYRot()+"/"+p.getXRot()+" expected="+yaw+"/"+pitch);
+            check(h, closest.getHealth() < HP && farther.getHealth() < HP && ammo(stack).rounds() == 11,
+                    "Both enemies reached by the finite native swept path lose real HP");
             check(h, h.getLevel().noCollision(p, p.getBoundingBox())
                             && h.getLevel().getWorldBorder().isWithinBounds(p.getBoundingBox()),
                     "Lunge endpoint body remains collision-free and inside the world border");
@@ -342,6 +350,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void rearOffAcquisitionConeAndBeyondRangeCannotAutoMovePlayer(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 6.5);
         var stack = equip(p, 12);
         var rear = target(h, .8, 6.5);
@@ -355,14 +364,14 @@ public final class SwordCleaveW52GameTests {
         WeaponRuntime.onPunch(miss);
         beforeLightContact(h, p, start, rear, wide, tooFar);
         beforeLightContact(h, miss, before);
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(p);
             WeaponRuntime.tickPlayer(miss);
-            unchanged(h, p, start, "Rear, wide-cone and beyond-5.3 enemies cannot synthesize forward movement");
-            check(h, rear.getHealth() == HP && tooFar.getHealth() == HP && wide.getHealth() < HP
+            check(h,p.getZ()==start.z&&horizontal(start,p.position())<=2+EPS,"Excluded acquisition targets cannot turn or extend the two-block fallback");
+            check(h, rear.getHealth() == HP && tooFar.getHealth() < HP && wide.getHealth() < HP
                             && ammo(stack).rounds() == 11,
                     "Wider light cleave can hurt a legal side enemy without turning it into a narrow-cone lunge target");
-            unchanged(h, miss, before, "A powered miss with no forward legal target is stationary");
+            check(h,Math.abs(horizontal(before,miss.position())-2)<.02,"A targetless powered contact advances two native blocks");
             check(h, ammo(drySwing).rounds() == 11, "Stationary accepted miss still costs one ammo");
             h.succeed();
         });
@@ -370,6 +379,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void bodyHeightAllowsLocalCleaveButRejectsHighDamageAndLungeTargets(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 6.5);
         var stack = equip(p, 12);
         // Husk body midpoint is .975 above feet: y=2.35 is 1.425 above player body origin at y=1.9.
@@ -382,18 +392,19 @@ public final class SwordCleaveW52GameTests {
         var start = p.position();
         WeaponRuntime.onPunch(p);
         beforeLightContact(h, p, start, local, high, elevatedDistant);
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(p);
-            unchanged(h, p, start, "Enemies outside acquisition height cannot cause upward or horizontal lunge");
-            check(h, local.getHealth() < HP && high.getHealth() == HP && elevatedDistant.getHealth() == HP
+            check(h,Math.abs(p.getY()-start.y)<EPS&&p.onGround()&&horizontal(start,p.position())<=2+EPS,"High targets cannot boost or extend grounded native step: delta="+p.position().subtract(start));
+            check(h, local.getHealth() < HP && high.getHealth() == HP && elevatedDistant.getHealth() < HP
                             && ammo(stack).rounds() == 11,
-                    "Independent body-height bounds govern actual HP: local legal cleave, high and unreachable enemies excluded");
+                    "Body-height bounds exclude the high foe while actual swept path reaches the lower far foe");
             h.succeed();
         });
     }
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void emptyLightWeaklyCleavesBothSidesWithoutLungeOrAmmoGrant(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var paid = player(h, 2.5);
         var empty = player(h, 9.5);
         var poweredStack = equip(paid, 12);
@@ -409,23 +420,24 @@ public final class SwordCleaveW52GameTests {
         InputRouter.onPunch(empty);
         beforeLightContact(h, paid, paidStart, poweredA, poweredB);
         beforeLightContact(h, empty, start, weakA, weakB, distant);
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(paid);
             WeaponRuntime.tickPlayer(empty);
             float strong = HP - poweredA.getHealth(), weak = HP - weakA.getHealth();
             check(h, strong > weak && weak > 0 && Math.abs(poweredB.getHealth() - poweredA.getHealth()) < .001f
                             && Math.abs(weakB.getHealth() - weakA.getHealth()) < .001f,
                     "Empty light still cleaves both legal side bodies, each at weaker actual HP damage");
-            unchanged(h, empty, start, "Empty sword cannot lunge even toward an otherwise eligible distant front enemy");
-            check(h, distant.getHealth() == HP && ammo(emptyStack).total() == 0 && ammo(poweredStack).rounds() == 11
+            check(h,horizontal(start,empty.position())<=2+EPS,"Empty weak contact retains the bounded two-block step");
+            check(h, distant.getHealth() < HP && ammo(emptyStack).total() == 0 && ammo(poweredStack).rounds() == 11
                             && !WeaponRuntime.reloading(empty),
-                    "Weak stationary cleave cannot reach remote targets, create ammo or begin reload");
+                    "Weak swept contact cannot create ammo or begin reload");
             h.succeed();
         });
     }
 
     @GameTest(structure = FLOOR, maxTicks = 80, environment = "destiny-test:w90_isolated")
     public void airborneLightKeepsVerticalMomentumAndViewAcrossAllFiveFrames(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         // Historical aggressive/lightweight air actions are sourced; shared geometry is authored.
         var ids = List.of("abide_the_return", "goldtusk", "crown_splitter", "falling_guillotine", "temptation_s_hook");
         for (int i = 0; i < ids.size(); i++) {
@@ -440,15 +452,15 @@ public final class SwordCleaveW52GameTests {
                 var p = player(h, 6.5);
                 var stack = WeaponItems.create(WeaponCatalog.find(id).orElseThrow());
                 WeaponItems.save(stack, new WeaponMagazine(WeaponProfile.forEntry(WeaponItems.entry(stack).orElseThrow()), 12, 0));
+                p.setPos(p.getX(), p.getY() + 11.1, p.getZ());
+                p.setOnGround(false);
                 p.setItemInHand(InteractionHand.MAIN_HAND, stack);
                 WeaponRuntime.tickPlayer(p);
-                p.setPos(p.getX(), p.getY() + 1.1, p.getZ());
-                p.setOnGround(false);
                 p.setXRot(19);
                 p.setDeltaMovement(new Vec3(.2, -.35, .1));
                 var velocity = p.getDeltaMovement();
                 var start = p.position();
-                var enemy = target(h, 6.7, 2.1, 6.5);
+                var enemy = target(h, 6.7, 12.1, 6.5);
                 TestPlayers.drain(p);
                 owner[0] = p; held[0] = stack; target[0] = enemy; origin[0] = start; motion[0] = velocity;
                 InputRouter.onPunch(p);
@@ -463,29 +475,23 @@ public final class SwordCleaveW52GameTests {
                                 net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket.class::isInstance),
                         id + ": no lunge correction is queued before contact");
             });
-            h.runAfterDelay(startTick + lightContact() + 1, () -> {
+            h.runAfterDelay(startTick + lightContact() + 7, () -> {
                 var p = owner[0]; var stack = held[0]; var enemy = target[0];
                 var start = origin[0]; var velocity = motion[0];
                 WeaponRuntime.tickPlayer(p);
-                check(h, horizontal(start, p.position()) > 0 && horizontal(start, p.position()) <= 1.8 + EPS
-                                && p.getY() == start.y && !p.onGround() && p.getXRot() == 19 && p.getYRot() == -90
-                                && p.getDeltaMovement().distanceToSqr(velocity) < 1e-12,
+                check(h, horizontal(start, p.position()) > 0 && horizontal(start, p.position()) <= 5 + EPS
+                                && p.getY() < start.y && !p.onGround() && p.getXRot() == 19 && p.getYRot() == -90
+                                && p.getDeltaMovement().y < 0,
                         id + ": airborne light lunge preserves air motion; start=" + start + ", end=" + p.position()
                                 + ", grounded=" + p.onGround() + ", yaw=" + p.getYRot() + ", pitch=" + p.getXRot()
                                 + ", beforeVelocity=" + velocity + ", afterVelocity=" + p.getDeltaMovement());
                 check(h, enemy.getHealth() < HP && ammo(stack).rounds() == 11 && !WeaponRuntime.reloading(p),
                         id + ": an accepted airborne light changes actual HP and pays once");
-                var corrections = TestPlayers.outbound(p).stream()
-                        .filter(net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket.class::isInstance)
-                        .map(net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket.class::cast).toList();
-                check(h, corrections.size() == 1, id + ": one bounded lunge queues exactly one position correction");
-                var correction = corrections.getFirst();
-                check(h, correction.change().position().distanceToSqr(p.position()) < 1e-12
-                                && correction.change().deltaMovement().equals(Vec3.ZERO)
-                                && correction.change().yRot() == 0 && correction.change().xRot() == 0
-                                && correction.relatives().equals(net.minecraft.world.entity.Relative.union(
-                                        net.minecraft.world.entity.Relative.DELTA, net.minecraft.world.entity.Relative.ROTATION)),
-                        id + ": real queued packet uses absolute position and relative-zero velocity/view, not a forced lift/turn");
+                var packets=TestPlayers.outbound(p);
+                check(h,packets.stream().noneMatch(net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket.class::isInstance),
+                        id+": dash never queues a teleport correction");
+                check(h,packets.stream().anyMatch(net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket.class::isInstance),
+                        id+": actual native velocity packets drive the finite dash");
                 enemy.discard();
                 if (last) h.succeed();
             });
@@ -494,6 +500,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 20, environment = "destiny-test:w90_isolated")
     public void aggressiveAirborneHeavyAcceptsAnyPositiveEnergyAndStartsRechargeDelay(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var enemies = new ArrayList<Husk>();
         var owners = new ArrayList<ServerPlayer>();
         var stacks = new ArrayList<ItemStack>();
@@ -506,11 +513,11 @@ public final class SwordCleaveW52GameTests {
             var stack = WeaponItems.create(WeaponCatalog.find("crown_splitter").orElseThrow());
             WeaponItems.save(stack, new WeaponMagazine(WeaponProfile.forEntry(WeaponItems.entry(stack).orElseThrow()), 12, 0));
             SwordItems.save(stack, energy, 0);
+            p.setPos(p.getX(), p.getY() + 11.1, p.getZ());
+            p.setOnGround(false);
             p.setItemInHand(InteractionHand.MAIN_HAND, stack);
             WeaponRuntime.tickPlayer(p);
-            p.setPos(p.getX(), p.getY() + 1.1, p.getZ());
-            p.setOnGround(false);
-            var enemy = target(h, 4.5, 2.1, z);
+            var enemy = target(h, 4.5, 12.1, z);
             owners.add(p); stacks.add(stack); enemies.add(enemy); origins.add(p.position());
             var before = p.position();
             p.gameMode.useItem(p, h.getLevel(), stack, InteractionHand.MAIN_HAND);
@@ -537,6 +544,7 @@ public final class SwordCleaveW52GameTests {
 
     @GameTest(structure = FLOOR, maxTicks = 25, environment = "destiny-test:w90_isolated")
     public void duplicateCooldownSwapGuardAndUnavailableInputsCannotMoveSpendOrRepeatHp(GameTestHelper h) {
+        MeleeNativeTestFrames.install(h);
         var p = player(h, 6.5);
         var first = equip(p, 12);
         var enemy = target(h, 7, 6.5);
@@ -584,7 +592,7 @@ public final class SwordCleaveW52GameTests {
             check(h, unavailableEnemy.getHealth() == HP && ammo(unavailableStack).rounds() == 12,
                     "Unavailable input has no HP or ammo transaction");
         });
-        h.runAfterDelay(lightContact() + 1, () -> {
+        h.runAfterDelay(lightContact() + 7, () -> {
             WeaponRuntime.tickPlayer(p);
             WeaponRuntime.tickPlayer(guarded);
             WeaponRuntime.tickPlayer(unavailable);

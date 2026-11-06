@@ -1,0 +1,77 @@
+{
+  "owner": "master only; existing approved isolated coordinator/client/server",
+  "status": "NOT_EXECUTED_BY_WORKER",
+  "entrypoint": "/destiny devils",
+  "commands": {
+    "restriction": "/destiny devils qa_restriction <owned-player>",
+    "wipe": "/destiny devils qa_wipe <owned-player>",
+    "status": "/destiny devils qa_failure_status <owned-player>"
+  },
+  "commandLimits": "OP-only, supplied by activity_exit worker. qa_restriction requires RUNNING and retained audience client+pack-ready in the owned strike; uses safe RF placement and normal director invalidation/start. qa_wipe invokes actual down/GuardianDown ownership for current living participants; it does not jump the grace clock or forge a completion.",
+  "cases": [
+    {
+      "name": "entry_and_sustained_restriction",
+      "steps": [
+        "Admit owned native client with actual pack ACK into isolated DevilsLair",
+        "Run qa_restriction",
+        "Capture centered diamond+부활 제한 at about0.5seconds",
+        "Capture compact sustained marker after5.5seconds",
+        "Check status restricted=true phase=RF_ENTRY or subsequent RF phase"
+      ],
+      "evidence": [
+        "native framebuffer PNG paths",
+        "client audio engine STARTED exactly once for destiny_activity_failure:restricted_entry_[0-63]",
+        "server command result and generation",
+        "native hearing separate from engine dispatch"
+      ],
+      "failureChecks": [
+        "No per-tick cue spam during15seconds",
+        "Objective/weapon/ADS readability and no misplaced icon",
+        "Pack loads the dedicated item models and glyphs"
+      ]
+    },
+    {
+      "name": "wipe_grace_full_presentation_checkpoint",
+      "steps": [
+        "Record current activity/generation/status",
+        "Run qa_wipe",
+        "Before8seconds capture GuardianDown and light-fading countdown",
+        "At about9seconds capture full dark screen, red down triangle/skull, light-fades/checkpoint text",
+        "Capture dedicated team_wipe engine STARTED once",
+        "After about19.5seconds poll until safe placement succeeds",
+        "Verify new generation, wiping=false, living equals current ready team, camera/input/health recovered, old enemies/telegraphs absent"
+      ],
+      "expectedTicks": {
+        "grace": 160,
+        "presentation": 230
+      },
+      "evidence": [
+        "PNG before/during/after",
+        "server generation and checkpoint coordinates",
+        "client audio engine STARTED",
+        "native movement/attack input after recovery",
+        "audio hearing separate"
+      ],
+      "timingClassification": "Minecraft policy;230ticks preserves the full selected11.14s cue plus a small end gap."
+    },
+    {
+      "name": "ownership_and_cleanup",
+      "steps": [
+        "During restriction leave through actual activity exit UI; verify own marker/events disappear and remaining team continues",
+        "During grace or wipe leave one member; retain the others' scene and recover them once",
+        "Disconnect/reconnect downed player; restore owned down scene, one private entry/wipe cue per new connection, no extra death count",
+        "Disconnect entire audience during wipe; deadline does not advance without ready viewers",
+        "Close old activity/start new activity; old token cannot reset new checkpoint or erase its HUD/audio",
+        "Clear RF/BL encounter normally; sustained marker and restricted wipe policy disappear before next zone"
+      ],
+      "evidence": [
+        "before/after HUD PNG",
+        "old/new session+generation IDs",
+        "no stale reset logs",
+        "per-player cue dispatch and stop ownership"
+      ]
+    }
+  ],
+  "gametestClass": "kim.biryeong.destiny.test.ActivityFailureW329GameTests",
+  "originalCueAcceptance": "USER_MAPPING_CONFIRMED: restricted_entry=023D-0000110F.mp3 (Drive1Pt81syHr9SpNIJi5c6aB_yIoZKq3cM5Y), team_wipe=023D-00001176.mp3 (Drive1d5cmGti9U3EcfIaqhxOAoma46EvP5-9M). Archived originals + full decoded stereo48k OGG checked. No subjective listening claim; client engine STARTED and native listening remain master QA."
+}

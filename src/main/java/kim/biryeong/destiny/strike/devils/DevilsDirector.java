@@ -458,6 +458,12 @@ public final class DevilsDirector implements AutoCloseable {
         host.checkpointReset(zone, restartingGeneration, Objects.requireNonNull(reason));
         if (generation == restartingGeneration && phase != Phase.CLOSED) startZone(zone);
     }
+    /** OP-only native QA fixture adapter. Uses normal invalidation/start, never fabricates encounter completion. */
+    void qaCheckpoint(Zone zone) {
+        if (phase == Phase.CLOSED) return;
+        invalidate(Retirement.CHECKPOINT);
+        startZone(Objects.requireNonNull(zone));
+    }
     private void invalidate(Retirement reason) {
         long old = generation++;
         speaking = null; speech.clear(); packs.reset(); phaseRequired.clear();

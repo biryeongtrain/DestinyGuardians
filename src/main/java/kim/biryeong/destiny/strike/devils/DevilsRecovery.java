@@ -58,7 +58,7 @@ public final class DevilsRecovery implements AutoCloseable {
     private long generation, clock, request;
     private DevilsPlan.Zone zone;
     private int wipeTicks;
-    private boolean wipeIssued, closed;
+    private boolean wipeIssued, closed, restricted;
 
     public DevilsRecovery(UUID activity, Collection<UUID> players, Host host) {
         this.activity = Objects.requireNonNull(activity); this.host = Objects.requireNonNull(host);
@@ -75,7 +75,7 @@ public final class DevilsRecovery implements AutoCloseable {
         Objects.requireNonNull(nextZone);
         if (closed || nextGeneration <= generation) return false;
         List<Revival> pending = pending();
-        generation = nextGeneration; zone = nextZone; wipeTicks = 0; wipeIssued = false;
+        generation = nextGeneration; zone = nextZone; restricted = nextZone != DevilsPlan.Zone.RY; wipeTicks = 0; wipeIssued = false;
         holdInputs.clear();
         for (Slot slot : slots.values()) {
             slot.state = State.ALIVE; slot.down = null; slot.pending = null;
@@ -111,6 +111,13 @@ public final class DevilsRecovery implements AutoCloseable {
     }
 
     public Optional<DownToken> token(UUID player) { return Optional.ofNullable(require(player).down); }
+
+    /** Phase adapter: a cleared encounter is no longer restricted even before leaving its zone. */
+    public void restricted(boolean restricted) {
+        if (closed || wipeIssued) return;
+        this.restricted = restricted;
+        if (!restricted) wipeTicks = 0;
+    }
 
     /** Player-requested self revive. Normal zones require 5 seconds; restricted zones require 30 seconds. */
     public boolean self(DownToken token) {
@@ -162,7 +169,7 @@ public final class DevilsRecovery implements AutoCloseable {
         }
         holdInputs.clear();
         // A pending animation is not a living Guardian. A successful callback immediately cancels the wipe.
-        if (zone != DevilsPlan.Zone.RY && living() == 0 && slots.values().stream().anyMatch(s -> s.online && s.state != State.ALIVE)) {
+        if (restricted && living() == 0 && slots.values().stream().anyMatch(s -> s.online && s.state != State.ALIVE)) {
             if (++wipeTicks >= WIPE_TICKS) {
                 wipeIssued = true;
                 List<Revival> pending = pending();
@@ -231,7 +238,7 @@ public final class DevilsRecovery implements AutoCloseable {
     }
     private int readyIn(Slot slot) {
         if (slot.down == null) return 0;
-        return (int) Math.max(0, (zone == DevilsPlan.Zone.RY ? NORMAL_SELF_TICKS : SELF_TICKS) - (clock - slot.downAt));
+        return (int) Math.max(0, (restricted ? SELF_TICKS : NORMAL_SELF_TICKS) - (clock - slot.downAt));
     }
     private void resetHold(Slot slot) { slot.helper = null; slot.holdTicks = 0; }
     private int online() { return (int) slots.values().stream().filter(s -> s.online).count(); }
