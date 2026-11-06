@@ -45,15 +45,25 @@ public final class Loot {
 
     private static final List<WorldDrop> DROPS = new ArrayList<>();
     private static final List<LootChest> CHESTS = new ArrayList<>();
+    /** Guardians who damaged each living enemy (Destiny rolls loot per contributor). Weak: removed enemies drop out. */
+    private static final Map<LivingEntity, Set<UUID>> CONTRIBUTORS = new WeakHashMap<>();
+    /** Fireteam members this close to a kill also roll (Destiny shares kills inside the fireteam's area). */
+    static final double FIRETEAM_SHARE = 64;
+    private static final String ENGRAM_TAG = "destiny_engram";
 
     private Loot() { }
 
     public static void init() {
         ServerTickEvents.END_SERVER_TICK.register(Loot::tick);
         ServerLivingEntityEvents.AFTER_DEATH.register(Loot::died);
+        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, base, taken, blocked) -> {
+            if (entity instanceof ServerPlayer || !(entity instanceof Enemy)) return;
+            var who = source.getEntity() instanceof ServerPlayer sp ? sp : null;
+            if (who != null) CONTRIBUTORS.computeIfAbsent(entity, k -> new HashSet<>()).add(who.getUUID());
+        });
         ServerPlayConnectionEvents.DISCONNECT.register((h, s) -> LootToast.forget(h.getPlayer()));
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
-            for (var d : List.copyOf(DROPS)) d.close();
+            for (var d : List.copyOf(DROPS)) d.close(true);
             for (var c : List.copyOf(CHESTS)) c.close(false);
             DROPS.clear(); CHESTS.clear();
         });
@@ -139,11 +149,43 @@ public final class Loot {
         }
     }
 
-    /** The activity is closing: unopened chests are delivered, personal drops vanish. */
+    /** The activity is closing: unopened chests are delivered, uncollected drops go to the postmaster. */
     public static void activityClosed(List<ServerPlayer> players) {
         for (var c : List.copyOf(CHESTS)) if (players.contains(c.owner)) c.close(true);
-        for (var d : List.copyOf(DROPS)) if (players.contains(d.owner)) d.close();
+        for (var d : List.copyOf(DROPS)) if (players.contains(d.owner)) d.close(true);
     }
+
+    // ---------------------------------------------------------------- engrams as items (postmaster mail)
+
+    /** A mail-able engram: claiming it puts the engram back into the engram inventory. */
+    public static ItemStack engramToken(String tier) {
+        var s = new ItemStack(net.minecraft.world.item.Items.PAPER);
+        s.set(net.minecraft.core.component.DataComponents.ITEM_MODEL, WorldDrop.engramModel(tier));
+        s.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, Component.literal(engramName(tier))
+                .withStyle(st -> st.withItalic(false).withColor(color(LootRoller.Reward.engram(tier)))));
+        var tag = new net.minecraft.nbt.CompoundTag(); tag.putString(ENGRAM_TAG, tier);
+        s.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(tag));
+        return s;
+    }
+    public static Optional<String> engramTier(ItemStack s) {
+        var data = s.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+        if (data == null) return Optional.empty();
+        var tier = data.copyTag().getStringOr(ENGRAM_TAG, "");
+        return tier.isEmpty() ? Optional.empty() : Optional.of(tier);
+    }
+    /** Null when one more engram fits, else why not. */
+    public static String engramRoom(ServerPlayer p) {
+        return profile(p).engrams().size() >= LootProfile.ENGRAM_CAP ? "엔그램은 " + LootProfile.ENGRAM_CAP + "개까지 보관할 수 있습니다. 먼저 해독하세요." : null;
+    }
+    public static String storeEngram(ServerPlayer p, String tier) {
+        String why = engramRoom(p);
+        if (why != null) return why;
+        p.setAttached(PROFILE, profile(p).plus(tier));
+        announce(p, LootRoller.Reward.engram(tier), "우편함");
+        return null;
+    }
+    /** The uncollected reward as a stack for the postmaster. */
+    static ItemStack mailStack(LootRoller.Reward r) { return r.engram() != null ? engramToken(r.engram()) : r.weapon().copy(); }
 
     // ---------------------------------------------------------------- grants
 
@@ -264,10 +306,10 @@ public final class Loot {
     }
 
     private static void died(LivingEntity entity, DamageSource source) {
+        var contributors = CONTRIBUTORS.remove(entity);
         if (entity instanceof ServerPlayer || !(entity instanceof Enemy)) return;
         ServerPlayer killer = source.getEntity() instanceof ServerPlayer sp ? sp
                 : entity.getKillCredit() instanceof ServerPlayer sp ? sp : null;
-        if (killer == null || killer.level() != entity.level() || kim.biryeong.destiny.crucible.CrucibleRuntime.participating(killer)) return;
         var tier = entity instanceof LootTagged t ? t.lootTier()
                 : entity.getMaxHealth() <= MINOR_HEALTH ? LootTagged.Tier.MINOR
                 : entity.getMaxHealth() <= MAJOR_HEALTH ? LootTagged.Tier.MAJOR : LootTagged.Tier.BOSS;
@@ -279,10 +321,33 @@ public final class Loot {
         var t = LootTables.table(table);
         if (t.isEmpty()) return;
         var at = entity.position();
-        for (var r : LootRoller.roll(t.get(), killer.getRandom())) drop(killer, at, r);
-        // Glimmer income: every combatant kill pays a little (Destiny's on-kill Glimmer).
-        long glimmer = switch (tier) { case MINOR -> killer.getRandom().nextInt(3) == 0 ? 1 : 0; case MAJOR -> 3; case BOSS -> 20; case NONE -> 0; };
-        kim.biryeong.destiny.economy.Economy.reward(killer, glimmer, "처치");
+        // Every Guardian who hit it, the killer, and the killer's fireteam nearby each roll their own loot.
+        for (var p : recipients(entity, killer, contributors)) {
+            for (var r : LootRoller.roll(t.get(), p.getRandom())) drop(p, at, r);
+            long glimmer = switch (tier) { case MINOR -> p.getRandom().nextInt(3) == 0 ? 1 : 0; case MAJOR -> 3; case BOSS -> 20; case NONE -> 0; };
+            kim.biryeong.destiny.economy.Economy.reward(p, glimmer, "처치");
+        }
+    }
+
+    /** Distinct living Guardians in the enemy's level who earned a roll; never Crucible participants. */
+    static List<ServerPlayer> recipients(LivingEntity entity, ServerPlayer killer, Set<UUID> contributors) {
+        var server = entity.level().getServer();
+        var out = new LinkedHashMap<UUID, ServerPlayer>();
+        if (killer != null) out.put(killer.getUUID(), killer);
+        if (contributors != null) for (var id : contributors) {
+            var p = server.getPlayerList().getPlayer(id);
+            if (p != null) out.putIfAbsent(id, p);
+        }
+        for (var p : List.copyOf(out.values()))
+            kim.biryeong.destiny.fireteam.Fireteams.team(p).ifPresent(team -> {
+                for (var id : team.members()) {
+                    var m = server.getPlayerList().getPlayer(id);
+                    if (m != null && m.level() == entity.level() && m.distanceToSqr(entity) <= FIRETEAM_SHARE * FIRETEAM_SHARE) out.putIfAbsent(id, m);
+                }
+            });
+        out.values().removeIf(p -> p.hasDisconnected() || !p.isAlive() || p.isSpectator() || p.level() != entity.level()
+                || kim.biryeong.destiny.crucible.CrucibleRuntime.participating(p));
+        return List.copyOf(out.values());
     }
 
     private static void tick(MinecraftServer server) {

@@ -63,7 +63,7 @@ public final class EconomyLedger {
         public boolean ok() { return error == null; }
     }
 
-    public enum MailKind { PLAYER, AUCTION_ITEM, AUCTION_RETURN, AUCTION_SALE, OVERFLOW, ADMIN }
+    public enum MailKind { PLAYER, AUCTION_ITEM, AUCTION_RETURN, AUCTION_SALE, OVERFLOW, ADMIN, LOST_ITEM }
 
     /** One postmaster entry: an item, Glimmer, or both. */
     public record Mail(long id, UUID from, String fromName, MailKind kind, ItemPayload item, long glimmer,

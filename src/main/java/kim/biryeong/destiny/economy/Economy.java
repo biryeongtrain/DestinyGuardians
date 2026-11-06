@@ -213,8 +213,25 @@ public final class Economy {
         return null;
     }
 
+    /**
+     * Destiny postmaster: an uncollected reward (drop left behind, activity ended) goes to the Guardian's mailbox.
+     * Works for offline owners. Returns false only when the mailbox is at its system cap or the economy is down.
+     */
+    public static boolean postmaster(java.util.UUID id, String name, ItemStack stack, String message) {
+        if (LEDGER == null || SERVER == null || stack.isEmpty()) return false;
+        LEDGER.touch(id, name);
+        var r = LEDGER.deliver(id, EconomyLedger.MailKind.LOST_ITEM, "우편 관리자", payload(stack), 0, message, now());
+        if (!r.ok()) { kim.biryeong.destiny.DestinyGuardians.LOGGER.warn("[Economy] postmaster refused {} for {}: {}", stack.getHoverName().getString(), name, r.error()); return false; }
+        changed(id);
+        // Activities drain during shutdown, possibly after the stopping save: persist now.
+        if (!SERVER.isRunning()) save(true);
+        return true;
+    }
+
     /** Null when {@code stack} can be placed into the player's storage now, else why not. Never mutates. */
     public static String canReceive(ServerPlayer p, ItemStack stack) {
+        var engram = kim.biryeong.destiny.loot.Loot.engramTier(stack);
+        if (engram.isPresent()) return kim.biryeong.destiny.loot.Loot.engramRoom(p);
         var entry = WeaponItems.entry(stack);
         if (entry.isPresent()) {
             var slot = WeaponLoadout.slot(p, stack, entry.get());
@@ -228,6 +245,8 @@ public final class Economy {
 
     /** Place a stack (already checked with {@link #canReceive}). Null on success. */
     static String place(ServerPlayer p, ItemStack stack) {
+        var engram = kim.biryeong.destiny.loot.Loot.engramTier(stack);
+        if (engram.isPresent()) return kim.biryeong.destiny.loot.Loot.storeEngram(p, engram.get());
         if (WeaponItems.entry(stack).isPresent()) return GearAcquisition.store(p, stack);
         for (int i = FIRST_SLOT; i <= LAST_SLOT; i++) if (p.getInventory().getItem(i).isEmpty()) {
             p.getInventory().setItem(i, stack); p.getInventory().setChanged(); return null;

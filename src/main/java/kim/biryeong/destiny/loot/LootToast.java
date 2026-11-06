@@ -46,18 +46,21 @@ public final class LootToast {
 
     private static void render(ServerPlayer p) {
         var painter = new HudPainter(p, PREFIX);
-        // The gear screen shows the change itself; cards wait underneath and reappear when it closes.
-        var q = kim.biryeong.destiny.inventory.gear.GearScreen.active(p) ? new ArrayDeque<Card>() : CARDS.getOrDefault(p.getUUID(), new ArrayDeque<>());
-        float y = 700;
+        var q = CARDS.getOrDefault(p.getUUID(), new ArrayDeque<>());
+        // Over the gear screen (engram decode) the newest card shows top-centre under the engram row, above the
+        // screen's own layers; in the world the stack sits at the left edge.
+        boolean gear = kim.biryeong.destiny.inventory.gear.GearScreen.active(p);
+        float x = gear ? 960 : 250, y = gear ? 214 : 700, depth = gear ? 125 : 120;
         int i = 0;
         for (var c : q) {
+            if (gear && i >= 1) break;
             String k = "c" + i++;
-            painter.rect(k + "_bg", 250, y, 380, 76, 120, 0x0E1318);
-            painter.rect(k + "_band", 250, y - 32, 380, 12, 121, c.band());
-            if (c.icon() != null) painter.icon(k + "_icon", c.icon(), 98, y + 4, 60, 124, 0xFFFFFF);
-            else if (c.weapon() != null) painter.weapon(k + "_icon", c.weapon(), 98, y + 4, 60, 124);
-            painter.textLeft(k + "_name", c.name(), 138, y - 12, 22, 0xF2F2EE, 280, 255);
-            painter.textLeft(k + "_line", c.line(), 138, y + 16, 18, 0x9AA3AA, 280, 255);
+            painter.rect(k + "_bg", x, y, 380, 76, depth, 0x0E1318);
+            painter.rect(k + "_band", x, y - 32, 380, 12, depth + 1, c.band());
+            if (c.icon() != null) painter.icon(k + "_icon", c.icon(), x - 152, y + 4, 60, depth + 3, 0xFFFFFF);
+            else if (c.weapon() != null) painter.weapon(k + "_icon", c.weapon(), x - 152, y + 4, 60, depth + 3);
+            painter.textLeft(k + "_name", c.name(), x - 112, y - 12, 22, 0xF2F2EE, 280, 255);
+            painter.textLeft(k + "_line", c.line(), x - 112, y + 16, 18, 0x9AA3AA, 280, 255);
             y -= 92;
         }
         painter.finish();

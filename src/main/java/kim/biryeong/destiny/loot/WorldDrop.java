@@ -88,7 +88,7 @@ final class WorldDrop {
     boolean tick() {
         if (done) return false;
         age++;
-        if (owner.hasDisconnected() || owner.level() != level || age > LIFE) { close(); return false; }
+        if (owner.hasDisconnected() || owner.level() != level || age > LIFE) { close(true); return false; }
         if ((age & 1) == 0) place();
         if (age % 5 == 0 && owner.getEyePosition().distanceToSqr(pos) > 16) {
             level.sendParticles(owner, new DustParticleOptions(color, .8f), true, false, pos.x, pos.y + .2 + (age / 5 % 8) * .35, pos.z, 1, .04, .08, .04, 0);
@@ -100,5 +100,12 @@ final class WorldDrop {
         return true;
     }
 
-    void close() { if (!done) { done = true; holder.destroy(); } }
+    void close() { close(false); }
+    /** {@code mail}: the reward was never collected and goes to the owner's postmaster (Destiny behaviour). */
+    void close(boolean mail) {
+        if (done) return;
+        done = true; holder.destroy();
+        if (mail) kim.biryeong.destiny.economy.Economy.postmaster(owner.getUUID(), owner.getGameProfile().name(), Loot.mailStack(reward),
+                "회수하지 못한 " + (reward.engram() != null ? Loot.engramName(reward.engram()) : "무기"));
+    }
 }
