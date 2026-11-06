@@ -23,11 +23,15 @@ import java.util.*;
 public final class ProfileWeaponView {
     public static final String LEGACY_PROPERTY="destiny.weapon.legacyPixelArms";
     private static final float SCALE=32000;
+    // Vanilla F5 is client-only. Cull owner-mounted view parts when its camera pulls away.
+    // After chunk-distance compensation, vanilla's 50..500% entity slider gives .32..3.2 blocks.
+    // This is proximity culling, not an exact F5 detector: wall-compressed cameras can enter it.
+    private static final float OWNER_VIEW_RADIUS = .64f;
     private static final Map<UUID,Session> ACTIVE=new HashMap<>();
     private static final class Session {
         final ServerPlayer owner;final ItemDisplayHud gun,grenade;final ItemDisplayHud[] arms=new ItemDisplayHud[4];
         final Object profile;final boolean slim;boolean leftHand,lastTwoHand;ItemStack lastGun=ItemStack.EMPTY;
-        ItemStack source;boolean lastCarrier;
+        ItemStack source;boolean lastCarrier;float viewRange;
         Matrix4f lastRoot;boolean throwing,meleeHidden;long raiseAt=Long.MIN_VALUE;
         final Matrix4f[] readyArms=new Matrix4f[4];
         final String[] lastPoses=new String[4];final int[] lastMarkers={-1,-1,-1,-1};int sleeves=-1;float lastHandX=Float.NaN;
@@ -36,6 +40,7 @@ public final class ProfileWeaponView {
             grenade=create(p,"grenade",ItemStack.EMPTY,ItemDisplayContext.NONE,new Brightness(0,12));
             for(int i=0;i<4;i++) {var carrier=ProfileSkinArmCarrier.createCarrier(p.getGameProfile());carrier.set(DataComponents.ITEM_MODEL,kim.biryeong.destiny.DestinyGuardians.id(ProfileArmAssets.ITEM));
                 arms[i]=create(p,"arm_"+i,carrier,ItemDisplayContext.NONE,ProfileSkinArmCarrier.marker(i));}
+            viewRange=viewRange(p);
         }
     }
     private ProfileWeaponView(){}
@@ -59,7 +64,20 @@ public final class ProfileWeaponView {
     }
     private static ItemDisplayHud create(ServerPlayer p,String suffix,ItemStack stack,ItemDisplayContext context,Brightness marker){
         var h=new ItemDisplayHud();h.updateWhenDataChanged(false);h.setItem(stack);h.setItemTransform(context);h.removeWhenPlayerDied();
+        h.setViewRange(viewRange(p));
         h.spawn(p,"destiny:profile_view_"+suffix);h.getDisplay().setBrightnessOverride(marker);return h;
+    }
+    private static float viewRange(ServerPlayer p) {
+        return kim.biryeong.destiny.util.DisplayViewRange.nearCamera(OWNER_VIEW_RADIUS,
+                p.requestedViewDistance(),p.level().getServer().getPlayerList().getViewDistance());
+    }
+    private static void refreshViewRange(Session s) {
+        float range=viewRange(s.owner);
+        if(Float.compare(range,s.viewRange)==0)return;
+        s.viewRange=range;
+        s.gun.setViewRange(range);s.gun.update();
+        s.grenade.setViewRange(range);s.grenade.update();
+        for(var arm:s.arms){arm.setViewRange(range);arm.update();}
     }
     private static void update(ServerPlayer p){
         var original=p.getMainHandItem();
@@ -70,7 +88,7 @@ public final class ProfileWeaponView {
             var session=ACTIVE.get(p.getUUID());
             if(session!=null&&(session.owner!=p||!session.profile.equals(p.getGameProfile()))){remove(session.owner);session=null;}
             if(session==null){session=new Session(p);ACTIVE.put(p.getUUID(),session);}
-            throwView(p,session);return;
+            refreshViewRange(session);throwView(p,session);return;
         }
         if(kim.biryeong.destiny.fx.PlayerAnimations.meleePlaying(p)) {
             var session=ACTIVE.get(p.getUUID());
@@ -89,6 +107,7 @@ public final class ProfileWeaponView {
         if(s!=null&&(s.owner!=p||!s.profile.equals(p.getGameProfile()))){remove(s.owner);s=null;}
         // Do not clear a first accepted shot just because its first view display is being created.
         if(s==null){s=new Session(p);ACTIVE.put(p.getUUID(),s);}
+        refreshViewRange(s);
         // A copied/equivalent replacement is still a different owner source. Do not interpolate
         // its hands from a retired reload pose (or reuse those arms after a later grenade throw).
         if (s.source != original) {
