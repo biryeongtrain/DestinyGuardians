@@ -52,6 +52,11 @@ public final class GearHud {
         var c = v.character();
         p.textLeft("class_line", c.className() + "  ·  " + c.subclassName(), 146, 112, 20, MUTED, 600, 255);
         p.textRight("tab", v.stage() == Stage.SUBCLASS || v.stage() == Stage.OPTIONS ? "하위직업" : "캐릭터", 1860, 80, 26, WHITE, 255);
+        if (v.glimmer() >= 0) {
+            String amount = String.format("%,d", v.glimmer());
+            p.textRight("glimmer", amount, 1860, 114, 22, WHITE, 255);
+            p.icon("glimmer_icon", "bungie/currency_glimmer", 1860 - HudPainter.width(amount, 22) - 22, 128, 30, 112, 0xFFFFFF);
+        }
         p.rect("header_rule", 960, 150, 1760, 1, 104, LINE);
     }
 
@@ -160,6 +165,16 @@ public final class GearHud {
         if (icon.isPresent()) p.icon(k + "_model", icon.get(), b.x(), b.y(), b.width() - 4, depth + 2, 0xFFFFFF);
         else p.weapon(k + "_model", w.iconId(), b.x(), b.y() - 4, b.width() * .92f, depth + 2);
         p.icon(k + "_damage", "ammo_damage_" + w.damage().toLowerCase(Locale.ROOT), b.x() - b.width() / 2 + 14, b.y() + b.height() / 2 - 14, 18, depth + 4, damageColor(w.damage()));
+        if (kim.biryeong.destiny.weapon.WeaponLock.locked(w.stack())) lockBadge(p, k + "_lock", b.x() + b.width() / 2 - 14, b.y() - b.height() / 2 + 15, depth + 4);
+    }
+
+    /** Small padlock in a tile's top-right corner: dark plate, shackle and body. */
+    private static void lockBadge(HudPainter p, String k, float x, float y, float depth) {
+        p.rect(k + "_plate", x, y, 22, 24, depth, 0x0E1318);
+        p.rect(k + "_l", x - 4, y - 4, 2, 7, depth + .2f, GOLD);
+        p.rect(k + "_r", x + 4, y - 4, 2, 7, depth + .2f, GOLD);
+        p.rect(k + "_t", x, y - 7, 10, 2, depth + .2f, GOLD);
+        p.rect(k + "_body", x, y + 3, 14, 10, depth + .2f, GOLD);
     }
 
     private static void storage(HudPainter p, GearView v, GearSlot slot) {
@@ -225,7 +240,9 @@ public final class GearHud {
             }
         }
         rows.add(rule(p, "tip_rule3", left));
-        rows.add(new Row(30, y -> p.textLeft("tip_hint", w.equipped() ? "장착 중  ·  F 상세 보기" : "좌클릭 장착  ·  F 상세 보기  ·  Q 분해", x0, y, 18, GOLD, TIP_W - 48, 255)));
+        rows.add(new Row(30, y -> p.textLeft("tip_hint", w.equipped() ? "장착 중  ·  F 상세 보기  ·  Shift " + (kim.biryeong.destiny.weapon.WeaponLock.locked(w.stack()) ? "잠금 해제" : "잠금")
+                : kim.biryeong.destiny.weapon.WeaponLock.locked(w.stack()) ? "좌클릭 장착  ·  F 상세  ·  Shift 잠금 해제"
+                : "좌클릭 장착  ·  F 상세  ·  A 판매  ·  Q 분해  ·  Shift 잠금", x0, y, 18, GOLD, TIP_W - 48, 255)));
         float bodyTop = top + 104, h = 16;
         for (var r : rows) h += r.height();
         p.rect("tip_head", left + TIP_W / 2, top + 52, TIP_W, 104, 120, head);
@@ -233,7 +250,8 @@ public final class GearHud {
         if (headIcon.isPresent()) p.icon("tip_icon", headIcon.get(), left + 58, top + 52, 84, 124, 0xFFFFFF);
         else p.weapon("tip_icon", w.iconId(), left + 58, top + 52, 84, 124);
         p.textLeft("tip_name", w.name(), left + 110, top + 22, 28, WHITE, TIP_W - 130, 255);
-        p.textLeft("tip_type", w.family() + "  ·  " + w.rarity().label() + (w.equipped() ? "  ·  장착 중" : ""),
+        p.textLeft("tip_type", w.family() + "  ·  " + w.rarity().label() + (w.equipped() ? "  ·  장착 중" : "")
+                        + (kim.biryeong.destiny.weapon.WeaponLock.locked(w.stack()) ? "  ·  잠김" : ""),
                 left + 110, top + 62, 20, mix(w.rarity().color(), 0xFFFFFF, .55f), TIP_W - 130, 255);
         p.rect("tip_body", left + TIP_W / 2, bodyTop + h / 2, TIP_W, h, 120, PANEL);
         float y = bodyTop + 12;
@@ -397,7 +415,7 @@ public final class GearHud {
     private static void footer(HudPainter p, GearView v) {
         p.rect("footer_rule", 960, 990, 1760, 1, 104, LINE);
         String hint = switch (v.stage()) {
-            case GEAR -> "마우스 · WASD 이동    좌클릭 · Space 선택    F 상세    우클릭 · E 닫기";
+            case GEAR -> "좌클릭 · Space 선택    F 상세    A 판매    Shift 잠금    W 경매장    S 창고    우클릭 · E 닫기";
             case DETAIL -> "F · 우클릭 뒤로    E 닫기";
             default -> "좌클릭 · Space 선택    우클릭 뒤로    E 닫기";
         };

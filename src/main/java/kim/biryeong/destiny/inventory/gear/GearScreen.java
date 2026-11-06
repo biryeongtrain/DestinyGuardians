@@ -44,11 +44,10 @@ public final class GearScreen {
         final WeaponScreenControls controls = new WeaponScreenControls();
         Stage stage = Stage.GEAR;
         GearSlot expanded;
-        int focus = -1, hoverSince, repeatAt, lastClick = Integer.MIN_VALUE / 2, lastActive, openedAt;
+        int focus = -1, hoverSince, lastClick = Integer.MIN_VALUE / 2, lastActive, openedAt;
         /** W325 dismantle confirmation: the inventory index armed by the first Q and its expiry tick. */
         int dismantleIndex = -1, dismantleUntil;
         Input input = Input.EMPTY;
-        boolean pointerDriven = true;
         String message = "";
         int messageUntil;
         GearItems.Weapon detail;
@@ -138,7 +137,7 @@ public final class GearScreen {
             if (Float.isFinite(yaw) && Float.isFinite(pitch)) {
                 p.setYRot(yaw); p.setYHeadRot(yaw); p.setXRot(Math.clamp(pitch, -90, 90));
                 float lastYaw = s.controls.yaw(), lastPitch = s.controls.pitch();
-                if (s.controls.rotate(yaw, pitch)) { s.pointerDriven = true; s.lastActive = now(s); hover(s); render(s); }
+                if (s.controls.rotate(yaw, pitch)) { s.lastActive = now(s); hover(s); render(s); }
                 // Clamped at an edge: the pointer stays, but its reference rotation must follow the view or the
                 // client would keep extrapolating it past the edge.
                 else if (lastYaw != s.controls.yaw() || lastPitch != s.controls.pitch()) render(s);
@@ -164,9 +163,52 @@ public final class GearScreen {
     public static boolean input(ServerPlayer p, Input next) {
         var s = current(p); if (s == null) return false;
         Input old = s.input; s.input = next; s.lastActive = now(s);
-        if (next.jump() && !old.jump()) { s.pointerDriven = false; click(p, false); }
-        if (!next.equals(old)) { s.repeatAt = now(s) + 7; navigate(s); }
+        if (next.jump() && !old.jump()) click(p, false);
+        if (s.stage != Stage.GEAR) return true;
+        if (next.forward() && !old.forward()) openEconomy(s, true);
+        else if (next.backward() && !old.backward()) openEconomy(s, false);
+        else if (next.left() && !old.left()) sell(s);
+        else if (next.shift() && !old.shift()) lock(s);
         return true;
+    }
+
+    /** W: auction house, S: vault. The gear screen closes first (economy menus need the plain inventory menu). */
+    private static void openEconomy(Session s, boolean auction) {
+        var p = s.owner;
+        close(p);
+        if (auction) kim.biryeong.destiny.economy.EconomyMenus.openAuction(p);
+        else kim.biryeong.destiny.economy.EconomyMenus.openVault(p);
+    }
+
+    /** A: list the hovered stored weapon on the auction house. */
+    private static void sell(Session s) {
+        var w = hoveredWeapon(s);
+        if (w == null) { notice(s, "무기에 커서를 올린 뒤 A를 누르면 경매장에 판매합니다."); render(s); return; }
+        String why = kim.biryeong.destiny.economy.EconomyMenus.sellable(s.owner, w.inventoryIndex());
+        if (why != null) { notice(s, why); render(s); return; }
+        var p = s.owner; int index = w.inventoryIndex();
+        close(p);
+        kim.biryeong.destiny.economy.EconomyMenus.openSell(p, index);
+    }
+
+    /** Shift: lock or unlock the hovered weapon (locked weapons cannot be dismantled or sold). */
+    private static void lock(Session s) {
+        var w = hoveredWeapon(s);
+        if (w == null) { notice(s, "무기에 커서를 올린 뒤 Shift를 누르면 잠급니다."); render(s); return; }
+        var stack = s.owner.getInventory().getItem(w.inventoryIndex());
+        if (stack != w.stack()) { refresh(s); return; }
+        boolean locked = kim.biryeong.destiny.weapon.WeaponLock.toggle(stack);
+        s.owner.getInventory().setChanged();
+        s.owner.level().playSound(null, s.owner.getX(), s.owner.getY(), s.owner.getZ(), net.minecraft.sounds.SoundEvents.UI_BUTTON_CLICK.value(),
+                net.minecraft.sounds.SoundSource.PLAYERS, .4f, locked ? 1.4f : 1f);
+        notice(s, w.name() + (locked ? " 잠금" : " 잠금 해제"));
+        refresh(s);
+    }
+
+    /** QA: park the pointer at screen coordinates (1920x1080 space) and hover what is under it. */
+    public static boolean qaPoint(ServerPlayer p, float x, float y) {
+        var s = current(p); if (s == null) return false;
+        s.controls.point(x, y); hover(s); render(s); return true;
     }
 
     /** F (swap hands): open/close the detail view of the hovered weapon. */
@@ -189,6 +231,7 @@ public final class GearScreen {
         var w = hoveredWeapon(s);
         if (w == null) { notice(s, "보관함의 무기에 커서를 올린 뒤 Q를 누르면 분해합니다."); render(s); return true; }
         if (w.equipped()) { notice(s, "장착 중인 무기는 분해할 수 없습니다."); render(s); return true; }
+        if (kim.biryeong.destiny.weapon.WeaponLock.locked(w.stack())) { notice(s, "잠긴 무기는 분해할 수 없습니다. Shift로 잠금을 해제하세요."); render(s); return true; }
         int now = now(s);
         if (s.dismantleIndex != w.inventoryIndex() || now > s.dismantleUntil) {
             s.dismantleIndex = w.inventoryIndex(); s.dismantleUntil = now + 40;
@@ -282,6 +325,11 @@ public final class GearScreen {
                 && p.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER);
     }
 
+    private static long glimmer(ServerPlayer p) {
+        var ledger = kim.biryeong.destiny.economy.Economy.ledger();
+        return ledger == null ? -1 : ledger.glimmer(p.getUUID());
+    }
+
     private static void notice(Session s, String text) { s.message = text; s.messageUntil = now(s) + 80; }
     private static int now(Session s) { return s.level.getServer().getTickCount(); }
 
@@ -307,23 +355,6 @@ public final class GearScreen {
             s.focus = GearLayout.hit(nodes(s), s.controls.x(), s.controls.y());
         } else s.focus = GearLayout.hit(nodes(s), s.controls.x(), s.controls.y());
         if (s.focus != before) s.hoverSince = now(s);
-    }
-
-    private static void navigate(Session s) {
-        int dx = (s.input.right() ? 1 : 0) - (s.input.left() ? 1 : 0);
-        int dy = (s.input.backward() ? 1 : 0) - (s.input.forward() ? 1 : 0);
-        if (dx == 0 && dy == 0) return;
-        s.pointerDriven = false;
-        int next = GearLayout.navigate(nodes(s), s.focus, dx, dy);
-        if (s.stage == Stage.GEAR && next >= 0 && next < GearLayout.SLOT_COUNT) {
-            var slot = GearSlot.values()[next];
-            s.expanded = slot.weapon() != null ? slot : null;
-        }
-        if (next != s.focus) s.hoverSince = now(s);
-        s.focus = next;
-        var box = nodes(s).get(next);
-        if (box != null) s.controls.point(box.x(), box.y());
-        render(s);
     }
 
     static GearItems.Weapon hoveredWeapon(Session s) {
@@ -364,7 +395,6 @@ public final class GearScreen {
                     || kim.biryeong.destiny.down.GuardianDown.active(p)
                     || dx * dx + dz * dz > .25 || now(s) - s.lastActive > 20 * 120) { retire(s); continue; }
             var v = p.getDeltaMovement(); p.setDeltaMovement(0, v.y, 0);
-            if (now(s) >= s.repeatAt) { s.repeatAt = now(s) + 4; navigate(s); }
             if (now(s) % 10 == 0) refresh(s);
             else if (server.getTickCount() % kim.biryeong.destiny.inventory.PlayerFigure.BREATH == 0) render(s); // idle breath key
             else if (now(s) - s.hoverSince <= TOOLTIP_DELAY + 1 || (s.stage == Stage.DETAIL && now(s) % 20 == 0)
@@ -379,7 +409,7 @@ public final class GearScreen {
             s.fields = view.fields();
             s.options = s.stage == Stage.OPTIONS ? WeaponScreen.characterOptions(s.owner, s.field) : List.of();
         }
-        if (s.pointerDriven) hover(s);
+        hover(s);
         render(s);
     }
 
@@ -393,7 +423,8 @@ public final class GearScreen {
                 s.controls.x(), s.controls.y(), s.controls.yaw(), s.controls.pitch(), Map.copyOf(s.buckets), tooltip ? hovered : null, compare, s.detail,
                 ((now(s) - s.openedAt) / 20) * 30f % 360, s.field, s.fields, s.options, s.message, armory(s.owner),
                 kim.biryeong.destiny.guardian.Guardians.data(s.owner).guardianClass(),
-                WeaponScreen.characterView(s.owner, s.field), kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams());
+                WeaponScreen.characterView(s.owner, s.field), kim.biryeong.destiny.loot.Loot.profile(s.owner).engrams(),
+                glimmer(s.owner));
         GearHud.render(s.owner, s.view);
     }
 }

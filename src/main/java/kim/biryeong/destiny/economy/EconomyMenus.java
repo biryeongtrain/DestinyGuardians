@@ -130,6 +130,24 @@ public final class EconomyMenus {
         if (holder[0] != null) { OPEN.put(p.getUUID(), holder[0]); holder[0].redraw(); holder[0].sendAllDataToRemote(); }
     }
 
+    /** Entry points for the gear screen keys (W auction, S vault, A sell the hovered weapon). */
+    public static void openVault(ServerPlayer p) { open(p, new VaultScreen()); }
+    public static void openAuction(ServerPlayer p) { open(p, new AuctionScreen("")); }
+    /** Null when the sell screen opened with inventory slot {@code index} picked, else why not. */
+    public static String sellable(ServerPlayer p, int index) {
+        String why = Economy.movable(p, index);
+        if (why == null && kim.biryeong.destiny.weapon.WeaponItems.entry(p.getInventory().getItem(index)).isEmpty())
+            why = EconomyLedger.Error.NOT_A_WEAPON.message;
+        if (why == null && kim.biryeong.destiny.weapon.WeaponLock.locked(p.getInventory().getItem(index)))
+            why = "잠긴 무기는 판매할 수 없습니다.";
+        return why;
+    }
+    public static void openSell(ServerPlayer p, int index) {
+        var sell = new SellScreen();
+        if (sellable(p, index) == null) { sell.index = index; sell.picked = p.getInventory().getItem(index); }
+        open(p, sell);
+    }
+
     static String blocked(ServerPlayer p) {
         if (!p.isAlive() || p.isSpectator() || p.hasDisconnected()) return "지금은 열 수 없습니다.";
         if (kim.biryeong.destiny.inventory.gear.GearScreen.active(p)) return "장비 화면을 닫은 뒤 여세요.";
@@ -553,9 +571,7 @@ public final class EconomyMenus {
         int index = -1; ItemStack picked = ItemStack.EMPTY; long price = 1_000; int hours = 24;
         @Override Component title(Menu m) { return EconomyGui.title("sell", "무기 판매 등록"); }
         void pick(Menu m, int i) {
-            String why = Economy.movable(m.owner, i);
-            if (why == null && kim.biryeong.destiny.weapon.WeaponItems.entry(m.owner.getInventory().getItem(i)).isEmpty())
-                why = EconomyLedger.Error.NOT_A_WEAPON.message;
+            String why = sellable(m.owner, i);
             if (why != null) { say(m, why, false); return; }
             index = i; picked = m.owner.getInventory().getItem(i);
         }
@@ -581,7 +597,7 @@ public final class EconomyMenus {
             var l = Economy.ledger(); var me = m.owner.getUUID();
             if (index < 0) { say(m, "판매할 무기를 먼저 고르세요.", false); return; }
             if (m.owner.getInventory().getItem(index) != picked) { say(m, "선택한 무기가 바뀌었습니다. 다시 고르세요.", false); index = -1; return; }
-            String why = Economy.movable(m.owner, index);
+            String why = sellable(m.owner, index);
             if (why != null) { say(m, why, false); return; }
             var preview = Economy.payloadPreview(picked);
             var e = l.canList(me, preview, price, hours);

@@ -81,6 +81,13 @@ public final class WeaponScreen {
                 .then(Commands.literal("close").executes(c -> { close(c.getSource().getPlayerOrException()); return 1; }))
                 .then(Commands.literal("open").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .then(Commands.argument("player", EntityArgument.player()).executes(c -> open(EntityArgument.getPlayer(c, "player")) ? 1 : 0)))
+                .then(Commands.literal("point").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                    .then(Commands.argument("player", EntityArgument.player())
+                        .then(Commands.argument("x", com.mojang.brigadier.arguments.FloatArgumentType.floatArg(0, 1920))
+                            .then(Commands.argument("y", com.mojang.brigadier.arguments.FloatArgumentType.floatArg(0, 1080))
+                                .executes(c -> kim.biryeong.destiny.inventory.gear.GearScreen.qaPoint(EntityArgument.getPlayer(c, "player"),
+                                        com.mojang.brigadier.arguments.FloatArgumentType.getFloat(c, "x"),
+                                        com.mojang.brigadier.arguments.FloatArgumentType.getFloat(c, "y")) ? 1 : 0)))))
                 .then(Commands.literal("status").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .then(Commands.argument("player", EntityArgument.player()).executes(c -> {
                         var p = EntityArgument.getPlayer(c, "player"); var s = current(p);

@@ -13,7 +13,8 @@ public record GearView(String playerName, GearLayout.Stage stage, GearSlot expan
                        Map<WeaponSlot, GearItems.Bucket> buckets, GearItems.Weapon tooltip, GearItems.Weapon compare,
                        GearItems.Weapon detail, float spin, String field, List<WeaponScreenView.CharacterField> fields,
                        List<WeaponScreenView.CharacterOption> options, String message, boolean armory,
-                       GuardianClass guardianClass, WeaponScreenView.CharacterView character, List<String> engrams) {
+                       GuardianClass guardianClass, WeaponScreenView.CharacterView character, List<String> engrams,
+                       long glimmer) {
     public GearView {
         buckets = Map.copyOf(buckets); fields = List.copyOf(fields); options = List.copyOf(options); engrams = List.copyOf(engrams);
     }
