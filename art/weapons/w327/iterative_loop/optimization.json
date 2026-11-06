@@ -1,0 +1,1567 @@
+{
+ "method": "Exact convex-volume subtraction of outward-offset faces; opaque cuboids only; per animated part",
+ "before": {
+  "elements": 170,
+  "faces": 964,
+  "parts": {
+   "body": 140,
+   "magazine": 30
+  }
+ },
+ "after": {
+  "elements": 169,
+  "faces": 803,
+  "parts": {
+   "body": 139,
+   "magazine": 30
+  }
+ },
+ "removed_faces": [
+  {
+   "part": "body",
+   "element": "muzzle/rectangular_port/left",
+   "face": "up",
+   "occluders": [
+    "muzzle/rectangular_port/top"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "muzzle/rectangular_port/left",
+   "face": "down",
+   "occluders": [
+    "muzzle/rectangular_port/bottom"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "muzzle/rectangular_port/right",
+   "face": "up",
+   "occluders": [
+    "muzzle/rectangular_port/top"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "muzzle/rectangular_port/right",
+   "face": "down",
+   "occluders": [
+    "muzzle/rectangular_port/bottom"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/web",
+   "face": "up",
+   "occluders": [
+    "fore/upper_bar/chamfer3",
+    "fore/upper_bar/chamfer4",
+    "fore/upper_bar/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/web",
+   "face": "down",
+   "occluders": [
+    "fore/upper_bar/chamfer0",
+    "fore/upper_bar/chamfer1",
+    "fore/upper_bar/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/web",
+   "face": "east",
+   "occluders": [
+    "fore/upper_bar/chamfer1",
+    "fore/upper_bar/chamfer2",
+    "fore/upper_bar/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/web",
+   "face": "west",
+   "occluders": [
+    "fore/upper_bar/chamfer5",
+    "fore/upper_bar/chamfer6",
+    "fore/upper_bar/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer0",
+   "face": "up",
+   "occluders": [
+    "fore/upper_bar/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer1",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/right"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer2",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/top",
+    "muzzle/rectangular_port/right"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer3",
+   "face": "east",
+   "occluders": [
+    "muzzle/rectangular_port/top",
+    "fore/upper_bar/chamfer4"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer3",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/top"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer5",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/top"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer6",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/top",
+    "muzzle/rectangular_port/left"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/upper_bar/chamfer7",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/left"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/lower_case/web",
+   "face": "up",
+   "occluders": [
+    "fore/lower_case/chamfer3",
+    "fore/lower_case/chamfer4",
+    "fore/lower_case/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/lower_case/web",
+   "face": "down",
+   "occluders": [
+    "fore/lower_case/chamfer0",
+    "fore/lower_case/chamfer1",
+    "fore/lower_case/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/lower_case/web",
+   "face": "east",
+   "occluders": [
+    "fore/lower_case/chamfer1",
+    "fore/lower_case/chamfer2",
+    "fore/lower_case/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/lower_case/web",
+   "face": "west",
+   "occluders": [
+    "fore/lower_case/chamfer5",
+    "fore/lower_case/chamfer6",
+    "fore/lower_case/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/lower_case/web",
+   "face": "south",
+   "occluders": [
+    "fore/lower_case/chamfer1",
+    "fore/lower_case/chamfer3",
+    "fore/lower_case/chamfer5",
+    "fore/lower_case/chamfer7",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer0",
+    "receiver/breech_coupling/chamfer1",
+    "receiver/breech_coupling/chamfer2",
+    "receiver/breech_coupling/chamfer6",
+    "receiver/breech_coupling/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/lower_case/chamfer0",
+   "face": "up",
+   "occluders": [
+    "fore/lower_case/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/lower_case/chamfer4",
+   "face": "south",
+   "occluders": [
+    "fore/inner_core/chamfer0",
+    "fore/inner_core/chamfer1",
+    "fore/inner_core/chamfer7",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer2",
+    "receiver/breech_coupling/chamfer6"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/web",
+   "face": "up",
+   "occluders": [
+    "fore/inner_core/chamfer3",
+    "fore/inner_core/chamfer4",
+    "fore/inner_core/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/web",
+   "face": "down",
+   "occluders": [
+    "fore/inner_core/chamfer0",
+    "fore/inner_core/chamfer1",
+    "fore/inner_core/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/web",
+   "face": "east",
+   "occluders": [
+    "fore/inner_core/chamfer1",
+    "fore/inner_core/chamfer2",
+    "fore/inner_core/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/web",
+   "face": "west",
+   "occluders": [
+    "fore/inner_core/chamfer5",
+    "fore/inner_core/chamfer6",
+    "fore/inner_core/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/web",
+   "face": "south",
+   "occluders": [
+    "fore/inner_core/chamfer1",
+    "fore/inner_core/chamfer3",
+    "fore/inner_core/chamfer5",
+    "fore/inner_core/chamfer7",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer3",
+    "receiver/breech_coupling/chamfer4",
+    "receiver/breech_coupling/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer0",
+   "face": "up",
+   "occluders": [
+    "fore/inner_core/web",
+    "fore/inner_core/chamfer1",
+    "fore/inner_core/chamfer7",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer0",
+   "face": "down",
+   "occluders": [
+    "fore/lower_case/chamfer4",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer0",
+   "face": "east",
+   "occluders": [
+    "fore/lower_case/chamfer4",
+    "fore/inner_core/chamfer1",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer0",
+   "face": "west",
+   "occluders": [
+    "fore/lower_case/chamfer4",
+    "fore/inner_core/chamfer7",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer0",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/bottom"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer0",
+   "face": "south",
+   "occluders": [
+    "fore/inner_core/chamfer1",
+    "fore/inner_core/chamfer7",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer1",
+   "face": "up",
+   "occluders": [
+    "muzzle/rectangular_port/bottom",
+    "fore/inner_core/web",
+    "fore/inner_core/chamfer0",
+    "fore/inner_core/chamfer2",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer1",
+   "face": "west",
+   "occluders": [
+    "muzzle/rectangular_port/bottom",
+    "fore/lower_case/chamfer4",
+    "fore/inner_core/chamfer0",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer1",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/bottom"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer1",
+   "face": "south",
+   "occluders": [
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer2",
+   "face": "south",
+   "occluders": [
+    "fore/inner_core/chamfer3",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer3",
+   "face": "south",
+   "occluders": [
+    "fore/inner_core/chamfer4",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer4",
+   "face": "south",
+   "occluders": [
+    "fore/inner_core/chamfer5",
+    "receiver/breech_coupling/chamfer3",
+    "receiver/breech_coupling/chamfer4"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer5",
+   "face": "south",
+   "occluders": [
+    "fore/inner_core/chamfer6",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer4",
+    "receiver/breech_coupling/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer6",
+   "face": "south",
+   "occluders": [
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer7",
+   "face": "up",
+   "occluders": [
+    "muzzle/rectangular_port/bottom",
+    "fore/inner_core/web",
+    "fore/inner_core/chamfer0",
+    "fore/inner_core/chamfer6",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer7",
+   "face": "east",
+   "occluders": [
+    "muzzle/rectangular_port/bottom",
+    "fore/lower_case/chamfer4",
+    "fore/inner_core/chamfer0",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer7",
+   "face": "north",
+   "occluders": [
+    "muzzle/rectangular_port/bottom"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer7",
+   "face": "south",
+   "occluders": [
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/neon_recess-20",
+   "face": "up",
+   "occluders": [
+    "fore/blue_lip-20"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/neon_recess20",
+   "face": "up",
+   "occluders": [
+    "fore/blue_lip20"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel15/web",
+   "face": "up",
+   "occluders": [
+    "fore/top_panel15/chamfer3",
+    "fore/top_panel15/chamfer4",
+    "fore/top_panel15/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel15/web",
+   "face": "down",
+   "occluders": [
+    "fore/top_panel15/chamfer0",
+    "fore/top_panel15/chamfer1",
+    "fore/top_panel15/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel15/web",
+   "face": "east",
+   "occluders": [
+    "fore/top_panel15/chamfer1",
+    "fore/top_panel15/chamfer2",
+    "fore/top_panel15/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel15/web",
+   "face": "west",
+   "occluders": [
+    "fore/top_panel15/chamfer5",
+    "fore/top_panel15/chamfer6",
+    "fore/top_panel15/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel15/chamfer0",
+   "face": "up",
+   "occluders": [
+    "fore/top_panel15/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel77/web",
+   "face": "up",
+   "occluders": [
+    "fore/top_panel77/chamfer3",
+    "fore/top_panel77/chamfer4",
+    "fore/top_panel77/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel77/web",
+   "face": "down",
+   "occluders": [
+    "fore/top_panel77/chamfer0",
+    "fore/top_panel77/chamfer1",
+    "fore/top_panel77/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel77/web",
+   "face": "east",
+   "occluders": [
+    "fore/top_panel77/chamfer1",
+    "fore/top_panel77/chamfer2",
+    "fore/top_panel77/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel77/web",
+   "face": "west",
+   "occluders": [
+    "fore/top_panel77/chamfer5",
+    "fore/top_panel77/chamfer6",
+    "fore/top_panel77/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel77/chamfer0",
+   "face": "up",
+   "occluders": [
+    "fore/top_panel77/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel123/web",
+   "face": "up",
+   "occluders": [
+    "fore/top_panel123/chamfer3",
+    "fore/top_panel123/chamfer4",
+    "fore/top_panel123/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel123/web",
+   "face": "down",
+   "occluders": [
+    "fore/top_panel123/chamfer0",
+    "fore/top_panel123/chamfer1",
+    "fore/top_panel123/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel123/web",
+   "face": "east",
+   "occluders": [
+    "fore/top_panel123/chamfer1",
+    "fore/top_panel123/chamfer2",
+    "fore/top_panel123/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel123/web",
+   "face": "west",
+   "occluders": [
+    "fore/top_panel123/chamfer5",
+    "fore/top_panel123/chamfer6",
+    "fore/top_panel123/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "fore/top_panel123/chamfer0",
+   "face": "up",
+   "occluders": [
+    "fore/top_panel123/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/web",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/web",
+   "face": "east",
+   "occluders": [
+    "fore/lower_case/chamfer1",
+    "fore/lower_case/chamfer3",
+    "fore/lower_case/chamfer4",
+    "receiver/breech_coupling/chamfer1",
+    "receiver/breech_coupling/chamfer2",
+    "receiver/breech_coupling/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/web",
+   "face": "west",
+   "occluders": [
+    "fore/lower_case/chamfer4",
+    "fore/lower_case/chamfer5",
+    "fore/lower_case/chamfer7",
+    "receiver/breech_coupling/chamfer5",
+    "receiver/breech_coupling/chamfer6",
+    "receiver/breech_coupling/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/web",
+   "face": "up",
+   "occluders": [
+    "fore/inner_core/chamfer2",
+    "fore/inner_core/chamfer3",
+    "fore/inner_core/chamfer5",
+    "fore/inner_core/chamfer6",
+    "receiver/breech_coupling/chamfer3",
+    "receiver/breech_coupling/chamfer4",
+    "receiver/breech_coupling/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/web",
+   "face": "down",
+   "occluders": [
+    "fore/lower_case/chamfer1",
+    "fore/lower_case/chamfer7",
+    "receiver/breech_coupling/chamfer0",
+    "receiver/breech_coupling/chamfer1",
+    "receiver/breech_coupling/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer0",
+   "face": "north",
+   "occluders": [
+    "fore/lower_case/web",
+    "fore/lower_case/chamfer0"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer0",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer0",
+   "face": "up",
+   "occluders": [
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer1",
+   "face": "north",
+   "occluders": [
+    "fore/lower_case/web",
+    "fore/lower_case/chamfer0",
+    "fore/lower_case/chamfer1",
+    "fore/lower_case/chamfer2"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer1",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web",
+    "receiver/central_shoulder/chamfer2"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer1",
+   "face": "up",
+   "occluders": [
+    "fore/lower_case/web",
+    "fore/lower_case/chamfer0",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer0",
+    "receiver/breech_coupling/chamfer2"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer2",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web",
+    "receiver/central_shoulder/chamfer2"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer3",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web",
+    "receiver/central_shoulder/chamfer2"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer4",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer4",
+   "face": "up",
+   "occluders": [
+    "fore/inner_core/web",
+    "receiver/breech_coupling/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer5",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web",
+    "receiver/central_shoulder/chamfer6"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer6",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web",
+    "receiver/central_shoulder/chamfer6"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer7",
+   "face": "north",
+   "occluders": [
+    "fore/lower_case/web",
+    "fore/lower_case/chamfer0",
+    "fore/lower_case/chamfer6",
+    "fore/lower_case/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer7",
+   "face": "south",
+   "occluders": [
+    "receiver/central_shoulder/web",
+    "receiver/central_shoulder/chamfer6"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/breech_coupling/chamfer7",
+   "face": "up",
+   "occluders": [
+    "fore/lower_case/web",
+    "fore/lower_case/chamfer0",
+    "receiver/breech_coupling/web",
+    "receiver/breech_coupling/chamfer0",
+    "receiver/breech_coupling/chamfer6"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/central_shoulder/web",
+   "face": "up",
+   "occluders": [
+    "receiver/central_shoulder/chamfer3",
+    "receiver/central_shoulder/chamfer4",
+    "receiver/central_shoulder/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/central_shoulder/web",
+   "face": "down",
+   "occluders": [
+    "receiver/central_shoulder/chamfer0",
+    "receiver/central_shoulder/chamfer1",
+    "receiver/central_shoulder/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/central_shoulder/web",
+   "face": "east",
+   "occluders": [
+    "receiver/breech_coupling/chamfer1",
+    "receiver/breech_coupling/chamfer2",
+    "receiver/breech_coupling/chamfer3",
+    "receiver/central_shoulder/chamfer1",
+    "receiver/central_shoulder/chamfer2",
+    "receiver/central_shoulder/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/central_shoulder/web",
+   "face": "west",
+   "occluders": [
+    "receiver/breech_coupling/chamfer5",
+    "receiver/breech_coupling/chamfer6",
+    "receiver/breech_coupling/chamfer7",
+    "receiver/central_shoulder/chamfer5",
+    "receiver/central_shoulder/chamfer6",
+    "receiver/central_shoulder/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/central_shoulder/chamfer0",
+   "face": "up",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/web",
+   "face": "up",
+   "occluders": [
+    "receiver/top_latch/chamfer3",
+    "receiver/top_latch/chamfer4",
+    "receiver/top_latch/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/web",
+   "face": "down",
+   "occluders": [
+    "receiver/central_shoulder/chamfer3",
+    "receiver/central_shoulder/chamfer4",
+    "receiver/central_shoulder/chamfer5",
+    "receiver/top_latch/chamfer0",
+    "receiver/top_latch/chamfer1",
+    "receiver/top_latch/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/web",
+   "face": "east",
+   "occluders": [
+    "receiver/top_latch/chamfer1",
+    "receiver/top_latch/chamfer2",
+    "receiver/top_latch/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/web",
+   "face": "west",
+   "occluders": [
+    "receiver/top_latch/chamfer5",
+    "receiver/top_latch/chamfer6",
+    "receiver/top_latch/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/chamfer0",
+   "face": "up",
+   "occluders": [
+    "receiver/central_shoulder/chamfer3",
+    "receiver/central_shoulder/chamfer4",
+    "receiver/central_shoulder/chamfer5",
+    "receiver/top_latch/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/chamfer0",
+   "face": "down",
+   "occluders": [
+    "receiver/central_shoulder/chamfer3",
+    "receiver/central_shoulder/chamfer4",
+    "receiver/central_shoulder/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/chamfer0",
+   "face": "east",
+   "occluders": [
+    "receiver/central_shoulder/chamfer3",
+    "receiver/top_latch/chamfer1"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/chamfer0",
+   "face": "west",
+   "occluders": [
+    "receiver/central_shoulder/chamfer5",
+    "receiver/top_latch/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/chamfer1",
+   "face": "west",
+   "occluders": [
+    "receiver/central_shoulder/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/top_latch/chamfer7",
+   "face": "east",
+   "occluders": [
+    "receiver/central_shoulder/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "receiver/upper_step",
+   "face": "down",
+   "occluders": [
+    "receiver/central_shoulder/chamfer4"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/web",
+   "face": "up",
+   "occluders": [
+    "rear/main_action/chamfer3",
+    "rear/main_action/chamfer4",
+    "rear/main_action/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/web",
+   "face": "down",
+   "occluders": [
+    "rear/main_action/chamfer0",
+    "rear/main_action/chamfer1",
+    "rear/main_action/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/web",
+   "face": "east",
+   "occluders": [
+    "rear/main_action/chamfer1",
+    "rear/main_action/chamfer2",
+    "rear/main_action/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/web",
+   "face": "west",
+   "occluders": [
+    "rear/main_action/chamfer5",
+    "rear/main_action/chamfer6",
+    "rear/main_action/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/web",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer0",
+   "face": "up",
+   "occluders": [
+    "rear/main_action/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer0",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer1",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer2",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer3",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer4",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer5",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer6",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/main_action/chamfer7",
+   "face": "north",
+   "occluders": [
+    "receiver/central_shoulder/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/neon_recess-14.5",
+   "face": "west",
+   "occluders": [
+    "rear/main_action/chamfer2",
+    "rear/main_action/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/lower_rail-14.5",
+   "face": "west",
+   "occluders": [
+    "rear/main_action/chamfer1",
+    "rear/main_action/chamfer2"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/neon_recess14.5",
+   "face": "east",
+   "occluders": [
+    "rear/main_action/chamfer5",
+    "rear/main_action/chamfer6"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "rear/lower_rail14.5",
+   "face": "east",
+   "occluders": [
+    "rear/main_action/chamfer6"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/butt/web",
+   "face": "east",
+   "occluders": [
+    "stock/butt/chamfer1",
+    "stock/butt/chamfer2",
+    "stock/butt/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/butt/web",
+   "face": "west",
+   "occluders": [
+    "stock/butt/chamfer5",
+    "stock/butt/chamfer6",
+    "stock/butt/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/butt/web",
+   "face": "up",
+   "occluders": [
+    "stock/butt/chamfer3",
+    "stock/butt/chamfer4",
+    "stock/butt/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/butt/web",
+   "face": "down",
+   "occluders": [
+    "stock/butt/chamfer0",
+    "stock/butt/chamfer1",
+    "stock/butt/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/butt/chamfer0",
+   "face": "up",
+   "occluders": [
+    "stock/butt/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_pad",
+   "face": "north",
+   "occluders": [
+    "stock/butt/web",
+    "stock/butt/chamfer1",
+    "stock/butt/chamfer2",
+    "stock/butt/chamfer3",
+    "stock/butt/chamfer5",
+    "stock/butt/chamfer6",
+    "stock/butt/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/web",
+   "face": "up",
+   "occluders": [
+    "stock/rear_sight/chamfer3",
+    "stock/rear_sight/chamfer4",
+    "stock/rear_sight/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/web",
+   "face": "down",
+   "occluders": [
+    "stock/butt/web",
+    "stock/rear_sight/chamfer0",
+    "stock/rear_sight/chamfer1",
+    "stock/rear_sight/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/web",
+   "face": "east",
+   "occluders": [
+    "stock/butt/web",
+    "stock/butt/chamfer3",
+    "stock/butt/chamfer4",
+    "stock/rear_sight/chamfer1",
+    "stock/rear_sight/chamfer2",
+    "stock/rear_sight/chamfer3"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/web",
+   "face": "west",
+   "occluders": [
+    "stock/butt/web",
+    "stock/butt/chamfer4",
+    "stock/butt/chamfer5",
+    "stock/rear_sight/chamfer5",
+    "stock/rear_sight/chamfer6",
+    "stock/rear_sight/chamfer7"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/chamfer0",
+   "face": "up",
+   "occluders": [
+    "stock/butt/web",
+    "stock/rear_sight/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/chamfer0",
+   "face": "south",
+   "occluders": [
+    "stock/butt/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/chamfer1",
+   "face": "south",
+   "occluders": [
+    "stock/butt/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/chamfer2",
+   "face": "south",
+   "occluders": [
+    "stock/butt/web",
+    "stock/butt/chamfer3",
+    "stock/butt/chamfer4"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/chamfer6",
+   "face": "south",
+   "occluders": [
+    "stock/butt/web",
+    "stock/butt/chamfer4",
+    "stock/butt/chamfer5"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "stock/rear_sight/chamfer7",
+   "face": "south",
+   "occluders": [
+    "stock/butt/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "grip/source_mount",
+   "face": "north",
+   "occluders": [
+    "rear/main_action/web"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "trigger/upper_pivot",
+   "face": "up",
+   "occluders": [
+    "rear/main_action/chamfer0"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "trigger/upper_pivot",
+   "face": "south",
+   "occluders": [
+    "rear/main_action/chamfer0",
+    "grip/source_mount"
+   ]
+  },
+  {
+   "part": "body",
+   "element": "trigger/blade",
+   "face": "north",
+   "occluders": [
+    "grip/source_mount",
+    "trigger/upper_pivot"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/web",
+   "face": "east",
+   "occluders": [
+    "mag/main_cell/chamfer1",
+    "mag/main_cell/chamfer2",
+    "mag/main_cell/chamfer3"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/web",
+   "face": "west",
+   "occluders": [
+    "mag/main_cell/chamfer5",
+    "mag/main_cell/chamfer6",
+    "mag/main_cell/chamfer7"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/web",
+   "face": "up",
+   "occluders": [
+    "mag/main_cell/chamfer3",
+    "mag/main_cell/chamfer4",
+    "mag/main_cell/chamfer5"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/web",
+   "face": "down",
+   "occluders": [
+    "mag/main_cell/chamfer0",
+    "mag/main_cell/chamfer1",
+    "mag/main_cell/chamfer7"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/chamfer0",
+   "face": "up",
+   "occluders": [
+    "mag/main_cell/web"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/chamfer0",
+   "face": "down",
+   "occluders": [
+    "mag/bottom/chamfer4"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/chamfer4",
+   "face": "up",
+   "occluders": [
+    "mag/main_cell/web"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/main_cell/chamfer5",
+   "face": "up",
+   "occluders": [
+    "mag/main_cell/web",
+    "mag/main_cell/chamfer4",
+    "mag/main_cell/chamfer6"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/bottom/web",
+   "face": "up",
+   "occluders": [
+    "mag/bottom/chamfer3",
+    "mag/bottom/chamfer4",
+    "mag/bottom/chamfer5"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/bottom/web",
+   "face": "down",
+   "occluders": [
+    "mag/bottom/chamfer0",
+    "mag/bottom/chamfer1",
+    "mag/bottom/chamfer7"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/bottom/web",
+   "face": "east",
+   "occluders": [
+    "mag/bottom/chamfer1",
+    "mag/bottom/chamfer2",
+    "mag/bottom/chamfer3"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/bottom/web",
+   "face": "west",
+   "occluders": [
+    "mag/bottom/chamfer5",
+    "mag/bottom/chamfer6",
+    "mag/bottom/chamfer7"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/bottom/chamfer0",
+   "face": "up",
+   "occluders": [
+    "mag/bottom/web"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/vertical_channel-21",
+   "face": "down",
+   "occluders": [
+    "mag/cell_clamp-21105"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/inner_light-21",
+   "face": "down",
+   "occluders": [
+    "mag/cell_clamp-21105"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/rear_channel-21",
+   "face": "down",
+   "occluders": [
+    "mag/cell_clamp-21105"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/cell_clamp-21111",
+   "face": "west",
+   "occluders": [
+    "mag/bottom/chamfer2"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/cell_clamp-21117",
+   "face": "west",
+   "occluders": [
+    "mag/bottom/chamfer1",
+    "mag/bottom/chamfer2"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/vertical_channel21",
+   "face": "down",
+   "occluders": [
+    "mag/cell_clamp21105"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/inner_light21",
+   "face": "down",
+   "occluders": [
+    "mag/cell_clamp21105"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/rear_channel21",
+   "face": "down",
+   "occluders": [
+    "mag/cell_clamp21105"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/cell_clamp21111",
+   "face": "east",
+   "occluders": [
+    "mag/bottom/chamfer5",
+    "mag/bottom/chamfer6"
+   ]
+  },
+  {
+   "part": "magazine",
+   "element": "mag/cell_clamp21117",
+   "face": "east",
+   "occluders": [
+    "mag/bottom/chamfer6",
+    "mag/bottom/chamfer7"
+   ]
+  }
+ ],
+ "removed_elements": [
+  {
+   "part": "body",
+   "element": "fore/inner_core/chamfer0"
+  }
+ ],
+ "uv_and_material_pixels": "UNCHANGED",
+ "native_qa": "MASTER_PENDING",
+ "before_sha256": "d2dc18cb8600c3eec0636b78d5d696801c323d89a36d827bf13af69ca5f2d70d",
+ "after_sha256": "b389b70a65e5e85babdc4ae3b794d9ca11ed329be9e6c535901ec71205ff9450"
+}

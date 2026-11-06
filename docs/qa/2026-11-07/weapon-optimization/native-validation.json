@@ -1,0 +1,84 @@
+{
+  "status": "24/24 short native visual review accepted",
+  "firstAttempt": {
+    "packZipBytes": 185478235,
+    "result": "FAILED_RELOAD",
+    "cause": "StitcherException: Unable to fit destiny:item/weapon/w327/deliverance 1024x1024",
+    "inputLeaseAcquired": false
+  },
+  "fix": "Atlas routing now keeps actual faces of each cuboid model on one atlas; no texture downsampling.",
+  "evidence": "/tmp/w327-opt-native-20261107",
+  "secondAttempt": {
+    "packZipBytes": 185479466,
+    "result": "world loaded, 14 mixed-atlas ADS bake errors found",
+    "nativeInput": "foreground interrupted by physical_user_input; isolated background explicitly authorized, 6 sequences completed with neutral release",
+    "eyasluna": "ADS and third-person rendered; native hold-use emptied 11 rounds, showed reload at 0, returned to 10 rounds and fired again; server reload event00:48:21",
+    "krait": "hip rendered; ADS occluded by receiver - correction pending",
+    "deliverance_circular_logic_brigands_law": "ADS missing-model checkerboards due mixed atlas; new routes pending live recheck",
+    "artifacts": "/tmp/destiny-perks-20261106/qa/opt-*"
+  },
+  "all24FirstPass": {
+    "capture": "completed24/24",
+    "masterInspection": "24/24 reviewed",
+    "shortVisualPass": 18,
+    "fixRequired": [
+      "rufuss_fury",
+      "subjunctive",
+      "succession",
+      "deliverance",
+      "forbearance",
+      "cataclysmic"
+    ],
+    "fireAndAmmo": "24/24 server round/reserve consumption and refill confirmed",
+    "finalRecheck": "all six corrections accepted; failed Subjunctive W151 attempt preserved"
+  },
+  "display12": {
+    "render": "12 actual displays viewed, no missing textures",
+    "idleFpsSnapshots": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    "frameTimeNsSnapshotRange": [
+      1900334,
+      4785750
+    ],
+    "performanceAcceptance": "not established; FPS snapshots are not a benchmark; idle limiter confounding not resolved"
+  },
+  "sixFixRecheck": {
+    "masterInspected": 6,
+    "pass": [
+      "rufuss_fury",
+      "succession",
+      "deliverance",
+      "forbearance",
+      "cataclysmic"
+    ],
+    "failed": {
+      "subjunctive": "Wrong W151 path was unused; actual runtime uses W153. Original failure evidence retained in recheck/subjunctive."
+    },
+    "evidence": "/tmp/w327-opt-native-20261107/recheck"
+  },
+  "subjunctiveRouteCorrection": {
+    "removedWrongW151Leaves": 42,
+    "addedActualW153Leaves": 42,
+    "build": "Gradle assemble succeeded",
+    "nativeRecheck": "PASS: actual W153 model, central aim clear, 41→10 native fire, reload41/41, hip/third/return reviewed",
+    "packGrowthCause": "Wrong parent reference triggered fail-closed global unused-model pruning; no optimizer code change required."
+  },
+  "finalPack": {
+    "bytes": 185480655,
+    "additionalUnusedModelsOmitted": 131470,
+    "weaponAtlasOrMissingModelErrors": 0,
+    "otherWarnings": "Existing unrelated gui/econ texture-reference warnings remain; not an error-free whole-pack certification."
+  }
+}
