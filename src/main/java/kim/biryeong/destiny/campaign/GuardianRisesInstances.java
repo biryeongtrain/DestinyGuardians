@@ -1,16 +1,20 @@
 package kim.biryeong.destiny.campaign;
 
 import kim.biryeong.destiny.DestinyGuardians;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.gamerules.GameRules;
 import xyz.nucleoid.fantasy.Fantasy;
 import xyz.nucleoid.fantasy.RuntimeLevelConfig;
 import xyz.nucleoid.fantasy.RuntimeLevelHandle;
-import xyz.nucleoid.fantasy.util.VoidChunkGenerator;
+import kim.biryeong.destiny.campaign.map.RisingZones;
+import kim.biryeong.destiny.campaign.RisingServices.Zone;
+import kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator;
+import xyz.nucleoid.map_templates.MapTemplate;
+import java.util.concurrent.CompletableFuture;
 import java.util.*;
 
 /** Owned by one server. Admission happens only after the scene builder marks an instance ready. */
@@ -32,12 +36,19 @@ public final class GuardianRisesInstances {
     }
     private final MinecraftServer server;
     private final int capacity;
+    private final CompletableFuture<List<MapTemplate>> templates;
     static final long MORNING_TICKS = 2000L;
     private final Map<UUID, Instance> byOwner = new HashMap<>();
     public GuardianRisesInstances(MinecraftServer server, int capacity) {
         this.server = Objects.requireNonNull(server);
         if (capacity < 1) throw new IllegalArgumentException("Positive capacity required");
         this.capacity = capacity;
+        this.templates = RisingZones.preloadAsync(server);
+    }
+    /** Fixed map coordinates shared by the NBT export, markers, and every personal instance. */
+    public static BlockPos origin(Zone zone) {
+        return new BlockPos(RisingCampaign.ZONE_SPACING / 2 + zone.ordinal() * RisingCampaign.ZONE_SPACING,
+                RisingCampaign.ZONE_Y, RisingCampaign.ZONE_SPACING / 2);
     }
     private void thread() {
         if (!server.isSameThread()) throw new IllegalStateException("Campaign worlds require server thread");
@@ -45,11 +56,12 @@ public final class GuardianRisesInstances {
     public Optional<Instance> prepare(UUID owner) {
         thread(); Objects.requireNonNull(owner);
         if (byOwner.containsKey(owner)) return Optional.of(byOwner.get(owner));
+        if (!templates.isDone()) return Optional.empty(); // never join an unfinished disk/NBT load on the server thread
         if (byOwner.size() >= capacity || byOwner.values().stream().anyMatch(i -> i.state == State.PREPARING))
             return Optional.empty();
         var config = new RuntimeLevelConfig()
                 .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
-                .setGenerator(new VoidChunkGenerator(server.registryAccess().getOrThrow(Biomes.THE_VOID)))
+                .setGenerator(new NbtTemplateChunkGenerator(server, templates.join()))
                 .setDifficulty(Difficulty.NORMAL)
                 .setMirrorOverworldGameRules(false).setMirrorOverworldClocks(false).setMirrorOverworldDifficulty(false)
                 .setShouldTickTime(true) // gameplay timers use level game time
@@ -69,7 +81,7 @@ public final class GuardianRisesInstances {
                 .setGameRule(GameRules.ENTITY_DROPS, false).setGameRule(GameRules.KEEP_INVENTORY, true);
         UUID id = UUID.randomUUID();
         var handle = Fantasy.get(server).openTemporaryLevel(DestinyGuardians.id("guardian_rises/" + id), config);
-        handle.setTickWhenEmpty(false);
+        handle.setTickWhenEmpty(true); // Fantasy must service asynchronous chunk requests before admission
         var instance = new Instance(id, owner, handle);
         byOwner.put(owner, instance);
         return Optional.of(instance);
@@ -90,6 +102,7 @@ public final class GuardianRisesInstances {
         require(instance);
         if (instance.state != State.PREPARING) throw new IllegalStateException("Not preparing");
         instance.state = State.READY;
+        instance.handle.setTickWhenEmpty(false);
     }
     public void running(Instance instance) {
         require(instance);

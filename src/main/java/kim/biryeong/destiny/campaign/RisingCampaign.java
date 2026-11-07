@@ -56,10 +56,9 @@ public final class RisingCampaign {
     /** Shared build budget per server tick across every instance (nanoseconds). */
     static final long BUILD_BUDGET_NANOS = 2_000_000L;
     /**
-     * Budget while the head job's Guardian waits in the pre-mission blackout (nothing to simulate for them yet).
-     * Target: blackout to Ghost scan within ~5 s. Still shared and capped well under the 50 ms tick.
+     * Chunk requests use the same small budget during blackout; section generation runs in the chunk pipeline.
      */
-    static final long ENTRY_BUILD_BUDGET_NANOS = 16_000_000L;
+    static final long ENTRY_BUILD_BUDGET_NANOS = BUILD_BUDGET_NANOS;
     static final int RECONNECT_GRACE = 20 * 120;
     static final int ZONE_SPACING = 4096;
     static final int ZONE_Y = 64;
@@ -288,7 +287,7 @@ public final class RisingCampaign {
 
         ServerPlayer player() { return server == null ? null : server.getPlayerList().getPlayer(owner); }
         ServerLevel level() { return instance.level(); }
-        BlockPos origin(Zone zone) { return new BlockPos(ZONE_SPACING / 2 + zone.ordinal() * ZONE_SPACING, ZONE_Y, ZONE_SPACING / 2); }
+        BlockPos origin(Zone zone) { return GuardianRisesInstances.origin(zone); }
 
         // -- Host --
         @Override public boolean classKnown() {
@@ -599,7 +598,9 @@ public final class RisingCampaign {
             if (spareBuilt) {
                 s.built.add(Zone.GATEWAY);
                 s.markersOf(Zone.GATEWAY);
-            } else if (spareBuild != null) s.builds.put(Zone.GATEWAY, spareBuild); // finishes as this run's job
+            }
+            // Completed warmups still own chunk tickets; transfer cleanup ownership as well as in-flight work.
+            if (spareBuild != null) s.builds.put(Zone.GATEWAY, spareBuild);
             DestinyGuardians.LOGGER.info("[GuardianRises] {} adopted warm instance (gateway {})", s.owner, spareBuilt ? "built" : "in progress");
             spare = null; spareBuild = null; spareBuilt = false;
         }
@@ -614,8 +615,8 @@ public final class RisingCampaign {
         });
         if (s.state == State.QUEUED) s.state = State.PREPARING;
         enqueue(s, entryZone(s), false);
-        // A checkpoint resume elsewhere never returns to the Gateway: drop the half-built warm copy's chunk tickets.
-        if (adopted && !s.built.contains(Zone.GATEWAY) && entryZone(s) != Zone.GATEWAY) {
+        // A checkpoint resume elsewhere never returns to the Gateway: release the unused warm copy's chunk tickets.
+        if (adopted && entryZone(s) != Zone.GATEWAY) {
             var partial = s.builds.remove(Zone.GATEWAY);
             if (partial != null) partial.cancel();
         }
@@ -626,18 +627,18 @@ public final class RisingCampaign {
         if (!WARM_SPARE || !RisingMission.enabled() || instances == null || left <= 0) return;
         var zones = RisingServices.zones();
         if (zones.isEmpty()) return;
-        if (spare == null) {
-            if (now() < spareRetryAt) return;
-            // Never take the single preparation slot from a waiting Guardian.
-            for (var s : SESSIONS.values()) if (s.instance == null && s.state != State.ENDING) return;
-            var made = instances.prepare(SPARE_OWNER);
-            if (made.isEmpty()) { spareRetryAt = now() + 200; return; }
-            spare = made.get();
-            spareBuilt = false;
-            DestinyGuardians.LOGGER.info("[GuardianRises] warming spare instance {}", spare.id());
-        }
-        if (spareBuilt) return;
         try {
+            if (spare == null) {
+                if (now() < spareRetryAt) return;
+                // Never take the single preparation slot from a waiting Guardian.
+                for (var s : SESSIONS.values()) if (s.instance == null && s.state != State.ENDING) return;
+                var made = instances.prepare(SPARE_OWNER);
+                if (made.isEmpty()) { spareRetryAt = now() + 200; return; }
+                spare = made.get();
+                spareBuilt = false;
+                DestinyGuardians.LOGGER.info("[GuardianRises] warming spare instance {}", spare.id());
+            }
+            if (spareBuilt) return;
             if (spareBuild == null) spareBuild = zones.get().begin(spare.level(), Zone.GATEWAY, gatewayOrigin());
             if (spareBuild.step(left)) {
                 spareBuilt = true;
@@ -651,7 +652,7 @@ public final class RisingCampaign {
     }
 
     private static BlockPos gatewayOrigin() {
-        return new BlockPos(ZONE_SPACING / 2 + Zone.GATEWAY.ordinal() * ZONE_SPACING, ZONE_Y, ZONE_SPACING / 2);
+        return GuardianRisesInstances.origin(Zone.GATEWAY);
     }
 
     private static void closeSpare() {

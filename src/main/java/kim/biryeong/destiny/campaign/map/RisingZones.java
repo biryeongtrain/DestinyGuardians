@@ -3,6 +3,14 @@ package kim.biryeong.destiny.campaign.map;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import kim.biryeong.destiny.campaign.RisingServices;
+import kim.biryeong.destiny.campaign.GuardianRisesInstances;
+import kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator;
+import kim.biryeong.destiny.world.template.TemplateChunkWarmup;
+import net.minecraft.server.MinecraftServer;
+import xyz.nucleoid.map_templates.BlockBounds;
+import xyz.nucleoid.map_templates.MapTemplate;
+import xyz.nucleoid.map_templates.MapTemplateSerializer;
+import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.Vec3;
@@ -35,14 +43,46 @@ public final class RisingZones implements RisingServices.Zones {
 
     private RisingZones() {}
 
-    /** Registers the zone service once and warms the template cache off-thread. */
+    /** Registers the zone service; NBT loading is owned by each server's instance manager. */
     public static void init() {
         RisingServices.register(INSTANCE);
-        ZoneTemplate.preloadAsync();
     }
 
     @Override public RisingServices.ZoneBuild begin(ServerLevel level, RisingServices.Zone zone, BlockPos origin) {
-        return ZoneTemplate.get(zone).begin(level, origin);
+        var bounds = bounds(zone);
+        if (!origin.equals(bounds.min())) throw new IllegalArgumentException("Guardian Rises template origin mismatch");
+        if (!(level.getChunkSource().getGenerator() instanceof NbtTemplateChunkGenerator generator)
+                || generator.templates().stream().noneMatch(t -> t.getBounds().min().equals(bounds.min())
+                        && t.getBounds().max().equals(bounds.max())))
+            throw new IllegalStateException("Guardian Rises requires its NBT chunk generator");
+        int margin = Math.clamp(level.getServer().getPlayerList().getViewDistance() + 1, 0, 12);
+        return new TemplateChunkWarmup(level, bounds, margin);
+    }
+
+    public static BlockBounds bounds(RisingServices.Zone zone) {
+        var local = localMarkers().get(zone);
+        var origin = GuardianRisesInstances.origin(zone);
+        return new BlockBounds(origin, origin.offset(local.sizeX() - 1, local.sizeY() - 1, local.sizeZ() - 1));
+    }
+
+    /** One immutable template set per instance manager, shared by its worlds, loaded without server-thread IO. */
+    public static CompletableFuture<List<MapTemplate>> preloadAsync(MinecraftServer server) {
+        var registries = server.registryAccess();
+        return CompletableFuture.supplyAsync(() -> {
+            var loaded = new ArrayList<MapTemplate>();
+            for (var zone : RisingServices.Zone.values()) {
+                String path = "/data/destiny/map_template/guardian_rises/" + ZoneTemplate.resourceName(zone) + ".nbt";
+                try (var in = RisingZones.class.getResourceAsStream(path)) {
+                    if (in == null) throw new IOException("Missing " + path);
+                    var template = MapTemplateSerializer.loadFrom(in, registries);
+                    var bounds = bounds(zone);
+                    if (!template.getBounds().min().equals(bounds.min()) || !template.getBounds().max().equals(bounds.max()))
+                        throw new IOException("Guardian Rises NBT bounds do not match markers: " + zone);
+                    loaded.add(template);
+                } catch (IOException e) { throw new UncheckedIOException(path, e); }
+            }
+            return List.copyOf(loaded);
+        });
     }
 
     @Override public RisingServices.Markers markers(RisingServices.Zone zone, BlockPos origin) {

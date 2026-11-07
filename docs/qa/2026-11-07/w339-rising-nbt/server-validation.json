@@ -1,0 +1,39 @@
+{
+  "relevantServerTests": [
+    {
+      "name": "destiny-test:devils_nbt_game_tests_nbt_generates_all_four_maps_with_original_blocks_and_world_offsets",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "name": "destiny-test:rising_nbt_w339game_tests_generates_four_nbt_zones_and_owns_warmup_through_adoption",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "wideFilterTotal": 9,
+  "wideFilterPassed": 7,
+  "wideFilterFailed": [
+    {
+      "name": "destiny-test:recluse_reload_w100game_tests_copied_and_nbt_persisted_mid_reload_selectors_cannot_acquire_ammo_hud_or_encoded_authority",
+      "passed": false,
+      "failure": {
+        "message": "(-1386780, 4, -6126913) Live float1 keeps 61 samples and the existing acquisition offset: 0.06666667 != 0.083333336 on tick 4"
+      }
+    },
+    {
+      "name": "destiny-test:magazine_reload_w114game_tests_copies_and_nbt_persistence_cannot_acquire_owner_authority",
+      "passed": false,
+      "failure": {
+        "message": "(-1386725, 4, -6126913) Live float1 keeps the authored 61 samples and the existing acquisition offset: 0.06666667 != 0.083333336 on tick 4"
+      }
+    }
+  ],
+  "gradleRunGameTestExit": 2,
+  "firstRun": "asset initialization timeout before tests, 120s",
+  "secondRun": "same readiness guard, existing timeout property extended to 360s; profile graph genuinely ready after 135914ms",
+  "voxelSamples": 651504,
+  "runtime": "build/run/gameTest (Loom overrides JavaExec workingDir)",
+  "nativeClientQA": false,
+  "TPSBenchmark": false
+}
