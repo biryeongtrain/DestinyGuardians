@@ -1,0 +1,106 @@
+{
+  "status": "source visual candidate, parent native acceptance pending",
+  "sourceGroup": "warlock_daybreak",
+  "sourceDirectory": "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/warlock_daybreak",
+  "originalsReadOnly": true,
+  "sourceFiles": {
+    "source.blend": "6e2bf98a0a0b5c7d2f0e8b8d3b024002f61101df806a513a8efe1182041f4221",
+    "clips.json": "9cb0e08d2074906ba18d0d8fe26f6d56e8d5ab6d169f072b00fe21c1f8cc7334",
+    "CLIPS.md": "bf4a9d208d1183478f0f82e51d0a3ce03edf1ad07d9528193140427cc8256d0a",
+    "inspection.json": "535dbe6a4c46808245d1d950634274c68c4ac0c67da6e435c6e5316e4027ea61"
+  },
+  "blender": "5.4.0 Alpha",
+  "directEvaluation": true,
+  "sampleHz": 60,
+  "targetRig": "/Users/qf/IdeaProjects/DestinyGuardians/art/blockbench/animations/guardian_hunter_w199_r1.bbmodel",
+  "targetRigSha256": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+  "rigGeometryChanged": false,
+  "retargetHelper": {
+    "path": "scripts/art/w330_spectral_blades.py",
+    "sha256": "0682319db9755e0f66e16393919109f55ce27a399eb3ab615d64fc1f7d32e7bb",
+    "modified": false
+  },
+  "coordinateBasis": [
+    [
+      0,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      -1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "rotationConvention": "target Blockbench Rz*Ry*Rx; destiny_quaternion x,y,z,w before MC sign conversion; hemisphere continuous",
+  "retarget": "existing16bone rig; independent source pelvis/waist/chest/head rotations; anatomical leg flex; source joint-quaternion transported bind bend planes avoid near-extension IK pole flips; reach-limited two-link arms; each source wrist rotation restored after IK; existing item pivots",
+  "sourceLayerPolicy": "Selected air cast is Base layer, directly evaluated; no new attack/dodge phase or original game state-machine claim.",
+  "translation": "in place; zero horizontal root; target skin floor correction only; runtime ShadowshotLift/entity movement remains authoritative",
+  "timing": "complete original30fps action span; resample60Hz + exact endpoint; no time compression/forced neutral; entry1/exit2 independent from W332 display interpolation2",
+  "gameplay": "no release/impact event decoded; current release/contact/charge/recovery must be preserved by runtime integration; visual source mapping provisional",
+  "clips": [
+    {
+      "name": "w229_warlock_solar_start_air",
+      "tag": "80A8A973",
+      "action": "Armature|80A8A973|Base",
+      "slot": "OBSlot",
+      "sourceFrameRange": [
+        1.0,
+        48.0
+      ],
+      "sourceSeconds": 1.5666666666666667,
+      "clipSeconds": 1.5666666666666667,
+      "samples": 95,
+      "sourceSinglePoseHold": false,
+      "clipLoop": "once",
+      "holdPolicy": null,
+      "largestLocalQuaternionStep": {
+        "bone": "pla_left_arm",
+        "seconds": 0.5666666666666667,
+        "degrees": 41.50958476398629
+      },
+      "endpointPolicy": "literal source evaluated endpoint; no neutral envelope or PHASES retiming",
+      "contactPolicy": "source release/impact event semantics unknown; keep existing gameplay contact; provisional visual mapping"
+    }
+  ],
+  "events": [
+    {
+      "tag": "80A8A973",
+      "FrameCount": 48,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    }
+  ],
+  "missingPhases": "This follow-up adds only original Daybreak air cast80A8A973; existing Shadowshot/Nova resources remain unchanged.",
+  "nativeQueue": [
+    "Air activation selects w229_warlock_solar_start_air; preserve full1.566667s original action with entry1/exit2",
+    "Inspect sword hand grip, hip/chest rotation, original wrist roll and recovery to existing air carry",
+    "Ground cast/attack/dodge/gameplay timings remain outside this source-only delta"
+  ]
+}

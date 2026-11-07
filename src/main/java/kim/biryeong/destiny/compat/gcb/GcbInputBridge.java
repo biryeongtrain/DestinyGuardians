@@ -45,6 +45,8 @@ public final class GcbInputBridge {
         ClientControls.gcb(player);
         if (key == Key.KEY_ATTACK || key == Key.KEY_USE)
             kim.biryeong.destiny.weapon.GcbWeaponInput.key(player, key == Key.KEY_ATTACK, pushed);
+        if(pushed&&key==Key.KEY_USE&&InputRouter.onUseItem(player,net.minecraft.world.InteractionHand.MAIN_HAND)
+                !=net.minecraft.world.InteractionResult.PASS)return;
         if (pushed && key == Key.KEY_0) {
             kim.biryeong.destiny.inventory.WeaponScreen.toggle(player); return;
         }

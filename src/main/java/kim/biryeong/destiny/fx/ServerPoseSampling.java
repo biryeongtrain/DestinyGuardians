@@ -13,6 +13,13 @@ public final class ServerPoseSampling {
         Integer ticks = SMOOTHING.get();
         return ticks == null ? 1 : ticks;
     }
+    /** Two display ticks for super limbs, including ready/move loops; other animation policies stay unchanged. */
+    static int animationSmoothingTicks(String animation) {
+        if (animation == null) return 1;
+        String name = animation.startsWith("h15_") ? animation.substring(4) : animation;
+        return name.startsWith("super_") || name.startsWith("w229_") || name.startsWith("w230_")
+                || animation.equals("h15_revive_combat") ? 2 : 1;
+    }
     /** Visual smoothing only; authoritative pose evaluation remains unchanged. */
     public static void withSmoothing(int ticks, Runnable action) {
         if (ticks < 1 || ticks > 2) throw new IllegalArgumentException("Unsupported pose smoothing");

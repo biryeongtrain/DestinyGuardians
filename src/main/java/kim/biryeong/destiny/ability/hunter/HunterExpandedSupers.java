@@ -219,8 +219,8 @@ public final class HunterExpandedSupers {
     private static final class Session implements SuperSession {
         final Lease lease; final Expanded ability; final String path; final ScopedCloak cloak;
         final long started; final int windup, firstContact, secondContact;
-        long endAt, nextAttack, lastTick=Long.MIN_VALUE, pendingAt=-1, decloakedUntil;
-        boolean ended, firstDone, secondDone, heavyPending, groundedPending; int charges=3, combo, attackCount, visibleDrainRemainder;
+        long endAt, nextAttack, nextHeavy, lastTick=Long.MIN_VALUE, pendingAt=-1, decloakedUntil;
+        boolean ended, firstDone, secondDone, heavyPending, groundedPending, bufferedPrimary, bufferedHeavy; int charges=3, combo, attackCount, visibleDrainRemainder;
         Session(Lease l, Expanded a) {
             lease=l; ability=a; path=a.id().getPath(); started=l.level.getGameTime();
             cloak=a.kind==Kind.SPECTRAL?new ScopedCloak(l):null;
@@ -266,6 +266,9 @@ public final class HunterExpandedSupers {
                         visibleDrainRemainder=0; endAt--; // DDC visible passive drain is 50% faster.
                     }
                     if (pendingAt >= 0 && now() >= pendingAt) { pendingAt=-1; slash(heavyPending); }
+                    if(bufferedPrimary&&now()>=nextAttack) {
+                        boolean heavy=bufferedHeavy;bufferedPrimary=false;spectralPrimary(heavy);
+                    }
                     cloak.sync(cloaked());
                     if (cloaked() && age % 8 == 0) Fx.ring(lease.owner, lease.level,lease.owner.position().add(0,.12,0),.65,Element.VOID.color(),10);
                 }
@@ -273,33 +276,45 @@ public final class HunterExpandedSupers {
             return true;
         }
         @Override public void primary() {
+            if(ability.kind==Kind.SPECTRAL) {
+                spectralPrimary(false);return;
+            }
             if (!live() || now() >= endAt || now() < nextAttack || now()-started < windup || pendingAt >= 0) return;
-            if (ability.kind == Kind.SPECTRAL) {
-                heavyPending=lease.owner.isShiftKeyDown();
-                groundedPending=lease.owner.onGround();
-                String phase=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.spectralAttack(groundedPending,heavyPending,combo);
-                String clip=ClassSuperModelAssets.prefix(path)+"_"+phase;
-                int animation=clipTicks(phase,heavyPending?18:12);
-                int fallback=ticks(ability,heavyPending?"heavy_contact_ticks":phase.equals("attack2")?"attack2_contact_ticks":"attack_contact_ticks",
-                        heavyPending?3:phase.equals("attack2")?4:6,1,40)+SwordTiming.START_TICKS;
-                int contact=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.contactTicks(clip,fallback);
-                if(now()+contact>=endAt)return;
-                if(!heavyPending)combo++;
-                playAttack(phase);
-                pendingAt=now()+Math.min(contact,animation);
-                nextAttack=now()+Math.max(kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.recoveryTicks(clip,animation),
-                        ticks(ability,"attack_interval_ticks",10,3,60));
-                decloakedUntil=Long.MAX_VALUE; // Heavy contact restores the scoped cloak; light leaves it removed.
-                cloak.sync(false);
-                endAt=Math.max(now()+1,endAt-ticks(ability,heavyPending?"heavy_cost_ticks":"light_cost_ticks",heavyPending?35:10,0,120));
-                SuperCamera.blockMovement(lease.owner,Math.min(animation,8));
-            } else if (ability.kind == Kind.EDGE && charges > 0 && lease.flights.stream().allMatch(SimProjectile::isDone)) {
+            if (ability.kind == Kind.EDGE && charges > 0 && lease.flights.stream().allMatch(SimProjectile::isDone)) {
                 charges--; playAttack("attack");
                 int animation=clipTicks("attack",24);
                 pendingAt=now()+Math.min(animation,ticks(ability,"attack_contact_ticks",10,1,60)+SwordTiming.START_TICKS);
                 nextAttack=now()+animation;
                 SuperCamera.blockMovement(lease.owner,animation);
             }
+        }
+        @Override public boolean supportsSecondary() { return ability.kind==Kind.SPECTRAL; }
+        @Override public void secondary() { if(supportsSecondary())spectralPrimary(true); }
+        private void spectralPrimary(boolean heavy) {
+            if(!live()||now()>=endAt||now()-started<windup||pendingAt>=0)return;
+            if(now()<nextAttack) {
+                if(nextAttack-now()<=2&&!bufferedPrimary&&(!heavy||nextAttack>=nextHeavy)) {
+                    bufferedPrimary=true;bufferedHeavy=heavy;
+                }
+                return;
+            }
+            if(heavy&&now()<nextHeavy)return;
+            heavyPending=heavy;groundedPending=lease.owner.onGround();
+            String phase=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.spectralAttack(groundedPending,heavy,combo);
+            String clip=ClassSuperModelAssets.prefix(path)+"_"+phase;
+            int animation=clipTicks(phase,heavy?18:12);
+            int fallback=ticks(ability,heavy?"heavy_contact_ticks":phase.equals("attack2")?"attack2_contact_ticks":"attack_contact_ticks",
+                    heavy?3:phase.equals("attack2")?4:6,1,40)+SwordTiming.START_TICKS;
+            int contact=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.contactTicks(clip,fallback);
+            if(now()+contact>=endAt)return;
+            combo=heavy?0:combo+1;bufferedPrimary=false;
+            playAttack(phase);pendingAt=now()+Math.min(contact,animation);
+            nextAttack=now()+animation; // Full source endpoint + entry, without an extra fixed interval or exit/display wait.
+            if(heavy)nextHeavy=now()+60;
+            decloakedUntil=Long.MAX_VALUE;
+            cloak.sync(false);
+            endAt=Math.max(now()+1,endAt-ticks(ability,heavy?"heavy_cost_ticks":"light_cost_ticks",heavy?35:10,0,120));
+            SuperCamera.blockMovement(lease.owner,Math.min(animation,8));
         }
         private int clipTicks(String phase,int fallback) {
             if (ability.kind==Kind.EDGE && phase.equals("attack")

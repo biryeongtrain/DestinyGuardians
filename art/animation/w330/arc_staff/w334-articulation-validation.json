@@ -1,0 +1,23 @@
+{
+  "status": "PASS; native comparison pending",
+  "clips": 12,
+  "new_nonroot_position_keys": 3762,
+  "position_curve_reduction_tolerance_units": 0.0001,
+  "checks": [
+    "clip lengths/contact/recovery/blend and all other clip metadata unchanged",
+    "all original animator/key UUIDs and canonical key times retained",
+    "non-arm original channels unchanged",
+    "unit quaternions",
+    "source original/input hashes unchanged",
+    "actual moved-parent IK preserves accepted wrists/head within float32 residuals"
+  ],
+  "max_wrist_world_residual_units": 1.5397083138887103e-05,
+  "max_head_world_residual_units": 4.583937547765266e-06,
+  "remaining": [
+    "source axial forearm twist still constrained by existing single-hinge rig",
+    "native joint seams and subjective articulation acceptance remain master owned"
+  ],
+  "not_run": [
+    "full QA/build/runtime/native; no timing changes"
+  ]
+}

@@ -110,10 +110,12 @@ public final class ClassAbilityEffects {
                 p.getZ(), 4, .4, .4, .4, .01);
     }
 
-    public static void attack(ServerPlayer p, Element e, String path) {
+    public static void attack(ServerPlayer p,Element e,String path) { attack(p,e,path,"attack"); }
+
+    public static void attack(ServerPlayer p,Element e,String path,String phase) {
         Presentation s = ACTIVE.get(p.getUUID());
         if (s != null && s.player == p) s.attackAt = p.level().getServer().getTickCount();
-        String clip = ClassSuperModelAssets.prefix(path) + "_attack";
+        String clip = ClassSuperModelAssets.prefix(path) + "_"+phase;
         if (ClassSuperModelAssets.hasClip(clip)) {
             PlayerAnimations.play(p, clip);
             equip(p, path);

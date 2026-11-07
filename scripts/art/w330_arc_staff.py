@@ -24,6 +24,10 @@ DODGE_TAGS = {
     'h15_super_arc_dodge_left': '80A8A93E',
     'h15_super_arc_dodge_right': '80A8A93F',
 }
+HEAVY_TAGS = {
+    'h15_super_arc_attack_heavy': '80A8A933',
+    'h15_super_arc_attack_heavy_air': '80A8A985',
+}
 CONTACTS = {'80A8A937': 10/30, '80A8A92A': 8/30, '80A8A92B': 8/30, '80A8A92D': 8/30}
 REPO = None
 
@@ -79,7 +83,8 @@ def main(args):
     if rig.constraints or rig.animation_data and rig.animation_data.drivers: raise ValueError('Unexpected source drivers/constraints')
     selected = sorted(set(old.MAP.values()) | set(old.EXTRA) | {'6B138432','9D7EE73A'})
     actions = {a.name.split('|')[1]: a for a in bpy.data.actions if len(a.name.split('|'))>=3}
-    exportTags=DODGE_TAGS if args.append_dodges else TAGS
+    appendMode="heavy" if args.append_heavies else "dodge" if args.append_dodges else None
+    exportTags={**TAGS,**DODGE_TAGS,**HEAVY_TAGS} if args.articulate_existing else HEAVY_TAGS if args.append_heavies else DODGE_TAGS if args.append_dodges else TAGS
     samples = {tag: sample(rig, actions[tag], selected) for tag in dict.fromkeys([*exportTags.values(),'80A8A922'])}
     reference = samples['80A8A922'][-1]['matrices']
     refs = {n: Matrix(m) for n,m in reference.items()}
@@ -105,6 +110,9 @@ def main(args):
         y=Vector(y).normalized();x=Vector(x);x=(x-y*x.dot(y)).normalized();z=x.cross(y).normalized();x=y.cross(z).normalized()
         return Matrix((x,y,z)).transposed().to_4x4()
     sourceGripFrame=frame_from_xy((C@axis(refs['DE9D6BEA'])).to_3x3()@Vector((1,0,0)),refGripAxis)
+    if args.articulate_existing:
+        articulated_existing(out,model,samples,reference,C,h15,h19,h20,hashes,source)
+        return
     previousPole={}
     def evaluate(row):
         current = {n:Matrix(m) for n,m in row['matrices'].items()}; points = target_points(row['matrices'])
@@ -221,7 +229,14 @@ def main(args):
                 total=costs[:,None]+transition;previous=np.argmin(total,axis=0);costs=total[previous,np.arange(len(candidates))]+radii*.04;costs[~valid]=np.inf;histories.append(previous)
             if end<len(frames)-1:costs[radii>1.75]=np.inf
             choice=int(np.argmin(costs))
-            if not np.isfinite(costs[choice]):raise RuntimeError('No local continuous clearance path '+str((start,end)))
+            if not np.isfinite(costs[choice]):
+                if args.append_heavies:
+                    # Heavy's original fast twirl is retained for native review rather than forced through the old light-only clearance bound.
+                    for (_,_,metrics),g in zip(frames,geom):
+                        metrics['head_overlap_remaining']=overlaps(g,Vector((0,0,0)))
+                        metrics['head_clearance_fallback']='Original heavy wrist/staff motion retained; head proxy overlap requires native review.'
+                    return frames
+                raise RuntimeError('No local continuous clearance path '+str((start,end)))
             for i in range(end,start-1,-1):
                 translations[i]=candidates[choice].copy()
                 if i>start:choice=int(histories[i-start][choice])
@@ -238,7 +253,27 @@ def main(args):
         return frames
     clips=[]; audit=[]; preview={}
     for name,tag in exportTags.items():
-        rows=samples[tag]; previousPole.clear(); frames=continuous_clearance([evaluate(row) for row in rows]); length=rows[-1]['seconds']
+        rows=samples[tag]; length=rows[-1]['seconds']
+        heavySweep=None
+        if args.append_heavies:
+            # Geometric proxy for the original held staff: original wrist orientation, 1.1m tip from its shared grip basis.
+            tips=[]
+            for row in rows:
+                current={n:Matrix(m) for n,m in row['matrices'].items()}
+                direction=(world_delta(current,'DE9D6BEA').to_3x3()@refGripAxis).normalized()
+                tips.append(Vector(target_points(row['matrices'])['DE9D6BEA'])+direction*1.1)
+            speeds=[((b-a).length*60,rows[i+1]['seconds']) for i,(a,b) in enumerate(zip(tips,tips[1:]))]
+            eligible=[v for v in speeds if .1<=v[1]<=length*.8]
+            peak=max(v[0] for v in eligible)
+            localPeaks=[v for i,v in enumerate(speeds) if i>0 and i<len(speeds)-1 and .1<=v[1]<=length*.8 and v[0]>=speeds[i-1][0] and v[0]>=speeds[i+1][0]]
+            prominent=[v for v in localPeaks if v[0]>=peak*.6]
+            contact=min(prominent,key=lambda v:v[1])[1] if prominent else max(eligible)[1]
+            CONTACTS[tag]=contact
+            heavySweep={'method':'First local source staff-tip speed peak >=60% of the maximum between .1s and80% clip span; visual provisional, never decoded damage.',
+                'tip_proxy_m':1.1,'first_prominent_peak_seconds':contact,'peak_speed_m_s':peak,'local_peaks':[{'seconds':t,'speed_m_s':speed} for speed,t in localPeaks]}
+
+        if heavySweep is not None:print('HEAVY_SWEEP',name,heavySweep)
+        previousPole.clear();frames=continuous_clearance([evaluate(row) for row in rows])
         animators={}; maxEuler=0; maxQuat=0
         for bone in ready:
             keys=[]; previousEuler=None; previousQ=None
@@ -266,7 +301,7 @@ def main(args):
         clip={'name':name,'uuid':h15.uid('w330/'+name),'length':length,'loop':'once','snapping':60,
               'destiny_quaternion_sampling':True,'destiny_entry_blend_ticks':1,'destiny_exit_blend_ticks':2,'animators':animators}
         if tag in CONTACTS:clip.update(destiny_contact_seconds=CONTACTS[tag],destiny_recovery_seconds=length,destiny_contact_provisional=True)
-        if args.append_dodges:clip['destiny_recovery_seconds']=length
+        if appendMode:clip['destiny_recovery_seconds']=length
         clips.append(clip)
         speeds=[]
         for a,b in zip(rows,rows[1:]):
@@ -278,11 +313,16 @@ def main(args):
                       'right_hand_peak_speed_time':peak[0],'right_hand_peak_speed_m_s':peak[1],
                       'provisional_contact_seconds':CONTACTS.get(tag),'contact_note':'Provisional geometric first-swing beat, not decoded damage. weak2 .266667 uses first fast sweep; opaque event .733333 remains unclassified.',
                       'head_clearance_corrected_frames':sum(f[2]['head_clearance_correction_units']>.001 for f in frames),'max_head_clearance_correction_units':max(f[2]['head_clearance_correction_units'] for f in frames),'head_overlap_remaining_frames':[rows[i]['seconds'] for i,f in enumerate(frames) if f[2]['head_overlap_remaining']],
+                      'head_clearance_native_review':any('head_clearance_fallback' in f[2] for f in frames),
+                      'max_head_clearance_left_grip_slide_units':max(f[2].get('head_clearance_left_grip_slide_units',0) for f in frames),
                       'max_source_lift_units':max(f[2]['source_lift_units'] for f in frames),
                       'max_reach_correction_units':max(f[2]['reach_correction_units'] for f in frames),
                       'source_two_hand_frames':sum(f[2]['grip_weight']>.9 for f in frames),
                       'start_wrist':vec(h19.point(h19.fk(model,frames[0][0],frames[0][1])['pri_right_item'],[0,0,0])),
                       'end_wrist':vec(h19.point(h19.fk(model,frames[-1][0],frames[-1][1])['pri_right_item'],[0,0,0]))})
+        if heavySweep is not None:
+            audit[-1]['heavy_sweep']=heavySweep
+            audit[-1]['contact_note']=heavySweep['method']
         if args.append_dodges:
             positions=[Vector(target_points(row['matrices'])['1A5C68E5']) for row in rows]
             pelvis=[Vector(target_points(row['matrices'])['C7C0BA6E']) for row in rows]
@@ -301,23 +341,24 @@ def main(args):
             audit[-1]['motion_start_seconds']=clip.get('destiny_motion_start_seconds')
             audit[-1]['motion_end_seconds']=clip.get('destiny_motion_end_seconds')
         preview[name]={'rows':rows,'frames':frames}
-    if args.append_dodges:
+    if appendMode:
+        prefix='w333-heavy' if args.append_heavies else 'w331-dodge'
         path=out/'arc_staff_w330.animation.json';base=json.loads(path.read_text());existing=copy.deepcopy(base['animations'])
-        assert not any(c['name'] in exportTags for c in existing),'Dodge clips already exist; use a clean captured baseline'
+        assert not any(c['name'] in exportTags for c in existing),'Requested clips already exist; use a clean captured baseline'
         base['animations'].extend(clips);write_json(path,base)
         assert json.loads(path.read_text())['animations'][:len(existing)]==existing
-        write_json(out/'w331-dodge-manifest.json',{'status':'direct-source candidate awaiting master native dodge acceptance','blender':bpy.app.version_string,
+        write_json(out/(prefix+'-manifest.json'),{'status':'direct-source candidate awaiting master native '+appendMode+' acceptance','blender':bpy.app.version_string,
             'source_blend':str(source),'input_sha256':hashes,'fps':30,'sampling_fps':60,'clips':audit,
-            'timing':'Original32frames /31intervals at30fps; no retime, entry1/exit2, no generic dodge substitution.',
-            'translation':'Source horizontal root is measured for direction provenance, kept visually in place so runtime owns actual dodge movement.',
-            'rig_geometry_uv_changed':False,'existing_six_clips_preserved':True,'review':'Single forward source/retarget proxy image; direct depsgraph source action/slot evaluated for all4directions.'})
-        write_json(out/'w331-dodge-source-review.json',{'space':'evaluated armature object matrices; read-only .blend, same C basis as W330',
+            'timing':'Original evaluated action frame spans at30fps; no retime or forced neutral endpoint, entry1/exit2.',
+            'translation':'Source horizontal root remains visually in place; runtime owns actual gameplay movement.',
+            'rig_geometry_uv_changed':False,'existing_clips_preserved':len(existing),'review':'Single ground heavy source/retarget proxy image' if args.append_heavies else 'Single forward dodge source/retarget proxy image','source_action_slot_directly_evaluated':True})
+        write_json(out/(prefix+'-source-review.json'),{'space':'evaluated armature object matrices; read-only .blend, same C basis as W330',
             'actions':[{'tag':tag,'action':actions[tag].name,'slot':actions[tag].slots[0].identifier,'frames':list(actions[tag].frame_range)} for tag in exportTags.values()],
             'representative_samples':{tag:[rows[0],rows[len(rows)//2],rows[-1]] for tag,rows in samples.items() if tag in exportTags.values()}})
         for path,sha in hashes.items():
             if digest(path)!=sha:raise RuntimeError('Read-only source drift: '+path)
-        review(out,model,preview,h15,h19,C,refGripAxis,refs,['h15_super_arc_dodge_forward'])
-        print('W331_ARC_DODGE_APPENDED',len(clips),out);return
+        review(out,model,preview,h15,h19,C,refGripAxis,refs,['h15_super_arc_attack_heavy' if args.append_heavies else 'h15_super_arc_dodge_forward'])
+        print('ARC_SOURCE_APPENDED',appendMode,len(clips),out);return
     root={'schema_version':1,'model':'guardian_hunter_w330_arc_candidate','destiny_deploy_swing_seconds':13/30,'animations':clips}
     write_json(out/'arc_staff_w330.animation.json',root)
     write_json(out/'action-audit.json',audit)
@@ -335,6 +376,127 @@ def main(args):
     write_json(out/'manifest.json',manifest)
     # Representative source/retarget PNGs retain the prior clearance-candidate caption; native QA evaluates this continuity revision.
     print('W330_ARC_EXPORTED',len(clips),out)
+
+def articulation_fk(model,pose,positions,rootY,h15):
+    groups={g['uuid']:g for g in model['groups']};result={}
+    def walk(nodes,parent,parentOrigin):
+        for node in nodes:
+            if isinstance(node,str):continue
+            g=groups[node['uuid']];name=g['name'];offset=Vector(g['origin'])-Vector(parentOrigin)+Vector(positions.get(name,(0,0,0)))
+            if name=='player_root':offset.y+=rootY
+            local=Matrix(h15.tr(vec(offset)))@Matrix(h15.rot([a+b for a,b in zip(g.get('rotation',[0,0,0]),pose.get(name,[0,0,0]))]))
+            current=parent@local;result[name]=mat(current);walk(node['children'],current,g['origin'])
+    walk(model['outliner'],Matrix.Identity(4),(0,0,0));return result
+
+def articulated_existing(out,model,samples,reference,C,h15,h19,h20,hashes,source):
+    # Recover only channels lost when source spine/clavicle chains collapse onto the existing player rig.
+    path=out/'arc_staff_w330.animation.json';base=json.loads(path.read_text());result=copy.deepcopy(base)
+    groups={g['name']:g for g in model['groups']};parents={}
+    def walk(nodes,parent=None):
+        for node in nodes:
+            if isinstance(node,str):continue
+            name=next(g['name'] for g in model['groups'] if g['uuid']==node['uuid']);parents[name]=parent;walk(node['children'],name)
+    walk(model['outliner'])
+    cast=next(c for c in base['animations'] if c['name']=='h15_super_arc_start');refPose,refY=h19.sample(cast,cast['length']);refFK=h19.fk(model,refPose,refY)
+    channels={'pw_waist':('A252A6A2','C7C0BA6E'),'pc_chest':('A352A6A2','A252A6A2'),'pra_right_arm':('17025F50','A352A6A2'),'pla_left_arm':('D1232BA2','A352A6A2')}
+    mapping={**TAGS,**DODGE_TAGS,**HEAVY_TAGS};calibration={};localReference={}
+    for target,(bone,parent) in channels.items():
+        sourceParent=Matrix(reference[parent]);localReference[target]=sourceParent.inverted()@Matrix(reference[bone]).translation
+        targetParent=parents[target];calibration[target]=axis(refFK[targetParent]).to_3x3().inverted()@C.to_3x3()@axis(sourceParent).to_3x3()
+    def positions_at(row):
+        matrices=row['matrices'];positions={}
+        for target,(bone,parent) in channels.items():
+            local=Matrix(matrices[parent]).inverted()@Matrix(matrices[bone]).translation
+            positions[target]=vec(calibration[target]@(local-localReference[target])*16)
+        return positions
+    def solve(p,positions,rootY,side,target,bias):
+        upper,fore,item=('pra_right_arm','prfa_right_forearm','pri_right_item') if side=='right' else ('pla_left_arm','plfa_left_forearm','pli_left_item')
+        matrices=articulation_fk(model,p,positions,rootY,h15);shoulder=h19.point(matrices[upper],[0,0,0]);a=groups[item]['origin'][0]-groups[fore]['origin'][0]
+        l1=h19.norm(h19.sub(groups[fore]['origin'],groups[upper]['origin']));longitudinal=groups[fore]['origin'][1]-groups[item]['origin'][1];l2=math.hypot(longitudinal,a)
+        delta=h19.sub(target,shoulder);distance=h19.norm(delta);along=h19.unit(delta)
+        center=(l1*l1-l2*l2+distance*distance)/(2*distance);radius=math.sqrt(max(0,l1*l1-center*center))
+        swivel=h19.sub(bias,h19.mul(along,h19.dot(bias,along)))
+        if h19.norm(swivel)<1e-5:swivel=[1 if side=='right' else -1,0,.2]
+        elbow=h19.add(shoulder,h19.add(h19.mul(along,center),h19.mul(h19.unit(swivel),radius)))
+        down=h19.unit(h19.sub(elbow,shoulder));end=h19.sub(target,elbow);bend=math.acos(max(-1,min(1,h19.dot(end,down)/longitudinal)))
+        perpendicular=h19.unit(h19.sub(end,h19.mul(down,h19.dot(end,down))));y=h19.mul(down,-1);z0=h19.mul(perpendicular,-1);x0=h19.cross(y,z0)
+        twist=-math.atan2(a,longitudinal*math.sin(bend));x=h19.add(h19.mul(x0,math.cos(twist)),h19.mul(z0,math.sin(twist)));z=h19.add(h19.mul(x0,-math.sin(twist)),h19.mul(z0,math.cos(twist)))
+        world=[[x[i],y[i],z[i],0] for i in range(3)]+[[0,0,0,1]];local=h15.mm(h19.inverse_rotation(matrices[parents[upper]]),world)
+        p[upper]=h19.sub(h19.euler(local),groups[upper].get('rotation',[0,0,0]));p[fore]=[math.degrees(bend),0,0]
+        actual=h19.point(articulation_fk(model,p,positions,rootY,h15)[item],[0,0,0]);return h19.norm(h19.sub(actual,target))
+    def simplify(keys,tolerance=.0001):
+        keep={0,len(keys)-1}
+        def visit(a,b):
+            if b-a<2:return
+            span=keys[b][0]-keys[a][0];worst=-1;index=None
+            for i in range(a+1,b):
+                t=(keys[i][0]-keys[a][0])/span;expected=Vector(keys[a][1]).lerp(Vector(keys[b][1]),t);error=(Vector(keys[i][1])-expected).length
+                if error>worst:worst=error;index=i
+            if worst>tolerance:keep.add(index);visit(a,index);visit(index,b)
+        visit(0,len(keys)-1);return[ keys[i] for i in sorted(keep)]
+    audit=[];preview={};maxWrist=0;maxHead=0;maxOrientation=0
+    for old,clip in zip(base['animations'],result['animations']):
+        name=clip['name'];rows=samples[mapping[name]];prepared=[];alphas=[];beforeElbows=[];afterElbows=[];rawMax=0
+        for row in rows:
+            t=row['seconds'];pose,rootY=h19.sample(old,t);original=copy.deepcopy(pose);oldFK=h19.fk(model,pose,rootY);raw=positions_at(row);rawMax=max(rawMax,max(Vector(v).length for v in raw.values()))
+            targets={side:h19.point(oldFK[item],[0,0,0]) for side,item in [('right','pri_right_item'),('left','pli_left_item')]}
+            def reachable(alpha):
+                positions={n:vec(Vector(v)*alpha) for n,v in raw.items()};fk=articulation_fk(model,pose,positions,rootY,h15)
+                return all(.2<(Vector(targets[side])-Vector(h19.point(fk[upper],[0,0,0]))).length<11.13 for side,upper in [('right','pra_right_arm'),('left','pla_left_arm')])
+            alpha=1.0
+            if not reachable(alpha):
+                lo,hi=0.0,1.0
+                for _ in range(24):
+                    mid=(lo+hi)/2
+                    if reachable(mid):lo=mid
+                    else:hi=mid
+                alpha=lo*.999
+            positions={n:vec(Vector(v)*alpha) for n,v in raw.items()};alphas.append(alpha)
+            # Keep the accepted head world location and orientation while the compressed spine segment articulates below it.
+            fk=articulation_fk(model,pose,positions,rootY,h15);headParent=parents['h_ph_head'];parent=Matrix(fk[headParent]);headLocal=parent.inverted()@Vector(h19.point(oldFK['h_ph_head'],[0,0,0]))
+            positions['h_ph_head']=vec(headLocal-(Vector(groups['h_ph_head']['origin'])-Vector(groups[headParent]['origin'])))
+            for side,upper,fore,item in [('right','pra_right_arm','prfa_right_forearm','pri_right_item'),('left','pla_left_arm','plfa_left_forearm','pli_left_item')]:
+                bias=h19.sub(h19.point(oldFK[fore],[0,0,0]),h19.point(oldFK[upper],[0,0,0]));residual=solve(pose,positions,rootY,side,targets[side],bias);maxWrist=max(maxWrist,residual)
+                current=articulation_fk(model,pose,positions,rootY,h15);local=axis(current[fore]).inverted()@axis(oldFK[item]);pose[item]=h19.sub(h19.euler(mat(local)),groups[item].get('rotation',[0,0,0]))
+            fk=articulation_fk(model,pose,positions,rootY,h15)
+            maxHead=max(maxHead,h19.norm(h19.sub(h19.point(fk['h_ph_head'],[0,0,0]),h19.point(oldFK['h_ph_head'],[0,0,0]))))
+            maxOrientation=max(maxOrientation,max(abs(fk['pri_right_item'][i][j]-oldFK['pri_right_item'][i][j]) for i in range(3) for j in range(3)))
+            beforeElbows.append(h19.point(oldFK['prfa_right_forearm'],[0,0,0]));afterElbows.append(h19.point(fk['prfa_right_forearm'],[0,0,0]))
+            prepared.append((pose,rootY,{'local_positions':positions,'retained_source_factor':alpha}))
+        changedRotations={'pra_right_arm','prfa_right_forearm','pri_right_item','pla_left_arm','plfa_left_forearm','pli_left_item'}
+        for animator in clip['animators'].values():
+            bone=animator['name']
+            if bone in changedRotations:
+                previousEuler=None;previousQ=None
+                for k in animator['keyframes']:
+                    if k['channel']!='rotation':continue
+                    idx=min(range(len(rows)),key=lambda i:abs(rows[i]['seconds']-k['time']));rotation=prepared[idx][0][bone]
+                    if previousEuler is not None:
+                        candidates=[[a+360*round((b-a)/360) for a,b in zip(v,previousEuler)] for v in [rotation,[rotation[0]+180,180-rotation[1],rotation[2]+180]]]
+                        rotation=min(candidates,key=lambda v:sum((a-b)**2 for a,b in zip(v,previousEuler)))
+                    q=Matrix(h15.rot(rotation)).to_quaternion();q.normalize()
+                    if previousQ is not None and q.dot(previousQ)<0:q.negate()
+                    previousEuler=rotation;previousQ=q.copy();k['data_points']=[dict(zip('xyz',[round(v,7) for v in rotation]))];k['destiny_quaternion']=[round(q.x,10),round(q.y,10),round(q.z,10),round(q.w,10)]
+            if bone in channels or bone=='h_ph_head':
+                values=[(r['seconds'],f[2]['local_positions'][bone]) for r,f in zip(rows,prepared)]
+                if max(Vector(v).length for _,v in values)>.0001:
+                    for t,v in simplify(values):animator['keyframes'].append({'channel':'position','time':t,'interpolation':'linear','uuid':h15.uid('w334/articulation/'+name+'/'+bone+'/'+str(t)),'data_points':[dict(zip('xyz',[round(x,7) for x in v]))]})
+        audit.append({'clip':name,'source_tag':mapping[name],'raw_max_local_translation_units':rawMax,'applied_max_local_translation_units':max(Vector(v).length for f in prepared for v in f[2]['local_positions'].values()),'minimum_source_retained_factor':min(alphas),'position_keys':sum(k['channel']=='position' and b['name']!='player_root' for b in clip['animators'].values() for k in b['keyframes']),
+            'right_elbow_path_change_max_units':max((Vector(a)-Vector(b)).length for a,b in zip(beforeElbows,afterElbows))})
+        preview[name]={'rows':rows,'frames':prepared}
+    assert maxWrist<.0001 and maxHead<.0001 and maxOrientation<.00001,(maxWrist,maxHead,maxOrientation)
+    write_json(path,result)
+    report={'status':'source-derived articulation candidate; master native comparison pending','source_blend':str(source),'input_sha256':hashes,'source_unit_scale':16,'source_reference':'shared cast frame44; parent-local bone deltas through original pelvis/spine/clavicle chains','position_channels':list(channels)+['h_ph_head'],'root_entity_motion_changed':False,
+        'unchanged':'All original lengths, contact/recovery/blend/audio, canonical60Hz times, source speed, non-arm rotations, existing key/animator UUIDs, geometry and accepted world wrists/head.',
+        'reach_adaptation':'Only shrink all source local translations together where required to retain accepted two-hand world targets within unchanged limb reach. No amplitude amplification.',
+        'remaining_rig_limit':'No new bone geometry; forearm still uses existing single-hinge rig. New clavicle/lumbar path drives shoulder and elbow articulation rather than time compression.',
+        'max_wrist_world_residual_units':maxWrist,'max_head_world_residual_units':maxHead,'max_item_world_rotation_component_residual':maxOrientation,'clips':audit}
+    for p,sha in hashes.items():
+        if digest(p)!=sha:raise RuntimeError('Read-only source drift '+p)
+    write_json(out/'w334-articulation-manifest.json',report)
+    refMatrices={n:Matrix(m) for n,m in reference.items()};refPoints={n:C.to_3x3()@Matrix(m).translation for n,m in reference.items()};grip=(refPoints['8C83CB67']-refPoints['DE9D6BEA']).normalized()
+    review(out,model,{'w334-articulation':preview['h15_super_arc_start']},h15,h19,C,grip,refMatrices,['w334-articulation'])
+    print('W334_ARTICULATION_EXPORTED',len(result['animations']),maxWrist,maxHead,maxOrientation)
 
 def review(out,model,preview,h15,h19,C,refGripAxis,refs,names=None):
     # Explicit source/retarget joint and untextured rig proxies, not game screenshots or original meshes.
@@ -368,7 +530,7 @@ def review(out,model,preview,h15,h19,C,refGripAxis,refs,names=None):
                 for a,b in zip(chain,chain[1:]):segment(xyz(points[a],col,1),xyz(points[b],col,1),.022,cyan)
             delta=C@axis(row['matrices']['DE9D6BEA'])@axis(refs['DE9D6BEA']).inverted()@C.inverted();shaft=delta.to_3x3()@refGripAxis;w=points['DE9D6BEA']
             segment(xyz(w-shaft*.8,col,1),xyz(w+shaft*1.1,col,1),.026,cyan)
-            matrices=h19.fk(model,pose,rootY)
+            matrices=articulation_fk(model,pose,data['frames'][i][2].get('local_positions',{}),rootY,h15)
             for element in model['elements']:
                 group=groups[parent[element['uuid']]]
                 if group['name'] in ['tag_name','shadow']:continue
@@ -392,5 +554,5 @@ def review(out,model,preview,h15,h19,C,refGripAxis,refs,names=None):
         scene.render.filepath=str(out/(name+'-source-retarget.png'));bpy.ops.render.render(write_still=True)
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--repo-root',required=True);parser.add_argument('--output',required=True);parser.add_argument('--append-dodges',action='store_true')
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--repo-root',required=True);parser.add_argument('--output',required=True);modes=parser.add_mutually_exclusive_group();modes.add_argument('--append-dodges',action='store_true');modes.add_argument('--append-heavies',action='store_true');modes.add_argument('--articulate-existing',action='store_true')
     main(parser.parse_args(sys.argv[sys.argv.index('--')+1:]))

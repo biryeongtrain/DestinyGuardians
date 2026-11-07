@@ -1,0 +1,39 @@
+{
+  "worktree": "/Users/qf/.codex/worktrees/perk-expansion-stats/DestinyGuardians",
+  "main_baselines_match": true,
+  "files": [
+    {
+      "path": "src/main/java/kim/biryeong/destiny/fx/PlayerAnimations.java",
+      "before_sha256": "fd48014a0c2ce18945d9af186be8b6a10ba1dee23e47f49aac0ae3e9e410de29",
+      "after_sha256": "74c1ca00b8fc829a2a488bfee417981967f9d41bcaf1bcce281facf846c83e78",
+      "bytes": 42017
+    },
+    {
+      "path": "src/main/java/kim/biryeong/destiny/fx/ServerPoseSampling.java",
+      "before_sha256": "42e418c2dbe4b0a5c6eea64e99b5e2e2dccf15022cb4f760a488e3792ce9245a",
+      "after_sha256": "3ad84f17b24df2008a1a6d146ecca3f9bfd3c7e4dcfe460d71d21f19e7a1235b",
+      "bytes": 2386
+    },
+    {
+      "path": "src/test/java/kim/biryeong/destiny/fx/ServerPoseSamplingW198Test.java",
+      "before_sha256": "a7715343c319b7133993a8e36d5ea73f55476a1844a46c14d559ca9c6f63c985",
+      "after_sha256": "72320ebcac765e920ea68f8fa87adfab54bc35cfe7e485b3edf22c88056e5c21",
+      "bytes": 2874
+    }
+  ],
+  "scope": "super display interpolation duration2 at prime and tick; other clip policy unchanged",
+  "preserved": [
+    "source clip speeds and duration",
+    "START_TICKS/entry/exit gameplay modifiers",
+    "contact/recovery timing",
+    "40Hz authoritative sampling clock and existing final tick publication",
+    "ordinary weapon/reload/intro interpolation policy"
+  ],
+  "checks": {
+    "targeted_javac_java25": "PASS",
+    "targeted_junit": "3/3 PASS",
+    "native": "not run; master owns",
+    "worker_Gradle_attempt": "failed because isolated worker lacked main W330 MeleeSuperAnimationTiming dependency; resolved for targeted verification using read-only integrated dependency classpath"
+  },
+  "gcb_findings": "/tmp/w332-super-review/gcb-interpolation-findings.md"
+}

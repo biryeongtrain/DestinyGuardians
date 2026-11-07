@@ -20,9 +20,9 @@
     "80A8B4F5": 0,
     "80A8B55A": 0
   },
-  "retarget": "unchanged segmented player rig; torso/head rest-relative rotation; anatomical legs; reach-limited two-link arm IK; each source wrist rest-relative rotation drives its own existing item pivot; no shared rig/geometry changes",
+  "retarget": "Original16bone rig plus source parent-relative waist/chest/shoulder positions and source forearm axial rotation; translation-aware IK and item counter-transform preserve original wrist/knife world FK.",
   "rootMotion": "horizontal source locomotion omitted (runtime owns entity movement); ground skin floor support plus source ankle lift; air pelvis displacement relative source bind, bounded to +/-8 model units",
-  "nativeAcceptance": "parent first Vision baseline reviewed; replacement still awaits parent second Vision; static diagrams cannot certify native knife grip/contact",
+  "nativeAcceptance": "pending master ground/light/heavy/air source-detail recheck",
   "clips": [
     {
       "phase": "start",
@@ -55,7 +55,7 @@
       "contactSeconds": 0.15,
       "contactSourceFrame": 5.5,
       "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
-      "maxQuaternionStepDegrees": 132.6441145470866,
+      "maxQuaternionStepDegrees": 131.80639646190374,
       "endPosePreserved": true
     },
     {
@@ -89,7 +89,7 @@
       "contactSeconds": 0.225,
       "contactSourceFrame": 7.75,
       "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
-      "maxQuaternionStepDegrees": 98.56600080449905,
+      "maxQuaternionStepDegrees": 99.74136363958172,
       "endPosePreserved": true
     },
     {
@@ -106,7 +106,7 @@
       "contactSeconds": 0.15,
       "contactSourceFrame": 5.5,
       "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
-      "maxQuaternionStepDegrees": 106.81565804698563,
+      "maxQuaternionStepDegrees": 117.9873950052459,
       "endPosePreserved": true
     },
     {
@@ -123,7 +123,7 @@
       "contactSeconds": 0.3,
       "contactSourceFrame": 10.0,
       "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
-      "maxQuaternionStepDegrees": 142.04113027985835,
+      "maxQuaternionStepDegrees": 144.4348566730129,
       "endPosePreserved": true
     },
     {
@@ -140,7 +140,7 @@
       "contactSeconds": 0.15,
       "contactSourceFrame": 5.5,
       "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
-      "maxQuaternionStepDegrees": 82.28868393737412,
+      "maxQuaternionStepDegrees": 92.53715251114147,
       "endPosePreserved": true
     },
     {
@@ -157,7 +157,7 @@
       "contactSeconds": 0.075,
       "contactSourceFrame": 3.25,
       "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
-      "maxQuaternionStepDegrees": 79.52223377365388,
+      "maxQuaternionStepDegrees": 73.96869665322016,
       "endPosePreserved": true
     },
     {
@@ -174,7 +174,7 @@
       "contactSeconds": 0.075,
       "contactSourceFrame": 3.25,
       "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
-      "maxQuaternionStepDegrees": 79.01345700729183,
+      "maxQuaternionStepDegrees": 77.44051769979932,
       "endPosePreserved": true
     },
     {
@@ -215,5 +215,41 @@
       "name": "CLIPS.md",
       "sha256": "a554fa1aa67398d657d5ca829d0272b9ff9b19304b231be78d43ef2c6800f088"
     }
-  ]
+  ],
+  "detailRevision": {
+    "revision": "source local shoulder/spine position and axial forearm detail; no tempo change",
+    "preserved": [
+      "all clip lengths",
+      "all source sample timestamps at40Hz",
+      "contact/recovery/entry/exit metadata",
+      "root X/Y/Z channels",
+      "item scale channels",
+      "existing wrist/blade world position and orientation",
+      "rig hierarchy/geometry/UV",
+      "audio"
+    ],
+    "positionMaxUnits": {
+      "pw_waist": 1.6464930970939944,
+      "pc_chest": 0.07988839426978163,
+      "pla_left_arm": 2.2389723874055836,
+      "pra_right_arm": 2.2481127587588614
+    },
+    "reachCorrectionMaxUnits": 1.7282775695248351,
+    "wristBladePositionResidualMaxUnits": 4.070144838902081e-15,
+    "wristBladeAngularResidualMaxDegrees": 1.7075472925031877e-06,
+    "forearmAxialRollRangeDegrees": {
+      "plfa_left_forearm": [
+        -0.3163213560354084,
+        0.17031361887808724
+      ],
+      "prfa_right_forearm": [
+        -0.049989313956746585,
+        0.047486751680574785
+      ]
+    },
+    "pelvisExcluded": "Source root-relative pelvis displacement reaches24.484model units and overlaps existing leap/root representation; do not duplicate it.",
+    "handContact": "Both arm segments remain connected by FK. Compensated equipment point stays within2u cross-section of lower-arm local hand; exact wrist world target retained.",
+    "rawPoseCache": "/tmp/w332-super-review/spectral-detail-evaluated-source.json; excluded from delta/commit",
+    "nativeAcceptance": "pending master ground/light/heavy/air source-detail recheck"
+  }
 }

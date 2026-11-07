@@ -59,6 +59,7 @@ public final class HunterSuper extends Ability {
     public boolean activate(ServerPlayer player) {
         if(element()==Element.ARC&&!kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.available(
                 kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.ARC_RESOURCE))return false;
+        if(element()==Element.VOID&&!kim.biryeong.destiny.fx.SuperMotionOverlaysW332.available())return false;
         if (!kim.biryeong.destiny.camera.SuperCamera.start(player, element())) return false;
         Session session = switch (element()) {
             case ARC -> new ArcStaff(player);
@@ -156,7 +157,9 @@ public final class HunterSuper extends Ability {
 
     /** Arc: 아크 지팡이. */
     private final class ArcStaff extends Session {
-        private int nextStrike,combo;
+        private int combo;
+        private long nextStrike,nextHeavy;
+        private boolean heavyPending,bufferedPrimary,bufferedHeavy,queuedDeployHeavy;
         private final String startClip;
         private final int deployTicks;
         private boolean queued,acceptedGrounded;
@@ -181,8 +184,11 @@ public final class HunterSuper extends Ability {
         public boolean tick() {
             advanceDodge();
             if (age + 1 == SuperAttackTiming.ARC_DEPLOY_SWING) SuperVfx.arcDeploy(player);
-            if (age >= deployTicks && queued) { queued = false; primary(); }
+            if (age >= deployTicks && queued) { queued = false; primary(queuedDeployHeavy); }
             if (contact.advance()) strike();
+            if(bufferedPrimary&&now()>=nextStrike) {
+                boolean heavy=bufferedHeavy;bufferedPrimary=false;primary(heavy);
+            }
             if (age == duration - 7) PlayerAnimations.play(player, "super_arc_end");
             if (age % 4 == 0) {
                 Vec3 p = player.position().add(0, 1, 0);
@@ -191,17 +197,31 @@ public final class HunterSuper extends Ability {
             return super.tick();
         }
 
-        @Override
-        public void primary() {
-            if (age < deployTicks) { queued = true; return; }
-            if(age<nextStrike||contact.pending()||dodgeActive())return;
+        @Override public void primary() { primary(false); }
+        @Override public boolean supportsSecondary() { return true; }
+        @Override public void secondary() { primary(true); }
+        private void primary(boolean heavy) {
+            if(!ownsDodge())return;
+            if(age<deployTicks) {if(!queued)queuedDeployHeavy=heavy;queued=true;return;}
+            if(contact.pending()||dodgeActive())return;
+            if(now()<nextStrike) {
+                // One fresh late input, at most two server ticks before the source endpoint. No mid-swing auto-repeat.
+                if(nextStrike-now()<=2&&!bufferedPrimary&&(!heavy||nextStrike>=nextHeavy)) {
+                    bufferedPrimary=true;bufferedHeavy=heavy;
+                }
+                return;
+            }
+            if(heavy&&now()<nextHeavy)return;
             boolean grounded=player.onGround();
-            String phase=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.arcAttack(grounded,combo);
+            String phase=heavy?"h15_super_arc_attack_heavy"+(grounded?"":"_air")
+                    :kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.arcAttack(grounded,combo);
+            if(!kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.has(phase))return;
             int hit=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.contactTicks(phase,SuperAttackTiming.ARC_CONTACT);
             if(age+hit>=duration)return;
-            acceptedGrounded=grounded;combo++;
-            nextStrike=age+Math.max(kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.recoveryTicks(phase,SuperAttackTiming.ARC_RECOVERY),
-                    (int)param("strike_interval_ticks",SuperAttackTiming.ARC_RECOVERY));
+            acceptedGrounded=grounded;heavyPending=heavy;combo=heavy?0:combo+1;bufferedPrimary=false;
+            // Nominal source endpoint + entry; exit/display interpolation is not an extra gameplay cooldown.
+            nextStrike=now()+kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.durationTicks(phase,SuperAttackTiming.ARC_RECOVERY);
+            if(heavy)nextHeavy=now()+60; // User-requested local cooldown, independent of the next light attack.
             contact.request(hit);
             PlayerAnimations.play(player,phase);
         }
@@ -218,7 +238,7 @@ public final class HunterSuper extends Ability {
             return java.util.Optional.of(new SuperSession.ClassAbilityCooldown((int)Math.max(0,nextDodge-now()),DODGE_COOLDOWN));
         }
         @Override public AbilityService.Result classAbility() {
-            if(!ownsDodge()||age<deployTicks||age<nextStrike||contact.pending()||dodgeActive()
+            if(!ownsDodge()||age<deployTicks||now()<nextStrike||contact.pending()||bufferedPrimary||dodgeActive()
                     ||kim.biryeong.destiny.combat.MeleeLunge.active(player))return AbilityService.Result.BUSY;
             if(now()<nextDodge)return AbilityService.Result.COOLDOWN;
             var runtime=Guardians.runtime(player);
@@ -284,7 +304,10 @@ public final class HunterSuper extends Ability {
             int[] impactVisuals = {0};
             kim.biryeong.destiny.ability.MeleeSuperMovement.contact(player,this,
                     Math.clamp(reach,.1,8),cosHalf,1.8,true,acceptedGrounded,e->{
-                Combat.damage(level,player,e,AbilityDamage.pvp(HunterSuper.this,"strike",e,(float)param("damage",16)),
+                float base=(float)param("damage",16);
+                // DDC PvE Heavy1264/Light864=79/54. This is a local MC derivation; PvP heavy is unconfirmed.
+                float damage=heavyPending?(float)param("heavy_damage",base*79d/54d):base;
+                Combat.damage(level,player,e,AbilityDamage.pvp(HunterSuper.this,heavyPending?"heavy":"strike",e,damage),
                         element(),kim.biryeong.destiny.weapon.AmmoGeneration.SUPER);
                 if(impactVisuals[0]++==0)DestinySounds.hunter(level,e.position(),element(),"super.impact",.65f);
                 if(impactVisuals[0]<=2)SuperVfx.arcHit(player,e);
@@ -294,7 +317,7 @@ public final class HunterSuper extends Ability {
 
         @Override
         public void end() {
-            queued = false;
+            queued = bufferedPrimary = false;
             contact.cancel();
             finishDodge();
             super.end();
@@ -384,9 +407,11 @@ public final class HunterSuper extends Ability {
         private final kim.biryeong.destiny.fx.ShadowshotTiming draw = new kim.biryeong.destiny.fx.ShadowshotTiming();
         private int bowStage = -1;
         private ShadowshotLift lift;
+        private final boolean airCast;
 
         Shadowshot(ServerPlayer player) {
             super(player, kim.biryeong.destiny.fx.ShadowshotTiming.RELEASE_TICKS + 1);
+            airCast=!player.onGround();
             handItem(kim.biryeong.destiny.fx.SuperVisuals.item(element()));
         }
 
@@ -416,7 +441,8 @@ public final class HunterSuper extends Ability {
             lift = new ShadowshotLift(player);
             bowStage = 0;
             PlayerAnimations.superItem(player, kim.biryeong.destiny.fx.SuperVisuals.bowStage(0), true);
-            PlayerAnimations.superAttack(player, element());
+            // Full source motion is visual only; the existing one-arrow T+7 gameplay release remains unchanged.
+            PlayerAnimations.play(player,"h15_super_void_attack"+(airCast?"_air":""));
         }
 
         private void releaseArrow() {

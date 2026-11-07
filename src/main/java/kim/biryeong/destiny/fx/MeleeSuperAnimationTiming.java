@@ -73,7 +73,7 @@ public final class MeleeSuperAnimationTiming {
                 "Malformed required W330 source overlay: "+path+": "+Sources.VALIDATION_ERRORS.get(path));
         String prefix=path.equals(ARC_RESOURCE)?"h15_super_arc_":"w230_hunter_spectral_blades_";
         var phases=path.equals(ARC_RESOURCE)?List.of("start","start_air","attack","attack_weak_2","attack_weak_3","attack_air",
-                        "dodge_forward","dodge_backward","dodge_left","dodge_right")
+                        "dodge_forward","dodge_backward","dodge_left","dodge_right","attack_heavy","attack_heavy_air")
                 :List.of("start","start_air","attack","attack2","attack3","attack_air","attack3_air","heavy","heavy_air");
         for(String phase:phases) {
             var clip=Sources.CLIPS.get(prefix+phase);

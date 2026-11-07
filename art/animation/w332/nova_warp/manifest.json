@@ -1,0 +1,137 @@
+{
+  "status": "source visual candidate, parent native acceptance pending",
+  "sourceGroup": "warlock_nova_warp",
+  "sourceDirectory": "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/warlock_nova_warp",
+  "originalsReadOnly": true,
+  "sourceFiles": {
+    "source.blend": "9f2a6ffd6828c6f41feaa4d6a1db6f967007ddd6e748f71323fda8310f9c705a",
+    "clips.json": "aaf996e1b74dbd0bad8830ffb2ea0ed2e49e600093f85d2a01596694614ab873",
+    "CLIPS.md": "984224526967be57b612e29d5f6c7fb79af7bfdc72c09cd065dd9c935198bfc5",
+    "inspection.json": "f5e076c36baf8a8d809923699130393d10af930571acd256bc63181e55827606"
+  },
+  "blender": "5.4.0 Alpha",
+  "directEvaluation": true,
+  "sampleHz": 60,
+  "targetRig": "/Users/qf/IdeaProjects/DestinyGuardians/art/blockbench/animations/guardian_hunter_w199_r1.bbmodel",
+  "targetRigSha256": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+  "rigGeometryChanged": false,
+  "retargetHelper": {
+    "path": "scripts/art/w330_spectral_blades.py",
+    "sha256": "0682319db9755e0f66e16393919109f55ce27a399eb3ab615d64fc1f7d32e7bb",
+    "modified": false
+  },
+  "coordinateBasis": [
+    [
+      0,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      -1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "rotationConvention": "target Blockbench Rz*Ry*Rx; destiny_quaternion x,y,z,w before MC sign conversion; hemisphere continuous",
+  "retarget": "existing16bone rig; independent source pelvis/waist/chest/head rotations; anatomical leg flex; source joint-quaternion transported bind bend planes avoid near-extension IK pole flips; reach-limited two-link arms; each source wrist rotation restored after IK; existing item pivots",
+  "sourceLayerPolicy": "Nova charge sources are Additive layer; original runtime base-layer weights/state mixing are not decoded. This is directly evaluated source-derived standalone visual adaptation, not a claim of original game layer reconstruction.",
+  "translation": "in place; zero horizontal root; target skin floor correction only; runtime ShadowshotLift/entity movement remains authoritative",
+  "timing": "complete original30fps action span; resample60Hz + exact endpoint; no time compression/forced neutral; entry1/exit2 independent from W332 display interpolation2",
+  "gameplay": "no release/impact event decoded; current release/contact/charge/recovery must be preserved by runtime integration; visual source mapping provisional",
+  "clips": [
+    {
+      "name": "w230_warlock_nova_warp_charge_idle",
+      "tag": "80A8A99C",
+      "action": "Armature|80A8A99C|Additive",
+      "slot": "OBSlot",
+      "sourceFrameRange": [
+        1.0,
+        1.0
+      ],
+      "sourceSeconds": 0.0,
+      "clipSeconds": 2.0,
+      "samples": 121,
+      "holdPolicy": "one original source frame held for explicitly authored 2.0s once visual hold (max configured40tick charge support); no original duration claim",
+      "largestLocalQuaternionStep": {
+        "bone": "plfa_left_forearm",
+        "seconds": 0.016666666666666666,
+        "degrees": 1.7075472925031877e-06
+      },
+      "endpointPolicy": "literal source evaluated endpoint; no neutral envelope or PHASES retiming",
+      "contactPolicy": "source release/impact event semantics unknown; keep existing gameplay contact; provisional visual mapping",
+      "sourceSinglePoseHold": true,
+      "clipLoop": "once"
+    },
+    {
+      "name": "w230_warlock_nova_warp_charge_exit",
+      "tag": "80A8A99D",
+      "action": "Armature|80A8A99D|Additive",
+      "slot": "OBSlot",
+      "sourceFrameRange": [
+        1.0,
+        39.0
+      ],
+      "sourceSeconds": 1.2666666666666666,
+      "clipSeconds": 1.2666666666666666,
+      "samples": 77,
+      "holdPolicy": null,
+      "largestLocalQuaternionStep": {
+        "bone": "prfa_right_forearm",
+        "seconds": 0.4,
+        "degrees": 46.98721581940298
+      },
+      "endpointPolicy": "literal source evaluated endpoint; no neutral envelope or PHASES retiming",
+      "contactPolicy": "source release/impact event semantics unknown; keep existing gameplay contact; provisional visual mapping",
+      "sourceSinglePoseHold": false,
+      "clipLoop": "once"
+    }
+  ],
+  "events": [
+    {
+      "tag": "80A8A99C",
+      "FrameCount": 9,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Additive",
+      "events": []
+    },
+    {
+      "tag": "80A8A99D",
+      "FrameCount": 39,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Additive",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    }
+  ],
+  "missingPhases": "No charge-enter or separate air charge-exit in Nova Warp supplied group; no fabricated phase",
+  "nativeQueue": [
+    "Shadowshot ground/air bow grip+nock/cheek/aim/release7tick and full1.3s recovery",
+    "Nova Warp hold->existing12tick blast->full charge_exit, new input after existing6tick recovery may blend-interrupt the visual",
+    "No detached held item, arm flip, skin overlap, neutral snap, or stale phase after cancellation"
+  ]
+}

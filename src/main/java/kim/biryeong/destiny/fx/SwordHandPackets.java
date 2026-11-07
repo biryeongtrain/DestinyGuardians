@@ -30,7 +30,16 @@ public final class SwordHandPackets {
     public static final class Protection {
         final ServerPlayerConnection connection;
         final int entityId;
-        private Protection(ServerPlayer player) { connection = player.connection; entityId = player.getId(); }
+        final boolean secondaryInput;
+        // Main-thread admission is captured before writes; Netty consumes only this immutable snapshot.
+        private record Secondary(int slot, boolean carrier) { }
+        private Secondary admitted;
+        private Secondary wire;
+        private Protection(ServerPlayer player) { this(player,false); }
+        private Protection(ServerPlayer player,boolean secondaryInput) {
+            connection=player.connection;entityId=player.getId();this.secondaryInput=secondaryInput;
+            admitted=wire=new Secondary(player.getInventory().getSelectedSlot(),false);
+        }
     }
     private SwordHandPackets() {}
 
@@ -38,6 +47,31 @@ public final class SwordHandPackets {
         var protection = new Protection(player);
         ordered(protection, () -> PROTECTED.put(protection.connection, protection));
         return protection;
+    }
+
+    /** Wire-only non-usable carrier lets an unmodified client emit use-in-air while BM hides its hand. */
+    public static Protection beginSecondary(ServerPlayer player) {
+        var protection=new Protection(player,true);
+        ordered(protection,()->PROTECTED.put(protection.connection,protection));return protection;
+    }
+
+    public static void refreshSecondary(ServerPlayer player) {
+        if(player!=null&&player.connection!=null)refreshSecondary(PROTECTED.get(player.connection),player);
+    }
+    static void refreshSecondary(Protection protection,ServerPlayer player) {
+        if(protection==null||!protection.secondaryInput||player.connection!=protection.connection
+                ||!player.level().getServer().isSameThread())return;
+        int selected=player.getInventory().getSelectedSlot();
+        boolean carrier=PlayerAnimations.ownsSecondaryHand(player)
+                &&player.containerMenu==player.inventoryMenu
+                &&!kim.biryeong.destiny.inventory.WeaponHotbarGuard.guiOpen(player);
+        var next=new Protection.Secondary(selected,carrier);var old=protection.admitted;
+        if(next.equals(old))return;
+        protection.admitted=next;
+        ordered(protection,()->protection.wire=next);
+        // Restore the CURRENT logical source at each old/new boundary, never a stored weapon snapshot.
+        if(old.slot()!=selected)syncSlot(player,old.slot());
+        syncSlot(player,selected);
     }
 
     public static void end(Protection protection) {
@@ -55,18 +89,63 @@ public final class SwordHandPackets {
     public static void syncCurrent(ServerPlayer player) {
         if (player.connection != null && !player.hasDisconnected() && !player.isRemoved()
                 && player.level().getServer().isSameThread()) {
-            player.connection.send(new ClientboundContainerSetSlotPacket(0,
-                    player.inventoryMenu.incrementStateId(), 36 + player.getInventory().getSelectedSlot(),
-                    player.getMainHandItem().copy()));
+            syncSlot(player,player.getInventory().getSelectedSlot());
         }
+    }
+
+    private static void syncSlot(ServerPlayer player,int slot) {
+        if(slot>=0&&slot<9&&player.connection!=null&&!player.hasDisconnected())
+            player.connection.send(new ClientboundContainerSetSlotPacket(0,player.inventoryMenu.incrementStateId(),
+                    36+slot,player.getInventory().getItem(slot).copy()));
     }
 
     public static Packet<?> around(ServerPlayerConnection connection, Packet<?> incoming,
                                    UnaryOperator<Packet<?>> betterModel) {
         var protection = PROTECTED.get(connection);
         if (protection == null) return betterModel.apply(incoming);
+        if(protection.secondaryInput) {
+            var state=protection.wire;
+            return secondaryTransform(incoming,protection.entityId,state.slot(),state.carrier(),betterModel);
+        }
         return transform(incoming, protection.entityId, betterModel, SwordHandPackets::combat,
                 stack -> concealProjected(stack, PolymerItemUtils.getPolymerIdentifier(stack)));
+    }
+
+    static Packet<?> secondaryTransform(Packet<?> incoming,int ownerId,int selected,boolean carrier,
+                                         UnaryOperator<Packet<?>> betterModel) {
+        Packet<?> isolated=incoming;
+        if(incoming instanceof ClientboundContainerSetContentPacket content)
+            isolated=new ClientboundContainerSetContentPacket(content.containerId(),content.stateId(),
+                    new ArrayList<>(content.items()),content.carriedItem());
+        Packet<?> outgoing=betterModel.apply(isolated);
+        int slot=36+selected;
+        if(selected>=0&&selected<9&&incoming instanceof ClientboundContainerSetSlotPacket before
+                &&outgoing instanceof ClientboundContainerSetSlotPacket after
+                &&before.getContainerId()==0&&after.getContainerId()==0&&before.getSlot()==slot
+                &&after.getSlot()==slot&&before.getStateId()==after.getStateId()) {
+            outgoing=new ClientboundContainerSetSlotPacket(0,after.getStateId(),slot,
+                    carrier?secondaryCarrier():before.getItem());
+        } else if(selected>=0&&selected<9&&incoming instanceof ClientboundContainerSetContentPacket before
+                &&outgoing instanceof ClientboundContainerSetContentPacket after
+                &&before.containerId()==0&&after.containerId()==0&&before.stateId()==after.stateId()
+                &&before.items().size()==after.items().size()&&slot<before.items().size()) {
+            var items=new ArrayList<>(after.items());items.set(slot,carrier?secondaryCarrier():before.items().get(slot));
+            outgoing=new ClientboundContainerSetContentPacket(0,after.stateId(),items,after.carriedItem());
+        }
+        return withoutSelfMainHand(outgoing,ownerId);
+    }
+    private static ItemStack secondaryCarrier() {
+        var carrier=new ItemStack(net.minecraft.world.item.Items.STICK);
+        carrier.set(net.minecraft.core.component.DataComponents.ITEM_MODEL,EMPTY_MODEL);
+        carrier.set(net.minecraft.core.component.DataComponents.ITEM_NAME,net.minecraft.network.chat.Component.empty());
+        // Consume the client's main-hand input, avoiding offhand fallthrough. This is the same silent
+        // long-use contract as weapon carriers; no food, ammo or Polymer ownership is copied.
+        carrier.set(net.minecraft.core.component.DataComponents.USE_EFFECTS,new net.minecraft.world.item.component.UseEffects(true,false,1f));
+        carrier.set(net.minecraft.core.component.DataComponents.CONSUMABLE,net.minecraft.world.item.component.Consumable.builder()
+                .consumeSeconds(3600).animation(net.minecraft.world.item.ItemUseAnimation.NONE).hasConsumeParticles(false)
+                .sound(net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(
+                        Identifier.withDefaultNamespace("intentionally_empty")))).build());
+        return carrier;
     }
 
     static boolean combat(ItemStack stack) {

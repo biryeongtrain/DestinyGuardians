@@ -98,6 +98,7 @@ public final class WeaponOutboundPresentation {
      * container/state/slot and ordering; offhand, cursor and stale snapshots pass through.
      */
     public static Packet<?> projectPacket(ServerPlayer recipient, Packet<?> packet) {
+        kim.biryeong.destiny.fx.SwordHandPackets.refreshSecondary(recipient);
         if (recipient == null || !(packet instanceof ClientboundContainerSetSlotPacket slot)) return packet;
         var menu = slot.getContainerId() == recipient.inventoryMenu.containerId ? recipient.inventoryMenu
                 : slot.getContainerId() == recipient.containerMenu.containerId ? recipient.containerMenu : null;

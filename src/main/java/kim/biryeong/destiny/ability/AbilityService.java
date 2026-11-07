@@ -36,6 +36,7 @@ public final class AbilityService {
     }
 
     public static void init() {
+        kim.biryeong.destiny.input.InputRouter.init();
         ServerTickEvents.END_SERVER_TICK.register(AbilityService::tick);
         net.fabricmc.fabric.api.entity.event.v1.ServerEntityLevelChangeEvents.AFTER_PLAYER_CHANGE_LEVEL.register((player, from, to) -> {
             cleanup(player);
@@ -201,6 +202,22 @@ public final class AbilityService {
             case CLASS_ABILITY -> use(player, AbilitySlot.CLASS_ABILITY) == Result.OK;
             case SUPER -> use(player, AbilitySlot.SUPER) == Result.OK;
         };
+    }
+
+    public static boolean secondarySupported(ServerPlayer player) {
+        return Guardians.runtimeIfPresent(player).map(r->r.superSession).map(SuperSession::supportsSecondary).orElse(false);
+    }
+
+    /** Same activity/PvP/down/lifecycle gates as primary, with no ordinary weapon or ability side effects. */
+    public static boolean secondary(ServerPlayer player) {
+        if(kim.biryeong.destiny.inventory.WeaponScreen.active(player)||player.containerMenu!=player.inventoryMenu
+                ||kim.biryeong.destiny.down.GuardianDown.active(player)
+                ||!kim.biryeong.destiny.strike.devils.DevilsLair.allows(player)
+                ||!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(player)
+                ||!Guardians.isGuardian(player)||player.isSpectator()||player.isDeadOrDying()||player.hasDisconnected())return false;
+        var session=Guardians.runtimeIfPresent(player).map(r->r.superSession).orElse(null);
+        if(session==null||!session.supportsSecondary())return false;
+        session.secondary();return true; // The opted-in session also owns rejected cooldown/recovery requests.
     }
 
     public static Result use(ServerPlayer player, AbilitySlot slot) {

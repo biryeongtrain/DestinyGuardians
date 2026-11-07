@@ -8,6 +8,10 @@ public interface SuperSession {
     /** 궁극기 중 기본 공격(좌클릭). */
     void primary();
 
+    /** Only explicit melee-super opt-ins own RMB; every other session preserves ordinary item use. */
+    default boolean supportsSecondary() { return false; }
+    default void secondary() { }
+
     /** Explicit opt-in: super-owned class actions never invoke the equipped ordinary ability or its perks. */
     default AbilityService.Result classAbility() { return AbilityService.Result.BUSY; }
 

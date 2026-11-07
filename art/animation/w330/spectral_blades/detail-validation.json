@@ -1,0 +1,36 @@
+{
+  "revision": "source local shoulder/spine position and axial forearm detail; no tempo change",
+  "preserved": [
+    "all clip lengths",
+    "all source sample timestamps at40Hz",
+    "contact/recovery/entry/exit metadata",
+    "root X/Y/Z channels",
+    "item scale channels",
+    "existing wrist/blade world position and orientation",
+    "rig hierarchy/geometry/UV",
+    "audio"
+  ],
+  "positionMaxUnits": {
+    "pw_waist": 1.6464930970939944,
+    "pc_chest": 0.07988839426978163,
+    "pla_left_arm": 2.2389723874055836,
+    "pra_right_arm": 2.2481127587588614
+  },
+  "reachCorrectionMaxUnits": 1.7282775695248351,
+  "wristBladePositionResidualMaxUnits": 4.070144838902081e-15,
+  "wristBladeAngularResidualMaxDegrees": 1.7075472925031877e-06,
+  "forearmAxialRollRangeDegrees": {
+    "plfa_left_forearm": [
+      -0.3163213560354084,
+      0.17031361887808724
+    ],
+    "prfa_right_forearm": [
+      -0.049989313956746585,
+      0.047486751680574785
+    ]
+  },
+  "pelvisExcluded": "Source root-relative pelvis displacement reaches24.484model units and overlaps existing leap/root representation; do not duplicate it.",
+  "handContact": "Both arm segments remain connected by FK. Compensated equipment point stays within2u cross-section of lower-arm local hand; exact wrist world target retained.",
+  "rawPoseCache": "/tmp/w332-super-review/spectral-detail-evaluated-source.json; excluded from delta/commit",
+  "nativeAcceptance": "pending master ground/light/heavy/air source-detail recheck"
+}

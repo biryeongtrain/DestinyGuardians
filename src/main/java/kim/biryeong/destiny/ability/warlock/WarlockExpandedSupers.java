@@ -50,6 +50,7 @@ public final class WarlockExpandedSupers {
         }
         @Override public boolean activate(ServerPlayer p) {
             if (AbilityService.inSuper(p) || ACTIVE.containsKey(p)) return false;
+            if(id().equals(NOVA_WARP)&&!kim.biryeong.destiny.fx.SuperMotionOverlaysW332.available())return false;
             Epoch epoch = new Epoch(p, id());
             if (!epoch.valid() || !ClassAbilityEffects.beginSuper(p, element(), id().getPath())) return false;
             Session session = new Session(epoch, this);
@@ -244,6 +245,7 @@ public final class WarlockExpandedSupers {
                 aura.point(epoch.owner.position().add(0, 1, 0), new Vector3f(.5f + fraction * 2.5f));
                 if (age >= chargeAt) {
                     chargeAt = -1; bursts++;
+                    play("charge_exit"); // Full source exit can be replaced by the next accepted input; no gameplay recovery extension.
                     if (aura != null) { aura.destroy(); aura = null; }
                     double radius = value(ability, "radius", 4.4, 1, 8);
                     Vec3 origin = epoch.owner.position().add(0, .8, 0);
@@ -268,7 +270,7 @@ public final class WarlockExpandedSupers {
             chargeAt = age + chargeTicks;
             nextAttack = chargeAt + ticks(ability, "burst_recovery_ticks", 6, 1, 30);
             spent += Math.max(1, (int)Math.ceil(duration * .05));
-            ClassAbilityEffects.attack(epoch.owner, Element.VOID, path);
+            ClassAbilityEffects.attack(epoch.owner,Element.VOID,path,"charge_idle"); // Source pose hold; charge/contact clock is unchanged.
             ClassAbilityEffects.sound(epoch.owner, Element.VOID, path, "super.fire");
         }
         private boolean blink() {

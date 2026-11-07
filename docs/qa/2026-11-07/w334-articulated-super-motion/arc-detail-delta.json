@@ -1,0 +1,67 @@
+{
+  "worktree": "/Users/qf/.codex/worktrees/perk-expansion-stats/DestinyGuardians",
+  "status": "source-derived articulation candidate awaiting master native comparison",
+  "main_baselines_match": true,
+  "baseline_overlay_sha256": "c22699225c262a281bc64210f17f81e7d14abb284467c5698f23a20e36b84e71",
+  "files": [
+    {
+      "path": "art/animation/w330/arc_staff/arc_staff_w330.animation.json",
+      "before_sha256": "c22699225c262a281bc64210f17f81e7d14abb284467c5698f23a20e36b84e71",
+      "after_sha256": "ca7ca92f2ac982ac293f639d3d3c1587fc78adbef22089de0581a16afe6b189c",
+      "bytes": 9263556
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w334-articulation-before-after.png",
+      "before_sha256": null,
+      "after_sha256": "6310f219a71da7e2fa719900e15894167314709d6e9b00963e9b21cf02bbe8a1",
+      "bytes": 1569568
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w334-articulation-manifest.json",
+      "before_sha256": null,
+      "after_sha256": "76fb389116f8f71b791cddd7f2c3aa47f1f776dc9772093d195f22422856c87b",
+      "bytes": 7087
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w334-articulation-source-retarget.png",
+      "before_sha256": null,
+      "after_sha256": "8e9aed006fab88dba1d3d7227fec3361d4a66ba519590d341ea5d1b3f73c36ea",
+      "bytes": 1577642
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w334-articulation-validation.json",
+      "before_sha256": null,
+      "after_sha256": "abd2a423b065b17d2ae1092d66d84b2b793b38096f0680776e3117181a25422e",
+      "bytes": 905
+    },
+    {
+      "path": "scripts/art/w330_arc_staff.py",
+      "before_sha256": "01a3f7aab81dc8452ed1d4332bcf46848f728dcad6f32b630e497b150cc266ca",
+      "after_sha256": "fecccda7148f339127cd408295c5fae3a502aea86b61d780c785ef7fa2da34bb",
+      "bytes": 46764
+    }
+  ],
+  "validation": {
+    "status": "PASS; native comparison pending",
+    "clips": 12,
+    "new_nonroot_position_keys": 3762,
+    "position_curve_reduction_tolerance_units": 0.0001,
+    "checks": [
+      "clip lengths/contact/recovery/blend and all other clip metadata unchanged",
+      "all original animator/key UUIDs and canonical key times retained",
+      "non-arm original channels unchanged",
+      "unit quaternions",
+      "source original/input hashes unchanged",
+      "actual moved-parent IK preserves accepted wrists/head within float32 residuals"
+    ],
+    "max_wrist_world_residual_units": 1.5397083138887103e-05,
+    "max_head_world_residual_units": 4.583937547765266e-06,
+    "remaining": [
+      "source axial forearm twist still constrained by existing single-hinge rig",
+      "native joint seams and subjective articulation acceptance remain master owned"
+    ],
+    "not_run": [
+      "full QA/build/runtime/native; no timing changes"
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "worktree": "/Users/qf/.codex/worktrees/perk-expansion-stats/DestinyGuardians",
+  "main_baselines_match": true,
+  "baseline_overlay_sha256": "34c5ba301356265cb2562bb2282cc263ea7e53f86aadee584f8135d3a1a94ab1",
+  "status": "two full-source heavy candidates; native acceptance pending",
+  "files": [
+    {
+      "path": "art/animation/w330/arc_staff/arc_staff_w330.animation.json",
+      "before_sha256": "34c5ba301356265cb2562bb2282cc263ea7e53f86aadee584f8135d3a1a94ab1",
+      "after_sha256": "c22699225c262a281bc64210f17f81e7d14abb284467c5698f23a20e36b84e71",
+      "bytes": 7761927
+    },
+    {
+      "path": "art/animation/w330/arc_staff/h15_super_arc_attack_heavy-source-retarget.png",
+      "before_sha256": null,
+      "after_sha256": "98a3d7f74c2c626b6772ad2cd8e83aa4552089eb98d38a31b9cf3ffa26c1f816",
+      "bytes": 1588035
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w333-heavy-manifest.json",
+      "before_sha256": null,
+      "after_sha256": "cb7f205c3564ab8e5e0af9e1d813adf7899c3866e70a12213de2ac55db9478d2",
+      "bytes": 8933
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w333-heavy-source-review.json",
+      "before_sha256": null,
+      "after_sha256": "e246f84b05a673524018447a0c3dfcbb802000047b0d038c2cbfd16d8e0dc196",
+      "bytes": 93373
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w333-heavy-validation.json",
+      "before_sha256": null,
+      "after_sha256": "f1eb0d009a13d6e425f3ffad3c9e1dc511bd45090c0aa3669705806550535282",
+      "bytes": 1046
+    },
+    {
+      "path": "scripts/art/w330_arc_staff.py",
+      "before_sha256": "62456e8e3841c1a39bcba5b6169bf3cb68745fffd98e117109914abb99815b13",
+      "after_sha256": "01a3f7aab81dc8452ed1d4332bcf46848f728dcad6f32b630e497b150cc266ca",
+      "bytes": 34669
+    }
+  ],
+  "validation": {
+    "status": "targeted artifact checks PASS; native air-head clearance review pending",
+    "added_clips": [
+      {
+        "name": "h15_super_arc_attack_heavy",
+        "length_seconds": 1.366666667,
+        "contact_seconds_provisional": 0.266666667
+      },
+      {
+        "name": "h15_super_arc_attack_heavy_air",
+        "length_seconds": 1.0,
+        "contact_seconds_provisional": 0.283333333
+      }
+    ],
+    "rotation_keys": 2304,
+    "checks": [
+      "actual background .blend action/slot/depsgraph evaluation",
+      "one ground source-target representative image inspected",
+      "existing ten clips exact dictionary equality and root metadata unchanged",
+      "rig UUID/name mapping unchanged",
+      "dense60Hz unit hemisphere-continuous quaternions",
+      "source/input hashes unchanged",
+      "no PHASES retiming or forced-neutral endpoint"
+    ],
+    "remaining": [
+      "air heavy shaft/head expanded proxy overlap18keys .316667–.616667s; original motion retained for native acceptance"
+    ],
+    "not_run": [
+      "runtime/client/server/build/QA; master owns"
+    ]
+  }
+}

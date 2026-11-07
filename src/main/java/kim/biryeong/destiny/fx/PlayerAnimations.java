@@ -174,6 +174,18 @@ public final class PlayerAnimations {
                 && stack == player.getMainHandItem() && !stack.isEmpty() && valid(state);
     }
 
+    /** Presentation ownership only: gameplay still validates the exact active super session. */
+    public static boolean ownsSecondaryHand(ServerPlayer player) {
+        Playback state=ACTIVE.get(player.getUUID());
+        return state!=null&&state.owner==player&&state.handProtection!=null&&!state.closingAfterRun
+                &&state.handProtection.secondaryInput&&valid(state);
+    }
+    private static boolean secondaryHandRequest(String request) {
+        String name=logical(request);
+        return name.equals("super_arc")||name.startsWith("super_arc_")
+                ||request.startsWith("w230_hunter_spectral_blades_");
+    }
+
     public static boolean meleePlaying(ServerPlayer player) {
         Playback state = ACTIVE.get(player.getUUID());
         return state != null && state.owner == player && state.meleeCast && valid(state);
@@ -268,7 +280,8 @@ public final class PlayerAnimations {
             } else clip = resolve(request);
             if (clip == null) return false; // A missing clip must not destroy a working loop.
             stop(player);
-            if (sword || logical(request).startsWith("class_") || ("grenade".equals(logical(request))
+            if(secondaryHandRequest(request))handProtection=SwordHandPackets.beginSecondary(player);
+            else if (sword || logical(request).startsWith("class_") || ("grenade".equals(logical(request))
                     && kim.biryeong.destiny.ability.GrenadeThrow.active(player)))
                 handProtection = SwordHandPackets.begin(player);
             LimbEquipment equipment = new LimbEquipment();
@@ -326,9 +339,13 @@ public final class PlayerAnimations {
             ACTIVE.put(player.getUUID(), state);
             adopted = true;
             applyOwnerVisibility(player, tracker);
-            if (handProtection != null) SwordHandPackets.syncCurrent(player);
+            if (handProtection != null) {
+                SwordHandPackets.refreshSecondary(handProtection,player);
+                SwordHandPackets.syncCurrent(player);
+            }
             boolean ok = loop ? tracker.animate(clip.animation, Modifiers.READY) : oneShot(state, clip.animation);
-            if (ok && loop) ((ServerAnimationClock) (Object) tracker).destiny$primeAnimation();
+            if (ok && loop) ServerPoseSampling.withSmoothing(ServerPoseSampling.animationSmoothingTicks(clip.animation),
+                    () -> ((ServerAnimationClock) (Object) tracker).destiny$primeAnimation());
             if (!ok) discard(state);
             return ok;
         } catch (RuntimeException | LinkageError e) {
@@ -383,7 +400,9 @@ public final class PlayerAnimations {
         Run previous = state.run;
         state.run = null; // Invalidate before stopAnimation can emit a callback.
         if (previous != null) state.tracker.stopAnimation(previous.animation);
-        var modifier=MeleeSuperAnimationTiming.has(animation)?AnimationModifier.builder()
+        var modifier=SuperMotionOverlaysW332.has(animation)?AnimationModifier.builder()
+                .start(SuperMotionOverlaysW332.entryBlendTicks(animation)).end(SuperMotionOverlaysW332.exitBlendTicks(animation))
+                .priority(20).type(AnimationIterator.Type.PLAY_ONCE).build():MeleeSuperAnimationTiming.has(animation)?AnimationModifier.builder()
                 .start(MeleeSuperAnimationTiming.entryBlendTicks(animation))
                 .end(MeleeSuperAnimationTiming.exitBlendTicks(animation)).priority(20)
                 .type(AnimationIterator.Type.PLAY_ONCE).build():Modifiers.ONCE;
@@ -392,7 +411,7 @@ public final class PlayerAnimations {
         Run run = new Run(animation, state.server.getTickCount(), ticks);
         state.run = run;
         boolean ok = state.tracker.animate(animation, modifier, () -> run.completed.set(true));
-        if (ok) ServerPoseSampling.withSmoothing(animation.equals("h15_revive_combat") ? 2 : 1,
+        if (ok) ServerPoseSampling.withSmoothing(ServerPoseSampling.animationSmoothingTicks(animation),
                 () -> ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation());
         if (!ok) {
             state.run = null;
@@ -419,7 +438,7 @@ public final class PlayerAnimations {
                     kim.biryeong.minigamelib.cinematic.CameraViews.sending(() ->
                             ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
                 else ServerPoseSampling.withSmoothing(
-                        state.run != null && state.run.animation.equals("h15_revive_combat") ? 2 : 1,
+                        ServerPoseSampling.animationSmoothingTicks(state.run != null ? state.run.animation : state.loopAnimation),
                         () -> ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
                 syncOwnerBody(state);
                 var position = state.owner.position();
@@ -483,7 +502,8 @@ public final class PlayerAnimations {
         if(!state.tracker.animate(name,Modifiers.READY))return false;
         if (state.loopAnimation != null) state.tracker.stopAnimation(state.loopAnimation);
         state.loopAnimation = name;
-        ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation();
+        ServerPoseSampling.withSmoothing(ServerPoseSampling.animationSmoothingTicks(name),
+                () -> ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation());
         return true;
     }
 
@@ -516,6 +536,7 @@ public final class PlayerAnimations {
                 return;
             }
             state.closingAfterRun = true;
+            SwordHandPackets.refreshSecondary(state.handProtection,state.owner);
             if (state.loopAnimation != null) state.tracker.stopAnimation(state.loopAnimation);
         } catch (RuntimeException | LinkageError e) { fail(player, "finish super", e); }
     }
@@ -768,6 +789,7 @@ public final class PlayerAnimations {
     }
 
     private static void syncEquipment(Playback state) {
+        SwordHandPackets.refreshSecondary(state.handProtection,state.owner);
         // Mapping refreshes respect the lifetime policy at the actual native commit.
         // Both hands refresh: switching away from a left-hand bow restores live offhand.
         state.tracker.update(TrackerUpdateAction.itemMapping(), bone ->

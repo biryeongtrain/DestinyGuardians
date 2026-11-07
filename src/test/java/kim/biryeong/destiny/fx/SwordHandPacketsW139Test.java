@@ -27,7 +27,7 @@ class SwordHandPacketsW139Test {
         net.minecraft.SharedConstants.tryDetectVersion(); net.minecraft.server.Bootstrap.bootStrap();
         // 26.3 binds default item components from data packs, absent in pure JUnit.
         // These packet fixtures use explicit components, not runtime item defaults.
-        for (var item : List.of(Items.STICK, Items.PAPER, Items.DIAMOND)) {
+        for (var item : List.of(Items.STICK, Items.PAPER, Items.DIAMOND, Items.APPLE)) {
             var holder = (net.minecraft.core.Holder.Reference<Item>) net.minecraft.core.registries.BuiltInRegistries.ITEM.wrapAsHolder(item);
             if (!holder.areComponentsBound()) holder.bindComponents(net.minecraft.core.component.DataComponentMap.EMPTY);
         }
@@ -192,4 +192,55 @@ class SwordHandPacketsW139Test {
         assertEquals(22, full.stateId());
         assertNotEquals(emptyModel, content.items().get(44).get(DataComponents.ITEM_MODEL));
     }
+    @Test void secondaryCarrierKeepsEmptyFoodAndGunSourcesPureAndRestoresCurrentGuiSnapshot() {
+        var food=new ItemStack(Items.APPLE,3);
+        food.set(DataComponents.CONSUMABLE,net.minecraft.world.item.component.Consumable.builder().consumeSeconds(1.6f).build());
+        var gun=new ItemStack(Items.PAPER);gun.set(DataComponents.ITEM_MODEL,Identifier.fromNamespaceAndPath("destiny","weapon/ace_of_spades"));
+        for(var source:List.of(ItemStack.EMPTY,food,gun)) {
+            var original=source.copy();var packet=new ClientboundContainerSetSlotPacket(0,37,38,source);
+            UnaryOperator<Packet<?>> bm=p->new ClientboundContainerSetSlotPacket(0,37,38,ItemStack.EMPTY);
+            var projected=(ClientboundContainerSetSlotPacket)SwordHandPackets.secondaryTransform(packet,42,2,true,bm);
+            var carrier=projected.getItem();assertFalse(carrier.isEmpty());assertTrue(carrier.is(Items.STICK));
+            assertEquals(Identifier.fromNamespaceAndPath("destiny","weapon_sword_hand_empty"),carrier.get(DataComponents.ITEM_MODEL));
+            assertFalse(carrier.has(DataComponents.FOOD));assertFalse(carrier.has(DataComponents.CUSTOM_DATA));
+            assertEquals(3600,carrier.get(DataComponents.CONSUMABLE).consumeSeconds());
+            assertEquals(ItemUseAnimation.NONE,carrier.get(DataComponents.CONSUMABLE).animation());
+            assertFalse(carrier.get(DataComponents.CONSUMABLE).hasConsumeParticles());
+            assertEquals(1f,carrier.get(DataComponents.USE_EFFECTS).speedMultiplier());
+            assertTrue(ItemStack.matches(original,source));assertEquals(37,projected.getStateId());
+            var gui=(ClientboundContainerSetSlotPacket)SwordHandPackets.secondaryTransform(packet,42,2,false,bm);
+            assertTrue(ItemStack.matches(original,gui.getItem()),"GUI gets this packet's current source, never the dummy or a stored gun");
+        }
+        for(int container:List.of(1,-1))for(int slot:List.of(-1,38,45)) {
+            var packet=new ClientboundContainerSetSlotPacket(container,3,slot,food);
+            assertSame(packet,SwordHandPackets.secondaryTransform(packet,42,2,true,SAME));
+        }
+        for(int slot:List.of(-1,5,36,37,39,45)) {
+            var packet=new ClientboundContainerSetSlotPacket(0,3,slot,food);
+            assertSame(packet,SwordHandPackets.secondaryTransform(packet,42,2,true,SAME));
+        }
+        var stale=new ClientboundContainerSetSlotPacket(0,38,38,ItemStack.EMPTY);
+        assertSame(stale,SwordHandPackets.secondaryTransform(new ClientboundContainerSetSlotPacket(0,37,38,gun),42,2,true,p->stale));
+    }
+    @Test void secondaryFullContentSelectedBoundaryOffhandCursorAndObserverIsolation() {
+        var source=new ArrayList<>(Collections.nCopies(46,ItemStack.EMPTY));
+        source.set(36,new ItemStack(Items.PAPER));source.set(37,new ItemStack(Items.APPLE));source.set(45,new ItemStack(Items.DIAMOND));
+        var cursor=new ItemStack(Items.DIAMOND);var packet=new ClientboundContainerSetContentPacket(0,15,source,cursor);
+        for(int selected:List.of(0,1,2)) {
+            var projected=(ClientboundContainerSetContentPacket)SwordHandPackets.secondaryTransform(packet,42,selected,true,p->{
+                var copy=(ClientboundContainerSetContentPacket)p;assertNotSame(packet.items(),copy.items());
+                copy.items().set(36+selected,ItemStack.EMPTY);return copy;
+            });
+            assertTrue(projected.items().get(36+selected).is(Items.STICK));assertSame(cursor,projected.carriedItem());
+            assertSame(source.get(45),projected.items().get(45));assertEquals(15,projected.stateId());
+            for(int slot=0;slot<46;slot++)if(slot!=36+selected)assertSame(source.get(slot),projected.items().get(slot));
+            assertTrue(source.get(36).is(Items.PAPER));assertTrue(source.get(37).is(Items.APPLE));assertTrue(source.get(38).isEmpty());
+        }
+        var observer=new ClientboundSetEquipmentPacket(99,List.of(Pair.of(EquipmentSlot.MAINHAND,ItemStack.EMPTY)));
+        assertSame(observer,SwordHandPackets.secondaryTransform(observer,42,0,true,SAME));
+        var self=new ClientboundSetEquipmentPacket(42,List.of(Pair.of(EquipmentSlot.MAINHAND,ItemStack.EMPTY),Pair.of(EquipmentSlot.OFFHAND,new ItemStack(Items.DIAMOND))));
+        var filtered=(ClientboundSetEquipmentPacket)SwordHandPackets.secondaryTransform(self,42,0,true,SAME);
+        assertEquals(List.of(EquipmentSlot.OFFHAND),filtered.getSlots().stream().map(Pair::getFirst).toList());
+    }
+
 }

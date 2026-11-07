@@ -23,7 +23,30 @@ import net.minecraft.world.entity.player.Input;
 public final class InputRouter {
     public static final int DOUBLE_TAP_TICKS = 7;
 
+    private static boolean initialized;
     private InputRouter() {
+    }
+
+    /** Register before DEFAULT even when WeaponRuntime initialized first; unsupported item use remains PASS. */
+    public static void init() {
+        if(initialized)return;initialized=true;
+        var phase=kim.biryeong.destiny.DestinyGuardians.id("super_secondary_input");
+        var item=net.fabricmc.fabric.api.event.player.UseItemCallback.EVENT;
+        var block=net.fabricmc.fabric.api.event.player.UseBlockCallback.EVENT;
+        var entity=net.fabricmc.fabric.api.event.player.UseEntityCallback.EVENT;
+        item.addPhaseOrdering(phase,net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE);
+        block.addPhaseOrdering(phase,net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE);
+        entity.addPhaseOrdering(phase,net.fabricmc.fabric.api.event.Event.DEFAULT_PHASE);
+        item.register(phase,(player,level,hand)->player instanceof ServerPlayer p?onUseItem(p,hand):net.minecraft.world.InteractionResult.PASS);
+        block.register(phase,(player,level,hand,hit)->player instanceof ServerPlayer p?onUseItem(p,hand):net.minecraft.world.InteractionResult.PASS);
+        entity.register(phase,(player,level,hand,target,hit)->player instanceof ServerPlayer p?onUseItem(p,hand):net.minecraft.world.InteractionResult.PASS);
+    }
+
+    /** Air, block, entity and existing GCB KEY_USE share the same main-hand-only opt-in route. */
+    public static net.minecraft.world.InteractionResult onUseItem(ServerPlayer player,net.minecraft.world.InteractionHand hand) {
+        if(hand!=net.minecraft.world.InteractionHand.MAIN_HAND||kim.biryeong.destiny.inventory.WeaponScreen.active(player)
+                ||player.containerMenu!=player.inventoryMenu||!AbilityService.secondarySupported(player))return net.minecraft.world.InteractionResult.PASS;
+        return AbilityService.secondary(player)?net.minecraft.world.InteractionResult.CONSUME:net.minecraft.world.InteractionResult.FAIL;
     }
 
     /** 같은 동작이 같은 틱에 두 경로로 들어오면 한 번만 처리한다. */

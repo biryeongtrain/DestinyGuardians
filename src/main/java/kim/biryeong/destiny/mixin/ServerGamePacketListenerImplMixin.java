@@ -28,6 +28,18 @@ public abstract class ServerGamePacketListenerImplMixin {
     @Shadow
     public abstract void resetPosition();
 
+    /** A client-only invisible carrier emits air-use even when the authoritative hand is empty.
+     * Vanilla otherwise returns before Fabric's item callback. Keep its loaded/thread/ack guards. */
+    @Inject(method="handleUseItem",at=@At(value="INVOKE",
+            target="Lnet/minecraft/server/network/ServerGamePacketListenerImpl;ackBlockChangesUpTo(I)V",
+            shift=At.Shift.AFTER),cancellable=true)
+    private void destiny$emptySuperSecondary(net.minecraft.network.protocol.game.ServerboundUseItemPacket packet,CallbackInfo ci) {
+        if(packet.hand()==net.minecraft.world.InteractionHand.MAIN_HAND&&player.getMainHandItem().isEmpty()
+                &&InputRouter.onUseItem(player,packet.hand())!=net.minecraft.world.InteractionResult.PASS) {
+            player.resetLastActionTime();ci.cancel();
+        }
+    }
+
     @Inject(method="handlePlayerPositionChange",at=@At("HEAD"))
     private void destiny$dashMovementStart(double x,double y,double z,float yaw,float pitch,boolean grounded,boolean collision,CallbackInfo ci) {
         kim.biryeong.destiny.combat.MeleeLunge.beforeClientMovement(player);
