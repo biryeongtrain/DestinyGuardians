@@ -1,0 +1,47 @@
+{
+  "productGameTestsPassed": 24,
+  "frameworkAlwaysPass": 1,
+  "unresolvedFailures": [],
+  "initialFailuresRetained": 9,
+  "h20Followup": {
+    "passed": 16,
+    "productionCodeChangedToSatisfyStaleTests": false
+  },
+  "sourceMotionScope": [
+    "arc_cast_ground_air",
+    "arc_light_1_2_3_air",
+    "spectral_cast_ground_air",
+    "spectral_light_1_2_3_air",
+    "spectral_heavy_ground_air"
+  ],
+  "firstVision": "baseline-review.json",
+  "secondVision": [
+    "arc-ground.json",
+    "arc-air.json",
+    "spectral-ground.json",
+    "spectral-air.json",
+    "spectral-air-chain.json"
+  ],
+  "finalClearanceNativeAcceptance": "PASS within actual captured cast/light1/light2 and recovery; no obvious new pose snap or head/shaft intersection in reviewed PNGs",
+  "gameplayRegressionPolicy": "Art-only clearance correction retains all lengths/contact/recovery/blend metadata; existing actual GameTests not repeated for pose-only delta. Final JUnit sources are re-run with packaged overlay.",
+  "finalClearance": {
+    "overlaySha256": "849f4adfe77466963cd908aa6f9301f6ed7da70ba5004e731ebaf8d3be041938",
+    "maxCorrectionVectorStepModelUnits": 1.553597,
+    "stepReductionPercent": 66.9,
+    "maxCorrectionBlocks": 0.3125,
+    "unchanged": [
+      "clip durations",
+      "contact/recovery/blend metadata",
+      "head rotations",
+      "staff world directions",
+      "rig geometry",
+      "UUIDs",
+      "source files"
+    ],
+    "headShaftOverlapAtAuthoredSamples": 0,
+    "nativeVerdict": "PASS within actual captured cast/light1/light2 and recovery; no obvious new pose snap or head/shaft intersection in reviewed PNGs",
+    "sequence": "arc-final-clean.json",
+    "movementDeltaX": 3.9999999999997726
+  },
+  "discardedFinalAttempt": "arc-final-clearance: nighttime hostiles/explosion disturbed body and later downed owner; repeated in daylight after clearing local ordinary hostile mobs and restoring fixture floor"
+}

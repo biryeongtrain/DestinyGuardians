@@ -53,6 +53,8 @@ public final class HunterExpandedSupers {
             super(id, GuardianClass.HUNTER, AbilitySlot.SUPER, element, 556, name); this.kind = kind;
         }
         @Override public boolean activate(ServerPlayer p) {
+            if(kind==Kind.SPECTRAL&&!kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.available(
+                    kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.SPECTRAL_RESOURCE))return false;
             if (AbilityService.inSuper(p) || ACTIVE.containsKey(p) || !eligible(p, this)) return false;
             // A fresh accepted activation retires previous fields of this particular owner only.
             cleanup(p);
@@ -222,7 +224,11 @@ public final class HunterExpandedSupers {
         Session(Lease l, Expanded a) {
             lease=l; ability=a; path=a.id().getPath(); started=l.level.getGameTime();
             cloak=a.kind==Kind.SPECTRAL?new ScopedCloak(l):null;
-            windup=ClassSuperModelAssets.durationTicks(path,"start", ticks(a,"cast_ticks",a.kind==Kind.BARRAGE?40:a.kind==Kind.SPECTRAL?30:a.kind==Kind.GATHERING?33:34,1,100)) + SwordTiming.START_TICKS;
+            String startPhase=a.kind==Kind.SPECTRAL&&!l.owner.onGround()
+                    &&ClassSuperModelAssets.hasClip(ClassSuperModelAssets.prefix(path)+"_start_air")?"start_air":"start";
+            String startClip=ClassSuperModelAssets.prefix(path)+"_"+startPhase;
+            windup=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.durationTicks(startClip,
+                    ClassSuperModelAssets.durationTicks(path,startPhase,ticks(a,"cast_ticks",a.kind==Kind.BARRAGE?40:a.kind==Kind.SPECTRAL?30:a.kind==Kind.GATHERING?33:34,1,100))+SwordTiming.START_TICKS);
             // Original game hit/release events are unavailable; these cue fractions are provisional.
             firstContact=Math.clamp(ticks(a,"first_contact_ticks",Math.max(1,(int)(windup*.45)),1,150),1,windup);
             secondContact=Math.clamp(ticks(a,"second_contact_ticks",Math.max(firstContact+1,(int)(windup*.72)),1,150),firstContact,windup);
@@ -271,12 +277,18 @@ public final class HunterExpandedSupers {
             if (ability.kind == Kind.SPECTRAL) {
                 heavyPending=lease.owner.isShiftKeyDown();
                 groundedPending=lease.owner.onGround();
-                String phase=heavyPending ? "attack3" : (combo++ & 1) == 1 ? "attack2" : "attack";
-                playAttack(phase);
+                String phase=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.spectralAttack(groundedPending,heavyPending,combo);
+                String clip=ClassSuperModelAssets.prefix(path)+"_"+phase;
                 int animation=clipTicks(phase,heavyPending?18:12);
-                int contact=ticks(ability,heavyPending?"heavy_contact_ticks":phase.equals("attack2")?"attack2_contact_ticks":"attack_contact_ticks",heavyPending?3:phase.equals("attack2")?4:6,1,40)+SwordTiming.START_TICKS;
+                int fallback=ticks(ability,heavyPending?"heavy_contact_ticks":phase.equals("attack2")?"attack2_contact_ticks":"attack_contact_ticks",
+                        heavyPending?3:phase.equals("attack2")?4:6,1,40)+SwordTiming.START_TICKS;
+                int contact=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.contactTicks(clip,fallback);
+                if(now()+contact>=endAt)return;
+                if(!heavyPending)combo++;
+                playAttack(phase);
                 pendingAt=now()+Math.min(contact,animation);
-                nextAttack=now()+Math.max(animation,ticks(ability,"attack_interval_ticks",10,3,60));
+                nextAttack=now()+Math.max(kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.recoveryTicks(clip,animation),
+                        ticks(ability,"attack_interval_ticks",10,3,60));
                 decloakedUntil=Long.MAX_VALUE; // Heavy contact restores the scoped cloak; light leaves it removed.
                 cloak.sync(false);
                 endAt=Math.max(now()+1,endAt-ticks(ability,heavyPending?"heavy_cost_ticks":"light_cost_ticks",heavyPending?35:10,0,120));
@@ -292,7 +304,8 @@ public final class HunterExpandedSupers {
         private int clipTicks(String phase,int fallback) {
             if (ability.kind==Kind.EDGE && phase.equals("attack")
                     && !ClassSuperModelAssets.hasClip(ClassSuperModelAssets.prefix(path)+"_attack")) phase="start";
-            return ClassSuperModelAssets.durationTicks(path,phase,fallback)+SwordTiming.START_TICKS;
+            return kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.durationTicks(ClassSuperModelAssets.prefix(path)+"_"+phase,
+                    ClassSuperModelAssets.durationTicks(path,phase,fallback)+SwordTiming.START_TICKS);
         }
         private void playAttack(String phase) {
             String clip=ClassSuperModelAssets.prefix(path)+"_"+phase;

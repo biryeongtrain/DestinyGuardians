@@ -172,12 +172,14 @@ public final class MeleeAreaW329GameTests {
             var a=foe(h,4.6,1,2);var b=foe(h,4.6,1,4);var c=foe(h,4.6,1,8);var d=foe(h,4.6,1,10);
             var rear=foe(h,1,1,3);arc.setXRot(75);spectral.setXRot(75);
             int ready=Math.max(SuperAttackTiming.ARC_DEPLOY,
-                    ClassSuperModelAssets.durationTicks(HunterExpandedSupers.SPECTRAL_BLADES.getPath(),"start",30)+SwordTiming.START_TICKS)+2;
+                    MeleeSuperAnimationTiming.durationTicks("w230_hunter_spectral_blades_start",30))+2;
             h.runAfterDelay(ready,()->{
                 Vec3 before=arc.position();for(int i=0;i<8;i++){AbilityService.perform(arc,GuardianAction.PRIMARY);AbilityService.perform(spectral,GuardianAction.PRIMARY);}
                 check(h,arc.position().equals(before)&&a.getHealth()==HP&&c.getHealth()==HP,"Accepted input waits for real contact and spam cannot dash early");
             });
-            h.runAfterDelay(ready+14,()->{
+            int settled=Math.max(MeleeSuperAnimationTiming.contactTicks(MeleeSuperAnimationTiming.arcAttack(true,0),SuperAttackTiming.ARC_CONTACT),
+                    MeleeSuperAnimationTiming.contactTicks("w230_hunter_spectral_blades_attack",7))+6;
+            h.runAfterDelay(ready+settled,()->{
                 check(h,a.getHealth()<HP&&a.getHealth()==b.getHealth(),"Arc Staff sweeps both side foes with steep view pitch");
                 check(h,c.getHealth()<HP&&c.getHealth()==d.getHealth(),"Spectral light sweeps both side foes with steep view pitch: hp="+c.getHealth()+"/"+d.getHealth()+" position="+spectral.position()+" active="+AbilityService.inSuper(spectral));
                 float ah=a.getHealth(),ch=c.getHealth();
@@ -196,7 +198,7 @@ public final class MeleeAreaW329GameTests {
             var spectral=superPlayer(h,HunterExpandedSupers.SPECTRAL_BLADES,new Vec3(2.5,1,9),true);
             Vec3 a=arc.position(),s=spectral.position();
             int ready=Math.max(SuperAttackTiming.ARC_DEPLOY,
-                    ClassSuperModelAssets.durationTicks(HunterExpandedSupers.SPECTRAL_BLADES.getPath(),"start",30)+SwordTiming.START_TICKS)+2;
+                    MeleeSuperAnimationTiming.durationTicks("w230_hunter_spectral_blades_start",30))+2;
             h.runAfterDelay(ready,()->{
                 AbilityService.perform(arc,GuardianAction.PRIMARY);
                 // Spectral warmed up on real ground: no unrelated 30+ block accumulated fall damage.
@@ -210,7 +212,9 @@ public final class MeleeAreaW329GameTests {
                 check(h,spectral.onGround(),"Spectral lands by native floor collision during contact windup");
                 AbilityService.perform(spectral,GuardianAction.PRIMARY); // Rejected cooldown input cannot replace the air snapshot.
             });
-            h.runAfterDelay(ready+14,()->{
+            int settled=Math.max(MeleeSuperAnimationTiming.contactTicks(MeleeSuperAnimationTiming.arcAttack(false,0),SuperAttackTiming.ARC_CONTACT),
+                    MeleeSuperAnimationTiming.contactTicks("w230_hunter_spectral_blades_attack_air",7))+6;
+            h.runAfterDelay(ready+settled,()->{
                 check(h,spectral.isAlive()&&AbilityService.inSuper(spectral),"The short landing must preserve the real Spectral session without fall death");
                 check(h,Math.abs(arc.getX()-a.x-5)<.01&&Math.abs(spectral.getX()-s.x-5)<.01,"Arc air contact and Spectral accepted-air contact retain five blocks even after windup landing: arc="+arc.position().subtract(a)+" spectral="+spectral.position().subtract(s)+" grounded="+spectral.onGround());
                 var stale=Guardians.runtime(arc).superSession;AbilityService.endSuper(arc);Vec3 after=arc.position();

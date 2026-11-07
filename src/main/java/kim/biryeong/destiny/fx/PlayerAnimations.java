@@ -383,11 +383,14 @@ public final class PlayerAnimations {
         Run previous = state.run;
         state.run = null; // Invalidate before stopAnimation can emit a callback.
         if (previous != null) state.tracker.stopAnimation(previous.animation);
+        var modifier=MeleeSuperAnimationTiming.has(animation)?AnimationModifier.builder()
+                .start(MeleeSuperAnimationTiming.entryBlendTicks(animation))
+                .end(MeleeSuperAnimationTiming.exitBlendTicks(animation)).priority(20)
+                .type(AnimationIterator.Type.PLAY_ONCE).build():Modifiers.ONCE;
         int ticks = Math.max(1, (int) Math.ceil(state.tracker.renderer().animation(animation)
-                .orElseThrow().length() * 20) + Modifiers.ONCE.start());
+                .orElseThrow().length() * 20) + modifier.start()+modifier.end());
         Run run = new Run(animation, state.server.getTickCount(), ticks);
         state.run = run;
-        var modifier = Modifiers.ONCE;
         boolean ok = state.tracker.animate(animation, modifier, () -> run.completed.set(true));
         if (ok) ServerPoseSampling.withSmoothing(animation.equals("h15_revive_combat") ? 2 : 1,
                 () -> ((ServerAnimationClock) (Object) state.tracker).destiny$primeAnimation());
@@ -424,7 +427,7 @@ public final class PlayerAnimations {
                 state.previousPosition = position;
                 Run run = state.run;
                 if (run != null) {
-                    boolean arcDeployDone = run.animation.equals(PREFIX + "super_arc_start")
+                    boolean arcDeployDone = run.animation.startsWith(PREFIX + "super_arc_start")
                             && server.getTickCount() - run.startedAt >= run.durationTicks;
                     if (arcDeployDone || run.finished(server.getTickCount())) {
                         state.run = null;

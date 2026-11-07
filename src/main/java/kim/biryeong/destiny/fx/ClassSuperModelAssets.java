@@ -15,7 +15,7 @@ import java.util.HashSet;
 
 /** Source-derived Titan/Warlock clips on BetterModel's complete player-skin rig. */
 public final class ClassSuperModelAssets {
-    public static final String MODEL_NAME = "guardian_classes_w255_r1";
+    public static final String MODEL_NAME = "guardian_classes_w330_" + MeleeSuperAnimationTiming.revision(MeleeSuperAnimationTiming.SPECTRAL_RESOURCE);
     static final String RESOURCE = "/destiny/animation/classes_w230.animation.json";
     private static final java.util.Set<String> EXPANDED = java.util.Set.of(
             "hunter/blade_barrage", "hunter/spectral_blades", "hunter/gathering_storm", "hunter/storms_edge",
@@ -50,6 +50,7 @@ public final class ClassSuperModelAssets {
             var animations = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8))
                     .getAsJsonObject().getAsJsonArray("animations");
             var lengths = new HashMap<String, Double>();
+            animations=MeleeSuperAnimationTiming.overlay(animations,MeleeSuperAnimationTiming.SPECTRAL_RESOURCE);
             for (var a : animations) {
                 var clip = a.getAsJsonObject();
                 lengths.put(clip.get("name").getAsString(), clip.get("length").getAsDouble());
@@ -60,6 +61,8 @@ public final class ClassSuperModelAssets {
 
     public static void prepare() {
         var target = FabricLoader.getInstance().getConfigDir().resolve("bettermodel/players/" + MODEL_NAME + ".bbmodel");
+        try {MeleeSuperAnimationTiming.require(MeleeSuperAnimationTiming.SPECTRAL_RESOURCE);}
+        catch(IllegalStateException e){DestinyGuardians.LOGGER.error(e.getMessage());return;}
         if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) return;
         try (var template = ClassSuperModelAssets.class.getResourceAsStream("/steve.bbmodel");
              var clips = ClassSuperModelAssets.class.getResourceAsStream(RESOURCE)) {
@@ -74,6 +77,7 @@ public final class ClassSuperModelAssets {
     }
 
     static JsonObject buildModel(JsonObject template, JsonArray clips) {
+        clips=MeleeSuperAnimationTiming.overlay(clips,MeleeSuperAnimationTiming.SPECTRAL_RESOURCE);
         var model = template.deepCopy();
         model.addProperty("name", MODEL_NAME);
         model.addProperty("model_identifier", MODEL_NAME);

@@ -1,0 +1,219 @@
+{
+  "source": "user-supplied Destiny-Light-Abilities-2026-10-28",
+  "sourceDirectory": "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/hunter_spectral_blades",
+  "sourceBlendSha256": "fe6a00260c9959ef6b42d286b52f27b4132a373cc46fe1f97ca30aaf9905cbf0",
+  "blenderVersion": "5.4.0 Alpha",
+  "sourceReadOnly": true,
+  "targetRig": "/Users/qf/IdeaProjects/DestinyGuardians/art/blockbench/animations/guardian_hunter_w199_r1.bbmodel",
+  "targetRigSha256": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+  "coordinateBasis": "source +X forward,+Y left,+Z up -> target +X right,+Y up,-Z forward; exclude FBX outer 0.01 transform",
+  "rotationConvention": "Blockbench Rz*Ry*Rx; quaternions x,y,z,w; hemisphere continuous",
+  "sampling": "direct fractional-frame Blender evaluation at 40 Hz and exact final timestamp; original 30 fps action duration; no source speed compression; no neutral endpoint blend",
+  "sourceQuaternionHemisphereCheck": {
+    "80A8AAC4": 0,
+    "80A8AAD0": 0,
+    "80A8AAC8": 0,
+    "80A8AAC7": 0,
+    "80A8AAC5": 0,
+    "80A8AAF8": 0,
+    "80A8AAE5": 0,
+    "80A8B4F5": 0,
+    "80A8B55A": 0
+  },
+  "retarget": "unchanged segmented player rig; torso/head rest-relative rotation; anatomical legs; reach-limited two-link arm IK; each source wrist rest-relative rotation drives its own existing item pivot; no shared rig/geometry changes",
+  "rootMotion": "horizontal source locomotion omitted (runtime owns entity movement); ground skin floor support plus source ankle lift; air pelvis displacement relative source bind, bounded to +/-8 model units",
+  "nativeAcceptance": "parent first Vision baseline reviewed; replacement still awaits parent second Vision; static diagrams cannot certify native knife grip/contact",
+  "clips": [
+    {
+      "phase": "start",
+      "clip": "w230_hunter_spectral_blades_start",
+      "tag": "80A8AAC4",
+      "action": "Armature|80A8AAC4|Base",
+      "lengthSeconds": 1.5666666666666667,
+      "sourceFrameRange": [
+        1.0,
+        48.0
+      ],
+      "sampleCount": 64,
+      "contactSeconds": 0.25,
+      "contactSourceFrame": 8.5,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 104.69653381453955,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "start_air",
+      "clip": "w230_hunter_spectral_blades_start_air",
+      "tag": "80A8AAD0",
+      "action": "Armature|80A8AAD0|Base",
+      "lengthSeconds": 1.6,
+      "sourceFrameRange": [
+        1.0,
+        49.0
+      ],
+      "sampleCount": 65,
+      "contactSeconds": 0.15,
+      "contactSourceFrame": 5.5,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 132.6441145470866,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "attack",
+      "clip": "w230_hunter_spectral_blades_attack",
+      "tag": "80A8AAC8",
+      "action": "Armature|80A8AAC8|Base",
+      "lengthSeconds": 1.4666666666666666,
+      "sourceFrameRange": [
+        1.0,
+        45.0
+      ],
+      "sampleCount": 60,
+      "contactSeconds": 0.3,
+      "contactSourceFrame": 10.0,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 71.95171013122678,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "attack2",
+      "clip": "w230_hunter_spectral_blades_attack2",
+      "tag": "80A8AAC7",
+      "action": "Armature|80A8AAC7|Base",
+      "lengthSeconds": 1.4666666666666666,
+      "sourceFrameRange": [
+        1.0,
+        45.0
+      ],
+      "sampleCount": 60,
+      "contactSeconds": 0.225,
+      "contactSourceFrame": 7.75,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 98.56600080449905,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "attack3",
+      "clip": "w230_hunter_spectral_blades_attack3",
+      "tag": "80A8AAC5",
+      "action": "Armature|80A8AAC5|Base",
+      "lengthSeconds": 1.7333333333333334,
+      "sourceFrameRange": [
+        1.0,
+        53.0
+      ],
+      "sampleCount": 71,
+      "contactSeconds": 0.15,
+      "contactSourceFrame": 5.5,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 106.81565804698563,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "attack_air",
+      "clip": "w230_hunter_spectral_blades_attack_air",
+      "tag": "80A8AAF8",
+      "action": "Armature|80A8AAF8|Base",
+      "lengthSeconds": 0.8333333333333334,
+      "sourceFrameRange": [
+        1.0,
+        26.0
+      ],
+      "sampleCount": 35,
+      "contactSeconds": 0.3,
+      "contactSourceFrame": 10.0,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 142.04113027985835,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "attack3_air",
+      "clip": "w230_hunter_spectral_blades_attack3_air",
+      "tag": "80A8AAE5",
+      "action": "Armature|80A8AAE5|Base",
+      "lengthSeconds": 0.9666666666666667,
+      "sourceFrameRange": [
+        1.0,
+        30.0
+      ],
+      "sampleCount": 40,
+      "contactSeconds": 0.15,
+      "contactSourceFrame": 5.5,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 82.28868393737412,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "heavy",
+      "clip": "w230_hunter_spectral_blades_heavy",
+      "tag": "80A8B4F5",
+      "action": "Armature|80A8B4F5|Base",
+      "lengthSeconds": 1.0,
+      "sourceFrameRange": [
+        1.0,
+        31.0
+      ],
+      "sampleCount": 41,
+      "contactSeconds": 0.075,
+      "contactSourceFrame": 3.25,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 79.52223377365388,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "heavy_air",
+      "clip": "w230_hunter_spectral_blades_heavy_air",
+      "tag": "80A8B55A",
+      "action": "Armature|80A8B55A|Base",
+      "lengthSeconds": 0.9,
+      "sourceFrameRange": [
+        1.0,
+        28.0
+      ],
+      "sampleCount": 37,
+      "contactSeconds": 0.075,
+      "contactSourceFrame": 3.25,
+      "contactStatus": "provisional visual first high wrist-speed sweep, NOT decoded hit marker",
+      "maxQuaternionStepDegrees": 79.01345700729183,
+      "endPosePreserved": true
+    },
+    {
+      "phase": "idle",
+      "clip": "w230_hunter_spectral_blades_idle",
+      "lengthSeconds": 0.8,
+      "sourceGuardTag": "80A8AAC4",
+      "sourceGuardFrame": 48.0,
+      "policy": "source final guard hold; no invented breathing animation"
+    },
+    {
+      "phase": "air",
+      "clip": "w230_hunter_spectral_blades_air",
+      "lengthSeconds": 0.8,
+      "sourceGuardTag": "80A8AAD0",
+      "sourceGuardFrame": 49.0,
+      "policy": "source final guard hold; no invented breathing animation"
+    },
+    {
+      "phase": "move",
+      "clip": "w230_hunter_spectral_blades_move",
+      "lengthSeconds": 0.8,
+      "sourceGuardTag": "80A8AAC4",
+      "sourceGuardFrame": 48.0,
+      "policy": "source final guard hold; mixed existing authored lower-body locomotion for move"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "name": "source.blend",
+      "sha256": "fe6a00260c9959ef6b42d286b52f27b4132a373cc46fe1f97ca30aaf9905cbf0"
+    },
+    {
+      "name": "clips.json",
+      "sha256": "c63000f4bb7e6c12544177f0aede0717b480c5019898a1e835b4f8f761c3f156"
+    },
+    {
+      "name": "CLIPS.md",
+      "sha256": "a554fa1aa67398d657d5ca829d0272b9ff9b19304b231be78d43ef2c6800f088"
+    }
+  ]
+}

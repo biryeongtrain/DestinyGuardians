@@ -1,0 +1,71 @@
+{
+  "task": "W330 Spectral Blades original source motion candidate",
+  "worker": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians",
+  "mainReadOnly": "/Users/qf/IdeaProjects/DestinyGuardians",
+  "files": [
+    {
+      "path": "art/animation/w330/spectral_blades/README.md",
+      "beforeSha256": null,
+      "afterSha256": "3f7f1f6259f256477cf176e80bd5c2998179ae36f1280a6b7599c5492f9625be",
+      "bytes": 4301
+    },
+    {
+      "path": "art/animation/w330/spectral_blades/blend-inspection.json",
+      "beforeSha256": null,
+      "afterSha256": "94d39210528eb4c59f62a5dd58538acb3349e4521a57aa4dbc48a9d96e42d19d",
+      "bytes": 62666
+    },
+    {
+      "path": "art/animation/w330/spectral_blades/evaluated-source.json",
+      "beforeSha256": null,
+      "afterSha256": "e261fa0b1201ed1329d1f7f4ef5700c44b83a2deb8bb13ea86f7f7277d89ae77",
+      "bytes": 9758687
+    },
+    {
+      "path": "art/animation/w330/spectral_blades/manifest.json",
+      "beforeSha256": null,
+      "afterSha256": "201f36fcf9438a4d489557e0d7aaf77a57bfab862402aba544429fed91f03fcd",
+      "bytes": 7802
+    },
+    {
+      "path": "art/animation/w330/spectral_blades/source-target-review.png",
+      "beforeSha256": null,
+      "afterSha256": "46822bd947d99ea972f00de3b0e80ee8d5e6cf0f515824c9059d52a4aad630a9",
+      "bytes": 841785
+    },
+    {
+      "path": "art/animation/w330/spectral_blades/source-target-review.svg",
+      "beforeSha256": null,
+      "afterSha256": "8805102e9fcad733191faaa3f0a47f280b935300908222643365cc78c876bb76",
+      "bytes": 118034
+    },
+    {
+      "path": "art/animation/w330/spectral_blades/spectral_blades_w330.animation.json",
+      "beforeSha256": null,
+      "afterSha256": "f7ee294784b49fcc2f613fd0b1f28feb7a3078ae4ab6cd854b696f27b7115e23",
+      "bytes": 2698959
+    },
+    {
+      "path": "scripts/art/w330_spectral_blades.py",
+      "beforeSha256": null,
+      "afterSha256": "0682319db9755e0f66e16393919109f55ce27a399eb3ab615d64fc1f7d32e7bb",
+      "bytes": 19141
+    }
+  ],
+  "runtimeInstallMapping": {
+    "from": "art/animation/w330/spectral_blades/spectral_blades_w330.animation.json",
+    "to": "src/main/resources/destiny/animation/spectral_blades_w330.animation.json"
+  },
+  "checks": [
+    "Headless Blender directly evaluated original source.blend / 72 bones / 13 actions / slots",
+    "9 source action duration and exact endpoint retained, 40 Hz resample",
+    "12 exported clips / 10868 finite keys / normalized quaternion metadata",
+    "Original blend source hash unchanged",
+    "Source-vs-target orthographic PNG reviewed; first native baseline PNGs reviewed"
+  ],
+  "pending": [
+    "Master integration and second native Vision",
+    "Contact beat visual calibration; original damage-event semantics not decoded",
+    "Final native two-knife grip / overlap / smoothness acceptance"
+  ]
+}

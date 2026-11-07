@@ -1,0 +1,1091 @@
+{
+  "status": "local continuity revision; master final cast/light2 native recheck pending",
+  "blender": "5.4.0 Alpha",
+  "source_blend": "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/hunter_arc_staff/source.blend",
+  "input_sha256": {
+    "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/hunter_arc_staff/source.blend": "91b87946c16749916d46016220996e6937647dfc3eb733fa7253e2f169c0d601",
+    "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/hunter_arc_staff/clips.json": "855f2db986e42112c4737bd0b5ba7e9c3e5cf9b81dd2ff5585069c7e2b56a54e",
+    "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/hunter_arc_staff/CLIPS.md": "9538b107d58286df39dd5e913ad518b7185c3594ca3c0046996758365db6d235",
+    "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/hunter_arc_staff/playback-samples.json": "72b108fe472f9d0fedc3700a1a73290927023814722430ecb57e5627d5e412e5",
+    "/Users/qf/Downloads/Destiny-Light-Abilities-2026-10-28/Destiny-Light-Abilities-2026-10-28/animations/hunter_arc_staff/hunter_arc_staff.fbx": "22c7a1b8fe9188d1bfb733e7d036b40e849e99ba2bee54d3cc4acd85d6b395e2",
+    "/Users/qf/IdeaProjects/DestinyGuardians/art/blockbench/animations/guardian_hunter_w199_r1.bbmodel": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+    "/Users/qf/IdeaProjects/DestinyGuardians/src/main/resources/destiny/animation/hunter_w199.animation.json": "ca2f7a2d5d424438d59321940be3c0621316d64dfedd8362c942d9d645d78eba"
+  },
+  "source_fps": 30,
+  "sample_fps": 60,
+  "target_rig": "/Users/qf/IdeaProjects/DestinyGuardians/art/blockbench/animations/guardian_hunter_w199_r1.bbmodel",
+  "target_groups": 18,
+  "rig_geometry_uv_changed": false,
+  "head_clearance": "Local overlap runs plus 3-pose shoulders: locally continuous avoidance direction, three-pose entry/exit shoulders and 1.75u/pose vector-step bound. Right wrist/staff and established two-hand grip translate together. Source shaft direction/head rotation/duration unchanged.",
+  "basis": [
+    [
+      0,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      -1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "quaternion_order": "[x,y,z,w], same BB Euler frame; Rz(z)*Ry(y)*Rx(x), intrinsic XYZ; no MC sign conversion",
+  "reference_pose": "Source anatomical shoulder/pelvis axes and evaluated joint directions drive the unchanged rig. One shared cast frame44 defines the wrist-to-staff shaft basis; no per-clip end calibration.",
+  "timing": "Original action spans preserved, no time compression, no forced first/last neutral pose or authored endpoint envelope. Runtime owns recovery-to-idle blending.",
+  "translation": "Horizontal root held in place to avoid duplicate gameplay lunge. Positive source toe lift preserved as visual Y above existing skin-floor correction; no entity movement.",
+  "grip": "Arm pole continuity only resolves near-extension IK ambiguity; source wrist rotations retain their rapid twirls. Right item follows source wrist quaternion. Source-driven left releases retained; shaft IK only weighted where source left wrist is near the staff axis. Existing rig pivots/mesh/display contract unchanged.",
+  "source_events": [
+    {
+      "tag": "80A8A922",
+      "FrameCount": 44,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A937",
+      "FrameCount": 40,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 10,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 13,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 19,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 22,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 26,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 32,
+          "marker": "811C9DC5",
+          "eventTag": "FFFFFFFF",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 38,
+          "marker": "811C9DC5",
+          "eventTag": "FFFFFFFF",
+          "path": "Tiger.StringPointer"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A92A",
+      "FrameCount": 43,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 22,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 24,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 26,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C858",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 33,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A92B",
+      "FrameCount": 38,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 8,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 10,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 13,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 17,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A933",
+      "FrameCount": 42,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 24,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C858",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 30,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C858",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A92D",
+      "FrameCount": 21,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A935",
+      "FrameCount": 22,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": []
+    },
+    {
+      "tag": "80A8A934",
+      "FrameCount": 11,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A93E",
+      "FrameCount": 32,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A93F",
+      "FrameCount": 32,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A938",
+      "FrameCount": 32,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A93C",
+      "FrameCount": 32,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A95C",
+      "FrameCount": 40,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A95F",
+      "FrameCount": 55,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 32,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C858",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 33,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A966",
+      "FrameCount": 39,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 1,
+          "marker": "811C9DC5",
+          "eventTag": "FFFFFFFF",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 11,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 16,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 19,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C858",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A972",
+      "FrameCount": 38,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 3,
+          "marker": "811C9DC5",
+          "eventTag": "FFFFFFFF",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 9,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 13,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C865",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C13",
+          "startFrame": 16,
+          "marker": "811C9DC5",
+          "eventTag": "80D4C858",
+          "path": "Tiger.StringPointer"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8A985",
+      "FrameCount": 31,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    },
+    {
+      "tag": "80A8AAE4",
+      "FrameCount": 29,
+      "NodeCount": 72,
+      "RigControlCount": 72,
+      "layer": "Base",
+      "events": [
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        },
+        {
+          "type": "S80808C1A"
+        }
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "clip": "h15_super_arc_start",
+      "source_tag": "80A8A922",
+      "action": "Armature|80A8A922|Base",
+      "slot": "OBSlot",
+      "source_frames": [
+        1.0,
+        44.0
+      ],
+      "length_seconds": 1.433333333,
+      "keys_per_rotation": 87,
+      "max_adjacent_euler_degrees": 55.61545860174596,
+      "max_adjacent_quaternion_degrees": 62.58132140229669,
+      "right_hand_peak_speed_time": 0.583333333,
+      "right_hand_peak_speed_m_s": 25.042346866316862,
+      "provisional_contact_seconds": null,
+      "contact_note": "Provisional geometric first-swing beat, not decoded damage. weak2 .266667 uses first fast sweep; opaque event .733333 remains unclassified.",
+      "head_clearance_corrected_frames": 20,
+      "max_head_clearance_correction_units": 5.000000086426734,
+      "head_overlap_remaining_frames": [],
+      "max_source_lift_units": 2.695894181211022,
+      "max_reach_correction_units": 1.0998309064656329,
+      "source_two_hand_frames": 4,
+      "start_wrist": [
+        13.268120765686035,
+        8.563465636253245,
+        -9.942413330078118
+      ],
+      "end_wrist": [
+        8.047375273672333,
+        13.532109553124483,
+        5.405507877687573
+      ]
+    },
+    {
+      "clip": "h15_super_arc_start_air",
+      "source_tag": "80A8A95C",
+      "action": "Armature|80A8A95C|Base",
+      "slot": "OBSlot",
+      "source_frames": [
+        1.0,
+        40.0
+      ],
+      "length_seconds": 1.3,
+      "keys_per_rotation": 79,
+      "max_adjacent_euler_degrees": 137.58132504758902,
+      "max_adjacent_quaternion_degrees": 135.49797577362995,
+      "right_hand_peak_speed_time": 0.55,
+      "right_hand_peak_speed_m_s": 24.193713253488678,
+      "provisional_contact_seconds": null,
+      "contact_note": "Provisional geometric first-swing beat, not decoded damage. weak2 .266667 uses first fast sweep; opaque event .733333 remains unclassified.",
+      "head_clearance_corrected_frames": 19,
+      "max_head_clearance_correction_units": 4.999999952316284,
+      "head_overlap_remaining_frames": [],
+      "max_source_lift_units": 6.8041369869817565,
+      "max_reach_correction_units": 1.1690797006337035,
+      "source_two_hand_frames": 2,
+      "start_wrist": [
+        13.28002738952637,
+        8.68363837890625,
+        -9.637047767639162
+      ],
+      "end_wrist": [
+        8.429613924237795,
+        14.904131254052482,
+        7.631105086184101
+      ]
+    },
+    {
+      "clip": "h15_super_arc_attack",
+      "source_tag": "80A8A937",
+      "action": "Armature|80A8A937|Base",
+      "slot": "OBSlot",
+      "source_frames": [
+        1.0,
+        40.0
+      ],
+      "length_seconds": 1.3,
+      "keys_per_rotation": 79,
+      "max_adjacent_euler_degrees": 91.00117163301863,
+      "max_adjacent_quaternion_degrees": 112.1590554551563,
+      "right_hand_peak_speed_time": 0.2,
+      "right_hand_peak_speed_m_s": 22.1464808786975,
+      "provisional_contact_seconds": 0.3333333333333333,
+      "contact_note": "Provisional geometric first-swing beat, not decoded damage. weak2 .266667 uses first fast sweep; opaque event .733333 remains unclassified.",
+      "head_clearance_corrected_frames": 16,
+      "max_head_clearance_correction_units": 4.9999999582767485,
+      "head_overlap_remaining_frames": [],
+      "max_source_lift_units": 6.883650529399337,
+      "max_reach_correction_units": 0.18278505108395557,
+      "source_two_hand_frames": 1,
+      "start_wrist": [
+        0.05361288785934387,
+        20.41958983973471,
+        7.178655624389647
+      ],
+      "end_wrist": [
+        8.585901229806545,
+        13.364512947645006,
+        4.863937294630474
+      ]
+    },
+    {
+      "clip": "h15_super_arc_attack_weak_2",
+      "source_tag": "80A8A92A",
+      "action": "Armature|80A8A92A|Base",
+      "slot": "OBSlot",
+      "source_frames": [
+        1.0,
+        43.0
+      ],
+      "length_seconds": 1.4,
+      "keys_per_rotation": 85,
+      "max_adjacent_euler_degrees": 94.29471437332896,
+      "max_adjacent_quaternion_degrees": 76.8313499733694,
+      "right_hand_peak_speed_time": 0.266666667,
+      "right_hand_peak_speed_m_s": 23.742161326773815,
+      "provisional_contact_seconds": 0.26666666666666666,
+      "contact_note": "Provisional geometric first-swing beat, not decoded damage. weak2 .266667 uses first fast sweep; opaque event .733333 remains unclassified.",
+      "head_clearance_corrected_frames": 28,
+      "max_head_clearance_correction_units": 3.750000046690305,
+      "head_overlap_remaining_frames": [],
+      "max_source_lift_units": 3.932441837791839,
+      "max_reach_correction_units": 0.595070268254338,
+      "source_two_hand_frames": 3,
+      "start_wrist": [
+        0.377230644226075,
+        19.981448546014295,
+        7.403215408325193
+      ],
+      "end_wrist": [
+        8.185458276756536,
+        14.080799688942058,
+        5.35568362471674
+      ]
+    },
+    {
+      "clip": "h15_super_arc_attack_weak_3",
+      "source_tag": "80A8A92B",
+      "action": "Armature|80A8A92B|Base",
+      "slot": "OBSlot",
+      "source_frames": [
+        1.0,
+        38.0
+      ],
+      "length_seconds": 1.233333333,
+      "keys_per_rotation": 75,
+      "max_adjacent_euler_degrees": 94.34348721417447,
+      "max_adjacent_quaternion_degrees": 93.58893906423971,
+      "right_hand_peak_speed_time": 0.233333333,
+      "right_hand_peak_speed_m_s": 38.679796088173276,
+      "provisional_contact_seconds": 0.26666666666666666,
+      "contact_note": "Provisional geometric first-swing beat, not decoded damage. weak2 .266667 uses first fast sweep; opaque event .733333 remains unclassified.",
+      "head_clearance_corrected_frames": 19,
+      "max_head_clearance_correction_units": 2.4999998599290807,
+      "head_overlap_remaining_frames": [],
+      "max_source_lift_units": 2.734523129917773,
+      "max_reach_correction_units": 0.5260351903910193,
+      "source_two_hand_frames": 2,
+      "start_wrist": [
+        6.256912708282469,
+        25.87609480529158,
+        5.010684967041017
+      ],
+      "end_wrist": [
+        12.859816551208494,
+        14.163381983947756,
+        3.2848927974700937
+      ]
+    },
+    {
+      "clip": "h15_super_arc_attack_air",
+      "source_tag": "80A8A92D",
+      "action": "Armature|80A8A92D|Base",
+      "slot": "OBSlot",
+      "source_frames": [
+        1.0,
+        21.0
+      ],
+      "length_seconds": 0.666666667,
+      "keys_per_rotation": 41,
+      "max_adjacent_euler_degrees": 38.48969380262753,
+      "max_adjacent_quaternion_degrees": 48.33424688804002,
+      "right_hand_peak_speed_time": 0.266666667,
+      "right_hand_peak_speed_m_s": 27.216137240327246,
+      "provisional_contact_seconds": 0.26666666666666666,
+      "contact_note": "Provisional geometric first-swing beat, not decoded damage. weak2 .266667 uses first fast sweep; opaque event .733333 remains unclassified.",
+      "head_clearance_corrected_frames": 0,
+      "max_head_clearance_correction_units": 0.0,
+      "head_overlap_remaining_frames": [],
+      "max_source_lift_units": 6.208693059895628,
+      "max_reach_correction_units": 0,
+      "source_two_hand_frames": 0,
+      "start_wrist": [
+        -6.0727100372314435,
+        19.619999576741108,
+        -4.727068901062009
+      ],
+      "end_wrist": [
+        10.832073211669918,
+        17.090272793436682,
+        2.914895057678223
+      ]
+    }
+  ],
+  "preview_pngs": "Prior clearance-candidate representative proxies, not rerendered for continuity revision; source poses unchanged.",
+  "continuity_review": {
+    "status": "PASS",
+    "scope": "local overlap windows and three-pose entry/exit shoulders only",
+    "max_before_correction_step_units": 4.69546,
+    "max_after_correction_step_units": 1.5535964920191343,
+    "step_reduction_percent": 66.91279465655902,
+    "max_wrist_translation_units": 5.0000006663796155,
+    "max_wrist_translation_blocks": 0.31250004164872597,
+    "max_world_staff_rotation_component_change": 5.384590673340739e-08,
+    "head_overlap_remaining_60hz_poses": 0,
+    "unchanged": [
+      "all clip timing/contact/recovery/blend metadata",
+      "UUIDs",
+      "all non-arm bones including head",
+      "rig geometry and UV",
+      "original source hashes and sampled matrices"
+    ],
+    "clips": [
+      {
+        "clip": "h15_super_arc_start",
+        "corrected_poses": 20,
+        "max_translation_units": 4.9999996821690464,
+        "max_correction_step": [
+          1.4210026481708349,
+          0.316667,
+          0.333333
+        ],
+        "remaining_overlap": []
+      },
+      {
+        "clip": "h15_super_arc_start_air",
+        "corrected_poses": 19,
+        "max_translation_units": 5.000000249236849,
+        "max_correction_step": [
+          1.2500010784481304,
+          0.45,
+          0.466667
+        ],
+        "remaining_overlap": []
+      },
+      {
+        "clip": "h15_super_arc_attack",
+        "corrected_poses": 16,
+        "max_translation_units": 5.0000006663796155,
+        "max_correction_step": [
+          1.5535964920191343,
+          0.233333,
+          0.25
+        ],
+        "remaining_overlap": []
+      },
+      {
+        "clip": "h15_super_arc_attack_weak_2",
+        "corrected_poses": 28,
+        "max_translation_units": 3.749999554362108,
+        "max_correction_step": [
+          1.2500001078530538,
+          1.016667,
+          1.033333
+        ],
+        "remaining_overlap": []
+      },
+      {
+        "clip": "h15_super_arc_attack_weak_3",
+        "corrected_poses": 19,
+        "max_translation_units": 2.5000008426086935,
+        "max_correction_step": [
+          1.2499999232494188,
+          0.266667,
+          0.283333
+        ],
+        "remaining_overlap": []
+      },
+      {
+        "clip": "h15_super_arc_attack_air",
+        "corrected_poses": 0,
+        "max_translation_units": 0,
+        "max_correction_step": [
+          0.0,
+          0.65,
+          0.666667
+        ],
+        "remaining_overlap": []
+      }
+    ],
+    "native": "master final cast/light2 recheck pending",
+    "preview_pngs": "Earlier localized-clearance candidate representative proxies; not rerendered for this continuity revision"
+  }
+}

@@ -4,7 +4,10 @@ import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.ability.Tasks;
 import kim.biryeong.destiny.camera.SuperCamera;
 import kim.biryeong.destiny.combat.Statuses;
+import kim.biryeong.destiny.combat.PveDamageBalance;
+import kim.biryeong.destiny.weapon.AmmoGeneration;
 import kim.biryeong.destiny.fx.HunterModelAssets;
+import kim.biryeong.destiny.fx.MeleeSuperAnimationTiming;
 import kim.biryeong.destiny.fx.PlayerAnimations;
 import kim.biryeong.destiny.fx.SimProjectile;
 import kim.biryeong.destiny.fx.SuperAttackTiming;
@@ -16,6 +19,7 @@ import kim.biryeong.destiny.input.GuardianAction;
 import kr.toxicity.model.api.BetterModel;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -40,7 +44,7 @@ import java.util.function.IntConsumer;
  */
 public final class H20SuperTimingGameTests {
     private static final String FLOOR = "destiny-test:floor";
-    private static final float HEALTH = 400;
+    private static final float HEALTH = 1000; // Survives two actual PvE Solar contacts (240 each).
 
     private static void check(GameTestHelper h, boolean condition, String message) {
         h.assertTrue(condition, Component.literal(message));
@@ -76,6 +80,7 @@ public final class H20SuperTimingGameTests {
             this.h = h;
             this.element = element;
             player = TestPlayers.hunter(h, element, new Vec3(2.5, 1, 6.5), -90, 0);
+            player.setOnGround(true); // This embedded clock fixture explicitly exercises the ground cast/attack branch.
             TestCleanup.register(h, () -> TestPlayers.remove(player));
             check(h, !h.getLevel().getServer().getPlayerList().getPlayers().contains(player),
                     "Embedded fixture must not also receive the PlayerList ability tick");
@@ -91,8 +96,9 @@ public final class H20SuperTimingGameTests {
             // Isolate direct cast damage from vanilla fire/custom scorch pulses, not from weapon hits.
             target.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1200, 0, false, false));
             targetPosition = target.position();
-            damage = (float) AbilityService.equipped(player, AbilitySlot.SUPER).orElseThrow()
-                    .param("damage", element == Element.ARC ? 16 : 80);
+            float raw=(float)AbilityService.equipped(player,AbilitySlot.SUPER).orElseThrow()
+                    .param("damage",element==Element.ARC?16:80);
+            damage=PveDamageBalance.scale(raw,AmmoGeneration.Kind.SUPER,false);
             var renderer = BetterModel.limb(HunterModelAssets.MODEL_NAME).orElseThrow();
             String prefix = "h15_super_" + element.getSerializedName();
             check(h, renderer.animation(prefix + "_start").isPresent()
@@ -100,12 +106,16 @@ public final class H20SuperTimingGameTests {
         }
 
         void startSuper() {
+            boolean cameraBefore=SuperCamera.active(player);
+            Vec3 cameraPositionBefore=SuperCamera.cameraPosition(player);
             Guardians.data(player).setSuperEnergy(1);
             check(h, AbilityService.use(player, AbilitySlot.SUPER) == AbilityService.Result.OK, "Real super activation");
             check(h, AbilityService.inSuper(player) && Guardians.data(player).superEnergy() == 0,
                     "Super activation creates session and consumes energy");
             check(h, PlayerAnimations.isPlaying(player), "Activation has a real limb playback");
-            check(h, element != Element.SOLAR || !SuperCamera.active(player), "Solar must not acquire rear camera");
+            check(h,element!=Element.SOLAR||SuperCamera.active(player)==cameraBefore
+                            &&(!cameraBefore||SuperCamera.cameraPosition(player).equals(cameraPositionBefore)),
+                    "Golden Gun camera start is a no-op; it cannot acquire or replace an existing dodge camera");
             inventory();
         }
 
@@ -128,6 +138,9 @@ public final class H20SuperTimingGameTests {
             // Keep fixture geometry fixed after knockback; never reset target health between contacts.
             target.setPos(targetPosition);
             target.setDeltaMovement(Vec3.ZERO);
+            // Full source recovery crosses the normal 40-tick input watchdog; keep the embedded owner's rotation live.
+            if(SuperCamera.active(player))SuperCamera.move(player,new ServerboundMovePlayerPacket.Rot(
+                    player.getYRot(),player.getXRot(),player.onGround(),false));
             AbilityService.tickPlayer(player);
         }
 
@@ -212,8 +225,9 @@ public final class H20SuperTimingGameTests {
                 check(h, Guardians.runtime(f.player).airJumpsUsed == (deployingArc ? 0 : 1),
                         "Only an available JUMP consumes an air jump");
             }
-            int hitAt = deploy(element) + contact(element);
-            int until = deploy(element) + recovery(element) - 1;
+            String firstClip=element==Element.ARC?MeleeSuperAnimationTiming.arcAttack(!busy,0):"";
+            int hitAt=deploy(element)+(element==Element.ARC?MeleeSuperAnimationTiming.contactTicks(firstClip,contact(element)):contact(element));
+            int until=deploy(element)+(element==Element.ARC?MeleeSuperAnimationTiming.recoveryTicks(firstClip,recovery(element)):recovery(element))-1;
             ticks(h, List.of(f), until, elapsed -> {
                 f.health(elapsed < hitAt ? HEALTH : HEALTH - f.damage, "Contact/recovery tick " + elapsed);
                 if (elapsed >= deploy(element)) {
@@ -245,7 +259,8 @@ public final class H20SuperTimingGameTests {
             int interval = Math.max(recovery(element), (int) AbilityService.equipped(f.player, AbilitySlot.SUPER)
                     .orElseThrow().param(element == Element.ARC ? "strike_interval_ticks" : "shot_interval_ticks", recovery(element)));
             int secondRequest = deploy(element) + interval;
-            int second = secondRequest + contact(element);
+            int second=secondRequest+(element==Element.ARC?MeleeSuperAnimationTiming.contactTicks(
+                    MeleeSuperAnimationTiming.arcAttack(true,1),contact(element)):contact(element));
             ticks(h, List.of(f), second, elapsed -> {
                 int hits = elapsed < first ? 0 : elapsed < second ? 1 : 2;
                 f.health(HEALTH - hits * f.damage, "Exact recovery boundary tick " + elapsed);
@@ -306,8 +321,12 @@ public final class H20SuperTimingGameTests {
                             "No late ordinary projectile; pre-existing projectile survives");
                     check(h, AbilityService.inSuper(f.player) && PlayerAnimations.isPlaying(f.player),
                             "Old ordinary callbacks cannot stop the new super");
-                    if (elapsed >= 2) check(h, unrelated.get(i).get() > 0 && Tasks.count(f.player) == 1,
-                            "Only pending ordinary tasks are dropped; unrelated task survives");
+                    if (elapsed >= 2) {
+                        check(h,unrelated.get(i).get()>0&&Tasks.count(f.player)==1,
+                                "Only pending ordinary tasks are dropped; unrelated task survives");
+                        check(h,element!=Element.SOLAR||!SuperCamera.active(f.player),
+                                "The replaced dodge camera releases on its next normal camera tick; Golden Gun stays first person");
+                    }
                     f.inventory();
                 }
             });
