@@ -81,7 +81,7 @@ public final class GuardianRisesInstances {
                 .setGameRule(GameRules.ENTITY_DROPS, false).setGameRule(GameRules.KEEP_INVENTORY, true);
         UUID id = UUID.randomUUID();
         var handle = Fantasy.get(server).openTemporaryLevel(DestinyGuardians.id("guardian_rises/" + id), config);
-        handle.setTickWhenEmpty(true); // Fantasy must service asynchronous chunk requests before admission
+        handle.setTickWhenEmpty(false); // Assign the generator only; no idle pre-generation or spare world.
         var instance = new Instance(id, owner, handle);
         byOwner.put(owner, instance);
         return Optional.of(instance);
@@ -103,6 +103,11 @@ public final class GuardianRisesInstances {
         if (instance.state != State.PREPARING) throw new IllegalStateException("Not preparing");
         instance.state = State.READY;
         instance.handle.setTickWhenEmpty(false);
+    }
+    /** Temporarily service the single asynchronous arrival request before a player has entered. */
+    public void tickForArrival(Instance instance, boolean enabled) {
+        require(instance);
+        instance.handle.setTickWhenEmpty(enabled);
     }
     public void running(Instance instance) {
         require(instance);

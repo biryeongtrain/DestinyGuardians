@@ -53,12 +53,6 @@ import java.util.*;
  * safely with a message (the run waits, an operator can {@code /destiny rising skip|abort}).
  */
 public final class RisingCampaign {
-    /** Shared build budget per server tick across every instance (nanoseconds). */
-    static final long BUILD_BUDGET_NANOS = 2_000_000L;
-    /**
-     * Chunk requests use the same small budget during blackout; section generation runs in the chunk pipeline.
-     */
-    static final long ENTRY_BUILD_BUDGET_NANOS = BUILD_BUDGET_NANOS;
     static final int RECONNECT_GRACE = 20 * 120;
     static final int ZONE_SPACING = 4096;
     static final int ZONE_Y = 64;
@@ -85,22 +79,10 @@ public final class RisingCampaign {
     enum State { CHOOSING, QUEUED, PREPARING, RUNNING, ENDING }
 
     private static final Map<UUID, Session> SESSIONS = new LinkedHashMap<>();
-    private static final Deque<Job> JOBS = new ArrayDeque<>();
-    /**
-     * W300 r12: one warm instance whose Gateway is pre-built in idle build time, so a fresh run goes from blackout to
-     * the Ghost scan in a few seconds instead of waiting for a ~6-78 s zone build. Adopted by the next mission start.
-     */
-    static final UUID SPARE_OWNER = new UUID(0x5157_4152_4500L, 0x5741_524DL);
-    static final boolean WARM_SPARE = !"false".equalsIgnoreCase(System.getProperty("destiny.guardianRises.warmSpare"));
-    private static GuardianRisesInstances.Instance spare;
-    private static RisingServices.ZoneBuild spareBuild;
-    private static boolean spareBuilt;
-    private static int spareRetryAt;
     private static MinecraftServer server;
     private static GuardianRisesInstances instances;
     private static boolean initialized;
 
-    private record Job(Session session, Zone zone) { }
 
     private RisingCampaign() { }
 
@@ -116,8 +98,6 @@ public final class RisingCampaign {
         ServerLifecycleEvents.SERVER_STOPPING.register(s -> {
             for (var session : List.copyOf(SESSIONS.values())) shutdown(session);
             SESSIONS.clear();
-            JOBS.clear();
-            closeSpare();
         });
         ServerLifecycleEvents.SERVER_STOPPED.register(s -> { if (server == s) { server = null; instances = null; } });
         ServerTickEvents.END_SERVER_TICK.register(RisingCampaign::tick);
@@ -269,10 +249,12 @@ public final class RisingCampaign {
         boolean classChosen;
         boolean blackout;
         GuardianRisesInstances.Instance instance;
-        final EnumMap<Zone, RisingServices.ZoneBuild> builds = new EnumMap<>(Zone.class);
-        final EnumSet<Zone> built = EnumSet.noneOf(Zone.class);
+        kim.biryeong.destiny.world.template.ArrivalChunks arrival;
+        final EnumSet<Zone> prepared = EnumSet.noneOf(Zone.class);
         final EnumMap<Zone, List<Marker>> markers = new EnumMap<>(Zone.class);
         final EnumMap<Zone, Double> floors = new EnumMap<>(Zone.class);
+        final EnumMap<Zone, Set<String>> lightPhases = new EnumMap<>(Zone.class);
+        final Map<String, net.minecraft.world.level.block.state.BlockState> lightStates = new HashMap<>();
         final Map<UUID, LivingEntity> enemies = new HashMap<>();
         final RisingObjectives objectives = new RisingObjectives();
         RisingMission mission;
@@ -320,17 +302,28 @@ public final class RisingCampaign {
                     .map(Marker::pos).orElse(null);
         }
         @Override public void lights(Zone zone, String phase) {
+            lightPhases.computeIfAbsent(zone, ignored -> new HashSet<>()).add(phase);
+            applyLoadedLights(zone, phase);
+        }
+        private void refreshLights() {
+            lightPhases.forEach((zone, phases) -> phases.forEach(phase -> applyLoadedLights(zone, phase)));
+        }
+        private void applyLoadedLights(Zone zone, String phase) {
             if (instance == null) return;
             var level = level();
             for (var m : markers(zone, "light.")) {
                 if (!phase.equals(m.tags().get("phase"))) continue;
                 String block = m.tags().get("block");
                 if (block == null) continue;
+                var pos = net.minecraft.core.BlockPos.containing(m.pos());
+                if (!level.isLoaded(pos)) continue;
                 try {
-                    var state = net.minecraft.commands.arguments.blocks.BlockStateParser
-                            .parseForBlock(net.minecraft.core.registries.BuiltInRegistries.BLOCK, block, false).blockState();
-                    var pos = net.minecraft.core.BlockPos.containing(m.pos());
-                    if (!level.isLoaded(pos)) continue;
+                    var state = lightStates.get(block);
+                    if (state == null) {
+                        state = net.minecraft.commands.arguments.blocks.BlockStateParser
+                                .parseForBlock(net.minecraft.core.registries.BuiltInRegistries.BLOCK, block, false).blockState();
+                        lightStates.put(block, state);
+                    }
                     var old = level.getBlockState(pos);
                     if (old == state) continue;
                     // fill lights replace air only; mounted bulbs replace their unlit selves
@@ -360,8 +353,27 @@ public final class RisingCampaign {
             return all;
         }
         @Override public Vec3 position() { var p = player(); return p == null ? Vec3.ZERO : p.position(); }
-        @Override public boolean zoneReady(Zone zone) { return built.contains(zone); }
-        @Override public void prepareZone(Zone zone) { enqueue(this, zone, true); }
+        @Override public boolean zoneReady(Zone zone) { return prepared.contains(zone); }
+        @Override public void prepareZone(Zone zone) {
+            if (instance == null || prepared.contains(zone)) return;
+            var zones = RisingServices.zones().orElseThrow();
+            // NBT terrain belongs to the generator. This checks metadata only; it never requests map chunks.
+            if (!zones.begin(level(), zone, origin(zone)).step(0))
+                throw new IllegalStateException("Guardian Rises map metadata is unavailable: " + zone);
+            prepared.add(zone);
+            markersOf(zone);
+        }
+        @Override public boolean readyToPlace(Zone zone, Marker anchor) {
+            if (instance == null) return false;
+            if (arrival == null) {
+                var manager = instances; var owned = instance;
+                arrival = new kim.biryeong.destiny.world.template.ArrivalChunks(level(), ticking -> {
+                    if (owned.state() != GuardianRisesInstances.State.CLOSED) manager.tickForArrival(owned, ticking);
+                });
+            }
+            return arrival.ready(BlockPos.containing(anchor.pos()));
+        }
+        void releaseArrival() { if (arrival != null) { arrival.close(); arrival = null; } }
         @Override public void place(Zone zone, Marker anchor) {
             var p = player();
             if (p == null || instance == null) return;
@@ -369,7 +381,9 @@ public final class RisingCampaign {
             if (entering) cleanupForTeleport(p);
             if (!entering) p.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 30, 0, false, false));
             Vec3 at = anchor.pos();
-            p.teleportTo(level(), at.x, at.y, at.z, Set.of(), anchor.yaw(), 0, true);
+            if (!p.teleportTo(level(), at.x, at.y, at.z, Set.of(), anchor.yaw(), 0, true))
+                throw new IllegalStateException("Guardian Rises teleport failed");
+            releaseArrival(); // vanilla player/post-teleport tickets take over the destination
             p.resetFallDistance();
             p.setDeltaMovement(Vec3.ZERO);
             entered = true;
@@ -497,7 +511,6 @@ public final class RisingCampaign {
 
     private static void tick(MinecraftServer s) {
         if (s != server || instances == null) return;
-        build();
         if (SESSIONS.isEmpty()) return;
         int now = now();
         int queuePos = 0;
@@ -554,9 +567,7 @@ public final class RisingCampaign {
                 if (s.instance != null && s.instance.state() == GuardianRisesInstances.State.READY) enter(s, p, now);
                 else if (now - s.lastLoadingNotice >= 20) {
                     s.lastLoadingNotice = now;
-                    var build = s.builds.get(entryZone(s));
-                    int pct = build == null ? 0 : (int) Math.round(Math.min(1, Math.max(0, build.progress())) * 100);
-                    RisingObjectives.renderLoading(p, "고스트가 당신을 찾고 있어요 · " + pct + "%");
+                    RisingObjectives.renderLoading(p, "고스트가 입장 지점을 준비하고 있어요…");
                 }
             }
             case RUNNING -> running(s, p, now);
@@ -564,10 +575,14 @@ public final class RisingCampaign {
         }
     }
 
-    /** The entry zone is built: READY frees the single preparation slot even while a class is being chosen. */
+    /** The generator and marker metadata are ready; terrain is requested only at an actual arrival. */
     private static void markReady(Session s) {
-        if (s.instance != null && s.instance.state() == GuardianRisesInstances.State.PREPARING && s.built.contains(entryZone(s)))
-            instances.ready(s.instance);
+        if (s.instance == null || s.instance.state() != GuardianRisesInstances.State.PREPARING || !s.prepared.contains(entryZone(s))) return;
+        var zone = entryZone(s);
+        var anchor = RisingMission.anchors(s.saved.progress().checkpoint()).stream()
+                .map(id -> s.marker(zone, id)).flatMap(Optional::stream).findFirst()
+                .orElseThrow(() -> new IllegalStateException("Missing Guardian Rises arrival anchor"));
+        if (s.readyToPlace(zone, anchor)) instances.ready(s.instance);
     }
 
     /** Before entry the Guardian waits where they are: no damage, no void falls, darkness once a class is chosen. */
@@ -592,73 +607,18 @@ public final class RisingCampaign {
         if (s.instance != null) return;
         var zones = RisingServices.zones();
         if (zones.isEmpty()) { s.problem("구역 서비스가 등록되지 않아 임무를 준비할 수 없습니다."); return; }
-        boolean adopted = spare != null && instances.adopt(spare, SPARE_OWNER, s.owner);
-        if (adopted) {
-            s.instance = spare;
-            if (spareBuilt) {
-                s.built.add(Zone.GATEWAY);
-                s.markersOf(Zone.GATEWAY);
-            }
-            // Completed warmups still own chunk tickets; transfer cleanup ownership as well as in-flight work.
-            if (spareBuild != null) s.builds.put(Zone.GATEWAY, spareBuild);
-            DestinyGuardians.LOGGER.info("[GuardianRises] {} adopted warm instance (gateway {})", s.owner, spareBuilt ? "built" : "in progress");
-            spare = null; spareBuild = null; spareBuilt = false;
-        }
-        var made = adopted ? Optional.of(s.instance) : instances.prepare(s.owner);
+        var made = instances.prepare(s.owner);
         if (made.isEmpty()) return;
         s.instance = made.get();
         DestinyGuardians.LOGGER.info("[GuardianRises] instance created for {}", s.owner);
         instances.own(s.instance, () -> {
-            for (var build : s.builds.values()) build.cancel();
+            s.releaseArrival();
             for (var e : List.copyOf(s.enemies.values())) if (!e.isRemoved()) e.discard();
             s.enemies.clear();
         });
         if (s.state == State.QUEUED) s.state = State.PREPARING;
-        enqueue(s, entryZone(s), false);
-        // A checkpoint resume elsewhere never returns to the Gateway: release the unused warm copy's chunk tickets.
-        if (adopted && entryZone(s) != Zone.GATEWAY) {
-            var partial = s.builds.remove(Zone.GATEWAY);
-            if (partial != null) partial.cancel();
-        }
-    }
-
-    /** Idle-time Gateway pre-build for the next mission start. Only runs when no real build job is queued. */
-    private static void warmSpare(long left) {
-        if (!WARM_SPARE || !RisingMission.enabled() || instances == null || left <= 0) return;
-        var zones = RisingServices.zones();
-        if (zones.isEmpty()) return;
-        try {
-            if (spare == null) {
-                if (now() < spareRetryAt) return;
-                // Never take the single preparation slot from a waiting Guardian.
-                for (var s : SESSIONS.values()) if (s.instance == null && s.state != State.ENDING) return;
-                var made = instances.prepare(SPARE_OWNER);
-                if (made.isEmpty()) { spareRetryAt = now() + 200; return; }
-                spare = made.get();
-                spareBuilt = false;
-                DestinyGuardians.LOGGER.info("[GuardianRises] warming spare instance {}", spare.id());
-            }
-            if (spareBuilt) return;
-            if (spareBuild == null) spareBuild = zones.get().begin(spare.level(), Zone.GATEWAY, gatewayOrigin());
-            if (spareBuild.step(left)) {
-                spareBuilt = true;
-                DestinyGuardians.LOGGER.info("[GuardianRises] spare instance {} ready (gateway built)", spare.id());
-            }
-        } catch (RuntimeException e) {
-            DestinyGuardians.LOGGER.error("[GuardianRises] spare build failed", e);
-            closeSpare();
-            spareRetryAt = now() + 20 * 60;
-        }
-    }
-
-    private static BlockPos gatewayOrigin() {
-        return GuardianRisesInstances.origin(Zone.GATEWAY);
-    }
-
-    private static void closeSpare() {
-        if (spareBuild != null) spareBuild.cancel();
-        if (spare != null && instances != null) instances.close(spare);
-        spare = null; spareBuild = null; spareBuilt = false;
+        s.prepareZone(entryZone(s));
+        markReady(s);
     }
 
     private static Zone entryZone(Session s) { return RisingMission.anchorZone(s.saved.progress().checkpoint()); }
@@ -699,6 +659,7 @@ public final class RisingCampaign {
             return;
         }
         s.mission.tick(now);
+        if (now % 10 == 0) s.refreshLights(); // apply reached phases only as ordinary player chunks become loaded
         if (s.mission.complete()) {
             DestinyGuardians.LOGGER.info("[GuardianRises] {} complete; closing {}", p.getScoreboardName(), s.instance.id());
             drop(s);
@@ -715,61 +676,6 @@ public final class RisingCampaign {
         }
     }
 
-    // ---- builds ------------------------------------------------------------------------------------------
-
-    private static void enqueue(Session s, Zone zone, boolean priority) {
-        if (s.built.contains(zone) || s.instance == null) return;
-        for (var job : JOBS) if (job.session() == s && job.zone() == zone) return;
-        var job = new Job(s, zone);
-        if (priority && s.state == State.RUNNING) {
-            // Running Guardians waiting at a zone exit go first; the head job keeps its progress.
-            var head = JOBS.pollFirst();
-            JOBS.addFirst(job);
-            if (head != null) JOBS.addFirst(head);
-        } else JOBS.addLast(job);
-    }
-
-    /** One preparation at a time under the shared budget; never runs ahead of the budget. */
-    private static void build() {
-        var head = JOBS.peekFirst();
-        boolean entry = head != null && head.session().state != State.RUNNING;
-        long deadline = System.nanoTime() + (entry ? ENTRY_BUILD_BUDGET_NANOS : BUILD_BUDGET_NANOS);
-        if (JOBS.isEmpty()) { warmSpare(deadline - System.nanoTime()); return; }
-        while (!JOBS.isEmpty()) {
-            long left = deadline - System.nanoTime();
-            if (left <= 0) return;
-            var job = JOBS.peekFirst();
-            var s = job.session();
-            if (!SESSIONS.containsValue(s) || s.instance == null || s.state == State.ENDING
-                    || s.instance.state() == GuardianRisesInstances.State.CLOSED || s.built.contains(job.zone())) {
-                JOBS.pollFirst();
-                continue;
-            }
-            var zones = RisingServices.zones();
-            if (zones.isEmpty()) return;
-            var build = s.builds.get(job.zone());
-            try {
-                if (build == null) {
-                    build = zones.get().begin(s.level(), job.zone(), s.origin(job.zone()));
-                    s.builds.put(job.zone(), build);
-                    DestinyGuardians.LOGGER.info("[GuardianRises] zone {} build start", job.zone());
-                }
-                if (build.step(left)) {
-                    s.built.add(job.zone());
-                    JOBS.pollFirst();
-                    s.markersOf(job.zone());
-                    DestinyGuardians.LOGGER.info("[GuardianRises] zone {} ready for {}", job.zone(), s.owner);
-                } else return;
-            } catch (RuntimeException e) {
-                JOBS.pollFirst();
-                DestinyGuardians.LOGGER.error("[GuardianRises] zone {} build failed", job.zone(), e);
-                s.problem("구역 " + job.zone() + " 생성 실패: " + e.getMessage());
-                end(s, s.player(), true, null);
-                return;
-            }
-        }
-    }
-
     // ---- lifecycle ---------------------------------------------------------------------------------------
 
     private static void disconnected(ServerPlayer p) {
@@ -777,6 +683,7 @@ public final class RisingCampaign {
         if (s == null) return;
         if (s.state == State.RUNNING && s.mission != null && !s.mission.complete()) {
             s.save(p);
+            s.releaseArrival();
             s.mission.pause();
             s.disconnectedAt = now();
             s.musicThisConnection = false;
@@ -810,9 +717,8 @@ public final class RisingCampaign {
         var p = s.player();
         if (s.mission != null) { s.saved(); s.mission.close(); }
         if (p != null) { RisingObjectives.clear(p); RisingServices.presentation().ifPresent(pr -> pr.stopAll(p)); }
-        // close() defers while the player is still inside (true at SERVER_STOPPING): release chunk tickets of
-        // unfinished builds now, or stopServer waits forever on the forced chunk loads.
-        for (var build : s.builds.values()) build.cancel();
+        // Release the one pending arrival ticket even if close waits for the player to leave.
+        s.releaseArrival();
         // Loans stay in persistent escrow and are restored on the next join; temporary levels die with the server.
         if (s.instance != null && instances != null) instances.close(s.instance);
     }
@@ -929,12 +835,12 @@ public final class RisingCampaign {
     }
 
     private static int status(CommandSourceStack source) {
-        var out = new StringBuilder("떠오르는 수호자 · 세션 " + SESSIONS.size() + " · 빌드 대기 " + JOBS.size()
+        var out = new StringBuilder("떠오르는 수호자 · 세션 " + SESSIONS.size()
                 + " · 인스턴스 " + (instances == null ? 0 : instances.instances().size()));
         for (var s : SESSIONS.values()) {
             var p = s.player();
             out.append("\n- ").append(p == null ? s.owner.toString() : p.getScoreboardName()).append(' ').append(s.state);
-            if (s.instance != null) out.append(" inst=").append(s.instance.state()).append(" built=").append(s.built);
+            if (s.instance != null) out.append(" inst=").append(s.instance.state()).append(" zones=").append(s.prepared);
             if (s.mission != null) {
                 out.append(" stage=").append(s.mission.stage()).append(" cp=").append(s.mission.progress().checkpoint())
                         .append(" zone=").append(s.mission.zone()).append(" enemies=").append(s.mission.progress().enemiesRemaining())

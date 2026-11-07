@@ -5,7 +5,6 @@ import com.google.gson.JsonParser;
 import kim.biryeong.destiny.campaign.RisingServices;
 import kim.biryeong.destiny.campaign.GuardianRisesInstances;
 import kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator;
-import kim.biryeong.destiny.world.template.TemplateChunkWarmup;
 import net.minecraft.server.MinecraftServer;
 import xyz.nucleoid.map_templates.BlockBounds;
 import xyz.nucleoid.map_templates.MapTemplate;
@@ -55,8 +54,13 @@ public final class RisingZones implements RisingServices.Zones {
                 || generator.templates().stream().noneMatch(t -> t.getBounds().min().equals(bounds.min())
                         && t.getBounds().max().equals(bounds.max())))
             throw new IllegalStateException("Guardian Rises requires its NBT chunk generator");
-        int margin = Math.clamp(level.getServer().getPlayerList().getViewDistance() + 1, 0, 12);
-        return new TemplateChunkWarmup(level, bounds, margin);
+        // Assignment/metadata validation only. Never enumerate the zone bounds or view-distance margins.
+        return new RisingServices.ZoneBuild() {
+            private boolean cancelled;
+            @Override public boolean step(long budget) { return !cancelled; }
+            @Override public double progress() { return cancelled ? 0 : 1; }
+            @Override public void cancel() { cancelled = true; }
+        };
     }
 
     public static BlockBounds bounds(RisingServices.Zone zone) {

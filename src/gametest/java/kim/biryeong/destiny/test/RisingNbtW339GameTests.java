@@ -55,7 +55,7 @@ public final class RisingNbtW339GameTests {
             if (index[0] < RisingServices.Zone.values().length) {
                 var zone = RisingServices.Zone.values()[index[0]];
                 if (warmup[0] == null) {
-                    warmup[0] = zones.begin(first[0].level(), zone, GuardianRisesInstances.origin(zone));
+                    warmup[0] = geometryWarmup(instances, first[0], zone);
                     var owned = warmup[0]; instances.own(first[0], owned::cancel);
                     check(h, !owned.step(0), "Zero budget cannot request chunks");
                 }
@@ -74,8 +74,7 @@ public final class RisingNbtW339GameTests {
             if (second[0] == null) {
                 second[0] = instances.prepare(nextOwner).orElseThrow();
                 check(h, second[0].level() != first[0].level(), "Personal instances have separate mutable worlds");
-                warmup[0] = zones.begin(second[0].level(), RisingServices.Zone.GATEWAY,
-                        GuardianRisesInstances.origin(RisingServices.Zone.GATEWAY));
+                warmup[0] = geometryWarmup(instances, second[0], RisingServices.Zone.GATEWAY);
                 var owned = warmup[0]; instances.own(second[0], owned::cancel);
                 // Cancellation after requests must remain safe and permit the owner to retry in a new instance.
                 owned.step(2_000_000); owned.cancel(); owned.cancel();
@@ -84,8 +83,7 @@ public final class RisingNbtW339GameTests {
                 check(h, instances.close(second[0]), "Close is idempotent");
                 warmup[0] = null;
                 second[0] = instances.prepare(nextOwner).orElseThrow();
-                warmup[0] = zones.begin(second[0].level(), RisingServices.Zone.GATEWAY,
-                        GuardianRisesInstances.origin(RisingServices.Zone.GATEWAY));
+                warmup[0] = geometryWarmup(instances, second[0], RisingServices.Zone.GATEWAY);
                 var retry = warmup[0]; instances.own(second[0], retry::cancel);
             }
             if (!warmup[0].step(2_000_000)) return;
@@ -105,6 +103,13 @@ public final class RisingNbtW339GameTests {
             check(h, instances.instances().isEmpty(), "No retained instance owners");
             h.succeed();
         });
+    }
+
+    /** TEST ONLY: exhaustive geometry sampling intentionally warms each map; production begin() never does. */
+    private static RisingServices.ZoneBuild geometryWarmup(GuardianRisesInstances instances,
+            GuardianRisesInstances.Instance instance, RisingServices.Zone zone) {
+        instances.tickForArrival(instance, true);
+        return new kim.biryeong.destiny.world.template.TemplateChunkWarmup(instance.level(), RisingZones.bounds(zone), 0);
     }
 
     private static void verify(GameTestHelper h, GuardianRisesInstances.Instance instance, RisingServices.Zone zone) {

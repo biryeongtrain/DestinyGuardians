@@ -43,8 +43,10 @@ public final class RisingMission {
         List<Marker> markers(Zone zone, String prefix);
         Vec3 position();
         boolean zoneReady(Zone zone);
-        /** Queue (or prioritise) a budgeted build. Never places blocks in view of the player. */
+        /** Make zone metadata available. Terrain is generated on demand by the instance generator. */
         void prepareZone(Zone zone);
+        /** Actual arrival only. Default hosts already have their destination; server hosts may await one chunk. */
+        default boolean readyToPlace(Zone zone, Marker anchor) { return true; }
         /** Fade and teleport to a marker of a ready zone. */
         void place(Zone zone, Marker anchor);
         /** Returns duration ticks; 0 when unknown or the presentation service is absent. */
@@ -156,15 +158,15 @@ public final class RisingMission {
             if (!host.zoneReady(pendingZone)) { host.prepareZone(pendingZone); return; }
             var target = pendingZone;
             var anchor = find(target, pendingAnchor);
-            pendingZone = null;
             if (anchor.isEmpty()) {
                 report("anchor:" + target, "구역 " + target + "의 도착 지점 마커가 없습니다: " + pendingAnchor);
                 anchor = host.markers(target, "").stream().findFirst();
             }
             if (anchor.isPresent()) {
+                if (!host.readyToPlace(target, anchor.get())) return;
+                pendingZone = null;
                 zone = target;
                 host.place(target, anchor.get());
-                next(target).ifPresent(host::prepareZone);
             } else {
                 report("empty:" + target, "구역 " + target + "에 마커가 하나도 없습니다.");
                 return;

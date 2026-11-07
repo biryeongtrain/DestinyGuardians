@@ -36,7 +36,8 @@ class RisingMissionTest {
         final List<String> placed = new ArrayList<>();
         final List<String> problems = new ArrayList<>();
         final RisingEncountersTest.FakeSpawner spawner = new RisingEncountersTest.FakeSpawner();
-        boolean presentation = true;
+        boolean presentation = true, arrivalReady = true;
+        final List<Zone> preparedZones = new ArrayList<>();
         Vec3 pos = Vec3.ZERO;
         Zone zone;
         FakeHandle opening, scan, departure;
@@ -86,7 +87,8 @@ class RisingMissionTest {
         }
         @Override public Vec3 position() { return pos; }
         @Override public boolean zoneReady(Zone z) { return ready.contains(z); }
-        @Override public void prepareZone(Zone z) { }
+        @Override public void prepareZone(Zone z) { preparedZones.add(z); }
+        @Override public boolean readyToPlace(Zone z, Marker anchor) { return arrivalReady; }
         @Override public void place(Zone z, Marker anchor) { zone = z; pos = anchor.pos(); placed.add(z + ":" + anchor.id()); }
         @Override public int voice(String id) { voices.add(id); return voiceTicks; }
         @Override public Handle openingScan(Runnable done) { return presentation ? opening = new FakeHandle(done) : null; }
@@ -450,6 +452,31 @@ class RisingMissionTest {
         host.markers.get(Zone.BREACH).removeIf(m -> m.id().equals("prop.rifle") || m.id().equals("trigger.rifle"));
         var m=fresh(host);m.begin(now);m.skip(ARM_YOURSELF);run(m,60);
         assertFalse(m.rifleGranted());run(m,41);assertTrue(m.rifleGranted());
+    }
+
+    @Test void waitsForActualDestinationAndDoesNotPrefetchFollowingZones() {
+        var host = new FakeHost();
+        host.arrivalReady = false;
+        var mission = fresh(host);
+        mission.begin(now);
+        run(mission, 20);
+        assertTrue(mission.placing());
+        assertTrue(host.placed.isEmpty());
+        assertTrue(host.voices.isEmpty(), "No scene/audio starts while the actual arrival is pending");
+        assertNull(host.opening);
+        host.arrivalReady = true;
+        run(mission, 1);
+        assertFalse(mission.placing());
+        assertEquals("GATEWAY:spawn.player", host.placed.getLast());
+        assertFalse(host.preparedZones.contains(Zone.BREACH), "Entering Gateway never prepares the next map");
+        host.arrivalReady = false;
+        mission.skip(BREACH_DARK);
+        run(mission, 10);
+        assertEquals(1, host.placed.size(), "Unready destination cannot teleport the player");
+        host.arrivalReady = true;
+        run(mission, 1);
+        assertEquals("BREACH:spawn.player", host.placed.getLast());
+        assertFalse(host.preparedZones.contains(Zone.DIVIDE), "No future-zone request after Breach arrival either");
     }
 
 }
