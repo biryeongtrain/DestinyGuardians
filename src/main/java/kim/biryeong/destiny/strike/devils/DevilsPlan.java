@@ -20,9 +20,9 @@ public final class DevilsPlan {
     }
 
     public enum Kind {
-        DREG(20, 0), VANDAL(34, 0), SHANK(16, 0), MARAUDER(28, 0), CAPTAIN(80, 24),
-        THRALL(14, 0), ACOLYTE(24, 0), KNIGHT(90, 0), WIZARD(64, 24),
-        SERVITOR(60, 0), BRIG(700, 0), WALKER(1600, 0), SEPIKS(2200, 0);
+        DREG(11, 0), VANDAL(34, 0), SHANK(10, 0), MARAUDER(28, 0), CAPTAIN(80, 24),
+        THRALL(11, 0), ACOLYTE(11, 0), KNIGHT(90, 0), WIZARD(64, 24),
+        SERVITOR(60, 0), BRIG(700, 0), WALKER(DevilsWalkerState.MAX_CORE, 0), SEPIKS(550, 0);
         private final double health, shield;
         Kind(double health, double shield) { this.health = health; this.shield = shield; }
         public double health() { return health; }

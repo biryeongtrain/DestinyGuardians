@@ -12,7 +12,8 @@ public final class PveDamageBalance {
         return amount * switch (kind) {
             case PRIMARY -> 1.5f;
             case SPECIAL -> 2.5f;
-            case SUPER -> 3f;
+            case ABILITY -> 3f;
+            case SUPER -> 10f;
             default -> 1f;
         };
     }

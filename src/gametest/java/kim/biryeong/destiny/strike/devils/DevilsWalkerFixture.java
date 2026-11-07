@@ -77,14 +77,14 @@ public final class DevilsWalkerFixture {
         for (int index = 1; index <= 2; index++) {
             var brig = spawn(h, runtime, f.live.get("BL-brig-" + index));
             check(h, brig.getMaxHealth() == 700 && !brig.armorOpen(), "Brig starts with closed armor and planned pool");
-            Combat.damage(h.getLevel(), player, brig, 349, Element.ARC);
+            Combat.damage(h.getLevel(), player, brig, 349, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             check(h, brig.getHealth() == 351 && !brig.armorOpen(), "Armor stays closed above half health");
-            Combat.damage(h.getLevel(), player, brig, 1, Element.ARC);
+            Combat.damage(h.getLevel(), player, brig, 1, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             check(h, brig.getHealth() == 350 && brig.armorOpen(), "Actual damage opens armor exactly at half health");
             int before = f.director.snapshot().defeated();
-            check(h, Combat.damage(h.getLevel(), player, brig, 1000, Element.ARC), "Brig lethal hit reports kill");
+            check(h, Combat.damage(h.getLevel(), player, brig, 1000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE), "Brig lethal hit reports kill");
             check(h, f.director.snapshot().defeated() == before + 1, "Brig death credited once");
-            check(h, !Combat.damage(h.getLevel(), player, brig, 1000, Element.ARC), "Dead Brig cannot award another kill");
+            check(h, !Combat.damage(h.getLevel(), player, brig, 1000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE), "Dead Brig cannot award another kill");
         }
         check(h, f.director.phase() == Phase.BL_BATTLE, "Two Brig kills cannot skip the living Walker");
     }
@@ -201,35 +201,81 @@ public final class DevilsWalkerFixture {
         var runtime = runtime(h, player, f);
         for (int i = 0; i < 100 && !f.live.containsKey("SP-sepiks"); i++) f.tick(false);
         var boss = spawn(h, runtime, f.live.get("SP-sepiks"));
-        check(h, boss.getHealth() == 2200 && boss.getMaxHealth() == 2200, "Real health exceeds vanilla 1024 limit");
-        Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC);
-        check(h, boss.getHealth() == 2200, "Guard-phase Sepiks rejects damage");
+        check(h, boss.getHealth() == 550 && boss.getMaxHealth() == 550, "Sepiks uses reduced planned pool");
+        Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
+        check(h, boss.getHealth() == 550, "Guard-phase Sepiks rejects damage");
         f.until(h, Phase.SP_INTRO, 2000);
-        Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC);
-        check(h, boss.getHealth() == 2200, "Intro Sepiks rejects damage");
+        Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
+        check(h, boss.getHealth() == 550, "Intro Sepiks rejects damage");
         check(h, f.director.introFinished(f.director.generation()), "Fixture acknowledges intro, not animation acceptance");
         f.until(h, Phase.SP_DAMAGE1, 200);
         for (int round = 1; round <= 2; round++) {
-            float floor = round == 1 ? 1474 : 726;
-            Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC);
+            float floor = round == 1 ? 368.5f : 181.5f;
+            Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             check(h, boss.getHealth() == floor && !boss.isDeadOrDying(), "Oversized actual hit clamps at shield threshold");
             check(h, f.director.phase() == (round == 1 ? Phase.SP_SHIELD1 : Phase.SP_SHIELD2), "Actual health change enters shield phase");
-            Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC);
+            Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             check(h, boss.getHealth() == floor, "Shield blocks further damage");
             for (int i = 0; i < 80; i++) f.tick(true);
             for (int index = 1; index <= 3; index++) {
                 var servant = spawn(h, runtime, f.live.get("SP-servitor-" + round + "-" + index));
-                check(h, Combat.damage(h.getLevel(), player, servant, 1000, Element.ARC), "Actual shield servitor dies");
+                check(h, Combat.damage(h.getLevel(), player, servant, 1000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE), "Actual shield servitor dies");
                 if (index < 3) check(h, f.director.phase().shieldPhase(), "Shield stays until all three servitors die");
             }
             check(h, f.director.phase() == (round == 1 ? Phase.SP_RECOVER1 : Phase.SP_RECOVER2), "Last servitor starts recovery");
-            Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC);
+            Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             check(h, boss.getHealth() == floor, "Recovery still blocks damage");
             f.until(h, round == 1 ? Phase.SP_DAMAGE2 : Phase.SP_DAMAGE3, 100);
         }
-        check(h, Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC), "Final-phase Sepiks can die");
+        check(h, Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE), "Final-phase Sepiks can die");
         check(h, f.director.phase() == Phase.COMPLETE && f.completions == 1, "Actual death completes strike once");
-        check(h, !Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC) && f.completions == 1, "Repeated lethal hit cannot repeat completion");
+        check(h, !Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE) && f.completions == 1, "Repeated lethal hit cannot repeat completion");
+    }
+    /** Actual precision classification, Combat scaling and one death callback on the weakest auto frame. */
+    public static void verifyMinorBalance(GameTestHelper h, ServerPlayer player) {
+        var f = new HostFixture();
+        check(h, f.director.begin(1), "Begin encounter");
+        f.until(h, Phase.RY_CLEAR, 2000);
+        check(h, f.director.arrive(Zone.RF), "Refinery holds all three fragile species");
+        var wanted = java.util.Set.of(Kind.DREG, Kind.THRALL, Kind.ACOLYTE);
+        for(int i=0;i<1000 && wanted.stream().anyMatch(k->f.live.values().stream().noneMatch(v->v.slot().kind()==k));i++) f.tick(false);
+        var sounds = new ArrayList<String>();
+        int[] placed={0};
+        var runtime = new DevilsActors(h.getLevel(), ()->f.director, new DevilsActors.Environment() {
+            public List<ServerPlayer> participants(){return List.of(player);}
+            public Optional<Vec3> spawnPoint(Slot slot, DevilsMob mob){return Optional.of(h.absoluteVec(new Vec3(4,20+placed[0]++*10,4)));}
+            public boolean contains(Zone zone,Vec3 at){return true;}
+            public Optional<Vec3> sepiksWarp(DevilsMob mob){return Optional.empty();}
+            public void sound(DevilsMob mob,String event){sounds.add(mob.kind()+":"+event);}
+        });
+        TestCleanup.register(h,runtime::close);
+        TestCleanup.register(h,f.director::close);
+        var entry=kim.biryeong.destiny.weapon.WeaponCatalog.find("steelfeather_repeater").orElseThrow();
+        var profile=kim.biryeong.destiny.weapon.WeaponProfile.forEntry(entry);
+        var curve=kim.biryeong.destiny.weapon.WeaponBallistics.of(entry);
+        for(var kind:wanted) {
+            var reserved=f.live.values().stream().filter(v->v.slot().kind()==kind).findFirst().orElseThrow();
+            var mob=spawn(h,runtime,reserved);
+            var head=mob.position().add(0,mob.getBbHeight()*.875,0);
+            check(h,kim.biryeong.destiny.weapon.WeaponPrecision.critical(mob,head.add(0,0,-10),head,curve.precision()),"Head is a precision contact: "+kind);
+            float hit=curve.damage(profile.damage(),10,true);
+            var ammo=kim.biryeong.destiny.weapon.AmmoGeneration.weapon(entry);
+            check(h,!Combat.damage(h.getLevel(),player,mob,hit,Element.ARC,ammo)&&mob.isAlive(),"First unbuffed rapid-auto headshot leaves target alive");
+            check(h,Combat.damage(h.getLevel(),player,mob,hit,Element.ARC,ammo),"Second headshot kills "+kind);
+            check(h,sounds.stream().filter(e->e.equals(kind+":death")).count()==1,"One death cue for "+kind);
+            check(h,sounds.stream().filter(e->e.equals(kind+":hurt")).count()==1,"Lethal hit does not layer another pain cue");
+        }
+        // New actual actors use the same accepted encounter generation and ownership checks.
+        for(var kind:List.of(Kind.DREG,Kind.THRALL,Kind.ACOLYTE)) {
+            // Use another reserved actor of this species so death accounting cannot be duplicated.
+            var reserved=f.live.values().stream().filter(v->v.slot().kind()==kind && runtime.actors().stream().noneMatch(m->m.reference().equals(v.ref())) && f.director.allowedDamage(v.ref(),11,1)>0).findFirst().orElseThrow();
+            var mob=spawn(h,runtime,reserved);
+            check(h,Combat.damage(h.getLevel(),player,mob,4,Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.ABILITY),"A direct basic ability kills fragile minor: "+kind);
+        }
+        for(int i=0;i<100 && f.live.values().stream().noneMatch(v->v.slot().kind()==Kind.KNIGHT);i++) f.tick(false);
+        var knightSpawn=f.live.values().stream().filter(v->v.slot().kind()==Kind.KNIGHT).findFirst().orElseThrow();
+        var knight=spawn(h,runtime,knightSpawn);
+        check(h,Combat.damage(h.getLevel(),player,knight,11,Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.SUPER),"Roaming-super light hit kills a full-health ordinary Knight");
     }
     public static void verify(GameTestHelper h, ServerPlayer player) {
         var f=new HostFixture();
@@ -263,32 +309,32 @@ public final class DevilsWalkerFixture {
         float before=Combat.damagePool(leg);
         int sameTick=h.getLevel().getServer().getTickCount();
         try(var emission=Combat.emission(new Object())) {
-            check(h,!Combat.damage(h.getLevel(),player,leg,40,Element.ARC),"Leg damage is not a kill");
-            check(h,!Combat.damage(h.getLevel(),player,core,500,Element.ARC),"Same explosion cannot damage a second region");
+            check(h,!Combat.damage(h.getLevel(),player,leg,(float)(DevilsWalkerState.MAX_LEG*.4),Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE),"Leg damage is not a kill");
+            check(h,!Combat.damage(h.getLevel(),player,core,500,Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE),"Same explosion cannot damage a second region");
         }
-        check(h,Math.abs(Combat.damagePool(leg)-(before-40))<.001,"Combat measures actual leg loss");
+        check(h,Math.abs(Combat.damagePool(leg)-(before-DevilsWalkerState.MAX_LEG*.4))<.001,"Combat measures actual leg loss");
         check(h,leg.getHealth()==leg.getMaxHealth(),"Proxy HP is not a second damage pool");
         try(var emission=Combat.emission(new Object())) {
-            Combat.damage(h.getLevel(),player,leg,10,Element.ARC);
+            Combat.damage(h.getLevel(),player,leg,(float)(DevilsWalkerState.MAX_LEG*.1),Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             try(var payload=Combat.emission(new Object())) {
-                Combat.damage(h.getLevel(),player,leg,5,Element.ARC);
+                Combat.damage(h.getLevel(),player,leg,(float)(DevilsWalkerState.MAX_LEG*.05),Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             }
-            Combat.damage(h.getLevel(),player,leg,20,Element.ARC);
+            Combat.damage(h.getLevel(),player,leg,(float)(DevilsWalkerState.MAX_LEG*.2),Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
         }
         check(h,h.getLevel().getServer().getTickCount()==sameTick,"All emission checks execute in the same real server tick");
-        check(h,Math.abs(Combat.damagePool(leg)-(before-55))<.001,
+        check(h,Math.abs(Combat.damagePool(leg)-(before-DevilsWalkerState.MAX_LEG*.55))<.001,
                 "Distinct emissions and payload count independently; closing nested scope restores original dedup");
         root.walkerState().tick();
-        check(h,!Combat.damage(h.getLevel(),player,leg,100,Element.ARC),"Leg break is not boss death");
+        check(h,!Combat.damage(h.getLevel(),player,leg,100,Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE),"Leg break is not boss death");
         check(h,root.walkerState().phase()==DevilsWalkerState.Phase.STAGGER,"Leg break staggers");
         for(int i=0;i<DevilsWalkerState.STAGGER_TICKS;i++)root.walkerState().tick();
         check(h,core.precisionAt(core.position()),"Exposed core is precise");
         int defeated=f.director.snapshot().defeated();
-        check(h,Combat.damage(h.getLevel(),player,core,2000,Element.ARC),"Core lethal hit reports root kill");
+        check(h,Combat.damage(h.getLevel(),player,core,2000,Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE),"Core lethal hit reports root kill");
         check(h,root.isDeadOrDying(),"Root is dead");
         check(h,f.director.snapshot().defeated()==defeated+1,"Director credits exactly one boss death");
         check(h,parts.stream().allMatch(DevilsMob::isRemoved),"Death removes every proxy");
-        check(h,!Combat.damage(h.getLevel(),player,core,2000,Element.ARC),"Stale proxy cannot award another kill");
+        check(h,!Combat.damage(h.getLevel(),player,core,2000,Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE),"Stale proxy cannot award another kill");
         check(h,f.director.snapshot().defeated()==defeated+1,"Repeated hit cannot duplicate death");
     }
 }

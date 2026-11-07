@@ -244,7 +244,7 @@ class DevilsDirectorTest {
     @Test void blastThresholdsAreFiniteFifoAndBossDeathCancelsPendingPacks() {
         var f = new Fixture(); f.blast(); f.ticks(180);
         Spawn walker = f.live.get("BL-walker");
-        for (int i = 0; i < 10; i++) f.director.healthChanged(walker.ref(), 300);
+        for (int i = 0; i < 10; i++) f.director.healthChanged(walker.ref(), Kind.WALKER.health() * 3 / 16);
         f.kill("BL-brig-1"); f.kill("BL-brig-2");
         f.ticks(500); // backlog waits for whole-pack capacity
         assertTrue(f.director.snapshot().pendingPacks() > 0);
@@ -259,14 +259,14 @@ class DevilsDirectorTest {
 
     @Test void sepiksClampsBothThresholdsAndOnlyActualFinalDeathCompletes() {
         var f = new Fixture(); f.lair();
-        assertEquals(726, f.director.allowedDamage(f.sepiks().ref(), 2200, 10000), 1e-6);
-        f.shield(1); assertEquals(1474, f.director.snapshot().sepiksHealth(), 1e-6);
-        assertEquals(0, f.director.allowedDamage(f.sepiks().ref(), 1474, 500));
+        assertEquals(181.5, f.director.allowedDamage(f.sepiks().ref(), 550, 10000), 1e-6);
+        f.shield(1); assertEquals(368.5, f.director.snapshot().sepiksHealth(), 1e-6);
+        assertEquals(0, f.director.allowedDamage(f.sepiks().ref(), 368.5, 500));
         f.ticks(30); assertEquals(3, f.director.snapshot().shieldServitors());
         f.servitors(); assertEquals(Phase.SP_RECOVER1, f.director.phase());
         f.ticks(39); assertEquals(Phase.SP_RECOVER1, f.director.phase()); f.tick();
         assertEquals(Phase.SP_DAMAGE2, f.director.phase());
-        f.shield(2); assertEquals(726, f.director.snapshot().sepiksHealth(), 1e-6);
+        f.shield(2); assertEquals(181.5, f.director.snapshot().sepiksHealth(), 1e-6);
         f.ticks(30); f.servitors(); f.ticks(40);
         assertEquals(Phase.SP_DAMAGE3, f.director.phase());
         Spawn boss = f.sepiks(); f.director.healthChanged(boss.ref(), 0);
@@ -314,7 +314,7 @@ class DevilsDirectorTest {
     @Test void fullOptionalRouteSpawnsExactlyThe258PlannedSlotsOnce() {
         var f = new Fixture(); f.blast(); f.ticks(30);
         Spawn walker = f.live.get("BL-walker");
-        f.director.healthChanged(walker.ref(), 300);
+        f.director.healthChanged(walker.ref(), Kind.WALKER.health() * 3 / 16);
         f.kill("BL-brig-1"); f.kill("BL-brig-2");
         for (int i = 0; i < 1800; i++) { f.tick(); f.ordinary(); }
         assertEquals(59, f.spawns.stream().filter(s -> s.slot().zone() == Zone.BL).count());

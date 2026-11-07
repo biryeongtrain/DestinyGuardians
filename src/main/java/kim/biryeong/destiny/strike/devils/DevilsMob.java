@@ -363,7 +363,10 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
                 runtime.environment.sound(this,"armor_break");
                 level.sendParticles(ParticleTypes.EXPLOSION,getX(),getY()+3,getZ(),1,0,0,0,0);
             }
-            if(model!=null)model.hit(); runtime.environment.sound(this,"hurt");
+            if(isAlive()) {
+                if(model!=null)model.hit();
+                runtime.environment.sound(this,"hurt");
+            }
         }
         return accepted;
     }

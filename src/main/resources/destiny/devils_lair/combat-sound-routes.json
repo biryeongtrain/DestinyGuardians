@@ -47,7 +47,8 @@
   "routes": {
     "ACOLYTE": {
       "fire": "arc_rifle_fire",
-      "melee": "trooper_melee_swing"
+      "melee": "trooper_melee_swing",
+      "death": "knight_mvmt_death"
     },
     "BRIG": {
       "armor_break": "fallen_mech_hard_ping",
@@ -56,14 +57,14 @@
       "secondary_charge": "fallen_mech_500_chaingun_intro"
     },
     "CAPTAIN": {
-      "death": "captain_death_mvmt",
+      "death": "destiny:guardian_rises.fallen.fallen_captain_death",
       "fire": "shock_rifle_fire",
       "melee": "captain_melee_swing_mvmt",
       "teleport_begin": "teleport_begin",
       "teleport_end": "teleport_end"
     },
     "DREG": {
-      "death": "dreg_death_mvmt",
+      "death": "destiny:guardian_rises.fallen.fallen_dreg_death",
       "fire": "shock_pistol_fire",
       "melee": "dreg_melee_swing"
     },
@@ -75,7 +76,7 @@
     },
     "MARAUDER": {
       "charge": "fallen_sword_generic_telegraph",
-      "death": "fallen_base_death_mvmt",
+      "death": "destiny:guardian_rises.fallen.fallen_vandal_death",
       "melee": "vandal_sword_melee_any"
     },
     "SEPIKS": {
@@ -96,10 +97,11 @@
     },
     "THRALL": {
       "charge": "thrall_melee_pre",
-      "melee": "thrall_melee_swing_1"
+      "melee": "thrall_melee_swing_1",
+      "death": "knight_mvmt_death"
     },
     "VANDAL": {
-      "death": "fallen_base_death_mvmt",
+      "death": "destiny:guardian_rises.fallen.fallen_vandal_death",
       "fire": "shock_rifle_fire",
       "melee": "vandal_sword_melee_any",
       "sniper_fire": "wire_rifle_fire"
@@ -115,8 +117,15 @@
       "charge": "wizard_cast_ability",
       "fire": "darkness_blast_fire_single",
       "hazard": "darkness_cloud_cast",
-      "impact": "darkness_blast_explode"
+      "impact": "darkness_blast_explode",
+      "death": "knight_mvmt_death"
     }
   },
-  "selection": "Authored gameplay timing and random media selection from named source bindings, not a reconstruction of Wwise layered mixing. Actor owner matches are audited in the manifest; unmatched shared sounds are explicit approximations. Unnamed Brig firing and vocal events remain pending."
+  "selection": "Authored gameplay timing and random media selection from named source bindings, not a reconstruction of Wwise layered mixing. Actor owner matches are audited in the manifest; unmatched shared sounds are explicit approximations. Unnamed Brig firing and vocal events remain pending.",
+  "approximations": {
+    "THRALL.death": "Reuses shipped Hive Knight death movement; exact species-specific death vocal is not bundled.",
+    "ACOLYTE.death": "Reuses shipped Hive Knight death movement; exact species-specific death vocal is not bundled.",
+    "WIZARD.death": "Reuses shipped Hive Knight death movement; exact species-specific death vocal is not bundled.",
+    "MARAUDER.death": "Uses shipped Fallen Vandal death vocal for the Vandal-derived Marauder."
+  }
 }

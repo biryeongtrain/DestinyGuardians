@@ -27,17 +27,19 @@ public final class DevilsCombatSounds {
             for(var kind:routes.entrySet()) {
                 Map<String,Identifier> events=new HashMap<>();
                 for(var event:kind.getValue().getAsJsonObject().entrySet())
-                    events.put(event.getKey(),Identifier.fromNamespaceAndPath("destiny_devils_sfx",event.getValue().getAsString()));
+                    events.put(event.getKey(),Identifier.parse(event.getValue().getAsString().contains(":")
+                            ? event.getValue().getAsString() : "destiny_devils_sfx:" + event.getValue().getAsString()));
                 result.put(DevilsPlan.Kind.valueOf(kind.getKey()),Map.copyOf(events));
             }
             return Map.copyOf(result);
         }catch(Exception error){throw new IllegalStateException("Invalid Devils combat sound catalog",error);}
     }
+    static Identifier event(DevilsPlan.Kind kind, String event) { return ROUTES.getOrDefault(kind,Map.of()).get(event); }
     public static int play(ServerLevel level,List<ServerPlayer> listeners,DevilsPlan.Kind kind,String event,Vec3 at) {
-        var id=ROUTES.getOrDefault(kind,Map.of()).get(event);
+        var id=event(kind,event);
         if(id==null)return 0;
         float range=kind.boss()?64:40;
-        float volume=event.equals("impact")?.8f:1f;
+        float volume=kim.biryeong.destiny.sound.EnemySoundMix.volume(event);
         var packet=new ClientboundSoundPacket(Holder.direct(SoundEvent.createFixedRangeEvent(id,range)),
                 SoundSource.HOSTILE,at.x,at.y,at.z,volume,1f,level.getRandom().nextLong());
         int sent=0;

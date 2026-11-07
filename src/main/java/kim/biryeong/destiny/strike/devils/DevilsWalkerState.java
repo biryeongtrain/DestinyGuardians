@@ -12,7 +12,7 @@ public final class DevilsWalkerState {
         public boolean leg() { return ordinal() < 6; }
     }
     public record Hit(double applied, boolean legBroken, boolean killed, Phase phase) { }
-    public static final double MAX_CORE = 1600, MAX_LEG = 100;
+    public static final double MAX_CORE = 200, MAX_LEG = 12.5;
     public static final int STAGGER_TICKS = 16, EXPOSED_TICKS = 240, RECOVER_TICKS = 20;
     private final double[] legs = new double[6];
     private final ArrayDeque<Region> broken = new ArrayDeque<>();

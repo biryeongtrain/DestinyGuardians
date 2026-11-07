@@ -77,7 +77,7 @@ public final class FallenArchetypes {
         // Dreg: fragile rusher. Shock blades up close, a shock-pistol snap shot while closing in.
         TABLE.put(FallenKind.DREG, new Archetype(FallenKind.DREG, Role.RUSHER, RisingServices.Models.DREG,
                 RisingServices.Models.INFANTRY_CLIPS, .8f, 1.9f, false,
-                20, 0, .25, .36, 1.6, 7, .55,
+                11, 0, .25, .36, 1.6, 7, .55,
                 new Attack(.24, 9, 22, 34, 1, 0, 0, 0, 0, 2.6),
                 new Attack(.06, 7, 40, 60, 1, 0, 1.15, 0, 5, 16), 0, .35, ARC_BLUE));
         // Vandal: tall wire-rifle marksman. Mid range, strafes, seeks cover, blinks when pressured.
@@ -95,7 +95,7 @@ public final class FallenArchetypes {
         // Shank: hovering drone, arc bursts, keeps distance and orbits.
         TABLE.put(FallenKind.SHANK, new Archetype(FallenKind.SHANK, Role.DRONE, RisingServices.Models.SHANK,
                 RisingServices.Models.SHANK_CLIPS, .9f, .9f, true,
-                14, 0, .32, .42, 7, 15, .5,
+                10, 0, .32, .42, 7, 15, .5,
                 new Attack(.045, 10, 46, 64, 4, 3, 1.2, 0, 3, 24),
                 null, 0, .2, ARC_BLUE));
         // Walker: boss pools live in WalkerBoss.Tuning; this row is the anchor identity and its two guns.

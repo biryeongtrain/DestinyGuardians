@@ -33,8 +33,9 @@ public final class FallenSounds {
 
     /** Attenuation range (blocks), volume and pitch jitter per category. */
     enum Cat {
-        GUN(48, 1f, .06f), IMPACT(16, .9f, .05f), FLYBY(12, .9f, .08f), MELEE(24, 1f, .06f),
-        BARK(24, 1f, .05f), FOLEY(20, .9f, .05f), WALKER(64, 1f, .04f), SKIFF(64, 1f, .03f);
+        GUN(48, kim.biryeong.destiny.sound.EnemySoundMix.COMBAT, .06f), IMPACT(16, .45f, .05f), FLYBY(12, .4f, .08f), MELEE(24, .5f, .06f),
+        BARK(24, .45f, .05f), DEATH(24, kim.biryeong.destiny.sound.EnemySoundMix.DEATH, .05f),
+        FOLEY(20, kim.biryeong.destiny.sound.EnemySoundMix.FOLEY, .05f), WALKER(64, .6f, .04f), SKIFF(64, .6f, .03f);
         final float range, volume, jitter;
         Cat(float range, float volume, float jitter) { this.range = range; this.volume = volume; this.jitter = jitter; }
     }
@@ -58,19 +59,19 @@ public final class FallenSounds {
         DREG_TAUNT("fallen_dreg_taunt", Cat.BARK, null),
         DREG_UNDER_FIRE("fallen_dreg_under_fire", Cat.BARK, () -> SoundEvents.SPIDER_HURT),
         DREG_EVADE("fallen_dreg_dive_evade", Cat.BARK, null),
-        DREG_DEATH("fallen_dreg_death", Cat.BARK, () -> SoundEvents.SPIDER_DEATH),
+        DREG_DEATH("fallen_dreg_death", Cat.DEATH, () -> SoundEvents.SPIDER_DEATH),
         DREG_KILL("fallen_dreg_kill", Cat.BARK, null),
         VANDAL_SIGHTED("fallen_vandal_target_sighted", Cat.BARK, null),
         VANDAL_UNDER_FIRE("fallen_vandal_under_fire", Cat.BARK, () -> SoundEvents.SPIDER_HURT),
         VANDAL_EVADE("fallen_vandal_dive_evade", Cat.BARK, null),
-        VANDAL_DEATH("fallen_vandal_death", Cat.BARK, () -> SoundEvents.SPIDER_DEATH),
+        VANDAL_DEATH("fallen_vandal_death", Cat.DEATH, () -> SoundEvents.SPIDER_DEATH),
         CAPTAIN_SIGHTED("fallen_captain_target_sighted", Cat.BARK, null),
         CAPTAIN_UNDER_FIRE("fallen_captain_under_fire", Cat.BARK, () -> SoundEvents.SPIDER_HURT),
-        CAPTAIN_DEATH("fallen_captain_death", Cat.BARK, () -> SoundEvents.SPIDER_DEATH),
+        CAPTAIN_DEATH("fallen_captain_death", Cat.DEATH, () -> SoundEvents.SPIDER_DEATH),
         CAPTAIN_KILL("fallen_captain_kill", Cat.BARK, null),
         SHANK_SIGHTED("fallen_shank_target_sighted", Cat.BARK, null),
         SHANK_PAIN("fallen_shank_pain", Cat.BARK, () -> SoundEvents.IRON_GOLEM_HURT),
-        SHANK_DEATH("fallen_shank_death", Cat.BARK, () -> SoundEvents.IRON_GOLEM_DEATH),
+        SHANK_DEATH("fallen_shank_death", Cat.DEATH, () -> SoundEvents.IRON_GOLEM_DEATH),
         SHANK_SHOOT("fallen_shank_shoot", Cat.BARK, null),
         SHANK_EXPLODE("shank_explode", Cat.GUN, null),
         DREG_EVADE_SPIN("dreg_evade_spin", Cat.FOLEY, null),
