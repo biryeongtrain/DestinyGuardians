@@ -1113,6 +1113,7 @@ public final class WeaponRuntime {
         boolean killed = Combat.damage(owner.level(), owner, contact, requested, WeaponShotTraits.element(damageTraits.shotTraits()), PerkBatchA.ammoGeneration(attribution,damageTraits.batchA()));
         float actual = before - Combat.damagePool(contact);
         if (!Float.isFinite(actual) || actual <= 0) return 0;
+        kim.biryeong.destiny.sound.EnemyHeadburstSounds.confirmed(owner, target, actual, hits.precision, killed, hits.precisionPoint);
         PerkBatchD.confirmed(owner, damageTraits.batchD(), contact, batchDPre, actual, killed); // W323 batch D
         // One cue per observed damage transaction, after immunity/absorption checks.
         kim.biryeong.destiny.hud.WeaponHitHud.confirm(owner, actual, killed);

@@ -1,0 +1,8 @@
+--- a/src/main/java/kim/biryeong/destiny/weapon/WeaponRuntime.java
++++ b/src/main/java/kim/biryeong/destiny/weapon/WeaponRuntime.java
+@@ -1129,4 +1129,5 @@
+         float actual = before - Combat.damagePool(contact);
+         if (!Float.isFinite(actual) || actual <= 0) return 0;
++        kim.biryeong.destiny.sound.EnemyHeadburstSounds.confirmed(owner, target, actual, hits.precision, killed, hits.precisionPoint);
+         PerkBatchD.confirmed(owner, damageTraits.batchD(), contact, batchDPre, actual, killed); // W323 batch D
+         // One cue per observed damage transaction, after immunity/absorption checks.
