@@ -60,6 +60,7 @@ public final class PlayerAnimations {
         String loopAnimation;
         net.minecraft.world.phys.Vec3 previousPosition;
         int classMovingUntil;
+        final SuperLocomotionW336.Motion locomotion=new SuperLocomotionW336.Motion();
         Run run;
         boolean closingAfterRun, meleeCast;
         boolean ownerBodyHidden;
@@ -442,7 +443,9 @@ public final class PlayerAnimations {
                         () -> ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
                 syncOwnerBody(state);
                 var position = state.owner.position();
-                double moved = position.subtract(state.previousPosition).horizontalDistanceSqr();
+                var displacement=position.subtract(state.previousPosition);
+                double moved=displacement.horizontalDistanceSqr();
+                var direction=state.locomotion.sample(displacement.x,displacement.z,state.owner.getYRot(),server.getTickCount());
                 state.previousPosition = position;
                 Run run = state.run;
                 if (run != null) {
@@ -457,10 +460,16 @@ public final class PlayerAnimations {
                         }
                     }
                 }
-                if (state.run == null && !state.closingAfterRun && "super_arc".equals(state.loopRequest)) {
+                boolean sourceLocomotion=state.run==null&&!state.closingAfterRun&&SuperLocomotionW336.hasFamily(state.loopRequest);
+                if(sourceLocomotion) {
+                    String selected=SuperLocomotionW336.select(state.loopRequest,direction,state.owner.onGround(),SuperLocomotionW336.floating(state.loopRequest),
+                            clip->state.tracker.renderer().animation(clip).isPresent());
+                    if(selected!=null)updateLoop(state,selected);
+                }
+                if (!sourceLocomotion && state.run == null && !state.closingAfterRun && "super_arc".equals(state.loopRequest)) {
                     updateArcLocomotion(state, moved > .000225 && state.owner.onGround());
                 }
-                if (state.run == null && !state.closingAfterRun && state.loopRequest != null
+                if (!sourceLocomotion && state.run == null && !state.closingAfterRun && state.loopRequest != null
                         && (state.loopRequest.startsWith("w229_") || state.loopRequest.startsWith("w230_"))) {
                     if (moved > .000225) state.classMovingUntil = server.getTickCount() + 3;
                     updateClassLocomotion(state, server.getTickCount() < state.classMovingUntil);

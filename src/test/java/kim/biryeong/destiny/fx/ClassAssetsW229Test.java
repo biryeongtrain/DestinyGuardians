@@ -33,8 +33,10 @@ class ClassAssetsW229Test {
         int inherited = original.getAsJsonArray("animations").size();
         for (int i = 0; i < inherited; i++)
             assertEquals(original.getAsJsonArray("animations").get(i), built.getAsJsonArray("animations").get(i));
-        assertEquals(inherited + clips.size(), built.getAsJsonArray("animations").size());
-        for (int i = inherited; i < inherited + clips.size(); i++) {
+        var merged=SuperLocomotionW336.overlay(SuperMotionOverlaysW332.overlay(
+                MeleeSuperAnimationTiming.overlay(clips,MeleeSuperAnimationTiming.SPECTRAL_RESOURCE),"w2"),"w2");
+        assertEquals(inherited + merged.size(), built.getAsJsonArray("animations").size());
+        for (int i = inherited; i < inherited + merged.size(); i++) {
             var animation = built.getAsJsonArray("animations").get(i).getAsJsonObject();
             assertTrue(animation.get("name").getAsString().startsWith("w229_")
                     || animation.get("name").getAsString().startsWith("w230_"));

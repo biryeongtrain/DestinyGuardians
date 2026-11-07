@@ -1,0 +1,105 @@
+{
+  "task": "W336 R2 composed classes locomotion replaces quarantined R1",
+  "source_revision": "R2",
+  "worker": "/Users/qf/.codex/worktrees/legendary-models-rifles/DestinyGuardians",
+  "mainReadOnly": "/Users/qf/IdeaProjects/DestinyGuardians",
+  "files": [
+    {
+      "path": "art/animation/w336/classes/README.md",
+      "beforeSha256": null,
+      "afterSha256": "a7f8cd3edfeca9e670ae220cf542719b18108293259c3b1f02157ba395d2131f",
+      "bytes": 3835
+    },
+    {
+      "path": "art/animation/w336/classes/families-selected.json",
+      "beforeSha256": null,
+      "afterSha256": "fefae89831cdaec5badcba775a799e01a9f6c7df56ede250cc7a47684b7d8be8",
+      "bytes": 159768
+    },
+    {
+      "path": "art/animation/w336/classes/manifest.json",
+      "beforeSha256": null,
+      "afterSha256": "880c8ffa961319cce5d906d45c0dfd7f7cac321fc19f64db24c3cd1ac3ec5490",
+      "bytes": 108636
+    },
+    {
+      "path": "art/animation/w336/classes/representative-poses.png",
+      "beforeSha256": null,
+      "afterSha256": "b27290a4eaad1dbb3774c29c14cb5ce43fdf9ae11ccf9246cfcd6a98806e885c",
+      "bytes": 326942
+    },
+    {
+      "path": "art/animation/w336/classes/representative-poses.svg",
+      "beforeSha256": null,
+      "afterSha256": "2b80717da3c8b74f99d63135c82ed7dca4395ce21b8031a4be249b19fe29bd88",
+      "bytes": 35013
+    },
+    {
+      "path": "art/animation/w336/classes/super_locomotion_classes_w336.animation.json",
+      "beforeSha256": null,
+      "afterSha256": "f10a37630ea2d835844fa4e9b50e2c892a7b30003f6cea371528e072465d2e79",
+      "bytes": 36474084
+    },
+    {
+      "path": "art/animation/w336/classes/validation.json",
+      "beforeSha256": null,
+      "afterSha256": "383db16680931af44ea99850b353d8daf910503def32f3f2b43d0a1f254d3943",
+      "bytes": 1429
+    },
+    {
+      "path": "scripts/art/w336_class_locomotion.py",
+      "beforeSha256": null,
+      "afterSha256": "3f98ee73391ae95519a75512453d44da4f4e2476aeb65ecfdfba185429f44dbc",
+      "bytes": 26061
+    }
+  ],
+  "resourceSource": "art/animation/w336/classes/super_locomotion_classes_w336.animation.json",
+  "resourceTarget": "src/main/resources/destiny/animation/super_locomotion_classes_w336.animation.json",
+  "resourceSha256": "f10a37630ea2d835844fa4e9b50e2c892a7b30003f6cea371528e072465d2e79",
+  "checks": {
+    "source_revision": "R2",
+    "clips": 31,
+    "finiteNormalizedHemisphereKeys": 71568,
+    "authenticPeriodsPreserved": true,
+    "rootHorizontalZero": true,
+    "sourceBlendsAndMetadataHashesUnchanged": true,
+    "R2ComposedActions": 105,
+    "sourceBones": 72,
+    "selectedActionsStartMidEndCompared": 29,
+    "maxReconstructedTRSvsActualBlendError": 1.056051831083149e-05,
+    "maxLoopRotationSeamDegrees": 2.2263692832568138e-05,
+    "retargetMetricsMax": {
+      "pelvisDisplacementUnits": 3.2834814931046936,
+      "wristSourceRelativeMotionUnits": 9.375691637801527,
+      "commonReachCorrectionUnits": 0.0,
+      "pairTrajectoryResidualUnits": 0.0,
+      "gripPositionErrorUnits": 4.189529226675416e-15,
+      "gripRotationErrorDegrees": 1.7075472925031877e-06
+    },
+    "representativeFootDirection": {
+      "w230_titan_burning_maul_move_forward": {
+        "inferredTargetStanceXZUnitsPerSec": [
+          0.0573237561239883,
+          -18.601934650608367
+        ],
+        "status": "bounded geometry inference; native pending"
+      },
+      "w230_titan_burning_maul_move_left": {
+        "inferredTargetStanceXZUnitsPerSec": [
+          -12.695247963593815,
+          -0.17723677842441435
+        ],
+        "status": "bounded geometry inference; native pending"
+      }
+    },
+    "representativePosePngViewed": true,
+    "R1FrozenArmAndStaticOnlyPoliciesRetired": true,
+    "nativeAcceptance": "pending master source R2 fullbody/weapon grips/idle-move-stop and floating checks"
+  },
+  "privateR1Evidence": "/tmp/w336-super-locomotion/classes-r1-private-evidence",
+  "rawOriginalsAndCachesExcluded": true,
+  "pending": [
+    "Master full R2 native idle/move/stop/direction",
+    "Master source wrists vs current weapon props and floating body acceptance"
+  ]
+}

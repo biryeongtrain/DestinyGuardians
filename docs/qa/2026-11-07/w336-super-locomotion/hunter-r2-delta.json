@@ -1,0 +1,158 @@
+{
+  "source_revision": "R2",
+  "worktree": "/Users/qf/.codex/worktrees/perk-expansion-stats/DestinyGuardians",
+  "main_baselines_match": true,
+  "status": "R2 namedSpectral/fullbody Hunter candidates, native acceptance pending",
+  "files": [
+    {
+      "path": "art/animation/w336/hunter/manifest.json",
+      "before_sha256": null,
+      "after_sha256": "63c32c2b11972e81afcbece031786dcb0a20b2fa3b45f7a76a93ad6b4969f3c6",
+      "bytes": 38818
+    },
+    {
+      "path": "art/animation/w336/hunter/source-before-after.png",
+      "before_sha256": null,
+      "after_sha256": "7a76ae1eea5f026e071db586b7ab4c46998f1ebf7e87772204636d3e5aa59f45",
+      "bytes": 2447653
+    },
+    {
+      "path": "art/animation/w336/hunter/super_locomotion_hunter_w336.animation.json",
+      "before_sha256": null,
+      "after_sha256": "72c840ecc6b0c324bc3d9c37ae3207268eeee09b564d0760898c29f238260885",
+      "bytes": 8692967
+    },
+    {
+      "path": "art/animation/w336/hunter/validation.json",
+      "before_sha256": null,
+      "after_sha256": "ee6536c802b6089b004e3bf6d1e09a135ef92f547e5f5fb5480c3046ff4c5fae",
+      "bytes": 3659
+    },
+    {
+      "path": "scripts/art/w336_hunter_locomotion.py",
+      "before_sha256": null,
+      "after_sha256": "36b5c9456523edcf038eccb39279d3dbc7eb7fa362cf23afb2fafb6e1e47465e",
+      "bytes": 21124
+    }
+  ],
+  "validation": {
+    "source_revision": "R2",
+    "status": "PASS; master native acceptance pending",
+    "clips": 10,
+    "rotation_keys": 11936,
+    "source_direct_evaluation": "105action library/72bones, 10 selected actual composed actions/OBArmature slots",
+    "source_full_trs_world_agreement_max_m": 4.136279930831185e-06,
+    "source_stance_direction_checks": [
+      {
+        "clip": "w230_hunter_spectral_blades_idle",
+        "source_stance_phase_target_direction": "idle",
+        "target_move_velocity_xyz_mps": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "clip": "w230_hunter_spectral_blades_move_forward",
+        "source_stance_phase_target_direction": "move_forward",
+        "target_move_velocity_xyz_mps": [
+          0.0023880831586567,
+          -0.37950429263281543,
+          -2.0597601056586656
+        ]
+      },
+      {
+        "clip": "w230_hunter_spectral_blades_move_backward",
+        "source_stance_phase_target_direction": "move_backward",
+        "target_move_velocity_xyz_mps": [
+          -0.003842958650146103,
+          0.3529542164308068,
+          2.0672220622087316
+        ]
+      },
+      {
+        "clip": "w230_hunter_spectral_blades_move_left",
+        "source_stance_phase_target_direction": "move_left",
+        "target_move_velocity_xyz_mps": [
+          -2.2690505941683785,
+          0.3006021456751741,
+          -0.17765744211499954
+        ]
+      },
+      {
+        "clip": "w230_hunter_spectral_blades_move_right",
+        "source_stance_phase_target_direction": "move_right",
+        "target_move_velocity_xyz_mps": [
+          2.165322151113832,
+          -0.22108531295445275,
+          0.15932222683718755
+        ]
+      },
+      {
+        "clip": "h15_super_arc",
+        "source_stance_phase_target_direction": "idle",
+        "target_move_velocity_xyz_mps": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "clip": "h15_super_arc_move_forward",
+        "source_stance_phase_target_direction": "move_forward",
+        "target_move_velocity_xyz_mps": [
+          0.0023880831586567,
+          -0.37950429263281543,
+          -2.0597601056586656
+        ]
+      },
+      {
+        "clip": "h15_super_arc_move_backward",
+        "source_stance_phase_target_direction": "move_backward",
+        "target_move_velocity_xyz_mps": [
+          -0.003842958650146103,
+          0.3529542164308068,
+          2.0672220622087316
+        ]
+      },
+      {
+        "clip": "h15_super_arc_move_left",
+        "source_stance_phase_target_direction": "move_left",
+        "target_move_velocity_xyz_mps": [
+          -2.2690505941683785,
+          0.3006021456751741,
+          -0.17765744211499954
+        ]
+      },
+      {
+        "clip": "h15_super_arc_move_right",
+        "source_stance_phase_target_direction": "move_right",
+        "target_move_velocity_xyz_mps": [
+          2.165322151113832,
+          -0.22108531295445275,
+          0.15932222683718755
+        ]
+      }
+    ],
+    "max_wrist_IK_residual_units": 3.960906917056119e-06,
+    "max_loop_rotation_gap_degrees": 0.0,
+    "checks": [
+      "R2 root marker and named spectral_blades provenance",
+      "actual composed fullbody/arms; no R1 upper mask",
+      "full source periods, no speedup",
+      "finite unit quaternion/duration/loop boundaries",
+      "no rootXZ displacement duplication",
+      "target rig UUID/geometry unchanged",
+      "cast/attack/dodge/audio resources unchanged",
+      "source originals/hash and raw20Hz fullTRS world reconstruction agreement"
+    ],
+    "limitations": [
+      "existing block rig has no independent fingers or toe bones",
+      "Arc Staff binding remains candidate; weapon prop visual/native fit still master-owned"
+    ],
+    "quarantined_R1": "/tmp/w336-super-locomotion/quarantine/hunter-r1",
+    "not_run": [
+      "main build/QA/native/server/client/commit"
+    ]
+  }
+}

@@ -21,7 +21,7 @@ import java.util.Map;
 
 /** Installs a versioned limb without ever opening an artist-owned installed model for writing. */
 public final class HunterModelAssets {
-    public static final String MODEL_NAME = "guardian_hunter_w332_"+SuperMotionOverlaysW332.revision()+"_"+MeleeSuperAnimationTiming.revision(MeleeSuperAnimationTiming.ARC_RESOURCE);
+    public static final String MODEL_NAME = "guardian_hunter_w336_"+SuperLocomotionW336.revision(SuperLocomotionW336.HUNTER_RESOURCE)+"_"+SuperMotionOverlaysW332.revision()+"_"+MeleeSuperAnimationTiming.revision(MeleeSuperAnimationTiming.ARC_RESOURCE);
     static final String ANIMATION_RESOURCE = "/destiny/animation/hunter_w199.animation.json";
 
     private HunterModelAssets() { }
@@ -84,8 +84,8 @@ public final class HunterModelAssets {
                 JsonParser.parseReader(new InputStreamReader(source, StandardCharsets.UTF_8))
                         .getAsJsonObject().getAsJsonArray("animations").forEach(animations::add);
             }
-            JsonArray compiledAnimations=SuperMotionOverlaysW332.overlay(
-                    MeleeSuperAnimationTiming.overlay(animations,MeleeSuperAnimationTiming.ARC_RESOURCE),"h15_");
+            JsonArray compiledAnimations=SuperLocomotionW336.overlay(SuperMotionOverlaysW332.overlay(
+                    MeleeSuperAnimationTiming.overlay(animations,MeleeSuperAnimationTiming.ARC_RESOURCE),"h15_"),"h15_");
             JsonObject model = buildModel(
                     JsonParser.parseReader(new InputStreamReader(template, StandardCharsets.UTF_8)).getAsJsonObject(),compiledAnimations);
             if (installIfAbsent(target, model)) {
