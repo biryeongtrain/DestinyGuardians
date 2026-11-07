@@ -1,5 +1,5 @@
 {
-  "_doc": "Shared loot tables. Weapon filters match the catalog (w30/w40): exotic, slots (KINETIC/ENERGY/POWER), ammo (PRIMARY/SPECIAL/HEAVY), families, ids, exclude, rarity (W325: common/uncommon/rare = Red War skins, legendary, exotic; omitted = catalog legendary+exotic). Engram tiers decode through engramTables. A fresh weapon fills trait columns by tier: common 0, uncommon 1, rare and above all. W325 loot-shooter pacing: white/green/blue weapons drop directly and often, legendaries mostly as engrams.",
+  "_doc": "Shared loot tables. Weapon filters match the catalog (w30/w40): exotic, slots (KINETIC/ENERGY/POWER), ammo (PRIMARY/SPECIAL/HEAVY), families, ids, exclude, rarity (W325: common/uncommon/rare = Red War skins, legendary, exotic; omitted = catalog legendary+exotic). Engram tiers decode through engramTables. A fresh weapon fills trait columns by tier: common 0, uncommon 1, rare and above all. Reduced pre-auto-dismantle pacing: minor 3%, major 10%, boss one 50% roll; strike completion retains one guaranteed weapon and its chest has one 50% bonus roll. Tier weights and engram decoding remain unchanged. Minecraft-specific economy tuning, not source-game drop rates.",
   "tables": {
     "strike_completion": {
       "rolls": 1,
@@ -13,7 +13,7 @@
       ]
     },
     "strike_chest": {
-      "rolls": 2,
+      "rolls": 1,
       "entries": [
         {
           "weight": 3,
@@ -37,11 +37,12 @@
           "weight": 1,
           "engram": "exotic"
         }
-      ]
+      ],
+      "chance": 0.5
     },
     "enemy_minor": {
       "rolls": 1,
-      "chance": 0.14,
+      "chance": 0.03,
       "entries": [
         {
           "weight": 5,
@@ -75,7 +76,7 @@
     },
     "enemy_major": {
       "rolls": 1,
-      "chance": 0.45,
+      "chance": 0.1,
       "entries": [
         {
           "weight": 2,
@@ -104,8 +105,8 @@
       ]
     },
     "enemy_boss": {
-      "rolls": 2,
-      "chance": 1,
+      "rolls": 1,
+      "chance": 0.5,
       "entries": [
         {
           "weight": 5,
@@ -209,7 +210,10 @@
     "devils_lair": {
       "completion": "strike_completion",
       "chest": "strike_chest",
-      "glimmer": [40, 60]
+      "glimmer": [
+        40,
+        60
+      ]
     }
   }
 }
