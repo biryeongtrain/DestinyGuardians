@@ -199,22 +199,28 @@ public final class MeleeAreaW329GameTests {
             Vec3 a=arc.position(),s=spectral.position();
             int ready=Math.max(SuperAttackTiming.ARC_DEPLOY,
                     MeleeSuperAnimationTiming.durationTicks("w230_hunter_spectral_blades_start",30))+2;
-            h.runAfterDelay(ready,()->{
+            int settled=Math.max(MeleeSuperAnimationTiming.contactTicks(MeleeSuperAnimationTiming.arcAttack(false,0),SuperAttackTiming.ARC_CONTACT),
+                    MeleeSuperAnimationTiming.contactTicks("w230_hunter_spectral_blades_attack_air",7))+6;
+            // 26.3 runs tick-map callbacks in hash order, then sequences. Keep native onEachTick physics
+            // before acceptance/assertions, so the +2 landing check really observes two complete frames.
+            h.startSequence().thenExecuteAfter(ready,()->{
                 AbilityService.perform(arc,GuardianAction.PRIMARY);
                 // Spectral warmed up on real ground: no unrelated 30+ block accumulated fall damage.
                 // Accept a short airborne contact, then let native gravity land it during the authored windup.
                 check(h,spectral.onGround()&&spectral.getHealth()==20,"Spectral starts its regression jump alive on actual solid ground");
                 spectral.setPos(spectral.getX(),spectral.getY()+.2,spectral.getZ());
                 spectral.setDeltaMovement(new Vec3(0,-.2,0));spectral.setOnGround(false);
+                check(h,!spectral.level().noCollision(spectral,spectral.getBoundingBox().move(0,-.25,0)),
+                        "The airborne fixture has its real floor immediately below the short fall");
                 AbilityService.perform(spectral,GuardianAction.PRIMARY);
-            });
-            h.runAfterDelay(ready+2,()->{
-                check(h,spectral.onGround(),"Spectral lands by native floor collision during contact windup");
+                check(h,PlayerAnimations.activeClip(spectral).equals("w230_hunter_spectral_blades_attack_air"),
+                        "Accepted short fall selects the actual airborne source attack");
+            }).thenExecuteAfter(2,()->{
+                check(h,spectral.onGround()&&Math.abs(spectral.getY()-s.y)<1e-6,
+                        "Spectral lands by native floor collision during contact windup: position="+spectral.position()
+                                +" velocity="+spectral.getDeltaMovement()+" groundY="+s.y+" onGround="+spectral.onGround());
                 AbilityService.perform(spectral,GuardianAction.PRIMARY); // Rejected cooldown input cannot replace the air snapshot.
-            });
-            int settled=Math.max(MeleeSuperAnimationTiming.contactTicks(MeleeSuperAnimationTiming.arcAttack(false,0),SuperAttackTiming.ARC_CONTACT),
-                    MeleeSuperAnimationTiming.contactTicks("w230_hunter_spectral_blades_attack_air",7))+6;
-            h.runAfterDelay(ready+settled,()->{
+            }).thenExecuteAfter(settled-2,()->{
                 check(h,spectral.isAlive()&&AbilityService.inSuper(spectral),"The short landing must preserve the real Spectral session without fall death");
                 check(h,Math.abs(arc.getX()-a.x-5)<.01&&Math.abs(spectral.getX()-s.x-5)<.01,"Arc air contact and Spectral accepted-air contact retain five blocks even after windup landing: arc="+arc.position().subtract(a)+" spectral="+spectral.position().subtract(s)+" grounded="+spectral.onGround());
                 var stale=Guardians.runtime(arc).superSession;AbilityService.endSuper(arc);Vec3 after=arc.position();

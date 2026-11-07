@@ -72,7 +72,8 @@ public final class MeleeSuperAnimationTiming {
         if(Sources.VALIDATION_ERRORS.containsKey(path))throw new IllegalStateException(
                 "Malformed required W330 source overlay: "+path+": "+Sources.VALIDATION_ERRORS.get(path));
         String prefix=path.equals(ARC_RESOURCE)?"h15_super_arc_":"w230_hunter_spectral_blades_";
-        var phases=path.equals(ARC_RESOURCE)?List.of("start","start_air","attack","attack_weak_2","attack_weak_3","attack_air")
+        var phases=path.equals(ARC_RESOURCE)?List.of("start","start_air","attack","attack_weak_2","attack_weak_3","attack_air",
+                        "dodge_forward","dodge_backward","dodge_left","dodge_right")
                 :List.of("start","start_air","attack","attack2","attack3","attack_air","attack3_air","heavy","heavy_air");
         for(String phase:phases) {
             var clip=Sources.CLIPS.get(prefix+phase);
@@ -128,6 +129,11 @@ public final class MeleeSuperAnimationTiming {
         }:Math.floorMod(combo,3)==2?"attack3_air":"attack_air";
         String clip="w230_hunter_spectral_blades_"+phase;
         return has(clip)?phase:heavy?"attack3":Math.floorMod(combo,2)==1?"attack2":"attack";
+    }
+    public static String arcDodge(net.minecraft.world.entity.player.Input input) {
+        int forward=(input.forward()?1:0)-(input.backward()?1:0);
+        int strafe=(input.left()?1:0)-(input.right()?1:0);
+        return "h15_super_arc_dodge_"+(forward<0?"backward":forward>0?"forward":strafe>0?"left":strafe<0?"right":"forward");
     }
     private static int seconds(double value) {return Math.max(0,(int)Math.ceil(value*20-1e-8));}
 }

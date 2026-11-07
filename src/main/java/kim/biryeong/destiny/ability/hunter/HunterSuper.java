@@ -21,6 +21,7 @@ import kim.biryeong.destiny.fx.GoldenGunHandPose;
 import kim.biryeong.destiny.guardian.AbilitySlot;
 import kim.biryeong.destiny.guardian.Element;
 import kim.biryeong.destiny.guardian.GuardianClass;
+import kim.biryeong.destiny.guardian.Guardians;
 import kim.biryeong.minigamelib.displayhud.DisplayHud;
 import kim.biryeong.minigamelib.displayhud.ItemDisplayHud;
 import net.minecraft.core.particles.ParticleTypes;
@@ -160,9 +161,15 @@ public final class HunterSuper extends Ability {
         private final int deployTicks;
         private boolean queued,acceptedGrounded;
         private final SuperAttackTiming contact = new SuperAttackTiming();
+        private static final int DODGE_COOLDOWN=40,DODGE_INVULNERABLE=6;
+        private final ServerLevel dodgeLevel;
+        private long nextDodge,dodgeUntil=-1,dodgeMotionAt=-1,dodgeMotionEnd=-1,dodgeInvulnerableUntil=-1;
+        private Vec3 dodgeDirection=Vec3.ZERO;
+        private boolean dodgeImpulse;
 
         ArcStaff(ServerPlayer player) {
             super(player, (int) param("duration_ticks", 400));
+            dodgeLevel=player.level();
             startClip=!player.onGround()&&kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.has("h15_super_arc_start_air")
                     ?"h15_super_arc_start_air":"h15_super_arc_start";
             deployTicks=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.durationTicks(startClip,SuperAttackTiming.ARC_DEPLOY);
@@ -172,6 +179,7 @@ public final class HunterSuper extends Ability {
 
         @Override
         public boolean tick() {
+            advanceDodge();
             if (age + 1 == SuperAttackTiming.ARC_DEPLOY_SWING) SuperVfx.arcDeploy(player);
             if (age >= deployTicks && queued) { queued = false; primary(); }
             if (contact.advance()) strike();
@@ -186,7 +194,7 @@ public final class HunterSuper extends Ability {
         @Override
         public void primary() {
             if (age < deployTicks) { queued = true; return; }
-            if(age<nextStrike||contact.pending())return;
+            if(age<nextStrike||contact.pending()||dodgeActive())return;
             boolean grounded=player.onGround();
             String phase=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.arcAttack(grounded,combo);
             int hit=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.contactTicks(phase,SuperAttackTiming.ARC_CONTACT);
@@ -196,6 +204,68 @@ public final class HunterSuper extends Ability {
                     (int)param("strike_interval_ticks",SuperAttackTiming.ARC_RECOVERY));
             contact.request(hit);
             PlayerAnimations.play(player,phase);
+        }
+
+        private long now() { return dodgeLevel.getServer().getTickCount(); }
+        private boolean dodgeActive() { return dodgeUntil>=0&&now()<dodgeUntil; }
+        private boolean ownsDodge() {
+            return player.level()==dodgeLevel&&player.isAlive()&&!player.isRemoved()&&!player.hasDisconnected()
+                    &&player.getCamera()==player&&kim.biryeong.minigamelib.cinematic.CameraViews.get(player)==null
+                    &&(!kim.biryeong.destiny.camera.SuperCamera.ENABLED||kim.biryeong.destiny.camera.SuperCamera.active(player))
+                    &&Guardians.runtimeIfPresent(player).map(r->r.superSession==this).orElse(false);
+        }
+        @Override public java.util.Optional<SuperSession.ClassAbilityCooldown> classAbilityCooldown() {
+            return java.util.Optional.of(new SuperSession.ClassAbilityCooldown((int)Math.max(0,nextDodge-now()),DODGE_COOLDOWN));
+        }
+        @Override public AbilityService.Result classAbility() {
+            if(!ownsDodge()||age<deployTicks||age<nextStrike||contact.pending()||dodgeActive()
+                    ||kim.biryeong.destiny.combat.MeleeLunge.active(player))return AbilityService.Result.BUSY;
+            if(now()<nextDodge)return AbilityService.Result.COOLDOWN;
+            var runtime=Guardians.runtime(player);
+            String clip=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.arcDodge(runtime.lastInput);
+            int playback=kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.playbackTicks(clip,24);
+            if(!kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.has(clip))return AbilityService.Result.BUSY;
+            if(!PlayerAnimations.play(player,clip))return AbilityService.Result.FAILED;
+            dodgeDirection=Motion.inputDirection(player,runtime.lastInput);
+            nextDodge=now()+DODGE_COOLDOWN;
+            dodgeUntil=now()+playback;
+            dodgeMotionAt=now()+kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.entryBlendTicks(clip);
+            dodgeMotionEnd=now()+kim.biryeong.destiny.fx.MeleeSuperAnimationTiming.durationTicks(clip,22);
+            dodgeImpulse=false;
+            DestinySounds.orVanilla(dodgeLevel,player.position(),"class.hunter.dodge.gambler",
+                    SoundEvents.PLAYER_ATTACK_SWEEP,.6f,1.4f);
+            advanceDodge();
+            return AbilityService.Result.OK;
+        }
+        private void advanceDodge() {
+            if(dodgeUntil<0)return;
+            if(!ownsDodge()){finishDodge();return;}
+            if(!dodgeImpulse&&now()>=dodgeMotionAt&&now()<dodgeMotionEnd) {
+                dodgeImpulse=true;
+                Motion.setVelocity(player,new Vec3(dodgeDirection.x*1.15,.18,dodgeDirection.z*1.15));
+                Guardians.runtime(player).invulnerableTicks=Math.max(Guardians.runtime(player).invulnerableTicks,DODGE_INVULNERABLE);
+                dodgeInvulnerableUntil=now()+DODGE_INVULNERABLE;
+                player.resetFallDistance();
+            }
+            if(dodgeImpulse&&now()>=dodgeMotionEnd)stopDodgeImpulse();
+            if(now()>=dodgeUntil)finishDodge();
+        }
+        private void stopDodgeImpulse() {
+            if(!dodgeImpulse)return;
+            dodgeImpulse=false;
+            if(player.level()!=dodgeLevel||!player.isAlive()||player.hasDisconnected())return;
+            Vec3 velocity=player.getDeltaMovement();double along=velocity.dot(dodgeDirection);
+            // Retire only the small residual of this impulse; preserve vertical gravity and unrelated lateral/strong impulses.
+            if(along>0&&along<=1.1501&&velocity.subtract(dodgeDirection.scale(along)).horizontalDistanceSqr()<.01)
+                Motion.setVelocity(player,velocity.subtract(dodgeDirection.scale(along)));
+        }
+        private void finishDodge() {
+            stopDodgeImpulse();
+            var runtime=Guardians.runtimeIfPresent(player).orElse(null);
+            if(runtime!=null&&now()<dodgeInvulnerableUntil&&runtime.invulnerableTicks<=dodgeInvulnerableUntil-now())
+                runtime.invulnerableTicks=0;
+            dodgeUntil=dodgeMotionAt=dodgeMotionEnd=dodgeInvulnerableUntil=-1;
+            dodgeDirection=Vec3.ZERO;
         }
 
         private void strike() {
@@ -226,6 +296,7 @@ public final class HunterSuper extends Ability {
         public void end() {
             queued = false;
             contact.cancel();
+            finishDodge();
             super.end();
             player.removeEffect(net.minecraft.world.effect.MobEffects.SPEED);
         }

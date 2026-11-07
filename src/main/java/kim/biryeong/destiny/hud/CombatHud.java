@@ -50,9 +50,16 @@ public final class CombatHud {
 
     /** Cooldown fill is an actual charge fraction, not a fabricated timer. */
     public static float charge(ServerPlayer player, AbilitySlot slot) {
+        var sessionCooldown=sessionCooldown(player,slot);
+        if(sessionCooldown.isPresent())return 1f-fraction(sessionCooldown.get().remainingTicks(),sessionCooldown.get().totalTicks());
         Ability ability = AbilityService.equipped(player, slot).orElse(null);
         return ability == null ? 0f : Math.clamp(1f - fraction(Guardians.data(player).cooldown(slot),
                 Math.max(1, ability.cooldownTicks())), 0f, 1f);
+    }
+
+    private static java.util.Optional<kim.biryeong.destiny.ability.SuperSession.ClassAbilityCooldown> sessionCooldown(ServerPlayer player,AbilitySlot slot) {
+        if(slot!=AbilitySlot.CLASS_ABILITY)return java.util.Optional.empty();
+        return Guardians.runtimeIfPresent(player).map(r->r.superSession).flatMap(s->s.classAbilityCooldown());
     }
 
     private static float fraction(float value, float max) {
@@ -125,7 +132,8 @@ public final class CombatHud {
             if(sword.isPresent()) { debug.append("|검 에너지 ").append(Math.round(progress*100)).append('%'); continue; }
             debug.append('|').append(switch(slot) {
                 case GRENADE -> "수류탄 "; case MELEE -> "근접 "; default -> "직업 ";
-            }).append(data.cooldown(slot) > 0 ? (data.cooldown(slot) + 19) / 20 + "s" : "ready");
+            }).append((sessionCooldown(player,slot).map(c->c.remainingTicks()).orElse(data.cooldown(slot)))>0
+                    ?(sessionCooldown(player,slot).map(c->c.remainingTicks()).orElse(data.cooldown(slot))+19)/20+"s":"ready");
         }
         AbilityKeyHud.update(player);
         LAST.put(player.getUUID(), debug.append("|궁극기 ").append(Math.round(superCharge * 100)).append('%').toString());

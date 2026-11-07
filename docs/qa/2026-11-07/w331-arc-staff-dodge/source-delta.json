@@ -1,0 +1,69 @@
+{
+  "worktree": "/Users/qf/.codex/worktrees/perk-expansion-stats/DestinyGuardians",
+  "main_head_baseline": "4e5d1ebf9",
+  "main_baselines_match": true,
+  "status": "four dedicated Arc Staff dodge clips; native acceptance pending",
+  "files": [
+    {
+      "path": "art/animation/w330/arc_staff/arc_staff_w330.animation.json",
+      "before_sha256": "849f4adfe77466963cd908aa6f9301f6ed7da70ba5004e731ebaf8d3be041938",
+      "after_sha256": "34c5ba301356265cb2562bb2282cc263ea7e53f86aadee584f8135d3a1a94ab1",
+      "bytes": 6434668
+    },
+    {
+      "path": "art/animation/w330/arc_staff/h15_super_arc_dodge_forward-source-retarget.png",
+      "before_sha256": null,
+      "after_sha256": "19fb14022f1d4cb7681f051880e1420d87e18ed779a64cc4a1ac5d19d46f7977",
+      "bytes": 1563130
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w331-dodge-manifest.json",
+      "before_sha256": null,
+      "after_sha256": "f6090b7178d6256b8193118ea688e860d6dc9e6a7b63c246738843e01ad2b776",
+      "bytes": 10414
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w331-dodge-source-review.json",
+      "before_sha256": null,
+      "after_sha256": "a11ff6abebeb3de784365e91b5a6ac449e07a6bef8f8c9dfaecdb99e0f754efc",
+      "bytes": 186506
+    },
+    {
+      "path": "art/animation/w330/arc_staff/w331-dodge-validation.json",
+      "before_sha256": null,
+      "after_sha256": "21ee810e9ebde019b6f1791d015b143b54284cad5d113079b9c55c1c87c646cd",
+      "bytes": 800
+    },
+    {
+      "path": "scripts/art/w330_arc_staff.py",
+      "before_sha256": "81e7d8f9d3d156b6001314227ac1d61f3b7bd74cdda7744e48124a5467cb3309",
+      "after_sha256": "62456e8e3841c1a39bcba5b6169bf3cb68745fffd98e117109914abb99815b13",
+      "bytes": 31775
+    }
+  ],
+  "checks": {
+    "status": "PASS",
+    "new_clips": 4,
+    "new_rotation_keys": 4032,
+    "length_seconds_each": 1.033333333,
+    "frames_each": [
+      1,
+      32
+    ],
+    "checks": [
+      "direct headless .blend action/slot/depsgraph evaluation",
+      "single forward source/retarget representative PNG inspected",
+      "all existing six clips exact dictionary equality",
+      "root existing metadata unchanged",
+      "existing rig UUID/name mapping and geometry unchanged",
+      "dense60Hz unit hemisphere-continuous quaternion keys",
+      "entry1/exit2 and full source span",
+      "source original/input hashes unchanged",
+      "no remaining source-key head clearance overlap"
+    ],
+    "not_run": [
+      "native client/server and runtime integration, owned by master",
+      "full QA/build intentionally omitted for art addition"
+    ]
+  }
+}

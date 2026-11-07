@@ -8,6 +8,18 @@ public interface SuperSession {
     /** 궁극기 중 기본 공격(좌클릭). */
     void primary();
 
+    /** Explicit opt-in: super-owned class actions never invoke the equipped ordinary ability or its perks. */
+    default AbilityService.Result classAbility() { return AbilityService.Result.BUSY; }
+
+    /** Session-local HUD charge, independent of the equipped ordinary class ability's saved cooldown. */
+    default java.util.Optional<ClassAbilityCooldown> classAbilityCooldown() { return java.util.Optional.empty(); }
+    record ClassAbilityCooldown(int remainingTicks,int totalTicks) {
+        public ClassAbilityCooldown {
+            if(totalTicks<1)throw new IllegalArgumentException("Cooldown capacity must be positive");
+            remainingTicks=Math.clamp(remainingTicks,0,totalTicks);
+        }
+    }
+
     /** 종료 정리. 자연 종료·사망·접속 종료 모두 호출된다. */
     void end();
 

@@ -226,7 +226,10 @@ public final class AbilityService {
             return Result.BUSY;
         }
         if (runtime.superSession != null && slot != AbilitySlot.SUPER && slot != AbilitySlot.JUMP) {
-            return Result.BUSY; // A grenade/dodge cannot replace an accepted super contact animation.
+            if(slot!=AbilitySlot.CLASS_ABILITY)return Result.BUSY;
+            Result result=runtime.superSession.classAbility();
+            if(result==Result.OK)CombatHud.update(player);
+            return result; // No ordinary cooldown, reload, melee refresh, perk or cast lifecycle side effects.
         }
         if (slot == AbilitySlot.SUPER) {
             if (runtime.superSession != null) {

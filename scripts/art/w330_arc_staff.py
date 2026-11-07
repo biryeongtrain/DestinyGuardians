@@ -18,6 +18,12 @@ TAGS = {
     'h15_super_arc_attack_weak_3': '80A8A92B',
     'h15_super_arc_attack_air': '80A8A92D',
 }
+DODGE_TAGS = {
+    'h15_super_arc_dodge_forward': '80A8A938',
+    'h15_super_arc_dodge_backward': '80A8A93C',
+    'h15_super_arc_dodge_left': '80A8A93E',
+    'h15_super_arc_dodge_right': '80A8A93F',
+}
 CONTACTS = {'80A8A937': 10/30, '80A8A92A': 8/30, '80A8A92B': 8/30, '80A8A92D': 8/30}
 REPO = None
 
@@ -73,7 +79,8 @@ def main(args):
     if rig.constraints or rig.animation_data and rig.animation_data.drivers: raise ValueError('Unexpected source drivers/constraints')
     selected = sorted(set(old.MAP.values()) | set(old.EXTRA) | {'6B138432','9D7EE73A'})
     actions = {a.name.split('|')[1]: a for a in bpy.data.actions if len(a.name.split('|'))>=3}
-    samples = {tag: sample(rig, actions[tag], selected) for tag in TAGS.values()}
+    exportTags=DODGE_TAGS if args.append_dodges else TAGS
+    samples = {tag: sample(rig, actions[tag], selected) for tag in dict.fromkeys([*exportTags.values(),'80A8A922'])}
     reference = samples['80A8A922'][-1]['matrices']
     refs = {n: Matrix(m) for n,m in reference.items()}
     def point(m): return Vector((m[0][3],m[1][3],m[2][3]))
@@ -230,7 +237,7 @@ def main(args):
             h20.aim_right(model,pose,mat(desiredItem))
         return frames
     clips=[]; audit=[]; preview={}
-    for name,tag in TAGS.items():
+    for name,tag in exportTags.items():
         rows=samples[tag]; previousPole.clear(); frames=continuous_clearance([evaluate(row) for row in rows]); length=rows[-1]['seconds']
         animators={}; maxEuler=0; maxQuat=0
         for bone in ready:
@@ -259,6 +266,7 @@ def main(args):
         clip={'name':name,'uuid':h15.uid('w330/'+name),'length':length,'loop':'once','snapping':60,
               'destiny_quaternion_sampling':True,'destiny_entry_blend_ticks':1,'destiny_exit_blend_ticks':2,'animators':animators}
         if tag in CONTACTS:clip.update(destiny_contact_seconds=CONTACTS[tag],destiny_recovery_seconds=length,destiny_contact_provisional=True)
+        if args.append_dodges:clip['destiny_recovery_seconds']=length
         clips.append(clip)
         speeds=[]
         for a,b in zip(rows,rows[1:]):
@@ -275,7 +283,41 @@ def main(args):
                       'source_two_hand_frames':sum(f[2]['grip_weight']>.9 for f in frames),
                       'start_wrist':vec(h19.point(h19.fk(model,frames[0][0],frames[0][1])['pri_right_item'],[0,0,0])),
                       'end_wrist':vec(h19.point(h19.fk(model,frames[-1][0],frames[-1][1])['pri_right_item'],[0,0,0]))})
+        if args.append_dodges:
+            positions=[Vector(target_points(row['matrices'])['1A5C68E5']) for row in rows]
+            pelvis=[Vector(target_points(row['matrices'])['C7C0BA6E']) for row in rows]
+            velocities=[((b-a).length*60,rows[i+1]['seconds']) for i,(a,b) in enumerate(zip(positions,positions[1:]))]
+            peak=max(v[0] for v in velocities)
+            moving=[time for speed,time in velocities if speed>max(.03,peak*.1)]
+            if moving:
+                clip['destiny_motion_start_seconds']=max(0,moving[0]-1/60)
+                clip['destiny_motion_end_seconds']=moving[-1]
+                clip['destiny_motion_provisional']=True
+            audit[-1]['source_pedestal_delta_target_basis']=vec(positions[-1]-positions[0])
+            audit[-1]['source_pelvis_delta_target_basis']=vec(pelvis[-1]-pelvis[0])
+            audit[-1]['source_pedestal_xz_extent']=[[min(v[j] for v in positions),max(v[j] for v in positions)] for j in [0,2]]
+            audit[-1]['source_pelvis_xz_extent']=[[min(v[j] for v in pelvis),max(v[j] for v in pelvis)] for j in [0,2]]
+            audit[-1]['motion_cue_note']='Provisional 10%-of-peak evaluated pedestal translation speed, not a decoded gameplay event.'
+            audit[-1]['motion_start_seconds']=clip.get('destiny_motion_start_seconds')
+            audit[-1]['motion_end_seconds']=clip.get('destiny_motion_end_seconds')
         preview[name]={'rows':rows,'frames':frames}
+    if args.append_dodges:
+        path=out/'arc_staff_w330.animation.json';base=json.loads(path.read_text());existing=copy.deepcopy(base['animations'])
+        assert not any(c['name'] in exportTags for c in existing),'Dodge clips already exist; use a clean captured baseline'
+        base['animations'].extend(clips);write_json(path,base)
+        assert json.loads(path.read_text())['animations'][:len(existing)]==existing
+        write_json(out/'w331-dodge-manifest.json',{'status':'direct-source candidate awaiting master native dodge acceptance','blender':bpy.app.version_string,
+            'source_blend':str(source),'input_sha256':hashes,'fps':30,'sampling_fps':60,'clips':audit,
+            'timing':'Original32frames /31intervals at30fps; no retime, entry1/exit2, no generic dodge substitution.',
+            'translation':'Source horizontal root is measured for direction provenance, kept visually in place so runtime owns actual dodge movement.',
+            'rig_geometry_uv_changed':False,'existing_six_clips_preserved':True,'review':'Single forward source/retarget proxy image; direct depsgraph source action/slot evaluated for all4directions.'})
+        write_json(out/'w331-dodge-source-review.json',{'space':'evaluated armature object matrices; read-only .blend, same C basis as W330',
+            'actions':[{'tag':tag,'action':actions[tag].name,'slot':actions[tag].slots[0].identifier,'frames':list(actions[tag].frame_range)} for tag in exportTags.values()],
+            'representative_samples':{tag:[rows[0],rows[len(rows)//2],rows[-1]] for tag,rows in samples.items() if tag in exportTags.values()}})
+        for path,sha in hashes.items():
+            if digest(path)!=sha:raise RuntimeError('Read-only source drift: '+path)
+        review(out,model,preview,h15,h19,C,refGripAxis,refs,['h15_super_arc_dodge_forward'])
+        print('W331_ARC_DODGE_APPENDED',len(clips),out);return
     root={'schema_version':1,'model':'guardian_hunter_w330_arc_candidate','destiny_deploy_swing_seconds':13/30,'animations':clips}
     write_json(out/'arc_staff_w330.animation.json',root)
     write_json(out/'action-audit.json',audit)
@@ -294,7 +336,7 @@ def main(args):
     # Representative source/retarget PNGs retain the prior clearance-candidate caption; native QA evaluates this continuity revision.
     print('W330_ARC_EXPORTED',len(clips),out)
 
-def review(out,model,preview,h15,h19,C,refGripAxis,refs):
+def review(out,model,preview,h15,h19,C,refGripAxis,refs,names=None):
     # Explicit source/retarget joint and untextured rig proxies, not game screenshots or original meshes.
     for o in list(bpy.data.objects):bpy.data.objects.remove(o,do_unlink=True)
     def material(name,color):
@@ -316,7 +358,7 @@ def review(out,model,preview,h15,h19,C,refGripAxis,refs):
             else:tree(n['children'],n['uuid'])
     tree(model['outliner']);groups={g['uuid']:g for g in model['groups']}
     chains=[['C7C0BA6E','A252A6A2','A352A6A2','7E92D640'],['A352A6A2','17025F50','A3781DCD','DE9D6BEA'],['A352A6A2','D1232BA2','897A1504','8C83CB67'],['C7C0BA6E','9F0FD28C','8BD44A3F','B9B9E05D','6B138432'],['C7C0BA6E','695DAF09','35B14D1B','0F8B505D','9D7EE73A']]
-    for name in ['h15_super_arc_start','h15_super_arc_attack']:
+    for name in (names or ['h15_super_arc_start','h15_super_arc_attack']):
         for o in list(bpy.data.objects):bpy.data.objects.remove(o,do_unlink=True)
         data=preview[name];count=len(data['rows']);indices=[round((count-1)*f) for f in [0,.25,.5,.75,1]]
         for col,i in enumerate(indices):
@@ -350,5 +392,5 @@ def review(out,model,preview,h15,h19,C,refGripAxis,refs):
         scene.render.filepath=str(out/(name+'-source-retarget.png'));bpy.ops.render.render(write_still=True)
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--repo-root',required=True);parser.add_argument('--output',required=True)
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--repo-root',required=True);parser.add_argument('--output',required=True);parser.add_argument('--append-dodges',action='store_true')
     main(parser.parse_args(sys.argv[sys.argv.index('--')+1:]))

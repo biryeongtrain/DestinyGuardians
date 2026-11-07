@@ -1,0 +1,21 @@
+{
+  "centralGameTests": {
+    "testsIncludingFramework": 24,
+    "passed": 23,
+    "failures": [
+      {
+        "test": "destiny-test:melee_area_w329game_tests_arc_staff_and_spectral_targetless_air_contacts_travel_five_and_stale_session_cannot_move",
+        "message": "(5115997, 4, -14545986) Spectral lands by native floor collision during contact windup on tick 37"
+      }
+    ]
+  },
+  "newW331CasesPassed": 2,
+  "nativeAcceptance": "PASS: four direction keys + double-sneak used the existing vanilla packet route; actual PNGs show crouch/flip/landing, staff/rear camera retained and idle return; independent charge visible",
+  "nativeSequence": "dodge-four.json",
+  "sourceWorkerVisualReview": "source worker inspected master contact sheet; no clear detached limb/staff or new IK damage; subframe contact not certified",
+  "resolvedGameTests": {
+    "productPassed": 23,
+    "unresolvedFailures": [],
+    "landingFollowup": "5/5 product + framework passed; same floor/time/velocity/5-block assertions; ordered callback fixture"
+  }
+}
