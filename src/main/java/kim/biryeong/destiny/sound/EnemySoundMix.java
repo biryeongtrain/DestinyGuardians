@@ -6,7 +6,7 @@ public final class EnemySoundMix {
     private EnemySoundMix() { }
     public static float volume(String event) {
         return switch (event) {
-            case "death" -> DEATH;
+            case "death", "death_hard" -> DEATH;
             case "hurt" -> HURT;
             case "impact" -> .45f;
             default -> COMBAT;

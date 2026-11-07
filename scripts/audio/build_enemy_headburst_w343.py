@@ -1,25 +1,14 @@
 #!/usr/bin/env python3
 """Read-only import of the 2026-11-08 headburst delivery; full-length positional mono derivatives."""
 import argparse
-import hashlib
 import json
 import shutil
-import subprocess
-import wave
 from pathlib import Path
+from audio_variant_common import digest, write_json, mono_derivative
 
 ROOT = Path(__file__).resolve().parents[2]
 ART = ROOT / "art/audio/enemy-headburst-w343"
 ASSETS = ROOT / "src/main/resources/assets/destiny_headburst"
-
-
-def digest(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def write_json(path, value):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
 def main():
@@ -53,19 +42,8 @@ def main():
     files = []
     for row in manifest:
         wav = source / row["wav"]
-        with wave.open(str(wav)) as stream:
-            rate, frames, channels = stream.getframerate(), stream.getnframes(), stream.getnchannels()
-        assert channels == 2
         out = ASSETS / "sounds" / (row["wem"].lower() + ".ogg")
-        subprocess.run([ffmpeg, "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav),
-                        "-af", "pan=mono|c0=0.5*c0+0.5*c1", "-ar", str(rate),
-                        "-map_metadata", "-1", "-threads", "1", "-fflags", "+bitexact", "-flags:a", "+bitexact",
-                        "-c:a", "libvorbis", "-q:a", "5", str(out)], check=True)
-        pcm = subprocess.check_output([ffmpeg, "-hide_banner", "-loglevel", "error", "-i", str(out),
-                                       "-f", "s16le", "-acodec", "pcm_s16le", "-"])
-        decoded = len(pcm) // 2
-        assert abs(decoded - frames) <= 256 and any(pcm), row["wem"]
-        assert out.read_bytes()[39] == 1, "Vorbis identification must report mono"
+        rate, frames, decoded = mono_derivative(ffmpeg, wav, out)
         files.append(dict(row, sourceWavSha256=digest(wav), sourceOggSha256=digest(source / row["ogg"]),
                           sourceFrames=frames, outputFrames=decoded, outputChannels=1,
                           output=out.relative_to(ROOT).as_posix(), outputSha256=digest(out)))

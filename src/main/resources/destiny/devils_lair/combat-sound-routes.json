@@ -48,7 +48,8 @@
     "ACOLYTE": {
       "fire": "arc_rifle_fire",
       "melee": "trooper_melee_swing",
-      "death": "knight_mvmt_death"
+      "death": "destiny_hive_death:death.trooper.soft",
+      "death_hard": "destiny_hive_death:death.trooper.hard"
     },
     "BRIG": {
       "armor_break": "fallen_mech_hard_ping",
@@ -69,10 +70,11 @@
       "melee": "dreg_melee_swing"
     },
     "KNIGHT": {
-      "death": "knight_mvmt_death",
+      "death": "destiny_hive_death:death.knight.soft",
       "fire": "boomer_fire",
       "impact": "boomer_explode",
-      "melee": "knight_melee_whoosh"
+      "melee": "knight_melee_whoosh",
+      "death_hard": "destiny_hive_death:death.knight.hard"
     },
     "MARAUDER": {
       "charge": "fallen_sword_generic_telegraph",
@@ -98,7 +100,8 @@
     "THRALL": {
       "charge": "thrall_melee_pre",
       "melee": "thrall_melee_swing_1",
-      "death": "knight_mvmt_death"
+      "death": "destiny_hive_death:death.thrall.soft",
+      "death_hard": "destiny_hive_death:death.thrall.hard"
     },
     "VANDAL": {
       "death": "destiny:guardian_rises.fallen.fallen_vandal_death",
@@ -118,14 +121,19 @@
       "fire": "darkness_blast_fire_single",
       "hazard": "darkness_cloud_cast",
       "impact": "darkness_blast_explode",
-      "death": "knight_mvmt_death"
+      "death": "destiny_hive_death:death.wizard.soft",
+      "death_hard": "destiny_hive_death:death.wizard.hard"
     }
   },
   "selection": "Authored gameplay timing and random media selection from named source bindings, not a reconstruction of Wwise layered mixing. Actor owner matches are audited in the manifest; unmatched shared sounds are explicit approximations. Unnamed Brig firing and vocal events remain pending.",
   "approximations": {
-    "THRALL.death": "Reuses shipped Hive Knight death movement; exact species-specific death vocal is not bundled.",
-    "ACOLYTE.death": "Reuses shipped Hive Knight death movement; exact species-specific death vocal is not bundled.",
-    "WIZARD.death": "Reuses shipped Hive Knight death movement; exact species-specific death vocal is not bundled.",
     "MARAUDER.death": "Uses shipped Fallen Vandal death vocal for the Vandal-derived Marauder."
+  },
+  "hive_death_policy": {
+    "source": "Destiny-Hive-Death-SFX-Comparison-2026-11-08",
+    "default": "soft on ordinary death (local playback choice)",
+    "hard": "Separate authored event, available without relabeling it as headshot-only",
+    "headshot_only_confirmed": false,
+    "soft_hard_equals_body_headshot": false
   }
 }
