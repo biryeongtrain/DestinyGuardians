@@ -13,14 +13,19 @@ import java.util.*;
  * Legacy sources stay on disk; pixel/tint arm graphs never enter the production client pack. */
 public final class ProfileArmAssets {
     public record Pose(Matrix4f right, Matrix4f left, boolean leftArm, boolean upper) {}
-    private static volatile Map<Identifier, JsonObject> graphs = Map.of();
-    private static volatile Map<String, Pose> poses = Map.of();
+    record Snapshot(Map<Identifier, JsonObject> graphs, Map<String, Pose> poses) {
+        Snapshot { graphs = Map.copyOf(graphs); poses = Map.copyOf(poses); }
+    }
+    private static volatile Snapshot current = new Snapshot(Map.of(), Map.of());
     public static final String ITEM = "profile_arm";
     public static final String ITEM_JSON = "{\"model\":{\"type\":\"minecraft:special\",\"base\":\"destiny:profile_arm\",\"transformation\":[1,0,0,0.5,0,1,0,0.5,0,0,1,0.5,0,0,0,1],\"model\":{\"type\":\"minecraft:player_head\"}}}";
     private ProfileArmAssets() {}
     public static Identifier view(Identifier id) {return DestinyGuardians.id("profile_view/"+id.getPath());}
-    public static JsonObject graph(Identifier id) {return graphs.get(id);}
-    public static Pose pose(String id) {return poses.get(id);}
+    public static JsonObject graph(Identifier id) {return current.graphs().get(id);}
+    public static Pose pose(String id) {return current.poses().get(id);}
+    static Snapshot snapshot() { return current; }
+    static void install(Snapshot snapshot) { current = snapshot; }
+    static void clear() { current = new Snapshot(Map.of(), Map.of()); }
 
     static void compact(ResourcePackBuilder builder, Map<String,PackResource> files, Set<Identifier> active) {
         var newGraphs=new HashMap<Identifier,JsonObject>();var newPoses=new HashMap<String,Pose>();
@@ -78,7 +83,7 @@ public final class ProfileArmAssets {
         DestinyGuardians.LOGGER.info("Weapon textures: {} unused versioned PNGs omitted without resampling",removedTextures);
         Set<String> excluded=Set.copyOf(omitted);builder.addResourceConverter((path,data)->excluded.contains(path)?null:data);
         patchShaders(builder);
-        poses=Map.copyOf(newPoses);graphs=Map.copyOf(newGraphs);
+        current = new Snapshot(newGraphs, newPoses);
         DestinyGuardians.LOGGER.info("Profile skin view: {} routes, {} server poses, {} omitted files; item graphs {} -> {} bytes",newGraphs.size(),newPoses.size(),omitted.size(),before,after);
     }
     private static JsonObject firstPersonEmpty(JsonObject fallback) {
