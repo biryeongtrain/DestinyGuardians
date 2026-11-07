@@ -151,6 +151,7 @@ class WeaponUseTraceTest {
         assertBody(method(source("weapon/WeaponItems.java"), "magazine"), """
                 {
                     var data = stack.get(DataComponents.CUSTOM_DATA);
+                    p = WeaponComponents.profile(stack, p);
                     if (data == null) return new WeaponMagazine(p, 0, 0);
                     var tag = data.copyTag();
                     var ammo = new WeaponMagazine(p, savedCount(tag, ROUNDS), savedCount(tag, RESERVE), savedCount(tag, OVERFLOW), loadedLimit(stack, p, tag));
@@ -158,6 +159,65 @@ class WeaponUseTraceTest {
                     return ammo;
                 }
                 """);
+        // W326 adds a component-derived immutable profile projection. Freeze every
+        // newly reachable helper so observation cannot start rolling or saving items.
+        var components = source("weapon/WeaponComponents.java");
+        assertBody(method(components, "profile"), """
+                {
+                    if (p == null || p.mode() == WeaponProfile.Mode.MELEE) return p;
+                    int bonus = stat(stack, "magazine");
+                    int mag = magazine(p.magazine(), bonus);
+                    if (mag == p.magazine()) return p;
+                    return new WeaponProfile(p.mode(), p.damage(), p.intervalTicks(), mag, p.reserve(), p.reloadTicks(), p.range(),
+                            p.chargeTicks(), p.burst(), p.pellets(), p.spread(), p.speed(), p.gravity(), p.blastRadius(), p.automatic(),
+                            p.infiniteReserve(), p.cadenceTicks(), p.burstSpacingTicks(), p.sharedBurstAmmo(), p.shellReload(),
+                            p.firstReloadTicks(), p.roundsPerInsert());
+                }
+                """);
+        assertBody(method(components, "stat"), """
+                {
+                    int sum = 0;
+                    for (var c : of(stack)) sum += c.stat(key);
+                    return sum;
+                }
+                """);
+        assertBody(method(components, "of"), """
+                {
+                    var entry = WeaponItems.entry(stack);
+                    if (entry.isEmpty()) return List.of();
+                    var data = stack.get(DataComponents.CUSTOM_DATA);
+                    if (data == null) return List.of();
+                    var tag = data.copyTag().getCompoundOrEmpty(KEY);
+                    var out = new ArrayList<Component>(2);
+                    for (var s : Slot.values()) {
+                        String id = tag.getStringOr(s.id(), "");
+                        var c = BY_ID.get(id);
+                        if (c != null && pool(entry.get(), s).contains(c)) out.add(c);
+                    }
+                    return out;
+                }
+                """);
+        assertBody(method(components, "pool"), """
+                {
+                    var p = POOLS.get(entry.id());
+                    return p == null ? List.of() : p.getOrDefault(slot, List.of());
+                }
+                """);
+        assertBody(method(components, "magazine"), """
+                {
+                    if (bonus == 0 || base <= 0) return base;
+                    double delta = base * bonus * 0.0067;
+                    int d = (int) Math.round(delta);
+                    if (d == 0 && base >= 5) d = Integer.signum(bonus);
+                    return Math.max(1, base + d);
+                }
+                """);
+        var component = components.getMembers().stream().filter(ClassTree.class::isInstance).map(ClassTree.class::cast)
+                .filter(t -> t.getSimpleName().contentEquals("Component")).findFirst().orElseThrow();
+        var slot = components.getMembers().stream().filter(ClassTree.class::isInstance).map(ClassTree.class::cast)
+                .filter(t -> t.getSimpleName().contentEquals("Slot")).findFirst().orElseThrow();
+        assertBody(method(component, "stat"), "{ return stats == null ? 0 : stats.getOrDefault(key, 0); }");
+        assertBody(method(slot, "id"), "{ return name().toLowerCase(Locale.ROOT); }");
     }
 
     @Test void registeredPacketObserversRunAfterExactMainThreadCheckWithoutCancellationOrMutation() throws Exception {

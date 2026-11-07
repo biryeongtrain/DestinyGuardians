@@ -23,7 +23,7 @@ final class ReviewedAudioW234 {
         for (var entry : fragment.entrySet()) target.add(entry.getKey(), entry.getValue().deepCopy());
     }
     static JsonObject w102Definitions() throws Exception {
-        var result = json("docs/qa/2026-10-25/w98/before/src/main/resources/assets/destiny/sounds.json");
+        var result = json("src/test/resources/destiny-test/audio/w96-sounds.json");
         merge(result, json("art/weapons/w98/audio/event-definitions.json"));
         merge(result, json("art/weapons/w102/audio/event-definitions.json"));
         return result;
@@ -48,7 +48,7 @@ final class ReviewedAudioW234 {
             result.add(event, entry);
         }
         merge(result, json("art/classes/w229/audio/sounds-additions.json"));
-        merge(result, json("docs/qa/2026-10-28/w230/sources/sounds-additions.json"));
+        merge(result, json("src/test/resources/destiny-test/audio/w230/sounds-additions.json"));
         for (var value : json("art/audio/w233/applied.json").getAsJsonArray("bindings")) {
             var binding = value.getAsJsonObject();
             String event = binding.get("event").getAsString();
@@ -57,7 +57,7 @@ final class ReviewedAudioW234 {
             result.add(event, definition(assetId(binding.get("output").getAsString()),
                     previous.isJsonNull() ? null : previous.getAsJsonObject()));
         }
-        merge(result, json("docs/qa/2026-10-30/w270/sounds-fragment.json"));
+        merge(result, json("src/test/resources/destiny-test/audio/w270/sounds-fragment.json"));
         merge(result, json("art/ghost/w280/sounds-fragment.json"));
         // W300 A Guardian Rises campaign + W303 Guardian Down (scripts/campaign/campaign_audio_layer.py).
         merge(result, json("art/campaign/w300/sounds-fragment.json"));
@@ -100,7 +100,7 @@ final class ReviewedAudioW234 {
             pin(result, entry.get("asset").getAsString(), entry.get("sha256").getAsString(), entry.get("bytes").getAsLong());
         }
         for (String file : new String[]{"art/classes/w229/audio/provenance-mapping.json",
-                "docs/qa/2026-10-28/w230/sources/audio-provenance.json"}) {
+                "src/test/resources/destiny-test/audio/w230/audio-provenance.json"}) {
             for (var value : json(file).getAsJsonArray("entries")) {
                 var entry = value.getAsJsonObject();
                 // Disabled/retained clips are still shipped files and remain hash-checked.
@@ -112,7 +112,7 @@ final class ReviewedAudioW234 {
             var entry = value.getAsJsonObject();
             pin(result, entry.get("output").getAsString(), entry.getAsJsonObject("processed").get("sha256").getAsString(), null);
         }
-        for (var value : json("docs/qa/2026-10-30/w270/audio-import.json").getAsJsonArray("entries")) {
+        for (var value : json("src/test/resources/destiny-test/audio/w270/audio-import.json").getAsJsonArray("entries")) {
             var entry = value.getAsJsonObject();
             pin(result, entry.get("output").getAsString(), entry.get("sha256").getAsString(), entry.get("bytes").getAsLong());
         }

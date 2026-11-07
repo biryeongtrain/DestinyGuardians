@@ -41,7 +41,7 @@ class InsertW179MindbenderTest {
         assertThrows(Exception.class,()->CuboidModel.fromStream(new StringReader("{\"elements\":[{\"from\":[1,2],\"to\":[3,4,5],\"faces\":{}}]}")));
     }
     @Test void canonicalBodyAndUvsExactAndConnectedHiddenShellBudget() throws Exception {
-        var canonical=source();var body=json(A.resolve("models/"+KEY+"_body.json"));var shell=json(A.resolve("models/"+KEY+"_shell.json"));
+        var canonical=json(kim.biryeong.destiny.testfixtures.PreW251Assets.path("src/main/resources/assets/destiny/models/weapon_surface_w123/mindbender_s_ambition_adept.json"));var body=json(A.resolve("models/"+KEY+"_body.json"));var shell=json(A.resolve("models/"+KEY+"_shell.json"));
         assertEquals(canonical,body);assertEquals(104,body.getAsJsonArray("elements").size());
         assertEquals(12,shell.getAsJsonArray("elements").size());assertEquals(canonical.get("textures"),shell.get("textures"));
         assertTrue(104+12<=1000);

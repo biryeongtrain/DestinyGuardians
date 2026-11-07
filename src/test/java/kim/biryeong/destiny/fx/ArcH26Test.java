@@ -35,16 +35,16 @@ class ArcH26Test {
         for(var e:before.entrySet())if(!Set.of("name","model_identifier","animations").contains(e.getKey()))assertEquals(e.getValue(),after.get(e.getKey()),e.getKey());
         assertEquals("guardian_hunter_h26_r2",pack("h26").get("model").getAsString());
     }
-    @Test void shorterDeployContactAndRecoveryMatchSelectedClipKeys() throws Exception {
+    @Test void archivedDeployContactAndRecoveryMatchH26ClipKeys() throws Exception {
         var c=clips("h26");var start=c.get("h15_super_arc_start");var attack=c.get("h15_super_arc_attack");
-        assertEquals(11,SuperAttackTiming.ARC_DEPLOY);assertEquals(3,SuperAttackTiming.ARC_CONTACT);assertEquals(8,SuperAttackTiming.ARC_RECOVERY);
-        assertEquals(SuperAttackTiming.ARC_DEPLOY,1+start.get("length").getAsDouble()*20,1e-6);
-        assertEquals(SuperAttackTiming.ARC_RECOVERY,1+attack.get("length").getAsDouble()*20,1e-6);
+        // H26 is archived; W330 owns the live timing contract.
+        assertEquals(11,1+start.get("length").getAsDouble()*20,1e-6);
+        assertEquals(8,1+attack.get("length").getAsDouble()*20,1e-6);
         for(var v:attack.getAsJsonObject("animators").asMap().values()) {
             var bone=v.getAsJsonObject().get("name").getAsString();
             assertEquals(3,1+20*.10);at(attack,bone,.10);
         }
-        assertEquals(4,SuperAttackTiming.ARC_DEPLOY_SWING);assertEquals("once",start.get("loop").getAsString());
+        assertEquals("once",start.get("loop").getAsString());
     }
     @Test void fastDriveHasLargeTorsoTurnAndPreservesCrouchedHeroThenSettles() throws Exception {
         var c=clips("h26");var a=c.get("h15_super_arc_attack");var s=c.get("h15_super_arc_start");var ready=c.get("h15_super_arc");

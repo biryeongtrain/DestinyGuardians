@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** The installed source-Void revision keeps the accepted Arc motion and rig. */
+/** W199 is the archived source-Void base; newer overlays own installed revisions. */
 class HunterSourceW199Test {
     private JsonObject read(String name) throws Exception {
         return JsonParser.parseString(Files.readString(Path.of(name))).getAsJsonObject();
@@ -23,8 +23,7 @@ class HunterSourceW199Test {
         }
         return clips;
     }
-    @Test void installedVersionUsesSourceVoidWithoutChangingOtherClipsOrGeometry() throws Exception {
-        assertEquals("guardian_hunter_briefing_r4", HunterModelAssets.MODEL_NAME);
+    @Test void archivedSourceVoidPreservesOtherClipsAndGeometry() throws Exception {
         assertEquals("/destiny/animation/hunter_w199.animation.json", HunterModelAssets.ANIMATION_RESOURCE);
         var root = "src/main/resources/destiny/animation/";
         var before = read(root + "hunter_w197.animation.json");

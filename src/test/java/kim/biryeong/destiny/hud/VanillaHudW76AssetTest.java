@@ -141,17 +141,22 @@ class VanillaHudW76AssetTest {
     }
 
     @Test
-    void everyLocaleOverridesOnlyTheDedicatedXpKeyWithoutTouchingItemCounts() throws IOException {
+    void everyLocaleContainsOnlyReviewedXpAndInventoryTitleOverrides() throws IOException {
         for (String locale : locales()) {
             String path = LANG + locale + ".json";
             // Streaming also rejects repeated keys, which a JsonObject would silently collapse.
             try (var reader = new JsonReader(new StringReader(resource(path)))) {
                 reader.beginObject();
-                assertTrue(reader.hasNext(), path);
-                assertEquals(XP_LEVEL, reader.nextName(), path);
-                assertEquals(JsonToken.STRING, reader.peek(), path);
-                assertEquals("", reader.nextString(), path);
-                assertFalse(reader.hasNext(), "No generic number, item-count, or other translation overrides: " + path);
+                var expected = Map.of(XP_LEVEL, "", "container.inventory", "");
+                var seen = new HashSet<String>();
+                while (reader.hasNext()) {
+                    String key = reader.nextName();
+                    assertTrue(seen.add(key), "Duplicate translation: " + path + "/" + key);
+                    assertTrue(expected.containsKey(key), "No generic number, item-count or unreviewed key: " + path + "/" + key);
+                    assertEquals(JsonToken.STRING, reader.peek(), path);
+                    assertEquals(expected.get(key), reader.nextString(), path);
+                }
+                assertEquals(expected.keySet(), seen, path);
                 reader.endObject();
                 assertEquals(JsonToken.END_DOCUMENT, reader.peek(), path);
             }

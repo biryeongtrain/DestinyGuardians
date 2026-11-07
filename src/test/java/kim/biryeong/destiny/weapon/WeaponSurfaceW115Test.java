@@ -233,14 +233,14 @@ class WeaponSurfaceW115Test {
                     reviewedSightBody(MODEL + "weapon_sight_w151/" + id + "_body.json");
                     sightPoses++; continue;
                 }
-                // W207 explicitly starts from the reviewed current W123 split geometry.
+                // W207 preserves its reviewed pre-W251 W123 split geometry.
                 // The historical W115 migration invariant does not apply to these new banks.
                 if (relative.startsWith(MODEL + "weapon_reload_w207_blast_furnace/")
                         || relative.startsWith(MODEL + "weapon_reload_w207_hammerhead/")) {
                     var current = json(relative);
                     if (current.has("elements")) {
                         String name=path.getFileName().toString();
-                        var source=json(MODEL+"weapon_surface_w123/"+name);
+                        var source=JsonParser.parseString(Files.readString(kim.biryeong.destiny.testfixtures.PreW251Assets.path("src/main/resources/"+MODEL+"weapon_surface_w123/"+name))).getAsJsonObject();
                         assertEquals(source.get("elements"),current.get("elements"),relative);
                         assertEquals(source.get("textures"),current.get("textures"),relative);
                     } else {
@@ -280,16 +280,16 @@ class WeaponSurfaceW115Test {
         assertEquals(1, rows.size()); var row = rows.getFirst();
         String sourcePath = "src/main/resources/" + MODEL + "weapon_surface_w123/" + id + ".json";
         assertEquals(sourcePath, row.get("source").getAsString());
-        assertEquals(row.get("sourceSha256").getAsString(), WeaponSurfaceAssets.sha256(Files.readString(Path.of(sourcePath))));
+        assertEquals(row.get("sourceSha256").getAsString(), WeaponSurfaceAssets.sha256(Files.readString(kim.biryeong.destiny.testfixtures.PreW251Assets.path(sourcePath))));
         assertEquals("weapon_sight_w151/" + id + "_body", row.get("body").getAsString());
         assertTrue(row.getAsJsonArray("removedSightNames").isEmpty());
-        var source = json(MODEL + "weapon_surface_w123/" + id + ".json");
+        var source = JsonParser.parseString(Files.readString(kim.biryeong.destiny.testfixtures.PreW251Assets.path(sourcePath))).getAsJsonObject();
         var body = json(path); assertFalse(body.has("parent")); assertFalse(body.has("display"));
         var original = source.getAsJsonArray("elements"); var actual = body.getAsJsonArray("elements");
         assertEquals(row.get("sourceElementCount").getAsInt(), original.size());
         assertEquals(original.size() + 2, actual.size());
         assertEquals(row.get("elementCount").getAsInt(), actual.size());
-        for (int i = 0; i < original.size(); i++) assertEquals(original.get(i), actual.get(i), "Current W123 element/UV order preserved");
+        for (int i = 0; i < original.size(); i++) assertEquals(original.get(i), actual.get(i), "Reviewed pre-W251 W151 source element/UV order preserved");
         assertEquals(Set.of("w151_front_pin_stem", "w151_front_pin_tip"),
                 Set.of(actual.get(original.size()).getAsJsonObject().get("name").getAsString(),
                         actual.get(original.size() + 1).getAsJsonObject().get("name").getAsString()));

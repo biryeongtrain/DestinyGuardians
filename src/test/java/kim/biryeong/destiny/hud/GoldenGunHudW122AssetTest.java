@@ -1,5 +1,8 @@
 package kim.biryeong.destiny.hud;
 
+import com.sun.source.tree.*;
+import static kim.biryeong.destiny.testfixtures.JavaSourceContracts.*;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -56,8 +59,14 @@ class GoldenGunHudW122AssetTest {
         assertTrue(visuals.contains("case SOLAR -> \"golden_gun_h29\""));
         assertTrue(visuals.contains("stack.set(DataComponents.ITEM_MODEL, DestinyGuardians.id(name))"));
         String session = Files.readString(Path.of("src/main/java/kim/biryeong/destiny/ability/hunter/HunterSuper.java"));
-        String golden = session.substring(session.indexOf("private final class GoldenGun"));
-        assertTrue(golden.contains("handItem(kim.biryeong.destiny.fx.SuperVisuals.item(element()))"));
+        var golden = nodes(parse(session),ClassTree.class).stream()
+                .filter(c -> c.getSimpleName().contentEquals("GoldenGun")).findFirst().orElseThrow();
+        var binding = nodes(golden,MethodTree.class).stream().filter(c->c.getName().contentEquals("<init>"))
+                .flatMap(c -> nodes(c,MethodInvocationTree.class).stream())
+                .filter(c -> c.getMethodSelect().toString().equals("handItem")).toList();
+        assertEquals(1, binding.size());
+        assertEquals(expression("kim.biryeong.destiny.fx.SuperVisuals.item(element())"),
+                binding.getFirst().getArguments().getFirst().toString());
         var root = object(ITEM).getAsJsonObject("model");
         assertEquals("composite", root.get("type").getAsString());
         assertEquals(2350, root.getAsJsonArray("models").size());
@@ -65,15 +74,24 @@ class GoldenGunHudW122AssetTest {
             assertEquals("destiny:mesh/h29/golden_gun_triangle", child.getAsJsonObject().get("model").getAsString());
     }
 
-    @Test void allCurrentInputsAndFourOutputHashesAreExact() throws Exception {
+    @Test void immutableGenerationInputsAndFourOutputHashesRemainExact() throws Exception {
         var m = manifest();
         var inputs = m.getAsJsonObject("inputs_sha256");
         assertEquals(11, inputs.size());
         for (String required : new String[]{SOURCE, ITEM, PRIMITIVE, MESH,
                 A + "textures/item/supers/mesh_triangle_h28.png", "scripts/build_weapon_hud_w112.py",
                 "scripts/build_golden_gun_hud_w122.py"}) assertTrue(inputs.has(required), required);
-        for (var entry : inputs.entrySet())
+        String binding = "src/main/java/kim/biryeong/destiny/ability/hunter/HunterSuper.java";
+        // This historical runtime-binding digest is provenance, not a pixel input.
+        // The live GoldenGun constructor is checked structurally below instead.
+        assertEquals("69ee99bca920cf88ca328305cb076b87eb48325f542f70b07f3dd62905e09e82", inputs.get(binding).getAsString());
+        int exact = 0;
+        for (var entry : inputs.entrySet()) {
+            if (entry.getKey().equals(binding)) continue;
             assertEquals(entry.getValue().getAsString(), hash(Files.readAllBytes(Path.of(entry.getKey()))), entry.getKey());
+            exact++;
+        }
+        assertEquals(10, exact);
         var outputs = m.getAsJsonObject("outputs_sha256");
         assertEquals(Set.of(A + "items/gui/hud/" + NAME + ".json", A + "models/gui/hud/" + NAME + ".json",
                 A + "textures/item/hud/" + NAME + ".png", ART + "contact.png"), outputs.keySet());
@@ -216,11 +234,22 @@ class GoldenGunHudW122AssetTest {
         for (var element : model.getAsJsonArray("elements")) for (var face : element.getAsJsonObject().getAsJsonObject("faces").entrySet())
             assertEquals(0, face.getValue().getAsJsonObject().get("tintindex").getAsInt());
         String hud = Files.readString(Path.of("src/main/java/kim/biryeong/destiny/hud/AmmoHud.java"));
-        assertTrue(hud.contains("String silhouette = state.superWeapon() ? \"" + NAME + "\"\n"
-                + "                : \"ammo_weapon_w112_\" + WeaponItems.entry(player.getMainHandItem()).orElseThrow().id();"));
+        var hudTree = parse(hud);
+        var silhouette = (ConditionalExpressionTree) nodes(hudTree,VariableTree.class).stream()
+                .filter(v -> v.getName().contentEquals("silhouette")).findFirst().orElseThrow().getInitializer();
+        assertEquals(expression("state.superWeapon()"), silhouette.getCondition().toString());
+        assertEquals(NAME, ((LiteralTree)silhouette.getTrueExpression()).getValue());
+        assertEquals(expression("kim.biryeong.destiny.weapon.WeaponSkins.hudIcon(player.getMainHandItem(), WeaponItems.entry(player.getMainHandItem()).orElseThrow())"),
+                silhouette.getFalseExpression().toString());
         assertTrue(hud.contains("sprite(player, PREFIX + \"weapon\", silhouette, 336, 948, 80, 32, 2,"));
         assertTrue(hud.contains("state.superWeapon() ? 0xF4D36A : 0xC7CDD4"));
-        assertTrue(hud.contains("\"ammo_weapon_w112_\"+equipped.weapon().id(),329,y,50,20,2,0xA9B0B9"));
+        String skinIcon=expression("kim.biryeong.destiny.weapon.WeaponSkins.hudIcon(equipped.stack(),equipped.weapon())");
+        var stowed = nodes(hudTree,MethodInvocationTree.class).stream()
+                .filter(c -> c.getMethodSelect().toString().equals("sprite") && c.getArguments().size() == 10
+                        && c.getArguments().get(2).toString().equals(skinIcon)).toList();
+        assertEquals(1, stowed.size());
+        assertEquals("329", stowed.getFirst().getArguments().get(3).toString());
+        assertEquals(0xA9B0B9, ((LiteralTree)stowed.getFirst().getArguments().get(8)).getValue());
         assertFalse(Arrays.equals(alpha(image(NAME)), alpha(image("ammo_weapon_w112_ace_of_spades"))));
         assertFalse(Arrays.equals(alpha(image(NAME)), alpha(image("ammo_hand_cannon"))));
         String gt = Files.readString(Path.of("src/gametest/java/kim/biryeong/destiny/test/WeaponFeedbackW112GameTests.java"));

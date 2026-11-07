@@ -25,7 +25,7 @@ class ReloadW168AustringerTest {
         }
     }
     @Test void exactSourceElementsAndUvPartitionWithoutDuplication() throws Exception {
-        var source = json(A.resolve("models/weapon_surface_w123/austringer.json"));
+        var source = json(kim.biryeong.destiny.testfixtures.PreW251Assets.path("src/main/resources/assets/destiny/models/weapon_surface_w123/austringer.json"));
         var body = json(A.resolve("models/"+KEY+"_body.json"));
         var moving = json(A.resolve("models/"+KEY+"_moving.json"));
         assertEquals(114,body.getAsJsonArray("elements").size());

@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Runtime-selected resource and the archived rig must agree before a model is installed. */
+/** Archived W197 source motion and rig; newer overlays own runtime timing. */
 class HunterSourceW197Test {
     private JsonObject resource(String name) throws Exception {
         try (var stream = getClass().getResourceAsStream("/destiny/animation/" + name)) {
@@ -52,14 +52,10 @@ class HunterSourceW197Test {
         }
     }
 
-    @Test void sourceRetimingKeepsServerContactAndReleaseContract() throws Exception {
+    @Test void archivedSourceRetimingKeepsFiniteBoundedKeys() throws Exception {
         var selected = clips(resource("hunter_w197.animation.json"));
         assertEquals(.50, selected.get("h15_super_arc_start").get("length").getAsDouble(), 1e-9);
         assertEquals(.35, selected.get("h15_super_arc_attack").get("length").getAsDouble(), 1e-9);
-        assertEquals(11, SuperAttackTiming.ARC_DEPLOY);
-        assertEquals(3, SuperAttackTiming.ARC_CONTACT);
-        assertEquals(8, SuperAttackTiming.ARC_RECOVERY);
-        assertEquals(4, SuperAttackTiming.ARC_DEPLOY_SWING);
         for (String name : Set.of("h15_super_arc_start", "h15_super_arc_attack")) {
             for (var entry : selected.get(name).getAsJsonObject("animators").entrySet()) {
                 var animator = entry.getValue().getAsJsonObject();

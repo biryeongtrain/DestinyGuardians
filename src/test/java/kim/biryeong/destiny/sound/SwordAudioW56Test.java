@@ -65,7 +65,7 @@ class SwordAudioW56Test {
         assertFalse(b.sample(Long.MAX_VALUE,true),"Another owner's long hold never retriggers");
     }
     @Test void existingSoundDefinitionsRemainIdenticalWithExactlyFifteenAdditions() throws Exception {
-        var before=json(Path.of("docs/qa/2026-10-24/w56/before-sounds.json"));
+        var before=json(Path.of("src/test/resources/destiny-test/audio/w55-sounds.json"));
         var now=ReviewedAudioW234.legacyW102(json(Path.of("src/main/resources/assets/destiny/sounds.json")));
         for(String key:before.keySet()) {
             // Explicit later W98 contract migration for exactly three non-sword fire events.

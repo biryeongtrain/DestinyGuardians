@@ -80,13 +80,26 @@ class WeaponSilhouetteW112AssetTest {
         assertEquals(paths, actual, "No aimed/reload/twohand or other W112 variants");
     }
 
-    @Test void currentSourceInputsAndAllOutputBytesMatchManifestHashes() throws Exception {
+    @Test void historicalSourceInputsAndCurrentTransportRetainAllOutputBytes() throws Exception {
         JsonObject manifest = manifest();
-        for (var entry : manifest.getAsJsonObject("inputs_sha256").entrySet())
-            assertEquals(entry.getValue().getAsString(), hash(Files.readAllBytes(Path.of(entry.getKey()))), entry.getKey());
+        for (var entry : manifest.getAsJsonObject("inputs_sha256").entrySet()) {
+            var input = entry.getKey().equals("src/main/resources/weapon_surface_w123/manifest.json")
+                    ? kim.biryeong.destiny.testfixtures.PreW251Assets.path(entry.getKey()) : Path.of(entry.getKey());
+            assertEquals(entry.getValue().getAsString(), hash(Files.readAllBytes(input)), entry.getKey());
+        }
         assertEquals(7, manifest.getAsJsonObject("inputs_sha256").size());
         Map<String, JsonObject> catalog = catalog();
-        JsonObject migration = object("src/main/resources/weapon_surface_w123/manifest.json");
+        JsonObject migration = JsonParser.parseString(Files.readString(kim.biryeong.destiny.testfixtures.PreW251Assets.path("src/main/resources/weapon_surface_w123/manifest.json"))).getAsJsonObject();
+        var liveMigration = object("src/main/resources/weapon_surface_w123/manifest.json");
+        for (var field : migration.entrySet()) if (!field.getKey().equals("targets"))
+            assertEquals(field.getValue(), liveMigration.get(field.getKey()), field.getKey());
+        assertEquals(migration.getAsJsonArray("targets").size(), liveMigration.getAsJsonArray("targets").size());
+        for (int i = 0; i < migration.getAsJsonArray("targets").size(); i++) {
+            var historicalRule = migration.getAsJsonArray("targets").get(i).getAsJsonObject().deepCopy();
+            var liveRule = liveMigration.getAsJsonArray("targets").get(i).getAsJsonObject().deepCopy();
+            historicalRule.remove("replacementSha256"); liveRule.remove("replacementSha256");
+            assertEquals(historicalRule, liveRule, "Only later replacement geometry may have a new digest");
+        }
         Map<String, JsonObject> replacements = new HashMap<>();
         for (JsonElement target : migration.getAsJsonArray("targets")) {
             JsonObject rule = target.getAsJsonObject();
@@ -109,8 +122,10 @@ class WeaponSilhouetteW112AssetTest {
                 replaced++;
             } else assertEquals("canonical unchanged", weapon.get("source_profile").getAsString());
             assertEquals(source, weapon.get("source_model").getAsString());
-            assertEquals(weapon.get("source_sha256").getAsString(), hash(Files.readAllBytes(Path.of(source))), id);
-            JsonArray cubes = object(source).getAsJsonArray("elements");
+            assertEquals(weapon.get("source_sha256").getAsString(), hash(Files.readAllBytes(Set.of("austringer", "mindbender_s_ambition_adept", "blast_furnace", "hammerhead", "the_recluse").contains(id)
+                    ? kim.biryeong.destiny.testfixtures.PreW251Assets.path(source) : Path.of(source))), id);
+            JsonArray cubes = JsonParser.parseString(Files.readString(Set.of("austringer", "mindbender_s_ambition_adept", "blast_furnace", "hammerhead", "the_recluse").contains(id)
+                    ? kim.biryeong.destiny.testfixtures.PreW251Assets.path(source) : Path.of(source))).getAsJsonObject().getAsJsonArray("elements");
             assertEquals(cubes.size(), weapon.get("elements").getAsInt());
             int faces = 0, rotations = 0;
             for (JsonElement cube : cubes) {

@@ -55,7 +55,7 @@ class FireVariantsW98Test {
 
     @Test void onlyThreeExactEventsGainTwoAlternativesAndKeepOriginalFirstEntryAndSubtitles() throws Exception {
         var now = ReviewedAudioW234.legacyW102(json(SOUNDS));
-        var beforePath = Path.of("docs/qa/2026-10-25/w98/before/src/main/resources/assets/destiny/sounds.json");
+        var beforePath = Path.of("src/test/resources/destiny-test/audio/w96-sounds.json");
         var w96Path = Path.of("art/qa/w96/implementation.json");
         assertEquals("bbc7ae9a16f42d4b8a4983c29bd8b39eb8e7e8a12f9ec200cdfcc7f501784458", sha(w96Path));
         assertEquals(json(w96Path).getAsJsonObject("clientAssets").get("src/main/resources/assets/destiny/sounds.json").getAsString(), sha(beforePath));
@@ -180,6 +180,8 @@ class FireVariantsW98Test {
         // W300 campaign / W303 Guardian Down audio layer (scripts/campaign/campaign_audio_layer.py).
         for (var value : json(Path.of("art/campaign/w300/audio-inventory.json")).getAsJsonArray("paths"))
             expected.add(value.getAsString()); // pinned clips already arrive through ReviewedAudioW234
+        for (String path : LaterAudioW346.verifiedPaths())
+            assertTrue(expected.add(path), "New layers must not overwrite inherited audio: " + path);
         assertAudioInventory(expected, actual);
         assertSixOggBytes(w98);
     }
@@ -253,7 +255,7 @@ class FireVariantsW98Test {
     }
 
     @Test void exactRoutingDoesNotTransferVariantsToOtherFramesOrChangeReloadMappings() throws Exception {
-        var now = json(SOUNDS); var before = json(Path.of("docs/qa/2026-10-25/w98/before/src/main/resources/assets/destiny/sounds.json"));
+        var now = json(SOUNDS); var before = json(Path.of("src/test/resources/destiny-test/audio/w96-sounds.json"));
         var named = namedW102Definitions(now);
         for (var entry : WeaponCatalog.all()) {
             String key = DestinySounds.weaponKey(entry, "fire");
