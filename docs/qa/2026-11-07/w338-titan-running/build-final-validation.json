@@ -1,0 +1,98 @@
+{
+  "real_Gradle_build": true,
+  "commands": [
+    [
+      "./gradlew",
+      "assemble",
+      "compileGametestJava",
+      "--offline",
+      "--console=plain",
+      "--no-daemon"
+    ],
+    [
+      "./gradlew",
+      "test",
+      "--tests",
+      "*TitanRunningW338Test",
+      "--tests",
+      "*SuperLocomotionW336Test",
+      "--tests",
+      "*ClassAssetsW229Test",
+      "--tests",
+      "*SourceAnimationGridW255Test",
+      "--tests",
+      "*ServerPoseSamplingW198Test",
+      "--offline",
+      "--console=plain",
+      "--no-daemon"
+    ]
+  ],
+  "jar": "/Users/qf/IdeaProjects/DestinyGuardians/build/libs/destiny-guardians-0.1.0+26.3.jar",
+  "jar_bytes": 390235521,
+  "jar_sha256": "e0974edc18fb14309418f6c16192559a8d47b83a8713a867aa4b1c3858c52ede",
+  "zipCRC": "PASS",
+  "resources_match_final_source": {
+    "destiny/animation/arc_staff_w330.animation.json": {
+      "sha256": "ca7ca92f2ac982ac293f639d3d3c1587fc78adbef22089de0581a16afe6b189c",
+      "bytes": 9263556
+    },
+    "destiny/animation/spectral_blades_w330.animation.json": {
+      "sha256": "47c732d661801b57fc84c836a2f5be09b38cc0044bdf9bc5eebbb221a0890c8b",
+      "bytes": 3473342
+    },
+    "destiny/animation/super_motion_w332.animation.json": {
+      "sha256": "7fd54de0c75f582b623fad5d4b52562290b54421279f7ef1a5481fe86e87dfc1",
+      "bytes": 4759112
+    },
+    "destiny/animation/super_locomotion_hunter_w336.animation.json": {
+      "sha256": "72c840ecc6b0c324bc3d9c37ae3207268eeee09b564d0760898c29f238260885",
+      "bytes": 8692967
+    },
+    "destiny/animation/super_locomotion_classes_w336.animation.json": {
+      "sha256": "1e4d4811e8e7d04c043fa5e76c97888c99045a92e74707cfb6e0b95fdbb0da99",
+      "bytes": 36469301
+    },
+    "destiny/animation/titan_running_w338.animation.json": {
+      "sha256": "cd2ef73069b8d00d222ed2e9e652b466069ff55c80ca58e87fe8860530d6738f",
+      "bytes": 4491420
+    }
+  },
+  "unit_suites": [
+    {
+      "name": "kim.biryeong.destiny.fx.ServerPoseSamplingW198Test",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "kim.biryeong.destiny.fx.ClassAssetsW229Test",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "kim.biryeong.destiny.fx.TitanRunningW338Test",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "kim.biryeong.destiny.fx.SourceAnimationGridW255Test",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "kim.biryeong.destiny.fx.SuperLocomotionW336Test",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "actual_GameTests": "Not rerun for W337/W338. These presentation/asset-loader changes use targeted unit/model checks and master actual native screenshots; historical W336 GameTest XML is not counted as a new run."
+}

@@ -89,6 +89,6 @@ class SuperLocomotionW336Test {
             assertFalse(clip.get("name").getAsString().contains("attack"));
         }
         assertTrue(HunterModelAssets.MODEL_NAME.contains(SuperLocomotionW336.revision(SuperLocomotionW336.HUNTER_RESOURCE)));
-        assertTrue(ClassSuperModelAssets.MODEL_NAME.contains(SuperLocomotionW336.revision(SuperLocomotionW336.HUNTER_RESOURCE,SuperLocomotionW336.CLASSES_RESOURCE)));
+        assertTrue(ClassSuperModelAssets.MODEL_NAME.contains(SuperLocomotionW336.revision(SuperLocomotionW336.HUNTER_RESOURCE,SuperLocomotionW336.CLASSES_RESOURCE,SuperLocomotionW336.TITAN_RUNNING_RESOURCE)));
     }
 }

@@ -3209,7 +3209,7 @@
       "sourceLoopCandidate": true,
       "loopRotationSeamDegrees": 1.7075472925031877e-06,
       "fullCoupledChannels": true,
-      "gripPolicy": "source wrist/elbow trajectories calibrated only to R2 composed idle and existing item bind nodes; no older ready pose, frozen arms or R1 masks",
+      "gripPolicy": "W337 absolute R2 chest-relative wrists and source elbow/roll; actual mesh shaft +2Y display transform fitted to both distal skin palm volumes",
       "floatingPreviewPreset": false,
       "aliasOf": null
     },
@@ -3247,7 +3247,7 @@
       "sourceLoopCandidate": true,
       "loopRotationSeamDegrees": 1.7075472925031877e-06,
       "fullCoupledChannels": true,
-      "gripPolicy": "source wrist/elbow trajectories calibrated only to R2 composed idle and existing item bind nodes; no older ready pose, frozen arms or R1 masks",
+      "gripPolicy": "W337 absolute R2 chest-relative wrists and source elbow/roll; actual mesh shaft +2Y display transform fitted to both distal skin palm volumes",
       "floatingPreviewPreset": false,
       "aliasOf": null
     },
@@ -3285,7 +3285,7 @@
       "sourceLoopCandidate": true,
       "loopRotationSeamDegrees": 2.4148365394514667e-06,
       "fullCoupledChannels": true,
-      "gripPolicy": "source wrist/elbow trajectories calibrated only to R2 composed idle and existing item bind nodes; no older ready pose, frozen arms or R1 masks",
+      "gripPolicy": "W337 absolute R2 chest-relative wrists and source elbow/roll; actual mesh shaft +2Y display transform fitted to both distal skin palm volumes",
       "floatingPreviewPreset": false,
       "aliasOf": null
     },
@@ -3323,7 +3323,7 @@
       "sourceLoopCandidate": true,
       "loopRotationSeamDegrees": 1.7075472925031877e-06,
       "fullCoupledChannels": true,
-      "gripPolicy": "source wrist/elbow trajectories calibrated only to R2 composed idle and existing item bind nodes; no older ready pose, frozen arms or R1 masks",
+      "gripPolicy": "W337 absolute R2 chest-relative wrists and source elbow/roll; actual mesh shaft +2Y display transform fitted to both distal skin palm volumes",
       "floatingPreviewPreset": false,
       "aliasOf": null
     },
@@ -3361,7 +3361,7 @@
       "sourceLoopCandidate": true,
       "loopRotationSeamDegrees": 2.4148365394514667e-06,
       "fullCoupledChannels": true,
-      "gripPolicy": "source wrist/elbow trajectories calibrated only to R2 composed idle and existing item bind nodes; no older ready pose, frozen arms or R1 masks",
+      "gripPolicy": "W337 absolute R2 chest-relative wrists and source elbow/roll; actual mesh shaft +2Y display transform fitted to both distal skin palm volumes",
       "floatingPreviewPreset": false,
       "aliasOf": null
     },
@@ -3904,5 +3904,31 @@
     "gripPositionErrorUnits": 4.189529226675416e-15,
     "gripRotationErrorDegrees": 1.7075472925031877e-06
   },
-  "nativeAcceptance": "pending master full R2 idle/move/direction/grip/float review"
+  "nativeAcceptance": "pending master full R2 idle/move/direction/grip/float review",
+  "maulGripRevision": {
+    "revision": "W337 actual mesh shaft / absolute R2 wrists",
+    "clips": [
+      "w230_titan_burning_maul_idle",
+      "w230_titan_burning_maul_move_forward",
+      "w230_titan_burning_maul_move_backward",
+      "w230_titan_burning_maul_move_left",
+      "w230_titan_burning_maul_move_right"
+    ],
+    "metricsMax": {
+      "pelvisDisplacementUnits": 2.5403728698042207,
+      "wristSourceRelativeMotionUnits": 1.1974459497950116,
+      "commonReachCorrectionUnits": 0.0,
+      "pairTrajectoryResidualUnits": 0.0,
+      "gripPositionErrorUnits": 3.66205343881779e-15,
+      "gripRotationErrorDegrees": 0,
+      "actualShaftPalmRadialErrorUnits": 4.383680149279125e-14,
+      "upperRightGripRawY": 16.181538523707612,
+      "lowerLeftGripRawY": 5.25
+    },
+    "metricsMin": {
+      "shaftThroughPalmMinimumLengthUnits": 1.9843384962518957
+    },
+    "other26Clips": "raw per-clip JSON bytes preserved",
+    "nativeAcceptance": "pending master idle/4directions/attack-return review"
+  }
 }

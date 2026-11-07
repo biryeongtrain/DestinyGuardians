@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 public final class SuperLocomotionW336 {
     public static final String HUNTER_RESOURCE="/destiny/animation/super_locomotion_hunter_w336.animation.json";
     public static final String CLASSES_RESOURCE="/destiny/animation/super_locomotion_classes_w336.animation.json";
+    public static final String TITAN_RUNNING_RESOURCE="/destiny/animation/titan_running_w338.animation.json";
+    private static final List<String> RESOURCE_ORDER=List.of(HUNTER_RESOURCE,CLASSES_RESOURCE,TITAN_RUNNING_RESOURCE);
     private static final Set<String> CLASS_BASES=Set.of("w230_hunter_spectral_blades","w229_titan_arc","w229_titan_solar",
             "w229_titan_void","w230_titan_burning_maul","w229_warlock_arc","w229_warlock_solar","w230_warlock_nova_warp");
     private SuperLocomotionW336() { }
@@ -19,29 +21,66 @@ public final class SuperLocomotionW336 {
         static final Map<String,JsonObject> CLIPS=index();
         static Map<String,JsonObject> load() {
             var result=new LinkedHashMap<String,JsonObject>();
-            for(String path:List.of(HUNTER_RESOURCE,CLASSES_RESOURCE))try(var in=SuperLocomotionW336.class.getResourceAsStream(path)) {
+            for(String path:RESOURCE_ORDER)try(var in=SuperLocomotionW336.class.getResourceAsStream(path)) {
                 if(in==null)continue; // An absent optional overlay keeps the existing authored fallback.
                 var file=JsonParser.parseReader(new InputStreamReader(in,StandardCharsets.UTF_8)).getAsJsonObject();
-                requireR2(file,path);
+                if(path.equals(TITAN_RUNNING_RESOURCE))requireR3(file,path);else requireR2(file,path);
                 result.put(path,file);
             } catch(java.io.IOException e){throw new IllegalStateException("Cannot read W336 locomotion source: "+path,e);}
             return Map.copyOf(result);
         }
-        static Map<String,JsonObject> index() {
-            var result=new HashMap<String,JsonObject>();
-            for(var file:FILES.entrySet())for(var value:file.getValue().getAsJsonArray("animations")) {
+        static Map<String,JsonObject> index() {return indexSources(FILES);}
+    }
+    /** Explicit resource order is required: Map.copyOf iteration order is unspecified. */
+    static Map<String,JsonObject> indexSources(Map<String,JsonObject> files) {
+        var result=new HashMap<String,JsonObject>();var owners=new HashMap<String,String>();
+        for(String path:files.keySet())if(!RESOURCE_ORDER.contains(path))
+            throw new IllegalStateException("Foreign locomotion resource: "+path);
+        for(String path:RESOURCE_ORDER) {
+            var file=files.get(path);if(file==null)continue;
+            boolean r3=path.equals(TITAN_RUNNING_RESOURCE);
+            if(r3)requireR3(file,path);else requireR2(file,path);
+            var seen=new HashSet<String>();
+            for(var value:file.getAsJsonArray("animations")) {
                 var clip=value.getAsJsonObject();String name=clip.get("name").getAsString();
                 boolean hunter=name.equals("h15_super_arc")||name.startsWith("h15_super_arc_move_")||name.equals("h15_super_arc_air")
                         ||name.startsWith("w230_hunter_spectral_blades_");
-                if((file.getKey().equals(HUNTER_RESOURCE)!=hunter)||!validName(name)||result.put(name,clip)!=null)
+                if(!seen.add(name)||!validName(name)||(path.equals(HUNTER_RESOURCE)!=hunter)
+                        ||(!r3&&clip.has("source_revision")&&!"R2".equals(clip.get("source_revision").getAsString())))
+                    throw new IllegalStateException("Foreign/duplicate W336 locomotion clip: "+name);
+                if(result.containsKey(name)&&!(r3&&CLASSES_RESOURCE.equals(owners.get(name))))
                     throw new IllegalStateException("Foreign/duplicate W336 locomotion clip: "+name);
                 double length=clip.get("length").getAsDouble();
                 if(!Double.isFinite(length)||length<=0||!"loop".equals(clip.get("loop").getAsString()))
                     throw new IllegalStateException("Invalid W336 loop period: "+name);
-                requireFamily(clip);
-                // Curve validation/baking happens once at the normal model-build boundary, including long R2 periods.
+                requireFamily(clip);result.put(name,clip);owners.put(name,path);
             }
-            return Map.copyOf(result);
+        }
+        return Map.copyOf(result);
+    }
+    /** R3 is a narrow run-only replacement, never a general third source family. */
+    static void requireR3(JsonObject source,String path) {
+        if(!TITAN_RUNNING_RESOURCE.equals(path)||!source.has("schema_version")||source.get("schema_version").getAsInt()!=1
+                ||!source.has("source_revision")||!"R3".equals(source.get("source_revision").getAsString())
+                ||!source.has("animations")||!source.get("animations").isJsonArray()||source.getAsJsonArray("animations").size()!=12)
+            throw new IllegalStateException("Unsupported/non-R3 Titan running source: "+path);
+        var seen=new HashSet<String>();
+        for(var value:source.getAsJsonArray("animations")) {
+            var clip=value.getAsJsonObject();String name=clip.has("name")?clip.get("name").getAsString():"";
+            String family=name.startsWith("w229_titan_solar_move_")?"hammer_of_sol":"unarmed_fists_candidate";
+            String base=name.startsWith("w229_titan_arc_move_")?"w229_titan_arc":name.startsWith("w229_titan_solar_move_")?"w229_titan_solar":name.startsWith("w229_titan_void_move_")?"w229_titan_void":"";
+            String direction=base.isEmpty()?"":name.substring(base.length()+6);
+            boolean hammer=family.equals("hammer_of_sol");
+            String action=switch(direction){case "forward"->family+"__set0_point4";case "backward"->family+(hammer?"__set3_point1":"__set1_point1");case "left"->family+"__set2_point1";case "right"->family+(hammer?"__set1_point1":"__set3_point1");default->"";};
+            if(base.isEmpty()||action.isEmpty()||!seen.add(name)||!clip.has("source_revision")||!"R3".equals(clip.get("source_revision").getAsString())
+                    ||!clip.has("destiny_source_family")||!family.equals(clip.get("destiny_source_family").getAsString())
+                    ||!clip.has("destiny_source_composed_action")||!action.equals(clip.get("destiny_source_composed_action").getAsString())
+                    ||!clip.has("destiny_source_period_seconds")||!clip.has("length")
+                    ||!Double.isFinite(clip.get("length").getAsDouble())||clip.get("length").getAsDouble()<=0
+                    ||Math.abs(clip.get("length").getAsDouble()-clip.get("destiny_source_period_seconds").getAsDouble())>1e-9
+                    ||!Double.isFinite(clip.get("destiny_source_period_seconds").getAsDouble())
+                    ||!clip.has("loop")||!"loop".equals(clip.get("loop").getAsString()))
+                throw new IllegalStateException("Foreign/duplicate/unmarked R3 Titan running clip: "+name);
         }
     }
     static void requireR2(JsonObject source,String path) {
@@ -71,7 +110,7 @@ public final class SuperLocomotionW336 {
     }
     public static JsonArray overlay(JsonArray original,String prefix) {
         var result=original.deepCopy();
-        for(String path:List.of(HUNTER_RESOURCE,CLASSES_RESOURCE)) {
+        for(String path:RESOURCE_ORDER) {
             var file=Sources.FILES.get(path);if(file==null)continue;
             for(var value:file.getAsJsonArray("animations")) {
                 var clip=value.getAsJsonObject();String name=clip.get("name").getAsString();if(!name.startsWith(prefix))continue;

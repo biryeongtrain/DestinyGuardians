@@ -15,7 +15,7 @@ import java.util.HashSet;
 
 /** Source-derived Titan/Warlock clips on BetterModel's complete player-skin rig. */
 public final class ClassSuperModelAssets {
-    public static final String MODEL_NAME = "guardian_classes_w336_"+SuperLocomotionW336.revision(SuperLocomotionW336.HUNTER_RESOURCE,SuperLocomotionW336.CLASSES_RESOURCE)+"_"+SuperMotionOverlaysW332.revision()+"_"+MeleeSuperAnimationTiming.revision(MeleeSuperAnimationTiming.SPECTRAL_RESOURCE);
+    public static final String MODEL_NAME = "guardian_classes_w336_"+SuperLocomotionW336.revision(SuperLocomotionW336.HUNTER_RESOURCE,SuperLocomotionW336.CLASSES_RESOURCE,SuperLocomotionW336.TITAN_RUNNING_RESOURCE)+"_"+SuperMotionOverlaysW332.revision()+"_"+MeleeSuperAnimationTiming.revision(MeleeSuperAnimationTiming.SPECTRAL_RESOURCE);
     static final String RESOURCE = "/destiny/animation/classes_w230.animation.json";
     private static final java.util.Set<String> EXPANDED = java.util.Set.of(
             "hunter/blade_barrage", "hunter/spectral_blades", "hunter/gathering_storm", "hunter/storms_edge",

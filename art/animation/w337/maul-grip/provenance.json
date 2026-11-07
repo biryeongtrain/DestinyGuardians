@@ -1,0 +1,75 @@
+{
+  "task": "W337 Maul physical shaft grip repair",
+  "sourcePackage": "/Users/qf/Downloads/Destiny-Super-Idle-Movement-2026-11-07-R2",
+  "sourceRevision": "R2",
+  "composedBlendSha256": "ab74edaaeca2a6c0d2554af5ebdbc31f1ed8553c86081b1c3612aaebb1e88c25",
+  "directBlendEvidence": "W336 manifest directBlendEvaluation:105actions/72bones; selected actual action start/mid/end comparisons, unchanged source SHA verified W337. No fresh exhaustive source audit.",
+  "sourcePolicy": "Absolute current chest-relative source wrists *14.5u/m; current source elbow plane and forearm roll retained. Actual mesh shaft alignment compensates absent source prop/final procedural hand IK. No frozen upper body, R1 mask, root travel or speedup.",
+  "actualModel": {
+    "path": "src/main/resources/assets/destiny/models/class_ability/titan/burning_maul.json",
+    "sha256": "373647196a40754e34164290215f4a4739edf846dbe74cc6f634df27681a2ccd",
+    "shaftRawBounds": [
+      [
+        7.66,
+        3.6,
+        7.66
+      ],
+      [
+        8.34,
+        25.6,
+        8.34
+      ]
+    ],
+    "thirdpersonDisplayTranslation": [
+      0,
+      2,
+      0
+    ],
+    "lowerPalmRawY": [
+      4.75,
+      11.25
+    ]
+  },
+  "contactValidation": "validation.json reads serialized payload and actual mesh/skin bounds. Centerline passes through both distal1.5u skin slabs. It does not certify articulated fingers or all-angle native contact.",
+  "unchanged": [
+    "other26 raw clip JSON objects",
+    "Maul source periods/key times/all non-arm channels",
+    "cast/attack/dodge/audio/contact/gameplay",
+    "target mesh/UV/runtime/display2ticks"
+  ],
+  "continuity": [
+    {
+      "clip": "w230_titan_burning_maul_idle",
+      "maxAdjacentItemRotationDegrees": 0.93420153193103,
+      "endpointItemRotationDegrees": 0.0
+    },
+    {
+      "clip": "w230_titan_burning_maul_move_forward",
+      "maxAdjacentItemRotationDegrees": 0.9695256670350746,
+      "endpointItemRotationDegrees": 1.7075472925031877e-06
+    },
+    {
+      "clip": "w230_titan_burning_maul_move_backward",
+      "maxAdjacentItemRotationDegrees": 1.4278328699863971,
+      "endpointItemRotationDegrees": 0.0
+    },
+    {
+      "clip": "w230_titan_burning_maul_move_left",
+      "maxAdjacentItemRotationDegrees": 1.4223987240675386,
+      "endpointItemRotationDegrees": 0.0
+    },
+    {
+      "clip": "w230_titan_burning_maul_move_right",
+      "maxAdjacentItemRotationDegrees": 1.4803908305903524,
+      "endpointItemRotationDegrees": 0.0
+    }
+  ],
+  "nativeAcceptance": "pending master idle/4directions/attack/recovery",
+  "propOnlyClearanceFollowup": {
+    "beforePayloadSha256": "fc83d81e3a59626da35c7d4948313e452c82b8754b6dc828bf3159b11d83e673",
+    "afterPayloadSha256": "1e4d4811e8e7d04c043fa5e76c97888c99045a92e74707cfb6e0b95fdbb0da99",
+    "lowerGripRawY": 5.25,
+    "onlyChangedChannels": "five Maul pri_right_item position channels; all rotations/source wrist and body channels identical to FC83 first fit",
+    "onePoseSAT": "render-pose-overlap.json; idle3.425s actual head cuboids vs actual skin. Minimum right upper-arm separating-axis gap0.224u, right forearm0.484u. No all-frame clearance claim."
+  }
+}

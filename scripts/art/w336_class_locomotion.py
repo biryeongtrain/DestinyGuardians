@@ -28,6 +28,7 @@ NAMESPACE=uuid.UUID('c16b6f35-0f23-47f0-85cd-e41c0fc814ef')
 FAMILIES=[('fists_of_havoc_candidate','w229_titan_arc'),('hammer_of_sol','w229_titan_solar'),
  ('sentinel_shield','w229_titan_void'),('burning_maul','w230_titan_burning_maul'),
  ('daybreak','w229_warlock_solar'),('stormtrance','w229_warlock_arc'),('nova_warp','w230_warlock_nova_warp')]
+MAUL_LOWER_GRIP_RAW_Y=5.25 # actual sleeve4.75..11.25; source wrists/body remain unchanged
 ARMS=['pra_right_arm','prfa_right_forearm','pri_right_item','pla_left_arm','plfa_left_forearm','pli_left_item']
 
 
@@ -187,7 +188,73 @@ def solve_source_arm(model,p,positions,side,target,item_rotation,matrices,rest,m
     return error,angular
 
 
-def full_pose(model,matrices,rest,reference,calibration,module):
+def palm_geometry(model):
+    groups={g['uuid']:g for g in model['groups']};elements={e['uuid']:e for e in model['elements']};result={}
+    def walk(nodes):
+        for node in nodes:
+            if isinstance(node,str):continue
+            group=groups[node['uuid']]
+            if group['name']in ['prfa_right_forearm','plfa_left_forearm']:
+                skin=next(elements[child]for child in node['children']if isinstance(child,str)and elements[child].get('name')=='skin')
+                lo=[skin['from'][i]-group['origin'][i]for i in range(3)];hi=[skin['to'][i]-group['origin'][i]for i in range(3)]
+                # Actual lower-arm skin has no separate finger joint. Its distal
+                #1.5u slab is the visible palm volume, not the item-node origin.
+                hi[1]=lo[1]+1.5
+                result[group['name']]={'min':lo,'max':hi,'center':[(a+b)/2 for a,b in zip(lo,hi)]}
+            walk(node['children'])
+    walk(model['outliner']);return result
+
+
+def fit_maul_shaft(model,p,positions,module):
+    h15,h19,w197=module.h15,module.h19,module.w197
+    mesh=read(MAIN/'src/main/resources/assets/destiny/models/class_ability/titan/burning_maul.json')
+    shaft=next(e for e in mesh['elements']if e.get('name')=='continuous_heavy_shaft')
+    display=mesh['display']['thirdperson_righthand']
+    assert display['rotation']==[0,0,0]and display['scale']==[1,1,1]and display['translation']==[0,2,0]
+    palms=palm_geometry(model);fk=module.motion.fk_positions(model,p,positions)
+    left=h19.point(fk['plfa_left_forearm'],palms['plfa_left_forearm']['center'])
+    right=h19.point(fk['prfa_right_forearm'],palms['prfa_right_forearm']['center'])
+    axis=h19.unit(h19.sub(right,left));distance=h19.norm(h19.sub(right,left))
+    # Lower left palm is inside the model's actual lower sleeve; the right upper
+    # hand rests further along the same physical continuous shaft. Source hand
+    # movement changes that upper grip naturally instead of stretching the mesh.
+    lower_grip=MAUL_LOWER_GRIP_RAW_Y
+    assert shaft['from'][1]<lower_grip<lower_grip+distance<shaft['to'][1],distance
+    old=w197.rotation(fk['pri_right_item']);source_z=[old[i][2]for i in range(3)]
+    z=h19.sub(source_z,h19.mul(axis,h19.dot(source_z,axis)))
+    assert h19.norm(z)>.05,'Ambiguous source wrist roll; inspect before inventing an orientation'
+    z=h19.unit(z);x=h19.unit(h19.cross(axis,z));z=h19.cross(x,axis)
+    rotation=[[x[i],axis[i],z[i],0]for i in range(3)]+[[0,0,0,1]]
+    # Actual model projection: raw-center8, thirdperson translation+2Y. Native
+    # innerRy180 and BB/game XZ basis leave the centerline/+Y axis unchanged.
+    node=h19.sub(left,h19.vector(rotation,[0,lower_grip-6,0]))
+    fore=fk['prfa_right_forearm'];groups={g['name']:g for g in model['groups']}
+    positions['pri_right_item']=h19.sub(h19.vector(h19.inverse_rotation(w197.rotation(fore)),h19.sub(node,h19.point(fore,[0,0,0]))),h19.sub(groups['pri_right_item']['origin'],groups['prfa_right_forearm']['origin']))
+    module.motion.local(model,p,'pri_right_item',rotation)
+    actual=module.motion.fk_positions(model,p,positions)['pri_right_item']
+    start=h19.point(actual,[0,shaft['from'][1]-6,0]);end=h19.point(actual,[0,shaft['to'][1]-6,0])
+    direction=h19.unit(h19.sub(end,start));maximum=0;hits=[]
+    for name,point in [('plfa_left_forearm',left),('prfa_right_forearm',right)]:
+        along=h19.dot(h19.sub(point,start),direction)
+        closest=h19.add(start,h19.mul(direction,along));maximum=max(maximum,h19.norm(h19.sub(point,closest)))
+        assert 0<along<h19.norm(h19.sub(end,start))
+        # Independent segment-vs-actual distal skin box intersection, using
+        # decoded mesh bounds rather than the IK target used to solve the arm.
+        inv=h19.inverse_rotation(w197.rotation(fk[name]));origin=h19.point(fk[name],[0,0,0])
+        a=h19.vector(inv,h19.sub(start,origin));b=h19.vector(inv,h19.sub(end,origin));lo,hi=0.,1.
+        for dim in range(3):
+            delta=b[dim]-a[dim];bounds=palms[name]
+            if abs(delta)<1e-9:assert bounds['min'][dim]<=a[dim]<=bounds['max'][dim]
+            else:
+                t0=(bounds['min'][dim]-a[dim])/delta;t1=(bounds['max'][dim]-a[dim])/delta
+                lo=max(lo,min(t0,t1));hi=min(hi,max(t0,t1))
+        assert lo<=hi,(name,lo,hi)
+        hits.append((hi-lo)*h19.norm(h19.sub(end,start)))
+    assert maximum<1e-6
+    return {'actualShaftPalmRadialErrorUnits':maximum,'upperRightGripRawY':lower_grip+distance,'lowerLeftGripRawY':lower_grip,'shaftThroughPalmMinimumLengthUnits':min(hits)}
+
+
+def full_pose(model,matrices,rest,reference,calibration,module,maul=False):
     h15,h19,w197,C=module.h15,module.h19,module.w197,module.C
     p=module.stable_pose(model,matrices,rest)
     positions=spine_positions(p,matrices,rest,model,module)
@@ -218,6 +285,11 @@ def full_pose(model,matrices,rest,reference,calibration,module):
         change=h19.mul(h19.vector(axes,h19.sub(now_rel,ref_rel)),14.5);relative_motion=max(relative_motion,h19.norm(change))
         target_rel=h19.vector(h19.inverse_rotation(w197.rotation(reference_fk['pc_chest'])),h19.sub(h19.point(reference_fk[item],[0,0,0]),h19.point(reference_fk['pc_chest'],[0,0,0])))
         targets[side]=h19.add(chest_pos,h19.vector(chest,h19.add(target_rel,change)))
+        if maul:
+            # W337: absolute R2 anatomical wrist placement, not a rotation-only
+            # FK reference plus deltas. Different limb proportions are handled
+            # by the arm IK; this restores the correct source grip baseline.
+            targets[side]=h19.add(chest_pos,h19.mul(h19.vector(C,h19.sub(pt(matrices,source),pt(matrices,'A352A6A2'))),14.5))
         now_local=h15.mm(h19.inverse_rotation(source_chest),w197.rotation(matrices[source]))
         ref_local=h15.mm(h19.inverse_rotation(ref_chest),w197.rotation(reference[source]))
         rotation_delta=h15.mm(axes,h15.mm(now_local,h15.mm(h19.inverse_rotation(ref_local),h19.inverse_rotation(axes))))
@@ -238,7 +310,9 @@ def full_pose(model,matrices,rest,reference,calibration,module):
         err,angle=solve_source_arm(model,p,positions,side,targets[side],rotations[side],matrices,rest,module)
         grip_error=max(grip_error,err);angular_error=max(angular_error,angle)
     pair_error=h19.norm(h19.sub(h19.sub(targets['left'],targets['right']),h19.sub(originals['left'],originals['right'])))
-    return p,positions,{'pelvisDisplacementUnits':h19.norm(pelvis),'wristSourceRelativeMotionUnits':relative_motion,'commonReachCorrectionUnits':h19.norm(h19.sub(targets['right'],originals['right'])),'pairTrajectoryResidualUnits':pair_error,'gripPositionErrorUnits':grip_error,'gripRotationErrorDegrees':angular_error}
+    metrics={'pelvisDisplacementUnits':h19.norm(pelvis),'wristSourceRelativeMotionUnits':relative_motion,'commonReachCorrectionUnits':h19.norm(h19.sub(targets['right'],originals['right'])),'pairTrajectoryResidualUnits':pair_error,'gripPositionErrorUnits':grip_error,'gripRotationErrorDegrees':angular_error}
+    if maul:metrics.update(fit_maul_shaft(model,p,positions,module))
+    return p,positions,metrics
 
 
 def source_floor(model,p,positions,module):
@@ -258,11 +332,12 @@ def source_floor(model,p,positions,module):
     return-min(ys)
 
 
-def export():
+def export(maul_only=False):
     module=helpers();h15,h19,w197=module.h15,module.h19,module.w197
     model=read(MAIN/'art/blockbench/animations/guardian_hunter_w199_r1.bbmodel');groups={g['name']:g for g in model['groups']}
     clips=[];reports=[];review_frames=[];allmetrics=[]
-    for family,prefix in FAMILIES:
+    selected_families=[('burning_maul','w230_titan_burning_maul')]if maul_only else FAMILIES
+    for family,prefix in selected_families:
         spec,selected=selected_clips(family);floating=spec['source_type']=='floating'
         reference_data=read(SOURCE/selected['idle']['sample_file']);reference=reconstruct(reference_data,reference_data['samples'][0],module)
         reference_rest={n:[reference_data['rest_armature_matrices_row_major'][i][row*4:row*4+4]for row in range(4)]for i,n in enumerate(reference_data['bones'])}
@@ -277,7 +352,7 @@ def export():
             frames=[];previous=None
             for t in times:
                 matrices=sample(data,t,module)
-                p,positions,metrics=full_pose(model,matrices,rest,reference,calibration,module)
+                p,positions,metrics=full_pose(model,matrices,rest,reference,calibration,module,family=='burning_maul')
                 p=module.motion.continuous(p,previous);previous=p
                 root=0 if floating else source_floor(model,p,positions,module)
                 frames.append({'seconds':t,'pose':p,'positions':positions,'rootY':root});allmetrics.append(metrics)
@@ -299,8 +374,31 @@ def export():
                 clip['animators'][groups[bone]['uuid']]={'name':bone,'type':'bone','rotation_global':False,'quaternion_interpolation':True,'keyframes':keys}
             clips.append(clip)
             seam=max(math.degrees(2*math.acos(min(1,abs(sum(a*b for a,b in zip(w197.quat(h15.rot(frames[0]['pose'][bone])),w197.quat(h15.rot(frames[-1]['pose'][bone]))))))))for bone in h15.BONES)
-            reports.append({'clip':name,'source_revision':'R2','family':family,'group':spec['group'],'bindingStatus':spec['binding_status'],'role':role,'sourceAction':entry['action'],'sourceBase':entry['base'],'bake':entry['bake'],'omittedDrivers':entry.get('omitted_from_neutral_bake',[]),'sourceSampleFile':entry['sample_file'],'sourceSampleSha256':sha(SOURCE/entry['sample_file']),'sourcePeriodSeconds':length,'inferredDirection':entry.get('inferred_direction'),'sourceLoopCandidate':entry['loop_candidate'],'loopRotationSeamDegrees':seam,'fullCoupledChannels':True,'gripPolicy':'source wrist/elbow trajectories calibrated only to R2 composed idle and existing item bind nodes; no older ready pose, frozen arms or R1 masks','floatingPreviewPreset':floating,'aliasOf':prefix+'_idle'if role=='air'else None})
+            reports.append({'clip':name,'source_revision':'R2','family':family,'group':spec['group'],'bindingStatus':spec['binding_status'],'role':role,'sourceAction':entry['action'],'sourceBase':entry['base'],'bake':entry['bake'],'omittedDrivers':entry.get('omitted_from_neutral_bake',[]),'sourceSampleFile':entry['sample_file'],'sourceSampleSha256':sha(SOURCE/entry['sample_file']),'sourcePeriodSeconds':length,'inferredDirection':entry.get('inferred_direction'),'sourceLoopCandidate':entry['loop_candidate'],'loopRotationSeamDegrees':seam,'fullCoupledChannels':True,'gripPolicy':('W337 absolute R2 chest-relative wrists and source elbow/roll; actual mesh shaft +2Y display transform fitted to both distal skin palm volumes'if family=='burning_maul'else'source wrist/elbow trajectories calibrated only to R2 composed idle and existing item bind nodes; no older ready pose, frozen arms or R1 masks'),'floatingPreviewPreset':floating,'aliasOf':prefix+'_idle'if role=='air'else None})
             if role in ['idle','move_forward','move']:review_frames.append((family,role,frames[0],frames[len(frames)//2],model))
+    if maul_only:
+        baseline_path=MAIN/'art/animation/w336/classes/super_locomotion_classes_w336.animation.json'
+        baseline_text=baseline_path.read_text();decoder=json.JSONDecoder();offset=baseline_text.index('[',baseline_text.index('"animations"'))+1
+        replacements={c['name']:c for c in clips};ranges=[]
+        while True:
+            while baseline_text[offset].isspace()or baseline_text[offset]==',':offset+=1
+            if baseline_text[offset]==']':break
+            value,end=decoder.raw_decode(baseline_text,offset)
+            if value['name']in replacements:
+                rendered=json.dumps(replacements[value['name']],ensure_ascii=False,indent=2,allow_nan=False).replace('\n','\n    ')
+                ranges.append((offset,end,rendered))
+            offset=end
+        assert len(ranges)==5
+        for a,b,value in reversed(ranges):baseline_text=baseline_text[:a]+value+baseline_text[b:]
+        (OUT/'super_locomotion_classes_w336.animation.json').write_text(baseline_text)
+        baseline_manifest=read(MAIN/'art/animation/w336/classes/manifest.json')
+        for index,record in enumerate(baseline_manifest['clips']):
+            replacement=next((r for r in reports if r['clip']==record['clip']),None)
+            if replacement:baseline_manifest['clips'][index]=replacement
+        baseline_manifest['maulGripRevision']={'revision':'W337 actual mesh shaft / absolute R2 wrists','clips':list(replacements),'metricsMax':{k:max(m[k]for m in allmetrics)for k in allmetrics[0]if k!='shaftThroughPalmMinimumLengthUnits'},'metricsMin':{'shaftThroughPalmMinimumLengthUnits':min(m['shaftThroughPalmMinimumLengthUnits']for m in allmetrics)},'other26Clips':'raw per-clip JSON bytes preserved','nativeAcceptance':'pending master idle/4directions/attack-return review'}
+        write(OUT/'manifest.json',baseline_manifest)
+        print('W337 Maul-only physical grip corrected; untouched26clip byte ranges retained',baseline_manifest['maulGripRevision']['metricsMax'],flush=True)
+        return
     write(OUT/'super_locomotion_classes_w336.animation.json',{'schema_version':1,'source_revision':'R2','animations':clips})
     evaluation=read(TEMP/'R2-composed-blend-evaluation.json')
     manifest={'task':'W336 R2 composed Titan/Warlock locomotion','source_revision':'R2','R1Status':'superseded; private evidence only, no R1 family table/layer decode/upperbody mask retained','sourcePackage':str(SOURCE),
@@ -340,8 +438,8 @@ def review(records,module):
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--inspect',choices=['composed']);parser.add_argument('--export',action='store_true')
+    parser=argparse.ArgumentParser();parser.add_argument('--inspect',choices=['composed']);parser.add_argument('--export',action='store_true');parser.add_argument('--maul-only',action='store_true')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:]if'--'in sys.argv else sys.argv[1:])
     if args.inspect:inspect(args.inspect)
-    elif args.export:export()
+    elif args.export:export(args.maul_only)
     else:parser.error('choose --inspect or --export')

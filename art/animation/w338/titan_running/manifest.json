@@ -1,0 +1,1062 @@
+{
+  "task": "W338 R3 Titan run-only overlay",
+  "source_revision": "R3",
+  "sourcePackage": "/Users/qf/Downloads/Destiny-Super-Idle-Movement-2026-11-07-R3-Titan-Running",
+  "sourceFiles": {
+    "README.md": "8151ea50f9d8a8ffa352e330b3ee0fd2b3260def3a52a993c1f36a90b08db36f",
+    "HANDOFF.md": "89562fc95880ae58fc6dff9cdb7d16c17cc3f1f9d2077e0a24bd9bea9611ef23",
+    "CATALOG.json": "7e88050b2059582b96862fc3ea8cbbc410910a6180698aaa309901dc59d16760",
+    "FILE-HASHES.json": "4bc89d2c0ad0baea823c7bed95efc92b16b9c99e9ee2dda45e787269cb687ebf",
+    "motions/Titan_Running_R3.blend": "609e7886027e1bafd8db8cd2a3ee1730d5ce74200e772e3167dba9e8dbd693d7"
+  },
+  "coordinateBasis": [
+    [
+      0,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      -1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "coordinatePolicy": "Use sampled armature-space matrices verified directly against .blend; source values are meters/game Xforward,Yside,Zup. Do not reapply armature_world/rest; C maps to target X=-sourceY,Y=sourceZ,Z=-sourceX once.",
+  "helpers": {
+    "scripts/art/w332_super_motion_sources.py": "af18818f40217f815eaaa86ffffbb9b4aca2c229ab95225469162f0d631b77ae",
+    "scripts/art/w330_spectral_blades.py": "53d794ebdfefc5701d97caa571a63c2df1b816fc77fc2994002e2b54a2cd18f9"
+  },
+  "mathProvenance": "W336 baseline helper snapshot SHA3f98ee73391ae95519a75512453d44da4f4e2476aeb65ecfdfba185429f44dbc; copied reconstruction/spine/IK/floor only; no dynamic dependency on concurrent R2/Maul generator",
+  "directBlendEvaluation": "blend-evaluation.json",
+  "clipCount": 12,
+  "clips": [
+    {
+      "clip": "w229_titan_arc_move_forward",
+      "family": "unarmed_fists_candidate",
+      "direction": "forward",
+      "sourceAction": "unarmed_fists_candidate__set0_point4",
+      "sourceBase": "80A8A7CD",
+      "sourcePeriodSeconds": 0.5666666666666667,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set0_point4.json",
+      "sourceSampleSha256": "7b2427311155119fd771545a8ed43b458fe4b2976a1ab4b60018d58107b467c7",
+      "bake": {
+        "name": "unarmed_fists_candidate__set0_point4",
+        "base": "80A8A7CD",
+        "frames": 18,
+        "layers": [
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Fists candidate binding; final active-super selection unproven",
+      "loopRotationSeamDegrees": 4.9489422255199244e-05,
+      "samples": 24,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.076740298213702e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.5121479338940403e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06,
+        "leftSourceChestRelativeMeters": [
+          0.10992175724895444,
+          0.40004665542565654,
+          0.29510662224447337
+        ],
+        "leftTargetChestRelativeUnits": [
+          -7.137833446814442,
+          1.8329257131909706,
+          -8.829508077316724
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.04204218217395951,
+          0.2509000008555727,
+          -0.3683534103979168
+        ],
+        "rightTargetChestRelativeUnits": [
+          8.744131496958742,
+          -1.559299284063628,
+          -6.175399661981418
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.1912110639947092,
+          0.1932205159910595,
+          0.14055286417723284
+        ],
+        "right": [
+          0.3245781269029252,
+          0.24701072966589072,
+          0.16877812588957464
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          3.110099073225128,
+          3.8174611435801116,
+          3.6235344441122574
+        ],
+        "right": [
+          3.8989853470068576,
+          7.039149179426352,
+          4.526193282203996
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_arc_move_backward",
+      "family": "unarmed_fists_candidate",
+      "direction": "backward",
+      "sourceAction": "unarmed_fists_candidate__set1_point1",
+      "sourceBase": "80A8A630",
+      "sourcePeriodSeconds": 0.6666666666666666,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set1_point1.json",
+      "sourceSampleSha256": "db173f520a893a163023bc4194c0cdd357fbd845e9e62d25013c0a7bd169dca4",
+      "bake": {
+        "name": "unarmed_fists_candidate__set1_point1",
+        "base": "80A8A630",
+        "frames": 21,
+        "layers": [
+          {
+            "tag": "80A8A7C2",
+            "weight": 1.0,
+            "frame": 5.0
+          },
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Fists candidate binding; final active-super selection unproven",
+      "loopRotationSeamDegrees": 3.4150945850063755e-06,
+      "samples": 28,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.6645352591003757e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 1.4217791915866692e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.1443812829575779,
+          0.17436161863074073,
+          0.37977856064737986
+        ],
+        "leftTargetChestRelativeUnits": [
+          -9.136075240611303,
+          -3.858841598456331,
+          -4.351520423154202
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.1363401577692652,
+          0.17309198239077783,
+          -0.30597655132500484
+        ],
+        "rightTargetChestRelativeUnits": [
+          7.362323820131126,
+          -3.6600387429697725,
+          -4.449865386924723
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.07071706509027958,
+          0.10162703403657677,
+          0.05785974974818414
+        ],
+        "right": [
+          0.03807244787038308,
+          0.014601414281401714,
+          0.04477489748521446
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          1.174938438363034,
+          1.5093942656855548,
+          2.0585017303952657
+        ],
+        "right": [
+          0.961729949139464,
+          0.7999192823722217,
+          0.29344508828067806
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_arc_move_left",
+      "family": "unarmed_fists_candidate",
+      "direction": "left",
+      "sourceAction": "unarmed_fists_candidate__set2_point1",
+      "sourceBase": "80A8A63D",
+      "sourcePeriodSeconds": 0.6666666666666666,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set2_point1.json",
+      "sourceSampleSha256": "fb128d4fd6836b11dab6551d65738292800e961d3d0817f4ae679b7580834fb2",
+      "bake": {
+        "name": "unarmed_fists_candidate__set2_point1",
+        "base": "80A8A63D",
+        "frames": 21,
+        "layers": [
+          {
+            "tag": "80A8A7C1",
+            "weight": 1.0,
+            "frame": 5.0
+          },
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Fists candidate binding; final active-super selection unproven",
+      "loopRotationSeamDegrees": 1.2194326777763644e-05,
+      "samples": 28,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.2023728339893768e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.0201331455116262e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.22405659832872066,
+          -0.02990747977028497,
+          0.2871329121214289
+        ],
+        "leftTargetChestRelativeUnits": [
+          -7.250010216678845,
+          -5.570628626144482,
+          -0.33952137152555206
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.06502163520595834,
+          0.25014996525281014,
+          -0.32014984177795075
+        ],
+        "rightTargetChestRelativeUnits": [
+          7.602627067535574,
+          -2.1351482955165317,
+          -6.040350871624453
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.05373398307651456,
+          0.09127431674654975,
+          0.08287277668990628
+        ],
+        "right": [
+          0.04671311162391239,
+          0.013979621241844459,
+          0.0429749700055202
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          1.631253111816223,
+          1.1614293964819522,
+          1.7654904909599534
+        ],
+        "right": [
+          0.85888575823944,
+          0.9405921971335371,
+          0.3049114872642411
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_arc_move_right",
+      "family": "unarmed_fists_candidate",
+      "direction": "right",
+      "sourceAction": "unarmed_fists_candidate__set3_point1",
+      "sourceBase": "80A8A635",
+      "sourcePeriodSeconds": 0.6666666666666666,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set3_point1.json",
+      "sourceSampleSha256": "452af48706f5e62c49ffb804d94bf18326a1a5f698670c5750ffce416bd603ca",
+      "bake": {
+        "name": "unarmed_fists_candidate__set3_point1",
+        "base": "80A8A635",
+        "frames": 21,
+        "layers": [
+          {
+            "tag": "80A8A7C9",
+            "weight": 1.0,
+            "frame": 5.0
+          },
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Fists candidate binding; final active-super selection unproven",
+      "loopRotationSeamDegrees": 1.1706354451251832e-05,
+      "samples": 28,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.9310728916085627e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 8.881784197001252e-16,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.17595837650801296,
+          0.1223672411606476,
+          0.3289555595421753
+        ],
+        "leftTargetChestRelativeUnits": [
+          -8.045487393157499,
+          -4.435759900172156,
+          -3.433861242421741
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.04687978109416525,
+          0.16295679318211762,
+          -0.3197212703985315
+        ],
+        "rightTargetChestRelativeUnits": [
+          7.6861723179765775,
+          -1.6689894469991629,
+          -4.309145398892562
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.08632704445211667,
+          0.08827721722534197,
+          0.0452346231888025
+        ],
+        "right": [
+          0.05673441216925798,
+          0.041607985738659314,
+          0.03541938617459417
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          0.8557996099446079,
+          1.8723764623545032,
+          1.6953164936283933
+        ],
+        "right": [
+          0.6866450222814899,
+          1.259539352150548,
+          0.8061190839983023
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_solar_move_forward",
+      "family": "hammer_of_sol",
+      "direction": "forward",
+      "sourceAction": "hammer_of_sol__set0_point4",
+      "sourceBase": "80A8A8ED",
+      "sourcePeriodSeconds": 0.5333333333333333,
+      "sourceSampleFile": "motions/samples_20tps/hammer_of_sol__set0_point4.json",
+      "sourceSampleSha256": "49b2c060f3b9e65ac15f8768267037e865ad4517ddc419348a37b127cfd82092",
+      "bake": {
+        "name": "hammer_of_sol__set0_point4",
+        "base": "80A8A8ED",
+        "frames": 17,
+        "layers": [
+          {
+            "tag": "80A8A8CD",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Hammer named state group32",
+      "loopRotationSeamDegrees": 2.4979263396122898e-05,
+      "samples": 23,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.5121479338940403e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 1.9860273225978185e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          0.21535449893095399,
+          0.2828225606092074,
+          0.3531761985407348
+        ],
+        "leftTargetChestRelativeUnits": [
+          -8.379258392962456,
+          3.844137969576548,
+          -6.710953865984815
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.08725050412177833,
+          0.1639633443341536,
+          -0.3715039698584928
+        ],
+        "rightTargetChestRelativeUnits": [
+          8.76158439163714,
+          -2.7169755034687224,
+          -4.40237353934622
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.36513080971109096,
+          0.17386389687761158,
+          0.06966748047745625
+        ],
+        "right": [
+          0.10220400679164604,
+          0.13735512366006108,
+          0.05527854364551393
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          1.3754747943517147,
+          7.597330197501085,
+          3.809144017462935
+        ],
+        "right": [
+          1.1531572807831427,
+          2.129515945950967,
+          2.7733577612989846
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_solar_move_backward",
+      "family": "hammer_of_sol",
+      "direction": "backward",
+      "sourceAction": "hammer_of_sol__set3_point1",
+      "sourceBase": "80A8A891",
+      "sourcePeriodSeconds": 0.5666666666666667,
+      "sourceSampleFile": "motions/samples_20tps/hammer_of_sol__set3_point1.json",
+      "sourceSampleSha256": "fe0dd1352fd27fd385121e5674d60bab23a2a1f94e3fd05bad00511116bcd0c0",
+      "bake": {
+        "name": "hammer_of_sol__set3_point1",
+        "base": "80A8A891",
+        "frames": 18,
+        "layers": [
+          {
+            "tag": "80A8A8CD",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Hammer named state group32",
+      "loopRotationSeamDegrees": 1.27781138805208e-05,
+      "samples": 24,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.076740298213702e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.094764613337708e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.04145831094560576,
+          0.23252258513802845,
+          0.3975310509183493
+        ],
+        "leftTargetChestRelativeUnits": [
+          -9.437415494258163,
+          -1.4432548159029022,
+          -5.827307401462585
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.16931311665134102,
+          0.1296353162050629,
+          -0.30421363608978064
+        ],
+        "rightTargetChestRelativeUnits": [
+          7.452735174946731,
+          -4.183593572695636,
+          -3.6271019195415786
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.245936701733855,
+          0.18776582934159486,
+          0.07300090005202009
+        ],
+        "right": [
+          0.12289945393936164,
+          0.21829425965410884,
+          0.05170225444517945
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          1.3985348647469955,
+          5.351068939608107,
+          3.795052387026759
+        ],
+        "right": [
+          1.0600418983931101,
+          2.8163227121611234,
+          4.459139205511318
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_solar_move_left",
+      "family": "hammer_of_sol",
+      "direction": "left",
+      "sourceAction": "hammer_of_sol__set2_point1",
+      "sourceBase": "80A8A8AB",
+      "sourcePeriodSeconds": 0.5666666666666667,
+      "sourceSampleFile": "motions/samples_20tps/hammer_of_sol__set2_point1.json",
+      "sourceSampleSha256": "d717d1a2a93f4eaa1e63662b5a24a40fca02b0206b43f2a7c24bf5b5e51169da",
+      "bake": {
+        "name": "hammer_of_sol__set2_point1",
+        "base": "80A8A8AB",
+        "frames": 18,
+        "layers": [
+          {
+            "tag": "80A8A8CD",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Hammer named state group32",
+      "loopRotationSeamDegrees": 7.2445096183544e-06,
+      "samples": 24,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.076740298213702e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 1.790180836524724e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.004162009331536449,
+          0.30082227927439675,
+          0.30496653777091703
+        ],
+        "leftTargetChestRelativeUnits": [
+          -7.448716166646224,
+          -0.6029430102424136,
+          -7.21115227217013
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.1313327274789013,
+          0.12171401087161432,
+          -0.3883783581757115
+        ],
+        "rightTargetChestRelativeUnits": [
+          9.260950323393713,
+          -3.3797816407158177,
+          -3.4640663341251168
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.2710037639482075,
+          0.196664036517264,
+          0.05121082116324949
+        ],
+        "right": [
+          0.13181867466535274,
+          0.1425192870297512,
+          0.03622776870620109
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          0.8880603761091486,
+          5.886312699221674,
+          3.88969031050037
+        ],
+        "right": [
+          0.7286278879230235,
+          3.007449178581673,
+          2.861079138925409
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_solar_move_right",
+      "family": "hammer_of_sol",
+      "direction": "right",
+      "sourceAction": "hammer_of_sol__set1_point1",
+      "sourceBase": "80A8A892",
+      "sourcePeriodSeconds": 0.6,
+      "sourceSampleFile": "motions/samples_20tps/hammer_of_sol__set1_point1.json",
+      "sourceSampleSha256": "1302aa633bf0f06761016b1588972e0baf0a2265d9eecef57a36de555be0a45d",
+      "bake": {
+        "name": "hammer_of_sol__set1_point1",
+        "base": "80A8A892",
+        "frames": 19,
+        "layers": [
+          {
+            "tag": "80A8A8CD",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "Hammer named state group32",
+      "loopRotationSeamDegrees": 5.485454151053806e-05,
+      "samples": 25,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.210061615366513e-15,
+        "wristRotationErrorDegrees": 0
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 1.9860273225978185e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.1860136704459633,
+          0.19608177746293687,
+          0.3189249126195324
+        ],
+        "leftTargetChestRelativeUnits": [
+          -7.777277433000954,
+          -4.698407874983683,
+          -4.902699836526451
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.039211053676219895,
+          0.1187338355249349,
+          -0.4620877365068017
+        ],
+        "rightTargetChestRelativeUnits": [
+          10.822042631181729,
+          -1.623190841683457,
+          -3.479989076706932
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.20847593605829334,
+          0.24249350879755666,
+          0.11942446845279292
+        ],
+        "right": [
+          0.07383360833953867,
+          0.13185960825292514,
+          0.10895019714793558
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          2.517304969098012,
+          4.564919024392419,
+          4.887502521018133
+        ],
+        "right": [
+          2.246631152579191,
+          1.4755254943990492,
+          2.693160113481465
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_void_move_forward",
+      "family": "unarmed_fists_candidate",
+      "direction": "forward",
+      "sourceAction": "unarmed_fists_candidate__set0_point4",
+      "sourceBase": "80A8A7CD",
+      "sourcePeriodSeconds": 0.5666666666666667,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set0_point4.json",
+      "sourceSampleSha256": "7b2427311155119fd771545a8ed43b458fe4b2976a1ab4b60018d58107b467c7",
+      "bake": {
+        "name": "unarmed_fists_candidate__set0_point4",
+        "base": "80A8A7CD",
+        "frames": 18,
+        "layers": [
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "deliberate user mapping of same unarmed running to Sentinel; not Sentinel-exclusive source",
+      "loopRotationSeamDegrees": 4.9489422255199244e-05,
+      "samples": 24,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.076740298213702e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.5121479338940403e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06,
+        "leftSourceChestRelativeMeters": [
+          0.10992175724895444,
+          0.40004665542565654,
+          0.29510662224447337
+        ],
+        "leftTargetChestRelativeUnits": [
+          -7.137833446814442,
+          1.8329257131909706,
+          -8.829508077316724
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.04204218217395951,
+          0.2509000008555727,
+          -0.3683534103979168
+        ],
+        "rightTargetChestRelativeUnits": [
+          8.744131496958742,
+          -1.559299284063628,
+          -6.175399661981418
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.1912110639947092,
+          0.1932205159910595,
+          0.14055286417723284
+        ],
+        "right": [
+          0.3245781269029252,
+          0.24701072966589072,
+          0.16877812588957464
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          3.110099073225128,
+          3.8174611435801116,
+          3.6235344441122574
+        ],
+        "right": [
+          3.8989853470068576,
+          7.039149179426352,
+          4.526193282203996
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_void_move_backward",
+      "family": "unarmed_fists_candidate",
+      "direction": "backward",
+      "sourceAction": "unarmed_fists_candidate__set1_point1",
+      "sourceBase": "80A8A630",
+      "sourcePeriodSeconds": 0.6666666666666666,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set1_point1.json",
+      "sourceSampleSha256": "db173f520a893a163023bc4194c0cdd357fbd845e9e62d25013c0a7bd169dca4",
+      "bake": {
+        "name": "unarmed_fists_candidate__set1_point1",
+        "base": "80A8A630",
+        "frames": 21,
+        "layers": [
+          {
+            "tag": "80A8A7C2",
+            "weight": 1.0,
+            "frame": 5.0
+          },
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "deliberate user mapping of same unarmed running to Sentinel; not Sentinel-exclusive source",
+      "loopRotationSeamDegrees": 3.4150945850063755e-06,
+      "samples": 28,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.6645352591003757e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 1.4217791915866692e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.1443812829575779,
+          0.17436161863074073,
+          0.37977856064737986
+        ],
+        "leftTargetChestRelativeUnits": [
+          -9.136075240611303,
+          -3.858841598456331,
+          -4.351520423154202
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.1363401577692652,
+          0.17309198239077783,
+          -0.30597655132500484
+        ],
+        "rightTargetChestRelativeUnits": [
+          7.362323820131126,
+          -3.6600387429697725,
+          -4.449865386924723
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.07071706509027958,
+          0.10162703403657677,
+          0.05785974974818414
+        ],
+        "right": [
+          0.03807244787038308,
+          0.014601414281401714,
+          0.04477489748521446
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          1.174938438363034,
+          1.5093942656855548,
+          2.0585017303952657
+        ],
+        "right": [
+          0.961729949139464,
+          0.7999192823722217,
+          0.29344508828067806
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_void_move_left",
+      "family": "unarmed_fists_candidate",
+      "direction": "left",
+      "sourceAction": "unarmed_fists_candidate__set2_point1",
+      "sourceBase": "80A8A63D",
+      "sourcePeriodSeconds": 0.6666666666666666,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set2_point1.json",
+      "sourceSampleSha256": "fb128d4fd6836b11dab6551d65738292800e961d3d0817f4ae679b7580834fb2",
+      "bake": {
+        "name": "unarmed_fists_candidate__set2_point1",
+        "base": "80A8A63D",
+        "frames": 21,
+        "layers": [
+          {
+            "tag": "80A8A7C1",
+            "weight": 1.0,
+            "frame": 5.0
+          },
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "deliberate user mapping of same unarmed running to Sentinel; not Sentinel-exclusive source",
+      "loopRotationSeamDegrees": 1.2194326777763644e-05,
+      "samples": 28,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.2023728339893768e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 3.0201331455116262e-15,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.22405659832872066,
+          -0.02990747977028497,
+          0.2871329121214289
+        ],
+        "leftTargetChestRelativeUnits": [
+          -7.250010216678845,
+          -5.570628626144482,
+          -0.33952137152555206
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.06502163520595834,
+          0.25014996525281014,
+          -0.32014984177795075
+        ],
+        "rightTargetChestRelativeUnits": [
+          7.602627067535574,
+          -2.1351482955165317,
+          -6.040350871624453
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.05373398307651456,
+          0.09127431674654975,
+          0.08287277668990628
+        ],
+        "right": [
+          0.04671311162391239,
+          0.013979621241844459,
+          0.0429749700055202
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          1.631253111816223,
+          1.1614293964819522,
+          1.7654904909599534
+        ],
+        "right": [
+          0.85888575823944,
+          0.9405921971335371,
+          0.3049114872642411
+        ]
+      }
+    },
+    {
+      "clip": "w229_titan_void_move_right",
+      "family": "unarmed_fists_candidate",
+      "direction": "right",
+      "sourceAction": "unarmed_fists_candidate__set3_point1",
+      "sourceBase": "80A8A635",
+      "sourcePeriodSeconds": 0.6666666666666666,
+      "sourceSampleFile": "motions/samples_20tps/unarmed_fists_candidate__set3_point1.json",
+      "sourceSampleSha256": "452af48706f5e62c49ffb804d94bf18326a1a5f698670c5750ffce416bd603ca",
+      "bake": {
+        "name": "unarmed_fists_candidate__set3_point1",
+        "base": "80A8A635",
+        "frames": 21,
+        "layers": [
+          {
+            "tag": "80A8A7C9",
+            "weight": 1.0,
+            "frame": 5.0
+          },
+          {
+            "tag": "80A8A824",
+            "weight": 1.0,
+            "frame": 0
+          }
+        ]
+      },
+      "omittedDrivers": [],
+      "mapping": "deliberate user mapping of same unarmed running to Sentinel; not Sentinel-exclusive source",
+      "loopRotationSeamDegrees": 1.1706354451251832e-05,
+      "samples": 28,
+      "metrics": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 2.9310728916085627e-15,
+        "wristRotationErrorDegrees": 1.7075472925031877e-06
+      },
+      "absoluteChestRelativeWristReview": {
+        "reachCorrectionUnits": 0,
+        "wristPositionErrorUnits": 8.881784197001252e-16,
+        "wristRotationErrorDegrees": 0,
+        "leftSourceChestRelativeMeters": [
+          -0.17595837650801296,
+          0.1223672411606476,
+          0.3289555595421753
+        ],
+        "leftTargetChestRelativeUnits": [
+          -8.045487393157499,
+          -4.435759900172156,
+          -3.433861242421741
+        ],
+        "rightSourceChestRelativeMeters": [
+          -0.04687978109416525,
+          0.16295679318211762,
+          -0.3197212703985315
+        ],
+        "rightTargetChestRelativeUnits": [
+          7.6861723179765775,
+          -1.6689894469991629,
+          -4.309145398892562
+        ]
+      },
+      "sourceChestRelativeSwingMeters": {
+        "left": [
+          0.08632704445211667,
+          0.08827721722534197,
+          0.0452346231888025
+        ],
+        "right": [
+          0.05673441216925798,
+          0.041607985738659314,
+          0.03541938617459417
+        ]
+      },
+      "targetChestRelativeSwingUnits": {
+        "left": [
+          0.8557996099446079,
+          1.8723764623545032,
+          1.6953164936283933
+        ],
+        "right": [
+          0.6866450222814899,
+          1.259539352150548,
+          0.8061190839983023
+        ]
+      }
+    }
+  ],
+  "targetRigSha256": "70396db93479ee3134a90221247ddcd600bdb2372598ae578a7e2c4b6997b81c",
+  "retarget": "source absolute shoulder/elbow/wrist anatomical directions scaled to target segment lengths, actual per-frame wrist orientation and source clavicle/pelvis/spine/head/legs; no idle-calibrated wrist/ready handpoint, no frozen upperbody mask",
+  "sampling": "supplied composed20Hz parent-local absolute TRS (rest included exactly once);40Hz quaternion interpolation + exact endpoint; full original30fps source period, no speed compression",
+  "root": "source root XZ omitted; target root XZ zero; visual floor normalization and source residual body translations only",
+  "selection": "forward point4 A preferred; B evaluated briefly, same period and catalogue hand swing; lateral/backward CATALOG run_* point1, family-specific direction order",
+  "guard": "Selected run clips use constant original weapon_offset/grip only; neutral walking guard51=0/52=1 preset not used",
+  "limits": [
+    "active Fists-of-Havoc→unarmed selection remains candidate",
+    "Sentinel uses same unarmed R3 run by explicit user mapping; not Sentinel-exclusive proven source",
+    "gait labels inferred from source motion; source2/4m/s thresholds are examples and unused",
+    "source final IK/procedural layers/props/VFX not reproduced; native current Hammer/Shield prop grip/orientation and transitions pending master"
+  ],
+  "unchanged": [
+    "all other R2loops",
+    "idle",
+    "cast",
+    "attack",
+    "dodge",
+    "gameplay speed",
+    "contact/audio",
+    "weapon geometry",
+    "2tick display interpolation"
+  ],
+  "nativeAcceptance": "pending root idle→4directions→stop→attack→run return for all3; no client/server/lease touched"
+}
