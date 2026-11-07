@@ -65,7 +65,7 @@ public final class PlayerAnimations {
         boolean closingAfterRun, meleeCast;
         boolean ownerBodyHidden;
         boolean introOwned; // Survives run=null on completion, failure and explicit stop.
-        IntroSelfCarrier introSelfCarrier;
+        OwnerModelCarrier ownerCarrier;
         final LimbEquipment equipment;
         ItemStack swordStack;
         SwordHandPackets.Protection handProtection;
@@ -261,6 +261,7 @@ public final class PlayerAnimations {
         if (!available() || player.isRemoved() || !player.isAlive() || player.hasDisconnected()) return false;
         SwordHandPackets.Protection handProtection = null;
         boolean adopted = false;
+        OwnerModelCarrier[] preparingCarrier = {null};
         try {
             Playback previous = ACTIVE.get(player.getUUID());
             if(sword&&previous!=null&&previous.swordStack==player.getMainHandItem()&&valid(previous)) {
@@ -291,6 +292,8 @@ public final class PlayerAnimations {
                     TrackerModifier.DEFAULT, t -> {
                         t.hideOption(EntityHideOption.DEFAULT);
                         equipment.bind(t);
+                        if ((clip.animation.startsWith("h15_intro_") && introViewer(player)) || kim.biryeong.destiny.camera.SuperCamera.active(player))
+                            preparingCarrier[0] = new OwnerModelCarrier(player, t, clip.animation.startsWith("h15_intro_"));
                         created.set(true);
                     });
             // getOrCreate skips its initializer for an existing same-model tracker.
@@ -299,6 +302,7 @@ public final class PlayerAnimations {
             ((ServerAnimationClock) (Object) tracker).destiny$claimServerClock();
             Playback state = new Playback(player, tracker, loop ? logical(request) : null, loop ? clip.animation : null, equipment);
             state.introOwned = clip.animation.startsWith("h15_intro_");
+            state.ownerCarrier = preparingCarrier[0];
             if (state.introOwned) {
                 // Freeze the authored stage facing instead of BM's movement-smoothed body yaw.
                 float stageYaw = player.getYRot();
@@ -339,6 +343,7 @@ public final class PlayerAnimations {
             state.handProtection = handProtection;
             ACTIVE.put(player.getUUID(), state);
             adopted = true;
+            syncOwnerCarrier(state);
             applyOwnerVisibility(player, tracker);
             if (handProtection != null) {
                 SwordHandPackets.refreshSecondary(handProtection,player);
@@ -353,6 +358,7 @@ public final class PlayerAnimations {
             fail(player, request, e);
             return false;
         } finally {
+            if (!adopted && preparingCarrier[0] != null) preparingCarrier[0].close();
             if (!adopted && handProtection != null) {
                 SwordHandPackets.syncCurrent(player);
                 SwordHandPackets.end(handProtection);
@@ -435,6 +441,8 @@ public final class PlayerAnimations {
                     discard(state);
                     continue;
                 }
+                syncOwnerCarrier(state);
+                if (state.ownerCarrier != null) state.ownerCarrier.tick();
                 if (state.run != null && state.run.animation.startsWith("h15_intro_"))
                     kim.biryeong.minigamelib.cinematic.CameraViews.sending(() ->
                             ((ServerAnimationClock) (Object) state.tracker).destiny$advanceServerTick());
@@ -572,7 +580,7 @@ public final class PlayerAnimations {
             catch (RuntimeException | LinkageError e) {
                 DestinyGuardians.LOGGER.warn("Limb close failed: {}", e.toString());
             } finally {
-                closeIntroSelfCarrier(state);
+                closeOwnerCarrier(state);
                 if (state.handProtection != null) {
                     try { SwordHandPackets.syncCurrent(state.owner); }
                     finally { SwordHandPackets.end(state.handProtection); }
@@ -591,7 +599,7 @@ public final class PlayerAnimations {
         Playback state = ACTIVE.get(player.getUUID());
         if (state == null) return;
         if (!kim.biryeong.destiny.camera.SuperCamera.active(player)) state.ownerBodyHidden = false;
-        try { applyOwnerVisibility(player, state.tracker); }
+        try { syncOwnerCarrier(state); applyOwnerVisibility(player, state.tracker); }
         catch (RuntimeException | LinkageError e) { fail(player, "visibility", e); }
     }
 
@@ -667,12 +675,12 @@ public final class PlayerAnimations {
                         || kr.toxicity.model.api.util.EntityUtil.canSee(candidate.eyeLocation(), tracker.location());
             });
             if (viewer == owner) {
-                if (state.introSelfCarrier == null)
-                    state.introSelfCarrier = new IntroSelfCarrier(owner, tracker);
+                if (state.ownerCarrier == null)
+                    state.ownerCarrier = new OwnerModelCarrier(owner, tracker, true);
                 // Installation is ordered on Netty, never block the server thread.
                 // CrucibleIntro retries this pair next tick without restarting the cast.
-                if (!state.introSelfCarrier.ready()) return;
-                state.introSelfCarrier.spawn();
+                if (!state.ownerCarrier.ready()) return;
+                state.ownerCarrier.spawn();
             }
             var target = ModPlayer.of(viewer.connection);
             tracker.show(target);
@@ -706,18 +714,28 @@ public final class PlayerAnimations {
                     registry.remove(target);
                 else state.tracker.remove(target);
             } finally {
-                if (viewer == owner) closeIntroSelfCarrier(state);
+                if (viewer == owner) closeOwnerCarrier(state);
             }
         });
     }
 
-    private static void closeIntroSelfCarrier(Playback state) {
-        IntroSelfCarrier carrier = state.introSelfCarrier;
-        state.introSelfCarrier = null;
+    private static void syncOwnerCarrier(Playback state) {
+        boolean needed = (state.introOwned && introViewer(state.owner))
+                || kim.biryeong.destiny.camera.SuperCamera.active(state.owner);
+        if (!needed) { closeOwnerCarrier(state); return; }
+        if (state.ownerCarrier == null) {
+            state.ownerCarrier = new OwnerModelCarrier(state.owner, state.tracker, state.introOwned);
+            state.ownerCarrier.spawn();
+        }
+    }
+
+    private static void closeOwnerCarrier(Playback state) {
+        OwnerModelCarrier carrier = state.ownerCarrier;
+        state.ownerCarrier = null;
         if (carrier != null) {
             try { carrier.close(); }
             catch (RuntimeException | LinkageError e) {
-                DestinyGuardians.LOGGER.warn("Intro self carrier close failed: {}", e.toString());
+                DestinyGuardians.LOGGER.warn("Owner model carrier close failed: {}", e.toString());
             }
         }
     }

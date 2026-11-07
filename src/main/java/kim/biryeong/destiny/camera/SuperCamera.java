@@ -156,12 +156,13 @@ public final class SuperCamera {
         try {
             kim.biryeong.destiny.weapon.ProfileWeaponView.hideForCamera(p);
             updatePositions(s);
+            // Install the owner model anchor before switching the local camera.
+            PlayerAnimations.refreshOwnerVisibility(p);
             spawn(p, s.mount);
             spawn(p, s.camera);
             p.connection.send(passengers(s.mount.getId(), p.getId()));
             p.connection.send(new ClientboundSetActionBarTextPacket(Component.empty()));
             p.connection.send(new ClientboundSetCameraPacket(s.camera));
-            PlayerAnimations.refreshOwnerVisibility(p);
             return true;
         } catch (RuntimeException e) {
             stop(p);

@@ -34,8 +34,8 @@ class IntroSelfCarrierW260Test {
         net.minecraft.server.Bootstrap.bootStrap();
     }
 
-    private static IntroSelfCarrier.MountRelay relay() {
-        return new IntroSelfCarrier.MountRelay(OWNER, CARRIER, Set.of(LIMB_A, LIMB_B));
+    private static OwnerModelCarrier.MountRelay relay() {
+        return new OwnerModelCarrier.MountRelay(OWNER, CARRIER, Set.of(LIMB_A, LIMB_B));
     }
 
     @Test void ownerLimbsMoveToCarrierAndInputIsNotMutated() {
@@ -67,7 +67,7 @@ class IntroSelfCarrierW260Test {
         var untouchedBundle = bundle(other, hudOnly, removal);
         for (Packet<?> packet : List.of(other, carrier, hudOnly, empty, removal, untouchedBundle))
             assertSame(packet, relay.rewrite(packet));
-        assertSame(hudOnly, new IntroSelfCarrier.MountRelay(OWNER, CARRIER, Set.of()).rewrite(hudOnly));
+        assertSame(hudOnly, new OwnerModelCarrier.MountRelay(OWNER, CARRIER, Set.of()).rewrite(hudOnly));
     }
 
     @Test void changedBundleIsFlatPreservesPacketOrderAndDoesNotMutateBroadcastSource() {
@@ -122,7 +122,7 @@ class IntroSelfCarrierW260Test {
 
     @Test void relayOwnsAnImmutableDisplayIdSnapshot() {
         var ids = new HashSet<>(Set.of(LIMB_A));
-        var relay = new IntroSelfCarrier.MountRelay(OWNER, CARRIER, ids);
+        var relay = new OwnerModelCarrier.MountRelay(OWNER, CARRIER, ids);
         ids.clear(); ids.add(LIMB_B);
         var result = flat(relay.rewrite(mount(OWNER, LIMB_A, LIMB_B)));
         assertMount(result.get(0), OWNER, LIMB_B);
