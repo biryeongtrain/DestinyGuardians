@@ -20,7 +20,7 @@ public final class HitscanW290GameTests {
         var gun=WeaponItems.create(entry);
         WeaponAccuracy.setAirborneBonus(gun,100);
         p.getInventory().setItem(0,gun);p.getInventory().setSelectedSlot(0);
-        check(h,WeaponLoadout.equipHeld(p)==null,"Weapon equipped");
+        {var why=WeaponLoadout.equipHeld(p);check(h,why==null,"Weapon equipped: "+why);}
         TestCleanup.register(h,()->{WeaponRuntime.cleanup(p);WeaponAiming.cleanup(p);TestPlayers.remove(p);});
         h.onEachTick(()->{WeaponRuntime.tickPlayer(p);WeaponAiming.tick(p);});
         return p;

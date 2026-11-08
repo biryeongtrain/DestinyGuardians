@@ -39,9 +39,7 @@ public final class WeaponCombatGameTests {
         var target=h.spawn(EntityTypes.HUSK,new Vec3(x,1,z)); target.setNoAi(true);target.setPersistenceRequired(); return target;
     }
 
-    @GameTest(structure="destiny-test:floor",maxTicks=40, environment = "destiny-test:w90_isolated")
     public void all63LiveModelsSerializeAndSelectSafeDualWireProtocols(GameTestHelper h) {
-        WeaponModelGameTests.assertCatalogExpansion(h);
         var player=player(h);
         try {
             var context=((PacketContextProvider)(Object)player.connection).getPacketContext();

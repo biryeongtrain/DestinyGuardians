@@ -134,10 +134,13 @@ public final class ActivityExitW329GameTests {
                 instances = new kim.biryeong.destiny.strike.devils.DevilsInstances(server, 1);
                 instance = instances.prepare(members.stream().map(ServerPlayer::getUUID).toList()).orElseThrow();
                 var ctor = kim.biryeong.destiny.strike.devils.DevilsSession.class.getDeclaredConstructor(
-                        net.minecraft.server.MinecraftServer.class, instances.getClass(), instance.getClass(), java.util.List.class);
+                        net.minecraft.server.MinecraftServer.class, kim.biryeong.destiny.activity.strike.StrikeInstances.class,
+                        kim.biryeong.destiny.activity.strike.StrikeInstances.Instance.class, java.util.List.class);
                 ctor.setAccessible(true); session = ctor.newInstance(server, instances, instance, members);
-                var field = kim.biryeong.destiny.strike.devils.DevilsLair.class.getDeclaredField("SESSIONS");
-                field.setAccessible(true); sessions = (java.util.Map<java.util.UUID, kim.biryeong.destiny.strike.devils.DevilsSession>) field.get(null);
+                var hostField = kim.biryeong.destiny.strike.devils.DevilsLair.class.getDeclaredField("HOST");
+                hostField.setAccessible(true); var host = hostField.get(null);
+                var field = host.getClass().getDeclaredField("runs");
+                field.setAccessible(true); sessions = (java.util.Map<java.util.UUID, kim.biryeong.destiny.strike.devils.DevilsSession>) field.get(host);
                 sessions.put(instance.id(), session); TestCleanup.register(h, this::close);
             } catch (ReflectiveOperationException e) { throw new IllegalStateException(e); }
         }

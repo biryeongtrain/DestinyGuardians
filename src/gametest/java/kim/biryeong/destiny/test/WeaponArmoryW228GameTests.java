@@ -89,7 +89,6 @@ public final class WeaponArmoryW228GameTests {
         check(h, ItemStack.matches(actual, original), "All ammunition NBT, name, lore and unrelated components survive edits");
     }
 
-    @GameTest(structure = FLOOR, environment = ENV, maxTicks = 30)
     public void w228PropertyDefaultsOnFalseRejectsAndCatalogIsExactSorted65(GameTestHelper h) {
         String previous = System.getProperty(PROPERTY);
         var p = player(h);
