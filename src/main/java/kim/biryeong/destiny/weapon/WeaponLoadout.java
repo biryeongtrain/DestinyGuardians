@@ -18,8 +18,8 @@ public final class WeaponLoadout {
         public WeaponCharacteristics.Entry characteristics() { return WeaponCharacteristics.of(weapon); }
         public WeaponAmmoState ammunition() {
             var profile=WeaponProfile.forEntry(weapon);var ammo=WeaponItems.magazine(stack,profile);
-            return new WeaponAmmoState(weapon.family(),ammo.rounds(),ammo.reserve(),WeaponComponents.profile(stack,profile).magazine(),0,
-                    profile.reloadTicks(),false,profile.infiniteReserve());
+            return WeaponAmmoState.stowed(weapon.family(),ammo,WeaponComponents.profile(stack,profile).magazine(),
+                    profile.reloadTicks(),profile.infiniteReserve());
         }
     }
     private WeaponLoadout() {}
