@@ -14,9 +14,26 @@ CACHE = Path('/tmp/exodus-nessus-art/vanilla-textures')
 
 
 @lru_cache(None)
+def biome_tint(key):
+    biome=Path(__file__).resolve().parents[2]/'src/main/resources/data/destiny/worldgen/biome/nessus.json'
+    color=json.loads(biome.read_text())['effects'][key].lstrip('#')
+    return np.array([int(color[i:i+2],16)for i in (0,2,4)])/255
+
+
+@lru_cache(None)
 def asset(path):
     with ZipFile(CLIENT) as jar:
         return json.loads(jar.read('assets/minecraft/'+path))
+
+
+@lru_cache(None)
+def texture_file(name):
+    path='assets/minecraft/textures/'+name.removeprefix('minecraft:')+'.png'
+    target=CACHE/Path(path).name
+    if not target.exists():
+        CACHE.mkdir(parents=True,exist_ok=True)
+        with ZipFile(CLIENT)as jar:target.write_bytes(jar.read(path))
+    return target
 
 
 @lru_cache(None)
@@ -48,12 +65,7 @@ def face_texture(state, face):
             if not value or not value.startswith('#'):break
             value=textures.get(value[1:])
         if not value:return None
-        path='assets/minecraft/textures/'+value.removeprefix('minecraft:')+'.png'
-        target=CACHE/Path(path).name
-        if not target.exists():
-            CACHE.mkdir(parents=True,exist_ok=True)
-            with ZipFile(CLIENT)as jar:target.write_bytes(jar.read(path))
-        return target
+        return texture_file(value)
     except (KeyError,FileNotFoundError,StopIteration):
         return None
 
@@ -88,17 +100,23 @@ def blender_material(state, face, fallback_rgb):
     out=nodes.new('ShaderNodeOutputMaterial');emit=nodes.new('ShaderNodeEmission')
     texpath=face_texture(state,face)
     tint=np.ones(3)
-    if 'oak_leaves' in state:tint=np.array([189,62,43])/255
+    if 'oak_leaves' in state:tint=biome_tint('foliage_color')
+    if 'short_grass' in state or ('grass_block' in state and face=='up'):tint=biome_tint('grass_color')
     if texpath:
         tex=nodes.new('ShaderNodeTexImage');tex.image=bpy.data.images.load(str(texpath),check_existing=True);tex.interpolation='Closest'
         mult=nodes.new('ShaderNodeMixRGB');mult.blend_type='MULTIPLY';mult.inputs[0].default_value=1
         mult.inputs[2].default_value=(*baked_source.srgb_to_linear(tint),1)
         links.new(tex.outputs['Color'],mult.inputs[1]);links.new(mult.outputs[0],emit.inputs['Color'])
+        if 'grass_block' in state and face in ('east','west','north','south'):
+            overlay=nodes.new('ShaderNodeTexImage');overlay.image=bpy.data.images.load(str(texture_file('block/grass_block_side_overlay')),check_existing=True);overlay.interpolation='Closest'
+            paint=nodes.new('ShaderNodeMixRGB');paint.blend_type='MULTIPLY';paint.inputs[0].default_value=1
+            paint.inputs[2].default_value=(*baked_source.srgb_to_linear(biome_tint('grass_color')),1);links.new(overlay.outputs['Color'],paint.inputs[1])
+            layered=nodes.new('ShaderNodeMixRGB');links.new(overlay.outputs['Alpha'],layered.inputs[0]);links.new(mult.outputs[0],layered.inputs[1]);links.new(paint.outputs[0],layered.inputs[2]);links.new(layered.outputs[0],emit.inputs['Color'])
     else:
         emit.inputs['Color'].default_value=(*baked_source.srgb_to_linear(np.clip(fallback_rgb,0,1)),1)
     attr=nodes.new('ShaderNodeVertexColor');attr.layer_name='BlockLight'
     links.new(attr.outputs['Color'],emit.inputs['Strength'])
-    if texpath and any(n in state for n in ('leaves','roots','dead_bush','bars','chain')):
+    if texpath and any(n in state for n in ('leaves','roots','dead_bush','short_grass','bars','chain')):
         trans=nodes.new('ShaderNodeBsdfTransparent');mix=nodes.new('ShaderNodeMixShader')
         cut=nodes.new('ShaderNodeMath');cut.operation='GREATER_THAN';cut.inputs[1].default_value=.5
         links.new(tex.outputs['Alpha'],cut.inputs[0]);links.new(cut.outputs[0],mix.inputs[0])

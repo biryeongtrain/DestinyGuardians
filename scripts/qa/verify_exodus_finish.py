@@ -26,20 +26,27 @@ def main():
     signatures=sorted({shape(s)for s in oldstates+states})
     oldshape=np.array([signatures.index(shape(s))for s in oldstates],np.uint16)
     newshape=np.array([signatures.index(shape(s))for s in states],np.uint16)
-    allowed={'minecraft:dead_bush','minecraft:oak_leaves[distance=1,persistent=true,waterlogged=false]','minecraft:dark_oak_log[axis=y]'}
+    allowed={'minecraft:short_grass','minecraft:oak_leaves[distance=1,persistent=true,waterlogged=false]','minecraft:dark_oak_log[axis=y]'}
     allowed_ids=[i for i,s in enumerate(states)if s in allowed]
-    added=0;changed=0
+    light_ids=[i for i,s in enumerate(states)if s.startswith('minecraft:light[')]
+    grass=states.index('minecraft:short_grass');grass_support=states.index('minecraft:grass_block[snowy=false]')
+    added=0;changed=0;grass_checked=0;added_light=0
     for z in range(0,new.shape[1],64):
         b=old[:,z:z+64];c=new[:,z:z+64];original=b!=0
         # All prior blocks retain the exact collision category / slab properties.
         assert (oldshape[b][original]==newshape[c][original]).all(),('changed original shape',z)
         grow=(b==0)&(c!=0)
-        assert np.isin(c[grow],allowed_ids).all(),('unexpected new object',z)
-        assert not (grow & protected[z:z+64][None]).any(),('new obstruction in route/spawn reservation',z)
-        added+=int(grow.sum());changed+=int((b!=c).sum())
+        added_lights=grow & np.isin(c,light_ids)
+        geometry=grow & ~added_lights
+        assert np.isin(c[geometry],allowed_ids).all(),('unexpected new object',z)
+        assert not (geometry & protected[z:z+64][None]).any(),('new obstruction in route/spawn reservation',z)
+        gy,gz,gx=np.nonzero(c==grass)
+        assert (gy>0).all() and (c[gy-1,gz,gx]==grass_support).all(),('grass survival support',z)
+        grass_checked+=len(gy)
+        added+=int(geometry.sum());added_light+=int(added_lights.sum());changed+=int((b!=c).sum())
     out=dict(originalCollisionShapes='all retained, including slab properties',route='2488 cells identical',
              protectedColumns=int(protected.sum()),newVegetationBlocks=added,changedCells=changed,
-             newGeometryInProtectedColumns=0)
+             newGeometryInProtectedColumns=0,grassClumpsWithValidSupport=grass_checked,addedInvisibleLightCells=added_light)
     print(json.dumps(out,indent=1));(e.WORK/'finish-verification.json').write_text(json.dumps(out,indent=1))
 
 

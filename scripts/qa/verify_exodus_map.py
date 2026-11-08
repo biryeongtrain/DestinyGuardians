@@ -43,7 +43,7 @@ def main():
         if isinstance(beat.get('gate'),dict):
             assert all(beat['gate']['closed']),beat['id']
             for x,y,z in beat['gate']['cells']:assert world[y,z,x]==barrier
-    result=dict(nbtBytes=path.stat().st_size,sections=section_count,blocks=count,roundTrip='all blocks exact',routeCells=len(route),routeMaxRise=1.25,routeMaxDrop=3,markers=len(marker_doc),gates=4,nativePlay='not run')
+    result=dict(nbtBytes=path.stat().st_size,sections=section_count,blocks=count,roundTrip='all blocks exact',routeCells=len(route),routeMaxRise=1.25,routeMaxDrop=3,markers=len(marker_doc),gates=4,scope='offline NBT and route verification; native evidence is separate')
     print(json.dumps(result,indent=1));(e.WORK/'verification.json').write_text(json.dumps(result,indent=1))
 
 if __name__=='__main__':main()

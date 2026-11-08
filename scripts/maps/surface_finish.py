@@ -20,6 +20,18 @@ def replace_shape(state, full, slab=None):
     return 'minecraft:' + full
 
 
+def roof_opacity(states):
+    """Conservative sky occluders for template light placement, not thin decor."""
+    names=[s.split(':',1)[-1].split('[',1)[0] for s in states]
+    return np.array([n not in ('air','light','iron_bars','iron_chain')
+                     and 'glass' not in n and not n.endswith(('_wall','_leaves')) for n in names])
+
+
+def has_roof(world, opaque, x, feet_y, z):
+    """Use the full authored height so tall chambers do not become outdoor sky."""
+    return bool(opaque[world[feet_y+3:,z,x]].any())
+
+
 def patch_field(x, z):
     """Broad continuous patches, rather than independent salt-and-pepper voxels."""
     return (np.sin(x * .047 + np.sin(z * .021) * 1.4)

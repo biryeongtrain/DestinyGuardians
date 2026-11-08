@@ -87,7 +87,7 @@ def apply(world, states, work, route, markers):
             inside_floor=n & ~exterior & ((rr&2)!=0)
             old[inside_floor]=pid(replace_shape(state,'gray_terracotta','polished_deepslate_slab'))
             if base in ground:
-                old[n & ~exterior]=pid(replace_shape(state,'coarse_dirt',None))
+                old[n & ~exterior]=pid(replace_shape(state,'soul_soil',None))
             # Original bright painted panels remain bright enough to read, but
             # undersides/floors gain steel texture instead of emitting flat white.
             s = match & ~natural
@@ -112,9 +112,11 @@ def apply(world, states, work, route, markers):
     full = np.array(['[' not in s and s!='minecraft:air' for s in states])
     bed = exterior & ((rr&3)==3) & full[world[yy,zz,xx]] & (yy<world.shape[0]-20)
     red = bed & (field > -.04)
-    world[yy[red],zz[red],xx[red]] = pid('red_terracotta')
+    # Biome-tinted grass gives the red ground a living surface and supports
+    # real grass clumps. Terracotta beneath short grass would fail survival.
+    world[yy[red],zz[red],xx[red]] = pid('grass_block[snowy=false]')
     leaf_litter = int(red.sum())
-    root = pid('dead_bush'); leaves = pid('oak_leaves[distance=1,persistent=true,waterlogged=false]')
+    root = pid('short_grass'); leaves = pid('oak_leaves[distance=1,persistent=true,waterlogged=false]')
     log = pid('dark_oak_log[axis=y]')
     rng = np.random.default_rng(661193)
     red[:10]=False;red[-10:]=False;red[:,:10]=False;red[:,-10:]=False
@@ -162,10 +164,14 @@ def apply(world, states, work, route, markers):
                   if dx*dx+dz*dz+dy*dy*3<r*r],leaves)
         trees+=1
     # Turn the uniform level-14 fill into localized readable light pools.
-    lighting = 0
+    lighting = boss_lighting = 0
     for i,s in enumerate(before):
         if s.startswith('minecraft:light['):
             mask=world==i;lighting+=int(mask.sum());world[mask]=pid('light[level=11,waterlogged=false]')
+            yy,zz,xx=np.nonzero(mask)
+            boss=(xx+505<900)&(679-zz<-760)
+            world[yy[boss],zz[boss],xx[boss]]=pid('light[level=13,waterlogged=false]')
+            boss_lighting+=int(boss.sum())
     fixtures=0
     for k in range(0,len(route),22):
         x,y,z=map(int,route[k])
@@ -178,8 +184,9 @@ def apply(world, states, work, route, markers):
                     fixtures+=1
                 break
             if fixtures and fixtures%2==0:break
-    report=dict(version=1,materialCells=changed,redGroundCells=leaf_litter,rootClusters=plants,
+    report=dict(version=3,materialCells=changed,redGroundCells=leaf_litter,grassClumps=plants,
                 bushes=bushes,trees=trees,fillLights=lighting,fillLevel=11,ceilingFixtures=fixtures,
+                bossFillLights=boss_lighting,bossFillLevel=13,
                 protectedColumns=int(protected.sum()),biome='destiny:nessus',
                 policy='baked geometry + authored surface finishes and outdoor vegetation; original slab properties retained')
     (work/'nessus-art.json').write_text(json.dumps(report,indent=1))

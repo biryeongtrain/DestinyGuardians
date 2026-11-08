@@ -88,7 +88,7 @@ def build_voxels(root, eye, target, radius):
         cells=np.array(ids,np.uint16)[index]
         grid[l[1]-a[1]:h[1]-a[1],l[2]-a[2]:h[2]-a[2],l[0]-a[0]:h[0]-a[0]]=cells[l[1]-p[1]:h[1]-p[1],l[2]-p[2]:h[2]-p[2],l[0]-p[0]:h[0]-p[0]]
     invisible=[i for i,s in enumerate(states)if s.startswith('minecraft:light[')]
-    crosses=[i for i,s in enumerate(states)if any(n in s for n in ('crimson_roots','dead_bush'))]
+    crosses=[i for i,s in enumerate(states)if any(n in s for n in ('crimson_roots','dead_bush','short_grass'))]
     visible=~np.isin(grid,[0]+invisible+crosses);opaque=visible&~np.isin(grid,[i for i,s in enumerate(states)if 'leaves' in s or 'bars' in s or 'chain' in s])
     light=vanilla_review.light_levels(grid,states,opaque)
     solid=visible;verts=[];faces=[];mids=[];lighting=[]

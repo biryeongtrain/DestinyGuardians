@@ -59,21 +59,24 @@ def voxel(recolor=False):
     if pf.exists():
         for s in json.loads(pf.read_text()): pal.id(s)
     done = WORK / 'tiles.done'; finished = set(done.read_text().split()) if done.exists() and not recolor else set()
+    cache = WORK/'samples';cache.mkdir(exist_ok=True)
     for ty in range(Y0, Y1, TILE):
         for tx in range(X0, X1, TILE):
             key = f'{tx},{ty}'
-            if key in finished: continue
+            sample_file=cache/(key+'.npz')
+            if key in finished and sample_file.exists(): continue
             xs = np.arange(tx, min(tx + TILE, X1)); ys = np.arange(ty, min(ty + TILE, Y1))
             t0 = time.time()
             lo = [tx - MARGIN, ty - MARGIN, Z0]; hi = [min(tx + TILE, X1) + MARGIN, min(ty + TILE, Y1) + MARGIN, Z1]
             grid = m.Grid(lo, hi, 1.0)
-            cache = WORK/'samples';cache.mkdir(exist_ok=True);sample_file=cache/(key+'.npz')
             if sample_file.exists():
                 saved=np.load(sample_file);agg=m.Agg();agg.key=saved['key'];agg.occ=saved['occ'];agg.f={field:saved[field]for field in agg.FIELDS}
             else:
                 agg = m.voxelize(glb, grid, lo, hi, step=.3, log=lambda *a: None)
+            # Empty tiles are valid completed samples too. Persist them so an
+            # absent cache file can be distinguished from a known empty tile.
+            if not sample_file.exists():np.savez_compressed(sample_file, key=agg.key, occ=agg.occ, **agg.f)
             if len(agg.key):
-                if not sample_file.exists():np.savez_compressed(sample_file, key=agg.key, occ=agg.occ, **agg.f)
                 # Average baked albedo in linear RGB, then enter the existing
                 # perceptual Minecraft palette classifier in sRGB exactly once.
                 for channel in ('r', 'g', 'b'):
@@ -278,9 +281,11 @@ def stage2():
         beats.append(info)
     # 3b. Interior lighting: roofed stretches of the route (trench, hull, caves) get invisible light blocks; open sky keeps daylight.
     light = pid('minecraft:light[level=14,waterlogged=false]'); lit = 0
+    from surface_finish import roof_opacity, has_roof
+    opaque=roof_opacity(states)
     for k in range(0, len(path), 6):
         x, y, z = path[k]
-        if not world[y + 3:min(y + 46, world.shape[0]), z, x].any(): continue
+        if not has_roof(world,opaque,x,y,z): continue
         for ox, oz in ((0, 0), (5, 0), (-5, 0), (0, 5), (0, -5)):
             xx, zz = x + ox, z + oz
             if not (0 <= xx < world.shape[2] and 0 <= zz < world.shape[1]): continue

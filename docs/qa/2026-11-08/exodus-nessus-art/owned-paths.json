@@ -1,16 +1,254 @@
-{
- "scripts/maps/surface_finish.py": "f70d216006c38330bb3b21d0b703699106027b531ec6de536cdc2c085ecae19b",
- "scripts/maps/vanilla_review.py": "882601fcb5ab1832c423efed26dc10854ffd4d0c29a7cef5d485fc8181eae64f",
- "scripts/strikes/nessus_finish.py": "e4e6154b60186f7ae42f1a8524ba77b17bded57a615f8c33c8cb71816f598ea2",
- "scripts/strikes/build_exodus_maps.py": "9987b2bdfa6d4db7c353b3a0df995170bb4d7a623990ede917647e1d26d692ec",
- "scripts/strikes/review_exodus_blender.py": "62f8b0cac61d3e2a5a923790a91edb6f9601699f2970becfc279d9d139188ecb",
- "scripts/qa/verify_exodus_finish.py": "7b02d4f078c95119f6ac2c50e79550b02a9d6862c90e4c2ab470bb0192c96029",
- "scripts/qa/verify_exodus_map.py": "ef1783e30e6a1704332426ad8741501d96f00eccfcb9979897399a0b7cc2b072",
- "src/main/java/kim/biryeong/destiny/world/template/NbtTemplateChunkGenerator.java": "f4429c7dcda046de4fea1bf19d0ef323908cfe24c27deb80be4152191b650248",
- "src/main/java/kim/biryeong/destiny/strike/exodus/ExodusTemplateGenerator.java": "009664cadf4355a353d0d337d4b25accc23a9c2f0dbdd6ac2d442860ff7d2ade",
- "src/main/java/kim/biryeong/destiny/strike/exodus/ExodusCrash.java": "239902151d4a10495cfbed900ff6e0613d381744322b14095a82d68e58526636",
- "src/gametest/java/kim/biryeong/destiny/test/ExodusNbtGameTests.java": "fa837270987e607ee39f9a9905364d18372963074c3f409cacbf9d110c6efbd1",
- "src/main/resources/data/destiny/worldgen/biome/nessus.json": "af082865e3cac31f0d84f2905e677d7b025b14acc5c7dd6a728996ac15e18036",
- "src/main/resources/data/destiny/exodus_crash/manifest.json": "8790b740357f35c5d960a601d45f6baaf30fcc26bfbb428ef5262ee38511e643",
- "src/main/resources/data/destiny/map_template/exodus_crash/world.nbt": "e885a92743c9ae0eb83f0648ff6e9a07386417720d962541779ba01dc08dab7d"
-}
+[
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/README.md",
+    "sha256": "47ca93ceb9fb3205e564faec33b8686160d6eb77e734871bf2f88604025d0a20"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/art-pass.json",
+    "sha256": "d0057b9f9b3b441f42ec20d7a9873de872f3f53d55fc5ee17ea16c20642af290"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/boss_entry.png",
+    "sha256": "87ea3c086a12a6fb350bfa7490d48a9b8da085f3522d6e33328f1ab4e9c1e34f"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/boss_room.png",
+    "sha256": "e4993cfdc5196f66ba928f9e6c7fbc0a39cf40f7db43951ed62e34cc5bc509b8"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/cache-migration.json",
+    "sha256": "109eefa3005c9cd6f8a69a97933d973f82f26af2d2d327abe49c9790309d7d9c"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/cameras.json",
+    "sha256": "d259247b5f433eb2f8dc625a41015d310e63360911f0af156293f4d98b50adde"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/cleanup-final.json",
+    "sha256": "bb7ffb64e06581e137542930c4893a5936e76d104b81abc4e67aa73e56319ce2"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/colony.png",
+    "sha256": "7a12c6dec7f4621f511b81194c17b76466d1e48c64591f83dbea0bed322c6909"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/finish-verification.json",
+    "sha256": "99fe6c7676287a6789410ca988d7c827217d11ebac547be0e1b29bd0067d40a0"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/gametest.xml",
+    "sha256": "4b2285323ea80570c2771a8c38d53e448b9e727dc9bd2d9ca75537000095de86"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/hull_corridor.png",
+    "sha256": "47c1dbedc583997815c9e84c3e54899b413a53671208cd5a28123ed5c91b7d09"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/hull_entry.png",
+    "sha256": "5b4cb9bd7932c429ea79d015ebfb82960e1407a2d664be869fffaa2c09199e36"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/interior-cameras.json",
+    "sha256": "f0ad4e16096981c4187f24f51f86d3fe54c9fc48066702ccefde6f9e737ea2e7"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native-contact.png",
+    "sha256": "1a18d0e8b1ea359dc51ba7735e40b8b3ab34f6b706d17a51ba5ddd63d6714020"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native-review.json",
+    "sha256": "5bbb15151b13dbfe67122c5663b10d5e76568962eedd1046f43aa4790c768b76"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/arrival.json",
+    "sha256": "fdda0a2de5f3ddb8a03af473c6090584d27aab6e66d00024cd9a4f45ca6ac8ec"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/arrival.png",
+    "sha256": "dcd51b89f73cc4983720610ebd0569af0fc72b785ee7c49fe00228b5ccf04b4b"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/boss_entry.json",
+    "sha256": "27351f2c5918bb0e78a42b5ee4a177cf91b179ac3dfb8e6324dcaead5f289832"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/boss_entry.png",
+    "sha256": "793a26966e54b19902eed305b675fb62ecd65d5c19146c67b91c8d0a6db36f13"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/boss_room.json",
+    "sha256": "299fddb8a2ce4d2bb53bad47a4a6d49f28fc1a7199ac884e4be7f143760e40a6"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/boss_room.png",
+    "sha256": "e8491841b73a147e0132ddaf056e066799b997f448b0193e6bcc94d4f27e8329"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/colony.json",
+    "sha256": "bf72e2fa431f336f3ada858334ecd57a0b26ac639e3a14e309bc63d7db22fab5"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/colony.png",
+    "sha256": "27afcaff9a1253206a973bb0ad62b8b92c66aaa313d250628c44eca4d413e3c0"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/corridor-walk/after.png",
+    "sha256": "907980b8193a3ac37277f453a771d4140e6b401b65b2591fa66e4a453bf265f9"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/corridor-walk/before.png",
+    "sha256": "49aeb5d5f5faec7e480c6fd44d587053cdfdc59bf735e44d233be617913371de"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/corridor-walk/during.png",
+    "sha256": "5a1bccf2b21775612c329af3276dd5c51a36172741ef5bc9e11443250570be6f"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/corridor-walk/evidence.json",
+    "sha256": "72083e715c27893a7f6e127352ae70e621d5391374e2b058964c8d688fd35470"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/entry-jump/after.png",
+    "sha256": "35f43168f167adcc956d827afab00892716ba5201af6a518f75a5a629ac7c70e"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/entry-jump/before.png",
+    "sha256": "72fd570a6a25a61680e213a1d65c3dc384a9ae82e3ec21cb2af78ab8f02736a9"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/entry-jump/during.png",
+    "sha256": "e7b6ef229592f64f09370dff1de0df413227d4dba61ffdcfc75464e0b046ef96"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/entry-jump/evidence.json",
+    "sha256": "a226582f689c19597eabbdee33b1d41069aeb1f40fc220d218ea47df0e4572e5"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/final-neutral-control.json",
+    "sha256": "08db391b6d7bd4f06be5b75e9e03ed096e133c30df615f8289e02291e000146d"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/hull_corridor.json",
+    "sha256": "b9e0a4c4c1b5d9d6536310ff0a10ca19809447f0b246be1f877e369fc178f363"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/hull_corridor.png",
+    "sha256": "d941a8614efdc3e456212933ebc2b78c19503d673579f092ae5abe10cfc9beef"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/hull_entry.json",
+    "sha256": "18ddbfd9cc74494b152454a64703ff8688022b98e129b0be48ea9969be6edce5"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/hull_entry.png",
+    "sha256": "2ca90fee076b49c58e2830197e0088b1852cd7b9546e7552eaec13aa183b76a3"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/hull_exit.json",
+    "sha256": "1212382cccc538425d3a11269ec8109337326c20a6b5ac661d25b0978255c949"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/hull_exit.png",
+    "sha256": "e584f3f3c0d174aa2660abe42a410a1082061b59e1f7c8f9693a226b97680c5a"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/nessus_grove.json",
+    "sha256": "69d1abbb216c382750de9a1500241ab75a3979d196dd1a01ac4f35c9a974fa46"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/nessus_grove.png",
+    "sha256": "6303ebcc9a6febcb9ab6b55141a529da5e706e68354b9fa5900fbd42c648ce46"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/server-events.log",
+    "sha256": "6c5e30746a5f2380f4fa1f6dae57c69667fd614bf361dd9ea40ae1a44db6d8df"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/trench-walk/after.png",
+    "sha256": "0d04904b1806d7342d3e1a180f8713a1863d06b9c3d4b19dcb58a8aef0b47994"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/trench-walk/before.png",
+    "sha256": "2dcf33ec457f244a2e8cabf29a006db3febd6ba3d90bb7c483a0e3995e29b0a4"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/trench-walk/during.png",
+    "sha256": "a79431296a7f4894e17b0f0c2e2340ebe3e96b93fc4e13b861af0dd195015cdf"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/trench-walk/evidence.json",
+    "sha256": "09acb929863483654bcd4085fc0b7d37585c348fb25b1affd30e5c58965e1d32"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/trench_floor.json",
+    "sha256": "ba2528d717f6690e13a8c1b9adebcc9046c9f71305d17c74e8390c9f2c15beda"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/native/trench_floor.png",
+    "sha256": "dafadb65c83daab5d92bf4c64ec0edc747b0748a3c49d78978b88393647aa22c"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/nessus_grove.png",
+    "sha256": "a64cdb5c88c93b7686607f7edff9843eb0e9d3bf4b2de05c4d3bd4b23c691a2a"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/roof-regression.log",
+    "sha256": "a6707d4eff38012da33ddc34bc6dc076a3b17151cfc9aef223c8790cbe64c3da"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/targeted-tests.json",
+    "sha256": "0d9aeb609ae76354cbc67f46db8f9a630eb5956a735617ca11d46a8b0eef1a9a"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/validation.json",
+    "sha256": "7c6af8f224857430a353a0d1a36bde703f3cbeb09bf5699274e639c6912844b1"
+  },
+  {
+    "path": "docs/qa/2026-11-08/exodus-nessus-art/verification.json",
+    "sha256": "f93a9cc5d625425ac3e0febeb0ed1e4cf50ef08e3c0eeed522c13c9d89b1d9ba"
+  },
+  {
+    "path": "scripts/maps/surface_finish.py",
+    "sha256": "02601de9225cb79e8015a742788086991074d1b00415d3073bd6ec8b6af4442e"
+  },
+  {
+    "path": "scripts/maps/vanilla_review.py",
+    "sha256": "f08e6b77e9d81eeb758875a220c6457541eecc702d8c3046aa8df76f6f3ec033"
+  },
+  {
+    "path": "scripts/qa/test_surface_finish.py",
+    "sha256": "69c0c46d213e31418593faf66fd722f908c447ca166a029a51dc8a5d7c67c3ea"
+  },
+  {
+    "path": "scripts/qa/verify_exodus_finish.py",
+    "sha256": "be779953bc49428e2412c1072fd6b6029d5846e67aee1f5e98ae1ccf3a161383"
+  },
+  {
+    "path": "scripts/qa/verify_exodus_map.py",
+    "sha256": "d25536f8d1356e9dc2da70d2b4cb08e6f85b2d07878f34ca0bd354cc9a473900"
+  },
+  {
+    "path": "scripts/strikes/build_exodus_maps.py",
+    "sha256": "978012e3284e5cdf287ffa4a2a46661b533bfcd3d10381dab3129f0be5fcfe6e"
+  },
+  {
+    "path": "scripts/strikes/nessus_finish.py",
+    "sha256": "4913ddc49c4e81da319a0fa47d200b89e0462839e20eff80559f4dde56b8913b"
+  },
+  {
+    "path": "scripts/strikes/review_exodus_blender.py",
+    "sha256": "c672a1a462d5a87f9c0aafd83b1543689c8dd400c0429d0e89e8439f91d547c4"
+  },
+  {
+    "path": "src/main/resources/data/destiny/exodus_crash/manifest.json",
+    "sha256": "4cd9e079d4cf758049a10a8fb175278aeba05040b64de2dbedd84e8d9248ba13"
+  },
+  {
+    "path": "src/main/resources/data/destiny/map_template/exodus_crash/world.nbt",
+    "sha256": "330e172b37db7509342ba6916289ba677d916725284f64f38b05b6e51e4aab3c"
+  },
+  {
+    "path": "src/main/resources/data/destiny/worldgen/biome/nessus.json",
+    "sha256": "53b282571679817160968f8d80faae06478c19772d9b6a3c8631b8f33cb62651"
+  }
+]
