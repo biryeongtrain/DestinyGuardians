@@ -9,7 +9,7 @@ import net.minecraft.world.phys.Vec3;
 import xyz.nucleoid.map_templates.BlockBounds;
 
 /**
- * Exodus Crash's map data: one 1115x166x1570 section-NBT template. The shared {@link StrikeMaps} loads and checks it;
+ * Exodus Crash's map data: one 1115x231x1680 section-NBT template. The shared {@link StrikeMaps} loads and checks it;
  * only the start of the walk is generated ahead of the fireteam, the rest follows the players' view distance.
  */
 public final class ExodusMaps {
@@ -28,7 +28,7 @@ public final class ExodusMaps {
     public static Vec3 world(Vec3 local) { return local.add(ORIGIN.getX(), ORIGIN.getY(), ORIGIN.getZ()); }
     public static BlockPos world(BlockPos local) { return local.offset(ORIGIN); }
 
-    /** Warm only the chunks around the start. The full map is 6,900 columns; the walk generates the rest on demand. */
+    /** Warm only the chunks around the start. The full map is 7,350 columns; the walk generates the rest on demand. */
     public static RisingServices.ZoneBuild begin(ServerLevel level, ExodusPlan.Zone zone) {
         var at = BlockPos.containing(anchor("WORLD.IN").pos());
         return new TemplateChunkWarmup(level, BlockBounds.of(at.offset(-START_RADIUS, 0, -START_RADIUS),

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Exodus Crash: voxelize the four bubbles into ONE continuous block world (no zone teleports).
 
-Source: Exodus-Crash-Strike-KO-2026-11-08/maps_glb/*.textured.glb (read-only), Destiny Z-up, 1 unit = 1 block.
+Source: Exodus-Crash-Strike-KO-2026-11-08/maps_baked/Exodus_Crash_Continuous.baked.glb (read-only).
 World mapping (shared by every region so neighbours abut exactly):  wx = floor(src.x) - XO,  wy = floor(src.z) - ZO,
-wz = floor(-src.y) - YO.  Each source column is owned by exactly one bubble GLB (the overlapping terrain is identical).
+wz = floor(-src.y) - YO. The assembled bake retains overlapping, vertically stacked geometry.
 Stage 1 `voxel` writes a uint16 memmap + palette; later stages cut templates, markers and routes from it.
 Run with numpy + Pillow (/tmp/venv/bin/python).
 """
@@ -15,22 +15,25 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC = Path('/Users/qf/Downloads/Exodus-Crash-Strike-KO-2026-11-08/Exodus-Crash-Strike-KO-2026-11-08')
-WORK = Path('/tmp/exo')
-GLBS = ['prodromus_down__80f360a6', 'exodus_black__80f3405f', 'glade_of_echoes__80f3bd0e', 'ex_077_command__80f35561']
+WORK = Path('/tmp/exodus-r3')
+WORK.mkdir(parents=True, exist_ok=True)
 # source extent that holds any gameplay geometry (x, y) and Z range
-X0, X1, Y0, Y1, Z0, Z1 = 505, 1620, -890, 680, -125, 25
+X0, X1, Y0, Y1, Z0, Z1 = 505, 1620, -1000, 680, -125, 90
 XO, YO, ZO = X0, -Y1, Z0 - 8          # wx = ix - XO, wz = (-iy) - YO ... see below
 WX, WZ, WY = X1 - X0, Y1 - Y0, Z1 - Z0 + 16
 TILE, MARGIN = 160, 8
 
-def owner(sx, sy):
-    """glb index owning source column (sx, sy) (arrays of cell-centre coordinates)."""
-    o = np.full(sx.shape, -1, np.int8)
-    o[(sx >= 511) & (sx < 1095) & (sy >= -836) & (sy < -128)] = 2
-    o[(sx >= 1060) & (sx < 1295) & (sy >= -580) & (sy < -128)] = 1
-    o[(sx >= 1152) & (sx < 1620) & (sy >= -128) & (sy < 676)] = 0
-    o[(sx >= 769) & (sx < 879) & (sy >= -884) & (sy < -778)] = 3
-    return o
+sys.path.insert(0, str(ROOT / 'scripts/maps'))
+import baked_source
+from walk_route import astar, reachable
+from exodus_palette import EXTRA_PALETTE
+
+def sample_identity():
+    sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+    return dict(sourceSha256=sha(SRC/'maps_baked/Exodus_Crash_Continuous.baked.glb'),
+                sourceBounds=[X0,X1,Y0,Y1,Z0,Z1],step=.3,tile=TILE,margin=MARGIN,
+                bakeReaderSha256=sha(ROOT/'scripts/maps/baked_source.py'),
+                samplerSha256=sha(ROOT/'scripts/campaign/rising_maps.py'))
 
 def sampler():
     spec = importlib.util.spec_from_file_location('s', ROOT / 'scripts/campaign/rising_maps.py')
@@ -38,39 +41,51 @@ def sampler():
     ev = WORK / 'ev'; ev.mkdir(parents=True, exist_ok=True)
     m.SRC = SRC; m.EVIDENCE = ev; m.CACHE_DIR = ev / 'cache'; m.CACHE_DIR.mkdir(parents=True, exist_ok=True)
     m._load_full_texture = lambda p: np.asarray(Image.open(p).convert('RGBA'), dtype=np.float32) / 255
+    m.PALETTE_DEF.extend(EXTRA_PALETTE)
     return m
 
-def voxel(only=None):
+def voxel(recolor=False):
     m = sampler(); pal = m.Palette()
+    identity = sample_identity(); identity_file=WORK/'sample-identity.json'
+    if identity_file.exists() and json.loads(identity_file.read_text()) != identity:
+        raise SystemExit('Source/sampler changed: use a fresh WORK directory before reusing the sample cache')
+    if not identity_file.exists() and (WORK/'samples').exists():
+        raise SystemExit('Unidentified sample cache: use a fresh WORK directory')
+    identity_file.write_text(json.dumps(identity,indent=1))
     world = np.lib.format.open_memmap(WORK / 'world.npy', mode='r+' if (WORK / 'world.npy').exists() else 'w+', dtype=np.uint16, shape=(WY, WZ, WX))
-    glbs = [m.Glb(SRC / 'maps_glb' / (g + '.textured.glb')) for g in GLBS]
+    glb = baked_source.load(SRC / 'maps_baked/Exodus_Crash_Continuous.baked.glb', m)
+    m.sample_instance = lambda g, i, lo, hi, step: baked_source.sample_instance(g, i, lo, hi, step, m)
     pf = WORK / 'palette.json'
     if pf.exists():
         for s in json.loads(pf.read_text()): pal.id(s)
-    done = WORK / 'tiles.done'; finished = set(done.read_text().split()) if done.exists() else set()
+    done = WORK / 'tiles.done'; finished = set(done.read_text().split()) if done.exists() and not recolor else set()
     for ty in range(Y0, Y1, TILE):
         for tx in range(X0, X1, TILE):
             key = f'{tx},{ty}'
             if key in finished: continue
             xs = np.arange(tx, min(tx + TILE, X1)); ys = np.arange(ty, min(ty + TILE, Y1))
-            own = owner(*np.meshgrid(xs + .5, ys + .5))          # [y, x]
-            if (own < 0).all(): finished.add(key); continue
             t0 = time.time()
-            for gi in sorted(set(own[own >= 0].tolist())):
-                if only is not None and gi not in only: continue
-                lo = [tx - MARGIN, ty - MARGIN, Z0]; hi = [min(tx + TILE, X1) + MARGIN, min(ty + TILE, Y1) + MARGIN, Z1]
-                grid = m.Grid(lo, hi, 1.0); agg = m.voxelize(glbs[gi], grid, lo, hi, step=.3, log=lambda *a: None)
-                if not len(agg.key): continue
+            lo = [tx - MARGIN, ty - MARGIN, Z0]; hi = [min(tx + TILE, X1) + MARGIN, min(ty + TILE, Y1) + MARGIN, Z1]
+            grid = m.Grid(lo, hi, 1.0)
+            cache = WORK/'samples';cache.mkdir(exist_ok=True);sample_file=cache/(key+'.npz')
+            if sample_file.exists():
+                saved=np.load(sample_file);agg=m.Agg();agg.key=saved['key'];agg.occ=saved['occ'];agg.f={field:saved[field]for field in agg.FIELDS}
+            else:
+                agg = m.voxelize(glb, grid, lo, hi, step=.3, log=lambda *a: None)
+            if len(agg.key):
+                if not sample_file.exists():np.savez_compressed(sample_file, key=agg.key, occ=agg.occ, **agg.f)
+                # Average baked albedo in linear RGB, then enter the existing
+                # perceptual Minecraft palette classifier in sRGB exactly once.
+                for channel in ('r', 'g', 'b'):
+                    agg.f[channel] = baked_source.linear_to_srgb(agg.f[channel] / agg.f['cnt']) * agg.f['cnt']
                 labels, terr, _ = m.classify(agg, pal); labels = m.majority_smooth(grid, agg.key, labels)
                 st = m.shape_blocks(grid, agg, labels, terr, pal, log=lambda *a: None)   # [y, z, x]
                 # grid: x idx = ix - lo.x ; z idx = (-iy) - (-hi.y) ; y idx = iz - lo.z
                 sy, sz, sx = st.shape
                 for yy in range(len(ys)):
-                    for_cols = own[yy] == gi
-                    if not for_cols.any(): continue
                     iy = ys[yy]; gz = (-iy - 1) - (-hi[1])       # cell [iy, iy+1) -> mc z in [-iy-1, -iy)
                     wz = (-iy - 1) - (-Y1)
-                    cx = np.nonzero(for_cols)[0]
+                    cx = np.arange(len(xs))
                     gx = xs[cx] - lo[0]
                     if gz < 0 or gz >= sz: continue
                     col = st[:, gz, :][:, gx]                     # [y, n]
@@ -117,6 +132,18 @@ BEATS = [
       waves=[['PYKIS', 1], ['DREG', 4], ['VANDAL', 3], ['SHANK', 3], ['CYCLOPS', 1]]),
 ]
 
+# Reviewed three-dimensional landmarks, in source Z-up. Parent placement
+# coordinates are hints only: snap to start-connected floor, never a roof or
+# an isolated cavity merely because it is nearest in the horizontal plane.
+LANDMARKS = [
+    ('B01', (1440, 441, -64)), ('B02', (1378, 365, -73)),
+    ('trench_bend', (1337, 220, -84)), ('B03', (1244, 65, -58)),
+    ('B04', (1267, -43, -34)), ('B05', (1198, -195, -44)),
+    ('B06', (1197, -240, -45)), ('B07', (1115, -328, -48)),
+    ('B08', (1040, -655, -46)), ('B09', (935, -718, -71)),
+    ('B10', (852, -790, -71)), ('B11', (828, -812, -74)),
+]
+
 def stage2():
     m = sampler()
     world = np.array(np.load(WORK / 'world.npy', mmap_mode='r'))
@@ -126,17 +153,8 @@ def stage2():
         return states.index(s)
     W = lambda x, y, z: (int(x) - X0, int(z) - Z0 + 8, Y1 - int(y) - 1)
     S = lambda c: (int(c[0] + X0), int(Y1 - c[2] - 1), int(c[1] + Z0 - 8))
-    andesite, blackstone = pid('minecraft:polished_andesite'), pid('minecraft:polished_blackstone')
+    andesite = pid('minecraft:polished_andesite')
     adaptations = []
-    def ramp(a, b, width=5, name=''):
-        x0, y0, z0 = a; x1, y1, z1 = b; n = int(max(abs(x1 - x0), abs(z1 - z0))) + 1
-        dx, dz = x1 - x0, z1 - z0; L = max(1.0, math.hypot(dx, dz)); px, pz = -dz / L, dx / L
-        for i in range(n + 1):
-            t = i / n; x = round(x0 + dx * t); z = round(z0 + dz * t); y = round(y0 + (y1 - y0) * t)
-            for k in range(-(width // 2), width // 2 + 1):
-                xx = round(x + px * k); zz = round(z + pz * k)
-                world[y:y + 5, zz, xx] = 0; world[y - 1, zz, xx] = andesite
-        adaptations.append(dict(kind='authored_ramp', name=name, from_=S(a), to=S(b), width=width))
     def pad(c, r, h, floor, name):
         x, y, z = c
         for dz in range(-r, r + 1):
@@ -144,23 +162,68 @@ def stage2():
                 if dx * dx + dz * dz <= r * r:
                     world[y:y + h, z + dz, x + dx] = 0; world[y - 1, z + dz, x + dx] = floor
         adaptations.append(dict(kind='authored_pad', name=name, centre=S(c), radius=r, height=h))
-    # 1. Trench -> Exodus Black: the two bubbles meet at a 15-block cliff; a service ramp makes the descent walkable.
-    ramp(W(1196, -112, -19), W(1192, -129, -34), 5, 'prodromus_to_exodus_black')
-    # 2. Arrival pad for three Guardians and the boss pad inside the EX-077 sphere (the bowl floor is too steep to walk).
+    # Only the arrival pad is authored. Full assembled geometry already joins
+    # the regions; do not cut a seam ramp or flatten the whole boss chamber.
     start_src = (1474, 491, -55); start = W(*start_src)
     pad(start, 4, 5, andesite, 'arrival')
-    boss = W(828, -812, -72); pad(boss, 16, 14, blackstone, 'boss')
-    ramp(W(863, -790, -71), (boss[0] + 12, boss[1], boss[2] - 6), 5, 'command_sphere_entry')
     names = np.array([s.split(':')[1].split('[')[0] for s in states]); open_ids = np.nonzero(np.isin(names, ['air', 'light', 'snow']))[0]
     pas = np.zeros(world.shape, bool)
     for z0 in range(0, world.shape[1], 128): pas[:, z0:z0 + 128, :] = np.isin(world[:, z0:z0 + 128, :], open_ids)
-    st = np.zeros_like(pas); st[1:-1] = pas[1:-1] & pas[2:] & ~pas[:-2]
-    seen = m.reach(st, pas, start, max_down=12)
-    if not seen[boss[1], boss[2], boss[0]]: raise SystemExit('boss pad not reachable from arrival')
-    path = m.shortest_path(m.route_moves(st, pas, max_down=12), start, {boss})
+    # First trace the reviewed corridor on the surface grid. At one-block
+    # resolution a few original sloping parts become 1.5-block slab jumps, and
+    # thin rails can masquerade as floor. Repair only those supporting cells,
+    # then recompute reachability with the stricter physical floor model.
+    provisional_st = np.zeros_like(pas); provisional_st[1:-1] = pas[1:-1] & pas[2:] & ~pas[:-2]
+    provisional_seen = m.reach(provisional_st, pas, start, max_down=3)
+    provisional_connected = provisional_st & provisional_seen
+    provisional_moves = m.route_moves(provisional_st, pas, max_down=3)
+    provisional_path = [start]
+    for name, source in LANDMARKS:
+        target = m.nearest_standable(provisional_connected, W(*source), 12)
+        if target is None: raise SystemExit(f'No source floor near {name}')
+        provisional_path.extend(astar(provisional_moves, provisional_path[-1], {target})[1:])
+    repaired = set()
+    def repair_floor(c, target_state, reason):
+        x,y,z=c; old=states[int(world[y-1,z,x])]
+        world[y-1,z,x]=pid(target_state)
+        if (x,y,z) not in repaired:
+            adaptations.append(dict(kind='single_support_repair', centre=S(c), before=old, after=target_state, reason=reason))
+            repaired.add((x,y,z))
+    for c in provisional_path:
+        x,y,z=c; state=states[int(world[y-1,z,x])];base=state.split('[')[0]
+        if base.endswith('_wall') or base in ('minecraft:iron_bars','minecraft:iron_chain'):
+            full={'minecraft:mud_brick_wall':'minecraft:mud_bricks'}.get(base,base.removesuffix('_wall')) if base.endswith('_wall') else 'minecraft:polished_andesite'
+            repair_floor(c,full,'stable one-block support instead of a decorative rod/wall')
+    for a,b in zip(provisional_path,provisional_path[1:]):
+        ha=m.floor_height(world,states,a[1],a[2],a[0]);hb=m.floor_height(world,states,b[1],b[2],b[0])
+        low=a if hb-ha>1.25 else b if hb-ha < -3 else None
+        if low is not None:
+            state=states[int(world[low[1]-1,low[2],low[0]])]
+            if '_slab[' not in state or 'type=bottom' not in state:raise SystemExit(f'Unresolved physical step {a}->{b}')
+            repair_floor(low,state.replace('type=bottom','type=double'),'half-block correction for rise<=1.25/drop<=3')
+    del provisional_st, provisional_seen, provisional_connected, provisional_moves, provisional_path
+    support = np.array([not (s.split(':')[1].split('[')[0] in ('air','light','snow','iron_bars','iron_chain') or s.split('[')[0].endswith('_wall')) for s in states])
+    st = np.zeros_like(pas); st[1:-1] = pas[1:-1] & pas[2:] & support[world[:-2]]
+    offsets = np.array([-.5 if '_slab[' in s and 'type=bottom' in s else 0 for s in states])
+    def floor_height(c): return c[1] + offsets[world[c[1]-1,c[2],c[0]]]
+    raw_moves = m.route_moves(st, pas, max_down=3)
+    def moves(c):
+        h = floor_height(c)
+        return [n for n in raw_moves(c) if -3 <= floor_height(n)-h <= 1.25]
+    seen = reachable(moves, start, st.shape)
+    connected = st & seen
+    path = [start]; landmark_indices = {'B00': 30}; landmark_info = []
+    for name, source in LANDMARKS:
+        target = m.nearest_standable(connected, W(*source), 12)
+        if target is None: raise SystemExit(f'No start-connected floor near {name}: {source}')
+        leg = astar(moves, path[-1], {target})
+        path.extend(leg[1:]); landmark_indices[name] = len(path) - 1
+        landmark_info.append(dict(id=name, source=list(source), floorSource=S(target), routeIndex=len(path)-1, cells=len(leg)))
+        print('landmark', name, S(target), 'leg', len(leg), flush=True)
+    boss = path[-1]
     print('route cells', len(path))
     # 3. Beats: trigger = route cell; spawn candidates = reachable cells ahead of it; gates = barrier cross-sections.
-    barrier = pid('minecraft:red_stained_glass'); air = 0
+    barrier = pid('minecraft:red_stained_glass')
     markers = []; beats = []
     def mk(i, c, role='ground', **tags): markers.append(dict(id=i, pos=[c[0] + .5, float(c[1]), c[2] + .5], yaw=0.0, tags=dict(role=role, **{k: str(v) for k, v in tags.items()})))
     x, y, z = path[0]
@@ -168,14 +231,13 @@ def stage2():
     mk('WORLD.IN', path[0])
     mk('WORLD.OUT', path[-1]); bx, by, bz = boss; mk('WORLD.CHEST', (bx - 8, by, bz))
     pa = np.array(path)
-    ahead_pool = np.argwhere(seen)                      # (y, z, x) of every reachable stand cell
     for beat in BEATS:
-        i = beat['at']; tx, ty, tz = path[i]
+        i = landmark_indices[beat['id']]; tx, ty, tz = path[i]
         mk(f"WORLD.{beat['id']}", path[i], beat=beat['id'])
-        info = dict(beat); info['trigger'] = [tx + .5, float(ty), tz + .5]; info['routeIndex'] = i
+        info = dict(beat); info['at'] = i; info['trigger'] = [tx + .5, float(ty), tz + .5]; info['routeIndex'] = i
         if beat['kind'] in ('COMBAT', 'CHARGE', 'DEFEND', 'BOSS'):
             lo, hi = min(i + 14, len(path) - 2), min(i + 80, len(path) - 1)
-            seg = pa[lo:hi]
+            seg = pa[lo:hi] if beat['kind'] != 'BOSS' else pa[max(0, i-70):i+1]
             chosen = []
             cand = []
             for cx, cy, cz in seg[::2]:
@@ -231,17 +293,25 @@ def stage2():
     sx, sy, sz = world.shape[2], world.shape[0], world.shape[1]
     (OUT / 'zones').mkdir(parents=True, exist_ok=True); NBT_OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'zones' / 'markers.json').write_text(json.dumps(dict(schema=1, zones=dict(world=dict(size=[sx, sy, sz], markers=markers))), ensure_ascii=False))
-    (OUT / 'beats.json').write_text(json.dumps(dict(schema=1, origin=list(ORIGIN), route=[list(map(int, c)) for c in path[::6]], beats=beats), ensure_ascii=False))
+    # Keep the final point and each beat in the guidance route even when their
+    # index is not divisible by six.
+    route_indices = sorted(set(range(0, len(path), 6)) | set(landmark_indices.values()) | {len(path)-1})
+    (OUT / 'beats.json').write_text(json.dumps(dict(schema=1, origin=list(ORIGIN), route=[list(map(int, path[i])) for i in route_indices], beats=beats), ensure_ascii=False))
     (OUT / 'manifest.json').write_text(json.dumps(dict(schema=1, activity='exodus_crash', source=str(SRC), size=[sx, sy, sz], origin=list(ORIGIN),
         mapping='wx = floor(src.x) - %d; wy = floor(src.z) - %d; wz = %d - floor(src.y) - 1' % (X0, Z0 - 8, Y1), adaptations=adaptations,
-        routeCells=len(path), status='source-derived; native QA required'), ensure_ascii=False, indent=1))
+        sourceGlb='maps_baked/Exodus_Crash_Continuous.baked.glb', sourceGlbSha256=hashlib.sha256((SRC/'maps_baked/Exodus_Crash_Continuous.baked.glb').read_bytes()).hexdigest(),
+        colorPolicy='native baked PNG + BakedColorUV; linear RGB average; scene-default albedo retained with uncertainty; forward/decal and clipped-out layers excluded',
+        geometryPolicy='one assembled source; no per-bubble rectangular column ownership; no seam ramp or large boss pad',
+        routeModel='ordered 3D landmarks; true slab floor rise <=1.25, drop <=3; rods/walls not support; start-connected floor', landmarks=landmark_info,
+        routeCells=len(path), status='baked source reviewed in Blender; native QA required'), ensure_ascii=False, indent=1))
+    np.save(WORK/'final.npy',world); np.save(WORK/'route.npy',np.array(path))
+    (WORK/'final-palette.json').write_text(json.dumps(states))
     sys.path.insert(0, str(ROOT / 'scripts/maps'))
     import zone_nbt as Z
     export_nbt(world, states, NBT_OUT / 'world.nbt', Z)
 
 def export_nbt(world, states, target, Z, data_version=5023):
     sy, sz, sx = world.shape; chunks = []; count = 0
-    nz = world != 0
     for cy in range((sy + 15) // 16):
         for cz in range((sz + 15) // 16):
             for cx in range((sx + 15) // 16):
@@ -272,9 +342,9 @@ def export_nbt(world, states, target, Z, data_version=5023):
 
 
 if __name__ == '__main__':
-    a = argparse.ArgumentParser(); a.add_argument('stage', choices=['voxel', 'build']); a.add_argument('--only', type=int, nargs='*')
+    a = argparse.ArgumentParser(); a.add_argument('stage', choices=['voxel', 'build']); a.add_argument('--recolor',action='store_true')
     r = a.parse_args()
-    if r.stage == 'voxel': voxel(r.only)
+    if r.stage == 'voxel': voxel(r.recolor)
     elif r.stage == 'build': stage2()
 
 
