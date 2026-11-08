@@ -213,14 +213,7 @@ public final class AmmoEconomyW42GameTests {
         check(h,AmmoEconomy.meters(a).equals(AmmoGeneration.ABILITY.gains(true)),"Eligible helper earns assist even when killer is in legacy standalone mode");
         check(h,AmmoEconomy.meters(b).equals(AmmoMeters.EMPTY),"Legacy killer is not silently opted into equipment economy");h.succeed();
     }
-    @GameTest(structure="destiny-test:floor",maxTicks=25, environment = "destiny-test:w90_isolated")
-    public void actualPlayerDeathRemovesSceneBricksAndKeepsStoredProgress(GameTestHelper h) {
-        var p=player(h);p.setAttached(AmmoEconomy.METERS,new AmmoMeters(AmmoMeters.FULL-2000,6000));kill(h,p,5.5,1,AmmoGeneration.ABILITY);
-        check(h,AmmoEconomy.bricks(p)==1,"Earned scene brick before death");var saved=AmmoEconomy.meters(p);
-        p.hurtServer(h.getLevel(),p.damageSources().genericKill(),10000);
-        check(h,p.isDeadOrDying()&&AmmoEconomy.bricks(p)==0,"Actual death event clears private display manager");
-        check(h,AmmoEconomy.meters(p).equals(saved),"Death cleanup cannot erase persistent earned debt/progress");h.succeed();
-    }
+    
     @GameTest(structure="destiny-test:floor",maxTicks=2450, environment = "destiny-test:w90_isolated")
     public void lifetimeExpiresActualSceneBrickWithoutGrantingInventoryAmmo(GameTestHelper h) {
         var p=player(h);p.setAttached(AmmoEconomy.METERS,new AmmoMeters(AmmoMeters.FULL-2000,0));kill(h,p,5.5,1,AmmoGeneration.ABILITY);

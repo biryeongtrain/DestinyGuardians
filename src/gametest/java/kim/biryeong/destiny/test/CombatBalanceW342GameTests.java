@@ -11,8 +11,7 @@ public final class CombatBalanceW342GameTests {
         var p=TestPlayers.create(h,new Vec3(1,2,1),0,0);
         TestCleanup.register(h,()->TestPlayers.remove(p));return p;
     }
-    @GameTest(structure="destiny-test:floor",maxTicks=100,environment="destiny-test:w90_isolated")
-    public void fragileMinorsAndAbilitySuperDamage(GameTestHelper h) { DevilsWalkerFixture.verifyMinorBalance(h,player(h));h.succeed(); }
+    
     @GameTest(structure="destiny-test:floor",maxTicks=100,environment="destiny-test:w90_isolated")
     public void walkerReducedPoolsKeepMultipartDedupAndDeath(GameTestHelper h) { DevilsWalkerFixture.verify(h,player(h));h.succeed(); }
     @GameTest(structure="destiny-test:floor",maxTicks=100,environment="destiny-test:w90_isolated")

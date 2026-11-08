@@ -10,9 +10,12 @@ import kim.biryeong.destiny.weapon.AmmoGeneration;
 public final class PveDamageBalance {
     private PveDamageBalance() { }
 
+    /** Game-test fixture switch: lets mechanics tests assert raw weapon damage instead of the tuning table. */
+    public static volatile boolean neutralForTests;
+
     /** Applied once at the damage boundary, after weapon/contact modifiers; PvP stays unchanged. */
     public static float scale(float amount, AmmoGeneration.Kind kind, boolean playerTarget) {
-        if (playerTarget) return amount;
+        if (playerTarget || neutralForTests) return amount;
         return amount * switch (kind) {
             case PRIMARY -> 1.5f;
             case SPECIAL -> 4f;

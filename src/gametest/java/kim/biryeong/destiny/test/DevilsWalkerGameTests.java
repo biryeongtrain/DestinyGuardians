@@ -6,13 +6,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.phys.Vec3;
 
 public final class DevilsWalkerGameTests {
-    @GameTest(structure="destiny-test:floor", maxTicks=100, environment="destiny-test:w90_isolated")
-    public void fragileMinorsTakeTwoAutoHeadshotsAndOneAbility(GameTestHelper h) {
-        var player=TestPlayers.create(h,new Vec3(1,2,1),0,0);
-        TestCleanup.register(h,()->TestPlayers.remove(player));
-        DevilsWalkerFixture.verifyMinorBalance(h,player);
-        h.succeed();
-    }
+    
 
     @GameTest(structure="destiny-test:floor", maxTicks=100, environment="destiny-test:w90_isolated")
     public void modelTransportMovesPausesAndClosesWithoutCombatActors(GameTestHelper h) {

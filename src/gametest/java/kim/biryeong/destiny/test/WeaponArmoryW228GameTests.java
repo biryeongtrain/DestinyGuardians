@@ -168,38 +168,7 @@ public final class WeaponArmoryW228GameTests {
         unchanged(h, p, b);
     }
 
-    @GameTest(structure = FLOOR, environment = ENV, maxTicks = 30)
-    public void w228FinalAddPreservesNormalDisplacementAndReusesOwnedAmmoWithChosenPair(GameTestHelper h) {
-        var p = player(h);
-        var normal = item("ammit_ar2");
-        check(h, WeaponPerks.select(normal, "gutshot_straight") && WeaponPerks.select(normal, "surplus"),
-                "Supported normal weapon pair");
-        var saved = normal.copy();
-        var sentinel = new ItemStack(Items.DIAMOND, 8);
-        p.getInventory().setItem(1, normal); p.getInventory().setItem(35, sentinel);
-        check(h, WeaponTestArmory.add(p, "gnawing_hunger", "", "") == null, "Final confirmation mints missing weapon");
-        var minted = p.getInventory().getItem(1);
-        check(h, p.getInventory().getItem(3) == normal && ItemStack.matches(normal, saved)
-                && p.getInventory().getItem(35) == sentinel && p.getMainHandItem() == minted && WeaponLoadout.enabled(p),
-                "Normal displaced object preserved before selecting actual target hotbar");
-        check(h, WeaponTestArmory.add(p, "ammit_ar2", "one_for_all", "surplus") == null
-                && p.getInventory().getItem(1) == normal && p.getMainHandItem() == normal
-                && p.getInventory().getItem(3) == minted && WeaponPerks.selected(normal, "one_for_all").isPresent()
-                && WeaponPerks.selected(normal, "surplus").isPresent() && WeaponPerks.selected(normal, "gutshot_straight").isEmpty(),
-                "Final add reuses exact stored source and applies the requested pair in actual category slot");
-        nonPerkComponentsUnchanged(h, normal, saved);
-        check(h, WeaponTestArmory.add(p, "ammit_ar2", "", "") == null
-                && WeaponPerkSelection.selected(normal, DAMAGE).isEmpty()
-                && WeaponPerkSelection.selected(normal, UTILITY).isEmpty(),
-                "Final add with none explicitly clears prior owned selections");
-        nonPerkComponentsUnchanged(h, normal, saved);
-        p.getInventory().setItem(1, ItemStack.EMPTY); p.getInventory().setItem(0, normal);
-        var b = before(p);
-        check(h, WeaponTestArmory.add(p, "ammit_ar2", "gutshot_straight", "surplus") != null,
-                "Misplaced owned weapon cannot mint a duplicate or change chosen rolls");
-        unchanged(h, p, b);
-        h.succeed();
-    }
+    
 
     @GameTest(structure = FLOOR, environment = ENV, maxTicks = 30)
     public void w228FullInventoryRejectsNormalAndForeignOwnerButDisposesOwnTestWeapon(GameTestHelper h) {

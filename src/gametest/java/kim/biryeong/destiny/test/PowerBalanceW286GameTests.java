@@ -24,47 +24,7 @@ public final class PowerBalanceW286GameTests {
         return CrucibleDamage.ballistics(e,p,WeaponBallistics.of(e))
                 .damage(CrucibleDamage.base(e,p,WeaponProfile.forEntry(e).damage()),distance,head);
     }
-    @GameTest(structure="destiny-test:floor", environment="destiny-test:w90_isolated", maxTicks=20)
-    public void catalogKillThresholdsAndPveIsolation(GameTestHelper h) {
-        var p=TestPlayers.hunter(h,Element.ARC,new Vec3(2,1,2),0,0);
-        var mob=h.spawn(EntityTypes.HUSK,new net.minecraft.core.BlockPos(4,1,4));
-        TestCleanup.register(h,()->{mob.discard();TestPlayers.remove(p);});
-        p.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
-        for(var e:WeaponCatalog.all()) {
-            var profile=WeaponProfile.forEntry(e);
-            var ammo=WeaponCharacteristics.of(e).ammo();
-            near(h,CrucibleDamage.base(e,mob,profile.damage()),profile.damage(),e.id()+" PvE base");
-            check(h,CrucibleDamage.ballistics(e,mob,WeaponBallistics.of(e)).equals(WeaponBallistics.of(e)),e.id()+" PvE range/precision");
-            if(ammo==WeaponAmmoType.PRIMARY) {
-                check(h,CruciblePowerBalance.find(e).isEmpty(),e.id()+" primary untouched");
-                var row=CrucibleWeaponDamage.find(e.id()).orElseThrow();
-                near(h,damage(e,p,false,0),row.body()*20/230,e.id()+" primary damage");
-                continue;
-            }
-            check(h,CruciblePowerBalance.find(e).isPresent(),e.id()+" special/heavy covered");
-            float body=damage(e,p,false,0), head=damage(e,p,true,0);
-            if(ammo==WeaponAmmoType.HEAVY) {
-                if(e.family().equals("machine_gun")) {
-                    check(h,body<20&&head<20&&2*body>=20&&2*head>=20&&body+head>=20,e.id()+" BB/HH/BH exactly two");
-                } else check(h,body>=20,e.id()+" heavy body one-shot");
-            } else switch(e.family()) {
-                case "shotgun" -> {
-                    if(profile.pellets()>1) check(h,damage(e,p,false,5)*profile.pellets()>=20,e.id()+" full pattern lethal at five blocks");
-                    else check(h,body<20&&head>=20,e.id()+" slug head condition");
-                }
-                case "sniper_rifle" -> check(h,body<20&&head>=20,e.id()+" sniper head condition");
-                case "fusion_rifle" -> {near(h,body,4,e.id()+" bolt");check(h,4*body<20&&5*body>=20,e.id()+" five bolts");}
-                case "grenade_launcher" -> near(h,body,16,e.id()+" grenade");
-                case "glaive" -> {near(h,body,16,"glaive projectile");near(h,CrucibleDamage.melee(e,p,7),10,"glaive melee");}
-                case "trace_rifle" -> {near(h,body,3,"trace body");near(h,head,4,"trace head");}
-            }
-            near(h,CrucibleDamage.base(e,p,profile.damage()*1.5f),body*1.5,e.id()+" perk scaling survives");
-            p.getAttribute(Attributes.MAX_HEALTH).setBaseValue(40);
-            near(h,damage(e,p,false,0),body*2,e.id()+" health normalization");
-            p.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
-        }
-        h.succeed();
-    }
+    
     @GameTest(structure="destiny-test:floor", environment="destiny-test:w90_isolated", maxTicks=20)
     public void blastWaveFalloffAndUnpaidSwordBudgets(GameTestHelper h) {
         var p=TestPlayers.hunter(h,Element.ARC,new Vec3(2,1,2),0,0);

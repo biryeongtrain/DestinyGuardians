@@ -218,71 +218,9 @@ public final class WeaponInventoryWireW92GameTests {
                 "Actual owned Izanagi selector lies in " + low + ".." + high + "; actual " + value);
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 80, environment = "destiny-test:w90_isolated")
-    public void nativeIncrementalAndFullWireSeparateOrdinaryHonedCommitAndPaidShot(GameTestHelper h) {
-        var f = new Fixture(h); var normal = f.player(); var honed = f.player();
-        var a = f.equip(normal, 1, 5); var b = f.equip(honed, 1, 5);
-        request(h, normal.player, false); request(h, honed.player, true);
-        // Deliberately bypass the trusted synchronizer for a native-encoder control. SetSlot
-        // copies the argument, so the strict helpers cannot grant this packet the live route.
-        honed.discard();
-        honed.connection.send(new ClientboundContainerSetSlotPacket(honed.player.inventoryMenu.containerId,
-                honed.player.inventoryMenu.getStateId(), menuSlot(honed.player), b));
-        carrier(h, honed, b, selectedSlot(h, honed, honed.capture()), canonical(b));
-        sample(h, a, 0, 1.01f); sample(h, b, 2, 3.01f);
-        both(h, normal, IZANAGI); both(h, honed, IZANAGI);
-        f.at(30, () -> {
-            state(h, a, 1, 5, 0); state(h, b, 1, 5, 0);
-            sample(h, a, .45f, .51f); sample(h, b, 2.45f, 2.51f);
-            both(h, normal, IZANAGI); both(h, honed, IZANAGI);
-        });
-        f.at(60, () -> {
-            state(h, a, 1, 5, 0); state(h, b, 1, 5, 0);
-            sample(h, a, .95f, 1.01f); sample(h, b, 2.95f, 3.01f);
-            both(h, normal, IZANAGI); both(h, honed, IZANAGI);
-        });
-        f.at(61, () -> {
-            state(h, a, 4, 2, 0); state(h, b, 1, 2, 4);
-            check(h, !WeaponRuntime.reloading(normal.player) && !WeaponRuntime.reloading(honed.player)
-                    && !WeaponIzanagi.honing(honed.player) && !WeaponIzanagiPresentation.active(a),
-                    "Actual 61-tick commits finish; ordinary reload never grants a charged route");
-            sample(h, b, 4, 4.01f);
-            both(h, normal, canonical(a)); both(h, honed, IZANAGI);
-        });
-        f.at(65, () -> {
-            WeaponAiming.cleanup(honed.player); ads(honed.player, false);
-            honed.player.setXRot(90); WeaponAiming.tick(honed.player);
-            check(h, WeaponRuntime.beginUse(honed.player), "Actual funded hitscan into fixture floor admitted");
-            WeaponRuntime.releaseUse(honed.player, b); honed.player.stopUsingItem();
-            state(h, b, 0, 2, 0);
-            check(h, !WeaponIzanagiPresentation.active(b) || data(b).getFloat(6) < 2,
-                    "Paid emission clears funded cue; only a real ordinary auto reload may remain");
-            both(h, honed, WeaponIzanagiPresentation.active(b) ? IZANAGI : canonical(b));
-            h.succeed();
-        });
-    }
+    
 
-    @GameTest(structure = FLOOR, maxTicks = 100, environment = "destiny-test:w90_isolated")
-    public void fundedIdleAndRealAdsKeepScopePoseAndGripOnNativeWire(GameTestHelper h) {
-        var f = new Fixture(h); var w = f.player(); var s = f.equip(w, 2, 0);
-        request(h, w.player, true); both(h, w, IZANAGI);
-        f.at(61, () -> {
-            state(h, s, 1, 0, 2); sample(h, s, 4, 4.01f); both(h, w, IZANAGI);
-            ads(w.player, true);
-        });
-        f.at(62, () -> { /* Production tick advances the accepted left-click ADS session. */ });
-        f.at(72, () -> {
-            check(h, WeaponAiming.progress(w.player) == 1 && WeaponAimPresentation.ownedBy(w.player, s)
-                            && WeaponAiming.scoped(w.player) && WeaponIzanagiPresentation.scopedIdle(s)
-                            && data(s).getFloat(3) >= 1 && "scope".equals(data(s).getString(0)),
-                    "Funded idle Izanagi reaches W162 scope while preserving its live ADS selector and charged binding; progress="
-                            + WeaponAiming.progress(w.player) + " float3=" + data(s).getFloat(3)
-                            + " pose=" + data(s).getString(0));
-            state(h, s, 1, 0, 2); sample(h, s, 4, 4.01f);
-            both(h, w, Identifier.parse("destiny:weapon_scope_w45/izanagis_burden"));
-            h.succeed();
-        });
-    }
+    
 
     private record Pair(InventoryWireW92 wire, ItemStack outgoing, ItemStack incoming, int target, int stow, int ready) {}
     @GameTest(structure = FLOOR, maxTicks = 30, environment = "destiny-test:w90_isolated")

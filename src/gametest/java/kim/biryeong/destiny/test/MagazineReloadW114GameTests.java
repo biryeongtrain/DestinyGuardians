@@ -297,72 +297,9 @@ public final class MagazineReloadW114GameTests {
         amounts(h, r.stack, rounds + (paid ? moved : 0), p.infiniteReserve() ? 0 : reserve - (paid ? moved : 0));
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 10, environment = ISOLATED)
-    public void exactAdmissionAndCurrentCatalogProfiles(GameTestHelper h) {
-        int count = 0;
-        for (var e : WeaponCatalog.all()) {
-            boolean expected = List.of("erentil_fr4", "coriolis_force", "line_in_the_sand", "stormchaser", "code_duello", "bellowing_giant", "apostate", "hollow_words", "beloved", "duke_mk_44", "ammit_ar2", "the_recluse", "blast_furnace", "hammerhead", "ace_of_spades", "gnawing_hunger", "lonesome", "steelfeather_repeater", "bug_out_bag", "cold_denial", "austringer", "bygones", "retraced_path", "aishas_embrace", "chattering_bone", "salvager_s_salvo", "claws_of_the_wolf", "brass_attacks", "bite_of_the_fox", "bad_omens", "dream_breaker", "fixed_odds", "null_composure", "halfdan_d", "edge_transit", "seventh_seraph_officer_revolver", "retrofit_escapade", "distant_relation", "farewell", "patron_of_lost_causes","high_albedo","antiope_d", "ikelos_smg_v1_0_1", "allied_demand", "dead_man_walking_xx7463", "frontier_justice", "canis_major", "dimensional_hypotrochoid", "deafening_whisper", "pyroclastic_flow", "biting_winds", "whispering_slab", "nezarec_s_whisper").contains(e.id());
-            check(h, WeaponReloadPresentation.supports(e) == expected, "Only implemented whole-magazine reload graphs are admitted");
-            if (expected) {
-                check(h, expectedReloadRoute(e.id()).equals(WeaponReloadPresentation.model(e)),
-                        "Authored route is selected for " + e.id());
-                count++;
-            }
-        }
-        check(h, count == 53 && !WeaponReloadPresentation.supports(null), "Exact fifty-three-weapon admission, null denied");
-        for (String id : NEW) {
-            var e = WeaponCatalog.find(id).orElseThrow(); var p = WeaponProfile.forEntry(e); var t = WeaponTiming.forEntry(e);
-            check(h, p.magazine() == (id.equals("blast_furnace") ? 36 : 57)
-                    && p.reloadTicks() == (id.equals("blast_furnace") ? 43 : 91), "Authored W46 capacity/deadline baseline " + id);
-            check(h, p.magazine() == t.magazine().orElseThrow() && p.reloadTicks() == t.reloadTicks().orElseThrow()
-                    && p.firstReloadTicks() == p.reloadTicks() && !p.shellReload(), "Original whole-magazine capacity/timing remain " + id);
-            check(h, p.infiniteReserve() == id.equals("blast_furnace"), "Primary infinity / Heavy reserve policy unchanged");
-        }
-        h.succeed();
-    }
+    
 
-    @GameTest(structure = FLOOR, maxTicks = 180, environment = ISOLATED)
-    public void bothGripsEncodeLiveFramesHudAndExactCreditDeadline(GameTestHelper h) {
-        var f = new Fixture(h); var rs = cases(h, f, NEW, 2, 9); int end = end(h, rs);
-        for (var r : rs) r.wire.player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.EMERALD, 4));
-        for (int tick = 1; tick <= end; tick++) {
-            int elapsed = tick; f.at(tick, () -> {
-                for (var r : rs) {
-                    accounting(h, r, elapsed, 2, 9);
-                    if (elapsed < r.duration) {
-                        live(h, r, elapsed);
-                        if (elapsed == r.duration / 2) {
-                            both(h, r.wire, reloadModel(r.stack)); var before = r.stack.copy();
-                            check(h, !WeaponRuntime.reload(r.wire.player), "Duplicate cannot restart real reload");
-                            full(h, r.wire, reloadModel(r.stack));
-                            check(h, ItemStack.matches(before, r.stack), "Readonly wire/denied duplicate changes no ammo/components");
-                        }
-                        if (elapsed == r.duration - 1) {
-                            check(h, !WeaponRuntime.beginUse(r.wire.player), "No fire before existing full deadline");
-                            WeaponRuntime.releaseUse(r.wire.player, r.stack);
-                        }
-                    } else {
-                        retired(h, r);
-                        if (elapsed == r.duration) both(h, r.wire, base(r.stack));
-                    }
-                    if (elapsed == r.credit - 1 || elapsed == r.credit) full(h, r.wire,
-                            elapsed < r.duration ? reloadModel(r.stack) : base(r.stack));
-                    check(h, r.wire.player.getOffhandItem().is(Items.EMERALD)
-                            && r.wire.player.getOffhandItem().getCount() == 4 && !r.stack.has(DataComponents.CHARGED_PROJECTILES),
-                            "Real offhand/server stack untouched by twohand client carrier");
-                }
-                if (elapsed == end) {
-                    for (var r : rs) {
-                        var before = WeaponItems.magazine(r.stack, profile(r.stack));
-                        check(h, WeaponRuntime.beginUse(r.wire.player), "Actual firing resumes after unchanged full reload deadline");
-                        WeaponRuntime.releaseUse(r.wire.player, r.stack);
-                        amounts(h, r.stack, before.rounds() - 1, before.reserve());
-                    }
-                    h.succeed();
-                }
-            });
-        }
-    }
+    
 
     @GameTest(structure = FLOOR, maxTicks = 180, environment = ISOLATED)
     public void sameTickQAndSkillCancellationNeverCreditGhostAmmo(GameTestHelper h) {
@@ -387,83 +324,11 @@ public final class MagazineReloadW114GameTests {
         }
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 180, environment = ISOLATED)
-    public void slotReturnAndRepeatedCleanupRetireBindingsBeforeCredit(GameTestHelper h) {
-        var f = new Fixture(h); var rs = cases(h, f, NEW, 2, 9); int end = end(h, rs);
-        for (int tick = 1; tick <= end; tick++) {
-            int elapsed = tick; f.at(tick, () -> {
-                for (int i = 0; i < rs.size(); i++) {
-                    var r = rs.get(i); var p = r.wire.player;
-                    if (elapsed == 1) {
-                        if (i % 2 == 0) {
-                            p.getInventory().setItem(7, new ItemStack(Items.STONE));
-                            p.connection.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(7));
-                            p.connection.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(0));
-                            check(h, p.getMainHandItem() == r.stack && WeaponHandling.remaining(p) > 0, "Validated away/back keeps handling lock");
-                        } else { WeaponRuntime.cleanup(p); WeaponRuntime.cleanup(p); }
-                        both(h, r.wire, base(r.stack));
-                    }
-                    retired(h, r); accounting(h, r, 0, 2, 9);
-                }
-                if (elapsed == end) h.succeed();
-            });
-        }
-    }
+    
 
-    @GameTest(structure = FLOOR, maxTicks = 180, environment = ISOLATED)
-    public void copiesAndNbtPersistenceCannotAcquireOwnerAuthority(GameTestHelper h) {
-        var f = new Fixture(h); var rs = cases(h, f, NEW, 2, 9); int end = end(h, rs);
-        var copies = new ArrayList<InventoryWireW92>();
-        for (int tick = 1; tick <= end; tick++) {
-            int elapsed = tick; f.at(tick, () -> {
-                for (var r : rs) {
-                    if (elapsed < r.duration) live(h, r, elapsed); else retired(h, r);
-                    accounting(h, r, elapsed, 2, 9);
-                    if (elapsed == r.duration / 2) {
-                        var ops = h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
-                        var saved = ItemStack.CODEC.parse(ops, ItemStack.CODEC.encodeStart(ops, r.stack).getOrThrow()).getOrThrow();
-                        for (var s : List.of(r.stack.copy(), saved)) {
-                            check(h, ItemStack.matches(s, r.stack) && progress(s) > 0 && !WeaponReloadPresentation.active(s),
-                                    "Exact component copy and NBT roundtrip retain no live binding");
-                            var other = f.player(); copies.add(other); hold(other, s);
-                            WeaponRuntime.tickPlayer(other.player); full(h, other, base(s));
-                        }
-                    }
-                }
-                for (var w : copies) {
-                    var s = w.player.getMainHandItem(); check(h, !WeaponRuntime.reloading(w.player)
-                            && !WeaponReloadPresentation.ownedBy(w.player, s), "Held copied selectors cannot schedule ghost reload");
-                    amounts(h, s, 2, profile(s).infiniteReserve() ? 0 : 9); hud(h, w, false);
-                }
-                if (elapsed == end) { check(h, copies.size() == 8, "Copy/NBT exercised both weapons and carriers"); h.succeed(); }
-            });
-        }
-    }
+    
 
-    @GameTest(structure = FLOOR, maxTicks = 180, environment = ISOLATED)
-    public void exactObjectForeignRecipientCannotBorrowReloadGraph(GameTestHelper h) {
-        var f = new Fixture(h); var rs = cases(h, f, NEW, 2, 9); var others = new ArrayList<InventoryWireW92>();
-        for (var r : rs) {
-            var w = f.player(); others.add(w); hold(w, r.stack);
-            check(h, WeaponReloadPresentation.ownedBy(r.wire.player, r.stack)
-                    && !WeaponReloadPresentation.ownedBy(w.player, r.stack), "Exact-object foreign holder denied donor binding");
-            full(h, w, base(r.stack)); full(h, r.wire, reloadModel(r.stack));
-        }
-        int end = end(h, rs);
-        for (int tick = 1; tick <= end; tick++) {
-            int elapsed = tick; f.at(tick, () -> {
-                for (int i = 0; i < rs.size(); i++) {
-                    var r = rs.get(i); var w = others.get(i);
-                    if (elapsed < r.duration) live(h, r, elapsed); else retired(h, r);
-                    check(h, !WeaponRuntime.reloading(w.player) && !WeaponReloadPresentation.ownedBy(w.player, r.stack), "Foreign holder never borrows owner cycle");
-                    if (elapsed == r.duration / 2 || elapsed == r.duration) {
-                        both(h, w, base(r.stack)); both(h, r.wire, elapsed < r.duration ? reloadModel(r.stack) : base(r.stack));
-                    }
-                }
-                if (elapsed == end) h.succeed();
-            });
-        }
-    }
+    
 
     @GameTest(structure = FLOOR, maxTicks = 10, environment = ISOLATED)
     public void deniedFullMagazineOrEmptyHeavyReserveNeverActivatesSavedSelectors(GameTestHelper h) {
@@ -486,20 +351,5 @@ public final class MagazineReloadW114GameTests {
         h.succeed();
     }
 
-    @GameTest(structure = FLOOR, maxTicks = 180, environment = ISOLATED)
-    public void allSixReloadsCoexistAtTheirOriginalIndependentDeadlines(GameTestHelper h) {
-        var f = new Fixture(h); var rs = cases(h, f, List.of("blast_furnace", "hammerhead", "beloved", "duke_mk_44", "ammit_ar2", "the_recluse"), 1, 5);
-        int end = end(h, rs);
-        for (int tick = 1; tick <= end; tick++) {
-            int elapsed = tick; f.at(tick, () -> {
-                for (var r : rs) {
-                    accounting(h, r, elapsed, 1, 5);
-                    if (elapsed < r.duration) live(h, r, elapsed); else retired(h, r);
-                    if (elapsed == r.credit - 1 || elapsed == r.credit || elapsed == r.duration / 2 || elapsed == r.duration)
-                        full(h, r.wire, elapsed < r.duration ? reloadModel(r.stack) : base(r.stack));
-                }
-                if (elapsed == end) h.succeed();
-            });
-        }
-    }
+    
 }

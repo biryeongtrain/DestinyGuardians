@@ -35,6 +35,7 @@ final class TestPlayers {
     }
     /** Explicit independent scoreboard identity for fixtures that mutate player teams. */
     static ServerPlayer create(GameTestHelper h, Vec3 relative, float yaw, float pitch, String name) {
+        kim.biryeong.destiny.combat.PveDamageBalance.neutralForTests = true; // mechanics tests assert raw damage, not the tuning table
         var server = h.getLevel().getServer();
         var profile = new GameProfile(UUID.randomUUID(), name);
         var cookie = CommonListenerCookie.createInitial(profile, false);

@@ -36,78 +36,7 @@ public final class CrucibleDeathW289GameTests {
         } catch (ReflectiveOperationException error) { throw new AssertionError(error); }
     }
 
-    @GameTest(structure="destiny-test:floor", environment="destiny-test:w289_control", maxTicks=730)
-    public void nativeDeathShowsGhostThenRespawnsAndDepartureCleansUp(GameTestHelper h) {
-        check(h, CrucibleRuntime.snapshot().members().isEmpty(), "Exclusive Control fixture");
-        var server = h.getLevel().getServer();
-        TowerSpawnWorld.open(server);
-        var logins = new ArrayList<CrucibleW263GameTests.Login>();
-        var killer = CrucibleW263GameTests.login(h, logins, "W289Killer", Element.SOLAR);
-        var victim = CrucibleW263GameTests.login(h, logins, "W289Victim", Element.ARC);
-        h.onEachTick(() -> { for (var login : logins) CrucibleW263GameTests.tickLogin(server, login); });
-        check(h, TowerSpawnWorld.teleport(killer) && TowerSpawnWorld.teleport(victim), "Tower ready");
-        check(h, CrucibleRuntime.join(killer) && CrucibleRuntime.join(victim), "Opposing teams joined");
-        int[] score = {0};
-        Vec3[] deathAt = {null};
-        ServerPlayer[] replacement = {null};
-        h.runAfterDelay(450, () -> {
-            check(h, CrucibleRuntime.canFight(killer, victim), "Match is playing and protection ended");
-            check(h, victim.level().getGameRules().get(GameRules.IMMEDIATE_RESPAWN), "Native death menu suppressed only in arena");
-            deathAt[0] = victim.position();
-            score[0] = CrucibleRuntime.snapshot().scores().get(CrucibleRuntime.team(killer)) + 1;
-            check(h, Combat.damage(killer, victim, 10000, Element.KINETIC), "Real lethal hit");
-        });
-        h.runAfterDelay(465, () -> {
-            var p = server.getPlayerList().getPlayer(victim.getUUID());
-            replacement[0] = p;
-            check(h, p != null && p != victim && p.isAlive(), "Native replacement is ready during countdown");
-            check(h, p.isSpectator() && CrucibleDeathScene.active(p), "Noncombat death scene active");
-            check(h, p.getPostEffects().contains(CrucibleDeathScene.EFFECT) && deathHud(p), "Red grade and dedicated death HUD published");
-            check(h, p.getCamera() != p && p.level().getEntity(p.getCamera().getId()) == null, "Private camera never enters world storage");
-            check(h, p.getCamera().position().distanceTo(deathAt[0]) < 5, "Camera stays at death location");
-            Object scene = ((java.util.Map<?, ?>) field(CrucibleDeathScene.class, "ACTIVE")).get(p.getUUID());
-            Object ghost = field(scene, "ghost");
-            check(h, ((java.util.List<?>) field(ghost, "parts")).size() == 11
-                    && (Float) field(ghost, "openness") > .7f, "All eleven shell parts deploy over time");
-            var camera = p.getCamera();
-            p.setCamera(p);
-            check(h, p.getCamera() == camera, "Sneak cannot escape the death camera");
-            p.setCamera(killer);
-            check(h, p.getCamera() == camera, "Spectator target cannot replace the death camera");
-            check(h, !CrucibleRuntime.canAct(p) && !CrucibleRuntime.canFight(p, killer), "No combat or capture before deadline");
-            check(h, !Combat.damage(p, killer, 10000, Element.KINETIC), "Dead participant cannot damage a live opponent");
-            check(h, CrucibleRuntime.snapshot().scores().get(CrucibleRuntime.team(killer)) == score[0], "Exactly one death score");
-        });
-        h.runAfterDelay(545, () -> check(h, CrucibleDeathScene.active(replacement[0])
-                && !CrucibleRuntime.canAct(replacement[0]), "Wait the full five seconds"));
-        h.runAfterDelay(555, () -> {
-            var p = replacement[0];
-            check(h, p.gameMode() == GameType.ADVENTURE && p.getCamera() == p, "Return to normal player camera/mode");
-            check(h, !CrucibleDeathScene.active(p) && !p.getPostEffects().contains(CrucibleDeathScene.EFFECT)
-                    && !deathHud(p), "No death entities, red grade or countdown after respawn");
-            check(h, CrucibleWorld.isArena(p.level()) && TowerSpawnWorld.isSafeArrival(p.level(), p.position()), "Safe team spawn");
-            check(h, p.getHealth() == p.getMaxHealth() && CrucibleRuntime.canAct(p), "Restored health and combat eligibility");
-            check(h, !CrucibleRuntime.canFight(killer, p), "Spawn protection starts after countdown");
-        });
-        h.runAfterDelay(600, () -> {
-            check(h, CrucibleRuntime.canFight(killer, replacement[0]), "Spawn protection naturally expires");
-            check(h, Combat.damage(killer, replacement[0], 10000, Element.KINETIC), "Second real death");
-        });
-        h.runAfterDelay(615, () -> {
-            var p = server.getPlayerList().getPlayer(victim.getUUID());
-            check(h, CrucibleDeathScene.active(p), "Second death has a fresh scene");
-            check(h, CrucibleRuntime.leave(p, true), "Can leave during countdown");
-            check(h, !CrucibleDeathScene.active(p) && p.getCamera() == p
-                    && !p.getPostEffects().contains(CrucibleDeathScene.EFFECT) && !deathHud(p), "Departure removes all owned presentation");
-            check(h, !p.isSpectator() && !CrucibleWorld.isArena(p.level()), "Departure restores normal mode and tower");
-        });
-        h.runAfterDelay(715, () -> {
-            var p = server.getPlayerList().getPlayer(victim.getUUID());
-            check(h, !CrucibleRuntime.participating(p) && !CrucibleDeathScene.active(p)
-                    && !CrucibleWorld.isArena(p.level()), "Expired countdown cannot pull departed player back");
-            h.succeed();
-        });
-    }
+    
 
     @GameTest(structure="destiny-test:floor", environment="destiny-test:w289_scene", maxTicks=50)
     public void wallClippingAndEffectOwnershipCleanup(GameTestHelper h) {

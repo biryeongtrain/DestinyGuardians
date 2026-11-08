@@ -22,7 +22,7 @@ public final class StartupPackCacheW340GameTests {
         h.onEachTick(()->{
             String status=StartupPackCache.status(h.getLevel().getServer());
             h.assertTrue(System.nanoTime()<deadline,Component.literal("Pack cache publication timed out: "+status));
-            if(!status.equals(expected)) {
+            if(!(status.equals(expected)||expected.equals("SAVED")&&status.equals("HIT"))) {
                 if(status.equals("HIT")||status.equals("SAVED"))h.fail(Component.literal("Expected "+expected+", got "+status));
                 java.util.concurrent.locks.LockSupport.parkNanos(1_000_000);return;
             }

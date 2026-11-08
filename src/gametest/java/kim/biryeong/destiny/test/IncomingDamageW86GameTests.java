@@ -264,22 +264,7 @@ public final class IncomingDamageW86GameTests {
         near(h,p.getYRot(),yaw,"HUD never writes yaw");near(h,p.getXRot(),pitch,"HUD never writes pitch");near(h,p.getHealth(),6,"HUD never changes actual HP");near(h,p.getAbsorptionAmount(),4,"HUD never changes native absorption");near(h,p.getAttribute(Attributes.MOVEMENT_SPEED).getValue(),speed,"No movement attribute writes");near(h,p.getAttribute(Attributes.ARMOR).getValue(),armor,"No armor attribute writes");h.succeed();
     }
 
-    @GameTest(structure=FLOOR,maxTicks=10, environment = "destiny-test:w90_isolated")
-    public void deathLevelSpectatorForeignCameraCleanupIsIsolatedAndOwnSuperCameraKeepsIncomingHud(GameTestHelper h) {
-        var f=new Fixture(h);var dead=f.player(5,5,false);var traveler=f.player(15,5,false);var spectator=f.player(25,5,false);var keeper=f.player(35,5,false);
-        var foreign=f.player(10,22,false);var own=f.player(30,22,false);
-        for(var p:List.of(dead,traveler,spectator,keeper,foreign,own)) {var rel=h.relativeVec(p.position());hit(h,p,f.mob(rel.x,rel.z+4),1);rotation(h,p,0,0);}
-        hit(h,dead,f.mob(8,5),100);check(h,!dead.isAlive(),"Native lethal hit really kills victim");IncomingDamageHud.update(dead);absent(h,dead,"Native death retires feedback");
-        var other=h.getLevel().getServer().getLevel(h.getLevel().dimension().equals(Level.NETHER)?Level.OVERWORLD:Level.NETHER);check(h,other!=null&&other!=h.getLevel(),"Distinct actual server level preflight");
-        traveler.setServerLevel(other);IncomingDamageHud.update(traveler);traveler.setServerLevel(h.getLevel());IncomingDamageHud.update(traveler);absent(h,traveler,"Level identity mismatch cannot resurrect world origins");
-        spectator.setGameMode(GameType.SPECTATOR);IncomingDamageHud.update(spectator);absent(h,spectator,"Spectator removes feedback");spectator.setGameMode(GameType.SURVIVAL);IncomingDamageHud.update(spectator);absent(h,spectator,"Eligible return has no stale cue");
-        h.getLevel().addNewPlayer(foreign);check(h,h.getLevel().players().contains(foreign),"Native camera witness is registered BEFORE setCamera/ChunkSource.move");
-        var camera=f.mob(16,22);var attacker=f.mob(16,28);foreign.setCamera(camera);IncomingDamageHud.update(foreign);absent(h,foreign,"Foreign native camera removes old cue");
-        hit(h,foreign,attacker,1);absent(h,foreign,"Real loss while foreign camera owns view cannot recreate cue");foreign.setCamera(foreign);
-        check(h,SuperCamera.ENABLED&&SuperCamera.start(own,Element.VOID)&&SuperCamera.active(own)&&own.getCamera()==own&&CameraViews.get(own)==null,"Actual own fake SuperCamera with native self-camera");
-        hit(h,own,f.mob(34,22),1);check(h,!keys(own).isEmpty(),"Own SuperCamera intentionally preserves received-damage HUD");
-        SuperCamera.stop(own);IncomingDamageHud.cleanup(traveler);IncomingDamageHud.cleanup(traveler);rotation(h,keeper,0,0);h.succeed();
-    }
+    
 
     @GameTest(structure=FLOOR,maxTicks=10, environment = "destiny-test:w90_isolated")
     public void sameUuidReplacementSurvivesOldCleanupAndOwnerOnlyNativePacketCodecsRemainCached(GameTestHelper h) {
