@@ -1,0 +1,18 @@
+# 악마의 소굴: 시작 대사 무음 · 음악 약함 · 캐시 HIT 시 음악 준비 상태
+
+## 1. 시작 대사가 아무에게도 안 들린 원인
+브리핑(착지 연출)은 `CameraViews` 카메라 뷰 시네마틱이다. `CameraViews.allow()`는 `sending()` 범위 밖의 패킷 중 허용 목록(채팅·타이틀·리소스팩 등)에 없는 것을 버린다. 허용 목록에 `sound_entity`/`stop_sound`가 없고, `DevilsVoicePlayback`은 `player.connection.send`로 보냈기 때문에 오프닝 대사 패킷이 클라이언트에 닿지 않았다. 같은 이유로 HUD(자막)도 브리핑 동안 보이지 않는다(목표 HUD·자막은 DisplayHud). 수정: 대사 시작/정지 패킷을 `CameraViews.send`로 보낸다(`MusicService`가 쓰는 정식 경로).
+
+실측(격리 서버 + Vision client, 같은 Mac, 시스템 볼륨 85, 마이크 녹음 55초, 브리핑 대사 구간 = 브리핑 캐스트 시작 + 0~22초):
+- 수정 전(`mic-before-fix.wav`, 대사 구간 중 27~38초 지점): 3초 평균 -35 ~ -39 dB(무음).
+- 수정 후(`mic-after-fix.wav`, 같은 구간): -16.7 ~ -20.2 dB.
+`/playsound destiny_devils:voice.80b59f27`은 수정 전에도 들렸다(+5 dB). 즉 팩/사운드 정의는 정상이고 시네마틱 패킷 필터만 원인이다. 마이크 녹음은 스피커 청취가 아니다: 대사의 내용·타이밍을 귀로 확인한 것이 아니며, 노이즈 구간이 겹치는 정량 비교다. 자막은 브리핑 중 화면에 보이지 않음(HUD 숨김)을 스크린샷으로 확인했고 이번에 바꾸지 않았다.
+
+## 2. 음악이 거의 안 들린 원인
+`import_devils_music_linkage.py`가 모든 세그먼트에 `x0.3`을 곱해 "임시(provisional)"로 출력했다. 평균 -35~-44 dB로 대사(-17.6 dB)·SFX(-16.6 dB)보다 18~20 dB 낮다. 모든 세그먼트에 같은 배율 x4.5를 적용했다(`scripts/strikes/regain_devils_music.py`; 상대 레벨 유지, 최대 피크 0.59, 프레임 수 불변 49/49). 결과 평균 -21 ~ -24 dB. 적용 전 원본은 `/tmp/devils_music_orig`(보관 안 함); 해시는 `art/audio/devils-music-gain/manifest.json`. 2026-11-04 QA 기록(`music-linkage/import.json`)은 봉인본이라 그대로 두고, `LaterAudioW346` 고정 해시를 새 매니페스트로 옮겼다. 팩 용량은 약 +5 MB. 브리핑 동안(section -1)에는 음악이 없고 대사가 끝나야 구간 0 음악이 시작한다(기존 설계, 변경 없음).
+
+## 3. 팩 캐시 HIT이면 음악 준비 상태가 비던 문제
+HIT은 빌드를 건너뛰므로 `MusicPacks.finish`가 안 불려 `published.hash`가 빈 문자열로 남고 `MusicPacks.ready()`가 항상 false가 된다. 공격전 시작(`DevilsLair.check`)과 입장 확인이 `ready`를 요구하므로 HIT 상태에서는 시작할 수 없었다. `MusicPacks.restore(sha1)`로 음악 카탈로그와 해시를 복원한다. 캐시 키에 `config/minigame-lib`(음악 디렉터리)를 추가했다. 실측: HIT(21.8초 복원) 뒤 공격전이 정상 시작하고 음악 세그먼트가 재생됨.
+
+## 미수행
+스피커로 직접 듣는 청취, 다중 클라이언트, 3인 동시 브리핑, 브리핑 중 자막 가시화(현재 HUD 숨김).

@@ -111,4 +111,13 @@ class PackCacheW340Test {
         assertEquals(List.of("mod/two"),store.changedGroups(second.groups()));
         assertEquals(List.of(),store.changedGroups(first.groups()));
     }
+    @Test void regeneratedBetterModelIconDoesNotChangeTheKey() throws Exception {
+        var a=jar("bm-a.jar",Map.of("assets/x/t.png","1","pack.png","icon-a"));
+        var b=jar("bm-b.jar",Map.of("assets/x/t.png","1","pack.png","icon-bigger-b"));
+        var c=jar("bm-c.jar",Map.of("assets/x/t.png","2","pack.png","icon-a"));
+        String ka=new PackCacheStore.Inputs().path("bettermodel-output",a).finish();
+        assertEquals(ka,new PackCacheStore.Inputs().path("bettermodel-output",b).finish());
+        assertNotEquals(ka,new PackCacheStore.Inputs().path("bettermodel-output",c).finish());
+        assertNotEquals(new PackCacheStore.Inputs().path("other",a).finish(),new PackCacheStore.Inputs().path("other",b).finish());
+    }
 }

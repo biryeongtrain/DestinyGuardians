@@ -1,6 +1,7 @@
 package kim.biryeong.destiny.strike.devils;
 
 import kim.biryeong.destiny.campaign.presentation.DevilsSubtitles;
+import kim.biryeong.minigamelib.cinematic.CameraViews;
 import net.minecraft.core.Holder;
 import net.minecraft.network.protocol.game.ClientboundSoundEntityPacket;
 import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
@@ -48,7 +49,9 @@ public final class DevilsVoicePlayback implements AutoCloseable {
             if (player.hasDisconnected() || !player.connection.hasClientLoaded()) continue;
             listeners.add(player);
             // The actual player's tracked entity follows movement; no temporary sound-emitter entity is needed.
-            if (line != null) player.connection.send(new ClientboundSoundEntityPacket(
+            // The briefing is a camera-view cinematic, which drops every packet outside its allow-list (sound included),
+            // so the opening line was silently discarded. CameraViews.send is the sanctioned route, as MusicService uses.
+            if (line != null) CameraViews.send(player, new ClientboundSoundEntityPacket(
                     Holder.direct(SoundEvent.createFixedRangeEvent(Identifier.parse(next.event()), 32f)),
                     SoundSource.PLAYERS, player, 1f, 1f, player.getRandom().nextLong()));
             render(player);
@@ -111,7 +114,7 @@ public final class DevilsVoicePlayback implements AutoCloseable {
         if (listeners.remove(player)) remove(player);
     }
     private void remove(ServerPlayer player) {
-        if (!player.hasDisconnected() && line != null) player.connection.send(new ClientboundStopSoundPacket(
+        if (!player.hasDisconnected() && line != null) CameraViews.send(player, new ClientboundStopSoundPacket(
                 Identifier.parse(line.event()), SoundSource.PLAYERS));
         DevilsSubtitles.remove(player);
     }

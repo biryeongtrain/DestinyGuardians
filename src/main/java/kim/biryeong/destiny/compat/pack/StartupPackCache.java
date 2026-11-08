@@ -71,6 +71,8 @@ public final class StartupPackCache {
                     var cached=hit.orElseThrow();
                     var snapshot=ProfileArmCache.read(cached.profiles());
                     validate(snapshot);
+                    // Reuse skips the build that normally publishes the music catalog and pack hash; do it before readiness.
+                    kim.biryeong.minigamelib.music.MusicPacks.restore(cached.sha1());
                     if(current!=s||s.epoch!=epoch)return;
                     Path prepared=PackCacheStore.prepare(cached.archive(),PolymerResourcePackUtils.getMainPath());
                     s.pending.add(prepared);
@@ -172,7 +174,7 @@ public final class StartupPackCache {
             }
         }
         // Only configuration that feeds the pack. Other mods' configs are rewritten at runtime and never reach it.
-        for(String dir:new String[]{"destiny","bettermodel"})paths.put("config/"+dir,loader.getConfigDir().resolve(dir));
+        for(String dir:new String[]{"destiny","bettermodel","minigame-lib"})paths.put("config/"+dir,loader.getConfigDir().resolve(dir));
         paths.put("config/polymer-pack",loader.getConfigDir().resolve("polymer/resource-pack.json"));
         paths.put("polymer-source-assets",loader.getGameDir().resolve("polymer/source_assets"));
         paths.put("bettermodel-output",loader.getConfigDir().resolve("bettermodel/build.zip"));

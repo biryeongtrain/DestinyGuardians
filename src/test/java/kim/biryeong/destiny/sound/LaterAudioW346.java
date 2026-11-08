@@ -35,9 +35,9 @@ final class LaterAudioW346 {
         for (var value : json("src/main/resources/destiny/down/respawn-audio-provenance.json").getAsJsonArray("files")) {
             var row=value.getAsJsonObject();pin(pins,row.get("output").getAsString(),row.get("outputSha256").getAsString());
         }
-        for (var value : json("docs/qa/2026-11-04/devils-lair/music-linkage/import.json").getAsJsonArray("segments")) {
-            var row=value.getAsJsonObject();
-            pin(pins,"src/main/resources/assets/destiny_music/sounds/devils/"+row.get("segment").getAsString()+".ogg",row.get("sha256").getAsString());
+        // The 2026-11-04 import wrote these at x0.3 (sealed QA evidence, left as is); art/audio/devils-music-gain re-levels them.
+        for (var value : json("art/audio/devils-music-gain/manifest.json").getAsJsonArray("files")) {
+            var row=value.getAsJsonObject();pin(pins,row.get("output").getAsString(),row.get("outputSha256").getAsString());
         }
         var descent=json("docs/qa/2026-11-03/devils-lair/music/source-inventory.json").getAsJsonArray("clips").asList().stream()
                 .map(v->v.getAsJsonObject()).filter(v->v.get("wem").getAsString().equals("80D715DA")).toList();

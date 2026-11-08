@@ -166,7 +166,11 @@ final class PackCacheStore {
             if (name.endsWith(".jar") || name.endsWith(".zip")) {
                 try (var zip = new ZipFile(path.toFile())) {
                     text(label, "archive");
-                    for (var e : zip.stream().filter(e -> !e.isDirectory()).sorted(Comparator.comparing(java.util.zip.ZipEntry::getName)).toList())
+                    // BetterModel rewrites its generated icon on every start (200 B vs 2.4 KB observed); the shipped pack icon is
+                    // Polymer's, which is hashed separately, so the generated one must not decide hit or miss.
+                    boolean generatedIcon = label.equals("bettermodel-output");
+                    for (var e : zip.stream().filter(e -> !e.isDirectory() && !(generatedIcon && e.getName().equals("pack.png")))
+                            .sorted(Comparator.comparing(java.util.zip.ZipEntry::getName)).toList())
                         text(e.getName(), e.getSize() + ":" + e.getCrc());
                 }
             } else { text(label, "file"); text("contents", PackCacheStore.digest(path, "SHA-256")); }
