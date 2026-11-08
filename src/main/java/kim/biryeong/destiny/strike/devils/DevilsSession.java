@@ -19,15 +19,17 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import kim.biryeong.destiny.activity.strike.StrikeInstances;
+import kim.biryeong.destiny.activity.strike.StrikeRun;
 import java.util.*;
 import static kim.biryeong.destiny.strike.devils.DevilsPlan.Zone;
 
 /** Server-thread session adapter. Generation-owned cameras and callbacks never outlive their encounter. */
-public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.Host, DevilsActors.Environment {
+public final class DevilsSession implements StrikeRun, DevilsDirector.Host, DevilsRecovery.Host, DevilsActors.Environment {
     private enum State { PREPARING, ADMITTING, RUNNING, DRAINING, CLOSED }
     private final MinecraftServer server;
-    private final DevilsInstances instances;
-    private final DevilsInstances.Instance instance;
+    private final StrikeInstances instances;
+    private final StrikeInstances.Instance instance;
     private final List<UUID> ids;
     private final Set<UUID> departed = new HashSet<>();
     private final StrikeRoster roster;
@@ -66,7 +68,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private StrikeBriefingGate briefingGate;
     private UUID qaStatsTarget;
 
-    DevilsSession(MinecraftServer server, DevilsInstances instances, DevilsInstances.Instance instance,
+    DevilsSession(MinecraftServer server, StrikeInstances instances, StrikeInstances.Instance instance,
                   List<ServerPlayer> players) {
         this.server = server; this.instances = instances; this.instance = instance;
         this.ids = players.stream().map(ServerPlayer::getUUID).toList();
@@ -101,22 +103,23 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
      * 0..1 for the launch loading screen. Map building is the long pole, so it owns most of the range; the remainder is
      * placement and admission. Never 1: the screen reaches the end only when the client has really loaded.
      */
-    public float loadProgress() {
+    @Override public float loadProgress() {
         return switch (state) {
             case PREPARING -> (float) (build.progress() * .88);
             case ADMITTING -> .92f;
             default -> .96f;
         };
     }
-    public UUID id() { return instance.id(); }
-    public ServerLevel level() { return instance.level(); }
+    @Override public UUID id() { return instance.id(); }
+    @Override public ServerLevel level() { return instance.level(); }
     public DevilsDirector director() { return director; }
-    public boolean member(UUID id) { return ids.contains(id) && !departed.contains(id); }
-    public boolean closed() { return state == State.CLOSED; }
-    public boolean running() { return state == State.RUNNING; }
+    @Override public boolean briefing() { return director.phase() == DevilsDirector.Phase.BRIEFING; }
+    @Override public boolean member(UUID id) { return ids.contains(id) && !departed.contains(id); }
+    @Override public boolean closed() { return state == State.CLOSED; }
+    @Override public boolean running() { return state == State.RUNNING; }
     private boolean readyLivingAudience(ServerPlayer p) { return running() && !joining.contains(p.getUUID()) && !resetPlacement && !failure.state().wiping()
             && p.level() == level() && recovery.token(p.getUUID()).isEmpty() && ready(p); }
-    public boolean allows(ServerPlayer p) { return readyLivingAudience(p) && !presentation.hidden(p); }
+    @Override public boolean allows(ServerPlayer p) { return readyLivingAudience(p) && !presentation.hidden(p); }
     public String status() { var s = director.snapshot(); return state + " / " + s.phase() + " / " + s.occupied() + "/" + s.zone().actorCap(); }
     public List<ServerPlayer> players() {
         return ids.stream().filter(this::member).map(id -> server.getPlayerList().getPlayer(id))
@@ -125,7 +128,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     @Override public List<ServerPlayer> participants() { return players().stream().filter(this::allows)
             .filter(p -> p.level() == level()).toList(); }
 
-    void tick(long now, long buildBudget) {
+    @Override public void tick(long now, long buildBudget) {
         if (state == State.CLOSED) return;
         if (state == State.DRAINING) { drain(); return; }
         reservations.clear();
@@ -372,7 +375,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
                 GuardianDown.progressOwned(player, option, member.helper(), member.holdTicks(), players());
         }
     }
-    GuardianDown.Options downed(ServerPlayer p) {
+    @Override public GuardianDown.Options downed(ServerPlayer p) {
         if (!running() || p.level() != level() || !member(p.getUUID()) || joining.contains(p.getUUID())) return null;
         var down = recovery.down(p.getUUID(), director.generation());
         if (down.isEmpty()) return null;
@@ -625,7 +628,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         } catch (RuntimeException error) { problem("Reward chest spot failed: " + error); return null; }
     }
     @Override public void problem(String message) { if (problems.add(message)) DestinyGuardians.LOGGER.warn("[DevilsLair {}] {}", id(), message); }
-    void disconnected(ServerPlayer p, long now) {
+    @Override public void disconnected(ServerPlayer p, long now) {
         failure.remove(p);
         DevilsCombatSounds.stop(p); music.remove(p);
         supplySneaking.remove(p.getUUID());
@@ -637,14 +640,14 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         voice.disconnected(p); presentation.disconnected(p); DevilsObjectives.remove(p); clearGuide(p);
         GuardianDown.clearExternalHud(p);
     }
-    boolean rejoin(ServerPlayer p, long now) {
+    @Override public boolean rejoin(ServerPlayer p, long now) {
         if (!member(p.getUUID()) || state == State.DRAINING || state == State.CLOSED) return false;
         if (roster.rejoin(p.getUUID(), now) != StrikeRoster.Join.ACCEPTED) { departed.add(p.getUUID()); return false; }
         supplies.reconnect(p);
         if (state == State.RUNNING) joining.add(p.getUUID());
         return true;
     }
-    void leave(ServerPlayer p) {
+    @Override public void leave(ServerPlayer p) {
         if (!member(p.getUUID())) return;
         failure.remove(p);
         DevilsCombatSounds.stop(p); music.remove(p);
@@ -657,12 +660,12 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         departed.add(p.getUUID()); DevilsLair.restore(p);
         if (ids.stream().noneMatch(this::member)) stop("화력팀 이탈");
     }
-    void stop(String reason) {
+    @Override public void stop(String reason) {
         if (state == State.CLOSED || state == State.DRAINING) return;
         state = State.DRAINING; attemptStats.close(); failure.close(); kim.biryeong.destiny.loot.Loot.activityClosed(players()); music.close(); director.close(); recovery.close(); actors.close(); build.close(); presentation.close(); voice.close(); supplies.close(); supplyStations.close();
         for (var p : players()) { cancelDown(p); DevilsObjectives.remove(p); clearGuide(p); p.sendSystemMessage(Component.literal(reason)); }
     }
-    void drain() {
+    @Override public void drain() {
         if (state != State.DRAINING) return;
         // Include outsiders and departed participants: deleting a world with any player still inside is forbidden.
         for (var p : List.copyOf(level().players())) {

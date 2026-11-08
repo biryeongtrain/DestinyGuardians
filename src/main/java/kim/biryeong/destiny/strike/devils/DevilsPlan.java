@@ -11,10 +11,12 @@ public final class DevilsPlan {
     public static final int REINFORCEMENT_GAP = 120, INTERMISSION_TICKS = 160;
     public static final int SEPIKS_RESERVED_SERVITORS = 3;
 
-    public enum Zone {
-        RY(24, 3), RF(24, 3), BL(32, 4), SP(24, 3);
+    public enum Zone implements kim.biryeong.destiny.activity.strike.StrikeZone {
+        RY("rocketyard", 24, 3), RF("refinery", 24, 3), BL("blast", 32, 4), SP("lair", 24, 3);
+        private final String resourceName;
         private final int actorCap, packCap;
-        Zone(int actorCap, int packCap) { this.actorCap = actorCap; this.packCap = packCap; }
+        Zone(String resourceName, int actorCap, int packCap) { this.resourceName = resourceName; this.actorCap = actorCap; this.packCap = packCap; }
+        @Override public String resourceName() { return resourceName; }
         public int actorCap() { return actorCap; }
         public int packCap() { return packCap; }
     }
