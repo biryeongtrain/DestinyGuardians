@@ -126,6 +126,12 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     }
     private boolean mobileFlyer() { return kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD; }
     private Vec3 lastOverMap;
+    /** Flyers fight around the pad they entered at; caves and side passages beyond it are not part of the encounter. */
+    static final double FLYER_LEASH = 24, FLYER_LEASH_DOWN = 5, FLYER_LEASH_UP = 9;
+    private boolean withinLeash(Vec3 at) {
+        double dx = at.x - home.x, dz = at.z - home.z;
+        return dx * dx + dz * dz <= FLYER_LEASH * FLYER_LEASH && at.y >= home.y - FLYER_LEASH_DOWN && at.y <= home.y + FLYER_LEASH_UP + 2.5;
+    }
     /**
      * Flyers can be knocked or steered past the rim of the built map, where nobody can reach them and the encounter
      * stalls. Remember the last position over the map and put the flyer back there instead of losing it.
@@ -135,6 +141,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
         Vec3 at = position();
         boolean inside = runtime.environment.contains(slot.zone(), at)
                 && runtime.environment.contains(slot.zone(), at.add(1.5, 0, 1.5)) && runtime.environment.contains(slot.zone(), at.add(-1.5, 0, -1.5))
+                && withinLeash(at)
                 && (age % 5 != 0 || DevilsSpatial.flightSupported(level, at));
         if (inside) { if (age % 5 == 0) lastOverMap = at; return true; }
         Vec3 back = lastOverMap != null ? lastOverMap : home;
@@ -262,7 +269,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
         double range=kind==DevilsPlan.Kind.THRALL||kind==DevilsPlan.Kind.MARAUDER?2:kind==DevilsPlan.Kind.BRIG?22:14;
         if(distanceToSqr(target)<range*range && getSensing().hasLineOfSight(target)) {getNavigation().stop(); model.base("idle"); return;}
         Vec3 destination=target.position();
-        double homeRadius=kind==DevilsPlan.Kind.BRIG?16:32;
+        double homeRadius=kind==DevilsPlan.Kind.BRIG?16:mobileFlyer()?FLYER_LEASH-4:32;
         Vec3 relative=destination.subtract(home).multiply(1,0,1);
         if(relative.length()>homeRadius) destination=home.add(relative.normalize().scale(homeRadius));
         if(!runtime.environment.contains(slot.zone(),destination))return;
@@ -274,7 +281,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
                 if (path != null) for (int i=0;i<path.getNodeCount();i++) {
                     var node=path.getNode(i);
                     var nodeAt = new Vec3(node.x+.5,node.y,node.z+.5);
-                    if (!runtime.environment.contains(slot.zone(), nodeAt) || mobileFlyer() && !DevilsSpatial.flightSupported((ServerLevel) level(), nodeAt)) {inside=false;break;}
+                    if (!runtime.environment.contains(slot.zone(), nodeAt) || mobileFlyer() && (!withinLeash(nodeAt) || !DevilsSpatial.flightSupported((ServerLevel) level(), nodeAt))) {inside=false;break;}
                 }
                 if (inside) getNavigation().moveTo(path, 1); else getNavigation().stop();
             }
