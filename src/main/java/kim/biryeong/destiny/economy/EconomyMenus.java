@@ -38,6 +38,8 @@ public final class EconomyMenus {
     static final Identifier VAULT_ICON = Identifier.parse("destiny:gui/hud/bungie/vendor_vault");
     static final Identifier POSTMASTER_ICON = Identifier.parse("destiny:gui/hud/bungie/vendor_postmaster");
     private static final int ROWS = 6, CONTENT = 45, PAGE = 45;
+    /** Starting price shown on the sell screen (was 1,000); the listing floor is {@link EconomyLedger#MIN_PRICE}. */
+    static final long DEFAULT_PRICE = 30;
     private static final Map<UUID, Menu> OPEN = new HashMap<>();
 
     private EconomyMenus() { }
@@ -595,7 +597,7 @@ public final class EconomyMenus {
     }
 
     static final class SellScreen extends Screen {
-        int index = -1; ItemStack picked = ItemStack.EMPTY; long price = 1_000; int hours = 24;
+        int index = -1; ItemStack picked = ItemStack.EMPTY; long price = DEFAULT_PRICE; int hours = 24;
         @Override Component title(Menu m) { return EconomyGui.title("sell", "무기 판매 등록"); }
         void pick(Menu m, int i) {
             String why = sellable(m.owner, i);
