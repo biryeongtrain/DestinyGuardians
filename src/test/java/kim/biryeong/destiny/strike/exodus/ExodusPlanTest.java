@@ -56,4 +56,18 @@ class ExodusPlanTest {
             assertTrue(ExodusVoice.catalog().line(id).isPresent(), id);
         for (var id : ExodusVoice.COMPLETE) assertTrue(ExodusVoice.catalog().line(id).isPresent(), id);
     }
+    @Test void everyScoreClipIsPackagedAndEveryTierHasMusic() throws Exception {
+        try (var in = getClass().getResourceAsStream("/destiny/exodus_crash/music.json")) {
+            var tiers = com.google.gson.JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject().getAsJsonArray("tiers");
+            assertEquals(4, tiers.size());
+            for (var tier : tiers) {
+                assertTrue(tier.getAsJsonArray().size() >= 5);
+                for (var c : tier.getAsJsonArray()) try (var ogg = getClass().getResourceAsStream(
+                        "/assets/destiny_exodus_music/sounds/music/" + c.getAsJsonObject().get("event").getAsString() + ".ogg")) {
+                    assertNotNull(ogg);
+                    assertEquals("OggS", new String(ogg.readNBytes(4), StandardCharsets.US_ASCII));
+                }
+            }
+        }
+    }
 }
