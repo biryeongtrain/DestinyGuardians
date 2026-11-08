@@ -254,6 +254,7 @@ public final class GearScreen {
                 net.minecraft.sounds.SoundSource.PLAYERS, .6f, 1.4f);
         long glimmer = kim.biryeong.destiny.economy.Economy.reward(p, kim.biryeong.destiny.economy.Economy.dismantleValue(w.rarity()), "분해");
         notice(s, w.name() + " 분해" + (glimmer > 0 ? " · 미광체 +" + glimmer : ""));
+        kim.biryeong.destiny.tutorial.Guide.event(p, kim.biryeong.destiny.tutorial.Guide.Event.DISMANTLED);
         refresh(s); return true;
     }
 

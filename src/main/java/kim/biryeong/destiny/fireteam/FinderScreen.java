@@ -82,6 +82,8 @@ public final class FinderScreen {
     }
 
     public static boolean active(ServerPlayer p) { return current(p) != null; }
+    /** The player has opened one activity's detail page (tutorial guide). */
+    public static boolean onActivityPage(ServerPlayer p) { var s = current(p); return s != null && s.page == Page.ACTIVITY; }
     private static Session current(ServerPlayer p) {
         var s = OPEN.get(p.getUUID());
         return s != null && s.owner == p && s.connection == p.connection ? s : null;

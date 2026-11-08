@@ -262,6 +262,7 @@ public final class Loot {
         p.setAttached(PROFILE, profile(p).minus(index));
         LootSounds.decode(p);
         announce(p, LootRoller.Reward.weapon(weapon), "엔그램 해독");
+        kim.biryeong.destiny.tutorial.Guide.event(p, kim.biryeong.destiny.tutorial.Guide.Event.ENGRAM_DECODED);
         return null;
     }
 

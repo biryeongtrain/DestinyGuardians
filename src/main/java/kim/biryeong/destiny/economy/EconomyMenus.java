@@ -134,7 +134,11 @@ public final class EconomyMenus {
             var m = new Menu(id, p, screen, new SimpleContainer(ROWS * 9));
             holder[0] = m; return m;
         }, screen.title(null)));
-        if (holder[0] != null) { OPEN.put(p.getUUID(), holder[0]); holder[0].redraw(); holder[0].sendAllDataToRemote(); }
+        if (holder[0] != null) {
+            OPEN.put(p.getUUID(), holder[0]); holder[0].redraw(); holder[0].sendAllDataToRemote();
+            if (screen instanceof AuctionScreen) kim.biryeong.destiny.tutorial.Guide.event(p, kim.biryeong.destiny.tutorial.Guide.Event.AUCTION_OPENED);
+            else if (screen instanceof SellScreen) kim.biryeong.destiny.tutorial.Guide.event(p, kim.biryeong.destiny.tutorial.Guide.Event.SELL_OPENED);
+        }
     }
 
     /** Entry points for the gear screen keys (W auction, S vault, A sell the hovered weapon). */
@@ -637,6 +641,7 @@ public final class EconomyMenus {
             Economy.commit(m.owner);
             refreshAll();
             say(m, payload.name() + " 등록 · " + glimmer(price) + " 미광체", true);
+            kim.biryeong.destiny.tutorial.Guide.event(m.owner, kim.biryeong.destiny.tutorial.Guide.Event.LISTED);
             open(m.owner, new MyListingsScreen());
         }
     }
