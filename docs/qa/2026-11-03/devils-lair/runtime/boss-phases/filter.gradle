@@ -1,8 +1,0 @@
-allprojects {
-    tasks.withType(JavaExec).configureEach {
-        if (name == 'runGameTest') {
-            systemProperty 'fabric-api.gametest.filter', 'destiny-test:devils_walker_game_tests*'
-            systemProperty 'fabric-api.gametest.report-file', '/tmp/devils-walker-report.xml'
-        }
-    }
-}
