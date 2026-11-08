@@ -289,6 +289,8 @@ def stage2():
             for dy in (2, 3, 1):
                 if world[y + dy, zz, xx] == 0: world[y + dy, zz, xx] = light; lit += 1; break
     print('light blocks', lit)
+    from nessus_finish import apply as finish_nessus
+    art = finish_nessus(world, states, WORK, path, markers)
     # 4. Persist world (compressed), markers, beats, NBT.
     sx, sy, sz = world.shape[2], world.shape[0], world.shape[1]
     (OUT / 'zones').mkdir(parents=True, exist_ok=True); NBT_OUT.mkdir(parents=True, exist_ok=True)
@@ -303,7 +305,7 @@ def stage2():
         colorPolicy='native baked PNG + BakedColorUV; linear RGB average; scene-default albedo retained with uncertainty; forward/decal and clipped-out layers excluded',
         geometryPolicy='one assembled source; no per-bubble rectangular column ownership; no seam ramp or large boss pad',
         routeModel='ordered 3D landmarks; true slab floor rise <=1.25, drop <=3; rods/walls not support; start-connected floor', landmarks=landmark_info,
-        routeCells=len(path), status='baked source reviewed in Blender; native QA required'), ensure_ascii=False, indent=1))
+        routeCells=len(path), art=art, status='authored Nessus finish generated; verification recorded separately in docs/qa'), ensure_ascii=False, indent=1))
     np.save(WORK/'final.npy',world); np.save(WORK/'route.npy',np.array(path))
     (WORK/'final-palette.json').write_text(json.dumps(states))
     sys.path.insert(0, str(ROOT / 'scripts/maps'))
@@ -334,7 +336,7 @@ def export_nbt(world, states, target, Z, data_version=5023):
                                           Z.tag(10, 'block_states', Z.compound(entries))]))
     bounds = Z.compound([Z.tag(11, 'min', Z.ints(list(ORIGIN))), Z.tag(11, 'max', Z.ints([ORIGIN[0] + sx - 1, ORIGIN[1] + sy - 1, ORIGIN[2] + sz - 1]))])
     root = Z.compound([Z.tag(3, 'data_version', Z.i32(data_version)), Z.tag(9, 'chunks', Z.items(10, chunks)), Z.tag(10, 'bounds', bounds),
-                       Z.tag(8, 'biome', Z.string('minecraft:the_void')), Z.tag(9, 'block_entities', Z.items(10, [])), Z.tag(9, 'regions', Z.items(10, [])),
+                       Z.tag(8, 'biome', Z.string('destiny:nessus')), Z.tag(9, 'block_entities', Z.items(10, [])), Z.tag(9, 'regions', Z.items(10, [])),
                        Z.tag(10, 'data', Z.compound([]))])
     target.write_bytes(gzip.compress(Z.tag(10, '', root), compresslevel=9, mtime=0))
     print('nbt', target.stat().st_size, 'sections', len(chunks), 'blocks', count, 'palette', len(states))

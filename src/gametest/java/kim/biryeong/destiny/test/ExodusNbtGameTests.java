@@ -1,7 +1,7 @@
 package kim.biryeong.destiny.test;
 
 import kim.biryeong.destiny.activity.strike.StrikeInstances;
-import kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator;
+import kim.biryeong.destiny.strike.exodus.ExodusTemplateGenerator;
 import kim.biryeong.destiny.strike.exodus.ExodusMaps;
 import kim.biryeong.destiny.strike.exodus.ExodusPlan;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
@@ -21,7 +21,7 @@ public final class ExodusNbtGameTests {
         var server = h.getLevel().getServer();
         var preload = ExodusMaps.maps().preloadAsync(server);
         var instances = new StrikeInstances(server, "exodus_crash", 1, 1, 3,
-                () -> new DevilsTemplateGenerator(server, ExodusMaps.maps().nbtTemplates()));
+                () -> new ExodusTemplateGenerator(server, ExodusMaps.maps().nbtTemplates()));
         var instance = new StrikeInstances.Instance[1];
         var build = new kim.biryeong.destiny.campaign.RisingServices.ZoneBuild[1];
         long deadline = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(120);
@@ -61,6 +61,7 @@ public final class ExodusNbtGameTests {
             for (var seat : List.of("WORLD.IN", "WORLD.IN.0", "WORLD.IN.1", "WORLD.IN.2")) {
                 var p = ExodusMaps.anchor(seat).pos();
                 var feet = BlockPos.containing(p);
+                check(h, level.getBiome(feet).is(ExodusTemplateGenerator.BIOME), seat + " Nessus atmosphere");
                 check(h, !level.getBlockState(feet.below()).getCollisionShape(level, feet.below()).isEmpty(), seat + " floor");
                 check(h, level.noCollision(new net.minecraft.world.phys.AABB(p.x - .3, p.y + 1.0, p.z - .3, p.x + .3, p.y + 1.8, p.z + .3)), seat + " clear");
             }

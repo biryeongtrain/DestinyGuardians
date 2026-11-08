@@ -23,7 +23,12 @@ import java.util.concurrent.CompletableFuture;
 public class NbtTemplateChunkGenerator extends TransientChunkGenerator {
     private final List<MapTemplate> templates;
     public NbtTemplateChunkGenerator(MinecraftServer server, List<MapTemplate> templates) {
-        super(new FixedBiomeSource(server.registryAccess().getOrThrow(Biomes.THE_VOID)));
+        this(server, templates, Biomes.THE_VOID);
+    }
+    /** Activity-owned atmosphere; the default remains the featureless void biome. */
+    public NbtTemplateChunkGenerator(MinecraftServer server, List<MapTemplate> templates,
+            net.minecraft.resources.ResourceKey<Biome> biome) {
+        super(new FixedBiomeSource(server.registryAccess().getOrThrow(biome)));
         this.templates = List.copyOf(templates);
     }
     public List<MapTemplate> templates() { return templates; }

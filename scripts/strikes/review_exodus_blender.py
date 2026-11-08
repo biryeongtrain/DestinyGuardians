@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / 'scripts/maps'))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import baked_source
 import section_nbt
+import vanilla_review
 spec=importlib.util.spec_from_file_location('source_sampler', ROOT/'scripts/campaign/rising_maps.py')
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 from exodus_palette import EXTRA_PALETTE
@@ -66,7 +67,7 @@ def build_source(g, eye, target, radius):
     return count
 
 def build_voxels(root, eye, target, radius):
-    """Display the actual NBT, using block colors and exposed voxel faces.
+    """Display the actual NBT with installed vanilla textures and block lighting.
 
     Slab top/bottom heights are retained; rods/walls/stairs are conservative
     cube proxies here. Minecraft remains authoritative for their exact shapes.
@@ -87,13 +88,21 @@ def build_voxels(root, eye, target, radius):
         cells=np.array(ids,np.uint16)[index]
         grid[l[1]-a[1]:h[1]-a[1],l[2]-a[2]:h[2]-a[2],l[0]-a[0]:h[0]-a[0]]=cells[l[1]-p[1]:h[1]-p[1],l[2]-p[2]:h[2]-p[2],l[0]-p[0]:h[0]-p[0]]
     invisible=[i for i,s in enumerate(states)if s.startswith('minecraft:light[')]
-    grid[np.isin(grid,invisible)]=0;solid=grid!=0;verts=[];faces=[];mids=[]
+    crosses=[i for i,s in enumerate(states)if any(n in s for n in ('crimson_roots','dead_bush'))]
+    visible=~np.isin(grid,[0]+invisible+crosses);opaque=visible&~np.isin(grid,[i for i,s in enumerate(states)if 'leaves' in s or 'bars' in s or 'chain' in s])
+    light=vanilla_review.light_levels(grid,states,opaque)
+    solid=visible;verts=[];faces=[];mids=[];lighting=[]
+    matkeys=[];matlookup={}
+    def mid(pid,face):
+        key=(int(pid),face)
+        if key not in matlookup:matlookup[key]=len(matkeys);matkeys.append(key)
+        return matlookup[key]
     # (array y,z,x offset, quad source xyz offsets)
     defs=[((0,0,1),[(1,0,0),(1,1,0),(1,1,1),(1,0,1)]),((0,0,-1),[(0,1,0),(0,0,0),(0,0,1),(0,1,1)]),
           ((0,-1,0),[(0,1,0),(1,1,0),(1,1,1),(0,1,1)]),((0,1,0),[(1,0,0),(0,0,0),(0,0,1),(1,0,1)]),
           ((1,0,0),[(0,0,1),(1,0,1),(1,1,1),(0,1,1)]),((-1,0,0),[(0,1,0),(1,1,0),(1,0,0),(0,0,0)])]
     bottom=np.array(['_slab['in s and 'type=bottom'in s for s in states]);top=np.array(['_slab['in s and 'type=top'in s for s in states])
-    for delta,quad in defs:
+    for (delta,quad),face,shade in zip(defs,['east','west','north','south','up','down'],[.65,.65,.8,.8,1,.5]):
         neighbour=np.roll(solid,tuple(-v for v in delta),(0,1,2));mask=solid&~neighbour
         yy,zz,xx=np.nonzero(mask);pid=grid[yy,zz,xx]
         points=np.stack([xx+a[0]+505,679-(zz+a[2]),yy+a[1]-133],1).astype(float)
@@ -101,11 +110,28 @@ def build_voxels(root, eye, target, radius):
         for j,offset in enumerate(quad):
             if offset[2]:v[bottom[pid],j,2]-=.5
             else:v[top[pid],j,2]+=.5
-        start=len(verts);verts.extend(v.reshape(-1,3).tolist());faces.extend((np.arange(len(v)*4).reshape(-1,4)+start).tolist());mids.extend(pid.tolist())
+        nl=light[np.clip(yy+delta[0],0,grid.shape[0]-1),np.clip(zz+delta[1],0,grid.shape[1]-1),np.clip(xx+delta[2],0,grid.shape[2]-1)]
+        value=(.055+.945*(nl.astype(float)/15)**1.35)*shade
+        emission=np.array([any(t in s for t in ('sea_lantern','froglight'))for s in states])
+        value[emission[pid]]=1
+        start=len(verts);verts.extend(v.reshape(-1,3).tolist());faces.extend((np.arange(len(v)*4).reshape(-1,4)+start).tolist())
+        mids.extend([mid(i,face)for i in pid]);lighting.extend(value.tolist())
+    yy,zz,xx=np.nonzero(np.isin(grid,crosses))
+    for y,z,x in zip(yy,zz,xx):
+        point=np.array([x+a[0]+505,679-(z+a[2]),y+a[1]-133],float)
+        for quad in [[(0,0,0),(1,1,0),(1,1,1),(0,0,1)],[(0,1,0),(1,0,0),(1,0,1),(0,1,1)]]:
+            start=len(verts);verts.extend((point+np.array(quad)).tolist());faces.append(list(range(start,start+4)))
+            mids.append(mid(grid[y,z,x],'up'));lighting.append(.055+.945*(float(light[y,z,x])/15)**1.35)
     mesh=bpy.data.meshes.new('NBT exposed block faces');mesh.from_pydata(verts,[],faces)
-    for state in states:
-        mat=bpy.data.materials.new(state);mat.use_nodes=True;nodes=mat.node_tree.nodes;nodes.clear();out=nodes.new('ShaderNodeOutputMaterial');emit=nodes.new('ShaderNodeEmission')
-        rgb=np.clip(m.state_rgb(state),0,1);emit.inputs['Color'].default_value=(*baked_source.srgb_to_linear(rgb),1);mat.node_tree.links.new(emit.outputs[0],out.inputs[0]);mesh.materials.append(mat)
+    layer=mesh.uv_layers.new(name='Vanilla block UV')
+    layer.data.foreach_set('uv',np.tile([[0,0],[1,0],[1,1],[0,1]],(len(faces),1)).reshape(-1))
+    color=mesh.color_attributes.new(name='BlockLight',type='FLOAT_COLOR',domain='CORNER')
+    brightness=np.repeat(np.array(lighting,dtype=np.float32),4)
+    colors=np.ones((len(brightness),4),np.float32);colors[:,:3]=brightness[:,None]
+    color.data.foreach_set('color',colors.reshape(-1))
+    for pid,face in matkeys:
+        state=states[pid]
+        mesh.materials.append(vanilla_review.blender_material(state,face,m.state_rgb(state)))
     mesh.polygons.foreach_set('material_index',mids);obj=bpy.data.objects.new('Actual exported NBT',mesh);bpy.context.scene.collection.objects.link(obj)
     return len(faces)*2
 
@@ -119,7 +145,7 @@ def main():
         views=[(v['name'],v['eye'],v['target'],v.get('radius',100))for v in json.loads(args.cameras.read_text())]
     if args.route:
         route=np.load(args.route)
-        def source(c):return (float(c[0]+505.5),float(679-c[2]-.5),float(c[1]-133+1.62))
+        def source(c):return (float(c[0]+505.5),float(679-c[2]+.5),float(c[1]-133+1.62))
         views=[(f'route_{i}',source(route[i]),source(route[min(i+10,len(route)-1)]),100)for i in args.route_indices]
     for name,eye,target,radius in views:
         if args.view and name not in args.view:continue
@@ -129,7 +155,8 @@ def main():
         scene.render.resolution_x=1100;scene.render.resolution_y=720;scene.render.resolution_percentage=100
         scene.render.image_settings.file_format='PNG';scene.view_settings.view_transform='Standard'
         scene.world=bpy.data.worlds.new('Review background');scene.world.use_nodes=True
-        bg=next(n for n in scene.world.node_tree.nodes if n.type=='BACKGROUND');bg.inputs['Color'].default_value=(.08,.1,.14,1);bg.inputs['Strength'].default_value=.3
+        sky=[111,174,170] if nbt and nbt.get('biome')=='destiny:nessus' else [123,164,255]
+        bg=next(n for n in scene.world.node_tree.nodes if n.type=='BACKGROUND');bg.inputs['Color'].default_value=(*baked_source.srgb_to_linear(np.array(sky)/255),1);bg.inputs['Strength'].default_value=1 if args.nbt else .3
         cam=bpy.data.objects.new('Review camera',bpy.data.cameras.new('Review camera'));scene.collection.objects.link(cam);scene.camera=cam
         cam.location=eye;cam.rotation_euler=(Vector(target)-cam.location).to_track_quat('-Z','Y').to_euler();cam.data.lens=22;cam.data.clip_start=.05;cam.data.clip_end=2000
         probes=[];dg=bpy.context.evaluated_depsgraph_get()
@@ -142,11 +169,12 @@ def main():
         print('BAKED_VIEW',name,'triangles',count,flush=True)
         if not args.inspect_only:bpy.ops.render.render(write_still=True)
         if args.save:
+            bpy.ops.file.pack_all()
             for screen in bpy.data.screens:
                 for area in screen.areas:
                     if area.type=='VIEW_3D':
                         area.spaces.active.region_3d.view_perspective='CAMERA';area.spaces.active.shading.type='MATERIAL'
             bpy.ops.wm.save_as_mainfile(filepath=str(args.output/(name+'.blend')))
-        (args.output/(name+'.json')).write_text(json.dumps(dict(eye=eye,target=target,triangles=count,probes=probes,source=str(args.nbt if args.nbt else g.path),review='Blender Cycles CPU; NBT block-color/shape proxies'if args.nbt else 'Blender Cycles CPU, actual unlit baked PNG + UV; not in-game'),indent=1))
+        (args.output/(name+'.json')).write_text(json.dumps(dict(eye=eye,target=target,triangles=count,probes=probes,source=str(args.nbt if args.nbt else g.path),review='Blender Cycles CPU; installed vanilla textures, Nessus foliage tint, approximate vanilla block light; rods/walls/stairs proxies; not native client'if args.nbt else 'Blender Cycles CPU, actual unlit baked PNG + UV; not in-game'),indent=1))
 
 if __name__=='__main__':main()

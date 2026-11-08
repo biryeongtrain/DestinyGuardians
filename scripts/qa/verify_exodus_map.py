@@ -20,11 +20,12 @@ def main():
         count+=int(np.count_nonzero(actual));section_count+=1
     assert count==int(np.count_nonzero(world))
     route=np.load(e.WORK/'route.npy');plan=json.loads((e.OUT/'beats.json').read_text())
-    barrier=states.index('minecraft:red_stained_glass');light=states.index('minecraft:light[level=14,waterlogged=false]')
-    def clear(v):return np.isin(v,[0,light,barrier]).all()
+    barrier=states.index('minecraft:red_stained_glass');lights=[i for i,s in enumerate(states)if s.startswith('minecraft:light[')]
+    passable=[0,barrier]+lights
+    def clear(v):return np.isin(v,passable).all()
     m=e.sampler()
     for i,(x,y,z)in enumerate(route):
-        assert world[y-1,z,x]not in (0,light,barrier),('floor',i)
+        assert world[y-1,z,x]not in passable,('floor',i)
         floor_state=states[int(world[y-1,z,x])].split('[')[0]
         assert not floor_state.endswith('_wall') and floor_state not in ('minecraft:iron_bars','minecraft:iron_chain'),('decorative support',i)
         assert clear(world[y:y+2,z,x]),('headroom',i)
@@ -36,7 +37,7 @@ def main():
     marker_doc=json.loads((e.OUT/'zones/markers.json').read_text())['zones']['world']['markers']
     for marker in marker_doc:
         if marker['id'].endswith('GEN'):continue
-        x,y,z=map(int,marker['pos']);assert world[y-1,z,x]not in (0,light,barrier),('marker floor',marker['id'])
+        x,y,z=map(int,marker['pos']);assert world[y-1,z,x]not in passable,('marker floor',marker['id'])
         assert clear(world[y:y+2,z,x]),('marker clearance',marker['id'])
     for beat in plan['beats']:
         if isinstance(beat.get('gate'),dict):

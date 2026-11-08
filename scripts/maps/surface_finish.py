@@ -1,0 +1,39 @@
+"""Shared helpers for deterministic, collision-preserving template art passes."""
+import numpy as np
+
+
+def palette_id(states, state):
+    state = state if ':' in state else 'minecraft:' + state
+    if state not in states:
+        states.append(state)
+    return states.index(state)
+
+
+def replace_shape(state, full, slab=None):
+    """Keep the original half/double slab and all its block-state properties."""
+    if '_slab[' in state:
+        if slab is None:
+            return state
+        return 'minecraft:' + slab + '[' + state.split('[', 1)[1]
+    if '[' in state:  # rails, walls and chains have independent collision shapes
+        return state
+    return 'minecraft:' + full
+
+
+def patch_field(x, z):
+    """Broad continuous patches, rather than independent salt-and-pepper voxels."""
+    return (np.sin(x * .047 + np.sin(z * .021) * 1.4)
+            + .65 * np.sin(z * .071 + x * .012)
+            + .3 * np.sin(x * .13 - z * .08)) / 1.95
+
+
+def protected_columns(shape, route, markers, route_radius=4, marker_radius=6):
+    protected = np.zeros((shape[1], shape[2]), bool)
+    points = [(int(x), int(z), route_radius) for x, _, z in route]
+    points += [(int(m['pos'][0]), int(m['pos'][2]), marker_radius) for m in markers]
+    for x, z, radius in points:
+        a, b = max(0, x-radius), min(shape[2], x+radius+1)
+        c, d = max(0, z-radius), min(shape[1], z+radius+1)
+        zz, xx = np.ogrid[c:d, a:b]
+        protected[c:d, a:b] |= (xx-x)**2 + (zz-z)**2 <= radius**2
+    return protected

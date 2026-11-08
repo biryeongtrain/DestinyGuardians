@@ -21,7 +21,7 @@ public final class ExodusCrash {
     private static final StrikeHost<ExodusSession> HOST = new StrikeHost<>("ExodusCrash", "exodus_return",
             ExodusPlan.MIN_PLAYERS, ExodusPlan.PLAYERS,
             s -> new StrikeInstances(s, "exodus_crash", 2, ExodusPlan.MIN_PLAYERS, ExodusPlan.PLAYERS,
-                    () -> new kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator(s, ExodusMaps.maps().nbtTemplates())),
+                    () -> new ExodusTemplateGenerator(s, ExodusMaps.maps().nbtTemplates())),
             s -> ExodusMaps.maps().preloadAsync(s).thenRun(ExodusPlan::data),
             ExodusSession::new, kim.biryeong.destiny.sound.ActivityMusic::devilsEnded);
 
