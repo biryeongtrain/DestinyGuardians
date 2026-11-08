@@ -83,4 +83,32 @@ class PackCacheW340Test {
         byte[] bytes=Files.readAllBytes(p);Files.write(p,Arrays.copyOf(bytes,bytes.length/2));
         assertThrows(java.io.IOException.class,()->ProfileArmCache.read(p));
     }
+    private Path jar(String name, Map<String,String> entries) throws Exception {
+        Path p=dir.resolve(name);
+        try(var out=new ZipOutputStream(Files.newOutputStream(p))){
+            for(var e:new TreeMap<>(entries).entrySet()){var z=new ZipEntry(e.getKey());z.setTime(0);out.putNextEntry(z);out.write(e.getValue().getBytes());out.closeEntry();}
+        }
+        return p;
+    }
+    @Test void foreignModCodeChangesDoNotInvalidateButAssetsDo() throws Exception {
+        var a=jar("a.jar",Map.of("assets/x/t.png","1","x/Code.class","code-1"));
+        var b=jar("b.jar",Map.of("assets/x/t.png","1","x/Code.class","code-2-longer"));
+        var c=jar("c.jar",Map.of("assets/x/t.png","2","x/Code.class","code-1"));
+        String ka=new PackCacheStore.Inputs().assetsOnly("mod/other/0",a,"assets/").finish();
+        assertEquals(ka,new PackCacheStore.Inputs().assetsOnly("mod/other/0",b,"assets/").finish());
+        assertNotEquals(ka,new PackCacheStore.Inputs().assetsOnly("mod/other/0",c,"assets/").finish());
+        // The Destiny mod itself still hashes everything, code included.
+        assertNotEquals(new PackCacheStore.Inputs().path("mod/destiny/0",a).finish(),new PackCacheStore.Inputs().path("mod/destiny/0",b).finish());
+    }
+    @Test void missReportNamesTheChangedGroup() throws Exception {
+        var a=jar("a.jar",Map.of("assets/x/t.png","1"));var c=jar("c.jar",Map.of("assets/x/t.png","2"));
+        var pack=zip("generated.zip","{x}",0);var profile=dir.resolve("p.gz");Files.writeString(profile,"p");
+        var first=new PackCacheStore.Inputs().assetsOnly("mod/one/0",a,"assets/").assetsOnly("mod/two/0",a,"assets/").key();
+        var store=new PackCacheStore(dir.resolve("cache"));
+        assertEquals(List.of("no previous cache"),store.changedGroups(first.groups()));
+        store.write(first.value(),first.groups(),pack,profile,PackCacheStore.digest(pack,"SHA-1"));
+        var second=new PackCacheStore.Inputs().assetsOnly("mod/one/0",a,"assets/").assetsOnly("mod/two/0",c,"assets/").key();
+        assertEquals(List.of("mod/two"),store.changedGroups(second.groups()));
+        assertEquals(List.of(),store.changedGroups(first.groups()));
+    }
 }
