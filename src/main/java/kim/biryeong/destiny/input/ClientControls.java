@@ -65,7 +65,7 @@ public final class ClientControls {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 var session = SESSIONS.get(player.getUUID());
                 boolean blocked = player.hasDisconnected() || !player.connection.hasClientLoaded()
-                        || kim.biryeong.destiny.strike.devils.DevilsLair.participating(player)
+                        || kim.biryeong.destiny.activity.strike.Strikes.participating(player)
                         || kim.biryeong.destiny.hud.CombatHud.cinematic.test(player);
                 session.notices.drain(blocked).forEach(player::sendSystemMessage);
             }

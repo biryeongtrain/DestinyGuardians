@@ -19,7 +19,7 @@ import net.minecraft.world.phys.*;
 import java.util.*;
 
 /** Strike-owned enemy, using authored fixed-three tuning. No vanilla attack goals or loot. */
-public final class DevilsMob extends Monster implements PolymerEntity, kim.biryeong.destiny.loot.LootTagged {
+public final class DevilsMob extends Monster implements PolymerEntity, kim.biryeong.destiny.loot.LootTagged, kim.biryeong.destiny.combat.StrikeCombatant {
     final DevilsPlan.Kind kind;
     DevilsActors runtime;
     DevilsDirector.ActorRef ref;
@@ -81,10 +81,35 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     public DevilsDirector.ActorRef reference() { return ref; }
     public boolean armorOpen() { return armorOpen; }
     public boolean walkerPart() { return root != null; }
-    public DevilsMob damageOwner() { return root == null ? this : root; }
+    @Override public DevilsMob damageOwner() { return root == null ? this : root; }
+    @Override public java.util.OptionalDouble damagePool() {
+        var state = walkerState();
+        return state == null ? java.util.OptionalDouble.empty() : java.util.OptionalDouble.of(state.damagePool());
+    }
+    @Override public kim.biryeong.destiny.combat.CombatantRank rank() {
+        return switch (kind) {
+            case WALKER, SEPIKS -> kim.biryeong.destiny.combat.CombatantRank.BOSS;
+            case BRIG -> kim.biryeong.destiny.combat.CombatantRank.MINIBOSS;
+            case CAPTAIN, KNIGHT, WIZARD, SERVITOR -> kim.biryeong.destiny.combat.CombatantRank.ELITE;
+            default -> kim.biryeong.destiny.combat.CombatantRank.RANK_AND_FILE;
+        };
+    }
+    @Override public kim.biryeong.destiny.combat.CombatantShields.Type shieldType() {
+        return kind == DevilsPlan.Kind.WIZARD ? kim.biryeong.destiny.combat.CombatantShields.Type.SOLAR
+                : kim.biryeong.destiny.combat.CombatantShields.Type.ARC;
+    }
+    @Override public kim.biryeong.destiny.sound.EnemyHeadburstSounds.Family headburstFamily() {
+        if (walkerPart()) return null;
+        return switch (kind) {
+            case DREG -> kim.biryeong.destiny.sound.EnemyHeadburstSounds.Family.FALLEN_DREG;
+            case VANDAL, MARAUDER -> kim.biryeong.destiny.sound.EnemyHeadburstSounds.Family.FALLEN_VANDAL;
+            case CAPTAIN -> kim.biryeong.destiny.sound.EnemyHeadburstSounds.Family.FALLEN_CAPTAIN;
+            default -> null;
+        };
+    }
     public DevilsWalkerState walkerState() { return root == null ? walker : root.walker; }
     /** WeaponPrecision must call this before its generic humanoid/head branch. No damage multiplication here. */
-    public boolean precisionAt(Vec3 point) {
+    @Override public boolean precisionAt(Vec3 point) {
         if (root != null) return region == DevilsWalkerState.Region.CORE && root.walker.phase() == DevilsWalkerState.Phase.EXPOSED;
         if (kind == DevilsPlan.Kind.WALKER) return false;
         if (kind == DevilsPlan.Kind.BRIG) return armorOpen && point.y > getY()+getBbHeight()*.5 && point.y < getY()+getBbHeight()*.78;

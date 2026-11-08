@@ -2,7 +2,6 @@ package kim.biryeong.destiny.sound;
 
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.campaign.fallen.FallenMob;
-import kim.biryeong.destiny.strike.devils.DevilsMob;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
@@ -40,15 +39,7 @@ public final class EnemyHeadburstSounds {
             case CAPTAIN -> Family.FALLEN_CAPTAIN;
             default -> null;
         };
-        if (target instanceof DevilsMob mob) {
-            if (mob.walkerPart()) return null;
-            return switch (mob.kind()) {
-                case DREG -> Family.FALLEN_DREG;
-                case VANDAL, MARAUDER -> Family.FALLEN_VANDAL;
-                case CAPTAIN -> Family.FALLEN_CAPTAIN;
-                default -> null;
-            };
-        }
+        if (target instanceof kim.biryeong.destiny.combat.StrikeCombatant combatant) return combatant.headburstFamily();
         return target.getType().builtInRegistryHolder().is(CABAL) ? Family.CABAL : null;
     }
 

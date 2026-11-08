@@ -51,11 +51,11 @@ public final class Combat {
 
     /** Multipart hitboxes keep region dispatch, but perks/rewards refer to one living actor. */
     public static LivingEntity damageOwner(LivingEntity target) {
-        return target instanceof kim.biryeong.destiny.strike.devils.DevilsMob mob ? mob.damageOwner() : target;
+        return target instanceof StrikeCombatant combatant ? combatant.damageOwner() : target;
     }
     public static float damagePool(LivingEntity target) {
-        if(target instanceof kim.biryeong.destiny.strike.devils.DevilsMob mob && mob.walkerState()!=null)
-            return (float)mob.walkerState().damagePool();
+        if(target instanceof StrikeCombatant combatant && combatant.damagePool().isPresent())
+            return (float)combatant.damagePool().getAsDouble();
         return target.getHealth()+target.getAbsorptionAmount();
     }
 
@@ -105,7 +105,7 @@ public final class Combat {
                 || source.isRemoved() || target.isRemoved()) {
             return false;
         }
-        if (!kim.biryeong.destiny.strike.devils.DevilsLair.allows(source)) return false;
+        if (!kim.biryeong.destiny.activity.strike.Strikes.allows(source)) return false;
         if (!kim.biryeong.destiny.world.TowerSpawnWorld.mayAttack(level, target)) return false;
         if (target instanceof ServerPlayer player
                 && !kim.biryeong.destiny.crucible.CrucibleRuntime.canFight(source, player)) return false;

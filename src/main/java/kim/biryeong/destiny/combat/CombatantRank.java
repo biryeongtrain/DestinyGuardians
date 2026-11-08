@@ -25,12 +25,7 @@ public enum CombatantRank {
         if (tags.contains("destiny_vehicle")) return VEHICLE;
         if (tags.contains("destiny_miniboss")) return MINIBOSS;
         if (tags.contains("destiny_elite")) return ELITE;
-        if (target instanceof kim.biryeong.destiny.strike.devils.DevilsMob mob) return switch (mob.kind()) {
-            case WALKER, SEPIKS -> BOSS;
-            case BRIG -> MINIBOSS;
-            case CAPTAIN, KNIGHT, WIZARD, SERVITOR -> ELITE;
-            default -> RANK_AND_FILE;
-        };
+        if (target instanceof StrikeCombatant combatant) return combatant.rank();
         if (target instanceof kim.biryeong.destiny.campaign.fallen.FallenMob
                 && target.getAttributeBaseValue(Attributes.MAX_ABSORPTION) > 0) return ELITE;
         return target instanceof Mob ? RANK_AND_FILE : null;

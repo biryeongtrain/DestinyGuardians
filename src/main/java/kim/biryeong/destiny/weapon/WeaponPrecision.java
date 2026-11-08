@@ -18,7 +18,7 @@ public final class WeaponPrecision {
     /** Hitscan classifies the same historical body used for contact, without moving the live target. */
     public static boolean critical(LivingEntity target, Vec3 from, Vec3 reportedHit, double multiplier,
                                    net.minecraft.world.phys.AABB box) {
-        if (target instanceof kim.biryeong.destiny.strike.devils.DevilsMob mob) {
+        if (target instanceof kim.biryeong.destiny.combat.StrikeCombatant mob) {
             if (multiplier <= 1 || target.getAbsorptionAmount() > 0 || box.contains(from)) return false;
             Vec3 direction = reportedHit.subtract(from);
             if (direction.lengthSqr() < 1e-10) return false;

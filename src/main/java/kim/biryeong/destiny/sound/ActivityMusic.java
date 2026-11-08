@@ -84,7 +84,7 @@ public final class ActivityMusic {
             // Native respawn replaces ServerPlayer, including the entity sound anchor.
             if (old != null && old.player != player) { stop(old); LISTENERS.remove(player.getUUID()); }
             var listener = LISTENERS.computeIfAbsent(player.getUUID(), id -> new Listener(player));
-            var desired = kim.biryeong.destiny.strike.devils.DevilsLair.briefing(player)
+            var desired = kim.biryeong.destiny.activity.strike.Strikes.briefing(player)
                     ? MusicSequence.Scene.DEVILS_DESCENT
                     : scene(TowerSpawnWorld.isTower(player.level()), CrucibleRuntime.participating(player), phase, Tutorial.active(player));
             boolean ready = !player.hasDisconnected() && player.connection.hasClientLoaded() && MusicPacks.ready(player);

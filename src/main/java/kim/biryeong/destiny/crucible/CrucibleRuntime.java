@@ -228,7 +228,7 @@ public final class CrucibleRuntime {
     }
 
     public static boolean join(ServerPlayer player) {
-        if (kim.biryeong.destiny.strike.devils.DevilsLair.participating(player)) {
+        if (kim.biryeong.destiny.activity.strike.Strikes.participating(player)) {
             player.sendSystemMessage(Component.literal("공격전에서 나간 뒤 참가하세요.")); return false;
         }
         if (participating(player)) return true;

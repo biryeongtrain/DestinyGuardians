@@ -3,7 +3,7 @@ package kim.biryeong.destiny.activity;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import kim.biryeong.destiny.campaign.RisingCampaign;
 import kim.biryeong.destiny.crucible.CrucibleRuntime;
-import kim.biryeong.destiny.strike.devils.DevilsLair;
+import kim.biryeong.destiny.activity.strike.Strikes;
 import kim.biryeong.destiny.tutorial.Tutorial;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -22,11 +22,16 @@ import java.util.function.Function;
 public final class ActivityExit {
     private record Adapter(String id, String name, Function<ServerPlayer, Object> token,
                            BiPredicate<ServerPlayer, Object> leave) { }
-    private static final List<Adapter> ADAPTERS = List.of(
-            new Adapter("devils_lair", "악마의 소굴", DevilsLair::participationToken, DevilsLair::leave),
-            new Adapter("guardian_rises", "눈을 뜨세요, 수호자", RisingCampaign::participationToken, RisingCampaign::leave),
-            new Adapter("crucible_control", "시련의 장 · 점령", CrucibleRuntime::participationToken, CrucibleRuntime::leave),
-            new Adapter("tutorial", "수호자 훈련", Tutorial::participationToken, Tutorial::leave));
+    /** Strikes first (read when asked, so a strike registered later is still seen), then the single-player activities. */
+    private static List<Adapter> adapters() {
+        var all = new ArrayList<Adapter>();
+        for (var strike : Strikes.all())
+            all.add(new Adapter(strike.info().id(), strike.info().name(), strike::participationToken, strike::leave));
+        all.add(new Adapter("guardian_rises", "눈을 뜨세요, 수호자", RisingCampaign::participationToken, RisingCampaign::leave));
+        all.add(new Adapter("crucible_control", "시련의 장 · 점령", CrucibleRuntime::participationToken, CrucibleRuntime::leave));
+        all.add(new Adapter("tutorial", "수호자 훈련", Tutorial::participationToken, Tutorial::leave));
+        return all;
+    }
 
     /** Immutable authority captured when the confirmation opens, never recalculated on confirm. */
     public static final class Ticket {
@@ -69,7 +74,7 @@ public final class ActivityExit {
 
     public static Optional<Ticket> capture(ServerPlayer p) {
         if (p == null || !p.level().getServer().isSameThread() || p.hasDisconnected() || p.isRemoved()) return Optional.empty();
-        for (var adapter : ADAPTERS) {
+        for (var adapter : adapters()) {
             Object token = adapter.token.apply(p);
             if (token != null) return Optional.of(new Ticket(p, adapter, token));
         }

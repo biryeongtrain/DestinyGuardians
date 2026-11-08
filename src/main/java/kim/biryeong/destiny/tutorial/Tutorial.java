@@ -272,7 +272,7 @@ public final class Tutorial {
     }
 
     public static String start(ServerPlayer p) {
-        if (kim.biryeong.destiny.strike.devils.DevilsLair.participating(p)) return "공격전에서 나간 뒤 시작하세요.";
+        if (kim.biryeong.destiny.activity.strike.Strikes.participating(p)) return "공격전에서 나간 뒤 시작하세요.";
         if (RisingMission.enabled()) return RisingCampaign.start(p, false);
         if (!p.level().getServer().isSameThread()) return "서버에서 다시 시도하세요.";
         if (!p.isAlive() || p.isSpectator() || p.hasDisconnected()) return "살아 있는 접속 플레이어만 시작할 수 있습니다.";

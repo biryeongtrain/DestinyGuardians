@@ -3,6 +3,7 @@ package kim.biryeong.destiny.strike.devils;
 import com.mojang.serialization.Codec;
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.ability.AbilityService;
+import kim.biryeong.destiny.activity.strike.StrikeCoordinator;
 import kim.biryeong.destiny.campaign.RisingCampaign;
 import kim.biryeong.destiny.crucible.CrucibleRuntime;
 import kim.biryeong.destiny.down.GuardianDown;
@@ -61,6 +62,23 @@ public final class DevilsLair {
         presentationFactory = Objects.requireNonNull(factory);
     }
     static Presentation presentationFor(DevilsSession session) { return Objects.requireNonNull(presentationFactory.apply(session)); }
+    /** What the rest of the mod sees of this strike. Finder text lives here, next to the strike it describes. */
+    public static final StrikeCoordinator COORDINATOR = new StrikeCoordinator() {
+        private final Info info = new Info("devils_lair", "악마의 소굴", "공격전 · 우주선 발사 기지",
+                "악마의 소굴로 들어가 발사 기지의 몰락자 세력을 약화시키세요.", "fireteam/banner_devils_lair",
+                "fireteam/icon_devils_lair", DevilsPlan.MIN_PLAYERS, DevilsPlan.PLAYERS, 10);
+        @Override public Info info() { return info; }
+        @Override public String check(List<ServerPlayer> fireteam) { return DevilsLair.check(fireteam); }
+        @Override public String start(List<ServerPlayer> fireteam) { return DevilsLair.start(fireteam); }
+        @Override public boolean entered(ServerPlayer p) { return DevilsLair.entered(p); }
+        @Override public boolean participating(ServerPlayer p) { return DevilsLair.participating(p); }
+        @Override public float loadProgress(ServerPlayer p) { return DevilsLair.loadProgress(p); }
+        @Override public Object participationToken(ServerPlayer p) { return DevilsLair.participationToken(p); }
+        @Override public boolean leave(ServerPlayer p, Object expected) { return DevilsLair.leave(p, expected); }
+        @Override public boolean briefing(ServerPlayer p) { return DevilsLair.briefing(p); }
+        @Override public boolean allows(ServerPlayer p) { return DevilsLair.allows(p); }
+        @Override public boolean isLevel(Level level) { return DevilsLair.isLevel(level); }
+    };
     private DevilsLair() { }
 
     public static void init() {

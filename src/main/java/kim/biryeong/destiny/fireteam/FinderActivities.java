@@ -1,7 +1,7 @@
 package kim.biryeong.destiny.fireteam;
 
 import kim.biryeong.destiny.campaign.RisingCampaign;
-import kim.biryeong.destiny.strike.devils.DevilsLair;
+import kim.biryeong.destiny.activity.strike.Strikes;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.List;
@@ -19,15 +19,17 @@ final class FinderActivities {
         ActivityCatalog.category(new ActivityCatalog.Category("campaign", "캠페인",
                 "수호자의 이야기를 따라가는 임무입니다.", "fireteam/mode_story", "fireteam/banner_story", 20));
 
-        ActivityCatalog.activity(new ActivityCatalog.Activity("devils_lair", "strikes", "악마의 소굴", "공격전 · 우주선 발사 기지",
-                "악마의 소굴로 들어가 발사 기지의 몰락자 세력을 약화시키세요.", "fireteam/banner_devils_lair",
-                "fireteam/icon_devils_lair", 1, 3, 10, new ActivityCatalog.Launcher() {
-            @Override public String check(List<ServerPlayer> fireteam) { return DevilsLair.check(fireteam); }
-            @Override public String launch(List<ServerPlayer> fireteam) { return DevilsLair.start(fireteam); }
-            @Override public boolean entered(ServerPlayer p) { return DevilsLair.entered(p); }
-            @Override public boolean participating(ServerPlayer p) { return DevilsLair.participating(p); }
-            @Override public float progress(ServerPlayer p) { return DevilsLair.loadProgress(p); }
-        }));
+        for (var strike : Strikes.all()) {
+            var info = strike.info();
+            ActivityCatalog.activity(new ActivityCatalog.Activity(info.id(), "strikes", info.name(), info.type(), info.description(),
+                    info.banner(), info.icon(), info.minPlayers(), info.maxPlayers(), info.order(), new ActivityCatalog.Launcher() {
+                @Override public String check(List<ServerPlayer> fireteam) { return strike.check(fireteam); }
+                @Override public String launch(List<ServerPlayer> fireteam) { return strike.start(fireteam); }
+                @Override public boolean entered(ServerPlayer p) { return strike.entered(p); }
+                @Override public boolean participating(ServerPlayer p) { return strike.participating(p); }
+                @Override public float progress(ServerPlayer p) { return strike.loadProgress(p); }
+            }));
+        }
 
         // The Guardian Rises mission runs one private instance per Guardian: a one-person fireteam.
         ActivityCatalog.activity(new ActivityCatalog.Activity("guardian_rises", "campaign", "눈을 뜨세요, 수호자", "캠페인 · 떠오르는 수호자",

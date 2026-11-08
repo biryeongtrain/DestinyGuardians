@@ -45,8 +45,7 @@ public final class CombatantShields {
                 default: break;
             }
         }
-        if (target instanceof kim.biryeong.destiny.strike.devils.DevilsMob mob)
-            return mob.kind() == kim.biryeong.destiny.strike.devils.DevilsPlan.Kind.WIZARD ? Type.SOLAR : Type.ARC;
+        if (target instanceof StrikeCombatant combatant) return combatant.shieldType();
         if (target instanceof kim.biryeong.destiny.campaign.fallen.FallenMob
                 && target.getAttributeBaseValue(Attributes.MAX_ABSORPTION) > 0) return Type.ARC;
         return null;

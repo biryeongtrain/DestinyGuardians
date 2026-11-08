@@ -182,7 +182,7 @@ public final class AbilityService {
     /** 입력 동작 처리. 처리했으면 true. */
     public static boolean perform(ServerPlayer player, GuardianAction action) {
         if (kim.biryeong.destiny.down.GuardianDown.active(player)) return false;
-        if (!kim.biryeong.destiny.strike.devils.DevilsLair.allows(player)) return false;
+        if (!kim.biryeong.destiny.activity.strike.Strikes.allows(player)) return false;
         if (!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(player)) return false;
         if (!Guardians.isGuardian(player) || player.isSpectator() || player.isDeadOrDying()) {
             return false;
@@ -212,7 +212,7 @@ public final class AbilityService {
     public static boolean secondary(ServerPlayer player) {
         if(kim.biryeong.destiny.inventory.WeaponScreen.active(player)||player.containerMenu!=player.inventoryMenu
                 ||kim.biryeong.destiny.down.GuardianDown.active(player)
-                ||!kim.biryeong.destiny.strike.devils.DevilsLair.allows(player)
+                ||!kim.biryeong.destiny.activity.strike.Strikes.allows(player)
                 ||!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(player)
                 ||!Guardians.isGuardian(player)||player.isSpectator()||player.isDeadOrDying()||player.hasDisconnected())return false;
         var session=Guardians.runtimeIfPresent(player).map(r->r.superSession).orElse(null);
@@ -222,7 +222,7 @@ public final class AbilityService {
 
     public static Result use(ServerPlayer player, AbilitySlot slot) {
         if (kim.biryeong.destiny.down.GuardianDown.active(player)) return Result.BUSY;
-        if (!kim.biryeong.destiny.strike.devils.DevilsLair.allows(player)) return Result.BUSY;
+        if (!kim.biryeong.destiny.activity.strike.Strikes.allows(player)) return Result.BUSY;
         if (!kim.biryeong.destiny.crucible.CrucibleRuntime.canAct(player)) return Result.BUSY;
         if (player.isDeadOrDying() || player.isSpectator()) return Result.FAILED;
         if (!Guardians.isGuardian(player)) {
