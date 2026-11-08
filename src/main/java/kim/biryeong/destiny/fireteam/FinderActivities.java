@@ -26,6 +26,7 @@ final class FinderActivities {
             @Override public String launch(List<ServerPlayer> fireteam) { return DevilsLair.start(fireteam); }
             @Override public boolean entered(ServerPlayer p) { return DevilsLair.entered(p); }
             @Override public boolean participating(ServerPlayer p) { return DevilsLair.participating(p); }
+            @Override public float progress(ServerPlayer p) { return DevilsLair.loadProgress(p); }
         }));
 
         // The Guardian Rises mission runs one private instance per Guardian: a one-person fireteam.

@@ -27,7 +27,10 @@ class MinorPveBalanceW342Test {
     @Test void directAbilityAndLightSuperMeetTheirTargetPools() {
         for(var kind:new Kind[]{Kind.DREG,Kind.THRALL,Kind.ACOLYTE})
             assertTrue(PveDamageBalance.scale(4,AmmoGeneration.Kind.ABILITY,false)>=kind.health());
-        for(var kind:Kind.values()) if(!kind.boss())
+        // The shield servitor is deliberately twice as sturdy (120): it holds Sepiks's barrier, so one light super hit
+        // no longer removes it. Every other ordinary enemy still falls to a single light super hit.
+        for(var kind:Kind.values()) if(!kind.boss() && kind != Kind.SERVITOR)
             assertTrue(PveDamageBalance.scale(11,AmmoGeneration.Kind.SUPER,false)>=kind.health()+kind.shield(),kind.name());
+        assertEquals(120,Kind.SERVITOR.health());
     }
 }

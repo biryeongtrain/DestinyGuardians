@@ -41,6 +41,11 @@ public final class ActivityCatalog {
         boolean entered(ServerPlayer player);
         /** The player is in this activity (queued, preparing or running). Hides the fireteam's listing. */
         boolean participating(ServerPlayer player);
+        /**
+         * How far along the activity's preparation is for this player, 0..1, for the launch loading screen; negative when
+         * the activity cannot measure it (the screen then shows a time-based estimate). Called every tick while dark.
+         */
+        default float progress(ServerPlayer player) { return -1f; }
     }
 
     private static final Map<String, Category> CATEGORIES = new LinkedHashMap<>();

@@ -50,8 +50,9 @@ class DevilsPlanTest {
         assertEquals(3, PLAYERS);
         assertEquals(8, PACK_SIZE);
         assertEquals(2, SPAWNS_PER_TICK);
-        assertEquals(200, Kind.WALKER.health());
-        assertEquals(550, Kind.SEPIKS.health());
+        assertEquals(1600, Kind.WALKER.health());
+        assertEquals(2200, Kind.SEPIKS.health());
+        assertEquals(120, Kind.SERVITOR.health());
         assertEquals(11, Kind.DREG.health());
     }
 }

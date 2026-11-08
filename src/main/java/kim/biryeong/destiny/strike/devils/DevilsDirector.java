@@ -112,7 +112,9 @@ public final class DevilsDirector implements AutoCloseable {
     private final Set<String> phaseRequired = new LinkedHashSet<>();
     private Speaking speaking;
     private Phase phase = Phase.READY;
-    private long generation = 1, clock, phaseAt, cueSerial;
+    /** Sepiks falls, the reward chest appears, and only then does Zavala speak: a beat of silence reads as an ending. */
+    public static final int COMPLETION_SPEECH_DELAY = 120;
+    private long generation = 1, clock, phaseAt, cueSerial, completionSpeechAt = -1;
     private boolean paused, deviceReady, gateFinished, completionSent;
     private int defeated, defenseDefeated;
 
@@ -152,6 +154,10 @@ public final class DevilsDirector implements AutoCloseable {
         long before = generation;
         tickSpeech();
         if (before != generation || phase == Phase.CLOSED) return;
+        if (completionSpeechAt >= 0 && phase == Phase.COMPLETE && clock >= completionSpeechAt) {
+            completionSpeechAt = -1;
+            speak("80b59f28", null);
+        }
         if (phase == Phase.RF_INTERMISSION1 && gateFinished && phaseAge() >= INTERMISSION_TICKS)
             startPacks(Phase.RF_DEFENSE2, Zone.RF, "defense2", REINFORCEMENT_GAP);
         else if (phase == Phase.RF_INTERMISSION2 && gateFinished && phaseAge() >= INTERMISSION_TICKS)
@@ -400,7 +406,7 @@ public final class DevilsDirector implements AutoCloseable {
         transition(Phase.COMPLETE);
         long completedGeneration = generation;
         host.completed(completedGeneration);
-        if (generation == completedGeneration && phase == Phase.COMPLETE) speak("80b59f28", null);
+        if (generation == completedGeneration && phase == Phase.COMPLETE) completionSpeechAt = clock + COMPLETION_SPEECH_DELAY;
     }
 
     private void speak(String id, Runnable continuation) {
@@ -466,7 +472,7 @@ public final class DevilsDirector implements AutoCloseable {
     }
     private void invalidate(Retirement reason) {
         long old = generation++;
-        speaking = null; speech.clear(); packs.reset(); phaseRequired.clear();
+        speaking = null; speech.clear(); packs.reset(); phaseRequired.clear(); completionSpeechAt = -1;
         spawnBudget.reset();
         deviceReady = gateFinished = false;
         List<ActorRef> retiring = actors.values().stream().filter(a -> a.state == SlotState.LIVE)

@@ -56,6 +56,8 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private State state = State.PREPARING;
     private long createdAt, admittedAt, gatherAt = -1, completeAt = -1;
     private boolean resetPlacement;
+    /** Non-null from admission until the briefing begins. */
+    private DevilsBriefingGate briefingGate;
     private UUID qaStatsTarget;
 
     DevilsSession(MinecraftServer server, DevilsInstances instances, DevilsInstances.Instance instance,
@@ -88,6 +90,17 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
                 speaking = null; director.cueFinished(cue);
             }
         });
+    }
+    /**
+     * 0..1 for the launch loading screen. Map building is the long pole, so it owns most of the range; the remainder is
+     * placement and admission. Never 1: the screen reaches the end only when the client has really loaded.
+     */
+    public float loadProgress() {
+        return switch (state) {
+            case PREPARING -> (float) (build.progress() * .88);
+            case ADMITTING -> .92f;
+            default -> .96f;
+        };
     }
     public UUID id() { return instance.id(); }
     public ServerLevel level() { return instance.level(); }
@@ -137,7 +150,13 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
             if (now - admittedAt > 1200) { stop("입장 확인 시간 초과"); return; }
             for (var p : players()) roster.ready(p.getUUID(), p.level() == level() && ready(p));
             if (!DevilsAdmission.ready(roster.members(), this::member)) return;
-            state = State.RUNNING; instances.running(instance); syncPresence(); director.begin(DevilsAdmission.count(roster.members(), this::member));
+            state = State.RUNNING; instances.running(instance); syncPresence();
+            briefingGate = new DevilsBriefingGate(now);
+        }
+        if (briefingGate != null && state == State.RUNNING
+                && briefingGate.ready(now, players().stream().anyMatch(kim.biryeong.destiny.fireteam.Fireteams::dark))) {
+            briefingGate = null;
+            director.begin(DevilsAdmission.count(roster.members(), this::member));
         }
         for (var p : players()) {
             if (joining.contains(p.getUUID())) {
@@ -183,7 +202,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         guides(now);
         renderFailure(now);
         if (now % 4 == 0) for (var p : players()) if (p.level() == level()) {
-            DevilsObjectives.render(p, director.snapshot(), atDevice(p), GuardianDown.active(p) || presentation.hidden(p),
+            DevilsObjectives.render(p, director.snapshot(), atDevice(p), GuardianDown.active(p) || presentation.hidden(p) || briefingGate != null,
                     allows(p) && supplyStations.lookingAt(p, director.phase().zone()),
                     supplies.available(p.getUUID(), director.phase().zone()),
                     remainingSeconds(gatherAt, 300, now), remainingSeconds(completeAt, 600, now), voice.playing());

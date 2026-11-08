@@ -230,6 +230,8 @@ public final class DevilsLair {
         return SESSIONS.values().stream().filter(s -> s.member(p.getUUID()) && !s.closed()).findFirst().orElse(null);
     }
     public static boolean participating(ServerPlayer p) { return session(p) != null; }
+    /** Preparation progress for the launch loading screen, or -1 when this player has no run yet. */
+    public static float loadProgress(ServerPlayer p) { var s = session(p); return s == null ? -1f : s.loadProgress(); }
     /** Opaque per-run identity, including preparation/admission. */
     public static Object participationToken(ServerPlayer p) { return p == null ? null : session(p); }
     public static boolean leave(ServerPlayer p, Object expected) {

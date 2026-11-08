@@ -201,16 +201,16 @@ public final class DevilsWalkerFixture {
         var runtime = runtime(h, player, f);
         for (int i = 0; i < 100 && !f.live.containsKey("SP-sepiks"); i++) f.tick(false);
         var boss = spawn(h, runtime, f.live.get("SP-sepiks"));
-        check(h, boss.getHealth() == 550 && boss.getMaxHealth() == 550, "Sepiks uses reduced planned pool");
+        check(h, boss.getHealth() == 2200 && boss.getMaxHealth() == 2200, "Sepiks uses its full planned pool");
         Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
-        check(h, boss.getHealth() == 550, "Guard-phase Sepiks rejects damage");
+        check(h, boss.getHealth() == 2200, "Guard-phase Sepiks rejects damage");
         f.until(h, Phase.SP_INTRO, 2000);
         Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
-        check(h, boss.getHealth() == 550, "Intro Sepiks rejects damage");
+        check(h, boss.getHealth() == 2200, "Intro Sepiks rejects damage");
         check(h, f.director.introFinished(f.director.generation()), "Fixture acknowledges intro, not animation acceptance");
         f.until(h, Phase.SP_DAMAGE1, 200);
         for (int round = 1; round <= 2; round++) {
-            float floor = round == 1 ? 368.5f : 181.5f;
+            float floor = round == 1 ? 1474f : 726f;
             Combat.damage(h.getLevel(), player, boss, 10000, Element.ARC,kim.biryeong.destiny.weapon.AmmoGeneration.GLAIVE_MELEE);
             check(h, boss.getHealth() == floor && !boss.isDeadOrDying(), "Oversized actual hit clamps at shield threshold");
             check(h, f.director.phase() == (round == 1 ? Phase.SP_SHIELD1 : Phase.SP_SHIELD2), "Actual health change enters shield phase");

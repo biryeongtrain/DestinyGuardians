@@ -147,7 +147,10 @@ class VanillaHudW76AssetTest {
             // Streaming also rejects repeated keys, which a JsonObject would silently collapse.
             try (var reader = new JsonReader(new StringReader(resource(path)))) {
                 reader.beginObject();
-                var expected = Map.of(XP_LEVEL, "", "container.inventory", "");
+                // The launch loading screen replaces the stock "Loading terrain..." interstitial in the two shipped languages.
+                var expected = locale.equals("ko_kr") ? Map.of(XP_LEVEL, "", "container.inventory", "", "multiplayer.downloadingTerrain", "게임을 불러오는 중...")
+                        : locale.equals("en_us") ? Map.of(XP_LEVEL, "", "container.inventory", "", "multiplayer.downloadingTerrain", "Loading...")
+                        : Map.of(XP_LEVEL, "", "container.inventory", "");
                 var seen = new HashSet<String>();
                 while (reader.hasNext()) {
                     String key = reader.nextName();

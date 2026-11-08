@@ -23,7 +23,7 @@ final class ActivityLaunch {
     enum Phase { COUNTDOWN, FADE_OUT, PREPARE, DONE }
     static final int LEAD_IN = 20, COUNTDOWN = 5 * 20, LAUNCH_AT = LEAD_IN + COUNTDOWN,
             FADE_OUT = 16, FADE_START = LAUNCH_AT - FADE_OUT, REVEAL = 24, PREPARE_TIMEOUT = 45 * 20,
-            DROPPED_GRACE = 3 * 20;
+            DROPPED_GRACE = 3 * 20, READY_HOLD = 14;
 
     /** Titles in Noto Sans KR (the economy UI font) instead of the pixel font. */
     private static final FontDescription.Resource NOTO = new FontDescription.Resource(Identifier.fromNamespaceAndPath("destiny", "econ_text"));
@@ -34,6 +34,10 @@ final class ActivityLaunch {
     private final Map<UUID, LaunchCurtain> curtains = new LinkedHashMap<>();
     /** Per player: tick the fade-in started, or absent while still dark. */
     private final Map<UUID, Integer> revealing = new HashMap<>();
+    /** Per player: the loading screen drawn over the black while the activity prepares. */
+    private final Map<UUID, LaunchLoadingScreen> screens = new HashMap<>();
+    /** Per player: tick the destination was confirmed loaded; the bar rests at 100% for {@link #READY_HOLD} before the fade-in. */
+    private final Map<UUID, Integer> loaded = new HashMap<>();
     private Phase phase = Phase.COUNTDOWN;
     private final int started;
     private int phaseAt, launchedAt;
@@ -154,11 +158,8 @@ final class ActivityLaunch {
                     launchInvoked = false; cancel(error); return;
                 }
                 // Success keeps the original cue's remaining~0.34seconds; no sound-stop at the launch boundary.
-                for (var p : online) {
-                    p.connection.send(new ClientboundSetTitlesAnimationPacket(10, 60, 20));
-                    p.connection.send(new ClientboundSetSubtitleTextPacket(Component.literal(activity.type()).withStyle(s -> s.withColor(0xA9B2BC).withFont(NOTO))));
-                    p.connection.send(new ClientboundSetTitleTextPacket(Component.literal(activity.name()).withStyle(s -> s.withColor(0xF2F2EE).withFont(NOTO))));
-                }
+                // The title that follows is the loading screen (drawn each tick under the black), not a one-off card.
+                for (var p : online) p.connection.send(new ClientboundClearTitlesPacket(true));
                 DestinyGuardians.LOGGER.info("[ActivityLaunch] {} launched for {} after {} ticks", activity.id(), members.size(), elapsed);
             }
             case PREPARE -> {
@@ -167,14 +168,25 @@ final class ActivityLaunch {
                     var c = e.getValue();
                     if (c.released()) continue;
                     var p = c.player;
-                    if (!owns(p) || server.getPlayerList().getPlayer(p.getUUID()) != p || p.hasDisconnected()) { c.release(); continue; }
+                    if (!owns(p) || server.getPlayerList().getPlayer(p.getUUID()) != p || p.hasDisconnected()) { c.release(); screens.remove(e.getKey()); continue; }
                     if (!revealing.containsKey(e.getKey())) {
                         c.level(1f); c.freeze();
                         boolean entered = launchedAt >= 0 && activity.launcher().entered(p);
                         // The activity refused or ended for this player: return them to the light where they are.
                         boolean dropped = launchedAt >= 0 && now - launchedAt > DROPPED_GRACE && !activity.launcher().participating(p);
                         if (entered) c.unfreeze();
-                        if ((entered && c.clientReady()) || dropped || timedOut) revealing.put(e.getKey(), now);
+                        // clientReady() counts calm ticks, so it is polled every tick until the destination is confirmed.
+                        if (entered && !loaded.containsKey(e.getKey()) && c.clientReady()) loaded.put(e.getKey(), now);
+                        boolean ready = loaded.containsKey(e.getKey());
+                        if (launchedAt >= 0 && !dropped && !timedOut) {
+                            var screen = screens.computeIfAbsent(e.getKey(), k -> new LaunchLoadingScreen(p, activity.name(), activity.type()));
+                            screen.render(now - launchedAt, activity.launcher().progress(p), ready);
+                        }
+                        if (ready && now - loaded.get(e.getKey()) >= READY_HOLD || dropped || timedOut) {
+                            revealing.put(e.getKey(), now);
+                            var screen = screens.get(e.getKey());
+                            if (screen != null) { if (dropped || timedOut) screen.clear(); else screen.fadeOut(REVEAL); }
+                        }
                         continue;
                     }
                     int t = now - revealing.get(e.getKey());
@@ -194,6 +206,8 @@ final class ActivityLaunch {
     void abort() {
         if (cancelable() && shownNumber > 0) for (var p : online()) p.connection.send(new ClientboundClearTitlesPacket(true));
         for (var sound : countdownAudio) sound.cancel(this);
+        for (var screen : screens.values()) screen.clear();
+        screens.clear();
         for (var c : curtains.values()) c.release();
         phase = Phase.DONE;
     }

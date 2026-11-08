@@ -259,14 +259,14 @@ class DevilsDirectorTest {
 
     @Test void sepiksClampsBothThresholdsAndOnlyActualFinalDeathCompletes() {
         var f = new Fixture(); f.lair();
-        assertEquals(181.5, f.director.allowedDamage(f.sepiks().ref(), 550, 10000), 1e-6);
-        f.shield(1); assertEquals(368.5, f.director.snapshot().sepiksHealth(), 1e-6);
-        assertEquals(0, f.director.allowedDamage(f.sepiks().ref(), 368.5, 500));
+        assertEquals(726, f.director.allowedDamage(f.sepiks().ref(), 2200, 10000), 1e-6);
+        f.shield(1); assertEquals(1474, f.director.snapshot().sepiksHealth(), 1e-6);
+        assertEquals(0, f.director.allowedDamage(f.sepiks().ref(), 1474, 500));
         f.ticks(30); assertEquals(3, f.director.snapshot().shieldServitors());
         f.servitors(); assertEquals(Phase.SP_RECOVER1, f.director.phase());
         f.ticks(39); assertEquals(Phase.SP_RECOVER1, f.director.phase()); f.tick();
         assertEquals(Phase.SP_DAMAGE2, f.director.phase());
-        f.shield(2); assertEquals(181.5, f.director.snapshot().sepiksHealth(), 1e-6);
+        f.shield(2); assertEquals(726, f.director.snapshot().sepiksHealth(), 1e-6);
         f.ticks(30); f.servitors(); f.ticks(40);
         assertEquals(Phase.SP_DAMAGE3, f.director.phase());
         Spawn boss = f.sepiks(); f.director.healthChanged(boss.ref(), 0);
@@ -274,6 +274,22 @@ class DevilsDirectorTest {
         f.kill("SP-sepiks"); assertEquals(Phase.COMPLETE, f.director.phase());
         assertEquals(1, f.completionCount); f.director.defeated(boss.ref());
         assertEquals(1, f.completionCount); assertEquals(0, f.director.snapshot().occupied());
+    }
+
+    @Test void closingBriefingWaitsAfterSepiksFalls() {
+        var f = new Fixture(); f.lair();
+        f.shield(1); f.ticks(30); f.servitors(); f.ticks(40); f.shield(2); f.ticks(30); f.servitors(); f.ticks(40);
+        assertEquals(Phase.SP_DAMAGE3, f.director.phase());
+        f.director.healthChanged(f.sepiks().ref(), 0);
+        f.kill("SP-sepiks");
+        assertEquals(Phase.COMPLETE, f.director.phase());
+        java.util.function.BooleanSupplier closing = () -> f.cues.keySet().stream().anyMatch(c -> c.lineId().equals("80b59f28"));
+        f.finishCues = false;
+        f.ticks(DevilsDirector.COMPLETION_SPEECH_DELAY - 2);
+        assertFalse(closing.getAsBoolean(), "Zavala must not talk over the kill; the ending needs a beat of silence");
+        f.ticks(4);
+        assertTrue(closing.getAsBoolean(), "After the beat the closing briefing is spoken exactly once");
+        assertEquals(1, f.cues.keySet().stream().filter(c -> c.lineId().equals("80b59f28")).count());
     }
 
     @Test void shieldSlotsRemainAvailableWithSurvivingNormalPacks() {

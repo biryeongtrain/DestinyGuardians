@@ -44,6 +44,8 @@ import java.util.List;
 public final class LootChest {
     static final int STAND_TICKS = 30, ARRIVE = 10, BURST_AT = 4, FLIGHT = 16, LINGER = 20 * 12, VANISH = 9;
     static final int GOLD = 0xE3C46B, GLIMMER = 0x7FE3FF;
+    /** The chest is placed in corners of large arenas: 25% bigger than the authored model so it reads from across the room. */
+    static final float SIZE = 1.25f;
     /** Lid hinge relative to the chest base, chest-local (front = +z). */
     static final float HINGE_Y = .557f, HINGE_Z = -.39f, OPEN = (float) Math.toRadians(104), OVERSHOOT = (float) Math.toRadians(116);
     /** Item displays turn FIXED models half a turn about Y; undone so model south is the chest's front. */
@@ -80,7 +82,7 @@ public final class LootChest {
         prompt.setBillboardMode(Display.BillboardConstraints.CENTER);
         prompt.setBackground(0xA0101418);
         prompt.setBrightness(new Brightness(15, 15));
-        prompt.setTranslation(new Vector3f(0, 1.45f, 0));
+        prompt.setTranslation(new Vector3f(0, 1.45f * SIZE, 0));
         prompt.setScale(new Vector3f(0));
         prompt.setInterpolationDuration(3);
         prompt.setLineWidth(240);
@@ -90,7 +92,7 @@ public final class LootChest {
             @Override public void interact(ServerPlayer p, InteractionHand hand, Vec3 at, boolean secondary) { if (p == owner) open(); }
             @Override public void attack(ServerPlayer p) { if (p == owner) open(); }
         });
-        hit.setSize(1.2f, .85f);
+        hit.setSize(1.2f * SIZE, .85f * SIZE);
         hit.setResponse(true);
         holder.addElement(hit);
         pose(.02f, 0, 0);
@@ -104,13 +106,17 @@ public final class LootChest {
         stack.set(DataComponents.ITEM_MODEL, Identifier.parse("destiny:loot/" + model));
         var e = new ItemDisplayElement(stack);
         e.setItemDisplayContext(ItemDisplayContext.FIXED);
-        e.setBrightness(new Brightness(13, 15));
+        e.setBrightness(new Brightness(15, 15));
+        // A gold outline the Guardian sees through walls and darkness: the chest is the end of the activity, never a search.
+        e.setGlowing(true);
+        e.setGlowColorOverride(GOLD);
         e.setViewRange(2f);
         return e;
     }
 
     /** Body and lid at {@code scale}, lid opened by {@code angle} radians, interpolated over {@code ticks}. */
-    private void pose(float scale, float angle, int ticks) {
+    private void pose(float relative, float angle, int ticks) {
+        float scale = relative * SIZE;
         body.setInterpolationDuration(ticks); lid.setInterpolationDuration(ticks);
         body.setScale(new Vector3f(scale));
         body.setTranslation(new Vector3f(0, .5f * scale, 0));
@@ -148,12 +154,12 @@ public final class LootChest {
 
     private void idle() {
         double d = owner.position().distanceTo(pos);
-        boolean near = owner.isAlive() && d < 1.6;
+        boolean near = owner.isAlive() && d < 1.6 * SIZE;
         standing = near ? standing + 1 : Math.max(0, standing - 2);
         if (standing >= STAND_TICKS) { open(); return; }
-        if (age % 5 == 0 && d > 5) {   // a soft gold beam so the chest is found from across the arena
-            for (int i = 0; i < 3; i++)
-                level.sendParticles(owner, new DustParticleOptions(GOLD, .9f), true, false, pos.x, pos.y + 1.1 + ((age / 5 + i * 3) % 9) * .45, pos.z, 1, .05, .05, .05, 0);
+        if (age % 3 == 0 && d > 4) {   // a gold beam so the chest is found from across the arena
+            for (int i = 0; i < 5; i++)
+                level.sendParticles(owner, new DustParticleOptions(GOLD, 1.1f), true, false, pos.x, pos.y + 1.2 + ((age / 3 + i * 3) % 15) * .5, pos.z, 1, .05, .05, .05, 0);
         }
         boolean show = d < 6;
         if (show != promptShown || (show && age % 2 == 0)) {
