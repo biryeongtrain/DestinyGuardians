@@ -27,7 +27,7 @@ import java.util.zip.GZIPInputStream;
  */
 public final class ZoneTemplate {
     public static final byte[] MAGIC = "DGZONE01".getBytes(StandardCharsets.US_ASCII);
-    public static final int MAX_EDGE = 1024, MAX_HEIGHT = 384, MAX_PALETTE = 256;
+    public static final int MAX_EDGE = 2048, MAX_HEIGHT = 384, MAX_PALETTE = 256;
     public static final String RESOURCE_DIR = "/data/destiny/guardian_rises/zones/";
     private static final Map<String, ZoneTemplate> CACHE = new ConcurrentHashMap<>();
 

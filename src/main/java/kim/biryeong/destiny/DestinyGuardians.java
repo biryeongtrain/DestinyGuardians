@@ -92,6 +92,7 @@ public final class DestinyGuardians implements ModInitializer {
         kim.biryeong.destiny.tutorial.Tutorial.init();
         kim.biryeong.destiny.tutorial.Guide.init();
         kim.biryeong.destiny.strike.devils.DevilsLair.init();
+        kim.biryeong.destiny.strike.exodus.ExodusCrash.init();
         kim.biryeong.destiny.activity.ActivityExit.init();
         GuardianCommands.register();
         kim.biryeong.destiny.weapon.WeaponCommands.register();

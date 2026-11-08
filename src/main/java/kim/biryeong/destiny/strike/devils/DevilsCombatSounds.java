@@ -34,7 +34,15 @@ public final class DevilsCombatSounds {
             return Map.copyOf(result);
         }catch(Exception error){throw new IllegalStateException("Invalid Devils combat sound catalog",error);}
     }
-    static Identifier event(DevilsPlan.Kind kind, String event) { return ROUTES.getOrDefault(kind,Map.of()).get(event); }
+    static Identifier event(DevilsPlan.Kind kind, String event) { return ROUTES.getOrDefault(stand(kind),Map.of()).get(event); }
+    /** Exodus Crash enemies share the sound set of the same-class Devils Lair enemy until they get their own. */
+    private static DevilsPlan.Kind stand(DevilsPlan.Kind kind) {
+        return switch(kind) {
+            case GOBLIN -> DevilsPlan.Kind.THRALL; case HOBGOBLIN -> DevilsPlan.Kind.ACOLYTE; case HARPY -> DevilsPlan.Kind.WIZARD;
+            case MINOTAUR -> DevilsPlan.Kind.KNIGHT; case CYCLOPS -> DevilsPlan.Kind.SERVITOR; case PYKIS -> DevilsPlan.Kind.CAPTAIN;
+            default -> kind;
+        };
+    }
     public static int play(ServerLevel level,List<ServerPlayer> listeners,DevilsPlan.Kind kind,String event,Vec3 at) {
         var id=event(kind,event);
         if(id==null)return 0;

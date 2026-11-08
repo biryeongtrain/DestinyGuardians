@@ -66,24 +66,28 @@ public final class DevilsActors implements AutoCloseable {
     }
     public static float width(DevilsPlan.Kind kind) {
         return switch (kind) { case WALKER -> 4.2f; case BRIG -> 3.5f; case SEPIKS -> 6.5f;
-            case SERVITOR -> 2.6f; case KNIGHT -> 1.25f; case WIZARD -> 1.2f; case SHANK -> 1.1f; default -> .75f; };
+            case SERVITOR, CYCLOPS -> 2.6f; case KNIGHT, MINOTAUR -> 1.25f; case WIZARD, HARPY -> 1.2f; case SHANK -> 1.1f; case PYKIS -> 1.4f; default -> .75f; };
     }
     public static float height(DevilsPlan.Kind kind) {
         return switch (kind) { case DREG -> 1.7f; case VANDAL, MARAUDER -> 2.3f; case CAPTAIN -> 2.7f;
             case SHANK -> .8f; case THRALL -> 1.9f; case ACOLYTE -> 2.05f; case KNIGHT -> 2.9f;
-            case WIZARD -> 2.4f; case SERVITOR -> 2.6f; case BRIG -> 5.5f; case WALKER -> 3.2f; case SEPIKS -> 6.5f; };
+            case WIZARD, HARPY -> 2.4f; case SERVITOR, CYCLOPS -> 2.6f; case BRIG -> 5.5f; case WALKER -> 3.2f; case SEPIKS -> 6.5f;
+            case GOBLIN -> 1.9f; case HOBGOBLIN -> 2.05f; case MINOTAUR -> 2.9f; case PYKIS -> 3.4f; };
     }
     static boolean flying(DevilsPlan.Kind kind) {
-        return kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD
-                || kind == DevilsPlan.Kind.SERVITOR || kind == DevilsPlan.Kind.SEPIKS;
+        return kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD || kind == DevilsPlan.Kind.HARPY
+                || kind == DevilsPlan.Kind.SERVITOR || kind == DevilsPlan.Kind.CYCLOPS || kind == DevilsPlan.Kind.SEPIKS;
     }
     static String model(DevilsPlan.Kind kind) {
         return switch (kind) { case DREG, VANDAL, CAPTAIN, SHANK, WALKER -> "rg_" + kind.name().toLowerCase(Locale.ROOT);
+            // Exodus Crash stand-ins until the extracted Vex rigs are converted (same silhouette class, not the Vex look).
+            case GOBLIN -> "dl_thrall"; case HOBGOBLIN -> "dl_acolyte"; case MINOTAUR -> "dl_knight";
+            case HARPY -> "dl_wizard"; case CYCLOPS -> "dl_servitor"; case PYKIS -> "rg_captain";
             default -> "dl_" + kind.name().toLowerCase(Locale.ROOT); };
     }
     final ServerLevel level;
     final Environment environment;
-    final Supplier<DevilsDirector> director;
+    final Supplier<? extends ActorDirector> director;
     final Map<DevilsDirector.ActorRef, DevilsMob> active = new LinkedHashMap<>();
     private record WalkerKey(long generation, String slot) { }
     private final Map<WalkerKey, DevilsWalkerState> walkers = new HashMap<>();
@@ -91,7 +95,7 @@ public final class DevilsActors implements AutoCloseable {
     private final Map<DevilsMob, Reservation> attacks = new IdentityHashMap<>();
     private boolean closed, paused;
     int clock;
-    public DevilsActors(ServerLevel level, Supplier<DevilsDirector> director, Environment environment) {
+    public DevilsActors(ServerLevel level, Supplier<? extends ActorDirector> director, Environment environment) {
         this.level = Objects.requireNonNull(level); this.director = Objects.requireNonNull(director);
         this.environment = Objects.requireNonNull(environment);
     }
@@ -141,7 +145,7 @@ public final class DevilsActors implements AutoCloseable {
                 && p.isAlive() && !p.isSpectator() && !p.isCreative()).toList();
     }
     static boolean hive(DevilsPlan.Kind kind) {
-        return switch (kind) { case THRALL, ACOLYTE, KNIGHT, WIZARD -> true; default -> false; };
+        return switch (kind) { case THRALL, ACOLYTE, KNIGHT, WIZARD, GOBLIN, HOBGOBLIN, HARPY, MINOTAUR, CYCLOPS -> true; default -> false; };
     }
     private boolean owns(DevilsMob mob) {
         return mob.runtime == this && !mob.walkerPart() && !mob.neutral && mob.isAlive()

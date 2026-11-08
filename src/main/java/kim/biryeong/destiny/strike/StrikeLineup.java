@@ -2,6 +2,7 @@ package kim.biryeong.destiny.strike;
 
 import kim.biryeong.destiny.activity.strike.Strikes;
 import kim.biryeong.destiny.strike.devils.DevilsLair;
+import kim.biryeong.destiny.strike.exodus.ExodusCrash;
 
 /**
  * The strikes this mod ships. A new strike adds one line here; the finder listing, the personal-exit command and the
@@ -15,5 +16,6 @@ public final class StrikeLineup {
         if (registered) return;
         registered = true;
         Strikes.register(DevilsLair.COORDINATOR);
+        Strikes.register(ExodusCrash.COORDINATOR);
     }
 }

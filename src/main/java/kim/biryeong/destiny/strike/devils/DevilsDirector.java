@@ -19,7 +19,7 @@ import static kim.biryeong.destiny.strike.devils.DevilsPlan.*;
  * spatial spawn validation and persistent reward delivery belong to the host. No difficulty input
  * exists: admission allows one to three ready players, and subsequent losses never rescale the plan.
  */
-public final class DevilsDirector implements AutoCloseable {
+public final class DevilsDirector implements ActorDirector, AutoCloseable {
     public enum Phase {
         READY(Zone.RY), BRIEFING(Zone.RY), RY_APPROACH(Zone.RY), RY_CLEAR(Zone.RY),
         RF_ENTRY(Zone.RF), RF_DEVICE(Zone.RF), RF_HACK(Zone.RF), RF_DEFENSE1(Zone.RF),
@@ -120,6 +120,8 @@ public final class DevilsDirector implements AutoCloseable {
 
     public DevilsDirector(Host host) { this.host = Objects.requireNonNull(host); }
     public Phase phase() { return phase; }
+    @Override public boolean damagePhase() { return phase.damagePhase(); }
+    @Override public boolean shieldPhase() { return phase.shieldPhase(); }
     public long generation() { return generation; }
     public boolean begin(int readyPlayers) {
         if (phase != Phase.READY || readyPlayers < MIN_PLAYERS || readyPlayers > PLAYERS) return false;
@@ -256,7 +258,7 @@ public final class DevilsDirector implements AutoCloseable {
         host.incoming(generation, List.of(slot), FLYING_TELEGRAPH_TICKS);
     }
 
-    public void defeated(ActorRef ref) {
+    @Override public void defeated(ActorRef ref) {
         Actor actor = live(ref);
         if (actor == null) return;
         // Invulnerable intro/shield actors cannot manufacture progression via an administrative kill.
@@ -282,7 +284,7 @@ public final class DevilsDirector implements AutoCloseable {
         Actor actor = live(ref);
         if (actor != null) lost(ref, health, actor.shield);
     }
-    public void lost(ActorRef ref, double health, double shield) {
+    @Override public void lost(ActorRef ref, double health, double shield) {
         Actor actor = live(ref);
         if (actor == null) return;
         if (!validHealth(actor, health, shield)) { resetCheckpoint("Invalid lost actor health: " + ref.slotId()); return; }
@@ -295,7 +297,7 @@ public final class DevilsDirector implements AutoCloseable {
     }
 
     /** Apply to the runtime's already-balanced incoming damage; never multiplies weapon damage. */
-    public double allowedDamage(ActorRef ref, double currentHealth, double requested) {
+    @Override public double allowedDamage(ActorRef ref, double currentHealth, double requested) {
         Actor actor = live(ref);
         if (actor == null || paused || !(requested > 0) || !Double.isFinite(requested)
                 || !(currentHealth > 0) || !Double.isFinite(currentHealth)) return 0;
@@ -311,7 +313,7 @@ public final class DevilsDirector implements AutoCloseable {
         Actor actor = live(ref);
         if (actor != null) healthChanged(ref, health, actor.shield);
     }
-    public void healthChanged(ActorRef ref, double health, double shield) {
+    @Override public void healthChanged(ActorRef ref, double health, double shield) {
         Actor actor = live(ref);
         if (actor == null || !Double.isFinite(health) || health < 0 || health > actor.slot.kind().health()
                 || !Double.isFinite(shield) || shield < 0 || shield > actor.slot.kind().shield()) return;

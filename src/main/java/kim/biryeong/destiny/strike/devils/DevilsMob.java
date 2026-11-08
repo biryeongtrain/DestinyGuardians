@@ -56,7 +56,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
         kind = DevilsActors.KINDS.getOrDefault(type, DevilsPlan.Kind.DREG);
         xpReward = 0; setPersistenceRequired(); setSilent(true);
         if (DevilsActors.flying(kind) || kind == DevilsPlan.Kind.WALKER || type == DevilsActors.PART) setNoGravity(true);
-        if (kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD)
+        if (kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD || kind == DevilsPlan.Kind.HARPY)
             moveControl = new net.minecraft.world.entity.ai.control.FlyingMoveControl(this, 20, true);
     }
     void bind(DevilsActors runtime, DevilsDirector.Spawn spawn, Vec3 at, DevilsWalkerState walker) {
@@ -73,9 +73,9 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     @Override public Tier lootTier() {
         if (root != null) return Tier.NONE;
         return switch (kind) {
-            case DREG, VANDAL, SHANK, THRALL, ACOLYTE -> Tier.MINOR;
-            case MARAUDER, CAPTAIN, KNIGHT, WIZARD, SERVITOR -> Tier.MAJOR;
-            case BRIG, WALKER, SEPIKS -> Tier.BOSS;
+            case DREG, VANDAL, SHANK, THRALL, ACOLYTE, GOBLIN, HOBGOBLIN, HARPY -> Tier.MINOR;
+            case MARAUDER, CAPTAIN, KNIGHT, WIZARD, SERVITOR, MINOTAUR, CYCLOPS -> Tier.MAJOR;
+            case BRIG, WALKER, SEPIKS, PYKIS -> Tier.BOSS;
         };
     }
     public DevilsDirector.ActorRef reference() { return ref; }
@@ -88,9 +88,9 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     }
     @Override public kim.biryeong.destiny.combat.CombatantRank rank() {
         return switch (kind) {
-            case WALKER, SEPIKS -> kim.biryeong.destiny.combat.CombatantRank.BOSS;
+            case WALKER, SEPIKS, PYKIS -> kim.biryeong.destiny.combat.CombatantRank.BOSS;
             case BRIG -> kim.biryeong.destiny.combat.CombatantRank.MINIBOSS;
-            case CAPTAIN, KNIGHT, WIZARD, SERVITOR -> kim.biryeong.destiny.combat.CombatantRank.ELITE;
+            case CAPTAIN, KNIGHT, WIZARD, SERVITOR, MINOTAUR, CYCLOPS -> kim.biryeong.destiny.combat.CombatantRank.ELITE;
             default -> kim.biryeong.destiny.combat.CombatantRank.RANK_AND_FILE;
         };
     }
@@ -124,7 +124,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
         }
         return kind != DevilsPlan.Kind.SHANK && point.y >= getY()+getBbHeight()*.75;
     }
-    private boolean mobileFlyer() { return kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD; }
+    private boolean mobileFlyer() { return kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD || kind == DevilsPlan.Kind.HARPY; }
     private Vec3 lastOverMap;
     /** Flyers fight around the pad they entered at; caves and side passages beyond it are not part of the encounter. */
     static final double FLYER_LEASH = 24, FLYER_LEASH_DOWN = 5, FLYER_LEASH_UP = 9;
@@ -154,7 +154,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     @Override protected void registerGoals() { }
     @Override protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(Level level) {
         var typeKind = DevilsActors.KINDS.getOrDefault(getType(), DevilsPlan.Kind.DREG);
-        return typeKind == DevilsPlan.Kind.SHANK || typeKind == DevilsPlan.Kind.WIZARD
+        return typeKind == DevilsPlan.Kind.SHANK || typeKind == DevilsPlan.Kind.WIZARD || typeKind == DevilsPlan.Kind.HARPY
                 ? new net.minecraft.world.entity.ai.navigation.FlyingPathNavigation(this, level)
                 : super.createNavigation(level);
     }
@@ -183,9 +183,9 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
             else if(age%15==0) { ring(level,hazard,3); splash(level,hazard,1,3); }
         }
         if (kind == DevilsPlan.Kind.SEPIKS) {
-            if (!runtime.director.get().phase().damagePhase() && !runtime.director.get().phase().shieldPhase()) return;
+            if (!runtime.director.get().damagePhase() && !runtime.director.get().shieldPhase()) return;
             if (warpTicks>0) { tickWarp(level); return; }
-            if(age>=warpAt && runtime.director.get().phase().damagePhase()) {
+            if(age>=warpAt && runtime.director.get().damagePhase()) {
                 warpAt=age+200;
                 warpDestination=runtime.environment.sepiksWarp(this).orElse(null);
                 if(warpDestination!=null) { warpTicks=24; tickWarp(level); return; }
@@ -220,7 +220,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
         moveToRange();
         if(cooldown<=0 && getSensing().hasLineOfSight(target)) {
             double dist=distanceToSqr(target);
-            attackMelee=kind==DevilsPlan.Kind.THRALL||kind==DevilsPlan.Kind.MARAUDER||dist<6.25&&!kind.boss()&&!DevilsActors.flying(kind);
+            attackMelee=(kind==DevilsPlan.Kind.THRALL||kind==DevilsPlan.Kind.GOBLIN)||kind==DevilsPlan.Kind.MARAUDER||dist<6.25&&!kind.boss()&&!DevilsActors.flying(kind);
             if(attackMelee && dist>9) return;
             attackSniper=kind==DevilsPlan.Kind.VANDAL && slot.index()%3==0;
             int lead=attackMelee? (kind==DevilsPlan.Kind.MARAUDER?10:12) : telegraph();
@@ -266,7 +266,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     }
     private void moveToRange() {
         if(kind==DevilsPlan.Kind.WALKER||kind==DevilsPlan.Kind.SEPIKS||kind==DevilsPlan.Kind.SERVITOR) { model.base("idle"); return; }
-        double range=kind==DevilsPlan.Kind.THRALL||kind==DevilsPlan.Kind.MARAUDER?2:kind==DevilsPlan.Kind.BRIG?22:14;
+        double range=kind==DevilsPlan.Kind.THRALL||kind==DevilsPlan.Kind.MARAUDER||kind==DevilsPlan.Kind.GOBLIN||kind==DevilsPlan.Kind.MINOTAUR?2:kind==DevilsPlan.Kind.BRIG?22:14;
         if(distanceToSqr(target)<range*range && getSensing().hasLineOfSight(target)) {getNavigation().stop(); model.base("idle"); return;}
         Vec3 destination=target.position();
         double homeRadius=kind==DevilsPlan.Kind.BRIG?16:mobileFlyer()?FLYER_LEASH-4:32;
@@ -285,8 +285,8 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
                 }
                 if (inside) getNavigation().moveTo(path, 1); else getNavigation().stop();
             }
-        } else if(age%10==0) getNavigation().moveTo(destination.x,destination.y,destination.z,kind==DevilsPlan.Kind.THRALL?1.35:1);
-        model.base(kind==DevilsPlan.Kind.THRALL?"run":"walk");
+        } else if(age%10==0) getNavigation().moveTo(destination.x,destination.y,destination.z,(kind==DevilsPlan.Kind.THRALL||kind==DevilsPlan.Kind.GOBLIN)?1.35:1);
+        model.base((kind==DevilsPlan.Kind.THRALL||kind==DevilsPlan.Kind.GOBLIN)?"run":"walk");
     }
     private boolean tickSecondary(ServerLevel level) {
         if(secondaryCooldown>0)secondaryCooldown--;
@@ -311,10 +311,10 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     }
     private int telegraph() {return switch(kind){case WALKER->40;case BRIG->30;case KNIGHT->18;case VANDAL->attackSniper?16:10;default->10;};}
     // User tuning: 50% more recovery between attacks; damage and actor caps are unchanged.
-    private int period(){return (switch(kind){case DREG->30;case VANDAL->attackSniper?60:36;case SHANK->12;case MARAUDER->32;case CAPTAIN,SERVITOR->50;case THRALL->20;case ACOLYTE->28;case KNIGHT->56;case WIZARD->40;case BRIG->120;case WALKER->140;case SEPIKS->60;}) * 3 / 2;}
+    private int period(){return (switch(kind){case DREG->30;case VANDAL->attackSniper?60:36;case SHANK->12;case MARAUDER->32;case CAPTAIN,SERVITOR->50;case THRALL->20;case ACOLYTE->28;case KNIGHT->56;case WIZARD->40;case GOBLIN->20;case HOBGOBLIN->28;case HARPY->40;case MINOTAUR->56;case CYCLOPS->50;case PYKIS->60;case BRIG->120;case WALKER->140;case SEPIKS->60;}) * 3 / 2;}
     private int burstSize(){return switch(kind){case DREG,CAPTAIN,WIZARD,SEPIKS->3;default->1;};}
-    private float shotDamage(){return switch(kind){case DREG,ACOLYTE,WIZARD->2;case SHANK->1.5f;case VANDAL->attackSniper?6:3;case CAPTAIN,SERVITOR->3;case KNIGHT,SEPIKS->5;case BRIG->8;case WALKER->10;default->3;};}
-    private float meleeDamage(){return switch(kind){case CAPTAIN->6;case THRALL->3;default->4;};}
+    private float shotDamage(){return switch(kind){case DREG,ACOLYTE,WIZARD,HOBGOBLIN,HARPY->2;case PYKIS->4;case MINOTAUR->5;case CYCLOPS->3;case SHANK->1.5f;case VANDAL->attackSniper?6:3;case CAPTAIN,SERVITOR->3;case KNIGHT,SEPIKS->5;case BRIG->8;case WALKER->10;default->3;};}
+    private float meleeDamage(){return switch(kind){case CAPTAIN,PYKIS->6;case THRALL,GOBLIN->3;default->4;};}
     private double radius(){return switch(kind){case KNIGHT->2.5;case BRIG->4;case WALKER->5;default->0;};}
     private void fire(ServerLevel level) {
         if(aim==null||bolts.size()>=12)return;
@@ -487,7 +487,7 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
     @Override protected boolean shouldDropLoot(ServerLevel level){return false;}
     @Override public boolean causeFallDamage(double d,float m,DamageSource source){return false;}
     @Override protected SoundEvent getAmbientSound(){return null;}
-    @Override public Component getName(){return Component.literal(switch(kind){case DREG->"드렉";case VANDAL->"반달";case SHANK->"생크";case MARAUDER->"약탈자";case CAPTAIN->"대장";case THRALL->"스랄";case ACOLYTE->"시종";case KNIGHT->"기사";case WIZARD->"마법사";case SERVITOR->"보호막 서비터";case BRIG->"브리그";case WALKER->"악마의 워커";case SEPIKS->"세픽스 프라임";});}
+    @Override public Component getName(){return Component.literal(switch(kind){case DREG->"드렉";case VANDAL->"반달";case SHANK->"생크";case MARAUDER->"약탈자";case CAPTAIN->"대장";case THRALL->"스랄";case ACOLYTE->"시종";case KNIGHT->"기사";case WIZARD->"마법사";case SERVITOR->"보호막 서비터";case BRIG->"브리그";case WALKER->"악마의 워커";case SEPIKS->"세픽스 프라임";case GOBLIN->"벡스 고블린";case HOBGOBLIN->"벡스 홉고블린";case HARPY->"벡스 하피";case MINOTAUR->"벡스 미노타우르";case CYCLOPS->"벡스 사이클롭스";case PYKIS->"구원의 가문 파이키스";});}
     @Override public EntityType<?> getPolymerEntityType(PacketContext context){return EntityTypes.ZOMBIE;}
     @Override public boolean sendPacketsTo(ServerPlayer player){return root==null;}
     @Override public void modifyRawTrackedData(List<SynchedEntityData.DataValue<?>> data,ServerPlayer player,boolean initial){
