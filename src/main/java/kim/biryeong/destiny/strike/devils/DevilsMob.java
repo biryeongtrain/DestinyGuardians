@@ -124,6 +124,26 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
         }
         return kind != DevilsPlan.Kind.SHANK && point.y >= getY()+getBbHeight()*.75;
     }
+    private boolean mobileFlyer() { return kind == DevilsPlan.Kind.SHANK || kind == DevilsPlan.Kind.WIZARD; }
+    private Vec3 lastOverMap;
+    /**
+     * Flyers can be knocked or steered past the rim of the built map, where nobody can reach them and the encounter
+     * stalls. Remember the last position over the map and put the flyer back there instead of losing it.
+     * Returns false when the mob was removed this tick.
+     */
+    private boolean keepFlyerOverMap(ServerLevel level) {
+        Vec3 at = position();
+        boolean inside = runtime.environment.contains(slot.zone(), at)
+                && runtime.environment.contains(slot.zone(), at.add(1.5, 0, 1.5)) && runtime.environment.contains(slot.zone(), at.add(-1.5, 0, -1.5))
+                && (age % 5 != 0 || DevilsSpatial.flightSupported(level, at));
+        if (inside) { if (age % 5 == 0) lastOverMap = at; return true; }
+        Vec3 back = lastOverMap != null ? lastOverMap : home;
+        if (!runtime.environment.contains(slot.zone(), back) || getY() < level.getMinY() + 1 && lastOverMap == null) { discard(); return false; }
+        getNavigation().stop();
+        setDeltaMovement(Vec3.ZERO);
+        teleportTo(back.x, back.y, back.z);
+        return true;
+    }
     @Override protected void registerGoals() { }
     @Override protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(Level level) {
         var typeKind = DevilsActors.KINDS.getOrDefault(getType(), DevilsPlan.Kind.DREG);
@@ -137,7 +157,8 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
         if (runtime == null) { discard(); return; }
         if (runtime.paused()) { getNavigation().stop(); setDeltaMovement(Vec3.ZERO); return; }
         age++;
-        if (!runtime.environment.contains(slot.zone(), position()) || getY()<level.getMinY()+1) { discard(); return; }
+        if (mobileFlyer()) { if (!keepFlyerOverMap(level)) return; }
+        else if (!runtime.environment.contains(slot.zone(), position()) || getY()<level.getMinY()+1) { discard(); return; }
         if (model != null) { model.tick(); model.cloak(kind==DevilsPlan.Kind.MARAUDER && windup==0 && cooldown>10); }
         if(blinkPending) { blinkPending=false; blink(level); }
         if (walker != null) {
@@ -252,7 +273,8 @@ public final class DevilsMob extends Monster implements PolymerEntity, kim.birye
                 boolean inside = path != null;
                 if (path != null) for (int i=0;i<path.getNodeCount();i++) {
                     var node=path.getNode(i);
-                    if (!runtime.environment.contains(slot.zone(), new Vec3(node.x+.5,node.y,node.z+.5))) {inside=false;break;}
+                    var nodeAt = new Vec3(node.x+.5,node.y,node.z+.5);
+                    if (!runtime.environment.contains(slot.zone(), nodeAt) || mobileFlyer() && !DevilsSpatial.flightSupported((ServerLevel) level(), nodeAt)) {inside=false;break;}
                 }
                 if (inside) getNavigation().moveTo(path, 1); else getNavigation().stop();
             }

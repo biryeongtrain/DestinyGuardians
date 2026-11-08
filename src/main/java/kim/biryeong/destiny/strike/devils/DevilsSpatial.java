@@ -85,6 +85,7 @@ public final class DevilsSpatial {
                 AABB body = bodyAt(mob, pos);
                 if (!clearTerrain(level, slot.zone(), origin, mob, body)) { collisionRejected++; continue; }
                 if (!flying && !supported(level, body)) { supportRejected++; continue; }
+                if (mobileFlyer && !flightSupported(level, pos)) { supportRejected++; continue; }
                 // Only a geometrically valid pad can wait on transient proximity/occupancy.
                 if (!farEnough(pos, positions, MIN_SPAWN_DISTANCE)) {
                     distanceRejected++; search.transientBlocked = true; continue;
@@ -130,6 +131,7 @@ public final class DevilsSpatial {
         var body = bodyAt(mob, pos); boolean flying = flying(slot.kind());
         return !targets.isEmpty() && farEnough(pos, targets.stream().map(Entity::position).toList(), MIN_SPAWN_DISTANCE)
                 && clear(level, slot.zone(), origin, mob, body, reservations) && (flying || supported(level, body))
+                && (!(slot.kind()==DevilsPlan.Kind.SHANK || slot.kind()==DevilsPlan.Kind.WIZARD) || flightSupported(level, pos))
                 && reachable(level, mob, pos, targets, flying,
                     slot.kind()==DevilsPlan.Kind.SHANK || slot.kind()==DevilsPlan.Kind.WIZARD);
     }
@@ -233,6 +235,21 @@ public final class DevilsSpatial {
         if (!level.hasChunkAt(pos) || !level.getFluidState(pos).isEmpty() || !level.noCollision(player, body)) return false;
         var contact = new AABB(body.minX, body.minY - .08, body.minZ, body.maxX, body.minY, body.maxZ);
         return level.getBlockCollisions(player, contact).iterator().hasNext();
+    }
+    /** Deepest drop below a mobile flyer that still counts as "over the playable map" (blocks). */
+    static final int FLIGHT_SUPPORT_DEPTH = 14;
+    /**
+     * A mobile flyer (shank, wizard) may only hover where solid ground lies within {@link #FLIGHT_SUPPORT_DEPTH} blocks
+     * below it. The zone box is larger than the built map, so bounds alone let a flyer drift over the rim into empty air.
+     */
+    public static boolean flightSupported(ServerLevel level, Vec3 at) {
+        var column = BlockPos.containing(at.x, at.y, at.z);
+        for (int dy = 0; dy <= FLIGHT_SUPPORT_DEPTH; dy++) {
+            var pos = column.below(dy);
+            if (!level.isLoaded(pos)) return false;
+            if (!level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()) return true;
+        }
+        return false;
     }
     static boolean supported(ServerLevel level, AABB box) {
         // Collision-shape ray tests support slabs/stairs; require center and footprint corners, not a full-block guess.
