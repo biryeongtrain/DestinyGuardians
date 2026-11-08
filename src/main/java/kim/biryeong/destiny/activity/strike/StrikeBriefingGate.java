@@ -1,4 +1,4 @@
-package kim.biryeong.destiny.strike.devils;
+package kim.biryeong.destiny.activity.strike;
 
 /**
  * Holds the briefing (landing cast, music and Zavala's opening line) until the fireteam can actually see it.
@@ -9,19 +9,19 @@ package kim.biryeong.destiny.strike.devils;
  * and a run that was never dark (operator command) starts immediately. A curtain that never lifts cannot hold the run
  * forever: {@link #TIMEOUT} ticks after the run began the briefing starts anyway.
  */
-final class DevilsBriefingGate {
+public final class StrikeBriefingGate {
     /** Silence between the picture returning and the first note/word. */
-    static final int BEAT = 20;
-    static final int TIMEOUT = 400;
+    public static final int BEAT = 20;
+    public static final int TIMEOUT = 400;
 
     private final long since;
     private boolean sawDark;
     private long litSince = -1;
 
-    DevilsBriefingGate(long now) { since = now; }
+    public StrikeBriefingGate(long now) { since = now; }
 
     /** @param dark any member is still under the launch curtain this tick. */
-    boolean ready(long now, boolean dark) {
+    public boolean ready(long now, boolean dark) {
         if (now - since >= TIMEOUT) return true;
         if (dark) { sawDark = true; litSince = -1; return false; }
         if (!sawDark) return true;

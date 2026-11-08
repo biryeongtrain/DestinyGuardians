@@ -1,4 +1,4 @@
-package kim.biryeong.destiny.strike.devils;
+package kim.biryeong.destiny.activity.strike;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-/** Fixed one-to-three-member identity and reconnect policy; never changes encounter tuning. Server-thread owned. */
-public final class DevilsRoster {
+/** Fixed-size strike fireteam identity and reconnect policy; never changes encounter tuning. Server-thread owned. */
+public final class StrikeRoster {
     public static final long RECONNECT_TICKS = 2400;
     public enum Join { ACCEPTED, UNKNOWN, EXPIRED }
     public record Member(UUID id, boolean connected, boolean ready, boolean down, boolean expired) { }
@@ -22,13 +22,14 @@ public final class DevilsRoster {
     private final Map<UUID, Slot> members = new LinkedHashMap<>();
     private long allOfflineAt = -1;
 
-    public DevilsRoster(Collection<UUID> ids) {
+    public StrikeRoster(Collection<UUID> ids, int min, int max) {
+        if (min < 1 || max < min) throw new IllegalArgumentException("Invalid strike roster bounds");
         Objects.requireNonNull(ids);
         for (UUID id : ids) {
             Objects.requireNonNull(id);
             if (members.putIfAbsent(id, new Slot(id)) != null) throw new IllegalArgumentException("Duplicate participant");
         }
-        if (members.size() < DevilsPlan.MIN_PLAYERS || members.size() > DevilsPlan.PLAYERS) throw new IllegalArgumentException("The Devils' Lair requires one to three participants");
+        if (members.size() < min || members.size() > max) throw new IllegalArgumentException("A strike requires " + min + " to " + max + " participants");
     }
     public boolean contains(UUID id) { return members.containsKey(id); }
     public List<Member> members() { return members.values().stream().map(Slot::snapshot).toList(); }

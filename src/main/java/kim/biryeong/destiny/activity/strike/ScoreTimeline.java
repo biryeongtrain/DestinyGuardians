@@ -1,21 +1,21 @@
-package kim.biryeong.destiny.strike.devils;
+package kim.biryeong.destiny.activity.strike;
 
 import com.google.gson.*;
 
 /** Pure per-listener score clock; all times are monotonic nanoseconds. */
-final class DevilsMusicTimeline {
+final class ScoreTimeline {
     record Change(boolean stop, Integer segment, boolean transition) {
         static final Change NONE=new Change(false,null,false);
     }
     private final JsonObject data;
     private final long seed;
-    private DevilsMusicPlaylist playlist;
+    private ScorePlaylist playlist;
     private int section=-1, pending=-1;
     private Integer segment;
     private JsonObject pendingRule;
     private long startedAt, nextAt, switchAt, serial;
     private boolean finished;
-    DevilsMusicTimeline(JsonObject data,long seed) {this.data=data;this.seed=seed;}
+    ScoreTimeline(JsonObject data,long seed) {this.data=data;this.seed=seed;}
     int section(){return section;}
     Change update(int desired,long now) {
         if(desired<0) {boolean stop=segment!=null;reset();return new Change(stop,null,false);}
@@ -53,7 +53,7 @@ final class DevilsMusicTimeline {
         }
         if(tree==null)throw new IllegalStateException("Missing playlist "+wanted);
         int jump=rule.getAsJsonObject("destination").get("uJumpToID").getAsInt();
-        playlist=new DevilsMusicPlaylist(tree,seed+serial++,jump);
+        playlist=new ScorePlaylist(tree,seed+serial++,jump);
     }
     private int container(int state) {
         if(state<0)return 0;

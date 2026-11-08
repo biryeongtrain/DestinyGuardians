@@ -1,10 +1,10 @@
-package kim.biryeong.destiny.strike.devils;
+package kim.biryeong.destiny.activity.strike;
 
 import com.google.gson.JsonObject;
 import java.util.*;
 
 /** Lazy Wwise playlist tree: Loop=0 is unbounded, never eagerly expanded. */
-final class DevilsMusicPlaylist {
+public final class ScorePlaylist {
     private final Random random;
     private final Deque<Frame> stack = new ArrayDeque<>();
     private final Map<Integer,Deque<Integer>> recent = new HashMap<>();
@@ -17,8 +17,8 @@ final class DevilsMusicPlaylist {
         List<JsonObject> children;
         Frame(JsonObject node) { this.node=node; }
     }
-    DevilsMusicPlaylist(JsonObject tree, long seed) { this(tree,seed,0); }
-    DevilsMusicPlaylist(JsonObject tree, long seed, int jump) {
+    public ScorePlaylist(JsonObject tree, long seed) { this(tree,seed,0); }
+    public ScorePlaylist(JsonObject tree, long seed, int jump) {
         random=new Random(seed);
         if(jump==0){stack.push(new Frame(tree));return;}
         var path=new ArrayList<JsonObject>();
@@ -41,7 +41,7 @@ final class DevilsMusicPlaylist {
         for(var child:node.getAsJsonArray("children"))if(pathTo(child.getAsJsonObject(),jump,path))return true;
         path.removeLast();return false;
     }
-    Integer next() {
+    public Integer next() {
         for (int budget=0;budget<10000 && !stack.isEmpty();budget++) {
             var f=stack.peek();
             int segment=number(f.node,"SegmentID");

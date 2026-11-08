@@ -11,15 +11,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public final class DevilsVoiceFixture {
     private static void check(GameTestHelper h, boolean ok, String text) { h.assertTrue(ok, Component.literal(text)); }
-    private static boolean subtitle(ServerPlayer p) { return DisplayHud.getHuds(p).keySet().stream().anyMatch(k -> k.startsWith("destiny:devils_subtitle/")); }
+    private static boolean subtitle(ServerPlayer p) { return DisplayHud.getHuds(p).keySet().stream().anyMatch(k -> k.startsWith("destiny:strike_subtitle/")); }
     public static void fallback(GameTestHelper h, ServerPlayer a, ServerPlayer b, java.util.function.Function<ServerPlayer, List<net.minecraft.network.protocol.Packet<?>>> packets) {
         var audience = new ArrayList<ServerPlayer>(); audience.add(a);
         var completed = new AtomicInteger();
-        try (var voice = new DevilsVoicePlayback(() -> List.copyOf(audience), token -> completed.incrementAndGet(), line -> false)) {
+        try (var voice = DevilsVoiceCatalog.playback(() -> List.copyOf(audience), token -> completed.incrementAndGet(), line -> false)) {
             packets.apply(a); packets.apply(b);
             check(h, voice.start(1,"80b59f27")==0 && voice.remaining()==60, "Unavailable clip reports fallback to director");
             check(h, subtitle(a) && !subtitle(b), "Only current audience receives fallback subtitle");
-            var speaker=DisplayHud.getHud(a,"destiny:devils_subtitle/speaker");
+            var speaker=DisplayHud.getHud(a,"destiny:strike_subtitle/speaker");
             check(h, speaker!=null && speaker.getExtraData("shape").toString().startsWith("임무 안내:"), "Authored notice is not attributed to source character");
             check(h, packets.apply(a).stream().noneMatch(ClientboundSoundEntityPacket.class::isInstance), "Missing audio sends no sound packet");
             voice.disconnected(a); audience.clear(); audience.add(b);
@@ -38,7 +38,7 @@ public final class DevilsVoiceFixture {
     }
     public static void original(GameTestHelper h, ServerPlayer player, java.util.function.Function<ServerPlayer, List<net.minecraft.network.protocol.Packet<?>>> packets) {
         var completed = new AtomicInteger();
-        try(var voice=new DevilsVoicePlayback(() -> List.of(player), token -> completed.incrementAndGet())) {
+        try(var voice=DevilsVoiceCatalog.playback(() -> List.of(player), token -> completed.incrementAndGet())) {
             packets.apply(player);
             int ticks=voice.start(3,"80b59f1e");
             check(h, ticks==DevilsVoiceCatalog.line("80b59f1e").orElseThrow().ticks(), "Original full duration retained");

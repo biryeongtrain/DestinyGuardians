@@ -1,5 +1,7 @@
 package kim.biryeong.destiny.strike.devils;
 
+import kim.biryeong.destiny.activity.strike.StrikeRoster;
+
 import kim.biryeong.destiny.DestinyGuardians;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -50,7 +52,7 @@ public final class DevilsInstances {
     }
     public Optional<Instance> prepare(Collection<UUID> ids) {
         thread();
-        new DevilsRoster(ids); // validate one to three distinct members before acquiring any resources
+        new StrikeRoster(ids, DevilsPlan.MIN_PLAYERS, DevilsPlan.PLAYERS); // validate one to three distinct members before acquiring any resources
         var members = Set.copyOf(ids);
         if (instances.size() >= capacity || members.stream().anyMatch(participants::containsKey)
                 || instances.values().stream().anyMatch(i -> i.state == State.PREPARING)) return Optional.empty();

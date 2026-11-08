@@ -1,9 +1,11 @@
 package kim.biryeong.destiny.strike.devils;
 
+import kim.biryeong.destiny.activity.strike.StrikePausePolicy;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class DevilsPausePolicyTest {
+class StrikePausePolicyTest {
     @Test void fallbackCaptionClosesBeforeTheNextEncounterCanSpawn() {
         int[] closed={0}, spawned={0};
         var director=new DevilsDirector(new DevilsDirector.Host() {
@@ -30,7 +32,7 @@ class DevilsPausePolicyTest {
     }
     @Test void lockedCinematicAudienceAllowsUnavailableBriefingToFinishAfterThreeSeconds() {
         var director=briefing();
-        var policy=DevilsPausePolicy.forPresence(false,true,false);
+        var policy=StrikePausePolicy.forPresence(false,true,false);
         assertTrue(policy.actors(), "Enemies remain paused while every player is input locked");
         director.pause(policy.progress());
         for(int i=0;i<59;i++) director.tick();
@@ -40,20 +42,20 @@ class DevilsPausePolicyTest {
     }
     @Test void absentUnreadyOrDownAudienceFreezesProgressAndActorClocks() {
         var director=briefing();
-        var policy=DevilsPausePolicy.forPresence(false,false,false);
+        var policy=StrikePausePolicy.forPresence(false,false,false);
         director.pause(policy.progress());
         assertTrue(policy.actors());
         for(int i=0;i<1000;i++) director.tick();
         assertEquals(0,director.snapshot().tick());
         assertEquals(DevilsDirector.Phase.BRIEFING,director.phase());
-        director.pause(DevilsPausePolicy.forPresence(false,true,false).progress());
+        director.pause(StrikePausePolicy.forPresence(false,true,false).progress());
         for(int i=0;i<60;i++)director.tick();
         assertEquals(DevilsDirector.Phase.RY_APPROACH,director.phase());
     }
     @Test void checkpointPlacementSuspendsBothClocksEvenWithAnAudience() {
-        var paused=DevilsPausePolicy.forPresence(true,true,true);
+        var paused=StrikePausePolicy.forPresence(true,true,true);
         assertTrue(paused.progress());assertTrue(paused.actors());
-        var active=DevilsPausePolicy.forPresence(false,true,true);
+        var active=StrikePausePolicy.forPresence(false,true,true);
         assertFalse(active.progress());assertFalse(active.actors());
     }
 }

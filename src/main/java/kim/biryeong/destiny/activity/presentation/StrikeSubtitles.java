@@ -1,5 +1,6 @@
-package kim.biryeong.destiny.campaign.presentation;
+package kim.biryeong.destiny.activity.presentation;
 
+import kim.biryeong.destiny.campaign.presentation.ObjectiveTypography;
 import kim.biryeong.minigamelib.displayhud.DisplayHud;
 import kim.biryeong.minigamelib.displayhud.ItemDisplayHud;
 import kim.biryeong.minigamelib.displayhud.TextDisplayHud;
@@ -14,10 +15,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomModelData;
 import java.util.List;
 
-/** Strike-owned subtitle rows, using the Korean bitmap font and its measured advances. */
-public final class DevilsSubtitles {
-    private static final String PREFIX = "destiny:devils_subtitle/";
-    private DevilsSubtitles() { }
+/** Strike subtitle rows shared by every strike, using the Korean bitmap font and its measured advances. */
+public final class StrikeSubtitles {
+    private static final String PREFIX = "destiny:strike_subtitle/";
+    private StrikeSubtitles() { }
 
     /** Called for the current clip, including after a world-ready acknowledgement/reconnect. */
     public static void render(ServerPlayer player, String speaker, String text) {

@@ -1,5 +1,11 @@
 package kim.biryeong.destiny.strike.devils;
 
+import kim.biryeong.destiny.activity.strike.StrikeRoster;
+import kim.biryeong.destiny.activity.strike.StrikeVoicePlayback;
+import kim.biryeong.destiny.activity.strike.StrikeAdmission;
+import kim.biryeong.destiny.activity.strike.StrikePausePolicy;
+import kim.biryeong.destiny.activity.strike.StrikeBriefingGate;
+
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.down.GuardianDown;
 import kim.biryeong.destiny.activity.presentation.ActivityFailurePresentation;
@@ -24,7 +30,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private final DevilsInstances.Instance instance;
     private final List<UUID> ids;
     private final Set<UUID> departed = new HashSet<>();
-    private final DevilsRoster roster;
+    private final StrikeRoster roster;
     private final DevilsWorldBuild build;
     private final DevilsDirector director;
     private final DevilsActors actors;
@@ -38,7 +44,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private final Map<UUID, kim.biryeong.destiny.activity.presentation.ObjectiveGuide> guides = new HashMap<>();
     private final DevilsLair.Presentation presentation;
     private final DevilsMusic music = new DevilsMusic();
-    private DevilsVoicePlayback voice;
+    private StrikeVoicePlayback voice;
     private DevilsDirector.Cue speaking;
     private final Map<UUID, GuardianDown.Options> downOptions = new HashMap<>();
     private final Map<UUID, Vec3> downBodies = new HashMap<>();
@@ -57,14 +63,14 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     private long createdAt, admittedAt, gatherAt = -1, completeAt = -1;
     private boolean resetPlacement;
     /** Non-null from admission until the briefing begins. */
-    private DevilsBriefingGate briefingGate;
+    private StrikeBriefingGate briefingGate;
     private UUID qaStatsTarget;
 
     DevilsSession(MinecraftServer server, DevilsInstances instances, DevilsInstances.Instance instance,
                   List<ServerPlayer> players) {
         this.server = server; this.instances = instances; this.instance = instance;
         this.ids = players.stream().map(ServerPlayer::getUUID).toList();
-        roster = new DevilsRoster(ids); build = new DevilsWorldBuild(instance.level());
+        roster = new StrikeRoster(ids, DevilsPlan.MIN_PLAYERS, DevilsPlan.PLAYERS); build = new DevilsWorldBuild(instance.level());
         director = new DevilsDirector(this); recovery = new DevilsRecovery(instance.id(), ids, this);
         failure = new ActivityFailurePresentation(instance.id());
         supplies = new DevilsSupplies(ids);
@@ -83,8 +89,8 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         instances.own(instance, failure::close);
         instances.own(instance, attemptStats::close);
     }
-    private DevilsVoicePlayback newVoice() {
-        return new DevilsVoicePlayback(this::players, token -> {
+    private StrikeVoicePlayback newVoice() {
+        return DevilsVoiceCatalog.playback(this::players, token -> {
             var cue = speaking;
             if (cue != null && cue.serial() == token && cue.generation() == director.generation()) {
                 speaking = null; director.cueFinished(cue);
@@ -142,21 +148,21 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
             }
             if (build.state() != DevilsWorldBuild.State.READY) return;
             if (!supplyStations.prepare()) { problem("Safe supply station placement unavailable"); return; }
-            if (players().size() != DevilsAdmission.count(roster.members(), this::member) || players().stream().anyMatch(p -> !ready(p))) return;
+            if (players().size() != StrikeAdmission.count(roster.members(), this::member) || players().stream().anyMatch(p -> !ready(p))) return;
             if (!place(Zone.RY, players(), true)) return;
             instances.ready(instance); state = State.ADMITTING; admittedAt = now; return;
         }
         if (state == State.ADMITTING) {
             if (now - admittedAt > 1200) { stop("입장 확인 시간 초과"); return; }
             for (var p : players()) roster.ready(p.getUUID(), p.level() == level() && ready(p));
-            if (!DevilsAdmission.ready(roster.members(), this::member)) return;
+            if (!StrikeAdmission.ready(roster.members(), this::member)) return;
             state = State.RUNNING; instances.running(instance); syncPresence();
-            briefingGate = new DevilsBriefingGate(now);
+            briefingGate = new StrikeBriefingGate(now);
         }
         if (briefingGate != null && state == State.RUNNING
                 && briefingGate.ready(now, players().stream().anyMatch(kim.biryeong.destiny.fireteam.Fireteams::dark))) {
             briefingGate = null;
-            director.begin(DevilsAdmission.count(roster.members(), this::member));
+            director.begin(StrikeAdmission.count(roster.members(), this::member));
         }
         for (var p : players()) {
             if (joining.contains(p.getUUID())) {
@@ -184,7 +190,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
         if (failure.state().wiping()) { tickWipe(now); return; }
         boolean paused = roster.connected() == 0 || resetPlacement;
         boolean noTargets = participants().isEmpty();
-        var pause = DevilsPausePolicy.forPresence(paused, players().stream().anyMatch(this::readyLivingAudience), !noTargets);
+        var pause = StrikePausePolicy.forPresence(paused, players().stream().anyMatch(this::readyLivingAudience), !noTargets);
         director.pause(pause.progress()); actors.tick(pause.actors());
         if (resetPlacement) {
             if (place(director.phase().zone(), players(), false)) { resetPlacement = false; resetRecovery(); }
@@ -633,7 +639,7 @@ public final class DevilsSession implements DevilsDirector.Host, DevilsRecovery.
     }
     boolean rejoin(ServerPlayer p, long now) {
         if (!member(p.getUUID()) || state == State.DRAINING || state == State.CLOSED) return false;
-        if (roster.rejoin(p.getUUID(), now) != DevilsRoster.Join.ACCEPTED) { departed.add(p.getUUID()); return false; }
+        if (roster.rejoin(p.getUUID(), now) != StrikeRoster.Join.ACCEPTED) { departed.add(p.getUUID()); return false; }
         supplies.reconnect(p);
         if (state == State.RUNNING) joining.add(p.getUUID());
         return true;

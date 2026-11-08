@@ -13,23 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 /** Metrics from the exact bitmap glyphs sent to the client, in the 20px source layout. */
-final class ObjectiveTypography {
+public final class ObjectiveTypography {
     private static final Map<String, Map<Integer, Integer>> ADVANCES = load();
     private ObjectiveTypography() { }
 
-    static Component text(String text, int color, boolean bold) {
+    public static Component text(String text, int color, boolean bold) {
         var font = new FontDescription.Resource(Identifier.fromNamespaceAndPath("destiny",
                 "rg_objective_" + (bold ? "bold" : "medium")));
         return Component.literal(text).withStyle(s -> s.withFont(font).withColor(color).withBold(false));
     }
 
-    static float width(String text, float size, boolean bold) {
+    public static float width(String text, float size, boolean bold) {
         var metrics = ADVANCES.get(bold ? "bold" : "medium");
         return text.codePoints().map(c -> metrics.getOrDefault(c, metrics.get((int) '?'))).sum() * size / 20f;
     }
 
     /** Character-safe wrapping also handles a long Korean word without spaces. */
-    static List<String> wrap(String text, float maxWidth, float size) {
+    public static List<String> wrap(String text, float maxWidth, float size) {
         var lines = new ArrayList<String>();
         var row = new StringBuilder();
         for (int cp : text.codePoints().toArray()) {

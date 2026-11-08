@@ -1,5 +1,7 @@
 package kim.biryeong.destiny.strike.devils;
 
+import kim.biryeong.destiny.activity.strike.ScorePlaylist;
+
 import com.google.gson.*;
 import org.junit.jupiter.api.Test;
 import java.io.*;
@@ -18,13 +20,13 @@ class DevilsMusicTest {
         throw new AssertionError("No container");
     }
     @Test void sepiksKeepsIntroEightLoopsAndOutro() throws Exception {
-        var p=new DevilsMusicPlaylist(tree(501705178),1);
+        var p=new ScorePlaylist(tree(501705178),1);
         assertEquals(949958315,p.next());
         for(int i=0;i<8;i++)assertEquals(21796713,p.next());
         assertEquals(756934739,p.next());assertNull(p.next());assertNull(p.next());
     }
     @Test void refineryKeepsAuthoredPairsBeforeRandomLoop() throws Exception {
-        var p=new DevilsMusicPlaylist(tree(979679608),1);
+        var p=new ScorePlaylist(tree(979679608),1);
         for(int id:new int[]{933801940,933801940,402177965,402177965,849805584,849805584})assertEquals(id,p.next());
         var first=new ArrayList<Integer>();var second=new ArrayList<Integer>();
         for(int i=0;i<5;i++)first.add(p.next());
@@ -45,7 +47,7 @@ class DevilsMusicTest {
     @Test void everySelectedSegmentHasPackSoundAndFiniteDuration() throws Exception {
         var d=data();
         for(var row:d.getAsJsonArray("playlists")) {
-            var p=new DevilsMusicPlaylist(row.getAsJsonObject().getAsJsonObject("tree"),42);
+            var p=new ScorePlaylist(row.getAsJsonObject().getAsJsonObject("tree"),42);
             for(int i=0;i<100;i++) {
                 Integer next=p.next();if(next==null)break;
                 var clip=d.getAsJsonObject("segments").getAsJsonObject(next.toString());
