@@ -17,7 +17,7 @@ class SoundAssetsW33Test {
             return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
         }
     }
-    @Test void allPackReferencesAreNamespacedMonoVorbisWithBoundedSize() throws Exception {
+    @Test void packReferencesKeepPositionalMonoAndExactStereoAcquisitionClipsWithBoundedSize() throws Exception {
         var root = definitions();
         ReviewedAudioW234.legacyW102(root);
         var laterSounds = ReviewedAudioW234.laterSoundIds();
@@ -83,7 +83,9 @@ class SoundAssetsW33Test {
                     for (int j = 0; j < Math.min(200, bytes.length - 16); j++)
                         if (bytes[j] == 1 && new String(bytes, j + 1, 6, StandardCharsets.US_ASCII).equals("vorbis")) { i = j; break; }
                     assertTrue(i >= 0, "Vorbis identification: " + name);
-                    assertEquals(1, bytes[i + 11], "Positional effects must be mono: " + name);
+                    boolean acquisition = java.util.Set.of("destiny:loot/acquire_basic", "destiny:loot/acquire_legendary",
+                            "destiny:loot/acquire_exotic").contains(name);
+                    assertEquals(acquisition ? 2 : 1, bytes[i + 11], "Source stereo UI acquisition / mono positional effects: " + name);
                 }
             }
         }

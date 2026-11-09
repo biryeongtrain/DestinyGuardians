@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
 
-/** Owner-only loot cues (player category). No original engram/chest audio is extracted yet: transmat + vanilla. */
+/** Owner-only world-drop/chest cues (player category); acquisition recordings live in {@link AcquisitionSounds}. */
 final class LootSounds {
     private LootSounds() { }
 
@@ -21,10 +21,6 @@ final class LootSounds {
     static void drop(ServerPlayer p, Vec3 at, boolean exotic) {
         play(p, "minecraft:block.amethyst_block.chime", at, 1.2f, exotic ? .7f : 1.1f);
         play(p, "minecraft:block.beacon.activate", at, .35f, exotic ? 1.2f : 1.8f);
-    }
-    static void pickup(ServerPlayer p) {
-        play(p, "destiny:guardian_rises.sfx.transmat", p.position(), .6f, 1.4f);
-        play(p, "minecraft:entity.experience_orb.pickup", p.position(), .5f, .7f);
     }
     static void chest(ServerPlayer p, Vec3 at) {
         play(p, "minecraft:block.iron_trapdoor.open", at, .9f, .7f);
@@ -43,5 +39,4 @@ final class LootSounds {
     }
     static void glimmer(ServerPlayer p, float pitch) { play(p, "minecraft:entity.experience_orb.pickup", p.position(), .32f, Math.min(2f, pitch)); }
     static void chestLeave(ServerPlayer p, Vec3 at) { play(p, "destiny:guardian_rises.sfx.transmat", at, .5f, 1.4f); }
-    static void decode(ServerPlayer p) { play(p, "minecraft:block.enchantment_table.use", p.position(), .8f, 1.2f); }
 }

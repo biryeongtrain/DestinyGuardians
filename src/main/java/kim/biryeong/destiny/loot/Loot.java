@@ -230,7 +230,7 @@ public final class Loot {
     public static boolean collect(ServerPlayer p, LootRoller.Reward r, String source) {
         if (r.weapon() != null) {
             String error = GearAcquisition.store(p, r.weapon());
-            if (error == null) { announce(p, r, source); LootSounds.pickup(p); return true; }
+            if (error == null) { announce(p, r, source); return true; }
             if (exotic(r) || profile(p).engrams().size() >= LootProfile.ENGRAM_CAP) {
                 p.sendOverlayMessage(Component.literal(error));
                 return false;
@@ -247,7 +247,6 @@ public final class Loot {
         }
         p.setAttached(PROFILE, profile(p).plus(r.engram()));
         announce(p, r, source);
-        LootSounds.pickup(p);
         return true;
     }
 
@@ -260,7 +259,6 @@ public final class Loot {
         String error = GearAcquisition.store(p, weapon);
         if (error != null) return error;
         p.setAttached(PROFILE, profile(p).minus(index));
-        LootSounds.decode(p);
         announce(p, LootRoller.Reward.weapon(weapon), "엔그램 해독");
         kim.biryeong.destiny.tutorial.Guide.event(p, kim.biryeong.destiny.tutorial.Guide.Event.ENGRAM_DECODED);
         return null;
@@ -283,7 +281,10 @@ public final class Loot {
             var stack = LootRoller.create(entry.get(), spec[1], p.getRandom());
             var slot = WeaponLoadout.slot(p, stack, entry.get());
             var inv = p.getInventory();
-            if (inv.getItem(slot.hotbar()).isEmpty()) { inv.setItem(slot.hotbar(), stack); p.setAttached(WeaponLoadout.ENABLED, true); }
+            if (inv.getItem(slot.hotbar()).isEmpty()) {
+                inv.setItem(slot.hotbar(), stack); p.setAttached(WeaponLoadout.ENABLED, true);
+                AcquisitionSounds.play(p, WeaponRarity.of(stack));
+            }
             else if (GearAcquisition.store(p, stack) != null) continue;
             announce(p, LootRoller.Reward.weapon(stack), "수호자 기본 무장");
         }
@@ -291,7 +292,6 @@ public final class Loot {
         p.containerMenu.broadcastChanges();
         WeaponHandling.update(p);
         p.setAttached(PROFILE, profile(p).withStarter());
-        LootSounds.pickup(p);
         return true;
     }
 
@@ -420,6 +420,7 @@ public final class Loot {
 
     private static void announce(ServerPlayer p, LootRoller.Reward r, String source) {
         if (r.engram() != null) {
+            AcquisitionSounds.play(p, rarity(r));
             LootToast.show(p, engramIcon(r.engram()), null, engramName(r.engram()), source, band(rarity(r)));
             return;
         }

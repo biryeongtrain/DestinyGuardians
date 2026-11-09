@@ -71,6 +71,8 @@ public final class GearAcquisition {
 
     /** Put an already-built weapon stack (perks rolled) into storage. Null on success; never displaces items. */
     public static String store(ServerPlayer p, ItemStack stack) {
-        return kim.biryeong.destiny.inventory.WeaponStorage.store(p, stack);
+        String error = kim.biryeong.destiny.inventory.WeaponStorage.store(p, stack);
+        if (error == null) kim.biryeong.destiny.loot.AcquisitionSounds.play(p, WeaponRarity.of(stack));
+        return error;
     }
 }
