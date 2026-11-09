@@ -1,6 +1,5 @@
 package kim.biryeong.destiny.tutorial;
 
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.serialization.Codec;
 import kim.biryeong.destiny.DestinyGuardians;
 import kim.biryeong.destiny.activity.strike.Strikes;
@@ -151,12 +150,14 @@ public final class Guide {
             if (s != null) TutorialUi.remove(h.getPlayer());
         });
         CommandRegistrationCallback.EVENT.register((d, access, env) -> {
-            for (String name : new String[]{"안내", "guide"}) d.register(Commands.literal(name)
-                    .executes(c -> command(c.getSource().getPlayerOrException(), "시작"))
-                    .then(Commands.argument("항목", StringArgumentType.word())
-                            .suggests((c, b) -> net.minecraft.commands.SharedSuggestionProvider.suggest(
-                                    List.of("시작", "공격전", "엔그램", "분해", "경매장", "다음", "중단", "나중에"), b))
-                            .executes(c -> command(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "항목")))));
+            for (String name : new String[]{"안내", "guide"}) {
+                var root = Commands.literal(name)
+                        .executes(c -> command(c.getSource().getPlayerOrException(), "시작"));
+                // Brigadier word() only accepts ASCII unquoted characters; the chat buttons send Korean.
+                for (String action : List.of("시작", "공격전", "엔그램", "분해", "경매장", "다음", "중단", "나중에"))
+                    root.then(Commands.literal(action).executes(c -> command(c.getSource().getPlayerOrException(), action)));
+                d.register(root);
+            }
         });
     }
 
@@ -184,7 +185,13 @@ public final class Guide {
 
     private static int command(ServerPlayer p, String arg) {
         switch (arg) {
-            case "중단", "나중에" -> {
+            case "나중에" -> {
+                end(p, false);
+                p.setAttached(STATE, p.getAttachedOrElse(STATE, 0) | OFFERED);
+                p.sendSystemMessage(Component.literal("안내는 나중에 진행할게요. /안내 로 언제든 시작할 수 있어요."));
+                return 1;
+            }
+            case "중단" -> {
                 if (!end(p, true)) p.sendSystemMessage(Component.literal("진행 중인 안내가 없습니다."));
                 return 1;
             }
