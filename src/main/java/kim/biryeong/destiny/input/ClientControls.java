@@ -7,7 +7,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -28,11 +30,12 @@ public final class ClientControls {
     }
 
     private static final class Session {
+        final ServerGamePacketListenerImpl connection;
         final int joined;
         boolean installed, recommended, announced;
         String version = "";
         final ControlNotices notices = new ControlNotices();
-        Session(int joined) { this.joined = joined; }
+        Session(ServerPlayer player, int joined) { this.connection = player.connection; this.joined = joined; }
     }
 
     private ClientControls() { }
@@ -40,45 +43,65 @@ public final class ClientControls {
     public static void init() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             forget(handler.getPlayer());
-            SESSIONS.put(handler.getPlayer().getUUID(), new Session(server.getTickCount()));
+            SESSIONS.put(handler.getPlayer().getUUID(), new Session(handler.getPlayer(), server.getTickCount()));
         });
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> forget(handler.getPlayer()));
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> SESSIONS.clear());
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-                gcb(player);
-                Session session = SESSIONS.get(player.getUUID());
-                boolean graceElapsed = server.getTickCount() - session.joined >= HANDSHAKE_GRACE_TICKS;
-                if (session.installed && !session.announced && (!session.version.isEmpty() || graceElapsed)) {
-                    session.announced = true;
-                    var message = installedMessage(player.getName(), session.version);
-                    for (var recipient : server.getPlayerList().getPlayers())
-                        SESSIONS.computeIfAbsent(recipient.getUUID(), id -> new Session(server.getTickCount()))
-                                .notices.announce(player.getUUID(), message);
-                } else if (!session.installed && !session.recommended && graceElapsed) {
-                    session.recommended = true;
-                    session.notices.recommend(recommendation());
+        ServerTickEvents.END_SERVER_TICK.register(ClientControls::tick);
+    }
+
+    public static void tick(MinecraftServer server) {
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            Session session = refresh(player);
+            if (session == null) continue;
+            boolean graceElapsed = server.getTickCount() - session.joined >= HANDSHAKE_GRACE_TICKS;
+            if (session.installed && !session.announced && (!session.version.isEmpty() || graceElapsed)) {
+                session.announced = true;
+                var message = installedMessage(player.getName(), session.version);
+                for (var recipient : server.getPlayerList().getPlayers()) {
+                    var target = session(recipient);
+                    if (target != null) target.notices.announce(player.getUUID(), message);
                 }
+            } else if (!session.installed && !session.recommended && graceElapsed) {
+                session.recommended = true;
+                session.notices.recommend(recommendation());
             }
-            // Drain after all detections: a late handshake cancels a queued recommendation
-            // before any recipient can receive it. Each connection owns its own backlog.
-            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-                var session = SESSIONS.get(player.getUUID());
-                boolean blocked = player.hasDisconnected() || !player.connection.hasClientLoaded()
-                        || kim.biryeong.destiny.activity.strike.Strikes.participating(player)
-                        || kim.biryeong.destiny.hud.CombatHud.cinematic.test(player);
-                session.notices.drain(blocked).forEach(player::sendSystemMessage);
-            }
-        });
+        }
+        // Drain after all detections: a late handshake cancels a queued recommendation
+        // before any recipient can receive it. Each connection owns its own backlog.
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            var session = SESSIONS.get(player.getUUID());
+            // Disconnect/cleanup may remove a session between detection and delivery.
+            if (session == null || session.connection != player.connection || player.hasDisconnected()) continue;
+            boolean blocked = !player.connection.hasClientLoaded()
+                    || kim.biryeong.destiny.activity.strike.Strikes.participating(player)
+                    || kim.biryeong.destiny.hud.CombatHud.cinematic.test(player);
+            session.notices.drain(blocked).forEach(player::sendSystemMessage);
+        }
     }
 
     /** The optional GCB bridge supplies protocol state, never a client name or debug camera flag. */
     public static void setDetector(Function<ServerPlayer, Capability> source) { detector = source; }
 
     public static boolean gcb(ServerPlayer player) {
-        Session session = SESSIONS.computeIfAbsent(player.getUUID(),
-                ignored -> new Session(player.level().getServer().getTickCount()));
+        var session = refresh(player);
+        return session != null && session.installed;
+    }
+
+    private static Session session(ServerPlayer player) {
+        if (player.hasDisconnected()) return null;
+        return SESSIONS.compute(player.getUUID(), (id, previous) ->
+                previous != null && previous.connection == player.connection ? previous
+                        : new Session(player, player.level().getServer().getTickCount()));
+    }
+
+    private static Session refresh(ServerPlayer player) {
+        Session session = session(player);
+        if (session == null) return null;
         Capability current = detector.apply(player);
+        // A callback can retire this connection. Never resurrect it or update a replacement session.
+        if (player.hasDisconnected() || session.connection != player.connection
+                || SESSIONS.get(player.getUUID()) != session) return null;
         if (current.detected()) {
             session.notices.installed();
             if (!session.installed) Guardians.runtime(player).lastShiftPressTick = Integer.MIN_VALUE / 2;
@@ -88,15 +111,18 @@ public final class ClientControls {
         }
         // GuardianRuntime is reset on death/dimension change; this session lasts until disconnect.
         if (session.installed) Guardians.runtime(player).gcbClient = true;
-        return session.installed;
+        return session;
     }
 
-    public static void forget(ServerPlayer player) { SESSIONS.remove(player.getUUID()); }
+    public static void forget(ServerPlayer player) {
+        SESSIONS.computeIfPresent(player.getUUID(), (id, session) -> session.connection == player.connection ? null : session);
+    }
 
     /** The existing 4.2 client predicts server-authoritative Mob mounts automatically. */
     public static boolean mountPrediction(ServerPlayer player) {
-        if (!gcb(player)) return false;
-        String version = SESSIONS.get(player.getUUID()).version;
+        var session = refresh(player);
+        if (session == null || !session.installed) return false;
+        String version = session.version;
         var match = java.util.regex.Pattern.compile("^(\\d+)\\.(\\d+)(?:\\.|$|[+\\-]).*").matcher(version);
         if (!match.matches()) return false;
         try {
