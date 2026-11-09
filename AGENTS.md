@@ -28,6 +28,8 @@
 
 ## Mac 인게임 QA
 
+- **Copper Golem 백그라운드 실행 — 사용자 지시 (2026-11-09):** 다음 격리 인게임 QA부터 `-PvisionControlBackground=true`를 기본으로 켠다. 전용 실행 폴더와 허용된 로컬 QA 서버에만 적용하고, 기존 인증 토큰·입력 lease 정리·`keep_awake.py` 시간 제한을 유지한다. 일반 Minecraft 프로필과 macOS 잠금·인증 설정은 변경하지 않는다.
+
 - **이번 부재중 세션 — 사용자 지시 (2026-10-28):** 사용자가 작업 전48시간 잠자기/자동 화면 꺼짐 방지를 명시적으로 요청했다. 별도 소유 `caffeinate -dimsu -t172800` PID79904, 만료2026-10-30 03:41:56+09:00을 유지한다. 기록: `/Users/qf/.codex/tmp/destiny-awake-48h-20261028/session.json`. 개별 QA 정리로 이48시간 assertion을 해제하지 않는다. 일반12시간 QA wrapper 제한과 별도이며 암호/인증/수동 잠금·덮개/재부팅은 우회하지 않는다.
 
 - 사용자가 승인한 격리 QA만 조작한다. 일반 Minecraft 프로필·월드와 Blender/Blockbench의 미저장 작업은 보존한다.
