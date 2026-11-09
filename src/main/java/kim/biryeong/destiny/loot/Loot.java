@@ -284,6 +284,7 @@ public final class Loot {
             if (inv.getItem(slot.hotbar()).isEmpty()) {
                 inv.setItem(slot.hotbar(), stack); p.setAttached(WeaponLoadout.ENABLED, true);
                 AcquisitionSounds.play(p, WeaponRarity.of(stack));
+                AcquisitionNotices.weapon(p, stack);
             }
             else if (GearAcquisition.store(p, stack) != null) continue;
             announce(p, LootRoller.Reward.weapon(stack), "수호자 기본 무장");
@@ -421,13 +422,14 @@ public final class Loot {
     private static void announce(ServerPlayer p, LootRoller.Reward r, String source) {
         if (r.engram() != null) {
             AcquisitionSounds.play(p, rarity(r));
+            AcquisitionNotices.engram(p, r.engram());
             LootToast.show(p, engramIcon(r.engram()), null, engramName(r.engram()), source, band(rarity(r)));
             return;
         }
         var entry = WeaponItems.entry(r.weapon());
         if (entry.isEmpty()) return;
         var skin = WeaponSkins.of(r.weapon());
-        String name = skin.map(WeaponSkins.Skin::display).orElse(WeaponScreenText.weapon(entry.get().id(), entry.get().name()));
+        String name = AcquisitionNotices.weaponName(r.weapon());
         String icon = GearIcons.weapon(skin.map(WeaponSkins.Skin::id).orElse(entry.get().id())).orElse(null);
         var tier = rarity(r);
         LootToast.show(p, icon, entry.get().id(), name, source + "  ·  " + tier.label() + " " + WeaponScreenText.family(entry.get().family()),
