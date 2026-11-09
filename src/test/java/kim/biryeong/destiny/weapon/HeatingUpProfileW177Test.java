@@ -51,7 +51,7 @@ class HeatingUpProfileW177Test {
     @Test void supportsOnlyCanonicalEntriesFromExactSelected65() throws Exception {
         var entries = catalog();
         assertEquals(65, entries.size());
-        assertEquals(entries, WeaponCatalog.all());
+        assertEquals(entries, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList());
         for (var e : entries) assertEquals(IDS.contains(e.id()), HeatingUpProfile.supports(e), e.id());
         assertFalse(HeatingUpProfile.supports(null));
         assertFalse(HeatingUpProfile.supports(new WeaponCatalog.Entry(null, null, null, null, null, null)));

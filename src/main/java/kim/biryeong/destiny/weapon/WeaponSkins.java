@@ -78,6 +78,14 @@ public final class WeaponSkins {
                 }
             }
         } catch (java.io.IOException e) { throw new IllegalStateException("Unreadable W325 registry", e); }
+        for (String id : LegendaryWeapons.ids()) {
+            var catalog = LegendaryWeapons.field(id, "catalog");
+            var meta = LegendaryWeapons.field(id, "characteristics");
+            var skin = new Skin(LegendaryWeapons.baseId(id), id, catalog.get("name").getAsString(),
+                    "destiny:item/weapon/w327/" + id, "destiny:item/hud/w327/ammo_" + id,
+                    WeaponRarity.LEGENDARY, LegendaryWeapons.name(id), meta.get("bungieHash").getAsLong());
+            if (out.putIfAbsent(id, skin) != null) throw new IllegalStateException("Duplicate legendary skin " + id);
+        }
         return List.copyOf(out.values());
     }
 
@@ -86,22 +94,29 @@ public final class WeaponSkins {
     /** Skins of a tier, in registry order. */
     public static List<Skin> ofRarity(WeaponRarity rarity) {
         var out = new ArrayList<Skin>();
-        for (var s : ALL) if (s.rarity() == rarity) out.add(s);
+        for (var s : ALL) if (s.rarity() == rarity && !LegendaryWeapons.contains(s.id())) out.add(s);
         return out;
     }
 
     /** The skin only applies to the weapon it was authored for. */
     public static Optional<Skin> of(ItemStack stack) {
+        var identity = WeaponModels.entry(stack);
+        if (identity.isPresent() && LegendaryWeapons.contains(identity.get().id())) return find(identity.get().id());
         var data = stack.get(DataComponents.CUSTOM_DATA);
         if (data == null) return Optional.empty();
         var skin = data.copyTag().getString(TAG).flatMap(WeaponSkins::find);
         if (skin.isEmpty()) return skin;
+        if (LegendaryWeapons.contains(skin.get().id())) return Optional.empty();
         return WeaponModels.entry(stack).filter(e -> e.id().equals(skin.get().base())).isPresent() ? skin : Optional.empty();
     }
 
     public static void apply(ItemStack stack, String skinId) {
         var skin = find(skinId).orElseThrow(() -> new IllegalArgumentException("Unknown weapon skin " + skinId));
         var entry = WeaponModels.entry(stack).orElseThrow();
+        if (LegendaryWeapons.contains(skinId)) {
+            if (!entry.id().equals(skinId)) throw new IllegalArgumentException("Legendary identity is not a cosmetic skin: " + skinId);
+            return;
+        }
         if (!entry.id().equals(skin.base())) throw new IllegalArgumentException(skinId + " is not a skin of " + entry.id());
         var data = stack.get(DataComponents.CUSTOM_DATA);
         CompoundTag tag = data == null ? new CompoundTag() : data.copyTag();

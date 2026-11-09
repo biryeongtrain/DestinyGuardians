@@ -31,9 +31,10 @@ public final class WeaponInsertPresentation {
     }
     private static final Map<ItemStack, Binding> ACTIVE = new IdentityHashMap<>();
     private WeaponInsertPresentation() {}
-    public static boolean supports(WeaponCatalog.Entry e) { return e != null && (e.id().equals("long_arm") || e.id().equals("first_in_last_out") || e.id().equals("mindbender_s_ambition_adept") || e.id().equals("dust_rock_blues") || e.id().equals("ikelos_sg_v1_0_1") || e.id().equals("parcel_of_stardust_fell_to_earth")); }
+    public static boolean supports(WeaponCatalog.Entry e) { e = LegendaryWeapons.base(e); return e != null && (e.id().equals("long_arm") || e.id().equals("first_in_last_out") || e.id().equals("mindbender_s_ambition_adept") || e.id().equals("dust_rock_blues") || e.id().equals("ikelos_sg_v1_0_1") || e.id().equals("parcel_of_stardust_fell_to_earth")); }
     public static Identifier model() { return Identifier.parse("destiny:weapon_insert_w222_long_arm/long_arm"); }
     public static Identifier model(WeaponCatalog.Entry entry) {
+        entry = LegendaryWeapons.base(entry);
         if (!supports(entry)) throw new IllegalArgumentException("No insert presentation: " + entry);
         return switch (entry.id()) {
             case "long_arm" -> model();

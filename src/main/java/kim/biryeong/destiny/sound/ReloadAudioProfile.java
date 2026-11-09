@@ -40,6 +40,7 @@ public final class ReloadAudioProfile {
             }
             // Fail closed if an eligible base weapon or an implemented modifier was accidentally omitted.
             for(var entry:WeaponCatalog.all()) {
+                if (LegendaryWeapons.contains(entry.id())) continue;
                 var p=WeaponProfile.forEntry(entry);
                 if(p.mode()==WeaponProfile.Mode.MELEE || p.shellReload() || entry.family().equals("bow"))continue;
                 if(!result.containsKey(key(entry.id(),p.firstReloadTicks())))throw new IllegalStateException("Missing base reload "+entry.id());
@@ -54,8 +55,15 @@ public final class ReloadAudioProfile {
         }catch(java.io.IOException e){throw new IllegalStateException(e);}
     }
     public static Optional<Clip> find(WeaponCatalog.Entry entry,int ticks) {
-        return entry==null || !WeaponCatalog.find(entry.id()).filter(entry::equals).isPresent()
-                ?Optional.empty():Optional.ofNullable(CLIPS.get(key(entry.id(),ticks)));
+        if (entry == null || WeaponCatalog.find(entry.id()).filter(entry::equals).isEmpty()) return Optional.empty();
+        var clip = CLIPS.get(key(entry.id(), ticks));
+        if (clip == null && LegendaryWeapons.contains(entry.id())) {
+            // Explicit source presentation reuse, not a claim of a newly time-stretched audio asset.
+            var base = LegendaryWeapons.base(entry);
+            clip = CLIPS.get(key(base.id(), ticks));
+            if (clip == null) clip = CLIPS.get(key(base.id(), WeaponProfile.forEntry(base).firstReloadTicks()));
+        }
+        return Optional.ofNullable(clip);
     }
     public static Collection<Clip> all() { return CLIPS.values(); }
 }

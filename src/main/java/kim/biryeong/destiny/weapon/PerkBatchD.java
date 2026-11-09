@@ -173,7 +173,7 @@ public final class PerkBatchD {
         if (!valid(owner) || contact == null || !(actual > 0)) return;
         if (killed) owner(owner, true).cycle.weaponKill(now(owner)); // Master of Arms: any weapon final blow.
         if (token == null || token.owner != owner) return;
-        if (token.coldSteel && contact.isAlive()) slow(contact, token.heavy);
+        if (token.coldSteel && contact.isAlive()) slow(owner, contact, token.heavy);
         if (token.duelist && killed) owner(owner, true).cycle.swordKill(token.source);
         if (token.turnabout && pre != null && shieldBroken(contact, pre)) grantOvershield(owner);
     }
@@ -185,10 +185,11 @@ public final class PerkBatchD {
         }
         return pre.absorption > 0 && contact.getAbsorptionAmount() <= 0;
     }
-    private static void slow(LivingEntity target, boolean heavy) {
+    private static void slow(ServerPlayer owner, LivingEntity target, boolean heavy) {
         int ticks = PerkBatchDProfile.ticks(PerkBatchDProfile.COLD_STEEL, target instanceof Player ? "pvpSlowTicks" : "pveSlowTicks");
         int amp = PerkBatchDProfile.ticks(PerkBatchDProfile.COLD_STEEL, heavy ? "heavyAmplifier" : "lightAmplifier");
-        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, ticks, amp));
+        if (target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, ticks, amp)))
+            PerkExpansionSupport.debuffApplied(owner, target);
     }
 
     private static void flashCounter(ServerPlayer p, ItemStack stack) {
@@ -216,8 +217,8 @@ public final class PerkBatchD {
             float factor = near + (far - near) * (float) Math.min(1, distance / radius);
             WeaponRuntime.perkDamage(p, target, base * factor, point, entry);
             if (!target.isAlive()) continue;
-            Statuses.apply(target, Keyword.BLINDED, disorient);
-            if (coldSteel) slow(target, true);
+            Statuses.apply(p, target, Keyword.BLINDED, disorient);
+            if (coldSteel) slow(p, target, true);
         }
         Fx.ring(p, level, p.position().add(0, .5, 0), Math.min(radius, 3), WeaponCharacteristics.of(entry).damage().color(), 24);
     }

@@ -111,10 +111,11 @@ public final class PerkBatchCProfile {
     }
     public static List<String> ids() { return IDS; }
     public static boolean has(String id) { return id != null && ROLLS.containsKey(id); }
-    public static List<WeaponPerks.Roll> rolls(String id) { return ROLLS.getOrDefault(id, List.of()); }
+    public static List<WeaponPerks.Roll> rolls(String id) { return LegendaryPerks.expandRolls(id, ROLLS.getOrDefault(id, List.of())); }
     public static long hash(String id) { return HASHES.getOrDefault(id, 0L); }
     /** Fast pre-filter: does this catalog weapon roll any batch C trait. */
-    public static boolean rolledBy(String weaponId) { return WEAPONS.contains(weaponId); }
+    public static boolean rolledBy(String weaponId) { return WEAPONS.contains(weaponId) || IDS.stream().anyMatch(id ->
+        LegendaryPerks.extraRolls(id).stream().anyMatch(r -> r.id().equals(weaponId))); }
     public static String name(String id) { var l = LABELS.get(id); return l == null ? id : l.name(); }
     public static List<WeaponPerks.Roll> pulseMonitorAliases() { return List.of(DATA.pulseMonitorAliases); }
     public static AdaptiveRule adaptive() { return DATA.mechanics.adaptiveMunitions; }

@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Pure assets/profile and actual 26.3 client codecs. Runtime/pack rendering remain separate. */
 class WeaponIzanagiScopeW162Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final Path ASSETS = Path.of("src/main/resources/assets/destiny");
     private static final String NAME = "scope_w162_izanagis_burden_";
     private static WeaponCatalog.Entry izanagi() { return WeaponCatalog.find("izanagis_burden").orElseThrow(); }
@@ -32,7 +33,7 @@ class WeaponIzanagiScopeW162Test {
     @Test void addsOnlyIzanagiToFiveExistingScopesAndNeverAHandCannon() throws Exception {
         var ids = Set.of("bite_of_the_fox", "beloved", "apostate", "line_in_the_sand", "stormchaser", "izanagis_burden");
         assertFalse(WeaponScopes.supports(null));
-        for (var entry : WeaponCatalog.all()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             assertEquals(ids.contains(entry.id()), WeaponScopes.supports(entry), entry.id());
             if (entry.family().equals("hand_cannon")) assertFalse(WeaponScopes.supports(entry));
             if (WeaponScopes.supports(entry))

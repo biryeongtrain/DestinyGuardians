@@ -619,7 +619,9 @@ def hud_icon(els, path, skip):
 
 # ------------------------------------------------------------------------------------------------ contract / render
 def contract(base):
-    """Geometry bounds of the base weapon's model leaves: the layout the skin must fit (grip, magazine, sight line)."""
+    """Donor geometry bounds for presentation reference, not target exterior proportions.
+    Keep the original weapon's proportions and adapt grip, moving-part pivots and sight framing separately.
+    """
     md = ASSETS / 'models'
     hits = sorted(p for p in md.rglob(f'*{base}*.json') if re.search(rf'(?<![a-z0-9]){re.escape(base)}(?![a-z0-9])', p.name))
     seen = set()
@@ -642,9 +644,11 @@ def _corners(e):
 
 
 def adscheck(wid):
-    """ADS occlusion check: the ADS camera sits behind the gun on the sight line, so anything the skin puts above the
-    base's own (in-game validated) top profile behind the muzzle blocks the view. For every 0.25 px z slice of the rear
-    two thirds, compare the skin's top y (elements crossing the centre band x 7..9) with the base body's top y there."""
+    """Conservative donor-framing conflict hint, not a visibility or exterior-quality gate.
+    Compare rear-section element bounds with the donor's top profile. Bounds do not account for
+    cutout alpha or the weapon's own sight line. Preserve source geometry; resolve framing separately
+    and verify the actual ADS framebuffer instead of deforming an exterior to pass this comparison.
+    """
     r = reg(wid); base = r['base']; md = ASSETS / 'models'
     cands = [md / f'weapon_sight_w151/{base}_body.json'] + sorted(md.glob(f'weapon_reload_w*_{base}/{base}_body.json')) \
         + sorted(md.glob(f'weapon/*/{base}.json'))
@@ -670,7 +674,7 @@ def adscheck(wid):
         z += .25
     print(f'adscheck {wid} vs {src.relative_to(ROOT)}: z {start:.2f}..{zmax:.2f}')
     if not bad: print('  OK: skin never rises above the base top profile behind the front third'); return
-    print('  ABOVE BASE (z, skin top, base top) — lower these or the ADS view is blocked:')
+    print('  DONOR FRAMING CONFLICT (z, skin top, base top) — preserve source shape; review own sight framing and native ADS:')
     for row in bad: print('   ', row)
 
 

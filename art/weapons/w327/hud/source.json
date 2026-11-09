@@ -1,0 +1,419 @@
+{
+  "stage": "W327",
+  "font_family": "Arial Narrow Bold",
+  "font_size_px": 22,
+  "font_sha256": "fcf34b330033e26c06e9bd466bea5a3e4b2f39272972275369beb7d8b257ed57",
+  "layout_engine": "BASIC",
+  "supersampling": 4,
+  "padding_px": 4,
+  "pillow_version": "13.0.0",
+  "freetype_version": "2.14.3",
+  "provenance": "Original generated system-font labels; no official sprite, ripped asset or bundled font",
+  "recipe": "W200 raster_label: 0.9 horizontal scale capped to padded width, centered LANCZOS coverage; W108 canonical RGBA8 PNG",
+  "recipe_sources": {
+    "scripts/build_perk_hud_w200.py": "0c13f90a1a33b53d22dfc546c06959cb359643f14f63dfd350923c85012c41ec",
+    "scripts/build_feeding_frenzy_hud_w108.py": "e0cf8b7460579a70bbbccf70e1ae0c054ba83730ba5f527165b53e2f824e4d1d"
+  },
+  "max_rows": 4,
+  "labels": [
+    {
+      "key": "precision_instrument",
+      "label": "PRECISION INSTRUMENT",
+      "icon_id": "destiny:gui/hud/perk_precision_instrument_w327",
+      "layout": "COUNT_TIMER",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        115,
+        23
+      ],
+      "horizontal_scale": 0.4954954954954955,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "desperate_measures",
+      "label": "DESPERATE MEASURES",
+      "icon_id": "destiny:gui/hud/perk_desperate_measures_w327",
+      "layout": "COUNT_TIMER",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        116,
+        23
+      ],
+      "horizontal_scale": 0.5069124423963134,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "successful_warm_up",
+      "label": "SUCCESSFUL WARM-UP",
+      "icon_id": "destiny:gui/hud/perk_successful_warm_up_w327",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.39814814814814814,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "keep_away",
+      "label": "KEEP AWAY",
+      "icon_id": "destiny:gui/hud/perk_keep_away_w327",
+      "layout": "FLAG",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        8,
+        1,
+        110,
+        22
+      ],
+      "horizontal_scale": 0.8993135011441648,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "None; short window uses label and marker only"
+    },
+    {
+      "key": "lone_wolf",
+      "label": "LONE WOLF",
+      "icon_id": "destiny:gui/hud/perk_lone_wolf_w327",
+      "layout": "FLAG",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        9,
+        1,
+        109,
+        23
+      ],
+      "horizontal_scale": 0.9004629629629629,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "None; short window uses label and marker only"
+    },
+    {
+      "key": "enlightened_action",
+      "label": "ENLIGHTENED ACTION",
+      "icon_id": "destiny:gui/hud/perk_enlightened_action_w327",
+      "layout": "DECIMAL_COUNT_TIMER",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        116,
+        23
+      ],
+      "horizontal_scale": 0.541871921182266,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "eddy_current",
+      "label": "EDDY CURRENT",
+      "icon_id": "destiny:gui/hud/perk_eddy_current_w327",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.6013986013986014,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "perfect_float",
+      "label": "PERFECT FLOAT",
+      "icon_id": "destiny:gui/hud/perk_perfect_float_w327",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.5771812080536913,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "offhand_strike",
+      "label": "OFFHAND STRIKE",
+      "icon_id": "destiny:gui/hud/perk_offhand_strike_w327",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.5408805031446541,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "loose_change",
+      "label": "LOOSE CHANGE",
+      "icon_id": "destiny:gui/hud/perk_loose_change_w327",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.589041095890411,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "heal_clip",
+      "label": "HEAL CLIP",
+      "icon_id": "destiny:gui/hud/perk_heal_clip_w327",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        3,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.9,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    },
+    {
+      "key": "permeability",
+      "label": "PERMEABILITY",
+      "icon_id": "destiny:gui/hud/perk_permeability_w327",
+      "layout": "FLAG",
+      "size": [
+        118,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        116,
+        22
+      ],
+      "horizontal_scale": 0.819366852886406,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "None; short window uses label and marker only"
+    },
+    {
+      "key": "repulsor_brace",
+      "label": "REPULSOR BRACE",
+      "icon_id": "destiny:gui/hud/perk_repulsor_brace_w327",
+      "layout": "TIMER",
+      "size": [
+        94,
+        24
+      ],
+      "alpha_bounds_px": [
+        2,
+        1,
+        92,
+        23
+      ],
+      "horizontal_scale": 0.5088757396449705,
+      "valid_ticks": [
+        1,
+        400
+      ],
+      "observer": "PerkExpansion*.buffs",
+      "visibility": "Observed source state only; -1 means untimed",
+      "timer": "ceil(observed remaining ticks / 20); never infer or restart duration"
+    }
+  ],
+  "priority": "Legacy enum order preserved; new damage rows follow exotic rows, utility follows existing rows",
+  "source_policy": "Server-runtime observations only; no equipment inference or gameplay values authored by HUD",
+  "native_validation": "Pending master pack/model parser, server and native QA; generation is offline evidence",
+  "pack_bytes": 144466,
+  "pack_files": {
+    "src/main/resources/assets/destiny/textures/item/hud/perk_precision_instrument_w327.png": "9b9f8635de055b1d7ddbbc806afb9a4078dde4141ef25683702ce78c36fd5761",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_precision_instrument_w327.json": "9284c483074cf8c6270ba9134d378fb2a46b93f3d127869a430f8fcf1b145d5f",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_precision_instrument_w327.json": "426ccd7479a1d6cb8e9a1c6622e11c0b114b52e150e4fb7836f30dad44b34c42",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_desperate_measures_w327.png": "3814b0cf53339b3b5e8b1bc1796f1888c2d158695abdfb0fffe519acc31706cd",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_desperate_measures_w327.json": "65fbc9abf18dfe0be6171bb548d3278dc4f3c9759c857a78c60318e62414eb37",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_desperate_measures_w327.json": "716f9f354c7ec2aef4674d9991fa2512fefa0f4110080d8dc027c7fefab58760",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_successful_warm_up_w327.png": "55da590f9fab2bbbdc12e4e42d2fa69a26af77e0a311391bbb275dad0b2bd94a",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_successful_warm_up_w327.json": "53ca101a16f0afdbb47dfe130d801faa808a84f584803bb913b35a06feecc156",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_successful_warm_up_w327.json": "b9eb9c17a592106b4d63781168585897cb38bf599ae1a69dfb3a972f01ed91a6",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_keep_away_w327.png": "b64590fb40ce531e837e1ad50b878736d87c91a969db3d762dd5c6608caa3d54",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_keep_away_w327.json": "62466d469146cc034d68a6e063f6deddd31cfd316bf553fa4fba60b3917e33ab",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_keep_away_w327.json": "f4b67283ba8c2bb3da6df7c003181817df283640ea0aa95bd0dd883f00060a39",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_lone_wolf_w327.png": "8e2c004b1d6dee578cdc9049b8b3d89c1b4a1fd2fc68444acf1a7392768cee8a",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_lone_wolf_w327.json": "426dc738a044b11a84cfc23b4d33119e5889558e50e28be031da16a6c6553eab",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_lone_wolf_w327.json": "cc51daaeae9ddee320bf573a85d674014b0c38fe3ea01604bfcc0e6fe6492313",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_enlightened_action_w327.png": "9387e265805f8e35775325982caf6e6b941c91a05e48a16bc24df2809b2f9835",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_enlightened_action_w327.json": "fc6dbf9df54d33722250d1d4e6df96355ff697628f83bd510354c46035c5597d",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_enlightened_action_w327.json": "c5515efe1574f4f52f9165b00014ab604c499314057cf443e4102086808a8f45",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_eddy_current_w327.png": "7788b92c000cfea2152a84c5a0a18a66a3713de97208657f1aacbc178606e78e",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_eddy_current_w327.json": "3d442767d329123f628b2f7162b5be5609b72f57b9c74948780eaff761110881",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_eddy_current_w327.json": "9dec8db849f3c5a29e1e9a2971da239480686843105bf2dc9c7f08b951448141",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_perfect_float_w327.png": "ff7666c9464239015197c115f2e57a01a3a183c7ab415653d02c0391b690eec4",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_perfect_float_w327.json": "59e232cfbf778512b478ea59336aa5f625edcd779ef8251a605935d84721428d",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_perfect_float_w327.json": "1c3304db63c873c273979d509b83a0ef6f60f533845138ba916641858222b1f8",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_offhand_strike_w327.png": "460d84604d2fd9a3e28664ccd0dcb7a78e644ce6a6e3a6cc042870a56dc5a6fd",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_offhand_strike_w327.json": "3d4490ba795811cd3f6e88a9de35ea588d778e64f2750c517f2f713629972b60",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_offhand_strike_w327.json": "e57ed0286ec56a74a7ead10a1a68558d4f24ad6288edf301513cc1d509f8fd9b",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_loose_change_w327.png": "c69e95e5ad84fa060c40cb779eb7f9e5b46fb55c1c7ee1ca4698ffdbd5494a2a",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_loose_change_w327.json": "b2283db22e820ede42a81a17604b51b57b81a39ff0d9188d106ace606a6f00ed",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_loose_change_w327.json": "2a73ca32416493a3b42671c8d5581977ffba7202a96c6b960f50da9df07313db",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_heal_clip_w327.png": "f38f57cd9c34d8c825fdc2a49d798d30afc393cd73adf1444da0e963fd8095e6",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_heal_clip_w327.json": "a8f86164d9e0cf78db98b6b9534f2713ecf9b24da15ef5633fe882c205e6189e",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_heal_clip_w327.json": "0382a345306f867e4a0af2a08c1b9963c6595162a8680683ee56b836c10a3225",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_permeability_w327.png": "ec3039e3300275eb349b1ff16b6bd1aef92a35b9fcaed6f6fe1df7c1106d93ea",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_permeability_w327.json": "a717f41caecf75667ddd41fa95b5a4e8407a6075b918693419f5e89ca5cbc254",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_permeability_w327.json": "df892e4df1f46e779651390d23757b9653a11b757fece60203dbcd73786a04cc",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_repulsor_brace_w327.png": "84b1a148c598db6360fe61c12204fd759df13704da9d575fb90e59a533c8c714",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_repulsor_brace_w327.json": "e62caf7568eaa444b929ad06a33a239162bdafc0d3172dea7483b8d28870a821",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_repulsor_brace_w327.json": "fc21aac1343cbbe510e10bbd4ff656e64a55d2dee837bbbd38bb13ed52bc568b"
+  },
+  "generated_paths": [
+    "src/main/resources/assets/destiny/textures/item/hud/perk_precision_instrument_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_precision_instrument_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_precision_instrument_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_desperate_measures_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_desperate_measures_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_desperate_measures_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_successful_warm_up_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_successful_warm_up_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_successful_warm_up_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_keep_away_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_keep_away_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_keep_away_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_lone_wolf_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_lone_wolf_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_lone_wolf_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_enlightened_action_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_enlightened_action_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_enlightened_action_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_eddy_current_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_eddy_current_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_eddy_current_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_perfect_float_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_perfect_float_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_perfect_float_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_offhand_strike_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_offhand_strike_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_offhand_strike_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_loose_change_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_loose_change_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_loose_change_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_heal_clip_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_heal_clip_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_heal_clip_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_permeability_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_permeability_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_permeability_w327.json",
+    "src/main/resources/assets/destiny/textures/item/hud/perk_repulsor_brace_w327.png",
+    "src/main/resources/assets/destiny/models/gui/hud/perk_repulsor_brace_w327.json",
+    "src/main/resources/assets/destiny/items/gui/hud/perk_repulsor_brace_w327.json",
+    "art/weapons/w327/hud/source.json"
+  ]
+}

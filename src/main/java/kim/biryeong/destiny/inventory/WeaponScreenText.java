@@ -19,7 +19,7 @@ public final class WeaponScreenText {
             return Map.copyOf(new Gson().fromJson(reader, Names.class).names());
         } catch (java.io.IOException e) { throw new IllegalStateException(e); }
     }
-    public static String weapon(String id, String fallback) { return WEAPONS.getOrDefault(id, fallback); }
+    public static String weapon(String id, String fallback) { var extra = kim.biryeong.destiny.weapon.LegendaryWeapons.name(id); return extra == null ? WEAPONS.getOrDefault(id, fallback) : extra; }
     public static String family(String value) {
         return switch (key(value)) {
             case "hand_cannon" -> "핸드 캐논"; case "auto_rifle" -> "자동 소총";

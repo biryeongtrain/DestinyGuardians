@@ -49,8 +49,8 @@ class VorpalW181Test {
             assertEquals(r.hash(), WeaponCharacteristics.of(entry(r.id())).bungieHash());
         }
         assertEquals(EXPECTED, actual);
-        assertEquals(65, WeaponCatalog.all().size());
-        assertEquals(17, WeaponCatalog.all().stream().filter(VorpalProfile::supports).count());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
+        assertEquals(17, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().filter(VorpalProfile::supports).count());
         assertThrows(UnsupportedOperationException.class, () -> VorpalProfile.rolls().clear());
     }
 
@@ -71,7 +71,7 @@ class VorpalW181Test {
     @Test void unsupportedExoticAndEveryForgedCanonicalFieldFailClosed() {
         assertFalse(VorpalProfile.supports(null));
         assertThrows(IllegalArgumentException.class, () -> VorpalProfile.multiplier(null));
-        for (var e : WeaponCatalog.all()) if (!EXPECTED.stream().anyMatch(r -> r.startsWith(e.id()+":"))) {
+        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) if (!EXPECTED.stream().anyMatch(r -> r.startsWith(e.id()+":"))) {
             assertFalse(VorpalProfile.supports(e), e.id());
             assertThrows(IllegalArgumentException.class, () -> VorpalProfile.multiplier(e), e.id());
         }

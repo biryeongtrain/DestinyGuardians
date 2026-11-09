@@ -34,6 +34,9 @@ public final class WeaponSwapPresentation {
 
     public static boolean supports(WeaponCatalog.Entry fromEntry, WeaponCatalog.Entry toEntry) {
         if (fromEntry == null || toEntry == null) return false;
+        // Pair graphs contain both identities. A single incoming skin cannot also
+        // replace the outgoing donor, so new identities use the normal item switch.
+        if (LegendaryWeapons.contains(fromEntry.id()) || LegendaryWeapons.contains(toEntry.id())) return false;
         return AUTHORED_WEAPONS.contains(fromEntry.id()) && AUTHORED_WEAPONS.contains(toEntry.id())
                 && !fromEntry.id().equals(toEntry.id());
     }

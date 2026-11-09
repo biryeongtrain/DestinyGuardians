@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Catalog-only regressions: independent expected IDs, no server or runtime bootstrap. */
 class WeaponAutoFireW113Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final Set<String> INTRINSIC = Set.of(
             "halfdan_d", "ammit_ar2", "gnawing_hunger", "steelfeather_repeater",
             "antiope_d", "bug_out_bag", "ikelos_smg_v1_0_1", "the_recluse", "retraced_path",
@@ -20,9 +21,9 @@ class WeaponAutoFireW113Test {
     }
 
     @Test void enabledCoversExactly57OfAll65CanonicalEntries() {
-        assertEquals(65, WeaponCatalog.all().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList().size());
         int admitted = 0;
-        for (var entry : WeaponCatalog.all()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             boolean supported = WeaponAutoFirePolicy.supportsAutomatic(entry, true);
             assertEquals(!DEFERRED_OR_MELEE.contains(entry.id()), supported, entry.id());
             if (supported) admitted++;
@@ -31,9 +32,9 @@ class WeaponAutoFireW113Test {
     }
 
     @Test void disabledPreservesAll65OldIntrinsicDecisions() {
-        assertEquals(65, WeaponCatalog.all().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList().size());
         int admitted = 0;
-        for (var entry : WeaponCatalog.all()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             boolean supported = WeaponAutoFirePolicy.supportsAutomatic(entry, false);
             assertEquals(INTRINSIC.contains(entry.id()), supported, entry.id());
             assertEquals(WeaponFirePolicy.supportsAutomatic(entry), supported, entry.id());

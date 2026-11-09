@@ -8,6 +8,7 @@ import kim.biryeong.destiny.weapon.TrackingSteering.Vector;
 /** Independent numeric oracles for authored bounded turning; no Minecraft bootstrap, fake
  * projectile or claim that this equation/rate was measured from Destiny 2. */
 class TrackingW104Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final double EPS = 2e-10;
     private static final Vector ZERO = new Vector(0,0,0);
     private static double norm(Vector v) { return Math.hypot(Math.hypot(v.x(),v.y()),v.z()); }
@@ -149,9 +150,9 @@ class TrackingW104Test {
         assertEquals(expected,TrackingProfile.rolls());
         assertThrows(UnsupportedOperationException.class,()->TrackingProfile.rolls().clear());
         assertFalse(TrackingProfile.supportsIntrinsic(null));
-        for(var e:WeaponCatalog.all())
+        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList())
             assertEquals(e.id().equals("pyroclastic_flow"),TrackingProfile.supportsIntrinsic(e),e.id());
-        assertEquals(4,WeaponCatalog.family("rocket_launcher").size());
+        assertEquals(4,WeaponCatalog.family("rocket_launcher").stream().filter(e -> !LegendaryWeapons.contains(e.id())).count());
         assertTrue(TrackingProfile.rolls().stream().noneMatch(r->r.perkHash()==406461158L));
     }
 

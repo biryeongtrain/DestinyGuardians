@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InsertRoutingW179Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     @Test void sixExactRoutesIncludeDenseLongArmAndShotguns() {
         var routes=Map.of("ikelos_sg_v1_0_1","weapon_insert_w221_ikelos_sg_v1_0_1/ikelos_sg_v1_0_1",
                 "parcel_of_stardust_fell_to_earth","weapon_insert_w221_parcel_of_stardust_fell_to_earth/parcel_of_stardust_fell_to_earth",
@@ -13,7 +14,7 @@ class InsertRoutingW179Test {
                 "mindbender_s_ambition_adept","weapon_insert_w221_mindbender_s_ambition_adept/mindbender_s_ambition_adept",
                 "dust_rock_blues","weapon_insert_w207_dust_rock_blues/dust_rock_blues");
         assertEquals("destiny:"+routes.get("long_arm"),WeaponInsertPresentation.model().toString());
-        for(var e:WeaponCatalog.all()) {
+        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             assertEquals(routes.containsKey(e.id()),WeaponInsertPresentation.supports(e),e.id());
             if(routes.containsKey(e.id())) assertEquals("destiny:"+routes.get(e.id()),WeaponInsertPresentation.model(e).toString());
             else assertThrows(IllegalArgumentException.class,()->WeaponInsertPresentation.model(e));

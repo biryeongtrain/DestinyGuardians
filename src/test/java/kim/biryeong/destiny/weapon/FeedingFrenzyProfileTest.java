@@ -10,6 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Pure pinned-source, profile validation and arithmetic contracts; no server or live-stack fixtures. */
 class FeedingFrenzyProfileTest {
+    /** Historical source assertions remain frozen; new identities require exact official tuples. */
+    private static java.util.List<WeaponPerks.Roll> legacyRolls() {
+        var all = FeedingFrenzyProfile.rolls();
+        var added = all.stream().filter(r -> LegendaryWeapons.contains(r.id())).toList();
+        assertEquals(java.util.Set.of("brigands_law", "circular_logic", "commemoration", "origin_story"), added.stream().map(WeaponPerks.Roll::id)
+            .collect(java.util.stream.Collectors.toSet()));
+        for (var roll : added) assertTrue(LegendaryWeapons.exactRoll(roll), roll.toString());
+        assertEquals(all.size(), new java.util.HashSet<>(all).size());
+        return all.stream().filter(r -> !LegendaryWeapons.contains(r.id())).toList();
+    }
+
     private static final String REF = "art/weapons/w108/references/";
     private static final String RESOURCE = "src/main/resources/destiny/weapons/w108-feeding-frenzy.json";
     private static final int[] BONUSES = {8, 50, 60, 75, 100};
@@ -29,7 +40,7 @@ class FeedingFrenzyProfileTest {
         assertEquals(2, proof.get("fixedCuratedCount").getAsInt());
         assertEquals(63, proof.getAsJsonArray("allSelectedPoolScans").size());
         assertEquals(50, proof.getAsJsonArray("unsupportedSelectedIds").size());
-        var rolls = FeedingFrenzyProfile.rolls();
+        var rolls = legacyRolls();
         assertEquals(13, rolls.size());
         assertEquals(13, rolls.stream().map(WeaponPerks.Roll::id).distinct().count());
         assertThrows(UnsupportedOperationException.class, rolls::clear);
@@ -171,7 +182,7 @@ class FeedingFrenzyProfileTest {
 
     @Test void exactSelectedOutlawIsExclusiveButBrassAttacksCanSelectDragonflyAlongsideFeedingFrenzy() throws Exception {
         int outlaw = 0, dragonfly = 0, payload = 0;
-        for (var ff : FeedingFrenzyProfile.rolls()) {
+        for (var ff : legacyRolls()) {
             for (var other : OutlawProfile.rolls()) if (ff.hash() == other.hash()) {
                 outlaw++;
                 assertEquals("blast_furnace", ff.id());

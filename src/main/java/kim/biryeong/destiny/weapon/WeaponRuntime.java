@@ -60,6 +60,7 @@ public final class WeaponRuntime {
         boolean holding;
         boolean fired;
         boolean emptyReloadPending;
+        boolean expansionReloadCredited;
         boolean reloadAllowsHeldInput;
         boolean heartbeatNeedsFreshPress;
         long heldUntil = -1;
@@ -86,7 +87,7 @@ public final class WeaponRuntime {
             swordBound=false;
             sword.stop();
             cycle.cancelPending(); releaseHold();
-            emptyReloadPending=false; reloadAllowsHeldInput=false;
+            emptyReloadPending=false; reloadAllowsHeldInput=false; expansionReloadCredited=false;
             heartbeatNeedsFreshPress=false;
             chargeEntry=null; acceptedCharge=null;
             paidHighImpact=WeaponHighImpactReserves.Token.NONE;
@@ -115,7 +116,7 @@ public final class WeaponRuntime {
                      boolean heavy,boolean empty,float damage,int combo,boolean visual) {
             this.entry=entry;this.base=base;this.profile=profile;this.heavy=heavy;this.empty=empty;this.damage=damage;
             grounded=player.onGround();
-            damageTraits=empty?DamageTraits.NONE:PerkBatchD.sword(heavy,()->DamageTraits.capture(player));
+            damageTraits=empty?DamageTraits.NONE:PerkBatchD.sword(heavy,()->DamageTraits.capture(player,WeaponHighImpactReserves.Token.NONE,WeaponShotTraits.paidSword(player,entry)));
             acceptedAt=now(player);delay=SwordTiming.contactTicks(profile.shape(),heavy,combo);previous=player.position();
             visualFrames=visual?kim.biryeong.destiny.fx.PlayerAnimations.serverFrames(player):-1;
         }
@@ -127,7 +128,7 @@ public final class WeaponRuntime {
         static DamageTraits capture(ServerPlayer p, WeaponHighImpactReserves.Token highImpact) { return capture(p,highImpact,WeaponShotTraits.NONE); }
         static DamageTraits capture(ServerPlayer p, WeaponHighImpactReserves.Token highImpact, WeaponShotTraits.Snapshot shotTraits) { return new DamageTraits(WeaponOneForAll.capture(p),WeaponSurrounded.capture(p),WeaponSwashbuckler.capture(p),WeaponMultikillClip.capture(p),WeaponSubsistence.capture(p),WeaponRapidHit.capture(p),WeaponFrenzy.capture(p),WeaponAdrenalineJunkie.capture(p),WeaponFocusedFury.capture(p),WeaponStatsForAll.capture(p), WeaponHeatingUp.capture(p), WeaponVorpal.capture(p),highImpact,WeaponZenMoment.capture(p),WeaponEnergyPerks.capture(p),WeaponPugilist.capture(p),WeaponFiringLine.capture(p),WeaponEncore.capture(p),WeaponAmbitiousAssassin.capture(p),WeaponAdagio.capture(p), WeaponKillingTally.capture(p), WeaponSympatheticArsenal.capture(p), WeaponRelentlessStrikes.capture(p), WeaponTirelessBlade.capture(p),WeaponWhirlwindBlade.capture(p),WeaponEnGarde.capture(p),WeaponAssassinsBlade.capture(p),WeaponUnrelenting.capture(p),shotTraits,PerkBatchD.capture(p),PerkBatchB.capture(p),PerkBatchA.capture(p),PerkBatchC.capture(p)); }
         DamageTraits perkSplash() { return new DamageTraits(oneForAll,surrounded,swashbuckler,multikillClip,subsistence,rapidHit,frenzy,adrenalineJunkie,WeaponFocusedFury.Token.NONE,statsForAll,heatingUp,vorpal,WeaponHighImpactReserves.Token.NONE,WeaponZenMoment.Token.NONE,energy,pugilist,WeaponFiringLine.Token.NONE,encore,assassin,adagio,tally,arsenal,relentless,tireless,whirlwind,enGarde,assassins,unrelenting,WeaponShotTraits.damageOnly(shotTraits),batchD,batchB.splash(),batchA,batchC); }
-        float multiplier(ServerPlayer owner, LivingEntity target) { return PerkBatchD.multiplier(owner,batchD)*WeaponWhirlwindBlade.multiplier(owner,whirlwind)*WeaponEnGarde.multiplier(owner,enGarde)*WeaponAssassinsBlade.multiplier(owner,assassins)*WeaponKillingTally.multiplier(owner,tally,target)*WeaponAdagio.multiplier(owner,adagio)* highImpact.multiplier()*vorpal.multiplier(target)*oneForAll.multiplier()*surrounded.multiplier()*swashbuckler.multiplier()*multikillClip.multiplier()*frenzy.multiplier()*adrenalineJunkie.multiplier()*focusedFury.multiplier()*PerkBatchB.multiplier(owner,batchB,target)*PerkBatchA.multiplier(owner,batchA); }
+        float multiplier(ServerPlayer owner, LivingEntity target) { return shotTraits.combat().multiplier()*PerkBatchD.multiplier(owner,batchD)*WeaponWhirlwindBlade.multiplier(owner,whirlwind)*WeaponEnGarde.multiplier(owner,enGarde)*WeaponAssassinsBlade.multiplier(owner,assassins)*WeaponKillingTally.multiplier(owner,tally,target)*WeaponAdagio.multiplier(owner,adagio)* highImpact.multiplier()*vorpal.multiplier(target)*oneForAll.multiplier()*surrounded.multiplier()*swashbuckler.multiplier()*multikillClip.multiplier()*frenzy.multiplier()*adrenalineJunkie.multiplier()*focusedFury.multiplier()*PerkBatchB.multiplier(owner,batchB,target)*PerkBatchA.multiplier(owner,batchA); }
     }
     private static final class Shot {
         final ServerPlayer owner;
@@ -309,10 +310,10 @@ public final class WeaponRuntime {
         s.holding = true; s.fired = false;
         if (p.chargeTicks() > 0) {
             if(s.cycle.startCharge(now(player))) {
-                if(entry.get().family().equals("bow")) s.acceptedBowDraw=WeaponArcherTempo.draw(player,entry.get(),p);
+                if(entry.get().family().equals("bow")) s.acceptedBowDraw=expansionCharge(player,entry.get(),WeaponArcherTempo.draw(player,entry.get(),p));
                 else if(entry.get().family().equals("fusion_rifle") || entry.get().family().equals("linear_fusion_rifle")) {
                     WeaponCornered.update(player);
-                    s.chargeEntry=entry.get(); s.acceptedCharge=PerkBatchA.charge(player,entry.get(),WeaponCornered.charge(player,entry.get(),WeaponBackupPlan.charge(player,entry.get(),p)));
+                    s.chargeEntry=entry.get(); s.acceptedCharge=expansionCharge(player,entry.get(),PerkBatchA.charge(player,entry.get(),WeaponCornered.charge(player,entry.get(),WeaponBackupPlan.charge(player,entry.get(),p))));
                 }
             }
             DestinySounds.weapon(player, entry.get(), "charge");
@@ -373,7 +374,7 @@ public final class WeaponRuntime {
         if(entry.get().family().equals("bow")) {
             if((GcbWeaponInput.firing(player,s.stack)||(player.isUsingItem()&&player.getUseItem()==s.stack))&&s.cycle.ready(now(player))
                     && !s.cycle.charging()&&WeaponItems.magazine(s.stack,p).rounds()>0) {
-                if(s.cycle.startCharge(now(player)))s.acceptedBowDraw=WeaponArcherTempo.draw(player,entry.get(),p);
+                if(s.cycle.startCharge(now(player)))s.acceptedBowDraw=expansionCharge(player,entry.get(),WeaponArcherTempo.draw(player,entry.get(),p));
                 DestinySounds.weapon(player,entry.get(),"charge");
             }
             updateBow(player,s);
@@ -388,7 +389,7 @@ public final class WeaponRuntime {
                     && WeaponItems.magazine(s.stack, p).rounds() > 0 && s.cycle.startCharge(now(player))) {
                 s.fired = false;
                 WeaponCornered.update(player);
-                s.chargeEntry = entry.get(); s.acceptedCharge = PerkBatchA.charge(player,entry.get(),WeaponCornered.charge(player,entry.get(),WeaponBackupPlan.charge(player,entry.get(),p)));
+                s.chargeEntry = entry.get(); s.acceptedCharge = expansionCharge(player,entry.get(),PerkBatchA.charge(player,entry.get(),WeaponCornered.charge(player,entry.get(),WeaponBackupPlan.charge(player,entry.get(),p))));
                 DestinySounds.weapon(player, entry.get(), "charge");
             }
             var accepted=entry.get().equals(s.chargeEntry)&&s.acceptedCharge!=null?s.acceptedCharge:p;
@@ -502,6 +503,7 @@ public final class WeaponRuntime {
         if (moved > 0) {
             WeaponItems.save(stack, ammo);
             WeaponKillClip.reloaded(player,stack);
+            PerkExpansionCombat.reloaded(player,stack);
             WeaponFocusedFury.reloadStarted(player,stack);
             WeaponKillingTally.reloadStarted(player,stack);
             WeaponMultikillClip.reloaded(player,stack);
@@ -548,6 +550,7 @@ public final class WeaponRuntime {
         if (GcbWeaponInput.remapped(player)) cancelUseForSkill(player);
         WeaponSurrounded.stowing(player,player.getMainHandItem()); WeaponThreatDetector.stowing(player,player.getMainHandItem());
         WeaponFocusedFury.stowing(player,player.getMainHandItem());
+        expansionStowing(player,player.getMainHandItem());
         WeaponTapTheTrigger.changed(player,player.getMainHandItem()); WeaponZenMoment.changed(player,player.getMainHandItem());
         WeaponSwashbuckler.stowing(player,player.getMainHandItem());
         WeaponMultikillClip.stowing(player,player.getMainHandItem());
@@ -570,6 +573,7 @@ public final class WeaponRuntime {
         WeaponQuickdraw.changed(player,previous);
         WeaponSurrounded.stowing(player,previous); WeaponThreatDetector.stowing(player,previous);
         WeaponFocusedFury.stowing(player,previous);
+        expansionStowing(player,previous);
         WeaponTapTheTrigger.changed(player,previous); WeaponZenMoment.changed(player,previous);
         WeaponSwashbuckler.stowing(player,previous);
         WeaponMultikillClip.stowing(player,previous);
@@ -630,6 +634,7 @@ public final class WeaponRuntime {
     private static boolean startReload(ServerPlayer player,State s,WeaponCatalog.Entry entry,
                                        WeaponProfile p,boolean shotCaused) {
         if (entry.family().equals("sword")) return false;
+        if(shotCaused && PerkExpansionCombat.awaitingRewind(player,s.stack)) return false;
         if(WeaponExotics.izanagi(entry)&&WeaponIzanagi.charge(s.stack)>0)return false;
         var ammo = WeaponItems.magazine(s.stack, p);
         var plan=WeaponAce.plan(player,entry,WeaponFrenzy.plan(player,entry,WeaponPerpetualMotion.plan(player,entry,WeaponRapidHit.plan(player,entry,WeaponFeedingFrenzy.plan(player,entry,WeaponOutlaw.plan(player,entry,p))))));
@@ -646,7 +651,15 @@ public final class WeaponRuntime {
         plan=WeaponSympatheticArsenal.plan(player,entry,plan);
         plan=PerkBatchA.plan(player,entry,plan); // W320 batch A
         plan=WeaponComponents.plan(player,entry,plan); // W326 components
+        PerkExpansionStats.update(player);
+        plan=PerkExpansionStats.plan(player,entry,plan);
+        int looseChange=PerkExpansionSupport.reloadBonus(player,s.stack);
+        plan=new WeaponReloadPolicy.Plan(WeaponStatCurves.reloadTicks(entry.id(),plan.firstTicks(),looseChange,1),
+                WeaponStatCurves.reloadTicks(entry.id(),plan.intervalTicks(),looseChange,1),plan.roundsPerInsert());
+        plan=PerkExpansionCombat.reloadPlan(player,s.stack,plan);
+        p=PerkExpansionCombat.reloadProfile(p,plan);
         if (!s.cycle.startReload(now(player), p, ammo, plan, ReloadCreditProfile.ammoTicks(entry,plan))) return false;
+        s.expansionReloadCredited=false;
         if (!shotCaused) GcbWeaponInput.cancelFire(player);
         s.clownReload=WeaponClownCartridge.acceptedReload(player);
         s.arsenalReload=WeaponSympatheticArsenal.acceptedReload(player);
@@ -1009,6 +1022,7 @@ public final class WeaponRuntime {
             apply(player,contact.target(),CrucibleDamage.payload(entry, contact.target(), p.damage())*contact.fraction(),false,contact.point(),
                     attribution,perks,WeaponOutlaw.Token.NONE,rampage,WeaponPrecisionReturn.Token.NONE,demolitionist,feedingFrenzy,damageTraits.perkSplash());
         }
+        WeaponShotTraits.resolved(player,damageTraits.shotTraits());
         if (impactPosition != null) DestinySounds.at(player.level(), impactPosition, DestinySounds.weaponKey(entry, "impact"), .8f);
     }
     /** W321 batch B deferred payload (Timed Payload / Explosive Head): same paid source, body-only splash traits. */
@@ -1110,6 +1124,7 @@ public final class WeaponRuntime {
         boolean weakened = kim.biryeong.destiny.combat.Statuses.has(target, kim.biryeong.destiny.combat.Keyword.WEAKENED);
         float before = Combat.damagePool(contact);
         var batchDPre = PerkBatchD.before(contact);
+        boolean voidDebuffed=PerkExpansionSupport.before(target);
         boolean killed = Combat.damage(owner.level(), owner, contact, requested, WeaponShotTraits.element(damageTraits.shotTraits()), PerkBatchA.ammoGeneration(attribution,damageTraits.batchA()));
         float actual = before - Combat.damagePool(contact);
         if (!Float.isFinite(actual) || actual <= 0) return 0;
@@ -1117,7 +1132,7 @@ public final class WeaponRuntime {
         PerkBatchD.confirmed(owner, damageTraits.batchD(), contact, batchDPre, actual, killed); // W323 batch D
         // One cue per observed damage transaction, after immunity/absorption checks.
         kim.biryeong.destiny.hud.WeaponHitHud.confirm(owner, actual, killed);
-        WeaponShotTraits.confirmed(owner,damageTraits.shotTraits(),target,hits.precision>0,actual,killed);
+        WeaponShotTraits.confirmed(owner,damageTraits.shotTraits(),target,hits.precision>0,actual,killed,voidDebuffed);
         WeaponPrecisionReturn.confirmed(owner, precisionReturn, hits.precision > 0);
         WeaponFocusedFury.confirmed(owner,damageTraits.focusedFury(),hits.precision>0,actual);
         WeaponOneForAll.confirmed(owner, damageTraits.oneForAll(), target);
@@ -1223,6 +1238,21 @@ public final class WeaponRuntime {
         }
         return to;
     }
+    private static void expansionTick(ServerPlayer player) {
+        PerkExpansionStats.update(player); PerkExpansionCombat.update(player); PerkExpansionSupport.update(player);
+        kim.biryeong.destiny.combat.ElementalCure.tick(player);
+        kim.biryeong.destiny.combat.TemporaryVoidOvershield.tick(player);
+    }
+    static void expansionStowing(ServerPlayer player,ItemStack stack) {
+        PerkExpansionStats.stowing(player,stack); PerkExpansionCombat.stowing(player,stack); PerkExpansionSupport.stowing(player,stack);
+    }
+    private static WeaponProfile expansionCharge(ServerPlayer player,WeaponCatalog.Entry entry,WeaponProfile base) {
+        int ticks=PerkExpansionCombat.chargeTicks(player,entry,base.chargeTicks());
+        return new WeaponProfile(base.mode(),base.damage(),base.intervalTicks(),base.magazine(),base.reserve(),base.reloadTicks(),
+                base.range(),ticks,base.burst(),base.pellets(),base.spread(),base.speed(),base.gravity(),base.blastRadius(),
+                base.automatic(),base.infiniteReserve(),base.cadenceTicks(),base.burstSpacingTicks(),base.sharedBurstAmmo(),
+                base.shellReload(),base.firstReloadTicks(),base.roundsPerInsert());
+    }
     public static void tick(MinecraftServer server) {
         PerkBatchC.tick(server); // W322 batch C
         for(var player:server.getPlayerList().getPlayers()) {
@@ -1246,6 +1276,7 @@ public final class WeaponRuntime {
         WeaponHandling.update(player);
             WeaponEnGarde.update(player);
             PerkBatchD.update(player); // W323 batch D
+        expansionTick(player);
             PerkBatchB.update(player); // W321 batch B
             PerkBatchA.update(player); // W320 batch A
             if(available(player)&&WeaponItems.entry(player.getMainHandItem()).isPresent())bind(player);
@@ -1257,6 +1288,7 @@ public final class WeaponRuntime {
         WeaponTracking.tick(server);
         SHOTS.removeIf(shot -> {
             if(shot.level.getServer()!=server||tickShot(shot))return false;
+            WeaponShotTraits.resolved(shot.owner,shot.damageTraits.shotTraits());
             if(shot.wave!=null)shot.wave.close();
             retireRemote(shot);
             return true;
@@ -1286,6 +1318,7 @@ public final class WeaponRuntime {
         WeaponHandling.update(player);
         WeaponEnGarde.update(player);
         PerkBatchD.update(player); // W323 batch D
+        expansionTick(player);
         WeaponAiming.tick(player);
         WeaponTracking.update(player);
         if(available(player)&&(GlaiveItems.isGlaive(player.getMainHandItem())||SwordItems.isSword(player.getMainHandItem())))bind(player);
@@ -1315,6 +1348,7 @@ public final class WeaponRuntime {
         boolean inserted=s.cycle.finishReload(now(player), ammo);
         if (wasReloading && !s.cycle.reloading()) PerkBatchA.reloadFinished(player,s.stack); // W320 batch A
         int creditedRounds=Math.max(0,ammo.rounds()-beforeReload);
+        s.expansionReloadCredited |= creditedRounds>0;
         if (inserted) kim.biryeong.destiny.sound.ShotgunReloadAudio.inserted(player,entry,s.cycle.reloading());
         boolean honedCompleted = WeaponIzanagi.finishReload(player,s.stack);
         if(honedCompleted)ammo=WeaponItems.magazine(s.stack,p);
@@ -1325,6 +1359,7 @@ public final class WeaponRuntime {
             s.clownReload=WeaponClownCartridge.Token.NONE;
             WeaponItems.save(s.stack, ammo);
             WeaponKillClip.reloaded(player,s.stack);
+            if(creditedRounds>0) PerkExpansionCombat.reloaded(player,s.stack);
             WeaponMultikillClip.reloaded(player,s.stack);
             boolean refillArsenal=WeaponSympatheticArsenal.reloaded(player,s.arsenalReload,creditedRounds);
             s.arsenalReload=WeaponSympatheticArsenal.ReloadToken.NONE;
@@ -1333,6 +1368,8 @@ public final class WeaponRuntime {
         // Ammo can credit before full-ready. Only the natural terminal transition starts recovery;
         // failed Honed transactions and all cancellation paths must remain immediate cleanup.
         if (wasReloading && !s.cycle.reloading() && (!wasHoning || honedCompleted)) {
+            if(s.expansionReloadCredited) PerkExpansionSupport.reloadFinished(player,s.stack);
+            s.expansionReloadCredited=false;
             WeaponReloadPresentation.completed(player,s.stack);
             WeaponIzanagiPresentation.completed(player,s.stack);
         }
@@ -1372,7 +1409,7 @@ public final class WeaponRuntime {
             // Fusion/LFR bolts share the already-paid cartridge; pulse bullets pay separately.
             var highImpact=p.sharedBurstAmmo()?s.paidHighImpact:
                     WeaponHighImpactReserves.capture(player,ammo.rounds()+1,WeaponProfile.forEntry(entry).magazine());
-            var shotTraits=WeaponShotTraits.paid(player,entry,p.sharedBurstAmmo()?ammo.rounds():ammo.rounds()+1,false);
+            var shotTraits=WeaponShotTraits.paid(player,entry,p.sharedBurstAmmo()?Math.max(1,ammo.rounds()+1):ammo.rounds()+1,false);
             emit(player, entry, p, false, s.cycle.burstIndex(),highImpact,null,shotTraits);
             // A precision return may have saved fresh ammo during this bolt's damage callback.
             // Never overwrite that reward with the pre-emission local copy on the next bolt.
@@ -1384,7 +1421,7 @@ public final class WeaponRuntime {
         // The candidate belongs only to this successful last shot and this stack;
         // cancel()/bind() discards it, so a swapped/skill-cancelled empty item does
         // not silently restart reload. No reserve means no timer or retry loop.
-        if(s.emptyReloadPending&&!s.cycle.bursting()&&s.remoteShot==null) {
+        if(s.emptyReloadPending&&!s.cycle.bursting()&&s.remoteShot==null&&!PerkExpansionCombat.awaitingRewind(player,s.stack)) {
             s.emptyReloadPending=false;
             if(ammo.rounds()==0&&p.mode()!=WeaponProfile.Mode.MELEE)
                 startReload(player,s,entry,p,true);
@@ -1699,6 +1736,12 @@ public final class WeaponRuntime {
         return s != null && s.stack == player.getMainHandItem() && s.cycle.reloading();
     }
     /** Read-only transport provenance; never binds state or advances a reload clock. */
+    public static boolean burstOwnedBy(ServerPlayer owner, ItemStack stack) {
+        if (owner == null || stack == null) return false;
+        State s = STATES.get(owner.getUUID());
+        return s != null && s.owner == owner && s.level == owner.level()
+                && s.stack == stack && s.cycle.bursting();
+    }
     public static boolean reloadOwnedBy(ServerPlayer owner, ItemStack stack) {
         if (owner == null || stack == null || owner.getMainHandItem() != stack || !available(owner)) return false;
         State s = STATES.get(owner.getUUID());
@@ -1728,6 +1771,8 @@ public final class WeaponRuntime {
         WeaponDemolitionist.cleanup(owner);
         PerkBatchB.cleanup(owner); // W321 batch B
         WeaponEnergyPerks.cleanup(owner); WeaponPugilist.cleanup(owner); WeaponBackupPlan.cleanup(owner); WeaponEncore.cleanup(owner); WeaponAmbitiousAssassin.cleanup(owner); WeaponClownCartridge.cleanup(owner); WeaponAdagio.cleanup(owner); WeaponWellRounded.cleanup(owner); WeaponKillingTally.cleanup(owner); WeaponSympatheticArsenal.cleanup(owner); WeaponRelentlessStrikes.cleanup(owner); WeaponTirelessBlade.cleanup(owner); WeaponWhirlwindBlade.cleanup(owner); WeaponEnGarde.cleanup(owner); WeaponOpeningShot.cleanup(owner); WeaponBoxBreathing.cleanup(owner); WeaponDynamicSway.cleanup(owner); WeaponAssassinsBlade.cleanup(owner); WeaponPerkMovement.cleanup(owner); WeaponPulseMonitor.cleanup(owner); WeaponRecoveryHandling.cleanup(owner); WeaponUnrelenting.cleanup(owner); WeaponHeadseeker.cleanup(owner); WeaponOsmosis.cleanup(owner); WeaponSteadyHands.cleanup(owner); WeaponCornered.cleanup(owner); PerkBatchD.cleanup(owner);
+        PerkExpansionStats.cleanup(owner); PerkExpansionCombat.cleanup(owner); PerkExpansionSupport.cleanup(owner);
+        kim.biryeong.destiny.combat.ElementalCure.cleanup(owner); kim.biryeong.destiny.combat.TemporaryVoidOvershield.cleanup(owner);
         WeaponTracking.cleanup(owner);
         PerkBatchA.cleanup(owner); // W320 batch A
         PerkBatchC.cleanup(owner); // W322 batch C
@@ -1754,6 +1799,8 @@ public final class WeaponRuntime {
         WeaponPrecisionReturn.clear();
         PerkBatchB.clear(); // W321 batch B
         WeaponDemolitionist.clear(); WeaponEnergyPerks.clear(); WeaponPugilist.clear(); WeaponBackupPlan.clear(); WeaponEncore.clear(); WeaponAmbitiousAssassin.clear(); WeaponClownCartridge.clear(); WeaponAdagio.clear(); WeaponWellRounded.clear(); WeaponKillingTally.clear(); WeaponSympatheticArsenal.clear(); WeaponRelentlessStrikes.clear(); WeaponTirelessBlade.clear(); WeaponWhirlwindBlade.clear(); WeaponEnGarde.clear(); WeaponOpeningShot.clear(); WeaponBoxBreathing.clear(); WeaponDynamicSway.clear(); WeaponAssassinsBlade.clear(); WeaponPerkMovement.clear(); WeaponPulseMonitor.clear(); WeaponRecoveryHandling.clear(); WeaponUnrelenting.clear(); WeaponHeadseeker.clear(); WeaponOsmosis.clear(); WeaponSteadyHands.clear(); WeaponCornered.clear(); PerkBatchD.clear();
+        PerkExpansionStats.clear(); PerkExpansionCombat.clear(); PerkExpansionSupport.clear();
+        kim.biryeong.destiny.combat.ElementalCure.clear(); kim.biryeong.destiny.combat.TemporaryVoidOvershield.clear();
         WeaponTracking.clear();
         PerkBatchA.clear(); // W320 batch A
         PerkBatchC.clear(); // W322 batch C

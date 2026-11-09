@@ -51,10 +51,11 @@ public final class OverflowProfile {
         for (var r : d.weapons) check(CATALOG.containsKey(r.id()), "canonical catalog source");
         return new Data(d.stage, d.perk, List.copyOf(d.weapons));
     }
-    public static List<WeaponPerks.Roll> rolls() { return DATA.weapons; }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, DATA.weapons); }
     public static boolean supports(WeaponCatalog.Entry entry) {
-        return entry != null && entry.equals(CATALOG.get(entry.id()))
-            && DATA.weapons.stream().anyMatch(r -> r.id().equals(entry.id()));
+        return entry != null && (entry.equals(CATALOG.get(entry.id())) || LegendaryWeapons.contains(entry.id())
+                && WeaponCatalog.find(entry.id()).filter(entry::equals).isPresent())
+            && rolls().stream().anyMatch(r -> r.id().equals(entry.id()));
     }
     /** Pure capacity target; no pickup, magazine, reserve or item mutation. */
     public static int target(WeaponCatalog.Entry entry) {

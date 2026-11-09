@@ -40,7 +40,7 @@ public final class WeaponAiming {
 
     private static int pugilistAdsTicks(ServerPlayer p,WeaponCatalog.Entry entry,int ticks,boolean entering) {
         ticks=PerkBatchA.adsTicks(p,entry,ticks,entering); // W320 batch A
-        ticks=WeaponComponents.adsTicks(p,entry,ticks); // W326 components
+        ticks=PerkExpansionStats.adsTicks(p,entry,WeaponComponents.adsTicks(p,entry,ticks),entering); // W326 components
         return WeaponSlickdraw.adsTicks(p,entry,WeaponSteadyHands.adsTicks(p,entry,WeaponRecoveryHandling.adsTicks(p,entry,WeaponBackupPlan.adsTicks(p,entry,WeaponWellRounded.adsTicks(p,entry,WeaponPugilist.adsTicks(p,entry,WeaponEnsemble.adsTicks(p,entry,ticks,entering),entering),entering),entering),entering),entering),entering);
     }
     private static boolean eligible(ServerPlayer p) {
@@ -202,8 +202,8 @@ public final class WeaponAiming {
         updateNoDistractions(s);
         var entry=WeaponItems.entry(s.stack).orElseThrow();
         var profile=WeaponAimProfile.of(entry);
-        float magnitude=WeaponFlinchState.magnitude(actualLoss,p.getMaxHealth(),RapidHitStability.effectiveSigned(profile.stability(),WeaponRapidHit.stabilityBonus(p)+WeaponPerpetualMotion.stabilityBonus(p)+WeaponTapTheTrigger.stabilityBonus(p)+WeaponStatsForAll.stabilityBonus(p)+WeaponHeatingUp.stabilityBonus(p)+WeaponThreatDetector.stabilityBonus(p)+WeaponSurplus.stabilityBonus(p)+WeaponElementalCapacitor.stabilityBonus(p)+WeaponFirmlyPlanted.stabilityBonus(p)+WeaponIronReach.stabilityBonus(p)+WeaponHipFireGrip.stabilityBonus(p)+WeaponUnderPressure.stabilityBonus(p)+WeaponFullAuto.stabilityBonus(p)+WeaponEncore.stabilityBonus(p)+WeaponWellRounded.stabilityBonus(p)+WeaponDynamicSway.stabilityBonus(p)+PerkBatchA.stabilityBonus(p)+WeaponComponents.stabilityBonus(p)),
-                WeaponFlinchProfile.maxResistance(entry),s.state.progress(),s.flinch.active()) * WeaponZenMoment.flinchScalar(p);
+        float magnitude=WeaponFlinchState.magnitude(actualLoss,p.getMaxHealth(),RapidHitStability.effectiveSigned(profile.stability(),WeaponRapidHit.stabilityBonus(p)+WeaponPerpetualMotion.stabilityBonus(p)+WeaponTapTheTrigger.stabilityBonus(p)+WeaponStatsForAll.stabilityBonus(p)+WeaponHeatingUp.stabilityBonus(p)+WeaponThreatDetector.stabilityBonus(p)+WeaponSurplus.stabilityBonus(p)+WeaponElementalCapacitor.stabilityBonus(p)+WeaponFirmlyPlanted.stabilityBonus(p)+WeaponIronReach.stabilityBonus(p)+WeaponHipFireGrip.stabilityBonus(p)+WeaponUnderPressure.stabilityBonus(p)+WeaponFullAuto.stabilityBonus(p)+WeaponEncore.stabilityBonus(p)+WeaponWellRounded.stabilityBonus(p)+WeaponDynamicSway.stabilityBonus(p)+PerkBatchA.stabilityBonus(p)+WeaponComponents.stabilityBonus(p)+PerkExpansionStats.stabilityBonus(p)),
+                WeaponFlinchProfile.maxResistance(entry),s.state.progress(),s.flinch.active()) * WeaponZenMoment.flinchScalar(p)*PerkExpansionStats.flinchScalar(p);
         long now=p.level().getServer().getTickCount();
         if(now!=s.flinchTick) { s.flinchTick=now;s.flinchBudget=0; }
         magnitude=Math.min(magnitude,Math.max(0,2.5f-s.flinchBudget));
@@ -234,7 +234,7 @@ public final class WeaponAiming {
                 * PerkBatchA.accuracyScalar(p); // W320 batch A
         // Air is independent: an accuracy perk cannot bypass an insufficient AE stat.
         return ShotDispersion.coneDegrees(profile.hipDegrees(), profile.airDegrees(), ads,
-                WeaponAccuracy.airborne(p), Math.clamp(WeaponAccuracy.airborne(entry, p.getMainHandItem())+PerkBatchA.airborneBonus(p),0,100), bloom, accuracy);
+                WeaponAccuracy.airborne(p), Math.clamp(WeaponAccuracy.airborne(entry, p.getMainHandItem())+PerkBatchA.airborneBonus(p)+PerkExpansionStats.airborneBonus(p),0,100), bloom, accuracy);
     }
     public static Vec3 direction(ServerPlayer p) { return direction(p, 1); }
     static Vec3 direction(ServerPlayer p, double paidAccuracy) {
@@ -252,13 +252,13 @@ public final class WeaponAiming {
         boolean held=WeaponItems.entry(p.getMainHandItem()).filter(entry::equals).isPresent();
         int bonus=held?paidRange+WeaponIronReach.rangeBonus(p)+WeaponIronGaze.rangeBonus(p)+WeaponStatsForAll.rangeBonus(p)
                 +WeaponRangefinder.rangeBonus(p)+WeaponAdagio.rangeBonus(p)+WeaponEncore.rangeBonus(p)+WeaponWellRounded.rangeBonus(p)
-                +PerkBatchA.rangeBonus(p)+WeaponComponents.rangeBonus(p):0; // W320 batch A, W326 components
+                +PerkBatchA.rangeBonus(p)+WeaponComponents.rangeBonus(p)+PerkExpansionStats.rangeBonus(p):0; // W320 batch A, W326 components
         var hip=WeaponBallistics.withRangeBonus(entry,bonus);
         if(held)hip=PerkBatchA.falloff(p,entry,hip); // W320 batch A
         // SFA's separate falloff-distance scalar remains after raw Range summation.
         if(held&&WeaponStatsForAll.remaining(p)>0&&WeaponCharacteristics.of(entry).stats().containsKey("1240592695"))
             hip=new WeaponBallistics.Profile(hip.start()*1.05,hip.end()*1.05,hip.floor(),hip.precision());
-        double hipFire=held?WeaponHipFireGrip.falloffScalar(p,entry):1;
+        double hipFire=held?WeaponHipFireGrip.falloffScalar(p,entry)*PerkExpansionStats.falloffScalar(p):1;
         if (hipFire != 1) hip=new WeaponBallistics.Profile(hip.start()*hipFire,hip.end()*hipFire,hip.floor(),hip.precision());
         return scale(hip,WeaponAimProfile.of(entry).falloffScalar(),progress(p));
     }
@@ -276,7 +276,7 @@ public final class WeaponAiming {
         var profile=WeaponAimProfile.of(entry);
         float ads=s.state.progress();
         int stabilityBonus=paidStability+WeaponRapidHit.stabilityBonus(p)+WeaponPerpetualMotion.stabilityBonus(p)+WeaponTapTheTrigger.stabilityBonus(p)+WeaponStatsForAll.stabilityBonus(p)+WeaponHeatingUp.stabilityBonus(p)+WeaponThreatDetector.stabilityBonus(p)+WeaponSurplus.stabilityBonus(p)+WeaponElementalCapacitor.stabilityBonus(p)+WeaponFirmlyPlanted.stabilityBonus(p)+WeaponIronReach.stabilityBonus(p)+WeaponHipFireGrip.stabilityBonus(p)+WeaponUnderPressure.stabilityBonus(p)+WeaponFullAuto.stabilityBonus(p)+WeaponEncore.stabilityBonus(p)+WeaponWellRounded.stabilityBonus(p)
-                +PerkBatchA.stabilityBonus(p)+WeaponComponents.stabilityBonus(p); // W320 batch A, W326 components
+                +PerkBatchA.stabilityBonus(p)+WeaponComponents.stabilityBonus(p)+PerkExpansionStats.stabilityBonus(p); // W320 batch A, W326 components
         float kick=RapidHitStability.kickSigned(profile,stabilityBonus)*WeaponTapTheTrigger.recoilScalar(p);
         float vertical=kick*(1-.35f*ads);
         // Recoil Direction informs bounded alternating horizontal kick, not an invented exact D2 curve.

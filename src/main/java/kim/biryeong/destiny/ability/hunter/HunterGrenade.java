@@ -67,7 +67,7 @@ public final class HunterGrenade extends Ability {
                 DestinySounds.hunterOrVanilla(level, pos, element(), "grenade.impact", SoundEvents.LIGHTNING_BOLT_IMPACT, 0.8f, 1.6f);
                 for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
                     kim.biryeong.destiny.weapon.WeaponAdrenalineJunkie.grenadeDamage(player, adrenalineJunkie, level, e, AbilityDamage.pvp(this, "explosion", e, (float) param("damage", 5)), element());
-                    Statuses.apply(e, Keyword.BLINDED, (int) param("blind_ticks", 80));
+                    Statuses.apply(player, e, Keyword.BLINDED, (int) param("blind_ticks", 80));
                 }
             }
             case SOLAR -> {

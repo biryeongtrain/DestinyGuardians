@@ -25,8 +25,12 @@ def unit(a):
 
 def euler_zyx(u,v,n):
  """Angles in degrees for matrix with columns u,v,n; native rotationZYX."""
- y=math.asin(max(-1.,min(1.,-u[2])))
- if abs(math.cos(y))>1e-8:x,z=math.atan2(v[2],n[2]),math.atan2(u[1],u[0])
+ # asin(u.z) loses the small transverse component near a vertical basis.
+ # Normalization can also leave |u.z| one ULP below 1 for exactly vertical u.
+ # Measure that component directly, so roundoff cannot choose the wrong branch.
+ transverse=math.hypot(u[0],u[1])
+ y=math.atan2(-u[2],transverse)
+ if transverse>1e-12:x,z=math.atan2(v[2],n[2]),math.atan2(u[1],u[0])
  else:x,z=math.atan2(-n[1],v[1]),0.
  return tuple(math.degrees(t) for t in (x,y,z))
 

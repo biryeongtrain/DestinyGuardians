@@ -63,7 +63,20 @@ final class WeaponPerkRows {
         PULSE_MONITOR("pulse_monitor_", "perk_pulse_monitor_w200", Layout.FLAG),
         UNRELENTING("unrelenting_", "perk_unrelenting_w200", Layout.FLAG),
         HEADSEEKER("headseeker_", "perk_headseeker_w202", Layout.FLAG),
-        STEADY_HANDS("steady_hands_", "perk_steady_hands_w202", Layout.TIMER);
+        STEADY_HANDS("steady_hands_", "perk_steady_hands_w202", Layout.TIMER),
+        PRECISION_INSTRUMENT("precision_instrument_", "perk_precision_instrument_w327", Layout.COUNT_TIMER),
+        DESPERATE_MEASURES("desperate_measures_", "perk_desperate_measures_w327", Layout.COUNT_TIMER),
+        SUCCESSFUL_WARM_UP("successful_warm_up_", "perk_successful_warm_up_w327", Layout.TIMER),
+        KEEP_AWAY("keep_away_", "perk_keep_away_w327", Layout.FLAG),
+        LONE_WOLF("lone_wolf_", "perk_lone_wolf_w327", Layout.FLAG),
+        ENLIGHTENED_ACTION("enlightened_action_", "perk_enlightened_action_w327", Layout.DECIMAL_COUNT_TIMER),
+        EDDY_CURRENT("eddy_current_", "perk_eddy_current_w327", Layout.TIMER),
+        PERFECT_FLOAT("perfect_float_", "perk_perfect_float_w327", Layout.TIMER),
+        OFFHAND_STRIKE("offhand_strike_", "perk_offhand_strike_w327", Layout.TIMER),
+        LOOSE_CHANGE("loose_change_", "perk_loose_change_w327", Layout.TIMER),
+        HEAL_CLIP("heal_clip_", "perk_heal_clip_w327", Layout.TIMER),
+        PERMEABILITY("permeability_", "perk_permeability_w327", Layout.FLAG),
+        REPULSOR_BRACE("repulsor_brace_", "perk_repulsor_brace_w327", Layout.TIMER);
 
         final String key;
         final String label;
@@ -411,6 +424,29 @@ final class WeaponPerkRows {
             if (rows.size() == MAX_ROWS) break;
         }
         return List.copyOf(rows);
+    }
+
+    record Extra(String id, int count, int ticks) {}
+    /** One bounded feed: actual new observations share the legacy four-row budget. */
+    static List<Row> merge(List<Row> legacy, List<Extra> extra) {
+        var added = new ArrayList<Row>();
+        for (var value : extra) {
+            Kind kind;
+            try { kind = Kind.valueOf(value.id().toUpperCase(java.util.Locale.ROOT)); }
+            catch (IllegalArgumentException ex) { continue; }
+            if (!kind.label.endsWith("_w327") || value.count() < 1 || value.count() > 99
+                    || (kind.layout.timed() ? value.ticks() <= 0 : value.ticks() != -1)) continue;
+            if (added.stream().noneMatch(r -> r.kind() == kind))
+                added.add(new Row(kind, Math.min(1180, value.ticks()), value.count(), 0));
+        }
+        var ordered = new ArrayList<Row>();
+        legacy.stream().filter(r -> r.kind() == Kind.MEMENTO_MORI || r.kind() == Kind.HONED_EDGE).forEach(ordered::add);
+        added.stream().filter(r -> r.kind() == Kind.PRECISION_INSTRUMENT || r.kind() == Kind.DESPERATE_MEASURES).forEach(ordered::add);
+        legacy.stream().filter(r -> r.kind() != Kind.MEMENTO_MORI && r.kind() != Kind.HONED_EDGE).forEach(ordered::add);
+        added.stream().filter(r -> r.kind() != Kind.PRECISION_INSTRUMENT && r.kind() != Kind.DESPERATE_MEASURES).forEach(ordered::add);
+        var out = new ArrayList<Row>();
+        for (var row : ordered) { if (out.size() == MAX_ROWS) break; out.add(new Row(row.kind(),row.ticks(),row.count(),out.size())); }
+        return List.copyOf(out);
     }
 
     /** Remove all old feed nodes not in this projection, including legacy/unknown suffixes. */

@@ -8,6 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WeaponGripW32Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static JsonObject read(Path path) throws Exception {
         return JsonParser.parseString(Files.readString(path)).getAsJsonObject();
     }
@@ -76,9 +77,9 @@ class WeaponGripW32Test {
     }
     @Test void longGunsAndGlaiveOptInButBowsAndSwordsRemainNative() {
         assertEquals(47,WeaponCatalogTest.originalW30Entries().stream().filter(e->WeaponModels.defaultGrip(e)==WeaponModels.Grip.TWO_HAND).count());
-        assertEquals(48,WeaponCatalog.all().stream().filter(e->WeaponModels.defaultGrip(e)==WeaponModels.Grip.TWO_HAND).count());
+        assertEquals(48,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).filter(e->WeaponModels.defaultGrip(e)==WeaponModels.Grip.TWO_HAND).count());
         assertEquals(56,WeaponCatalogTest.originalW30Entries().stream().filter(WeaponModels::supportsTwoHand).count());
-        assertEquals(58,WeaponCatalog.all().stream().filter(WeaponModels::supportsTwoHand).count());
+        assertEquals(58,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).filter(WeaponModels::supportsTwoHand).count());
         for(var row:WeaponCatalog.all())if(List.of("hand_cannon","sidearm","bow","sword").contains(row.family()))
             assertEquals(WeaponModels.Grip.NATIVE,WeaponModels.defaultGrip(row));
     }

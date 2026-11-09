@@ -8,6 +8,8 @@ import com.google.gson.JsonPrimitive;
 import kim.biryeong.destiny.weapon.WeaponCatalog;
 import kim.biryeong.destiny.weapon.WeaponFirstPersonHands;
 import kim.biryeong.destiny.weapon.WeaponPackRoots;
+import kim.biryeong.destiny.weapon.LegendaryWeapons;
+import kim.biryeong.destiny.weapon.WeaponSkins;
 import net.minecraft.resources.Identifier;
 import org.junit.jupiter.api.Test;
 
@@ -269,11 +271,22 @@ class WeaponPackOptimizerTest {
         for (var entry : WeaponCatalog.all())
             assertTrue(active.contains(Identifier.parse(entry.item_model())), "Catalog base " + entry.id());
         for (var root : active) {
-            assertNotNull(getClass().getResource("/" + WeaponPackOptimizer.itemPath(root)), "Source item " + root);
+            var source = root;
+            if (getClass().getResource("/" + WeaponPackOptimizer.itemPath(source)) == null) {
+                // W327 identities are authored parts; their item graphs are mirrored at pack generation.
+                var skin = WeaponSkins.ALL.stream().filter(s -> LegendaryWeapons.contains(s.id()))
+                        .filter(s -> !WeaponSkins.route(new WeaponSkins.Skin(s.id(), s.base(), s.name(), s.texture()), root).equals(root))
+                        .findFirst().orElseThrow(() -> new AssertionError("Unmapped source item " + root));
+                source = WeaponSkins.route(new WeaponSkins.Skin(skin.id(), skin.base(), skin.name(), skin.texture()), root);
+                assertEquals(root, WeaponSkins.route(skin, source));
+                assertNotNull(getClass().getResource("/destiny/weapon_skins/" + skin.id() + ".json"));
+            }
+            assertNotNull(getClass().getResource("/" + WeaponPackOptimizer.itemPath(source)), "Source item " + source);
             var wrapped = WeaponFirstPersonHands.model(root);
             if (sources.contains(root)) {
                 assertEquals(Identifier.fromNamespaceAndPath(root.getNamespace(), "weapon_hands_w201/" + root.getPath()), wrapped);
-                assertNotNull(getClass().getResource("/" + WeaponPackOptimizer.itemPath(wrapped)), "Hands item " + wrapped);
+                var authoredHands = WeaponFirstPersonHands.model(source);
+                assertNotNull(getClass().getResource("/" + WeaponPackOptimizer.itemPath(authoredHands)), "Hands source " + authoredHands);
             } else {
                 assertEquals(root, wrapped, "Unmapped active routes retain their original item model");
             }

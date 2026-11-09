@@ -98,7 +98,7 @@ class MultikillClipProfileTest {
                 assertTrue(admitted.stream().anyMatch(r -> r.id().equals(id) && r.socket() == socket.getAsInt()));
         }
         assertEquals(65, audited.size());
-        assertEquals(WeaponCatalog.all().stream().map(WeaponCatalog.Entry::id)
+        assertEquals(WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().map(WeaponCatalog.Entry::id)
             .collect(java.util.stream.Collectors.toSet()), audited);
         assertEquals(new HashSet<>(MultikillClipProfile.rolls()), admitted);
     }

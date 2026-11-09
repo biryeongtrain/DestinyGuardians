@@ -47,7 +47,7 @@ class AdrenalineJunkieProfileW173Test {
         assertEquals(60, sockets.getAsJsonArray("unsupportedSelectedIds").size());
         var scan = sockets.getAsJsonArray("selectedScan");
         assertEquals(65, scan.size());
-        assertEquals(WeaponCatalog.all().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
+        assertEquals(WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
             scan.asList().stream().map(e -> e.getAsJsonObject().get("id").getAsString()).collect(Collectors.toSet()));
         for (var e : sockets.getAsJsonArray("weapons")) {
             var row = e.getAsJsonObject();
@@ -201,7 +201,7 @@ class AdrenalineJunkieProfileW173Test {
         assertFalse(AdrenalineJunkieProfile.supports((WeaponCatalog.Entry) null));
         assertThrows(IllegalArgumentException.class, () -> AdrenalineJunkieProfile.timing(null));
         assertThrows(IllegalArgumentException.class, () -> AdrenalineJunkieProfile.adsTicks(null, true));
-        for (var w : WeaponCatalog.all()) {
+        for (var w : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) {
             assertEquals(IDS.contains(w.id()), AdrenalineJunkieProfile.supports(w));
             assertEquals(IDS.contains(w.id()), AdrenalineJunkieProfile.supports(w.id()));
             if (!IDS.contains(w.id())) assertThrows(IllegalArgumentException.class, () -> AdrenalineJunkieProfile.timing(w));

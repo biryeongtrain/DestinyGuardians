@@ -13,13 +13,11 @@ public final class WeaponCatalog {
     private static final Map<String, Entry> BY_ID;
     static {
         Map<String, Entry> entries = new LinkedHashMap<>();
-        Set<String> combinations = new HashSet<>();
         for (Entry e : ALL) {
             if (e.id() == null || !e.id().matches("[a-z0-9_]+") || e.name() == null
                     || e.name().isBlank() || e.family() == null || e.frame() == null
                     || !Objects.equals(e.item_model(), "destiny:weapon/" + e.id())
-                    || entries.putIfAbsent(e.id(), e) != null
-                    || !combinations.add(e.family() + "/" + e.frame())) {
+                    || entries.putIfAbsent(e.id(), e) != null) {
                 throw new IllegalStateException("Invalid/duplicate weapon catalog entry: " + e);
             }
         }

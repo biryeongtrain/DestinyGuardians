@@ -34,8 +34,8 @@ class TapTheTriggerProfileW171Test {
         assertThrows(UnsupportedOperationException.class, () -> TapTheTriggerProfile.rolls().clear());
     }
     @Test void membershipCoversEverySelectedWeaponAndRejectsForgedEntries() {
-        assertEquals(65, WeaponCatalog.all().size());
-        for (var w : WeaponCatalog.all()) {
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
+        for (var w : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) {
             assertEquals(SUPPORTED.contains(w.id()), TapTheTriggerProfile.supports(w), w.id());
             if (!SUPPORTED.contains(w.id())) {
                 assertThrows(IllegalArgumentException.class, () -> TapTheTriggerProfile.stabilityBonus(w));

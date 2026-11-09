@@ -39,7 +39,7 @@ class PerpetualMotionProfileW170Test {
         assertEquals(63, sockets.getAsJsonArray("unsupportedSelectedIds").size());
         var scans = sockets.getAsJsonArray("allSelectedPoolScans");
         assertEquals(65, scans.size());
-        assertEquals(WeaponCatalog.all().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
+        assertEquals(WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
             scans.asList().stream().map(e -> e.getAsJsonObject().get("id").getAsString()).collect(Collectors.toSet()));
         for (var e : sockets.getAsJsonArray("weapons")) {
             var r = e.getAsJsonObject();
@@ -141,7 +141,7 @@ class PerpetualMotionProfileW170Test {
         for (int count : new int[]{-1,0,3,Integer.MAX_VALUE})
             assertThrows(IllegalArgumentException.class, () -> PerpetualMotionProfile.timing(a, count));
         assertThrows(IllegalArgumentException.class, () -> PerpetualMotionProfile.timing(null, 1));
-        for (var w : WeaponCatalog.all()) if (!Set.of("aishas_embrace", "retraced_path").contains(w.id()))
+        for (var w : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) if (!Set.of("aishas_embrace", "retraced_path").contains(w.id()))
             assertThrows(IllegalArgumentException.class, () -> PerpetualMotionProfile.timing(w, 1), w.id());
         var forged = new WeaponCatalog.Entry(a.id(), "shotgun", a.frame(), a.name(), a.source_frame_label(), a.item_model());
         assertThrows(IllegalArgumentException.class, () -> PerpetualMotionProfile.timing(forged, 1));

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Historical qualitative shapes; numerical coordinates and ADS remain local Minecraft tuning. */
 class ShotgunPatternW105Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final double EPS = 1e-11;
     private static final Map<String, ShotgunSpread.Shape> SHAPES = Map.of(
             "mindbender_s_ambition_adept", CONE, "dust_rock_blues", VERTICAL_OVAL,
@@ -143,9 +144,9 @@ class ShotgunPatternW105Test {
 
     @Test
     void onlyExactFiveCatalogShotgunsParticipateAndLegacyBodyBudgetsSurviveTwelvePellets() {
-        assertEquals(SHAPES.keySet(), WeaponCatalog.family("shotgun").stream()
+        assertEquals(SHAPES.keySet(), WeaponCatalog.family("shotgun").stream().filter(e -> !LegendaryWeapons.contains(e.id()))
                 .map(WeaponCatalog.Entry::id).collect(java.util.stream.Collectors.toSet()));
-        for (var entry : WeaponCatalog.all()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             var actual = ShotgunPatternProfile.shape(entry);
             var profile = WeaponProfile.forEntry(entry);
             if (SHAPES.containsKey(entry.id())) {

@@ -64,7 +64,8 @@ public final class WeaponItems {
             maximum = (int)Math.min(Integer.MAX_VALUE, ((long)base * 250 + 99) / 100);
         if (WeaponPerks.selected(stack, "clown_cartridge").isPresent())
             maximum = Math.max(maximum, (int)Math.min(Integer.MAX_VALUE, ((long)base * 150 + 99) / 100));
-        if (WeaponPerks.selected(stack, "overflow").isPresent())
+        if (WeaponPerks.selected(stack, "overflow").isPresent()
+                || WeaponPerks.selected(stack, "reconstruction").isPresent())
             maximum = Math.max(maximum, (int)Math.min(Integer.MAX_VALUE, (long)base * 2));
         return (int)Math.clamp(savedCount(tag, LOADED_LIMIT), base, maximum);
     }

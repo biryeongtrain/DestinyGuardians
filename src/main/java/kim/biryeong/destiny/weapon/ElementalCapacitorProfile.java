@@ -105,13 +105,16 @@ public final class ElementalCapacitorProfile {
         try { check(JsonParser.parseString(json).equals(DATA.document), "mutated resource"); }
         catch (RuntimeException e) { throw new IllegalStateException("Invalid W184 JSON", e); }
     }
-    public static List<WeaponPerks.Roll> rolls() { return DATA.rolls; }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, DATA.rolls); }
     /** KINETIC and absent element are invalid/neutral; Stasis/Strand do not exist in Element. */
     public static int stabilityBonus(Element element) { return element == Element.VOID ? 20 : 0; }
     public static int handlingBonus(Element element) { return element == Element.ARC ? 50 : 0; }
     public static int reloadBonus(Element element) { return element == Element.SOLAR ? 50 : 0; }
     public static boolean supports(WeaponCatalog.Entry entry) {
-        if (entry == null || entry.id() == null || !DATA.curves.containsKey(entry.id())) return false;
+        if (entry == null || entry.id() == null) return false;
+        if (!DATA.curves.containsKey(entry.id())) return LegendaryWeapons.contains(entry.id())
+            && WeaponCatalog.find(entry.id()).filter(entry::equals).isPresent()
+            && LegendaryPerks.extraRolls(ID).stream().anyMatch(r -> r.id().equals(entry.id()));
         var row = CATALOG.get(entry.id());
         return Objects.equals(entry, GSON.fromJson(row, WeaponCatalog.Entry.class));
     }
@@ -128,13 +131,27 @@ public final class ElementalCapacitorProfile {
         return Math.max(1, (int)Math.ceil(seconds * 20));
     }
     public static int handlingTicks(WeaponCatalog.Entry entry, int totalHandlingBonus, double scalar, boolean ready) {
-        var c = curve(entry); scalar(scalar);
+        scalar(scalar);
+        if (supports(entry) && LegendaryWeapons.contains(entry.id())) {
+            var base = WeaponHandlingProfile.of(entry);
+            return WeaponStatCurves.handlingTicks(entry.id(), ready, ready ? base.readyTicks() : base.stowTicks(), totalHandlingBonus, scalar);
+        }
+        var c = curve(entry);
         int stat = effectiveStat(c.baseHandlingStat, totalHandlingBonus);
         double seconds = ready ? c.ready.seconds(stat) : Math.max(c.stow.seconds(stat), c.stow.seconds(100));
         return quantize(seconds * scalar);
     }
     /** No EC ADS scalar; only the ARC handling stat changes raw ADS duration. No selected Snapshot pair. */
     public static int adsTicks(WeaponCatalog.Entry entry, int totalHandlingBonus, boolean snapshotEntering) {
+        if (supports(entry) && LegendaryWeapons.contains(entry.id())) {
+            double multiplier = 1;
+            if (snapshotEntering) {
+                if (LegendaryPerks.extraRolls(SnapshotAimProfile.ID).stream().noneMatch(r -> compatible(entry, SnapshotAimProfile.ID, r)))
+                    throw new IllegalArgumentException("No compatible Snapshot socket");
+                multiplier = WeaponCharacteristics.of(entry).ammo() == WeaponAmmoType.PRIMARY ? .5 : .8;
+            }
+            return WeaponStatCurves.adsTicks(entry.id(), WeaponAimProfile.of(entry).transitionTicks(), totalHandlingBonus, multiplier);
+        }
         var c = curve(entry);
         if (snapshotEntering && c.snapshotScalar == null) throw new IllegalArgumentException("No compatible Snapshot socket");
         double seconds = c.ads.seconds(effectiveStat(c.baseHandlingStat, totalHandlingBonus));
@@ -146,10 +163,16 @@ public final class ElementalCapacitorProfile {
         return c.reload.seconds(Math.min(c.reloadStatCap, effectiveStat(c.baseReloadStat, totalReloadBonus))) * reloadScalar;
     }
     public static int reloadTicks(WeaponCatalog.Entry entry, int totalReloadBonus, double reloadScalar) {
+        scalar(reloadScalar);
+        if (supports(entry) && LegendaryWeapons.contains(entry.id()))
+            return WeaponStatCurves.reloadTicks(entry.id(), WeaponProfile.forEntry(entry).reloadTicks(), totalReloadBonus, reloadScalar);
         return quantize(reloadSeconds(curve(entry), totalReloadBonus, reloadScalar));
     }
     /** Exact finite co-selection proof; the selected companion must equal the pinned official roll. */
     static boolean compatible(WeaponCatalog.Entry entry, String perk, WeaponPerks.Roll selected) {
+        if (supports(entry) && LegendaryWeapons.contains(entry.id()))
+            return LegendaryPerks.extraRolls(perk).contains(selected) && selected.id().equals(entry.id())
+                && LegendaryPerks.extraRolls(ID).stream().anyMatch(r -> r.id().equals(entry.id()) && r.socket() != selected.socket());
         return supports(entry) && DATA.companions.stream().anyMatch(p -> p.id.equals(entry.id()) && p.perk.equals(perk) && p.roll.equals(selected));
     }
     /** Both exact selected weapons use whole-magazine reload. Compute raw total once and retain
@@ -157,6 +180,13 @@ public final class ElementalCapacitorProfile {
      */
     static WeaponReloadPolicy.Plan reloadPlan(WeaponCatalog.Entry entry, int totalReloadBonus, double reloadScalar,
                                               WeaponReloadPolicy.Plan base) {
+        if (supports(entry) && LegendaryWeapons.contains(entry.id())) {
+            scalar(reloadScalar);
+            var own = WeaponProfile.forEntry(entry);
+            return new WeaponReloadPolicy.Plan(
+                WeaponStatCurves.reloadTicks(entry.id(), own.firstReloadTicks(), totalReloadBonus, reloadScalar),
+                WeaponStatCurves.reloadTicks(entry.id(), own.reloadTicks(), totalReloadBonus, reloadScalar), base.roundsPerInsert());
+        }
         int ticks = reloadTicks(entry, totalReloadBonus, reloadScalar);
         return new WeaponReloadPolicy.Plan(ticks, ticks, base.roundsPerInsert());
     }

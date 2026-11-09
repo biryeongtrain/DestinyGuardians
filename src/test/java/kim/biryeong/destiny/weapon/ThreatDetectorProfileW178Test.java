@@ -50,8 +50,8 @@ class ThreatDetectorProfileW178Test {
             assertTrue(ThreatDetectorProfile.supports(entry(r.id())));
         }
         assertEquals(EXPECTED, actual);
-        assertEquals(65, WeaponCatalog.all().size());
-        assertEquals(19, WeaponCatalog.all().stream().filter(ThreatDetectorProfile::supports).count());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
+        assertEquals(19, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().filter(ThreatDetectorProfile::supports).count());
         assertFalse(ThreatDetectorProfile.supports(entry("ammit_ar2")));
         assertFalse(ThreatDetectorProfile.supports(entry("ace_of_spades")));
         assertThrows(UnsupportedOperationException.class, () -> ThreatDetectorProfile.rolls().clear());

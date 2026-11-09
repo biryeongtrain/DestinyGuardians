@@ -39,10 +39,10 @@ public final class AmbitiousAssassinProfile {
             return new Data(d.stage,d.perk,List.copyOf(d.weapons));
         } catch(java.io.IOException e) { throw new IllegalStateException(e); }
     }
-    public static List<WeaponPerks.Roll> rolls() { return DATA.weapons; }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, DATA.weapons); }
     public static boolean supports(WeaponCatalog.Entry e) {
         return e!=null && WeaponCatalog.find(e.id()).filter(e::equals).isPresent()
-            && !WeaponCharacteristics.of(e).exotic() && EXPECTED.stream().anyMatch(r->r.id().equals(e.id())
+            && !WeaponCharacteristics.of(e).exotic() && rolls().stream().anyMatch(r->r.id().equals(e.id())
                 && r.hash()==WeaponCharacteristics.of(e).bungieHash());
     }
     public static int target(WeaponCatalog.Entry e,int kills) {

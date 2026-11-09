@@ -4,12 +4,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WaveFrameW78Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static boolean hit(double fx,double fz,double minX,double minY,double minZ,double maxX,double maxY,double maxZ) {
         return WaveFrameProfile.intersects(fx,fz,0,1,0,fx*2,1,fz*2,2,1.5,minX,minY,minZ,maxX,maxY,maxZ);
     }
     @Test void waveAndCompressedAreExactTwoSupportedEntries() {
-        assertEquals(2,WaveFrameProfile.all().size());
-        for(var entry:WeaponCatalog.all())assertEquals(entry.id().equals("deafening_whisper")||entry.id().equals("dimensional_hypotrochoid"),WaveFrameProfile.of(entry).isPresent(),entry.id());
+        assertEquals(2,WaveFrameProfile.all().stream().filter(p -> !LegendaryWeapons.contains(p.id())).count());
+        for(var entry:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList())assertEquals(entry.id().equals("deafening_whisper")||entry.id().equals("dimensional_hypotrochoid"),WaveFrameProfile.of(entry).isPresent(),entry.id());
         for(var p:WaveFrameProfile.all()) {
             var entry=WeaponCatalog.find(p.id()).orElseThrow();
             assertEquals(WeaponCharacteristics.of(entry).bungieHash(),p.hash());

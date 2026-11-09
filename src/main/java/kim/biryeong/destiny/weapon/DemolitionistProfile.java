@@ -55,9 +55,13 @@ public final class DemolitionistProfile {
         } catch (java.io.IOException e) { throw new IllegalStateException(e); }
     }
     public static Perk perk() { return DATA.perk; }
-    public static List<WeaponPerks.Roll> rolls() { return Arrays.stream(DATA.weapons).map(Row::roll).toList(); }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, Arrays.stream(DATA.weapons).map(Row::roll).toList()); }
     /** BASE percentage; zero for exact weapons without a verified base-trait socket. */
     public static int energyPercent(WeaponCatalog.Entry entry) {
+        if (entry == null || WeaponCatalog.find(entry.id()).filter(entry::equals).isEmpty()) return 0;
+        if (LegendaryPerks.extraRolls(ID).stream().anyMatch(r -> r.id().equals(entry.id())))
+            return DATA.perk.specialEnergyFamilies.contains(entry.family())
+                ? DATA.perk.specialEnergyPercent : DATA.perk.energyPercent;
         return Arrays.stream(DATA.weapons).filter(r -> r.id.equals(entry.id())).findFirst().map(Row::baseEnergyPercent).orElse(0);
     }
 }

@@ -92,6 +92,12 @@ public final class WeaponFrenzy {
         int feeding=WeaponFeedingFrenzy.stacks(p),rapid=WeaponRapidHit.stacks(p);
         if(feeding>0)scalar*=FeedingFrenzyProfile.durationMultiplier(feeding);
         if(rapid>0)scalar*=RapidHitProfile.durationMultiplier(rapid);
+        if (LegendaryWeapons.contains(entry.id())) {
+            var own = WeaponProfile.forEntry(entry);
+            return new WeaponReloadPolicy.Plan(
+                WeaponStatCurves.reloadTicks(entry.id(), own.firstReloadTicks(), FrenzyProfile.reloadBonus(), scalar),
+                WeaponStatCurves.reloadTicks(entry.id(), own.reloadTicks(), FrenzyProfile.reloadBonus(), scalar), base.roundsPerInsert());
+        }
         int ticks=FrenzyProfile.reloadTicks(entry,scalar);
         return new WeaponReloadPolicy.Plan(ticks,ticks,base.roundsPerInsert());
     }

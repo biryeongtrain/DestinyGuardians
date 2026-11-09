@@ -12,6 +12,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WeaponSightW150Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final Path ASSETS=Path.of("src/main/resources/assets/destiny");
     private static final Set<String> IDS=Set.of("dust_rock_blues","first_in_last_out","ikelos_sg_v1_0_1",
             "parcel_of_stardust_fell_to_earth","mindbender_s_ambition_adept","biting_winds","whispering_slab");
@@ -19,10 +20,10 @@ class WeaponSightW150Test {
     private static final Set<String> TRACE_ROCKETS=Set.of("retraced_path","bellowing_giant","pyroclastic_flow");
     private static final Set<String> LFRS=Set.of("line_in_the_sand","stormchaser");
     @Test void onlyTheFiveLatestWeaponsUseNewSightRoute() {
-        for(var entry:WeaponCatalog.all()) assertEquals(entry.id().equals("ace_of_spades")?"weapon_sight_w159/":WeaponSightW153Test.IDS.contains(entry.id())?"weapon_sight_w153/":WeaponSightW151Test.IDS.contains(entry.id())?"weapon_sight_w151/":(TRACE_ROCKETS.contains(entry.id()) || LFRS.contains(entry.id()))?"weapon_sight_w150/":IDS.contains(entry.id())?"weapon_sight_w148/":LAUNCHERS.contains(entry.id())?"weapon_sight_w149/":"weapon_aim_w70/",WeaponAimPresentation.modelPrefix(entry));
+        for(var entry:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) assertEquals(entry.id().equals("ace_of_spades")?"weapon_sight_w159/":WeaponSightW153Test.IDS.contains(entry.id())?"weapon_sight_w153/":WeaponSightW151Test.IDS.contains(entry.id())?"weapon_sight_w151/":(TRACE_ROCKETS.contains(entry.id()) || LFRS.contains(entry.id()))?"weapon_sight_w150/":IDS.contains(entry.id())?"weapon_sight_w148/":LAUNCHERS.contains(entry.id())?"weapon_sight_w149/":"weapon_aim_w70/",WeaponAimPresentation.modelPrefix(entry));
     }
     @Test void physicalSightsReplaceHipReticlesOnlyAtTheRaisedEndpoint() {
-        for(var entry:WeaponCatalog.all()) {
+        for(var entry:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             assertFalse(WeaponAimPresentation.physicalSight(entry,0));
             assertFalse(WeaponAimPresentation.physicalSight(entry,.94f));
             assertFalse(WeaponAimPresentation.physicalSight(entry,Float.NaN));

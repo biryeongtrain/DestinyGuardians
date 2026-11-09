@@ -28,12 +28,12 @@ public final class WeaponOverflow {
     }
 
     /** Pure exact original-stack predicate. Held/stowed and current weapon selection are
-     * irrelevant. No reserve-full check: a real brick can be consumed for Primary loaded gain.
+     * irrelevant. No reserve-full check: a real brick can be consumed for reserve-funded loaded gain (Primary retains infinite supply).
      */
     public static boolean selected(ServerPlayer p, ItemStack stack) {
         if (!ownerValid(p) || !equipped(p, stack)) return false;
         var entry = WeaponItems.entry(stack).orElse(null);
-        return OverflowProfile.supports(entry) && WeaponCharacteristics.of(entry).ammo() == WeaponAmmoType.PRIMARY
+        return OverflowProfile.supports(entry)
             && WeaponPerks.selected(stack, OverflowProfile.ID).filter(OverflowProfile.rolls()::contains)
                 .filter(r -> r.id().equals(entry.id())).isPresent();
     }
@@ -56,4 +56,14 @@ public final class WeaponOverflow {
      * Eligibility must come from selected/eligible; an entry alone proves no ownership.
      */
     public static int target(WeaponCatalog.Entry entry) { return OverflowProfile.target(entry); }
+    /** Runtime target uses this original item's magazine component, matching WeaponItems.magazine.
+     * Eligibility is still the caller's selected/eligible check; this pure query grants no ammo. */
+    public static int target(ItemStack stack, WeaponCatalog.Entry entry) {
+        if (stack == null || !OverflowProfile.supports(entry)) return 0;
+        return target(entry, WeaponComponents.profile(stack, WeaponProfile.forEntry(entry)).magazine());
+    }
+    static int target(WeaponCatalog.Entry entry, int effectiveCapacity) {
+        return !OverflowProfile.supports(entry) || effectiveCapacity <= 0 ? 0
+                : (int)Math.min(Integer.MAX_VALUE, 2L * effectiveCapacity);
+    }
 }

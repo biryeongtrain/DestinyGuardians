@@ -21,6 +21,8 @@ import java.util.function.BooleanSupplier;
 public abstract class GameTestPackReadinessMixin {
     @Shadow private MultipleTestTracker testTracker;
     @Unique private long destiny$packWaitStarted;
+    @Unique private static final long destiny$packTimeoutSeconds = Math.clamp(
+            Long.getLong("destiny.gametest.packTimeoutSeconds", 120L), 30L, 600L);
 
     @Inject(method = "tickServer", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/gametest/framework/GameTestServer;haveTestsStarted()Z"), cancellable = true)
@@ -38,8 +40,9 @@ public abstract class GameTestPackReadinessMixin {
         if (destiny$packWaitStarted == 0) {
             destiny$packWaitStarted = now;
             DestinyGuardians.LOGGER.info("GameTest waits for real profile-graph publication before allocating test fixtures");
-        } else if (now - destiny$packWaitStarted > 120_000_000_000L) {
-            throw new IllegalStateException("GameTest asset setup failed: profile graph not published within 120 seconds; inspect Polymer startup errors");
+        } else if (now - destiny$packWaitStarted > destiny$packTimeoutSeconds * 1_000_000_000L) {
+            throw new IllegalStateException("GameTest asset setup failed: profile graph not published within "
+                    + destiny$packTimeoutSeconds + " seconds; inspect Polymer startup errors");
         }
         // The MinecraftServer superclass tick has already run: workers and queued server tasks
         // keep progressing. Only fixture allocation / test clocks wait, with no blocking sleep.

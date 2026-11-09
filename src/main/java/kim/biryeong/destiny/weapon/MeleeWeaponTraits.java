@@ -11,12 +11,12 @@ import net.minecraft.world.entity.TamableAnimal;
  * weapons, grenades and supers use that DamageSource too. Never hook generic onKill.
  */
 public final class MeleeWeaponTraits {
-    public record Snapshot(WeaponSwashbuckler.MeleeToken swashbuckler, WeaponGraveRobber.Token graveRobber, WeaponPugilist.MeleeToken pugilist, WeaponWellRounded.Token wellRounded, PerkBatchC.MeleeToken batchC /* W322 batch C */) {
-        public static final Snapshot NONE = new Snapshot(WeaponSwashbuckler.MeleeToken.NONE,WeaponGraveRobber.Token.NONE,WeaponPugilist.MeleeToken.NONE,WeaponWellRounded.Token.NONE,PerkBatchC.MeleeToken.NONE);
+    public record Snapshot(WeaponSwashbuckler.MeleeToken swashbuckler, WeaponGraveRobber.Token graveRobber, WeaponPugilist.MeleeToken pugilist, WeaponWellRounded.Token wellRounded, PerkBatchC.MeleeToken batchC /* W322 batch C */, PerkExpansionCombat.AbilityToken desperate) {
+        public static final Snapshot NONE = new Snapshot(WeaponSwashbuckler.MeleeToken.NONE,WeaponGraveRobber.Token.NONE,WeaponPugilist.MeleeToken.NONE,WeaponWellRounded.Token.NONE,PerkBatchC.MeleeToken.NONE,PerkExpansionCombat.AbilityToken.NONE);
     }
     private MeleeWeaponTraits() {}
     public static Snapshot accepted(ServerPlayer p) {
-        return new Snapshot(WeaponSwashbuckler.meleeAccepted(p),WeaponGraveRobber.accepted(p),WeaponPugilist.meleeAccepted(p),WeaponWellRounded.accepted(p,kim.biryeong.destiny.guardian.AbilitySlot.MELEE),PerkBatchC.meleeAccepted(p));
+        return new Snapshot(WeaponSwashbuckler.meleeAccepted(p),WeaponGraveRobber.accepted(p),WeaponPugilist.meleeAccepted(p),WeaponWellRounded.accepted(p,kim.biryeong.destiny.guardian.AbilitySlot.MELEE),PerkBatchC.meleeAccepted(p),PerkExpansionCombat.acceptedAbility(p,kim.biryeong.destiny.guardian.AbilitySlot.MELEE));
     }
     /** Real direct powered contact only. Damage-over-time/status pulses are deliberately excluded. */
     public static boolean poweredDamage(ServerLevel level,ServerPlayer p,LivingEntity target,float amount,
@@ -33,6 +33,7 @@ public final class MeleeWeaponTraits {
     /** Only for callers already observing positive actual loss and exact melee attribution. */
     static void confirmed(ServerPlayer p,Snapshot source,LivingEntity target,boolean powered,boolean killed) {
         if(source==null || source==Snapshot.NONE)return;
+        if(killed)PerkExpansionCombat.abilityKilled(p,source.desperate(),target);
         if(killed)WeaponSwashbuckler.meleeKilled(p,source.swashbuckler(),target);
         WeaponGraveRobber.confirmed(p,source.graveRobber(),target,powered,killed);
         WeaponPugilist.meleeConfirmed(p,source.pugilist(),target);

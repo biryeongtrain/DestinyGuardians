@@ -18,7 +18,9 @@ class WeaponHandlingProfileTest {
         }
         assertEquals(58, WeaponCatalogTest.originalW30Entries().stream()
                 .filter(e -> !e.family().equals("sword")).count());
-        assertEquals(60, supported);
+        assertEquals(60, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()))
+                .filter(e -> WeaponHandlingProfile.of(e).supported()).count());
+        assertEquals(60 + 24, supported);
     }
     @Test void actualSelectedItemStatsDriveDistinctReadyAndStowTimes() {
         var p = WeaponHandlingProfile.of(WeaponCatalog.find("austringer").orElseThrow());

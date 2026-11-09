@@ -7,9 +7,20 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OutlawProfileTest {
+    /** Historical source assertions remain frozen; new identities require exact official tuples. */
+    private static java.util.List<WeaponPerks.Roll> legacyRolls() {
+        var all = OutlawProfile.rolls();
+        var added = all.stream().filter(r -> LegendaryWeapons.contains(r.id())).toList();
+        assertEquals(java.util.Set.of("heritage", "trustee"), added.stream().map(WeaponPerks.Roll::id)
+            .collect(java.util.stream.Collectors.toSet()));
+        for (var roll : added) assertTrue(LegendaryWeapons.exactRoll(roll), roll.toString());
+        assertEquals(all.size(), new java.util.HashSet<>(all).size());
+        return all.stream().filter(r -> !LegendaryWeapons.contains(r.id())).toList();
+    }
+
     private static JsonObject json(String file) throws Exception {return JsonParser.parseString(Files.readString(Path.of(file))).getAsJsonObject();}
     @Test void exactThirteenOfficialSocketsIncludeTwelveRandomPoolsAndOneExplicitFixedInitialTrait() throws Exception {
-        var proof=json("art/weapons/w62/references/socket-pools.json");var rolls=OutlawProfile.rolls();
+        var proof=json("art/weapons/w62/references/socket-pools.json");var rolls=legacyRolls();
         assertEquals(13,rolls.size());assertEquals(13,rolls.stream().map(WeaponPerks.Roll::id).distinct().count());
         assertEquals(63,proof.get("selectedCount").getAsInt());assertEquals(12,proof.get("randomizedPoolRows").getAsInt());assertEquals(1,proof.get("fixedDirectRows").getAsInt());
         assertEquals(0,proof.getAsJsonArray("duplicateBaseSelectedOptions").size());var seen=new HashSet<String>();int fixed=0;
@@ -55,7 +66,7 @@ class OutlawProfileTest {
         assertFalse(proof.getAsJsonObject("enhancedComparison").get("implemented").getAsBoolean());
         assertFalse(proof.getAsJsonObject("animationSnapshot").get("verifiedDestinyBehavior").getAsBoolean());
         assertFalse(proof.getAsJsonObject("mixedPelletPrecision").get("verified").getAsBoolean());
-        assertTrue(OutlawProfile.rolls().stream().noneMatch(r->r.perkHash()==1347741687L||r.perkHash()==1528281896L));
+        assertTrue(legacyRolls().stream().noneMatch(r->r.perkHash()==1347741687L||r.perkHash()==1528281896L));
         assertThrows(IllegalArgumentException.class,()->OutlawProfile.reload(WeaponCatalog.find("bad_omens").orElseThrow()));
     }
 }

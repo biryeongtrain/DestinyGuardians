@@ -23,15 +23,15 @@ class ElementalCapacitorW184Test {
         assertEquals("elemental_capacitor", ElementalCapacitorProfile.ID);
         assertEquals(3511092054L, ElementalCapacitorProfile.HASH);
         var actual = new HashSet<String>();
-        for (var r : ElementalCapacitorProfile.rolls()) {
+        for (var r : ElementalCapacitorProfile.rolls().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) {
             assertEquals(3511092054L, r.perkHash());
             assertNotEquals(711234314L, r.perkHash());
             assertTrue(actual.add(r.id()+":"+r.hash()+":"+r.socket()+":"+r.plugSetHash()));
             assertTrue(ElementalCapacitorProfile.supports(entry(r.id())));
         }
         assertEquals(EXPECTED, actual);
-        assertEquals(65, WeaponCatalog.all().size());
-        assertEquals(2, WeaponCatalog.all().stream().filter(ElementalCapacitorProfile::supports).count());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
+        assertEquals(2, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().filter(ElementalCapacitorProfile::supports).count());
         assertFalse(ElementalCapacitorProfile.supports(entry("cold_denial")));
         assertFalse(ElementalCapacitorProfile.supports(entry("ace_of_spades")));
         assertThrows(UnsupportedOperationException.class, () -> ElementalCapacitorProfile.rolls().clear());
@@ -78,7 +78,7 @@ class ElementalCapacitorW184Test {
             var data=read(pair.getValue()).getAsJsonObject();
             for(var value:data.getAsJsonArray(data.has("rolls")?"rolls":"weapons")) {
                 var b=GSON.fromJson(value,WeaponPerks.Roll.class);
-                for(var a:ElementalCapacitorProfile.rolls()) if(a.id().equals(b.id())) {
+                for(var a:ElementalCapacitorProfile.rolls().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) if(a.id().equals(b.id())) {
                     boolean distinct=a.socket()!=b.socket();
                     assertEquals(distinct,ElementalCapacitorProfile.compatible(entry(a.id()),pair.getKey(),b));
                     if(distinct) found.add(a.id()+":"+pair.getKey());
@@ -97,7 +97,7 @@ class ElementalCapacitorW184Test {
         for(var row:read("w58-handling.json").getAsJsonArray()) {var o=row.getAsJsonObject();handling.put(o.get("id").getAsString(),o.getAsJsonObject("profile"));}
         for(var row:read("w44-aim.json").getAsJsonArray()) {var o=row.getAsJsonObject();aim.put(o.get("id").getAsString(),o.getAsJsonObject("profile"));}
         int shells=0;
-        for(var roll:ElementalCapacitorProfile.rolls()) {
+        for(var roll:ElementalCapacitorProfile.rolls().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) {
             var e=entry(roll.id());var t=timings.get(e.id());var h=handling.get(e.id());
             boolean shell=t.get("shellReload").getAsBoolean();if(shell)shells++;
             assertEquals(t.get(shell?"reloadPerRoundTicks":"reloadTicks").getAsInt(),ElementalCapacitorProfile.reloadTicks(e,0,1));
@@ -201,7 +201,7 @@ class ElementalCapacitorW184Test {
         assertEquals(100,ElementalCapacitorProfile.effectiveStat(99,Integer.MAX_VALUE));
         assertEquals(0,ElementalCapacitorProfile.effectiveStat(99,Integer.MIN_VALUE));
         boolean differs=false;
-        for(var roll:ElementalCapacitorProfile.rolls()) {
+        for(var roll:ElementalCapacitorProfile.rolls().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) {
             var e=entry(roll.id());
             assertEquals(ElementalCapacitorProfile.reloadTicks(e,100,1),ElementalCapacitorProfile.reloadTicks(e,Integer.MAX_VALUE,1));
             assertEquals(ElementalCapacitorProfile.handlingTicks(e,100,1,true),ElementalCapacitorProfile.handlingTicks(e,Integer.MAX_VALUE,1,true));
@@ -227,10 +227,11 @@ class ElementalCapacitorW184Test {
     }
     @Test void initializationUsesJsonSourcesWithoutCatalogOrPerkRegistryRecursion() throws Exception {
         String source=java.nio.file.Files.readString(java.nio.file.Path.of("src/main/java/kim/biryeong/destiny/weapon/ElementalCapacitorProfile.java"));
+        String initialization=source.substring(0,source.indexOf("public static List<WeaponPerks.Roll> rolls()"));
         for(String forbidden:List.of("WeaponCatalog.find(","WeaponCatalog.all(","WeaponCharacteristics.of(","WeaponPerks.rolls(","WeaponPerks.available(","WeaponPerks.selected("))
-            assertFalse(source.contains(forbidden),forbidden);
+            assertFalse(initialization.contains(forbidden),forbidden);
         assertTrue(source.contains("byId(\"/destiny/weapons/w30.json\")"));
-        assertEquals(2,ElementalCapacitorProfile.rolls().size());
+        assertEquals(2,ElementalCapacitorProfile.rolls().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
     }
 
 }

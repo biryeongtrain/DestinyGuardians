@@ -39,7 +39,7 @@ public final class WeaponExotics {
             if (value.isJsonArray()) for (var item : value.getAsJsonArray()) result.add(gson.fromJson(item, type));
             else result.add(gson.fromJson(value, type));
         }
-        return List.copyOf(result);
+        return LegendaryWeapons.append(result, field, type);
     }
     public static boolean ace(WeaponCatalog.Entry entry) {
         return entry != null && entry.id().equals("ace_of_spades")

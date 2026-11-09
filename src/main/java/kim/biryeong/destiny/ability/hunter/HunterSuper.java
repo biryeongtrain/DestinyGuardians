@@ -472,8 +472,8 @@ public final class HunterSuper extends Ability {
                             }
                             for (LivingEntity e : enemies) {
                                 if (age % 10 == 0) {
-                                    Statuses.apply(e, Keyword.WEAKENED, 30);
-                                    Statuses.apply(e, Keyword.SUPPRESSED, 30);
+                                    Statuses.apply(player, e, Keyword.WEAKENED, 30);
+                                    Statuses.apply(player, e, Keyword.SUPPRESSED, 30);
                                     Fx.line(player, level, anchor, e.position().add(0, e.getBbHeight() / 2, 0), element().glow(), 0.35, 0.7f);
                                 }
                                 Vec3 pull = anchor.subtract(e.position()).scale(0.04);
@@ -530,7 +530,7 @@ public final class HunterSuper extends Ability {
             PostEffects.pulse(player, element, true);
             if (keyword != null && target.isAlive()) {
                 if (keyword == Keyword.SCORCHED) Statuses.scorch(player, target, 100);
-                else Statuses.apply(target, keyword, 100);
+                else Statuses.apply(player, target, keyword, 100);
             }
             return target;
         }

@@ -6,18 +6,26 @@ import net.minecraft.server.level.ServerPlayer;
 final class WeaponShotTraits {
     record Snapshot(WeaponOpeningShot.Token opening, WeaponBoxBreathing.Token breathing,
                     WeaponDynamicSway.Token sway, WeaponHeadseeker.Token headseeker, WeaponSteadyHands.Token steadyHands,
-                    WeaponCharacteristics.Damage damage, WeaponGutshot.Token gutshot) {}
+                    WeaponCharacteristics.Damage damage, WeaponGutshot.Token gutshot,
+                    PerkExpansionStats.Token stats, PerkExpansionCombat.Token combat, PerkExpansionSupport.Token support) {}
     static final Snapshot NONE = new Snapshot(WeaponOpeningShot.Token.NONE,
-            WeaponBoxBreathing.Token.NONE,WeaponDynamicSway.Token.NONE,WeaponHeadseeker.Token.NONE,WeaponSteadyHands.Token.NONE,WeaponCharacteristics.Damage.KINETIC,WeaponGutshot.Token.NONE);
+            WeaponBoxBreathing.Token.NONE,WeaponDynamicSway.Token.NONE,WeaponHeadseeker.Token.NONE,WeaponSteadyHands.Token.NONE,WeaponCharacteristics.Damage.KINETIC,WeaponGutshot.Token.NONE,PerkExpansionStats.Token.NONE,PerkExpansionCombat.Token.NONE,PerkExpansionSupport.Token.NONE);
     private WeaponShotTraits() {}
     static Snapshot paid(ServerPlayer p, WeaponCatalog.Entry entry, int roundsBefore, boolean firstOfBurst) {
         return new Snapshot(WeaponOpeningShot.capture(p,entry,firstOfBurst),
                 firstOfBurst?WeaponBoxBreathing.capture(p,entry,roundsBefore,WeaponAiming.aimInput(p)):WeaponBoxBreathing.Token.NONE,
-                WeaponDynamicSway.paid(p,entry),WeaponHeadseeker.capture(p),WeaponSteadyHands.capture(p),WeaponOsmosis.damage(p,p.getMainHandItem(),entry),WeaponGutshot.capture(p,entry));
+                WeaponDynamicSway.paid(p,entry),WeaponHeadseeker.capture(p),WeaponSteadyHands.capture(p),PerkExpansionSupport.damage(p,p.getMainHandItem(),entry,WeaponOsmosis.damage(p,p.getMainHandItem(),entry)),WeaponGutshot.capture(p,entry),
+                PerkExpansionStats.capture(p),PerkExpansionCombat.paid(p,entry,roundsBefore,firstOfBurst),PerkExpansionSupport.capture(p));
     }
+    static Snapshot paidSword(ServerPlayer p, WeaponCatalog.Entry entry) {
+        return new Snapshot(NONE.opening(), NONE.breathing(), NONE.sway(), NONE.headseeker(), NONE.steadyHands(),
+                PerkExpansionSupport.damage(p,p.getMainHandItem(),entry,WeaponCharacteristics.of(entry).damage()),
+                NONE.gutshot(), PerkExpansionStats.capture(p), PerkExpansionCombat.Token.NONE, PerkExpansionSupport.capture(p));
+    }
+    static void resolved(ServerPlayer p, Snapshot s) { PerkExpansionCombat.resolved(p,s.combat()); }
     static Snapshot damageOnly(Snapshot source) {
         return new Snapshot(WeaponOpeningShot.Token.NONE,WeaponBoxBreathing.Token.NONE,WeaponDynamicSway.Token.NONE,
-                WeaponHeadseeker.Token.NONE,WeaponSteadyHands.Token.NONE,source.damage(),WeaponGutshot.Token.NONE);
+                WeaponHeadseeker.Token.NONE,WeaponSteadyHands.Token.NONE,source.damage(),WeaponGutshot.Token.NONE,PerkExpansionStats.Token.NONE,source.combat().splash(),source.support());
     }
     static kim.biryeong.destiny.guardian.Element element(Snapshot source) {
         return switch(source.damage()) {
@@ -41,9 +49,12 @@ final class WeaponShotTraits {
     }
     static float bodyDamage(Snapshot s,float body) { return WeaponGutshot.bodyDamage(s.gutshot(),body); }
     static void confirmed(ServerPlayer p,Snapshot s,net.minecraft.world.entity.LivingEntity target,
-                          boolean precision,float actual,boolean killed) {
+                          boolean precision,float actual,boolean killed,boolean voidDebuffed) {
         WeaponHeadseeker.confirmed(p,s.headseeker(),precision,actual);
+        PerkExpansionStats.confirmed(p,s.stats(),target,actual,killed);
+        PerkExpansionCombat.confirmed(p,s.combat(),target,actual,killed);
+        if(killed && actual>0) PerkExpansionSupport.killed(p,s.support(),target,precision,voidDebuffed);
         if(killed) WeaponSteadyHands.killed(p,s.steadyHands(),target);
     }
-    static float precision(ServerPlayer p,Snapshot s) { return WeaponBoxBreathing.precisionMultiplier(p,s.breathing()); }
+    static float precision(ServerPlayer p,Snapshot s) { return WeaponBoxBreathing.precisionMultiplier(p,s.breathing())*s.combat().precisionMultiplier(); }
 }

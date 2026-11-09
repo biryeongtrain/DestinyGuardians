@@ -22,6 +22,13 @@ public final class StasisStatus {
     private static final Map<UUID, Frozen> FROZEN = new HashMap<>();
     private StasisStatus() {}
 
+    /** Owner-attributed formation freeze; no inference from the victim's last attacker. */
+    public static void freeze(net.minecraft.server.level.ServerPlayer owner, LivingEntity target, int ticks) {
+        if (owner == null || target == null || ticks <= 0 || !target.isAlive()
+                || owner.level() != target.level() || !Combat.isEnemy(owner, target)) return;
+        freeze(target, ticks);
+        if (frozen(target)) kim.biryeong.destiny.weapon.PerkExpansionSupport.debuffApplied(owner, target);
+    }
     public static void freeze(LivingEntity target, int ticks) {
         if (target == null || ticks <= 0 || !target.isAlive() || !(target.level() instanceof ServerLevel level)) return;
         long until = level.getGameTime() + ticks;

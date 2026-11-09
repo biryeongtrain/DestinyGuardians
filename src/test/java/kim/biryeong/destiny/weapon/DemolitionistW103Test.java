@@ -10,6 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Literal frozen base-socket oracle and local adaptation boundaries, not measured live D2 energy. */
 class DemolitionistW103Test {
+    /** Historical source assertions remain frozen; new identities require exact official tuples. */
+    private static java.util.List<WeaponPerks.Roll> legacyRolls() {
+        var all = DemolitionistProfile.rolls();
+        var added = all.stream().filter(r -> LegendaryWeapons.contains(r.id())).toList();
+        assertEquals(java.util.Set.of("age_old_bond", "apex_predator", "brigands_law", "circular_logic", "deliverance", "forbearance", "heritage", "insidious", "iterative_loop", "origin_story", "rufuss_fury", "submission", "succession"), added.stream().map(WeaponPerks.Roll::id)
+            .collect(java.util.stream.Collectors.toSet()));
+        for (var roll : added) assertTrue(LegendaryWeapons.exactRoll(roll), roll.toString());
+        assertEquals(all.size(), new java.util.HashSet<>(all).size());
+        return all.stream().filter(r -> !LegendaryWeapons.contains(r.id())).toList();
+    }
+
     private static final long HASH = 3523296417L;
     private static final Set<WeaponPerks.Roll> ROWS = Set.of(
             new WeaponPerks.Roll("austringer",3055790362L,4,HASH,785215120L),
@@ -27,10 +38,10 @@ class DemolitionistW103Test {
     @Test void exactElevenBaseSocketsAndImmutableProfileExcludeEnhanced() {
         assertEquals("demolitionist", DemolitionistProfile.ID);
         assertEquals(HASH, DemolitionistProfile.HASH);
-        assertEquals(11, DemolitionistProfile.rolls().size());
-        assertEquals(ROWS, Set.copyOf(DemolitionistProfile.rolls()));
-        assertTrue(DemolitionistProfile.rolls().stream().noneMatch(r -> r.perkHash() == 1906147653L));
-        assertThrows(UnsupportedOperationException.class, () -> DemolitionistProfile.rolls().clear());
+        assertEquals(11, legacyRolls().size());
+        assertEquals(ROWS, Set.copyOf(legacyRolls()));
+        assertTrue(legacyRolls().stream().noneMatch(r -> r.perkHash() == 1906147653L));
+        assertThrows(UnsupportedOperationException.class, () -> legacyRolls().clear());
         var p = DemolitionistProfile.perk();
         assertEquals(HASH, p.hash()); assertEquals("demolitionist", p.id());
         assertEquals(10, p.energyPercent()); assertEquals(20, p.specialEnergyPercent());
@@ -42,7 +53,7 @@ class DemolitionistW103Test {
 
     @Test void exactRosterNotBlanketSpecialAmmoDeterminesBaselineEnergy() {
         int eligible = 0, twenty = 0;
-        for (var e : WeaponCatalog.all()) {
+        for (var e : WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id())).toList()) {
             boolean present = ROWS.stream().anyMatch(r -> r.id().equals(e.id()));
             int expected = !present ? 0 : Set.of("first_in_last_out","nezarec_s_whisper").contains(e.id()) ? 20 : 10;
             assertEquals(expected, DemolitionistProfile.energyPercent(e), e.id());

@@ -26,11 +26,11 @@ import java.util.List;
  */
 public final class StasisCrystals {
     private static final class Crystal {
-        final ServerLevel level; final Vec3 position; final long expires; final ElementHolder holder;
-        Crystal(ServerLevel level, Vec3 position, long expires, ElementHolder holder) {
-            this.level = level; this.position = position; this.expires = expires; this.holder = holder;
+        final ServerLevel level; final Vec3 position; final long expires; final ElementHolder holder; final double bodyRadius;
+        Crystal(ServerLevel level, Vec3 position, long expires, ElementHolder holder, double bodyRadius) {
+            this.level = level; this.position = position; this.expires = expires; this.holder = holder; this.bodyRadius = bodyRadius;
         }
-        Vec3 center(double radius) { return position.add(0, radius, 0); }
+        Vec3 center() { return position.add(0, bodyRadius, 0); }
     }
     private static final List<Crystal> CRYSTALS = new ArrayList<>();
     private StasisCrystals() {}
@@ -40,22 +40,28 @@ public final class StasisCrystals {
 
     /** Grow a crystal for {@code owner}; formation freezes only that owner's enemies. */
     public static boolean spawn(ServerPlayer owner, ServerLevel level, Vec3 at) {
+        return spawn(owner, level, at, 1.0);
+    }
+    /** Headstone size extension. Scale is local geometry only; existing formation/shatter tuning stays shared. */
+    public static boolean spawn(ServerPlayer owner, ServerLevel level, Vec3 at, double scale) {
+        if (!Double.isFinite(scale) || scale < .5 || scale > 2) return false;
         if (owner == null || level == null || owner.level() != level || !owner.isAlive() || at == null
                 || !level.hasChunkAt(BlockPos.containing(at))) return false;
         var r = rule();
         if (CRYSTALS.stream().filter(c -> c.level == level).count() >= r.maxPerLevel()) return false;
         var holder = new ElementHolder();
         var block = new BlockDisplayElement(Blocks.BLUE_ICE.defaultBlockState());
-        float w = (float) (r.bodyRadius() * 2), h = (float) (r.bodyRadius() * 2.4);
+        double bodyRadius = r.bodyRadius() * scale;
+        float w = (float) (bodyRadius * 2), h = (float) (bodyRadius * 2.4);
         block.setScale(new Vector3f(w, h, w));
         block.setTranslation(new Vector3f(-w / 2, 0, -w / 2));
         block.setBrightness(new Brightness(12, 15));
         block.setViewRange(2);
         holder.addElement(block);
         ChunkAttachment.ofTicking(holder, level, at);
-        CRYSTALS.add(new Crystal(level, at, level.getGameTime() + r.lifetimeTicks(), holder));
-        for (var e : Combat.enemiesNear(level, owner, at.add(0, r.bodyRadius(), 0), r.formationRadius()))
-            StasisStatus.freeze(e, r.freezeTicks());
+        CRYSTALS.add(new Crystal(level, at, level.getGameTime() + r.lifetimeTicks(), holder, bodyRadius));
+        for (var e : Combat.enemiesNear(level, owner, at.add(0, bodyRadius, 0), r.formationRadius()))
+            StasisStatus.freeze(owner, e, r.freezeTicks());
         level.playSound(null, BlockPos.containing(at), SoundEvents.GLASS_PLACE, SoundSource.PLAYERS, .9f, .6f);
         return true;
     }
@@ -69,14 +75,12 @@ public final class StasisCrystals {
     /** Weapon ray crossing a crystal body. @return number of crystals shattered by {@code by}. */
     public static int shatterAlong(ServerPlayer by, Vec3 from, Vec3 to) {
         if (by == null || CRYSTALS.isEmpty()) return 0;
-        double r = rule().bodyRadius();
-        return shatter(by, c -> segmentDistance(from, to, c.center(r)) <= r);
+        return shatter(by, c -> segmentDistance(from, to, c.center()) <= c.bodyRadius);
     }
     /** Blast or contact near a crystal. @return number of crystals shattered by {@code by}. */
     public static int shatterNear(ServerPlayer by, Vec3 center, double radius) {
         if (by == null || CRYSTALS.isEmpty() || center == null) return 0;
-        double r = rule().bodyRadius();
-        return shatter(by, c -> c.center(r).distanceTo(center) <= radius + r);
+        return shatter(by, c -> c.center().distanceTo(center) <= radius + c.bodyRadius);
     }
     private static int shatter(ServerPlayer by, java.util.function.Predicate<Crystal> hit) {
         var level = by.level();
@@ -89,7 +93,7 @@ public final class StasisCrystals {
         }
         for (var c : hits) {
             c.holder.destroy();
-            Vec3 center = c.center(r.bodyRadius());
+            Vec3 center = c.center();
             Fx.burst(level, center, Element.KINETIC, 24, .6);
             level.playSound(null, BlockPos.containing(center), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1f, .7f);
             for (var e : Combat.enemiesNear(level, by, center, r.shatterRadius()))

@@ -38,7 +38,13 @@ class PerkBatchBW321Test {
     @Test void exactPinnedPoolsAreRegistered() {
         assertEquals(EXPECTED.keySet(), new HashSet<>(PerkBatchBProfile.IDS));
         for (var id : PerkBatchBProfile.IDS) {
-            assertEquals(EXPECTED.get(id), new HashSet<>(PerkBatchBProfile.rolls(id)), id);
+            var all = PerkBatchBProfile.rolls(id);
+            assertEquals(EXPECTED.get(id), new HashSet<>(all.stream()
+                .filter(r -> !LegendaryWeapons.contains(r.id())).toList()), id);
+            var added = all.stream().filter(r -> LegendaryWeapons.contains(r.id())).toList();
+            assertEquals(new HashSet<>(LegendaryPerks.extraRolls(id)), new HashSet<>(added), id);
+            for (var roll : added) assertTrue(LegendaryWeapons.exactRoll(roll), roll.toString());
+            assertEquals(all.size(), new HashSet<>(all).size(), id);
             assertTrue(WeaponPerks.ids().contains(id), id);
             assertTrue(PerkBatchBProfile.perk(id).source().row() > 0, id);
             assertFalse(PerkBatchBProfile.koName(id).isBlank());

@@ -264,6 +264,9 @@ public final class AbilityService {
             :kim.biryeong.destiny.weapon.WeaponWellRounded.Token.NONE;
         var osmosis = slot == AbilitySlot.GRENADE ? kim.biryeong.destiny.weapon.WeaponOsmosis.accepted(player)
                 : kim.biryeong.destiny.weapon.WeaponOsmosis.Token.NONE;
+        var permeability = slot == AbilitySlot.CLASS_ABILITY
+                ? kim.biryeong.destiny.weapon.PerkExpansionSupport.classAccepted(player)
+                : kim.biryeong.destiny.weapon.PerkExpansionSupport.ClassToken.NONE;
         if (!ability.activate(player)) {
             return Result.FAILED;
         }
@@ -276,6 +279,7 @@ public final class AbilityService {
         }
         kim.biryeong.destiny.weapon.WeaponWellRounded.abilityUsed(player,wellRounded,slot);
         if (slot == AbilitySlot.GRENADE) kim.biryeong.destiny.weapon.WeaponOsmosis.abilityUsed(player,osmosis);
+        if (slot == AbilitySlot.CLASS_ABILITY) kim.biryeong.destiny.weapon.PerkExpansionSupport.classUsed(player, permeability);
         kim.biryeong.destiny.tutorial.Tutorial.abilityUsed(player, slot);
         CombatHud.update(player);
         return Result.OK;

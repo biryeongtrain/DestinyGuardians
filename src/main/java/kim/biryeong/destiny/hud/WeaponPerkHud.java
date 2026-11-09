@@ -56,7 +56,11 @@ public final class WeaponPerkHud {
                 kim.biryeong.destiny.weapon.WeaponHeadseeker.remaining(player),
                 // Aggregate runtime observer includes active sources in stowed slots.
                 kim.biryeong.destiny.weapon.WeaponSteadyHands.remaining(player));
-        var rows = WeaponPerkRows.project(state);
+        var extra = new java.util.ArrayList<WeaponPerkRows.Extra>();
+        for (var b : kim.biryeong.destiny.weapon.PerkExpansionStats.buffs(player)) extra.add(new WeaponPerkRows.Extra(b.id(),b.stacks(),b.remainingTicks()));
+        for (var b : kim.biryeong.destiny.weapon.PerkExpansionCombat.buffs(player)) extra.add(new WeaponPerkRows.Extra(b.id(),b.stacks(),b.remainingTicks()));
+        for (var b : kim.biryeong.destiny.weapon.PerkExpansionSupport.buffs(player)) extra.add(new WeaponPerkRows.Extra(b.id(),b.stacks(),b.remainingTicks()));
+        var rows = WeaponPerkRows.merge(WeaponPerkRows.project(state), extra);
         // Reconcile with the real registry, not a per-player cache. Remove hidden/deactivated rows first.
         for (String id : WeaponPerkRows.nodesToRemove(rows, List.copyOf(DisplayHud.getHuds(player).keySet())))
             DisplayHud.removeHud(player, id);

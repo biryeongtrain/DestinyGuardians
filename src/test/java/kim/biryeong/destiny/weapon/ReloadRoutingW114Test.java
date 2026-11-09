@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Catalog-only admission regression, independently runnable without asset/server bootstrap. */
 class ReloadRoutingW114Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final Map<String, String> EXPECTED = Map.ofEntries(
             Map.entry("biting_winds", "weapon_reload_w222_biting_winds/biting_winds"),
             Map.entry("whispering_slab", "weapon_reload_w222_whispering_slab/whispering_slab"),
@@ -65,9 +66,9 @@ class ReloadRoutingW114Test {
             Map.entry("claws_of_the_wolf", "weapon_reload_w214_claws_of_the_wolf/claws_of_the_wolf"),
             Map.entry("salvager_s_salvo", "weapon_reload_w220_salvager_s_salvo/salvager_s_salvo"));
     @Test void fiftyThreeRoutesIncludeBowNockingAndGlaive() {
-        assertEquals(65, WeaponCatalog.all().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList().size());
         int count = 0;
-        for (var entry : WeaponCatalog.all()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             assertEquals(EXPECTED.containsKey(entry.id()), WeaponReloadPresentation.supports(entry), entry.id());
             if (EXPECTED.containsKey(entry.id())) {
                 assertEquals(Identifier.fromNamespaceAndPath("destiny", EXPECTED.get(entry.id())), WeaponReloadPresentation.model(entry));

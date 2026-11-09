@@ -17,12 +17,14 @@ public final class WeaponScopes {
     private WeaponScopes() {}
 
     public static boolean supports(WeaponCatalog.Entry entry) {
+        entry = LegendaryWeapons.base(entry);
         return entry != null && IDS.contains(entry.id())
                 && (!"izanagis_burden".equals(entry.id()) || WeaponExotics.izanagi(entry));
     }
 
     /** Call only for supported entries from the live stack's Polymer model getter. */
     public static Identifier model(WeaponCatalog.Entry entry) {
+        entry = LegendaryWeapons.base(entry);
         if (!supports(entry)) throw new IllegalArgumentException("Weapon has no W45 scope: " + entry);
         return Identifier.fromNamespaceAndPath("destiny", "weapon_scope_w45/" + entry.id());
     }

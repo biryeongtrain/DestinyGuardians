@@ -17,9 +17,10 @@ public final class WarlockMelee extends Ability {
     private static final List<Burn> BURNS = new ArrayList<>();
     private static final class Burn {
         final WarlockAbilities.Lease lease; final WarlockMelee ability; final LivingEntity target; final Vec3 origin;
+        final kim.biryeong.destiny.weapon.PerkExpansionCombat.AbilityToken desperate;
         int age;
-        Burn(WarlockAbilities.Lease lease, WarlockMelee ability, LivingEntity target, Vec3 origin) {
-            this.lease = lease; this.ability = ability; this.target = target; this.origin = origin;
+        Burn(WarlockAbilities.Lease lease, WarlockMelee ability, LivingEntity target, Vec3 origin, kim.biryeong.destiny.weapon.PerkExpansionCombat.AbilityToken desperate) {
+            this.lease = lease; this.ability = ability; this.target = target; this.origin = origin; this.desperate = desperate;
         }
     }
     static void tick() {
@@ -27,9 +28,16 @@ public final class WarlockMelee extends Ability {
             if (!burn.lease.valid() || !WarlockAbilities.enemy(burn.lease.owner, burn.target) || burn.age >= 30) { BURNS.remove(burn); continue; }
             if (++burn.age % 10 == 0 && WarlockAbilities.center(burn.target).distanceToSqr(burn.origin) <= 36
                     && WarlockAbilities.visible(burn.lease, burn.origin, WarlockAbilities.center(burn.target)))
-                Combat.damage(burn.lease.level, burn.lease.owner, burn.target,
-                        AbilityDamage.pvp(burn.ability, "burn_pulse", burn.target, 1f), Element.SOLAR);
+                burnDamage(burn);
         }
+    }
+    private static void burnDamage(Burn burn) {
+        float before = burn.target.getHealth() + burn.target.getAbsorptionAmount();
+        boolean killed = Combat.damage(burn.lease.level, burn.lease.owner, burn.target,
+                AbilityDamage.pvp(burn.ability, "burn_pulse", burn.target, 1f), Element.SOLAR);
+        float loss = before - burn.target.getHealth() - burn.target.getAbsorptionAmount();
+        if (killed && Float.isFinite(loss) && loss > 0)
+            kim.biryeong.destiny.weapon.PerkExpansionCombat.abilityKilled(burn.lease.owner, burn.desperate, burn.target);
     }
     static void cleanup(ServerPlayer p) { BURNS.removeIf(b -> b.lease.owner == p); }
 
@@ -64,7 +72,7 @@ public final class WarlockMelee extends Ability {
                                         AbilityDamage.pvp(this, "direct", target, damage), element(), traits);
                                 if (target.isAlive()) {
                                     BURNS.removeIf(b -> b.lease.owner == p && b.target == target);
-                                    BURNS.add(new Burn(lease, this, target, p.getEyePosition()));
+                                    BURNS.add(new Burn(lease, this, target, p.getEyePosition(), traits.desperate()));
                                 }
                                 ClassAbilityEffects.sound(p, element(), "melee.impact");
                                 ClassAbilityEffects.burst(p, hit.getLocation(), element(), .6);

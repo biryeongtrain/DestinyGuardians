@@ -23,7 +23,7 @@ public final class WeaponStatCurves {
         if (data == null || !"W320".equals(data.stage) || data.curves == null || data.curves.length == 0)
             throw new IllegalStateException("Invalid W320 stat curves");
         var result = new HashMap<String, Curve>();
-        for (var c : data.curves) {
+        for (var c : LegendaryWeapons.append(Arrays.asList(data.curves), "curves", Curve.class)) {
             if (c == null || c.id == null || result.putIfAbsent(c.id, c) != null || c.reload == null || c.ready == null
                 || c.stow == null || c.ads == null || c.baseHandlingStat < 0 || c.baseHandlingStat > 100
                 || c.baseReloadStat < 0 || c.baseReloadStat > 100)

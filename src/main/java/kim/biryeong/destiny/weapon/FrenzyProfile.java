@@ -268,7 +268,7 @@ public final class FrenzyProfile {
         }
         return Map.copyOf(result);
     }
-    public static List<WeaponPerks.Roll> rolls() { return List.of(DATA.weapons); }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, List.of(DATA.weapons)); }
     public static Perk perk() { return DATA.perk; }
     public static int activationTicks() { return DATA.perk.activationTicks; }
     public static int combatGraceTicks() { return DATA.perk.combatGraceTicks; }
@@ -282,7 +282,9 @@ public final class FrenzyProfile {
     public static boolean supports(WeaponCatalog.Entry entry) {
         if (entry == null || entry.id() == null) return false;
         var source = SOURCES.get(entry.id());
-        if (source == null) return false;
+        if (source == null) return LegendaryWeapons.contains(entry.id())
+            && WeaponCatalog.find(entry.id()).filter(entry::equals).isPresent()
+            && LegendaryPerks.extraRolls(ID).stream().anyMatch(r -> r.id().equals(entry.id()));
         var row = source.catalog;
         return Objects.equals(entry.family(), row.get("family").getAsString())
             && Objects.equals(entry.frame(), row.get("frame").getAsString())
@@ -299,7 +301,7 @@ public final class FrenzyProfile {
             throw new IllegalArgumentException("Frenzy reload duration scalar must be finite and in (0,1]");
         for (var curve : DATA.curves) if (curve.id.equals(entry.id()))
             return durationTicks(curve.reload.seconds(100) * durationScalar, false);
-        throw new IllegalStateException("Missing Frenzy reload curve for " + entry.id());
+        return WeaponStatCurves.reloadTicks(entry.id(), WeaponProfile.forEntry(entry).reloadTicks(), reloadBonus(), durationScalar);
     }
     /** Active Frenzy ADS entry: W68 Snapshot scalar applies to stat100 seconds before a single ceil.
      * Only the two exact distinct-socket co-selections are accepted; false retains the W44 bound.
@@ -310,10 +312,22 @@ public final class FrenzyProfile {
         if (!snapshotSelected) return active.adsTicks;
         for (var row : DATA.snapshotADS) if (row.id.equals(entry.id()))
             return snapshotDurationTicks(row.adsSeconds, row.scalar);
+        if (LegendaryWeapons.contains(entry.id()) && LegendaryPerks.extraRolls(SnapshotAimProfile.ID).stream()
+                .anyMatch(r -> r.id().equals(entry.id()) && LegendaryPerks.extraRolls(ID).stream()
+                    .anyMatch(f -> f.id().equals(entry.id()) && f.socket() != r.socket()))) {
+            double scalar = WeaponCharacteristics.of(entry).ammo() == WeaponAmmoType.PRIMARY ? .5 : .8;
+            return WeaponStatCurves.adsTicks(entry.id(), WeaponAimProfile.of(entry).transitionTicks(), handlingBonus(), scalar);
+        }
         throw new IllegalArgumentException("No distinct-socket Frenzy/Snapshot selection for " + entry.id());
     }
     public static Timing timing(WeaponCatalog.Entry entry) {
         if (!supports(entry)) throw new IllegalArgumentException("No Frenzy timing for unsupported/noncanonical entry");
-        return TIMINGS.get(entry.id());
+        var legacy = TIMINGS.get(entry.id());
+        if (legacy != null) return legacy;
+        var handling = WeaponHandlingProfile.of(entry);
+        return new Timing(entry.id(), reloadTicks(entry, 1),
+            WeaponStatCurves.handlingTicks(entry.id(), true, handling.readyTicks(), handlingBonus(), 1),
+            WeaponStatCurves.handlingTicks(entry.id(), false, handling.stowTicks(), handlingBonus(), 1),
+            WeaponStatCurves.adsTicks(entry.id(), WeaponAimProfile.of(entry).transitionTicks(), handlingBonus(), 1));
     }
 }

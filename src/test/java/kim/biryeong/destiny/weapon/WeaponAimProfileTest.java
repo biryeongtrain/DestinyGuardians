@@ -4,11 +4,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WeaponAimProfileTest {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     @Test void all63ProfilesHaveSafeAndExplicitSupportedState() {
         WeaponCatalogTest.assertExpandedCatalog();
         assertEquals(57,WeaponCatalogTest.originalW30Entries().stream().filter(WeaponAimProfile::supports).count());
         int supported=0;
-        for(var e:WeaponCatalog.all()) {
+        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             var p=WeaponAimProfile.of(e);
             assertTrue(p.transitionTicks()>=2&&p.transitionTicks()<=20);
             if(WeaponAimProfile.supports(e)) {

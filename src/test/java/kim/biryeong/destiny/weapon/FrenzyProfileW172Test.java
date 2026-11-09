@@ -11,6 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Standalone source/API/math regression. Native combat and combined-perk behavior are master-owned. */
 class FrenzyProfileW172Test {
+    /** Historical source assertions remain frozen; new identities require exact official tuples. */
+    private static java.util.List<WeaponPerks.Roll> legacyRolls() {
+        var all = FrenzyProfile.rolls();
+        var added = all.stream().filter(r -> LegendaryWeapons.contains(r.id())).toList();
+        assertEquals(java.util.Set.of("apex_predator", "forbearance", "igneous_hammer", "insidious", "palmyra_b", "phyllotactic_spiral", "rufuss_fury", "submission"), added.stream().map(WeaponPerks.Roll::id)
+            .collect(java.util.stream.Collectors.toSet()));
+        for (var roll : added) assertTrue(LegendaryWeapons.exactRoll(roll), roll.toString());
+        assertEquals(all.size(), new java.util.HashSet<>(all).size());
+        return all.stream().filter(r -> !LegendaryWeapons.contains(r.id())).toList();
+    }
+
     private static final String ART = "art/weapons/w172/frenzy/";
     private static final String RESOURCE = "src/main/resources/destiny/weapons/w172-frenzy.json";
     private static JsonObject json(String path) throws Exception {
@@ -27,7 +38,7 @@ class FrenzyProfileW172Test {
     @Test void exactTenBaseRollsAndFull65RandomizedScan() throws Exception {
         assertEquals("frenzy", FrenzyProfile.ID);
         assertEquals(4104185692L, FrenzyProfile.HASH);
-        var rolls = FrenzyProfile.rolls();
+        var rolls = legacyRolls();
         assertEquals(Set.of(
             new WeaponPerks.Roll("austringer", 3055790362L, 4, 4104185692L, 785215120L),
             new WeaponPerks.Roll("allied_demand", 1532276803L, 4, 4104185692L, 703779397L),
@@ -48,7 +59,7 @@ class FrenzyProfileW172Test {
         assertEquals(55, sockets.getAsJsonArray("unsupportedSelectedIds").size());
         var scans = sockets.getAsJsonArray("selectedScan");
         assertEquals(65, scans.size());
-        assertEquals(WeaponCatalog.all().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
+        assertEquals(WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id())).map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
             scans.asList().stream().map(e -> e.getAsJsonObject().get("id").getAsString()).collect(Collectors.toSet()));
         for (var e : sockets.getAsJsonArray("weapons")) {
             var row = e.getAsJsonObject();
@@ -170,7 +181,7 @@ class FrenzyProfileW172Test {
         }
         assertEquals(2, FrenzyProfile.adsTicks(entry("austringer"), true));
         assertEquals(4, FrenzyProfile.adsTicks(entry("dream_breaker"), true));
-        for (var roll : FrenzyProfile.rolls()) {
+        for (var roll : legacyRolls()) {
             var w = entry(roll.id());
             assertEquals(FrenzyProfile.timing(w).adsTicks(), FrenzyProfile.adsTicks(w, false));
             if (!Set.of("austringer", "dream_breaker").contains(w.id()))
@@ -192,7 +203,7 @@ class FrenzyProfileW172Test {
     }
     @Test void reloadDurationScalarAppliesToRawStat100SecondsBeforeOneCeil() throws Exception {
         var resource = json(RESOURCE);
-        for (var roll : FrenzyProfile.rolls()) {
+        for (var roll : legacyRolls()) {
             var w = entry(roll.id());
             assertEquals(FrenzyProfile.timing(w).reloadTicks(), FrenzyProfile.reloadTicks(w, 1.0));
             var curve = resource.getAsJsonArray("curves").asList().stream().map(JsonElement::getAsJsonObject)
@@ -330,7 +341,7 @@ class FrenzyProfileW172Test {
         };
         var type = Class.forName(prefix + "FrenzyProfile", true, isolated);
         assertEquals(240, type.getMethod("activationTicks").invoke(null));
-        assertEquals(10, ((List<?>) type.getMethod("rolls").invoke(null)).size());
+        assertEquals(10 + LegendaryPerks.extraRolls("frenzy").size(), ((List<?>) type.getMethod("rolls").invoke(null)).size());
         var validate = type.getDeclaredMethod("validateResource", String.class);
         validate.setAccessible(true);
         validate.invoke(null, Files.readString(Path.of(RESOURCE)));

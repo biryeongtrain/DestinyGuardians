@@ -32,13 +32,14 @@ public final class WeaponHandling {
                 .map(profile -> WeaponQuickdraw.handlingTicks(p,stack,ready,WeaponFirmlyPlanted.handlingTicks(p,stack,ready,WeaponElementalCapacitor.handlingTicks(p,stack,ready,WeaponSurplus.handlingTicks(p,stack,ready,WeaponThreatDetector.handlingTicks(p,stack,ready,WeaponStatsForAll.handlingTicks(p,stack,ready,WeaponFrenzy.handlingTicks(p,stack,ready,WeaponAdrenalineJunkie.handlingTicks(p,stack,ready,WeaponPerpetualMotion.handlingTicks(p,stack,ready,
                         ready ? profile.readyTicks() : profile.stowTicks())))))))))).orElse(0);
         ticks = PerkBatchA.handlingTicks(p,stack,ready,ticks); // W320 batch A
-        ticks = WeaponComponents.handlingTicks(stack,ready,ticks); // W326 components
+        ticks = PerkExpansionStats.handlingTicks(p,stack,ready,WeaponComponents.handlingTicks(stack,ready,ticks)); // W326 components
         return WeaponSlickdraw.handlingTicks(p,stack,ready,WeaponSteadyHands.handlingTicks(p,stack,ready,WeaponRecoveryHandling.handlingTicks(p,stack,ready,WeaponBackupPlan.handlingTicks(p,stack,ready,WeaponWellRounded.handlingTicks(p,stack,ready,WeaponPugilist.handlingTicks(p,stack,ready,WeaponEnsemble.handlingTicks(p,stack,ready,ticks)))))));
     }
     /** Observe inventory replacement/commands, including swaps to non-weapons, before inputs or ticks. */
     public static void update(ServerPlayer p) {
         if (!eligible(p)) { WeaponSwapPresentation.cleanup(p); WeaponEnsemble.cleanup(p); return; }
         WeaponEnsemble.update(p);
+        PerkExpansionStats.update(p);
         select(p, p.getMainHandItem());
         var view = presentation(p);
         if (view.isPresent()) {
@@ -64,6 +65,7 @@ public final class WeaponHandling {
         if (s.cycle.phase(now(p)) != WeaponSwapCycle.Phase.STOW)
             s.outgoing = WeaponItems.entry(s.stack).orElse(null);
         int stow = duration(p, s.stack, false);
+        WeaponRuntime.expansionStowing(p,s.stack);
         PerkBatchA.stowing(p, s.stack); // W320 batch A: after the outgoing stow duration
         WeaponAssassinsBlade.stowing(p,s.stack); WeaponUnrelenting.stowing(p,s.stack); WeaponWhirlwindBlade.stowing(p,s.stack); WeaponEnGarde.stowing(p,s.stack); WeaponOpeningShot.stowing(p,s.stack); WeaponBoxBreathing.stowing(p,s.stack); WeaponHeadseeker.stowing(p,s.stack); WeaponSteadyHands.stowing(p,s.stack); WeaponDynamicSway.released(p,s.stack);
         WeaponKillingTally.stowing(p,s.stack); WeaponSympatheticArsenal.stowing(p,s.stack);

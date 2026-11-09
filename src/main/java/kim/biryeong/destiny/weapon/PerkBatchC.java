@@ -168,8 +168,8 @@ public final class PerkBatchC {
         if (broke && matching && active(owner, t, PerkBatchCProfile.SHIELD_DISORIENT)) {
             var r = PerkBatchCProfile.disorient();
             for (var e : Combat.enemiesNear(owner.level(), owner, center(target), r.radius()))
-                Statuses.apply(e, Keyword.BLINDED, r.ticks());
-            if (target.isAlive()) Statuses.apply(target, Keyword.BLINDED, r.ticks());
+                Statuses.apply(owner, e, Keyword.BLINDED, r.ticks());
+            if (target.isAlive()) Statuses.apply(owner, target, Keyword.BLINDED, r.ticks());
         }
         if (active(owner, t, PerkBatchCProfile.ADAPTIVE_MUNITIONS))
             source(owner, t.stack).adaptive.hit(shield.shielded(), matching);

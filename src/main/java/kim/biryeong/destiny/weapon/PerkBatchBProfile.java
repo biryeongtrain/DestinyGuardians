@@ -82,7 +82,7 @@ public final class PerkBatchBProfile {
         } catch (java.io.IOException e) { throw new IllegalStateException(e); }
     }
     public static boolean owns(String id) { return id != null && HASHES.containsKey(id); }
-    public static List<WeaponPerks.Roll> rolls(String id) { return ROLLS.getOrDefault(id, List.of()); }
+    public static List<WeaponPerks.Roll> rolls(String id) { return LegendaryPerks.expandRolls(id, ROLLS.getOrDefault(id, List.of())); }
     public static Perk perk(String id) { return PERKS.get(id); }
     public static String koName(String id) { var p = PERKS.get(id); return p == null ? id : p.koName(); }
     public static String koDescription(String id) { var p = PERKS.get(id); return p == null ? "" : p.koDescription(); }

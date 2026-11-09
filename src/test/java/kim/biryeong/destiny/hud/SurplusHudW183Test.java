@@ -52,7 +52,8 @@ class SurplusHudW183Test {
         assertEquals(KIND.nodeIds().stream().sorted().toList(),WeaponPerkRows.nodesToRemove(WeaponPerkRows.project(busy),KIND.nodeIds()));
         assertEquals(2,WeaponPerkRows.project(state(2)).getFirst().count());
         assertEquals(KIND.nodeIds().stream().sorted().toList(),WeaponPerkRows.nodesToRemove(WeaponPerkRows.project(state(0)),KIND.nodeIds()));
-        assertEquals(32,WeaponPerkRows.Kind.values().length);assertEquals(KIND,WeaponPerkRows.Kind.values()[21]);
+        assertEquals(List.of("MEMENTO_MORI","HONED_EDGE","KILL_CLIP","MULTIKILL_CLIP","RAMPAGE","ONE_FOR_ALL","SURROUNDED","SWASHBUCKLER","OUTLAW","ARCHERS_TEMPO","NO_DISTRACTIONS","RAPID_HIT","FEEDING_FRENZY","PERPETUAL_MOTION","TAP_THE_TRIGGER","FRENZY","ADRENALINE_JUNKIE","FOCUSED_FURY","STATS_FOR_ALL","HEATING_UP","THREAT_DETECTOR","SURPLUS","KILLING_TALLY","WHIRLWIND_BLADE","EN_GARDE","ASSASSINS_BLADE","DYNAMIC_SWAY","BOX_BREATHING","PULSE_MONITOR","UNRELENTING","HEADSEEKER","STEADY_HANDS"),
+                Arrays.stream(WeaponPerkRows.Kind.values()).filter(kind -> !kind.label.contains("_w327")).map(Enum::name).toList());assertEquals(KIND,WeaponPerkRows.Kind.values()[21]);
         var all=Arrays.stream(WeaponPerkRows.Kind.values()).flatMap(x->x.nodeIds().stream()).toList();assertEquals(all.size(),Set.copyOf(all).size());
     }
     @Test void actual26CodecsAcceptLabelAndRejectWrongGraphType() throws Exception {

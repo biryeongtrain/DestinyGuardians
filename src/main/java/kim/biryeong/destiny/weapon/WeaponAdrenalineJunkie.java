@@ -38,9 +38,11 @@ public final class WeaponAdrenalineJunkie {
     public static final class GrenadeToken {
         public static final GrenadeToken NONE = new GrenadeToken(null,List.of());
         private final ServerPlayer owner; private final List<Session> originals;
+        private final PerkExpansionCombat.AbilityToken desperate;
         private final Identifier grenade; private final Set<UUID> corpses=new HashSet<>();
         private GrenadeToken(ServerPlayer owner,List<Session> originals){
             this.owner=owner;this.originals=List.copyOf(originals);
+            desperate=owner==null?PerkExpansionCombat.AbilityToken.NONE:PerkExpansionCombat.acceptedAbility(owner,AbilitySlot.GRENADE);
             grenade=owner==null?null:equippedGrenade(Guardians.data(owner));
         }
     }
@@ -106,7 +108,7 @@ public final class WeaponAdrenalineJunkie {
         for(int i=0;i<p.getInventory().getContainerSize();i++){
             var s=bind(p,p.getInventory().getItem(i));if(s!=null&&!originals.contains(s))originals.add(s);
         }
-        return originals.isEmpty()?GrenadeToken.NONE:new GrenadeToken(p,originals);
+        return new GrenadeToken(p,originals);
     }
     /** Dedicated grenade damage boundary; melee/super/Dragonfly/generic Combat.damage cannot proc. */
     public static boolean grenadeDamage(ServerPlayer p,GrenadeToken token,ServerLevel level,LivingEntity target,float amount,Element element){
@@ -119,6 +121,7 @@ public final class WeaponAdrenalineJunkie {
     }
     /** Also called at actual fire death for attributed grenade scorch; distinct corpses, once each. */
     public static void grenadeKilled(ServerPlayer p,GrenadeToken token,LivingEntity corpse){
+        if(token!=null && token.owner==p) PerkExpansionCombat.abilityKilled(p,token.desperate,corpse);
         if(token==null||token.owner!=p||!ownerValid(p)||corpse==null||corpse==p||corpse.isAlive()&&!corpse.isDeadOrDying()
                 ||!(corpse instanceof net.minecraft.world.entity.Mob)||corpse.level()!=p.level())return;
         update(p);

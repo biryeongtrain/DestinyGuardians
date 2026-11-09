@@ -33,7 +33,7 @@ public final class WeaponFireMotion {
             try (var reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
                 var library = Library.read(reader);
                 var expected = new HashSet<String>();
-                for (var entry : WeaponCatalog.all()) if (!entry.family().equals("sword")) expected.add(entry.id());
+                for (var entry : WeaponCatalog.all()) if (!entry.family().equals("sword")) expected.add(LegendaryWeapons.baseId(entry.id()));
                 if (!expected.equals(library.weapons.keySet()))
                     throw new IllegalStateException("W242 fire motion must cover every non-sword catalog weapon");
                 return library;
@@ -49,7 +49,7 @@ public final class WeaponFireMotion {
                 || entry.family().equals("sword") || !visible(player)
                 || WeaponItems.entry(player.getMainHandItem()).filter(entry::equals).isEmpty()) return;
         if (!accepts(profile.sharedBurstAmmo(), playFire, boltIndex)) return;
-        var clips = Source.LIBRARY.weapons.get(entry.id());
+        var clips = Source.LIBRARY.weapons.get(LegendaryWeapons.baseId(entry.id()));
         if (clips == null) return;
         LIVE.emit(player.getUUID(), player, player.getMainHandItem(), player.level(), entry.id(), clips,
                 player.level().getServer().getTickCount(), profile.sharedBurstAmmo(), playFire, boltIndex,

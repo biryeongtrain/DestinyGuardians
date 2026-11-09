@@ -128,7 +128,7 @@ public final class AmmoEconomy {
             for(var stack:WeaponOverflow.eligible(p)) {
                 var entry=WeaponItems.entry(stack).orElseThrow();
                 var ammo=WeaponItems.magazine(stack,WeaponProfile.forEntry(entry));
-                int gained=ammo.reloadOverflow(WeaponOverflow.target(entry));
+                int gained=ammo.reloadOverflow(WeaponOverflow.target(stack,entry));
                 if(gained>0) { WeaponItems.save(stack,ammo); total+=gained; }
             }
         }

@@ -170,13 +170,21 @@ public final class FeedingFrenzyProfile {
     public static int maxStacks() { return DATA.perk.maxStacks; }
     public static Perk perk() { return DATA.perk; }
     public static Policies policies() { return DATA.policies; }
-    public static List<WeaponPerks.Roll> rolls() { return List.of(DATA.weapons); }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, List.of(DATA.weapons)); }
 
     /** Active tiers only. Zero/invalid stacks and noncanonical/unsupported entries fail closed. */
     public static Reload reload(WeaponCatalog.Entry entry, int stacks) {
         if (entry == null || stacks < 1 || stacks > 5
                 || WeaponCatalog.find(entry.id()).filter(entry::equals).isEmpty())
             throw new IllegalArgumentException("Invalid Feeding Frenzy entry/stacks");
+        if (LegendaryPerks.extraRolls(ID).stream().anyMatch(r -> r.id().equals(entry.id()))) {
+            var base = WeaponProfile.forEntry(entry);
+            int stat = WeaponCharacteristics.of(entry).stats().get("4188031367");
+            return new Reload(
+                WeaponStatCurves.reloadTicks(entry.id(), base.firstReloadTicks(), BONUSES[stacks - 1], SCALARS[stacks - 1]),
+                WeaponStatCurves.reloadTicks(entry.id(), base.reloadTicks(), BONUSES[stacks - 1], SCALARS[stacks - 1]),
+                stat, Math.min(100, stat + BONUSES[stacks - 1]));
+        }
         var result = RELOADS.get(key(entry.id(), stacks));
         if (result == null) throw new IllegalArgumentException("No Feeding Frenzy reload for " + entry.id());
         return result;

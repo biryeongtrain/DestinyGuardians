@@ -27,7 +27,7 @@ public final class WeaponPerkLabels {
         }
         return Map.copyOf(all);
     }
-    public static boolean damage(String id) { var label = ALL.get(id); return label != null && label.damage(); }
-    public static String name(String id) { var label = ALL.get(id); return label == null ? id : label.name(); }
-    public static String description(String id) { var label = ALL.get(id); return label == null ? "" : label.description(); }
+    public static boolean damage(String id) { var extra = kim.biryeong.destiny.weapon.LegendaryPerks.trait(id); var label = extra != null && extra.added() ? new Label(extra.name(), extra.description(), extra.damage()) : ALL.get(id); return label != null && label.damage(); }
+    public static String name(String id) { var extra = kim.biryeong.destiny.weapon.LegendaryPerks.trait(id); var label = extra != null && extra.added() ? new Label(extra.name(), extra.description(), extra.damage()) : ALL.get(id); return label == null ? id : label.name(); }
+    public static String description(String id) { var extra = kim.biryeong.destiny.weapon.LegendaryPerks.trait(id); var label = extra != null && extra.added() ? new Label(extra.name(), extra.description(), extra.damage()) : ALL.get(id); return label == null ? "" : label.description(); }
 }

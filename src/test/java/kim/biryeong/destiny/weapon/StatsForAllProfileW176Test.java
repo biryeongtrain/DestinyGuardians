@@ -58,8 +58,8 @@ class StatsForAllProfileW176Test {
         assertEquals(.95, StatsForAllProfile.reloadScalar()); assertEquals(1.05, StatsForAllProfile.falloffScalar());
     }
     @Test void canonicalAll65CoverageAndEachForgedCatalogFieldRejected() {
-        assertEquals(65, WeaponCatalog.all().size());
-        for (var e : WeaponCatalog.all()) assertEquals(IDS.contains(e.id()), StatsForAllProfile.supports(e), e.id());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
+        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) assertEquals(IDS.contains(e.id()), StatsForAllProfile.supports(e), e.id());
         assertFalse(StatsForAllProfile.supports(null));
         assertFalse(StatsForAllProfile.supports(new WeaponCatalog.Entry(null,null,null,null,null,null)));
         var e = entry("ammit_ar2");

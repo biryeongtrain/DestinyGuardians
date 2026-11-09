@@ -92,9 +92,10 @@ public final class SnapshotAimProfile {
                     || t.snapshotTicks != expected || result.putIfAbsent(t.id, t) != null)
                 throw new IllegalStateException("Invalid W68 ADS timing " + t);
         }
-        // This frozen perk table covers legendary ADS timings. Exotics cannot select Snapshot;
-        // their native base ADS still comes from WeaponAimProfile in enterTicks().
+        // This frozen table covers the original legendary roster. W327 does not
+        // expose Snapshot sockets; its own base ADS comes from WeaponAimProfile.
         var supported = WeaponCatalog.all().stream().filter(e -> !WeaponCharacteristics.of(e).exotic())
+                .filter(e -> !LegendaryWeapons.contains(e.id()))
                 .filter(WeaponAimProfile::supports)
                 .map(WeaponCatalog.Entry::id).collect(java.util.stream.Collectors.toSet());
         if (!result.keySet().equals(supported)) throw new IllegalStateException("Incomplete W68 ADS timing");

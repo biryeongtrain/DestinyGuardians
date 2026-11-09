@@ -27,12 +27,19 @@ class Triangles(unittest.TestCase):
   r=random.Random(115)
   for i in range(1000):self.verify([tuple(r.uniform(-8,24) for a in range(3)) for v in range(3)])
  def test_gimbal_lock(self):
-  for y in (90.,-90.,89.999999999):
+  for y in (90.,-90.,89.999999999,-89.999999999,89.999999,-89.999999):
    for x in (-130,0,27):
     for z in (-80,0,141):
      basis=[t.rotate(v,(x,y,z)) for v in ((1,0,0),(0,1,0),(0,0,1))]
      angles=t.euler_zyx(*basis)
      for v,b in zip(((1,0,0),(0,1,0),(0,0,1)),basis):self.close(t.rotate(v,angles),b)
+ def test_normalized_vertical_roundoff(self):
+  # Actual authored Krait stock-heel section: normalization produced nextafter(1,0).
+  for sign in (-1,1):
+   u=(0.,0.,sign*math.nextafter(1.,0.));v=(1.,0.,0.);n=(0.,float(sign),0.)
+   angles=t.euler_zyx(u,v,n)
+   for local,expected in zip(((1,0,0),(0,1,0),(0,0,1)),(u,v,n)):
+    self.close(t.rotate(local,angles),expected,tol=1e-12)
  def test_invalid_geometry(self):
   for bad in [[],[(0,0,0)]*3,[(0,0,0),(1,1,1),(2,2,2)],[(0,0,0),(math.nan,1,1),(1,2,0)],[(1,2),(2,3),(3,4)]]:
    with self.assertRaises(ValueError):t.split_triangle(bad)

@@ -24,7 +24,7 @@ public final class WeaponReloadPresentation {
     public static final int PROGRESS_INDEX = 1;
     /** Dense reload banks; older unaffected weapon banks still have 21 poses. */
     static int intervals(ItemStack stack) {
-        return WeaponItems.entry(stack).filter(e -> e.id().equals("ace_of_spades")
+        return WeaponItems.entry(stack).map(LegendaryWeapons::base).filter(e -> e.id().equals("ace_of_spades")
                 || e.id().equals("duke_mk_44") || e.id().equals("ammit_ar2")
                 || e.id().equals("blast_furnace") || e.id().equals("hammerhead")
                 || e.id().equals("the_recluse") || e.id().equals("beloved")
@@ -43,6 +43,7 @@ public final class WeaponReloadPresentation {
     }
     private WeaponReloadPresentation() {}
     public static boolean supports(WeaponCatalog.Entry entry) {
+        entry = LegendaryWeapons.base(entry);
         return entry != null && (entry.id().equals("beloved") || entry.id().equals("duke_mk_44")
                 || entry.id().equals("ammit_ar2") || entry.id().equals("the_recluse")
                 || entry.id().equals("blast_furnace") || entry.id().equals("hammerhead")
@@ -53,6 +54,7 @@ public final class WeaponReloadPresentation {
                 || entry.id().equals("retraced_path") || entry.id().equals("aishas_embrace") || entry.id().equals("chattering_bone") || entry.id().equals("salvager_s_salvo") || entry.id().equals("claws_of_the_wolf") || entry.id().equals("brass_attacks") || entry.id().equals("bite_of_the_fox") || entry.id().equals("bad_omens") || entry.id().equals("dream_breaker") || entry.id().equals("seventh_seraph_officer_revolver") || entry.id().equals("retrofit_escapade") || entry.id().equals("erentil_fr4") || entry.id().equals("coriolis_force") || entry.id().equals("line_in_the_sand") || entry.id().equals("stormchaser") || entry.id().equals("code_duello") || entry.id().equals("bellowing_giant") || entry.id().equals("apostate") || entry.id().equals("hollow_words") || entry.id().equals("distant_relation") || entry.id().equals("farewell") || entry.id().equals("patron_of_lost_causes") || entry.id().equals("high_albedo") || entry.id().equals("antiope_d") || entry.id().equals("ikelos_smg_v1_0_1") || entry.id().equals("halfdan_d") || entry.id().equals("edge_transit") || entry.id().equals("fixed_odds") || entry.id().equals("null_composure") || entry.id().equals("allied_demand") || entry.id().equals("dead_man_walking_xx7463") || entry.id().equals("frontier_justice") || entry.id().equals("canis_major") || entry.id().equals("dimensional_hypotrochoid") || entry.id().equals("deafening_whisper") || entry.id().equals("pyroclastic_flow") || entry.id().equals("biting_winds") || entry.id().equals("whispering_slab") || entry.id().equals("nezarec_s_whisper"));
     }
     public static Identifier model(WeaponCatalog.Entry entry) {
+        entry = LegendaryWeapons.base(entry);
         if (!supports(entry)) throw new IllegalArgumentException("No reload presentation: " + entry);
         String namespace = switch (entry.id()) {
             case "biting_winds", "whispering_slab", "nezarec_s_whisper" -> "weapon_reload_w222_" + entry.id() + "/";

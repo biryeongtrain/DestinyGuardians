@@ -49,7 +49,19 @@ public final class WeaponComponents {
                 if (c.stats != null) for (var v : c.stats.values()) if (v == null || Math.abs(v) > 100)
                     throw new IllegalStateException("Unsafe W326 stat " + c.id);
             }
-            if (data.pools != null) for (var e : data.pools.entrySet()) {
+            var pools = new LinkedHashMap<String, Map<String, List<String>>>();
+            if (data.pools != null) pools.putAll(data.pools);
+            for (var id : LegendaryWeapons.ids()) {
+                var row = LegendaryWeapons.field(id, "componentPools");
+                var slots = new LinkedHashMap<String, List<String>>();
+                for (var slot : row.entrySet()) {
+                    var values = new ArrayList<String>();
+                    for (var value : slot.getValue().getAsJsonArray()) values.add(value.getAsString());
+                    slots.put(slot.getKey(), List.copyOf(values));
+                }
+                if (pools.putIfAbsent(id, slots) != null) throw new IllegalStateException("Duplicate component pool " + id);
+            }
+            for (var e : pools.entrySet()) {
                 if (WeaponCatalog.find(e.getKey()).isEmpty()) continue;
                 var bySlot = new EnumMap<Slot, List<Component>>(Slot.class);
                 for (var s : Slot.values()) {

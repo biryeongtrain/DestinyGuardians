@@ -38,6 +38,15 @@ public final class WaveFrameProfile {
                         ||entry.family().equals("heavy_grenade_launcher")&&entry.frame().equals("compressed_wave"))
                         ||result.putIfAbsent(p.id,p)!=null)throw new IllegalStateException("Invalid W78 intrinsic: "+p.id);
             }
+            var forbearance = WeaponCatalog.find("forbearance").orElse(null);
+            if (forbearance != null && forbearance.family().equals("grenade_launcher")
+                    && forbearance.frame().equals("wave")
+                    && WeaponCharacteristics.of(forbearance).bungieHash() == 613334176L) {
+                var p = result.get("deafening_whisper");
+                result.put(forbearance.id(), new Profile(forbearance.id(), 613334176L, 1395789926L,
+                        p.length(), p.width(), p.speed(), p.height(), p.stepUp(), p.stepDown(),
+                        p.directMultiplier(), p.waveMultiplier()));
+            }
             return Map.copyOf(result);
         } catch(java.io.IOException e) { throw new IllegalStateException(e); }
     }

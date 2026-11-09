@@ -58,8 +58,9 @@ public final class TrackingProfile {
     }
     public static List<WeaponPerks.Roll> rolls() {return ROLLS;}
     public static boolean supportsIntrinsic(WeaponCatalog.Entry e) {
-        return e!=null&&e.id().equals("pyroclastic_flow")&&e.family().equals("rocket_launcher")
-                &&WeaponCharacteristics.of(e).bungieHash()==1289324202L;
+        return e != null && e.family().equals("rocket_launcher") && e.frame().equals("precision")
+                && (e.id().equals("pyroclastic_flow") && WeaponCharacteristics.of(e).bungieHash() == 1289324202L
+                || e.id().equals("palmyra_b") && WeaponCharacteristics.of(e).bungieHash() == 3489657138L);
     }
     public static boolean supports(ItemStack stack) {
         return WeaponItems.entry(stack).filter(e->supportsIntrinsic(e)||WeaponPerks.selected(stack,ID).isPresent()).isPresent();

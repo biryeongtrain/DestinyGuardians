@@ -91,7 +91,7 @@ public final class HunterMelee extends Ability {
                     DestinySounds.hunter(level, hit.getLocation(), element(), "melee.impact", .7f);
                     if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity target) {
                         kim.biryeong.destiny.weapon.MeleeWeaponTraits.poweredDamage(level, player, target, AbilityDamage.pvp(this, "knife", target, damage), element(), traits);
-                        Statuses.scorch(player, target, (int) param("scorch_ticks", 80));
+                        Statuses.scorch(player, target, (int) param("scorch_ticks", 80), traits.desperate());
                     }
                 });
         DestinySounds.hunterOrVanilla(level, player.getEyePosition(), element(), "melee.cast", SoundEvents.TRIDENT_THROW.value(), 0.8f, 1.5f);
@@ -116,7 +116,7 @@ public final class HunterMelee extends Ability {
                         }
                         if (age % 10 == 0) {
                             for (LivingEntity e : Combat.enemiesNear(level, player, pos, radius)) {
-                                Statuses.apply(e, Keyword.SUPPRESSED, 20);
+                                Statuses.apply(player, e, Keyword.SUPPRESSED, 20);
                             }
                             for (Player p : level.getEntitiesOfClass(Player.class, new net.minecraft.world.phys.AABB(pos, pos).inflate(radius))) {
                                 p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 40, 0, false, false));

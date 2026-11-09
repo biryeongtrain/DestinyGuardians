@@ -39,7 +39,7 @@ final class WeaponAimMovement {
         }
         double scalar=WeaponNativeZoom.movementScalar(WeaponAimMovementProfile.scalar(entry),
                 WeaponAimProfile.of(entry).zoom()*WeaponRangefinder.zoomScalar(owner,entry),progress);
-        double amount=WeaponAimMovementProfile.modifierAmount(WeaponMovingTarget.movementScalar(owner,entry,scalar));
+        double amount=WeaponAimMovementProfile.modifierAmount(PerkExpansionSupport.adsMovementScalar(owner,stack,WeaponMovingTarget.movementScalar(owner,entry,scalar)));
         if (ownedSpeed != null) {
             if (speed.getModifier(SPEED_ID) != ownedSpeed) {
                 // A foreign takeover still owns its exact objects, including equal-valued clones.

@@ -49,7 +49,10 @@ public abstract class LivingEntityMixin {
         float loss;boolean complete=false;
         try {original.call(level,source,amount);complete=true;}
         finally {loss=destiny$frenzyLoss.finish(victim.getHealth()+victim.getAbsorptionAmount());}
-        if(complete && loss>0)WeaponFrenzy.dealt(owner,victim,source,loss);
+        if(complete && loss>0) {
+            WeaponFrenzy.dealt(owner,victim,source,loss);
+            kim.biryeong.destiny.weapon.PerkExpansionStats.dealt(owner,victim,source,loss);
+        }
     }
     @ModifyVariable(method = "hurtServer", at = @At("HEAD"), argsOnly = true)
     private float destiny$weaken(float amount, ServerLevel level, DamageSource source) {

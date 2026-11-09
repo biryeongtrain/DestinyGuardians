@@ -55,8 +55,18 @@ public final class OutlawProfile {
         var result = new HashMap<String, Reload>(); for (var row : DATA.reloads) result.put(row.id, row); return Map.copyOf(result);
     }
     public static Perk perk() { return DATA.perk; }
-    public static List<WeaponPerks.Roll> rolls() { return List.of(DATA.weapons); }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, List.of(DATA.weapons)); }
     public static Reload reload(WeaponCatalog.Entry entry) {
+        if (entry != null && LegendaryWeapons.contains(entry.id())
+                && WeaponCatalog.find(entry.id()).filter(entry::equals).isPresent()
+                && LegendaryPerks.extraRolls(ID).stream().anyMatch(r -> r.id().equals(entry.id()))) {
+            var base = WeaponProfile.forEntry(entry);
+            int stat = WeaponCharacteristics.of(entry).stats().get("4188031367");
+            return new Reload(entry.id(),
+                WeaponStatCurves.reloadTicks(entry.id(), base.firstReloadTicks(), perk().reloadBonus(), perk().durationMultiplier()),
+                WeaponStatCurves.reloadTicks(entry.id(), base.reloadTicks(), perk().reloadBonus(), perk().durationMultiplier()),
+                stat, Math.min(100, stat + perk().reloadBonus()));
+        }
         var row = RELOADS.get(entry.id()); if (row == null) throw new IllegalArgumentException("No Outlaw reload " + entry.id()); return row;
     }
 }

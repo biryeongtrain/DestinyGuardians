@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Source assets plus actual 26.3 client-JAR codecs; no server/game runtime needed. */
 class WeaponScopeAssetsW45Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final Path ROOT = Path.of("src/main/resources/assets/destiny");
     private static final List<String> IDS = List.of(
             "bite_of_the_fox", "beloved", "apostate", "line_in_the_sand", "stormchaser");
@@ -43,7 +44,7 @@ class WeaponScopeAssetsW45Test {
 
     @Test void legacyFiveAndIzanagiHaveScopeRoutes() throws Exception {
         assertFalse(WeaponScopes.supports(null));
-        for (var entry : WeaponCatalog.all()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             assertEquals(IDS.contains(entry.id()) || entry.id().equals("izanagis_burden"), WeaponScopes.supports(entry), entry.id());
             if (WeaponScopes.supports(entry)) {
                 assertEquals("destiny:weapon_scope_w45/" + entry.id(), WeaponScopes.model(entry).toString());

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Pure unit tests: source data, cosmetic clocks and matrices only; no server or GPU bootstrap. */
 class WeaponFireMotionW242Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final WeaponFireMotion.Pose IDLE = WeaponFireMotion.Pose.IDENTITY;
     private static final Object KEY = "fixture";
     private final Object owner = new Object(), stack = new Object(), level = new Object();
@@ -25,7 +26,7 @@ class WeaponFireMotionW242Test {
             assertNotNull(in);
             var library = WeaponFireMotion.Library.read(new InputStreamReader(in, StandardCharsets.UTF_8));
             var expected = new HashSet<String>();
-            for (var entry : WeaponCatalog.all()) if (!entry.family().equals("sword")) expected.add(entry.id());
+            for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) if (!entry.family().equals("sword")) expected.add(entry.id());
             assertEquals(60, expected.size());
             assertEquals(expected, library.weapons.keySet());
             assertEquals(32, library.groups.size());

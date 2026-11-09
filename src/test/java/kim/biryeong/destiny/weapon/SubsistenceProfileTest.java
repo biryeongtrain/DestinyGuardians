@@ -18,6 +18,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SubsistenceProfileTest {
+    /** Historical source assertions remain frozen; new identities require exact official tuples. */
+    private static java.util.List<WeaponPerks.Roll> legacyRolls() {
+        var all = SubsistenceProfile.rolls();
+        var added = all.stream().filter(r -> LegendaryWeapons.contains(r.id())).toList();
+        assertEquals(java.util.Set.of("commemoration", "krait", "subjunctive", "submission"), added.stream().map(WeaponPerks.Roll::id)
+            .collect(java.util.stream.Collectors.toSet()));
+        for (var roll : added) assertTrue(LegendaryWeapons.exactRoll(roll), roll.toString());
+        assertEquals(all.size(), new java.util.HashSet<>(all).size());
+        return all.stream().filter(r -> !LegendaryWeapons.contains(r.id())).toList();
+    }
+
     private static final Path RESOURCE = Path.of("src/main/resources/destiny/weapons/w167-subsistence.json");
     private static final Path REFS = Path.of("art/weapons/w167/references");
     private static final Set<String> IDS = Set.of("gnawing_hunger", "steelfeather_repeater", "long_arm",
@@ -55,9 +66,9 @@ class SubsistenceProfileTest {
         }
         assertEquals(7, found.size());
         assertEquals(IDS, found.stream().map(WeaponPerks.Roll::id).collect(Collectors.toSet()));
-        assertEquals(found, new HashSet<>(SubsistenceProfile.rolls()));
-        assertEquals(7, SubsistenceProfile.rolls().size());
-        assertThrows(UnsupportedOperationException.class, () -> SubsistenceProfile.rolls().clear());
+        assertEquals(found, new HashSet<>(legacyRolls()));
+        assertEquals(7, legacyRolls().size());
+        assertThrows(UnsupportedOperationException.class, () -> legacyRolls().clear());
     }
 
     @Test void exhaustiveAuditIncludesAll65CatalogIdsAndBothExotics() throws Exception {
@@ -102,8 +113,8 @@ class SubsistenceProfileTest {
         }
         assertEquals(65, audited.size());
         assertEquals(2, exotics);
-        assertEquals(WeaponCatalog.all().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()), audited);
-        assertEquals(new HashSet<>(SubsistenceProfile.rolls()), admitted);
+        assertEquals(WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id())).map(WeaponCatalog.Entry::id).collect(Collectors.toSet()), audited);
+        assertEquals(new HashSet<>(legacyRolls()), admitted);
     }
 
     @Test void pinnedClarityDescribesBaseRatesReservesAndRefillSemantics() throws Exception {
@@ -150,7 +161,7 @@ class SubsistenceProfileTest {
     @Test void invalidCapacitiesUnsupportedAndNoncanonicalEntriesReturnZero() {
         assertFalse(SubsistenceProfile.supports(null));
         assertEquals(0, SubsistenceProfile.refillRounds(null, 30));
-        for (var weapon : WeaponCatalog.all()) {
+        for (var weapon : WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id())).toList()) {
             assertEquals(IDS.contains(weapon.id()), SubsistenceProfile.supports(weapon));
             for (int capacity : new int[]{Integer.MIN_VALUE, -1, 0})
                 assertEquals(0, SubsistenceProfile.refillRounds(weapon, capacity));

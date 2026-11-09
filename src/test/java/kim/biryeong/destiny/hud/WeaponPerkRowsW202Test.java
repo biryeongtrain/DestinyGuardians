@@ -67,7 +67,7 @@ class WeaponPerkRowsW202Test {
     }
 
     @Test void legacyConstructorsAndEnumOrdinalsStayCompatible() throws Exception {
-        assertEquals(32, WeaponPerkRows.Kind.values().length);
+        assertEquals(32, Arrays.stream(WeaponPerkRows.Kind.values()).filter(k -> !k.label.endsWith("_w327")).count());
         assertEquals(29, UNRELENTING.ordinal());
         assertEquals(30, HEADSEEKER.ordinal());
         assertEquals(31, STEADY_HANDS.ordinal());

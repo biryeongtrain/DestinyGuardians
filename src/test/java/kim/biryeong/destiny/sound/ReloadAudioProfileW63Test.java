@@ -9,9 +9,10 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReloadAudioProfileW63Test {
+    // Historical exact-duration recordings; W327 explicitly reuses base audio and is checked separately.
     @Test void everyWholeMagazineHasExactlyItsRealBasePhase() {
         int expected=0;
-        for(var e:WeaponCatalog.all()) {
+        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             var p=WeaponProfile.forEntry(e);
             boolean eligible=p.mode()!=WeaponProfile.Mode.MELEE&&!p.shellReload()&&!e.family().equals("bow");
             var clip=ReloadAudioProfile.find(e,p.firstReloadTicks());
@@ -24,7 +25,7 @@ class ReloadAudioProfileW63Test {
     }
     @Test void everySupportedFullMagazineOutlawVariantUsesModifiedCurveDeadline() {
         int count=0;
-        for(var row:OutlawProfile.rolls()) {
+        for(var row:OutlawProfile.rolls().stream().filter(r -> !LegendaryWeapons.contains(r.id())).toList()) {
             var e=WeaponCatalog.find(row.id()).orElseThrow();var p=WeaponProfile.forEntry(e);
             var boost=OutlawProfile.reload(e);var clip=ReloadAudioProfile.find(e,boost.firstTicks());
             if(p.shellReload()) {assertTrue(clip.isEmpty(),"No full reload sound on each shell");continue;}

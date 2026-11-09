@@ -55,12 +55,12 @@ public final class SubsistenceProfile {
         }
     }
 
-    public static List<WeaponPerks.Roll> rolls() { return DATA.weapons; }
+    public static List<WeaponPerks.Roll> rolls() { return LegendaryPerks.expandRolls(ID, DATA.weapons); }
 
     /** Canonical catalog membership rejects forged records sharing only a supported ID. */
     public static boolean supports(WeaponCatalog.Entry entry) {
         return entry != null && WeaponCatalog.find(entry.id()).filter(entry::equals).isPresent()
-                && DATA.weapons.stream().anyMatch(r -> r.id().equals(entry.id()));
+                && rolls().stream().anyMatch(r -> r.id().equals(entry.id()));
     }
 
     /** Requested rounds per weapon kill, before runtime clamps to magazine space and reserves.

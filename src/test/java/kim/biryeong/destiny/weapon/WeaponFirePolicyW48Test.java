@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Pure catalog/artifact tests: no server, registry bootstrap or gameplay integration. */
 class WeaponFirePolicyW48Test {
+    // Frozen pre-W327 roster assertions retain their original counts; new identities have separate coverage.
     private static final Set<String> BASE = Set.of("auto_rifle", "submachine_gun", "trace_rifle", "machine_gun");
     private static final Map<String, Long> EXPLICIT = Map.of(
             "aishas_embrace", 3920852688L,
@@ -73,7 +74,7 @@ class WeaponFirePolicyW48Test {
 
     @Test void existingAutomaticFamiliesRemainAutomaticAcrossEverySelectedFrame() {
         int count = 0;
-        for (var e : WeaponCatalog.all()) {
+        for (var e : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
             if (BASE.contains(e.family())) { assertTrue(automatic(e.id()), e.id()); count++; }
             else assertEquals(EXPLICIT.containsKey(e.id()), automatic(e.id()), e.id());
         }
