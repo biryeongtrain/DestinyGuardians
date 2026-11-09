@@ -1,6 +1,7 @@
 package kim.biryeong.destiny.activity.strike;
 
 import kim.biryeong.destiny.DestinyGuardians;
+import kim.biryeong.destiny.compat.pack.ActivityPacks;
 import kim.biryeong.destiny.ability.AbilityService;
 import kim.biryeong.destiny.campaign.RisingCampaign;
 import kim.biryeong.destiny.crucible.CrucibleRuntime;
@@ -38,7 +39,7 @@ public final class StrikeHost<R extends StrikeRun> {
     /** Shared launch-time ceiling for world-build work across all runs of this host. */
     private static final long TICK_BUDGET_NANOS = 2_000_000L;
 
-    private final String logTag;
+    private final String logTag, resourcePack;
     private final int minPlayers, maxPlayers;
     private final Function<MinecraftServer, StrikeInstances> instanceFactory;
     private final Function<MinecraftServer, CompletableFuture<Void>> mapLoader;
@@ -56,11 +57,12 @@ public final class StrikeHost<R extends StrikeRun> {
      * @param returnAttachmentId persistent id of the origin record; stable across versions
      * @param strikeCleanup      strike-specific teardown of one player's presentation (music, HUD, cameras of its own)
      */
-    public StrikeHost(String logTag, String returnAttachmentId, int minPlayers, int maxPlayers,
+    public StrikeHost(String logTag, String resourcePack, String returnAttachmentId, int minPlayers, int maxPlayers,
                       Function<MinecraftServer, StrikeInstances> instanceFactory,
                       Function<MinecraftServer, CompletableFuture<Void>> mapLoader,
                       RunFactory<R> runFactory, Consumer<ServerPlayer> strikeCleanup) {
         this.logTag = Objects.requireNonNull(logTag);
+        this.resourcePack = Objects.requireNonNull(resourcePack);
         this.minPlayers = minPlayers; this.maxPlayers = maxPlayers;
         this.instanceFactory = Objects.requireNonNull(instanceFactory);
         this.mapLoader = Objects.requireNonNull(mapLoader);
@@ -90,6 +92,7 @@ public final class StrikeHost<R extends StrikeRun> {
             // JOIN fires inside placeNewPlayer before the level registers the player. Teleporting here
             // registers one ServerPlayer in two levels (duplicate UUID, broken chunk tracking). Defer.
             if (run == null || !run.rejoin(player, s.getTickCount())) pendingRestore.put(player.getUUID(), player);
+            else acquirePack(player, run);
         });
         GuardianDown.register((p, source) -> { var run = run(p); return run == null ? null : run.downed(p); });
         net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
@@ -132,10 +135,14 @@ public final class StrikeHost<R extends StrikeRun> {
             if (origin.pending(p) && !restore(p)) return "이전 공격전 복귀를 먼저 완료해야 합니다.";
         var instance = instances.prepare(players.stream().map(ServerPlayer::getUUID).toList());
         if (instance.isEmpty()) return "공격전 인스턴스 준비가 진행 중이거나 정원이 가득 찼습니다.";
+        R run = null;
         try {
-            runs.put(instance.get().id(), runFactory.create(server, instances, instance.get(), players));
+            run = runFactory.create(server, instances, instance.get(), players);
+            runs.put(instance.get().id(), run);
+            for (var player : players) acquirePack(player, run);
         } catch (RuntimeException e) {
-            instances.close(instance.get());
+            if (run != null) { run.stop("리소스 팩 입장 준비 실패"); run.drain(); runs.remove(run.id()); }
+            else instances.close(instance.get());
             DestinyGuardians.LOGGER.error("[{}] session construction failed", logTag, e);
             return "공격전을 준비하지 못했습니다.";
         }
@@ -145,6 +152,13 @@ public final class StrikeHost<R extends StrikeRun> {
     private void tick(MinecraftServer s) {
         long deadline = System.nanoTime() + TICK_BUDGET_NANOS;
         for (var run : List.copyOf(runs.values())) {
+            for (var p : List.copyOf(s.getPlayerList().getPlayers())) if (run.member(p.getUUID())) {
+                String failure = ActivityPacks.failure(p, run);
+                if (failure != null) {
+                    if (!run.running()) { run.stop(failure); break; }
+                    p.sendSystemMessage(net.minecraft.network.chat.Component.literal(failure)); run.leave(p);
+                }
+            }
             try { run.tick(s.getTickCount(), Math.max(0, deadline - System.nanoTime())); }
             catch (RuntimeException e) { DestinyGuardians.LOGGER.error("[{}] session failed", logTag, e); run.stop("공격전 오류"); }
             if (run.closed()) runs.remove(run.id());
@@ -168,7 +182,14 @@ public final class StrikeHost<R extends StrikeRun> {
     }
     public boolean participating(ServerPlayer p) { return run(p) != null; }
     /** Preparation progress for the launch loading screen, or -1 when this player has no run yet. */
-    public float loadProgress(ServerPlayer p) { var r = run(p); return r == null ? -1f : r.loadProgress(); }
+    public float loadProgress(ServerPlayer p) {
+        var r = run(p);
+        if (r == null) return -1f;
+        return .25f * ActivityPacks.progress(p, resourcePack) + .75f * r.loadProgress();
+    }
+    private void acquirePack(ServerPlayer p, R run) {
+        ActivityPacks.acquire(p, resourcePack, run, () -> !run.closed() && run.member(p.getUUID()));
+    }
     /** Opaque per-run identity, including preparation/admission. */
     public Object participationToken(ServerPlayer p) { return p == null ? null : run(p); }
     public boolean leave(ServerPlayer p, Object expected) {

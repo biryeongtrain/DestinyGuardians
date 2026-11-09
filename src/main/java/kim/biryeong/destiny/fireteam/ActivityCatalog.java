@@ -46,6 +46,15 @@ public final class ActivityCatalog {
          * the activity cannot measure it (the screen then shows a time-based estimate). Called every tick while dark.
          */
         default float progress(ServerPlayer player) { return -1f; }
+        /** Read-only: the whole accepted group is still waiting before placement. */
+        default Object preparationToken(ServerPlayer player) { return null; }
+        default boolean canCancelPreparation(List<ServerPlayer> players, Map<java.util.UUID, Object> expected) { return false; }
+        /** Release only this group's current preparation; never cancel an already entered activity. */
+        default void cancelPreparation(List<ServerPlayer> players, Map<java.util.UUID, Object> expected) { }
+    }
+
+    static boolean ownsPreparation(Map<java.util.UUID, Object> expected, java.util.UUID player, Object current) {
+        return current != null && expected.get(player) == current;
     }
 
     private static final Map<String, Category> CATEGORIES = new LinkedHashMap<>();

@@ -104,6 +104,7 @@ public final class DestinyGuardians implements ModInitializer {
         }
         // Last pack hook: lossless output compression after every other converter.
         kim.biryeong.destiny.compat.pack.PackCompression.init();
+        kim.biryeong.destiny.compat.pack.ActivityPacks.init();
 
         logDependency("polymer-core");
         logDependency("bettermodel");

@@ -71,6 +71,7 @@ public final class StartupPackCache {
                     var cached=hit.orElseThrow();
                     var snapshot=ProfileArmCache.read(cached.profiles());
                     validate(snapshot);
+                    ActivityPacks.validateCached(cached.archive(), cached.sha1());
                     // Reuse skips the build that normally publishes the music catalog and pack hash; do it before readiness.
                     kim.biryeong.minigamelib.music.MusicPacks.restore(cached.sha1());
                     if(current!=s||s.epoch!=epoch)return;

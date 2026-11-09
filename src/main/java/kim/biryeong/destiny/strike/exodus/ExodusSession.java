@@ -105,7 +105,8 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
     @Override public float loadProgress() {
         return switch (state) { case PREPARING -> (float) (build.progress() * .88); case ADMITTING -> .92f; default -> .96f; };
     }
-    private boolean ready(ServerPlayer p) { return p.connection.hasClientLoaded() && MusicPacks.ready(p); }
+    private boolean ready(ServerPlayer p) { return p.connection.hasClientLoaded() && MusicPacks.ready(p)
+            && kim.biryeong.destiny.compat.pack.ActivityPacks.ready(p, "exodus_crash"); }
     private boolean readyLiving(ServerPlayer p) {
         return running() && !joining.contains(p.getUUID()) && !resetPlacement && !failure.state().wiping()
                 && p.level() == level() && recovery.token(p.getUUID()).isEmpty() && ready(p);

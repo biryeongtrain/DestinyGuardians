@@ -22,7 +22,7 @@ import net.minecraft.resources.Identifier;
 final class ActivityLaunch {
     enum Phase { COUNTDOWN, FADE_OUT, PREPARE, DONE }
     static final int LEAD_IN = 20, COUNTDOWN = 5 * 20, LAUNCH_AT = LEAD_IN + COUNTDOWN,
-            FADE_OUT = 16, FADE_START = LAUNCH_AT - FADE_OUT, REVEAL = 24, PREPARE_TIMEOUT = 45 * 20,
+            FADE_OUT = 16, FADE_START = LAUNCH_AT - FADE_OUT, REVEAL = 24, PREPARE_TIMEOUT = kim.biryeong.destiny.compat.pack.ActivityPacks.LOAD_TIMEOUT_TICKS + 45 * 20,
             DROPPED_GRACE = 3 * 20, READY_HOLD = 14;
 
     /** Titles in Noto Sans KR (the economy UI font) instead of the pixel font. */
@@ -47,6 +47,7 @@ final class ActivityLaunch {
     private record Bound(ServerPlayer player, net.minecraft.server.network.ServerGamePacketListenerImpl connection,
                          net.minecraft.server.level.ServerLevel level) { }
     private final Map<UUID, Bound> acceptedPlayers = new LinkedHashMap<>();
+    private final Map<UUID, Object> preparationTokens = new HashMap<>();
     private final List<FinderSounds.Countdown> countdownAudio = new ArrayList<>();
 
     ActivityLaunch(MinecraftServer server, FireteamRoster.Team team, ActivityCatalog.Activity activity,
@@ -69,7 +70,12 @@ final class ActivityLaunch {
         var bound = acceptedPlayers.get(p.getUUID());
         return bound != null && bound.player == p && bound.connection == p.connection;
     }
-    boolean cancelable() { return !launchInvoked && (phase == Phase.COUNTDOWN || phase == Phase.FADE_OUT); }
+    boolean cancelable() {
+        if (outcome != null || phase == Phase.DONE) return false;
+        if (!launchInvoked) return phase == Phase.COUNTDOWN || phase == Phase.FADE_OUT;
+        return phase == Phase.PREPARE && loaded.isEmpty() && revealing.isEmpty()
+                && activity.launcher().canCancelPreparation(online(), preparationTokens);
+    }
     /** No number during the click's first second, then5..1 on exact20tick boundaries; never0. */
     static int numberAt(int elapsed) { return elapsed < LEAD_IN || elapsed >= LAUNCH_AT ? 0 : 6 - elapsed / 20; }
     private boolean validCountdown() {
@@ -101,7 +107,12 @@ final class ActivityLaunch {
 
     /** Leader cancel or a roster change during the countdown. Fades back in if already dark. */
     void cancel(String reason) {
-        if (phase == Phase.DONE || outcome != null || launchInvoked) return;
+        if (phase == Phase.DONE || outcome != null) return;
+        if (launchInvoked) {
+            if (!cancelable()) return;
+            activity.launcher().cancelPreparation(online(), preparationTokens);
+            launchInvoked = false;
+        }
         outcome = reason;
         for (var sound : countdownAudio) sound.cancel(this);
         for (var p : online()) {
@@ -157,6 +168,7 @@ final class ActivityLaunch {
                 if (error != null) {
                     launchInvoked = false; cancel(error); return;
                 }
+                for (var p : online) preparationTokens.put(p.getUUID(), activity.launcher().preparationToken(p));
                 // Success keeps the original cue's remaining~0.34seconds; no sound-stop at the launch boundary.
                 // The title that follows is the loading screen (drawn each tick under the black), not a one-off card.
                 for (var p : online) p.connection.send(new ClientboundClearTitlesPacket(true));
@@ -180,7 +192,8 @@ final class ActivityLaunch {
                         boolean ready = loaded.containsKey(e.getKey());
                         if (launchedAt >= 0 && !dropped && !timedOut) {
                             var screen = screens.computeIfAbsent(e.getKey(), k -> new LaunchLoadingScreen(p, activity.name(), activity.type()));
-                            screen.render(now - launchedAt, activity.launcher().progress(p), ready);
+                            screen.render(now - launchedAt, activity.launcher().progress(p), ready,
+                                    kim.biryeong.destiny.compat.pack.ActivityPacks.loadingStatus(p, activity.id()));
                         }
                         if (ready && now - loaded.get(e.getKey()) >= READY_HOLD || dropped || timedOut) {
                             revealing.put(e.getKey(), now);

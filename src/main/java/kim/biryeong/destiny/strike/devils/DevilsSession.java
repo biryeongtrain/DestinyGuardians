@@ -270,7 +270,8 @@ public final class DevilsSession implements StrikeRun, DevilsDirector.Host, Devi
         if (startedAt < 0) return -1;
         return (int) ((Math.max(0L, durationTicks - Math.max(0L, now - startedAt)) + 19) / 20);
     }
-    private boolean ready(ServerPlayer p) { return p.connection.hasClientLoaded() && MusicPacks.ready(p); }
+    private boolean ready(ServerPlayer p) { return p.connection.hasClientLoaded() && MusicPacks.ready(p)
+            && kim.biryeong.destiny.compat.pack.ActivityPacks.ready(p, "devils_lair"); }
     private boolean supported(ServerPlayer p, Vec3 at) {
         return contains(director.phase().zone(), at) && DevilsSpatial.groundedPlayer(level(), p, at);
     }

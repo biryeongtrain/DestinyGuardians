@@ -28,6 +28,15 @@ final class FinderActivities {
                 @Override public boolean entered(ServerPlayer p) { return strike.entered(p); }
                 @Override public boolean participating(ServerPlayer p) { return strike.participating(p); }
                 @Override public float progress(ServerPlayer p) { return strike.loadProgress(p); }
+                @Override public Object preparationToken(ServerPlayer p) { return strike.participationToken(p); }
+                @Override public boolean canCancelPreparation(List<ServerPlayer> players, java.util.Map<java.util.UUID, Object> expected) {
+                    return !players.isEmpty() && players.stream().allMatch(p ->
+                            ActivityCatalog.ownsPreparation(expected, p.getUUID(), strike.participationToken(p)) && !strike.entered(p));
+                }
+                @Override public void cancelPreparation(List<ServerPlayer> players, java.util.Map<java.util.UUID, Object> expected) {
+                    if (!canCancelPreparation(players, expected)) return;
+                    for (var p : players) strike.leave(p, expected.get(p.getUUID()));
+                }
             }));
         }
 

@@ -18,6 +18,17 @@ base {
 def gcbAvailable = new File(file(project.gcb_server_dir), 'build.gradle').exists()
 
 repositories {
+    exclusiveContent {
+        forRepository {
+            ivy {
+                name = 'R2UploaderGitHubReleases'
+                url = 'https://github.com/biryeongtrain/rp-cloudflare-r2-uploader/releases/download'
+                patternLayout { artifact '[revision]/[artifact]-[revision].[ext]' }
+                metadataSources { artifact() }
+            }
+        }
+        filter { includeModule 'kim.biryeong', 'rp-r2-uploader' }
+    }
     mavenCentral()
     maven { url 'https://maven.nucleoid.xyz' }      // Polymer, sgui
     maven { url 'https://maven.blamejared.com/' }   // BetterModel 전이 의존성
@@ -54,6 +65,10 @@ dependencies {
     // BetterModel: 플레이어 limb·적·보스 모델과 애니메이션. 배포 JAR에 포함한다.
     implementation "io.github.toxicity188:bettermodel-fabric:${project.bettermodel_version}"
     include "io.github.toxicity188:bettermodel-fabric:${project.bettermodel_version}"
+
+    // Released R2 uploader: ship the exact tested mod as a nested JAR, including its transport.
+    implementation "kim.biryeong:rp-r2-uploader:${project.r2_uploader_version}"
+    include "kim.biryeong:rp-r2-uploader:${project.r2_uploader_version}"
 
     // minigame-lib: libs/minigame-lib submodule 에서 includeBuild 로 대체됨
     implementation "kim.biryeong:minigame-lib:${project.minigamelib_version}"

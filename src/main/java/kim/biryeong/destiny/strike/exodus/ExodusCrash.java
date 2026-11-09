@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
  * Built entirely on the shared strike seam: host, instances, maps, roster, recovery and actors.
  */
 public final class ExodusCrash {
-    private static final StrikeHost<ExodusSession> HOST = new StrikeHost<>("ExodusCrash", "exodus_return",
+    private static final StrikeHost<ExodusSession> HOST = new StrikeHost<>("ExodusCrash", "exodus_crash", "exodus_return",
             ExodusPlan.MIN_PLAYERS, ExodusPlan.PLAYERS,
             s -> new StrikeInstances(s, "exodus_crash", 2, ExodusPlan.MIN_PLAYERS, ExodusPlan.PLAYERS,
                     () -> new ExodusTemplateGenerator(s, ExodusMaps.maps().nbtTemplates())),

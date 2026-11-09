@@ -36,7 +36,7 @@ import java.util.concurrent.CompletableFuture;
 
 /** Live one-to-three-player coordinator with fixed three-player encounter tuning. The sole owner of world construction and participant admission. */
 public final class DevilsLair {
-    private static final StrikeHost<DevilsSession> HOST = new StrikeHost<>("DevilsLair", "devils_return",
+    private static final StrikeHost<DevilsSession> HOST = new StrikeHost<>("DevilsLair", "devils_lair", "devils_return",
             DevilsPlan.MIN_PLAYERS, DevilsPlan.PLAYERS, s -> new DevilsInstances(s, 4), DevilsMaps::preloadAsync,
             DevilsSession::new, kim.biryeong.destiny.sound.ActivityMusic::devilsEnded);
 

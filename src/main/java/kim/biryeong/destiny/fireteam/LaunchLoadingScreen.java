@@ -38,6 +38,7 @@ final class LaunchLoadingScreen {
     private final String type;
     private float shown;
     private boolean started, fading;
+    private String detail;
 
     LaunchLoadingScreen(ServerPlayer player, String name, String type) {
         this.player = player; this.name = name; this.type = type;
@@ -82,7 +83,9 @@ final class LaunchLoadingScreen {
     // -------------------------------------------------------------------------------------------------- render
 
     /** Draw one frame. {@code age}: ticks since the activity began preparing. */
-    void render(int age, float measured, boolean ready) {
+    void render(int age, float measured, boolean ready) { render(age, measured, ready, null); }
+    void render(int age, float measured, boolean ready, String detail) {
+        this.detail = detail;
         if (player.hasDisconnected() || fading) return;
         shown = ease(shown, goal(measured, age, ready), ready);
         var c = player.connection;
@@ -102,7 +105,7 @@ final class LaunchLoadingScreen {
             return out;
         }
         out.append(Component.literal(String.valueOf(spinner(age))).withStyle(glyph(NAME)));
-        out.append(Component.literal("  게임을 불러오는 중").withStyle(plain(STATUS)));
+        out.append(Component.literal("  " + (detail == null ? "게임을 불러오는 중" : detail)).withStyle(plain(STATUS)));
         int lit = age / 8 % 4;   // 0..3 dots lit: a fixed-width ellipsis, so the line never shifts sideways
         for (int i = 0; i < 3; i++) {
             int color = i < lit ? STATUS : DIM;
