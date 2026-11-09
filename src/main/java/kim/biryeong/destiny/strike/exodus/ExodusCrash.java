@@ -61,6 +61,11 @@ public final class ExodusCrash {
                                     if (s == null || !s.qaSkip()) { c.getSource().sendFailure(Component.literal("건너뛸 수 없습니다.")); return 0; }
                                     return 1;
                                 }))
+                        .then(Commands.literal("inspect").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .executes(c -> {
+                                    var s = HOST.run(c.getSource().getPlayerOrException());
+                                    c.getSource().sendSuccess(() -> Component.literal(s == null ? "공격전 참가 중이 아닙니다." : s.diagnostics()), false); return 1;
+                                }))
                         .then(Commands.literal("leave").executes(c -> { HOST.leave(c.getSource().getPlayerOrException()); return 1; }))
                         .then(Commands.literal("status").executes(c -> {
                             var s = HOST.run(c.getSource().getPlayerOrException());

@@ -468,7 +468,7 @@
  ],
  "routeCells": 2488,
  "art": {
-  "version": 3,
+  "version": 4,
   "materialCells": 5221937,
   "redGroundCells": 30721,
   "grassClumps": 7651,
@@ -481,7 +481,15 @@
   "bossFillLevel": 13,
   "protectedColumns": 28704,
   "biome": "destiny:nessus",
-  "policy": "baked geometry + authored surface finishes and outdoor vegetation; original slab properties retained"
+  "policy": "baked geometry + authored surface finishes and outdoor vegetation; original slab properties retained",
+  "bossArenaDeckLights": 616,
+  "bossArenaDeckLightLevel": 15
  },
- "status": "authored Nessus finish generated; verification recorded separately in docs/qa"
+ "status": "authored Nessus finish generated; verification recorded separately in docs/qa",
+ "hazards": {
+  "resource": "hazards.json",
+  "nbtMarker": "death",
+  "regions": 3,
+  "provenance": "authored death volumes, not decoded original Destiny triggers"
+ }
 }

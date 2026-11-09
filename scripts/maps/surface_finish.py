@@ -32,6 +32,23 @@ def has_roof(world, opaque, x, feet_y, z):
     return bool(opaque[world[feet_y+3:,z,x]].any())
 
 
+def place_floor_lights(world, states, low, high, spacing=6, level=15):
+    """Non-colliding fill above each usable deck in a bounded, multi-level arena."""
+    light = palette_id(states, f'light[level={level},waterlogged=false]')
+    is_open = np.array([s == 'minecraft:air' or s.startswith('minecraft:light[') for s in states])
+    support = np.array([('[' not in s or '_slab[' in s) and not is_open[i]
+                        and 'glass' not in s and not s.endswith(('_grass', '_bush')) for i, s in enumerate(states)])
+    placed = 0
+    for z in range(((low[2]+spacing-1)//spacing)*spacing, high[2]+1, spacing):
+        for x in range(((low[0]+spacing-1)//spacing)*spacing, high[0]+1, spacing):
+            for y in range(max(1, low[1]), min(world.shape[0]-3, high[1])+1):
+                if support[world[y-1,z,x]] and is_open[world[y:y+3,z,x]].all():
+                    if world[y+2,z,x] != light:
+                        world[y+2,z,x] = light
+                        placed += 1
+    return placed
+
+
 def patch_field(x, z):
     """Broad continuous patches, rather than independent salt-and-pepper voxels."""
     return (np.sin(x * .047 + np.sin(z * .021) * 1.4)

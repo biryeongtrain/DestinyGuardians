@@ -1,0 +1,123 @@
+{
+  "status": "accepted representative boss-phase visibility and authored death-volume runtime",
+  "dimension": "destiny:exodus_crash/3feb9edf-3f94-42e9-ae0b-737c18472b82",
+  "frames": [
+    {
+      "name": "final-boss-shield-up",
+      "pixels": [
+        3024,
+        1728
+      ],
+      "dimension": "destiny:exodus_crash/3feb9edf-3f94-42e9-ae0b-737c18472b82",
+      "cameraIsPlayer": true,
+      "onGround": true,
+      "fpsSnapshot": 30,
+      "sha256": "90be66a94415bb422c59a594a3565dd64a1989878747809ad3da27606871715f"
+    },
+    {
+      "name": "final-boss-damage-phase",
+      "pixels": [
+        3024,
+        1728
+      ],
+      "dimension": "destiny:exodus_crash/3feb9edf-3f94-42e9-ae0b-737c18472b82",
+      "cameraIsPlayer": true,
+      "onGround": true,
+      "fpsSnapshot": 28,
+      "sha256": "34626f242c8e6222f2545d2e4b704a0039422f8073e721c56272c561adebcfe1"
+    },
+    {
+      "name": "final-boss-flank",
+      "pixels": [
+        3024,
+        1728
+      ],
+      "dimension": "destiny:exodus_crash/3feb9edf-3f94-42e9-ae0b-737c18472b82",
+      "cameraIsPlayer": true,
+      "onGround": true,
+      "fpsSnapshot": 30,
+      "sha256": "e62dc971394e5714188a8811613e2dac03894fc01c5e49b985ef290ed434f7ff"
+    },
+    {
+      "name": "final-fall-ledge",
+      "pixels": [
+        3024,
+        1728
+      ],
+      "dimension": "destiny:exodus_crash/3feb9edf-3f94-42e9-ae0b-737c18472b82",
+      "cameraIsPlayer": true,
+      "onGround": true,
+      "fpsSnapshot": 20,
+      "sha256": "c252b5cd41a5e1f4e337c77ffbb01b29b0a2dbdebe6c58954fa62222ee7b4598"
+    },
+    {
+      "name": "final-fall-death",
+      "pixels": [
+        3024,
+        1728
+      ],
+      "dimension": "destiny:exodus_crash/3feb9edf-3f94-42e9-ae0b-737c18472b82",
+      "cameraIsPlayer": false,
+      "onGround": false,
+      "fpsSnapshot": 30,
+      "sha256": "f5cb2910750bd82f5c9ce020f99ec95c121871dedbf46bbf193e871135d71dd3"
+    },
+    {
+      "name": "final-fall-checkpoint",
+      "pixels": [
+        3024,
+        1728
+      ],
+      "dimension": "destiny:exodus_crash/3feb9edf-3f94-42e9-ae0b-737c18472b82",
+      "cameraIsPlayer": true,
+      "onGround": true,
+      "fpsSnapshot": 30,
+      "sha256": "38b61b4838bacc7a74a14c6a259ace2a59aebbb87e76dc99de5b30128bab92c2"
+    }
+  ],
+  "lighting": "615 added invisible level-15 cells and 1 upgraded; all solid geometry unchanged",
+  "phase": {
+    "carriers": "2 extra Hobgoblins plus Cyclops while boss remains alive",
+    "delivered": "1, 2, then field DOWN through normal pickup/delivery logic",
+    "shieldUpProbe": "no applied-damage feedback, HP remained 1800",
+    "shieldDownProbe": {
+      "absorptionBefore": 590,
+      "absorptionAfter": 580,
+      "health": 1800,
+      "damage": 10
+    }
+  },
+  "fall": {
+    "region": "boss_understructure",
+    "gravityTrigger": [
+      581.5,
+      61.9166651918337,
+      1712.5
+    ],
+    "safeGhost": [
+      577.5,
+      90,
+      1746.5
+    ],
+    "deathStatBefore": 1,
+    "deathStatAfter": 2,
+    "delta": 1,
+    "checkpointRecovery": true
+  },
+  "fixture": "OP skip, teleport, damage commands and resistance effects; screenshot observation through real client; no native-input gameplay claim",
+  "captureOptions": {
+    "gamma": 0.5,
+    "externalShaderPack": false,
+    "hudHidden": true,
+    "pauseOnLostFocus": false,
+    "controlEnabled": true,
+    "nativeInputUsed": false,
+    "backgroundControlEnabled": false
+  },
+  "limitations": [
+    "representative platforms and phases, not a full combat clear",
+    "one additional combat down occurred after automatic fall recovery while waiting for the camera; final checkpoint image is after that later reset",
+    "initial third-orb pickup fixture used Cyclops height 91 while the orb floor was 87; corrected fixture collected the orb successfully",
+    "FPS is a snapshot, not a performance benchmark"
+  ]
+}

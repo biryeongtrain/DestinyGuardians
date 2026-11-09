@@ -24,4 +24,19 @@ class RoofTests(unittest.TestCase):
         self.assertTrue(has_roof(world,opaque,0,10,0))
 
 
+class ArenaLightsTests(unittest.TestCase):
+    def test_lights_follow_both_decks_and_preserve_geometry(self):
+        from surface_finish import place_floor_lights
+        states=['minecraft:air','minecraft:stone']
+        world=np.zeros((16,12,12),np.uint16)
+        world[2,:,:]=1;world[8,:,:]=1
+        before=world.copy()
+        count=place_floor_lights(world,states,(0,3,0),(11,10,11),spacing=6,level=15)
+        self.assertEqual(count,8)
+        self.assertTrue((world[before==1]==1).all())
+        self.assertEqual(world[5,0,0],2)
+        self.assertEqual(world[11,0,0],2)
+        self.assertEqual(place_floor_lights(world,states,(0,3,0),(11,10,11),spacing=6,level=15),0)
+
+
 if __name__=='__main__':unittest.main()

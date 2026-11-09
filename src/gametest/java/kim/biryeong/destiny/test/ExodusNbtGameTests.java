@@ -47,6 +47,11 @@ public final class ExodusNbtGameTests {
             if (!build[0].step(2_000_000)) return;
             var level = instance[0].level();
             var plan = ExodusPlan.data();
+            var hazards = kim.biryeong.destiny.world.template.TemplateHazards.from(ExodusMaps.maps().nbt(ExodusPlan.Zone.WORLD));
+            check(h, hazards.deaths().size() == 3, "NBT death volumes loaded");
+            check(h, hazards.deathAt(ExodusMaps.world(new net.minecraft.world.phys.Vec3(324.5, 31, 1455.5))).isPresent(), "boss abyss is lethal");
+            for (var point : plan.route()) check(h, hazards.deathAt(ExodusMaps.world(point)).isEmpty(), "guidance route outside death volumes");
+            for (var marker : ExodusMaps.markers()) check(h, hazards.deathAt(marker.pos()).isEmpty(), "marker outside death volumes: " + marker.id());
             int checked = 0;
             for (int i = 0; i < plan.route().size(); i += 12) {
                 var at = ExodusMaps.world(plan.route().get(i));

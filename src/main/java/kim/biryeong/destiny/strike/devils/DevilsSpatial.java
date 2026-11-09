@@ -228,7 +228,7 @@ public final class DevilsSpatial {
         return !level.getBlockCollisions(entity, body).iterator().hasNext();
     }
     /** Player feet may rest on fractional slabs/stairs or partly overhang a step. */
-    static boolean groundedPlayer(ServerLevel level, Entity player, Vec3 feet) {
+    public static boolean groundedPlayer(ServerLevel level, Entity player, Vec3 feet) {
         thread(level);
         var pos = BlockPos.containing(feet);
         var body = bodyAt(player, feet);

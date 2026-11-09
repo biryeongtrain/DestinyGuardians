@@ -340,8 +340,10 @@ def export_nbt(world, states, target, Z, data_version=5023):
                 chunks.append(Z.compound([Z.tag(11, 'pos', Z.ints([cx + ORIGIN[0] // 16, cy + ORIGIN[1] // 16, cz + ORIGIN[2] // 16])),
                                           Z.tag(10, 'block_states', Z.compound(entries))]))
     bounds = Z.compound([Z.tag(11, 'min', Z.ints(list(ORIGIN))), Z.tag(11, 'max', Z.ints([ORIGIN[0] + sx - 1, ORIGIN[1] + sy - 1, ORIGIN[2] + sz - 1]))])
+    from template_regions import region_payload
+    hazards = json.loads((OUT / 'hazards.json').read_text())['regions']
     root = Z.compound([Z.tag(3, 'data_version', Z.i32(data_version)), Z.tag(9, 'chunks', Z.items(10, chunks)), Z.tag(10, 'bounds', bounds),
-                       Z.tag(8, 'biome', Z.string('destiny:nessus')), Z.tag(9, 'block_entities', Z.items(10, [])), Z.tag(9, 'regions', Z.items(10, [])),
+                       Z.tag(8, 'biome', Z.string('destiny:nessus')), Z.tag(9, 'block_entities', Z.items(10, [])), Z.tag(9, 'regions', region_payload(hazards, ORIGIN)),
                        Z.tag(10, 'data', Z.compound([]))])
     target.write_bytes(gzip.compress(Z.tag(10, '', root), compresslevel=9, mtime=0))
     print('nbt', target.stat().st_size, 'sections', len(chunks), 'blocks', count, 'palette', len(states))

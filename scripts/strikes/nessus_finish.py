@@ -184,9 +184,12 @@ def apply(world, states, work, route, markers):
                     fixtures+=1
                 break
             if fixtures and fixtures%2==0:break
-    report=dict(version=3,materialCells=changed,redGroundCells=leaf_litter,grassClumps=plants,
+    from surface_finish import place_floor_lights
+    arena_lights=place_floor_lights(world,states,(270,41,1420),(390,72,1560),spacing=6,level=15)
+    report=dict(version=4,materialCells=changed,redGroundCells=leaf_litter,grassClumps=plants,
                 bushes=bushes,trees=trees,fillLights=lighting,fillLevel=11,ceilingFixtures=fixtures,
                 bossFillLights=boss_lighting,bossFillLevel=13,
+                bossArenaDeckLights=arena_lights,bossArenaDeckLightLevel=15,
                 protectedColumns=int(protected.sum()),biome='destiny:nessus',
                 policy='baked geometry + authored surface finishes and outdoor vegetation; original slab properties retained')
     (work/'nessus-art.json').write_text(json.dumps(report,indent=1))

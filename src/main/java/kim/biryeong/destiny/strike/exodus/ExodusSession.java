@@ -112,7 +112,13 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
     }
     @Override public boolean allows(ServerPlayer p) { return readyLiving(p); }
     public String status() {
-        return state + " / " + beat().id() + " " + beatState + " / live " + live.size() + " / charges " + delivered + " / gen " + generation;
+        return state + " / " + beat().id() + " " + beatState + " / live " + live.size() + " / charges " + delivered
+                + " / field " + (fieldUp ? "UP" : "DOWN") + " / gen " + generation;
+    }
+    String diagnostics() {
+        return status() + " / queued " + queue.size() + " / carriers " + carrierSlots.size()
+                + " / dropped " + ground.stream().map(Charge::at).toList()
+                + " / carried " + carrying;
     }
     public List<ServerPlayer> players() {
         return ids.stream().filter(this::member).map(id -> server.getPlayerList().getPlayer(id))
@@ -303,8 +309,9 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
         int need = chargeNeed();
         long carried = carrying.values().stream().filter(v -> v).count();
         long available = delivered + carried + ground.size() + carrierSlots.size();
-        if (queue.isEmpty() && live.isEmpty() && available < need) {
+        if (queue.isEmpty() && available < need) {
             // Not enough charge carriers left alive: send in more Vex that carry one.
+            // The shielded boss stays alive, so waiting for an empty live set deadlocks this objective.
             for (long i = available; i < need; i++) queue.add(DevilsPlan.Kind.HOBGOBLIN);
         }
         Vec3 gen = generatorAt(b);
@@ -431,7 +438,14 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
         if (kind == DevilsPlan.Kind.PYKIS) bossDead = true;
         if (carrierSlots.remove(ref.slotId()) && at != null) {
             var floor = kim.biryeong.destiny.loot.Loot.floor(level(), at, 6);
-            ground.add(new Charge(floor == null ? at : floor));
+            Vec3 drop = floor == null ? null : stand(floor, List.of());
+            double lowestLane = lane(beat().id()).stream().mapToDouble(m -> m.pos().y).min().orElse(generatorAt(beat()).y);
+            // A mesh can have decorative floors beneath the playable decks. Never count an inaccessible orb as supply.
+            if (drop == null || drop.y < lowestLane - .5) drop = stand(generatorAt(beat()), List.of());
+            if (drop != null) {
+                ground.add(new Charge(drop));
+                DestinyGuardians.LOGGER.info("[ExodusCrash {}] charge drop {} -> {}", id(), at, drop);
+            }
             level().playSound(null, BlockPos.containing(at), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.HOSTILE, 2f, 1.8f);
             if (!firstChargeSpoken) { firstChargeSpoken = true; say(List.of(ExodusVoice.FIRST_CHARGE)); }
         }
@@ -534,6 +548,7 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
                 var floor = pos.below();
                 if (!level().getBlockState(floor).isFaceSturdy(level(), floor, net.minecraft.core.Direction.UP)) continue;
                 Vec3 at = new Vec3(pos.getX() + .5, pos.getY(), pos.getZ() + .5);
+                if (hazards != null && hazards.deathAt(at).isPresent()) continue;
                 if (!level().noCollision(new AABB(at.x - .35, at.y, at.z - .35, at.x + .35, at.y + 1.9, at.z + .35))) continue;
                 if (taken.stream().anyMatch(t -> t.distanceToSqr(at) < 1.8)) continue;
                 return at;
@@ -541,17 +556,30 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
         }
         return null;
     }
+    private kim.biryeong.destiny.world.template.TemplateHazards hazards;
     private void checkFalls() {
         var size = ExodusMaps.dimensions(); var o = ExodusMaps.ORIGIN;
+        if (hazards == null) hazards = kim.biryeong.destiny.world.template.TemplateHazards.from(ExodusMaps.maps().nbt(ExodusPlan.Zone.WORLD));
         for (var p : participants()) {
             Vec3 at = p.position();
             boolean outside = at.y < o.getY() - 4 || at.x < o.getX() || at.z < o.getZ() || at.x >= o.getX() + size.getX() || at.z >= o.getZ() + size.getZ();
-            if (!outside) { if (p.onGround() && level().getGameTime() % 20 == 0) supported.put(p.getUUID(), at); continue; }
-            // No walls, no kill: put them back on the last ground they stood on, as the cave floor is not a death.
-            Vec3 back = supported.getOrDefault(p.getUUID(), ExodusMaps.anchor("WORLD.IN").pos());
-            p.teleportTo(level(), back.x, back.y, back.z, Set.of(), p.getYRot(), 0, true);
-            p.resetFallDistance(); p.setDeltaMovement(Vec3.ZERO);
-            p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket(Component.literal("이탈한 위치에서 복귀했습니다")));
+            if (!outside && hazards.deathAt(at).isEmpty()) {
+                if (p.onGround()) supported.put(p.getUUID(), at);
+                continue;
+            }
+            // Keep the Ghost on an accessible ledge, but record a real down and retain wipe/revive rules.
+            Vec3 body = supported.get(p.getUUID());
+            if (body == null || hazards.deathAt(body).isPresent() || !ExodusMaps.contains(body)
+                    || !kim.biryeong.destiny.strike.devils.DevilsSpatial.groundedPlayer(level(), p, body)) {
+                body = stand(checkpoint() == null ? ExodusMaps.anchor("WORLD.IN").pos() : checkpoint(), List.of());
+                if (body == null) { stop("추락 후 안전한 부활 지점을 찾지 못했습니다."); return; }
+            }
+            var option = downed(p, body);
+            if (option == null) continue;
+            DestinyGuardians.LOGGER.info("[ExodusCrash {}] {} fall death: {} at {}; Ghost at {}", id(), p.getScoreboardName(),
+                    hazards.deathAt(at).map(kim.biryeong.destiny.world.template.TemplateHazards.DeathRegion::id).orElse("world boundary"), at, body);
+            ExodusCrash.cleanup(p);
+            if (!GuardianDown.fallOwned(p, option, body)) restoreDown(p, option);
         }
     }
 
@@ -633,12 +661,15 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
         }
     }
     @Override public GuardianDown.Options downed(ServerPlayer p) {
+        return downed(p, p.position());
+    }
+    private GuardianDown.Options downed(ServerPlayer p, Vec3 body) {
         if (!running() || p.level() != level() || !member(p.getUUID()) || joining.contains(p.getUUID())) return null;
         var down = recovery.down(p.getUUID(), generation);
         if (down.isEmpty()) return null;
         kim.biryeong.destiny.down.FireteamReviveAudio.announce(p, players());
-        roster.down(p.getUUID(), true); downBodies.put(p.getUUID(), p.position());
-        if (carrying.put(p.getUUID(), false) == Boolean.TRUE) ground.add(new Charge(p.position()));
+        roster.down(p.getUUID(), true); downBodies.put(p.getUUID(), body);
+        if (carrying.put(p.getUUID(), false) == Boolean.TRUE) ground.add(new Charge(body));
         return downOptions.computeIfAbsent(p.getUUID(), id -> new GuardianDown.Options(false, 600, true,
                 false, "엑소더스의 추락", this::reviveFinished, 60, true, true));
     }
