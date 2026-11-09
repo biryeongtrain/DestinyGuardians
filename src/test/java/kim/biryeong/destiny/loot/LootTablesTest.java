@@ -79,4 +79,29 @@ class LootTablesTest {
         for (int i = 0; i < 200; i++) { long g = hook.rollGlimmer(rng); assertTrue(g >= 40 && g <= 60, "glimmer " + g); }
         assertEquals(0, new LootTables.Activity("strike_completion", "strike_chest").rollGlimmer(rng));
     }
+
+    @Test void strikeChestIsEightyPercentLegendaryOrBetterPerOpening() {
+        for (String activity : List.of("devils_lair", "exodus_crash")) {
+            var hook = LootTables.activity(activity).orElseThrow();
+            var chest = LootTables.table(hook.chest()).orElseThrow();
+            assertEquals(1, chest.rolls()); assertEquals(1.0, chest.chance());
+            int total = 0, rare = 0, legendary = 0, exotic = 0;
+            for (var entry : chest.entries()) {
+                total += entry.weight();
+                if ("exotic".equals(entry.engram())) exotic += entry.weight();
+                else if ("legendary".equals(entry.engram()) || entry.weapon() != null && Boolean.FALSE.equals(entry.weapon().exotic())) legendary += entry.weight();
+                else {
+                    assertNotNull(entry.weapon()); assertEquals(List.of("rare"), entry.weapon().rarity());
+                    rare += entry.weight();
+                }
+            }
+            assertEquals(.2, rare / (double) total, 1e-12);
+            assertEquals(.72, legendary / (double) total, 1e-12);
+            assertEquals(.08, exotic / (double) total, 1e-12);
+            var completion = LootTables.table(hook.completion()).orElseThrow();
+            assertEquals(1.0, completion.chance());
+            assertEquals(activity.equals("exodus_crash") ? 2 : 1, completion.rolls());
+            assertTrue(completion.entries().stream().allMatch(e -> e.weapon() != null && Boolean.FALSE.equals(e.weapon().exotic())));
+        }
+    }
 }

@@ -1,5 +1,5 @@
 {
-  "_doc": "Shared loot tables. Weapon filters match the catalog (w30/w40): exotic, slots (KINETIC/ENERGY/POWER), ammo (PRIMARY/SPECIAL/HEAVY), families, ids, exclude, rarity (W325: common/uncommon/rare = Red War skins, legendary, exotic; omitted = catalog legendary+exotic). Engram tiers decode through engramTables. A fresh weapon fills trait columns by tier: common 0, uncommon 1, rare and above all. Reduced pre-auto-dismantle pacing: minor 3%, major 10%, boss one 50% roll; standard strike completion retains one guaranteed weapon and its chest has one 50% bonus roll. Exodus Crash compensates its longer mandatory walking route with two guaranteed completion weapons and 80-120 chest Glimmer, versus the standard 40-60. This fixed completion bonus does not scale with elapsed time or distance. Tier weights and engram decoding remain unchanged. Minecraft-specific economy tuning, not source-game drop rates.",
+  "_doc": "Shared loot tables. Weapon filters match the catalog (w30/w40): exotic, slots (KINETIC/ENERGY/POWER), ammo (PRIMARY/SPECIAL/HEAVY), families, ids, exclude, rarity (W325: common/uncommon/rare = Red War skins, legendary, exotic; omitted = catalog legendary+exotic). Engram tiers decode through engramTables. A fresh weapon fills trait columns by tier: common 0, uncommon 1, rare and above all. Reduced pre-auto-dismantle pacing: minor 3%, major 10%, boss one 50% roll; standard strike completion retains one guaranteed weapon. Each strike chest gives one bonus reward: rare 20%, legendary 72% (48% engram + 24% weapon), exotic engram 8%; legendary-or-better is exactly 80% per opened chest. Exodus Crash compensates its longer mandatory walking route with two guaranteed completion weapons and 80-120 chest Glimmer, versus the standard 40-60. This fixed completion bonus does not scale with elapsed time or distance. Enemy drops, guaranteed completion rewards and engram decoding remain unchanged. Minecraft-specific economy tuning, not source-game drop rates.",
   "tables": {
     "strike_completion": {
       "rolls": 1,
@@ -28,7 +28,7 @@
       "rolls": 1,
       "entries": [
         {
-          "weight": 3,
+          "weight": 5,
           "weapon": {
             "rarity": [
               "rare"
@@ -36,21 +36,21 @@
           }
         },
         {
-          "weight": 6,
+          "weight": 12,
           "engram": "legendary"
         },
         {
-          "weight": 3,
+          "weight": 6,
           "weapon": {
             "exotic": false
           }
         },
         {
-          "weight": 1,
+          "weight": 2,
           "engram": "exotic"
         }
       ],
-      "chance": 0.5
+      "chance": 1.0
     },
     "enemy_minor": {
       "rolls": 1,

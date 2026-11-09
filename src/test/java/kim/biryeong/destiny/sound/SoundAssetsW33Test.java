@@ -83,9 +83,9 @@ class SoundAssetsW33Test {
                     for (int j = 0; j < Math.min(200, bytes.length - 16); j++)
                         if (bytes[j] == 1 && new String(bytes, j + 1, 6, StandardCharsets.US_ASCII).equals("vorbis")) { i = j; break; }
                     assertTrue(i >= 0, "Vorbis identification: " + name);
-                    boolean acquisition = java.util.Set.of("destiny:loot/acquire_basic", "destiny:loot/acquire_legendary",
-                            "destiny:loot/acquire_exotic").contains(name);
-                    assertEquals(acquisition ? 2 : 1, bytes[i + 11], "Source stereo UI acquisition / mono positional effects: " + name);
+                    boolean stereoUi = java.util.Set.of("destiny:loot/acquire_basic", "destiny:loot/acquire_legendary",
+                            "destiny:loot/acquire_exotic", "destiny:loot/chest_open").contains(name);
+                    assertEquals(stereoUi ? 2 : 1, bytes[i + 11], "Source stereo reward cues / mono positional effects: " + name);
                 }
             }
         }

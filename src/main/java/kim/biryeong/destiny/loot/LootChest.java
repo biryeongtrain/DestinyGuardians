@@ -209,10 +209,9 @@ public final class LootChest {
 
     private void burst() {
         var rewards = this.rewards.all();
-        int best = GOLD, bestTier = -1; boolean exotic = false;
+        int best = GOLD, bestTier = -1;
         for (int i = 0; i < rewards.size(); i++) {
             var r = rewards.get(i);
-            if (Loot.exotic(r)) exotic = true;
             if (Loot.rarity(r).ordinal() > bestTier) { bestTier = Loot.rarity(r).ordinal(); best = Loot.color(r); }
             double spread = rewards.size() == 1 ? 0 : (i / (rewards.size() - 1.0) - .5) * Math.toRadians(130);
             flights.add(new Flight(i, r, landing(spread, 2.2 + (i % 2) * .4)));
@@ -223,7 +222,6 @@ public final class LootChest {
         if (pieces == 0) creditGlimmer();
         level.sendParticles(owner, new DustParticleOptions(lighten(best), 1.2f), true, false, pos.x, pos.y + .8, pos.z, 22, .35, .35, .35, 0);
         level.sendParticles(owner, ParticleTypes.END_ROD, true, false, pos.x, pos.y + .7, pos.z, 16, .15, .25, .15, .12);
-        LootSounds.burst(owner, pos, exotic);
     }
 
     /** Ground point {@code radius} in front of the chest, {@code spread} radians off its facing; walls pull it in. */

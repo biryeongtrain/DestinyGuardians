@@ -62,6 +62,7 @@ final class ReviewedAudioW234 {
         // W300 A Guardian Rises campaign + W303 Guardian Down (scripts/campaign/campaign_audio_layer.py).
         merge(result, json("art/campaign/w300/sounds-fragment.json"));
         merge(result, json("art/audio/loot-acquisition/sounds-fragment.json"));
+        merge(result, json("art/audio/reward-chest/sounds-fragment.json"));
         // Direct reload channels reference the reviewed clips without changing audio bytes.
         for(String event : Set.copyOf(result.keySet())) {
             if(!(event.startsWith("weapon.reload_w63.") || event.startsWith("weapon.reload_w83.")
@@ -134,13 +135,17 @@ final class ReviewedAudioW234 {
             assertTrue(output.startsWith(RES), output);
             pin(result, output.substring(RES.length()), entry.get("outputSha256").getAsString(), entry.get("outputBytes").getAsLong());
         }
+        var chest = json("art/audio/reward-chest/manifest.json");
+        String chestOutput = chest.get("output").getAsString();
+        assertTrue(chestOutput.startsWith(RES), chestOutput);
+        pin(result, chestOutput.substring(RES.length()), chest.get("outputSha256").getAsString(), chest.get("outputBytes").getAsLong());
         return Map.copyOf(result);
     }
     /** Later reviewed Ghost/campaign/acquisition clips pinned after the W270 count. */
     static int pinnedAfterW270() throws Exception {
         return json("art/ghost/w282/audio-manifest.json").size()
                 + json("art/campaign/w300/audio-inventory.json").getAsJsonArray("pins").size()
-                + json("art/audio/loot-acquisition/manifest.json").getAsJsonArray("files").size();
+                + json("art/audio/loot-acquisition/manifest.json").getAsJsonArray("files").size() + 1;
     }
     static Set<String> laterSoundIds() throws Exception {
         var result = new HashSet<String>();
