@@ -102,6 +102,7 @@ public final class DestinyGuardians implements ModInitializer {
         if (FabricLoader.getInstance().isModLoaded("gcb-server")) {
             initGcb();
         }
+        kim.biryeong.destiny.compat.pack.UiFontPack.init();
         // Last pack hook: lossless output compression after every other converter.
         kim.biryeong.destiny.compat.pack.PackCompression.init();
         kim.biryeong.destiny.compat.pack.ActivityPacks.init();

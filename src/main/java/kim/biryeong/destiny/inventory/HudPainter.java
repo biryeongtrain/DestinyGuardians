@@ -32,9 +32,9 @@ import java.util.Set;
  */
 public final class HudPainter {
     public static final float MIN_TEXT_PIXELS = 18f;
-    /** Noto Sans KR (OFL) bitmap font already shipped for the objective HUD; no new font file. */
+    /** Source-derived outline font; its advances preserve the existing 20px objective bitmap layout. */
     private static final FontDescription.Resource FONT =
-            new FontDescription.Resource(Identifier.fromNamespaceAndPath("destiny", "rg_objective_medium"));
+            new FontDescription.Resource(Identifier.fromNamespaceAndPath("destiny", "ui_medium"));
     /** Display scale per reference pixel: Noto Hangul advance 19 units vs vanilla 9 at scale 5 (≈ same size). */
     private static final float FONT_SCALE = 2.2f;
     private static final java.util.Map<Integer, Integer> ADVANCES = loadAdvances();
