@@ -27,8 +27,8 @@ public final class ExodusCrash {
 
     public static final StrikeCoordinator COORDINATOR = new StrikeCoordinator() {
         private final Info info = new Info("exodus_crash", "엑소더스의 추락", "공격전 · 네소스",
-                "엑소더스 블랙의 추락 지점에 진입해 벡스와 구원의 가문 부관 파이키스를 처치하세요.", "fireteam/banner_devils_lair",
-                "fireteam/icon_devils_lair", ExodusPlan.MIN_PLAYERS, ExodusPlan.PLAYERS, 20);
+                "엑소더스 블랙의 추락 지점에 진입해 벡스와 구원의 가문 부관 파이키스를 처치하세요.", "fireteam/banner_exodus_crash",
+                "fireteam/icon_exodus_crash", ExodusPlan.MIN_PLAYERS, ExodusPlan.PLAYERS, 20);
         @Override public Info info() { return info; }
         @Override public String check(List<ServerPlayer> fireteam) { return HOST.check(fireteam); }
         @Override public String start(List<ServerPlayer> fireteam) { return HOST.start(fireteam); }

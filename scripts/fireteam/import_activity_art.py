@@ -28,18 +28,21 @@ paths = manifest["jsonWorldComponentContentPaths"]["en"]
 acts = json.load(open(fetch(BUNGIE + paths["DestinyActivityDefinition"], CACHE / "DestinyActivityDefinition.json")))
 modes = json.load(open(fetch(BUNGIE + paths["DestinyActivityModeDefinition"], CACHE / "DestinyActivityModeDefinition.json")))
 
-GUARDIAN_RISES, DEVILS_LAIR = "3906017155", "1917776943"
+GUARDIAN_RISES, DEVILS_LAIR, EXODUS_CRASH = "3906017155", "1917776943", "1236031537"
 STRIKES, STORY = "2394616003", "1686739444"
 assert acts[DEVILS_LAIR]["displayProperties"]["name"] == "The Devils' Lair"
 assert acts[GUARDIAN_RISES]["displayProperties"]["name"] == "A Guardian Rises"
+assert acts[EXODUS_CRASH]["displayProperties"]["name"] == "Exodus Crash"
 
 # key -> (url, size, source hash)
 wanted = {
     "banner_devils_lair": (acts[DEVILS_LAIR]["pgcrImage"], (640, 360), DEVILS_LAIR),
+    "banner_exodus_crash": (acts[EXODUS_CRASH]["pgcrImage"], (640, 360), EXODUS_CRASH),
     "banner_guardian_rises": (acts[GUARDIAN_RISES]["pgcrImage"], (640, 360), GUARDIAN_RISES),
     "banner_strikes": (modes[STRIKES]["pgcrImage"], (640, 360), STRIKES),
     "banner_story": (modes[STORY]["pgcrImage"], (640, 360), STORY),
     "icon_devils_lair": (acts[DEVILS_LAIR]["displayProperties"]["icon"], (96, 96), DEVILS_LAIR),
+    "icon_exodus_crash": (acts[EXODUS_CRASH]["displayProperties"]["icon"], (96, 96), EXODUS_CRASH),
     "mode_strikes": (modes[STRIKES]["displayProperties"]["icon"], (96, 96), STRIKES),
     "mode_story": (modes[STORY]["displayProperties"]["icon"], (96, 96), STORY),
 }
