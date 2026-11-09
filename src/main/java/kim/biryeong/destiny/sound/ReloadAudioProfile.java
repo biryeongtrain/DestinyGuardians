@@ -25,10 +25,10 @@ public final class ReloadAudioProfile {
                 var c=NamedReloadAudioW102.overlay(inherited);
                 var entry=WeaponCatalog.find(c.id).orElseThrow();var p=WeaponProfile.forEntry(entry);
                 if(p.mode()==WeaponProfile.Mode.MELEE || p.shellReload() || entry.family().equals("bow")
-                        || c.ticks<1 || c.ticks>1200 || c.event==null || !(NamedReloadAudioW102.isReplacement(c) || c.event.startsWith("weapon.reload_w63.") || WeaponExotics.ace(entry) && c.event.startsWith("weapon.reload_w83.") || WeaponExotics.izanagi(entry) && c.event.startsWith("weapon.reload_w84."))
+                        || c.ticks<1 || c.ticks>1200 || c.event==null || !(NamedReloadAudioW102.isReplacement(c) || c.event.startsWith("weapon.reload_w63.") || WeaponExotics.ace(entry) && c.event.startsWith("weapon.reload_w83.") || WeaponExotics.izanagi(entry) && c.event.startsWith("weapon.reload_w84.") || WeaponExotics.expanded(entry) && c.event.equals("weapon.reload_w350."+entry.id()+"_"+c.ticks))
                         || !DestinySounds.has(c.event) || !DestinySounds.weaponKey(entry,"reload").equals(c.sourceEvent)
                         || c.sourceSha256==null || !c.sourceSha256.matches("[a-f0-9]{64}")
-                        || c.asset==null || !(NamedReloadAudioW102.isReplacement(c) || c.asset.startsWith("assets/destiny/sounds/w63/reload/") || WeaponExotics.ace(entry) && c.asset.startsWith("assets/destiny/sounds/w83/reload/") || WeaponExotics.izanagi(entry) && c.asset.startsWith("assets/destiny/sounds/w84/reload/"))
+                        || c.asset==null || !(NamedReloadAudioW102.isReplacement(c) || c.asset.startsWith("assets/destiny/sounds/w63/reload/") || WeaponExotics.ace(entry) && c.asset.startsWith("assets/destiny/sounds/w83/reload/") || WeaponExotics.izanagi(entry) && c.asset.startsWith("assets/destiny/sounds/w84/reload/") || WeaponExotics.expanded(entry) && c.asset.equals("assets/destiny/sounds/w350/reload/"+entry.id()+"_"+c.ticks+".ogg"))
                         || !c.asset.endsWith(".ogg") || c.asset.contains("..")
                         || result.put(key(c.id,c.ticks),c)!=null)
                     throw new IllegalStateException("Invalid timed reload clip "+c);
@@ -57,6 +57,8 @@ public final class ReloadAudioProfile {
     public static Optional<Clip> find(WeaponCatalog.Entry entry,int ticks) {
         if (entry == null || WeaponCatalog.find(entry.id()).filter(entry::equals).isEmpty()) return Optional.empty();
         var clip = CLIPS.get(key(entry.id(), ticks));
+        if (clip == null && WeaponExotics.expanded(entry))
+            clip = CLIPS.get(key(entry.id(), WeaponProfile.forEntry(entry).firstReloadTicks()));
         if (clip == null && LegendaryWeapons.contains(entry.id())) {
             // Explicit source presentation reuse, not a claim of a newly time-stretched audio asset.
             var base = LegendaryWeapons.base(entry);

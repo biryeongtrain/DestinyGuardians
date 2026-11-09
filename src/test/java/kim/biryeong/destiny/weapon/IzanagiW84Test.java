@@ -20,8 +20,8 @@ class IzanagiW84Test {
 
     @Test void exactSecondExoticKeepsAllOriginalSixtyThreeAndAceCanonical() {
         WeaponCatalogTest.assertExpandedCatalog();
-        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).count());
-        assertEquals(Set.of("ace_of_spades", "izanagis_burden"), WeaponCatalog.all().stream()
+        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).count());
+        assertEquals(Set.of("ace_of_spades", "izanagis_burden"), WeaponCatalog.all().stream().filter(e -> !WeaponExotics.expanded(e))
                 .filter(e -> WeaponCharacteristics.of(e).exotic()).map(WeaponCatalog.Entry::id).collect(Collectors.toSet()));
         for (var e : WeaponCatalog.all()) assertEquals(e.equals(entry()), WeaponExotics.izanagi(e), e.id());
         assertTrue(WeaponExotics.ace(WeaponCatalog.find("ace_of_spades").orElseThrow()));

@@ -93,7 +93,8 @@ public final class ProfileArmAssets {
     private static JsonObject empty(){var n=new JsonObject();n.addProperty("type","minecraft:empty");return n;}
     static JsonObject gunOnly(JsonObject input) {
         String type=input.get("type").getAsString();
-        if(type.equals("minecraft:model")&&input.get("model").getAsString().startsWith("destiny:skin_arm_w204/"))return empty();
+        if(type.equals("minecraft:model")&&(input.get("model").getAsString().startsWith("destiny:skin_arm_w204/")
+                || ProfileArmGraph.armPose(input.get("model").getAsString())))return empty();
         var n=new JsonObject();
         // Copy opaque metadata once; model edges are rebuilt without copying their source subtrees.
         // Iterate in source order so serialized field order also stays unchanged.

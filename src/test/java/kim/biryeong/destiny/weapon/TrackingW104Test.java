@@ -150,9 +150,9 @@ class TrackingW104Test {
         assertEquals(expected,TrackingProfile.rolls());
         assertThrows(UnsupportedOperationException.class,()->TrackingProfile.rolls().clear());
         assertFalse(TrackingProfile.supportsIntrinsic(null));
-        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList())
+        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList())
             assertEquals(e.id().equals("pyroclastic_flow"),TrackingProfile.supportsIntrinsic(e),e.id());
-        assertEquals(4,WeaponCatalog.family("rocket_launcher").stream().filter(e -> !LegendaryWeapons.contains(e.id())).count());
+        assertEquals(4,WeaponCatalog.family("rocket_launcher").stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).count());
         assertTrue(TrackingProfile.rolls().stream().noneMatch(r->r.perkHash()==406461158L));
     }
 

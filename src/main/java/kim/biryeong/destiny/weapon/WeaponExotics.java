@@ -16,10 +16,15 @@ import java.util.List;
  */
 public final class WeaponExotics {
     private static final List<JsonObject> ROWS = load();
+    private static final java.util.Set<String> EXPANSION_IDS = ROWS.stream()
+            .filter(r -> r.has("stage") && "W350".equals(r.get("stage").getAsString()))
+            .map(r -> r.getAsJsonObject("catalog").get("id").getAsString())
+            .collect(java.util.stream.Collectors.toUnmodifiableSet());
     private WeaponExotics() {}
     private static List<JsonObject> load() {
         var rows = new ArrayList<JsonObject>();
-        for(String path:List.of("/destiny/weapons/w83-exotics.json","/destiny/weapons/w84-exotics.json")) {
+        for(String path:List.of("/destiny/weapons/w83-exotics.json","/destiny/weapons/w84-exotics.json",
+                "/destiny/weapons/w350-exotics.json")) {
             var in = WeaponExotics.class.getResourceAsStream(path);
             if (in == null) throw new IllegalStateException("Missing exotic definitions " + path);
             try (var reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
@@ -52,5 +57,28 @@ public final class WeaponExotics {
                 && WeaponCatalog.find(entry.id()).filter(entry::equals).isPresent()
                 && WeaponCharacteristics.of(entry).bungieHash() == 3211806999L
                 && WeaponCharacteristics.of(entry).exotic();
+    }
+    /** New exact identities, independent of the cosmetic-skin registry. */
+    public static java.util.Set<String> expansionIds() {
+        return EXPANSION_IDS;
+    }
+    public static boolean expanded(WeaponCatalog.Entry entry) {
+        return entry != null && expansionIds().contains(entry.id());
+    }
+    public static String displayName(WeaponCatalog.Entry entry) {
+        for (var row : ROWS) if (row.has("nameKo")
+                && row.getAsJsonObject("catalog").get("id").getAsString().equals(entry.id()))
+            return row.get("nameKo").getAsString();
+        return entry.name();
+    }
+    public static <T> List<T> appendExpansion(List<T> legacy, String field, Class<T> type) {
+        var result = new ArrayList<>(legacy); var gson = new Gson();
+        for (var row : ROWS) if (row.has("stage") && "W350".equals(row.get("stage").getAsString())) {
+            var value = row.get(field);
+            if (value == null) throw new IllegalStateException("Missing expansion field " + field);
+            if (value.isJsonArray()) for (var item : value.getAsJsonArray()) result.add(gson.fromJson(item, type));
+            else result.add(gson.fromJson(value, type));
+        }
+        return List.copyOf(result);
     }
 }

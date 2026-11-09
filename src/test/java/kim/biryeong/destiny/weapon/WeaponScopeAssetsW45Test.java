@@ -44,7 +44,7 @@ class WeaponScopeAssetsW45Test {
 
     @Test void legacyFiveAndIzanagiHaveScopeRoutes() throws Exception {
         assertFalse(WeaponScopes.supports(null));
-        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             assertEquals(IDS.contains(entry.id()) || entry.id().equals("izanagis_burden"), WeaponScopes.supports(entry), entry.id());
             if (WeaponScopes.supports(entry)) {
                 assertEquals("destiny:weapon_scope_w45/" + entry.id(), WeaponScopes.model(entry).toString());

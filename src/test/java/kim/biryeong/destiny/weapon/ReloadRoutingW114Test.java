@@ -66,9 +66,9 @@ class ReloadRoutingW114Test {
             Map.entry("claws_of_the_wolf", "weapon_reload_w214_claws_of_the_wolf/claws_of_the_wolf"),
             Map.entry("salvager_s_salvo", "weapon_reload_w220_salvager_s_salvo/salvager_s_salvo"));
     @Test void fiftyThreeRoutesIncludeBowNockingAndGlaive() {
-        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList().size());
         int count = 0;
-        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             assertEquals(EXPECTED.containsKey(entry.id()), WeaponReloadPresentation.supports(entry), entry.id());
             if (EXPECTED.containsKey(entry.id())) {
                 assertEquals(Identifier.fromNamespaceAndPath("destiny", EXPECTED.get(entry.id())), WeaponReloadPresentation.model(entry));

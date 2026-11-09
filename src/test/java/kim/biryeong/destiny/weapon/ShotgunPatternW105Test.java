@@ -144,9 +144,9 @@ class ShotgunPatternW105Test {
 
     @Test
     void onlyExactFiveCatalogShotgunsParticipateAndLegacyBodyBudgetsSurviveTwelvePellets() {
-        assertEquals(SHAPES.keySet(), WeaponCatalog.family("shotgun").stream().filter(e -> !LegendaryWeapons.contains(e.id()))
+        assertEquals(SHAPES.keySet(), WeaponCatalog.family("shotgun").stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e))
                 .map(WeaponCatalog.Entry::id).collect(java.util.stream.Collectors.toSet()));
-        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             var actual = ShotgunPatternProfile.shape(entry);
             var profile = WeaponProfile.forEntry(entry);
             if (SHAPES.containsKey(entry.id())) {

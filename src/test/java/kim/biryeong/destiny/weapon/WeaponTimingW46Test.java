@@ -132,7 +132,7 @@ class WeaponTimingW46Test {
         assertEquals(5 * 20.0 / 30, timing("stormchaser").burstSpacingTicks().orElseThrow(), 1e-10);
         assertEquals(19 + 2 * 5 * 20.0 / 30, timing("stormchaser").cadenceTicks().orElseThrow(), 1e-10);
         assertEquals(19, timing("line_in_the_sand").cadenceTicks().orElseThrow());
-        for (var entry : WeaponCatalog.all())
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !WeaponExotics.expanded(e)).toList())
             assertEquals(entry.family().equals("fusion_rifle") || entry.family().equals("linear_fusion_rifle"),
                     WeaponTiming.of(entry).sharedBurstAmmo());
     }

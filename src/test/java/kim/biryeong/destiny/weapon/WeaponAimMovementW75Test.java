@@ -18,19 +18,19 @@ class WeaponAimMovementW75Test {
 
     @Test
     void exactly57NormalW44WeaponsHaveMovementProfiles() {
-        var supported = WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).filter(WeaponAimProfile::supports).toList();
+        var supported = WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).filter(WeaponAimProfile::supports).toList();
         assertEquals(57, WeaponCatalogTest.originalW30Entries().stream().filter(WeaponAimProfile::supports).count());
         assertEquals(59, supported.size());
         var legacyIds = new java.util.HashSet<>(WeaponCatalogTest.originalW30Entries().stream().map(WeaponCatalog.Entry::id).toList());
         legacyIds.add("ace_of_spades"); legacyIds.add("izanagis_burden");
-        assertEquals(legacyIds,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()))
+        assertEquals(legacyIds,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e))
                 .map(WeaponCatalog.Entry::id).collect(Collectors.toSet()));
         for (var e : supported) assertDoesNotThrow(() -> WeaponAimMovementProfile.scalar(e), e.id());
     }
 
     @Test
     void allSixPinnedSidearmsUseTheFifteenPercentPenalty() {
-        assertEquals(SIDEARMS, WeaponCatalog.family("sidearm").stream().filter(e -> !LegendaryWeapons.contains(e.id()))
+        assertEquals(SIDEARMS, WeaponCatalog.family("sidearm").stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e))
                 .map(WeaponCatalog.Entry::id).collect(Collectors.toSet()));
         for (String id : SIDEARMS) assertEquals(.85, WeaponAimMovementProfile.scalar(entry(id)), EPS, id);
     }
@@ -46,7 +46,7 @@ class WeaponAimMovementW75Test {
 
     @Test
     void remaining50SupportedWeaponsUseTheOrdinaryQuarterPenalty() {
-        var ordinary = WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).filter(WeaponAimProfile::supports)
+        var ordinary = WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).filter(WeaponAimProfile::supports)
                 .filter(e -> !SIDEARMS.contains(e.id()) && !e.id().equals(PRECISION_HC)).toList();
         assertEquals(50, WeaponCatalogTest.originalW30Entries().stream().filter(WeaponAimProfile::supports)
                 .filter(e -> !SIDEARMS.contains(e.id()) && !e.id().equals(PRECISION_HC)).count());

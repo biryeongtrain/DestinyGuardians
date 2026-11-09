@@ -76,6 +76,11 @@ final class ReviewedAudioW234 {
                 result.add(event+".direct_"+channel,alias);
             }
         }
+        // W350 is a distinct, individually manifested single-variant source layer.
+        var w350=json("art/weapons/w350/audio/sounds-json-snippet.json");
+        assertEquals(333,w350.size(),"36 actions, 9 timed reloads and 288 direct channels");
+        for(var event:w350.keySet())assertFalse(result.has(event),"W350 must not overwrite a historical event: "+event);
+        merge(result,w350);
         return result;
     }
     /** Validate the complete current index, then expose the historical layer to its old assertions. */
@@ -139,13 +144,30 @@ final class ReviewedAudioW234 {
         String chestOutput = chest.get("output").getAsString();
         assertTrue(chestOutput.startsWith(RES), chestOutput);
         pin(result, chestOutput.substring(RES.length()), chest.get("outputSha256").getAsString(), chest.get("outputBytes").getAsLong());
+        for(var entry:w350Pins().entrySet())
+            pin(result,entry.getKey(),entry.getValue().sha256(),entry.getValue().bytes());
+        return Map.copyOf(result);
+    }
+    /** Exact output files; shared source actions may legitimately name one identical packed clip. */
+    private static Map<String,Pin> w350Pins() throws Exception {
+        var result=new TreeMap<String,Pin>();var manifest=json("art/weapons/w350/audio/manifest.json");
+        for(String field:new String[]{"records","timedReloads"})for(var value:manifest.getAsJsonArray(field)) {
+            var row=value.getAsJsonObject();String path=row.get("assetPath").getAsString();
+            assertTrue(path.startsWith(RES),path);
+            String asset=path.substring(RES.length());
+            var valuePin=new Pin(row.get("outputSha256").getAsString(),row.get("outputBytes").getAsLong());
+            assetId(asset);var previous=result.putIfAbsent(asset,valuePin);
+            if(previous!=null)assertEquals(previous,valuePin,"Shared W350 action must retain identical bytes: "+path);
+        }
+        assertEquals(34,result.size(),"Finite W350 source layer, with aliases deduplicated");
+        assertEquals(880413,result.values().stream().mapToLong(Pin::bytes).sum(),"Exact compressed W350 audio budget");
         return Map.copyOf(result);
     }
     /** Later reviewed Ghost/campaign/acquisition clips pinned after the W270 count. */
     static int pinnedAfterW270() throws Exception {
         return json("art/ghost/w282/audio-manifest.json").size()
                 + json("art/campaign/w300/audio-inventory.json").getAsJsonArray("pins").size()
-                + json("art/audio/loot-acquisition/manifest.json").getAsJsonArray("files").size() + 1;
+                + json("art/audio/loot-acquisition/manifest.json").getAsJsonArray("files").size() + 1 + w350Pins().size();
     }
     static Set<String> laterSoundIds() throws Exception {
         var result = new HashSet<String>();

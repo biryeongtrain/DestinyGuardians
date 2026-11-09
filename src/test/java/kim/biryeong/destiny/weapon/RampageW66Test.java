@@ -229,7 +229,7 @@ class RampageW66Test {
         assertEquals(21, rolls.size());
         assertEquals(21, rolls.stream().map(WeaponPerks.Roll::id).distinct().count());
         assertEquals(EXPECTED, new HashSet<>(rolls));
-        assertEquals(65,WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).count());
+        assertEquals(65,WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).count());
         for (var roll : rolls) {
             var entry = WeaponCatalog.find(roll.id()).orElseThrow();
             var meta = WeaponCharacteristics.of(entry);

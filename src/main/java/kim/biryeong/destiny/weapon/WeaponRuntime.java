@@ -122,13 +122,13 @@ public final class WeaponRuntime {
         }
     }
     /** Snapshot once per paid emission/contact; the third target does not buff that same emission. */
-    private record DamageTraits(WeaponOneForAll.Token oneForAll, WeaponSurrounded.Token surrounded, WeaponSwashbuckler.Token swashbuckler, WeaponMultikillClip.Token multikillClip, WeaponSubsistence.Token subsistence, WeaponRapidHit.Token rapidHit, WeaponFrenzy.Token frenzy, WeaponAdrenalineJunkie.Token adrenalineJunkie, WeaponFocusedFury.Token focusedFury, WeaponStatsForAll.Token statsForAll, WeaponHeatingUp.Token heatingUp, WeaponVorpal.Token vorpal, WeaponHighImpactReserves.Token highImpact, WeaponZenMoment.Token zenMoment, WeaponEnergyPerks.Token energy, WeaponPugilist.Token pugilist, WeaponFiringLine.Token firingLine, WeaponEncore.Token encore, WeaponAmbitiousAssassin.Token assassin, WeaponAdagio.Token adagio, WeaponKillingTally.Token tally, WeaponSympatheticArsenal.PaidToken arsenal, WeaponRelentlessStrikes.Token relentless, WeaponTirelessBlade.Token tireless, WeaponWhirlwindBlade.Token whirlwind, WeaponEnGarde.Token enGarde, WeaponAssassinsBlade.Token assassins, WeaponUnrelenting.Token unrelenting, WeaponShotTraits.Snapshot shotTraits, PerkBatchD.Token batchD, PerkBatchB.Token batchB /* W321 batch B */, PerkBatchA.Token batchA, PerkBatchC.Token batchC /* W322 batch C */) {
-        static final DamageTraits NONE = new DamageTraits(WeaponOneForAll.Token.NONE, WeaponSurrounded.Token.NONE, WeaponSwashbuckler.Token.NONE, WeaponMultikillClip.Token.NONE, WeaponSubsistence.Token.NONE, WeaponRapidHit.Token.NONE, WeaponFrenzy.Token.NONE, WeaponAdrenalineJunkie.Token.NONE, WeaponFocusedFury.Token.NONE, WeaponStatsForAll.Token.NONE, WeaponHeatingUp.Token.NONE, WeaponVorpal.Token.NONE, WeaponHighImpactReserves.Token.NONE, WeaponZenMoment.Token.NONE, WeaponEnergyPerks.Token.NONE, WeaponPugilist.Token.NONE, WeaponFiringLine.Token.NONE, WeaponEncore.Token.NONE, WeaponAmbitiousAssassin.Token.NONE, WeaponAdagio.Token.NONE, WeaponKillingTally.Token.NONE, WeaponSympatheticArsenal.PaidToken.NONE, WeaponRelentlessStrikes.Token.NONE, WeaponTirelessBlade.Token.NONE,WeaponWhirlwindBlade.Token.NONE,WeaponEnGarde.Token.NONE,WeaponAssassinsBlade.Token.NONE,WeaponUnrelenting.Token.NONE,WeaponShotTraits.NONE,PerkBatchD.Token.NONE,PerkBatchB.Token.NONE,PerkBatchA.Token.NONE,PerkBatchC.Token.NONE);
+    private record DamageTraits(WeaponOneForAll.Token oneForAll, WeaponSurrounded.Token surrounded, WeaponSwashbuckler.Token swashbuckler, WeaponMultikillClip.Token multikillClip, WeaponSubsistence.Token subsistence, WeaponRapidHit.Token rapidHit, WeaponFrenzy.Token frenzy, WeaponAdrenalineJunkie.Token adrenalineJunkie, WeaponFocusedFury.Token focusedFury, WeaponStatsForAll.Token statsForAll, WeaponHeatingUp.Token heatingUp, WeaponVorpal.Token vorpal, WeaponHighImpactReserves.Token highImpact, WeaponZenMoment.Token zenMoment, WeaponEnergyPerks.Token energy, WeaponPugilist.Token pugilist, WeaponFiringLine.Token firingLine, WeaponEncore.Token encore, WeaponAmbitiousAssassin.Token assassin, WeaponAdagio.Token adagio, WeaponKillingTally.Token tally, WeaponSympatheticArsenal.PaidToken arsenal, WeaponRelentlessStrikes.Token relentless, WeaponTirelessBlade.Token tireless, WeaponWhirlwindBlade.Token whirlwind, WeaponEnGarde.Token enGarde, WeaponAssassinsBlade.Token assassins, WeaponUnrelenting.Token unrelenting, WeaponShotTraits.Snapshot shotTraits, PerkBatchD.Token batchD, PerkBatchB.Token batchB /* W321 batch B */, PerkBatchA.Token batchA, PerkBatchC.Token batchC /* W322 batch C */, ExoticWeaponsW350.Token exotic) {
+        static final DamageTraits NONE = new DamageTraits(WeaponOneForAll.Token.NONE, WeaponSurrounded.Token.NONE, WeaponSwashbuckler.Token.NONE, WeaponMultikillClip.Token.NONE, WeaponSubsistence.Token.NONE, WeaponRapidHit.Token.NONE, WeaponFrenzy.Token.NONE, WeaponAdrenalineJunkie.Token.NONE, WeaponFocusedFury.Token.NONE, WeaponStatsForAll.Token.NONE, WeaponHeatingUp.Token.NONE, WeaponVorpal.Token.NONE, WeaponHighImpactReserves.Token.NONE, WeaponZenMoment.Token.NONE, WeaponEnergyPerks.Token.NONE, WeaponPugilist.Token.NONE, WeaponFiringLine.Token.NONE, WeaponEncore.Token.NONE, WeaponAmbitiousAssassin.Token.NONE, WeaponAdagio.Token.NONE, WeaponKillingTally.Token.NONE, WeaponSympatheticArsenal.PaidToken.NONE, WeaponRelentlessStrikes.Token.NONE, WeaponTirelessBlade.Token.NONE,WeaponWhirlwindBlade.Token.NONE,WeaponEnGarde.Token.NONE,WeaponAssassinsBlade.Token.NONE,WeaponUnrelenting.Token.NONE,WeaponShotTraits.NONE,PerkBatchD.Token.NONE,PerkBatchB.Token.NONE,PerkBatchA.Token.NONE,PerkBatchC.Token.NONE,ExoticWeaponsW350.Token.NONE);
         static DamageTraits capture(ServerPlayer p) { return capture(p,WeaponHighImpactReserves.Token.NONE); }
         static DamageTraits capture(ServerPlayer p, WeaponHighImpactReserves.Token highImpact) { return capture(p,highImpact,WeaponShotTraits.NONE); }
-        static DamageTraits capture(ServerPlayer p, WeaponHighImpactReserves.Token highImpact, WeaponShotTraits.Snapshot shotTraits) { return new DamageTraits(WeaponOneForAll.capture(p),WeaponSurrounded.capture(p),WeaponSwashbuckler.capture(p),WeaponMultikillClip.capture(p),WeaponSubsistence.capture(p),WeaponRapidHit.capture(p),WeaponFrenzy.capture(p),WeaponAdrenalineJunkie.capture(p),WeaponFocusedFury.capture(p),WeaponStatsForAll.capture(p), WeaponHeatingUp.capture(p), WeaponVorpal.capture(p),highImpact,WeaponZenMoment.capture(p),WeaponEnergyPerks.capture(p),WeaponPugilist.capture(p),WeaponFiringLine.capture(p),WeaponEncore.capture(p),WeaponAmbitiousAssassin.capture(p),WeaponAdagio.capture(p), WeaponKillingTally.capture(p), WeaponSympatheticArsenal.capture(p), WeaponRelentlessStrikes.capture(p), WeaponTirelessBlade.capture(p),WeaponWhirlwindBlade.capture(p),WeaponEnGarde.capture(p),WeaponAssassinsBlade.capture(p),WeaponUnrelenting.capture(p),shotTraits,PerkBatchD.capture(p),PerkBatchB.capture(p),PerkBatchA.capture(p),PerkBatchC.capture(p)); }
-        DamageTraits perkSplash() { return new DamageTraits(oneForAll,surrounded,swashbuckler,multikillClip,subsistence,rapidHit,frenzy,adrenalineJunkie,WeaponFocusedFury.Token.NONE,statsForAll,heatingUp,vorpal,WeaponHighImpactReserves.Token.NONE,WeaponZenMoment.Token.NONE,energy,pugilist,WeaponFiringLine.Token.NONE,encore,assassin,adagio,tally,arsenal,relentless,tireless,whirlwind,enGarde,assassins,unrelenting,WeaponShotTraits.damageOnly(shotTraits),batchD,batchB.splash(),batchA,batchC); }
-        float multiplier(ServerPlayer owner, LivingEntity target) { return shotTraits.combat().multiplier()*PerkBatchD.multiplier(owner,batchD)*WeaponWhirlwindBlade.multiplier(owner,whirlwind)*WeaponEnGarde.multiplier(owner,enGarde)*WeaponAssassinsBlade.multiplier(owner,assassins)*WeaponKillingTally.multiplier(owner,tally,target)*WeaponAdagio.multiplier(owner,adagio)* highImpact.multiplier()*vorpal.multiplier(target)*oneForAll.multiplier()*surrounded.multiplier()*swashbuckler.multiplier()*multikillClip.multiplier()*frenzy.multiplier()*adrenalineJunkie.multiplier()*focusedFury.multiplier()*PerkBatchB.multiplier(owner,batchB,target)*PerkBatchA.multiplier(owner,batchA); }
+        static DamageTraits capture(ServerPlayer p, WeaponHighImpactReserves.Token highImpact, WeaponShotTraits.Snapshot shotTraits) { return new DamageTraits(WeaponOneForAll.capture(p),WeaponSurrounded.capture(p),WeaponSwashbuckler.capture(p),WeaponMultikillClip.capture(p),WeaponSubsistence.capture(p),WeaponRapidHit.capture(p),WeaponFrenzy.capture(p),WeaponAdrenalineJunkie.capture(p),WeaponFocusedFury.capture(p),WeaponStatsForAll.capture(p), WeaponHeatingUp.capture(p), WeaponVorpal.capture(p),highImpact,WeaponZenMoment.capture(p),WeaponEnergyPerks.capture(p),WeaponPugilist.capture(p),WeaponFiringLine.capture(p),WeaponEncore.capture(p),WeaponAmbitiousAssassin.capture(p),WeaponAdagio.capture(p), WeaponKillingTally.capture(p), WeaponSympatheticArsenal.capture(p), WeaponRelentlessStrikes.capture(p), WeaponTirelessBlade.capture(p),WeaponWhirlwindBlade.capture(p),WeaponEnGarde.capture(p),WeaponAssassinsBlade.capture(p),WeaponUnrelenting.capture(p),shotTraits,PerkBatchD.capture(p),PerkBatchB.capture(p),PerkBatchA.capture(p),PerkBatchC.capture(p),ExoticWeaponsW350.capture(p)); }
+        DamageTraits perkSplash() { return new DamageTraits(oneForAll,surrounded,swashbuckler,multikillClip,subsistence,rapidHit,frenzy,adrenalineJunkie,WeaponFocusedFury.Token.NONE,statsForAll,heatingUp,vorpal,WeaponHighImpactReserves.Token.NONE,WeaponZenMoment.Token.NONE,energy,pugilist,WeaponFiringLine.Token.NONE,encore,assassin,adagio,tally,arsenal,relentless,tireless,whirlwind,enGarde,assassins,unrelenting,WeaponShotTraits.damageOnly(shotTraits),batchD,batchB.splash(),batchA,batchC,exotic.splash()); }
+        float multiplier(ServerPlayer owner, LivingEntity target) { return ExoticWeaponsW350.directMultiplier(exotic,target)*shotTraits.combat().multiplier()*PerkBatchD.multiplier(owner,batchD)*WeaponWhirlwindBlade.multiplier(owner,whirlwind)*WeaponEnGarde.multiplier(owner,enGarde)*WeaponAssassinsBlade.multiplier(owner,assassins)*WeaponKillingTally.multiplier(owner,tally,target)*WeaponAdagio.multiplier(owner,adagio)* highImpact.multiplier()*vorpal.multiplier(target)*oneForAll.multiplier()*surrounded.multiplier()*swashbuckler.multiplier()*multikillClip.multiplier()*frenzy.multiplier()*adrenalineJunkie.multiplier()*focusedFury.multiplier()*PerkBatchB.multiplier(owner,batchB,target)*PerkBatchA.multiplier(owner,batchA); }
     }
     private static final class Shot {
         final ServerPlayer owner;
@@ -147,6 +147,7 @@ public final class WeaponRuntime {
         final WeaponDragonfly.Token dragonfly;
         final WeaponDemolitionist.Token demolitionist;
         final WeaponTracking.Flight tracking;
+        final LivingEntity exoticTracking;
         final WaveFrameProfile.Profile waveProfile;
         final BreachGrenade breach;
         final long launchedAt;
@@ -178,6 +179,7 @@ public final class WeaponRuntime {
             this.dragonfly=WeaponDragonfly.capture(owner);
             this.demolitionist=WeaponDemolitionist.capture(owner);
             this.tracking=entry.family().equals("rocket_launcher")?WeaponTracking.capture(owner):null;
+            this.exoticTracking=ExoticWeaponsW350.launchTarget(owner,entry);
             this.waveProfile=WaveFrameProfile.of(entry).orElse(null);
             this.breach=BreachGrenade.supports(entry)?new BreachGrenade():null;
             this.launchedAt=now(owner);
@@ -542,6 +544,7 @@ public final class WeaponRuntime {
         if (slot < 0 || slot >= 9) return;
         WeaponKillClip.selecting(player,slot);
         WeaponAce.selecting(player,slot);
+        if(slot!=player.getInventory().getSelectedSlot())ExoticWeaponsW350.stowing(player,player.getMainHandItem());
         WeaponOutlaw.selecting(player,slot);
         WeaponArcherTempo.selecting(player,slot);
         WeaponHolster.selecting(player,slot);
@@ -574,6 +577,7 @@ public final class WeaponRuntime {
         WeaponSurrounded.stowing(player,previous); WeaponThreatDetector.stowing(player,previous);
         WeaponFocusedFury.stowing(player,previous);
         expansionStowing(player,previous);
+        ExoticWeaponsW350.stowing(player,previous);
         WeaponTapTheTrigger.changed(player,previous); WeaponZenMoment.changed(player,previous);
         WeaponSwashbuckler.stowing(player,previous);
         WeaponMultikillClip.stowing(player,previous);
@@ -656,6 +660,7 @@ public final class WeaponRuntime {
         int looseChange=PerkExpansionSupport.reloadBonus(player,s.stack);
         plan=new WeaponReloadPolicy.Plan(WeaponStatCurves.reloadTicks(entry.id(),plan.firstTicks(),looseChange,1),
                 WeaponStatCurves.reloadTicks(entry.id(),plan.intervalTicks(),looseChange,1),plan.roundsPerInsert());
+        plan=ExoticWeaponsW350.reloadPlan(player,entry,plan);
         plan=PerkExpansionCombat.reloadPlan(player,s.stack,plan);
         p=PerkExpansionCombat.reloadProfile(p,plan);
         if (!s.cycle.startReload(now(player), p, ammo, plan, ReloadCreditProfile.ammoTicks(entry,plan))) return false;
@@ -850,7 +855,7 @@ public final class WeaponRuntime {
         if(ammo.rounds()==0&&p.mode()!=WeaponProfile.Mode.MELEE)s.emptyReloadPending=true;
         if(entry.family().equals("glaive"))s.glaive.shot(now(player));
         emit(player, entry, p, true,0,s.paidHighImpact,null,shotTraits);
-        WeaponAiming.shot(player,entry,WeaponShotTraits.stability(player,shotTraits),WeaponShotTraits.growth(player,shotTraits));
+        WeaponAiming.shot(player,entry,WeaponShotTraits.stability(player,shotTraits),WeaponShotTraits.growth(player,shotTraits),!entry.id().equals("graviton_lance"));
         PerkBatchA.paidEmission(player,entry); // W320 batch A
         return true;
     }
@@ -889,6 +894,7 @@ public final class WeaponRuntime {
         if (playFire && kim.biryeong.destiny.sound.ShotgunReloadAudio.handles(entry))
             kim.biryeong.destiny.sound.ReloadAudio.stop(player);
         if (playFire) DestinySounds.weapon(player, entry, honed>=2?"honed_fire":"fire");
+        if(entry.id().equals("tractor_cannon")&&ExoticWeaponsW350.pulse(ExoticWeaponsW350.capture(player),p))return;
         if (p.mode() == WeaponProfile.Mode.PROJECTILE) {
             var shot=new Shot(player,entry,p,highImpact,acceptedTraits,shotTraits);
             SHOTS.add(shot);
@@ -961,24 +967,41 @@ public final class WeaponRuntime {
                         .stream().min(Comparator.comparingDouble(e->e.position().distanceToSqr(from)));
                 if(contact.isPresent())hit=new EntityHitResult(contact.get(),from);
             }
-            if (hit instanceof EntityHitResult entity && entity.getEntity() instanceof LivingEntity target) {
-                var targetBallistics = CrucibleDamage.ballistics(entry, target, ballistics);
-                float targetBase = p.mode() == WeaponProfile.Mode.MELEE ? CrucibleDamage.melee(entry,target,p.damage())
-                        : CrucibleDamage.base(entry, target, p.damage());
-                boolean precision = p.mode() != WeaponProfile.Mode.MELEE
-                        && WeaponPrecision.critical(target, from, hit.getLocation(), targetBallistics.precision(),
-                                instant != null && instant.body() != null ? instant.body() : target.getBoundingBox());
-                float amount = p.mode() == WeaponProfile.Mode.MELEE ? targetBase
-                        : targetBallistics.damage(targetBase, from.distanceTo(hit.getLocation()), precision);
-                if(payload.active())amount=PayloadProfile.impact(targetBase,targetBallistics.precision(),precision,
-                        ballistics.falloff(from.distanceTo(hit.getLocation())));
-                if(timedFraction>0&&targetBase>0) {
-                    float moved=PerkBatchBMath.payloadMoved(amount,precision,targetBallistics.precision(),timedFraction);
-                    amount-=moved; timedPayloads.merge(target,moved/targetBase,Float::sum);
+            var rayContacts=new ArrayList<WeaponHitscan.Contact>();
+            rayContacts.add(instant!=null?instant:new WeaponHitscan.Contact(hit,null));
+            if(entry.id().equals("thorn")&&instant!=null) {
+                var pierced=Collections.newSetFromMap(new IdentityHashMap<Entity,Boolean>());
+                for(int pierce=0;pierce<31; pierce++) {
+                    var last=rayContacts.getLast().hit();
+                    if(!(last instanceof EntityHitResult entity))break;
+                    pierced.add(entity.getEntity());
+                    var more=WeaponHitscan.trace(player,from,to,.03f,candidate->enemy(player,candidate)&&!pierced.contains(candidate));
+                    if(!(more.hit() instanceof EntityHitResult))break;
+                    rayContacts.add(more);
                 }
-                damage.computeIfAbsent(target, ignored -> new HitDamage()).add(amount, precision, hit.getLocation());
             }
-            if(payload.active()) { payloadHit=hit; payloadBody=instant==null?null:instant.body(); }
+            for(var contactInstant:rayContacts) {
+                var contactHit=contactInstant.hit();
+                if (contactHit instanceof EntityHitResult entity && entity.getEntity() instanceof LivingEntity target) {
+                    var targetBallistics = ExoticWeaponsW350.ballistics(entry,boltIndex,CrucibleDamage.ballistics(entry, target, ballistics));
+                    float targetBase = p.mode() == WeaponProfile.Mode.MELEE ? CrucibleDamage.melee(entry,target,p.damage())
+                            : CrucibleDamage.base(entry, target, p.damage());
+                    boolean precision = p.mode() != WeaponProfile.Mode.MELEE
+                            && WeaponPrecision.critical(target, from, contactHit.getLocation(), targetBallistics.precision(),
+                                    contactInstant.body()!=null ? contactInstant.body() : target.getBoundingBox());
+                    float amount = p.mode() == WeaponProfile.Mode.MELEE ? targetBase
+                            : targetBallistics.damage(targetBase, from.distanceTo(contactHit.getLocation()), precision);
+                    if(payload.active())amount=PayloadProfile.impact(targetBase,targetBallistics.precision(),precision,
+                            ballistics.falloff(from.distanceTo(contactHit.getLocation())));
+                    if(timedFraction>0&&targetBase>0) {
+                        float moved=PerkBatchBMath.payloadMoved(amount,precision,targetBallistics.precision(),timedFraction);
+                        amount-=moved; timedPayloads.merge(target,moved/targetBase,Float::sum);
+                    }
+                    amount*=ExoticWeaponsW350.bulletScale(entry,boltIndex);
+                    damage.computeIfAbsent(target, ignored -> new HitDamage()).add(amount, precision, contactHit.getLocation());
+                }
+            }
+            if(payload.active()||entry.id().equals("sunshot")) { payloadHit=hit; payloadBody=instant==null?null:instant.body(); }
             if (impactPosition == null && hit.getType() != HitResult.Type.MISS) impactPosition = hit.getLocation();
             if (p.mode() == WeaponProfile.Mode.HITSCAN) batchCSegments.add(new Vec3[]{from, hit.getLocation()});
             if (i == 0) Fx.line(player.level(), from, hit.getLocation(), ace.empowered()?0xFFC773:shotTraits.damage().color(), 1.0, 0.5f);
@@ -1022,6 +1045,8 @@ public final class WeaponRuntime {
             apply(player,contact.target(),CrucibleDamage.payload(entry, contact.target(), p.damage())*contact.fraction(),false,contact.point(),
                     attribution,perks,WeaponOutlaw.Token.NONE,rampage,WeaponPrecisionReturn.Token.NONE,demolitionist,feedingFrenzy,damageTraits.perkSplash());
         }
+        ExoticWeaponsW350.resolved(damageTraits.exotic(),!damage.isEmpty());
+        ExoticWeaponsW350.sunburn(damageTraits.exotic(),payloadHit!=null?payloadHit:(impactPosition==null?null:BlockHitResult.miss(impactPosition,net.minecraft.core.Direction.UP,BlockPos.containing(impactPosition))));
         WeaponShotTraits.resolved(player,damageTraits.shotTraits());
         if (impactPosition != null) DestinySounds.at(player.level(), impactPosition, DestinySounds.weaponKey(entry, "impact"), .8f);
     }
@@ -1048,6 +1073,7 @@ public final class WeaponRuntime {
     /** W321 batch B rocket detonation: Lasting Impression scale/radius and Cluster Bomb submunitions. */
     private static void detonateRocket(Shot shot, Vec3 center, Entity direct, PerkBatchB.Rocket rocket) {
         var p=shot.profile;
+        ExoticWeaponsW350.rocketDetonated(shot.damageTraits.exotic(),center);
         blast(shot,center,direct,p.blastRadius()*rocket.radiusScale(),rocket.damageScale(),shot.damageTraits,false);
         PerkBatchC.blast(shot.owner, shot.damageTraits.batchC(), center, p.blastRadius()*rocket.radiusScale()); // W322 batch C
         if(rocket.clusterBombs()<=0)return;
@@ -1118,6 +1144,7 @@ public final class WeaponRuntime {
         target = Combat.damageOwner(contact);
         float effectivePrecision=WeaponPrecisionDamage.boost(WeaponShotTraits.precisionDamage(owner,damageTraits.shotTraits(),hits.precision,target),damageTraits.firingLine().precisionMultiplier())*WeaponShotTraits.precision(owner,damageTraits.shotTraits());
         float effectiveBody = WeaponShotTraits.bodyDamage(damageTraits.shotTraits(), hits.body);
+        var exoticShield=kim.biryeong.destiny.combat.CombatantShields.snapshot(target);
         var batchC = PerkBatchC.before(owner, damageTraits.batchC(), target, hits.pellets); // W322 batch C
         float requested = (effectiveBody + effectivePrecision) * perks.multiplier() * rampage.multiplier() * damageTraits.multiplier(owner,target) * batchC.multiplier();
         if (!Float.isFinite(requested) || requested <= 0) return 0;
@@ -1133,6 +1160,7 @@ public final class WeaponRuntime {
         // One cue per observed damage transaction, after immunity/absorption checks.
         kim.biryeong.destiny.hud.WeaponHitHud.confirm(owner, actual, killed);
         WeaponShotTraits.confirmed(owner,damageTraits.shotTraits(),target,hits.precision>0,actual,killed,voidDebuffed);
+        ExoticWeaponsW350.confirmed(owner,damageTraits.exotic(),target,hits.precision>0,actual,killed,exoticShield);
         WeaponPrecisionReturn.confirmed(owner, precisionReturn, hits.precision > 0);
         WeaponFocusedFury.confirmed(owner,damageTraits.focusedFury(),hits.precision>0,actual);
         WeaponOneForAll.confirmed(owner, damageTraits.oneForAll(), target);
@@ -1244,6 +1272,7 @@ public final class WeaponRuntime {
         kim.biryeong.destiny.combat.TemporaryVoidOvershield.tick(player);
     }
     static void expansionStowing(ServerPlayer player,ItemStack stack) {
+        ExoticWeaponsW350.stowing(player,stack);
         PerkExpansionStats.stowing(player,stack); PerkExpansionCombat.stowing(player,stack); PerkExpansionSupport.stowing(player,stack);
     }
     private static WeaponProfile expansionCharge(ServerPlayer player,WeaponCatalog.Entry entry,WeaponProfile base) {
@@ -1254,6 +1283,7 @@ public final class WeaponRuntime {
                 base.shellReload(),base.firstReloadTicks(),base.roundsPerInsert());
     }
     public static void tick(MinecraftServer server) {
+        ExoticWeaponsW350.tick(server);
         PerkBatchC.tick(server); // W322 batch C
         for(var player:server.getPlayerList().getPlayers()) {
             WeaponKillClip.update(player);
@@ -1532,6 +1562,7 @@ public final class WeaponRuntime {
             return shot.wave.alive();
         }
         if(shot.tracking!=null)shot.velocity=shot.tracking.steer(shot.position,shot.velocity);
+        if(shot.exoticTracking!=null)shot.velocity=ExoticWeaponsW350.steer(owner,shot.exoticTracking,shot.position,shot.velocity);
         Vec3 expected = shot.position.add(shot.velocity.normalize().scale(Math.min(shot.velocity.length(), shot.remaining)));
         Vec3 next = loadedEnd(shot.level, shot.position, expected);
         if (next.distanceToSqr(expected) > 1.0e-6) return false;
@@ -1613,6 +1644,8 @@ public final class WeaponRuntime {
     }
     private static void impactInEmission(Shot shot, HitResult hit, Vec3 segmentFrom) {
         var p = shot.profile;
+        if(ExoticWeaponsW350.projectileImpact(shot.damageTraits.exotic(),hit.getLocation().subtract(shot.velocity.normalize().scale(.04)),
+                hit instanceof EntityHitResult e&&e.getEntity() instanceof LivingEntity l?l:null))return;
         if(shot.entry.family().equals("sword"))
             kim.biryeong.destiny.sound.SwordSounds.casterImpact(shot.level,hit.getLocation());
         else DestinySounds.at(shot.level, hit.getLocation(), DestinySounds.weaponKey(shot.entry, "impact"), .8f);
@@ -1749,6 +1782,7 @@ public final class WeaponRuntime {
                 && s.stack == stack && s.cycle.reloading();
     }
     public static void cleanup(ServerPlayer owner) {
+        ExoticWeaponsW350.cleanup(owner);
         kim.biryeong.destiny.combat.MeleeLunge.cancelWeapon(owner);
         GcbWeaponInput.cleanup(owner);
         kim.biryeong.destiny.sound.ReloadAudio.stop(owner);
@@ -1791,6 +1825,7 @@ public final class WeaponRuntime {
         if (owner.isUsingItem() && owner.getUseItem().is(WeaponCombatItem.INSTANCE)) owner.stopUsingItem();
     }
     public static void clearAll() {
+        ExoticWeaponsW350.clearAll();
         GcbWeaponInput.clearAll();
         for (State s : List.copyOf(STATES.values())) cleanup(s.owner);
         WeaponCrouchPresentation.clearAll();

@@ -62,7 +62,9 @@ public final class PackCompression {
         try { Files.createDirectories(cache); } catch (IOException ignored) {}
         var before = new java.util.concurrent.atomic.AtomicLong(); var after = new java.util.concurrent.atomic.AtomicLong();
         files.entrySet().parallelStream().filter(e -> e.getKey().endsWith(".png") && !untouched(e.getKey())).forEach(e -> {
-            byte[] src = e.getValue().readAllBytes();
+            var resource = upstream == null ? e.getValue() : upstream.convert(e.getKey(),e.getValue());
+            if (resource == null) return;
+            byte[] src = resource.readAllBytes();
             byte[] out = optimizedPng(src, cache);
             before.addAndGet(src.length); after.addAndGet(out.length);
             if (out.length < src.length) png.put(sha1(src), out);

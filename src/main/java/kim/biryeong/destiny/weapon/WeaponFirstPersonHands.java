@@ -40,6 +40,13 @@ public final class WeaponFirstPersonHands {
                 var from = WeaponSkins.route(skin, e.getKey());
                 if (!from.equals(e.getKey())) result.put(from, WeaponSkins.route(skin, e.getValue()));
             }
+            for (String id : WeaponExotics.expansionIds())
+                for (String prefix : java.util.List.of("weapon/", "weapon_reload_w350/", "weapon_aim_w350/")) {
+                    var source = Identifier.fromNamespaceAndPath("destiny", prefix + id);
+                    result.put(source, Identifier.fromNamespaceAndPath("destiny", "weapon_hands_w201/" + source.getPath()));
+                }
+            var whisperScope = Identifier.parse("destiny:weapon_scope_w350/whisper_of_the_worm");
+            result.put(whisperScope, Identifier.parse("destiny:weapon_hands_w201/weapon_scope_w350/whisper_of_the_worm"));
             return Map.copyOf(result);
         } catch (java.io.IOException e) {
             throw new IllegalStateException("Unreadable first-person arm routes", e);

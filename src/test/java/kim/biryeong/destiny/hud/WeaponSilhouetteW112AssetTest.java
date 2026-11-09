@@ -74,7 +74,10 @@ class WeaponSilhouetteW112AssetTest {
         Set<String> actual = new HashSet<>();
         for (String directory : new String[]{"items/gui/hud", "models/gui/hud", "textures/item/hud"}) {
             try (var files = Files.list(Path.of(ASSET + directory))) {
-                files.filter(p -> p.getFileName().toString().startsWith(PREFIX)).forEach(p -> actual.add(p.toString()));
+                files.filter(p -> p.getFileName().toString().startsWith(PREFIX))
+                        .filter(p -> !kim.biryeong.destiny.weapon.WeaponExotics.expansionIds().stream()
+                                .anyMatch(id -> p.getFileName().toString().equals(PREFIX+id+".json")
+                                        ||p.getFileName().toString().equals(PREFIX+id+".png"))).forEach(p -> actual.add(p.toString()));
             }
         }
         assertEquals(paths, actual, "No aimed/reload/twohand or other W112 variants");

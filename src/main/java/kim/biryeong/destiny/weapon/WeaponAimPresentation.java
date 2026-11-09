@@ -37,6 +37,7 @@ public final class WeaponAimPresentation {
             "patron_of_lost_causes", "aishas_embrace", "long_arm", "antiope_d", "bug_out_bag", "ikelos_smg_v1_0_1", "the_recluse", "dead_man_walking_xx7463", "high_albedo", "brass_attacks", "erentil_fr4", "hollow_words", "dream_breaker", "null_composure", "coriolis_force", "edge_transit", "fixed_odds", "retrofit_escapade");
     static String modelPrefix(WeaponCatalog.Entry entry) {
         entry = LegendaryWeapons.base(entry);
+        if (WeaponExotics.expanded(entry)) return "weapon_aim_w350/";
         if (entry.id().equals("ace_of_spades")) return "weapon_sight_w159/";
         if (REMAINING_RANGED_SIGHTS.contains(entry.id())) return "weapon_sight_w153/";
         if (RIFLE_HANDGUN_SIGHTS.contains(entry.id())) return "weapon_sight_w151/";
@@ -45,7 +46,7 @@ public final class WeaponAimPresentation {
     /** Only a fully raised physical or holographic sight replaces the screen-space hip reticle. */
     public static boolean physicalSight(WeaponCatalog.Entry entry, float progress) {
         entry = LegendaryWeapons.base(entry);
-        return Float.isFinite(progress) && progress >= .95f && (entry.id().equals("ace_of_spades") || SIGHT_ALIGNED.contains(entry.id()) || LAUNCHER_SIGHTS.contains(entry.id()) || TRACE_ROCKET_SIGHTS.contains(entry.id()) || RIFLE_HANDGUN_SIGHTS.contains(entry.id()) || REMAINING_RANGED_SIGHTS.contains(entry.id()));
+        return Float.isFinite(progress) && progress >= .95f && (WeaponExotics.expanded(entry) || entry.id().equals("ace_of_spades") || SIGHT_ALIGNED.contains(entry.id()) || LAUNCHER_SIGHTS.contains(entry.id()) || TRACE_ROCKET_SIGHTS.contains(entry.id()) || RIFLE_HANDGUN_SIGHTS.contains(entry.id()) || REMAINING_RANGED_SIGHTS.contains(entry.id()));
     }
     private record Binding(ServerPlayer owner, ServerLevel level, float offset, List<Float> previous) {}
     private static final Map<ItemStack, Binding> ACTIVE = new IdentityHashMap<>();

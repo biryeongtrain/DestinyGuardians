@@ -113,7 +113,7 @@ class SubsistenceProfileTest {
         }
         assertEquals(65, audited.size());
         assertEquals(2, exotics);
-        assertEquals(WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id())).map(WeaponCatalog.Entry::id).collect(Collectors.toSet()), audited);
+        assertEquals(WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id()) && !WeaponExotics.expanded(w)).map(WeaponCatalog.Entry::id).collect(Collectors.toSet()), audited);
         assertEquals(new HashSet<>(legacyRolls()), admitted);
     }
 
@@ -161,7 +161,7 @@ class SubsistenceProfileTest {
     @Test void invalidCapacitiesUnsupportedAndNoncanonicalEntriesReturnZero() {
         assertFalse(SubsistenceProfile.supports(null));
         assertEquals(0, SubsistenceProfile.refillRounds(null, 30));
-        for (var weapon : WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id())).toList()) {
+        for (var weapon : WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id()) && !WeaponExotics.expanded(w)).toList()) {
             assertEquals(IDS.contains(weapon.id()), SubsistenceProfile.supports(weapon));
             for (int capacity : new int[]{Integer.MIN_VALUE, -1, 0})
                 assertEquals(0, SubsistenceProfile.refillRounds(weapon, capacity));

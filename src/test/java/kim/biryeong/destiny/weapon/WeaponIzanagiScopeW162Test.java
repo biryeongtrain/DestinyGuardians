@@ -33,7 +33,7 @@ class WeaponIzanagiScopeW162Test {
     @Test void addsOnlyIzanagiToFiveExistingScopesAndNeverAHandCannon() throws Exception {
         var ids = Set.of("bite_of_the_fox", "beloved", "apostate", "line_in_the_sand", "stormchaser", "izanagis_burden");
         assertFalse(WeaponScopes.supports(null));
-        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             assertEquals(ids.contains(entry.id()), WeaponScopes.supports(entry), entry.id());
             if (entry.family().equals("hand_cannon")) assertFalse(WeaponScopes.supports(entry));
             if (WeaponScopes.supports(entry))

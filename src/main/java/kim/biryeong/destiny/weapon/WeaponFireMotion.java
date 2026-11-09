@@ -24,6 +24,19 @@ public final class WeaponFireMotion {
     static final float MAX_TRANSLATION = .35f, MAX_ROTATION = (float)Math.toRadians(40);
     private static final Controller LIVE = new Controller();
     private WeaponFireMotion() {}
+    /** Authored W350 rigs have no source fire actions. Reuse the documented same-family
+     * cosmetic impulse only; this route never participates in damage or ammunition. */
+    private static String motionId(String id) {
+        return switch (id) {
+            case "crimson", "thorn", "sunshot" -> "ace_of_spades";
+            case "outbreak_perfected", "graviton_lance" -> "chattering_bone";
+            case "jotunn" -> "erentil_fr4";
+            case "gjallarhorn" -> "code_duello";
+            case "whisper_of_the_worm" -> "izanagis_burden";
+            case "tractor_cannon" -> "dust_rock_blues";
+            default -> LegendaryWeapons.baseId(id);
+        };
+    }
 
     private static final class Source {
         static final Library LIBRARY = load();
@@ -33,7 +46,7 @@ public final class WeaponFireMotion {
             try (var reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
                 var library = Library.read(reader);
                 var expected = new HashSet<String>();
-                for (var entry : WeaponCatalog.all()) if (!entry.family().equals("sword")) expected.add(LegendaryWeapons.baseId(entry.id()));
+                for (var entry : WeaponCatalog.all()) if (!entry.family().equals("sword")) expected.add(motionId(entry.id()));
                 if (!expected.equals(library.weapons.keySet()))
                     throw new IllegalStateException("W242 fire motion must cover every non-sword catalog weapon");
                 return library;
@@ -49,7 +62,7 @@ public final class WeaponFireMotion {
                 || entry.family().equals("sword") || !visible(player)
                 || WeaponItems.entry(player.getMainHandItem()).filter(entry::equals).isEmpty()) return;
         if (!accepts(profile.sharedBurstAmmo(), playFire, boltIndex)) return;
-        var clips = Source.LIBRARY.weapons.get(LegendaryWeapons.baseId(entry.id()));
+        var clips = Source.LIBRARY.weapons.get(motionId(entry.id()));
         if (clips == null) return;
         LIVE.emit(player.getUUID(), player, player.getMainHandItem(), player.level(), entry.id(), clips,
                 player.level().getServer().getTickCount(), profile.sharedBurstAmmo(), playFire, boltIndex,

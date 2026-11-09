@@ -11,14 +11,15 @@ class WeaponHandlingProfileTest {
             if (e.family().equals("sword")) {
                 assertFalse(p.supported()); assertNull(p.handling()); assertNull(p.readyTicks()); assertNull(p.stowTicks());
             } else {
-                supported++; assertTrue(p.supported());
+                if(!WeaponExotics.expanded(e))supported++; // Preserve the frozen pre-W350 count; validate every current profile below.
+                assertTrue(p.supported());
                 assertEquals(WeaponCharacteristics.of(e).stats().get("943549884"), p.handling());
                 assertTrue(p.readyTicks() > 0); assertTrue(p.stowTicks() > 0);
             }
         }
         assertEquals(58, WeaponCatalogTest.originalW30Entries().stream()
                 .filter(e -> !e.family().equals("sword")).count());
-        assertEquals(60, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()))
+        assertEquals(60, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e))
                 .filter(e -> WeaponHandlingProfile.of(e).supported()).count());
         assertEquals(60 + 24, supported);
     }

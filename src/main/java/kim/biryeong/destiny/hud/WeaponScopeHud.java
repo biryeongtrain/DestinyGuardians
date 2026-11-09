@@ -31,7 +31,9 @@ public final class WeaponScopeHud {
         var entry = WeaponItems.entry(player.getMainHandItem()).orElseThrow();
         boolean sniper = entry.family().equals("sniper_rifle");
         boolean izanagi = WeaponExotics.izanagi(entry);
-        String artwork = (izanagi ? "scope_w162_" : "scope_w45_") + entry.id();
+        // W350 reuses the shared circular mask/reticle, not another weapon's held geometry.
+        String artwork = entry.id().equals("whisper_of_the_worm") ? "scope_w45_beloved"
+                : (izanagi ? "scope_w162_" : "scope_w45_") + entry.id();
         // W84 remains the sole authority for funded charge; a cosmetic selector grants nothing.
         int tint = izanagi && WeaponIzanagi.charge(player.getMainHandItem()) >= 2 ? 0xFFAA8C : 0xFFFFFF;
         // A wide black extension preserves a circular aperture up through 32:9 without stretching it.

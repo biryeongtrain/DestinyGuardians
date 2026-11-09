@@ -43,8 +43,8 @@ class HighImpactReservesW182Test {
             assertEquals(r.hash(), WeaponCharacteristics.of(entry(r.id())).bungieHash());
         }
         assertEquals(EXPECTED, actual);
-        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
-        assertEquals(11, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().filter(HighImpactReservesProfile::supports).count());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().size());
+        assertEquals(11, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().stream().filter(HighImpactReservesProfile::supports).count());
         assertThrows(UnsupportedOperationException.class, () -> HighImpactReservesProfile.rolls().clear());
     }
 
@@ -111,7 +111,7 @@ class HighImpactReservesW182Test {
     @Test void unsupportedExoticAndEveryForgedCanonicalFieldFailClosed() {
         assertFalse(HighImpactReservesProfile.supports(null));
         assertThrows(IllegalArgumentException.class, () -> HighImpactReservesProfile.multiplier(null, 1, 11));
-        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) if (!EXPECTED.stream().anyMatch(r -> r.startsWith(e.id()+":"))) {
+        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList()) if (!EXPECTED.stream().anyMatch(r -> r.startsWith(e.id()+":"))) {
             assertFalse(HighImpactReservesProfile.supports(e), e.id());
             assertThrows(IllegalArgumentException.class, () -> HighImpactReservesProfile.multiplier(e, 1, 11), e.id());
         }

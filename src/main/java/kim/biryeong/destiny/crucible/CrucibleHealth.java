@@ -10,6 +10,10 @@ import java.util.UUID;
 public final class CrucibleHealth {
     private static final Map<UUID, Long> LAST_DAMAGE = new HashMap<>();
     private CrucibleHealth() {}
+    /** Accepted explicit recovery proc; future actual health loss resets the ordinary delay. */
+    public static void startRegeneration(ServerPlayer p) {
+        if (p.isAlive() && CrucibleRuntime.canAct(p)) LAST_DAMAGE.put(p.getUUID(),p.level().getGameTime()-106);
+    }
     public static void arrive(ServerPlayer p) { LAST_DAMAGE.put(p.getUUID(), p.level().getGameTime()); }
     public static void leave(ServerPlayer p) { LAST_DAMAGE.remove(p.getUUID()); }
     public static void damaged(ServerPlayer p, boolean healthLost) {

@@ -33,7 +33,7 @@ class RapidHitProfileW169Test {
 
     @Test void exactElevenOfficialBaseSocketsCoverFullSelected65AndDenyEnhancedCopies() throws Exception {
         var proof = json(ART + "official-sockets.json");
-        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().size());
         assertEquals(65, proof.get("selectedCount").getAsInt());
         assertEquals(11, proof.get("supportedCount").getAsInt());
         assertEquals(11, proof.get("randomizedCount").getAsInt());
@@ -41,7 +41,7 @@ class RapidHitProfileW169Test {
         assertEquals(54, proof.getAsJsonArray("unsupportedSelectedIds").size());
         var scans = proof.getAsJsonArray("allSelectedPoolScans");
         assertEquals(65, scans.size());
-        assertEquals(WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
+        assertEquals(WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().stream().map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
             scans.asList().stream().map(e -> e.getAsJsonObject().get("id").getAsString()).collect(Collectors.toSet()));
         var rolls = RapidHitProfile.rolls();
         assertEquals(11, rolls.size());
@@ -293,7 +293,7 @@ class RapidHitProfileW169Test {
         for (int stacks : new int[]{-1, 6, Integer.MIN_VALUE, Integer.MAX_VALUE})
             assertThrows(IllegalArgumentException.class, () -> RapidHitProfile.stabilityBonus(stacks));
         assertThrows(IllegalArgumentException.class, () -> RapidHitProfile.reload(null, 1));
-        for (var unsupported : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) if (!IDS.contains(unsupported.id()))
+        for (var unsupported : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList()) if (!IDS.contains(unsupported.id()))
             assertThrows(IllegalArgumentException.class, () -> RapidHitProfile.reload(unsupported, 1), unsupported.id());
         var actual = entry("duke_mk_44");
         var forged = new WeaponCatalog.Entry(actual.id(), "shotgun", actual.frame(), actual.name(), actual.source_frame_label(), actual.item_model());

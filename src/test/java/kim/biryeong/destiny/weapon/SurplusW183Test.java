@@ -40,8 +40,8 @@ class SurplusW183Test {
             assertTrue(SurplusProfile.supports(entry(r.id())));
         }
         assertEquals(EXPECTED, actual);
-        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
-        assertEquals(9, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().filter(SurplusProfile::supports).count());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().size());
+        assertEquals(9, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().stream().filter(SurplusProfile::supports).count());
         assertFalse(SurplusProfile.supports(entry("cold_denial")));
         assertFalse(SurplusProfile.supports(entry("ace_of_spades")));
         assertThrows(UnsupportedOperationException.class, () -> SurplusProfile.rolls().clear());

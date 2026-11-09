@@ -23,6 +23,11 @@ public final class ProfileArmGraph {
             "firstperson_lefthand", "firstperson_righthand", "head", "gui", "ground", "fixed", "on_shelf");
 
     private ProfileArmGraph() {}
+    /** Weapon-owned W350 pose leaves inherit the same W204 arm geometry and tint contract. */
+    public static boolean armPose(String id) {
+        return id.startsWith(POSES) || id.startsWith("destiny:weapon_hands_w350/")
+                || id.startsWith("destiny:weapon_w350/") && id.contains("/hands/");
+    }
 
     /** Returns a detached, tint-free native graph; rejects unsupported selectors even in dead branches.
      * Thresholds must already be finite and strictly increasing in native Float.compare order.
@@ -38,7 +43,7 @@ public final class ProfileArmGraph {
             case "minecraft:model" -> {
                 fields(source, "type", "model", "tints", "transformation");
                 String model = string(source, "model");
-                if (!model.startsWith(POSES)) yield empty();
+                if (!armPose(model)) yield empty();
                 yield shell(source, "tints");
             }
             case "minecraft:composite" -> composite(source);
@@ -163,7 +168,7 @@ public final class ProfileArmGraph {
             case "minecraft:empty" -> { }
             case "minecraft:model" -> {
                 String model = string(node, "model");
-                if (model.startsWith(POSES)) result.add(model);
+                if (armPose(model)) result.add(model);
             }
             case "minecraft:composite" -> {
                 for (var child : array(node, "models")) evaluate(object(child), data, slim, left, result);

@@ -70,8 +70,9 @@ public final class PackAtlasRouting {
                 String old = destinations.putIfAbsent(sprite, r.from() + ">" + r.to());
                 if (old != null && !old.equals(r.from() + ">" + r.to())) throw new IllegalStateException("Conflicting atlas routes: " + sprite);
                 var filter = new JsonObject(); filter.addProperty("type", "minecraft:filter");
-                var pattern = new JsonObject(); pattern.addProperty("namespace", Pattern.quote(parts[1]));
-                pattern.addProperty("path", Pattern.quote(sprite.substring(sprite.indexOf(':') + 1))); filter.add("pattern", pattern);
+                // Native IdentifierPattern uses Pattern.asPredicate (find), so quote alone also removes _hud siblings.
+                var pattern = new JsonObject(); pattern.addProperty("namespace", "^" + Pattern.quote(parts[1]) + "$");
+                pattern.addProperty("path", "^" + Pattern.quote(sprite.substring(sprite.indexOf(':') + 1)) + "$"); filter.add("pattern", pattern);
                 append(updates, files, r.from(), filter);
                 var single = new JsonObject(); single.addProperty("type", "minecraft:single");
                 single.addProperty("resource", sprite); single.addProperty("sprite", sprite);

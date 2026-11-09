@@ -12,7 +12,7 @@ class LeadFromGoldW187Test {
     @Test void exactSixBaseSocketsAcrossTheReal65EntryCatalog() {
         assertEquals("lead_from_gold", LeadFromGoldProfile.ID);
         assertEquals(1556840489L, LeadFromGoldProfile.HASH);
-        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().size());
         var expected = Set.of(
             new WeaponPerks.Roll("apostate",2164448701L,3,1556840489L,1306932196L),
             new WeaponPerks.Roll("mindbender_s_ambition_adept",912150785L,3,1556840489L,1732284294L),
@@ -23,7 +23,7 @@ class LeadFromGoldW187Test {
         assertEquals(6, LeadFromGoldProfile.rolls().size());
         assertEquals(expected, Set.copyOf(LeadFromGoldProfile.rolls()));
         assertThrows(UnsupportedOperationException.class, () -> LeadFromGoldProfile.rolls().clear());
-        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) {
+        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList()) {
             boolean supported = expected.stream().anyMatch(r -> r.id().equals(e.id()));
             assertEquals(supported, LeadFromGoldProfile.supports(e), e.id());
             if (supported) {
@@ -58,7 +58,7 @@ class LeadFromGoldW187Test {
             for (int count : new int[]{Integer.MIN_VALUE,-1,0,3,Integer.MAX_VALUE})
                 assertEquals(0,LeadFromGoldProfile.amount(e,count));
         });
-        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) if (!LeadFromGoldProfile.supports(e)) {
+        for (var e : WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList()) if (!LeadFromGoldProfile.supports(e)) {
             assertEquals(0,LeadFromGoldProfile.amount(e,1)); assertEquals(0,LeadFromGoldProfile.amount(e,2));
         }
     }

@@ -40,12 +40,12 @@ class FirmlyPlantedW189Test {
             assertTrue(actual.add(r.id()+":"+r.hash()+":"+r.socket()+":"+r.plugSetHash()));
             assertTrue(FirmlyPlantedProfile.supports(entry(r.id())));
         }
-        assertEquals(expected,actual);assertEquals(65,WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
-        assertEquals(8,WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().filter(FirmlyPlantedProfile::supports).count());
+        assertEquals(expected,actual);assertEquals(65,WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().size());
+        assertEquals(8,WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().stream().filter(FirmlyPlantedProfile::supports).count());
         assertThrows(UnsupportedOperationException.class,()->FirmlyPlantedProfile.rolls().clear());
     }
     @Test void ordinaryFusionBonusesAndAllUnsupportedNeutral() {
-        for(var e:WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList()) {
+        for(var e:WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList()) {
             boolean supported=FirmlyPlantedProfile.supports(e),fusion=e.id().equals("dream_breaker");
             assertEquals(!supported?0:fusion?10:20,FirmlyPlantedProfile.stabilityBonus(e));
             assertEquals(!supported?0:fusion?15:30,FirmlyPlantedProfile.handlingBonus(e));

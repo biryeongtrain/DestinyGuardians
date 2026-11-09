@@ -24,6 +24,7 @@ public final class WeaponReloadPresentation {
     public static final int PROGRESS_INDEX = 1;
     /** Dense reload banks; older unaffected weapon banks still have 21 poses. */
     static int intervals(ItemStack stack) {
+        if (WeaponItems.entry(stack).filter(WeaponExotics::expanded).isPresent()) return 60;
         return WeaponItems.entry(stack).map(LegendaryWeapons::base).filter(e -> e.id().equals("ace_of_spades")
                 || e.id().equals("duke_mk_44") || e.id().equals("ammit_ar2")
                 || e.id().equals("blast_furnace") || e.id().equals("hammerhead")
@@ -44,6 +45,7 @@ public final class WeaponReloadPresentation {
     private WeaponReloadPresentation() {}
     public static boolean supports(WeaponCatalog.Entry entry) {
         entry = LegendaryWeapons.base(entry);
+        if (WeaponExotics.expanded(entry)) return true;
         return entry != null && (entry.id().equals("beloved") || entry.id().equals("duke_mk_44")
                 || entry.id().equals("ammit_ar2") || entry.id().equals("the_recluse")
                 || entry.id().equals("blast_furnace") || entry.id().equals("hammerhead")
@@ -55,6 +57,7 @@ public final class WeaponReloadPresentation {
     }
     public static Identifier model(WeaponCatalog.Entry entry) {
         entry = LegendaryWeapons.base(entry);
+        if (WeaponExotics.expanded(entry)) return Identifier.fromNamespaceAndPath("destiny", "weapon_reload_w350/" + entry.id());
         if (!supports(entry)) throw new IllegalArgumentException("No reload presentation: " + entry);
         String namespace = switch (entry.id()) {
             case "biting_winds", "whispering_slab", "nezarec_s_whisper" -> "weapon_reload_w222_" + entry.id() + "/";

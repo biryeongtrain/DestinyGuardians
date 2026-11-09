@@ -22,7 +22,7 @@ public final class WeaponModels {
     public static ItemStack create(WeaponCatalog.Entry entry) {
         ItemStack stack = new ItemStack(WeaponPreviewItem.INSTANCE);
         stack.set(DataComponents.ITEM_MODEL, Identifier.parse(entry.item_model()));
-        stack.set(DataComponents.ITEM_NAME, Component.literal(entry.name()));
+        stack.set(DataComponents.ITEM_NAME, Component.literal(WeaponExotics.displayName(entry)));
         stack.set(DataComponents.MAX_STACK_SIZE, 1);
         CompoundTag tag = new CompoundTag();
         tag.putString(TAG, entry.id());

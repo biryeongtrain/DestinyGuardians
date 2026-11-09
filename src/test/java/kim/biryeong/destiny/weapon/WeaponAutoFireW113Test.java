@@ -21,9 +21,9 @@ class WeaponAutoFireW113Test {
     }
 
     @Test void enabledCoversExactly57OfAll65CanonicalEntries() {
-        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList().size());
         int admitted = 0;
-        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             boolean supported = WeaponAutoFirePolicy.supportsAutomatic(entry, true);
             assertEquals(!DEFERRED_OR_MELEE.contains(entry.id()), supported, entry.id());
             if (supported) admitted++;
@@ -32,9 +32,9 @@ class WeaponAutoFireW113Test {
     }
 
     @Test void disabledPreservesAll65OldIntrinsicDecisions() {
-        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList().size());
+        assertEquals(65, WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList().size());
         int admitted = 0;
-        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             boolean supported = WeaponAutoFirePolicy.supportsAutomatic(entry, false);
             assertEquals(INTRINSIC.contains(entry.id()), supported, entry.id());
             assertEquals(WeaponFirePolicy.supportsAutomatic(entry), supported, entry.id());

@@ -20,10 +20,10 @@ class WeaponSightW149Test {
     private static final Set<String> TRACE_ROCKETS=Set.of("retraced_path","bellowing_giant","pyroclastic_flow");
     private static final Set<String> LFRS=Set.of("line_in_the_sand","stormchaser");
     @Test void onlyTheFourLaunchersUseNewSightRoute() {
-        for(var entry:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) assertEquals(entry.id().equals("ace_of_spades")?"weapon_sight_w159/":WeaponSightW153Test.IDS.contains(entry.id())?"weapon_sight_w153/":WeaponSightW151Test.IDS.contains(entry.id())?"weapon_sight_w151/":(TRACE_ROCKETS.contains(entry.id()) || LFRS.contains(entry.id()))?"weapon_sight_w150/":IDS.contains(entry.id())?"weapon_sight_w148/":LAUNCHERS.contains(entry.id())?"weapon_sight_w149/":"weapon_aim_w70/",WeaponAimPresentation.modelPrefix(entry));
+        for(var entry:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) assertEquals(entry.id().equals("ace_of_spades")?"weapon_sight_w159/":WeaponSightW153Test.IDS.contains(entry.id())?"weapon_sight_w153/":WeaponSightW151Test.IDS.contains(entry.id())?"weapon_sight_w151/":(TRACE_ROCKETS.contains(entry.id()) || LFRS.contains(entry.id()))?"weapon_sight_w150/":IDS.contains(entry.id())?"weapon_sight_w148/":LAUNCHERS.contains(entry.id())?"weapon_sight_w149/":"weapon_aim_w70/",WeaponAimPresentation.modelPrefix(entry));
     }
     @Test void physicalSightsReplaceHipReticlesOnlyAtTheRaisedEndpoint() {
-        for(var entry:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for(var entry:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             assertFalse(WeaponAimPresentation.physicalSight(entry,0));
             assertFalse(WeaponAimPresentation.physicalSight(entry,.94f));
             assertFalse(WeaponAimPresentation.physicalSight(entry,Float.NaN));

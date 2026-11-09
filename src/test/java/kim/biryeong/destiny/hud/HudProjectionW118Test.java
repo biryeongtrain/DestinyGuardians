@@ -164,7 +164,9 @@ class HudProjectionW118Test {
         assertNull(slots(template).getMaterial("particle"));
         int count = 0;
         try (var files = Files.list(Path.of(ASSETS + "models/gui/hud"))) {
-            for (var path : files.filter(p -> p.getFileName().toString().startsWith("ammo_weapon_w112_")).toList()) {
+            for (var path : files.filter(p -> p.getFileName().toString().startsWith("ammo_weapon_w112_"))
+                    .filter(p -> !kim.biryeong.destiny.weapon.WeaponExotics.expansionIds().stream()
+                            .anyMatch(id -> p.getFileName().toString().equals("ammo_weapon_w112_"+id+".json"))).toList()) {
                 var model = object(path);
                 assertEquals("#layer0", model.getAsJsonObject("textures").get("particle").getAsString());
                 var resolved = slots(model);

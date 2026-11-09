@@ -33,6 +33,7 @@ public final class WeaponHandling {
                         ready ? profile.readyTicks() : profile.stowTicks())))))))))).orElse(0);
         ticks = PerkBatchA.handlingTicks(p,stack,ready,ticks); // W320 batch A
         ticks = PerkExpansionStats.handlingTicks(p,stack,ready,WeaponComponents.handlingTicks(stack,ready,ticks)); // W326 components
+        ticks = ExoticWeaponsW350.handlingTicks(p,stack,ready,ticks);
         return WeaponSlickdraw.handlingTicks(p,stack,ready,WeaponSteadyHands.handlingTicks(p,stack,ready,WeaponRecoveryHandling.handlingTicks(p,stack,ready,WeaponBackupPlan.handlingTicks(p,stack,ready,WeaponWellRounded.handlingTicks(p,stack,ready,WeaponPugilist.handlingTicks(p,stack,ready,WeaponEnsemble.handlingTicks(p,stack,ready,ticks)))))));
     }
     /** Observe inventory replacement/commands, including swaps to non-weapons, before inputs or ticks. */

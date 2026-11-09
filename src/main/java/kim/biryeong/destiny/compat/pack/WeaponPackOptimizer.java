@@ -102,6 +102,8 @@ public final class WeaponPackOptimizer {
     static boolean generatedPose(String path) {
         return path.endsWith(".json") && (path.startsWith("assets/destiny/models/skin_arm_w204/poses/")
                 || path.startsWith("assets/destiny/models/first_person_framing_w205/")
+                || path.startsWith("assets/destiny/models/weapon_w350/") && path.contains("/hands/")
+                || path.startsWith("assets/destiny/models/weapon_hands_w350/")
                 || path.startsWith("assets/destiny/models/weapon_hands_w201/poses/"));
     }
 

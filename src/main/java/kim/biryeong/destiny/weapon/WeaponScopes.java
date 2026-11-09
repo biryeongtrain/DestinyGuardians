@@ -12,7 +12,7 @@ import java.util.Set;
 public final class WeaponScopes {
     private static final Set<String> IDS = Set.of(
             "bite_of_the_fox", "beloved", "apostate", "line_in_the_sand", "stormchaser",
-            "izanagis_burden");
+            "izanagis_burden", "whisper_of_the_worm");
 
     private WeaponScopes() {}
 
@@ -26,6 +26,8 @@ public final class WeaponScopes {
     public static Identifier model(WeaponCatalog.Entry entry) {
         entry = LegendaryWeapons.base(entry);
         if (!supports(entry)) throw new IllegalArgumentException("Weapon has no W45 scope: " + entry);
+        if (entry.id().equals("whisper_of_the_worm"))
+            return Identifier.parse("destiny:weapon_scope_w350/whisper_of_the_worm");
         return Identifier.fromNamespaceAndPath("destiny", "weapon_scope_w45/" + entry.id());
     }
 

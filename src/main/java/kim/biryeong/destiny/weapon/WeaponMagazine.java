@@ -50,6 +50,14 @@ public final class WeaponMagazine {
         rounds += accepted;
         return accepted;
     }
+    /** Explicit generated intrinsic reward (Thorn Remnants), capped independently of reserve funding. */
+    public int generateLoadedOverflow(int amount, int ceiling) {
+        if (amount <= 0 || ceiling < capacity || ceiling > 1000) return 0;
+        int accepted=(int)Math.min(Math.min(Math.max(0L,(long)ceiling-rounds),amount),WeaponAmmoMigration.MAX_TOTAL-total());
+        rounds+=accepted;
+        if(accepted>0)loadedLimit=Math.max(loadedLimit,rounds);
+        return accepted;
+    }
     /** Atomic paid multi-ammo attack; a denied action cannot partially spend ammunition. */
     public boolean consume(int amount) {
         if (amount <= 0 || amount > rounds) return false;

@@ -1,0 +1,425 @@
+{
+  "blend": "/tmp/exotic-expansion-20261109/sources/thorn/unpacked/Thorn/Thorn.blend",
+  "sha256": "c378edb79d261da544fb5ae700a6405406ed6fbb745f7c097d42e2d05e9b592e",
+  "lo": [
+    -0.0456710010766983,
+    -0.4886929988861084,
+    -0.052292998880147934
+  ],
+  "hi": [
+    0.0456710010766983,
+    0.04471899941563606,
+    0.1985200047492981
+  ],
+  "meshes": [
+    {
+      "name": "Thorn.00.000",
+      "vertices": 16530,
+      "materials": [
+        "Frame"
+      ]
+    },
+    {
+      "name": "Thorn.00.001",
+      "vertices": 6,
+      "materials": [
+        "Triangle"
+      ]
+    },
+    {
+      "name": "Thorn.00.002",
+      "vertices": 358,
+      "materials": [
+        "Material"
+      ]
+    },
+    {
+      "name": "Thorn.00.003",
+      "vertices": 25,
+      "materials": [
+        "Triangle"
+      ]
+    },
+    {
+      "name": "Thorn.01.000",
+      "vertices": 8,
+      "materials": [
+        "Reticle"
+      ]
+    }
+  ],
+  "armatures": [
+    {
+      "name": "Armature",
+      "bones": [
+        {
+          "name": "Pedestal",
+          "head": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tail": [
+            0.0,
+            0.0,
+            0.05752503126859665
+          ]
+        },
+        {
+          "name": "Hammer",
+          "head": [
+            0.0,
+            -0.019012000411748886,
+            0.12497299909591675
+          ],
+          "tail": [
+            0.0,
+            -0.019012000411748886,
+            0.1349732130765915
+          ]
+        },
+        {
+          "name": "CraneRotate",
+          "head": [
+            0.0,
+            -0.1506749987602234,
+            0.08052700012922287
+          ],
+          "tail": [
+            0.0,
+            -0.1506749987602234,
+            0.09150616824626923
+          ]
+        },
+        {
+          "name": "CraneExtend",
+          "head": [
+            0.0,
+            -0.14282000064849854,
+            0.09178199619054794
+          ],
+          "tail": [
+            0.0,
+            -0.14282000064849854,
+            0.13286009430885315
+          ]
+        },
+        {
+          "name": "Cylinder",
+          "head": [
+            5.36861765601872e-18,
+            -0.123055100440979,
+            0.11825928837060928
+          ],
+          "tail": [
+            -5.36862096474117e-18,
+            -0.07469888031482697,
+            0.1185268685221672
+          ]
+        },
+        {
+          "name": "Magazine",
+          "head": [
+            5.36861765601872e-18,
+            -0.123055100440979,
+            0.11825928837060928
+          ],
+          "tail": [
+            -5.36862096474117e-18,
+            -0.07469888031482697,
+            0.1185268685221672
+          ]
+        },
+        {
+          "name": "Trigger",
+          "head": [
+            0.0,
+            -0.07118599861860275,
+            0.0696989968419075
+          ],
+          "tail": [
+            0.0,
+            -0.07118599861860275,
+            0.07969874888658524
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "materials": [
+    {
+      "name": "Dots Stroke",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "nodes": [
+        {
+          "name": "Frame",
+          "type": "FRAME",
+          "image": null
+        },
+        {
+          "name": "Material Output",
+          "type": "OUTPUT_MATERIAL",
+          "image": null
+        },
+        {
+          "name": "Principled BSDF",
+          "type": "BSDF_PRINCIPLED",
+          "image": null
+        },
+        {
+          "name": "Material Output.001",
+          "type": "OUTPUT_MATERIAL",
+          "image": null
+        },
+        {
+          "name": "Diffuse BSDF",
+          "type": "BSDF_DIFFUSE",
+          "image": null
+        }
+      ]
+    },
+    {
+      "name": "Frame",
+      "diffuse": [
+        1.0,
+        0.5,
+        0.10000000149011612,
+        1.0
+      ],
+      "nodes": [
+        {
+          "name": "Frame.002",
+          "type": "FRAME",
+          "image": null
+        },
+        {
+          "name": "Frame.003",
+          "type": "FRAME",
+          "image": null
+        },
+        {
+          "name": "Main Shader",
+          "type": "FRAME",
+          "image": null
+        },
+        {
+          "name": "Material Output",
+          "type": "OUTPUT_MATERIAL",
+          "image": null
+        },
+        {
+          "name": "Gstack Texture",
+          "type": "TEX_IMAGE",
+          "image": "TFrame_GStack.png"
+        },
+        {
+          "name": "Diffuse Texture",
+          "type": "TEX_IMAGE",
+          "image": "TFrame_Diffuse.png"
+        },
+        {
+          "name": "Normal Map",
+          "type": "TEX_IMAGE",
+          "image": "TFrame_Normal.png"
+        },
+        {
+          "name": "D2 PlayerGear Shader 3.0.0",
+          "type": "GROUP",
+          "image": null
+        },
+        {
+          "name": "Shader Preset",
+          "type": "GROUP",
+          "image": null
+        }
+      ]
+    },
+    {
+      "name": "Material",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "nodes": [
+        {
+          "name": "Material Output",
+          "type": "OUTPUT_MATERIAL",
+          "image": null
+        },
+        {
+          "name": "Principled BSDF",
+          "type": "BSDF_PRINCIPLED",
+          "image": null
+        }
+      ]
+    },
+    {
+      "name": "Reticle",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "nodes": [
+        {
+          "name": "Material Output",
+          "type": "OUTPUT_MATERIAL",
+          "image": null
+        },
+        {
+          "name": "Group",
+          "type": "GROUP",
+          "image": null
+        },
+        {
+          "name": "Image Texture",
+          "type": "TEX_IMAGE",
+          "image": "TReticle_Diffuse.png"
+        },
+        {
+          "name": "Image Texture.002",
+          "type": "TEX_IMAGE",
+          "image": "TReticle_Normal.png"
+        },
+        {
+          "name": "Image Texture.001",
+          "type": "TEX_IMAGE",
+          "image": "TReticle_GStack.png"
+        }
+      ]
+    },
+    {
+      "name": "Triangle",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "nodes": [
+        {
+          "name": "Material Output",
+          "type": "OUTPUT_MATERIAL",
+          "image": null
+        },
+        {
+          "name": "Image Texture",
+          "type": "TEX_IMAGE",
+          "image": "23ace380.png"
+        },
+        {
+          "name": "Group",
+          "type": "GROUP",
+          "image": null
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "23ace380.png",
+      "path": "//Textures/23ace380.png",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "name": "Iridescence Lookup Numbers",
+      "path": "//../../../../../../Re-used Textures/Guns/AmmoNumbers01_Emission.dds",
+      "size": [
+        512,
+        576
+      ]
+    },
+    {
+      "name": "Iridescence_Lookup.dds",
+      "path": "\\\\Append libraries/Destiny Models/Re-used Textures/Iridescence_Lookup.dds",
+      "size": [
+        64,
+        128
+      ]
+    },
+    {
+      "name": "Missing_Textures_Warning.png",
+      "path": "//../Ripping Tools/Downloads/Missing_Textures_Warning.png",
+      "size": [
+        300,
+        300
+      ]
+    },
+    {
+      "name": "Render Result",
+      "path": "",
+      "size": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TFrame_Diffuse.png",
+      "path": "//TFrame_Diffuse.png",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "TFrame_GStack.png",
+      "path": "//TFrame_GStack.png",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "TFrame_Normal.png",
+      "path": "//TFrame_Normal.png",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "TReticle_Diffuse.png",
+      "path": "//TReticle_Diffuse.png",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "TReticle_GStack.png",
+      "path": "//TReticle_GStack.png",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "TReticle_Normal.png",
+      "path": "//TReticle_Normal.png",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Undefined Node Warning",
+      "path": "E:/Downloads/New Project (2).png",
+      "size": [
+        150,
+        150
+      ]
+    }
+  ]
+}

@@ -103,6 +103,7 @@ public final class DestinyGuardians implements ModInitializer {
             initGcb();
         }
         kim.biryeong.destiny.compat.pack.UiFontPack.init();
+        kim.biryeong.destiny.compat.pack.PackTextureResolution.init();
         // Last pack hook: lossless output compression after every other converter.
         kim.biryeong.destiny.compat.pack.PackCompression.init();
         kim.biryeong.destiny.compat.pack.ActivityPacks.init();

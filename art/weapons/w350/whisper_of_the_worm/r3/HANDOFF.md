@@ -1,0 +1,21 @@
+# Whisper R3 detail and supplied-render finish
+
+Scope: Whisper assets/art and two Whisper-specific generators only. Gjallarhorn/Tractor, shared Java/data/audio and shared QA untouched. No client/server/CU/build/commit/push.
+
+The actual supplied `.blend` was opened again read-only in headless Blender. `power_whisper_source_r3.py` records solid-part bounds and excludes explicitly named transparent FX materials from new `solid_side/oblique/opposite.png` geometry-only renders. Source original `.blend` SHA remains bdd1ea322402075fe01ce69a1a4a2ac35a9c2c22ec714ac5397a5e9ed6c47754. Raw downloads were not saved or altered.
+
+Latest user's `user-reference.png` is authoritative for finish, overriding the earlier generic fissure idea. Actual authored white skull/bone takes the front quarter, with dark recessed orbit/mouth, teeth, brow/cheek/jaw volumes and rooted swept horns. Mechanical shroud/receiver/scope/stock stays near-black with sparse cyan blotches/short vent marks and a narrow short receiver stripe. Blue lenses are closed, shallow inset optical discs. The sculptural receiver has a narrow inner core and exposed cylindrical bolt, framed by separate diagonal upper brace and lower housing. Scope feet have a real gap; grip and stock keep source voids.
+
+Output count: body980, magazine15, simultaneous assembled995. 982 native masked polygon planes +13 solid cuboids. All boundary surfaces are from authored closed lofts/profiles, not source mesh conversion or two side cutouts. The 1000 limit includes all simultaneously displayed weapon pieces. W204 forearms are separate, adding224 when two classic arms show; native performance is unmeasured. Atlas2048x1024,32 texels per model unit.
+
+Native light_emission is supported by target26.3 CuboidModelElement.Deserializer as verified by master from the local target client JAR. Skull338 elements use15/shadefalse; blue optical20 use8/shadefalse; all other637 including orbital floor use0. Native flags are present in full/body models and inherited by every aim/reload pose. This is native fullbright color, not a restoration of bloom, cast light, reflections or dynamic Taken shader behavior. Offline renders emulate per-element emission with alpha-preserving material mixes and no bloom. Colored emission strength in Blender is approximate native lightmap evidence, not client QA.
+
+Review images: `before-after.png` compares R2 and R3 in identical side/oblique/opposite camera and lighting; `after_east/q/otherq/front.png` show current full weapon. `muzzle-closeups.png` and `receiver-closeups.png` use fixed 3D region cameras shared by R2/R3 and both sides. Individual `muzzle_after_*` and `receiver_after_*` are available without sheet scaling. Renderer reads `native-render-input.json` extracted from actual current native full model. Original R2 and rejected initial proof remain unchanged.
+
+Checks passed: 995 count, valid native zero-depth adapter/cuboid bounds and UV, matching2K-capped atlas dimensions, all model references, source SHA, 61 ordered poses/rest endpoints, 21 aim entries, unchanged route/hand prefix and existing contracts. No reload motion changes were requested; no source player motion is invented. Final native pack load and master first Vision/delegated review/second Vision, grip/ADS/reload contact and performance remain pending.
+
+Regenerate only with `power_whisper_r3.py build|render|check`; older `power.py`/`power_r2.py build` still describes R2 and should not be used to overwrite this new Whisper revision. Model and source evaluator scripts are supplied as the owned generators; no shared generator was edited.
+
+Delivery baseline: `/tmp/exotic-expansion-20261109/whisper-r3/baseline.json` (captured before edits). Sealed delta/ZIP are adjacent under `/tmp/exotic-expansion-20261109/whisper-r3/`. Every modified path carries baseline/current SHA; new paths carry ABSENT. No deletions expected. Master must verify baseline match at integration, since earlier R2 was already integrated.
+
+Target codec caveat: `shade:false` is retained as a legacy authored flag; its effect on26.3 was not verified and may be ignored. Only `light_emission` integer0..15 support was verified. Native Vision will assess whether the white cluster retains enough facet detail.

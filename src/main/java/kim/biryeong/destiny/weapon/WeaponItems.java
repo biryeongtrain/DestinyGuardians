@@ -35,7 +35,7 @@ public final class WeaponItems {
         var tag = stack.get(DataComponents.CUSTOM_DATA).copyTag();
         tag.putBoolean(LIVE, true);
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-        stack.set(DataComponents.ITEM_NAME, Component.literal("[전투] " + entry.name()).withStyle(ChatFormatting.GOLD));
+        stack.set(DataComponents.ITEM_NAME, Component.literal("[전투] " + WeaponExotics.displayName(entry)).withStyle(ChatFormatting.GOLD));
         var profile = WeaponProfile.forEntry(entry);
         var magazine = new WeaponMagazine(profile, profile.magazine(), profile.reserve());
         stack.set(DataComponents.LORE, combatLore(stack, magazine));
@@ -67,6 +67,8 @@ public final class WeaponItems {
         if (WeaponPerks.selected(stack, "overflow").isPresent()
                 || WeaponPerks.selected(stack, "reconstruction").isPresent())
             maximum = Math.max(maximum, (int)Math.min(Integer.MAX_VALUE, (long)base * 2));
+        if (WeaponItems.entry(stack).filter(e -> e.id().equals("thorn") && ExoticWeaponsW350.supports(e)).isPresent())
+            maximum = Math.max(maximum, 40);
         return (int)Math.clamp(savedCount(tag, LOADED_LIMIT), base, maximum);
     }
     /** Integral NBT only: doubles/NaN/strings must not truncate, wrap or grant ammunition. */
@@ -107,7 +109,7 @@ public final class WeaponItems {
                 (entry(stack).map(WeaponProfile::forEntry).map(WeaponProfile::infiniteReserve).orElse(false) ? "∞" : magazine.reserve()));
     }
     private static ItemLore combatLore(ItemStack stack, WeaponMagazine magazine) {
-        return new ItemLore(List.of(
+        var lines = new ArrayList<>(List.of(
                 Component.literal("W33 PvE 전투 무기 · 서버 판정").withStyle(ChatFormatting.GOLD),
                 ammoLine(stack, magazine),
                 Component.literal(SwordItems.isSword(stack)?"좌클릭 약공격 / 우클릭 강공격 / 웅크리기 가드 / 검은 재장전 없음"
@@ -120,5 +122,7 @@ public final class WeaponItems {
                         ?"No Distractions: 1초간 사격 없이 ADS · 조준 중 플린치 35% 감소"
                         :"활: 당긴 뒤 놓기 / 융합: 충전 완료 시 발사"),
                 Component.literal("검·글레이브: 좌클릭 근접 / 궁극기·스킬 입력 우선")));
+        entry(stack).ifPresent(e -> lines.addAll(ExoticDescriptionsW350.lore(e)));
+        return new ItemLore(lines);
     }
 }

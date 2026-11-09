@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class AceW83Test {
     @Test void canonicalFirstExoticAddsToEveryProfileWithoutReclassifyingOriginal63() {
         WeaponCatalogTest.assertExpandedCatalog();
-        assertEquals(65,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).count());
-        assertEquals(2,WeaponCatalog.all().stream().filter(e->WeaponCharacteristics.of(e).exotic()).count());
+        assertEquals(65,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).count());
+        assertEquals(2,WeaponCatalog.all().stream().filter(e -> !WeaponExotics.expanded(e)).filter(e->WeaponCharacteristics.of(e).exotic()).count());
         var ace=WeaponCatalog.find("ace_of_spades").orElseThrow();
         assertTrue(WeaponExotics.ace(ace));
         assertEquals(1,WeaponCatalog.all().stream().filter(WeaponExotics::ace).count());
-        assertEquals(63,WeaponCatalog.all().stream().filter(e->!WeaponCharacteristics.of(e).exotic() && !LegendaryWeapons.contains(e.id())).count());
+        assertEquals(63,WeaponCatalog.all().stream().filter(e->!WeaponCharacteristics.of(e).exotic() && !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).count());
         var c=WeaponCharacteristics.of(ace);
         assertEquals(347366834L,c.bungieHash()); assertEquals(WeaponAmmoType.PRIMARY,c.ammo());
         assertEquals(WeaponSlot.KINETIC,c.slot()); assertEquals(WeaponCharacteristics.Damage.KINETIC,c.damage());

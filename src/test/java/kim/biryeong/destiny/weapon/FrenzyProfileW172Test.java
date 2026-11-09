@@ -59,7 +59,7 @@ class FrenzyProfileW172Test {
         assertEquals(55, sockets.getAsJsonArray("unsupportedSelectedIds").size());
         var scans = sockets.getAsJsonArray("selectedScan");
         assertEquals(65, scans.size());
-        assertEquals(WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id())).map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
+        assertEquals(WeaponCatalog.all().stream().filter(w -> !LegendaryWeapons.contains(w.id()) && !WeaponExotics.expanded(w)).map(WeaponCatalog.Entry::id).collect(Collectors.toSet()),
             scans.asList().stream().map(e -> e.getAsJsonObject().get("id").getAsString()).collect(Collectors.toSet()));
         for (var e : sockets.getAsJsonArray("weapons")) {
             var row = e.getAsJsonObject();

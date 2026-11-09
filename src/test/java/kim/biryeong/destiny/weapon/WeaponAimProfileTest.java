@@ -9,7 +9,7 @@ class WeaponAimProfileTest {
         WeaponCatalogTest.assertExpandedCatalog();
         assertEquals(57,WeaponCatalogTest.originalW30Entries().stream().filter(WeaponAimProfile::supports).count());
         int supported=0;
-        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             var p=WeaponAimProfile.of(e);
             assertTrue(p.transitionTicks()>=2&&p.transitionTicks()<=20);
             if(WeaponAimProfile.supports(e)) {

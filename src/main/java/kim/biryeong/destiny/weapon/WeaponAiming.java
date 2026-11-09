@@ -268,6 +268,10 @@ public final class WeaponAiming {
     }
     public static void shot(ServerPlayer p,WeaponCatalog.Entry entry) { shot(p,entry,0,1); }
     static void shot(ServerPlayer p,WeaponCatalog.Entry entry,int paidStability,double paidGrowth) {
+        shot(p,entry,paidStability,paidGrowth,true);
+    }
+    /** Recoil-free bullets still advance paid-shot bloom and flinch recovery state. */
+    static void shot(ServerPlayer p,WeaponCatalog.Entry entry,int paidStability,double paidGrowth,boolean recoil) {
         if(!WeaponAimProfile.supports(entry) || !eligible(p))return;
         var s=matching(p);if(s==null) { tick(p);s=matching(p); }
         if(s==null)return;
@@ -285,6 +289,7 @@ public final class WeaponAiming {
                 (100-recoilDirection)/100f*kick*.5f*(float)WeaponFirmlyPlanted.yawScalar(p);
         if((s.state.shots()&1)!=0)side=-side;
         s.state.shot((float)(Math.clamp(paidGrowth,0,1)*RapidHitStability.bloomSigned(profile,stabilityBonus)*(1-.45f*ads)*WeaponHeatingUp.accuracyScalar(p)*WeaponFirmlyPlanted.growthScalar(p)*PerkBatchA.growthScalar(p)));
+        if(!recoil)return;
         p.setYRot(p.getYRot()+side);p.setXRot(Math.clamp(p.getXRot()-vertical,-90,90));
         p.connection.send(new ClientboundPlayerRotationPacket(side,true,-vertical,true));
     }

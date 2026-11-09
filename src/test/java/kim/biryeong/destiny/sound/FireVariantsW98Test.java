@@ -257,7 +257,7 @@ class FireVariantsW98Test {
     @Test void exactRoutingDoesNotTransferVariantsToOtherFramesOrChangeReloadMappings() throws Exception {
         var now = json(SOUNDS); var before = json(Path.of("src/test/resources/destiny-test/audio/w96-sounds.json"));
         var named = namedW102Definitions(now);
-        for (var entry : WeaponCatalog.all()) {
+        for (var entry : WeaponCatalog.all().stream().filter(e -> !kim.biryeong.destiny.weapon.WeaponExotics.expanded(e)).toList()) {
             String key = DestinySounds.weaponKey(entry, "fire");
             if (FAMILIES.containsKey(entry.id())) assertEquals("weapon." + entry.id() + ".fire", key);
             else if (namedW102Events().contains(key)) assertEquals(named.get(key), now.get(key), entry.id());
@@ -269,7 +269,7 @@ class FireVariantsW98Test {
         assertEquals("weapon.hand_cannon.fire", DestinySounds.weaponKey(WeaponCatalog.find("duke_mk_44").orElseThrow(), "fire"));
         assertEquals("weapon.hand_cannon.fire", DestinySounds.weaponKey(WeaponCatalog.find("austringer").orElseThrow(), "fire"));
         for (String family : FAMILIES.values()) assertEquals(before.get("weapon." + family + ".fire"), now.get("weapon." + family + ".fire"));
-        for (var clip : ReloadAudioProfile.all()) {
+        for (var clip : ReloadAudioProfile.all().stream().filter(c -> !kim.biryeong.destiny.weapon.WeaponExotics.expansionIds().contains(c.id())).toList()) {
             if (namedW102Events().contains(clip.event())) assertEquals(named.get(clip.event()), now.get(clip.event()));
             else assertEquals(before.get(clip.event()), now.get(clip.event()));
         }

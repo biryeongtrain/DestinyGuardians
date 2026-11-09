@@ -30,8 +30,8 @@ class ElementalCapacitorW184Test {
             assertTrue(ElementalCapacitorProfile.supports(entry(r.id())));
         }
         assertEquals(EXPECTED, actual);
-        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().size());
-        assertEquals(2, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id())).toList().stream().filter(ElementalCapacitorProfile::supports).count());
+        assertEquals(65, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().size());
+        assertEquals(2, WeaponCatalog.all().stream().filter(legacy -> !LegendaryWeapons.contains(legacy.id()) && !WeaponExotics.expanded(legacy)).toList().stream().filter(ElementalCapacitorProfile::supports).count());
         assertFalse(ElementalCapacitorProfile.supports(entry("cold_denial")));
         assertFalse(ElementalCapacitorProfile.supports(entry("ace_of_spades")));
         assertThrows(UnsupportedOperationException.class, () -> ElementalCapacitorProfile.rolls().clear());

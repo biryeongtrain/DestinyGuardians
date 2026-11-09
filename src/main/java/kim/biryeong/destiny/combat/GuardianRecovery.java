@@ -18,6 +18,14 @@ public final class GuardianRecovery {
 
     private GuardianRecovery() { }
 
+    /** Explicit health-regeneration trigger; incoming real health loss still interrupts it. */
+    public static void startRegeneration(ServerPlayer player) {
+        if (!player.isAlive() || player.isSpectator() || GuardianDown.active(player)) return;
+        if (CrucibleRuntime.participating(player)) {
+            kim.biryeong.destiny.crucible.CrucibleHealth.startRegeneration(player);
+        } else LAST_DAMAGE.put(player, (long) player.level().getServer().getTickCount() - 106);
+    }
+
     public static void forget(ServerPlayer player) { LAST_DAMAGE.remove(player); }
 
     public static void damaged(ServerPlayer player, boolean healthLost) {

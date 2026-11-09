@@ -55,7 +55,7 @@ public final class SteadyHandsProfile {
     private static Map<String, Curve> curves() {
         var result = new HashMap<String, Curve>();
         // W327 contributes each canonical identity's own stat/formula row, never its visual donor.
-        for (var c : LegendaryWeapons.append(DATA.curves, "curves", Curve.class)) {
+        for (var c : WeaponExotics.appendExpansion(LegendaryWeapons.append(DATA.curves, "curves", Curve.class), "curves", Curve.class)) {
             var entry = CATALOG.get(c.id);
             check(entry != null && result.putIfAbsent(c.id, c) == null, "canonical unique curve");
             boolean sword = entry.family().equals("sword"), glaive = entry.family().equals("glaive");

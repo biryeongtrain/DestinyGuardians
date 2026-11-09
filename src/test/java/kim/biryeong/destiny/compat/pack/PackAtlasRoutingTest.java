@@ -28,6 +28,13 @@ class PackAtlasRoutingTest {
         var pattern = sources.get(1).getAsJsonObject().getAsJsonObject("pattern");
         assertTrue("item/renamed".matches(pattern.get("path").getAsString()));
         assertFalse("item/renamed2".matches(pattern.get("path").getAsString()));
+        var nativePathPredicate=java.util.regex.Pattern.compile(pattern.get("path").getAsString()).asPredicate();
+        assertTrue(nativePathPredicate.test("item/renamed"));
+        assertFalse(nativePathPredicate.test("item/renamed_hud"));
+        assertFalse(nativePathPredicate.test("prefix/item/renamed"));
+        var nativeNamespacePredicate=java.util.regex.Pattern.compile(pattern.get("namespace").getAsString()).asPredicate();
+        assertTrue(nativeNamespacePredicate.test("bettermodel"));
+        assertFalse(nativeNamespacePredicate.test("otherbettermodel"));
         assertArrayEquals(bytes, texture.readAllBytes());
         files.putAll(result.updates());
         var repeated = PackAtlasRouting.route(files, List.of(rule(bytes)));

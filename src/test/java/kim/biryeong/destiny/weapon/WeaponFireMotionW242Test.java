@@ -26,7 +26,7 @@ class WeaponFireMotionW242Test {
             assertNotNull(in);
             var library = WeaponFireMotion.Library.read(new InputStreamReader(in, StandardCharsets.UTF_8));
             var expected = new HashSet<String>();
-            for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) if (!entry.family().equals("sword")) expected.add(entry.id());
+            for (var entry : WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) if (!entry.family().equals("sword")) expected.add(entry.id());
             assertEquals(60, expected.size());
             assertEquals(expected, library.weapons.keySet());
             assertEquals(32, library.groups.size());

@@ -102,11 +102,11 @@ public record WeaponProfile(Mode mode, float damage, int intervalTicks, int maga
             damage=damage*pellets/burst;
             pellets=1;
         }
-        return new WeaponProfile(tuned.mode,damage,(int)Math.ceil(cadence),magazine,
+        return ExoticProfilesW350.adjust(entry, new WeaponProfile(tuned.mode,damage,(int)Math.ceil(cadence),magazine,
                 infinite||entry.family().equals("sword")?0:tuned.reserve,reloadPlan.intervalTicks(),tuned.range,charge,burst,
                 pellets,tuned.spread,tuned.speed,tuned.gravity,tuned.blastRadius,WeaponFirePolicy.supportsAutomatic(entry),infinite,
                 cadence,spacing,timing.sharedBurstAmmo(),reloadPlan.incremental(),
-                reloadPlan.firstTicks(),reloadPlan.roundsPerInsert());
+                reloadPlan.firstTicks(),reloadPlan.roundsPerInsert()));
     }
 
     private static WeaponProfile gun(float d, int t, int m, int r, int reload, double range, boolean auto) {

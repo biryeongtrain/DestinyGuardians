@@ -22,6 +22,10 @@ public final class Statuses {
     public static final float WEAKEN_MULTIPLIER = 1.3f;
 
     private static final Map<UUID, Map<Keyword, Long>> ACTIVE = new HashMap<>();
+    private record Weaken(ServerLevel level, long until, float pve, float pvp) {}
+    private record ExternalScorch(ServerLevel level,long until) {}
+    private static final Map<UUID, ExternalScorch> EXTERNAL_SCORCH = new HashMap<>();
+    private static final Map<UUID, Weaken> STRONG_WEAKEN = new HashMap<>();
     private static final Map<UUID, ServerLevel> LEVELS = new HashMap<>();
     private static final Map<UUID, net.minecraft.server.level.ServerPlayer> SCORCH_OWNERS = new HashMap<>();
 
@@ -36,6 +40,32 @@ public final class Statuses {
         apply(target, keyword, ticks);
         if (keyword != Keyword.AMPLIFIED && has(target, keyword))
             kim.biryeong.destiny.weapon.PerkExpansionSupport.debuffApplied(owner, target);
+    }
+
+    /** Strong nonstacking weaken, sharing the existing incoming-damage and expiry path. */
+    public static void applyWeaken(net.minecraft.server.level.ServerPlayer owner, LivingEntity target, int ticks,
+                                   float pveMultiplier, float pvpMultiplier) {
+        if (!Float.isFinite(pveMultiplier) || !Float.isFinite(pvpMultiplier) || pveMultiplier < 1 || pvpMultiplier < 1
+                || pveMultiplier > 3 || pvpMultiplier > 3 || owner == null || target == null || ticks <= 0
+                || !target.isAlive() || owner.level()!=target.level() || !Combat.isEnemy(owner,target)) return;
+        apply(owner,target,Keyword.WEAKENED,ticks);
+        var old=STRONG_WEAKEN.get(target.getUUID());
+        long until=owner.level().getGameTime()+ticks;
+        // Strongest effect wins; a weaker later application cannot extend the stronger lease.
+        if (old==null || old.level()!=target.level() || old.until()<=owner.level().getGameTime()
+                || pveMultiplier>=old.pve() && pvpMultiplier>=old.pvp())
+            STRONG_WEAKEN.put(target.getUUID(),new Weaken(owner.level(),until,pveMultiplier,pvpMultiplier));
+    }
+
+    /** A separate attributed stack service owns the damage pulses; expose the keyword without
+     * also adding vanilla fire or the legacy generic scorch pulse a second time. */
+    public static void markScorched(LivingEntity target,int ticks) {
+        if(ticks<=0||!target.isAlive()||!(target.level() instanceof ServerLevel level))return;
+        long until=level.getGameTime()+ticks;
+        ACTIVE.computeIfAbsent(target.getUUID(),id->new EnumMap<>(Keyword.class)).put(Keyword.SCORCHED,until);
+        LEVELS.put(target.getUUID(),level);
+        EXTERNAL_SCORCH.put(target.getUUID(),new ExternalScorch(level,until));
+        SCORCH_OWNERS.remove(target.getUUID());SCORCH_GRENADES.remove(target.getUUID());SCORCH_MELEES.remove(target.getUUID());
     }
 
     private Statuses() {
@@ -58,6 +88,7 @@ public final class Statuses {
             }
             case AMPLIFIED -> target.addEffect(new MobEffectInstance(MobEffects.SPEED, ticks, 1));
             case SCORCHED -> {
+                EXTERNAL_SCORCH.remove(target.getUUID());
                 // PvP scorch has its own normalized non-lethal pulse; vanilla fire would double-charge it.
                 if (!(target instanceof Player))
                     target.setRemainingFireTicks(Math.max(target.getRemainingFireTicks(), ticks));
@@ -123,6 +154,8 @@ public final class Statuses {
     }
 
     public static void forget(Entity entity) {
+        EXTERNAL_SCORCH.remove(entity.getUUID());
+        STRONG_WEAKEN.remove(entity.getUUID());
         ACTIVE.remove(entity.getUUID());
         LEVELS.remove(entity.getUUID());
         SCORCH_OWNERS.remove(entity.getUUID());
@@ -137,11 +170,24 @@ public final class Statuses {
 
     /** 받는 피해 보정 (LivingEntityMixin). */
     public static float modifyIncoming(LivingEntity target, float amount) {
-        return has(target, Keyword.WEAKENED)
-                ? amount * (target instanceof Player ? 1.075f : WEAKEN_MULTIPLIER) : amount;
+        float multiplier=has(target,Keyword.WEAKENED)?target instanceof Player?1.075f:WEAKEN_MULTIPLIER:1;
+        var strong=STRONG_WEAKEN.get(target.getUUID());
+        if(strong!=null && strong.level()==target.level() && strong.until()>strong.level().getGameTime())
+            multiplier=Math.max(multiplier,target instanceof Player?strong.pvp():strong.pve());
+        return amount*multiplier;
     }
 
     public static void tick(MinecraftServer server) {
+        EXTERNAL_SCORCH.entrySet().removeIf(e -> {
+            var w=e.getValue();if(w.level().getServer()!=server)return false;
+            var target=w.level().getEntity(e.getKey());
+            return target==null||!target.isAlive()||w.until()<=w.level().getGameTime();
+        });
+        STRONG_WEAKEN.entrySet().removeIf(e -> {
+            var w=e.getValue(); if(w.level().getServer()!=server)return false;
+            var target=w.level().getEntity(e.getKey());
+            return target==null || !target.isAlive() || w.until()<=w.level().getGameTime();
+        });
         Iterator<Map.Entry<UUID, Map<Keyword, Long>>> it = ACTIVE.entrySet().iterator();
         while (it.hasNext()) {
             var entry = it.next();
@@ -167,7 +213,7 @@ public final class Statuses {
             if (entry.getValue().containsKey(Keyword.BLINDED) || entry.getValue().containsKey(Keyword.SUPPRESSED)) {
                 clearTarget(living);
             }
-            if (entry.getValue().containsKey(Keyword.SCORCHED)) {
+            if (entry.getValue().containsKey(Keyword.SCORCHED) && !EXTERNAL_SCORCH.containsKey(entry.getKey())) {
                 if (living instanceof net.minecraft.server.level.ServerPlayer player) {
                     // DDC x50 representative: 6.5 points / .56s, rounded to 11 server ticks.
                     // Stack/ignition simulation is not implemented; retain the accepted cast duration.
@@ -188,6 +234,8 @@ public final class Statuses {
     }
 
     public static void clearAll() {
+        EXTERNAL_SCORCH.clear();
+        STRONG_WEAKEN.clear();
         ACTIVE.clear();
         LEVELS.clear();
         SCORCH_OWNERS.clear();

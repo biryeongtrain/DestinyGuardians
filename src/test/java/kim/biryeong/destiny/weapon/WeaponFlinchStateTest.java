@@ -78,13 +78,13 @@ class WeaponFlinchStateTest {
                 Map.entry("shotgun",.10f),Map.entry("sniper_rifle",.10f),Map.entry("grenade_launcher",.10f),
                 Map.entry("heavy_grenade_launcher",.10f),Map.entry("linear_fusion_rifle",.10f),Map.entry("rocket_launcher",.10f));
         int ranged=0,excluded=0;
-        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList()) {
+        for(var e:WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList()) {
             float endpoint=expected.getOrDefault(e.family(),0f);
             assertEquals(endpoint,WeaponFlinchProfile.maxResistance(e),e.id());
             if(WeaponAimProfile.supports(e)) {assertTrue(endpoint>0,e.id());ranged++;}
             else {assertEquals(0,endpoint,e.id());excluded++;}
         }
-        assertEquals(65,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id())).toList().size()); assertEquals(59,ranged); assertEquals(6,excluded);
+        assertEquals(65,WeaponCatalog.all().stream().filter(e -> !LegendaryWeapons.contains(e.id()) && !WeaponExotics.expanded(e)).toList().size()); assertEquals(59,ranged); assertEquals(6,excluded);
         assertEquals(0,WeaponFlinchProfile.maxResistance(null));
         var source=WeaponCatalog.find("izanagis_burden").orElseThrow();
         var unknown=new WeaponCatalog.Entry("w85_unknown","w85_unknown","unknown",source.name(),source.source_frame_label(),source.item_model());

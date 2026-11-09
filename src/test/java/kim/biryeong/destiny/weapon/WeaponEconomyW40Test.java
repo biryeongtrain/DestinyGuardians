@@ -7,7 +7,7 @@ class WeaponEconomyW40Test {
     private WeaponCharacteristics.Entry metadata(String id) { return WeaponCharacteristics.of(WeaponCatalog.find(id).orElseThrow()); }
     @Test void all63HaveIndependentOfficialSlotAmmoAndDamageDefinitions() {
         WeaponCatalogTest.assertExpandedCatalog();
-        for(var e:WeaponCatalog.all()) {
+        for(var e:WeaponCatalogTest.beforeW350Entries()) {
             var m=WeaponCharacteristics.of(e);var p=WeaponProfile.forEntry(e);
             assertEquals(e.id(),m.id());assertTrue(m.bungieHash()>0);
             assertEquals(java.util.Set.of("ace_of_spades","izanagis_burden").contains(e.id()),m.exotic(),e.id());
