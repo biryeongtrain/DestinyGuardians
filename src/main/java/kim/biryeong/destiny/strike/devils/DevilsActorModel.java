@@ -30,6 +30,10 @@ final class DevilsActorModel implements AutoCloseable {
             var tracker=renderer.getOrCreate(ModEntity.of(mob),TrackerModifier.builder().sightTrace(false).damageAnimation(false).damageTint(true).build());
             if(tracker==null)return null;
             var model=new DevilsActorModel(mob,renderer,tracker);
+            // Highlight the rendered bones, not the invisible Polymer hitbox.
+            // Shared by Pykis, Sepiks, Walkers and Brigs across strike instances.
+            if(mob.kind().boss())tracker.update(TrackerUpdateAction.composite(
+                    TrackerUpdateAction.glowColor(0xFFD45A),TrackerUpdateAction.glow(true)));
             model.base("idle");
             // Sepiks awakens only after the guard encounter, under the presentation completion gate.
             if(mob.kind()!=DevilsPlan.Kind.SEPIKS)model.play("spawn");
