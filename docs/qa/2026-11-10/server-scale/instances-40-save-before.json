@@ -1,0 +1,1920 @@
+{
+  "schema": 1,
+  "clients": 40,
+  "cohort": "4 Devils parties x3 +2 Exodus parties x3 +12 personal campaign +10 tower",
+  "start_utc": "2026-11-10T01:51:58.896672Z",
+  "global_view_distance": 32,
+  "global_simulation_distance": 10,
+  "reconnect_grace_exercised": false,
+  "production_strike_reconnect_grace_ticks": 2400,
+  "reconnect_grace_elapsed_ticks": 0,
+  "cleanup_policy": "Explicit normal leave before disconnect; cleanup deadline exceeds production reconnect grace without changing it",
+  "campaign_qa_stage": "breach_fight via registered administrator command, with real stage/encounter placement",
+  "arrival_metric": "Maximum observed pending ArrivalChunks.requestedColumns per campaign; zero means no request persisted to an observation boundary, not zero terrain/view generation",
+  "limitations": [
+    "Loopback peers share server JVM/CPU and registry snapshot",
+    "Verified warm base/activity ZIP cache; no pack download/render/authentication/WAN acceptance",
+    "Invulnerable automated players send movement/ADS/fire; no graphical or human-combat certification",
+    "Production capacities, reconnect grace and world generation/admission remain unchanged"
+  ],
+  "verified_pack_cache": {
+    "devils_lair": {
+      "sha1": "88891eb922c2333249541cd95afc67cbbc8654a0",
+      "bytes": 53630561
+    },
+    "exodus_crash": {
+      "sha1": "237dfea681518f185afe63d6c76827404f4be132",
+      "bytes": 25628970
+    }
+  },
+  "base_pack_sha1": "a81340fb78a8afb3b858a8470a117a4f13a6272b",
+  "phase": "DONE",
+  "passed": true,
+  "wall_seconds": 113.771506625,
+  "prepared_peers": 40,
+  "owned_activity_players": 30,
+  "current_session_token_references": 0,
+  "successful_campaign_stage_jumps": 12,
+  "maximum_observed_pending_campaign_arrival_columns": {
+    "Si9f9fad18": 1,
+    "Si9f9fad19": 1,
+    "Si9f9fad20": 1,
+    "Si9f9fad21": 1,
+    "Si9f9fad22": 1,
+    "Si9f9fad23": 1,
+    "Si9f9fad24": 1,
+    "Si9f9fad25": 1,
+    "Si9f9fad26": 1,
+    "Si9f9fad27": 1,
+    "Si9f9fad28": 1,
+    "Si9f9fad29": 1
+  },
+  "observed_temporary_worlds": 18,
+  "server_heap_max_bytes": 8589934592,
+  "latest_admission_worlds": [
+    {
+      "key": "minecraft:overworld",
+      "players": 0,
+      "loaded_chunks": 729,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 1,
+      "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+      "level_implementation": "net.minecraft.server.level.ServerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {}
+    },
+    {
+      "key": "minecraft:the_end",
+      "players": 0,
+      "loaded_chunks": 0,
+      "pending_chunk_tasks": 0,
+      "active_tickets": false,
+      "forced_columns": 0,
+      "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+      "level_implementation": "net.minecraft.server.level.ServerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {}
+    },
+    {
+      "key": "minecraft:the_nether",
+      "players": 0,
+      "loaded_chunks": 0,
+      "pending_chunk_tasks": 0,
+      "active_tickets": false,
+      "forced_columns": 0,
+      "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+      "level_implementation": "net.minecraft.server.level.ServerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {}
+    },
+    {
+      "key": "destiny:tower",
+      "players": 10,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.TowerChunkGenerator",
+      "level_implementation": "kim.biryeong.destiny.world.TowerSpawnWorld$TowerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad30": 8,
+        "Si9f9fad31": 8,
+        "Si9f9fad32": 8,
+        "Si9f9fad33": 8,
+        "Si9f9fad34": 8,
+        "Si9f9fad35": 8,
+        "Si9f9fad36": 8,
+        "Si9f9fad37": 8,
+        "Si9f9fad38": 8,
+        "Si9f9fad39": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/a2164ccd-53ee-449e-95a5-aa215f247bd8",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 24,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad00": 8,
+        "Si9f9fad01": 8,
+        "Si9f9fad02": 8
+      }
+    },
+    {
+      "key": "destiny:exodus_crash/719007be-c3e0-4408-badd-aa89df06feaa",
+      "players": 3,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.exodus.ExodusTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad12": 8,
+        "Si9f9fad13": 8,
+        "Si9f9fad14": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/d2a1298a-6cc8-48e0-a6f2-7d2ee9c428f6",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad18": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/7287bd51-97a4-461a-a1e3-c9ae76ac8c13",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad19": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/fd9ee234-f22c-4c08-a322-20739701e80d",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad20": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/e83b1d9d-e30d-4446-8647-8eef4d089363",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad21": 8
+      }
+    },
+    {
+      "key": "destiny:exodus_crash/c99c4892-3e3f-4126-889c-f8495ade0f10",
+      "players": 3,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.exodus.ExodusTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad15": 8,
+        "Si9f9fad16": 8,
+        "Si9f9fad17": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/eca3ce8c-4770-4ce3-92e1-2d27ce4d5786",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad23": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/f5f8b9ba-2495-4d49-9035-9b78c6e826d5",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad22": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/317b5ef0-aec4-4eda-805e-669a9332c673",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad24": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/6b7dd3f7-0635-4268-80b8-35f902404868",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad25": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/602f3810-87c6-45ae-b964-5b4e6ac125e2",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad26": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/f04ff4f6-a65e-4faf-beb1-b9e739048962",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad27": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/beda4ef2-f7b7-490c-a155-506ab3bb1665",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad28": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/33490af4-3b7c-4585-b159-e3f7dce3d4a5",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad29": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/5056df36-c253-48e5-8186-5bfec16e8db4",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 24,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad03": 8,
+        "Si9f9fad04": 8,
+        "Si9f9fad05": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/39228f80-3e98-452e-9b7f-74a4ffff8993",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 16,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad06": 8,
+        "Si9f9fad07": 8,
+        "Si9f9fad08": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/2acfd3ef-82d1-45ed-835d-9ea8870fce3c",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad09": 8,
+        "Si9f9fad10": 8,
+        "Si9f9fad11": 8
+      }
+    }
+  ],
+  "latest_admission_heap_bytes": 5949792448,
+  "admission_wall_seconds": 97.328269375,
+  "admission_ticks": 1893,
+  "worlds_at_steady": [
+    {
+      "key": "minecraft:overworld",
+      "players": 0,
+      "loaded_chunks": 729,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 1,
+      "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+      "level_implementation": "net.minecraft.server.level.ServerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {}
+    },
+    {
+      "key": "minecraft:the_end",
+      "players": 0,
+      "loaded_chunks": 0,
+      "pending_chunk_tasks": 0,
+      "active_tickets": false,
+      "forced_columns": 0,
+      "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+      "level_implementation": "net.minecraft.server.level.ServerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {}
+    },
+    {
+      "key": "minecraft:the_nether",
+      "players": 0,
+      "loaded_chunks": 0,
+      "pending_chunk_tasks": 0,
+      "active_tickets": false,
+      "forced_columns": 0,
+      "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+      "level_implementation": "net.minecraft.server.level.ServerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {}
+    },
+    {
+      "key": "destiny:tower",
+      "players": 10,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.TowerChunkGenerator",
+      "level_implementation": "kim.biryeong.destiny.world.TowerSpawnWorld$TowerLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad30": 8,
+        "Si9f9fad31": 8,
+        "Si9f9fad32": 8,
+        "Si9f9fad33": 8,
+        "Si9f9fad34": 8,
+        "Si9f9fad35": 8,
+        "Si9f9fad36": 8,
+        "Si9f9fad37": 8,
+        "Si9f9fad38": 8,
+        "Si9f9fad39": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/a2164ccd-53ee-449e-95a5-aa215f247bd8",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 24,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad00": 8,
+        "Si9f9fad01": 8,
+        "Si9f9fad02": 8
+      }
+    },
+    {
+      "key": "destiny:exodus_crash/719007be-c3e0-4408-badd-aa89df06feaa",
+      "players": 3,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.exodus.ExodusTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad12": 8,
+        "Si9f9fad13": 8,
+        "Si9f9fad14": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/d2a1298a-6cc8-48e0-a6f2-7d2ee9c428f6",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad18": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/7287bd51-97a4-461a-a1e3-c9ae76ac8c13",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad19": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/fd9ee234-f22c-4c08-a322-20739701e80d",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad20": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/e83b1d9d-e30d-4446-8647-8eef4d089363",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad21": 8
+      }
+    },
+    {
+      "key": "destiny:exodus_crash/c99c4892-3e3f-4126-889c-f8495ade0f10",
+      "players": 3,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.exodus.ExodusTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 0,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad15": 8,
+        "Si9f9fad16": 8,
+        "Si9f9fad17": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/eca3ce8c-4770-4ce3-92e1-2d27ce4d5786",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad23": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/f5f8b9ba-2495-4d49-9035-9b78c6e826d5",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad22": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/317b5ef0-aec4-4eda-805e-669a9332c673",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad24": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/6b7dd3f7-0635-4268-80b8-35f902404868",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad25": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/602f3810-87c6-45ae-b964-5b4e6ac125e2",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad26": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/f04ff4f6-a65e-4faf-beb1-b9e739048962",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad27": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/beda4ef2-f7b7-490c-a155-506ab3bb1665",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad28": 8
+      }
+    },
+    {
+      "key": "destiny:guardian_rises/33490af4-3b7c-4585-b159-e3f7dce3d4a5",
+      "players": 1,
+      "loaded_chunks": 1849,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad29": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/5056df36-c253-48e5-8186-5bfec16e8db4",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 24,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad03": 8,
+        "Si9f9fad04": 8,
+        "Si9f9fad05": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/39228f80-3e98-452e-9b7f-74a4ffff8993",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 24,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad06": 8,
+        "Si9f9fad07": 8,
+        "Si9f9fad08": 8
+      }
+    },
+    {
+      "key": "destiny:devils_lair/2acfd3ef-82d1-45ed-835d-9ea8870fce3c",
+      "players": 3,
+      "loaded_chunks": 6724,
+      "pending_chunk_tasks": 0,
+      "active_tickets": true,
+      "forced_columns": 0,
+      "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+      "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "no_save_flag": false,
+      "living_nonplayer_entities": 4,
+      "actual_player_tracking_view_distances": {
+        "Si9f9fad09": 8,
+        "Si9f9fad10": 8,
+        "Si9f9fad11": 8
+      }
+    }
+  ],
+  "full_tracking_windows_received_before_sampling": true,
+  "explicit_periodic_save_probe_server_tick": 2521,
+  "steady": {
+    "ticks": 300,
+    "mspt_warmup_ticks_excluded": 60,
+    "wall_seconds": 15.823222959,
+    "observed_steady_tps": 18.73169814044885,
+    "whole_tick_nanos": [
+      10198541,
+      16144000,
+      13788458,
+      13505167,
+      13935875,
+      13812416,
+      11724208,
+      12153791,
+      10967166,
+      11671125,
+      11247875,
+      12124833,
+      10432875,
+      11071250,
+      10899958,
+      11670791,
+      10659959,
+      10849458,
+      10286917,
+      11860208,
+      9981291,
+      14473375,
+      16640750,
+      15131542,
+      18188167,
+      12971125,
+      11256292,
+      10826417,
+      10575750,
+      11239167,
+      10837333,
+      11365291,
+      10034708,
+      14936125,
+      10591875,
+      11409125,
+      10528083,
+      10527625,
+      10163125,
+      11598583,
+      845111958,
+      76584666,
+      183609375,
+      14762292,
+      18890625,
+      13230208,
+      22713250,
+      15069917,
+      20964875,
+      32778416,
+      27287083,
+      25899875,
+      25590000,
+      21789125,
+      24404791,
+      13263625,
+      13922583,
+      23740292,
+      14477750,
+      22844417,
+      32709500,
+      40152917,
+      30929416,
+      27786833,
+      58545833,
+      59112084,
+      55755000,
+      46792792,
+      128574292,
+      25795167,
+      18491542,
+      15576833,
+      24918583,
+      21968208,
+      12488208,
+      17845750,
+      12069833,
+      11681750,
+      11073959,
+      11156041,
+      10104125,
+      14223209,
+      14357000,
+      13878166,
+      13420208,
+      12761333,
+      11545916,
+      11179500,
+      11239500,
+      10982291,
+      71510041,
+      10707000,
+      10202709,
+      10462542,
+      9908875,
+      10732584,
+      10326375,
+      10378917,
+      14057000,
+      12915750,
+      12029459,
+      17167708,
+      16766458,
+      15973625,
+      17884417,
+      14536833,
+      15520458,
+      12158791,
+      11829667,
+      12077750,
+      13143542,
+      17276667,
+      11907083,
+      11695625,
+      11070000,
+      12044417,
+      10685791,
+      11110583,
+      10175959,
+      11660500,
+      9899417,
+      13543041,
+      13481750,
+      12685083,
+      13816917,
+      13132125,
+      10968667,
+      11292417,
+      13125208,
+      11847833,
+      11690833,
+      11857375,
+      10541541,
+      10806792,
+      11569625,
+      12219167,
+      10817917,
+      10959792,
+      10120875,
+      11952459,
+      10293417,
+      31720875,
+      18245375,
+      16056250,
+      19481000,
+      14953625,
+      13420125,
+      12855208,
+      12826875,
+      13711875,
+      13111666,
+      15856625,
+      14365041,
+      17542083,
+      12818250,
+      14434333,
+      15543041,
+      14162417,
+      13367292,
+      16024709,
+      13996042,
+      18678958,
+      109936959,
+      24693917,
+      19538083,
+      15312250,
+      14980750,
+      16354000,
+      30976167,
+      23301958,
+      21155875,
+      33150250,
+      15546292,
+      13684667,
+      13274958,
+      14165541,
+      13050375,
+      13097250,
+      12893250,
+      14598667,
+      13088834,
+      14952042,
+      16156708,
+      15048292,
+      16172917,
+      13592917,
+      13077708,
+      14086833,
+      15278708,
+      20988875,
+      20483584,
+      16699584,
+      15151250,
+      15866708,
+      16691625,
+      16746541,
+      15132583,
+      14375167,
+      13459709,
+      15172250,
+      12677917,
+      14973583,
+      15480708,
+      14458333,
+      15578916,
+      13050250,
+      13437542,
+      13696375,
+      13345459,
+      14908584,
+      13127791,
+      13323667,
+      12257833,
+      15086833,
+      14830167,
+      14641833,
+      12433584,
+      11620750,
+      15379709,
+      14671750,
+      13797291,
+      17203333,
+      16167500,
+      16129125,
+      14774250,
+      15115334,
+      12922667,
+      12802667,
+      11982417,
+      12306667,
+      11706375,
+      12502417,
+      11880375,
+      15120209,
+      12598250,
+      12949459,
+      11698000,
+      13447250,
+      11894625,
+      13899375
+    ],
+    "client_received_framed_bytes": 114586024,
+    "client_sent_framed_bytes": 485501,
+    "client_decoded_packets": {
+      "ClientboundAddEntityPacket": 1308,
+      "ClientboundBlockChangedAckPacket": 560,
+      "ClientboundBlockUpdatePacket": 0,
+      "ClientboundBundlePacket": 586728,
+      "ClientboundChangeDifficultyPacket": 0,
+      "ClientboundChunkBatchFinishedPacket": 3,
+      "ClientboundChunkBatchStartPacket": 3,
+      "ClientboundClearTitlesPacket": 0,
+      "ClientboundCommandsPacket": 0,
+      "ClientboundContainerClosePacket": 0,
+      "ClientboundContainerSetContentPacket": 168,
+      "ClientboundContainerSetSlotPacket": 3311,
+      "ClientboundCustomPayloadPacket": 0,
+      "ClientboundEntityEventPacket": 0,
+      "ClientboundEntityPositionSyncPacket": 984,
+      "ClientboundFinishConfigurationPacket": 0,
+      "ClientboundForgetLevelChunkPacket": 0,
+      "ClientboundGameEventPacket": 0,
+      "ClientboundInitializeBorderPacket": 0,
+      "ClientboundKeepAlivePacket": 40,
+      "ClientboundLevelChunkWithLightPacket": 3,
+      "ClientboundLevelParticlesPacket": 76108,
+      "ClientboundLightUpdatePacket": 0,
+      "ClientboundLoginCompressionPacket": 0,
+      "ClientboundLoginFinishedPacket": 0,
+      "ClientboundLoginPacket": 0,
+      "ClientboundPingPacket": 0,
+      "ClientboundPlayerAbilitiesPacket": 0,
+      "ClientboundPlayerInfoUpdatePacket": 0,
+      "ClientboundPlayerPositionPacket": 0,
+      "ClientboundPlayerRotationPacket": 839,
+      "ClientboundPostEffectsPacket": 0,
+      "ClientboundRecipeBookAddPacket": 0,
+      "ClientboundRecipeBookRemovePacket": 0,
+      "ClientboundRecipeBookSettingsPacket": 0,
+      "ClientboundRegistryDataPacket": 0,
+      "ClientboundRemoveEntitiesPacket": 485,
+      "ClientboundRemoveMobEffectPacket": 0,
+      "ClientboundResourcePackPushPacket": 0,
+      "ClientboundRespawnPacket": 0,
+      "ClientboundRotateHeadPacket": 20328,
+      "ClientboundSelectKnownPacks": 0,
+      "ClientboundServerDataPacket": 0,
+      "ClientboundSetCameraPacket": 0,
+      "ClientboundSetChunkCacheCenterPacket": 0,
+      "ClientboundSetChunkCacheRadiusPacket": 0,
+      "ClientboundSetDefaultSpawnPositionPacket": 0,
+      "ClientboundSetEntityDataPacket": 2978918,
+      "ClientboundSetEntityMotionPacket": 786,
+      "ClientboundSetEquipmentPacket": 13705,
+      "ClientboundSetExperiencePacket": 0,
+      "ClientboundSetHealthPacket": 0,
+      "ClientboundSetHeldSlotPacket": 0,
+      "ClientboundSetPassengersPacket": 888,
+      "ClientboundSetSimulationDistancePacket": 0,
+      "ClientboundSetTimePacket": 600,
+      "ClientboundSetTitleTextPacket": 0,
+      "ClientboundSetTitlesAnimationPacket": 0,
+      "ClientboundSoundEntityPacket": 10,
+      "ClientboundSoundPacket": 2601,
+      "ClientboundStopSoundPacket": 1154,
+      "ClientboundSwingAnimationPacket": 882,
+      "ClientboundSystemChatPacket": 0,
+      "ClientboundTeleportEntityPacket": 1818,
+      "ClientboundTickingStatePacket": 0,
+      "ClientboundTickingStepPacket": 0,
+      "ClientboundTrackedWaypointPacket": 0,
+      "ClientboundUpdateAdvancementsPacket": 0,
+      "ClientboundUpdateAttributesPacket": 13211,
+      "ClientboundUpdateEnabledFeaturesPacket": 0,
+      "ClientboundUpdateMobEffectPacket": 0,
+      "ClientboundUpdateRecipesPacket": 0,
+      "ClientboundUpdateTagsPacket": 0,
+      "Pos": 2427,
+      "PosRot": 652,
+      "Rot": 22726
+    },
+    "gc_collection_ms": 696,
+    "heap_used_bytes": 4829741056,
+    "worlds": [
+      {
+        "key": "minecraft:overworld",
+        "players": 0,
+        "loaded_chunks": 729,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 1,
+        "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+        "level_implementation": "net.minecraft.server.level.ServerLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 0,
+        "actual_player_tracking_view_distances": {}
+      },
+      {
+        "key": "minecraft:the_end",
+        "players": 0,
+        "loaded_chunks": 0,
+        "pending_chunk_tasks": 0,
+        "active_tickets": false,
+        "forced_columns": 0,
+        "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+        "level_implementation": "net.minecraft.server.level.ServerLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 0,
+        "actual_player_tracking_view_distances": {}
+      },
+      {
+        "key": "minecraft:the_nether",
+        "players": 0,
+        "loaded_chunks": 0,
+        "pending_chunk_tasks": 0,
+        "active_tickets": false,
+        "forced_columns": 0,
+        "generator": "net.minecraft.world.level.levelgen.FlatLevelSource",
+        "level_implementation": "net.minecraft.server.level.ServerLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 0,
+        "actual_player_tracking_view_distances": {}
+      },
+      {
+        "key": "destiny:tower",
+        "players": 10,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.TowerChunkGenerator",
+        "level_implementation": "kim.biryeong.destiny.world.TowerSpawnWorld$TowerLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 0,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad30": 8,
+          "Si9f9fad31": 8,
+          "Si9f9fad32": 8,
+          "Si9f9fad33": 8,
+          "Si9f9fad34": 8,
+          "Si9f9fad35": 8,
+          "Si9f9fad36": 8,
+          "Si9f9fad37": 8,
+          "Si9f9fad38": 8,
+          "Si9f9fad39": 8
+        }
+      },
+      {
+        "key": "destiny:devils_lair/a2164ccd-53ee-449e-95a5-aa215f247bd8",
+        "players": 3,
+        "loaded_chunks": 6724,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 24,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad00": 8,
+          "Si9f9fad01": 8,
+          "Si9f9fad02": 8
+        }
+      },
+      {
+        "key": "destiny:exodus_crash/719007be-c3e0-4408-badd-aa89df06feaa",
+        "players": 3,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.strike.exodus.ExodusTemplateGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 0,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad12": 8,
+          "Si9f9fad13": 8,
+          "Si9f9fad14": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/d2a1298a-6cc8-48e0-a6f2-7d2ee9c428f6",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad18": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/7287bd51-97a4-461a-a1e3-c9ae76ac8c13",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad19": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/fd9ee234-f22c-4c08-a322-20739701e80d",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad20": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/e83b1d9d-e30d-4446-8647-8eef4d089363",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad21": 8
+        }
+      },
+      {
+        "key": "destiny:exodus_crash/c99c4892-3e3f-4126-889c-f8495ade0f10",
+        "players": 3,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.strike.exodus.ExodusTemplateGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 0,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad15": 8,
+          "Si9f9fad16": 8,
+          "Si9f9fad17": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/eca3ce8c-4770-4ce3-92e1-2d27ce4d5786",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad23": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/f5f8b9ba-2495-4d49-9035-9b78c6e826d5",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad22": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/317b5ef0-aec4-4eda-805e-669a9332c673",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad24": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/6b7dd3f7-0635-4268-80b8-35f902404868",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad25": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/602f3810-87c6-45ae-b964-5b4e6ac125e2",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad26": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/f04ff4f6-a65e-4faf-beb1-b9e739048962",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad27": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/beda4ef2-f7b7-490c-a155-506ab3bb1665",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad28": 8
+        }
+      },
+      {
+        "key": "destiny:guardian_rises/33490af4-3b7c-4585-b159-e3f7dce3d4a5",
+        "players": 1,
+        "loaded_chunks": 1849,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.world.template.NbtTemplateChunkGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 4,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad29": 8
+        }
+      },
+      {
+        "key": "destiny:devils_lair/5056df36-c253-48e5-8186-5bfec16e8db4",
+        "players": 3,
+        "loaded_chunks": 6724,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 24,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad03": 8,
+          "Si9f9fad04": 8,
+          "Si9f9fad05": 8
+        }
+      },
+      {
+        "key": "destiny:devils_lair/39228f80-3e98-452e-9b7f-74a4ffff8993",
+        "players": 3,
+        "loaded_chunks": 6724,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 24,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad06": 8,
+          "Si9f9fad07": 8,
+          "Si9f9fad08": 8
+        }
+      },
+      {
+        "key": "destiny:devils_lair/2acfd3ef-82d1-45ed-835d-9ea8870fce3c",
+        "players": 3,
+        "loaded_chunks": 6724,
+        "pending_chunk_tasks": 0,
+        "active_tickets": true,
+        "forced_columns": 0,
+        "generator": "kim.biryeong.destiny.strike.devils.DevilsTemplateGenerator",
+        "level_implementation": "xyz.nucleoid.fantasy.RuntimeLevel",
+        "no_save_flag": false,
+        "living_nonplayer_entities": 16,
+        "actual_player_tracking_view_distances": {
+          "Si9f9fad09": 8,
+          "Si9f9fad10": 8,
+          "Si9f9fad11": 8
+        }
+      }
+    ],
+    "observed_paid_round_drops": {
+      "Si9f9fad00": 13,
+      "Si9f9fad01": 12,
+      "Si9f9fad02": 13,
+      "Si9f9fad03": 13,
+      "Si9f9fad04": 13,
+      "Si9f9fad05": 13,
+      "Si9f9fad06": 13,
+      "Si9f9fad07": 13,
+      "Si9f9fad08": 12,
+      "Si9f9fad09": 12,
+      "Si9f9fad10": 12,
+      "Si9f9fad11": 12,
+      "Si9f9fad12": 12,
+      "Si9f9fad13": 12,
+      "Si9f9fad14": 12,
+      "Si9f9fad15": 12,
+      "Si9f9fad16": 13,
+      "Si9f9fad17": 13,
+      "Si9f9fad18": 41,
+      "Si9f9fad19": 41,
+      "Si9f9fad20": 41,
+      "Si9f9fad21": 41,
+      "Si9f9fad22": 41,
+      "Si9f9fad23": 41,
+      "Si9f9fad24": 41,
+      "Si9f9fad25": 41,
+      "Si9f9fad26": 41,
+      "Si9f9fad27": 41,
+      "Si9f9fad28": 41,
+      "Si9f9fad29": 41,
+      "Si9f9fad30": 13,
+      "Si9f9fad31": 13,
+      "Si9f9fad32": 12,
+      "Si9f9fad33": 12,
+      "Si9f9fad34": 12,
+      "Si9f9fad35": 12,
+      "Si9f9fad36": 12,
+      "Si9f9fad37": 12,
+      "Si9f9fad38": 12,
+      "Si9f9fad39": 12
+    }
+  },
+  "save_trace": [
+    {
+      "style": "level.save.native_parent",
+      "class": "net.minecraft.server.level.ServerLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 12842584,
+      "level": "minecraft:overworld",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "net.minecraft.server.level.ServerLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 96292,
+      "level": "minecraft:the_end",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "net.minecraft.server.level.ServerLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 661125,
+      "level": "minecraft:the_nether",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "kim.biryeong.destiny.world.TowerSpawnWorld$TowerLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 12381250,
+      "level": "destiny:tower",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 147523459,
+      "level": "destiny:devils_lair/a2164ccd-53ee-449e-95a5-aa215f247bd8",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 10911709,
+      "level": "destiny:exodus_crash/719007be-c3e0-4408-badd-aa89df06feaa",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 14025291,
+      "level": "destiny:guardian_rises/d2a1298a-6cc8-48e0-a6f2-7d2ee9c428f6",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 10136792,
+      "level": "destiny:guardian_rises/7287bd51-97a4-461a-a1e3-c9ae76ac8c13",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 11756041,
+      "level": "destiny:guardian_rises/fd9ee234-f22c-4c08-a322-20739701e80d",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 30489167,
+      "level": "destiny:guardian_rises/e83b1d9d-e30d-4446-8647-8eef4d089363",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 7372125,
+      "level": "destiny:exodus_crash/c99c4892-3e3f-4126-889c-f8495ade0f10",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 17353167,
+      "level": "destiny:guardian_rises/eca3ce8c-4770-4ce3-92e1-2d27ce4d5786",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 8068334,
+      "level": "destiny:guardian_rises/f5f8b9ba-2495-4d49-9035-9b78c6e826d5",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 159261625,
+      "level": "destiny:guardian_rises/317b5ef0-aec4-4eda-805e-669a9332c673",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 10065667,
+      "level": "destiny:guardian_rises/6b7dd3f7-0635-4268-80b8-35f902404868",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 12737333,
+      "level": "destiny:guardian_rises/602f3810-87c6-45ae-b964-5b4e6ac125e2",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 18592750,
+      "level": "destiny:guardian_rises/f04ff4f6-a65e-4faf-beb1-b9e739048962",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 11769583,
+      "level": "destiny:guardian_rises/beda4ef2-f7b7-490c-a155-506ab3bb1665",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 8069875,
+      "level": "destiny:guardian_rises/33490af4-3b7c-4585-b159-e3f7dce3d4a5",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 64922583,
+      "level": "destiny:devils_lair/5056df36-c253-48e5-8186-5bfec16e8db4",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 92699250,
+      "level": "destiny:devils_lair/39228f80-3e98-452e-9b7f-74a4ffff8993",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "style": "level.save.native_parent",
+      "class": "xyz.nucleoid.fantasy.RuntimeLevel",
+      "dropped_before": 0,
+      "outcome": "returned",
+      "duration_ns": 56872750,
+      "level": "destiny:devils_lair/2acfd3ef-82d1-45ed-835d-9ea8870fce3c",
+      "flush": false,
+      "no_save": false,
+      "server_tick": 2521,
+      "server_tick_end": 2521
+    },
+    {
+      "duration_ns": 814080750,
+      "style": "server.saveEverything",
+      "dropped_before": 0,
+      "server_tick": 2521,
+      "flush": false,
+      "class": "net.minecraft.gametest.framework.GameTestServer",
+      "silent": true,
+      "result": true,
+      "server_tick_end": 2521,
+      "outcome": "returned",
+      "force": false
+    }
+  ],
+  "strong_session_tokens_released_before_cleanup_wait": true,
+  "world_cleanup_ticks": 1,
+  "released_worlds": {
+    "destiny:guardian_rises/d2a1298a-6cc8-48e0-a6f2-7d2ee9c428f6": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/7287bd51-97a4-461a-a1e3-c9ae76ac8c13": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/fd9ee234-f22c-4c08-a322-20739701e80d": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:exodus_crash/719007be-c3e0-4408-badd-aa89df06feaa": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 1
+      }
+    },
+    "destiny:guardian_rises/e83b1d9d-e30d-4446-8647-8eef4d089363": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/eca3ce8c-4770-4ce3-92e1-2d27ce4d5786": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/f5f8b9ba-2495-4d49-9035-9b78c6e826d5": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/317b5ef0-aec4-4eda-805e-669a9332c673": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:exodus_crash/c99c4892-3e3f-4126-889c-f8495ade0f10": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 1
+      }
+    },
+    "destiny:guardian_rises/6b7dd3f7-0635-4268-80b8-35f902404868": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/602f3810-87c6-45ae-b964-5b4e6ac125e2": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/f04ff4f6-a65e-4faf-beb1-b9e739048962": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/beda4ef2-f7b7-490c-a155-506ab3bb1665": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:guardian_rises/33490af4-3b7c-4585-b159-e3f7dce3d4a5": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 6
+      }
+    },
+    "destiny:devils_lair/a2164ccd-53ee-449e-95a5-aa215f247bd8": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 9
+      }
+    },
+    "destiny:devils_lair/5056df36-c253-48e5-8186-5bfec16e8db4": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 8
+      }
+    },
+    "destiny:devils_lair/39228f80-3e98-452e-9b7f-74a4ffff8993": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 9
+      }
+    },
+    "destiny:devils_lair/2acfd3ef-82d1-45ed-835d-9ea8870fce3c": {
+      "keeps_dimension_active": false,
+      "removed_from_server": true,
+      "forced_columns": 0,
+      "has_retained_ticket_records": true,
+      "remaining_ticket_types": {
+        "UNKNOWN": 5
+      }
+    }
+  },
+  "cleanup_deadline_ticks": 2600,
+  "heap_used_after_world_unload_bytes": 5228199936,
+  "heap_sample_note": "Unforced heap-used after logical registry/ticket cleanup, not GC-live bytes or a long-run memory certification"
+}

@@ -1,0 +1,111 @@
+{
+  "sourceFiles": [
+    {
+      "path": "/Users/qf/Downloads/2026-11-08-5.log.gz",
+      "sha256": "c799e2d7d0ab5ab3aa1009e08a73ac8f18a6fd072864361392db0d8da7760d24",
+      "bytes": 98255
+    },
+    {
+      "path": "/Users/qf/crash-2026-11-08_14.45.28-server.txt",
+      "sha256": "a5e024622f2ee2d00a366923668db2ffc3fa0e8fe520e4ae46715b75e52a4c3b",
+      "bytes": 238853
+    }
+  ],
+  "targetHost": {
+    "cpu": "Intel Core i5-13600KF",
+    "ramGiB": 32,
+    "maxHeapGiB": 8,
+    "os": "Windows11",
+    "java": "25.0.3"
+  },
+  "observations": {
+    "watchdogSeconds": 61,
+    "heapUsedMiB": 8141,
+    "heapMaxMiB": 8192,
+    "worlds": [
+      {
+        "type": "minecraft:overworld",
+        "players": 0,
+        "loadedChunks": 0
+      },
+      {
+        "type": "minecraft:the_end",
+        "players": 0,
+        "loadedChunks": 0
+      },
+      {
+        "type": "minecraft:the_nether",
+        "players": 0,
+        "loadedChunks": 0
+      },
+      {
+        "type": "destiny:tower",
+        "players": 3,
+        "loadedChunks": 8372
+      },
+      {
+        "type": "destiny:guardian_rises",
+        "players": 0,
+        "loadedChunks": 0
+      },
+      {
+        "type": "destiny:guardian_rises",
+        "players": 0,
+        "loadedChunks": 0
+      },
+      {
+        "type": "destiny:guardian_rises",
+        "players": 0,
+        "loadedChunks": 0
+      },
+      {
+        "type": "destiny:guardian_rises",
+        "players": 0,
+        "loadedChunks": 0
+      },
+      {
+        "type": "destiny:devils_lair",
+        "players": 3,
+        "loadedChunks": 11474
+      },
+      {
+        "type": "destiny:guardian_rises",
+        "players": 1,
+        "loadedChunks": 8281
+      },
+      {
+        "type": "destiny:guardian_rises",
+        "players": 0,
+        "loadedChunks": 8174
+      },
+      {
+        "type": "destiny:devils_lair",
+        "players": 1,
+        "loadedChunks": 11339
+      },
+      {
+        "type": "destiny:guardian_rises",
+        "players": 0,
+        "loadedChunks": 8281
+      },
+      {
+        "type": "destiny:devils_lair",
+        "players": 1,
+        "loadedChunks": 11341
+      }
+    ],
+    "loadedChunksTotal": 67262,
+    "serverStackTop": "ClientControls.lambda$init$3(ClientControls.java:70)",
+    "sparkStacks": [
+      "WindowsWmi.read process pipe wait",
+      "JavaNodeExporter/MethodDisambiguator export work",
+      "ProtoTimeEncoder RuntimeException: No index for key"
+    ]
+  },
+  "limits": [
+    "One watchdog snapshot cannot establish the 61-second exclusive CPU owner or GC pause duration",
+    "Heap occupancy suggests pressure but does not prove which object graph retains memory",
+    "moved too quickly is not a network-throttling measurement",
+    "Requested client/server view distance32 is inferred from chunk footprints and must be confirmed by live settings"
+  ]
+}

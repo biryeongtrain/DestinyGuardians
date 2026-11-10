@@ -28,15 +28,48 @@ public final class ProfileWeaponView {
     // This is proximity culling, not an exact F5 detector: wall-compressed cameras can enter it.
     private static final float OWNER_VIEW_RADIUS = .64f;
     private static final Map<UUID,Session> ACTIVE=new HashMap<>();
+    /** One selector result per live owner session; motion remains evaluated every tick. */
+    record Selection(CustomModelData data,List<String> poses,boolean carrier) {}
+    static final class SelectionCache {
+        private Object source;private Identifier route;private JsonObject graph;private CustomModelData input;
+        private boolean slim,left,twoHand,crouched;private Selection selected;
+        Selection resolve(Object source,Identifier route,JsonObject graph,CustomModelData input,
+                          boolean slim,boolean left,boolean twoHand,boolean crouched) {
+            if(selected!=null&&this.source==source&&this.graph==graph&&Objects.equals(this.route,route)
+                    &&Objects.equals(this.input,input)&&this.slim==slim&&this.left==left
+                    &&this.twoHand==twoHand&&this.crouched==crouched)return selected;
+            // Components are normally immutable; snapshot the lists also protects against a caller retaining them.
+            var snapshot=new CustomModelData(List.copyOf(input.floats()),List.copyOf(input.flags()),List.copyOf(input.strings()),List.copyOf(input.colors()));
+            var flags=new ArrayList<>(snapshot.flags());while(flags.size()<2)flags.add(false);
+            flags.set(0,twoHand);flags.set(1,crouched);
+            var data=new CustomModelData(snapshot.floats(),List.copyOf(flags),snapshot.strings(),snapshot.colors());
+            var poses=ProfileArmGraph.select(graph,data,slim,left);
+            var next=new Selection(data,poses,twoHand&&carrierCompensated(graph,data,slim,left,poses));
+            this.source=source;this.route=route;this.graph=graph;this.input=snapshot;
+            this.slim=slim;this.left=left;this.twoHand=twoHand;this.crouched=crouched;selected=next;
+            return next;
+        }
+    }
+    /** Snapshot the target, not its mutable matrix argument. Interpolation changes apply once. */
+    static final class TransformState {
+        private Matrix4f last;private boolean interpolated;
+        boolean matches(Matrix4f local,boolean interpolate) {return last!=null&&last.equals(local)&&interpolated==interpolate;}
+        void remember(Matrix4f local,boolean interpolate) {last=new Matrix4f(local);interpolated=interpolate;}
+        void invalidate() {last=null;}
+    }
     private static final class Session {
         final ServerPlayer owner;final ItemDisplayHud gun,grenade;final ItemDisplayHud[] arms=new ItemDisplayHud[4];
         final Object profile;final boolean slim;boolean leftHand,lastTwoHand;ItemStack lastGun=ItemStack.EMPTY;
+        ItemStack shownGun=new ItemStack(Items.STICK),shownGrenade=ItemStack.EMPTY;
         ItemStack source;boolean lastCarrier;float viewRange;
         Matrix4f lastRoot;boolean throwing,meleeHidden;long raiseAt=Long.MIN_VALUE;
         final Matrix4f[] readyArms=new Matrix4f[4];
+        final SelectionCache selection=new SelectionCache();Selection lastSelection;
+        final TransformState gunTransform=new TransformState(),grenadeTransform=new TransformState();
+        final TransformState[] armTransforms={new TransformState(),new TransformState(),new TransformState(),new TransformState()};
         final String[] lastPoses=new String[4];final int[] lastMarkers={-1,-1,-1,-1};int sleeves=-1;float lastHandX=Float.NaN;
         Session(ServerPlayer p){owner=p;profile=p.getGameProfile();slim=slim(p);
-            gun=create(p,"gun",new ItemStack(Items.STICK),ItemDisplayContext.FIRST_PERSON_RIGHT_HAND,new Brightness(0,12));
+            gun=create(p,"gun",shownGun,ItemDisplayContext.FIRST_PERSON_RIGHT_HAND,new Brightness(0,12));
             grenade=create(p,"grenade",ItemStack.EMPTY,ItemDisplayContext.NONE,new Brightness(0,12));
             for(int i=0;i<4;i++) {var carrier=ProfileSkinArmCarrier.createCarrier(p.getGameProfile());carrier.set(DataComponents.ITEM_MODEL,kim.biryeong.destiny.DestinyGuardians.id(ProfileArmAssets.ITEM));
                 arms[i]=create(p,"arm_"+i,carrier,ItemDisplayContext.NONE,ProfileSkinArmCarrier.marker(i));}
@@ -69,7 +102,7 @@ public final class ProfileWeaponView {
     }
     private static float viewRange(ServerPlayer p) {
         return kim.biryeong.destiny.util.DisplayViewRange.nearCamera(OWNER_VIEW_RADIUS,
-                p.requestedViewDistance(),p.level().getServer().getPlayerList().getViewDistance());
+                p.requestedViewDistance(),kim.biryeong.minigamelib.cinematic.CameraViews.viewDistance(p,p.level()));
     }
     private static void refreshViewRange(Session s) {
         float range=viewRange(s.owner);
@@ -94,9 +127,9 @@ public final class ProfileWeaponView {
             var session=ACTIVE.get(p.getUUID());
             if(session!=null) {
                 session.meleeHidden=true;
-                session.gun.setItem(ItemStack.EMPTY);session.gun.update();
-                session.grenade.setItem(ItemStack.EMPTY);session.grenade.update();
-                for(var arm:session.arms)apply(arm,new Matrix4f().translation(0,-3,-1).scale(0),false);
+                session.shownGun=setItem(session.gun,session.gunTransform,ItemStack.EMPTY,session.shownGun);session.gun.update();
+                session.shownGrenade=setItem(session.grenade,session.grenadeTransform,ItemStack.EMPTY,session.shownGrenade);session.grenade.update();
+                for(int i=0;i<session.arms.length;i++)apply(session.arms[i],session.armTransforms[i],new Matrix4f().translation(0,-3,-1).scale(0),false);
                 Arrays.fill(session.lastPoses,null);session.lastRoot=null;
             }
             return;
@@ -118,24 +151,27 @@ public final class ProfileWeaponView {
         // No independent view clock: gun and all four arm segments consume the same selector.
         boolean returningFromThrow=s.throwing||s.meleeHidden;
         if(returningFromThrow){s.raiseAt=p.level().getGameTime();Arrays.fill(s.lastPoses,null);}
-        s.throwing=false;s.meleeHidden=false;s.grenade.setItem(ItemStack.EMPTY);s.grenade.update();
+        s.throwing=false;s.meleeHidden=false;
+        s.shownGrenade=setItem(s.grenade,s.grenadeTransform,ItemStack.EMPTY,s.shownGrenade);s.grenade.update();
         WeaponFireMotion.retire(p);
         boolean left=p.getMainArm()==HumanoidArm.LEFT;
+        boolean twoHand=WeaponModels.twoHanded(original);
         var originalData=original.getOrDefault(DataComponents.CUSTOM_MODEL_DATA,CustomModelData.EMPTY);
-        var flags=new ArrayList<>(originalData.flags());while(flags.size()<2)flags.add(false);
-        flags.set(0,WeaponModels.twoHanded(original));flags.set(1,WeaponCrouchPresentation.supports(original)&&WeaponCrouchPresentation.crouched(original));
-        var data=new CustomModelData(originalData.floats(),flags,originalData.strings(),originalData.colors());
-        var gun=new ItemStack(Items.STICK);gun.set(DataComponents.ITEM_MODEL,ProfileArmAssets.view(route));gun.set(DataComponents.CUSTOM_MODEL_DATA,data);
-        if(returningFromThrow||!ItemStack.matches(gun,s.lastGun)){s.gun.setItem(gun);s.lastGun=gun.copy();}
+        var selection=s.selection.resolve(original,route,graph,originalData,s.slim,left,twoHand,
+                WeaponCrouchPresentation.supports(original)&&WeaponCrouchPresentation.crouched(original));
+        if(selection!=s.lastSelection) {
+            var gun=new ItemStack(Items.STICK);gun.set(DataComponents.ITEM_MODEL,ProfileArmAssets.view(route));gun.set(DataComponents.CUSTOM_MODEL_DATA,selection.data());
+            if(returningFromThrow||!ItemStack.matches(gun,s.lastGun)){s.shownGun=setItem(s.gun,s.gunTransform,gun,s.shownGun);s.lastGun=gun.copy();}
+            s.lastSelection=selection;
+        } else if(returningFromThrow)s.shownGun=setItem(s.gun,s.gunTransform,s.lastGun,s.shownGun);
         boolean handChanged=left!=s.leftHand;
         if(handChanged){s.leftHand=left;s.gun.setItemTransform(left?ItemDisplayContext.FIRST_PERSON_LEFT_HAND:ItemDisplayContext.FIRST_PERSON_RIGHT_HAND);Arrays.fill(s.lastPoses,null);}
         // Move the whole grip inward at hip; keep the calibrated ADS sight line unchanged.
-        boolean twoHand=WeaponModels.twoHanded(original);
-        var selected=ProfileArmGraph.select(graph,data,s.slim,left);
+        var selected=selection.poses();
         // W278: most reload/insert banks bake the native grip into their two-hand branch too.
         // Undoing the charged-crossbow carrier for those routes shifted the whole reload
         // .64 block sideways, then snapped back when the idle route returned.
-        boolean carrier=twoHand&&carrierCompensated(graph,data,s.slim,left,selected);
+        boolean carrier=selection.carrier();
         float handX=handX(left,twoHand,WeaponAiming.progress(p));
         boolean framingChanged=handChanged||twoHand!=s.lastTwoHand||carrier!=s.lastCarrier||Float.compare(handX,s.lastHandX)!=0;
         var hand=motionRoot(handMatrix(left,twoHand,carrier,WeaponAiming.progress(p)),WeaponFireMotion.pose(p),left);
@@ -148,7 +184,7 @@ public final class ProfileWeaponView {
         // A route swap (reload/insert bank <-> idle) changes the item model instantly. Its carrier
         // compensation must land on the same frame; interpolating it shows a one-frame lurch.
         boolean snap=handChanged||carrier!=s.lastCarrier;
-        apply(s.gun,hand,(framingChanged||rootChanged)&&s.lastRoot!=null&&!snap);
+        apply(s.gun,s.gunTransform,hand,(framingChanged||rootChanged)&&s.lastRoot!=null&&!snap);
         var seen=new boolean[4];
         int sleeves=(p.isModelPartShown(PlayerModelPart.RIGHT_SLEEVE)?1:0)|(p.isModelPartShown(PlayerModelPart.LEFT_SLEEVE)?2:0);
         for(String id:selected){var pose=ProfileArmAssets.pose(id);if(pose==null)throw new IllegalStateException("Missing profile pose "+id);
@@ -159,10 +195,10 @@ public final class ProfileWeaponView {
                 var m=new Matrix4f(hand).mul(left?pose.left():pose.right());
                 // Native head spans x/z -4..4 and y -8..0 in sixteenths. Preserve W204 contact geometry exactly.
                 m.translate(.5f,pose.upper()?.5f:.5625f,.5f).scale(s.slim?-.225f:-.3f,.9375f,.3f);
-                apply(s.arms[index],m,s.lastPoses[index]!=null&&!snap);s.readyArms[index]=new Matrix4f(m);s.lastPoses[index]=id;
+                apply(s.arms[index],s.armTransforms[index],m,s.lastPoses[index]!=null&&!snap);s.readyArms[index]=new Matrix4f(m);s.lastPoses[index]=id;
             } else s.arms[index].update();
         }
-        for(int i=0;i<4;i++)if(!seen[i]){if(s.lastPoses[i]!=null){apply(s.arms[i],new Matrix4f().translation(0,0,1).scale(0),false);s.lastPoses[i]=null;}else if(s.arms[i].getDisplay().getTransformationInterpolationDuration()==0)apply(s.arms[i],new Matrix4f().translation(0,0,1).scale(0),false);}
+        for(int i=0;i<4;i++)if(!seen[i]){apply(s.arms[i],s.armTransforms[i],new Matrix4f().translation(0,0,1).scale(0),false);s.lastPoses[i]=null;}
         s.sleeves=sleeves;s.lastHandX=handX;s.lastTwoHand=twoHand;s.lastCarrier=carrier;s.lastRoot=new Matrix4f(hand);s.gun.update();
     }
     private static void throwView(ServerPlayer p,Session s) {
@@ -172,9 +208,9 @@ public final class ProfileWeaponView {
         s.throwing=true;
         // Keep the gun absent for the WHOLE throw. Re-raise the current gun and its
         // grip arms together afterwards, never a cached weapon during recovery.
-        s.gun.setItem(ItemStack.EMPTY);s.gun.update();s.lastRoot=null;
+        s.shownGun=setItem(s.gun,s.gunTransform,ItemStack.EMPTY,s.shownGun);s.gun.update();s.lastRoot=null;
         var prop=kim.biryeong.destiny.ability.GrenadeThrow.prop(p);
-        s.grenade.setItem(prop);
+        s.shownGrenade=setItem(s.grenade,s.grenadeTransform,prop,s.shownGrenade);
         Matrix4f propTransform=GrenadeThrowPose.prop(progress,mirror);
         int sleeves=(p.isModelPartShown(PlayerModelPart.RIGHT_SLEEVE)?1:0)|(p.isModelPartShown(PlayerModelPart.LEFT_SLEEVE)?2:0);
         for(int i=0;i<4;i++) {
@@ -183,7 +219,7 @@ public final class ProfileWeaponView {
             if(s.lastMarkers[i]!=marker){s.arms[i].getDisplay().setBrightnessOverride(ProfileSkinArmCarrier.marker(marker));s.lastMarkers[i]=marker;}
             if(left==mirror) {
                 // The other arm lowers with the weapon; only the throwing arm enters view.
-                apply(s.arms[i],new Matrix4f().translation(0,-3,-1).scale(0),false);
+                apply(s.arms[i],s.armTransforms[i],new Matrix4f().translation(0,-3,-1).scale(0),false);
                 s.lastPoses[i]="@lowered";continue;
             }
             var arm=GrenadeThrowPose.arm(i,progress,s.slim,mirror);
@@ -192,10 +228,10 @@ public final class ProfileWeaponView {
             }
             if(i==(mirror?0:1))propTransform=new Matrix4f().translation(
                     new org.joml.Vector3f().mulPosition(arm)).scale(.56f);
-            apply(s.arms[i],arm,s.lastPoses[i]!=null);
+            apply(s.arms[i],s.armTransforms[i],arm,s.lastPoses[i]!=null);
             s.lastPoses[i]="@throw";
         }
-        apply(s.grenade,propTransform,true);
+        apply(s.grenade,s.grenadeTransform,propTransform,true);
     }
     static float handX(boolean left,boolean twoHand,float adsProgress){
         float progress=Float.isFinite(adsProgress)?Math.clamp(adsProgress,0f,1f):0f;
@@ -230,9 +266,18 @@ public final class ProfileWeaponView {
         return new Matrix4f().translation(baseline.m30(),baseline.m31(),baseline.m32())
                 .mul(motion.matrix(left)).mul(orientation);
     }
-    private static void apply(ItemDisplayHud h,Matrix4f local,boolean interpolate){
+    static ItemStack setItem(ItemDisplayHud h,TransformState state,ItemStack stack,ItemStack shown) {
+        if(ItemStack.matches(stack,shown))return shown;
+        // ItemDisplayHud.setItem also resets its HUD location. Reapply the raw profile target afterwards.
+        h.setItem(stack);state.invalidate();return stack.copy();
+    }
+    static void apply(ItemDisplayHud h,TransformState state,Matrix4f local,boolean interpolate){
+        // The native delay setter force-dirties metadata even for the same zero. Only restart a real change.
+        // Item/brightness/marker changes still need their normal dirty-data flush when the pose is stable.
+        if(state.matches(local,interpolate)){h.update();return;}
         var matrix=new Matrix4f().translation(0,-10_000_000,0).scale(SCALE).mul(local).rotateY((float)Math.PI);
         h.setTransformation(new Transformation(matrix));h.setInterpolationDuration(interpolate?1:0);h.setInterpolationDelay(0);h.update();
+        state.remember(local,interpolate);
     }
     private static boolean slim(ServerPlayer p){
         var values=p.getGameProfile().properties().get("textures");

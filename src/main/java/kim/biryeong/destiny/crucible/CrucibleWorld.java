@@ -130,7 +130,7 @@ public final class CrucibleWorld {
         private void closeMarkers() { markers.forEach(ElementHolder::destroy); markers.clear(); }
     }
 
-    private static final class ArenaLevel extends RuntimeLevel {
+    private static final class ArenaLevel extends kim.biryeong.destiny.world.TemporaryActivityLevel {
         ArenaLevel(MinecraftServer server, ResourceKey<Level> key, RuntimeLevelConfig config, Style style) { super(server,key,config,style); }
         @Override public boolean canSpreadFireAround(net.minecraft.core.BlockPos pos) { return false; }
         @Override public void explode(net.minecraft.world.entity.Entity source,
@@ -175,6 +175,7 @@ public final class CrucibleWorld {
                 .setGameRule(GameRules.KEEP_INVENTORY,true).setGameRule(GameRules.IMMEDIATE_RESPAWN,true)
                 .setGameRule(GameRules.NATURAL_HEALTH_REGENERATION,false);
         var handle=Fantasy.get(server).openTemporaryLevel(ID,config);
+        kim.biryeong.destiny.world.DestinyWorldDistances.manage(handle.asLevel());
         var arena=new Arena(handle,map);
         arena.level().getWorldBorder().setCenter(0,0);arena.level().getWorldBorder().setSize(map.manifest().worldBorder());
         try { arena.spawn(ControlMatch.Team.ALPHA,0);arena.spawn(ControlMatch.Team.BRAVO,0);arena.markZones(); }

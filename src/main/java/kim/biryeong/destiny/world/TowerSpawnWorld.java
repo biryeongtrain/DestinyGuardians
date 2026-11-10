@@ -186,6 +186,7 @@ public final class TowerSpawnWorld {
                 .setGameRule(GameRules.FALL_DAMAGE, false).setGameRule(GameRules.KEEP_INVENTORY, true);
         var handle = Fantasy.get(server).getOrOpenPersistentLevel(ID, config);
         ServerLevel level = handle.asLevel();
+        DestinyWorldDistances.manage(level);
         var bounds = map.manifest().bounds();
         level.getWorldBorder().setCenter((bounds.minX() + bounds.maxX() + 1) / 2.0, (bounds.minZ() + bounds.maxZ() + 1) / 2.0);
         level.getWorldBorder().setSize(map.manifest().worldBorder());

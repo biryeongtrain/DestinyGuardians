@@ -29,7 +29,11 @@ public abstract class GameTestPackReadinessMixin {
     private void destiny$awaitProfileGraphs(BooleanSupplier haveTime, CallbackInfo ci) {
         if (testTracker != null || !ProfileWeaponView.enabled()
                 || !FabricLoader.getInstance().isModLoaded("polymer-autohost")) return;
-        if (ProfileArmAssets.graph(Identifier.parse("destiny:weapon/ace_of_spades")) != null) {
+        if (ProfileArmAssets.graph(Identifier.parse("destiny:weapon/ace_of_spades")) != null
+                && (!Boolean.getBoolean("destiny.gametest.scale.enabled")
+                    || (!kim.biryeong.minigamelib.music.MusicPacks.published().hash().isEmpty()
+                        && java.util.Set.of("SAVED", "HIT").contains(kim.biryeong.destiny.compat.pack.StartupPackCache.status(
+                                (net.minecraft.server.MinecraftServer)(Object)this))))) {
             if (destiny$packWaitStarted != 0) {
                 DestinyGuardians.LOGGER.info("GameTest asset setup ready after {} ms; starting test clocks",
                         (System.nanoTime() - destiny$packWaitStarted) / 1_000_000);

@@ -60,6 +60,7 @@ public final class GuardianRisesInstances {
         if (byOwner.size() >= capacity || byOwner.values().stream().anyMatch(i -> i.state == State.PREPARING))
             return Optional.empty();
         var config = new RuntimeLevelConfig()
+                .setLevelConstructor(kim.biryeong.destiny.world.TemporaryActivityLevel::new)
                 .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
                 .setGenerator(new NbtTemplateChunkGenerator(server, templates.join()))
                 .setDifficulty(Difficulty.NORMAL)
@@ -81,6 +82,7 @@ public final class GuardianRisesInstances {
                 .setGameRule(GameRules.ENTITY_DROPS, false).setGameRule(GameRules.KEEP_INVENTORY, true);
         UUID id = UUID.randomUUID();
         var handle = Fantasy.get(server).openTemporaryLevel(DestinyGuardians.id("guardian_rises/" + id), config);
+        kim.biryeong.destiny.world.DestinyWorldDistances.manage(handle.asLevel());
         handle.setTickWhenEmpty(false); // Assign the generator only; no idle pre-generation or spare world.
         var instance = new Instance(id, owner, handle);
         byOwner.put(owner, instance);

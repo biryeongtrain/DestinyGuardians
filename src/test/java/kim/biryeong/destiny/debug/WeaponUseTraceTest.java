@@ -2,9 +2,11 @@ package kim.biryeong.destiny.debug;
 
 import com.google.gson.JsonParser;
 import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.MethodInvocationTree;
 import com.sun.source.tree.MethodTree;
 import com.sun.source.tree.VariableTree;
 import com.sun.source.util.JavacTask;
+import com.sun.source.util.TreeScanner;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -153,12 +155,13 @@ class WeaponUseTraceTest {
                     var data = stack.get(DataComponents.CUSTOM_DATA);
                     p = WeaponComponents.profile(stack, p);
                     if (data == null) return new WeaponMagazine(p, 0, 0);
-                    var tag = data.copyTag();
-                    var ammo = new WeaponMagazine(p, savedCount(tag, ROUNDS), savedCount(tag, RESERVE), savedCount(tag, OVERFLOW), loadedLimit(stack, p, tag));
+                    var read = WeaponReadCache.read(data);
+                    var ammo = new WeaponMagazine(p, read.rounds(), read.reserve(), read.overflow(), loadedLimit(stack, p, read));
                     if (SwordItems.isSword(stack)) ammo.reload();
                     return ammo;
                 }
                 """);
+        assertReviewedReadCache();
         // W326 adds a component-derived immutable profile projection. Freeze every
         // newly reachable helper so observation cannot start rolling or saving items.
         var components = source("weapon/WeaponComponents.java");
@@ -218,6 +221,43 @@ class WeaponUseTraceTest {
                 .filter(t -> t.getSimpleName().contentEquals("Slot")).findFirst().orElseThrow();
         assertBody(method(component, "stat"), "{ return stats == null ? 0 : stats.getOrDefault(key, 0); }");
         assertBody(method(slot, "id"), "{ return name().toLowerCase(Locale.ROOT); }");
+    }
+
+    /** Cache behavior is exercised by WeaponReadCacheScaleTest/GameTests; audit only the observer's effect boundary here. */
+    private static void assertReviewedReadCache() throws Exception {
+        var cache = source("weapon/WeaponReadCache.java");
+        var local = fields(cache).stream().filter(f -> f.getName().contentEquals("LOCAL")).findFirst().orElseThrow();
+        assertEquals("ThreadLocal<Cache>", local.getType().toString());
+        assertTrue(local.getModifiers().getFlags().containsAll(Set.of(javax.lang.model.element.Modifier.PRIVATE,
+                javax.lang.model.element.Modifier.STATIC, javax.lang.model.element.Modifier.FINAL)));
+        for (var field : fields(cache)) assertFalse(field.getType().toString().contains("Map"), "No shared static data cache");
+        for (var name : List.of("COMPONENT_LIMIT", "POOL_LIMIT", "SELECTION_LIMIT")) {
+            var limit = fields(cache).stream().filter(f -> f.getName().contentEquals(name)).findFirst().orElseThrow();
+            int value = Integer.parseInt(limit.getInitializer().toString());
+            assertTrue(value > 0 && value <= 4096, "Finite bounded memoization: " + name);
+        }
+        var snapshot = cache.getMembers().stream().filter(ClassTree.class::isInstance).map(ClassTree.class::cast)
+                .filter(t -> t.getSimpleName().contentEquals("Snapshot")).findFirst().orElseThrow();
+        for (var field : fields(snapshot)) {
+            assertTrue(field.getModifiers().getFlags().containsAll(Set.of(javax.lang.model.element.Modifier.PRIVATE,
+                    javax.lang.model.element.Modifier.FINAL)), "Decoded state cannot escape or change after publication");
+            for (var forbidden : List.of("ItemStack", "ServerPlayer", "Connection", "CompoundTag", "WeaponMagazine"))
+                assertFalse(field.getType().toString().contains(forbidden), "No retained owner, source NBT or mutable ammo projection");
+        }
+        for (var method : methods(snapshot)) if (method.getReturnType() != null)
+            assertFalse(method.getReturnType().toString().contains("CompoundTag"), "Cached source NBT cannot escape");
+        var forbiddenCalls = Set.of("send", "sendSystemMessage", "broadcastChanges", "set", "setAttached", "getAttachedOrCreate",
+                "save", "reload", "consume", "addLoaded", "generateLoaded", "teleportTo", "getGameProfile", "getMainHandItem",
+                "execute", "submit", "register", "invoker", "getenv", "getProperty", "getProperties", "getInputStream",
+                "getDeclaredField", "getDeclaredMethod", "setAccessible", "invoke", "forName");
+        new TreeScanner<Void, Void>() {
+            @Override public Void visitMethodInvocation(MethodInvocationTree call, Void ignored) {
+                String selected = call.getMethodSelect().toString();
+                String name = selected.substring(selected.lastIndexOf('.') + 1);
+                assertFalse(forbiddenCalls.contains(name), "Observation cache may not send, mutate game state or inspect secrets: " + selected);
+                return super.visitMethodInvocation(call, ignored);
+            }
+        }.scan(cache, null);
     }
 
     @Test void registeredPacketObserversRunAfterExactMainThreadCheckWithoutCancellationOrMutation() throws Exception {

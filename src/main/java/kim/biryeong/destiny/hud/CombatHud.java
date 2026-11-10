@@ -41,6 +41,19 @@ public final class CombatHud {
     private static final int GOLD = 0xF4D36A;
     private static final int MUTED = 0x606872;
     private static final AbilitySlot[] SLOTS = {AbilitySlot.GRENADE, AbilitySlot.MELEE, AbilitySlot.CLASS_ABILITY};
+    private static final String SPRITE_STATE = "combat_sprite_state";
+
+    /** Per-node projection, owned by the HUD itself so removal/respawn cannot leave a player cache behind. */
+    private record SpriteState(String image, int color, int widthKey, float width, float height,
+                               float x, float y, float z, DisplayHud.HudAlignment alignment, boolean aboveHand) {
+        boolean matches(String image, int color, int widthKey, float height, float x, float y, float z,
+                        DisplayHud.HudAlignment alignment, boolean aboveHand) {
+            return this.image.equals(image) && this.color == color && this.widthKey == widthKey
+                    && Float.compare(this.height, height) == 0 && Float.compare(this.x, x) == 0
+                    && Float.compare(this.y, y) == 0 && Float.compare(this.z, z) == 0
+                    && this.alignment == alignment && this.aboveHand == aboveHand;
+        }
+    }
 
     private CombatHud() { }
 
@@ -248,23 +261,38 @@ public final class CombatHud {
         // The native offhand model occupies the lower-left corner. Only affected left-aligned
         // HUDs request the existing DisplayHud above-hand pass; ordinary/centre HUDs keep their path.
         boolean aboveHand = align == DisplayHud.HudAlignment.LEFT && !player.getOffhandItem().isEmpty();
-        String key = image + ":" + color + ":" + (id.equals(HEALTH_ID) ? Float.toString(width) : Math.round(width * 10)) + ":" + height + ":" + x + ":" + y + ":" + z + ":" + align + ":" + aboveHand;
         DisplayHud existing = DisplayHud.getHud(player, id);
-        if (existing != null && key.equals(existing.getExtraData("state"))) return;
+        int widthKey = id.equals(HEALTH_ID) ? Float.floatToIntBits(width) : Math.round(width * 10);
+        var previous = existing != null && existing.getExtraData(SPRITE_STATE) instanceof SpriteState state ? state : null;
+        if (previous != null && previous.matches(image, color, widthKey, height, x, y, z, align, aboveHand)) return;
+        var state = new SpriteState(image, color, widthKey, width, height, x, y, z, align, aboveHand);
+        // Keep the legacy diagnostic state and migrate an already-rendered node without sending metadata.
+        String key = image + ":" + color + ":" + (id.equals(HEALTH_ID) ? Float.toString(width) : Math.round(width * 10)) + ":" + height + ":" + x + ":" + y + ":" + z + ":" + align + ":" + aboveHand;
+        if (existing != null && key.equals(existing.getExtraData("state"))) {
+            existing.setExtraData(SPRITE_STATE, new SpriteState(image, color, widthKey,
+                    existing.getScale().x, height, x, y, z, align, aboveHand));
+            return;
+        }
         ItemDisplayHud hud = existing instanceof ItemDisplayHud item ? item : new ItemDisplayHud();
         // Recovery remains fractional and interpolates between server ticks. Damage is immediate.
         int interpolation = id.equals(HEALTH_ID) && existing != null && width > hud.getScale().x ? 2 : 0;
         hud.updateWhenDataChanged(false);
-        ItemStack stack = new ItemStack(Items.PAPER);
-        stack.set(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath("destiny", "gui/hud/" + image));
-        stack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(List.of(), List.of(), List.of(), List.of(color)));
-        hud.setItem(stack);
-        hud.setItemTransform(ItemDisplayContext.NONE);
-        hud.setScale(width, height, 1, interpolation);
-        hud.setAlignment(align);
-        hud.setLocation(x, y, z, interpolation);
+        if (previous == null || !previous.image.equals(image) || previous.color != color) {
+            ItemStack stack = new ItemStack(Items.PAPER);
+            stack.set(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath("destiny", "gui/hud/" + image));
+            stack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(List.of(), List.of(), List.of(), List.of(color)));
+            hud.setItem(stack);
+        }
+        if (hud.getItemTransform() != ItemDisplayContext.NONE) hud.setItemTransform(ItemDisplayContext.NONE);
+        if (previous == null || Float.compare(previous.width, width) != 0 || Float.compare(previous.height, height) != 0)
+            hud.setScale(width, height, 1, interpolation);
+        if (previous == null || previous.alignment != align) hud.setAlignment(align);
+        if (previous == null || Float.compare(previous.x, x) != 0 || Float.compare(previous.y, y) != 0
+                || Float.compare(previous.z, z) != 0 || previous.alignment != align)
+            hud.setLocation(x, y, z, interpolation);
         hud.setViewRange(1000);
         hud.setExtraData("state", key);
+        hud.setExtraData(SPRITE_STATE, state);
         hud.setAboveHand(aboveHand);
         if (existing == null) hud.spawn(player, id);
         hud.updateWhenDataChanged(true);

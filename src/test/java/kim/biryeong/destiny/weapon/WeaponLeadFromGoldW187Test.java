@@ -45,7 +45,14 @@ class WeaponLeadFromGoldW187Test {
         assertTrue(loadout.contains("WeaponItems.entry(stack).filter(e->slot(p,stack,e)==slot)"));
         String items=Files.readString(Path.of("src/main/java/kim/biryeong/destiny/weapon/WeaponItems.java"));
         assertTrue(items.contains("if (!stack.is(WeaponCombatItem.INSTANCE)) return Optional.empty()"));
-        assertTrue(items.contains("getBooleanOr(LIVE, false)"));
+        // Cached decode is not authorization: carrier/live/model checks still precede every returned entry.
+        assertTrue(items.contains("entry(stack, WeaponReadCache.read(data))"));
+        assertTrue(items.contains("stack.is(WeaponCombatItem.INSTANCE) && read.live()"));
+        assertTrue(items.contains("read.entry(stack.get(DataComponents.ITEM_MODEL))"));
+        String cache=Files.readString(Path.of("src/main/java/kim/biryeong/destiny/weapon/WeaponReadCache.java"));
+        assertTrue(cache.contains("live = tag.getBooleanOr(WeaponItems.LIVE, false)"));
+        assertTrue(cache.contains("entry = tag.getString(WeaponModels.TAG).flatMap(WeaponCatalog::find)"));
+        assertTrue(cache.contains("model != null && model.equals(currentModel) ? entry : Optional.empty()"));
     }
     @Test void reserveOnlySaveFollowsActualGainAndMasterOwnsBroadcastAndEvent() throws Exception {
         String source=runtime();

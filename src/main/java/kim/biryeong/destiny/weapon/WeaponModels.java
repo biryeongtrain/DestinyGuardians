@@ -36,8 +36,7 @@ public final class WeaponModels {
         if (!stack.is(Items.STICK) && !stack.is(WeaponPreviewItem.INSTANCE) && !stack.is(WeaponCombatItem.INSTANCE)) return Optional.empty();
         var data = stack.get(DataComponents.CUSTOM_DATA);
         if (data == null) return Optional.empty();
-        return data.copyTag().getString(TAG).flatMap(WeaponCatalog::find)
-                .filter(e -> Identifier.parse(e.item_model()).equals(stack.get(DataComponents.ITEM_MODEL)));
+        return WeaponReadCache.read(data).entry(stack.get(DataComponents.ITEM_MODEL));
     }
     public static boolean supportsTwoHand(WeaponCatalog.Entry entry) {
         return !List.of("bow", "sword").contains(entry.family());
@@ -48,9 +47,10 @@ public final class WeaponModels {
     }
     public static boolean twoHanded(ItemStack stack) {
         if (!stack.is(WeaponPreviewItem.INSTANCE) && !stack.is(WeaponCombatItem.INSTANCE)) return false;
-        return entry(stack).filter(WeaponModels::supportsTwoHand).isPresent()
-                && stack.get(DataComponents.CUSTOM_DATA).copyTag().getString(GRIP_TAG)
-                .filter(Grip.TWO_HAND.name()::equals).isPresent();
+        var data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data == null) return false;
+        var read = WeaponReadCache.read(data);
+        return read.twoHanded() && read.entry(stack.get(DataComponents.ITEM_MODEL)).filter(WeaponModels::supportsTwoHand).isPresent();
     }
     /** Returns a copy so a legacy stick can safely migrate without losing its components. */
     public static Optional<ItemStack> withGrip(ItemStack stack, Grip grip) {

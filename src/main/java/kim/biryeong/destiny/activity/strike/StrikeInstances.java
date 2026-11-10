@@ -57,6 +57,7 @@ public class StrikeInstances {
         if (instances.size() >= capacity || members.stream().anyMatch(participants::containsKey)
                 || instances.values().stream().anyMatch(i -> i.state == State.PREPARING)) return Optional.empty();
         var config = new RuntimeLevelConfig()
+                .setLevelConstructor(kim.biryeong.destiny.world.TemporaryActivityLevel::new)
                 .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
                 .setGenerator(generator.get())
                 .setDifficulty(Difficulty.NORMAL)
@@ -76,6 +77,7 @@ public class StrikeInstances {
                 .setGameRule(GameRules.ENTITY_DROPS, false).setGameRule(GameRules.KEEP_INVENTORY, true);
         var id = UUID.randomUUID();
         var handle = Fantasy.get(server).openTemporaryLevel(DestinyGuardians.id(strikeId + "/" + id), config);
+        kim.biryeong.destiny.world.DestinyWorldDistances.manage(handle.asLevel());
         // Fantasy must tick the empty level while the first template chunks are generated.
         handle.setTickWhenEmpty(true);
         var instance = new Instance(id, members, handle);

@@ -1,0 +1,13 @@
+{
+  "nativeTests": 3,
+  "passed": 3,
+  "gradleExit": 0,
+  "logSha256": "de402f9386f0390ed1481e2977730b855d283b4ee6babc29e07003577de4c7a8",
+  "scope": [
+    "temporaryBulkSaveSkipped_TowerStillPersistent",
+    "actualNativeDirtyChunkUnloadReloadPreservesGoldBlock",
+    "PlayerListSaveAllCampaignAttachmentRestored"
+  ],
+  "qaTimingCorrection": "20Hz wrapper now supplies its actual spare-time deadline to native chunk work; prior externally paced GameTest time budget could starve unload callbacks",
+  "previousFailures": "global hasWork oracle and stale GameTest budget; no forced unload/save/ticket/GC workarounds"
+}

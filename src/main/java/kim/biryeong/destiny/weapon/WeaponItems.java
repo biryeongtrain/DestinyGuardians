@@ -4,10 +4,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ByteTag;
-import net.minecraft.nbt.ShortTag;
-import net.minecraft.nbt.IntTag;
-import net.minecraft.nbt.LongTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemLore;
@@ -27,8 +23,13 @@ public final class WeaponItems {
     public static Optional<WeaponCatalog.Entry> entry(ItemStack stack) {
         if (!stack.is(WeaponCombatItem.INSTANCE)) return Optional.empty();
         var data = stack.get(DataComponents.CUSTOM_DATA);
-        if (data == null || !data.copyTag().getBooleanOr(LIVE, false)) return Optional.empty();
-        return WeaponModels.entry(stack);
+        if (data == null) return Optional.empty();
+        return entry(stack, WeaponReadCache.read(data));
+    }
+    /** Revalidate the current carrier/model even when a caller already holds the component projection. */
+    static Optional<WeaponCatalog.Entry> entry(ItemStack stack, WeaponReadCache.Snapshot read) {
+        return stack.is(WeaponCombatItem.INSTANCE) && read.live()
+                ? read.entry(stack.get(DataComponents.ITEM_MODEL)) : Optional.empty();
     }
     public static ItemStack create(WeaponCatalog.Entry entry) {
         var stack = WeaponModels.create(entry).transmuteCopy(WeaponCombatItem.INSTANCE);
@@ -48,9 +49,9 @@ public final class WeaponItems {
         // Missing/corrupt ammunition never refills a saved item.
         p = WeaponComponents.profile(stack, p); // W326 magazine components
         if (data == null) return new WeaponMagazine(p, 0, 0);
-        var tag = data.copyTag();
+        var read = WeaponReadCache.read(data);
         // Pure projection only. HUD/get/inspect must not migrate or save the real item.
-        var ammo = new WeaponMagazine(p, savedCount(tag, ROUNDS), savedCount(tag, RESERVE), savedCount(tag, OVERFLOW), loadedLimit(stack, p, tag));
+        var ammo = new WeaponMagazine(p, read.rounds(), read.reserve(), read.overflow(), loadedLimit(stack, p, read));
         // A sword has a single ammo pool, no magazine/reload. Pure local projection
         // folds legacy reserve/overflow into usable capacity without minting ammo.
         if (SwordItems.isSword(stack)) ammo.reload();
@@ -58,7 +59,7 @@ public final class WeaponItems {
     }
     /** Only an exact implemented selected roll may retain a saved over-base magazine.
      * A trait edit projects unauthorized excess into reserve/legacy debt without losing ammo. */
-    private static int loadedLimit(ItemStack stack, WeaponProfile p, CompoundTag tag) {
+    private static int loadedLimit(ItemStack stack, WeaponProfile p, WeaponReadCache.Snapshot read) {
         int base = p.magazine(), maximum = base;
         if (WeaponPerks.selected(stack, "ambitious_assassin").isPresent())
             maximum = (int)Math.min(Integer.MAX_VALUE, ((long)base * 250 + 99) / 100);
@@ -69,17 +70,7 @@ public final class WeaponItems {
             maximum = Math.max(maximum, (int)Math.min(Integer.MAX_VALUE, (long)base * 2));
         if (WeaponItems.entry(stack).filter(e -> e.id().equals("thorn") && ExoticWeaponsW350.supports(e)).isPresent())
             maximum = Math.max(maximum, 40);
-        return (int)Math.clamp(savedCount(tag, LOADED_LIMIT), base, maximum);
-    }
-    /** Integral NBT only: doubles/NaN/strings must not truncate, wrap or grant ammunition. */
-    private static long savedCount(CompoundTag tag, String key) {
-        return switch (tag.get(key)) {
-            case ByteTag value -> Math.max(0, value.longValue());
-            case ShortTag value -> Math.max(0, value.longValue());
-            case IntTag value -> Math.max(0, value.longValue());
-            case LongTag value -> Math.max(0, value.longValue());
-            case null, default -> 0;
-        };
+        return (int)Math.clamp(read.loadedLimit(), base, maximum);
     }
     /** Mutation boundary only: write the projected state once, never merge legacy counts again. */
     public static void save(ItemStack stack, WeaponMagazine magazine) {

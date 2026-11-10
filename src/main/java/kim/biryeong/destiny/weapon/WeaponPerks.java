@@ -2,8 +2,6 @@ package kim.biryeong.destiny.weapon;
 
 import com.google.gson.Gson;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.IntTag;
-import net.minecraft.nbt.LongTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -56,8 +54,14 @@ public final class WeaponPerks {
     public static List<Roll> available(ItemStack stack, String id) {
         var entry = WeaponItems.entry(stack);
         if (entry.isEmpty()) return List.of();
-        if (LegendaryWeapons.contains(entry.get().id()))
-            return LegendaryPerks.extraRolls(id).stream().filter(r -> r.id.equals(entry.get().id())).toList();
+        return available(entry.get(), id);
+    }
+    private static List<Roll> available(WeaponCatalog.Entry entry, String id) {
+        var cached = WeaponReadCache.pool(entry, id);
+        if (cached != null) return cached;
+        if (LegendaryWeapons.contains(entry.id()))
+            return WeaponReadCache.rememberPool(entry, id,
+                    LegendaryPerks.extraRolls(id).stream().filter(r -> r.id.equals(entry.id())).toList());
         var pool = IronGazeProfile.ID.equals(id) ? IronGazeProfile.rolls() : SlickdrawProfile.ID.equals(id) ? SlickdrawProfile.rolls() : GutshotProfile.ID.equals(id) ? GutshotProfile.rolls() : CorneredProfile.ID.equals(id) ? CorneredProfile.rolls() : OsmosisProfile.ID.equals(id) ? OsmosisProfile.rolls() : HipFireGripProfile.ID.equals(id) ? HipFireGripProfile.rolls() : MovingTargetProfile.ID.equals(id) ? MovingTargetProfile.rolls() : HeadseekerProfile.ID.equals(id) ? HeadseekerProfile.rolls() : SteadyHandsProfile.ID.equals(id) ? SteadyHandsProfile.rolls() : PulseMonitorProfile.ID.equals(id) ? PulseMonitorProfile.rolls() : UnrelentingProfile.ID.equals(id) ? UnrelentingProfile.rolls() : WhirlwindBladeProfile.ID.equals(id) ? WhirlwindBladeProfile.rolls() : EnGardeProfile.ID.equals(id) ? EnGardeProfile.rolls() : OpeningShotProfile.ID.equals(id) ? OpeningShotProfile.rolls() : BoxBreathingProfile.ID.equals(id) ? BoxBreathingProfile.rolls() : DynamicSwayProfile.ID.equals(id) ? DynamicSwayProfile.rolls() : AssassinsBladeProfile.ID.equals(id) ? AssassinsBladeProfile.rolls() : KillingTallyProfile.ID.equals(id) ? KillingTallyProfile.rolls() : SympatheticArsenalProfile.ID.equals(id) ? SympatheticArsenalProfile.rolls() : NoDistractionsProfile.ID.equals(id) ? NoDistractionsProfile.rolls() : RelentlessStrikesProfile.ID.equals(id) ? RelentlessStrikesProfile.rolls() : TirelessBladeProfile.ID.equals(id) ? TirelessBladeProfile.rolls() : MulliganProfile.ID.equals(id) ? MulliganProfile.rolls() : AmbitiousAssassinProfile.ID.equals(id) ? AmbitiousAssassinProfile.rolls() : ClownCartridgeProfile.ID.equals(id) ? ClownCartridgeProfile.rolls() : OverflowProfile.ID.equals(id) ? OverflowProfile.rolls() : AdagioProfile.ID.equals(id) ? AdagioProfile.rolls() : ImpulseAmplifierProfile.ID.equals(id) ? ImpulseAmplifierProfile.rolls() : RangefinderProfile.ID.equals(id) ? RangefinderProfile.rolls() : BackupPlanProfile.ID.equals(id) ? BackupPlanProfile.rolls() : EncoreProfile.ID.equals(id) ? EncoreProfile.rolls() : WellRoundedProfile.ID.equals(id) ? WellRoundedProfile.rolls() : WellspringProfile.ID.equals(id) ? WellspringProfile.rolls() : ThreshProfile.ID.equals(id) ? ThreshProfile.rolls() : PugilistProfile.ID.equals(id) ? PugilistProfile.rolls() : FiringLineProfile.ID.equals(id) ? FiringLineProfile.rolls() : FullAutoProfile.ID.equals(id) ? FullAutoProfile.rolls() : IronReachProfile.ID.equals(id) ? IronReachProfile.rolls() : UnderPressureProfile.ID.equals(id) ? UnderPressureProfile.rolls() : CompulsiveReloaderProfile.ID.equals(id) ? CompulsiveReloaderProfile.rolls() : EnsembleProfile.ID.equals(id) ? EnsembleProfile.rolls() : FirmlyPlantedProfile.ID.equals(id) ? FirmlyPlantedProfile.rolls() : ZenMomentProfile.ID.equals(id) ? ZenMomentProfile.rolls() : LeadFromGoldProfile.ID.equals(id) ? LeadFromGoldProfile.rolls() : QuickdrawProfile.ID.equals(id) ? QuickdrawProfile.rolls() : ElementalCapacitorProfile.ID.equals(id) ? ElementalCapacitorProfile.rolls() : SurplusProfile.ID.equals(id) ? SurplusProfile.rolls() : HighImpactReservesProfile.ID.equals(id) ? HighImpactReservesProfile.rolls() : VorpalProfile.ID.equals(id) ? VorpalProfile.rolls() : ThreatDetectorProfile.ID.equals(id) ? ThreatDetectorProfile.rolls() : HeatingUpProfile.ID.equals(id) ? HeatingUpProfile.rolls() : StatsForAllProfile.ID.equals(id) ? StatsForAllProfile.rolls() : FocusedFuryProfile.ID.equals(id) ? FocusedFuryProfile.rolls() : AdrenalineJunkieProfile.ID.equals(id) ? AdrenalineJunkieProfile.rolls() : FrenzyProfile.ID.equals(id) ? FrenzyProfile.rolls() : TapTheTriggerProfile.ID.equals(id) ? TapTheTriggerProfile.rolls() : PerpetualMotionProfile.ID.equals(id) ? PerpetualMotionProfile.rolls() : RapidHitProfile.ID.equals(id) ? RapidHitProfile.rolls() : SubsistenceProfile.ID.equals(id) ? SubsistenceProfile.rolls() : MultikillClipProfile.ID.equals(id) ? MultikillClipProfile.rolls() : SwashbucklerProfile.ID.equals(id) ? SwashbucklerProfile.rolls() : GraveRobberProfile.ID.equals(id) ? GraveRobberProfile.rolls() : OneForAllProfile.ID.equals(id) ? OneForAllProfile.rolls() : SurroundedProfile.ID.equals(id) ? SurroundedProfile.rolls() : FeedingFrenzyProfile.ID.equals(id) ? FeedingFrenzyProfile.rolls() : TrackingProfile.ID.equals(id) ? TrackingProfile.rolls() : DemolitionistProfile.ID.equals(id) ? DemolitionistProfile.rolls() : PayloadProfile.ID.equals(id) ? PayloadProfile.rolls() : DragonflyProfile.ID.equals(id) ? DragonflyProfile.rolls() : ID.equals(id) ? rolls() : KillClipProfile.ID.equals(id) ? KillClipProfile.rolls()
                 : ArcherTempoProfile.ID.equals(id) ? ArcherTempoProfile.rolls()
                 : OutlawProfile.ID.equals(id) ? OutlawProfile.rolls()
@@ -68,7 +72,7 @@ public final class WeaponPerks {
                 : PerkBatchA.has(id) ? PerkBatchA.rolls(id) // W320 batch A
                 : PerkBatchC.has(id) ? PerkBatchC.rolls(id) // W322 batch C
                 : PrecisionReturnProfile.rolls(id);
-        return pool.stream().filter(r -> r.id.equals(entry.get().id())).toList();
+        return WeaponReadCache.rememberPool(entry, id, pool.stream().filter(r -> r.id.equals(entry.id())).toList());
     }
     public static List<String> ids() { // W320 batch A
         var all = new ArrayList<>(baseIds()); all.addAll(PerkBatchA.ids()); all.addAll(LegendaryPerks.addedIds()); return List.copyOf(new LinkedHashSet<>(all));
@@ -167,14 +171,6 @@ if (TirelessBladeProfile.ID.equals(id)) return "지칠 줄 모르는 칼날";
         if (PerkBatchC.has(id)) return PerkBatchC.name(id); // W322 batch C
         return ID.equals(id) ? "자동 장전 총집" : KillClipProfile.ID.equals(id) ? "살상 탄창" : OutlawProfile.ID.equals(id) ? "무법자" : RampageProfile.ID.equals(id) ? "광란" : id;
     }
-    private static long savedHash(CompoundTag tag, int socket) {
-        var modern = tag.get(SLOTS_KEY);
-        if (modern instanceof CompoundTag slots && slots.contains(Integer.toString(socket)))
-            return slots.get(Integer.toString(socket)) instanceof LongTag value ? value.longValue() : -1;
-        if (modern != null && !(modern instanceof CompoundTag)) return -1;
-        return tag.get(SOCKET_KEY) instanceof IntTag index && index.intValue() == socket
-                && tag.get(HASH_KEY) instanceof LongTag hash ? hash.longValue() : -1;
-    }
     /** Strict integral types, exact selected weapon and exact permitted trait socket. Read-only. */
     public static Optional<Roll> selected(ItemStack stack) {
         return selected(stack, ID);
@@ -182,8 +178,14 @@ if (TirelessBladeProfile.ID.equals(id)) return "지칠 줄 모르는 칼날";
     public static Optional<Roll> selected(ItemStack stack, String id) {
         var custom = stack.get(DataComponents.CUSTOM_DATA);
         if (custom == null) return Optional.empty();
-        var tag = custom.copyTag();
-        return available(stack, id).stream().filter(r -> savedHash(tag, r.socket) == r.perkHash).findFirst();
+        if (!stack.is(WeaponCombatItem.INSTANCE)) return Optional.empty();
+        var read = WeaponReadCache.read(custom);
+        var entry = WeaponItems.entry(stack, read);
+        if (entry.isEmpty()) return Optional.empty();
+        var selected = read.selected(id);
+        if (selected != null) return selected;
+        return read.rememberSelected(id, available(entry.get(), id).stream()
+                .filter(r -> read.savedHash(r.socket) == r.perkHash).findFirst());
     }
     /** Socket choice changes no stack identity, ammunition, pose, cooldown, or player lore. */
     public static boolean select(ItemStack stack) {

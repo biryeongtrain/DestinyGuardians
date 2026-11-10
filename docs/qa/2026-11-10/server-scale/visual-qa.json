@@ -1,0 +1,263 @@
+{
+  "scope": "One actual Fabric 26.3 rendering client against isolated loopback server; not 30 rendering clients or WAN acceptance",
+  "server": {
+    "loopbackPort": 25642,
+    "globalView": 32,
+    "globalSimulation": 6,
+    "managedTowerView": 8
+  },
+  "background": {
+    "backgroundMode": true,
+    "backgroundActive": true,
+    "backgroundGameplay": true,
+    "windowActive": true
+  },
+  "nativeInput": {
+    "scale-ads-input": {
+      "leaseReleased": true,
+      "heldKeys": [],
+      "pendingSteps": 0,
+      "renewalErrors": [],
+      "captures": [
+        {
+          "elapsed": 0.408,
+          "name": "scale-ads-0",
+          "bytes": 1542096,
+          "fps": 59,
+          "screen": null
+        },
+        {
+          "elapsed": 1.11,
+          "name": "scale-ads-1",
+          "bytes": 1544056,
+          "fps": 51,
+          "screen": null
+        }
+      ]
+    },
+    "scale-fire-input": {
+      "leaseReleased": true,
+      "heldKeys": [],
+      "pendingSteps": 0,
+      "renewalErrors": [],
+      "captures": [
+        {
+          "elapsed": 0.256,
+          "name": "scale-fire-0",
+          "bytes": 1536799,
+          "fps": 59,
+          "screen": null
+        },
+        {
+          "elapsed": 2.002,
+          "name": "scale-fire-1",
+          "bytes": 1546517,
+          "fps": 59,
+          "screen": null
+        },
+        {
+          "elapsed": 4.006,
+          "name": "scale-fire-2",
+          "bytes": 1515189,
+          "fps": 60,
+          "screen": null
+        },
+        {
+          "elapsed": 6.01,
+          "name": "scale-fire-3",
+          "bytes": 1476244,
+          "fps": 59,
+          "screen": null
+        },
+        {
+          "elapsed": 8.001,
+          "name": "scale-fire-4",
+          "bytes": 1433982,
+          "fps": 57,
+          "screen": null
+        },
+        {
+          "elapsed": 9.71,
+          "name": "scale-fire-5",
+          "bytes": 1424558,
+          "fps": 59,
+          "screen": null
+        }
+      ]
+    },
+    "scale-grenade-input": {
+      "leaseReleased": true,
+      "heldKeys": [],
+      "pendingSteps": 0,
+      "renewalErrors": [],
+      "captures": [
+        {
+          "elapsed": 0.13,
+          "name": "scale-grenade-0",
+          "bytes": 1427469,
+          "fps": 60,
+          "screen": null
+        },
+        {
+          "elapsed": 0.41,
+          "name": "scale-grenade-1",
+          "bytes": 1395478,
+          "fps": 51,
+          "screen": null
+        },
+        {
+          "elapsed": 1.606,
+          "name": "scale-grenade-2",
+          "bytes": 1426379,
+          "fps": 57,
+          "screen": null
+        }
+      ]
+    },
+    "scale-super-input": {
+      "leaseReleased": true,
+      "heldKeys": [],
+      "pendingSteps": 0,
+      "renewalErrors": [],
+      "captures": [
+        {
+          "elapsed": 0.209,
+          "name": "scale-super-0",
+          "bytes": 1460638,
+          "fps": 48,
+          "screen": null
+        },
+        {
+          "elapsed": 0.76,
+          "name": "scale-super-1",
+          "bytes": 1440882,
+          "fps": 48,
+          "screen": null
+        },
+        {
+          "elapsed": 2.809,
+          "name": "scale-super-2",
+          "bytes": 1457729,
+          "fps": 53,
+          "screen": null
+        }
+      ]
+    },
+    "scale-super-preheld-input": {
+      "leaseReleased": true,
+      "heldKeys": [],
+      "pendingSteps": 0,
+      "renewalErrors": [],
+      "captures": [
+        {
+          "elapsed": 0.36,
+          "name": "scale-super-preheld-0",
+          "bytes": 1560411,
+          "fps": 59,
+          "screen": null
+        },
+        {
+          "elapsed": 0.651,
+          "name": "scale-super-preheld-1",
+          "bytes": 1602345,
+          "fps": 47,
+          "screen": null
+        },
+        {
+          "elapsed": 1.109,
+          "name": "scale-super-preheld-2",
+          "bytes": 1570904,
+          "fps": 47,
+          "screen": null
+        },
+        {
+          "elapsed": 3.204,
+          "name": "scale-super-preheld-3",
+          "bytes": 1570358,
+          "fps": 60,
+          "screen": null
+        }
+      ]
+    },
+    "scale-titan-camera-input": {
+      "leaseReleased": true,
+      "heldKeys": [],
+      "pendingSteps": 0,
+      "renewalErrors": [],
+      "captures": [
+        {
+          "elapsed": 0.45,
+          "name": "scale-titan-camera-0",
+          "bytes": 1497963,
+          "fps": 59,
+          "screen": null
+        },
+        {
+          "elapsed": 1.208,
+          "name": "scale-titan-camera-1",
+          "bytes": 1646278,
+          "fps": 53,
+          "screen": null
+        },
+        {
+          "elapsed": 3.01,
+          "name": "scale-titan-camera-2",
+          "bytes": 1613721,
+          "fps": 60,
+          "screen": null
+        }
+      ]
+    }
+  },
+  "accepted": [
+    "Austringer hip and ADS model transition; actual native left click",
+    "Actual native right-click firing: HUD 11 to 0, reload model at 6 seconds, returned hip model and ammo 6 after held fire continued",
+    "Native F grenade: weapon hidden for hand/prop throw and restored with cooldown HUD",
+    "Non-self armor stand equipment from canonical weapon: recognizable gold/purple Austringer visible after equipment encoding; stand removed",
+    "Third-front perspective: owner weapon and HUD visible; first obstructed stand capture excluded from acceptance",
+    "Health ratio responds to temporary max-health 40 fixture and restores to 20; not damage-event or interpolation timing proof",
+    "Native preheld sneak then F: Titan super switches camera, third-person figure and surrounding Tower chunks visible; expiry restores first-person camera and weapon"
+  ],
+  "notClaimed": [
+    "Q-key manual reload; tool key set does not include drop",
+    "Unfocused rendering/input; background mode active but sampled windowActive=true",
+    "Speaker/audio quality, all weapon models, all lighting or super art acceptance",
+    "Golden Gun complete first-person art acceptance: canonical Austringer and golden prop both visible in exploratory capture; not changed in this optimization batch",
+    "Single FPS samples (47-60 across input captures) are not frame-time benchmark or concurrent-client certification"
+  ],
+  "attempts": [
+    "First QA connection rejected INVALID_URL because owned forced_address lacked http scheme; corrected private QA configuration only and restarted both processes",
+    "One-step simultaneous sneak/F activated grenade; preholding sneak for 5 ticks produced native super activation. Original input receipts retained"
+  ],
+  "finalNeutral": {
+    "leaseActive": false,
+    "heldKeys": [],
+    "pendingSteps": 0,
+    "perspective": "FIRST_PERSON",
+    "cameraIsPlayer": true,
+    "health": 20.0,
+    "usingItem": false
+  },
+  "cleanup": {
+    "8102": {
+      "free": true,
+      "listeners": ""
+    },
+    "25642": {
+      "free": true,
+      "listeners": ""
+    },
+    "81439": {
+      "running": false,
+      "process": ""
+    },
+    "81441": {
+      "running": false,
+      "process": ""
+    },
+    "89287": {
+      "running": false,
+      "process": ""
+    }
+  }
+}

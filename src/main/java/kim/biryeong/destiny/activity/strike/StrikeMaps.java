@@ -99,7 +99,7 @@ public final class StrikeMaps<Z extends Enum<Z> & StrikeZone> {
     /** Warm generator-owned chunks only: no per-block ServerLevel writes. */
     public RisingServices.ZoneBuild begin(ServerLevel level, Z zone, BlockPos origin) {
         if (!origin.equals(nbt(zone).getBounds().min())) throw new IllegalArgumentException("Template origin mismatch");
-        return new TemplateChunkWarmup(level, nbt(zone).getBounds(), warmupMargin(level.getServer().getPlayerList().getViewDistance()));
+        return new TemplateChunkWarmup(level, nbt(zone).getBounds(), warmupMargin(kim.biryeong.destiny.world.DestinyWorldDistances.effectiveViewDistance(level)));
     }
     /** View radius plus one column, capped so neighbouring zones never share columns. */
     public static int warmupMargin(int viewDistance) { return Math.clamp(viewDistance + 1, 0, 12); }

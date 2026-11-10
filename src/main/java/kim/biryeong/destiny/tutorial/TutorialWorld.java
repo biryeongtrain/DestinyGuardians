@@ -29,6 +29,7 @@ final class TutorialWorld {
     static ServerLevel open(MinecraftServer server) {
         if (handle != null && handle.asLevel().getServer() == server) return handle.asLevel();
         var config = new RuntimeLevelConfig()
+                .setLevelConstructor(kim.biryeong.destiny.world.TemporaryActivityLevel::new)
                 .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
                 .setGenerator(new VoidChunkGenerator(server.registryAccess().getOrThrow(Biomes.THE_VOID)))
                 .setDifficulty(Difficulty.NORMAL)
@@ -44,6 +45,7 @@ final class TutorialWorld {
                 .setGameRule(GameRules.ENTITY_DROPS, false).setGameRule(GameRules.PVP, false)
                 .setGameRule(GameRules.FALL_DAMAGE, false).setGameRule(GameRules.KEEP_INVENTORY, true);
         handle = Fantasy.get(server).openTemporaryLevel(ID, config);
+        kim.biryeong.destiny.world.DestinyWorldDistances.manage(handle.asLevel());
         handle.asLevel().getWorldBorder().setSize(60_000);
         LANES.clear();
         USED.clear();
