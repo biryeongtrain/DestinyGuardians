@@ -34,6 +34,7 @@ def main() -> int:
     parser.add_argument("--client-view", type=bounded(2, 32), default=32)
     parser.add_argument("--port", type=bounded(1024, 65535), default=25640)
     parser.add_argument("--jfr", action="store_true")
+    parser.add_argument("--lifecycle", action="store_true", help="instances only: two admission/exit cycles, native reconnect and unchanged120s expiry")
     args = parser.parse_args()
     if args.players is None:
         args.players = 40 if args.scenario == "instances" else 30
@@ -41,6 +42,8 @@ def main() -> int:
         parser.error("the production instance cohort currently requires exactly40 peers")
     if args.scenario == "instances" and args.jfr:
         parser.error("--jfr currently applies to the shared scenario; instance results include tick/GC/transport counters")
+    if args.lifecycle and args.scenario != "instances":
+        parser.error("--lifecycle requires --scenario instances")
     repo = Path(__file__).resolve().parents[2]
     run = args.run_dir.expanduser().resolve()
     marker = run / ".destiny-scale-owned.json"
@@ -76,6 +79,8 @@ def main() -> int:
         properties.update({
             "destiny.guardianRises": "true",
             "destiny.gametest.scale.instances.enabled": "true",
+            "destiny.gametest.scale.instances.lifecycle": str(args.lifecycle).lower(),
+            "destiny.gametest.scale.instances.globalSimulation": "6",
             "destiny.gametest.scale.instances.globalView": str(args.server_view),
             "destiny.gametest.scale.instances.port": str(args.port),
             "destiny.gametest.scale.instances.steadyTicks": str(args.phase_ticks),

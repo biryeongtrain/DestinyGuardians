@@ -51,6 +51,12 @@ public final class ServerScaleInstancesGameTests {
                 handler.player.setAttached(RisingCampaign.COMPLETED_REVISION, Integer.MAX_VALUE);
             }
         });
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            var run = active;
+            if (run != null && run.server == server && run.ids.contains(handler.player.getUUID()))
+                run.disconnectEvents.add(new DisconnectEvent(handler.player.getUUID(), System.identityHashCode(handler),
+                        server.isSameThread(), Thread.currentThread().getName(), server.getTickCount()));
+        });
     }
 
     @GameTest(structure="destiny-test:floor", environment="destiny-test:w90_isolated", maxTicks=36000)
@@ -75,10 +81,11 @@ public final class ServerScaleInstancesGameTests {
         h.assertTrue(valid, Component.literal(message));
     }
 
-    private enum Phase { VERIFY_PACKS, ADMITTING, STEADY, EXITING, POST_CLEANUP, DISCONNECTING, DONE }
+    private enum Phase { VERIFY_PACKS, ADMITTING, STEADY, RECONNECT, EXITING, POST_CLEANUP, DISCONNECTING, DONE }
     private record Owned(StrikeCoordinator strike, Object token) { }
     private record WorldProbe(ResourceKey<Level> key, WeakReference<TicketStorage> tickets) { }
     private record Packs(String base, Set<String> accepted, Map<String, Object> evidence) { }
+    private record DisconnectEvent(UUID player, int connection, boolean serverThread, String thread, int tick) { }
 
     private static final class Run implements AutoCloseable {
         final GameTestHelper h;
@@ -100,6 +107,15 @@ public final class ServerScaleInstancesGameTests {
         final Map<UUID, Integer> previousRounds = new HashMap<>();
         final Map<UUID, Integer> paidDrops = new HashMap<>();
         final List<Long> wholeTicks = new ArrayList<>();
+        final boolean lifecycle = Boolean.getBoolean("destiny.gametest.scale.instances.lifecycle");
+        final Set<UUID> intentionallyOffline = new HashSet<>();
+        final Map<UUID, ResourceKey<Level>> rejoinWorlds = new HashMap<>();
+        final Map<UUID, Integer> oldEntityIds = new HashMap<>();
+        final Set<ResourceKey<Level>> expiryWorlds = new HashSet<>();
+        final List<Long> lifecycleTicks = new ArrayList<>();
+        final List<Map<String, Object>> cycles = new ArrayList<>();
+        final java.util.concurrent.ConcurrentLinkedQueue<DisconnectEvent> disconnectEvents = new java.util.concurrent.ConcurrentLinkedQueue<>();
+        final Map<Integer, UUID> expectedDisconnects = new LinkedHashMap<>();
         CompletableFuture<Packs> verifiedPacks;
         Packs packs;
         Phase phase = Phase.VERIFY_PACKS;
@@ -108,6 +124,9 @@ public final class ServerScaleInstancesGameTests {
         long steadyStarted, firstSteady, lastSteady, receivedStart, sentStart, gcStart;
         Map<String, Long> packetsStart = Map.of();
         boolean listenerStarted, closed, passed;
+        int cycle, offlineObservedAt = -1, minimumConnected = 40, exodusDropAt = -1;
+        long reconnectStarted;
+        boolean replacementsStarted, devilsRejoined, exodusReplacementsStarted, rejoined;
 
         Run(GameTestHelper h, MinecraftServer server) {
             this.h = h; this.server = server;
@@ -146,7 +165,9 @@ public final class ServerScaleInstancesGameTests {
             report.put("reconnect_grace_exercised", false);
             report.put("production_strike_reconnect_grace_ticks", StrikeRoster.RECONNECT_TICKS);
             report.put("reconnect_grace_elapsed_ticks", 0);
-            report.put("cleanup_policy", "Explicit normal leave before disconnect; cleanup deadline exceeds production reconnect grace without changing it");
+            report.put("cleanup_policy", lifecycle ? "Two real admission/exit cycles; first includes native reconnect and unmodified120s all-offline expiry"
+                    : "Explicit normal leave before disconnect; cleanup deadline exceeds production reconnect grace without changing it");
+            report.put("requested_cycles", lifecycle ? 2 : 1);
             report.put("campaign_qa_stage", "breach_fight via registered administrator command, with real stage/encounter placement");
             report.put("arrival_metric", "Maximum observed pending ArrivalChunks.requestedColumns per campaign; zero means no request persisted to an observation boundary, not zero terrain/view generation");
             report.put("limitations", List.of("Loopback peers share server JVM/CPU and registry snapshot", "Verified warm base/activity ZIP cache; no pack download/render/authentication/WAN acceptance", "Invulnerable automated players send movement/ADS/fire; no graphical or human-combat certification", "Production capacities, reconnect grace and world generation/admission remain unchanged"));
@@ -182,8 +203,9 @@ public final class ServerScaleInstancesGameTests {
                     }
                 }
                 for (var client : clients) {
-                    if (phase != Phase.DISCONNECTING) check(h, client.failure == null, "Peer failed: " + client.name + " / " + client.failure);
-                    client.tick(phase == Phase.STEADY, phaseAge);
+                    if (phase != Phase.DISCONNECTING && !intentionallyOffline.contains(client.uuid))
+                        check(h, client.failure == null, "Peer failed: " + client.name + " / " + client.failure);
+                    client.tick(phase == Phase.STEADY || phase == Phase.RECONNECT, phaseAge);
                     var player = server.getPlayerList().getPlayer(client.uuid);
                     if (phase == Phase.ADMITTING && player != null && player.connection.hasClientLoaded()
                             && MusicPacks.ready(player) && !prepared.containsKey(client.uuid)) prepare(player);
@@ -191,6 +213,7 @@ public final class ServerScaleInstancesGameTests {
                 switch (phase) {
                     case ADMITTING -> admit();
                     case STEADY -> sample();
+                    case RECONNECT -> reconnect();
                     case EXITING -> awaitWorldDeletion();
                     case POST_CLEANUP -> postCleanupSample();
                     case DISCONNECTING -> awaitDisconnect();
@@ -320,11 +343,15 @@ public final class ServerScaleInstancesGameTests {
         boolean chunksReceived() {
             for (var client : clients) {
                 var p = prepared.get(client.uuid);
-                if (p == null || !p.connection.hasClientLoaded() || !(p.getChunkTrackingView() instanceof ChunkTrackingView.Positioned view)) return false;
-                var expected = new it.unimi.dsi.fastutil.longs.LongArrayList(); view.forEach(c -> expected.add(c.pack()));
-                if (expected.isEmpty() || !client.receivedChunks.contains(p.chunkPosition().pack())) return false;
-                for (long key : expected) if (!client.receivedChunks.contains(key)) return false;
+                if (!trackingReceived(client, p)) return false;
             }
+            return true;
+        }
+        boolean trackingReceived(ScaleLoopbackClient client, ServerPlayer p) {
+            if (p == null || !p.connection.hasClientLoaded() || !(p.getChunkTrackingView() instanceof ChunkTrackingView.Positioned view)) return false;
+            var expected = new it.unimi.dsi.fastutil.longs.LongArrayList(); view.forEach(c -> expected.add(c.pack()));
+            if (expected.isEmpty() || !client.receivedChunks.contains(p.chunkPosition().pack())) return false;
+            for (long key : expected) if (!client.receivedChunks.contains(key)) return false;
             return true;
         }
 
@@ -349,7 +376,7 @@ public final class ServerScaleInstancesGameTests {
             steady.put("ticks", phaseAge); steady.put("mspt_warmup_ticks_excluded", 60);
             steady.put("wall_seconds", (System.nanoTime() - steadyStarted) / 1e9);
             steady.put("observed_steady_tps", (wholeTicks.size() - 1) / ((lastSteady - firstSteady) / 1e9));
-            steady.put("whole_tick_nanos", wholeTicks);
+            steady.put("whole_tick_nanos", List.copyOf(wholeTicks));
             steady.put("client_received_framed_bytes", bytes(true) - receivedStart);
             steady.put("client_sent_framed_bytes", bytes(false) - sentStart);
             var delta = new TreeMap<String, Long>(); packets().forEach((k, v) -> delta.put(k, v - packetsStart.getOrDefault(k, 0L)));
@@ -359,9 +386,158 @@ public final class ServerScaleInstancesGameTests {
             steady.put("observed_paid_round_drops", drops);
             report.put("steady", steady);
             report.put("save_trace", GameTestScaleSaveTrace.drain(server));
+            if (lifecycle && cycle == 0) { beginReconnect(); return; }
+            finishActivities();
+        }
+
+        void finishActivities() {
             leaveOwned(); owned.clear();
             report.put("strong_session_tokens_released_before_cleanup_wait", true);
             phase = Phase.EXITING; phaseAge = 0; save();
+        }
+
+        void beginReconnect() {
+            // Nine native disconnects leave31 peers online. Party0 returns; parties1/5 expire naturally.
+            for (int i : new int[]{0, 1, 2, 3, 4, 5, 15, 16, 17}) {
+                dropPeer(i, i < 3);
+            }
+            check(h, expiryWorlds.size() == 2, "Expected one Devils and one Exodus world for all-offline expiry");
+            phase = Phase.RECONNECT; phaseAge = 0; reconnectStarted = System.nanoTime(); save();
+        }
+
+        void dropPeer(int index, boolean returns) {
+            var c = clients.get(index); var p = prepared.get(c.uuid);
+            intentionallyOffline.add(c.uuid);
+            expectedDisconnects.put(System.identityHashCode(p.connection), p.getUUID());
+            if (returns) { rejoinWorlds.put(c.uuid, p.level().dimension()); oldEntityIds.put(c.uuid, p.getId()); }
+            else expiryWorlds.add(p.level().dimension());
+            c.close();
+        }
+
+        void replacePeer(int index) {
+            var old = clients.get(index);
+            check(h, server.getPlayerList().getPlayer(old.uuid) == null, "Old connection must be removed before reconnect");
+            prepared.remove(old.uuid);
+            clients.set(index, new ScaleLoopbackClient(old.name, port, server.registryAccess(), packs.accepted));
+            intentionallyOffline.remove(old.uuid);
+        }
+
+        void reconnect() {
+            check(h, phaseAge < StrikeRoster.RECONNECT_TICKS + 2000, "Native reconnect/expiry deadline exceeded");
+            int connected = (int) clients.stream().filter(c -> c.playing && c.connection.isConnected()).count();
+            minimumConnected = Math.min(minimumConnected, connected);
+            check(h, connected >= 31, "At least31 native peers must stay connected during lifecycle verification");
+            if (phaseAge > 60) lifecycleTicks.add(wholeTick());
+            boolean allExpiredPeersGone = java.util.stream.IntStream.of(3, 4, 5, 15, 16, 17)
+                    .allMatch(i -> server.getPlayerList().getPlayer(clients.get(i).uuid) == null);
+            if (allExpiredPeersGone && offlineObservedAt < 0) offlineObservedAt = server.getTickCount();
+            if (phaseAge >= 100 && !replacementsStarted) {
+                for (int i = 0; i < 3; i++) replacePeer(i);
+                replacementsStarted = true;
+            }
+            if (exodusDropAt >= 0 && phaseAge - exodusDropAt >= 100 && !exodusReplacementsStarted) {
+                for (int i = 12; i < 15; i++) replacePeer(i);
+                exodusReplacementsStarted = true;
+            }
+            if (replacementsStarted && !rejoined) {
+                boolean ready = true;
+                for (int i : new int[]{0, 1, 2, 12, 13, 14}) {
+                    if (i >= 12 && !exodusReplacementsStarted) continue;
+                    var client = clients.get(i); var p = server.getPlayerList().getPlayer(client.uuid);
+                    var coordinator = i < 3 ? DevilsLair.COORDINATOR : ExodusCrash.COORDINATOR;
+                    if (p == null || !MusicPacks.ready(p) || !coordinator.entered(p)
+                            || !coordinator.allows(p) || !trackingReceived(client, p)) { ready = false; continue; }
+                    check(h, p.getId() != oldEntityIds.get(client.uuid), "Reconnect must create a new native player entity");
+                    check(h, coordinator.participationToken(p) == owned.get(client.uuid).token,
+                            "Reconnect must preserve the exact existing production run");
+                    check(h, p.level().dimension().equals(rejoinWorlds.get(client.uuid)), "Reconnect must return to the same world");
+                    if (prepared.put(client.uuid, p) != p) { p.getAbilities().invulnerable = true; p.onUpdateAbilities(); }
+                }
+                if (ready && !devilsRejoined) {
+                    devilsRejoined = true; report.put("devils_rejoin_completed_at_phase_tick", phaseAge);
+                    for (int i = 12; i < 15; i++) dropPeer(i, true);
+                    exodusDropAt = phaseAge; save();
+                }
+                if (ready && exodusReplacementsStarted) {
+                    rejoined = true; report.put("rejoined_same_run_peers", 6); report.put("rejoined_at_phase_tick", phaseAge); save();
+                }
+            }
+            if (offlineObservedAt < 0) return;
+            int elapsed = server.getTickCount() - offlineObservedAt;
+            if (elapsed < StrikeRoster.RECONNECT_TICKS - 10)
+                check(h, expiryWorlds.stream().allMatch(k -> server.getLevel(k) != null), "Offline worlds deleted before production grace elapsed");
+            if (phaseAge % 200 == 0) {
+                report.put("latest_lifecycle_elapsed_ticks", elapsed);
+                report.put("latest_reconnect_peers", reconnectReadiness());
+                report.put("latest_expiry_runs", expiryReadiness());
+                report.put("expiry_worlds_still_registered", expiryWorlds.stream().filter(k -> server.getLevel(k) != null)
+                        .map(k -> k.identifier().toString()).sorted().toList());
+                save();
+            }
+            if (elapsed < StrikeRoster.RECONNECT_TICKS || !rejoined
+                    || expiryWorlds.stream().anyMatch(k -> server.getLevel(k) != null)) return;
+            var result = new LinkedHashMap<String, Object>();
+            result.put("minimum_connected_native_peers", minimumConnected);
+            result.put("same_run_rejoined_peers", 6);
+            result.put("all_offline_expired_worlds", expiryWorlds.stream().map(k -> k.identifier().toString()).sorted().toList());
+            result.put("offline_elapsed_server_ticks", elapsed);
+            result.put("phase_ticks", phaseAge); result.put("wall_seconds", (System.nanoTime() - reconnectStarted) / 1e9);
+            result.put("whole_tick_nanos_after_first60", List.copyOf(lifecycleTicks));
+            result.put("worlds_after_expiry", worldSnapshot()); result.put("heap_used_bytes", heap());
+            for (var entry : expectedDisconnects.entrySet()) {
+                var events = disconnectEvents.stream().filter(e -> e.connection == entry.getKey() && e.player.equals(entry.getValue())).toList();
+                check(h, events.size() == 1 && events.getFirst().serverThread, "Every dropped connection needs exactly one server-thread disconnect event");
+            }
+            result.put("verified_once_only_server_thread_disconnects", expectedDisconnects.size());
+            report.put("lifecycle", result); report.put("reconnect_grace_exercised", true);
+            report.put("reconnect_grace_elapsed_ticks", elapsed);
+            finishActivities();
+        }
+
+        List<Map<String, Object>> reconnectReadiness() {
+            var result = new ArrayList<Map<String, Object>>();
+            for (int i : new int[]{0, 1, 2, 12, 13, 14}) {
+                var c = clients.get(i); var p = server.getPlayerList().getPlayer(c.uuid);
+                if (!rejoinWorlds.containsKey(c.uuid)) continue;
+                var coordinator = i < 3 ? DevilsLair.COORDINATOR : ExodusCrash.COORDINATOR;
+                var row = new LinkedHashMap<String, Object>(); row.put("name", c.name); row.put("server_player", p != null);
+                row.put("peer_connected", c.connection.isConnected()); row.put("received_chunks", c.receivedChunks.size());
+                row.put("client_position", c.position.toString()); row.put("packets", c.packetCounts());
+                if (p != null) {
+                    row.put("client_loaded", p.connection.hasClientLoaded()); row.put("base_pack_ready", MusicPacks.ready(p));
+                    row.put("activity_pack_ready", ActivityPacks.ready(p, coordinator.info().id())); row.put("entered", coordinator.entered(p));
+                    row.put("allows", coordinator.allows(p)); row.put("tracking_received", trackingReceived(c, p));
+                    row.put("world", p.level().dimension().identifier().toString()); row.put("server_position", p.position().toString());
+                    row.put("alive", p.isAlive()); row.put("health", p.getHealth()); row.put("invulnerable", p.getAbilities().invulnerable);
+                    row.put("guardian_down", kim.biryeong.destiny.down.GuardianDown.active(p));
+                    if (p.getChunkTrackingView() instanceof ChunkTrackingView.Positioned view) {
+                        int[] counts = {0, 0}; view.forEach(chunk -> { counts[0]++; if (!c.receivedChunks.contains(chunk.pack())) counts[1]++; });
+                        row.put("tracking_view", view.viewDistance()); row.put("expected_chunks", counts[0]); row.put("missing_chunks", counts[1]);
+                    }
+                }
+                result.add(row);
+            }
+            return result;
+        }
+
+        List<Map<String, Object>> expiryReadiness() {
+            var result = new ArrayList<Map<String, Object>>();
+            for (int index : new int[]{3, 15}) {
+                var token = owned.get(clients.get(index).uuid).token;
+                var run = (kim.biryeong.destiny.activity.strike.StrikeRun) token;
+                var row = new LinkedHashMap<String, Object>();
+                row.put("implementation", token.getClass().getName()); row.put("running", run.running()); row.put("closed", run.closed());
+                row.put("server_tick", server.getTickCount()); row.put("registered", server.getLevel(run.level().dimension()) != null);
+                row.put("world_players", run.level().players().stream().map(p -> Map.of("id", p.getUUID().toString(),
+                        "entity", p.getId(), "removed", p.isRemoved(), "disconnected", p.hasDisconnected())).toList());
+                try {
+                    var f = token.getClass().getDeclaredField("roster"); f.setAccessible(true); var roster = (StrikeRoster) f.get(token);
+                    row.put("members", roster.members()); row.put("connected", roster.connected()); row.put("abandoned", roster.abandoned(server.getTickCount()));
+                    var at = StrikeRoster.class.getDeclaredField("allOfflineAt"); at.setAccessible(true); row.put("all_offline_at", at.getLong(roster));
+                } catch (ReflectiveOperationException e) { throw new AssertionError(e); }
+                result.add(row);
+            }
+            return result;
         }
 
         void leaveOwned() {
@@ -415,6 +591,19 @@ public final class ServerScaleInstancesGameTests {
             // Separate callback: ticket/level locals from cleanup are gone, and no session tokens are retained.
             report.put("heap_used_after_world_unload_bytes", heap());
             report.put("heap_sample_note", "Unforced heap-used after logical registry/ticket cleanup, not GC-live bytes or a long-run memory certification");
+            var result = new LinkedHashMap<String, Object>();
+            result.put("cycle", cycle + 1); result.put("steady", report.get("steady"));
+            result.put("released_worlds", report.get("released_worlds")); result.put("world_cleanup_ticks", report.get("world_cleanup_ticks"));
+            result.put("heap_used_after_world_unload_bytes", heap()); result.put("worlds_after_cleanup", worldSnapshot());
+            cycles.add(result); report.put("cycle_results", cycles);
+            if (lifecycle && cycle == 0) {
+                for (int i : new int[]{3, 4, 5, 15, 16, 17}) replacePeer(i);
+                cycle++; nextDevils = 0; nextExodus = 0;
+                skippedCampaign.clear(); campaignJumps.clear(); observedArrivalColumns.clear();
+                previousRounds.clear(); paidDrops.clear(); wholeTicks.clear();
+                rejoinWorlds.clear(); oldEntityIds.clear(); expiryWorlds.clear(); lifecycleTicks.clear();
+                phase = Phase.ADMITTING; phaseAge = 0; save(); return;
+            }
             clients.forEach(ScaleLoopbackClient::close); phase = Phase.DISCONNECTING; phaseAge = 0;
         }
         void awaitDisconnect() {
@@ -461,6 +650,8 @@ public final class ServerScaleInstancesGameTests {
         }
         void save() {
             report.put("phase", phase.toString()); report.put("passed", passed);
+            report.put("current_cycle", cycle + 1);
+            report.put("disconnect_events", List.copyOf(disconnectEvents));
             report.put("wall_seconds", (System.nanoTime() - started) / 1e9);
             report.put("prepared_peers", prepared.size()); report.put("owned_activity_players", Math.max(admittedActivityPlayers, owned.size()));
             report.put("current_session_token_references", owned.size());

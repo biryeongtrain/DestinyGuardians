@@ -163,13 +163,15 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
             briefingGate = null; started = true; graceUntil = (int) now + 40;
             say(ExodusVoice.opening("B00"));
         }
+        var rejoinBatch = players().stream().filter(p -> joining.contains(p.getUUID())
+                && !joinPlaced.contains(p.getUUID()) && ready(p)).toList();
+        if (!rejoinBatch.isEmpty() && place(rejoinBatch, checkpoint(), false)) {
+            for (var p : rejoinBatch) { joinPlaced.add(p.getUUID()); roster.ready(p.getUUID(), false); }
+        }
         for (var p : players()) {
             if (joining.contains(p.getUUID())) {
                 if (!ready(p)) continue;
-                if (!joinPlaced.contains(p.getUUID())) {
-                    if (!place(List.of(p), checkpoint(), false)) continue;
-                    joinPlaced.add(p.getUUID()); roster.ready(p.getUUID(), false); continue;
-                }
+                if (rejoinBatch.contains(p) || !joinPlaced.contains(p.getUUID())) continue;
                 joining.remove(p.getUUID()); joinPlaced.remove(p.getUUID()); roster.ready(p.getUUID(), true);
                 var option = downOptions.get(p.getUUID());
                 if (recovery.token(p.getUUID()).isPresent() && option != null) restoreDown(p, option);
@@ -522,13 +524,17 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
     /** Where a wipe or a rejoin puts the team: the entrance until the first beat is passed, else the active beat's trigger. */
     private Vec3 checkpoint() { return beatIndex == 0 && beatState == BeatState.WAITING ? null : triggerAt(beat()); }
     private boolean place(List<ServerPlayer> group, Vec3 centre, boolean initial) {
+        var batch = kim.biryeong.destiny.world.PlayerPlacementBatch.create(level(), group).orElse(null);
+        if (batch == null) return false;
         var spots = new ArrayList<Vec3>();
         for (int i = 0; i < group.size(); i++) {
             int seat = ids.indexOf(group.get(i).getUUID());
-            Vec3 spot = centre == null ? ExodusMaps.anchor("WORLD.IN." + Math.floorMod(seat, 3)).pos() : stand(centre, spots);
+            Vec3 spot = centre == null ? ExodusMaps.anchor("WORLD.IN." + Math.floorMod(seat, 3)).pos()
+                    : stand(centre, spots, group.get(i), batch);
             if (spot == null) { problem("No safe checkpoint seat"); return false; }
             spots.add(spot);
         }
+        if (!batch.current()) return false;
         for (int i = 0; i < group.size(); i++) {
             var p = group.get(i); var at = spots.get(i);
             if (initial) ExodusCrash.saveReturn(p);
@@ -542,6 +548,10 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
     }
     /** A clear two-block-high standing cell with solid floor near the given point, away from the cells already chosen. */
     private Vec3 stand(Vec3 centre, List<Vec3> taken) {
+        return stand(centre, taken, null, null);
+    }
+    private Vec3 stand(Vec3 centre, List<Vec3> taken, ServerPlayer player,
+                       kim.biryeong.destiny.world.PlayerPlacementBatch batch) {
         for (int r = 0; r <= 6; r++) for (int dx = -r; dx <= r; dx++) for (int dz = -r; dz <= r; dz++) {
             if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
             for (int dy : new int[]{0, 1, -1, 2, -2, 3, -3}) {
@@ -550,7 +560,14 @@ public final class ExodusSession implements StrikeRun, ActorDirector, DevilsActo
                 if (!level().getBlockState(floor).isFaceSturdy(level(), floor, net.minecraft.core.Direction.UP)) continue;
                 Vec3 at = new Vec3(pos.getX() + .5, pos.getY(), pos.getZ() + .5);
                 if (hazards != null && hazards.deathAt(at).isPresent()) continue;
-                if (!level().noCollision(new AABB(at.x - .35, at.y, at.z - .35, at.x + .35, at.y + 1.9, at.z + .35))) continue;
+                var box = new AABB(at.x - .35, at.y, at.z - .35, at.x + .35, at.y + 1.9, at.z + .35);
+                if (batch == null) {
+                    if (!level().noCollision(box)) continue;
+                } else {
+                    if (!level().getWorldBorder().isWithinBounds(box)
+                            || level().getBlockCollisions(null, box).iterator().hasNext()
+                            || batch.blocked(player, box.inflate(1e-7), net.minecraft.world.entity.EntitySelector.CAN_BE_COLLIDED_WITH)) continue;
+                }
                 if (taken.stream().anyMatch(t -> t.distanceToSqr(at) < 1.8)) continue;
                 return at;
             }

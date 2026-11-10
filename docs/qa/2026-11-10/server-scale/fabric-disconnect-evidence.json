@@ -1,0 +1,19 @@
+{
+  "module": "fabric-networking-api-v1",
+  "version": "6.3.10+5c1fee4d5d",
+  "jar_sha256": "203a7f59f2c81c97cd4969fcb1725ac5bcaed8cd9b05cdd1e2cae76987917617",
+  "runtime_jar": "/Users/qf/.gradle/caches/modules-2/files-2.1/net.fabricmc.fabric-api/fabric-networking-api-v1/6.3.10+5c1fee4d5d/35aef74e899203a5c3cd90cb27eb21cf42f71d56/fabric-networking-api-v1-6.3.10+5c1fee4d5d.jar",
+  "classes": [
+    "net.fabricmc.fabric.impl.networking.AbstractNetworkAddon",
+    "net.fabricmc.fabric.impl.networking.server.ServerPlayNetworkAddon",
+    "net.fabricmc.fabric.mixin.networking.ConnectionMixin"
+  ],
+  "findings": [
+    "ConnectionMixin.disconnectAddon: channelInactive HEAD calls handleDisconnect directly",
+    "AbstractNetworkAddon.handleDisconnect: compareAndSet(false,true) before invokeDisconnectEvent/endSession",
+    "ServerPlayNetworkAddon.invokeDisconnectEvent: direct sequential ServerPlayConnectionEvents.DISCONNECT invoker",
+    "Earlier repository disconnect cleanup requires MinecraftServer thread; an exception can prevent later host callbacks after CAS is consumed",
+    "ServerPlayNetworkAddon private server field is the exact owner used by the accessor; only server-play addon handoff added before nativeCAS"
+  ],
+  "attribution_boundary": "No claim which callback threw first; native roster and thread observations establish before/after behavior"
+}

@@ -139,12 +139,27 @@ public final class DevilsSpatial {
     /** Three authored seats; occupied or obstructed seats are refused, never teleported blindly. */
     public static Optional<Point> seat(ServerLevel level, DevilsPlan.Zone zone, BlockPos origin,
                                       Entity player, int seat, List<AABB> reservations) {
+        return seat(level, zone, origin, player, seat, reservations, null);
+    }
+    /** Cohort exemption is only for an all-destinations-first player move, never actor spawning. */
+    public static Optional<Point> seat(ServerLevel level, DevilsPlan.Zone zone, BlockPos origin,
+                                      ServerPlayer player, int seat, List<AABB> reservations,
+                                      kim.biryeong.destiny.world.PlayerPlacementBatch batch) {
+        return seat(level, zone, origin, (Entity) player, seat, reservations, Objects.requireNonNull(batch));
+    }
+    private static Optional<Point> seat(ServerLevel level, DevilsPlan.Zone zone, BlockPos origin,
+                                       Entity player, int seat, List<AABB> reservations,
+                                       kim.biryeong.destiny.world.PlayerPlacementBatch batch) {
         thread(level);
         if (seat < 0 || seat >= DevilsPlan.PLAYERS) throw new IllegalArgumentException("seat must be 0..2");
         var marker = DevilsMaps.anchor(zone, zone.name() + ".IN." + seat, origin);
         for (double dy : new double[]{0, .5, 1, -.5, -1}) {
             Vec3 pos = marker.pos().add(0, dy, 0); AABB box = bodyAt(player, pos);
-            if (clear(level, zone, origin, player, box, reservations) && supported(level, box))
+            if (!clearTerrain(level, zone, origin, player, box)) continue;
+            boolean occupied = batch == null ? occupied(level, player, box, reservations)
+                    : reservations.stream().anyMatch(r -> r.inflate(.15).intersects(box))
+                    || batch.blocked((ServerPlayer) player, box, e -> e.isAlive() && !e.isSpectator());
+            if (!occupied && supported(level, box))
                 return Optional.of(new Point(marker.id(), pos, marker.yaw(), false));
         }
         return Optional.empty();

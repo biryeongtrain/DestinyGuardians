@@ -167,13 +167,16 @@ public final class DevilsSession implements StrikeRun, DevilsDirector.Host, Devi
             briefingGate = null;
             director.begin(StrikeAdmission.count(roster.members(), this::member));
         }
+        var rejoinBatch = players().stream().filter(p -> joining.contains(p.getUUID())
+                && !joinPlaced.contains(p.getUUID()) && ready(p)).toList();
+        if (!rejoinBatch.isEmpty() && place(director.phase().zone(), rejoinBatch, false)) {
+            for (var p : rejoinBatch) { joinPlaced.add(p.getUUID()); roster.ready(p.getUUID(), false); }
+        }
         for (var p : players()) {
             if (joining.contains(p.getUUID())) {
                 if (!ready(p)) continue;
-                if (!joinPlaced.contains(p.getUUID())) {
-                    if (!place(director.phase().zone(), List.of(p), false)) continue;
-                    joinPlaced.add(p.getUUID()); roster.ready(p.getUUID(), false); continue;
-                }
+                // Newly placed members still need a later tick's loaded acknowledgement.
+                if (rejoinBatch.contains(p) || !joinPlaced.contains(p.getUUID())) continue;
                 joining.remove(p.getUUID()); joinPlaced.remove(p.getUUID()); roster.ready(p.getUUID(), true);
                 // A downed reconnect must restore the existing down scene, never become alive merely by joining.
                 var token = recovery.token(p.getUUID());
@@ -304,12 +307,15 @@ public final class DevilsSession implements StrikeRun, DevilsDirector.Host, Devi
         for (var m : roster.members()) recovery.presence(m.id(), m.connected() && member(m.id()), m.ready() && !joining.contains(m.id()));
     }
     private boolean place(Zone zone, List<ServerPlayer> group, boolean initial) {
+        var batch = kim.biryeong.destiny.world.PlayerPlacementBatch.create(level(), group).orElse(null);
+        if (batch == null) return false;
         var points = new LinkedHashMap<ServerPlayer, DevilsSpatial.Point>(); var boxes = new ArrayList<AABB>();
         for (var p : group) {
-            var point = DevilsSpatial.seat(level(), zone, DevilsWorldBuild.origin(zone), p, ids.indexOf(p.getUUID()), boxes);
+            var point = DevilsSpatial.seat(level(), zone, DevilsWorldBuild.origin(zone), p, ids.indexOf(p.getUUID()), boxes, batch);
             if (point.isEmpty()) { problem("Safe checkpoint seat unavailable in " + zone); return false; }
             points.put(p, point.get()); boxes.add(DevilsSpatial.bodyAt(p, point.get().pos()));
         }
+        if (!batch.current()) return false;
         for (var e : points.entrySet()) {
             var p = e.getKey(); var at = e.getValue();
             if (initial) DevilsLair.saveReturn(p);

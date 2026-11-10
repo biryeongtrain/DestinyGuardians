@@ -1,0 +1,41 @@
+{
+  "attempts": [
+    {
+      "report": "lifecycle-first-timeout.json",
+      "terminal": true,
+      "nativeJvmExit": 1,
+      "gradleExit": 1,
+      "accepted": false,
+      "reason": "Reconnect/expiry deadline"
+    },
+    {
+      "report": "lifecycle-readiness-timeout.json",
+      "terminal": true,
+      "nativeJvmExit": 1,
+      "gradleExit": 1,
+      "accepted": false,
+      "reason": "Added readiness observation, same deadline; packs/chunks ready but cross-occupied seats"
+    },
+    {
+      "report": "lifecycle-roster-diagnostic.json",
+      "terminal": true,
+      "nativeJvmExit": 143,
+      "gradleExit": 1,
+      "accepted": false,
+      "termination": {
+        "pid": 6106,
+        "signal": "SIGTERM",
+        "reason": "Diagnostic stop after verified missing roster disconnect notifications; not acceptance pass",
+        "cwd": "/tmp/server-scale-20261110/lifecycle"
+      }
+    },
+    {
+      "report": "instances-40-lifecycle.json",
+      "terminal": true,
+      "nativeJvmExit": 0,
+      "gradleExit": 0,
+      "accepted": true,
+      "reason": "Fixed thread boundary and cohort placement; all criteria passed"
+    }
+  ]
+}

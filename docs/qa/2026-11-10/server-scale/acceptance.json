@@ -1,0 +1,64 @@
+{
+  "objective": "30명 이상이 접속해도 네트워크와 서버 틱이 안정적인 시스템",
+  "goalComplete": false,
+  "localImplementationAndValidationComplete": true,
+  "verified": [
+    {
+      "requirement": "30명 및40명 실제 전송 부하",
+      "evidence": [
+        "optimized-shared-30.json",
+        "optimized-shared-40.json"
+      ],
+      "boundary": "Loopback TCP shares JVM/CPU; warm caches"
+    },
+    {
+      "requirement": "40연결·18활동 인스턴스 지속과 저장 지연",
+      "evidence": [
+        "instances-40-final-soak.json",
+        "final-soak-summary.json"
+      ],
+      "boundary": "Five-minute local20Hz, JVM8GiB"
+    },
+    {
+      "requirement": "연결 종료·재접속·유예·활동 재사용",
+      "evidence": [
+        "instances-40-lifecycle.json",
+        "lifecycle-summary.json"
+      ],
+      "boundary": ">=31online,6rejoins,52once-only main-thread callbacks,2cycles, unchanged2400ticks"
+    },
+    {
+      "requirement": "기존 무기·HUD·거리·저장 동작 보존",
+      "evidence": [
+        "lifecycle-final-native.json",
+        "visual-qa.json"
+      ],
+      "boundary": "14native passed; representative earlier single renderer, no art changes in followup"
+    },
+    {
+      "requirement": "전체JUnit과 실제Gradle 조립",
+      "evidence": [
+        "lifecycle-full-unit.json",
+        "artifact-r2.json"
+      ],
+      "boundary": "2873tests with same3pre-existing failures; assemble completed, not whole-suite green"
+    }
+  ],
+  "remainingRequiredEvidence": {
+    "environment": "Actual i5-13600KF Windows server, JVM8GiB, >=30connected users representative activities",
+    "owner": "User chose direct diagnostic execution and result delivery",
+    "files": [
+      "recording.jfr",
+      "capture.json",
+      "gc-events.json when produced",
+      "same-period server log"
+    ],
+    "instructions": "WINDOWS_CAPTURE.md",
+    "status": "awaiting_user_capture"
+  },
+  "notClaimed": [
+    "WAN/ISP throughput acceptance",
+    "Hours-long memory retention certification",
+    "30concurrent graphical renderer FPS acceptance"
+  ]
+}

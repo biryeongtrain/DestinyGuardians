@@ -91,3 +91,11 @@ python3 scripts/qa/run_server_scale.py --run-dir /tmp/destiny-scale-owned --play
 ## 실제 화면 검수와 종료
 
 [화면 검수 기록](visual-qa.md)과 `visual-qa.json`에 대표 ADS·자동 장전·수류탄·관전자 장비·HUD·궁극기 카메라의 실제 PNG와 네이티브 입력을 보존했다. 단일 렌더링 클라이언트 검수이며 전체 무기/궁극기 아트 수락이나 다중 그래픽 클라이언트 성능 검증으로 확대하지 않는다. 소유 입력 lease·client/server·bounded awake를 정리했다.
+
+## 연결 종료와 동시 재접속 보완
+
+후속 [lifecycle 검증](lifecycle.md)에서 동시 재접속의 좌석 교착과 서버 스레드 밖 disconnect 이벤트로 인한 빈 월드 잔존을 재현했다. 정확한 현재 플레이어와 연결을 소유하는 공용 `PlayerPlacementBatch`로 복귀 목적지를 함께 계획하며, Fabric server-play disconnect를 native CAS 이전에 소유 서버 스레드로 넘긴다. 의도적12개/전체52개 연결 종료가 한 번씩 서버 스레드에서 관측됐고,6명 동일 run 복귀와 원래120초 유예 후 삭제,40개 계정의18월드 입장/퇴장 두 회차가 통과했다. 초기 실패와 강제 종료한 진단 시도는 별도 보고서에 보존했다.
+
+`artifact.json`과 `final-soak-summary.json`은 첫 통합 커밋5e5b7e48 당시의 기록이다. 후속 빌드와 검증은 r2 artifact 및 lifecycle 보고서를 사용한다. 첫 전달 JAR의 안정 사본은 Downloads의 `DestinyGuardians-server-scale-20261110` 폴더에 보존한다.
+
+후속 네이티브14개 회귀도 통과했다. 현재 전달 빌드는 `artifact-r2.json`에 있으며, 전체JUnit 기존3실패는 `lifecycle-full-unit.json`에 그대로 기록했다. 운영 진단은 사용자가 직접 실행해 전달하기로 했다.

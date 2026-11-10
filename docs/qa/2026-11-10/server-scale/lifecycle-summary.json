@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "native_tcp_accounts": 40,
+  "activity_cycles": 2,
+  "temporary_worlds_per_cycle": 18,
+  "minimum_connected_during_reconnect": 31,
+  "same_run_rejoins": 6,
+  "verified_server_thread_once_only_disconnects": 12,
+  "unchanged_production_grace_ticks": 2400,
+  "offline_elapsed_server_ticks_at_world_removal": 2401,
+  "cycles": [
+    {
+      "cycle": 1,
+      "tps": 20.02147142135538,
+      "samples": 240,
+      "p95_ms": 16.277333,
+      "p99_ms": 21.035208,
+      "max_ms": 28.891209,
+      "heap_used_bytes": 5868203576,
+      "world_cleanup_ticks": 1,
+      "released_world_count": 18,
+      "remaining_worlds": 4
+    },
+    {
+      "cycle": 2,
+      "tps": 20.018012861280113,
+      "samples": 240,
+      "p95_ms": 16.376583,
+      "p99_ms": 17.693125,
+      "max_ms": 19.534,
+      "heap_used_bytes": 4072168352,
+      "world_cleanup_ticks": 1,
+      "released_world_count": 18,
+      "remaining_worlds": 4
+    }
+  ],
+  "lifecycle_tick_sample": {
+    "samples": 2342,
+    "p95_ms": 13.686083,
+    "p99_ms": 16.0615,
+    "max_ms": 77.704375
+  },
+  "source_sha256": {
+    "scripts/qa/run_server_scale.py": "8ff5a004623779047860545723389ec75b6eb1685923988f7a6b0d12a626d1ac",
+    "src/gametest/java/kim/biryeong/destiny/test/ServerScaleInstancesGameTests.java": "229885aeb9ccddac487f52fa140ade8644a11a777ba11da03fb4bc774170b039",
+    "src/main/java/kim/biryeong/destiny/mixin/FabricDisconnectThreadMixin.java": "9f32dc59a54e9704dc7b738a5278b11e9be33f411b4d7cda90d616f2ea6e9326",
+    "src/main/java/kim/biryeong/destiny/mixin/ServerPlayNetworkAddonAccessor.java": "f77fd69fe2fcf90e964f03407e12f939e329f88349c8ed990b55821ecf859a84",
+    "src/main/java/kim/biryeong/destiny/strike/devils/DevilsSession.java": "8c5bd7861d5a9455c08f69bf93ab3e9aaf1b19989906ffb1e9734febadcda235",
+    "src/main/java/kim/biryeong/destiny/strike/devils/DevilsSpatial.java": "bfdcf33818166efb1eddde9fefe69ab57a32aade4ea7fc6a6985ff70e9535034",
+    "src/main/java/kim/biryeong/destiny/strike/exodus/ExodusSession.java": "85e4a9a6de07b5c84858b3db55aaaf2e9e60dab7f934ac8efa77cdfd01428f14",
+    "src/main/java/kim/biryeong/destiny/world/PlayerPlacementBatch.java": "e0fa1de7de272bfc859448e7d07b35ec016c660d274370f8349b3d8eb842d1b0",
+    "src/main/resources/destiny.mixins.json": "867481447cc1c01a89dfee88be9064b3715d4f774e4ba9ad387611a76f792e70"
+  },
+  "limitations": [
+    "Actual loopback TCP; shared server JVM and CPU, verified warm cache; no renderer/WAN/authentication/download certification",
+    "Two cycles and unforced heap-used are not an hours-long memory-retention certification",
+    "Operating13600KF Windows capture pending user execution"
+  ],
+  "total_observed_disconnect_events": 52,
+  "all_observed_disconnects_on_server_thread": true,
+  "all_observed_connection_callbacks_once": true
+}
